@@ -1,0 +1,82 @@
+= Building a Hybrid Model
+@link-instructions{Open your copy of @starter-file{alg2-hybrid} and click "Run".}
+
+== Disecting our `periodic` model
+
+@n Let's take a closer look at our `periodic` model by fitting it to the `recent-table` data. 
+
+- What kind of line does the wave wrap around? @fitb{}{@ifsoln{a horizontal line}}
+- What is the equation of that line? @fitb{}{@ifsoln{something like {nbsp} @math{y = 419.87}}}
+- Where does it show up in our `periodic` function? @fitb{}{@ifsoln{The last term describes the horizontal shift, }}
+@fitb{}{@ifsoln{which is the same as the midline that the periodic function wraps around.}}
+
+@vspace{1ex}
+
+In the definitions area of @starter-file{alg2-hybrid} you'll see the following example:
+
+@indented{
+```
+fun periodic-cos(x): (4.13 * cos(6.28 * (x - 2023.35))) + 419.87 end
+fun wave-cos(x): (4.13 * cos(6.28 * (x - 2023.35))) end
+fun trend-line(x): 419.87 end 
+fun hybrid(x): wave-cos(x) + trend-line(x) end
+```
+}
+
+@n Explain how you know that `fun-periodic-cos` and `hybrid` will build exactly the same model. @fitb{}{@ifsoln{I see that: }}
+
+@fitb{}{@ifsoln{`hybrid` adds `trend-line` to `wave-cos`.}}
+
+@fitb{}{@ifsoln{`trend-line` is just the horizontal shift of the `periodic-cos` function.}}
+
+@fitb{}{@ifsoln{`wave-cos` is just all of the parts of the `periodic-cos` function except for the horizontal shift.}}
+
+
+== Composing a `hybrid` model for the `modern-table`
+
+Our `periodic` model was built to undulate around a horizontal line whose equation is something like @math{y = 419.87}.
+
+@n Which line do we wish a model for the `modern-table` wrapped around instead? @fitb{}{@ifsoln{{nbsp}@math{y = 2.141263x - 4461}}}
+
+@fitb{}{@ifsoln{The line of best fit from our `lr-plot`, which we've defined in our starter file as `linear-modern`}}
+
+@n Which two functions from our Definitions Area could we compose to make a hybrid model for the `modern-table` data where the sine wave wraps around the line you just identified?
+
+@fitb{}{@ifsoln{`wave` and `linear-modern`}}
+
+Update the definition for `hybrid-modern` in the Definitions Area of your starter file and click "Run".
+
+@n Use `fit-model` to fit `hybrid-modern` to the `modern-table`. Describe what you see: @fitb{}{}
+
+@fitb{}{}
+
+@n What is the @vocab{S-value} of `hybrid-modern`? @fitb{}{@ifsoln{~1.4}}
+
+@n What was the @vocab{S-value} for `linear-modern`? @fitb{}{@ifsoln{~2.27}}
+
+@n @n How much
+@fitbruby{5em}{@ifsoln{less}}{more / less }
+error do we expect in predictions made using `hybrid-modern` than with the `linear-modern` model?
+
+@vspace{1ex}
+
+@scrub{
+A note for future authors:
+- {&#8192;} is used below to add horizontal space.
+- \mbox{} is used to make the words in the fraction use normal font.
+}
+
+@indented{
+_Percent Change_ &#8192; = &#8192;
+@math{
+\frac{&#8192; \mbox{Difference} &#8192; \mbox{between} &#8192; \mbox{the} &#8192; \mbox{S-values}&#8192;}
+{\mbox{S-value} &#8192; \mbox{for} &#8192; \mbox{linear} &#8192; \mbox{model}}
+\times 100 &#8192; = &#8192; }
+@ifnotsoln{@math{\frac{\qquad}{\qquad}}}
+@ifsoln{@math{\frac{0.87}{2.27} = 0.38  &#8192; &rarr; &#8192;  ~38 \%}}
+
+We expect 
+@fitb{4em}{@ifsoln{~38}} percent
+@fitbruby{5em}{@ifsoln{less}}{ more / less }
+error from predictions made with `hybrid-modern` than with `linear-modern` model!
+}

@@ -1,6 +1,10 @@
-= Modeling Historical Carbon Dioxide Levels
-++++
+= Modeling Modern Carbon Dioxide Levels
+++++ 
 <style>
+
+/* Format autonumbering inside the table correctly */
+table .autonum::after { content: ')' !important; }
+
 /* Tweak padding to save vertical height */
 td, .center { padding: 0 5px !important; }
 
@@ -24,12 +28,12 @@ td .codetwo { color: black; background: none; }
 }
 
 @link-instructions{
-For this page, we are going to work with the data in the `co2-table` of the @starter-file{alg2-hybrid}, which tracks the amount of @COtwo in the atmosphere (parts per million) from 1974 to 2023.
+For this page, we are going to work with the data in the `modern-table` of the @starter-file{alg2-hybrid}, which tracks the amount of @COtwo in the atmosphere (parts per million) from 2010 to 2023.
 }
 
 == Fitting a Linear Model
 
-@n Use `lr-plot` to find the best linear model for the `co2-table` and record the function below (in Pyret and Function Notation):
+@n Use `lr-plot` to find the best linear model for the `modern-table` and record the function below (in Pyret and Function Notation):
 
 @vspace{1ex}
 
@@ -38,27 +42,28 @@ For this page, we are going to work with the data in the `co2-table` of the @sta
 |===
 .^| *Function Notation*
 |
-@math{\text{linear}(x) =} @fitbruby{70pt}{@ifsoln{1.8345}}{slope}x {nbsp} + {nbsp} @fitbruby{10em}{@ifsoln{-3296}}{y-intercept / vertical shift}
+@math{\text{linear}(x) =} @fitbruby{70pt}{@ifsoln{2.41263}}{slope}x {nbsp} + {nbsp} @fitbruby{10em}{@ifsoln{-4461}}{y-intercept / vertical shift}
+
 .>| *Pyret Notation*
-| @show{(code '(define (linear x) (+ (* (?ANS 1.8345) x)(?ANS -3296))))}
+| @show{(code '(define (linear x) (+ (* (?ANS 2.41263) x)(?ANS -4461))))}
 |===
 }
 
-@n Update the definition for `linear-co2` in the starter file. Then complete the interpretation stem below.
+@n Update the definition for `linear-modern` in the starter file. Then complete the interpretation stem below.
 
 @indented{
 __**This model predicts** that we'll see a(n) __
 @fitbruby{7em}{@ifsoln{decrease}}{increase/decrease} _of_
-@fitbruby{5em}{@ifsoln{1.83453}}{rate of change}
+@fitbruby{5em}{@ifsoln{2.41263}}{rate of change}
 @fitbruby{20em}{@ifsoln{parts per million of @math{CO_2} in the atmosphere}}{x-variable} _every_
 @fitbruby{4em}{@ifsoln{year}}{x-units}.
 
 __**The error in the model** is described by an @vocab{S-value} of about__
-@fitbruby{3em}{@ifsoln{3.4}}{S}
+@fitbruby{3em}{@ifsoln{2.27}}{S}
 @fitbruby{3em}{@ifsoln{ppm}}{y-units}. @hspace{1em} _I_
 @fitbruby{18em}{@ifsoln{agree}}{strongly agree, agree, disagree, strongly disagree} _that this model is a good fit considering that_
 @fitbruby{7em}{@ifsoln{@math{CO_2} levels}}{y-variable} _in this dataset range from_
-@fitbruby{7em}{@ifsoln{327.28}}{lowest y-value} _to_
+@fitbruby{7em}{@ifsoln{387.03}}{lowest y-value} _to_
 @fitbruby{7em}{@ifsoln{424}}{highest y-value}.__
 }
 
@@ -77,16 +82,17 @@ __**The error in the model** is described by an @vocab{S-value} of about__
 
 @indented{
 __**The error in the model** is described by an @vocab{S-value} of about__ +
-@fitbruby{2em}{@ifsoln{55.89}}{S}
+@fitbruby{2em}{@ifsoln{17.76}}{S}
 @fitbruby{3em}{@ifsoln{ppm}}{y-units}. @hspace{1em} _I_
 @fitbruby{17em}{@ifsoln{disagree}}{strongly agree, agree, disagree, strongly disagree}
 _that this model is a good fit considering that_
 @fitbruby{5em}{@ifsoln{@math{CO_2}}}{y-variable} _in this dataset ranges from about_
-@fitbruby{6em}{@ifsoln{327.28 ppm}}{lowest y-value} _to_ @fitbruby{6em}{@ifsoln{424 ppm}}{highest y-value}.
+@fitbruby{6em}{@ifsoln{387.03 ppm}}{lowest y-value} _to_ 
+@fitbruby{6em}{@ifsoln{424 ppm}}{highest y-value}.
 }
 
-| @ifnotsoln{@center{@image{../images/historical-scatter-plot.png, 300}}}
-@ifsoln{@center{@image{../images/historical-bad-fit.png, 300}}}
+| @ifnotsoln{@center{@image{../images/modern-co2-scatter.png, 300}}}
+@ifsoln{@center{@image{../images/modern-co2-model-soln.png, 300}}}
 |===
 
 == Comparing Models
@@ -94,8 +100,8 @@ _that this model is a good fit considering that_
 @n Which model is better, the `linear` model or the `periodic` model? @fitb{}{@ifsoln{linear}}
 
 @n How much
-@fitbruby{7em}{@ifsoln{less}}{more / less }
-error do we expect in predictions made with the `linear` model than predictions made with the `periodic` model?
+@fitbruby{5em}{@ifsoln{less}}{more / less }
+error do we expect in predictions made with the `linear` model than with the `periodic` model?
 
 @vspace{1ex}
 
@@ -106,37 +112,26 @@ A note for future authors:
 }
 
 @indented{
-Percent Change &#8192; = &#8192;
+_Percent Change_ &#8192; = &#8192;
 @math{
 \frac{&#8192; \mbox{Difference} &#8192; \mbox{between} &#8192; \mbox{the} &#8192; \mbox{S-values}&#8192;}
 {\mbox{S-value} &#8192; \mbox{for} &#8192; \mbox{linear} &#8192; \mbox{model}}
 \times 100 &#8192; = &#8192; }
 @ifnotsoln{@math{\frac{\qquad}{\qquad}}}
-@ifsoln{@math{\frac{52.465}{55.89} = 0.9387  &#8192; &rarr; &#8192;  ~94 \%}}
+@ifsoln{@math{\frac{15.49}{17.76} = 0.87  &#8192; &rarr; &#8192;  ~87 \%}}
+
+We expect 
+@fitb{4em}{@ifsoln{~87}} percent
+@fitbruby{5em}{@ifsoln{less}}{ more / less }
+error from predictions made with the `linear` model than with the `periodic` model!
 }
 
-We expect predictions made with the `linear` model to have
-@fitb{4em}{@ifsoln{~94}} percent
-@fitbruby{7em}{@ifsoln{less}}{ more / less }
-error than predictions made with the `periodic` model!
+== Imagining the Best Possible Model
 
-== Comparing @vocab{S-values} doesn't always make sense
+What if we weren't limited to choosing between linear, quadratic, exponential, logarithimic and periodic models...
 
-We know that the `periodic` model was a good fit for the data in the `recent-table` it was built with. And we know from looking at the graphs that the model fit the historical data worse and worse the farther we went back in time. But, even though that's true, it doesn't make sense to justify it by comparing the @math{S-values} below.
+@n Describe what the best possible for this data would look like: @fitb{}{}
 
-@indented{
-[cols="1a,1a,1a,1a", options="header"]
-|===
-|					| recent-table	| modern-table 	| co2-table
-| @vocab{S-value}	| 1.2 			| 17.76			| 55.89
-| lowest y-value	| 415.74 		| 387.03 		| 327.28
-| highest y-value	| 424			| 424			| 424
-|===
-}
+@fitb{}{@ifsoln{Hopefully students will describe a wave that follows the line of best fit.}}
 
-@n Why wouldn't it make sense to compare the @math{S-values} in this table the way that we compared the @math{S-values} for how the linear and periodic models fit the `co2-table`? @fitb{}{}
-
-@fitb{}{@ifsoln{@math{S-values} only mean something when we consider them within the context of the range of the data. 
-}}
-
-@fitb{}{@ifsoln{We can compare @math{S-values} for different models when they're applied to the same dataset, but, in this case, we're looking at datasets with very different ranges!}}
+@fitb{}{}
