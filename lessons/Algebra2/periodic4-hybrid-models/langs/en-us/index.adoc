@@ -28,7 +28,7 @@
 
 |===
 
-== Comparing Models
+== Deconstructing Models
 
 === Overview
 
@@ -36,9 +36,50 @@ Students explore the historical data, discovering that there's a stronger patter
 
 === Launch
 
-Let's take a moment to refresh ourselves on the models we've seen so far and what their key characteristics are.
+@lesson-instruction{
+- Let's consider two periodic models built from the `recent-table` using cosine.
+- Complete the first section of @printable-exercise{choosing-the-best-model.adoc}.
+}
 
-@lesson-instruction{Complete @printable-exercise{choosing-the-best-model.adoc} with your partner.}
+@slidebreak
+
+@indented{
+```
+fun periodic-cos(x): (4.13 * cos(6.28 * (x - 2023.35))) + 419.87 end 
+fun wave-cos(x):     (4.13 * cos(6.28 * (x - 2023.35)))          end 
+fun midline-cos(x):                                       419.87 end 
+fun periodic-cos2(x):     wave-cos(x)      +      midline-cos(x) end
+```
+}
+
+@QandA{
+@Q{What is going in `periodic-cos2` and why does it produce the same graph as `periodic-cos`?}
+@A{`periodic-cos2` is composed of two functions called `midline-cos` and `wave-cos`:
+  - `midline-cos` is just the vertical shift of the `periodic-cos` function.
+  - `wave-cos` is all of the parts of the `periodic-cos` function except for that vertical shift.
+}
+}
+@slidebreak
+
+@QandA{
+@Q{What kind of line passed between the peaks and waves of our `periodic-cos` model?}
+@A{horizontal}
+
+@Q{How did that line get defined in our function definition?}
+@A{Horizontal lines are defined by a single number - the vertical shift.}
+@A{The final term of our `periodic-cos` function definition is the number that defines the position of the horizontal line.}
+}
+
+@slidebreak
+
+Our `periodic-cos` model has two terms:
+
+- The periodic term @math{4.13 \times cos(2\pi(x - 2023.35))}, which described the wave that wrapped around the horizontal midline
+- The vertical shift @math{419.87}, which described the (fixed) y-coordinate of the midline
+
+@lesson-instruction{
+- Let's take a moment to refresh ourselves on the models we've seen so far and what their key characteristics are.
+- Complete the rest of @printable-exercise{choosing-the-best-model.adoc} with your partner.}
 
 @QandA{
 @Q{Of the models you sketched and described, which makes the most sense to try fitting to this scatter plot? Why?}
@@ -48,11 +89,11 @@ Let's take a moment to refresh ourselves on the models we've seen so far and wha
 
 === Investigate
 
-We built our `periodic` model using data from a small window: _just one year_. The scatter plot on @printable-exercise{choosing-the-best-model.adoc} had a very different shape, because it came from a _50-year window_ of historical @math{\text{CO}_2} levels! In order to understand how the shape of these two datasets relate to each other, let's look at something in-between: @math{\text{CO}_2} data from 2010 to 2023.
+We built our `periodic` model using data from a small window: _just one year_. The scatter plot we just looked at on @printable-exercise{choosing-the-best-model.adoc} was also generated from @math{\text{CO}_2} data and had a very different shape!
 
 @lesson-instruction{
 - Open the @starter-file{alg2-hybrid} and click "Run".
-- Make a scatter plot of @math{\text{CO}_2} over time for the `modern-table`.
+- Make a scatter plot of @math{\text{CO}_2} over time for the `modern-table`, which includes historical @math{\text{CO}_2} levels from 2010 to 2023.
 - What do you Notice? What do you Wonder?
 }
 
@@ -71,17 +112,13 @@ We built our `periodic` model using data from a small window: _just one year_. T
 
 @lesson-instruction{
 - Let's try fitting linear and periodic models to the @math{\text{CO}_2} data from 2010 to 2023.
+- Start by finding the section of the @starter-file{alg2-hybrid} where you're asked to "Define your periodic sin functions..."
+  * First, define `periodic-sin` to be the periodic model you found using Desmos.
+  *** You should already have it defined as `periodic` in @starter-file{alg2-co2} and on @lesson-link{periodic3-fitting-models/pages/modeling-recent-co2-2.adoc}.
+  * Using the deconstruction of `periodic-cos` as your model, change the four functions to show how to separate the wave and midline of your periodic model.
 - With your partner complete @printable-exercise{modeling-modern-co2.adoc}.
 }
 
-@slidebreak
-
-@QandA{
-@Q{Which model was better?}
-@A{linear}
-@Q{How does the amount of error expected in predictions made with these models compare?}
-@A{We expect about 87% less error from the linear model.} 
-}
 
 @slidebreak
 
@@ -92,22 +129,35 @@ We built our `periodic` model using data from a small window: _just one year_. T
 |===
 
 @QandA{
-@Q{How would you describe how the linear model fit our `modern-table` data?}
+@Q{How would you describe how the `linear-modern` model fit our `modern-table` data?}
 @A{The linear regression plot shows the line of best fit passing through the middle of the diagonal wave of points.}
 
-@Q{How would you describe how our `periodic` model fits the shape of the data from the `modern-table`?}
+@Q{How would you describe how our `periodic-sin` model fits the shape of the data from the `modern-table`?}
 @A{Answers will vary. Make sure discussion addresses residuals. Sample responses may include:
  - While they both have a wave, they look pretty different!
  - The model undulates around a horizontal line and the data undulates around a diagonal line.
  - The y-intercepts are in completely different places.
- - When we fit the `periodic` model to the data we see the model as a horizontal wave at the top, eventually lining up with the points on the right hand side of the graph. 
+ - When we fit the `periodic-sin` model to the data we see the model as a horizontal wave at the top, eventually lining up with the points on the right hand side of the graph. 
  - We also see vertical residuals showing the distance between each data point and the model.
 }
+}
 
+@slidebreak
+
+@ifslide{@image{images/modern-co2-model-soln.png,350}}
+
+@QandA{
 @Q{Where does the `periodic` model fit the `modern-table` data best?}
 @A{Within the range of the dataset that it was built on.}
 @Q{Where does the `periodic` model fit the `modern-table` data worst?}
 @A{The farther we get from the date range it was built on.}
+}
+
+@slidebreak
+
+@QandA{
+@Q{How would you describe the shape of the model you drew that would be optimal?}
+@A{Hopefully students will describe a wave whose midline is diagonal.}
 }
 
 === Synthesize
@@ -134,49 +184,12 @@ Do you think it's possible for a model to be both linear _and_ periodic?
 
 @slidebreak
 
-@lesson-instruction{
-- Let's consider how our periodic model is defined.
-- Complete the first section of @printable-exercise{hybrid.adoc}.
-}
 
-@slidebreak
 
-```
-fun periodic-cos(x): (4.13 * cos(6.28 * (x - 2023.35))) + 419.87 end 
-fun wave-cos(x): (4.13 * cos(6.28 * (x - 2023.35))) end 
-fun trend-line(x): 419.87 end 
-fun hybrid(x): wave-cos(x) + trend-line(x) end
-```
-
-@QandA{
-@Q{How do you know that the `periodic-cos` and `hybrid-cos` functions defined in the codeblock above (excerpted from the Definitions Area of @starter-file{alg2-hybrid}) will produce identical models?}
-@A{`hybrid-cos` is composed of two functions called `trend-line` and `wave-cos`:
-  - `trend-line` is just the vertical shift of the `periodic-cos` function.
-  - `wave-cos` is all of the parts of the `periodic-cos` function except for that vertical shift.
-}
-}
-@slidebreak
-
-@QandA{
-@Q{What kind of line did the wave of our `periodic` model wrap around?}
-@A{horizontal}
-
-@Q{How did that line get defined in our function definition?}
-@A{Horizontal lines are defined by a single number - the vertical shift.}
-@A{The final term of our `periodic` function definition is the number that defines the position of the horizontal line the wave wraps around.}
-}
-
-@slidebreak
-
-Our `periodic-cos` model has two terms:
-
-- The periodic term @math{4.13 \times cos(2\pi(x - 2023.35))}, which described the wave that wrapped around the horizontal midline
-- The vertical shift @math{419.87}, which described the (fixed) y-coordinate of the midline
-
-When we zoom out to see the historical @math{\text{CO}_2} data, we see that the wave is undulating on a diagonal and the midline for our model shouldn't be horizontal at all!
+When we zoom out to see the historical @math{\text{CO}_2} data, we see that the wave is following a diagonal line so the midline for our model shouldn't be horizontal at all!
 
 @lesson-instruction{
-Complete the second section of @printable-exercise{hybrid.adoc}.
+Complete @printable-exercise{hybrid.adoc}.
 }
 
 @slidebreak
@@ -184,9 +197,6 @@ Complete the second section of @printable-exercise{hybrid.adoc}.
 @QandA{
 @Q{What line should our model wrap around?}
 @A{Our line of best fit!}
-
-@Q{What functions did you compose to define your `hybrid-modern` model?}
-@A{`wave` and `linear-modern`}
 
 @Q{What happens when you fit your `hybrid-modern` model to the `modern-table` data?}
 @A{The model should now look like waves along a diagonal.}
@@ -227,7 +237,10 @@ We can visualize the body of the function using the Circles of Evaluation:
 [.hybridCOE]
 @show{(coe '(+ (* 4.13 (sin (* (* 2 PI) (- x 2023.1)))) (+ (* 1.8345 x) -3296) ))}
 
-@opt{Turn to @opt-printable-exercise{more-hybrid.adoc} and build a hybrid model for the full @math{\text{CO}_2} data.}
+@lesson-instruction{
+- Now that you know how to build a hybrid model, let's have you try building one on your own! 
+- Turn to @printable-exercise{more-hybrid.adoc} and build a hybrid model for the full @math{\text{CO}_2} data.
+}
 
 === Synthesize
 

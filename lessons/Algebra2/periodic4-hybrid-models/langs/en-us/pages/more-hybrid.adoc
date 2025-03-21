@@ -8,19 +8,10 @@
 
 @n Let's test it out. What @vocab{S-value} do you get? @fitb{}{@ifsoln{~12.379}}
 
-@n To build a new hybrid model for the data in the `co2-table` we first need to decide: Which line do we want the wave to wrap around? @fitb{}{@ifsoln{{nbsp}@math{y = 1.83453x - 3296.8}}}
+@n Find the section of the starter file that says "HYBRID MODEL for the full co2-table". Define `hybrid-all` as a model that fits all of the data well. Be sure to think through which functions you will need to define in order to be able to compose your function definition.
+@teacher{the line of best fit for the full `co2-table` data is @math{y = 1.83453x - 3296.8}}
 
-@fitb{}{@ifsoln{The line of best fit from our `lr-plot` for the `co2-table`.}}
-
-@n Change the definition for `linear-co2` in the starter file based on your answer above.
-
-@n Which two functions from our Definitions Area could we compose to make a hybrid model for the `co2-table` data where the sine wave wraps around the line you just identified?
-
-@fitb{}{@ifsoln{`wave` and `linear-co2`}}
-
-@n *Copy-and-paste* the definition for `hybrid-modern`, changing the name of the new copy to `hybrid-all`.
-
-@n Use `fit-model` to fit `hybrid-all` to the `co2-table`. What is the @vocab{S-value} of `hybrid-all` with this data? @fitb{}{@ifsoln{~2.937}}
+@n Use `fit-model` to fit your new `hybrid-all` model to the `co2-table`. What is the @vocab{S-value} of `hybrid-all` with this data? @fitb{}{@ifsoln{~2.937}}
 
 @n How much @fitbruby{5em}{@ifsoln{less}}{more / less }
 error do we expect in predictions made using `hybrid-all` than with the `hybrid-modern` model for our `co2-table` data?
@@ -72,3 +63,5 @@ But it doesn't always make sense to compare @vocab{S-values}.
 @fitb{}{@ifsoln{We can compare @math{S-values} for different models when they're applied to the same dataset, but, in this case, we're looking at datasets with very different ranges!}}
 
 @teacher{Data Scientists have many tools in their toolboxes and @vocab{S-values} are just one of them. If your students are already familiar with @math{r^2}, now would be a good time to point out that when it doesn't make sense to compare @vocab{S-values} we can fall back on some of our other tools.}
+
+@star Just as there's nothing to say that midlines have to be horizontal, there’s also nothing to say that midlines need to be straight! If you look closely, the `co2-table`’s midline almost looks quadratic… can you come up with a `hybrid-curve` model for the `co2-table` that can beat the @vocab{S-value} you just found?

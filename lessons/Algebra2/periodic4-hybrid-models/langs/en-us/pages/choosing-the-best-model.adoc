@@ -1,31 +1,41 @@
 [.landscape]
 = Choosing the Best Model for the Data
 
-++++
-<style>
-/* Format autonumbering inside the table correctly */
-table .autonum::after { content: ')' !important; }
-</style>
-++++
-
 [.no-flex-section]
-== Review: Models We've Seen
-[cols="1a, 2a, 2a, 2a, 2a, 2a", options="header", stripes="none"]
+== Deconstructing a Model
+
+@n The four functions below are defined in the @starter-file{alg2-hybrid}. Use `fit-model` to fit `periodic-cos` and `periodic-cos2` to the `recent-table` data. 
+
+
+@indented{
+```
+fun periodic-cos(x): (4.13 * cos(6.28 * (x - 2023.35))) + 419.87 end 
+fun wave-cos(x):     (4.13 * cos(6.28 * (x - 2023.35)))          end 
+fun midline-cos(x):                                       419.87 end 
+fun periodic-cos2(x):     wave-cos(x)      +      midline-cos(x) end
+```
+
+}
+
+@n Looking at the definitions of these 4 functions, explain what is going in `periodic-cos2` and why it produces the same graph as `periodic-cos`. @fitb{}{}
+
+@fitb{}{}
+@fitb{}{}
+
+
+== Review: Models we've worked with so far
+[.FillVerticalSpace, cols="3a, 5a, 5a, 5a, 5a, 5a", options="header", stripes="none"]
 |===
 | 						|Linear 		| Quadratic | Exponential 	| Logarithmic 	| Periodic
-| Sketch 				|@vspace{20ex}	| 			| 				| 				| 
-| Key Characteristics	|@vspace{20ex}	|			|				|				|
+| Sketch(es) 			|				| 			| 				| 				| 
+| Key Characteristics	|				|			|				|				|
 |===
 
+[.no-flex-section]
 == What kind of model?
 
-[cols="6a,1,7a", grid="none", frame="none"]
-|===
-|@image{../images/historical-scatter-plot-no-labels.png}
-|
-|@n Consider the scatter plot to the left. What do you Notice? What do you Wonder?
+@n Identify which kind of model above would best describe... {nbsp} our `wave-cos` function: @fitb{13em}{@ifsoln{periodic}} {nbsp} our `midline-cos` function: @fitb{}{@ifsoln{linear}}
 
-@vspace{25ex}
+@n @image{../images/modern-co2-scatter.png, 125} Of the models you described above, which do you think it would make the most sense to try fitting to this scatter plot? Why? @fitb{}{}
 
-@n Of the models you described above, which do you think it would make the most sense to try fitting to this scatter plot? Why?
-|===
+@fitb{}{}

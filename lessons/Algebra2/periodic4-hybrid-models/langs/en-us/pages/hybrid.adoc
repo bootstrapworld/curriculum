@@ -7,59 +7,31 @@
 ++++
 @link-instructions{Open your copy of @starter-file{alg2-hybrid} and click "Run".}
 
-== Deconstructing a Model
-
-In the definitions area of @starter-file{alg2-hybrid} you'll see the following four functions:
-
-@indented{
-```
-fun periodic-cos(x): (4.13 * cos(6.28 * (x - 2023.35))) + 419.87 end
-
-fun wave-cos(x): (4.13 * cos(6.28 * (x - 2023.35))) end
-
-fun mid-line(x): 419.87 end 
-
-fun periodic-cos2(x): wave-cos(x) + mid-line(x) end
-```
-}
-
-@n Use `fit-model` to fit `periodic-cos` to the `recent-table` data.
-
-- What is the equation of this model's @vocab{midline}? @fitb{}{@ifsoln{something like {nbsp} @math{f(x) = 419.87}}}
-- Describe the shape of this line @fitb{}{@ifsoln{a straight, horizontal line}}
-- Where does the @vocab{midline} show up in our `periodic-cos` function? @fitb{}{@ifsoln{The last term, which describes the vertical shift}}
-
-@n Are `periodic-cos` and `periodic-cos2` the same model? Why or why not? @fitb{}{@ifsoln{I see that: }}
-
-@fitb{}{@ifsoln{`hybrid` adds `trend-line` to `wave-cos`.}}
-
-@fitb{}{@ifsoln{`trend-line` is just the horizontal shift of the `periodic-cos` function.}}
-
-@fitb{}{@ifsoln{`wave-cos` is just all of the parts of the `periodic-cos` function except for the horizontal shift.}}
-
-@center{*Check your answer by fitting `periodic-cos2` to the `recent-table` data!*}
-
-@n This code deconstructs `periodic-cos` into two helper functions: one for the wave, and one for the midline it wraps around. *Following this example, deconstruct your `periodic` model and define `periodic-sin2` in the starter file.*
-
 == Composing a `hybrid` model for the `modern-table`
 
-Both `periodic` and `periodic2` are built to wrap around a midline with the equation @math{f(x) = 419.87}. But who says the midline has to be _horizontal?_
+Both `periodic-sin` and `periodic-cos` are built to follow a midline with the equation @math{f(x) = 419.87}. +
+*But who says the midline has to be __horizontal?__*
 
-@n Which midline do we wish a model for the `modern-table` to wrap around instead? @fitb{}{@ifsoln{{nbsp}@math{y = 2.141263x - 4461}}}
+@n Which midline do we wish a model for the `modern-table` would follow instead?  @fitb{}{@ifsoln{The line of best fit, which we could find using `lr-plot`.}} 
 
-@fitb{}{@ifsoln{The line of best fit from our `lr-plot`, which we've defined in our starter file as `linear-modern`}}
+@teacher{The line of best fit will be @math{y = 2.141263x - 4461}}
 
-@n *Copy-and-paste* your definition of `periodic2`, changing the name of the new copy to `hybrid-modern`. 
+@n Find `linear-modern` in the starter file and define it to be the line you described above.
 
-@n Keeping the `wave-sin` part the same, *change the midline function* so that your wave wraps around the line you described above.
+@n Find the definition for `hybrid-modern`. How is this function using `linear-modern`? @fitb{}{}
+
+@fitb{}{@ifsoln{`linear-modern` is being used as the midline!}}
 
 @n Fit `hybrid-modern` to the `modern-table`, and describe what you see: @fitb{}{}
 
-@fitb{}{}
+@fitb{}{@ifsoln{Now the periodic wave is on a diagonal!}}
 
-@n What @vocab{S-value} did you get with this data? @fitb{}{@ifsoln{~1.4}}
 
-@n What @vocab{S-value} did `linear-modern` get with this data? @fitb{}{@ifsoln{~2.27}}
+== Comparing Models
+
+@n What @vocab{S-value} describes the expected error in our `hybrid-modern` model for this data? @fitb{}{@ifsoln{~1.4}}@fitbruby{8em}{@ifsoln{ppm}}{y-units}
+
+@n What @vocab{S-value} describes the expected error in our `linear-modern` model for this data? @fitb{}{@ifsoln{~2.27}}@fitbruby{8em}{@ifsoln{ppm}}{y-units}
 
 @n How much
 @fitbruby{5em}{@ifsoln{less}}{more / less }
@@ -87,3 +59,21 @@ We expect
 @fitbruby{5em}{@ifsoln{less}}{ more / less }
 error from predictions made with `hybrid-modern` than with `linear-modern` model!
 }
+
+
+== Interpreting the Hybrid Model
+
+__This model predicts that the overarching trend will be a(n)__
+@fitbruby{7em}{@ifsoln{increase}}{increase/decrease} _of_
+@fitbruby{5em}{@ifsoln{2.41263}}{rate of change}
+@fitbruby{20em}{@ifsoln{parts per million of @math{/text{CO}_2} in the atmosphere}}{x-variable} _every_
+@fitbruby{4em}{@ifsoln{year}}{x-units}. __The data will fluctuate following a periodic pattern that rises and falls around this @vocab{midline}, with an amplitude of__ 
+@fitbruby{6em}{@ifsoln{4.13}}{amplitude}, __repeating every__
+@fitbruby{4em}{@ifsoln{1}}{period} @fitbruby{5em}{@ifsoln{year}}{x-units}.
+
+__The error in the model is described by an @vocab{S-value} of about__ 
+@fitbruby{1em}{@ifsoln{1.4}}{S}@fitbruby{8em}{@ifsoln{ppm}}{y-units}. @hspace{1em} _I_
+@fitbruby{18em}{@ifsoln{strongly agree}}{strongly agree, agree, disagree, strongly disagree}
+that this model is a good fit considering that 
+@fitbruby{8em}{@ifsoln{@math{/text{CO}_2}}}{y-variable} in this dataset ranges from about
+@fitbruby{8em}{@ifsoln{387.03 ppm}}{lowest y-value} to @fitbruby{8em}{@ifsoln{424 ppm}}{highest y-value}.__
