@@ -1,0 +1,89 @@
+= Building a Hybrid Model
+++++
+<style>
+/* We don't need the margin on this page, and we want to save vertical space */
+.listingblock { margin-bottom: 0; }
+</style>
+++++
+@link-instructions{Open your copy of @starter-file{alg2-hybrid} and click "Run".}
+
+== Deconstructing a Model
+
+In the definitions area of @starter-file{alg2-hybrid} you'll see the following four functions:
+
+@indented{
+```
+fun periodic-cos(x): (4.13 * cos(6.28 * (x - 2023.35))) + 419.87 end
+
+fun wave-cos(x): (4.13 * cos(6.28 * (x - 2023.35))) end
+
+fun mid-line(x): 419.87 end 
+
+fun periodic-cos2(x): wave-cos(x) + mid-line(x) end
+```
+}
+
+@n Use `fit-model` to fit `periodic-cos` to the `recent-table` data.
+
+- What is the equation of this model's @vocab{midline}? @fitb{}{@ifsoln{something like {nbsp} @math{f(x) = 419.87}}}
+- Describe the shape of this line @fitb{}{@ifsoln{a straight, horizontal line}}
+- Where does the @vocab{midline} show up in our `periodic-cos` function? @fitb{}{@ifsoln{The last term, which describes the vertical shift}}
+
+@n Are `periodic-cos` and `periodic-cos2` the same model? Why or why not? @fitb{}{@ifsoln{I see that: }}
+
+@fitb{}{@ifsoln{`hybrid` adds `trend-line` to `wave-cos`.}}
+
+@fitb{}{@ifsoln{`trend-line` is just the horizontal shift of the `periodic-cos` function.}}
+
+@fitb{}{@ifsoln{`wave-cos` is just all of the parts of the `periodic-cos` function except for the horizontal shift.}}
+
+@center{*Check your answer by fitting `periodic-cos2` to the `recent-table` data!*}
+
+@n This code deconstructs `periodic-cos` into two helper functions: one for the wave, and one for the midline it wraps around. *Following this example, deconstruct your `periodic` model and define `periodic-sin2` in the starter file.*
+
+== Composing a `hybrid` model for the `modern-table`
+
+Both `periodic` and `periodic2` are built to wrap around a midline with the equation @math{f(x) = 419.87}. But who says the midline has to be _horizontal?_
+
+@n Which midline do we wish a model for the `modern-table` to wrap around instead? @fitb{}{@ifsoln{{nbsp}@math{y = 2.141263x - 4461}}}
+
+@fitb{}{@ifsoln{The line of best fit from our `lr-plot`, which we've defined in our starter file as `linear-modern`}}
+
+@n *Copy-and-paste* your definition of `periodic2`, changing the name of the new copy to `hybrid-modern`. 
+
+@n Keeping the `wave-sin` part the same, *change the midline function* so that your wave wraps around the line you described above.
+
+@n Fit `hybrid-modern` to the `modern-table`, and describe what you see: @fitb{}{}
+
+@fitb{}{}
+
+@n What @vocab{S-value} did you get with this data? @fitb{}{@ifsoln{~1.4}}
+
+@n What @vocab{S-value} did `linear-modern` get with this data? @fitb{}{@ifsoln{~2.27}}
+
+@n How much
+@fitbruby{5em}{@ifsoln{less}}{more / less }
+error do we expect in predictions made using `hybrid-modern` than with the `linear-modern` model?
+
+@vspace{1ex}
+
+@scrub{
+A note for future authors:
+- {&#8192;} is used below to add horizontal space.
+- \mbox{} is used to make the words in the fraction use normal font.
+}
+
+@indented{
+_Percent Change_ &#8192; = &#8192;
+@math{
+\frac{&#8192; \mbox{Difference} &#8192; \mbox{between} &#8192; \mbox{the} &#8192; \mbox{S-values}&#8192;}
+{\mbox{S-value} &#8192; \mbox{for} &#8192; \mbox{linear} &#8192; \mbox{model}}
+\times 100 &#8192; = &#8192; }
+@ifnotsoln{@math{\frac{\qquad}{\qquad}}}
+@ifsoln{@math{\frac{0.87}{2.27} = 0.38  &#8192; &rarr; &#8192;  ~38 \%}}
+
+We expect 
+@fitb{4em}{@ifsoln{~38}} percent
+@fitbruby{5em}{@ifsoln{less}}{ more / less }
+error from predictions made with `hybrid-modern` than with `linear-modern` model!
+}
