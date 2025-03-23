@@ -2,18 +2,16 @@
 ++++ 
 <style>
 
-/* Format autonumbering inside the table correctly */
-table .autonum::after { content: ')' !important; }
-
-/* Tweak padding to save vertical height */
-td, .center { padding: 0 !important; }
-
 /* Make code more visible */
 td .codetwo { color: black; background: none; }
 
-/* Shorten fill in the blanks */
+/* Allow fill in the blanks to be even shorter */
 .fitb { min-width: 2em; padding-top: 1rem; }
-.studentAnswerMedium { min-width: 70pt !important; }
+
+/* Adjust padding and font-style for our tables */
+table tr td { padding: 0; }
+td:first-child { padding-right: 1em; }
+td:first-child p { font-style:  italic; }
 </style>
 ++++
 
@@ -36,50 +34,56 @@ This page deals with the `modern-table` of the @starter-file{alg2-hybrid}, which
 @n Use `lr-plot` to find the best linear model for the `modern-table` and record the function below:
 
 @indented{
-[cols="1a, 5a", frame="none", stripes="none", grid="none"]
-|===
-.>| *Pyret Notation*
-| @show{(code '(define (linear-modern x) (+ (* (?ANS 2.41263) x)(?ANS -4461))))}
-|===
+@show{(code '(define (linear-modern x) (+ (* (?ANS 2.41263) x)(?ANS -4461))))}
 }
 
 @n Change the `linear-modern` function in the starter file to match the function above. Then complete the interpretation stem below.
 
-@indented{
-__**This model predicts** that we'll see a(n) __
-@fitbruby{7em}{@ifsoln{decrease}}{increase/decrease} _of_
+[cols="3a, .^1a", frame="none"]
+|===
+|
+*This model predicts* a(n)
+@fitbruby{7em}{@ifsoln{decrease}}{increase/decrease} of
 @fitbruby{5em}{@ifsoln{2.41263}}{rate of change}
-@fitbruby{20em}{@ifsoln{parts per million of @math{CO_2} in the atmosphere}}{x-variable} _every_
-@fitbruby{4em}{@ifsoln{year}}{x-units}.
+@fitbruby{10em}{@ifsoln{@math{CO_2} (ppm)}}{y-units} every
+@fitbruby{5em}{@ifsoln{year}}{x-units}.
 
-__**The error in the model** is described by an @vocab{S-value} of about__
+*When fit to this data, the model's error* is described by an @vocab{S-value} of about
 @fitbruby{3em}{@ifsoln{2.27}}{S}
-@fitbruby{3em}{@ifsoln{ppm}}{y-units}. @hspace{1em} _I_
-@fitbruby{18em}{@ifsoln{agree}}{strongly agree, agree, disagree, strongly disagree} _that this model is a good fit considering that_
-@fitbruby{7em}{@ifsoln{@math{CO_2} levels}}{y-variable} _in this dataset range from_
-@fitbruby{7em}{@ifsoln{387.03}}{lowest y-value} _to_
+@fitbruby{10em}{@ifsoln{@math{CO_2} (ppm)}}{y-units}. I
+@fitbruby{18em}{@ifsoln{agree}}{strongly agree, agree, disagree, strongly disagree} that this model is a good fit, since
+@fitbruby{10em}{@ifsoln{@math{CO_2} (ppm)}}{y-units} in this dataset ranges from about
+@fitbruby{7em}{@ifsoln{387.03}}{lowest y-value} to
 @fitbruby{7em}{@ifsoln{424}}{highest y-value}.
-}
+
+|
+@ifnotsoln{@center{@image{../images/modern-co2-scatter.png}}}
+@ifsoln{@center{@image{../images/modern-lr.png}}}
+|===
 
 == Fitting your Periodic Model
 @n Change the `periodic` function in the starter file to match what you found on @printable-exercise{periodic3-fitting-models/pages/modeling-recent-co2.adoc}.
 
 @n Use `fit-model` to fit `periodic` to the data in the `modern-table`, and complete the interpretation stem below.
 
-@indented{
-__**The error in the model** is described by an @vocab{S-value} of about__ 
-@fitbruby{2em}{@ifsoln{17.76}}{S}
-@fitbruby{3em}{@ifsoln{ppm}}{y-units}. @hspace{1em} _I_
-@fitbruby{17em}{@ifsoln{disagree}}{strongly agree, agree, disagree, strongly disagree}
-_that this model is a good fit considering that_
-@fitbruby{5em}{@ifsoln{@math{CO_2}}}{y-variable} _in this dataset ranges from about_
-@fitbruby{6em}{@ifsoln{387.03 ppm}}{lowest y-value} _to_ 
-@fitbruby{6em}{@ifsoln{424 ppm}}{highest y-value}.
-}
+[cols="3a, .^1a", frame="none"]
+|===
+|
+*When fit to this data, the model's error* is described by an @vocab{S-value} of about
+@fitbruby{3em}{@ifsoln{17.76}}{S}
+@fitbruby{10em}{@ifsoln{@math{CO_2} (ppm)}}{y-units}. I
+@fitbruby{18em}{@ifsoln{disagree}}{strongly agree, agree, disagree, strongly disagree}
+that this model is a good fit, since
+@fitbruby{10em}{@ifsoln{@math{CO_2} (ppm)}}{y-units} in this dataset range from
+@fitbruby{7em}{@ifsoln{387.03 ppm}}{lowest y-value} to
+@fitbruby{7em}{@ifsoln{424 ppm}}{highest y-value}.
+
+|
+@ifnotsoln{@center{@image{../images/modern-co2-scatter.png}}}
+@ifsoln{@center{@image{../images/modern-co2-model-soln.png}}}
+|===
 
 == Comparing Models
-
-@n Which model is better, the `linear` model or the `periodic` model? @fitb{}{@ifsoln{linear}}
 
 @n How much
 @fitbruby{5em}{@ifsoln{less}}{more / less }
@@ -108,21 +112,18 @@ We expect
 error from predictions made with the `linear` model than with the `periodic` model!
 }
 
-== Imagining the Best Possible Model
+== Imagining the _Best Possible_ Model
 
-@n Sketch the linear and periodic models you built above on the corresponding scatter plots below. Then consider: What if we weren't limited to choosing between linear, quadratic, exponential, logarithmic and periodic models...sketch the model you think would best fit the data!
+@n Sketch the _best possible model_ you can imagine for this data on the right, and describe it on the left. Do parts of it look linear? Quadratic? Exponenital? Logarithmic? Periodic?
 
-@vspace{1ex}
-
-[cols="^1a,^1a,^1a", options="header"]
+[cols="3a, .^1a", frame="none"]
 |===
-| Optimal Linear Model
-| My Periodic Model
-| Best Possible Model I can Imagine
-|@ifnotsoln{@center{@image{../images/modern-co2-scatter.png}}}
-@ifsoln{@center{@image{../images/modern-lr.png}}}
-|@ifnotsoln{@center{@image{../images/modern-co2-scatter.png}}}
-@ifsoln{@center{@image{../images/modern-co2-model-soln.png}}}
-|@ifnotsoln{@center{@image{../images/modern-co2-scatter.png}}}
+| @fitb{}{} +
+  @fitb{}{} +
+  @fitb{}{} +
+  @fitb{}{} +
+
+|
+@ifnotsoln{@center{@image{../images/modern-co2-scatter.png}}}
 @ifsoln{@center{@image{../images/modern-hybrid.png}}}
 |===

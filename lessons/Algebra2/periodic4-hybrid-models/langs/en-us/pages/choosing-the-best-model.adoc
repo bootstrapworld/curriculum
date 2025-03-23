@@ -5,27 +5,91 @@
 <style>
 /* Format autonumbering inside the table correctly */
 table .autonum::after { content: ')' !important; }
+
+/* Remove default table padding */
+.topTable { 
+	table-layout: 	fixed; 
+	margin: 		0 !important; 
+}
+
+.topTable th:first-child, 
+.topTable td:first-child { 
+	background:  	rgb(238, 238, 238) !important;
+}
+.topTable td:first-child p { 
+	writing-mode: 	vertical-rl;
+  	transform: 		rotate(180deg); 
+	font-weight: 	bold;
+ }
+
+/*
+  "Graph" tables provide a pure-CSS solution for all coordinate planes.
+
+  They rely on a set up CSS variables, with reasonable defaults:
+    --width and --height determine the size of plane. Defaults to 3in x 3x.
+    --min-gap determines the minimum space between graphs. Defaults to 20px.
+
+    --top_pct and --left_pct determine the origin's position (btw 0 and 1). Defaults to (0.5, 0.5).
+    --minors determines how many "minor axes" (incl the one behind major). Defaults to 7.
+
+    --x_label defaults to 'x'
+    --y_label defaults to 'y'
+*/
+.graph {
+  --width:    1.7in;
+  --height:   1.0in;
+  --top_pct:  .90; /* (90%) */
+  --left_pct: .10; /* (10%) */
+  --min-gap:  0px; /* No gap between cells */
+  --x_label:  '';  /* No label on x-axis */
+  --y_label:  '';  /* No label on y-axis */
+  --minors:		0; /* No "thin" gridlines */
+  height: 	  unset !important;
+}
+
+/* Override the VERY specific rule that prevents 
+   .graph cells from having a border
+*/
+body.workbookpage table.graph td { 
+	border-left: 1px solid lightgray !important; 
+}
+
+.graph td { background-color: white; }
 </style>
 ++++
 
-[.no-flex-section]
 == Review: Models We've Seen
-[cols="1a, 2a, 2a, 2a, 2a, 2a", options="header", stripes="none"]
+[.topTable, cols=".^1a, ^6a, ^6a, ^6a, ^6a, ^6a", options="header"]
 |===
-| 						|Linear 		| Quadratic | Exponential 	| Logarithmic 	| Periodic
-| Sketch 				|@vspace{20ex}	| 			| 				| 				| 
-| Key Characteristics	|@vspace{20ex}	|			|				|				|
+|	
+|Linear|Quadratic|Exponential|Logarithmic|Periodic
+|===
+
+[.topTable.FillVerticalSpace.graph, cols=".^1a, 6a, 6a, 6a, 6a, 6a", frame="none"]
+|===
+| Sketch
+|||||
+|===
+
+[.FillVerticalSpace.topTable, cols=".^1a, 6a, 6a, 6a, 6a, 6a"]
+|===
+| Key Characteristics
+|||||
 |===
 
 == What kind of model?
 
-[cols="6a,1,7a", grid="none", frame="none"]
+[cols=".^3a,1,10a", grid="none", frame="none"]
 |===
-|@image{../images/historical-scatter-plot-no-labels.png}
+|@image{../images/modern-co2-scatter.png, 200}
 |
-|@n Consider the scatter plot to the left. What do you Notice? What do you Wonder?
+|@n Consider the scatter plot to the left. What do you Notice? What do you Wonder? 
+@fitb{}{} +
+@fitb{}{} +
+@fitb{}{}
 
-@vspace{25ex}
-
-@n Of the models you described above, which do you think it would make the most sense to try fitting to this scatter plot? Why?
+@n Which of the models above look like they would make the most sense to try fitting to this scatter plot? Why? 
+@fitb{}{} +
+@fitb{}{} +
+@fitb{}{}
 |===
