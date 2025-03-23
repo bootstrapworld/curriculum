@@ -2208,6 +2208,8 @@
                    (set! beginning-of-line? #t)
                    (set! possible-beginning-of-line? #f)]
                   [else
+                    (when (char=? c #\`)
+                      (create-zero-file (format "~a.uses-codemirror" *out-file*)))
                     (set! beginning-of-line? #f)
                     (set! possible-beginning-of-line? #f)
                     (cond [(and (span-stack-present?) (or (char=? c #\{) (char=? c #\})))
