@@ -20,9 +20,13 @@
   --height:   3.0in;
   --left_pct: 0.08;
   --top_pct:  0.92;
-  --x_label: 'altitude';
-  --y_label: 'time';
+  --x_label: 'time';
+  --y_label: 'altitude';
 }
+
+/* "Altitude" is such a long label that we need to 
+   override the normal top positioning rule */
+table.graph td::before { top: 4% !important; }
 </style>
 ++++
 
@@ -33,7 +37,7 @@ The standard form of a periodic model is @math{f(x) = a sin(b⋅(x - h)) + k}. O
 @n Click on one of the @vocab{peaks} (highest-points) on the graph of your periodic function. Desmos will add a gray dot to _all_ of the peaks.
 
 @n Leaving the other sliders where they best fit the data, change *ONLY* the slider for @math{b}, experimenting with values at  @math{0.2},  @math{0.1},  @math{0.05},   and   @math{0}, graphing each curve below. +
-**For each curve, label two adjacent peaks.**
+*For each curve, label two adjacent peaks.*
 
 [.FillVerticalSpace.graph, cols="1,1", frame="none"]
 |===

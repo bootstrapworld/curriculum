@@ -20,9 +20,13 @@
   --height:   3.0in;
   --left_pct: 0.08;
   --top_pct:  0.92;
-  --x_label: 'altitude';
-  --y_label: 'time';
+  --x_label: 'time';
+  --y_label: 'altitude';
 }
+
+/* "Altitude" is such a long label that we need to 
+   override the normal top positioning rule */
+table.graph td::before { top: 4% !important; }
 </style>
 ++++
 
@@ -30,7 +34,7 @@ The standard form of periodic models is @math{f(x) = a sin(b⋅(x - h)) + k}. Le
 
 @n Adjust the sliders to fit the data as best you can, and fill in the coefficients: @fitbruby{6em}{@ifsoln{100}}{@math{a}}, @fitbruby{6em}{@ifsoln{0.209}}{@math{b}}, @fitbruby{6em}{@ifsoln{0}}{@math{h}} and @fitbruby{}{@ifsoln{105}}{@math{k}}
 
-@n Leaving the other sliders where they best fit the data, change *ONLY* the slider for @math{a}, experimenting with values at 100, 50, -50, and 0, graphing each curve below. *For each curve, label the coordinates at time=@math{15}, @math{30}, and @math{45}.*
+@n Changing *ONLY* the slider for @math{a}, experiment with values at 100, 50, -50, and 0, graphing each curve below. *For each curve, label the coordinates at time=@math{15}, @math{30}, and @math{45}.*
 
 [.FillVerticalSpace.graph, cols="1,1", frame="none"]
 |===
