@@ -128,7 +128,7 @@ local function postproc(fhtml_cached, tipe)
       end
     end
     --
-    x = x:gsub('<pre>', '<pre><code="' .. code_lang .. '">')
+    x = x:gsub('<pre>', '<pre><code class="' .. code_lang .. '">')
     x = x:gsub('</pre>', '</code></pre>')
     x = x:gsub('<code>', '<code class="' .. code_lang .. '">')
     x = x:gsub('<p> </p>', '<p></p>')
