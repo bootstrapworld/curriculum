@@ -148,6 +148,139 @@ We started out with two documents. Now, in place of our two documents, we have t
 
 
 
+
+== Computing Closeness with Angle Difference
+
+=== Overview
+
+Compressing text into bags of words gives us a coarse-grained notion of similarity. Let's explore how to produce a more refined notion of similarity.
+
+=== Launch
+
+
+Our primitive plagiarism detector determined if two documents matched perfectly. That plagiarism detector was not especially useful.
+
+Our slightly-less-primitive plagiarism detector determined if two documents' bag-of-words summaries were identical or not... which was also not very useful.
+
+What we would like is something richer. When we ask people whether two documents are the same, they rarely give us a black-and-white "yes" or "no" answer. Instead they tend to speak about shades of similarity. Likewise, we would like our computer to give us a range of values, not just two, that give us a sense of how similar the two documents are. In other words, we would like the output to be a Number, not just a Boolean.
+
+=== Investigate
+
+It turns out that the bag of words model lends itself especially well to that. Recall that using it, we can plot each point in a multi-dimensional space. Now suppose we draw a line from the origin of the space to each of those points. We can then ask what is the angle between the two lines?
+
+Take, for example, this comparison between two strings: stringA ("doo doo doo doo") and stringB ("be be be be").
+
+[cols="<.^8a,<.^8a,<.>8a",  stripes="none"]
+|===
+|
+
+StringA: `doo doo doo doo`
+
+[cols="1,1",options="header"]
+!===
+! Word  ! Frequency
+! be ! 0
+! doo! 4
+!===
+
+Ordered pair: (0,4)
+
+|
+
+StringB: `be be be be`
+
+[cols="1,1",options="header"]
+!===
+! Word  ! Frequency
+! be ! 4
+! doo! 0
+!===
+
+Ordered pair: (4,0)
+
+|
+
+@center{@image{images/soln1.png, 150}}
+
+The angle formed is 90°.
+|===
+
+
+
+If two documents are identical, they will be at the same point in space, and have the same vectors running from the origin to that point. That means the angle between those vectors will be 0°. Even if one document just rearranges the other, their bags of words will be identical—thereby again making the angle between the lines 0°.
+
+@lesson-instruction{
+- Complete @printable-exercise{angle-difference.adoc} using your knowledge of bags of words and vectors.
+
+** First, fill in the frequency tables by referring to the provided string.
+** Translate the bags of words to ordered pairs.
+** Plot the points.
+** Draw a ray from the origin to each of the points.
+** Approximate the angle size.}
+
+As the documents contain different words, the angles between the lines will grow. To reflect this, we can use the `angle-difference` function. It will give us a value between 0° (if the two are identical) and 90° (if the two have nothing in common).
+
+@QandA{
+@Q{Do you predict that the angle difference for the `wiki-article` and `student-essay` will be closer to 0° or closer to 90°?
+}
+@A{Since the student essay is nearly identical to the wikipedia article, we would expect a difference closer to zero. (It's actually 4.663°.)}
+}
+
+The contract for `angle-difference` is below.
+
+``
+# angle-difference :: (String, String) -> Number
+``
+
+@lesson-instruction{
+Let's try the `angle-difference` function in Pyret.
+
+- Use the provided contract to check what the angle difference is between `wiki-article` and `student-essay`.
+- Check your work on @printable-exercise{angle-difference.adoc}.
+.
+** Open @starter-file{plagiarism} and click "Run".
+** Enter `angle-difference("doo doo doo doo", "be be be be")` into the Interactions Area.
+** Does the angle size that Pyret produces match the angle that you drew? (Hopefully yes!)
+** Use `angle-difference` to compare each pair of strings on @printable-exercise{angle-difference.adoc}.
+}
+
+@strategy{Angles?!}{
+
+Yes, angles!
+
+Did you know that geometry is at the heart of modern AI? This lesson shows how. The same angles that your students learn to compute in middle-school are sitting at the heart of the machine learning calculations that power so many things in the world today. Even the plagiarism detectors that might be checking their essays on angles... are computing angles. So if your students ask “When are we ever going to use this?”, you can tell them, “You already do, all the time”.
+
+}
+
+
+
+
+=== Synthesize
+
+@QandA{
+
+Here are three different lines of code.
+
+`angle-difference("hello world", "hello")`
+
+`angle-difference("hello", "goodbye")`
+
+`angle-difference("hello", "hello")`
+
+@Q{Which line of code produces 90°? How do you know?}
+@A{`angle-difference("hello", "goodbye")`; the two strings are completely different.}
+
+@Q{Which line of code produces 45°? How do you know?}
+@A{`angle-difference("hello world", "hello")`; the two strings have one word in common; they are not entirely different nor are they identical.}
+
+
+@Q{Which line of code produces 0°? How do you know?}
+@A{`angle-difference("hello", "hello")`; the two strings are exactly the same.}
+}
+
+
+
+
 == The Dimensionality of Natural Language
 
 === Overview
@@ -218,134 +351,7 @@ Complete @printable-exercise{human-judgment.adoc}.}
 }
 
 
-== Computing Closeness with Angle Similarity
 
-=== Overview
-
-Compressing text into bags of words gives us a coarse-grained notion of similarity. Let's explore how to produce a more refined notion of similarity.
-
-=== Launch
-
-
-Our primitive plagiarism detector determined if two documents matched perfectly. That plagiarism detector was not especially useful.
-
-Our slightly-less-primitive plagiarism detector determined if two documents' bag-of-words summaries were identical or not... which was also not very useful.
-
-What we would like is something richer. When we ask people whether two documents are the same, they rarely give us a black-and-white "yes" or "no" answer. Instead they tend to speak about shades of similarity. Likewise, we would like our computer to give us a range of values, not just two, that give us a sense of how similar the two documents are. In other words, we would like the output to be a Number, not just a Boolean.
-
-=== Investigate
-
-It turns out that the bag of words model lends itself especially well to that. Recall that using it, we can plot each point in a multi-dimensional space. Now suppose we draw a line from the origin of the space to each of those points. We can then ask what is the angle between the two lines?
-
-Take, for example, this comparison between two strings: stringA ("doo doo doo doo") and stringB ("be be be be").
-
-[cols="<.^8a,<.^8a,<.>8a",  stripes="none"]
-|===
-|
-
-StringA: `doo doo doo doo`
-
-[cols="1,1",options="header"]
-!===
-! Word  ! Frequency
-! be ! 0
-! doo! 4
-!===
-
-Ordered pair: (0,4)
-
-|
-
-StringB: `be be be be`
-
-[cols="1,1",options="header"]
-!===
-! Word  ! Frequency
-! be ! 4
-! doo! 0
-!===
-
-Ordered pair: (4,0)
-
-|
-
-@center{@image{images/soln1.png, 150}}
-
-The angle formed is 90°.
-|===
-
-
-
-If two documents are identical, they will be at the same point in space, and have the same vectors running from the origin to that point. That means the angle between those vectors will be 0°. Even if one document just rearranges the other, their bags of words will be identical—thereby again making the angle between the lines 0°.
-
-@lesson-instruction{
-- Complete @printable-exercise{angle-similarity.adoc} using your knowledge of bags of words and vectors.
-
-** First, fill in the frequency tables by referring to the provided string.
-** Translate the bags of words to ordered pairs.
-** Plot the points.
-** Draw a ray from the origin to each of the points.
-** Approximate the angle size.}
-
-As the documents contain different words, the angles between the lines will grow. To reflect this, we can use the `angle-difference` function. It will give us a value between 0° (if the two are identical) and 90° (if the two have nothing in common).
-
-@QandA{
-@Q{Do you predict that the angle difference for the `wiki-article` and `student-essay` will be closer to 0° or closer to 90°?
-}
-@A{Since the student essay is nearly identical to the wikipedia article, we would expect a difference closer to zero. (It's actually 4.663°.)}
-}
-
-The contract for `angle-difference` is below.
-
-``
-# angle-difference :: (String, String) -> Number
-``
-
-@lesson-instruction{
-Let's try the `angle-difference` function in Pyret.
-
-- Use the provided contract to check what the angle difference is between `wiki-article` and `student-essay`.
-- Check your work on @printable-exercise{angle-similarity.adoc}.
-.
-** Open @starter-file{plagiarism} and click "Run".
-** Enter `angle-difference("doo doo doo doo", "be be be be")` into the Interactions Area.
-** Does the angle size that Pyret produces match the angle that you drew? (Hopefully yes!)
-** Use `angle-difference` to compare each pair of strings on @printable-exercise{angle-similarity.adoc}.
-}
-
-@strategy{Angles?!}{
-
-Yes, angles!
-
-Did you know that geometry is at the heart of modern AI? This lesson shows how. The same angles that your students learn to compute in middle-school are sitting at the heart of the machine learning calculations that power so many things in the world today. Even the plagiarism detectors that might be checking their essays on angles... are computing angles. So if your students ask “When are we ever going to use this?”, you can tell them, “You already do, all the time”.
-
-}
-
-
-
-
-=== Synthesize
-
-@QandA{
-
-Here are three different lines of code.
-
-`angle-difference("hello world", "hello")`
-
-`angle-difference("hello", "goodbye")`
-
-`angle-difference("hello", "hello")`
-
-@Q{Which line of code produces 90°? How do you know?}
-@A{`angle-difference("hello", "goodbye")`; the two strings are completely different.}
-
-@Q{Which line of code produces 45°? How do you know?}
-@A{`angle-difference("hello world", "hello")`; the two strings have one word in common; they are not entirely different nor are they identical.}
-
-
-@Q{Which line of code produces 0°? How do you know?}
-@A{`angle-difference("hello", "hello")`; the two strings are exactly the same.}
-}
 
 
 == Training a Model
@@ -356,7 +362,7 @@ Now that we've seen how to create a compressed representation of one piece of te
 
 === Launch
 
-Recall that we started with string-matching, then moved from that to bags of words. We still compared bags for being identical, which was too coarse. We therefore improved on that to create angle-similarity, which gives us a range of values indicating how similar two documents are.
+Recall that we started with string-matching, then moved from that to bags of words. We still compared bags for being identical, which was too coarse. We therefore improved on that to create angle-difference, which gives us a range of values indicating how similar two documents are.
 
 So far, we have only looked at pairs of documents. Each time, Pyret converts both documents to bags of words, then computes the angle between the two. But as we saw earlier, a real plagiarism detector will compare against _many_ documents--and each document will be compared against _many_ student submissions. It would be wasteful to repeat a lot of this work over and over.
 
@@ -374,7 +380,7 @@ Take a look at «the file». In it you will find ten different animal documents.
 The file also  contains the function angle-to-model-docs. You can give this function different documents, and it produces a table of the angular distance between the document you provided and all the other documents.
 
 
-Which animal's document does the student document seem closest to? (Remember that angle-similarity computes the angle, so close documents produce values closer to 0° and the higher the number, the less similar the documents.] Try to change the other documents and experiment!
+Which animal's document does the student document seem closest to? (Remember that angle-difference computes the angle, so close documents produce values closer to 0° and the higher the number, the less similar the documents.] Try to change the other documents and experiment!
 
 Invite students to share their responses.
 
@@ -397,13 +403,13 @@ Actual machine learning systems use cosines, not angles!
 
 === Launch
 
-We have now seen how we can use angle similarity to determine the distance between two documents. We've seen how we can train a model to record several documents, and then use it repeatedly to check a new document.
+We have now seen how we can use `angle-difference` to determine the distance between two documents. We've seen how we can train a model to record several documents, and then use it repeatedly to check a new document.
 
 In practice, real machine learning systems don't quite use angles. Instead, they use the cosine of the angle. There are two reasons for this:
 
 - The angle itself is a somewhat awkward value to work with. In contrast, the cosine has a nice numeric range, between -1 and 1, which makes it convenient to use in various other mathematical settings. (Specifically, it's used in a process called gradient descent.)
 
-- It's simpler to compute the cosine directly. In fact, inside Pyret, angle-similarity actually first computes the cosine, then converts the result into an angle!
+- It's simpler to compute the cosine directly. In fact, inside Pyret, `angle-difference` actually first computes the cosine, then converts the result into an angle!
 
 For the purposes of this curriculum, you can ignore this difference. In particular, if you've never even heard of the cosine, that's fine! You will! And maybe when you do, you'll remember that you've seen its name before...
 
