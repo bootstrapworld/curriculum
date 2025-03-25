@@ -1,50 +1,55 @@
-= Exploring the Model
+= distance-to-cleaned
 
 Use @starter-file{plagiarism} to respond to the questions, below.
 
-== distance-to
+== Part 1: chimpanzee-article
 
-@n Type `distance-to(student-essay)`. The table that appears displays the angle difference between `student-essay` and each of the other animal articles in the corpus.
+Let's compare the output of `distance-to(chimpanzee-article)` with the output of `distance-to-cleaned(chimpanzee-article)`.
 
--  Which article is the _most similar_ to student-essay? @fitb{}{@ifsoln{`elephant-article`}}
--  What is the angle difference between `student-essay` and the _most similar_ article in the corpus? @fitb{}{}
-- Which article is the _most different_ from `student-essay`? @fitb{}{@ifsoln{`hamster-article`}}
-- What is the angle difference between `student-essay` and the _most different_ article? @fitb{}{@ifsoln{77.565°}}
-
-@n Our corpus is made up of eight articles about different animals. Which other animals, aside from elephant and hamster, are represented in the corpus? List them here:
-@fitb{}{@ifsoln{polar bear, rhino, blue whale, giraffe, manatee, chimpanzee, badger, snail}}
+@n On both output tables, the angle produced in the "chimpanzee" row is zero. Why? @fitb{}{}
 
 @fitb{}{}
 
 @fitb{}{}
 
 
-@n In the Interactions Area, type `distance-to(chimpanzee-article)`.
-
-- One of the angle differences listed in the table is zero. What does that tell you? @fitb{}{}
-- Which article is the most similar to `chimpanzee-article`? @fitb{}{@ifsoln{`giraffe-article`}}
-- What is the angle difference between `chimpanzee-article` and the _most similar_ article? @fitb{}{@ifsoln{59.2059°}}
-- Which article is the most different from chimpanzee-article? @fitb{}{@ifsoln{`rhino-article`}}
-- What is the angle difference between `chimpanzee-article` and the _most different_ article? @fitb{}{@ifsoln{72.618°}}
-
-== string-to-bag-cleaned
-
-@n In the Interactions Area, type `string-to-bag(snail-article)`.
-
-- How many unique words are used in the snail article? @fitb{}{@ifsoln{39 words}}
-- List each word that is used 2 or more times in the article. We've provided the first three: @fitb{}{a (2), and (3), be (3),}
-
-@fitb{}{@ifsoln{can (2), found (2), greater(2), in (2), of (4), snail (2), snails (3), the (3)}}
-
-- What do you Notice about the commonly used words? What do you Wonder? @fitb{}{}
+@n When we used `distance-to-cleaned`, the angle measures were generally larger. Why? @fitb{}{}
 
 @fitb{}{}
 
 @fitb{}{}
 
-@n In the Interactions Area, type `string-to-bag-cleaned(snail-article)`.
+@n When we used `distance-to-cleaned`, four articles produced an angle measure of 90. What does this tell us? @fitb{}{}
 
-- Notice that there are fewer unique words listed. How many unique words are on the table now? @fitb{}{@ifsoln{23 words}}
-- List each word that appears 2 or more times, now: @fitb{}{@ifsoln{found (2), greater (2), snail (2), snails (3)}}
+@fitb{}{}
 
+@fitb{}{}
+
+== Part 2: mystery-article
+
+Follow the steps below to make some discoveries about the `mystery-article`.
+
+@n Type `distance-to(mystery-article)` in the Interactions Area. Look at the different angle measurements produced. Do you notice any outliers? @fitb{5em}{@ifsoln{Yes}} Explain. @fitb{}{}
+
+@fitb{}{}
+
+@fitb{}{}
+
+@n Think back to when you compared `student-essay` with `elephant-article`. Those two paragraphs were virtually identical, which resulted in an angle difference of about 5°. The difference between these two vectors (`giraffe-article` and `mystery-essay`) is much greater, but still seems unusual. Can you make any hypotheses about mystery-essay? @fitb{}{}
+
+@fitb{}{}
+
+@fitb{}{}
+
+@n Let’s investigate further. Type `distance-to-cleaned(mystery-essay)`. What do you notice? @fitb{}{}
+
+@fitb{}{}
+
+@fitb{}{}
+
+@n Time for the reveal! Type `mystery-essay` into the Interactions Area. Why was the angle difference between this article and `giraffe-article` small? @fitb{}{}
+
+@fitb{}{}
+
+@fitb{}{}
 
