@@ -220,12 +220,6 @@ If two documents are identical, they will be at the same point in space, and hav
 
 As the documents contain different words, the angles between the lines will grow. To reflect this, we can use the `angle-difference` function. It will give us a value between 0° (if the two are identical) and 90° (if the two have nothing in common).
 
-@QandA{
-@Q{Do you predict that the angle difference for the `wiki-article` and `student-essay` will be closer to 0° or closer to 90°?
-}
-@A{Since the student essay is nearly identical to the wikipedia article, we would expect a difference closer to zero. (It's actually 4.663°.)}
-}
-
 The contract for `angle-difference` is below.
 
 ``
@@ -235,7 +229,6 @@ The contract for `angle-difference` is below.
 @lesson-instruction{
 Let's try the `angle-difference` function in Pyret.
 
-- Use the provided contract to check what the angle difference is between `wiki-article` and `student-essay`.
 - Check your work on @printable-exercise{angle-difference.adoc}.
 .
 ** Open @starter-file{plagiarism} and click "Run".
@@ -344,11 +337,15 @@ Complete @printable-exercise{human-judgment.adoc}.}
 
 === Synthesize
 
+
 @QandA{
+Although we can't visualize the vector spaces for `wiki-article` and `student-essay`, we _can_ apply what we have learned to think about the angle formed by their vectors.
 
-@Q{}
+@Q{Do you predict that the angle difference for the `wiki-article` and `student-essay` will be closer to 0° or closer to 90°?}
 
+@A{Since the student essay is nearly identical to the wikipedia article, we would expect a difference closer to zero. (It's actually 4.663°.)}
 }
+
 
 
 
@@ -371,18 +368,40 @@ We will therefore see the next step of this process: training.
 
 === Investigate
 
-We are now ready to learn about training a model. In training, we take a number of sources — called a corpus (Latin for “body”) — and combine all of them into one large collection. Training is the act of converting each source into our representation; the model is an aggregate of all the corpus data.
+We are now ready to learn about training a model. In training, we take a number of sources and combine all of them into one corpus. Training is the act of converting each source into our representation; the model is an aggregate of all the corpus data.
 
-Specifically, let's suppose the teacher wants a plagiarism detector for (short) animal essays. We've already seen a paragraph about the elephant. She gathers up paragraphs about nine other animals as well. Each one is turned into a bag of words. The key to creating a model is that all this work is done once; it can then be used on many different student submissions.
+Specifically, let's suppose the teacher wants a plagiarism detector for (short) animal essays. We've already seen a paragraph about the elephant. She gathers up paragraphs about seven other animals as well. Each one is turned into a bag of words. The key to creating a model is that all this work is done _once_; it can then be used on many different student submissions.
 
-Take a look at «the file». In it you will find ten different animal documents. The variable model is a table where each animal’s document is associated with its corresponding bag of words. This way, we don’t have to recompute the bags for each of those documents every time; we do it once and save that work.
+@lesson-instruction{
+Use the @starter-file{plagiarism} to complete the first section (`distance-to`) of @printable-exercise{explore-model.adoc}.}
 
-The file also  contains the function angle-to-model-docs. You can give this function different documents, and it produces a table of the angular distance between the document you provided and all the other documents.
+Before we trained our model, we could use `angle-difference` to compute the angle difference between two different articles, that we provided as arguments. Now, with one command (`distance-to)`, we can compare a given article to every other article in the corpus. This way, we don’t have to recompute the bags for each of those documents every time; we do it once and save that work.
+
+*Can we refine our model any further?*
+
+@lesson-instruction{
+Use the @starter-file{plagiarism} to complete the second section (`string-to-bag-cleaned`) of @printable-exercise{explore-model.adoc}.}
+
+@QandA{
+The function you just explored was called `string-to-bag-*cleaned*`.
+
+@Q{What did "cleaning" our bags of words entail? What did we remove from the bags when we used this function?}
+@A{We removed words that are commonly used in the English language.}
+
+@Q{Can you think of any reasons or scenarios when it might be useful to "clean" text of commonly used words?}
+@A{Invite student discussion before sharing the explanation provided in the lesson.}
+}
+
+@vocab{Stopwords} are common words that are often filtered out in text analysis. Removing them can simplify text processing and increase focus on more meaningful words.
+
+Let's consider how stopwords can alter the output of our program.
+
+@lesson-instruction{
+Use the @starter-file{plagiarism} to complete @printable-exercise{distance-to-cleaned.adoc}.}
+}
 
 
-Which animal's document does the student document seem closest to? (Remember that angle-difference computes the angle, so close documents produce values closer to 0° and the higher the number, the less similar the documents.] Try to change the other documents and experiment!
 
-Invite students to share their responses.
 
 
 === Synthesize
