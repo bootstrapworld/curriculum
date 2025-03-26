@@ -370,12 +370,12 @@ We will therefore see the next step of this process: training.
 
 We are now ready to learn about training a model. In training, we take a number of sources and combine all of them into one corpus. Training is the act of converting each source into our representation; the model is an aggregate of all the corpus data.
 
-Specifically, let's suppose the teacher wants a plagiarism detector for (short) animal essays. We've already seen a paragraph about the elephant. She gathers up paragraphs about seven other animals as well. Each one is turned into a bag of words. The key to creating a model is that all this work is done _once_; it can then be used on many different student submissions.
+Specifically, let's suppose the teacher wants a plagiarism detector for (short) animal essays. We've already seen a paragraph about the elephant. She gathers up paragraphs about nine other animals as well. Each one is turned into a bag of words. The key to creating a model is that all this work is done _once_; it can then be used on many different student submissions.
 
 @lesson-instruction{
 Use the @starter-file{plagiarism} to complete the first section (`distance-to`) of @printable-exercise{explore-model.adoc}.}
 
-Before we trained our model, we could use `angle-difference` to compute the angle difference between two different articles, that we provided as arguments. Now, with one command (`distance-to)`, we can compare a given article to every other article in the corpus. This way, we don’t have to recompute the bags for each of those documents every time; we do it once and save that work.
+Before we trained our model, we could use `angle-difference` to compute the angle difference between two different articles, that we provided as arguments. Now, with one command (`distance-to)`, we can compare a given article to every other article in the corpus. This way, we don't have to recompute the bags for each of those documents every time; we do it once and save that work.
 
 *Can we refine our model any further?*
 
@@ -394,23 +394,18 @@ The function you just explored was called `string-to-bag-*cleaned*`.
 
 @vocab{Stopwords} are common words that are often filtered out in text analysis. Removing them can simplify text processing and increase focus on more meaningful words.
 
-Let's consider how stopwords can alter the output of our program.
+Let's consider how removing stopwords alters the results produced.
 
 @lesson-instruction{
 Use the @starter-file{plagiarism} to complete @printable-exercise{distance-to-cleaned.adoc}.}
-
-
-
-
-
 
 === Synthesize
 
 @QandA{
 
-@Q{What does Geometry have to do with AI?}
+@Q{}
 
-@A{To detect "sameness", we convert each document into a vector and use the angle between two documents to determine sameness.}
+@A{}
 }
 
 
@@ -432,7 +427,7 @@ In practice, real machine learning systems don't quite use angles. Instead, they
 
 For the purposes of this curriculum, you can ignore this difference. In particular, if you've never even heard of the cosine, that's fine! You will! And maybe when you do, you'll remember that you've seen its name before...
 
-If you do know what cosines are, and want to play with it, the @starter-file{plagiarism}contains a cosine-similarity function as well. Feel free to experiment!
+If you do know what cosines are, and want to play with it, the @starter-file{plagiarism} contains a cosine-similarity function as well. Feel free to experiment!
 
 @strategy{Connecting to Higher Math}{
 
