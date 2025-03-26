@@ -1,6 +1,6 @@
 = Fitting Hybrid Models
 
-@description{Students investigate periodic relationships, first by deciphering the patterns in a dataset with perfect periodic (sinusoidal) behavior and then by looking at data about Carbon Dioxide, using an inquiry-based model involving hypothesizing, experimental and computational modeling, and sense-making. }
+@description{Students investigate how to combine the types of models they have already learned about. }
 
 @lesson-prereqs{periodic3-fitting-models}
 
@@ -20,116 +20,164 @@
 | Student-facing Lesson Goals
 |
 
-- Let's use Pyret to model periodic relationships in data
+- Let's use Pyret to model periodic relationships in data.
 
 | Materials
 |[.materials-links]
 @material-links
 
-| Preparation
-|
-@preparation{
-- Much of the exploration in this lesson hinges on a custom-built interactive Desmos activity. +
-You will want to:
- * Open @starter-file{alg2-exploring-periodic-desmos}.
- * Make a link or code to share with your students.
- * Decide how you will share the link or code with students and, if you are using our Google Slides, add the appropriate link to the slide deck.
- * Set the pacing so that students are only able to interact with the first three slides. _(As the lesson progresses you will be directed to adjust the pacing or sync students to you so that they have access to relevant slides.)_
-- _If you're a first-time Desmos user, fear not!_ @dist-link{pages/desmos-instructions-alg2.adoc, _Here's what you need to do._}
-}
 |===
 
+== Comparing Models
+
+=== Overview
+
+Students explore the historical data, discovering that there's a stronger pattern at work than seasonal periodicity: a seemingly-linear pattern of rising @math{\text{CO}_2} over time. After considering why we ended up with a periodic model initially and how it connects to the larger trend in the data, they practice comparing @vocab{S-values} for the different models they've fit.
+
+=== Launch
+
+Let's take a moment to refresh ourselves on the models we've seen so far and what their key characteristics are.
+
+@lesson-instruction{Complete @printable-exercise{choosing-the-best-model.adoc} with your partner.}
+
+@QandA{
+@Q{Of the models you sketched and described, which makes the most sense to try fitting to this scatter plot? Why?}
+@A{Linear, because the point cloud is rising steadily.}
+@Q{Any other Notices or Wonders you would like to share?}
+}
+
+=== Investigate
+
+We built our `periodic` model using data from a small window: _just one year_. The scatter plot on @printable-exercise{choosing-the-best-model.adoc} had a very different shape, because it came from a _50-year window_ of historical @math{\text{CO}_2} levels! In order to understand how the shape of these two datasets relate to each other, let's look at something in-between: @math{\text{CO}_2} data from 2010 to 2023.
+
+@lesson-instruction{
+- Open the @starter-file{alg2-hybrid} and click "Run".
+- Make a scatter plot of @math{\text{CO}_2} over time for the `modern-table`.
+- What do you Notice? What do you Wonder?
+}
+
+@slidebreak
+
+@center{@image{images/modern-co2-scatter.png, 500}}
+
+@QandA{
+@Q{Why might somebody describe the shape of this data as linear?}
+@A{Because we could draw a diagonal line with a positive slope throught the middle of the wave and it would do a pretty good job of summarizing the trend.}
+@Q{Why might somebody describe the shape of this data as periodic?}
+@A{Because there is a consistent wave that goes up and down in regular intervals.}
+}
+
+@slidebreak
+
+@lesson-instruction{
+- Let's try fitting linear and periodic models to the @math{\text{CO}_2} data from 2010 to 2023.
+- With your partner complete @printable-exercise{modeling-modern-co2.adoc}.
+}
+
+@slidebreak
+
+@QandA{
+@Q{Which model was better?}
+@A{linear}
+@Q{How does the amount of error expected in predictions made with these models compare?}
+@A{We expect about 87% less error from the linear model.} 
+}
+
+@slidebreak
+
+[cols="^1a,^1a", options="header"]
+|===
+| Optimal Linear Model			| Our Periodic Model
+|@image{images/modern-lr.png}	|@image{images/modern-co2-model-soln.png}
+|===
+
+@QandA{
+@Q{How would you describe how the linear model fit our `modern-table` data?}
+@A{The linear regression plot shows the line of best fit passing through the middle of the diagonal wave of points.}
+
+@Q{How would you describe how our `periodic` model fits the shape of the data from the `modern-table`?}
+@A{Answers will vary. Make sure discussion addresses residuals. Sample responses may include:
+ - While they both have a wave, they look pretty different!
+ - The model undulates around a horizontal line and the data undulates around a diagonal line.
+ - The y-intercepts are in completely different places.
+ - When we fit the `periodic` model to the data we see the model as a horizontal wave at the top, eventually lining up with the points on the right hand side of the graph. 
+ - We also see vertical residuals showing the distance between each data point and the model.
+}
+
+@Q{Where does the `periodic` model fit the `modern-table` data best?}
+@A{Within the range of the dataset that it was built on.}
+@Q{Where does the `periodic` model fit the `modern-table` data worst?}
+@A{The farther we get from the date range it was built on.}
+}
+
+=== Synthesize
+
+@QandA{
+@Q{We built a `periodic` model to fit the data in the `recent-table`. Why doesn't it do a good job of predicting @math{CO_2} levels for a larger time frame?}
+@A{Models are only reliable within the span of the data they fit. The fact that the model fit `recent-table` well means it's a good model _for that year_, but we can't make any assumptions about dates outside of the range of the training data.}
+}
 
 == Hybrid Models
 
 === Overview
-Students discover that their periodic model for `recent-table` data doesn't fit the historical data very well. They explore the historical data, discovering that there's a stronger pattern at work than the seasonal periodicity: a linear pattern of rising @math{\text{CO}_2} over time. They try fitting a linear model first, then combine it with their periodic model to find a better fit.
+
+Students explore the possibility that a model could combine various kinds of models and use function composition to define functions from other functions.
 
 === Launch
-The resulting model fits the `recent-table` data pretty well, with an S-value of about 1.2ppm. But how well does it fit, if we try it with data from more than just the one year?
-
-The starter file includes another table, called `modern-table`, which is all the data from 2010 and beyond.
-
-@lesson-instruction{
-- Fit your model with the `modern-table`.
-- What @math{S} value do you get?
-- What do you think is going on?
-}
-
-@slidebreak
-
-@center{@image{images/modern-bad-fit.png}}
-
-We can still see our model running along the top of the graph, but the data doesn't line up with the model _at all_ until about the end of 2022.
-
-What do you think will happen if we try to fit this model to _all_ of our data? Try it out!
-
-@slidebreak
-
-It gets even worse!
-
-@center{@image{images/historical-bad-fit.png}}
-
-@QandA{
-@Q{If our model is so bad at fitting historical data, why was it so good at fitting just the one year?}
-@A{Models are only reliable within the span of the data they fit. The fact that the model fit `recent-table` well means it's a good model _for that year_, but we can't make any assumptions about dates outside of the range of the training data.}
-}
-
-=== Investigate
-Let's just look at the historical data by itself, without worrying about models.
-
-@center{@image{images/historical-scatter-plot.png}}
-@lesson-instruction{
-- In small groups, discuss what you Notice and Wonder about this plot.
-- Be prepared to share back with the class!
-}
-
-@slidebreak
-
-@lesson-instruction{
-- Complete questions 1 and 2 on @printable-exercise{modeling-historical-co2.adoc}
-}
-
-@slidebreak
 
 @ifslide{@right{@image{images/historical-scatter-plot.png}}}It looks like there are two different things going on here:
 
 1. The amount of @math{\text{CO}_2} in the air _generally_ rises linearly over time, for a positive, linear relationship with the year.
 2. But at the same time, there are seasonal, periodic variations that cause it to fluctuate up and down across that line.
 
-@lesson-instruction{
-- Do you think it's possible for a model to be both linear _and_ periodic?
-- In small groups, see if you can come up with an idea for a function that combined the best of both models.
-}
+Do you think it's possible for a model to be both linear _and_ periodic?
 
-@teacher{Have students share their models and/or discuss their thinking.}
-
-@slidebreak{InvestigateR-DN}
+@slidebreak
 
 @lesson-instruction{
-@ifslide{@right{@image{images/historical-scatter-plot.png}}}
-- Complete as much of @printable-exercise{modeling-historical-co2.adoc} as you can.
+- Let's consider how our periodic model is defined.
+- Complete the first section of @printable-exercise{hybrid.adoc}.
 }
 
 @slidebreak
 
-Our periodic model had two terms:
+```
+fun periodic-cos(x):  (4.13 * cos(6.28 * (x - 2023.35))) + 419.87 end
+fun wave-cos(x):      (4.13 * cos(6.28 * (x - 2023.35)))          end
+fun midline-cos(x):                                        419.87 end 
+fun periodic-cos2(x):         wave-cos(x)    +    mid-line-cos(x) end
+```
 
-- The periodic term @math{4.13 \times sin(2\pi(x - 2023.1))}, which described the wave that wrapped around the horizontal midline
+@QandA{
+@Q{How do you know that the `periodic-cos` and `hybrid-cos` functions defined above will produce identical models?}
+@A{`hybrid-cos` is composed of two functions called `trend-line` and `wave-cos`:
+  - `trend-line` is just the vertical shift of the `periodic-cos` function.
+  - `wave-cos` is all of the parts of the `periodic-cos` function except for that vertical shift.
+}
+}
+@slidebreak
+
+@QandA{
+@Q{What kind of line did the wave of our `periodic` model wrap around?}
+@A{horizontal}
+
+@Q{How did that line get defined in our function definition?}
+@A{Horizontal lines are defined by a single number - the vertical shift.}
+@A{The final term of our `periodic` function definition is the number that defines the position of the horizontal line the wave wraps around.}
+}
+
+@slidebreak
+
+Our `periodic-cos` model has two terms:
+
+- The periodic term @math{4.13 \times cos(2\pi(x - 2023.35))}, which described the wave that wrapped around the midline
 - The vertical shift @math{419.87}, which described the (fixed) y-coordinate of the midline
-
-But when we zoomed out to see the historical @math{\text{CO}_2} data, we saw that the midline isn't horizontal at all!
-
-@slidebreak
-
-*The midline _is_ our linear model!*
-
-By replacing the vertical shift term in our periodic model with the linear model, we get the best of both worlds! Linear behavior for the midline over the years, and periodic behavior for the seasonal variation in @math{\text{CO}_2}.
-
+- 
 ++++
 <style>
 /* Add custom CSS to make the math bold, and add coloring to nested circles */
 .hybridmath .mathunicode { font-weight: bold !important; }
+.hybridCOE .circleevalsexp { width: unset; vertical-align: middle; }
 .hybridCOE .expression { background: white !important; }
 .hybridCOE .expression .expression { background: aquamarine !important; }
 .hybridCOE .expression .expression .expression { background: lightskyblue !important; }
@@ -141,27 +189,71 @@ By replacing the vertical shift term in our periodic model with the linear model
 }
 </style>
 ++++
-[.hybridmath]
-@center{*@math{f(x) = 4.13 \times sin(2\pi(x - 2023.1)) + 1.8345x + -3296}*}
+
+`periodic-cos2` splits these terms into _separate functions_, and then composes them:
+
+[.hybridCOE]
+@show{(coe '(+ (* 4.13 (sin (* (* 2 PI) (- x 2023.1)))) 419.87))} &rarr;
+@show{(coe '(+ (wave-cos x) (midline-cos x)))}
+@slidebreak
+
+When we zoom out to see the modern @math{\text{CO}_2} data, we see that the midline for the wave is _diagonal!_
+
+@lesson-instruction{
+Complete the second section of @printable-exercise{hybrid.adoc}.
+}
 
 @slidebreak
 
-We can visualize the body of the function using the Circles of Evaluation:
+@QandA{
+@Q{What line should our model wrap around?}
+@A{Our line of best fit!}
+
+@Q{What functions did you compose to define your `hybrid-modern` model?}
+@A{`wave` and `linear-modern`}
+
+@Q{What happens when you fit your `hybrid-modern` model to the `modern-table` data?}
+@A{The model should now look like waves along a diagonal.}
+@teacher{If students' waves don't line up with the points, they need to update their `periodic` function definition!}
+
+@Q{How much less error do we expect from predictions made with `hybrid-modern` than with `linear-modern`?}
+@A{38%}
+}
+
+@slidebreak
+
+*The midline _is_ our linear model!*
+
+By replacing the vertical shift term in our periodic model with the linear model from `lr-plot`, we get the best of both worlds! Linear behavior for the midline over the years, and periodic behavior for the seasonal variation in @math{\text{CO}_2}.
+
+[.hybridmath]
+@center{*@math{f(x) = 4.13 \times sin(2\pi(x - 2023.1)) + (1.8345x + -3296)}*}
+
+@slidebreak
+
+We can visualize the body of the function using the Circles of Evaluation, replacing our `midline-sin` function with `linear-modern`:
 
 [.hybridCOE]
-@show{(coe '(+ (* 4.13 (sin (* (* 2 PI) (- x 2023.1)))) (+ (* 1.8345 x) -3296) ))}
+@show{(coe '(+ (wave-cos x) (midline-cos x)))} &rarr;
+@show{(coe '(+ (wave-sin x) (linear-modern x)))}
 
-@lesson-instruction{
-- If you haven't already defined your hybrid model, define it in the Definitions Area and finish @printable-exercise{modeling-historical-co2.adoc}.
-- How much better is the @math{S} value of the hybrid model, compared to the purely-linear one?
-}
+@opt{Turn to @opt-printable-exercise{more-hybrid.adoc} and build a hybrid model for the full @math{\text{CO}_2} data.}
 
 === Synthesize
 
-- Why did our hybrid model fit better than the periodic or linear models alone?
-- Look closely at where the hybrid model fits the data. When does the data _under_ or _over_ predict? What could this mean?
-- What would a model look like for a disease like Covid, but with seasonal variations that cause minor peaks and troughs?
+@QandA{
+@Q{Why did our hybrid model fit better than the periodic or linear models alone?}
+@A{Because it captures both the overarching trend and the seasonal trend.}
+
+@Q{Why doesn't it make sense to compare the S-values the error we expect for predictions made from our `periodic` model for the data in the `modern-table` compares to the error we expect for predictions made for the data in the `recent-table`?}
+@A{The datasets have completely different ranges!}
+
+@Q{Internet memes start out being shared from friend to friend, growing slowly until they "go viral". What would a hybrid model for meme growth look like, and what kinds of models would need to be combined?}
+@A{Before it goes viral, the growth of a meme probably looks linear (growing faster in the beginning than an exponential model), but eventually the steep part of the curve takes over, and the model looks exponential.}
+}
 
 @strategy{Going Deeper}{
-Have your students refer back to @lesson-link{exponential1-exploring-covid}. As with the `recent-table` table in @starter-file{alg2-co2}, the starter file there constrains the dataset to show only recent data. This is done for the same reason: to introduce students to a more perfectly-exponential model. Now that students know how to combine terms from different models, they can go back and build a model that fits the entire Covid dataset!
+- If students look carefully at the fit of their hybrid periodic model to the `co2-table`, they'll see that the model _under-predicts_ at the beginning of the graph, then _over-predicts_ in the middle, the _under-predicts_ again at the end. Is it possible that there's an _even-better_ hybrid model, which mixes periodic growth with something other than linear?
+- Have your students refer back to @lesson-link{exponential1-exploring-covid}. As with the `recent-table` table in @starter-file{alg2-hybrid}, the starter file there constrains the dataset to show only recent data. This is done for the same reason: to introduce students to a more perfectly-exponential model. Now that students know how to combine terms from different models, they can go back and build a model that fits the entire Covid dataset!
 }
+
