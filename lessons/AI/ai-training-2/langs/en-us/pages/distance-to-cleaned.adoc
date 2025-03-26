@@ -6,22 +6,22 @@ Use @starter-file{plagiarism} to respond to the questions, below.
 
 Let's compare the output of `distance-to(chimpanzee-article)` with the output of `distance-to-cleaned(chimpanzee-article)`.
 
-@n On both output tables, the angle produced in the "chimpanzee" row is zero. Why? @fitb{}{}
+@n On both output tables, the angle produced in the "chimpanzee" row is zero. Why? @fitb{}{@ifsoln{The `chimpanzee-article` is identical to itself, }}
+
+@fitb{}{@ifsoln{both with and without stopwords.}}
 
 @fitb{}{}
 
-@fitb{}{}
 
+@n When we used `distance-to-cleaned`, the angle measures were generally larger. Why? @fitb{}{@ifsoln{The articles are _more different_ after the stopwords}}
 
-@n When we used `distance-to-cleaned`, the angle measures were generally larger. Why? @fitb{}{}
-
-@fitb{}{}
+@fitb{}{@ifsoln{are removed. When we remove stopwords, we end up comparing more meaningful sets of words.}}
 
 @fitb{}{}
 
-@n When we used `distance-to-cleaned`, four articles produced an angle measure of 90. What does this tell us? @fitb{}{}
+@n When we used `distance-to-cleaned`, four articles produced an angle measure of 90°. What does this tell us? @fitb{}{@ifsoln{Articles separated by 90° are as different as possible. In other words, when we remove words like the, as, and of, there are no commonalities}}
 
-@fitb{}{}
+@fitb{}{@ifsoln{ between the documents.}}
 
 @fitb{}{}
 
@@ -29,27 +29,27 @@ Let's compare the output of `distance-to(chimpanzee-article)` with the output of
 
 Follow the steps below to make some discoveries about the `mystery-article`.
 
-@n Type `distance-to(mystery-article)` in the Interactions Area. Look at the different angle measurements produced. Do you notice any outliers? @fitb{5em}{@ifsoln{Yes}} Explain. @fitb{}{}
+@n Type `distance-to(mystery-article)` in the Interactions Area. Look at the different angle measurements produced. Do you notice any outliers? @fitb{5em}{@ifsoln{Yes}} Explain. @fitb{}{@ifsoln{All of the angle differences are between 58° and 72°, except for `giraffe-article`, which has an angle }}
+
+@fitb{}{@ifsoln{difference of ~48.541°.}}
 
 @fitb{}{}
 
-@fitb{}{}
+@n Think back to when you compared `student-essay` with `elephant-article`. Those two paragraphs were virtually identical, which resulted in an angle difference of about 5°. The difference between these two vectors (`giraffe-article` and `mystery-essay`) is much greater, but still seems unusual. Can you make any hypotheses about `mystery-article`? @fitb{}{@ifsoln{Maybe the mystery article is about an}}
 
-@n Think back to when you compared `student-essay` with `elephant-article`. Those two paragraphs were virtually identical, which resulted in an angle difference of about 5°. The difference between these two vectors (`giraffe-article` and `mystery-essay`) is much greater, but still seems unusual. Can you make any hypotheses about mystery-essay? @fitb{}{}
-
-@fitb{}{}
+@fitb{}{@ifsoln{animal that is similar or related to the giraffe, meaning that some of the same words would be used to describe it.}}
 
 @fitb{}{}
 
-@n Let’s investigate further. Type `distance-to-cleaned(mystery-essay)`. What do you notice? @fitb{}{}
+@n Let’s investigate further. Type `distance-to-cleaned(mystery-essay)`. What do you notice? @fitb{}{@ifsoln{All of the angle differences}}
+
+@fitb{}{@ifsoln{increased to 88° or greater, except for `giraffe-article`, which now has an angle difference of 76°.}}
 
 @fitb{}{}
 
-@fitb{}{}
+@n Time for the reveal! Type `mystery-essay` into the Interactions Area. Why was the angle difference between this article and `giraffe-article` small? @fitb{}{@ifsoln{The mystery article is about okapis, which are closely related to giraffes. Several unique words appear in both articles,}}
 
-@n Time for the reveal! Type `mystery-essay` into the Interactions Area. Why was the angle difference between this article and `giraffe-article` small? @fitb{}{}
-
-@fitb{}{}
+@fitb{}{@ifsoln{including "okapi", "giraffe", "ossicone", etc.}}
 
 @fitb{}{}
 
