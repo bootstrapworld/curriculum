@@ -2,9 +2,6 @@ import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 
 export default defineConfig(() => ({
-  base: "./lessons/__Authoring",
+  root: "lessons/__Authoring/__sample-lesson/langs/en-us/sample-quiz/",
   plugins: [react()],
-  rollupOptions: {
-      // https://rollupjs.org/configuration-options/
-    },
 }));
