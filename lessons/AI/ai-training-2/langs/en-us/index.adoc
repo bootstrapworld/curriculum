@@ -4,7 +4,7 @@
 @description{Students explore vectors, data normalization, the dimensionality of language, and training the model.
 }
 
-@lesson-prereqs{ai-training-1}
+@lesson-prereqs{ai-training}
 
 @keywords{}
 
@@ -163,6 +163,8 @@ Our primitive plagiarism detector determined if two documents matched perfectly.
 
 Our slightly-less-primitive plagiarism detector determined if two documents' bag-of-words summaries were identical or not... which was also not very useful.
 
+@slidebreak
+
 What we would like is something richer. When we ask people whether two documents are the same, they rarely give us a black-and-white "yes" or "no" answer. Instead they tend to speak about shades of similarity. Likewise, we would like our computer to give us a range of values, not just two, that give us a sense of how similar the two documents are. In other words, we would like the output to be a Number, not just a Boolean.
 
 === Investigate
@@ -206,7 +208,7 @@ Ordered pair: (4,0)
 The angle formed is 90°.
 |===
 
-
+@slidebreak
 
 If two documents are identical, they will be at the same point in space, and have the same vectors running from the origin to that point. That means the angle between those vectors will be 0°. Even if one document just rearranges the other, their bags of words will be identical—thereby again making the angle between the lines 0°.
 
@@ -217,7 +219,10 @@ If two documents are identical, they will be at the same point in space, and hav
 ** Translate the bags of words to ordered pairs.
 ** Plot the points.
 ** Draw a ray from the origin to each of the points.
-** Approximate the angle size.}
+** Approximate the angle size.
+}
+
+@slidebreak
 
 As the documents contain different words, the angles between the lines will grow. To reflect this, we can use the `angle-difference` function. It will give us a value between 0° (if the two are identical) and 90° (if the two have nothing in common).
 
@@ -226,6 +231,8 @@ The contract for `angle-difference` is below.
 ``
 # angle-difference :: (String, String) -> Number
 ``
+
+@slidebreak
 
 @lesson-instruction{
 Let's try the `angle-difference` function in Pyret.
@@ -348,10 +355,6 @@ Although we can't visualize the vector spaces for `wiki-article` and `student-es
 }
 
 
-
-
-
-
 == Training a Model
 
 === Overview
@@ -373,18 +376,24 @@ We are now ready to learn about training a model. In training, we take a number 
 
 Specifically, let's suppose the teacher wants a plagiarism detector for (short) animal essays. We've already seen a paragraph about the elephant. She gathers up paragraphs about nine other animals as well. Each one is turned into a bag of words. The key to creating a model is that all this work is done _once_; it can then be used on many different student submissions.
 
+@slidebreak
+
 @lesson-instruction{
 Use the @starter-file{plagiarism} to complete the first section (`distance-to`) of @printable-exercise{explore-model.adoc}.}
 
 Before we trained our model, we could use `angle-difference` to compute the angle difference between two different articles, that we provided as arguments. Now, with one command (`distance-to)`, we can compare a given article to every other article in the corpus. This way, we don't have to recompute the bags for each of those documents every time; we do it once and save that work.
+
+@slidebreak
 
 *Can we refine our model any further?*
 
 @lesson-instruction{
 Use the @starter-file{plagiarism} to complete the second section (`string-to-bag-cleaned`) of @printable-exercise{explore-model.adoc}.}
 
+@slidebreak
+
 @QandA{
-The function you just explored was called `string-to-bag-*cleaned*`.
+The function you just explored was called `string-to-bag-cleaned`.
 
 @Q{What did "cleaning" our bags of words entail? What did we remove from the bags when we used this function?}
 @A{We removed words that are commonly used in the English language.}
@@ -393,7 +402,9 @@ The function you just explored was called `string-to-bag-*cleaned*`.
 @A{Invite student discussion before sharing the explanation provided in the lesson.}
 }
 
-@vocab{Stopwords} are common words that are often filtered out in text analysis. Removing them can simplify text processing and increase focus on more meaningful words.
+@slidebreak
+
+*Stopwords* are common words that are often filtered out in text analysis. Removing them can simplify text processing and increase focus on more meaningful words.
 
 Let's consider how removing stopwords alters the results produced.
 
@@ -419,6 +430,8 @@ Actual machine learning systems use cosines, not angles!
 === Launch
 
 We have now seen how we can use `angle-difference` to determine the distance between two documents. We've seen how we can train a model to record several documents, and then use it repeatedly to check a new document.
+
+@slidebreak
 
 In practice, real machine learning systems don't quite use angles. Instead, they use the cosine of the angle. There are two reasons for this:
 
