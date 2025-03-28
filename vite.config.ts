@@ -7,7 +7,7 @@ import resolve from 'vite-plugin-resolve'
 
 // use glob to find all quiz directories
 const getQuizLocations = () =>
-  glob.sync('distribution/**/assessments/*/index.html')
+  glob.sync('distribution/*/lessons/*/assessments/*/index.html')
     .map(file => fileURLToPath(new URL(file,  import.meta.url)));
 
 const quizLocations = getQuizLocations();
@@ -27,12 +27,10 @@ export default {
   build: {
     root: "distribution",
     emptyOutDir: false,
-    modulePreload: { polyfill: false },
     rollupOptions: {
       external: [],
       input: quizLocations[0],
       output: {
-  //      manualChunks: (filename) => 'x',
         dir: ".",
       }
     }
