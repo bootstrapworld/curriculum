@@ -1,11 +1,28 @@
 #! /bin/bash
 
+jsonfile=vite.json
+
 function process_assessments() {
   for d in "$@"; do
-    echo processing $d/index.html
+    for dd in $d/*; do
+      if test -d $dd; then
+        echo processing $dd/index.html
+        echo \"$dd/index.html\", >> $jsonfile
+      fi
+    done
   done
 }
+
+rm -f $jsonfile
+
+echo '[' >> $jsonfile
 
 for d in $(find distribution -type d -name assessments); do
   process_assessments $d
 done
+
+# this is only to have a final array element that isn't followed by a comma
+# (since JSON is picky about this)
+echo \"ignore_file\" >> $jsonfile
+
+echo ']' >> $jsonfile
