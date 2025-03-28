@@ -1,0 +1,11 @@
+#! /bin/bash
+
+function process_assessments() {
+  for d in "$@"; do
+    echo processing $d/index.html
+  done
+}
+
+for d in $(find distribution -type d -name assessments); do
+  process_assessments $d
+done
