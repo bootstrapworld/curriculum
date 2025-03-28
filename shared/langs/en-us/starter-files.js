@@ -1050,7 +1050,7 @@ const Alg2 = {
   "alg2-log-desmos" : {
     "title" : "Fitting Wealth-v-Health and Exploring Logarithmic Models (Desmos)",
     "pyret" : {
-      "url" : "https://teacher.desmos.com/activitybuilder/custom/66057c8e8aec42ab256cc304"
+      "url" : "https://teacher.desmos.com/activitybuilder/custom/67e6c67a89009b2e82da38b7"
     }
   },
   "alg2-exploring-periodic-desmos" : {
