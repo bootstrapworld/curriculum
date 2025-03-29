@@ -1,0 +1,227 @@
+[[questions]]
+type = "CardSort"
+# The prompt we want to use (can be a multi-line string!)
+prompt.prompt = """
+Distinguish between bar charts and histograms: Sort the cards into two groups - one for bar charts and one for histograms. 
+Be sure to sort all 9 cards.
+"""
+
+# TOML doesn't support objects or complex arrays, per se
+# instead, it flattens everything into [[namespaces]]
+# The example below defines a namespace [[question.cards]],
+# which is part of the top-most [[questions]] object.
+# Each [[question.cards]] contains an ID, and (optionally)
+# a text string and/or an image path
+[[questions.cards]]
+id=1
+text="HISTOGRAM"
+[[questions.cards]]
+id=2
+image="hist-image.png"
+[[questions.cards]]
+id=3
+text="uses quantitative data"
+[[questions.cards]]
+id=4
+text="it's bars cannot be reordered"
+[[questions.cards]]
+id=5
+text="requires us to determine a bin width"
+[[questions.cards]]
+id=6
+text="BAR CHART"
+[[questions.cards]]
+id=7
+text="uses categorical data"
+[[questions.cards]]
+id=8
+text="it's bars can be reordered any way we wish"
+[[questions.cards]]
+id=9
+image="bar-image.png"
+
+# This will add an extra string of text at the bottom of the question.
+# Some questions might need some extra explanation
+context = """
+"""
+
+# An array of "answerGroups", each of which consists
+# of an array of card ids
+[[answer.answerGroups]]
+ids = [1, 2, 3, 4, 5]
+[[answer.answerGroups]]
+ids = [6, 7, 8, 9]
+
+# we don't care if the cards are sorted - just that they are in groups
+answer.sorted = false
+
+#################################################################################
+#################################################################################
+#################################################################################
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+Clara's Classmates' commute lengths (in minutes) were: 1, 4, 6, 6, 8, 11, 12, 14, 18, 22, 24
+"""
+prompt.distractors = [
+"Q2-distractor1",
+"Q2-distractor2",
+"Q2-distractor3",
+]
+answer.answer = "Q2-answer"
+
+# randomized is OK, so we don't set the answerIndex
+#prompt.answerIndex = 0
+context = """
+"""
+
+#################################################################################
+#################################################################################
+#################################################################################
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+A teacher surveys her students on how many hours of TV they watch per week. (See display for results.)
+
+How many students did the teacher survey?
+"""
+prompt.image = "hours-dist.png"
+prompt.distractors = [
+"8",
+"12",
+"18",
+]
+prompt.answerIndex = 3
+answer.answer = "26"
+context = """
+"""
+
+#################################################################################
+#################################################################################
+#################################################################################
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+A teacher surveys her students on how many hours of TV they watch per week. (See display for results.)
+
+How many students watch 13 hours of TV per week?
+"""
+prompt.image = "hours-dist.png"
+prompt.distractors = [
+"1",
+"2",
+"3",
+"4"
+]
+prompt.answerIndex = 0
+answer.answer = "0"
+context = """
+"""
+
+#################################################################################
+#################################################################################
+#################################################################################
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+A teacher surveys her students on how many hours of TV they watch per week. (See display for results.)
+
+How many students watch fewer than 4 hours of TV per week?
+"""
+prompt.image = "hours-dist.png"
+prompt.distractors = [
+"4",
+"9",
+"17",
+]
+prompt.answerIndex = 2
+answer.answer = "13"
+context = """
+"""
+
+
+#################################################################################
+#################################################################################
+#################################################################################
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+True or False: The number of women in the sample who could run a mile in under 10 minutes is six.
+"""
+prompt.image = "run-dist.png"
+prompt.distractors = [
+"True"
+]
+prompt.answerIndex = 1
+answer.answer = "False"
+context = """
+"""
+
+#################################################################################
+#################################################################################
+#################################################################################
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+True or False: A total of 13 women were in the sample.
+"""
+prompt.image = "run-dist.png"
+prompt.distractors = [
+"True"
+]
+prompt.answerIndex = 1
+answer.answer = "False"
+context = """
+"""
+
+#################################################################################
+#################################################################################
+#################################################################################
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+True or False: A total of 40 women were in the sample.
+"""
+prompt.image = "run-dist.png"
+prompt.distractors = [
+"False"
+]
+prompt.answerIndex = 0
+answer.answer = "True"
+context = """
+"""
+
+#################################################################################
+#################################################################################
+#################################################################################
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+True or False: The fastest time to run a mile was 9 minutes.
+"""
+prompt.image = "run-dist.png"
+prompt.distractors = [
+"True"
+]
+prompt.answerIndex = 1
+answer.answer = "False"
+context = """
+"""
+
+#################################################################################
+#################################################################################
+#################################################################################
+[[questions]]
+type = "MultipleChoice"
+prompt.prompt = """
+True or False: The majority of the women in the sample could run a mile in under 11.5 minutes.
+"""
+prompt.image = "run-dist.png"
+prompt.distractors = [
+"False"
+]
+prompt.answerIndex = 0
+answer.answer = "True"
+context = """
+"""
+
