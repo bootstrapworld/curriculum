@@ -1,4 +1,4 @@
-import TOML from "@iarna/toml";
+import { parse } from 'smol-toml'
 import { type Quiz, QuizView } from "@bootstrapworld/quiz";
 import React from "react";
 import ReactDOM from "react-dom/client";

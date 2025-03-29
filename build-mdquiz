@@ -1,31 +1,54 @@
 #! /bin/bash
 
-jsonfile=vite.json
-
 function process_assessments() {
   for d in "$@"; do
     for dd in $d/*; do
       if test -d $dd; then
         cp -pu lib/quiz-files/* $dd
-        echo \"$dd/index.html\", >> $jsonfile
       fi
     done
   done
 }
 
-rm -f $jsonfile
-
-echo '[' >> $jsonfile
 
 for d in $(find distribution -type d -name assessments); do
   process_assessments $d
 done
 
-# this is only to have a final array element that isn't followed by a comma
-# (since JSON is picky about this).
-# Users of this JSON should take care to ignore this bogus file
-echo \"ignore_file\" >> $jsonfile
+node --input-type=module -e '
+import react from "@vitejs/plugin-react"
+import { defineConfig, build } from "vite"
+import { viteSingleFile } from "vite-plugin-singlefile"
+import resolve from "vite-plugin-resolve"
+import { glob } from "glob";
 
-echo ']' >> $jsonfile
+const quizzes = glob.sync("distribution/*/lessons/*/assessments/*");
 
-node batch-vite.mjs
+// create the JSON objects for each of our quizzes
+const buildConfigs = quizzes.map( quiz => ({
+  plugins: [
+    react(), 
+    viteSingleFile(),
+    resolve({
+      "@bootstrapworld/quiz" : `
+        const { QuizView } = require("@bootstrapworld/quiz")
+        export { QuizView }
+      `
+      })
+  ],
+  build: {
+    root: "distribution",
+    outDir: ".",
+    emptyOutDir: false,
+    rollupOptions: {
+      external: ["@bootstrapworld/quiz"],
+      input: quiz+"/index.html",
+    }
+  }
+}));
+
+//console.log(JSON.stringify(buildConfigs, null, 2))
+
+// wait until all of the builds are complete
+await Promise.all(buildConfigs.map( async c => await build(c)));
+'
