@@ -53,10 +53,10 @@ Students learn that the patterns they intuitively see in a scatter plot represen
 
 Pyret has a function for making scatter plots, which has _four_ things in its Domain:
 
-1. The *table* containing all the data
+1. The table containing all the data
 2. The name of the column to use for labels
 3. The name of the column to use for the x-coordinates (xs)
-4. The name of the column to use for the y-coordinates (ys).
+4. The name of the column to use for the y-coordinates (ys)
 
 Here's the Contract:
 
@@ -82,12 +82,12 @@ Let's see if there's a correlation between an animal's `age` and the `weeks` it 
 @QandA{
 @Q{Do you see a pattern here, that relates `weeks` to `pounds`? If so, how would you describe it?}
 @A{The goal is to draw out student-generated notions, that may or may not include formal language, e.g.
-*** "It looks like weeks to adoption decreases as the lizards get heavier."
-*** "I see a shape in the points the looks like this (motions with arms)."
-*** "The points seem to be clustering around a diagonal line with a negative slope."
+ - "It looks like weeks to adoption generally decreases as the lizards get heavier."
+ - "I see a shape in the points the looks like this (motions with arms)."
+ - "The points seem to be clustering around a diagonal line with a negative slope."
 }
 @Q{If a new lizard appeared that weighed 2 pounds, how long would you predict it would take to be adopted?}
-@A{I'm not 100% sure, but I would expect it would probably take between 8 and 10 weeks, and it would certainly be surprising if it took less than 6 weeks to be adopted.}
+@A{I'm not 100% sure, but I would expect it would probably take between 7 and 10 weeks, and it would certainly be surprising if it took less than 6 weeks to be adopted.}
 @Q{How did you make your prediction?}
 @A{I pictured a line.}
 @A{I pictured a wide paint brush going backwards through the points starting from the right until I got to 2.}
@@ -101,7 +101,11 @@ Project the scatter plot at the front of the room, and have students come up to 
 
 
 @lesson-instruction{
-- Where might we draw a line on this scatter plot, to summarize the trend you see in the data?
+- Turn to the first section of @printable-exercise{how-could-we-measure-good-fit-lizard.adoc} and use a straightedge to draw a line that summarizes the trend you see in the data.
+- Think about how you would describe the line:
+  * Can you name two points that it would pass through? 
+  * Can you identify its slope?
+  * Where do you picture it crossing the y-axis?
 }
 
 @slidebreak
@@ -121,11 +125,11 @@ The line that is _closest_ to all the other points is known as the @vocab{line o
 
 === Investigate
 
-While most of us might have pictured similar lines (models!), it's likely that different people see slightly _different_ lines. But how do we know which model is best? _Whose @vocab{model} has the least error?_
+While most of us might have pictured similar lines (models!), it's likely that different people see slightly _different_ lines. How do we know which model is best? _How do we know whose @vocab{model} has the least error?_
 
 @lesson-instruction{
-- Turn to @printable-exercise{how-could-we-measure-good-fit-lizard.adoc} and use a straightedge to draw a line that you think would best fit the data on the scatter plot.
-- Then, complete the questions on the page with your partner.
+- Turn to the second section of @printable-exercise{how-could-we-measure-good-fit-lizard.adoc}. 
+- With your partner, discuss Cy and Jo's models and complete the questions on the page.
 }
 
 === Synthesize
@@ -134,8 +138,8 @@ While most of us might have pictured similar lines (models!), it's likely that d
 @Q{What criteria did you come up with for how to assess whether or not a model is a good fit for the data?}
 @A{Answers will vary. Ideas might include:}
 @A{The points should be as evenly distributed around the model as possible.
-- We could see how the number of points above the line and below the line compare.
-- We could measure the distance between the points and the line and try to make sure the average distance above is balanced with the average distance below.}
+ - We could see how the number of points above the line and below the line compare.
+ - We could measure the distance between the points and the line and try to make sure the average distance above is balanced with the average distance below.}
 
 @Q{How could we measure the distance between the data points and the linear model?}
 @A{Answers will vary. Ideas might include:}
@@ -158,7 +162,8 @@ Pyret has a function called `fit-model`, that takes in a function and graphs it 
 
 @QandA{
 @Q{Take a look at the contract for `fit-model` in your @dist-link{Contracts.shtml, contracts page}. What is its Domain?}
-@A{Like `scatter-plot`, it consumes columns for our _labels_, our @math{x}s, our @math{y}s... *additionally, it _consumes a function_*.}
+@A{Like `scatter-plot`, it consumes columns for our _labels_, our @math{x}s, our @math{y}s... }
+@A{Unlike `scatter-plot`, it _consumes a function_!}
 }
 
 @slidebreak
@@ -260,9 +265,11 @@ Statisticians and Data Scientists are careful to use the right tool for the job!
 @vocab{S} is a measure of fitness, which refers to the @vocab{Standard Deviation of the Residuals}.
 
 - The closer the data points are to the model, the smaller the residuals are.
-- Smaller residuals mean a smaller @vocab{S}, and a better model!
-- We know that if a model fits the data perfectly, the @vocab{S} value would be 0.
-- @vocab{S} is expressed in terms of _units of the response variable_ (the y-axis). When fitting a model to this dataset, an @vocab{S} of `5` means _the standard deviation of the residuals is "5 weeks to adoption"_ - making it much easier to understand.
+- If a model fits the data perfectly, the @vocab{S} value would be 0.
+- @vocab{S} is expressed in terms of _units of the response variable_ (the y-axis), which makes it easy to understand.
+  * e.g. When fitting a model to this dataset, an @vocab{S} of `5` would mean _the standard deviation of the residuals is "5 weeks to adoption."_ 
+- When comparing two models for the same dataset, the model with the smaller @vocab{S} is the better model!
+- It doesn't make sense to compare @vocab{S} for models that describe different datasets.
 
 @slidebreak
 
@@ -277,11 +284,11 @@ The @math{S}-value always has to be considered in the context of the range of va
 }
 
 @QandA{
-@Q{Were any of the models described terrific? How do you know?}
+@Q{Did you strongly agree that any of the models described were a good fit? Why?}
 @A{Both 2 and 8}
 @A{Because the numbers in the range were huge and the @math{S} value was really small.}
 
-@Q{Were any of the models described terrible? How do you know?}
+@Q{Did you strongly disagree that any of the models were a good fit? Why?}
 @A{Both 1 and 6}
 @A{Because the @math{S}-value was big in comparison to the range.}
 @A{For the first scenario the @math{S}-value was 300, which was the majority of the range between 0 and 400.}
@@ -304,15 +311,17 @@ Now that we have a basic sense of what `fit-model` does, let's see it work live 
 @A{Because the first expression in the Definitions Area takes in `cy`.}
 
 @Q{When you hover your mouse over the blue line, a box should pop up that says "Model". Move your mouse along the line. What information can we learn from the "Model" pop up windows?}
-@A{The y coordinate of any point in the model.}
+@A{The coordinates of any point in the model.}
 
 @Q{When you hover your mouse over a data point, a box should pop up that says "Data". Move your mouse to a few different points and read the information contained in these pop ups. What can we lean from the "Data" pop up windows?}
 @A{The x and y coordinates of each point in the data set, and the animals they are associated with.}
 }
 
 @QandA{
-@Q{There is one more kind of pop up window that will appear on this chart that says "Residuals". You can find them by hovering your mouse near the vertical residuals lines. Move your mouse to find and read a few of these. What can we learn from the "Residuals" pop up windows?}
-@A{"Residuals" tell us the x and y coordinates of a data point, compared with the predicted y-value (`y'`) for the x-value.}
+@Q{There is one more kind of pop up window that will appear on this chart that says "Residuals". You can find them by hovering your mouse near any of the data points. Move your mouse to find and read a few of these. What can we learn from the "Residuals" pop up windows?}
+@A{The x and y coordinates of a data point}
+@A{The predicted y-value (`ŷ`) for that x-value}
+@A{The "Residual": the difference between `y` and `ŷ`}
 
 @Q{We've been looking at how well `cy` 's model fit the data. What do we need to do if we want to see how well `jo` 's model fits the data.}
 @A{Close the window and another interactive chart will pop up.}
