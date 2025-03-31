@@ -1,7 +1,7 @@
-= Exploring Exploring Ferris Wheel Data
+= Exploring Ferris Wheel Data
 
 @description{
-Students are introduced to periodic functions through a dataset with perfect sinusoidal behavior: height on a Ferris Wheel over time. They see the same behavior reflected in the (x,y) coordinates of a point on a unit circle, and plot the graphs of the sine and cosine functions. Finally, they make the leap from degrees to radians.
+Students are introduced to periodic functions through a dataset with perfect sinusoidal behavior: _height on a revolving Ferris Wheel_. They see the same behavior reflected in the (x,y) coordinates of a point on a unit circle, and plot the graphs of the sine and cosine functions. Finally, they make the leap from degrees to radians.
 }
 
 @lesson-prereqs{fitting-models}
@@ -41,33 +41,36 @@ Students are introduced to the notion of @vocab{periodic relationships}: related
 
 @right{@image{images/state-fair.png, 200}}A physics teacher comes back from a trip to the state fair, and keeps raving about some amazing ride they took. The class keeps asking them for details: was it a Roller coaster? Bumper cars? Merry-Go-Round?
 
-Being a teacher, of course they decide to turn the casual curiosity into a _learning experience_, and share some data they recorded from their smart watch.
+Being a teacher, of course they decide to turn the class's polite curiosity into a _learning experience_, and share some data they recorded from their smart watch. How can we figure out what ride they went on?
+
+=== Investigate
 
 ++++
 <style>
-table.rideData tr * { padding: 0 !important; margin: 2px !important; }
+table.rideData tr * { padding: 0 !important; margin: 2px !important; line-height: 1.1; }
 table.rideData { width: 70%; margin: auto; }
 </style>
 ++++
 [.rideData, cols="^1a,^1a", options="header"]
 |===
 | `time` (minutes)  | `altitude` (feet)
-|  0				|   5.0
-|  5				|  55.0
-| 10				| 154.9
-| 15				| 205.0
-| 20				| 155.2
-| 25				|  55.2
-| 30				|   5.0
-| 35				|  54.7
-| 40				| 154.6
-| 45				| 205.0
-| 50				| 155.5
-| 55				|  55.5
-| 60				|   5.0
+|  0        |   5.0
+|  5        |  55.0
+| 10        | 154.9
+| 15        | 205.0
+| 20        | 155.2
+| 25        |  55.2
+| 30        |   5.0
+| 35        |  54.7
+| 40        | 154.6
+| 45        | 205.0
+| 50        | 155.5
+| 55        |  55.5
+| 60        |   5.0
 |===
 
-=== Investigate
+@slidebreak
+
 @lesson-instruction{
 Working in pairs or groups, complete @printable-exercise{exploring-periodic.adoc}.
 }
@@ -82,11 +85,15 @@ Working in pairs or groups, complete @printable-exercise{exploring-periodic.adoc
 
 @slidebreak
 
-The teacher was on a Ferris wheel. We can tell because the ride keeps going up and down over and over, and it takes the same amount of time to go up as it does to go down.
+The teacher was probably on a _Ferris wheel!_ We can tell because the ride keeps going up and down over and over, and it takes the same amount of time to go up as it does to go down.
 
 @slidebreak
 
-You just created a *new type of data visualization*, called a @vocab{line graph}. When the explanatory variable is continuous, as it is here, it makes sense to draw a line between our points. Not every explanatory variable is continuous, so it's not appropriate to connect the dots on every scatter plot!
+You just created a *new type of data visualization*, called a @vocab{line graph}. In some situations the explanatory variable is @vocab{continuous}, meaning that you know there are values in between the points.  
+
+But not every explanatory variable is continuous, so it's not appropriate to connect the dots on _every_ scatter plot! How do we know if our explanatory variable is continuous here?
+
+@slidebreak
 
 @lesson-point{Line graphs are often used instead of scatter plots when the explanatory variable is _time_.}
 
@@ -97,9 +104,11 @@ You just created a *new type of data visualization*, called a @vocab{line graph}
 
 @slidebreak
 
-In this example, we might only have data for the Ferris Wheel every 5 minutes, but we know it keeps turning, generating data "in between" the times represented in our scatter plot and there are an infinite number of points _between_ those times. We also know that the Ferris Wheel existed at every one of those points, meaning there was `height` data to be gathered at all times.
+In this example, we might only have data for the Ferris Wheel every 5 minutes, but we know it keeps turning, generating data "in between" the times represented in our scatter plot and there are an infinite number of points _between_ those times. We also know that the Ferris Wheel existed at every one of those points, meaning there was `altitude` data to be gathered at all times.
 
 Connecting the dots with the line gives us an *approximation* of what data is missing between those times, and helps us see the shape of the relationship.
+
+@slidebreak
 
 @ifslide{
 @right{@image{images/rides-combined-plot.png}}
@@ -136,10 +145,12 @@ Students begin to reason about points on the circumference of a circle, with the
 
 @right{@image{images/ferris-wheel.png, 150}}The teacher's seat on the Ferris Wheel can be thought of as a point on the circumference of a rotating circle.
 
-- The y-value (`altitude`) goes from 5ft to 205ft then back down to 5, then up again, then down again...
-- This pattern of y-values repeats at regular intervals (every 30m)
+- The y-coordinate (`altitude`) goes from 5ft to 205ft then back down to 5, then up again, then down again...
+- This pattern of y-coordinates repeats at regular intervals (every 30m)
 
-None of the models we've seen so far will help us predict how far off the ground (y-coordinate) the seat is after a length of time. Some of them increase or decrease forever (linear, exponential, logarithmic), and others change directions _once_ (quadratic), but not over and over in a cycle!
+@slidebreak 
+
+None of the models we've seen so far will help us predict how far off the ground (y-coordinate) the seat is after a length of time (x-coordinate). Some of them increase or decrease forever (linear, exponential, logarithmic), and others change directions _once_ (quadratic), but not over and over in a cycle!
 
 @slidebreak
 
@@ -197,7 +208,7 @@ To wrap our heads around periodic functions, let's think about something simpler
 @Q{At which time(s) does @math{A(\textit{time})=B(\textit{time})}, where the legs @math{x} and @math{y} are equal?}
 @A{1:30 and 7:30}
 @Q{When @math{A(\textit{time}) = B(\textit{time})}, how could we calculate the length of @math{A} and @math{B} from this right triangle?}
-@A{We could use the Pythagorean Theorem, with @math{x = y}: @hspace{1em} @math{x^2 + x^2 = 1^2}}
+@A{We could use the Pythagorean Theorem, with @math{A = B}: @hspace{1em} @math{A^2 + A^2 = 1^2}}
 }
 
 @lesson-instruction{
@@ -212,11 +223,17 @@ To wrap our heads around periodic functions, let's think about something simpler
 @QandA{
 In our clock example, we divide the circle into twelve "slices", each representing one hour.
 
+@Q{How many of those slices would represent 2 hours?}
+@A{2 slices}
+
+@Q{How many of those slices would represent 3 hours?}
+@A{3 slices}
+
+@Q{How many of those slices would represent a half hour (i.e. - 30 minutes)?}
+@A{1/2 of a slice}
+
 @Q{How many of those slices would represent 15 minutes?}
 @A{1/4 of a slice}
-
-@Q{An hour and a half?}
-@A{A slice and half}
 
 @Q{Of course, there are other ways besides 12 slices of "hours" to measure this angle! Can you think of another measure that divides a circle up differently?}
 @A{_Degrees_, divide a circle up into 360 slices instead of 12.
@@ -239,7 +256,7 @@ In our clock example, we divide the circle into twelve "slices", each representi
 @lesson-instruction{
 In our clock animation we have 12 "slices", with 12 evenly-spaced labels around the clock.
 
-- Return to the @starter-file{alg2-unit-clock}, change `num-slices` to 360, and click "Run". Did the curves change?
+- Return to the @starter-file{alg2-unit-clock}, change `num-slices` to 360, and click "Run". What changed? What stayed the same?
 - Take a minute to play with `num-slices` and `num-labels`, making sure that `num-labels` divides evenly into `num-slices` with _no remainder!_
 - Can you divide the clock into 70 slices? 92?
 }
@@ -263,8 +280,8 @@ Students are introduced to @vocab{radians}, and practice converting between diff
 
 This is really convenient when it comes to doing math involving circles!
 
-- The Babylonians chose to use 360 slices to map out the "circle" representing the night sky, because 360 is roughly the number of days in a year and most easy-to-see constellations repeat their cycles annually. 360 is also easily divided by common numbers like 2, 3, 4, 6, 8, 9, 10, and 12, simplifying calculations.
-- The Babylonians also noticed that there were roughly 12 full moons each year, and that a hand has 12 finger joints that can be touched with the thumb. For people who only have their hands to count with, 12 is a really convenient number to work with! They divided the night and day into 12 slices each (giving us 24 hours), and used @link{https://en.wikipedia.org/wiki/Sundial, sundials} to tell time. Thousands of years later, the 12 slices of a circular sundial became the 12 hours on a clock.
+- The Babylonians chose to use 360 slices to map out the "circle" representing the night sky, because 360 is roughly the number of days in a year and most easy-to-see constellations repeat their cycles annually. 360 is also easily divided by common numbers like 2, 3, 4, 6, 8, 9, 10, and 12, which makes calculating with those numbers a lot easier.
+- The Babylonians also noticed that there were roughly 12 full moons each year, and that a hand has 12 finger joints that can be touched with the thumb. For people who only have their hands to count with, 12 is a really convenient number to use! They divided the night and day into 12 slices each (giving us 24 hours), and used @link{https://en.wikipedia.org/wiki/Sundial, sundials} to tell time. Thousands of years later, the 12 slices of a circular sundial became the 12 hours on a clock.
 
 In other words, we can chop up circles based on whatever kind of math we want to do, and the devices we have available to do our computations with.
 
@@ -273,7 +290,7 @@ In other words, we can chop up circles based on whatever kind of math we want to
 We often want to talk about the *distance* traveled around the circumference of a circle.
 
 - For example, if we're building an arch out of bricks, we want to know how many bricks to use.
-- We might also want to know how far our teacher traveled on the Ferris Wheel.
+- We might also want to know _how far our teacher traveled_ on the Ferris Wheel.
 
 Calculations involving circumference all involve the *radius* of the circle. Is there a way to divide the circle into slices so that radial calculations are easy? It would be nice to have a measurement of angle that's _expressed in terms of a radius_, to make the math cleaner...
 
@@ -281,7 +298,7 @@ Calculations involving circumference all involve the *radius* of the circle. Is 
 
 --
 @right{@image{images/clock-6-equilateral.png, 100}@image{images/clock-6-hexagon.png, 100}}
-If the hand of our clock was made of rubber, how many "clock hands" would it take to wrap all the way around the clock?
+Suppose the hand of our clock was made of rubber, and we could take it off and bend it around the circle. How many "clock hands" would it take to wrap all the way around the clock?
 
 - We can start by imagining each slice as an equilateral triangle, where all three sides are exactly one radius.
 - This would give us exactly six slices, with the tip of each slice having a 60° angle...
@@ -329,7 +346,7 @@ Pyret knows about @math{\pi}, too!
 
 @slidebreak
 
-As with degrees, switching our unit-clock graph from hours to radians doesn't change the curve of our graph at all. It just changes the tick marks on the x-axis.
+As with hours, degrees, and compass directions, switching our unit-clock graph from hours to radians doesn't change the curve of our graph _at all_. It only changes the tick marks on the x-axis.
 
 *Note:* The conventions for labeling a clock are different from the conventions for labeling circles with Radians or Degrees.
 [cols="^5a,^1a,^5a", options="header", grid="none", stripes="none"]
@@ -372,7 +389,11 @@ As with degrees, switching our unit-clock graph from hours to radians doesn't ch
 |===
 }
 
-_These are conventions that people have agreed upon over time to make it easy to collaborate. If somebody wanted to make a clock with the numbers written backwards and have the hands move the other way, it would be possible to learn how to tell time using their clock... but it likely would be more confusing than helpful for most people if we hung a clock like that in our school._
+These are conventions that people have agreed upon over time to make it easy to collaborate. It's like driving on the right side of the road v. the left: it doesn't matter what we choose, as long as everyone makes the same choice!
+
+@slidebreak
+
+We could make a clock with the numbers written _backwards_ and have the hands move the other way! And as long as everyone uses the same clock, we can still tell time._
 
 @lesson-instruction{
 - Complete the first question on @printable-exercise{converting-angles.adoc}

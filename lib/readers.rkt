@@ -4,6 +4,7 @@
 
 (provide
   read-word
+  read-backticked-text
   string-to-form
   *make-read-group
   read-commaed-group
@@ -24,6 +25,13 @@
              (cond [(char=? c #\@) (read-char i) "@"]
                    [else ""])]
             [else (list->string (reverse r))]))))
+
+(define (read-backticked-text i)
+  (let loop ([r '(#\`)])
+    (let ([c (read-char i)])
+      (cond [(eof-object? c) (list->string (reverse r))]
+            [(char=? c #\`) (list->string (reverse (cons #\` r)))]
+            [else (loop (cons c r))]))))
 
 (define (read-mathjax-word i)
   (let ([c (read-char i)])

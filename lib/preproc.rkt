@@ -1077,7 +1077,9 @@
               ;TODO: probably not needed anymore
 
               (when (file-exists? f.uses-mathjax)
-                (create-zero-file (format "~a.uses-mathjax" *out-file*)))
+                (set! *uses-mathjax?* #t)
+                ; (create-zero-file (format "~a.uses-mathjax" *out-file*))
+                )
 
               ;FIXME: avoid erroring include: if file doesn't exist?
               (format "include::~a[~a]"
@@ -1521,6 +1523,9 @@
 (define *out-file* #f)
 (define *supplemental-materials-needed?* #f)
 
+(define *uses-codemirror?* #f)
+(define *uses-mathjax?* #f)
+
 (define (expand-directives i o)
         ;(printf "doing expand-directives\n")
         (let ([beginning-of-line? #t]
@@ -1810,7 +1815,8 @@
                                 (for ([s (string-to-form exprs)])
                                   (display (enclose-span ".solution" (format "~a" (massage-arg s))) o))))]
                            [(string=? directive "smath")
-                            (create-zero-file (format "~a.uses-mathjax" *out-file*))
+                            (set! *uses-mathjax?* #t)
+                            ; (create-zero-file (format "~a.uses-mathjax" *out-file*))
                             (let ([exprs (string-to-form (format "(math '~a)"
                                                                  (read-group i directive #:scheme? #t)))])
                               (for ([s exprs])
@@ -2207,6 +2213,12 @@
                    (newline o)
                    (set! beginning-of-line? #t)
                    (set! possible-beginning-of-line? #f)]
+                  [(and (char=? c #\`) (not *uses-codemirror?*))
+                   (let ([backticked-text (read-backticked-text i)])
+                     (when (or (string=? backticked-text "``")
+                               (regexp-match " " backticked-text))
+                       (set! *uses-codemirror?* #t))
+                     (display backticked-text o))]
                   [else
                     (set! beginning-of-line? #f)
                     (set! possible-beginning-of-line? #f)
@@ -2278,6 +2290,8 @@
       (set! *first-subsection-reached?* #f)
       (set! *title-reached?* #f)
       (set! *supplemental-materials-needed?* #f)
+      (set! *uses-codemirror?* #f)
+      (set! *uses-mathjax?* #f)
       ; (printf "preproc ~a to ~a\n" *in-file* *out-file*)
       ;
       (let ([internal-links-file (path-replace-extension *out-file* ".internal-links.txt.kp")]
@@ -2529,6 +2543,9 @@
       (when *internal-links-port* (close-output-port *internal-links-port*))
       (when *external-links-port* (close-output-port *external-links-port*))
 
+      (when *uses-codemirror?* (create-zero-file (format "~a.uses-codemirror" *out-file*)))
+      (when *uses-mathjax?* (create-zero-file (format "~a.uses-mathjax" *out-file*)))
+
       (erase-local-scheme-definitions)
       )
 
@@ -2750,7 +2767,8 @@
 
 (define (coe e)
   ;(printf "coe ~s\n" e)
-  (create-zero-file (format "~a.uses-codemirror" *out-file*))
+  ; (create-zero-file (format "~a.uses-codemirror" *out-file*))
+  (set! *uses-codemirror?* #t)
   (enclose-div ".circleevalsexp"
     (sexp->block e #:pyret (string=? *proglang* "pyret"))))
 
@@ -2987,7 +3005,8 @@
 
 (define (sexp->wescheme e #:multiline? [multiline? #f])
   ; (printf "doing sexp->wescheme ~s\n" e)
-  (create-zero-file (format "~a.uses-codemirror" *out-file*))
+  (set! *uses-codemirror?* #t)
+  ; (create-zero-file (format "~a.uses-codemirror" *out-file*))
   (let ([h (holes-to-underscores e #:wescheme #t)])
     ; (printf "h2u retn'd ~s\n" h)
 
@@ -3010,7 +3029,8 @@
   (math->string (sexp->arith e #:parens parens #:tex #t)))
 
 (define (math->mathjax-string text)
-  (create-zero-file (format "~a.uses-mathjax" *out-file*))
+  (set! *uses-mathjax?* #t)
+  ; (create-zero-file (format "~a.uses-mathjax" *out-file*))
   (enclose-math text))
 
 (define (math->string text)
@@ -3134,7 +3154,8 @@
   (let ([pyret? (string=? *proglang* "pyret")])
     (unless (string? x)
       (set! x ((if pyret? wescheme->pyret wescheme->wescheme) x #:parens parens #:indent 0)))
-    (create-zero-file (format "~a.uses-codemirror" *out-file*))
+    (set! *uses-codemirror?* #t)
+    ; (create-zero-file (format "~a.uses-codemirror" *out-file*))
     (enclose-textarea #:multiline? multiline?
       (if pyret? ".pyret" ".racket")
       (if pyret? (regexp-replace* " :: " x " :{zwsp}: ")

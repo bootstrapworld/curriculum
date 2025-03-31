@@ -1,0 +1,192 @@
+[.beta]
+= Data-Driven Algorithms
+
+@description{By exploring a spell checker program, students discover that AI relies on _data-driven algorithms_. When we provide more data to the computer, data-driven algorithms generally produce a higher quality output. }
+
+@lesson-prereqs{ai-intro}
+
+@keywords{}
+
+[@lesson-intro-table]
+|===
+| Lesson Goals
+| Students will be able to...
+
+@objectives
+
+| Student-facing Lesson Goals
+|
+
+- Let's play with spell checkers to learn about @vocab{data-driven algorithms}.
+
+| Materials
+|[.materials-links]
+@material-links
+
+|===
+
+== The First Spell Checker: Intelligent or Not? @duration{15 minutes}
+
+@objective{machines-v-people}
+
+=== Overview
+
+Students consider one specific example of machine learning, evaluating how spell checkers' programmed behaviors compare and contrast with the behaviors of humans.
+
+
+=== Launch
+
+The spell checker built into your web browser or word processing system is a classic example of @vocab{machine learning}. We are so used to receiving spell checking help that sometimes we don't even notice or acknowledge the way in which it happens automatically. But copy editing a document without the help of a spell checker would be laborious and error-prone!
+
+When we discuss and debate AI, the question of "what is intelligence?" often emerges. In this lesson, we will consider what sort of intelligence spell checking requires. When it comes to spell checking, how does the performance of a computer compare to that of a human? Do humans and computers use similar spell checking strategies, or do they approach the task from entirely different angles? How do their outcomes compare?
+
+@slidebreak
+
+@lesson-instruction{
+- Complete @printable-exercise{human-spell-checking.adoc}.
+- Be prepared to summarize the method that you used for spell checking:
+  * How do you locate misspelled words?
+  * How do you correct misspelled words?
+}
+
+@slidebreak
+
+You probably noticed that is was difficult to articulate how exactly you were able to locate and correct spelling mistakes. Why?
+
+We rely on context clues, experience, and background. There were probably students in your class who said that the spelling mistakes jumped off the page. They couldn't *not* see the mistakes. Other students relied on context clues or prior knowledge to locate and fix errors. Of course, the process of spell-checking varies not just by person but by situation, too. If a different word had been misspelled, perhaps a multi-syllabic and complex technical word, you might have relied on a different spell checking strategy. If you were from Britain rather than the United States, you might spell some words differently from others.
+
+
+=== Investigate
+
+
+The very first spell checker was developed in 1961 at Stanford University's Artificial Intelligence Laboratory. Its creators provided the spell checker program with a 10,000-word dictionary and a precise algorithm to follow. After scanning the text and extracting the words contained in it, the spell checker would compare each word with a known list of correctly spelled words. Here is what the algorithm did next:
+
+[.indentedpara]
+--
+- *First*, it would develop alternative candidates for the misspelled word (input) by making one of the following adjustments: (1) replace a single letter with a different one, or (2) swap the positions of two adjacent letters.
+
+- *Next*, it would search the provided dictionary to see which alternatives were valid options.
+
+- *Finally*, it would produce a list of valid correctly spelled words for the user to choose from.
+--
+
+@slidebreak
+
+Unsurprisingly, spell checkers have evolved a lot since 1961—but exploring this particular algorithm can offer us interesting insights about one of the earliest forms of AI/ML.
+
+@lesson-instruction{
+- In Part 1 of @printable-exercise{first-spell-checker.adoc}, __you__ will be the computer, following the spell checking algorithm developed at Stanford University's Artificial Intelligence Laboratory in 1961.
+- Reflect on the activity in Part 2.
+}
+
+@teacher{
+After students have completed the activity, invite them to share their responses to the three reflection questions (below) in small groups.
+}
+
+
+@slidebreak
+
+@QandA{
+@Q{What do you think are some limitations of the first spell checker's algorithm?}
+@A{There is an extremely limited number of ways in which a word can be misspelled. For example, if two separate letters in a word are incorrect, the spell checker has no chance of proposing the correct word!}
+
+@Q{How is the first spell checker's algorithm similar to whatever strategy *you* use when spell checking your writing?}
+@A{We can't think of any similarities! See what your students propose, and discuss.}
+
+@Q{How is the first spell checker's algorithm different from whatever strategy *you* use when spell checking your writing?}
+@A{Human spell checking relies a lot on context, instinct, and previously acquired knowledge of spelling. The first spell checker did not use any of these tools that humans use. The spell checker has the ability to enumerate thousands of words; no human would even think to approach a spelling error in this way. A human wouldn't have the time or ability to list so many words.}
+}
+
+
+=== Synthesize
+
+@QandA{
+@Q{In what ways do spell checkers succeed at mimicking humans?}
+@A{Based on the above, they do not at all! Perhaps the outcomes are similar, depending on a wide variety of variables.}
+
+@Q{Would it be a good idea for a human to try mimic a spell checker's algorithm? Why or why not?}
+
+@A{The program we just discussed relies on computational brute force: primitive spell checking programs will repeatedly edit / transform a misspelled word, generating dozens of different words to verify in the dictionary. Were a human to undergo this process, it would be time-consuming, laborious, and highly error prone.}
+}
+
+
+
+== Spell Checking in Pyret @duration{25 minutes}
+
+@objective{data-driven-algos}
+
+=== Overview
+
+Students explore both the algorithm and the datasets that power a Pyret-based spell checker, discovering that @vocab{data-driven algorithms} are at the heart of AI.
+
+=== Launch
+
+By now, we have a decent sense of the extensive work that is happening behind the scenes when we spell check our writing. We have *not*, however, discussed an essential truth about spell checkers and in fact *all modern AI*: it is "data-driven".
+
+@QandA{
+@Q{Where have you encountered the term "data-driven" before, if at all?}
+@A{Sample responses: data-driven *decision making* is informed by collecting or analyzing data; data-driven *health care* involves using data to think about the effectiveness of different treatments; a data-driven *teacher* will reteach topics that students struggled with.}
+
+@Q{Have you ever met anyone who is "data-driven"? (Teachers? Coaches? Parents?) Explain.}
+
+@Q{What do you think it means to be "data-driven"?}
+@A{Responses will vary, but should highlight the general idea that data informs how things are done.}
+}
+
+=== Investigate
+
+@lesson-instruction{
+- Open the @starter-file{spell-checker} and click "Run".
+- Complete @printable-exercise{pyret-spell-checker.adoc} to discover how one spell checker works.
+}
+
+As you were interacting with the @starter-file{spell-checker}, you observed that it only proposed five-letter words. This is because the dictionary it draws from is actually a Wordle dictionary!
+
+@teacher{Are you familiar with Wordle? If not, you can quickly learn the rules and play it @link{https://www.nytimes.com/games/wordle/index.html, "here"}. Before moving on with the lesson, be sure to check for students' familiarity with the game via a show of hands. If your students have _not_ played Wordle before, play one round as a class before proceeding.}
+
+
+@slidebreak
+
+@left{@image{images/wordle.png, 175}}
+
+
+Let's consider a partially-played Wordle game (left).
+
+
+The player has attempted three words so far: "WORTH", "MEDIA", and "GAMES". With each turn, we have learned something new. At this point, we know that _a_, _m_, and _e_ belong in the 2nd, 3rd, and 4th tiles, respectively. We know that the 1st and 5th tiles are _not_ occupied by _w_, _o_, _r_, _t_, _h_, _d_, _i_, _g_, or _s_.
+
+The player has just three turns left!
+
+
+@QandA{
+@Q{What word would _you_ try next?}
+@A{Responses will vary; keep a list of student proposals.}
+
+@Q{Each of the words you proposed was probably 2 edits away from "GAMES", the user's third guess. Why?}
+@A{Three of the letters are correct; we just need to substitute in different letters for _g_ and _s_.}
+}
+
+
+@slidebreak
+
+The player of this partially-completed Wordle game (above) wants some Pyret "assistance". Let's explore how directing Pyret to access differently sized datasets influences the quality of assistance that the program provides.
+
+@lesson-instruction{
+- Complete @printable-exercise{pyret-spell-checker2.adoc} using the @starter-file{spell-checker}.
+- If you finish early, try the two challenges at the bottom of the page.
+}
+
+@lesson-point{
+When we offered _more data_ to our rudimentary Pyret spell checker, we got better results _without changing the spell checker's code_.
+}
+
+=== Synthesize
+
+@QandA{
+
+@Q{In this lesson, you discovered that providing _more_ data often produces better results. Think about some of the different recommendation systems you have interacted with (e.g., YouTube, Spotify, etc). In your experience, how does the amount of data provided influence the quality of the recommendations made?}
+
+@A{A brand new YouTube user has not provided any data about what sort of videos they like to watch. YouTube cannot make specific recommendations without this data! As a user watches more videos, the system collects data about the user's interests, preferences, and more. With more data, YouTube can provide better recommendations.}
+}
+
+

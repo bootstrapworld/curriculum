@@ -3,9 +3,14 @@
 <style>
 /* We don't need the margin on this page, and we want to save vertical space */
 .listingblock { margin-bottom: 0; }
+.highlight { padding: 0.25em !important; }
+.editbox { line-height: 1.8rem !important; }
+
+
 </style>
 ++++
 @link-instructions{Open your copy of @starter-file{alg2-hybrid} and click "Run".}
+
 
 == Composing a `hybrid` model for the `modern-table`
 
@@ -14,6 +19,45 @@ Both `periodic-sin` and `periodic-cos` are built to follow a midline with the eq
 
 @n Which midline do we wish a model for the `modern-table` would follow instead?  @fitb{}{@ifsoln{The line of best fit, which we could find using `lr-plot`.}} 
 
+== Deconstructing a Model
+
+In the Definitions Area, you'll see the following four functions:
+
+@indented{
+```
+fun periodic-cos(x):  (4.13 * cos(6.28 * (x - 2023.35))) + 419.87 end
+fun wave-cos(x):      (4.13 * cos(6.28 * (x - 2023.35)))          end
+fun midline-cos(x):                                        419.87 end 
+fun periodic-cos2(x):         wave-cos(x)     +    midline-cos(x) end
+```
+}
+
+@n Use `fit-model` to fit `periodic-cos` to the `recent-table` data.
+
+- What is the equation of this model's @vocab{midline}? @fitb{}{@ifsoln{something like {nbsp} @math{f(x) = 419.87}}}
+- Describe the shape of this line @fitb{}{@ifsoln{a straight, horizontal line}}
+- Where does the @vocab{midline} show up in our `periodic-cos` function? @fitb{}{@ifsoln{The last term, which describes the vertical shift}}
+
+@n Are `periodic-cos` and `periodic-cos2` the same model? Why or why not? @fitb{}{@ifsoln{I see that: }}
+
+@fitb{}{@ifsoln{`hybrid` adds `midline-cos` to `wave-cos`.}}
+
+@fitb{}{@ifsoln{`mid-line` is just the horizontal shift of the `periodic-cos` function.}}
+
+@fitb{}{@ifsoln{`wave-cos` is just all of the parts of the `periodic-cos` function except for the horizontal shift.}}
+
+@n Check your answer by fitting `periodic-cos2` to the `recent-table` data!
+
+@center{*This code deconstructs `periodic-cos` into two helper functions: one for the `wave`, and one for the `midline` it wraps around.*} 
+
+@n Following this example, deconstruct your `periodic-sin` model and define `periodic-sin2` in the starter file.
+
+== Composing a `hybrid` model for the `modern-table`
+
+These functions are built to wrap around a midline with the equation @math{f(x) = 419.87}. But who says the midline has to be _horizontal?_
+
+@n Which midline should a model for the `modern-table` use instead? _(HINT: it's already defined in your starter file!)_ @fitb{}{@ifsoln{{nbsp}@math{f(x) = 2.141263x - 4461}}}
+
 @teacher{The line of best fit will be @math{y = 2.141263x - 4461}}
 
 @n Find `linear-modern` in the starter file and define it to be the line you described above.
@@ -21,6 +65,8 @@ Both `periodic-sin` and `periodic-cos` are built to follow a midline with the eq
 @n Find the definition for `hybrid-modern`. How is this function using `linear-modern`? @fitb{}{}
 
 @fitb{}{@ifsoln{`linear-modern` is being used as the midline!}}
+
+@n *Change the definition of `hybrid-model` so it looks like `periodic-sin2`! Keeping the `wave-sin` part the same, *change the midline function* from `midline-sin` to the new midline you described above.
 
 @n Fit `hybrid-modern` to the `modern-table`, and describe what you see: @fitb{}{}
 

@@ -9,7 +9,7 @@
     --width and --height determine the size of plane. Defaults to 3in x 3x.
     --min-gap determines the minimum space between graphs. Defaults to 20px.
 
-    --top_pct and --left_pct determine the origin's position. Defaults to (50%, 50%).
+    --top_pct and --left_pct determine the origin's position (btw 0 and 1). Defaults to (0.5, 0.5).
     --minors determines how many "minor axes" (incl the one behind major). Defaults to 7.
 
     --x_label defaults to 'x'
@@ -20,9 +20,13 @@
   --height:   3.0in;
   --left_pct: 0.08;
   --top_pct:  0.92;
-  --x_label: 'altitude';
-  --y_label: 'time';
+  --x_label: 'time';
+  --y_label: 'altitude';
 }
+
+/* "Altitude" is such a long label that we need to 
+   override the normal top positioning rule */
+table.graph td::before { top: 4% !important; }
 </style>
 ++++
 
@@ -33,7 +37,7 @@ The standard form of a periodic model is @math{f(x) = a sin(b⋅(x - h)) + k}. O
 @n Click on one of the @vocab{peaks} (highest-points) on the graph of your periodic function. Desmos will add a gray dot to _all_ of the peaks.
 
 @n Leaving the other sliders where they best fit the data, change *ONLY* the slider for @math{b}, experimenting with values at  @math{0.2},  @math{0.1},  @math{0.05},   and   @math{0}, graphing each curve below. +
-**For each curve, label two adjacent peaks.**
+*For each curve, label two adjacent peaks.*
 
 [.FillVerticalSpace.graph, cols="1,1", frame="none"]
 |===
@@ -47,9 +51,9 @@ The standard form of a periodic model is @math{f(x) = a sin(b⋅(x - h)) + k}. O
 *The distance between two adjacent @vocab{peaks} or @vocab{valleys} is called the @vocab{period}: the interval over which the pattern repeats itself.*
 
 @n What is the @vocab{period}
-             when *@math{b=0.2}*?       @fitb{5em}{@ifsoln{@math{10pi}}}
-@hspace{1em} when *@math{b=0.1}*?       @fitb{5em}{@ifsoln{@math{20pi}}}
-@hspace{1em} When *@math{b=0.5}*?       @fitb{5em}{@ifsoln{@math{40pi}}}
+             when *@math{b=0.2}*?       @fitb{5em}{@ifsoln{@math{10\pi}}}
+@hspace{1em} when *@math{b=0.1}*?       @fitb{5em}{@ifsoln{@math{20\pi}}}
+@hspace{1em} When *@math{b=0.5}*?       @fitb{5em}{@ifsoln{@math{40\pi}}}
 @hspace{1em} @star When *@math{b=0}*?   @fitb{}{@ifsoln{No period!}}
 
-@n As the @vocab{frequency} (@math{b}) doubles, the @vocab{period} @fitb{11em}{@ifsoln{gets cut in half}}. @hspace{1em} As the @vocab{frequency} (@math{b}) gets cut in half, the @vocab{period} @fitb{}{@ifsoln{dboules}}
+@n As the @vocab{frequency} (@math{b}) doubles, the @vocab{period} @fitb{11em}{@ifsoln{gets cut in half}}. @hspace{1em} As the @vocab{frequency} (@math{b}) gets cut in half, the @vocab{period} @fitb{}{@ifsoln{doubles}}
