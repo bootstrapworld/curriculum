@@ -1,0 +1,63 @@
+= A Pyret Spell Checker: The Algorithm
+
+@link-instructions{Open the @starter-file{spell-checker} and click "Run".} Follow each of the instructions below to discover how our very own Pyret spell checker works.
+
+@n In the @starter-file{spell-checker}, the function `go` consumes a string and a dictionary... but what does it produce?
+
+- Test `go("pyret", WORDS-ALL)` in the Interactions Area and record the results in the left column of the table below.
+- In the second column, describe how each option differs from the input string ("pyret").
+- In the third column, record how many edits to the string "pyret" this algorithm makes. _(A single edit could entail replacing one letter with a different one, for instance.)_
+
+@vspace{1ex}
+
+@indented{
+[cols="1a, 3a, 1a", options="header", stripes="none"]
+|===
+| Suggestion  | How it's different from the string "pyret"	| Number of Edits
+| @ifsoln{beret} 		| @ifsoln{changed first 2 letters}				| @ifsoln{2} @vspace{1ex}
+| @ifsoln{egret}		| @ifsoln{changed first 2 letters}				| @ifsoln{2} @vspace{1ex}
+| @ifsoln{parer}		| @ifsoln{changed 2nd and 5th letters}			| @ifsoln{2} @vspace{1ex}
+| @ifsoln{puree}		| @ifsoln{changed 2nd and 5th letters}			| @ifsoln{2} @vspace{1ex}
+| @ifsoln{purer}		| @ifsoln{changed 2nd and 5th letters}			| @ifsoln{2} @vspace{1ex}
+|===
+}
+
+@n Test `go("cloaks", WORDS-ALL)` in the Interactions Area.
+
+- Notice that "cloaks" has six letters, but all the suggested words have just five letters. What else can you conclude about the spell checker's algorithm?
+@fitb{}{@ifsoln{One of the edits can be the deletion of a letter.}} +
+@fitb{}{@ifsoln{The spell checker only proposes five-letter words.}}
+- To get from "cloaks" to "croak", delete @fitb{2em}{@ifsoln{s}} and change @fitb{2em}{@ifsoln{l}} to @fitb{2em}{@ifsoln{r}}.
+- To get from "cloaks" to "class", delete @fitb{2em}{@ifsoln{o}} and change @fitb{2em}{@ifsoln{k}} to @fitb{2em}{@ifsoln{s}}.
+- The spell checker makes just _one_ edit when it proposes @fitb{5em}{@ifsoln{"croak"}} as a match for "cloak".
+
+@vspace{1ex}
+
+*Use the `go` function in the @starter-file{spell-checker} on some strings and dictionaries of your choice.*
+
+@n We have seen multiple two-edit changes. Does the program propose words that include three edits? @fitb{}{@ifsoln{No.}}
+
+@n What is the maximum length string that this spell checker will accept? @fitb{}{@ifsoln{7 letters}}
+
+- Why does that maximum length make sense with what we know about the algorithm? @fitb{}{}
+
+@fitb{}{@ifsoln{A 7-letter word would require two deletions, using both of the available edits.}}
+
+@n What else do you notice? @fitb{}{@ifsoln{There are words for which the spellchecker offers no suggestions (e.g. "octagon").}}
+
+@fitb{}{@ifsoln{And there are words for which it proposes long lists (e.g. "silly" returns 41 suggestions!)}}
+
+@n Does this spell check program use the same algorithm as the @printable-exercise{first-spell-checker.adoc}? @fitb{}{@ifsoln{No.}}
+
+- If not, what is different and how do you know?  @fitb{}{@ifsoln{The first spell checker would only propose one adjustment, whereas the Pyret}}
+
+@fitb{}{@ifsoln{spell checker proposes two. Pyret can delete letters, while the first spell checker could not. Pyret also only proposes 5-letter words,}}
+
+@fitb{}{@ifsoln{while the first spell checker did not have a letter limit.}}
+
+- Which spell checker do you think is more effective? Why? @fitb{}{}
+
+@fitb{}{}
+
+
+

@@ -1,0 +1,81 @@
+= Building and Testing a Decision Tree
+
+++++
+<style>
+/* Format autonumbering inside the table correctly */
+table .autonum::after { content: ')' !important; }
+</style>
+++++
+
+On @printable-exercise{level-2.adoc}, we decided that the decision mode at the end of the "teens" branch should be "interest in game". Let's create the rest of the tree and test it out. You can refer to the training dataset on @handout{decision-tree-data.adoc}.
+
+== Build and Understand the Tree
+
+@vspace{1ex}
+
+Fill in the remainder of the tree using the algorithm you have learned (left) before filling in the blanks (right).
+
+@vspace{1ex}
+
+[cols="1,1", stripes="none"]
+|===
+
+|
+@ifnotsoln{@center{@image{../images/tree-w-blanks.png, 350}}}
+
+@ifsoln{@center{@image{../images/final-tree.png, 350}}}
+
+|
+
+@n The root node of this tree is @fitb{10em}{@ifsoln{age}}.
+
+
+@n The first set of branches includes: +
+@fitb{8em}{@ifsoln{teens}}, @fitb{8em}{@ifsoln{twenties}}, and @fitb{8em}{@ifsoln{thirties}}.
+
+@vspace{1ex}
+
+@n Write the rules that this decision tree follows. Predict that:
+
+a) @fitb{12em}{@ifsoln{interested}} teens will buy the game.
+
+b) @fitb{12em}{@ifsoln{everyone}} in their twenties will buy the game.
+
+c) @fitb{12em}{@ifsoln{previous customers}} in their thirties will buy the game.
+
+|===
+
+
+== Test the Tree
+
+@vspace{1ex}
+
+@n Complete the table below based on whether our decision tree predicts if Kat, Billy, or Chen will buy the game.
+
+@vspace{1ex}
+
+[cols="2,2,3,2,2,2", stripes="none", options="header"]
+|===
+| name 		| age 		| shopping history 	| interest in game 	| buys game | model predicts
+| Kat 		| teen 		| new customer		| yes 				| yes		| @ifsoln{will buy}
+| Billy		| twenties	| new customer		| no 				| none		| @ifsoln{will buy}
+| Chen	    | twenties 	| previous customer | no  				| none		| @ifsoln{will buy}
+|===
+
+@n Compare the test data with the decision tree recommendations. For which customers was the computer correct?  @hspace{1em} @ifsoln-choice{Kat} @hspace{1em} Billy @hspace{1em} Chen
+
+@n Based on this new test data, which rule (see Q3, above) needs to change? Why? @fitb{}{@ifsoln{We need to change Rule b,}}
+
+@fitb{}{@ifsoln{that all individuals in their 20s will buy the game. The new test data contradicts the rule.}}
+
+== Reflect
+
+@n The decision tree we built was correct 100% of the time with our training dataset, but correct only 33% of with our test dataset. Why?
+
+@fitb{}{@ifsoln{The training dataset is small, and only represents a sample of the population. The sample was not representative,}}
+
+@fitb{}{@ifsoln{as there are individuals in their twenties who choose not to purchase, among others who contradict the training data.}}
+
+@n What could we do to improve the quality of this decision tree? @fitb{}{@ifsoln{We would need to collect a bigger, more representative dataset,}}
+
+@fitb{}{@ifsoln{and then build the tree again.}}
