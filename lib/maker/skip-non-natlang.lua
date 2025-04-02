@@ -23,7 +23,8 @@ if natlang == 'en-us' then
 end
 
 local function skip_non_natlang(x)
-  x = x:gsub('\n%+', ' ') -- remove leading pluses (from git diff)
+  x = x:gsub('\n%+', '\n') -- remove leading pluses (from git diff)
+  x = x:gsub('\n%[.-\n', '') -- remove block-config lines
   x = x:gsub('\n', ' ') -- converts newlines to spaces for easier matching
   x = x:gsub('<style.->.-</style>', ' ')
   x = x:gsub('<script.->.-</script>', ' ')
@@ -31,6 +32,12 @@ local function skip_non_natlang(x)
   x = x:gsub('@math{.-}', ' ')
   x = x:gsub('@show{.-}', ' ')
   x = x:gsub('@showsoln{.-}', ' ')
+  x = x:gsub('@handout{.-[,}]', ' ')
+  x = x:gsub('@printable%-exercise{.-[,}]', ' ')
+  x = x:gsub('@opt%-printable%-exercise{.-[,}]', ' ')
+  x = x:gsub('@lesson%-link{.-[,}]', ' ')
+  x = x:gsub('@dist%-link{.-[,}]', ' ')
+  x = x:gsub('@link{.-[,}]', ' ')
   x = x:gsub('@[%w%-]+', ' ')
   x = x:gsub('```.-```', ' ') --  code displays
   x = x:gsub('``.-``', ' ') -- ``in-text code``
@@ -40,6 +47,8 @@ local function skip_non_natlang(x)
   x = x:gsub('’', "'") -- right single quote
   x = x:gsub('“', "'") -- left double quote
   x = x:gsub('”', "'") -- right double quote
+  x = x:gsub("[^%w']+", ' ') -- remove anything that isn't alphanum or single quote
+  x = x:gsub('[%d]+', ' ') -- remove digits
 
   for _,w in ipairs(added_words) do
     x = x:gsub(w, '')
