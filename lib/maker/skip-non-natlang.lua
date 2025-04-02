@@ -18,15 +18,22 @@ end
 local function skip_non_natlang(x)
   x = x:gsub('\n%+', ' ') -- remove leading pluses (from git diff)
   x = x:gsub('\n', ' ') -- converts newlines to spaces for easier matching
-  x = x:gsub('<style>.-</style>', '')
-  x = x:gsub('~%S+', '') -- remove roughnums
-  x = x:gsub('@link{.-}', '')
-  x = x:gsub('@math{.-}', '')
-  x = x:gsub('@show{.-}', '')
-  x = x:gsub('@showsoln{.-}', '')
-  x = x:gsub('```.-```', '') -- remove code displays
-  x = x:gsub('``.-``', '') -- remove in-text code
-  x = x:gsub('`.-`', '') -- ditto
+  x = x:gsub('<style.->.-</style>', ' ')
+  x = x:gsub('<script.->.-</script>', ' ')
+  x = x:gsub('@link{.-}', ' ')
+  x = x:gsub('@math{.-}', ' ')
+  x = x:gsub('@show{.-}', ' ')
+  x = x:gsub('@showsoln{.-}', ' ')
+  x = x:gsub('@%w+%s', ' ')
+  x = x:gsub('```.-```', ' ') --  code displays
+  x = x:gsub('``.-``', ' ') -- ``in-text code``
+  x = x:gsub('`.-`', ' ') -- `in-text code`
+  x = x:gsub('~%S+', ' ') -- roughnums
+  x = x:gsub('‘', "'") -- left single quote
+  x = x:gsub('’', "'") -- right single quote
+  x = x:gsub('“', "'") -- left double quote
+  x = x:gsub('”', "'") -- right double quote
+
   for _,w in ipairs(added_words) do
     x = x:gsub(w, '')
   end
