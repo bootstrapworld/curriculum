@@ -49,7 +49,7 @@ What we need is a way to check if bags are _similar_! To do this, we will repres
 
 - A @vocab{vector} is an ordered list of numbers within parentheses and separated by commas, representing a point.
 - Using vector notation, we can represent Document a ("doo be doo be doo") like this: @math{\overrightarrow{a} = (2, 3)}
-- If we were to plot a point for the vector on the coordinate plane, it would produce this:
+- If we were to plot a point for the vector on the doo-be plane, it would produce this:
 
 @center{@image{images/3-2.png, 150}}
 
@@ -58,7 +58,7 @@ What we need is a way to check if bags are _similar_! To do this, we will repres
 
 @Q{How would you represent the vector for Document b ("doo doo be doo be") on the coordinate plane?}
 
-@A{The point would be in the exact same position as the point for Document a. When we plot a point on the coordinate plane, first we plot @math{x} and then we plot @math{y}. There is no such protocol with the bag-of-words model. That said, it is crucial to adhere to the _same word order_ for each bag of words. Because we decided on "doo" then "be" for Document a, we must use "doo" then "be" for Document b also.}
+@A{The point would be in the exact same position as the point for Document a. When we plot a point on the coordinate plane, we locate @math{x} on the horizontal axis and then we locate @math{y} on the vertical axis. There is no such protocol with the bag-of-words model. That said, it is crucial to adhere to the _same word order_ for each bag of words. Because we decided on "doo" then "be" for Document a, we must use "doo" then "be" for Document b also.}
 }
 
 === Investigate
@@ -115,7 +115,7 @@ First we must recognize that Documents c and d contain a total of *three* differ
 
 We must revise our bag-of-words summaries and our vectors!
 
-@teacher{Normalizing data and considering dimensionality requires that--when a word occurs zero times--we acknowledge it. Instead of glossing over the dimension, we indicate that a given word occurred zero times.}
+@teacher{Normalizing data requires that we consider _all_ the words; when a word occurs zero times in a document, we acknowledge it. Instead of glossing over the dimension, we indicate that a given word occurred zero times.}
 
 @right{@image{images/2pts.png, 150}}
 
@@ -169,7 +169,7 @@ What we would like is something richer. When we ask people whether two documents
 
 === Investigate
 
-It turns out that the bag of words model lends itself especially well to that. Recall that using it, we can plot each point in a multi-dimensional space. Now suppose we draw a line from the origin of the space to each of those points. We can then ask what is the angle between the two lines?
+It turns out that the bag of words model lends itself especially well to that. Recall that using it, we can plot each point in a multi-dimensional space. Now suppose we draw a line from the origin of the space to each of those points. We can then ask: What is the angle between the two lines?
 
 Take, for example, this comparison between two strings: stringA ("doo doo doo doo") and stringB ("be be be be").
 
@@ -249,8 +249,15 @@ Let's try the `angle-difference` function in Pyret.
 
 Yes, angles!
 
-Did you know that geometry is at the heart of modern AI? This lesson shows how. The same angles that your students learn to compute in middle-school are sitting at the heart of the machine learning calculations that power so many things in the world today. Even the plagiarism detectors that might be checking their essays on angles... are computing angles. So if your students ask “When are we ever going to use this?”, you can tell them, “You already do, all the time”.
+Did you know that geometry is at the heart of modern AI? This lesson shows how. The same angles that your students learn to compute in middle-school are sitting at the heart of the machine learning calculations that power so many things in the world today. Even the plagiarism detectors that might be checking their essays on angles... are computing angles. So if your students ask “When are we ever going to use this?”, you can tell them, “You already do, all the time.”
 
+The plot thickens, especially if you have older students who have learned some trigonometry. In practice, real machine learning systems don't _quite_ use angles. Instead, they use the cosine of the angle. There are two reasons for this:
+
+- The angle itself is a somewhat awkward value to work with. In contrast, the cosine has a nice numeric range, between -1 and 1, which makes it convenient to use in various other mathematical settings. (Specifically, it's used in a process called gradient descent.)
+
+- It’s simpler to compute the cosine directly. In fact, inside Pyret, `angle-difference` actually first computes the cosine, then converts the result into an angle!
+
+For the purposes of this curriculum, you can ignore this difference. In particular, if your students have never even heard of the cosine, that's fine! For students who are familiar with cosine and curious to explore, the @starter-file{plagiarism} contains a `cosine-similarity function`.
 }
 
 
@@ -306,7 +313,7 @@ Let's add a fifth document, Document e, to our collection.
 
 - Document e: "doo be bop ski bop bop"
 
-Now we have thirty words total, made up of _four_ unique words: doo, be, bop, and *ski*. Plotting all of our documents would require the use of a _four-dimensional_ space. Having trouble visualizing a four-dimensional space? You're not alone
+Now we have thirty words total, made up of _four_ unique words: doo, be, bop, and *ski*. Plotting all of our documents would require the use of a _four-dimensional_ space. Having trouble visualizing a four-dimensional space? You're not alone.
 
 
 === Investigate
@@ -351,7 +358,7 @@ Although we can't visualize the vector spaces for `wiki-article` and `student-es
 
 @Q{Do you predict that the angle difference for the `wiki-article` and `student-essay` will be closer to 0° or closer to 90°?}
 
-@A{Since the student essay is nearly identical to the wikipedia article, we would expect a difference closer to zero. (It's actually 4.663°.)}
+@A{Since the student essay is nearly identical to the wikipedia article, we would expect a difference closer to zero. (It's actually 23.706°.)}
 }
 
 
@@ -363,7 +370,7 @@ Now that we've seen how to create a compressed representation of one piece of te
 
 === Launch
 
-Recall that we started with string-matching, then moved from that to bags of words. We still compared bags for being identical, which was too coarse. We therefore improved on that to create angle-difference, which gives us a range of values indicating how similar two documents are.
+Recall that we started with string-matching, then moved from that to bags of words. We still compared bags for being identical, which was too coarse. We therefore improved on that to create `angle-difference`, which gives us a range of values indicating how similar two documents are.
 
 So far, we have only looked at pairs of documents. Each time, Pyret converts both documents to bags of words, then computes the angle between the two. But as we saw earlier, a real plagiarism detector will compare against _many_ documents--and each document will be compared against _many_ student submissions. It would be wasteful to repeat a lot of this work over and over.
 
@@ -374,7 +381,7 @@ We will therefore see the next step of this process: training.
 
 We are now ready to learn about training a model. In training, we take a number of sources and combine all of them into one corpus. Training is the act of converting each source into our representation; the model is an aggregate of all the corpus data.
 
-Specifically, let's suppose the teacher wants a plagiarism detector for (short) animal essays. We've already seen a paragraph about the elephant. She gathers up paragraphs about nine other animals as well. Each one is turned into a bag of words. The key to creating a model is that all this work is done _once_; it can then be used on many different student submissions.
+Specifically, let's suppose the teacher wants a plagiarism detector for (short) animal essays. We've already seen a paragraph about the elephant. She gathers up paragraphs describing nine other animals. Each one is turned into a bag of words. The key to creating a model is that all this work is done _once_; it can then be used on many different student submissions.
 
 @slidebreak
 
@@ -411,50 +418,13 @@ Let's consider how removing stopwords alters the results produced.
 @lesson-instruction{
 Use the @starter-file{plagiarism} to complete @printable-exercise{distance-to-cleaned.adoc}.}
 
+
 === Synthesize
 
 @QandA{
 
-@Q{}
+@Q{Now that you understand a little bit more about how plagiarism detection programs work, what advice would you offer to a teacher who is considering using one... or to a student who is trying to get away with plagiarism?}
 
-@A{}
+@A{Students' responses will vary.}
 }
 
-
-== Computing Closeness with Cosine Similarity
-
-=== Overview
-
-Actual machine learning systems use cosines, not angles!
-
-=== Launch
-
-We have now seen how we can use `angle-difference` to determine the distance between two documents. We've seen how we can train a model to record several documents, and then use it repeatedly to check a new document.
-
-@slidebreak
-
-In practice, real machine learning systems don't quite use angles. Instead, they use the cosine of the angle. There are two reasons for this:
-
-- The angle itself is a somewhat awkward value to work with. In contrast, the cosine has a nice numeric range, between -1 and 1, which makes it convenient to use in various other mathematical settings. (Specifically, it's used in a process called gradient descent.)
-
-- It's simpler to compute the cosine directly. In fact, inside Pyret, `angle-difference` actually first computes the cosine, then converts the result into an angle!
-
-For the purposes of this curriculum, you can ignore this difference. In particular, if you've never even heard of the cosine, that's fine! You will! And maybe when you do, you'll remember that you've seen its name before...
-
-=== Investigate
-
-If you do know what cosines are, and want to play with it, the @starter-file{plagiarism} contains a cosine-similarity function as well. Feel free to experiment!
-
-@strategy{Connecting to Higher Math}{
-
-You might be wondering: are we actually using that cosine — the one students learn about when studying trigonometry? Or that gradient — the one students learn about when studying calculus? The answer to both  is YES!
-
-The cosine-similarity function Cosine similarity computes the cosine of the angle between two vectors. While it is not necessary for students to understand the mathematics happening behind the scenes, the function is a vital part of the program... and a lovely answer to the often-asked question, "When are we ever going to use this?"
-
-The math in machine learning doesn’t end with angles; it begins there. All of trigonometry, pre-calculus, calculus, statistics, and more lies at the heart of modern machine learning. So for almost any mathematics topic, if  your students ask “When are we ever going to use this?”, you can tell them, “You already do, all the time”.
-
-}
-
-=== Synthesize
-
-Now that you understand a little bit more about how plagiarism detection programs work, what advice would you offer to a teacher who is considering using one... or to a student who is trying to get away with plagiarism?
