@@ -27,6 +27,7 @@ local function skip_non_natlang(x)
   x = x:gsub('\n%[.-\n', '') -- remove block-config lines
   x = x:gsub('\n', ' ') -- converts newlines to spaces for easier matching
   x = x:gsub('\\%w+', ' ') -- remove mathjax tex control sequences
+  x = x:gsub('https://.-%[', '[') -- remove raw URLs
   x = x:gsub('<style.->.-</style>', ' ')
   x = x:gsub('<script.->.-</script>', ' ')
   x = x:gsub('@link{.-}', ' ')
@@ -38,6 +39,7 @@ local function skip_non_natlang(x)
   x = x:gsub('@slidebreak{.-}', ' ')
   x = x:gsub('@add%-to%-lang{.-}', ' ')
   x = x:gsub('@objective{.-}', ' ')
+  x = x:gsub('@ifproglang{.-}', ' ')
   x = x:gsub('@lesson%-prereqs{.-}', ' ')
   x = x:gsub('@[hv]space{.-}', ' ')
   x = x:gsub('@handout{.-[,}]', ' ')
