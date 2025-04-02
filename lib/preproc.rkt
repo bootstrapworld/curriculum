@@ -1524,6 +1524,7 @@
 (define *uses-codemirror?* #f)
 (define *uses-mathjax?* #f)
 
+(define *needs-objectives?* #f)
 (define *uses-objectives?* #f)
 
 (define (expand-directives i o)
@@ -1953,7 +1954,10 @@
                            [(string=? directive "Bootstrap")
                             (fprintf o "https://www.bootstrapworld.org/[Bootstrap]")]
                            [(hash-ref *simple-directives* (string->symbol directive) #f)
-                            => (lambda (s) (display s o))]
+                            => (lambda (s)
+                                 (when (string=? directive "lesson-intro-table")
+                                   (set! *needs-objectives?* #t))
+                                 (display s o))]
                            [(member directive '("assess-design-recipe" "design-recipe-exercise" "design-codap-recipe" "data-cycle"))
                             (let ([f (cond [(string=? directive "assess-design-recipe") assess-design-recipe]
                                            [(string=? directive "design-recipe-exercise") design-recipe-exercise]
@@ -2294,6 +2298,7 @@
       (set! *supplemental-materials-needed?* #f)
       (set! *uses-codemirror?* #f)
       (set! *uses-mathjax?* #f)
+      (set! *needs-objectives?* #f)
       (set! *uses-objectives?* #f)
       ; (printf "preproc ~a to ~a\n" *in-file* *out-file*)
       ;
@@ -2519,11 +2524,12 @@
 
             ))
 
-        (cond [(not *uses-objectives?*)
-               (printf "WARNING: ~a: Table missing @objectives\n\n" (errmessage-context))]
-              [(null? *objectives-met*)
-               (printf "WARNING: ~a: No @objective provided\n\n" (errmessage-context))]
-              [else #f])
+        (when *needs-objectives?*
+          (cond [(not *uses-objectives?*)
+                 (printf "WARNING: ~a: Table missing @objectives\n\n" (errmessage-context))]
+                [(null? *objectives-met*)
+                 (printf "WARNING: ~a: No @objective provided\n\n" (errmessage-context))]
+                [else #f]))
 
         )
 
