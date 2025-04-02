@@ -11,6 +11,13 @@ local added_words = {}
 local ignored_words = {}
 
 if natlang == 'en-us' then
+
+  -- In Sublime settings, the list of added_words and ignored_words
+  -- are used to mean different things. In this context, however, they
+  -- mean the same thing (i.e., words to ignore). To make it easy to
+  -- copy/paste back and forth between this file and sublime, they are
+  -- kept separate here
+
   added_words = read_json_file('shared/langs/en-us/hunspell/added-words.json')
   ignored_words = read_json_file('shared/langs/en-us/hunspell/ignored-words.json')
 end
@@ -24,7 +31,7 @@ local function skip_non_natlang(x)
   x = x:gsub('@math{.-}', ' ')
   x = x:gsub('@show{.-}', ' ')
   x = x:gsub('@showsoln{.-}', ' ')
-  x = x:gsub('@%w+%s', ' ')
+  x = x:gsub('@[%w%-]+', ' ')
   x = x:gsub('```.-```', ' ') --  code displays
   x = x:gsub('``.-``', ' ') -- ``in-text code``
   x = x:gsub('`.-`', ' ') -- `in-text code`
