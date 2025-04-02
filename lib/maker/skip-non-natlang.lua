@@ -58,7 +58,11 @@ local function skip_non_natlang(x)
   x = x:gsub('“', "'") -- left double quote
   x = x:gsub('”', "'") -- right double quote
   x = x:gsub("[^%w']+", ' ') -- remove anything that isn't alphanum or single quote
+  x = x:gsub('%dst ', ' ') -- ordinals
+  x = x:gsub('%dnd ', ' ')
+  x = x:gsub('%dth ', ' ')
   x = x:gsub('[%d]+', ' ') -- remove digits
+  x = x:gsub("(%w)'s ", '%1 ') -- remove 's
 
   for _,w in ipairs(added_words) do
     x = x:gsub(w, '')
