@@ -44,9 +44,17 @@ contexts:
       scope: directive
       push: directive
 
-    # we use code literals differently than asciidoc, so override them
-    - match: '`[^`]*`'
-      scope: code_literal
+    # match certain special literals as muted
+    - match: '{nbsp}'
+      scope: directive.muted
+
+    # mute table formatting statements
+    - match: '\[(\.\S+,\s*)?cols[^\]]+\]'
+      scope: directive.muted
+
+    # don't let '~' screw up the whole damned document
+    - match: '~'
+      scope: main
 
     # for anything else, use the normal text parsing rules
     - include: scope:text.asciidoc
@@ -84,5 +92,9 @@ contexts:
       scope: directive.mathjax
       push: mathjax
 
-    - match: '[^\}\{]+'
+    # muted mboxes
+    - match: '\\mbox\{'
+      scope: directive.muted
+
+    - match: '[^\}\{\\]+'
       scope: directive.mathjax
