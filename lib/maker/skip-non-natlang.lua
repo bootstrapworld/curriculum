@@ -5,12 +5,6 @@ local make_dir = 'lib/maker/'
 dofile(make_dir .. 'readers.lua')
 dofile(make_dir .. 'jread.lua')
 
--- reads from the stdin,
--- removes leading pluses,
--- removes stuff enclosed in backticks,
--- converts newlines to spaces,
--- writes to stdout
-
 local natlang = os.getenv('NATLANG')
 
 local added_words = {}
@@ -22,11 +16,17 @@ if natlang == 'en-us' then
 end
 
 local function skip_non_natlang(x)
-  x = x:gsub('\n%+', ' ')
-  x = x:gsub('\n', ' ')
-  x = x:gsub('```.-```', '')
-  x = x:gsub('``.-``', '')
-  x = x:gsub('`.-`', '')
+  x = x:gsub('\n%+', ' ') -- remove leading pluses (from git diff)
+  x = x:gsub('\n', ' ') -- converts newlines to spaces for easier matching
+  x = x:gsub('<style>.-</style>', '')
+  x = x:gsub('~%S+', '') -- remove roughnums
+  x = x:gsub('@link{.-}', '')
+  x = x:gsub('@math{.-}', '')
+  x = x:gsub('@show{.-}', '')
+  x = x:gsub('@showsoln{.-}', '')
+  x = x:gsub('```.-```', '') -- remove code displays
+  x = x:gsub('``.-``', '') -- remove in-text code
+  x = x:gsub('`.-`', '') -- ditto
   for _,w in ipairs(added_words) do
     x = x:gsub(w, '')
   end
@@ -35,5 +35,7 @@ local function skip_non_natlang(x)
   end
   return x
 end
+
+-- read from stdin, weed out fluff, and write to stdout
 
 io.write(skip_non_natlang(io.read('*a')))
