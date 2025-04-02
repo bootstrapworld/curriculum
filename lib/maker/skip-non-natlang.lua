@@ -26,6 +26,7 @@ local function skip_non_natlang(x)
   x = x:gsub('\n%+', '\n') -- remove leading pluses (from git diff)
   x = x:gsub('\n%[.-\n', '') -- remove block-config lines
   x = x:gsub('\n', ' ') -- converts newlines to spaces for easier matching
+  x = x:gsub('\\%w+', ' ') -- remove mathjax tex control sequences
   x = x:gsub('<style.->.-</style>', ' ')
   x = x:gsub('<script.->.-</script>', ' ')
   x = x:gsub('@link{.-}', ' ')
