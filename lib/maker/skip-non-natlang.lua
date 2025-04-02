@@ -27,6 +27,7 @@ local function skip_non_natlang(x)
   x = x:gsub('\n%[.-\n', '') -- remove block-config lines
   x = x:gsub('\n', ' ') -- converts newlines to spaces for easier matching
   x = x:gsub('\\%w+', ' ') -- remove mathjax tex control sequences
+  x = x:gsub('https://.-%[', '[') -- remove raw URLs
   x = x:gsub('<style.->.-</style>', ' ')
   x = x:gsub('<script.->.-</script>', ' ')
   x = x:gsub('@link{.-}', ' ')
@@ -38,6 +39,7 @@ local function skip_non_natlang(x)
   x = x:gsub('@slidebreak{.-}', ' ')
   x = x:gsub('@add%-to%-lang{.-}', ' ')
   x = x:gsub('@objective{.-}', ' ')
+  x = x:gsub('@ifproglang{.-}', ' ')
   x = x:gsub('@lesson%-prereqs{.-}', ' ')
   x = x:gsub('@[hv]space{.-}', ' ')
   x = x:gsub('@handout{.-[,}]', ' ')
@@ -58,7 +60,11 @@ local function skip_non_natlang(x)
   x = x:gsub('“', "'") -- left double quote
   x = x:gsub('”', "'") -- right double quote
   x = x:gsub("[^%w']+", ' ') -- remove anything that isn't alphanum or single quote
+  x = x:gsub('%dst ', ' ') -- ordinals
+  x = x:gsub('%dnd ', ' ')
+  x = x:gsub('%dth ', ' ')
   x = x:gsub('[%d]+', ' ') -- remove digits
+  x = x:gsub("(%w)'s ", '%1 ') -- remove 's
 
   for _,w in ipairs(added_words) do
     x = x:gsub(w, '')
