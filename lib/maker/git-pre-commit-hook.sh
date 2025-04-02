@@ -12,9 +12,10 @@ COMMITHOOK_PROGLANG=distribution/.commithook.proglang.log
 COMMITHOOK_SPELLCHECK=distribution/.commithook.spellcheck.log
 COMMITHOOK_BADJSON=distribution/.commithook.badjson.log
 
-rm -f $COMMITHOOK_PROGLANG $COMMITHOOK_SPELLCHECK $COMMITHOOK_BADJSON
-
-touch $COMMITHOOK_PROGLANG $COMMITHOOK_SPELLCHECK $COMMITHOOK_BADJSON
+for f in $COMMITHOOK_PROGLANG $COMMITHOOK_SPELLCHECK $COMMITHOOK_BADJSON; do
+  rm -f $f
+  touch $f
+done
 
 for f in $(git diff --name-only --staged); do
   if test ! -f $f; then continue; fi
@@ -31,7 +32,7 @@ for f in $(git diff --name-only --staged); do
     done
 
     for doit in justonce; do
-      git diff --staged -- $f|grep '^+'|grep -v '^+++'|node lib/spellcheck.js $f >> $COMMITHOOK_SPELLCHECK
+      git diff --staged -- $f | grep '^+' | grep -v '^+++' | lib/maker/skip-non-natlang.lua | node lib/spellcheck.js $f >> $COMMITHOOK_SPELLCHECK
     done
 
   elif test ${fb#*.} = json; then
