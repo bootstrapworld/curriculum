@@ -2134,8 +2134,7 @@
                               (display "{endsb}__" o))]
                            [(string=? directive "QandA")
                             (let ([text (read-group i directive #:multiline? #t)])
-                              (fprintf o "\n[~a.actually-openblock.q-and-a]\n====\n"
-                                      (if *optional-flag?* ".Optional" ""))
+                              (display "\n[.actually-openblock.q-and-a]\n====\n" o)
                               (expand-directives:string->port text o #:enclosing-directive directive)
                               (display "\n====\n" o))]
                            [(string=? directive "Q")
