@@ -113,17 +113,18 @@ Let's return to our dataset to dig into that messiness.
 @A{@math{k} should be about 450, because the y-value of the vertex is around there.}
 }
 
-Build on what we already know about the data, let's experiment with Desmos sliders to visually fit the best model we can.
+Building on what we already know about the data, let's experiment with Desmos sliders to visually fit the best model we can.
 
 @teacher{
-Make sure you have created a link or code for your class to @starter-file{alg2-exploring-quadratics-desmos}.
+Make sure you have shared the link or code you made for your class to @starter-file{alg2-exploring-quadratics-desmos}.
 }
 
 @lesson-instruction{
 - Open *Exploring Quadratic Functions (Desmos)*. You should be on  *Slide 3: Fitting Models* .
-- Turn to the *Fitting the Model Visually in Desmos* section of @printable-exercise{model-batangle-v-hitdistance.adoc}  and define your best-guess model for the relationship between `bat-angle` and `hit-distance` in the curve ball data.
-- Then, return to the @starter-file{alg2-aaron-judge} and modify the `curve` function on line 47 using the coefficients from the model you fit in Desmos.
-- When you're done, test how well your model predicts hit distance from bat angle using `fit-model` and complete the page to interpret the results.
+- Turn to the *Fitting the Model Visually in Desmos* section of @printable-exercise{model-batangle-v-hitdistance.adoc} and define your best-guess model for the relationship between `bat-angle` and `hit-distance` in the curve ball data.
+- Return to the @starter-file{alg2-aaron-judge} and modify the `curve` function on line 47 using the coefficients from the model you fit in Desmos.
+- Use `fit-model` to determine how well your model predicts hit distance from bat angle.
+- Record and interpret the results by completing @printable-exercise{model-batangle-v-hitdistance.adoc}.
 - @opt{Slides 4-7 of the Desmos file each focus on other subsets of Aaron Judge's batting data.
  * Visually fit models for these datasets in Desmos.
  * Update the last four functions defined in the Pyret file.
@@ -135,17 +136,17 @@ Make sure you have created a link or code for your class to @starter-file{alg2-e
 }
 
 @QandA{
-@Q{According to the @vocab{S-values}, does your quadratic model do a better job of predicting hit distances from bat angle?}
+@Q{According to the @vocab{S-values}, does your quadratic model do a better job of predicting hit distances from bat angle than the optimal linear model did?}
 @A{Yes. Hopefully students have come up with a model whose predictions are expected to be at least 30 feet more accurate than the optimal linear model.}
 @Q{Linear regression allows us to find the *computationally optimal model*. Do we know whether or not the quadratic models we just built are the _best?_}
 @A{We don't know!}
 @A{This fitting process was purely about adjusting sliders and seeing if @math{S} goes down. It was all trial-and-error, with no guarantee that there's no better model out there.}
-@Q{Slides 3-6 in the Desmos file display data for specific pitch types. Slide 7 shows the full dataset. Which of the subsets is most visually similar to the full dataset and what does the tell us?}
-@A{The four-seam fastball dataset looks almost identical to the full dataset. That is an indicator that the majority of the dataset is likely composed of four-seam fastballs.}
+@Q{Slides 3-6 in the Desmos file display data for specific pitch types. Slide 7 shows the full dataset. Which of the subsets is most visually similar to the full dataset and what does that tell us?}
+@A{The four-seam fastball dataset looks very similar to the full dataset. That is an indicator that four-seam fastballs likely represent a significant portion of the dataset.}
 @A{`count(judge-table, "pitch-type")` reveals that 93 of the 262 pitches are four-seam fastballs.}
 }
 
-Quadratic models written in Vertex Form make it incredibly easy to find the vertex @math{(h, k)}, the axis of symmetry @math{h}, and whether the parabola opens up or down (@math{a}). But finding the @vocab{roots} or @vocab{y-intercept} is a lot harder! There are other forms of quadratic models, however, that make those much easier to find. 
+Quadratic models written in Vertex Form make it incredibly easy to find the vertex @math{(h, k)}, the axis of symmetry @math{h}, and whether the parabola opens up or down (@math{a}). But finding the @vocab{roots} or @vocab{y-intercept} is a lot harder! Just as there are multiple forms of linear functions that make it easier to work with certain information, there are other forms of quadratic models!
 
 === Synthesize
 
@@ -171,7 +172,7 @@ Quadratic models written in Vertex Form make it incredibly easy to find the vert
 
 == Additional Practice
 
-- @opt-printable-exercise{model-speed-v-mpg.adoc} engages students with visually fitting a quadratic model for @opt-starter-file{alg2-fuel-efficiency, fuel efficiency data} in Pyret, using what they know about the coefficients in the vertex form from the shape of the data.
+- @opt-printable-exercise{model-speed-v-mpg.adoc} engages students with visually fitting a quadratic model for @opt-starter-file{alg2-fuel-efficiency, fuel efficiency data} using Slide 8 of the Desmos file and what they know about the coefficients in the vertex form from the shape of the data. As with the activity they just completed, students will then define and fit their model in Pyret, and interpret the results.
 
 @vspace{1ex}
 
