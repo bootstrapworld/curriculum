@@ -71,6 +71,7 @@ local function skip_non_natlang(x)
   x = x:gsub('%dnd ', ' ')
   x = x:gsub('%dth ', ' ')
   x = x:gsub('[%d]+', ' ') -- remove digits
+  x = x:gsub("(%w)' ", '%1 ') -- remove ' at word end
   x = x:gsub("(%w)'s ", '%1 ') -- remove 's
   --
   for _,wordlist in ipairs({added_words, ignored_words}) do
