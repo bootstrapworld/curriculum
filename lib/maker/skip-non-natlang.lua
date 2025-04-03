@@ -25,12 +25,16 @@ local function skip_non_natlang(x)
   x = x:gsub('\n%+', '\n') -- remove leading pluses (from git diff)
   x = x:gsub('\n%[.-\n', '') -- remove block-config lines
   x = x:gsub('\n', ' ') -- converts newlines to spaces for easier matching
+  x = x:gsub('\\text{.-}', ' ') -- do not check text inside mathjax textboxes
+  x = x:gsub('\\textit{.-}', ' ') -- or italic textboxes
+  x = x:gsub('\\textb{.-}', ' ') -- or bold textboxes
   x = x:gsub('\\%w+', ' ') -- remove mathjax tex control sequences
   x = x:gsub('https://.-%[', '[') -- remove raw URLs
   x = x:gsub('<style.->.-</style>', ' ')
   x = x:gsub('<script.->.-</script>', ' ')
   x = x:gsub('@link{.-}', ' ')
   x = x:gsub('@math{.-}', ' ')
+  x = x:gsub('@do{.-}', ' ')
   x = x:gsub('@show{.-}', ' ')
   x = x:gsub('@showsoln{.-}', ' ')
   x = x:gsub('@image{.-}', ' ')
@@ -56,8 +60,8 @@ local function skip_non_natlang(x)
   x = x:gsub('~%S+', ' ') -- roughnums
   x = x:gsub('‘', "'") -- left single quote
   x = x:gsub('’', "'") -- right single quote
-  x = x:gsub('“', "'") -- left double quote
-  x = x:gsub('”', "'") -- right double quote
+  x = x:gsub('“', "\"") -- left double quote
+  x = x:gsub('”', "\"") -- right double quote
   x = x:gsub("[^%w']+", ' ') -- remove anything that isn't alphanum or single quote
   x = x:gsub('%dst ', ' ') -- ordinals
   x = x:gsub('%dnd ', ' ')
