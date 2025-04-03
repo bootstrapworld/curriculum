@@ -35,7 +35,7 @@ for f in $(git diff --name-only --staged); do
 
     if test "$NATLANG" = "en-us"; then
       for doit in justonce; do
-        git diff --staged -- $f | grep '^+' | grep -v '^+++' | lib/maker/skip-non-natlang.lua | node lib/spellcheck.js $f >> $COMMITHOOK_SPELLCHECK
+        cat $f | lib/maker/skip-non-natlang.lua | node lib/spellcheck.js $f >> $COMMITHOOK_SPELLCHECK
       done
     fi
 
