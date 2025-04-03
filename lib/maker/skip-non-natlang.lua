@@ -82,8 +82,6 @@ local function skip_non_natlang(x)
       local w1 = w:sub(1,1)
       if w1:match('%l') then
         wC = w1:upper() .. w:sub(2)
-      elseif w1:match('%u') then
-        wC = w1:lower() .. w:sub(2)
       end
       if wC then
         x = x:gsub('%s' .. wC .. '%s', ' ')
