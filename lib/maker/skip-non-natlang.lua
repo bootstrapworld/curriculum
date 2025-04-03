@@ -21,7 +21,6 @@ if natlang == 'en-us' then
 end
 
 local function skip_non_natlang(x)
-  x = ' ' .. x .. ' '
   -- x = x:gsub('\n%+', '\n') -- remove leading pluses (from git diff)
   x = x:gsub('\n%[.-\n', '') -- remove block-config lines
   x = x:gsub('\n%-%-%-%-', '\n#ASCIIDOC#----')
@@ -62,6 +61,7 @@ local function skip_non_natlang(x)
   x = x:gsub('@lesson%-link{.-[,}]', ' ')
   x = x:gsub('@dist%-link{.-[,}]', ' ')
   x = x:gsub('@link{.-[,}]', ' ')
+  x = x:gsub('@citation{.-[,}]', ' ')
   x = x:gsub('@[%w%-]+', ' ')
   x = x:gsub('#ASCIIDOC#```.-#ASCIIDOC#```', ' ') --  code displays
   x = x:gsub('#ASCIIDOC#%-%-%-%-.-#ASCIIDOC#%-%-%-%-', ' ') --  code displays
@@ -79,6 +79,7 @@ local function skip_non_natlang(x)
   x = x:gsub('[%d]+', ' ') -- remove digits
   x = x:gsub("(%w)' ", '%1 ') -- remove ' at word end
   x = x:gsub("(%w)'s ", '%1 ') -- remove 's
+  x = ' ' .. x .. ' '
   --
   for _,wordlist in ipairs({added_words, ignored_words}) do
     for _,w in ipairs(wordlist) do
