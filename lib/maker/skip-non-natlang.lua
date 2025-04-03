@@ -40,6 +40,7 @@ local function skip_non_natlang(x)
   x = x:gsub('@showsoln{.-}', ' ')
   x = x:gsub('@image{.-}', ' ')
   x = x:gsub('@centered%-image{.-}', ' ')
+  x = x:gsub('@design%-recipe%-exercise{.-}', ' ')
   x = x:gsub('@slidebreak{.-}', ' ')
   x = x:gsub('@add%-to%-lang{.-}', ' ')
   x = x:gsub('@objective{.-}', ' ')
@@ -50,7 +51,7 @@ local function skip_non_natlang(x)
   x = x:gsub('@printable%-exercise{.-[,}]', ' ')
   x = x:gsub('@opt%-printable%-exercise{.-[,}]', ' ')
   x = x:gsub('@online%-exercise{.-[,}]', ' ')
-  x = x:gsub('@opt-online%-exercise{.-[,}]', ' ')
+  x = x:gsub('@opt%-online%-exercise{.-[,}]', ' ')
   x = x:gsub('@starter%-file{.-[,}]', ' ')
   x = x:gsub('@opt%-starter%-file{.-[,}]', ' ')
   x = x:gsub('@lesson%-link{.-[,}]', ' ')
@@ -63,8 +64,8 @@ local function skip_non_natlang(x)
   x = x:gsub('~%S+', ' ') -- roughnums
   x = x:gsub('‘', "'") -- left single quote
   x = x:gsub('’', "'") -- right single quote
-  x = x:gsub('“', "\"") -- left double quote
-  x = x:gsub('”', "\"") -- right double quote
+  x = x:gsub('“', "") -- left double quote
+  x = x:gsub('”', "") -- right double quote
   x = x:gsub("[^%w']+", ' ') -- remove anything that isn't alphanum or single quote
   x = x:gsub('%dst ', ' ') -- ordinals
   x = x:gsub('%dnd ', ' ')
