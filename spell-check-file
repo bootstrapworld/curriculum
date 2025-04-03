@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# check spelling of entire argument file
+
+f=$(realpath $1)
+
+cd $(git rev-parse --show-toplevel 2>/dev/null || echo .)
+
+cat $f|lib/maker/skip-non-natlang.lua|node lib/spellcheck.js $f
