@@ -30,6 +30,7 @@ local function skip_non_natlang(x)
   x = x:gsub('\\textb{.-}', ' ') -- or bold textboxes
   x = x:gsub('\\%w+', ' ') -- remove mathjax tex control sequences
   x = x:gsub('https://.-%[', '[') -- remove raw URLs
+  x = x:gsub('<span.->.-</span>', ' ')
   x = x:gsub('<style.->.-</style>', ' ')
   x = x:gsub('<script.->.-</script>', ' ')
   x = x:gsub('@link{.-}', ' ')
