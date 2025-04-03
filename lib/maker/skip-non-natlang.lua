@@ -5,24 +5,23 @@ local make_dir = 'lib/maker/'
 dofile(make_dir .. 'readers.lua')
 dofile(make_dir .. 'jread.lua')
 
-local natlang = os.getenv('NATLANG')
+local natlang = os.getenv('NATLANG') or 'en-us'
 
 local added_words = {}
 local ignored_words = {}
 
 if natlang == 'en-us' then
-
   -- In Sublime settings, the list of added_words and ignored_words
   -- are used to mean different things. In this context, however, they
   -- mean the same thing (i.e., words to ignore). To make it easy to
   -- copy/paste back and forth between this file and sublime, they are
   -- kept separate here
-
   added_words = read_json_file('shared/langs/en-us/hunspell/added-words.json')
   ignored_words = read_json_file('shared/langs/en-us/hunspell/ignored-words.json')
 end
 
 local function skip_non_natlang(x)
+  x = ' ' .. x .. ' '
   x = x:gsub('\n%+', '\n') -- remove leading pluses (from git diff)
   x = x:gsub('\n%[.-\n', '') -- remove block-config lines
   x = x:gsub('\n', ' ') -- converts newlines to spaces for easier matching
@@ -66,12 +65,12 @@ local function skip_non_natlang(x)
   x = x:gsub('[%d]+', ' ') -- remove digits
   x = x:gsub("(%w)'s ", '%1 ') -- remove 's
 
-  for _,w in ipairs(added_words) do
-    x = x:gsub(w, '')
+  for _,wordlist in ipairs({added_words, ignored_words}) do
+    for _,w in ipairs(wordlist) do
+      x = x:gsub('%s' .. w .. '%s', ' ')
+    end
   end
-  for _,w in ipairs(ignored_words) do
-    x = x:gsub(w, '')
-  end
+
   return x
 end
 
