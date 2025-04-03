@@ -24,6 +24,8 @@ local function skip_non_natlang(x)
   x = ' ' .. x .. ' '
   -- x = x:gsub('\n%+', '\n') -- remove leading pluses (from git diff)
   x = x:gsub('\n%[.-\n', '') -- remove block-config lines
+  x = x:gsub('\n%-%-%-%-', '\n#ASCIIDOC#----')
+  x = x:gsub('\n```', '\n#ASCIIDOC#```')
   x = x:gsub('\n', ' ') -- converts newlines to spaces for easier matching
   x = x:gsub('\\text{.-}', ' ') -- do not check text inside mathjax textboxes
   x = x:gsub('\\textit{.-}', ' ') -- or italic textboxes
@@ -59,7 +61,8 @@ local function skip_non_natlang(x)
   x = x:gsub('@dist%-link{.-[,}]', ' ')
   x = x:gsub('@link{.-[,}]', ' ')
   x = x:gsub('@[%w%-]+', ' ')
-  x = x:gsub('```.-```', ' ') --  code displays
+  x = x:gsub('#ASCIIDOC#```.-#ASCIIDOC#```', ' ') --  code displays
+  x = x:gsub('#ASCIIDOC#%-%-%-%-.-#ASCIIDOC#%-%-%-%-', ' ') --  code displays
   x = x:gsub('``.-``', ' ') -- ``in-text code``
   x = x:gsub('`.-`', ' ') -- `in-text code`
   x = x:gsub('~%S+', ' ') -- roughnums
