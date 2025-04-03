@@ -8,6 +8,8 @@ minchars=200
 
 JQ=$(which jq)
 
+mkdir -p distribution
+
 COMMITHOOK_PROGLANG=distribution/.commithook.proglang.log
 COMMITHOOK_SPELLCHECK=distribution/.commithook.spellcheck.log
 COMMITHOOK_BADJSON=distribution/.commithook.badjson.log
