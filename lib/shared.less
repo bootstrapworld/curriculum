@@ -107,8 +107,11 @@ body {
     font-size: inherit !important;
     line-height: 0;
   }
-  em .mathunicode, em .MathJax { font-family: 'MJXTEX-I'; margin-right: 1px;}
-  strong .mathunicode, strong .MathJax { font-family: 'MJXTEX-B'; margin-right: 1px;}
+  em .mathunicode, em .MathJax * { font-family: 'MJXTEX-I'; margin-right: 1px;}
+  strong .mathunicode, strong .MathJax * { font-family: 'MJXTEX-B'; margin-right: 1px;}
+  em strong .mathunicode, strong em .mathunicode, strong .MathJax .TEX-I, em .MathJax .TEX-B { 
+    font-family: 'MJXTEX-BI'; margin-right: 1px;
+  }
   
   table, td.tableblock>.content { margin-bottom: 0px; }
   tr th.tableblock code, td.tableblock code { background: none; }
