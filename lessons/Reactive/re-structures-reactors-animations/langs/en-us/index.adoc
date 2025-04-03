@@ -207,24 +207,24 @@ A reactor is designed to "`react`" to different events. When the computer’s cl
 
 Here, we define a reactor named `sunset-react` for the sunset animation:
 
-----
+```
 sunset-react = reactor:
   init: sunset(10, 300),
   on-tick: next-state-tick,
   to-draw: draw-state
 end
-----
+```
 
 @slidebreak
 
 @ifslide{
-----
+```
 sunset-react = reactor:
   init: sunset(10, 300),
   on-tick: next-state-tick,
   to-draw: draw-state
 end
-----
+```
 }
 `init` tells the reactor which instance to use when the program starts. In this example, the program will start with a `SunsetState` instance with the sun at (10, 30). `on-tick` and `to-draw` are event @vocab{handlers}, which connect `tick` and `draw` events to our `next-state-tick` and `draw-state` functions.
 

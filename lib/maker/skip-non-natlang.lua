@@ -30,12 +30,14 @@ local function skip_non_natlang(x)
   x = x:gsub('\\text{.-}', ' ') -- do not check text inside mathjax textboxes
   x = x:gsub('\\textit{.-}', ' ') -- or italic textboxes
   x = x:gsub('\\textb{.-}', ' ') -- or bold textboxes
+  x = x:gsub('\\enclose{.-}', ' ') -- or bold textboxes
   x = x:gsub('\\%w+', ' ') -- remove mathjax tex control sequences
   x = x:gsub('https://.-%[', '[') -- remove raw URLs
   x = x:gsub('<span.->.-</span>', ' ')
   x = x:gsub('<style.->.-</style>', ' ')
   x = x:gsub('<script.->.-</script>', ' ')
   x = x:gsub('@link{.-}', ' ')
+  x = x:gsub('@include{.-}', ' ')
   x = x:gsub('@define{.-}', ' ')
   x = x:gsub('@math{.-}', ' ')
   x = x:gsub('@do{.-}', ' ')
