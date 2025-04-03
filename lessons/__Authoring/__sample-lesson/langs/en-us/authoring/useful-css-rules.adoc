@@ -26,6 +26,18 @@ table .autonum::after { content: ')' !important; }
 </style>
 ++++
 
+* If fillvertical space isn't working, this might address the issue
+++++
+<style>
+/* This page has an unusual configuration, where there's only one
+   2nd level section but it doesn't start at the beginning.
+   Stop that section from auto-growing, thereby freeing up vertical
+   space for the first section in order to maximize the table height
+ */
+#preamble_disabled + .lesson-section-1 { flex-grow: 0 !important; }
+</style>
+++++
+
 * For pages with lots of empty space at the top.
 ++++
 <style>
@@ -130,14 +142,4 @@ Correlation does NOT imply causation.
 </style>
 ++++
 
-* If fillvertical space isn't working, this might address the issue
-++++
-<style>
-/* This page has an unusual configuration, where there's only one
-   2nd level section but it doesn't start at the beginning.
-   Stop that section from auto-growing, thereby freeing up vertical
-   space for the first section in order to maximize the table height
- */
-#preamble_disabled + .lesson-section-1 { flex-grow: 0 !important; }
-</style>
-++++
+
