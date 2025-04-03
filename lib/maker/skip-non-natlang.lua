@@ -64,13 +64,24 @@ local function skip_non_natlang(x)
   x = x:gsub('%dth ', ' ')
   x = x:gsub('[%d]+', ' ') -- remove digits
   x = x:gsub("(%w)'s ", '%1 ') -- remove 's
-
+  --
   for _,wordlist in ipairs({added_words, ignored_words}) do
     for _,w in ipairs(wordlist) do
       x = x:gsub('%s' .. w .. '%s', ' ')
+      -- also check if its other-title-cased form is in the text
+      local wT = false
+      local w1 = w:sub(1,1)
+      if w1:match('%l') then
+        wC = w1:upper() .. w:sub(2)
+      elseif w1:match('%u') then
+        wC = w1:lower() .. w:sub(2)
+      end
+      if wC then
+        x = x:gsub('%s' .. wC .. '%s', ' ')
+      end
     end
   end
-
+  --
   return x
 end
 
