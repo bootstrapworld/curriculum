@@ -21,18 +21,23 @@ if natlang == 'en-us' then
 end
 
 local function skip_non_natlang(x)
-  x = ' ' .. x .. ' '
-  x = x:gsub('\n%+', '\n') -- remove leading pluses (from git diff)
+  -- x = x:gsub('\n%+', '\n') -- remove leading pluses (from git diff)
+  x = '\n' .. x
   x = x:gsub('\n%[.-\n', '') -- remove block-config lines
+  x = x:gsub('\n%-%-%-%-', '\n#ASCIIDOC#----')
+  x = x:gsub('\n```', '\n#ASCIIDOC#```')
   x = x:gsub('\n', ' ') -- converts newlines to spaces for easier matching
   x = x:gsub('\\text{.-}', ' ') -- do not check text inside mathjax textboxes
   x = x:gsub('\\textit{.-}', ' ') -- or italic textboxes
   x = x:gsub('\\textb{.-}', ' ') -- or bold textboxes
+  x = x:gsub('\\enclose{.-}', ' ') -- or bold textboxes
   x = x:gsub('\\%w+', ' ') -- remove mathjax tex control sequences
   x = x:gsub('https://.-%[', '[') -- remove raw URLs
+  x = x:gsub('<span.->.-</span>', ' ')
   x = x:gsub('<style.->.-</style>', ' ')
   x = x:gsub('<script.->.-</script>', ' ')
   x = x:gsub('@link{.-}', ' ')
+  x = x:gsub('@include{.-}', ' ')
   x = x:gsub('@define{.-}', ' ')
   x = x:gsub('@math{.-}', ' ')
   x = x:gsub('@do{.-}', ' ')
@@ -57,8 +62,10 @@ local function skip_non_natlang(x)
   x = x:gsub('@lesson%-link{.-[,}]', ' ')
   x = x:gsub('@dist%-link{.-[,}]', ' ')
   x = x:gsub('@link{.-[,}]', ' ')
+  x = x:gsub('@citation{.-[,}]', ' ')
   x = x:gsub('@[%w%-]+', ' ')
-  x = x:gsub('```.-```', ' ') --  code displays
+  x = x:gsub('#ASCIIDOC#```.-#ASCIIDOC#```', ' ') --  code displays
+  x = x:gsub('#ASCIIDOC#%-%-%-%-.-#ASCIIDOC#%-%-%-%-', ' ') --  code displays
   x = x:gsub('``.-``', ' ') -- ``in-text code``
   x = x:gsub('`.-`', ' ') -- `in-text code`
   x = x:gsub('~%S+', ' ') -- roughnums
@@ -71,18 +78,18 @@ local function skip_non_natlang(x)
   x = x:gsub('%dnd ', ' ')
   x = x:gsub('%dth ', ' ')
   x = x:gsub('[%d]+', ' ') -- remove digits
+  x = x:gsub("(%w)' ", '%1 ') -- remove ' at word end
   x = x:gsub("(%w)'s ", '%1 ') -- remove 's
+  x = ' ' .. x .. ' '
   --
   for _,wordlist in ipairs({added_words, ignored_words}) do
     for _,w in ipairs(wordlist) do
-      x = x:gsub('%s' .. w .. '%s', ' ')
-      -- also check if its other-title-cased form is in the text
+      x = x:gsub('%f[%S]' .. w .. '%f[%s]', ' ')
+      -- also check if its title-cased form is in the text
       local wT = false
       local w1 = w:sub(1,1)
       if w1:match('%l') then
         wC = w1:upper() .. w:sub(2)
-      elseif w1:match('%u') then
-        wC = w1:lower() .. w:sub(2)
       end
       if wC then
         x = x:gsub('%s' .. wC .. '%s', ' ')
