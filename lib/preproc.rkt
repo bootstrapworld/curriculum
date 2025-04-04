@@ -2553,7 +2553,8 @@
             (call-with-output-file sf-file
               (lambda (o)
                 (for ([sf (reverse *opt-starter-files-used*)])
-                  (display sf o) (newline o)))
+                  (unless (member sf *starter-files-used*)
+                    (display sf o) (newline o))))
               #:exists (if *lesson-plan* 'replace 'append)))))
 
       (when *internal-links-port* (close-output-port *internal-links-port*))
