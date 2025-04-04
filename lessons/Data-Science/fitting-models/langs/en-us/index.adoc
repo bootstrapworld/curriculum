@@ -39,7 +39,7 @@
 
 | Preparation
 |
-- Students will need a straight edge for drawing lines of best fit. This will be particularly important if you plan to have your students define functions for their own linear models.
+- Students will need a straightedge for drawing lines of best fit. This will be particularly important if you plan to have your students define functions for their own linear models.
 
 
 |===
@@ -124,7 +124,7 @@ The line that is _closest_ to all the other points is known as the @vocab{line o
 While most of us might have pictured similar lines (models!), it's likely that different people see slightly _different_ lines. But how do we know which model is best? _Whose @vocab{model} has the least error?_
 
 @lesson-instruction{
-- Turn to @printable-exercise{how-could-we-measure-good-fit-lizard.adoc} and use a straight edge to draw a line that you think would best fit the data on the scatter plot.
+- Turn to @printable-exercise{how-could-we-measure-good-fit-lizard.adoc} and use a straightedge to draw a line that you think would best fit the data on the scatter plot.
 - Then, complete the questions on the page with your partner.
 }
 
@@ -172,23 +172,23 @@ Pyret has a function called `fit-model`, that takes in a function and graphs it 
 [cols="1a,1a", frame="none", grid="none"]
 |===
 |[subs="quotes"]
-----
+```
 fit-model(
   lizard-sample,
   "name",
   "pounds",
   "weeks",
   *cy*) # fit the cy model
-----
+```
 |[subs="quotes"]
-----
+```
 fit-model(
   lizard-sample,
   "name",
   "pounds",
   "weeks",
   *jo*) # fit the jo model
-----
+```
 
 | @centered-image{images/fit-cy-crop.png}
 | @centered-image{images/fit-jo-crop.png}
@@ -308,7 +308,9 @@ Now that we have a basic sense of what `fit-model` does, let's see it work live 
 
 @Q{When you hover your mouse over a data point, a box should pop up that says "Data". Move your mouse to a few different points and read the information contained in these pop ups. What can we lean from the "Data" pop up windows?}
 @A{The x and y coordinates of each point in the data set, and the animals they are associated with.}
+}
 
+@QandA{
 @Q{There is one more kind of pop up window that will appear on this chart that says "Residuals". You can find them by hovering your mouse near the vertical residuals lines. Move your mouse to find and read a few of these. What can we learn from the "Residuals" pop up windows?}
 @A{"Residuals" tell us the x and y coordinates of a data point, compared with the predicted y-value (`y'`) for the x-value.}
 
@@ -319,13 +321,14 @@ Now that we have a basic sense of what `fit-model` does, let's see it work live 
 @A{We see clickable thumbnail images of both charts in the Interactions Area.}
 }
 
-
 @strategy{Optional: Which Model is Best?}{
 If students know how to compute the equation of a line that crosses between two points, use @opt-printable-exercise{lines-to-functions.adoc} to have them define their models for `age` v. `weeks` in Pyret and use `fit-model` to see which one is best.
 }
 
-Let's put everything we've learned together and interpret the models we've built and the statistics we've gathered about them.
 
+@slidebreak
+
+Let's put everything we've learned together and interpret the models we've built and the statistics we've gathered about them.
 
 
 @lesson-instruction{

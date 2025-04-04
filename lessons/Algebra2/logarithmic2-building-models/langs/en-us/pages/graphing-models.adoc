@@ -6,7 +6,7 @@
 * which includes special glyphs used for icons on Desmos.com
 *
 * It also defines the classname '.desmosbutton', which is used
-* to style all demos glphys
+* to style all demos glyphs
 *
 * Finally, it defines AsciiDoc variables for glyphs we use:
 * {points}
@@ -21,9 +21,6 @@
 @include{fragments/desmos.adoc}
 ++++
 <style>
-/* This page is TIGHT. Shrink the line-height to make it fit. :-( */
-body:not(.LessonPlan, .narrativepage) p { line-height: 1; }
-
 /* Make autonums inside tables look consistent with those outside */
 .autonum { font-weight: bold; padding-top: 2px !important; }
 .autonum:after { content: ')' !important; }
@@ -51,14 +48,20 @@ body:not(.LessonPlan, .narrativepage) p { line-height: 1; }
   --top_pct:  0.85;
   --minors:   8.0;
 }
+
+p.tableblock:has(.solution) {
+  left: 0px !important;
+  top:  0px !important;
+  background: transparent !important;
+}
 </style>
 ++++
 
 @link-instructions{
 Use this page with *Slide 4: Exploring Logarithmic Functions* of *Fitting Wealth-v-Health and Exploring Logarithmic Models (Desmos)*.
 
-- The *blue curve* is the graph of @math{h(x) = 1 \log_{2} x + 0}. Its constants will remain set at @math{a=1}, @math{b=2}, and @math{k=0}.
-- You can modify the *red curve* @math{g(x)} (which is hiding behind @math{h(x)}!) by changing its coefficients: @math{a}, @math{b}, and @math{k}.
+- The *blue curve* is the graph of @math{s(x) = 1 \log_{2} x + 0}. Its constants will remain set at @math{a=1}, @math{b=2}, and @math{k=0}.
+- You can modify the *red curve* @math{r(x)} (which is hiding behind @math{s(x)}!) by changing its coefficients: @math{a}, @math{b}, and @math{k}.
 }
 
 == Base @math{b}
@@ -67,9 +70,17 @@ Use this page with *Slide 4: Exploring Logarithmic Functions* of *Fitting Wealth
 @n Sketch each graph and *label the coordinates where @math{x = 1}, @math{y = 1}, @math{y = 2} and @math{y = 3}*.
 
 
-[.FillVerticalSpace.graph, cols="1,1,1", frame="none"]
+[.FillVerticalSpace.graph, cols="1,1,1", frame="none", options="noheader"]
 |===
-| @math{b = 3} | @math{b = 5}  | @math{b = 10}
+| @math{b = 3}
+
+  @ifsoln{@image{../images/1log_3(x)+0.png}}
+| @math{b = 5}
+
+  @ifsoln{@image{../images/1log_5(x)+0.png}}
+| @math{b = 10}
+
+  @ifsoln{@image{../images/1log_10(x)+0.png}}
 |===
 
 @n How does the value of @math{b} impact the shape of a logarithmic function? @fitb{}{@ifsoln{@math{b} determines how sharply the curve grows}}
@@ -82,9 +93,18 @@ Use this page with *Slide 4: Exploring Logarithmic Functions* of *Fitting Wealth
 
 @n Sketch each graph and *label the coordinate where @math{x = 1}*.
 
-[.FillVerticalSpace.graph, cols="1,1,1", frame="none"]
+[.FillVerticalSpace.graph, cols="1,1,1", frame="none", options="noheader"]
 |===
-| @math{k = -10} | @math{k = 0}  | @math{k = 10}
+| @math{k = -5}
+
+  @ifsoln{@image{../images/1log_2(x)-5.png}}
+| @math{k = 0}
+
+  @ifsoln{@image{../images/1log_2(x)+0.png}}
+
+| @math{k = 5}
+
+  @ifsoln{@image{../images/1log_2(x)+5.png}}
 |===
 
 @n How does the value of @math{k} impact the shape of a logarithmic function? @fitb{}{@ifsoln{@math{k} shifts the curve up (positive k) or down (negative k),}} +
@@ -98,9 +118,17 @@ Change @math{h(x)} to @math{h(x) = 1 \log_{10} (x) + 0} so that the blue curve l
 
 @n In each graph, *label the coordinates where @math{x = 10} and @math{x = 100} and @math{x = 1000}.*
 
-[.FillVerticalSpace.graph, cols="1,1,1", frame="none"]
+[.FillVerticalSpace.graph, cols="1,1,1", frame="none", options="noheader"]
 |===
-| @math{a = -2} | @math{a = 0}  | @math{a = 2}
+| @math{a = 2}
+
+  @ifsoln{@image{../images/-2log_10(x)+0.png}}
+| @math{a = 4}
+
+  @ifsoln{@image{../images/0log_10(x)+0.png}}
+| @math{a = 2}
+
+  @ifsoln{@image{../images/2log_10(x)+0.png}}
 |===
 
 @n What is the value of @math{x} when @math{1\log_{2}(x) = 4}? @fitb{5em}{@ifsoln{16}} @hspace{1em} What about when @math{2 \log_{4}(x) = 4}? @fitb{5em}{@ifsoln{16}} @hspace{1em} When @math{3 \log_{8}(x) = 4}? @fitb{}{@ifsoln{16}}

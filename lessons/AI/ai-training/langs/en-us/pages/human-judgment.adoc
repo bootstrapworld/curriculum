@@ -1,0 +1,67 @@
+= The Importance of Human Judgment
+
+== How Many Dimensions?
+
+@vspace{1ex}
+
+A teacher asks students to write an essay on one of three topics: modern art, soccer, or zebras. The teacher feeds the essays to a plagiarism detector *to compare the essays to one another.* It plots 32 points in a 1023-dimensional space.
+
+@n What does the number 32 tell us? @fitb{}{@ifsoln{The teacher has provided the plagiarism detector with 32 student essays.}}
+
+@n What does the number 1023 tell us? @fitb{}{@ifsoln{In sum, the essays include 1023 different words.}}
+
+@n After thinking on it, the teacher realizes that students don't merely copy one another's writing; instead, they copy/paste text from the internet! The teacher opens her plagiarism detection software and tells it to consume a large @vocab{training corpus} of internet text about modern art, soccer, and zebras. How many dimensions will the space contain, now?
+
+@vspace{1ex}
+
+*Circle one:* @hspace{1em} more dimensions @hspace{5em}  the same amount of dimensions @hspace{5em} fewer dimensions
+
+@n Explain your choice. @fitb{}{}
+
+@fitb{}{}
+
+@fitb{}{}
+
+== Assessing the Output
+
+@vspace{1ex}
+
+Consider each of the four outputs, below. What do you think is happening in each of scenarios? How would you advise the teacher?
+
+@n The points are scattered seemingly randomly all over a 1023-dimensional space, with no apparent clustering.
+
+@fitb{}{@ifsoln{The models for the documents are not close; students appear to have written essays with a range of different words that appear in}}
+
+@fitb{}{@ifsoln{varying frequencies. The teacher should have no need to worry.}}
+
+@n The points are scattered seemingly randomly, but there are two points plotted extremely close together.
+
+@fitb{}{@ifsoln{With the exception of two essays, students appear to have written essays with a range of different words that appear in varying frequencies. }}
+
+@fitb{}{@ifsoln{The teacher should focus on those two essays. Observe that the similarity is of the models, but the documents themselves may be quite different.}}
+
+@fitb{}{@ifsoln{Therefore, the teacher should carefully examine the corresponding documents. If the documents are not similar, the closeness of the points}}
+
+@fitb{}{@ifsoln{is probably a coincidence.}}
+
+
+@n There appear to be three large, loose clusters of randomly plotted points.
+
+@fitb{}{@ifsoln{One likely explanation is that the three large, loose clusters represent the three different topics: modern art, zebras, and soccer. }}
+
+@fitb{}{@ifsoln{Students who write about one topic are likely to use similar terminology, and that terminology will differ by topic.}}
+
+@fitb{}{@ifsoln{Since our three topics are extremely different, we should expect little overlap in specialized terminology between them}}
+
+@fitb{}{@ifsoln{(although the “English”) parts will likely be quite similar). The teacher should have no need to worry.}}
+
+@fitb{}{}
+
+@n There appear to be two large, loose clusters of randomly plotted points, with one point positioned far away from the two clusters.
+
+@fitb{}{@ifsoln{Perhaps one of the topics was far less popular than the others, and only one student opted to write about that topic.}}
+
+@fitb{}{@ifsoln{The teacher should have no need to worry.}}
+
+
+

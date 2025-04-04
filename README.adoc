@@ -448,7 +448,7 @@ lessons or pathways.
   - on macOS: <Emmanuel, write this when someone needs it!>
 
 
-* After `make`-ing the distribution, it may be deployed to the web host
+* After ``make``-ing the distribution, it may be deployed to the web host
 using the `make` target `deploy`:
 
     make deploy
@@ -489,7 +489,7 @@ to unpack them on the webhost machine.
 [TIP]
 --
 Deployment uses
-SSH to interact with your webost.
+SSH to interact with your webhost.
 account. This can be slow. If you're updating an already deployed
 doctree, you may set the variable `SKIPLIB` to save yourself the time taken
 to recopy the large mathjax library, since it's unlikely to have
@@ -638,7 +638,7 @@ The subsections that follow will walk you through installing the following tools
 +
   brew install gnu-sed curl make coreutils gnu-tar lua asciidoctor pkg-config cairo pango libpng jpeg giflib librsvg pixman nvm jq racket
 
-* Mac users will also need to add these unix tools to their `$PATH`. In the terminal, run `open ~/.zshrc` to edit your configuration file. Add the following, then save the file and restart your terminal:
+* Mac users will also need to add these unix tools to their `$PATH`. In the terminal, run `open ~/.zshrc` to edit your configuration file. Add the following to the bottom of the file, then save and quit-and-reopen your terminal:
 +
   # add every gnu tool we have as a prefix to the path
   eval "$(/opt/homebrew/bin/brew shellenv)"
@@ -663,6 +663,19 @@ The subsections that follow will walk you through installing the following tools
 * To install NVM:
 +
   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+
+
+=== Additional Tools for Sublime
+
+If you use the https://www.sublimetext.com/[Sublime Text Editor], we've also created some tools that make authoring more pleasant and readable.
+
+* Make sure your curriculum folder is open on the screen (in the Finder on MacOS, or Explorer on Windows)
+* In that window, navigate to the `lib/sublime-settings` folder. The files there are the ones we want to copy into your Sublime Settings folder!
+* Open your unix terminal, and type `open ~/Library/Application\ Support/` (MacOS) or `explorer.exe %APPDATA%` (Windows) to open _another_ folder window.
+* In that window, navigate to `Sublime Text/Packages/User/`.
+** Note: on some sysetms, the folder may be called "Sublime Text 3"
+* Copy both files from the `curriculum/lib/sublime-settings` folder into your `Sublime Text/Packages/User` folder.
+* Quit and relaunch Sublime Text. You can now switch the Syntax mode from Asciidoctor to Asciidoctor+ when viewing an .adoc file, and Sublime will remember your preference for all future adoc files.
 
 == Authoring guidelines
 
@@ -698,11 +711,42 @@ Similarly for “subsections” at level 2, 3, 4, 5.
 
 (That's it. Headers of level 6+ are not provided.)
 
-TIP: By convention, the level of a section is one less than the number of `=` signs
-used to specify it.
+NOTE: By convention, the level of a section is one less than the number of `=` signs
+used to specify it. But this convention is more often than not
+honored in the breach.
 
-Itemized lists have each item paragraph preceded by a ``*`` or
-``-`` and space.
+Itemized (aka unordered) lists have each item paragraph preceded
+by a `+*+` and space. The `+*+` gets transformed into a bullet.
+Subitems are preceded by `+**+`, subsubitems by `+***+`, and so
+on. Any depth is allowed, but don't go crazy, because it may not
+be very readable after a depth of about 42.
+
+[CAUTION]
+--
+To accommodate your experience from elsewhere, AsciiDoc
+allows you to also specify bullets with `-` and `•` (an actual
+Unicode bullet character, U+2022).
+
+However, when used for contiguous items, the first bullet,
+whatever it be, marks a top-level item, while every different
+bullet marks its own sub-level! (Don't get misled into
+thinking that `+*+` is the first level and `-` is the second.
+Arbitrarily permuting the three bullets produces the same result.)
+
+Furthermore, `-` and `•` can only be used singly: `--` and
+`•••` will not be recognized as ostensible equivalents of `+**+`
+and `+***+`. This is a silent error, because the item text can
+flow into an adjacent paragraph and the bullet markers will be
+rendered verbatim. It's probably best not to rely on
+the auto-level-increment possible by using a mix of different
+single bullets -- you could end up shooting yourself in the foot.
+--
+
+Numbered (aka enumerated) lists have each item preceded by the
+number, period (= full stop), and space. You could save some
+typing/thinking by omitting the number, and Asciidoctor will
+automatically calculate the number for you. Don't though, as it's
+very confusing to read unless your list is very small.
 
 Emphasized text is set within underscores: `+_emphasized text_+`.
 
@@ -1010,8 +1054,8 @@ The directive `@dist-link{...}` uses pathnames relative to the
 ==== Generic links
 
 Use `@link{URL, link-text}` to refer to a generic URL
-not part of the curriculum hierarchy.  The second argument for
-the link text is optional.
+not part of the curriculum hierarchy.  The second argument can be
+omitted, in which case the URL doubles as the link text.
 
 ==== Images
 
@@ -1052,7 +1096,7 @@ being converted into slide. We have a bunch of directives starting with
 
 ===== Programming-language specific text
 
-Use the `@ifproglang` directive to conditonally include a
+Use the `@ifproglang` directive to conditionally include a
 fragment text for a specific programming language. E.g.,
 
   @ifproglang{pyret}{
@@ -1065,7 +1109,7 @@ fragment text for a specific programming language. E.g.,
 
 ===== Slide-specific text
 
-Lesson plan files are autoconverted to Google slides. To specify
+Lesson plan files are auto-converted to Google slides. To specify
 that content should not be part of the slide:
 
   @ifnotslide{This content should not show up in the slide}
@@ -1079,11 +1123,10 @@ the slide layout to use. While these heuristics may vary slightly over
 time, the general rules are:
 
 - The slide layout will be partially determined by whether the text occurs within a Launch, Investigate, or Synthesize section
-- @teacher{...} and "Common Misconceptions" will be auto converted into slide notes
+- `@teacher{...}` and `"Common Misconceptions"` sections will be autoconverted into slide notes
 - If the text has a right-aligned image, one of the "R" templates will be used
 - If the text has a center-aligned image, one of the "C" templates will be used
 - If the text has no image, one of the standard full-text templates will be used 
-
 
 ===== Student- vs solution mode
 
@@ -1146,5 +1189,3 @@ enclose CSS classes and/or an ID around arbitrary (i.e., in-line)
 text. ``@span``s may be nested. `@span`’s first argument of
 classes and ID is specified in the same way as for blocks,
 without the brackets.
-
-// vi:tw=72
