@@ -22,6 +22,7 @@ end
 
 local function skip_non_natlang(x)
   -- x = x:gsub('\n%+', '\n') -- remove leading pluses (from git diff)
+  x = '\n' .. x
   x = x:gsub('\n%[.-\n', '') -- remove block-config lines
   x = x:gsub('\n%-%-%-%-', '\n#ASCIIDOC#----')
   x = x:gsub('\n```', '\n#ASCIIDOC#```')
@@ -83,8 +84,8 @@ local function skip_non_natlang(x)
   --
   for _,wordlist in ipairs({added_words, ignored_words}) do
     for _,w in ipairs(wordlist) do
-      x = x:gsub('%s' .. w .. '%s', ' ')
-      -- also check if its other-title-cased form is in the text
+      x = x:gsub('%f[%S]' .. w .. '%f[%s]', ' ')
+      -- also check if its title-cased form is in the text
       local wT = false
       local w1 = w:sub(1,1)
       if w1:match('%l') then
