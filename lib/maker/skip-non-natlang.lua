@@ -22,6 +22,7 @@ end
 
 local function skip_non_natlang(x)
   -- x = x:gsub('\n%+', '\n') -- remove leading pluses (from git diff)
+  x = '\n' .. x
   x = x:gsub('\n%[.-\n', '') -- remove block-config lines
   x = x:gsub('\n%-%-%-%-', '\n#ASCIIDOC#----')
   x = x:gsub('\n```', '\n#ASCIIDOC#```')
