@@ -18,7 +18,7 @@
 | Student-facing Lesson Goals
 |
 
-- Let's use Pyret to model logarithmic relationships in data
+- Let's use Pyret to model logarithmic relationships in data.
 
 
 | Materials
@@ -53,7 +53,7 @@ Students plot a logarithmic sequence as points on a number line, and explore how
 Consider an exponential sequence, with a growth factor of 3: @hspace{1em} @big{@math{1, 3, 9, 27}...}
 
 @QandA{
-@Q{What are the next 2 numbers in the sequence?}
+@Q{What are the next two numbers in the sequence?}
 @A{81, 243...}
 
 @Q{What does it mean that the @vocab{growth factor} of this sequence is 3?}
@@ -131,7 +131,7 @@ Students take what they've learned about changing the scale, and apply it to the
 
 @lesson-instruction{
 - Let's return to the *Fitting Wealth-v-Health and Exploring Logarithmic Models Desmos file*, and open @starter-file{alg2-countries}.
-- You should now be on the Slide 7: "Wealth-v-Health (Logarithmic)".
+- You should now be on Slide 7: "Wealth-v-Health (Logarithmic)".
 - Use it to complete the first section of @printable-exercise{fitting-logarithmic-models.adoc}.
 }
 
@@ -146,13 +146,13 @@ Students take what they've learned about changing the scale, and apply it to the
 
 @slidebreak
 
-Trial-and-error only gets us so far, and it's not clear that we would ever stumble upon the optimal model. 
+Trial-and-error only gets us so far, and it's not clear that we would ever stumble upon the optimal model. We need something like Pyret's `lr-plot`, which uses computational methods to find the optimal model.
 
-*We need something like Pyret's `lr-plot`, which uses computational methods to find the optimal model.*
+@lesson-point{
+Data Scientists often use transformations to stretch their data into shapes that are easier to work with, and then reverse the transformation when they are done. 
+}
 
-Unfortunately, `lr-plot` only finds _linear_ models in data with _linear_ relationships.
-
-Data Scientists often use transformations to stretch their data into shapes that are easier to work with, and then reverse the transformation when they are done. If only we could _transform_ this data to make it appear linear. Then we could use `lr-plot` to fit the optimal model, and then reverse the transformation to get the optimal @vocab{logarithmic model}!
+If only we could _transform_ this data to make it appear linear... Then we could use `lr-plot` to fit the optimal model, and reverse the transformation to get the optimal @vocab{logarithmic model}!
 
 === Investigate
 
@@ -168,6 +168,7 @@ Students will be switching the x-axis of their graph from linear to logarithmic 
 @slidebreak
 
 @QandA{
+Before we discuss the work you just did, let's take a minute to think about how treadmills work.
 @Q{A person running on a treadmill doesn't change location. Why not?}
 @A{Their forward movement is balanced by the backwards movement of the treadmill.}
 
@@ -178,7 +179,15 @@ Students will be switching the x-axis of their graph from linear to logarithmic 
 @A{We are speeding up the growth intervals on the x-axis to "keep up with" the speed of growth in the data so that we can see the pattern better.}
 }
 
-We made the x-axis grow faster and "squish" the dots so the function appears to grow more slowly "to the right" than it grows "up". By _transforming the x-axis_ to grow exponentially, we are squashing the coordinate plane so that each interval on the x-axis represents 10x the growth in `pc-gdp` as the one before it. This balances out the logarithmic growth in `median-lifespan`, and warps our logarithmic model so the curved looks like linear.
+@slidebreak
+
+By _transforming the x-axis_ to grow exponentially, we squashed the coordinate plane so that each interval on the x-axis represents 10x the growth in `pc-gdp` as the one before it. This balances out the logarithmic growth in `median-lifespan`, and warps our logarithmic model so that the curve looks like linear.
+
+@QandA{
+@Q{How did changing the scale impact the quality of your model?  Were you able to get a better @vocab{S-value} with the `logarithmic2` model you made on the logarithimic scale than with the `logarithmic` model you made on the linear scale?}
+@A{Answers will vary.}
+}
+
 
 ++++
 <style>

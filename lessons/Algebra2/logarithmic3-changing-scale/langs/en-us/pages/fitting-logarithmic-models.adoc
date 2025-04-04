@@ -33,15 +33,15 @@ body.workbookpage .studentAnswerShort { min-width: 30pt; } .studentAnswerMedium 
 
 @include{fragments/desmos.adoc}
 
-@link-instructions{
-For this page, you'll need to have *Slide 6: Wealth-v-Health (Logarithmic)* of *Fitting Wealth-v-Health and Exploring Logarithmic Models (Desmos)* and @starter-file{alg2-countries} open on your computer.
-}
+@link-instructions{To complete this page you will need Desmos and the @starter-file{alg2-countries} open on your computer.}
+
 
 == Fitting a Logarithmic Model @hspace{2em} __f(x) = a log~b~ x + k__
+@link-instructions{You should be on *Slide 7: Wealth-v-Health (Logarithmic)* of *Fitting Wealth-v-Health and Exploring Logarithmic Models (Desmos)*.}
 
 @n The intervals on the x-axis are increasing: @hspace{6em} @ifsoln-choice{Linearly} @hspace{6em} Quadratically @hspace{6em} Exponentially
 
-@n Use the sliders for @math{a} and @math{k} to create the best-fitting logarithmic model you can find. Write it below. _(Note: In Pyret, `log` always uses @math{b = 10}!)_
+@n Use the sliders for {nbsp}@math{a}{nbsp} and {nbsp}@math{k}{nbsp} to create the best-fitting logarithmic model you can find. Write it below. _(Note: In Pyret, `log` always uses @math{b = 10}.)_
 
 [cols="^1a", grid="none", frame="none", stripes="none"]
 |===
@@ -104,7 +104,7 @@ The error in the model is described by an @math{S-value} of about
 @show{(code '(define (logarithmic2 x) (+ (* (?ANS 11.7 ) (log x)) (?ANS 60))))}
 |===
 
-@n Modify the definition of `logarithmic2(x)` in Pyret to match this model.  Then use the `fit-model` function to find its @vocab{S-value}: @fitb{}{@ifsoln{less than 5 }}
+@n In Pyret, define `logarithmic2(x)` to match this model.  Then use the `fit-model` function to find its @vocab{S-value}: @fitb{}{@ifsoln{less than 5 }}
 
 @n How will predictions made using `logarithmic2` compare to predictions made using `logarithmic`? @fitb{}{@ifsoln{They will be significantly better!}}
 
