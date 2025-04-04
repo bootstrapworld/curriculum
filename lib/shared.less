@@ -748,16 +748,9 @@ body.workbookpage {
   table.graph {
     grid-gap: var(--min-gap, 20px); 
     margin-top: 5px;
-
-    /* Location and style of the coefficient value */
-    td p.tableblock { 
-      top:        3px;
-      right:      3px;
-      position:   absolute; 
-      background: white; 
-    }
-
+    
     td {
+      padding: 0;
       border: none !important;
       background-image:
         linear-gradient(lightblue 2px, transparent 2px),
@@ -788,6 +781,21 @@ body.workbookpage {
       left:    calc(var(--width , 3in) * (var(--left_pct, .50) - .08));
       top:     2%;
       transform: rotate(270deg);
+    }
+
+    /* Location and style of the coefficient value */
+    td p > .mathunicode:first-child { 
+      top:        6px;
+      right:      3px;
+      position:   absolute; 
+      background: white; 
+      z-index:    10;
+    }
+
+    /* Squeeze solution img to the exact dimensions of the td */
+    .solution *:not(img) { display: contents; }
+    .solution, .solution img { 
+      position: absolute; width: 100%; height: 100%; 
     }
   }
 
