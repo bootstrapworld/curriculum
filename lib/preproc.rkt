@@ -1226,7 +1226,6 @@
               (set! link-text (call-with-input-file title-file read-line)))
             (fprintf o "\n** link:../../../lessons/~a/pages/~a.html[~a]\n" lesson page link-text)))))))
 
-
 (define (link-to-project-lessons-short-form header project-lessons o)
   ; (printf "doing link-to-project-lessons-short-form\n")
   (when (pair? project-lessons)
@@ -1268,7 +1267,6 @@
                  "{fromlangroot}"
                  project-lesson link-text link-desc)))
     (display "\n\n" o)))
-
 
 (define (link-to-project-lessons-in-lesson-plan o)
   ; (printf "doing link-to-project-lessons-in-lesson-plan\n")
@@ -1525,6 +1523,9 @@
 
 (define *uses-codemirror?* #f)
 (define *uses-mathjax?* #f)
+
+(define *needs-objectives?* #f)
+(define *uses-objectives?* #f)
 
 (define (expand-directives i o)
         ;(printf "doing expand-directives\n")
@@ -1953,7 +1954,10 @@
                            [(string=? directive "Bootstrap")
                             (fprintf o "https://www.bootstrapworld.org/[Bootstrap]")]
                            [(hash-ref *simple-directives* (string->symbol directive) #f)
-                            => (lambda (s) (display s o))]
+                            => (lambda (s)
+                                 (when (string=? directive "lesson-intro-table")
+                                   (set! *needs-objectives?* #t))
+                                 (display s o))]
                            [(member directive '("assess-design-recipe" "design-recipe-exercise" "design-codap-recipe" "data-cycle"))
                             (let ([f (cond [(string=? directive "assess-design-recipe") assess-design-recipe]
                                            [(string=? directive "design-recipe-exercise") design-recipe-exercise]
@@ -2101,6 +2105,7 @@
                                             (string-append link (enclose-span ".apa-citation" apa)))
                                            o)]))]
                           [(string=? directive "objectives")
+                           (set! *uses-objectives?* #t)
                            (fprintf o "\ninclude::~a/{cachedir}.index-objectives.asc[]\n" *containing-directory*)]
                           [(string=? directive "objective")
                            (let ([lbl (string->symbol (read-group i directive))])
@@ -2292,6 +2297,8 @@
       (set! *supplemental-materials-needed?* #f)
       (set! *uses-codemirror?* #f)
       (set! *uses-mathjax?* #f)
+      (set! *needs-objectives?* #f)
+      (set! *uses-objectives?* #f)
       ; (printf "preproc ~a to ~a\n" *in-file* *out-file*)
       ;
       (let ([internal-links-file (path-replace-extension *out-file* ".internal-links.txt.kp")]
@@ -2515,6 +2522,14 @@
               #:exists 'replace)
 
             ))
+
+        (when *needs-objectives?*
+          (cond [(not *uses-objectives?*)
+                 (printf "WARNING: ~a: Table missing @objectives\n\n" (errmessage-context))]
+                [(null? *objectives-met*)
+                 (printf "WARNING: ~a: No @objective provided\n\n" (errmessage-context))]
+                [else #f]))
+
         )
 
       (when (or *lesson-plan* *lesson*)
@@ -2537,7 +2552,8 @@
             (call-with-output-file sf-file
               (lambda (o)
                 (for ([sf (reverse *opt-starter-files-used*)])
-                  (display sf o) (newline o)))
+                  (unless (member sf *starter-files-used*)
+                    (display sf o) (newline o))))
               #:exists (if *lesson-plan* 'replace 'append)))))
 
       (when *internal-links-port* (close-output-port *internal-links-port*))

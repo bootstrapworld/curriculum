@@ -7,9 +7,18 @@ scope: text.asciidoc.asciidoctor++
 contexts:
   main:
     # mathjax gets its own context
-    - match: '@math\{'
+    - match: '@math{'
       scope: directive.muted
       push: mathjax
+
+    # @QandA gets its own context...
+    - match: "@QandA{\n"
+      scope: directive.muted
+      push: QandA
+
+    # So @Q and @A shouldn't show up inside main
+    - match: '@Q|@A'
+      scope: error
 
     # match "muted" directives WITH arguments
     #- match: '@([^\{\s]+)(\{[^\}]*\}){0,1}\{'
@@ -21,7 +30,7 @@ contexts:
       push: directive_muted
 
     # match "muted" directives WITHOUT arguments
-    - match: '@\b(center|left|right|fitb|fitbruby|vspace|hspace|show|showsoln|ifsoln|ifnotsoln)\b\{'
+    - match: '@\b(center|left|right|vspace|hspace)\b\{'
       scope: directive.muted
       captures:
         1: keyword
@@ -44,9 +53,17 @@ contexts:
       scope: directive
       push: directive
 
-    # we use code literals differently than asciidoc, so override them
-    - match: '`[^`]*`'
-      scope: code_literal
+    # match certain special literals as muted
+    - match: '{nbsp}'
+      scope: directive.muted
+
+    # don't let '~' screw up the whole damned document
+    - match: '~'
+      scope: main
+
+    # mute table formatting statements
+    - match: '\[(\.\S+,\s*)?cols[^\]]+\]'
+      scope: directive.muted
 
     # for anything else, use the normal text parsing rules
     - include: scope:text.asciidoc
@@ -84,5 +101,22 @@ contexts:
       scope: directive.mathjax
       push: mathjax
 
-    - match: '[^\}\{]+'
+    # muted mboxes
+    - match: '\\mbox\{'
+      scope: directive.muted
+
+    - match: '[^\}\{\\]+'
       scope: directive.mathjax
+
+  # in the "QandA" context, @Q and @A are handled specially
+  QandA:
+    - meta_content_scope: QandA
+    - match: '}'
+      scope: directive.muted
+      pop: true
+
+    - match: '@Q{|@A{'
+      scope: directive.muted
+      push: directive
+
+    - include: main

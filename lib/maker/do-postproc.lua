@@ -265,9 +265,9 @@ local function postproc(fhtml_cached, tipe)
       add_bootstrap_lesson_p = false
       if tipe ~= 'workbookpage' then
         o:write('<!-- Load PDF and Download modules -->\n')
-        o:write('<script defer src="https://unpkg.com/pdf-lib@1.4.0"></script>\n')
-        o:write('<script defer src="https://unpkg.com/@pdf-lib/fontkit/dist/fontkit.umd.min.js"></script>\n')
-        o:write('<script defer src="https://unpkg.com/downloadjs@1.4.7"></script>\n')
+        o:write('<script async defer src="https://unpkg.com/pdf-lib@1.4.0"></script>\n')
+        o:write('<script async defer src="https://unpkg.com/@pdf-lib/fontkit/dist/fontkit.umd.min.js"></script>\n')
+        o:write('<script async defer src="https://unpkg.com/downloadjs@1.4.7"></script>\n')
         o:write('<script src="' .. local_dist_root_dir .. 'dependency-graph.js"></script>\n')
         o:write('<script src="' .. local_dist_root_dir .. 'lib/makeWorkbook.js"></script>\n')
         o:write('<script src="' .. local_dist_root_dir .. 'lib/dictionaries.js"></script>\n')

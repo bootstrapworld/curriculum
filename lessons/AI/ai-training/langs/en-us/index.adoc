@@ -53,7 +53,7 @@ Data is at the heart of @vocab{data science} and @vocab{data-driven algorithms} 
 
 === Investigate
 
-It's likely that Michelle could get better suggestions without Spotify making any changes to the code base. But it's also possible that changing the code would improve Michelle's experience!  Let's consider song recommendation in more depth and explore the idea that sometimes _there is a need for algorithms to change_.
+It's likely that Michelle could get better suggestions without Spotify making any changes to the code base. But it's also possible that changing the code would improve Michelle's experience!  Let's consider song recommendation in more depth and explore the idea that sometimes _it is helpful for algorithms to change_.
 
 @slidebreak
 
@@ -130,14 +130,14 @@ Good designers of these systems have to practice adversarial thinking and imagin
   - change the ordering of sentences and paragraphs
   - plagiarize from an unlikely source (maybe a friend who took the class 5 years ago?)
   - plagiarize from multiple sources
-  - paraphrase text so that it has the correct "voice".
+  - paraphrase text so that its tone matches the student's voice
   }
 }
 
 @strategy{Adversarial Thinking}{
 Go easy on your students! As students share their plagiarism strategies, you may feel judgmental. We urge you to keep those feelings at bay.
 
-In this exercise, we are trying to get students to engage in *Adversarial Thinking* (put simply, thinking like a hacker). This is a valuable strategy that is taught, for example, in cybersecurity courses at the university level focused on security, data protection, harms caused by AI, etc. Adversarial Thinking is a valuable skill for students to develop; the key is that they learn how to exercise it in an ethical way!
+In this exercise, we are trying to get students to engage in *Adversarial Thinking* (put simply, thinking like a hacker). This is a valuable strategy that is taught, for example, university courses focused on security, data protection, harms caused by AI, etc. Adversarial Thinking is a valuable skill for students to develop; the key is that they learn how to exercise it in an ethical way!
 
 Just because students excel at thinking in this way doesn't mean they are ethically compromised. Focus on and commend their creativity and reasoning instead of judging them.
 }
@@ -157,9 +157,9 @@ To understand the workings of plagiarism detection, we'll start by looking at a 
 
 @QandA{
 @Q{What does the `simple-equality` detector do?}
-@A{Takes in two documents and returns 1 if they match exactly and 0 if they don't match exactly.}
+@A{Takes in two documents and returns `true` if they match exactly and `false` if they don't match exactly.}
 @Q{How would you evaluate the effectiveness of the `simple-equality` detector?}
-@A{It doesn't work very well! We have know way of knowing how similar the documents are unless they are an exact match. Whether two documents are almost identical or have nothing in common, we will be told that they aren't a match.}
+@A{It doesn't work very well! We have no way of knowing how similar the documents are unless they are an exact match. Whether two documents are almost identical or have nothing in common, we will be told that they aren't a match.}
 @Q{What might a more effective plagiarism detector do differently?}
 @A{Answers will vary.}
 }
@@ -168,13 +168,12 @@ To understand the workings of plagiarism detection, we'll start by looking at a 
 
 As we discussed, plagiarizers usually alter at least a few words of the original document. Sometimes they change the ordering of the text, and sometimes they delete a sentence or word here and there.
 
-- If the `simple-equality` detector finds a match, we can be certain that an identical document exists.
-- If the detector does not find a match, we know that there are no identical documents.
-- _Either way, we can't draw any conclusions about whether plagiarism happened!_
+- If the `simple-equality` detector finds a match, we can be certain that identicality exists.
+- If the detector does not find a match, all we know is that the two documents are not identical.
 
 *We need a plagiarism detector with more sophistication!*
 
-Rather than detecting identicality, we need to determine the _closeness_ of two documents. To do that, we need a way to summarize each document, and then compute the distance between the summaries.
+Rather than detecting identicality, we need to determine the _closeness_ of two documents. To do that, we summarize each document, and then compute the distance between the summaries.
 
 === Investigate
 
@@ -186,7 +185,7 @@ One standard way to summarize a document is by creating a "bag of words" model. 
 The bag-of-words summary for *Document a* looks like this: `"be": 2, "doo": 3`
 
 @lesson-point{
-A bag-of-words model represents text as an unordered collection of words with frequencies.
+A bag-of-words model represents text as an unordered collection of words with their frequencies.
 }
 
 @slidebreak
@@ -207,7 +206,7 @@ The bag-of-words summary for both documents is exactly the same!
 
 @slidebreak
 
-A plagiarism detector that uses this model, taking stock of word frequency and ignoring literally everything else, would discover that the two bags of words are a perfect match.
+A plagiarism detector that uses this model, taking stock of word frequency and word order, could compare the bags instead of the documents. If it did so, it would conclude that the two bags of words are a perfect match... and that Document a and Document b are suspiciously similar.
 
 
 @lesson-instruction{
@@ -229,7 +228,7 @@ A plagiarism detector that uses this model, taking stock of word frequency and i
 
 Checking if two bags of words are identical *is* an improvement from checking if two texts are identical.
 
-@teacher{If your students are ready to think about vectors, you can continue on to @lesson-link{ai-training-2} to learn about a major upgrade to our plagiarism detection algorithm.}
+@teacher{If your students are ready to think about plotting points in a multi-dimensional space, you can continue on to @lesson-link{ai-training-2} to learn about a major upgrade to our plagiarism detection algorithm.}
 
 === Synthesize
 
@@ -237,4 +236,3 @@ Checking if two bags of words are identical *is* an improvement from checking if
 @Q{What similarities are there between a system that recommends songs and `bag-equality` plagiarism detection?}
 @A{Both systems build summaries of the available data and then work with those summaries.}
 }
-

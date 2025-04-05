@@ -1,7 +1,7 @@
 [.beta]
 = Training Artificial Intelligence (2)
 
-@description{Students explore vectors, data normalization, the dimensionality of language, and training the model.
+@description{Students explore plotting points to represent documents, data normalization, the dimensionality of language, and training the model.
 }
 
 @lesson-prereqs{ai-training}
@@ -26,15 +26,13 @@
 
 |===
 
-
-
-== Vectors and Data Normalization
+== Data Normalization
 
 @objective{data-normalization}
 
 === Overview
 
-Students explore the importance of data normalization, when we organize data to follow a norm.
+Students explore the importance of data normalization, when we organize data to follow a standard pattern.
 
 === Launch
 
@@ -45,25 +43,25 @@ Here are some discoveries we have made so far:
 
 @slidebreak
 
-What we need is a way to check if bags are _similar_! To do this, we will represent our bags as @vocab{vectors}.
+What we need is a way to check if bags are _similar_! To do this, we will represent our bags as points.
 
-- A @vocab{vector} is an ordered list of numbers within parentheses and separated by commas, representing a point.
-- Using vector notation, we can represent Document a ("doo be doo be doo") like this: @math{\overrightarrow{a} = (2, 3)}
-- If we were to plot a point for the vector on the coordinate plane, it would produce this:
+- We locate points in two-dimensional space with ordered pairs.
+- We can represent the bag for Document a (`"be": 2, "doo": 3`) like this: (2, 3)
+- If we were to plot a point for Document a on the be-doo plane, it would produce this:
 
 @center{@image{images/3-2.png, 150}}
 
 
 @QandA{
 
-@Q{How would you represent the vector for Document b ("doo doo be doo be") on the coordinate plane?}
+@Q{How would you represent the Document b ("doo doo be doo be") as a point on the doo-be plane?}
 
-@A{The point would be in the exact same position as the point for Document a. When we plot a point on the coordinate plane, first we plot @math{x} and then we plot @math{y}. There is no such protocol with the bag-of-words model. That said, it is crucial to adhere to the _same word order_ for each bag of words. Because we decided on "doo" then "be" for Document a, we must use "doo" then "be" for Document b also.}
+@A{The point would be in the exact same position as the point for Document a. When we plot a point on the _coordinate_ plane, we locate @math{x} on the horizontal axis and then we locate @math{y} on the vertical axis. There is no such protocol with the bag-of-words model. That said, it is crucial to adhere to the _same word order_ for each bag of words. Because we decided on "be" then "doo" for Document a, we must use "be" then "doo" for Document b also.}
 }
 
 === Investigate
 
-Let's look at some slightly more complicated documents to learn how we can put these @vocab{vectors} to use.
+Let's look at some slightly more complicated documents and consider how to plot their points in a multi-dimensional space.
 
 - Document c: "doo be doo be doo doo doo"
 
@@ -75,27 +73,27 @@ Let's look at some slightly more complicated documents to learn how we can put t
 
 | Document
 | Bag-of-words summary
-| Vector
+| Point
 
 | c
 | `"be": 2, "doo": 5`
-| @math{\overrightarrow{c} = (2, 5)}
+| (2, 5)
 
 | d
 | `"be": 2, "bop": 5`
-| @math{\overrightarrow{d} = (2, 5)}
+| (2, 5)
 
 |===
 
-*We have a problem.*  We can plainly see that Documents c and d are *not* the same ... but their vectors are...
+*We have a problem.*  We can plainly see that Documents c and d are *not* the same ... but their points are...
 
 
 
 @QandA{
 @Q{What went wrong here?}
 @A{The point is to draw out student thinking here rather than to get to any particular answer. The remainder of the lesson will dig into the details. Students might suggest:
- - The vectors were written as if there were only two items in the list... but, in fact there are three different items!
- - 5 represents "doo" in the first vector and "bop" in the second vector... but we've lost that information.}
+ - The points were written as if there were only two items in the list... but, in fact there are three different items!
+ - 5 represents "doo" in the first point and "bop" in the second point... but we've lost that information.}
 }
 
 
@@ -113,21 +111,21 @@ First we must recognize that Documents c and d contain a total of *three* differ
 
 @slidebreak
 
-We must revise our bag-of-words summaries and our vectors!
+We must revise our bag-of-words summaries and our points!
 
-@teacher{Normalizing data and considering dimensionality requires that--when a word occurs zero times--we acknowledge it. Instead of glossing over the dimension, we indicate that a given word occurred zero times.}
+@teacher{Normalizing data requires that we consider _all_ the words; when a word occurs zero times in a document, we acknowledge it. Instead of glossing over the dimension, we indicate that a given word occurred zero times.}
 
 @right{@image{images/2pts.png, 150}}
 
 
-The new bag-of-words summary for Document c is `"be": 2, "bop": 0, "doo": 5`, which we can represent as  @math{\overrightarrow{c} = (2, 0, 5)}.
+The new bag-of-words summary for Document c is `"be": 2, "bop": 0, "doo": 5`, which we can represent as (2, 0, 5).
 
-The new bag-of-words summary for Document d is `"be": 2, "bop": 5, "doo": 0`, and we can represent it as @math{\overrightarrow{d} = (2, 5, 0)}.
+The new bag-of-words summary for Document d is `"be": 2, "bop": 5, "doo": 0`, and we can represent it as (2, 5, 0).
 
-It is a bit trickier to envision plotting these vectors, but not impossible!
+It is a bit trickier to envision plotting these points, but not impossible!
 
 @QandA{
-@Q{In the 3-dimensional space to the right (above), which point represents @math{\overrightarrow{c}}? How do you know?}
+@Q{In the 3-dimensional space to the right (above), which point represents @math{c}? How do you know?}
 @A{The one on the bottom. It's at point (2,5) on the be-doo plane, and has moved 0 in the bop direction.}
 }
 
@@ -144,7 +142,7 @@ We started out with two documents. Now, in place of our two documents, we have t
 
 @Q{Why is it important for the bag-of-words summary to acknowledge when a word occurs zero times?}
 
-@A{Each vector exists in a multi-dimensional space. To compare vectors and consider their closeness, the vectors must exist in the same multi-dimensional space. When we omit a word that occurs zero times, we are in fact omitting a dimension and constructing a broken model.}
+@A{Each point exists in a multi-dimensional space. To compare points and consider their closeness, the points must exist in the same multi-dimensional space. When we omit a word that occurs zero times, we are in fact omitting a dimension and constructing a broken model.}
 }
 
 
@@ -169,15 +167,15 @@ What we would like is something richer. When we ask people whether two documents
 
 === Investigate
 
-It turns out that the bag of words model lends itself especially well to that. Recall that using it, we can plot each point in a multi-dimensional space. Now suppose we draw a line from the origin of the space to each of those points. We can then ask what is the angle between the two lines?
+It turns out that the bag of words model lends itself especially well to that. Recall that using it, we can plot each point in a multi-dimensional space. Now suppose we draw a ray from the origin of the space through of those points. We can then ask: What is the angle between the two rays?
 
-Take, for example, this comparison between two strings: stringA ("doo doo doo doo") and stringB ("be be be be").
+Take, for example, this comparison between two strings: `stringA` ("doo doo doo doo") and `stringB` ("be be be be").
 
 [cols="<.^8a,<.^8a,<.>8a",  stripes="none"]
 |===
 |
 
-StringA: `doo doo doo doo`
+`StringA`: `doo doo doo doo`
 
 [cols="1,1",options="header"]
 !===
@@ -190,7 +188,7 @@ Ordered pair: (0,4)
 
 |
 
-StringB: `be be be be`
+`StringB`: `be be be be`
 
 [cols="1,1",options="header"]
 !===
@@ -210,10 +208,10 @@ The angle formed is 90°.
 
 @slidebreak
 
-If two documents are identical, they will be at the same point in space, and have the same vectors running from the origin to that point. That means the angle between those vectors will be 0°. Even if one document just rearranges the other, their bags of words will be identical—thereby again making the angle between the lines 0°.
+If two documents are identical, they will be at the same point in space, and have the same ray extending from the origin to that point. That means the angle between those rays will be 0°. Even if one document just rearranges the other, their bags of words will be identical—thereby again making the angle between the lines 0°.
 
 @lesson-instruction{
-- Complete @printable-exercise{angle-difference.adoc} using your knowledge of bags of words and vectors.
+- Complete @printable-exercise{angle-difference.adoc} using your knowledge of bags of words and plotting points.
 
 ** First, fill in the frequency tables by referring to the provided string.
 ** Translate the bags of words to ordered pairs.
@@ -226,11 +224,23 @@ If two documents are identical, they will be at the same point in space, and hav
 
 As the documents contain different words, the angles between the lines will grow. To reflect this, we can use the `angle-difference` function. It will give us a value between 0° (if the two are identical) and 90° (if the two have nothing in common).
 
+@strategy{}{Points, Rays, and Vectors}{
+
+As you've discovered, our plagiarism detector computes the angle difference between rays extending from the origin to various points that we have plotted space.
+
+In machine learning, we generally refer to these bag-of-word representations *not* as _points_, but as _vectors_. Why? A point represents a location in space, whereas a vector represents a magnitude and a direction.
+
+To reduce the amount of new vocabulary introduced in this lesson, we have opted to refer simply to points and rays. More commonly, however, the term _vector_ is used in a machine learning context.
+
+If you or your students are wondering why we wouldn't just compute the _distance_ between points, rather than complicating things and introducing angles... it's because typically, machine learning uses vectors, not points.
+}
+
+
 The contract for `angle-difference` is below.
 
-``
+```
 # angle-difference :: (String, String) -> Number
-``
+```
 
 @slidebreak
 
@@ -249,8 +259,15 @@ Let's try the `angle-difference` function in Pyret.
 
 Yes, angles!
 
-Did you know that geometry is at the heart of modern AI? This lesson shows how. The same angles that your students learn to compute in middle-school are sitting at the heart of the machine learning calculations that power so many things in the world today. Even the plagiarism detectors that might be checking their essays on angles... are computing angles. So if your students ask “When are we ever going to use this?”, you can tell them, “You already do, all the time”.
+Did you know that geometry is at the heart of modern AI? This lesson shows how. The same angles that your students learn to compute in middle-school are sitting at the heart of the machine learning calculations that power so many things in the world today. Even the plagiarism detectors that might be checking their essays on angles... are computing angles. So if your students ask “When are we ever going to use this?”, you can tell them, “You already do, all the time.”
 
+The plot thickens, especially if you have older students who have learned some trigonometry. In practice, real machine learning systems don't _quite_ use angles. Instead, they use the cosine of the angle. There are two reasons for this:
+
+- The angle itself is a somewhat awkward value to work with. In contrast, the cosine has a nice numeric range, between -1 and 1, which makes it convenient to use in various other mathematical settings. (Specifically, it's used in a process called gradient descent.)
+
+- It’s simpler to compute the cosine directly. In fact, inside Pyret, `angle-difference` actually first computes the cosine, then converts the result into an angle!
+
+For the purposes of this curriculum, you can ignore this difference. In particular, if your students have never even heard of the cosine, that's fine! For students who are familiar with cosine and curious to explore, the @starter-file{plagiarism} contains a `cosine-similarity function`.
 }
 
 
@@ -298,7 +315,7 @@ So far, we've looked at four documents.
 - Document c: "doo be doo be doo doo doo"
 - Document d: "be bop bop bop be bop bop"
 
-Although the documents contain 24 words in total, there are just *_three_* unique words: doo, be, and bop. As a result, we are able to plot these documents as vectors in a *_three_*-dimensional space.
+Although the documents contain 24 words in total, there are just *_three_* unique words: doo, be, and bop. As a result, we are able to plot these documents as points in a *_three_*-dimensional space.
 
 @slidebreak
 
@@ -306,7 +323,7 @@ Let's add a fifth document, Document e, to our collection.
 
 - Document e: "doo be bop ski bop bop"
 
-Now we have thirty words total, made up of _four_ unique words: doo, be, bop, and *ski*. Plotting all of our documents would require the use of a _four-dimensional_ space. Having trouble visualizing a four-dimensional space? You're not alone
+Now we have thirty words total, made up of _four_ unique words: doo, be, bop, and *ski*. Plotting all of our documents would require the use of a _four-dimensional_ space. Having trouble visualizing a four-dimensional space? You're not alone.
 
 
 === Investigate
@@ -347,11 +364,11 @@ Complete @printable-exercise{human-judgment.adoc}.}
 
 
 @QandA{
-Although we can't visualize the vector spaces for `wiki-article` and `student-essay`, we _can_ apply what we have learned to think about the angle formed by their vectors.
+Although we can't visualize the multi-dimensional spaces for `wiki-article` and `student-essay`, we _can_ apply what we have learned to consider angle differences.
 
 @Q{Do you predict that the angle difference for the `wiki-article` and `student-essay` will be closer to 0° or closer to 90°?}
 
-@A{Since the student essay is nearly identical to the wikipedia article, we would expect a difference closer to zero. (It's actually 4.663°.)}
+@A{Since the student essay is nearly identical to the wikipedia article, we would expect a difference closer to zero. (It's actually ~23.706°.)}
 }
 
 
@@ -363,7 +380,7 @@ Now that we've seen how to create a compressed representation of one piece of te
 
 === Launch
 
-Recall that we started with string-matching, then moved from that to bags of words. We still compared bags for being identical, which was too coarse. We therefore improved on that to create angle-difference, which gives us a range of values indicating how similar two documents are.
+Recall that we started with string-matching, then moved from that to bags of words. We still compared bags for being identical, which was too coarse. We therefore improved on that to create `angle-difference`, which gives us a range of values indicating how similar two documents are.
 
 So far, we have only looked at pairs of documents. Each time, Pyret converts both documents to bags of words, then computes the angle between the two. But as we saw earlier, a real plagiarism detector will compare against _many_ documents--and each document will be compared against _many_ student submissions. It would be wasteful to repeat a lot of this work over and over.
 
@@ -374,18 +391,18 @@ We will therefore see the next step of this process: training.
 
 We are now ready to learn about training a model. In training, we take a number of sources and combine all of them into one corpus. Training is the act of converting each source into our representation; the model is an aggregate of all the corpus data.
 
-Specifically, let's suppose the teacher wants a plagiarism detector for (short) animal essays. We've already seen a paragraph about the elephant. She gathers up paragraphs about nine other animals as well. Each one is turned into a bag of words. The key to creating a model is that all this work is done _once_; it can then be used on many different student submissions.
+Specifically, let's suppose the teacher wants a plagiarism detector for (short) animal essays. We've already seen a paragraph about the elephant. She gathers up paragraphs describing nine other animals. Each one is turned into a bag of words. The key to creating a model is that all this work is done _once_; it can then be used on many different student submissions.
 
 @slidebreak
 
 @lesson-instruction{
 Use the @starter-file{plagiarism} to complete the first section (`distance-to`) of @printable-exercise{explore-model.adoc}.}
 
-Before we trained our model, we could use `angle-difference` to compute the angle difference between two different articles, that we provided as arguments. Now, with one command (`distance-to)`, we can compare a given article to every other article in the corpus. This way, we don't have to recompute the bags for each of those documents every time; we do it once and save that work.
+Before we trained our model, we could use `angle-difference` to compute the angle difference between two different articles. Now, with one command (`distance-to)`, we can compare a given article to every other article in the corpus. This way, we don't have to recompute the bags for each of those documents every time; we do it once and save that work.
 
 @slidebreak
 
-*Can we refine our model any further?*
+It's nice to be able to see all of the different angle differences... but the information provided by `distance-to` is still inconclusive. For instance, is the angle difference of ~23.706° between `elephant-article` and `student-essay` small enough to say with certainty that plagiarism occurred? Or do we need to improve the model?
 
 @lesson-instruction{
 Use the @starter-file{plagiarism} to complete the second section (`string-to-bag-cleaned`) of @printable-exercise{explore-model.adoc}.}
@@ -411,50 +428,13 @@ Let's consider how removing stopwords alters the results produced.
 @lesson-instruction{
 Use the @starter-file{plagiarism} to complete @printable-exercise{distance-to-cleaned.adoc}.}
 
+
 === Synthesize
 
 @QandA{
 
-@Q{}
+@Q{Now that you understand a little bit more about how plagiarism detection programs work, what advice would you offer to a teacher who is considering using one... or to a student who is trying to get away with plagiarism?}
 
-@A{}
+@A{Students' responses will vary.}
 }
 
-
-== Computing Closeness with Cosine Similarity
-
-=== Overview
-
-Actual machine learning systems use cosines, not angles!
-
-=== Launch
-
-We have now seen how we can use `angle-difference` to determine the distance between two documents. We've seen how we can train a model to record several documents, and then use it repeatedly to check a new document.
-
-@slidebreak
-
-In practice, real machine learning systems don't quite use angles. Instead, they use the cosine of the angle. There are two reasons for this:
-
-- The angle itself is a somewhat awkward value to work with. In contrast, the cosine has a nice numeric range, between -1 and 1, which makes it convenient to use in various other mathematical settings. (Specifically, it's used in a process called gradient descent.)
-
-- It's simpler to compute the cosine directly. In fact, inside Pyret, `angle-difference` actually first computes the cosine, then converts the result into an angle!
-
-For the purposes of this curriculum, you can ignore this difference. In particular, if you've never even heard of the cosine, that's fine! You will! And maybe when you do, you'll remember that you've seen its name before...
-
-=== Investigate
-
-If you do know what cosines are, and want to play with it, the @starter-file{plagiarism} contains a cosine-similarity function as well. Feel free to experiment!
-
-@strategy{Connecting to Higher Math}{
-
-You might be wondering: are we actually using that cosine — the one students learn about when studying trigonometry? Or that gradient — the one students learn about when studying calculus? The answer to both  is YES!
-
-The cosine-similarity function Cosine similarity computes the cosine of the angle between two vectors. While it is not necessary for students to understand the mathematics happening behind the scenes, the function is a vital part of the program... and a lovely answer to the often-asked question, "When are we ever going to use this?"
-
-The math in machine learning doesn’t end with angles; it begins there. All of trigonometry, pre-calculus, calculus, statistics, and more lies at the heart of modern machine learning. So for almost any mathematics topic, if  your students ask “When are we ever going to use this?”, you can tell them, “You already do, all the time”.
-
-}
-
-=== Synthesize
-
-Now that you understand a little bit more about how plagiarism detection programs work, what advice would you offer to a teacher who is considering using one... or to a student who is trying to get away with plagiarism?
