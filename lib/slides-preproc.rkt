@@ -635,6 +635,7 @@
                            [(member directive '("image" "centered-image"))
                             (let* ([args (read-commaed-group i directive read-group)]
                                    [img-file (first args)])
+                              (display (spaces-till-newline-inclusive i) o)
                               (cond [(not *slurping-up-teacher-notes*)
                                      (display (make-image img-file
                                                           (if (>= (length args) 2) (second args) ""))
@@ -736,6 +737,7 @@
                               (expand-directives:string->port text o))]
                            [(member directive '("left" "right" "center"))
                             (let ([fragment (read-group i directive #:multiline? #t)])
+                              (display (spaces-till-newline-inclusive i) o)
                               (expand-directives:string->port fragment o))]
                            [(string=? directive "math")
                             (let ([text (read-group i directive)])
@@ -824,8 +826,8 @@
 
 (define (preproc-slides-file in-file out-file)
   ; (printf "\ndoing preproc-slides-file ~s ~s\n" in-file out-file)
-  (system (string-append 
-    "node " *topdir* 
+  (system (string-append
+    "node " *topdir*
     "/lib/maker/screenshot-elts.js " *topdir* "/distribution"))
   (set! *in-file* in-file)
   (call-with-input-file in-file
@@ -842,4 +844,3 @@
   (preproc-slides-file in-file out-file))
 
 (void)
-
