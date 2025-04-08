@@ -19,7 +19,6 @@ node --input-type=module -e '
 import react from "@vitejs/plugin-react"
 import { defineConfig, build } from "vite"
 import { viteSingleFile } from "vite-plugin-singlefile"
-import resolve from "vite-plugin-resolve"
 import { glob } from "glob";
 
 const quizzes = glob.sync("distribution/*/lessons/*/assessments/*");
@@ -29,19 +28,13 @@ const buildConfigs = quizzes.map( quiz => ({
   plugins: [
     react(), 
     viteSingleFile(),
-    resolve({
-      "@bootstrapworld/quiz" : `
-        const { QuizView } = require("@bootstrapworld/quiz")
-        export { QuizView }
-      `
-      })
   ],
   build: {
     root: "distribution",
+    minify: false,
     outDir: ".",
     emptyOutDir: false,
     rollupOptions: {
-      external: ["@bootstrapworld/quiz"],
       input: quiz+"/index.html",
     }
   }

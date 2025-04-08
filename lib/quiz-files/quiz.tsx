@@ -1,13 +1,9 @@
-import { parse } from 'smol-toml'
-import { type Quiz, QuizView } from "@bootstrapworld/quiz";
-import React from "react";
-import ReactDOM from "react-dom/client";
+import { React, ReactDOM, parseTOML, type Quiz, QuizView } from "mdquiz";
 
 import quizStr from "./quiz.toml?raw";
-import "./telemetry";
 
-let App = () => {
-  let quiz = TOML.parse(quizStr) as any as Quiz;
+const App = () => {
+  const quiz = parseTOML(quizStr) as Quiz;
   return (
     <div>
       <h1>Example quiz</h1>
