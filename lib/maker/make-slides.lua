@@ -20,6 +20,7 @@ local terror = make_error_function(errmsg_file_context)
 
 local lplan_file = 'index.adoc'
 
+
 -- make it zlides.md for now, when completely debugged rename to slides.md
 local slides_file = 'zlides.md'
 
@@ -114,9 +115,9 @@ end
 -- Note: we're counting levels using the AsciiDoc convention. It's one less than the number of ='s
 
 local function set_imageorientation(slide)
-  slide.imageorientation = ((slide.numimages == 2) and '') or
-    ((slide.containscenter and 'C') or
-    ((slide.numimages == 0) and '') or
+  slide.imageorientation = ((slide.numimages == 2) and '') or 
+    ((slide.containscenter and 'C') or 
+    ((slide.numimages == 0) and '') or 
     'R')
 end
 
@@ -243,7 +244,6 @@ local function get_slides(lsn_plan_adoc_file)
           curr_slide.text = curr_slide.text .. '★'
         elseif directive == 'ifslide' then
           local txt = read_group(i, directive, not 'scheme', 'multiline')
-          ignore_spaces(i)
           scan_directives(io.open_buffered(false, txt), directive, dont_count_image_p)
         elseif directive == 'teacher' or directive == 'QandA' then
           local txt = read_group(i, directive, not 'scheme', 'multiline')
