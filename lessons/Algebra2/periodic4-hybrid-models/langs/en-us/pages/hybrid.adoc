@@ -1,72 +1,26 @@
 = Building a Hybrid Model
+
 ++++
 <style>
-/* We don't need the margin on this page, and we want to save vertical space */
-.listingblock { margin-bottom: 0; }
-.highlight { padding: 0.25em !important; }
-.editbox { line-height: 1.8rem !important; }
-
-
+/* Push content to the top (instead of the default vertical distribution), which was leaving empty space at the top. */
+#content { display: block !important; }
 </style>
 ++++
+
 @link-instructions{Open your copy of @starter-file{alg2-hybrid} and click "Run".}
 
-
 == Composing a `hybrid` model for the `modern-table`
 
-Both `periodic-sin` and `periodic-cos` are built to follow a midline with the equation @math{f(x) = 419.87}. +
-*But who says the midline has to be __horizontal?__*
+@vspace{1ex}
 
-@n Which midline do we wish a model for the `modern-table` would follow instead?  @fitb{}{@ifsoln{The line of best fit, which we could find using `lr-plot`.}} 
+Both `periodic-sin` and `periodic-cos` are built to follow a horizontal midline with the equation @math{f(x) = 419.87}. 
 
-== Deconstructing a Model
+@n Which midline do we wish a model for the `modern-table` would follow instead?  @fitb{}{@ifsoln{The line of best fit @hspace{2em} @math{y = 2.141263x - 4461}}} 
 
-In the Definitions Area, you'll see the following four functions:
+@n Find `linear-modern` in the starter file and define it to be the line you described above. 
 
-@indented{
-```
-fun periodic-cos(x):  (4.13 * cos(6.28 * (x - 2023.35))) + 419.87 end
-fun wave-cos(x):      (4.13 * cos(6.28 * (x - 2023.35)))          end
-fun midline-cos(x):                                        419.87 end 
-fun periodic-cos2(x):         wave-cos(x)     +    midline-cos(x) end
-```
-}
-
-@n Use `fit-model` to fit `periodic-cos` to the `recent-table` data.
-
-- What is the equation of this model's @vocab{midline}? @fitb{}{@ifsoln{something like {nbsp} @math{f(x) = 419.87}}}
-- Describe the shape of this line @fitb{}{@ifsoln{a straight, horizontal line}}
-- Where does the @vocab{midline} show up in our `periodic-cos` function? @fitb{}{@ifsoln{The last term, which describes the vertical shift}}
-
-@n Are `periodic-cos` and `periodic-cos2` the same model? Why or why not? @fitb{}{@ifsoln{I see that: }}
-
-@fitb{}{@ifsoln{`hybrid` adds `midline-cos` to `wave-cos`.}}
-
-@fitb{}{@ifsoln{`mid-line` is just the horizontal shift of the `periodic-cos` function.}}
-
-@fitb{}{@ifsoln{`wave-cos` is just all of the parts of the `periodic-cos` function except for the horizontal shift.}}
-
-@n Check your answer by fitting `periodic-cos2` to the `recent-table` data!
-
-@center{*This code deconstructs `periodic-cos` into two helper functions: one for the `wave`, and one for the `midline` it wraps around.*} 
-
-@n Following this example, deconstruct your `periodic-sin` model and define `periodic-sin2` in the starter file.
-
-== Composing a `hybrid` model for the `modern-table`
-
-These functions are built to wrap around a midline with the equation @math{f(x) = 419.87}. But who says the midline has to be _horizontal?_
-
-@n Which midline should a model for the `modern-table` use instead? _(HINT: it's already defined in your starter file!)_ @fitb{}{@ifsoln{{nbsp}@math{f(x) = 2.141263x - 4461}}}
-
-@teacher{The line of best fit will be @math{y = 2.141263x - 4461}}
-
-@n Find `linear-modern` in the starter file and define it to be the line you described above.
-
-@n Find the definition for `hybrid-modern`. How is this function using `linear-modern`? @fitb{}{}
-
-@fitb{}{@ifsoln{`linear-modern` is being used as the midline!}}
-
-@n *Change the definition of `hybrid-model` so it looks like `periodic-sin2`! Keeping the `wave-sin` part the same, *change the midline function* from `midline-sin` to the new midline you described above.
+@n Find `hybrid-modern` in the starter file and define it using function composition.
+@indented{_Hint: Like `periodic-sin2` this function will use `wave-sin`. What will it use instead of `midline-sin`?_}
 
 @n Fit `hybrid-modern` to the `modern-table`, and describe what you see: @fitb{}{}
 
@@ -109,17 +63,24 @@ error from predictions made with `hybrid-modern` than with `linear-modern` model
 
 == Interpreting the Hybrid Model
 
-__This model predicts that the overarching trend will be a(n)__
+@vspace{1ex}
+
+__This model predicts that:__
+
+- __The overarching trend will be a(n)__
 @fitbruby{7em}{@ifsoln{increase}}{increase/decrease} _of_
 @fitbruby{5em}{@ifsoln{2.41263}}{rate of change}
 @fitbruby{20em}{@ifsoln{parts per million of @math{/text{CO}_2} in the atmosphere}}{x-variable} _every_
-@fitbruby{4em}{@ifsoln{year}}{x-units}. __The data will fluctuate following a periodic pattern that rises and falls around this @vocab{midline}, with an amplitude of__ 
-@fitbruby{6em}{@ifsoln{4.13}}{amplitude}, __repeating every__
+@fitbruby{4em}{@ifsoln{year}}{x-units}. 
+
+- __The data will fluctuate following a periodic pattern that rises and falls around this @vocab{midline}.__ + 
+__ The wave has an amplitude of__ 
+@fitbruby{6em}{@ifsoln{4.13}}{amplitude} __and repeats every__
 @fitbruby{4em}{@ifsoln{1}}{period} @fitbruby{5em}{@ifsoln{year}}{x-units}.
 
 __The error in the model is described by an @vocab{S-value} of about__ 
 @fitbruby{1em}{@ifsoln{1.4}}{S}@fitbruby{8em}{@ifsoln{ppm}}{y-units}. @hspace{1em} _I_
 @fitbruby{18em}{@ifsoln{strongly agree}}{strongly agree, agree, disagree, strongly disagree}
-that this model is a good fit considering that 
-@fitbruby{8em}{@ifsoln{@math{/text{CO}_2}}}{y-variable} in this dataset ranges from about
-@fitbruby{8em}{@ifsoln{387.03 ppm}}{lowest y-value} to @fitbruby{8em}{@ifsoln{424 ppm}}{highest y-value}.__
+__that this model is a good fit considering that__ 
+@fitbruby{8em}{@ifsoln{@math{CO_2}}}{y-variable} __in this dataset ranges from about__
+@fitbruby{8em}{@ifsoln{387.03 ppm}}{lowest y-value} _to_ @fitbruby{8em}{@ifsoln{424 ppm}}{highest y-value}.
