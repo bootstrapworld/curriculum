@@ -1,4 +1,4 @@
-{
+const quizConfig = {
     "title": "Emmanuel's Sample Quiz",
     "questions": [
         {
