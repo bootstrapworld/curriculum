@@ -25,12 +25,11 @@ fi
 # this is just to avoid problems copying an empty dir
 (find $src -maxdepth 0 -empty|grep -q .) || $CP -upr $src/* $d
 
-# ensure lesson plan .adoc present, unless .shtml present
-if test ! -f $d/index.adoc; then
-  if test ! -f $d/index.shtml; then
-    touch $d/index.adoc
-  fi
-fi
+# ensure lesson plan .adoc present, unless .html or .shtml present
+test -f $d/index.adoc ||
+  test -f $d/index.html ||
+  test -f $d/index.shtml ||
+  touch $d/index.adoc
 
 if test ! -d $d/images; then
   mkdir -p $d/images
@@ -59,7 +58,6 @@ if test -f $lessonName/proglang.txt; then
   proglangs=$(cat $lessonName/proglang.txt)
   firstproglang=$(echo $proglangs|$SED -e 's/^\([^ ]\+\).*/\1/')
 fi
-
 
 lessonNamePl=
 for pl in $proglangs; do
