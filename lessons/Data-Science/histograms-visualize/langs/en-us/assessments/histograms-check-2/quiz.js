@@ -5,13 +5,13 @@ const quizConfig = {
       "prompt": {
         "prompt": "Camille is curious about the distribution in the “pounds” column of the animals dataset and experiments with various bin sizes.\n\nWhich of the following displays would be most useful?\n",
         "distractors": [
-          "hist1.png",
-          "hist2.png",
-          "hist4.png"
+          "![alt](./hist1.png)",
+          "![alt](./hist2.png)",
+          "![alt](./hist4.png)"
         ]
       },
       "answer": {
-        "answer": "hist3.png"
+        "answer": "![alt](./hist3.png)"
       },
       "context": ""
     }
