@@ -1,7 +1,7 @@
 = Exploring Ferris Wheel Data
 
 @description{
-Students are introduced to periodic functions through a dataset with perfect sinusoidal behavior: _height on a revolving Ferris Wheel_. They see the same behavior reflected in the (x,y) coordinates of a point on a unit circle, and plot the graphs of the sine and cosine functions. Finally, they make the leap from degrees to radians.
+Students are introduced to periodic functions through a dataset with perfect sinusoidal behavior: _height on a revolving Ferris wheel_. They see the same behavior reflected in the (x,y) coordinates of a point on a unit circle, and plot the graphs of the sine and cosine functions. Finally, they make the leap from degrees to radians.
 }
 
 @lesson-prereqs{fitting-models}
@@ -80,7 +80,7 @@ Working in pairs or groups, complete @printable-exercise{exploring-periodic.adoc
 
 @slidebreak
 
-The teacher was probably on a _Ferris wheel!_ We can tell because the ride keeps going up and down over and over, and it takes the same amount of time to go up as it does to go down.
+The teacher was probably on a _Ferris wheel!_ We can tell because the ride keeps going up and down over and over, and it repeats this cycle over regular periods of about 30 minutes.
 
 @slidebreak
 
@@ -152,7 +152,7 @@ Students begin to reason about points on the circumference of a circle, with the
 @right{@image{images/ferris-wheel.png, 150}}The teacher's seat on the Ferris wheel can be thought of as a point on the circumference of a rotating circle.
 
 - The y-coordinate (`altitude`) goes from 5ft to 205ft then back down to 5, then up again, then down again...
-- This pattern of y-coordinates repeats at regular intervals (every 30m)
+- This pattern of y-coordinates is _periodic_, repeating at regular intervals (over a period of 30 minutes)
 
 @slidebreak 
 
@@ -163,9 +163,9 @@ None of the models we've seen so far will help us predict how far off the ground
 Modeling cyclical relationships is _incredibly important_, for everyone from farmers to fishermen to healthcare providers! +
 So many things in nature come in cycles:
 
-- The sun rises and sets every day:  @math{\text{sun-height}(\text{time})} is periodic
-- The tides come in and out each day:  @math{\text{tide}(\text{time})} is periodic
-- People tend to get sick in the winter:  @math{\text{flu-cases}(\text{date})} is periodic
+- The sun rises and sets every day:  @math{\text{sun-height}(\text{time})} is a periodic function
+- The tides come in and out each day:  @math{\text{tide}(\text{time})} is a periodic function
+- People tend to get sick in the winter:  @math{\text{flu-cases}(\text{date})} is a periodic function
 
 We're going to explore a new class of functions - @vocab{periodic functions} - that we can use to model cyclical relationships like these.
 
@@ -405,13 +405,17 @@ These are conventions that people have agreed upon over time to make it easy to 
 
 We could make a clock with the numbers written _backwards_ and have the hands move the other way! And as long as everyone uses the same clock, we can still tell time.
 
+Regardless of the direction the "hands" turn, or whether we're dividing the circle into hours, minutes, radians, or anything else, the plotted curves will always be the same.
+
 @lesson-instruction{
 - Complete the first question on @printable-exercise{converting-angles.adoc}
 }
 
 @slidebreak
 
-To plot these relationships when the input is @vocab{radians}, instead of hours, we'll use the @math{sine} and @math{cosine} functions. In Pyret (and most calculators) these function names are abbreviated as `sin` and `cos`.
+Mathematicians use special names for these functions. They call them @vocab{sine} and @vocab{cosine}, rather than "A" and "B"!
+
+In Pyret (and on most calculators) these functions consume @vocab{radians}, and their names are abbreviated as `sin` and `cos`.
 
 The contracts for these functions are: +
 @hspace{4em}
@@ -429,6 +433,27 @@ The contracts for these functions are: +
 }
 
 *Note:* The numbers that these functions expect aren't hours, minutes, pizza slices or degrees. _They consume @vocab{radians}!_
+
+@slidebreak
+
+- @vocab{sine} - the height of the right-triangle at a given angle ("time" in our example)
+- @vocab{cosine} - the width of the right-triangle at a given angle
+ 
+
+@strategy{Where did these Names Come From?}{
+
+@right{@image{images/Etymology.png, 125}}
+In ancient India, mathematicians thought that a vertical line drawn across the circle resembled the bowstring of a bow-and-arrow, which is also called a "cord". When cut in half, this "half-cord" represented the height of a right triangle formed by the angle! The Sanskrit word for "chord", _"jiva"_
+was mis-translated by Arabic mathematicians, who transliterated it as _"jiba"_^1^. +
+{empty} +
+In the 12th century, _"jiba"_ was translated into the Latin word _"sinus"_. The remaining part of the 180° or @math{\pi} in the semicircle formed by the bow is the "completion" of the "sinus", and the Latin prefix "co-" was used to name the length drawn by the remaining angle _"cosinus"_.
+
+{empty}
+
+[1] - Transliterating "v" and "b" sounds between languages is really common. Consider "veinte" the Spanish word for 20, which is often pronounced with a "b" instead.
+}
+
+When graphed, each of these functions shows us the relationship between the angle and the height (sine), or the angle and the height (cosine).
 
 
 === Synthesize
