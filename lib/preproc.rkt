@@ -2530,6 +2530,11 @@
                  (printf "WARNING: ~a: No @objective provided\n\n" (errmessage-context))]
                 [else #f]))
 
+        (when (and (or (pair? *opt-starter-files-used*)
+                       (pair? *opt-online-exercise-links*))
+                   (not *supplemental-materials-needed?*))
+          (printf "WARNING: ~a: @opt-material-links missing\n\n" (errmessage-context)))
+
         )
 
       (when (or *lesson-plan* *lesson*)
