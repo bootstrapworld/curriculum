@@ -1,17 +1,12 @@
 = Modeling Modern Carbon Dioxide Levels
 ++++ 
 <style>
-
 /* Make code more visible */
 td .codetwo { color: black; background: none; }
 
-/* Allow fill in the blanks to be even shorter */
-.fitb { min-width: 2em; padding-top: 1rem; }
+/* Format autonumbering inside the table correctly */
+table .autonum::after { content: ')' !important; }
 
-/* Adjust padding and font-style for our tables */
-table tr td { padding: 0; }
-td:first-child { padding-right: 1em; }
-td:first-child p { font-style:  italic; }
 </style>
 ++++
 
@@ -29,84 +24,58 @@ td:first-child p { font-style:  italic; }
 This page focuses on the `modern-table` of the @starter-file{alg2-hybrid}, which tracks atmospheric @COtwo (parts per million) from 2010-2023.
 }
 
-[.no-flex-section]
 == Decomposing Your Periodic Model
 
-Find the section of the starter file where you're asked to "Define your periodic sin functions..."
+@vspace{1ex}
 
-- Define `periodic-sin` to be the model you found on @printable-exercise{periodic3-fitting-models/pages/modeling-recent-co2-2.adoc}. _(You could also copy it from @opt-starter-file{alg2-co2}.)_  
-- Using the deconstruction of `periodic-cos` as your model, change the four functions to show how to separate the wave and midline of your `periodic-sin` model and then define `periodic-sin2` using function composition.
+Find the section of the starter file where you're asked to "Define your periodic-sin functions..."
+
+@vspace{1ex}
+
+- Define `periodic-sin` to be the periodic model you found using Desmos.
+ * You should already have defined it in @opt-starter-file{alg2-co2} and on @lesson-link{periodic3-fitting-models/pages/modeling-recent-co2-2.adoc}.
+- Using the deconstruction of `periodic-cos` as your model, change the other three functions in this section to show how to separate the wave and midline of your `periodic-sin` model and define `periodic-sin2` using function composition.
 
 == Fitting the Optimal Linear Model
 
+[cols="3a, .^1a", frame="none"]
+|===
+|
 @n Use `lr-plot` to find the best linear model for the `modern-table` and record the function below:
 
 @indented{@show{(code '(define (linear-modern x) (+ (* (?ANS 2.41263) x)(?ANS -4461))))}}
 
-@n Change the `linear-modern` function in the starter file to match the function above. Then complete the interpretation stem below.
+@vspace{1ex}
 
-@indented{
-__The @vocab{S-value} predicts an error of about__
-@fitbruby{3em}{@ifsoln{2.27}}{S}
-@fitbruby{3em}{@ifsoln{ppm}}{y-units}, _which range from_
-@fitbruby{7em}{@ifsoln{387.03}}{lowest y-value} _to_
-@fitbruby{7em}{@ifsoln{424}}{highest y-value} _in this dataset_.
-}
+@n Change the `linear-modern` function in the starter file to match the function above. +
+@hspace{1em}Then use `fit-model` to fit it to the `modern-table`. 
 
-== Fitting your Periodic Model
-@n Use `fit-model` to fit `periodic-sin` to the data in the `modern-table`, and complete the interpretation stem below.
+@indented{The @vocab{S-value} is: @fitb{6em}{@ifsoln{2.27}}}
 
-@indented{
-__The @vocab{S-value} predicts an error of about__
-@fitbruby{2em}{@ifsoln{17.76}}{S}
-@fitbruby{3em}{@ifsoln{ppm}}{y-units}, _which range from_
-@fitbruby{6em}{@ifsoln{387.03 ppm}}{lowest y-value} _to_ 
-@fitbruby{6em}{@ifsoln{424 ppm}}{highest y-value} _in this dataset_.
+@vspace{1ex}
 
-@show{(code '(define (linear-modern x) (+ (* (?ANS 2.41263) x)(?ANS -4461))))}
-}
-
-@n Change the `linear-modern` function in the starter file to match the function above. Then complete the interpretation stem below.
-
-[cols="3a, .^1a", frame="none"]
-|===
-|
-*This model predicts* a(n)
-@fitbruby{7em}{@ifsoln{decrease}}{increase/decrease} of
-@fitbruby{5em}{@ifsoln{2.41263}}{rate of change}
-@fitbruby{10em}{@ifsoln{@math{CO_2} (ppm)}}{y-units} every
-@fitbruby{5em}{@ifsoln{year}}{x-units}.
-
-*When fit to this data, the model's error* is described by an @vocab{S-value} of about
-@fitbruby{3em}{@ifsoln{2.27}}{S-value}
-@fitbruby{10em}{@ifsoln{@math{CO_2} (ppm)}}{y-units}. I
-@fitbruby{18em}{@ifsoln{agree}}{strongly agree, agree, disagree, strongly disagree} that this model is a good fit, since
-@fitbruby{10em}{@ifsoln{@math{CO_2} (ppm)}}{y-units} in this dataset ranges from about
-@fitbruby{7em}{@ifsoln{387.03}}{lowest y-value} to
-@fitbruby{7em}{@ifsoln{424}}{highest y-value}.
-
+@n Sketch the model on the graph to the right.
 |
 @ifnotsoln{@center{@image{../images/modern-co2-scatter.png}}}
-@ifsoln{@center{@image{../images/modern-lr.png}}}
+@ifsoln{@center{@image{../images/modern-co2-model-soln.png}}}
 |===
 
 == Fitting your Periodic Model
-@n Change the `periodic-sin` function in the starter file to match what you found on @printable-exercise{periodic3-fitting-models/pages/modeling-recent-co2.adoc}.
-
-@n Use `fit-model` to fit `periodic-sin` to the data in the `modern-table`, and complete the interpretation stem below.
 
 [cols="3a, .^1a", frame="none"]
 |===
 |
-*When fit to this data, the model's error* is described by an @vocab{S-value} of about
-@fitbruby{3em}{@ifsoln{17.76}}{S-value}
-@fitbruby{10em}{@ifsoln{@math{CO_2} (ppm)}}{y-units}. I
-@fitbruby{18em}{@ifsoln{disagree}}{strongly agree, agree, disagree, strongly disagree}
-that this model is a good fit, since
-@fitbruby{10em}{@ifsoln{@math{CO_2} (ppm)}}{y-units} in this dataset range from
-@fitbruby{7em}{@ifsoln{387.03 ppm}}{lowest y-value} to
-@fitbruby{7em}{@ifsoln{424 ppm}}{highest y-value}.
+@n Change the `periodic-sin` function in the starter file to match what you found on @printable-exercise{periodic3-fitting-models/pages/modeling-recent-co2.adoc}.
 
+@vspace{1ex}
+
+@n Use `fit-model` to fit `periodic-sin` to the data in the `modern-table`. 
+
+@indented{The @vocab{S-value} is: @fitb{6em}{@ifsoln{17.76}}}
+
+@vspace{1ex}
+
+@n Sketch the model on the graph to the right.
 |
 @ifnotsoln{@center{@image{../images/modern-co2-scatter.png}}}
 @ifsoln{@center{@image{../images/modern-co2-model-soln.png}}}
@@ -114,7 +83,8 @@ that this model is a good fit, since
 
 == Imagining the _Best Possible_ Model
 
-@n Sketch the _best possible model_ you can imagine for this data on the right, and describe it on the left. Do parts of it look linear? Quadratic? Exponential? Logarithmic? Periodic?
+@n Sketch the _best possible model_ you can imagine for this data on the graph to the right, and describe it. +
+@hspace{1em}Do parts of it look linear? Quadratic? Exponential? Logarithmic? Periodic?
 
 [cols="3a, .^1a", frame="none"]
 |===
