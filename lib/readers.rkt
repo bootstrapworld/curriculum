@@ -9,6 +9,7 @@
   *make-read-group
   read-commaed-group
   ignorespaces
+  spaces-till-newline-inclusive
   ignorespaces-peek-char
   process-as-many-pluses-as-possible
   process-passthrough-lines
@@ -168,6 +169,17 @@
       (when (char-whitespace? c)
         (read-char i)
         (loop)))))
+
+(define (spaces-till-newline-inclusive i)
+  (list->string
+    (reverse
+      (let loop ([r '()])
+        (let ([c (peek-char i)])
+          (cond [(eof-object? c) r]
+                [(char=? c #\newline) (read-char i) r]
+                [(char-whitespace? c)
+                 (read-char i) (loop (cons c r))]
+                [else r]))))))
 
 (define (ignorespaces-peek-char i)
   (let loop ()
