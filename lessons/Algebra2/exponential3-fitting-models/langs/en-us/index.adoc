@@ -99,27 +99,30 @@ In the next activity, students will use our custom slider activity to find promi
 Students take their Desmos-derived model settings back to Pyret, to formalize their understanding. They are also exposed to computational limitations, which arise when dealing with extremely small or extremely large numbers.
 
 === Launch
+@right{@image{images/neutrino-detector.jpg, 200}}
+Scientists send satellites to far-away planets, or reason about the mass of electrons and neutrinos. The numbers involved in these calculations are *very big* or *very small*, and can involve hundreds or even _thousands_ of digits.
 
-Sometimes, data scientists perform calculations that result in very large or very small numbers. They send satellites to far-away planets, or reason about the mass of electrons and neutrinos. These numbers are also rarely integers: numerical constants for gravity, friction, etc. are most often rational or irrational numbers.
+In math, this isn't a problem: numbers can be infinitely large or small, and have any number of digits or decimal places! But computers are _finite_, and some numbers get too big to fit in their memory. 
 
-In math, this isn't a problem: numbers can be infinitely large or small, and have any number of digits or decimal places! But computers are _finite_, and some numbers get too big to fit in their memory. So what do we do?
-
-@slidebreak
-
-One option is to make the really big or small numbers _approximations_ of the real numbers, in the same way a model approximates real data. We can shrink a number with 100 digits down to just 3 digits, as long as we remember "there's 97 zeros after it!" This way, numbers like a "4 and one trillionth" get approximated as "roughly four".
-
-If you've ever asked a calculator to compute @math{1 \div 3}, you've probably seen it displayed as @math{0.333333}  instead of @math{ 0.\overline{3}}. This is a problem if you need to do any calculation with the result! @math{0.333333 \times 3 = 0.999999}, instead of 1!
-
-@slidebreak
-
-Virtually every programming language does this when numbers get large enough, chopping off digits and giving up accuracy in exchange for speed. This is especially important for time-sensitive computations like weather modeling, where knowing _roughly_ where a tornado will land before it hits is much more important than knowing precisely where it will land after it's too late.
-
-But there are times when we'd rather be precise than fast...
+@QandA{
+@Q{So what could computers do, to make math work when numbers have too many digits?}
+@A{Solicit ideas from the class...}
+}
 
 @slidebreak
 
-- A satellite headed for Neptune needs to travel at an extremely precise trajectory. After 2.8 billion miles, starting off by with even a thousandth of a degree rounding error could cause it to miss the planet entirely!
-- When searching for neutrinos, the relative masses involved are so small that chopping off the 100th decimal place might mean losing the neutrino entirely!
+@right{@image{images/satellite-neptune.jpg, 200}}
+*Almost every programming language uses _approximations_ of long numbers*, in the same way a model approximates real data. If you’ve ever asked a calculator to compute @math{1 \div 3}, you’ve probably seen it displayed as @math{0.333333} instead of @math{ 0.\overline{3}}. This is an example of the approximation trick at work!
+
+The number "one octillion" is a 28-digit number: one followed by _27 zeros_. A computer can just store the one at the front and remember that there are 27 zeroes. That's 3 digits, rather than 28! Numbers like a "one octillion and four " get approximated as "roughly octillion".
+
+@QandA{
+@Q{What are some possible *benefits* to chopping off digits like this?}
+@A{Tornadoes can form very quickly, so it's more important to get a warning out *fast*, even if that warning is off by a few minutes or miles.}
+@Q{What are some possible *downsides*?}
+@A{A satellite whose launch angle is off by just 0.0001° will miss Neptune by 5,000 miles!}
+@A{The mass of a neutrino is so small that chopping off the 100th decimal place might mean missing it entirely!}
+}
 
 === Investigate
 
