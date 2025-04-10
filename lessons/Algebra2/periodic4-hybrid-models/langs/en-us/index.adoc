@@ -29,6 +29,7 @@
 |===
 
 == Deconstructing Models
+@objective{function-composition-programming}
 
 === Overview
 
@@ -82,24 +83,24 @@ Our `periodic-cos` model has two terms:
 <style>
 /* Add custom CSS to make the math bold, and add coloring to nested circles */
 .hybridmath .mathunicode { font-weight: bold !important; }
+.hybridCOE { display: inline-block !important; }
 .hybridCOE .circleevalsexp { width: unset; vertical-align: middle; }
-.hybridCOE .expression { background: white !important; }
-.hybridCOE .expression .expression { background: aquamarine !important; }
-.hybridCOE .expression .expression .expression { background: lightskyblue !important; }
-.hybridCOE .expression .expression .expression .expression {
-  background: lightyellow !important;
-}
-.hybridCOE .expression .expression .expression .expression .expression {
-  background: lightpink !important;
-}
+
+.hybridCOE .expression { background: rgb(231 231 231) !important; }
+.hybridCOE .expression .expression { background: white !important; }
+
+.first .expression > .value { background: white !important; }
 </style>
 ++++
 
 `periodic-cos2` splits these terms into _separate functions_, and then composes them:
 
-[.hybridCOE.center]
-@show{(coe '(+ (* 4.13 (sin (* (* 2 PI) (- x 2023.1)))) 419.87))} @hspace{2em} &rarr; @hspace{2em}
+[.hybridCOE.first.center]
+@show{(coe '(+ (* 4.13 (sin (* (* 2 PI) (- x 2023.1)))) 419.87))} &rarr;
+
+[.hybridCOE.second.center]
 @show{(coe '(+ (wave-cos x) (midline-cos x)))}
+
 @slidebreak
 
 @lesson-instruction{
