@@ -1,104 +1,104 @@
 const quizConfig = {
-    "title": "Emmanuel's Sample Quiz",
-    "questions": [
-        {
-            "type": "MultipleChoice",
-            "prompt": {
-                "prompt": "What does it mean if a variable `x` is immutable?\n",
-                "distractors": [
-                    "`x` is stored in the immutable region of memory.",
-                    "After being defined, `x` can be changed at most once.",
-                    "You cannot create a reference to `x`.![alt text](./react.svg 'react logo')"
-                ]
-            },
-            "answer": {
-                "answer": "`x` cannot be changed after being assigned to a value."
-            },
-            "context": "Immutable means \"not mutable\", or not changeable.\n"
+  "title": "Emmanuel's Sample Quiz",
+  "questions": [
+    {
+      "type": "MultipleChoice",
+      "prompt": {
+        "prompt": "What does it mean if a variable `x` is immutable?\n",
+        "distractors": [
+          "`x` is stored in the immutable region of memory.",
+          "After being defined, `x` can be changed at most once.",
+          "You cannot create a reference to `x`.![alt text](./react.svg 'react logo')"
+        ]
+      },
+      "answer": {
+          "answer": "`x` cannot be changed after being assigned to a value."
+      },
+      "context": "Immutable means \"not mutable\", or not changeable.\n"
+    },
+    {
+        "type": "ShortAnswer",
+        "prompt": {
+            "prompt": "What is the keyword used after `let` to indicate that a variable can be mutated?"
         },
-        {
-            "type": "ShortAnswer",
-            "prompt": {
-                "prompt": "What is the keyword used after `let` to indicate that a variable can be mutated?"
-            },
-            "image": "./react.svg",
-            "answer": {
-                "answer": "mut"
-            },
-            "context": "For example, you can make a mutable variable `x` by writing: `let mut x = 1`.\n",
-            "id": "dbbaea6a-f469-464f-9d60-99ae98456b6a"
+        "image": "./react.svg",
+        "answer": {
+            "answer": "mut"
         },
-        {
-            "type": "Informational",
-            "prompt": {
-                "prompt": "Hello! Good news! This is just a poster, no questions to answer."
-            },
-            "image": "https://www.bootstrapworld.org/images/icon.png",
-            "context": "It's so awesome!\n",
-            "id": "dbbaea6a-f469-464f-9d60-99ae98456b6a"
+        "context": "For example, you can make a mutable variable `x` by writing: `let mut x = 1`.\n",
+        "id": "dbbaea6a-f469-464f-9d60-99ae98456b6a"
+    },
+    {
+        "type": "Informational",
+        "prompt": {
+            "prompt": "Hello! Good news! This is just a poster, no questions to answer."
         },
-        {
-            "type": "Tracing",
-            "prompt": {
-                "program": "fn main() {\n  let x = 1;\n  println!(\"{x}\");\n  x += 1;\n  println!(\"{x}\");\n}\n"
-            },
-            "answer": {
-                "doesCompile": false,
-                "lineNumber": 4
-            },
-            "context": "This is a compiler error because line 4 tries to mutate `x` when `x` is not marked as `mut`.\n",
-            "id": "bba6a299-b20f-4685-934a-792a591df3c0"
+        "image": "https://www.bootstrapworld.org/images/icon.png",
+        "context": "It's so awesome!\n",
+        "id": "dbbaea6a-f469-464f-9d60-99ae98456b6a"
+    },
+    {
+        "type": "Tracing",
+        "prompt": {
+            "program": "fn main() {\n  let x = 1;\n  println!(\"{x}\");\n  x += 1;\n  println!(\"{x}\");\n}\n"
         },
-        {
-          "type": "CardSort",
-          "prompt": {
-            "prompt": "Distinguish between bar charts and histograms: Sort the cards into two groups - one for bar charts and one for histograms. \nBe sure to sort all 9 cards.\n",
-              "cards": [
-                {
-                  "id": "hist-title",
-                  "title": "HISTOGRAM"
-                },
-                {
-                  "id": "hist1",
-                  "content": "![alt text](./hist-image.png 'some text')"
-                },
-                {
-                  "id": "hist2",
-                  "title": "uses quantitative data"
-                },
-                {
-                  "id": "hist3",
-                  "title": "it's bars cannot be reordered"
-                },
-                {
-                  "id": "hist4",
-                  "title": "requires us to determine a bin width"
-                },
-                {
-                  "id": "bar-title",
-                  "title": "BAR CHART"
-                },
-                {
-                  "id": "bar1",
-                  "content": "uses categorical data"
-                },
-                {
-                  "id": "bar2",
-                  "content": "it's bars can be reordered any way we wish"
-                },
-                {
-                  "id": "bar3",
-                  "content": "![alt text](./bar-image.png 'some text')"
-                }
-              ]
+        "answer": {
+            "doesCompile": false,
+            "lineNumber": 4
+        },
+        "context": "This is a compiler error because line 4 tries to mutate `x` when `x` is not marked as `mut`.\n",
+        "id": "bba6a299-b20f-4685-934a-792a591df3c0"
+    },
+    {
+      "type": "CardSort",
+      "prompt": {
+        "prompt": "Distinguish between bar charts and histograms: Sort the cards into two groups - one for bar charts and one for histograms. \nBe sure to sort all 9 cards.\n",
+          "cards": [
+            {
+              "id": "hist-title",
+              "title": "HISTOGRAM"
             },
-            "answer": {
-              "answer": [
-                  ["hist-title", "hist1", "hist2", "hist3", "hist4"]
-                  ["bar-title", "hist1", "hist2", "hist3"]
-                ],
-              "ordered": false
+            {
+              "id": "hist1",
+              "content": "![alt text](./hist-image.png 'some text')"
+            },
+            {
+              "id": "hist2",
+              "title": "uses quantitative data"
+            },
+            {
+              "id": "hist3",
+              "title": "it's bars cannot be reordered"
+            },
+            {
+              "id": "hist4",
+              "title": "requires us to determine a bin width"
+            },
+            {
+              "id": "bar-title",
+              "title": "BAR CHART"
+            },
+            {
+              "id": "bar1",
+              "content": "uses categorical data"
+            },
+            {
+              "id": "bar2",
+              "content": "it's bars can be reordered any way we wish"
+            },
+            {
+              "id": "bar3",
+              "content": "![alt text](./bar-image.png 'some text')"
             }
+          ]
+        },
+        "answer": {
+          "answer": [
+              ["hist-title", "hist1", "hist2", "hist3", "hist4"]
+              ["bar-title", "hist1", "hist2", "hist3"]
+            ],
+          "ordered": false
         }
-    ]
+    }
+  ]
 }
