@@ -17,9 +17,8 @@ fun periodic-cos2(x):     wave-cos(x)      +      midline-cos(x) end
 
 }
 
-@n Looking at the definitions of these 4 functions, explain what is going on in `periodic-cos2` and why it produces the same graph as `periodic-cos`. @fitb{}{}
-
-@fitb{}{}
+@n Read these 4 functions carefully, and explain why `periodic-cos2` will produce the _same graph_ as `periodic-cos`. @fitb{}{} +
+@fitb{}{} +
 @fitb{}{}
 
 ++++
@@ -28,20 +27,29 @@ fun periodic-cos2(x):     wave-cos(x)      +      midline-cos(x) end
 table .autonum::after { content: ')' !important; }
 
 /* Remove default table padding */
-.topTable { 
-	table-layout: 	fixed; 
-	margin: 		0 !important; 
+.graph { table-layout: 	fixed; }
+.listingblock, .listingblock pre { 
+  margin: 0; padding: 0.5em !important; 
+}
+.autonum, .fitb { padding-top: 1rem !important; }
+
+.graph tr:first-child td, .graph td:first-child { 
+	background:  	rgb(235,235,235) !important;
+  width:        auto !important; 
+  padding:      0.1em !important;
+}
+.graph tr:first-child td *, .graph td:first-child * { 
+	font-weight: 	bold;
+  line-height:  unset !important;
+  width:        unset !important;
+}
+.graph td:first-child p {
+  writing-mode: vertical-rl;
+  transform:    rotate(180deg);
+  margin:       5px 0;
 }
 
-.topTable th:first-child, 
-.topTable td:first-child { 
-	background:  	rgb(238, 238, 238) !important;
-}
-.topTable td:first-child p { 
-	writing-mode: 	vertical-rl;
-  	transform: 		rotate(180deg); 
-	font-weight: 	bold;
- }
+td:last-child { padding: 0 !important; }
 
 /*
   "Graph" tables provide a pure-CSS solution for all coordinate planes.
@@ -57,63 +65,58 @@ table .autonum::after { content: ')' !important; }
     --y_label defaults to 'y'
 */
 .graph {
-  --width:    1.7in;
+  --width:    1.89in;
   --height:   1.0in;
-  --top_pct:  .90; /* (90%) */
+  --top_pct:  .85; /* (85%) */
   --left_pct: .10; /* (10%) */
   --min-gap:  0px; /* No gap between cells */
   --x_label:  '';  /* No label on x-axis */
   --y_label:  '';  /* No label on y-axis */
   --minors:		0; /* No "thin" gridlines */
-  height: 	  unset !important;
 }
+
+.graph tr:last-child td, .graph tr:first-child td { 
+  height: 100% !important; background-image: none !important; 
+}
+.graph tr:last-child td::before, .graph tr:last-child td::after{ 
+  content: none;
+} 
 
 /* Override the VERY specific rule that prevents 
    .graph cells from having a border
 */
 body.workbookpage table.graph td { 
-	border-left: 1px solid lightgray !important; 
+	border-right:  1px solid lightgray !important;
+  border-bottom: 1px solid lightgray !important; 
 }
 
-.graph td { background-color: white; }
+body.workbookpage table.FillVerticalSpace > tbody > tr:nth-of-type(even) > td { background-color: transparent; }
 </style>
 ++++
 
 == Review: Models We've Seen
-[.topTable, cols="1a, ^6a, ^6a, ^6a, ^6a, ^6a", options="header"]
-|===
-|	
-|Linear|Quadratic|Exponential|Logarithmic|Periodic
-|===
 
-[.topTable.FillVerticalSpace.graph, cols="1a, 6a, 6a, 6a, 6a, 6a", frame="none"]
+[.topTable.FillVerticalSpace.graph, cols="^.^1a, ^6a, ^6a, ^6a, ^6a, ^6a", frame="none"]
 |===
-| Sketch
-|||||
-|===
-
-[.FillVerticalSpace.topTable, cols="1a, 6a, 6a, 6a, 6a, 6a"]
-|===
-| Key Characteristics
-|||||
+|             | Linear  | Quadratic | Exponential | Logarithmic | Periodic
+| Sketch      |         |           |             |             |
+| Key Characteristics | |           |             |             |
 |===
 
 [.no-flex-section]
 == What kind of model?
 
-[cols=".^3a,1,10a", grid="none", frame="none"]
+[cols="^.^3a,10a", grid="none", frame="none"]
 |===
 |@image{../images/modern-co2-scatter.png, 200}
 |
-|
 
-@n Consider the scatter plot to the left. What do you Notice? What do you Wonder? 
-@fitb{}{} +
+@n What do you Notice about this scatter plot? What do you Wonder? 
 @fitb{}{} +
 @fitb{}{}
 
 
-@n Of the models you described above, which do you think it would make the most sense to try fitting to this scatter plot? Why? 
+@n Which of the models you described above would make the most sense to fit to this scatter plot? Why? 
 @fitb{}{} +
 @fitb{}{} +
 @fitb{}{}
