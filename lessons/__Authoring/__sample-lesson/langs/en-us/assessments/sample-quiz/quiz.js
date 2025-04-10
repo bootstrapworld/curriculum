@@ -48,6 +48,57 @@ const quizConfig = {
             },
             "context": "This is a compiler error because line 4 tries to mutate `x` when `x` is not marked as `mut`.\n",
             "id": "bba6a299-b20f-4685-934a-792a591df3c0"
+        },
+        {
+          "type": "CardSort",
+          "prompt": {
+            "prompt": "Distinguish between bar charts and histograms: Sort the cards into two groups - one for bar charts and one for histograms. \nBe sure to sort all 9 cards.\n",
+              "cards": [
+                {
+                  "id": "hist-title",
+                  "title": "HISTOGRAM"
+                },
+                {
+                  "id": "hist1",
+                  "content": "![alt text](./hist-image.png 'some text')"
+                },
+                {
+                  "id": "hist2",
+                  "title": "uses quantitative data"
+                },
+                {
+                  "id": "hist3",
+                  "title": "it's bars cannot be reordered"
+                },
+                {
+                  "id": "hist4",
+                  "title": "requires us to determine a bin width"
+                },
+                {
+                  "id": "bar-title",
+                  "title": "BAR CHART"
+                },
+                {
+                  "id": "bar1",
+                  "content": "uses categorical data"
+                },
+                {
+                  "id": "bar2",
+                  "content": "it's bars can be reordered any way we wish"
+                },
+                {
+                  "id": "bar3",
+                  "content": "![alt text](./bar-image.png 'some text')"
+                }
+              ]
+            },
+            "answer": {
+              "answer": [
+                  ["hist-title", "hist1", "hist2", "hist3", "hist4"]
+                  ["bar-title", "hist1", "hist2", "hist3"]
+                ],
+              "ordered": false
+            }
         }
     ]
 }
