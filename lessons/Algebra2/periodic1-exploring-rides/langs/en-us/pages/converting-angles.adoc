@@ -1,37 +1,28 @@
 = Converting Between Angles
 
-@right{@image{../images/pizza-clock.png, 200}} +
-*The table below lists different angles within a circle.*
-{empty} +
-@n Fill in the rows for 12, 9, and 6 o'clock, converting between hours, degrees, and radians. +
-{empty} +
-@n Fill in the rows for 1:30, 10:30, 7:30, and 4:30, converting between hours, degrees, and radians. +
-{empty} +
-*Remember:* degrees and radians both start with zero at "3 o'clock", and increase in the opposite direction of the hours! +
-{empty} +
-_We've filled in the rows for 12:00 and 3:00, as well as the length columns._
+@n In the circle below, fill in the blanks to label the number of degrees and radians at each point.
+
+@ifnotsoln{@center{@image{../images/convert-circle.png, 500}}}
+@ifsoln{@center{@image{../images/convert-circle-soln.png, 500}}}
 
 @define{leg}{@math{\sqrt{2} \over 2}}
 
-[.FillVerticalSpace, cols="^.^1a,^.^1a,^.^1a,^.^1a,^.^1a"]
+@n *Use Pyret's `sin` and `cos` functions* to complete the table below. +
+@hspace{1em} _Note: These function use radians not degrees._
+
+[.FillVerticalSpace, cols="^.^1a, ^.^2a, ^.^2a", options="header"]
 |===
-| Time 	|@math{θ} Degrees| @math{θ} Radians					|   x	|   y
-
-|  3:00	| 0°   			| @math{0\pi}						|  1    |  0
-|  1:30	| @ifsoln{ 45°}	| @ifsoln{@math{{1 \over 4}\pi}}	| @leg	| @leg
-| 12:00	| 		   90°	| 		  @math{{2 \over 4}\pi} 	|  0 	|  1
-| 10:30	| @ifsoln{135°}	| @ifsoln{@math{{3 \over 4}\pi}}	| -@leg	| @leg
-|  9:00	| @ifsoln{180°} | @ifsoln{@math{{4 \over 4}\pi}}	| -1 	|  0
-|  7:30	| @ifsoln{225°} | @ifsoln{@math{{5 \over 4}\pi}}	| -@leg	| -@leg
-|  6:00	| @ifsoln{270°} | @ifsoln{@math{{6 \over 4}\pi}}	|  0 	| -1
-|  4:30	| @ifsoln{315°} | @ifsoln{@math{{7 \over 4}\pi}}	| @leg	| -@leg
-|  3:00	| 360° 			| @math{{8 \over 4}pi} 				|  1 	| 0
+| Angle (θ)					| 	`sin(θ)`									| 	`cos(θ)`
+|	0° / @math{0  \pi}		| @ifsoln{0}									| @ifsoln{1}
+|  45° / @math{0.25\pi}		| `sin(0.25 * PI)` = @ifsoln{~ 0.7071}			| @ifsoln{~ 0.7071}
+|  90° / @math{0.50\pi}		| @ifsoln{1}									| @ifsoln{0}
+| 135° / @math{0.75\pi}		| @ifsoln{~ 0.7071}								| @ifsoln{~ - 0.7071}
+| 180° / @math{1.00\pi}		| @ifsoln{0}									| @ifsoln{-1}
+| 225° / @math{1.25\pi}		| @ifsoln{~ - 0.7071}							| @ifsoln{~ - 0.7071}
+| 270° / @math{1.50\pi}		| @ifsoln{-1}									| @ifsoln{0}
+| 315° / @math{1.75\pi}		| @ifsoln{~ - 0.7071}							| @ifsoln{~ 0.7071}
 |===
 
-@n In Pyret, experiment the functions `sin` and `cos`, passing in different *radian values* from the table above.
+@n Which function computes the *horizontal* leg of the right triangle (@math{A})? @fitb{}{@ifsoln{`sin`}}
 
-@indented{
-+a.+ Which function computes @math{x(θ)}? @fitb{5em}{@ifsoln{cos}}
-
-+b.+ Which function computes @math{y(θ)}? @fitb{5em}{@ifsoln{sin}}
-}
+@n Which function computes the *vertical* leg of the right triangle (@math{B})? @fitb{}{@ifsoln{`cos`}}

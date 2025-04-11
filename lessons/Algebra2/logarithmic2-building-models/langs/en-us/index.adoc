@@ -1,6 +1,8 @@
 = Building Logarithmic Models
+++++
 
-@description{Students learn to transform the explanatory data (by building a new column that finds its log), use it to perform linear regression to produce the optimal linear model, and then use it to generate the optimal logarithmic model for the original (untransformed) data.}
+++++
+@description{Students learn to transform the explanatory data (by building a new column that finds its log), use the new column to perform linear regression and produce the optimal linear model, then use the optimal linear model to generate the optimal logarithmic model for the original (untransformed) data.}
 
 @lesson-prereqs{logarithmic1-exploring-wealth-health}
 
@@ -13,14 +15,13 @@
 
 | Lesson Goals
 | Students will be able to...
-
-- Model logarithmic relationships using functions
+@objectives
 
 | Student-facing Lesson Goals
 |
 
-- Let's use Pyret to model logarithmic relationships in data
-
+- Let's learn how to recognize logarithmic models.
+- Let's explore how the model settings influence the shape of logarithmic models.
 
 | Materials
 |[.materials-links]
@@ -32,7 +33,7 @@
 
 | Relevant Resources
 |
-- @link{images/xkcd.png, This wonderful drawing} from @link{https://www.xkcd.com, XKCD}, uses a logarithmic scale to fit *the entire known universe* into the image.
+- @link{images/xkcd.png, This wonderful drawing} from @link{https://www.xkcd.com, XKCD}, uses a logarithmic scale to fit the entire known universe into the image.
 
 | Preparation
 | 
@@ -95,11 +96,11 @@ When we reflect the covid curve over @math{y=x}, the graph _starts_ with rapid g
 
 We see that:
 
-- We had ~104,000 cases in our initial value ("day 0")
-- To reach 116,000 cases, it took 50 days
-- To reach 126,000 cases, it took 100 days
-- To reach 167,000 cases, it took 150 days
-- To reach 350,000 cases, it took 200 days
+- We had ~104,000 cases in our initial value ("day 0").
+- To reach 116,000 cases, it took 50 days.
+- To reach 126,000 cases, it took 100 days.
+- To reach 167,000 cases, it took 150 days.
+- To reach 350,000 cases, it took 200 days.
 
 And we are much better able to understand just how quickly the infections were spreading.
 
@@ -127,11 +128,23 @@ Logarithmic functions and exponential functions serve as inverses of one another
 
 @teacher{Review student answers. Try to draw out student explanations for how they could tell whether a graph or plot was logarithmic instead of exponential. Their own reasoning is critical for building intuition, so you may even want to write down key phrases as students share them!}
 
+++++
+<style>
+.optSection, h4:has(+.optSection) {
+	margin: 0 2em;
+}
+.optSection > .content { background-color: transparent; opacity: 0.75; }
+.optSection .content:hover { opacity: 1; }
+</style>
+++++
 ==== Optional: Computations with Exponents and Logarithms
+
+[.optSection]
+@indented{
 
 We can use the inverse relationship between logarithms and exponents to do calculations.
 
-Just as there are fact families for multiplication and division (@math{2 \times 3 = 6}, @math{3 \times 2 = 6}, @math{6 \div 2 = 3}, @math{6 \div 3 = 2}), there are fact families for logarithms and exponents.
+Just as there are fact families for multiplication and division (_e.g._ @math{2 \times 3 = 6} @hspace{1em}@math{3 \times 2 = 6} @hspace{1em}@math{6 \div 2 = 3} @hspace{1em}@math{6 \div 3 = 2}), there are fact families for logarithms and exponents.
 
 The two equations below are different ways of expressing the same relationship between the numbers 3, 5 and 125.
 
@@ -144,11 +157,12 @@ The two equations below are different ways of expressing the same relationship b
 | @math{\log_5 125 = 3}
 |===
 
-*5* is our @vocab{base} in both of the equations above.
+*5* is our @vocab{base} in both the exponential and logarithmic equations above.
 
 @lesson-instruction{
 Turn to @opt-printable-exercise{evaluate-log.adoc} and complete the table in the first section by writing the related exponential or logarithmic equation for each row.
 }
+
 
 @QandA{
 @Q{What logarithmic equation can we write from @math{x^y = z}?}
@@ -169,9 +183,11 @@ When we want to evaluate log expressions, it is helpful to think about these fac
 | *Logarithmic* | @math{\log_3(9)}	| "Calculate what power 3 is raised to in order to reach 9" | 2
 |===
 
+@vspace{1ex}
+
 @QandA{
 @Q{What question do we ask ourselves to evaluate @math{\log_3(81)}?}
-@A{What power do we raise 3 to in order to reach 81?}
+@A{To what power do we raise 3 to reach 81?}
 @A{To get 81, what power do we raise 3 to?}
 @Q{What will @math{\log_3(81)} evaluate to?}
 @A{@math{4}, because @math{3^4 = 81}}
@@ -185,15 +201,15 @@ When we want to evaluate log expressions, it is helpful to think about these fac
 @QandA{
 @Q{Consider these two translations of @math{\log_2(128)}.
 
-@indented{
-(a) "To get 128, I raise 2 to what power?"
+@hspace{2em}(a) "To get 128, I raise 2 to what power?"
 
-(b) "The power you raise 2 to get 128"
-}
+@hspace{2em}(b) "The power to which you raise 2 to get 128"
+
 }
 @Q{Which translation do you prefer, and why?}
 @A{The first one, because it sets up a math problem and makes it clear what I need to do.}
 @A{The second one, because the numbers are in the same order that they appear in the expression (I can read left-to-right).}
+}
 }
 
 === Synthesize
@@ -222,7 +238,7 @@ Students learn to recognize logarithmic growth in tables.
 
 We know that:
 
-- Linear sequences can be recognized by their consistent growth
+- Linear sequences can be recognized by their consistent growth.
 - Exponential sequences can be recognized by identifying their growth factor.
 
 But how would we recognize a logarithmic sequence?
@@ -327,9 +343,10 @@ Students can check out @link{images/xkcd.png, this wonderful drawing} from @link
 
 == Logarithmic Functions
 @objective{logarithms-situations}
+@objective{logarithms-model-settings}
 
 === Overview
-Students are introduced to the form of logarithmic models, and explore the role the coefficients play using a custom-built Desmos slider activity.
+Students are introduced to the form of logarithmic models, and use a custom-built Desmos slider activity to explore how the model settings influence the shape of the model.
 
 === Launch
 
@@ -350,8 +367,8 @@ The expanded form for logarithmic models includes @math{h} and looks like this: 
 @teacher{
 Sync or pace students to *Slide 4: Exploring Logarithmic Functions* of @starter-file{alg2-log-desmos}. The following activity can be done two ways:
 
-@hspace{2em} (1) Debrief with your students after they complete _each section_ of @printable-exercise{graphing-models.adoc} +
-@hspace{2em} (2) Wait until they have completed the entire page
+@hspace{2em} (1) Debrief with your students after they complete _each section_ of @printable-exercise{graphing-models.adoc}. +
+@hspace{2em} (2) Wait until they have completed the entire page.
 }
 
 @lesson-instruction{
@@ -384,7 +401,7 @@ The expression @math{\log_2 1} is asking "to what power must 2 be raised to reac
 
 @slidebreak
 
-@lesson-point{Since any number to the zero power is @math{1}, no matter the base, @math{log(1)} will always be zero!}
+@lesson-point{Since any number to the zero power is @math{1}... {nbsp}no matter the base, @math{log(1)} will always be zero!}
 
 @lesson-instruction{
 - Turn to @printable-exercise{classifying-descriptions.adoc} and practice identifying whether the scenarios are best modeled by linear quadratic, exponential, or logarithmic functions.
@@ -433,7 +450,7 @@ The term @math{a} is called the logarithmic coefficient, which - along with the 
 }
 
 
-==== Asymptotes for logarithmic functions
+==== Asymptotes for Logarithmic Functions
 
 @vocab{Asymptotes} are lines that functions approach but never cross.
 

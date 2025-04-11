@@ -1,0 +1,123 @@
+[.landscape]
+= Choosing the Best Model for the Data
+
+[.no-flex-section]
+== Deconstructing a Model
+
+@n The four functions below are defined in the @starter-file{alg2-hybrid}. Use `fit-model` to fit `periodic-cos` and `periodic-cos2` to the `recent-table` data. 
+
+
+@indented{
+```
+fun periodic-cos(x): (4.13 * cos(6.28 * (x - 2023.35))) + 419.87 end 
+fun wave-cos(x):     (4.13 * cos(6.28 * (x - 2023.35)))          end 
+fun midline-cos(x):                                       419.87 end 
+fun periodic-cos2(x):     wave-cos(x)      +      midline-cos(x) end
+```
+
+}
+
+@n Read these 4 functions carefully, and explain why `periodic-cos2` will produce the _same graph_ as `periodic-cos`. @fitb{}{} +
+@fitb{}{} +
+@fitb{}{}
+
+++++
+<style>
+/* Format autonumbering inside the table correctly */
+table .autonum::after { content: ')' !important; }
+
+/* Remove default table padding */
+.graph { table-layout: 	fixed; }
+.listingblock, .listingblock pre { 
+  margin: 0; padding: 0.5em !important; 
+}
+.autonum, .fitb { padding-top: 1rem !important; }
+
+.graph tr:first-child td, .graph td:first-child { 
+	background:  	rgb(235,235,235) !important;
+  width:        auto !important; 
+  padding:      0.1em !important;
+}
+.graph tr:first-child td *, .graph td:first-child * { 
+	font-weight: 	bold;
+  line-height:  unset !important;
+  width:        unset !important;
+}
+.graph td:first-child p {
+  writing-mode: vertical-rl;
+  transform:    rotate(180deg);
+  margin:       5px 0;
+}
+
+td:last-child { padding: 0 !important; }
+
+/*
+  "Graph" tables provide a pure-CSS solution for all coordinate planes.
+
+  They rely on a set up CSS variables, with reasonable defaults:
+    --width and --height determine the size of plane. Defaults to 3in x 3x.
+    --min-gap determines the minimum space between graphs. Defaults to 20px.
+
+    --top_pct and --left_pct determine the origin's position (btw 0 and 1). Defaults to (0.5, 0.5).
+    --minors determines how many "minor axes" (incl the one behind major). Defaults to 7.
+
+    --x_label defaults to 'x'
+    --y_label defaults to 'y'
+*/
+.graph {
+  --width:    1.89in;
+  --height:   1.0in;
+  --top_pct:  .85; /* (85%) */
+  --left_pct: .10; /* (10%) */
+  --min-gap:  0px; /* No gap between cells */
+  --x_label:  '';  /* No label on x-axis */
+  --y_label:  '';  /* No label on y-axis */
+  --minors:		0; /* No "thin" gridlines */
+}
+
+.graph tr:last-child td, .graph tr:first-child td { 
+  height: 100% !important; background-image: none !important; 
+}
+.graph tr:last-child td::before, .graph tr:last-child td::after{ 
+  content: none;
+} 
+
+/* Override the VERY specific rule that prevents 
+   .graph cells from having a border
+*/
+body.workbookpage table.graph td { 
+	border-right:  1px solid lightgray !important;
+  border-bottom: 1px solid lightgray !important; 
+}
+
+body.workbookpage table.FillVerticalSpace > tbody > tr:nth-of-type(even) > td { background-color: transparent; }
+</style>
+++++
+
+== Review: Models We've Seen
+
+[.topTable.FillVerticalSpace.graph, cols="^.^1a, ^6a, ^6a, ^6a, ^6a, ^6a", frame="none"]
+|===
+|             | Linear  | Quadratic | Exponential | Logarithmic | Periodic
+| Sketch      |         |           |             |             |
+| Key Characteristics | |           |             |             |
+|===
+
+[.no-flex-section]
+== What kind of model?
+
+[cols="^.^3a,10a", grid="none", frame="none"]
+|===
+|@image{../images/modern-co2-scatter.png, 200}
+|
+
+@n What do you Notice about this scatter plot? What do you Wonder? 
+@fitb{}{} +
+@fitb{}{}
+
+
+@n Which of the models you described above would make the most sense to fit to this scatter plot? Why? 
+@fitb{}{} +
+@fitb{}{} +
+@fitb{}{}
+|===

@@ -1,0 +1,99 @@
+= Modeling Modern Carbon Dioxide Levels
+++++ 
+<style>
+/* Make code more visible */
+td .codetwo { color: black; background: none; }
+
+/* Format autonumbering inside the table correctly */
+table .autonum::after { content: ')' !important; }
+
+</style>
+++++
+
+@define{COtwo}{@math{\text{CO}_2}}
+@do{
+(define-values (hi lo lo-dateA lo-dateB) (values 424 415.74 2022.708 2023.708))
+(define p (abs (- lo-dateA lo-dateB)))
+(define a 4.13)
+(define b 6.28)
+(define c 419.87)
+(define d 2023.1)
+}
+
+@link-instructions{
+This page focuses on the `modern-table` of the @starter-file{alg2-hybrid}, which tracks atmospheric @COtwo (parts per million) from 2010-2023.
+}
+
+== Decomposing Your Periodic Model
+
+@vspace{1ex}
+
+Find the section of the starter file where you're asked to "Define your periodic-sin functions..."
+
+@vspace{1ex}
+
+- Define `periodic-sin` to be the periodic model you found using Desmos.
+ * You should already have defined it in @opt-starter-file{alg2-co2} and on @lesson-link{periodic3-fitting-models/pages/modeling-recent-co2-2.adoc}.
+- Using the deconstruction of `periodic-cos` as your model, change the other three functions in this section to show how to separate the wave and midline of your `periodic-sin` model and define `periodic-sin2` using function composition.
+
+== Fitting the Optimal Linear Model
+
+[cols="3a, .^1a", frame="none"]
+|===
+|
+@n Use `lr-plot` to find the best linear model for the `modern-table` and record the function below:
+
+@indented{@show{(code '(define (linear-modern x) (+ (* (?ANS 2.41263) x)(?ANS -4461))))}}
+
+@vspace{1ex}
+
+@n Change the `linear-modern` function in the starter file to match the function above. +
+@hspace{1em}Then use `fit-model` to fit it to the `modern-table`. 
+
+@indented{The @vocab{S-value} is: @fitb{6em}{@ifsoln{2.27}}}
+
+@vspace{1ex}
+
+@n Sketch the model on the graph to the right.
+|
+@ifnotsoln{@center{@image{../images/modern-co2-scatter.png}}}
+@ifsoln{@center{@image{../images/modern-co2-model-soln.png}}}
+|===
+
+== Fitting your Periodic Model
+
+[cols="3a, .^1a", frame="none"]
+|===
+|
+@n Change the `periodic-sin` function in the starter file to match what you found on @printable-exercise{periodic3-fitting-models/pages/modeling-recent-co2.adoc}.
+
+@vspace{1ex}
+
+@n Use `fit-model` to fit `periodic-sin` to the data in the `modern-table`. 
+
+@indented{The @vocab{S-value} is: @fitb{6em}{@ifsoln{17.76}}}
+
+@vspace{1ex}
+
+@n Sketch the model on the graph to the right.
+|
+@ifnotsoln{@center{@image{../images/modern-co2-scatter.png}}}
+@ifsoln{@center{@image{../images/modern-co2-model-soln.png}}}
+|===
+
+== Imagining the _Best Possible_ Model
+
+@n Sketch the _best possible model_ you can imagine for this data on the graph to the right, and describe it. +
+@hspace{1em}Do parts of it look linear? Quadratic? Exponential? Logarithmic? Periodic?
+
+[cols="3a, .^1a", frame="none"]
+|===
+| @fitb{}{} +
+  @fitb{}{} +
+  @fitb{}{} +
+  @fitb{}{} +
+
+|
+@ifnotsoln{@center{@image{../images/modern-co2-scatter.png}}}
+@ifsoln{@center{@image{../images/modern-hybrid.png}}}
+|===

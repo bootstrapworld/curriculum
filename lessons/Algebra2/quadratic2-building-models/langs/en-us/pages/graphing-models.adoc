@@ -3,8 +3,8 @@
 <style>
 /* Make autonums inside tables look consistent with those outside */
 .autonum { font-weight: bold; padding-top: 2px !important; }
-.autonum:after { content: ')' !important; }
 
+.fitb { min-width: 3.5em; }
 /*
   "Graph" tables provide a pure-CSS solution for all coordinate planes.
 
@@ -12,12 +12,13 @@
     --width and --height determine the size of plane. Defaults to 3in x 3x.
     --min-gap determines the minimum space between graphs. Defaults to 20px.
 
-    --top_pct and --left_pct determine the origin's position. Defaults to (50%, 50%).
+    --top_pct and --left_pct determine the origin's position (btw 0 and 1). Defaults to (0.5, 0.5).
     --minors determines how many "minor axes" (incl the one behind major). Defaults to 7.
 
       --x_label defaults to 'x'
       --y_label defaults to 'y'
 */
+
 .magnitude.graph {
 	--width:   2.0in;
 	--height:  1.5in;
@@ -33,13 +34,16 @@
 ++++
 
 @link-instructions{
-For this page, you'll need to have *Exploring Quadratic Functions(Desmos)* open to *Slide 1: Transforming Parabolas*. +
+For this page, you'll need to have *Exploring Quadratic Functions (Desmos)* open to *Slide 1: Transforming Parabolas*.
 }
 
 The parabola you'll see is the graph of @math{g(x) = x^2}. Another, *identical* parabola is hiding behind it. +
-This second parabola is written in Vertex Form: @math{f(x) = a(x - h)^2 + k}. Each coefficient starts at values to make @math{f(x)} equivalent to @math{g(x)}.
+This second parabola is written in Vertex Form: @math{f(x) = a(x - h)^2 + k}. Each model setting starts at the value that makes @math{f(x)} equivalent to @math{g(x)}.
 
-@n Using the starting values of @math{a}, @math{h}, and @math{k} you see for @math{f(x)} in Desmos, rewrite @math{g(x) = x^2 } in Vertex Form. @hspace{1em} @math{g(x) =}@fitb{}{@ifsoln{@math{1(x - 0)^2 + 0}}}
+@n Use the starting values of @math{a}, @math{h}, and @math{k} you see in Desmos, to complete this equation: @math{g(x) = x^2 = f(x) = } 
+@fitb{1em}{@ifsoln{1}} @math{(x -} 
+@fitb{1em}{@ifsoln{0}} @math{)^2 +} 
+@fitb{1em}{@ifsoln{0}}
 
 == Magnitude @math{a}
 @n In the first square below, make a sketch of the original graph you see (@math{a = 1}, @math{h = 0}, @math{k = 0}). +
@@ -48,17 +52,21 @@ Then try changing the value of @math{a} to 10, 0.1, 0, -10 and -2, graphing each
 
 [.FillVerticalSpace.magnitude.graph, cols="1,1,1", frame="none",grid="none"]
 |===
-| @math{a = 1}	| @math{a = 10}	 | @math{a = 0.1}
+| @math{a = 1}	 @ifsoln{@image{../images/a=1.png}}
+| @math{a = 10}	 @ifsoln{@image{../images/a=10.png}}
+| @math{a = 0.1} @ifsoln{@image{../images/a=0.1.png}}
 |===
 
 @vspace{8ex}
 
 [.FillVerticalSpace.magnitude.graph, cols="1,1,1", frame="none",grid="none"]
 |===
-| @math{a = 0}  | @math{a = -10} | @math{a = -2}
+| @math{a = 0}   @ifsoln{@image{../images/a=0.png}}
+| @math{a = -10} @ifsoln{@image{../images/a=-10.png}}
+| @math{a = -2}  @ifsoln{@image{../images/a=-2.png}}
 |===
 
-@n What does @math{a} tell us about a parabola? @fitb{}{@ifsoln{The parabola opens "up" if it's positive, and "down" if negative}} +
+@n What does @math{a} tell us about a parabola? @fitb{}{@ifsoln{The parabola opens "up" if it's positive, and "down" if it's negative.}} +
 @fitb{}{@ifsoln{The larger the magnitude, the "tighter" the parabola. If it's zero, the graph is a straight horizontal line.}}
 
 == Translation
@@ -74,7 +82,10 @@ Then try changing the value of @math{a} to 10, 0.1, 0, -10 and -2, graphing each
 
 [.FillVerticalSpace.translation.graph,cols="1a,1a,1a,1a", frame="none", stripes="none", grid="none"]
 |===
-|@math{h=-5}	| @math{h=5} 	|@math{k=-5}	| @math{k=5} 	
+| @math{h = -5}	 @ifsoln{@image{../images/h=-5.png}}
+| @math{h = 5} 	 @ifsoln{@image{../images/h=5.png}}
+| @math{k = -5}	 @ifsoln{@image{../images/k=-5.png}}
+| @math{k = 5} 	 @ifsoln{@image{../images/k=5.png}}
 |===
 
 [cols="1a,1a", frame="none", stripes="none", grid="none"]

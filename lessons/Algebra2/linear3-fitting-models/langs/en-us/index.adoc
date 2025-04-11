@@ -1,6 +1,6 @@
 = Fitting Linear Models
 
-@description{Students learn about model "fitness" through the _S_ value (Standard Deviation of Residuals). They build and fit a variety of linear models to a dataset, first by trial-and-error and then using linear regression.}
+@description{Students learn to gauge model "fitness" using _S_ value (Standard Deviation of Residuals), building and fitting a variety of linear models to a dataset, first by trial-and-error and then using linear regression.}
 
 @lesson-prereqs{linear2-building-models, fitting-models}
 
@@ -24,7 +24,7 @@
 | Student-facing Lesson Goals
 |
 
-- Let's use Pyret to make predictions with linear models
+- Let's use Pyret to fit linear models to our dataset.
 
 
 | Materials
@@ -37,19 +37,19 @@
 
 |===
 
-== Fitting the Michigan-California Model
+== Fitting and Comparing Linear Models
 @objective{model-interpret-residuals}
 @objective{model-predictions}
 @objective{model-fit-function}
 
 === Overview
 
-Students fit the Michigan-California model and the Alabama-Alaska model. Then they try to make some better models of their own through trial and error.
+Students compare the fits of the Alabama-Alaska model and the Michigan-California model. They also have the option of building a Massachusetts-Nevada model and trying to make some better models of their own through trial and error.
 
 === Launch
 
 @teacher{
-@opt{@opt-printable-exercise{review.adoc} circles back to what students in learned in @lesson-link{fitting-models} so their understanding of @math{S}-values and @math{residuals} is fresh.}
+@opt{@opt-printable-exercise{review.adoc} circles back to what students learned in @lesson-link{fitting-models} so their understanding of @math{S}-values and @math{\text{residuals}} is fresh.}
 }
 
 @lesson-instruction{
@@ -73,20 +73,11 @@ Students fit the Michigan-California model and the Alabama-Alaska model. Then th
 
 @slidebreak
 
-Compared to the size of the incomes in this dataset, an @vocab{S} value of $36,165 is pretty terrible. +
+Compared to the size of the incomes in this dataset, an @vocab{S} value of $36,165 is pretty terrible. 
 __This model should not be trusted!__
 
-@opt{Give students a chance to adjust their `al-ak` model by trial and error and practice defining a second model using Massachusetts and Nevada by having them complete @opt-printable-exercise{model-college-v-income-3.adoc}.}
-
-=== Investigate
-
-Can we do better?
-
-@lesson-instruction{
-- Complete the second section: *A Model of Your Own* on @printable-exercise{model-college-v-income-2.adoc} using the two states you identified as likely to produce a model with a better fit.
-}
-
-@slidebreak
+@teacher{
+@opt{Give students a chance to adjust their `al-ak` model by trial and error and practice defining a second model using Massachusetts and Nevada by having them complete @opt-printable-exercise{model-college-v-income-3.adoc}.
 
 @QandA{
 @Q{We made a model using Alabama and Alaska. The @math{S}-value for this `al-ak` model is ~36164.683.}
@@ -96,22 +87,44 @@ Can we do better?
 @A{The @math{S}-value of the `ma-nv` is 28660 dollars less!}
 @A{We expect predictions made with the `ma-nv` model to 79% less error than predictions made with the `al-ak` model.}
 }
+}
+}
+
+=== Investigate
+
+Can we do better?
+
+@lesson-instruction{
+- Find the `mi-ca` model in the Definitions Area of the @starter-file{alg2-states}. It was built using data from Michigan and California.
+- Complete the second section: *Comparing Models* on @printable-exercise{model-college-v-income-2.adoc} to determine how the `mi-ca` model compares to the `al-ak` model. 
+}
+
+@slidebreak
+
+@QandA{
+@Q{The @math{S}-value for the `al-ak` model (made using data points for Alabama and Alaska) is ~36164.683.}
+@Q{The @math{S}-value for the `mi-ca` model (made using data points for Michigan and California) is ~10779.923.}
+@Q{What comparisons can we make between these two models?}
+@A{We expect significantly less error in predictions made from the `mi-ca` model.}
+@A{Based on the @math{S}-values, we expect prediction made with `mi-ca` to have about 25385 dollars less error than those made with the `al-ak` model!}
+@A{We expect predictions made with the `mi-ca` model to have about 70% less error than predictions made with the `al-ak` model.}
+}
 
 @teacher{
-Make sure your students know to how to calculate what percent less error we expect in predictions from the `ma-nv` model than the `al-ak` model. Students are about to calculate what percent more or less error we expect from predictions made with their models, which will all have different @math{S}-values. Right now everyone is looking at the same @math{S}-values so supporting them will be much less work!
+Make sure your students know to how to calculate what percent less error we expect in predictions from the `mi-ca` model than the `al-ak` model. Students are about to calculate what percent more or less error we expect from predictions made with their models, which will all have different @math{S}-values. Right now everyone is looking at the same @math{S}-values so supporting them will be much less work!
 
 @indented{
 Percent Change &#8192; = &#8192;
 @math{
 \frac{&#8192; \text{Difference} &#8192; \text{between} &#8192; \text{the} &#8192; \text{S-values}&#8192;}
 {\text{S-value} &#8192; \text{for} &#8192; \text{al-ak} &#8192; \text{model}}
-\times 100 &#8192; = &#8192; }
-@math{\frac{28660}{36165} = .79 &#8192; &rarr; &#8192;  79 \%}
+\times 100 &#8192; = &#8192; 
+\frac{25384.76}{36164.683} = .70  &#8192; &rarr; &#8192;  70 \%}
 }
 }
 
 @lesson-instruction{
-- Return to @printable-exercise{model-college-v-income-2.adoc} and complete the third section: *Comparing Models*.
+- Return to @printable-exercise{model-college-v-income-2.adoc} and complete the third section: *A Model of Your Own*, using two states that you identify as likely to produce a model with a better fit.
 }
 
 @teacher{@opt{For a side by side visual comparison of their models have students complete @opt-printable-exercise{graphing-models.adoc}. Students who did not complete @opt-printable-exercise{model-college-v-income-3.adoc} should just sketch the two models they made.
@@ -150,7 +163,7 @@ Further discussion of @vocab{S} and @vocab{Residuals} may be appropriate for old
 Students are introduced to the `lr-plot` function in Pyret, which uses linear regression to fit the best possible linear model to the data.
 
 @teacher{
-If you want to spend more time with students interpreting regression results, writing about findings, or digging into @math{R^2} (a different measure of model fitness), we have an @lesson-link{linear-regression, entire Bootstrap: Data Science lesson on Linear Regression}.
+If you want to spend more time with students interpreting regression results, writing about findings, or digging into @math{R^2} (a different measure of model fitness), we have an entire @lesson-link{linear-regression, Bootstrap: Data Science lesson on Linear Regression}.
 }
 
 === Launch
@@ -178,17 +191,6 @@ Let's use Pyret to find the best possible linear model for predicting median inc
 @Q{Did anything about the optimal model surprise you?}
 }
 
-@strategy{Optional Activity: Guess the Model!}{
-
-1. Divide students into teams of 2-4, and have each team come up with a linear, real-world scenario, then have them write down a linear function that fits this scenario on a sticky note. Make sure no one else can see the function!
-2. On the board or some flip-chart paper, have each team draw a _scatter plot_ for which their linear function is best fit. They should only draw the point cloud - _not the function itself!_ Finally, students title their scatter plot to describe their real-world scenario (e.g. - "total cost vs. number of tickets purchased").
-3. Have teams switch places or rotate, so that each team is in front of another team's scatter plot. Have them figure out the original function, write their best guess on a sticky note, and stick it next to the plot.
-4. Have teams return to their original scatter plot, and look at the model their colleagues guessed. How close were they? What strategies did the class use to figure out the model?
-
-- The slope and y-intercepts can be constrained to make the activity easier or harder. For example, limiting these coefficients to whole numbers, positive numbers, etc.
-- To extend the activity, have the teams continue rotating so that each group adds their sticky note for the best-guess model. Then do a gallery walk so that students can reflect: were the models all pretty close? All over the place? Were the guesses for one coefficient grouped more tightly than the guesses for another?
-}
-
 === Synthesize
 
 @QandA{
@@ -197,7 +199,7 @@ Let's use Pyret to find the best possible linear model for predicting median inc
 @A{We know that we are working with the best possible linear model.}
 }
 
-== Using and Intepreting our Models
+== Using and Interpreting our Models
 
 === Overview
 
@@ -238,7 +240,8 @@ Models are only useful if we know how to use and interpret them!
 @Q{Our model is built from data about all of the existing states. College attendance rates range from 18.3% (West Virginia) to 52.4% (Washington, DC). +
 Suppose two new states were to join the union, one with a 30% college attendance rate and the other with a 90% attendance rate. Is our model more reliable for one of these states than another? Why or why not?
 }
-@A{A model is only as good as the data it was based on. With lots of data between 18.3-52%, this model is much more reliable for the 30% state than the 90% one!}
+@A{This model is much more reliable for the 30% state than the 90% one!}
+@A{A model is only as good as the data it was based on and the data in this dataset ranges from 18.3% to 52%.}
 @Q{How could we use scatter plots and linear models to find answers to _other_ questions, for example:
 - Do taller NBA players tend to make more three-pointers?
 - Do wealthier people live longer?
@@ -246,3 +249,14 @@ Suppose two new states were to join the union, one with a 30% college attendance
 @A{Find a dataset that contains the explanatory variable and response variable, import it into Pyret, and build an lr-plot!}
 }
 
+
+@strategy{Optional Activity: Guess the Model!}{
+
+1. Divide students into teams of 2-4, and have each team come up with a linear, real-world scenario, then have them write down a linear function that fits this scenario on a sticky note. Make sure no one else can see the function!
+2. On the board or some flip-chart paper, have each team draw a _scatter plot_ for which their linear function is best fit. They should only draw the point cloud - _not the function itself!_ Finally, students title their scatter plot to describe their real-world scenario (e.g. - "total cost vs. number of tickets purchased").
+3. Have teams switch places or rotate, so that each team is in front of another team's scatter plot. Have them figure out the original function, write their best guess on a sticky note, and stick it next to the plot.
+4. Have teams return to their original scatter plot, and look at the model their colleagues guessed. How close were they? What strategies did the class use to figure out the model?
+
+- The slope and y-intercepts can be constrained to make the activity easier or harder. For example, limiting these model settings to whole numbers, positive numbers, etc.
+- To extend the activity, have the teams continue rotating so that each group adds their sticky note for the best-guess model. Then do a gallery walk so that students can reflect: were the models all pretty close? All over the place? Were the guesses for one model setting more tightly than the guesses for another?
+}
