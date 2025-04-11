@@ -371,13 +371,14 @@
             (enclose-tag "sub" "" ss)]
           [else (string-append "<sub>" ss "</sub>")])))
 
+#| ; currently unused - all sqrts are handled by MathJax as of 4/11/25
 (define (math-sqrt x)
   ; (printf "math-sqrt of ~s\n" x)
   (let ([n (string-length x)])
     (string-append "√"
       (if (<= n 1) x
           (enclose-span ".overbar" x)))))
-
+|#
 (define (math-italic s #:asciidoc? [asciidoc? #t])
   (if asciidoc?
       (enclose-tag "i" "" s)
@@ -390,7 +391,8 @@
              (regexp-match "\\\\textit" text)
              (regexp-match "\\\\textbf" text)
              (regexp-match "\\\\qquad" text)
-             (and (regexp-match "\\\\sqrt" text) (not asciidoc?))
+             (regexp-match "\\\\sqrt" text)
+             ;(and (regexp-match "\\\\sqrt" text) (not asciidoc?))
              ; (regexp-match "\\\\sqrt" text)
              ; (regexp-match "\\\\sqrt{[^}]+[-+]" text)
              (and (regexp-match "\\\\sqrt{.[^}]" text) asciidoc?)
@@ -419,14 +421,15 @@
                                    (case ctl-seq
                                      [("mbox" "text") (let ([x (local-read-group i "math mbox")])
                                                  x)]
+                                     #| ; all sqrts are forced to mathjax as of 4/11/25
                                      [("sqrt") (let ([x (local-read-group i "math sqrt")])
                                                  ; (printf "sqrt of x = ~s\n" x)
                                                  (math-sqrt (math-unicode-if-possible
                                                               x #:asciidoc? asciidoc?)))]
+                                    |#
                                      [("frac") (let* ([nu (read-mathjax-token i)]
                                                       [de (read-mathjax-token i)])
                                                  (display (math-superscript nu #:asciidoc? asciidoc?) o)
-                                                 ; (display "⁄" o)
                                                  (display "/" o)
                                                  (math-subscript de #:asciidoc? asciidoc?))]
                                      [("overline") (let ([dec (read-mathjax-token i)])
