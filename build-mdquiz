@@ -6,9 +6,7 @@ function process_assessments() {
       if test -d $dd; then
         rm -f $dd/index.html
         rm -f $dd/quiz-style.css
-        rm -f $dd/telemetry.ts
-        rm -fr $dd/src
-        cp -pru node_modules/mdquiz/src $dd
+        cp -pu node_modules/mdquiz/dist/lib.js $dd/
         cp -pu lib/quiz-files/* $dd/
       fi
     done
