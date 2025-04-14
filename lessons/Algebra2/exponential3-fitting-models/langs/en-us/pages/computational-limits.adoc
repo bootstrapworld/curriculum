@@ -19,6 +19,20 @@ td .autonum::after { content: ')' !important; }
 Make sure you are working in your copy of the @starter-file{alg2-covid}.
 }
 
+== Benefits and Downsides of working with Approximations
+
+@n What are some possible *benefits* to approximating large and small numbers when doing computations?
+
+@fitb{}{@ifsoln{Tornadoes can form very quickly, so it's more important to get a warning out *fast*, even if that warning is off by a few minutes or miles.}}
+
+@fitb{}{}
+
+@n What are some possible *downsides* to approximating large and small numbers when doing computations?
+
+@fitb{}{@ifsoln{A satellite whose launch angle is off by just 0.0001° will miss Neptune by 5,000 miles!}}
+
+@fitb{}{@ifsoln{The mass of a neutrino is so small that chopping off the 100th decimal place might mean missing it entirely!}}
+
 == Exponentiation and "RoughNums" in Pyret
 
 @n *Write each of the expressions below in Pyret, then evaluate them and write down the answer.* _The first one has been started for you!_
@@ -55,33 +69,8 @@ _Why do you think Pyret gives an error when comparing identical RoughNums?_
 RoughNums always represent a _range_ of values on the number line, because two different Numbers might both round to the same RoughNum. As a result, there is no guarantee that "roughly one" represents the exact same value as "roughly one".
 }
 
-@center{*Stop here to discuss with the class, before moving on to the next section*}
 
-== Fitting Exponential Models in Pyret
-
-@n In the space below, define `exponential` for the best model from @printable-exercise{exponential-models-ma.adoc}.
-
-@ifsoln{@vspace{1ex}}
-
-@ifsoln{*Answers will vary.* If @math{a = 31.6}, @math{b = 1.047} and @math{k = 119000}, you would get the following:}
-
-`fun exponential(x): (` @fitbruby{8em}{@ifsoln{31.6}}{a} `* expt(` @fitbruby{10em}{@ifsoln{1.047}}{b} `, (~1 * x))) +` @fitbruby{10em}{@ifsoln{119000}}{k} `end`
-
-@n Update the definition for `exponential` in the Definitions Area and click "Run" to reload it. Use `fit-model` to determine how closely `exponential` fits the `MA-table`, and fill in the blanks below to interpret the model. +
-@ifsoln{*Answers will vary. Numbers below are provided for reference only!*} @ifnotsoln{@hspace{1em}}_Hint: If you forgot the contract for `fit-model`, look it up in the @dist-link{Contracts.shtml, Contracts Pages}!_
-
-@indented{
-According to this exponential model, on @fitbruby{6em}{June 9, 2020}{day zero} there were about 
-@fitbruby{1em}{@ifsoln{32}}{a} + @fitbruby{5em}{@ifsoln{119,000}}{k} @fitbruby{10em}{@ifsoln{positive covid cases}}{y-units} in MA, for a total of about 
-@fitbruby{7em}{@ifsoln{119,032}}{a + k}. This number grew exponentially, increasing by a factor of @fitbruby{6em}{@ifsoln{1.047}}{Growth Factor: b} or 
-@fitbruby{9em}{@ifsoln{4.7}}{Growth Rate: (b - 1) &times; 100} % every day. The error in the model is described by an @vocab{S-value} of about
-@fitbruby{3em}{@ifsoln{13,374}}{S}@fitbruby{11em}{@ifsoln{positive COVID cases}}{units}, which is a(n) @fitbruby{8em}{@ifsoln{moderate}}{bad, ok, good} model considering that
-@fitbruby{10em}{@ifsoln{positive cases}}{y-units} in this dataset range from @fitbruby{6em}{@ifsoln{104156}}{lowest y-value} to @fitbruby{6em}{@ifsoln{341925}}{highest y-value}. 
-}
-
-@vspace{1ex}
-
-You know that the pros of using `~1` involve speed. *What are the potential downsides of using `~1` to speed up a calculation?*
+@n The pros of using `~1` involve speed. *What are the potential downsides of using `~1` to speed up a calculation?*
 
 @ifnotsoln{
 @fitb{}{} +
@@ -93,3 +82,9 @@ You know that the pros of using `~1` involve speed. *What are the potential down
 - When calculating a path over an extremely long distance, missing decimal places could result in the Mars Rover missing its destination.
 - For an extremely large population like China, rounding to 10 decimal places might result in discounting an entire sub-population!
 }
+
+@n How likely are these downsides to apply to our Bootstrap work in @starter-file{editor}?
+
+@fitb{}{@ifsoln{We are not doing any super precise calculations and nobody's life depends on our work, so we're pretty safe.}}
+
+@fitb{}{}
