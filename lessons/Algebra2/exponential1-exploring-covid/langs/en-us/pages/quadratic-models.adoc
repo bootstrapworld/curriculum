@@ -1,8 +1,6 @@
 = Quadratic Models for Covid in Massachusetts
 ++++
 <style>
-/* Push content to the top (instead of the default vertical distribution), which was leaving empty space at the top. */
-#content { display: block !important; }
 
 /* Make autonums inside tables look consistent with those outside */
 .autonum { font-weight: bold; }
@@ -59,7 +57,9 @@ For this section, you'll need to have *Slide 1: Quadratic Model for MA* of *Mode
 @n Which quadratic form would be the easiest to fit to this data? @hspace{3em} standard &#9744; @hspace{3em}
 factored &#9744; @hspace{3em}  @ifsoln-choice{vertex}@ifnotsoln{&#9744;}
 
-== Fitting the Model Programmatically @math{f(x) = a(x-h)^2 + k}
+@vspace{1ex}
+
+== Fitting the Model Programmatically  @math{f(x) = a(x-h)^2 + k}
 _For this section, open your copy of the @starter-file{alg2-covid}._
 
 @n In the space below, define `quadratic1` to be the first model you fit in Desmos.
@@ -77,16 +77,20 @@ _Hint: If you forgot the contract for `fit-model`, look it up in the @dist-link{
 
 @hspace{1em} @math{S} for `quadratic1`: @fitb{9em}{@ifsoln{varies}} @hspace{2em} @math{S} for `quadratic2`: @fitb{9em}{@ifsoln{varies}} @hspace{2em} @math{S} for `quadratic3`: @fitb{}{@ifsoln{varies}}
 
+@vspace{1ex}
+
 == What does this model actually mean?
 
 @teacher{Numerical values below will vary!}
 
 After experimenting, the best quadratic model I came up with for this dataset shows that @fitbruby{5em}{@ifsoln{days}}{x-variable} are correlated to @fitbruby{}{@ifsoln{positive COVID cases}}{y-variable} +
 The vertex of the parabola drawn by this model is a @fitbruby{10em}{@ifsoln{minima}}{minima or maxima?} at about @fitbruby{8em}{@ifsoln{(70, 88000)}}{(x, y)}, which predicts that @fitb{}{}
-@fitb{}{@ifsoln{the lowest number of cases would be 88,000 at day 70}}. +
-The error in the model is described by an @vocab{S-value} of about @fitbruby{3em}{@ifsoln{22,109}}{S}@fitbruby{11em}{@ifsoln{positive COVID cases}}{units}, which is a @fitbruby{}{@ifsoln{significant}}{bad, ok, good} +
-fit considering that @fitbruby{8em}{@ifsoln{positive cases}}{y-variable} in this dataset range from @fitbruby{8em}{@ifsoln{104156}}{lowest y-value} to @fitbruby{8em}{@ifsoln{341925}}{highest y-value}.
+@fitb{}{@ifsoln{the lowest number of cases would be 88,000 at day 70}} +
+The error in the model is described by an @vocab{S-value} of about @fitbruby{5em}{@ifsoln{22,109}}{S}@fitbruby{11em}{@ifsoln{positive COVID cases}}{units}.  I
+@fitbruby{18em}{@ifsoln{disagree}}{strongly agree, agree, disagree, strongly disagree} that this model is a good fit considering that
+@fitbruby{10em}{@ifsoln{positive cases}}{y-variable} in this dataset range from @fitbruby{9em}{@ifsoln{104156}}{lowest y-value} to @fitbruby{9em}{@ifsoln{341925}}{highest y-value}.
 
+[.no-flex-section]
 == Are Quadratic Models a Good Fit for This Data?
 
 @n Would you feel good about making predictions based on these models? Why or why not? @fitb{}{} +

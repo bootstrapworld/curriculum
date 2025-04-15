@@ -13,13 +13,12 @@
 
 | Lesson Goals
 | Students will be able to...
-
-- Model logarithmic relationships using functions
+@objectives
 
 | Student-facing Lesson Goals
 |
 
-- Let's use Pyret to model logarithmic relationships in data
+- Let's use Pyret to compute logarithmic models for our data.
 
 
 | Materials
@@ -53,7 +52,7 @@
 === Overview
 Having discovered that changing the scale of a graph allows us to _see_ logarithmic growth as linear, but still doesn't allow us to _treat_ it as linear, students learn to *transform the data* by applying a function to each row and building a new column that can be fit with a linear model.
 
-Note: this also opens the door for teaching inverse functions!
+Note: This also opens the door for teaching inverse functions!
 
 === Launch
 
@@ -76,7 +75,7 @@ Instead of plotting `pc-gdp` on a _logarithmic_ x-axis, we could *transform the 
 @slidebreak
 
 @QandA{
-@Q{What values did you come up with for the coefficients @math{m} and @math{b} in your best-guess linear model?}
+@Q{What values did you come up with for @math{m} and @math{b} in your best-guess linear model?}
 @A{Record different students' responses for @math{m} and @math{b} on the board.}
 @A{These numbers should be somewhat close to their earlier responses for @math{a} and @math{k}!}
 @Q{Were those values very similar to or very different from our best-guess logarithmic model?}
@@ -90,15 +89,15 @@ Instead of plotting `pc-gdp` on a _logarithmic_ x-axis, we could *transform the 
 
 @lesson-point{
 
-- the *slope* in the transformed, linear model is the same as the *log coefficient* in the un-transformed logarithmic model
+- the *slope* in the transformed, linear model is the same as the *log coefficient* in the untransformed logarithmic model
 
-- the *vertical shift* in the transformed, linear model is the same as the *vertical shift* in the un-transformed logarithmic model
+- the *vertical shift* in the transformed, linear model is the same as the *vertical shift* in the untransformed logarithmic model
 }
 
 === Investigate
 
 
-Now that we know how the coefficients in our linear model of transformed data relate to the coefficients in our logarithmic model, let's return to Pyret to run linear regression on the transformed data, find the *best possible linear model*, and use the coefficients to define our *optimal _logarithmic_ model!*
+Now that we know how the model settings in our linear model of transformed data relate to the model settings in our logarithmic model, let's return to Pyret to run linear regression on the transformed data, find the *best possible linear model*, and use the model settings to define our *optimal _logarithmic_ model!*
 
 @slidebreak
 
@@ -109,16 +108,16 @@ Now that we know how the coefficients in our linear model of transformed data re
 
 We transformed the data in three steps:
 
-1. Define the transformation function @math{g(r)} to produce the log of the `pc-gdp` column.
-2. Build a new column `log(pc-gdp)` that gets populated by applying @math{g(r)} to transform each of our original x-values.
-3. Use the new column as the @vocab{explanatory variable} on the x-axis for our scatter plot.
+1. Defined the transformation function @math{g(r)} to produce the log of the `pc-gdp` column.
+2. Built a new column `log(pc-gdp)` by applying @math{g(r)} to transform each of our original x-values.
+3. Used the new column as the @vocab{explanatory variable} on the x-axis for our scatter plot.
 
 @teacher{Address any student questions about `build-column`, the Pyret function they've just discovered. Verify that students have recorded the slope and vertical shift for their regression line. Then, emphasize the key ideas below.}
 
 @slidebreak
 
 - At each point in our linear model, @math{y} is the _predicted median lifespan_, and @math{x} is the _log of per-capita gdp in dollars_.
-- We want @math{x} to represent the *original, un-transformed* value, simply using _per-capita gdp in thousands_ as-is...
+- We want @math{x} to represent the *original, untransformed* value, simply using _per-capita gdp in thousands_ as-is...
 
 @slidebreak
 
@@ -132,39 +131,30 @@ We transformed the data in three steps:
 @right{@image{images/lr-plot-transformed.png, 350}}Just like in Desmos, transforming the `pc-gdp` column with a log function produces a scatter plot showing a linear pattern in the data! +
 @vspace{1ex} +
 Pyret's `lr-plot` tool computes the best possible linear model for our transformed data: +
-@indented{@math{y = 11.9011x + ~59.967}} 
+@indented{@math{y = 11.9012x + ~24.2636}} 
 Our @math{S} has dropped to 4.49, showing a much better correlation than before.
 
 @clear
 
 @slidebreak
 
-@right{@image{images/logarithmic-model.png, 350}}From @printable-exercise{transforming-data.adoc}, we know that the coefficients used in the transformed, linear model are the same ones used in the logarithmic, un-transformed model:
+@right{@image{images/logarithmic-model.png, 350}}From @printable-exercise{transforming-data.adoc}, we know that the model settings used in the transformed, linear model are the same ones used in the logarithmic, untransformed model:
 
-@indented{@math{logarithmic3(x) = 11.9011 \log_{10}(x) + 59.967}}
+@indented{@math{logarithmic3(x) = 11.9012 \log_{10}(x) + 24.2636}}
 
-@indented{@show{(code '(define (logarithmic3 x) (+ (* 11.9011 (log x)) 59.967)))}}
+@indented{@show{(code '(define (logarithmic3 x) (+ (* 11.9012 (log x)) 24.2636)))}}
 
 The resulting logarithmic model can be fit to our original scatter plot, showing a much better fit than our 2-point-derived estimates.
 
 - How do you interpret this model?
 
-@strategy{Optional Activity: Guess the Model!}{
 
-1. Divide students into teams of 2-4, and have each team come up with a logarithmic, real-world scenario, then have them write down a logarithmic function that fits this scenario on a sticky note. Make sure no one else can see the function!
-2. On the board or some flip-chart paper, have each team draw a _scatter plot_ for which their logarithmic function is best fit. They should only draw the point cloud - _not the function itself!_ Finally, students title their scatter plot to describe their real-world scenario (e.g. - "Age of a Person from Birth to 16 vs. Number of Cells in their Body").
-3. Have teams switch places or rotate, so that each team is in front of another team's scatter plot. Have them figure out the original function, write their best guess on a sticky note, and stick it next to the plot.
-4. Have teams return to their original scatter plot, and look at the model their colleagues guessed. How close were they? What strategies did the class use to figure out the model?
-
-- The coefficients can be constrained to make the activity easier or harder. For example, limiting these coefficients to whole numbers, positive numbers, etc.
-- To extend the activity, have the teams continue rotating so that each group adds their sticky note for the best-guess model. Then do a gallery walk so that students can reflect: were the models all pretty close? All over the place? Were the guesses for one coefficient grouped more tightly than the guesses for another?
-}
 
 === Synthesize
 
 @QandA{
 @Q{Why is the @vocab{S-value} for our logarithmic model the same as the @vocab{S-value} for our linear model after transforming?}
-@Q{Why were our coefficients for linear and logarithmic models the same, even though they were for different terms?}
+@Q{Why were our model settings for linear and logarithmic models the same, even though they were for different terms?}
 @Q{Why do you think the relationship between wealth and median lifespan is logarithmic?}
 @Q{Suppose all the tech companies in the Bay Area (Google, Apple, Facebook, etc.) decided to secede and form their own country with a `pc-gdp` far, far beyond the range of the rest of the data. Would it be appropriate to use our model to predict the `median-lifespan` for their employees? Why or why not?}
 }
@@ -189,4 +179,17 @@ For more practice transforming data and programming with filters:
 
 @teacher{
 We are working on collecting more datasets that can be modeled with logarithmic functions so that we can offer students more practice with using linear regression to build logarithmic models.
+}
+
+@vspace{1ex}
+
+@strategy{Optional Activity: Guess the Model!}{
+
+1. Divide students into teams of 2-4, and have each team come up with a logarithmic, real-world scenario, then have them write down a logarithmic function that fits this scenario on a sticky note. Make sure no one else can see the function!
+2. On the board or some flip-chart paper, have each team draw a _scatter plot_ for which their logarithmic function is best fit. They should only draw the point cloud - _not the function itself!_ Finally, students title their scatter plot to describe their real-world scenario (e.g. - "Age of a Person from Birth to 16 vs. Number of Cells in their Body").
+3. Have teams switch places or rotate, so that each team is in front of another team's scatter plot. Have them figure out the original function, write their best guess on a sticky note, and stick it next to the plot.
+4. Have teams return to their original scatter plot, and look at the model their colleagues guessed. How close were they? What strategies did the class use to figure out the model?
+
+- The model settings can be constrained to make the activity easier or harder. For example, limiting these model settings to whole numbers, positive numbers, etc.
+- To extend the activity, have the teams continue rotating so that each group adds their sticky note for the best-guess model. Then do a gallery walk so that students can reflect: were the models all pretty close? All over the place? Were the guesses for one model setting grouped more tightly than the guesses for another?
 }

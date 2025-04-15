@@ -1,15 +1,7 @@
 = Models for Vermont
 ++++
 <style>
-/* Make autonums inside tables look consistent with those outside */
-body.workbookpage td .autonum::after { content: ')' !important; }
-
-/* Tweak table formatting */
-td:last-child { padding-top: 0; padding-bottom: 0; }
-body .center { padding: 0; }
-
-/* Push content to the top (instead of the default vertical distribution), which was leaving empty space at the top. */
-#content { display: block !important; }
+.listingblock { width: 75%; margin: 0 auto; }
 </style>
 ++++
 
@@ -17,25 +9,27 @@ body .center { padding: 0; }
 For this page, you'll need to have the @starter-file{alg2-covid} open on your computer. If you haven't already, select *Save a Copy* from the "File" menu to make a copy of the file that's just for you.
 }
 
-@n Find the function called `is-MA` in the Definitions Area under "Define some helper functions" and read the comments carefully!
+@vspace{1ex}
 
-@indented{
-a. What is the Domain of `is-MA`? @fitb{20em}{@ifsoln{Row}} What is its Range? @fitb{}{@ifsoln{Boolean}}
+*Find the definition of `is-MA` in your starter file.* The code is shown here:
+```
+# is-MA :: Row -> Boolean
+# consumes a Row, and checks if state == "MA" is equal to "MA"
+fun is-MA(r): r["state"] == "MA" end
+```
 
-b. What do you _think_ @show{(code '(is-MA MA1))} will evalute to? @fitb{7em}{@ifsoln{true}}. @show{(code '(is-MA CT1))}? @fitb{7em}{@ifsoln{false}}. @show{(code '(is-MA ME1))}? @fitb{}{@ifsoln{false}}
+@n Under the definition of `is-MA`, define a _new_ function called `is-VT`, which tests to see if the `state` value is equal to "VT." Click run and try it out!
 
-_Try typing each of the `is-MA` expressions from *b* into the Interactions Area on the right and confirm that you were correct._
-}
+@vspace{1ex}
 
-@n Find `MA-table` in the Definitions Area under "Define some grouped and/or random samples". What is that code doing? @fitb{}{} +
-@fitb{}{@ifsoln{Defining a new table called `MA-table`, which includes all the rows from our original table where state is "MA"}} +
-@fitb{}{}
+*Find the definition of `MA-table` in your starter file.* The code is shown here:
+```
+######################################################### 
+# Define some grouped and/or random samples
+MA-table = filter(covid-table, is-MA)
+```
 
-== Linear Model for Vermont (VT)
-
-@n Define a new function `is-VT` and add it beneath `is-MA`.
-
-@n Create a new grouped sample called `VT-table` and add it beneath `MA-table`.
+@n Under the definition of `MA-table`, define a _new_ grouped sample called `VT-table` containing all the rows for the state of Vermont.` Click run and try it out!
 
 @n Use `lr-plot` to obtain the best-possible linear model for the relationship between `day` and `positive` in the `VT-table`, then fill in the blanks below:
 
@@ -57,7 +51,9 @@ For this section, in addition to Pyret, open *Slide 5: Exponential Model for VT*
 
 @n Return to @starter-file{alg2-covid}. At the bottom of the Definitions Area, define `exponential-VT` to be the model you just found.
 
-- Click "Run" to load your definition, then fit the model using `VT-table`
+@vspace{1ex}
+
+Click "Run" to load your definition, then fit the model using `VT-table`.
 
 @indented{
 According to this model, on @fitbruby{6em}{June 9, 2020}{day zero} there were about

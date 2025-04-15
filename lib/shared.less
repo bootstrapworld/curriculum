@@ -87,6 +87,8 @@ body {
   .MathJax, .mathunicode {
     display: inline-block;
     font-weight: normal !important;
+    margin-left: 2px;
+    margin-right: 3px;
 
     .overbar {
       border-top: 1px solid;
@@ -107,7 +109,11 @@ body {
     font-size: inherit !important;
     line-height: 0;
   }
-  .mathunicode i { font-family: 'MJXTEX-I'; margin-right: 1px;}
+  em .mathunicode, em .MathJax * { font-family: 'MJXTEX-I'; margin-right: 1px;}
+  strong .mathunicode, strong .MathJax * { font-family: 'MJXTEX-B'; margin-right: 1px;}
+  em strong .mathunicode, strong em .mathunicode, strong .MathJax .TEX-I, em .MathJax .TEX-B { 
+    font-family: 'MJXTEX-BI'; margin-right: 1px;
+  }
   
   table, td.tableblock>.content { margin-bottom: 0px; }
   tr th.tableblock code, td.tableblock code { background: none; }
@@ -180,7 +186,7 @@ body {
   /* images and floated images */
   .left  { text-align: left  !important; }
   .right { text-align: right !important; }
-  .right img { margin-left: 1em; margin-bottom: 1em; }
+  .right .image-figure { margin-left: 1em; margin-bottom: 1em; }
   .center, .centered-image {
     display:          block;
     margin-left:      auto;
@@ -216,7 +222,7 @@ body {
     line-height: 1.1;
     word-break: break-word;
     text-align: center;
-    margin:     10px 0;
+    margin:  0;
     color:      black;
     &:empty { display: none; }
   }
@@ -422,38 +428,6 @@ lines on some browsers */
     .Optional::before, .OptProject::before, .handout::before { color: gray;}
   }
 
-  /* Language table */
-  .lang-features-table {
-    display: table;
-    z-index: 999;
-    position: fixed;
-    top:  50%;
-    left: 50%;
-    width: 500px;
-    transform: translate(-50%, -50%);
-    border:  solid 5px gray !important;
-    * {
-      margin:             0px;
-      padding:            1px;
-      font-size:          0.8rem;
-    }
-    p { font-family: monospace; }
-    
-    tr:first-of-type, tr:first-of-type p {
-      background-color:   @print-section-heading;
-      font-weight:        bold;
-      text-align:         center;
-      font-family:        inherit; /* Header row should not be monospace */
-    }
-    .centered-image { display: inline; } /* Override default image treatment */
-    tr td:nth-child(1), tr td:nth-child(1) p {
-      background-color:   transparent;
-      text-align:         center;
-      vertical-align:     middle;
-      font-family:        inherit; /* Type cell should not be monospace */
-    }
-  }
-
   /* Lesson sidebar */
   @keyframes slideInFromLeft {
       0% { transform: translateX(-100%); }
@@ -559,6 +533,21 @@ lines on some browsers */
   .duration { display: none; }
   /* Special links back to older, pre-remix materials */
   .old-materials p { width:100%; background:@translucent-bg-color; color:black; text-align:center; }
+
+  .optional:has(.q-and-a) {
+    border: 2px;
+    padding: 15px;
+    border-style: groove;
+    border-radius: 20px;
+    /* Override Asciidoc default here */
+    .exampleblock > .content { 
+      background-color: inherit; 
+      border:           none; 
+      box-shadow:       none;
+      border-radius:    20px;
+    }
+    .q-and-a { border-radius: 20px; }
+  }
 
   code { line-height: 1.5 !important; }
   .codesexp, .circleevalsexp, .editbox, .cm-s-scheme { font-size: 0.8em; }
@@ -737,7 +726,7 @@ body.workbookpage {
           &.halign-center { justify-content: center; }
           &.halign-right  { justify-content: right;  }         }
       }
-      > tr:nth-of-type(even) > td { background: #f8f8f7; }
+      > tr:nth-of-type(even) > td { background-color: #f8f8f7; }
     } 
   }
   /* Override AsciiDoc table defaults based on asciidoc classnames */
@@ -761,16 +750,9 @@ body.workbookpage {
   table.graph {
     grid-gap: var(--min-gap, 20px); 
     margin-top: 5px;
-
-    /* Location and style of the coefficient value */
-    td p.tableblock { 
-      top:        3px;
-      right:      3px;
-      position:   absolute; 
-      background: white; 
-    }
-
+    
     td {
+      padding: 0;
       border: none !important;
       background-image:
         linear-gradient(lightblue 2px, transparent 2px),
@@ -801,6 +783,21 @@ body.workbookpage {
       left:    calc(var(--width , 3in) * (var(--left_pct, .50) - .08));
       top:     2%;
       transform: rotate(270deg);
+    }
+
+    /* Location and style of the coefficient value */
+    td p > .mathunicode:first-child { 
+      top:        6px;
+      right:      3px;
+      position:   absolute; 
+      background: white; 
+      z-index:    10;
+    }
+
+    /* Squeeze solution img to the exact dimensions of the td */
+    .solution *:not(img) { display: contents; }
+    .solution, .solution img { 
+      position: absolute; width: 100%; height: 100%; 
     }
   }
 

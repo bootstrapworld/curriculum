@@ -1,0 +1,119 @@
+= Linear Relationships on a Changing Scale
+
+++++
+<style>
+/* Push content to the top (instead of the default vertical distribution), which was leaving empty space at the top. */
+#content { display: block !important; }
+body.workbookpage .studentAnswerShort { min-width: 30pt; } .studentAnswerMedium { min-width: 30pt !important;}
+
+/* Shrink vertical spacing on fitbs */
+.fitb, .fitbruby{padding-top: 1rem;}
+</style>
+++++
+
+////
+- Import Desmos Styles
+-
+- This includes some inline CSS which loads the Desmos font,
+- which includes special glyphs used for icons on Desmos.com
+-
+- It also defines the classname '.desmosbutton', which is used
+- to style all demos glyphs
+-
+- Finally, it defines AsciiDoc variables for glyphs we use:
+- {points}
+- {caret}
+- {magnifying}
+- {wrench}
+-
+- Here's an example of using these:
+- This is a wrench icon in desmos: [.desmosbutton]#{wrench}#
+////
+
+@include{fragments/desmos.adoc}
+
+== Lines and Intervals
+@link-instructions{
+Make sure you're on *Slide 5: Changing the Scale (Linear)* of *Fitting Wealth-v-Health and Exploring Logarithmic Models*.
+}
+
+- On the x-axis (black numbers), you'll see a sequence of numbers showing the intervals (0, 1, 2, 3 ...) 
+
+@n What kind of growth does the sequence on the x-axis show? (circle one) @hspace{2em}
+@ifsoln-choice{Linearly} 		@hspace{1em}
+Quadratically 					@hspace{1em}
+Exponentially 					@hspace{1em}
+Logarithmically
+
+@n What kind of growth does the sequence on the y-axis show? (circle one) @hspace{2em}
+@ifsoln-choice{Linearly} 		@hspace{1em}
+Quadratically 					@hspace{1em}
+Exponentially 					@hspace{1em}
+Logarithmically
+
+@n _Relative to the x-intervals,_ the y-intervals grow (circle one): @hspace{3.5em} 
+@ifsoln-choice{Linearly} 		@hspace{1em}
+Quadratically 					@hspace{1em}
+Exponentially 					@hspace{1em}
+Logarithmically
+
+@n The function @math{f} is (circle one): @hspace{18em}
+@ifsoln-choice{Linear}			@hspace{1em}
+Quadratic 						@hspace{1em}
+Exponential 					@hspace{1em}
+Logarithmic
+
+@n _Relative to the x-values,_ @math{f(x)} grows (circle one): @hspace{8.5em} 
+@ifsoln-choice{Linearly} 		@hspace{1em}
+Quadratically 					@hspace{1em}
+Exponentially 					@hspace{1em}
+Logarithmically
+
+== Changing the Scale of @math{y}
+- Click on the wrench button ([.desmosbutton]#{wrench}#) in the top-right corner of the Desmos graph to *open the "Graph Settings" window.*
+- *Expand the "More Options" section* by clicking the triangle ([.desmosbutton]#{caret}#).
+- *Change the y-axis* scale from `Linear` to `Logarithmic`, and close the settings window by clicking on the graph.
+
+@n Now, the intervals on the *y-axis* (black numbers) grow @fitbruby{35em}{@ifsoln{Exponentially}}{Linearly, Quadratically, Exponentially, or Logarithmically}.
+
+@n _For each increase along the x-intervals_, the y-intervals grow (circle one): @hspace{8.5em} 
+Linearly 						@hspace{1em}
+Quadratically 					@hspace{1em}
+@ifsoln-choice{Exponentially}	@hspace{1em}
+Logarithmically
+
+@n What happened to the graph of @math{f}? @fitb{}{@ifsoln{it turned into a logarithmic curve!}}
+
+@n Why? @fitb{}{@ifsoln{With y-intervals growing exponentially relative to x-intervals, the straight line wound up curving towards the x-axis making it appear linear!}} +
+@fitb{}{}
+@fitb{}{}
+
+== Changing the Scale of @math{x}
+- Return to the "Graph Settings" window, make the _x-axis_ `Linear` and make the _y-axis_ `Logarithmic`. 
+
+@n Now, the intervals on the *x-axis* (black numbers) grow @fitbruby{35em}{@ifsoln{Exponentially}}{Linearly, Quadratically, Exponentially, or Logarithmically}.
+
+@n _For each increase along the x-intervals_, the y-intervals grow (circle one): @hspace{2em} 
+Linearly				 		@hspace{1em}
+Quadratically 					@hspace{1em}
+Exponentially 					@hspace{1em}
+@ifsoln-choice{Logarithmically}
+
+@n What happened to the graph of @math{f}? @fitb{}{@ifsoln{it turned into an exponential curve!}}
+
+@n Why do you think that happened? @fitb{}{@ifsoln{With the y-intervals growing more slowly, the line curves up to the y-axis}} +
+@fitb{}{}
+
+== Changing the Scale of @math{x} and @math{y}
+- Return to the "Graph Settings" window, and make _both_ axes `Logarithmic`. 
+
+@n _For each increase along the x-intervals_, the y-intervals grow (circle one): @hspace{2em} 
+@ifsoln-choice{Linearly}		@hspace{1em}
+Quadratically 					@hspace{1em}
+Exponentially 					@hspace{1em}
+Logarithmically
+
+@n What happened to the graph of @math{f}? @fitb{}{@ifsoln{it stayed linear!}}
+
+@n Why do you think that happened? @fitb{}{@ifsoln{It goes back to being linear! With both intervals growing at the same rate relative to one another,}} +
+@fitb{}{@ifsoln{a straight line stays straight.}}

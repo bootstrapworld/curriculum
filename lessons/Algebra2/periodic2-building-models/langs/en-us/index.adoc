@@ -1,6 +1,6 @@
 = Building Periodic Models
 
-@description{Students investigate periodic relationships, first by deciphering the patterns in a dataset with perfect periodic (sinusoidal) behavior and then by looking at data about Carbon Dioxide, using an inquiry-based model involving hypothesizing, experimental and computational modeling, and sense-making. }
+@description{Students investigate periodic relationships, by deciphering the patterns in a dataset with perfect periodic (sinusoidal) behavior using an inquiry-based model involving hypothesizing, experimental and computational modeling, and sense-making. }
 
 @lesson-prereqs{periodic1-exploring-rides}
 
@@ -11,16 +11,12 @@
 
 | Lesson Goals
 | Students will be able to...
-
-- Read and interpret real-world data, presented in a scatter plot
-- Recognize periodic behavior in tables and graphs
-- Model periodic relationships using functions
-
+@objectives
 
 | Student-facing Lesson Goals
 |
 
-- Let's use Pyret to model periodic relationships in data
+- Let's use Pyret to model periodic relationships in data.
 
 | Materials
 |[.materials-links]
@@ -29,179 +25,238 @@
 | Preparation
 |
 @preparation{
+- Decide whether or not you want to print and distribute copies of @opt-printable-exercise{vocab-from-ferris-wheel.adoc}.
 - Much of the exploration in this lesson hinges on a custom-built interactive Desmos activity. +
 You will want to:
  * Open @starter-file{alg2-exploring-periodic-desmos}.
  * Make a link or code to share with your students.
  * Decide how you will share the link or code with students and, if you are using our Google Slides, add the appropriate link to the slide deck.
- * Set the pacing so that students are only able to interact with the first three slides. _(As the lesson progresses you will be directed to adjust the pacing or sync students to you so that they have access to relevant slides.)_
+ * Set the pacing so that students are only able to interact with the first slide. _(As the lesson progresses you will be directed to adjust the pacing so that students have access to relevant slides.)_
 - _If you're a first-time Desmos user, fear not!_ @dist-link{pages/desmos-instructions-alg2.adoc, _Here's what you need to do._}
 }
 |===
 
-
-== Periodic Functions
+== Describing Periodic Models
 @objective{periodic-situations}
 
 === Overview
-Students are introduced to periodic functions, and they become familiar with the terminology to describe them.
+Students are introduced to the basic form of sine and cosine functions, and become familiar with the terminology to describe them.
 
 === Launch
-We began by graphing the relationship between the legs of a right triangle and the angle formed based on the time on a clock using the functions @math{A(time)} and @math{B(time)}.
-
-To plot these relationships when the input is @vocab{radians}, instead of hours, we'll use the @math{sine} and @math{cosine} functions. In Pyret (and most calculators) these function names are abbreviated as `sin` and `cos`.
 
 @lesson-instruction{
-- One of these functions computes the "x values" from our unit circle (@math{A} on the unit clock). The other computes the y-values (@math{B} on the clock).
-- Complete @printable-exercise{periodic1-exploring-rides/pages/converting-angles.adoc} to determine which is which!
-- The contracts for these functions are: +
-@hspace{4em}
-@show{(contracts
-'("sin" ("Number") "Number")
-'("cos" ("Number") "Number")
-)}
+- Complete @printable-exercise{vocab-from-diagram.adoc} using what you can learn from the diagram to come up with explanations for each of the terms.
 }
 
-*Note:* the numbers that these functions expect aren't hours, minutes, pizza slices or degrees. _They consume @vocab{radians}!_
-
-=== Investigate
-Periodic models for sin and cos relationships have the basic form:
-
-@center{@math{f(x) = a \sin(b(x - h)) + k} @hspace{1em} **OR** @hspace{1em} @math{g(x) = a \cos(b(x - h)) + k}}
-
-Both @math{sin} and @math{cos} are closely related to one another, and each one can be expressed in terms of the other. We're going to investigate @math{sin} for now, but everything you learn will also apply to @math{cos}.
+@slidebreak
+@ifslide{@right{@image{images/wave-labeled-terms.png, 450}}}
+@ifnotslide{@center{@image{images/wave-labeled-terms.png, 450}}}
 
 @QandA{
-@Q{Many of the models we've studied had a coefficient added at the end of the definition. Thinking back to what you learned, what effect do you think @math{k} has on a periodic model?}
-@A{It's the vertical shift - it moves the midline of the graph up and down the y-axis.}
-@Q{What effect do you think each of the _other_ coefficients has on the model?}
-@A{Some may recognize @math{h} as the horizontal shift, or @math{a} as some kind of multiplier that makes the peaks higher and the troughs lower}
+@Q{What terms do you feel confident in your description of?}
+@Q{What terms do you have questions about?}
 }
 
 @slidebreak
 
-@teacher{Sync or pace students to __Slide 2: Modeling the Ferris Wheel Dataset (sin)__ of @starter-file{alg2-exploring-periodic-desmos}.}
+- @vocab{Peaks} - the highest points on the wave (also called @vocab{Crests})
+- @vocab{Valleys} - the lowest points on the wave (also called @vocab{Troughs})
+- @vocab{Midline} - a line (or curve!) that is always halfway between the @vocab{peaks} and the @vocab{valleys}
+- @vocab{Amplitude} - the distance from a peak or valley to the @vocab{midline}
+- @vocab{Period} - the distance over which the curve travels before it begins to repeat itself (one complete wave)
+
+NOTE: _Since periodic functions rise and fall repeatedly, there isn't a single maxima or minima, but math books sometimes refer to each peak and valley as a "local maxima" or "local minima"_
+
+@slidebreak
+
+@teacher{@opt{You may want to print copies of @opt-printable-exercise{vocab-from-ferris-wheel.adoc} for students to complete in advance of the upcoming discussion about the ferris wheel data.}}
+
+@center{@image{images/ferris-wheel-scatter-plot-w-curve.png, 80%}}
+
+@QandA{
+@Q{Where does the ferris wheel dataset appear to have @vocab{peaks}?}
+@A{(15, 205), (45, 205) (75, 205), (105, 205)...}
+
+@Q{Where does the ferris wheel dataset appear to have @vocab{valleys}?}
+@A{(0, 5), (30, 5), (60, 5), (90, 5)...}
+
+@Q{What does the @vocab{period} of this dataset appear to be?}
+@A{30 minutes}
+
+@Q{Where does the @vocab{midline} of this dataset appear to be?}
+@A{102.5 feet}
+
+@Q{What is the shape of the midline? Is it straight? Does it slope up or down?}
+@A{It's a straight, horizontal line (no slope)}
+
+@Q{What does the @vocab{amplitude} of this dataset appear to be?}
+@A{100 feet}
+}
 
 @lesson-instruction{
-- Let's return to the *Exploring Periodic Models Desmos file* to experiment with the coefficients of periodic models!
-- You should now be on *Slide 2: Modeling the Ferris Wheel Dataset (sin)*.
-- Adjust the sliders to fit this data. How close can you get?
-- With your partner or group, complete @printable-exercise{graphing-models-a.adoc}, @printable-exercise{graphing-models-b.adoc}, and @printable-exercise{graphing-models-h.adoc}.
-- Then turn to @printable-exercise{vocab-from-diagram.adoc} and
-see if you can come up with explanations for what each of the terms on this diagram refer to.
+- Turn to @printable-exercise{matching-periodic-descriptions.adoc} and match the graphs of periodic functions to their written descriptions.
+- What strategies did you use to match the graphs to the descriptions?
 }
 
-@slidebreak
+=== Investigate
+
+@teacher{Make sure you have created a link or code for your class to @starter-file{alg2-exploring-periodic-desmos} and paced the class so they have access to __Slide 1: Modeling the Ferris Wheel Dataset (sine)__.
+
+Note: The desmos slider activity in this lesson sections uses *Sine* as the model. The second section of this lesson introduces the idea that we can use either sine or cosine to model periodic functions and includes other slider activities through which students will explore how they are related.
+}
+
+@lesson-instruction{
+- We are about to explore the model settings in the sine model for periodic relationships: @hspace{1em} @math{f(x) = a \sin(b(x - h)) + k}
+- Take a moment to think back to other models we've seen and predict what effect each of the model settings will have on the shape of this model.
+}
+
+@teacher{
+Some students may recognize @math{k} as the vertical shift, @math{h} as the horizontal shift, or @math{a} as some kind of multiplier that makes the peaks higher and the valleys lower. The point here is just to encourage them to think about what patterns they've already seen. We are about to experiment with Desmos sliders to investigate how each of these model settings influences the shape of the model.
+}
+
+@lesson-instruction{
+- Open the *Desmos* link I've shared with you. (The file should be called *Exploring Periodic Models Desmos file*.)
+- You should now be on *Slide 1: Modeling the Ferris Wheel Dataset (sine)*.
+- Adjust the sliders to fit this data. How close can you get?
+- With your partner or group, experiment with the model settings of periodic models to complete these three pages:
+  * @printable-exercise{graphing-models-a.adoc}
+  * @printable-exercise{graphing-models-b.adoc}
+  * @printable-exercise{graphing-models-h.adoc}
+}
 
 @teacher{As you debrief, give ample time for students to hear each other's thinking. Concepts like amplitude and frequency can be difficult to describe, and having students reach a consensus on their definition in their own words will help deepen their understanding.}
 
-@centered-image{images/wave-labeled-terms.png, 450}
-
 @slidebreak
 
-*Peaks, Troughs and Midline*
+==== Amplitude (@math{a})
 
-When graphed from 0 to @math{2\pi}, periodic functions rise to a certain height above a @vocab{Midline}, then drop the same distance below it, then rise and fall again to complete the cycle. This cycle then repeats over and over.
+Determines how much the curve rises and falls above the midline.
 
-- @vocab{Peaks} - the highest points on the wave (also called @vocab{Crests})
-  * _Since periodic functions rise and fall repeatedly, there isn't a maxima, but math books sometimes refer to each peak as a local maxima_
-- @vocab{Troughs} - the lowest points on the wave
-  * _Since periodic functions rise and fall repeatedly, there isn't a minima, but math books sometimes refer to each trough as a local minima_
-- @vocab{Midline} - a horizontal line that falls halfway between the peaks and the troughs
+==== Period
 
-@slidebreak
+The distance over which the curve travels before it begins to repeat itself (one complete wave). It can be measured from peak to peak, from valley to valley, or from any start point to an identical end point that follows both a peak and a valley.
 
-==== Amplitude @math{a}
+==== Frequency (@math{b})
 
-The distance from a peak or trough to the @vocab{midline}.
+The number of @vocab{periods} that occur over a @math{2\pi} interval. @hspace{1em} @big{@math{\text{Period} = 2\pi \over \text{frequency}}}
 
-@slidebreak
-
-==== @math{\text{Period} = 2\pi \over \text{frequency}}
-
-The period is the horizontal distance over which the curve travels before it begins to repeat itself (one complete wave).
-- It can be measured from peak to peak or from trough to trough.
-- The @vocab{frequency} (@math{b}) is _how many cycles_ occur over a @math{2\pi} interval.
-[.rideData, cols="^4a,^1a, ^1a", options="header", stripes="none"]
+@indented{
+[.data-table, cols="^4a,^1a, ^1a", options="header", stripes="none"]
 |===
-|																			| Period 		| Frequency
-| When @math{b = 1}															|@math{2\pi} 	| 1
-| When the @vocab{period} is cut in half, the @vocab{frequency} _doubles_	|@math{\pi} 	| 2
-| When the @vocab{period} doubles, the @vocab{frequency} is _cut in half_	|@math{4\pi}	| @math{1/2}
+|
+| Period
+| Frequency
+
+| When @math{b = 1}
+| @math{2\pi}
+| 1
+
+| When the @vocab{period} is cut in half, the @vocab{frequency} _doubles_
+| @math{\pi}
+| 2
+
+| When the @vocab{period} doubles, the @vocab{frequency} is _cut in half_
+| @math{4\pi}
+| @math{1/2}
 |===
+}
 
 @slidebreak
 
 ==== Horizontal Shift (@math{h})
 
-The @vocab{Horizontal Shift} is also called the @vocab{Phase Shift}.
+In periodic functions, the @vocab{Horizontal Shift} is sometimes called the @vocab{Phase Shift}.
 
-- When @math{h} < 0, it shifts the graph to the left.
-- When @math{h} > 0, it shifts the graph to the right.
+- When @math{h} < 0, the graph shifts to the left.
+- When @math{h} > 0, the graph shifts to the right.
 
 _Note: In the function definition @math{f(x) = a \sin(b(x - h)) + k}, when h is positive it looks like it's being subtracted._
 
 ==== Vertical shift (@math{k})
 
-The vertical shift is the amount the function is shifted up or down
-- When @math{k} < 0, the graph is shifted down.
-- When @math{k} > 0, the graph is shifted up.
+The vertical shift is the amount the function is shifted up or down.
 
+- When @math{k} < 0, the graph shifts down.
+- When @math{k} > 0, the graph shifts up.
+
+
+=== Synthesize
+
+- What similarities and differences do you observes between periodic functions and other kinds of functions we've seen?
+
+== Connecting Sine and Cosine
+
+=== Overview
+Students dig deeper into the _vocabulary_ for periodic functions, starting with their own words and gradually moving to a more formal understanding. They apply this understanding by returning to the Ferris wheel problem from the @lesson-link{periodic1-exploring-rides} lesson.
+
+=== Launch
+[cols="2a,1a", frame="none", grid="none", stripes="none"]
+|===
+| We've been working with @math{\text{sine}} models for periodic relationships: 
+| @big{@math{f(x) = a \sin(b(x - h)) + k}}
+
+| Another commonly used periodic model is the @math{\text{cosine}} relationship: 
+| @big{@math{g(x) = a \cos(b(x - h)) + k}}
+|===
+
+@math{\text{Sine}} and @math{\text{Cosine}} relationships are closely related to one another, and each one can be expressed in terms of the other.
+
+=== Investigate
 
 @slidebreak
 
-@lesson-instruction{
-- Now that you have a sense for what terms like @vocab{amplitude}, @vocab{frequency}, and @vocab{midline} mean, complete @printable-exercise{matching-periodic-descriptions.adoc} by matching the graphs of periodic functions to their written descriptions.
-- What strategies did you use to match the graphs to the descriptions?
-}
-
-@slidebreak
-
-@teacher{Sync or pace students to __Slides 2 through 4 of @starter-file{alg2-exploring-periodic-desmos}__.}
+@teacher{Pace students to __Slides 1 through 3 of @starter-file{alg2-exploring-periodic-desmos}__.}
 
 @lesson-instruction{
 - Let's return to the *Exploring Periodic Models Desmos file*.
-- You should still be on *Slide 2: Modeling the Ferris Wheel Dataset (sin)*.
-- With your partner, complete @printable-exercise{modeling-ferris-wheel.adoc}, advancing to *Slide 3: Translating from sin to cos* and *Slide 4: Modeling the Ferris Wheel Dataset (cos)*.
-}
-
-@slidebreak
-
-@lesson-instruction{
-- Open the @starter-file{alg2-ferris-wheel}, and change the definitions of `f` and `g` to match the models defined on @printable-exercise{modeling-ferris-wheel.adoc}. How well do they fit?
+- With your partner, complete @printable-exercise{modeling-ferris-wheel.adoc}.
+  * For the first section you should still be on *Slide 1: Modeling the Ferris Wheel Dataset (sine)*.
+  * For the second section you'll advance to *Slide 2: Translating from sine to cosine*.
+  * For the third section you'll advance to *Slide 3: Modeling the Ferris Wheel Dataset (cosine)*.
+- When you finish the page, open the @starter-file{alg2-ferris-wheel}, and change the definitions of `f` and `g` to match the models defined on @printable-exercise{modeling-ferris-wheel.adoc}. How well do they fit?
 }
 
 @teacher{
 *NOTE:* The altitude column of the Ferris wheel dataset has been rounded to make it easier for students to use. This rounding will result in _some_ error in the model.
 }
 
-Suppose you needed to compute the model for a _different_ Ferris Wheel. Would you know how to use the radius and speed of the wheel to compute the model?
+@slidebreak
+
+Suppose you needed to compute the model for a _different_ Ferris wheel. Would you know how to use the radius and speed of the wheel to compute the model?
 
 @lesson-instruction{
 - Complete @printable-exercise{make-a-wheel.adoc} with your partner.
 }
 
 === Synthesize
-Periodic relationships involve repeating cycles. Like our Ferris wheel, they rise and fall along regular intervals. Can you come up with some examples of periodic relationships?
+Periodic relationships involve repeating cycles. Like our Ferris wheel, they rise and fall along regular intervals.
 
-@teacher{
-This can be a terrific out-of-seats activity:
-
-- Have groups of students go to whiteboards/flipcharts, and write down their periodic relationship (e.g. - phases of the moon, tides, etc).
-- Ask them what the period is, then the x-axis, then the y-axis. For example, phases of the moon has a period of roughly 1 month, so the x-axis might be days. For the y-axis, we could use "Percent of visible moon" or "number of lumens".
-- Under that description, have them draw axes and their wave!
+@QandA{
+@Q{Can you come up with some examples of periodic relationships?}
+@Q{For each one, can you estimate
+- the @vocab{period} of the relationship?
+- the @vocab{amplitude}?
+- the @vocab{midline} and vertical shift?
+}
 }
 
-For each one:
-
-- Can you estimate the _period_ of the relationship?
-- Can you estimate the _amplitude?_
-- Can you estimate the _midline_ and _vertical shift?_
-
 @teacher{
-You'll likely need to support students in thinking through what these terms mean in the context of their first example, to get the class started. Suppose a student volunteers "the temperature, because it gets cold in the winter and warm in the summer":
+You'll likely need to support students in thinking through what these terms mean in the context of their first example, to get the class started.
 
-- The seasons change over the course of one year, so the period would be 365 days.
-- The temperature in your area might fluctuate between 95° in the summer and 25° F in the winter. That's a range of 70° F, for an amplitude of 35° F.
-- The @vocab{midline} and the vertical shift are at 60° F (25 + 35 = 60).
+- Suppose a student volunteers "the temperature, because it gets cold in the winter and warm in the summer":
+  * The seasons change over the course of one year, so the period would be 365 days.
+  * The temperature in your area might fluctuate between 95° in the summer and 25° F in the winter. That's a range of 70° F, for an amplitude of 35° F.
+  * The @vocab{midline} and the vertical shift are at 60° F (25 + 35 = 60).
+- Other ideas might include tides, phases of the moon, hours of daylight over the course of the year, etc.
+}
+
+@strategy{Optional: Out-of-Seats Activity}{
+
+- Have groups of students go to whiteboards/flipcharts, and write down the periodic relationship they came up with.
+- Beneath the description, have them draw axes and their wave!
+- Ask them what the period is, then the x-axis, then the y-axis.
+  * e.g. Phases of the moon:
+  *** Period is roughly 1 month.
+  *** The x-axis might be days.
+  *** For the y-axis, we might use "Percent of visible moon" or "number of lumens".
 }

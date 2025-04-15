@@ -1,6 +1,6 @@
 = Fitting Periodic Models
 
-@description{Students investigate periodic relationships, first by deciphering the patterns in a dataset with perfect periodic (sinusoidal) behavior and then by looking at data about Carbon Dioxide, using an inquiry-based model involving hypothesizing, experimental and computational modeling, and sense-making. }
+@description{Having deciphered the patterns in a dataset with perfect periodic (sinusoidal) behavior, students build and work with a model for data about Carbon Dioxide that has more variability.}
 
 @lesson-prereqs{periodic2-building-models}
 
@@ -11,116 +11,112 @@
 
 | Lesson Goals
 | Students will be able to...
-
-- Read and interpret real-world data, presented in a scatter plot
-- Recognize periodic behavior in tables and graphs
-- Model periodic relationships using functions
-
+@objectives
 
 | Student-facing Lesson Goals
 |
 
-- Let's use Pyret to model periodic relationships in data
+- Let's use Pyret to model periodic relationships in data with more variability.
 
 | Materials
 |[.materials-links]
 @material-links
 
-| Preparation
-|
-@preparation{
-- Much of the exploration in this lesson hinges on a custom-built interactive Desmos activity. +
-You will want to:
- * Open @starter-file{alg2-exploring-periodic-desmos}.
- * Make a link or code to share with your students.
- * Decide how you will share the link or code with students and, if you are using our Google Slides, add the appropriate link to the slide deck.
- * Set the pacing so that students are only able to interact with the first three slides. _(As the lesson progresses you will be directed to adjust the pacing or sync students to you so that they have access to relevant slides.)_
-- _If you're a first-time Desmos user, fear not!_ @dist-link{pages/desmos-instructions-alg2.adoc, _Here's what you need to do._}
-}
 |===
 
-== Modeling Periodic Relationships
+== Fitting Periodic Models
 @objective{model-explore}
 
 === Overview
-Students explore the @math{\text{CO}_2} dataset, which tracks the recorded quantity of carbon dioxide in the atmosphere from an observatory in Hawaii.
+Students explore the @math{\text{CO}_2} dataset, which tracks the recorded quantity of carbon dioxide in the atmosphere from the Mauna Loa observatory in Hawaii beginning in 1974.
 
 === Launch
-Of course, the Ferris wheel dataset has almost no variability! The wheel doesn't change size or speed, and there aren't any other variables influencing the data. As a result, our scatter plot lines up perfectly with a periodic model.
+@right{@image{images/ferris-wheel-scatter-plot-w-curve.png, 250}}
+The Ferris wheel dataset lined up perfectly with a periodic model because it had almost no variability:
+the wheel didn't change size or speed and there aren't any other variables influencing the data.
 
-Now that we've had some practice, let's take a look at a dataset that has more variability!
-
-@slidebreak
-
-Carbon Dioxide (@math{\text{CO}_2}) is the gas inside the bubbles in a can of soda. It's what we breathe out when we exhale. In solid form, it's known as dry ice. It's also known as a "greenhouse gas", because it traps heat. When enough of it is in the atmosphere, it can make the planet warmer and warmer.
+The real world is never this simple! Now that we've started to understand how periodic models work, it's time to add them to our toolkit and look at a more realistic - and messy! - dataset.
 
 @slidebreak
 
-Scientists are concerned about how much @math{\text{CO}_2} is in the atmosphere, so they take frequent measurements from multiple locations around the globe. The amount of @math{\text{CO}_2} in the atmosphere is measured in _parts-per-million_, abbreviated "ppm". Of course, there are many things that can influence the amount of @math{\text{CO}_2} in any one location!
+Carbon Dioxide (@math{\text{CO}_2}) is:
 
-- Temperature and air pressure
-- Proximity to @math{\text{CO}_2} -producing or @math{\text{CO}_2} -consuming sources
-- Global trends like the burning of fossil fuels
+- the gas inside the bubbles in a can of soda
+- what we breathe out when we exhale
+- dry ice (in solid form)
+- known as a "greenhouse gas", because, when enough of it is in the atmosphere, it traps heat and contributes to global warming
 
-Because of these and other factors, the amount of @math{\text{CO}_2} at any one location goes up and down throughout the year. But is there a pattern?
+@slidebreak
+
+Because scientists are concerned about how much carbon dioxide is in the atmosphere, they take frequent measurements from multiple locations around the globe in _parts-per-million_ (abbreviated as _ppm_). There are many things that can influence the amount of @math{\text{CO}_2} in any one location over the course of time. Some of these factors include:
+
+- temperature and air pressure
+- proximity to carbon-dioxide-producing sources or carbon-dioxide-consuming features
+- global trends like the burning of fossil fuels
+
+But is there a pattern?
 
 @slidebreak
 
 @lesson-instruction{
-- Open the @starter-file{alg2-co2}, save a copy, and click "Run".
-- What is the name of the table here?
-- What are the names of the columns?
-- Type `co2-table` into the Interactions Area, and look at the table.
-- What do the `year`, `month`, and `co2` columns mean?
-- What do you think the `date` column could mean?
+- Open the @starter-file{alg2-co2}.
+- Save a copy that's just for you, and click "Run".
+}
+
+@QandA{
+@Q{What is the name of the table here?}
+@A{co2-table}
+@Q{What are the names of the columns?}
+@A{year, month, data, co2}
+@Q{Type `co2-table` into the Interactions Area, and look at the table. +
+What do the `year`, `month`, and `co2` columns mean?}
+@A{`year` is pretty self-explanatory, e.g. 1974 in the first row indicates that the first measurement was recorded in the year 1974.}
+@A{`month` is a number from 1 to 12. The 5 in the first row corresponds to May.}
+@A{`co2` is the carbon dioxide level in parts per million as measured at the Mauna Loa Observatory in Hawaii. In May of 1974 they recorded 333.18 ppm of @math{\text{CO}_2}.}
+@Q{The numbers in the `date` column look pretty different from dates we are used to seeing. What do you think they tell us?}
+@A{(Students answers will vary - see explanation below)}
 }
 
 @slidebreak
 
-The `date` column is the *decimal year*, in which the __n__th day of the year is divided by 365:
+The `date` column provides us with something known as the *decimal year*. When reading a *decimal year*, we see the year followed by the decimal that results when the __n__th day of the year is divided by 365.
+
+@teacher{For inquiring students, you may need to know that during a leap year, the decimal year is calculated by dividing by 366. (1974 was not a leap year. The next leap year was 1976.)}
 
 @QandA{
 The first date is `1974.375`, meaning the sample was taken `0.375` of the way through 1974.
 @Q{How could we compute which day of the year that is?}
 @A{There are 365 days in the year, so we could multiply 365 by `0.375` to see the number of days into the calendar.}
-@Q{What is @math{365 \times 0.375}?}
-@A{136.875, or roughly day 137}
-@Q{What month does that fall in, and what "month-number" is that?}
-@A{May, the 5th month}
-@Q{What is written in the `month` column for the first row?}
-@A{5, which is May}
+@A{@math{365 \times 0.375 = 136.875}, or roughly day 137}
+@Q{Does that day correspond to the "month-number" in the `month` column for the first row?}
+@A{Yes. The "month-number" is 5 for May. And the 137th day of a non-leap year is May 17th.}
 }
+
 
 @slidebreak
 
 @lesson-instruction{
-- What do you *Notice* about this dataset?
+- Now that we know what each of the columns mean, take another look at the dataset.
+- What do you *Notice*?
 - What do you *Wonder*?
 }
 
-Look farther down in the Definitions Area, until you find the function `is-recent`.
+Let's turn our attention back to the Definitions Area. Find the function `is-recent`.
 
 @QandA{
-@Q{What does it do?}
+@Q{What does `is-recent` do?}
 @A{It takes in a row, and checks to see if the decimal date is between 2022.083 and 2023.7917.}
-@Q{What is defined on the following line of code?}
-@A{A table, which contains only the rows for which the filter function produces `true`: just the rows between those dates.}
+@Q{What is defined on the line of code that follows?}
+@A{A table, which contains only the rows for which the filter function produces `true`. In other words, a table that contains just the rows between those dates.}
 }
 
 @slidebreak
 
-The `recent-table` includes just the rows from trough-to-trough for the years 2022-2023.
-
-@QandA{
-@Q{How many periods are represented here?}
-@A{One}
-@Q{Why?}
-@A{Because the distance between any adjacent troughs or peaks define one period.}
-}
+The `recent-table` includes just the rows from valley-to-valley for the years 2022-2023. It defines a single period.
 
 === Investigate
 @lesson-instruction{
-- Open the @starter-file{alg2-co2}, and complete Questions 1-6 of @printable-exercise{modeling-recent-co2.adoc}.
+- Complete @printable-exercise{modeling-recent-co2.adoc} using the @starter-file{alg2-co2}.
 - Be ready to share your answers!
 }
 
@@ -141,10 +137,46 @@ The `recent-table` includes just the rows from trough-to-trough for the years 20
 @A{@math{2\pi}, because the period is 1 year and @math{{2\pi \over 1} = 2\pi}.}
 }
 
+@teacher{
+As we know, @vocab{frequency} can be calculated from the @vocab{period} and vice-versa. While the model is built using the frequency, the period will be a much more intuitive measure for students in making sense of what we expect the data to do.
+}
+
 @slidebreak
 
+We can make a periodic model using sine or cosine (each one is a horizontal-shift away from the other, so they are interchangeable!). For now, let's work with periodic models that use `sin`.
+
 @lesson-instruction{
-- With your partner, complete @printable-exercise{modeling-recent-co2.adoc}, and enter your `periodic` model into Pyret. How well does it fit the data?
+- Let's use these values to construct our `periodic-sin` model, and then fit our model to the data in Pyret!
+- With your partner, complete @printable-exercise{modeling-recent-co2-2.adoc}.
+}
+
+@slidebreak
+
+@QandA{
+@Q{When you look at the `periodic-sin` model graphed on the `recent-table` scatter plot, do you think it makes sense to use a periodic model for this data? Why or why not?}
+@A{Yes. The data points move up and down along either side of the curve.}
+@Q{How does this model for the @math{\text{CO}_2} data compare to the model we saw for the ferris wheel data?}
+@A{All of the points for the ferris wheel data fell on the curve.}
+@A{Our @math{\text{CO}_2} data falls near the curve, but not on it.}
+@Q{Samuel says that the `periodic-sin` model is a good fit for the data in the `recent-table`. +
+Would you strongly agree, agree, disagree, or strongly disagree with that statement? Justify your decision based both on what you see in the model and using the @vocab{S-value}.}
+@A{Agree. While none of the points are on the curve, they don't stray very far from it.}
+@A{Also, the data in the `recent-table` ranges from 415.91 to 424 and the @math{S-value} tells us to expect an error of about 1.2 ppm of @math{\text{CO}_2} in predictions made with the model.}
+@Q{Linear regression allows us to find the *computationally optimal model*, not just a model that "fit really well." Do we know whether or not our model is the _best?_}
+@A{We don't know!}
+}
+
+=== Synthesize
+
+We just built a model from a sample for predicting @math{\text{CO}_2} levels.
+
+@QandA{
+@Q{Why might data scientists build a model from a sample?}
+@A{In the real world it is pretty rare to have access to every piece of data we can imagine wanting to work with, so sometimes all we have is a sample.}
+
+@Q{What limitations are there to building a model from a sample?}
+@A{The predictions a model will make will be most accurate for the range of data it is built on. Data beyond that range might exhibit other trends.}
+@A{The pattern we find in a sample could be unrepresentative of the patterns in the whole.}
 }
 
 @strategy{Optional Activity: Guess the Model!}{
@@ -154,24 +186,6 @@ The `recent-table` includes just the rows from trough-to-trough for the years 20
 3. Have teams switch places or rotate, so that each team is in front of another team's scatter plot. Have them figure out the original function, write their best guess on a sticky note, and stick it next to the plot.
 4. Have teams return to their original scatter plot, and look at the model their colleagues guessed. How close were they? What strategies did the class use to figure out the model?
 
-- The coefficients can be constrained to make the activity easier or harder. For example, limiting these coefficients to whole numbers, positive numbers, etc.
-- To extend the activity, have the teams continue rotating so that each group adds their sticky note for the best-guess model. Then do a gallery walk so that students can reflect: were the models all pretty close? All over the place? Were the guesses for one coefficient grouped more tightly than the guesses for another?
-}
-
-=== Synthesize
-
-- Could you rewrite this model to use cosine instead of sine?
-- If so, how?
-- What are some problems you see with this model?
-- Where does it fit the data best? Where does it fit the worst?
-
-@slidebreak
-
-Linear regression allows us to find the *computationally optimal model*, not just a model that "fit really well."
-
-@QandA{
-@Q{In this project, do we know whether or not our model is the _best?_}
-@A{We don't know!}
-@Q{How do you know?}
-@A{This fitting process was purely about adjusting sliders and seeing if @math{S} goes down. It was all trial-and-error, with no guarantee that there's no better model out there.}
+- The model settings can be constrained to make the activity easier or harder. For example, limiting these model settings to whole numbers, positive numbers, etc.
+- To extend the activity, have the teams continue rotating so that each group adds their sticky note for the best-guess model. Then do a gallery walk so that students can reflect: were the models all pretty close? All over the place? Were the guesses for one model setting grouped more tightly than the guesses for another?
 }

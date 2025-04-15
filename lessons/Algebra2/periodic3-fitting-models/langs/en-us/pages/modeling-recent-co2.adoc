@@ -3,6 +3,7 @@
 <style>
 /* Make autonums inside tables look consistent with those outside */
 td .autonum::after { content: ')' !important; }
+.autonum { padding-top: 2rem !important; }
 
 /* Tweak table display */
 td { padding: 0 !important; }
@@ -10,19 +11,21 @@ td .codetwo { color: black; background: none; }
 table table td { color: inherit !important; padding: 3px 0 !important; }
 body .center { padding: 0; }
 .directions p { line-height: 1.75 !important; }
-table+.paragraph .autonum {padding-top: 0; }
 
-/* Shorten fill in the blanks */
+/* Shorten fill in the blanks, and give fitbrubies more vertical space */
 .fitb, .fitbruby { min-width: 2em; }
 .indentedpara .fitbruby { padding-top: 0.8rem; }
 .studentAnswerMedium { min-width: 80pt !important; }
+.fitbruby{ margin-bottom: 0.8rem; }
+.ruby { bottom: -13px !important; }
+.ruby .mathunicode { line-height: 1.5; }
 </style>
 ++++
 
 @define{COtwo}{@math{\text{CO}_2}}
 
 @link-instructions{
-The data below was generated from the @starter-file{alg2-co2}. The dark dots show the amount of @COtwo in the atmosphere (in parts per million) on specific dates from December 2022 to November 2023. *NOTE:* the `date` column is the *decimal year* (so "June 15th, 2023" would be 2023.5).
+The data below was generated from the @starter-file{alg2-co2}. The *dark dots* show the amount of @COtwo in the atmosphere (in parts per million) recorded between December 2022 to November 2023. _NOTE:_ the `date` column is the *decimal year* (so "June 15th, 2023" would be 2023.5).
 }
 
 [cols="<.<1a,>.^3a", grid="none", frame="none"]
@@ -66,35 +69,35 @@ The data below was generated from the @starter-file{alg2-co2}. The dark dots sho
 @define{h}{@show{h}}
 
 |
-@image{../images/recent-co2-scatter-updated.png, 490}
+@image{../images/recent-co2-scatter.png, 490}
 |===
 
-**Connect the dots on the scatter plot from left to right to form a line-graph.**
+@n Connect the *dark dots* on the scatter plot from left to right to form a line-graph of the data in `recent-table`.
 
-@n Find the vertical distance between @fitbruby{7em}{@ifsoln{@lo}}{the lowest @vocab{trough}} and @fitbruby{7em}{@ifsoln{@hi}}{the highest @vocab{peak}}: @fitbruby{}{@ifsoln{@hi - @lo = @show{(* 2 a)} = @a}}{@COtwo in the atmosphere in parts per million}
+@n The amount of @COtwo varies from @fitbruby{7em}{@ifsoln{@lo}}{the lowest @vocab{valley}} to @fitbruby{7em}{@ifsoln{@hi}}{the highest @vocab{peak}}.
 
-@n Find the @vocab{amplitude}(@math{a}) by cutting the vertical distance you calculated in half: @fitbruby{}{@ifsoln{@show{a}}}{@COtwo in the atmosphere in parts per million}
+@n This represents a change in atmospheric @COtwo of @fitbruby{18em}{@ifsoln{@hi - @lo = @show{(* 2 a)}}}{difference between highest and lowest} parts per million.
 
-@n Draw the @vocab{midline} on the graph. _(It should be a horizontal line passing in the middle between the lowest @vocab{trough} and the highest @vocab{peak}.)_ +
+@n Find the @vocab{amplitude} (*@math{a}*) by cutting the vertical distance you calculated in half: @fitbruby{18em}{@ifsoln{@show{(* 2 a)} @math{\div 2} = @show{a}}}{@COtwo in the atmosphere in parts per million}
+
+@n Draw the @vocab{midline} on the graph. _(It should be a horizontal line passing in the middle between the lowest @vocab{valley} and the highest @vocab{peak}.)_ +
+
+@n The midline makes the @vocab{vertical shift} (*@math{k}*) visible. What is the @vocab{vertical shift} (*@math{k}*) of the model?
+@fitbruby{18em}{@ifsoln{@lo   +   @a   =   @k}}{@COtwo in the atmosphere in parts per million}
 
 @indented{
-The midline makes the vertical shift (@math{k}) visible. 
-What is the @vocab{vertical shift} (@math{k}) of the model? 
-@fitbruby{}{@ifsoln{@lo + @a = @k}}{@COtwo in the atmosphere in parts per million}}
+_HINT: The vertical shift can also be calculated by adding the amplitude(@math{a}) to the valley._}
 
-@indented{
-_HINT: The vertical shift can also be calculated by adding the amplitude(@math{a}) to the trough._}
+@n The @vocab{phase shift} (*@math{h}*) is the decimal year when the data *first* crosses the midline.  Estimate The @vocab{phase shift} (@math{h}) @fitbruby{9em}{@ifsoln{~@h}}{years}
 
-@n Estimate the decimal year when the data *first* crosses the midline. This is called the @vocab{phase shift} (@math{h}). @fitbruby{}{@ifsoln{~@h}}{years}
-
-@n Calculate the @vocab{period} between the troughs: 
+@n Calculate the @vocab{period} between the valleys:
 @fitbruby{15em}{2023.708}{`date` for the lowest values in 2023} - @fitbruby{15em}{2022.708}{`date` for the lowest values in 2022} =
-@fitbruby{}{@ifsoln{1}}{years}
+@fitbruby{9em}{@ifsoln{1}}{years}
 
-@n Justify the following statement: &#8193; _If_  &#8193; @math{\text{period} = {2\pi \over \text{frequency}}} &#8193; _then_ &#8193; @math{\text{frequency} = {2\pi \over \text{period}}}. 
+@n _If_   @math{\text{period} = {2\pi \over \text{frequency}}}   _then_   @math{\text{frequency} = {2\pi \over \text{period}}}.   How do you know that this statement is true?
 
 @fitb{}{@ifsoln{To solve the first equation for @math{\text{frequency}} we would multiply both sides by @math{\text{frequency}} to get @math{\text{period} \times \text{frequency} = {2\pi}}.}}
 
 @fitb{}{@ifsoln{The last step would be to divide by @math{\text{period}}.}}
 
-@n What is the @vocab{frequency} (@math{b})? @fitb{}{@ifsoln{@math{2\pi} or @b}}
+@n What is the @vocab{frequency} (*@math{b}*) of this model? @fitb{}{@ifsoln{@math{2\pi}   or   ~6.28}}
