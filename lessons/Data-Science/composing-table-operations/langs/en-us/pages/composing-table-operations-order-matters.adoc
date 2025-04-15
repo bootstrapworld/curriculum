@@ -26,7 +26,7 @@ div.circleevalsexp .value { margin: 0.5rem 0.25rem; }
 (define exp2 '(build-column (filter t is-female) "kilos" kilograms))
 (define exp3 '(filter (build-column t "kilos" kilograms) is-heavy))
 (define exp4 '(build-column (filter t is-heavy) "kilos" kilograms))
-(define exp5 '(filter (build-column (build-column t "female" is-female) "kilos" kilograms) is-heavy))
+(define exp5 '(filter (build-column (filter t is-female) "kilos" kilograms) is-heavy))
 (define exp6 '(build-column (sort (filter t is-female) "age" true) "kilos" kilograms))
 }
 
@@ -35,7 +35,7 @@ In table `t` below, fill in the "kilos" values by dividing each of the 4 animals
 [.data, cols='6', options="header"]
 |===
 | name        | sex       | age   | fixed   | pounds  | kilos
-| `"Toggle"`  | `"female"`| `3`   | `true`  | `48`    | @ifsoln{`12.72`}
+| `"Toggle"`  | `"female"`| `3`   | `true`  | `21.81` | @ifsoln{`12.72`}
 | `"Fritz"`   | `"male"`  | `4`   | `true`  | `92`    | @ifsoln{`41.81`}
 | `"Nori"`    | `"female"`| `6`   | `true`  | `35.3`  | @ifsoln{`16.04`}
 | `"Sasha"`   | `"female"`| `1`   | `false` |  `6.5`  | @ifsoln{ `2.95`}
@@ -57,7 +57,7 @@ Match each table description on the left, to the Circle of Evaluation that will 
 |*@n*@ifsoln{B} ||*A*
 | @show{(coe exp1)}
 
-| Produces a table containing Sasha, Nori and Toggle (in that order)
+| Produces a table containing Sasha, Nori and Toggle (in that order) 
 |*@n*@ifsoln{A} ||*B*
 | @show{(coe exp2)}
 
@@ -69,7 +69,7 @@ Match each table description on the left, to the Circle of Evaluation that will 
 |*@n*@ifsoln{D} ||*D*
 | @show{(coe exp4)}
 
-| Produces a table containing Sasha, Toggle, and Nori (in that order)
+| Produces a table containing Sasha, Toggle, and Nori (in that order) and adds an extra column showing their weight in kilograms
 |*@n*@ifsoln{F} ||*E*
 | @show{(coe exp5)}
 
