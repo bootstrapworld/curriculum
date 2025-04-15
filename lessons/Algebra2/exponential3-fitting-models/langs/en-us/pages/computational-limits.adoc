@@ -59,16 +59,10 @@ Make sure you are working in your copy of the @starter-file{alg2-covid}.
 @n In Pyret, evaluate the following expressions: @hspace{2em} @show{(code '(= 1 1))}, @hspace{2em} @show{(code '(= ~1 ~1))} +
 _Why do you think Pyret gives an error when comparing identical RoughNums?_
 
-@ifnotsoln{
+@fitb{}{@ifsoln{RoughNums always represent a _range_ of values on the number line, because two different Numbers might both round to the same RoughNum.}} +
+@fitb{}{@ifsoln{As a result, there is no guarantee that "roughly one" represents the exact same value as "roughly one".
+}} +
 @fitb{}{} +
-@fitb{}{} +
-@fitb{}{} +
-}
-
-@ifsoln{
-RoughNums always represent a _range_ of values on the number line, because two different Numbers might both round to the same RoughNum. As a result, there is no guarantee that "roughly one" represents the exact same value as "roughly one".
-}
-
 
 @n The pros of using `~1` involve speed. *What are the potential downsides of using `~1` to speed up a calculation?*
 
@@ -79,6 +73,8 @@ RoughNums always represent a _range_ of values on the number line, because two d
 }
 
 @ifsoln{
+@vspace{1ex}
+
 - When calculating a path over an extremely long distance, missing decimal places could result in the Mars Rover missing its destination.
 - For an extremely large population like China, rounding to 10 decimal places might result in discounting an entire sub-population!
 }
