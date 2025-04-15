@@ -1,5 +1,12 @@
 = From Lines to Functions
 
+++++
+<style>
+/* shorten fill in the blanks */
+.studentAnswerMedium { min-width: 1em !important; }
+</style>
+++++
+
 == Defining a Function from Two Points
 
 @n The scatter plot displays the relationship between clownfish age and adoption time in weeks. Identify the coordinates of the data points.
@@ -37,7 +44,7 @@ _Hint: Fill in the blanks for @math{y} and @math{x} below with the coordinates o
 @fitbruby{10em}{@ifsoln{1}}{y} @math{=} @fitbruby{10em}{@ifsoln{3}}{slope (m)} @math{\times} @fitbruby{10em}{@ifsoln{4}}{x} @math{+} @hspace{2em} @fitbruby{10em}{@math{b}}{y-intercept / vertical shift}
 --
 
-@vspace{2ex}
+@ifnotsoln{@vspace{2ex}}
 
 @n Use the slope and y-intercept you calculated to write the complete model below (in both Function and Pyret notation):
 
@@ -49,6 +56,9 @@ _Hint: Fill in the blanks for @math{y} and @math{x} below with the coordinates o
 
 @n Refer to the line you drew on @printable-exercise{how-could-we-measure-good-fit-lizard.adoc} to show the relationship you saw between the lizards' weight in `pounds` and adoption time in `weeks`. Identify two points that could be used to define the line (the points do not have to be dots from the scatter plot itself).
 
+@ifsoln{@hspace{1em}}
+@teacher{Students may all be working with different points for this section!}
+
 @indented{
 First point: (@fitbruby{2em}{}{x~1~}, @fitbruby{2em}{}{y~1~}) 
 @hspace{5em} 
@@ -58,14 +68,14 @@ Second point: (@fitbruby{2em}{}{x~2~}, @fitbruby{2em}{}{y~2~})
 @n Compute the @vocab{slope} (rate of change) between the points: @math{\frac{\Delta \mbox{y}}{\Delta \mbox{x}} =} @math{\frac{y&#8322; - y&#8321;}{x&#8322; - x&#8321;} =} @ifnotsoln{@math{\frac{\qquad}{\qquad} } }
 
 @indented{
-_Based solely on these 2 data points, increasing a lizard's_ @fitbruby{5em}{@ifsoln{weight}}{x-variable} _by 1, predicts a(n)_ @fitbruby{8em}{@ifsoln{decrease}}{increase or decrease?} _of_ @fitbruby{1em}{}{amount} @fitbruby{8em}{@ifsoln{weeks in adoption time}}{units and y-variable}.
+_Based solely on these 2 points, increasing a lizard's weight by 1 pound, predicts a(n)_ @fitbruby{7em}{@ifsoln{decrease}}{increase or decrease?} _of_ @fitbruby{1em}{}{&#916; weeks} _week(s) in adoption time_.
 }
 
 @n Now, use @vocab{slope-intercept form} (@math{y = mx + b}) to calculate the @vocab{y-intercept} (vertical shift) of the line passing through the two points.
 
 [.indentedpara]
 --
-@fitbruby{10em}{@ifsoln{1}}{y} @math{=} @fitbruby{10em}{@ifsoln{3}}{slope (m)} @math{\times} @fitbruby{10em}{@ifsoln{4}}{x} @math{+} @hspace{2em} @fitbruby{10em}{@math{b}}{y-intercept / vertical shift}
+@fitbruby{10em}{}{y} @math{=} @fitbruby{10em}{}{slope (m)} @math{\times} @fitbruby{10em}{}{x} @math{+} @hspace{2em} @fitbruby{10em}{@math{b}}{y-intercept / vertical shift}
 
 --
 @ifnotsoln{@vspace{4ex}}
@@ -74,6 +84,6 @@ _Based solely on these 2 data points, increasing a lizard's_ @fitbruby{5em}{@ifs
 @n Use the slope and y-intercept you calculated to write the complete model below (in both Function and Pyret notation):
 
 @indented{
-@math{lizard(x) =} @fitbruby{4em}{@ifsoln{3}}{slope (m)}x + @fitbruby{11em}{@ifsoln{-11}}{y-intercept / vertical shift} @hspace{3em} @show{(code '(define (lizard x) (+ (* (?ANS 3) x) (?ANS -11))))}
+@math{lizard(x) =} @fitbruby{4em}{}{slope (m)}x + @fitbruby{11em}{}{y-intercept / vertical shift} @hspace{3em} @show{(code '(define (lizard x) (+ (* (?ANS ...) x) (?ANS ...))))}
 }
 
