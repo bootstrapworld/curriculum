@@ -41,16 +41,43 @@
 |===
 
 
-== Changing the Scale (Sequences and Curves)
+== Axes have growth, too!
 @objective{logarithms-growth}
 @objective{logarithms-exponents}
 
 === Overview
-Students plot a logarithmic sequence as points on a number line, and explore how changing the intervals to grow exponentially appears to "linearize" the points.
+Students deepen their understanding of functions as a "ratio of growth", experimenting with linear-v-exponential intervals for the x- and y-axis in Desmos and seeing the effect those changes have on the graphs of different functions.
 
 === Launch
 
+You've probably heard people talk about the slope of a line as "rise over run", or "rate of change". Both of these terms have to do with _comparing one variable to another_. On a graph where one variable is on the y-axis and the other is on the x-axis, that means _comparing the growth in one axis to growth in another_. 
+
+In a linear function, the growth of the function is _proportional_ to the growth of the input. For example, in the line @math{f(x) = x}, the growth of @math{f(x)} is _exactly the same_ as the growth of @math{x}. 
+
+@QandA{
+@Q{What is the slope of the function @math{f(x) = x}?}
+@A{The slope is 1.}
+
+@Q{If the growth of @math{f(x)} is _twice_ the growth of @math{x}, what is the slope of that line?}
+@A{The slope is 2.}
+
+@Q{If the growth of @math{f(x)} is _one-third_ the growth of @math{x}, what is the slope of that line?}
+@A{The slope is @math{\frac{1}{3}}}.
+}
+
+@slidebreak
+*Proportional growth is linear growth.*
+
+@right{@image{images/empty-axes.png, 250}}
+When we think about quadratic, exponential, or logarithmic growth, that just means that the variable graphed on the y-axis is growing more than just _proportionally_ - it's growing "quadratically", "exponentially", "logarithmically", etc. That's what makes all these different-shaped curves!
+
+You've graphed all of these lines and curves on axes that grow *linearly*: the tick marks along the x- and y-axis always grow in equal intervals.
+
+But...who says the _axes have to grow linearly?_
+
 @teacher{Sync or pace students to *Slide 5: Changing the Scale (Linear)* of @starter-file{alg2-log-desmos}.}
+
+@slidebreak
 
 @lesson-instruction{
 - Return to the *Fitting Wealth-v-Health and Exploring Logarithmic Models Desmos file*.
@@ -60,25 +87,32 @@ Students plot a logarithmic sequence as points on a number line, and explore how
 
 === Investigate
 
-@right{@image{images/linear-to-exponential.png, 250}}
-When we changed the scale of the x-axis from `Linear` to `Logarithmic`, our intervals went from growing linearly to growing exponentially: _each interval on the x-axis represents 10x the length of the interval before it._
+@right{@image{images/linear-to-logarithmic.png, 250}}
+When we changed the scale of the y-axis from `Linear` to `Logarithmic`, our y-intervals went from growing linearly to growing exponentially: _each interval on the y-axis represents 10x the length of the interval before it._
 
-Our y-intervals haven't changed, so this has the effect of grabbing the left and right sides of the graph and "squishing" it. To see the y-values move up, _we need to go 10x as far to the right._
+Our x-intervals haven't changed, so this has the effect of grabbing the top and bottom sides of the graph and "squishing" it. For our function to appear to increase by one inch on the y-axis, it actually needs to increase 10x as much as the inch before it!
 
-With the y-axis appearing to grow more slowly than the x, our linear function "bends" up and looks exponential!
+With the y-axis appearing to grow more slowly than the x, our linear function "bends" down and looks logarithmic!
 
 @lesson-instruction{
-- Reset your axes back to linear, then complete the rest of @printable-exercise{changing-scale-linear.adoc}
+- Reset both axes back to linear!
+- Complete the rest of @printable-exercise{changing-scale-linear.adoc}
 }
 
 @slidebreak
+When we changed the scale of the x-axis from `Linear` to `Logarithmic`, our x-intervals went from growing linearly to growing exponentially.
+
+Our y-intervals haven't changed, so this has the effect of grabbing the left and right sides of the graph and "squishing" it. For our function to appear to increase by one inch on the x-axis, it actually needs to increase 10x as much as the inch before it!
 
 @QandA{
-@right{@image{images/linear-to-logarithmic.png, 250}}
-@Q{Why did changing the *y*-axis to `Logarithmic` make our linear curve look logarithmic?}
-@A{With the y-axis appearing to grow more quickly than the x, our linear function "bends" down and looks logarithmic!}
+@right{@image{images/linear-to-exponential.png, 250}}
+@Q{Why did changing the *x*-axis to `Logarithmic` make our linear curve look exponential?}
+@A{With the x-axis appearing to grow more slowly than the y, our linear function "bends" up and looks exponential!}
 
 The key here is to think in terms of *relative growth*: the scale of one axis _relative to the other_  balances out the growth of @math{f(x)} _relative to_ @math{x}.
+
+@Q{Why did changing both axes to `Logarithmic` make the line look normal again?}
+@A{Since both axes were growing proportionally to each other (linearly!), the growth on each axis is balanced and we can see the original shape of the line.}
 
 @Q{What would these transformations do to a _logarithmic_ function? An exponential one? }
 @A{Solicit some answers} 
@@ -94,16 +128,24 @@ Let's find out!
 - Turn to @printable-exercise{changing-scale-log-and-exp.adoc}, and complete the _first section_.
 }
 
-=== Synthesize
+@slidebreak
 @QandA{
-@Q{Why did changing the y-axis to `Logarithmic` make our exponential curve look linear?}
-@A{We squished/stretched the y-axis, but kept the x-axis linear. Since the y-values of the curve were growing exponentially, making the y-_intervals_ grow exponentially canceled out that growth relative to the x-values.}
+@Q{Why did changing the x-axis to `Logarithmic` make our logarithmic curve look linear?}
+@A{We squished the x-axis, but kept the y-axis linear. Since the y-intervals were growing exponentially relative to the x-intervals, that growth canceled out the logarithmic growth of @math{g}.}
 
-@Q{Why did changing the *y*-axis to `Logarithmic` make our linear curve look logarithmic?}
-@A{The y-values are still growing linearly, but with the y-_intervals_ growing exponentially it appears to go "up" more slowly than it goes "right".}
+@Q{Why did changing the y-axis to `Logarithmic` make our logarithmic curve look sharper?}
+@A{Instead of canceling out the logarithmic growth of the function, we took the "log of the log" - making the effect even sharper.}
+}
 
-@Q{We changed the y-axis to be logarithmic, to make our exponential curve look linear. Is there a _different_ way we could have linearized that curve, by changing the _x_-axis?}
-@A{If we changed the x-axis to grow _exponentially_, it would have canceled out the growth in the same way! Unfortunately, this is impossible in Desmos. (But not in Pyret!)}
+=== Synthesize
+
+@QandA{
+
+@Q{What kind of scale would the y-axis need to be, to make the logarithmic curve look linear?}
+@A{We would need it to "undo" or "cancel out" the logarithmic growth of @math{g}, so we would need an exponential scale.}
+
+@Q{What kind of scale would the x-axis need to be, to make the exponential curve look linear?}
+@A{We would need it to "undo" or "cancel out" the exponential growth of @math{h}, so we would need an exponential scale.}
 }
 
 == Changing the Scale to Fit a Model
