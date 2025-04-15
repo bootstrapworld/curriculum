@@ -1,10 +1,10 @@
 = Fitting Exponential Models
 
-@description{Students investigate exponential relationships in data about Covid spread, using an inquiry-based model involving hypothesizing, experimental and computational modeling, and sense-making. They are introduced to table transformations and inverse functions, which are used to fit exponential models onto nonlinear data.}
+@description{Students use a custom-built Desmos slider activity to visually fit an exponential model to the data, compute its fit in Pyret, and interpret the results. They also discuss the challenges of using a computer to work with the very large or very small numbers that show up when dealing with exponential functions, and the trade-offs Data Scientists have to make.}
 
 @lesson-prereqs{exponential2-building-models}
 
-@keywords{exponential, quadratic, square, coefficient}
+@keywords{exponential, quadratic, square}
 
 [@lesson-intro-table]
 |===
@@ -16,7 +16,8 @@
 | Student-facing Lesson Goals
 |
 
--
+- Let's use Pyret to fit exponential models to our dataset.
+- Let's think about optimizing our models for _speed_ v. _accuracy._
 
 | Materials
 |[.materials-links]
@@ -36,11 +37,11 @@
 |===
 
 == Modeling in Desmos
-@objective{model-fit-function}
+@objective{exponentials-model-settings}
 
 === Overview
 
-Students extend their sampling techniques to exponential relationships, experimenting in Desmos to come up with plausible models
+Students extend their sampling techniques to exponential relationships, experimenting in Desmos to come up with plausible models.
 
 === Launch
 
@@ -48,11 +49,11 @@ Now that you're familiar with exponential functions, let's use them to model thi
 
 @lesson-instruction{
 - Open @starter-file{program-list}, find your saved copy of the @starter-file{alg2-covid} and click "Run".
-- Make a scatter plot showing the change in `positive` Covid cases over time (`day`) for `MA-table`.
+- Make a scatter plot showing the change in `positive` Covid cases over time (i.e. `day`) for `MA-table`.
 - With your partner, discuss what you can learn from the scatter plot about the exponential function that will model the data.
 }
 
-@teacher{Project the following questions to guide small group discussion.}
+@teacher{Project the questions on the next slide to guide small group discussion.}
 
 @slidebreak
 
@@ -82,7 +83,7 @@ In the next activity, students will use our custom slider activity to find promi
 - Use it to complete @printable-exercise{exponential-models-ma.adoc}.
 }
 
-@teacher{Crowdsource the various values for each coefficient, writing 4-5 examples of each on the board.}
+@teacher{Crowdsource the various values for each model setting, writing 4-5 examples of each on the board.}
 
 - Look at all the lists of values we came up with for @math{a}, @math{b}, and @math{k}.
 - What do you notice? Are they clustered around a particular value, or completely spread out?  Are there any values that are really far from the others?
@@ -93,32 +94,43 @@ In the next activity, students will use our custom slider activity to find promi
 
 == Modeling in Pyret
 @objective{model-fit-function}
+@objective{computing-with-roughnums}
 
 === Overview
-Students take their Desmos-derived coefficients back to Pyret, to formalize their understanding. They are also exposed to computational limitations, which arise when dealing with extremely small or extremely large numbers.
+Students take their Desmos-derived model settings back to Pyret, to formalize their understanding. They are also exposed to computational limitations, which arise when dealing with extremely small or extremely large numbers.
 
 === Launch
+@right{@image{images/neutrino-detector.jpg, 250}}
+Scientists send satellites to far-away planets and reason about the mass of tiny particles, like the neutrinos we see in this image. The numbers involved in these calculations are *very big* or *very small*, and can involve hundreds or even _thousands_ of digits.
 
-Sometimes, data scientists perform calculations that result in very large or very small numbers. They send satellites to far-away planets, or reason about the mass of electrons and neutrinos. These numbers are also rarely integers: numerical constants for gravity, friction, etc. are most often rational or irrational numbers.
+In math, this isn't a problem: numbers can be infinitely large or small, and have any number of digits or decimal places! But computers are _finite_, and some numbers get too big to fit in their memory. 
 
-In math, this isn't a problem: numbers can be infinitely large or small, and have any number of digits or decimal places! But computers are _finite_, and some numbers get too big to fit in their memory. So what do we do?
-
-@slidebreak
-
-One option is to make the really big or small numbers _approximations_ of the real numbers, in the same way a model approximates real data. We can shrink a number with 100 digits down to just 3 digits, as long as we remember "there's 97 zeros after it!" This way, numbers like a "4 and one trillionth" get approximated as "roughly four".
-
-If you've ever asked a calculator to compute @math{1 \div 3}, you've probably seen it displayed as @math{0.333333}  instead of @math{ 0.\overline{3}}. This is a problem if you need to do any calculation with the result! @math{0.333333 \times 3 = 0.999999}, instead of 1!
-
-@slidebreak
-
-Virtually every programming language does this when numbers get large enough, chopping off digits and giving up accuracy in exchange for speed. This is especially important for time-sensitive computations like weather modeling, where knowing _roughly_ where a tornado will land before it hits is much more important than knowing precisely where it will land after it's too late.
-
-But there are times when we'd rather be precise than fast...
+@QandA{
+@Q{So what could computers do, to make math work when numbers have too many digits?}
+@A{Solicit ideas from the class...}
+}
 
 @slidebreak
 
-- A satellite headed for Neptune needs to travel at an extremely precise trajectory. After 2.8 billion miles, starting off by with even a thousandth of a degree rounding error could cause it to miss the planet entirely!
-- When searching for neutrinos, the relative masses involved are so small that chopping off the 100th decimal place might mean losing the neutrino entirely!
+@right{@image{images/satellite-neptune.jpg, 250}}
+*Almost every programming language uses _approximations_ of long numbers*, in the same way a model approximates real data. If you’ve ever asked a calculator to compute @math{1 \div 3}, you’ve probably seen it displayed as @math{0.333333} instead of @math{ 0.\overline{3}}. This is an example of the approximation trick at work!
+
+The number "one octillion" is a 28-digit number: one followed by _27 zeros_. A computer can just store the one at the front and remember that there are 27 zeroes. That's 3 digits, rather than 28! Numbers like a "one octillion and four " get approximated as "roughly octillion".
+
+@slidebreak
+
+@lesson-instruction{
+- Turn to the first section of @printable-exercise{computational-limits.adoc}.
+- With your partner, brainstorm some possible benefits and downsides to approximating long numbers.
+}
+
+@QandA{
+@Q{What are some possible *benefits* to chopping off digits like this?}
+@A{Tornadoes can form very quickly, so it's more important to get a warning out *fast*, even if that warning is off by a few minutes or miles.}
+@Q{What are some possible *downsides*?}
+@A{A satellite whose launch angle is off by just 0.0001° will miss Neptune by 5,000 miles!}
+@A{The mass of a neutrino is so small that chopping off the 100th decimal place might mean missing it entirely!}
+}
 
 === Investigate
 
@@ -222,12 +234,12 @@ We are creatures of nature, so our brains are designed to be really good at work
 
 But when numbers grow really, really, _really_ fast...we get lost! Our brains lose track of differences when two numbers get really enormous.
 
-_Mathematically,_ the number line is composed of equal intervals forever. @link{https://www.scientificamerican.com/article/a-natural-log/, *But we don't actually process it that way at all.*}
-
 @slidebreak
 
 *Exponential growth poses a problem for those of us with human brains*, because the numbers get so big, so fast that it can be difficult to wrap our heads around it!
 
-This may have played a role in the sluggish response of many countries, and the tragic loss of life and decrease in public health that followed.
+@teacher{
+This has been proven by some really fascinating studies - We know that the integer number line is made of infinite, equal-sized intervals...@link{https://www.scientificamerican.com/article/a-natural-log/, *but our brains don't process it that way at all!*}
+}
 
-Fortunately, there's another mathematical tool that can help us get control of these wildly gigantic numbers. It's called a _logarithm_!
+Humans' inability to reason about exponential growth may have played a role in the sluggish response of many countries, and the tragic loss of life and decrease in public health that followed.

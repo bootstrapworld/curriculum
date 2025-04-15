@@ -1,6 +1,8 @@
-= Exploring Periodic Data
+= Exploring Ferris Wheel Data
 
-@description{Students investigate periodic relationships, first by deciphering the patterns in a dataset with perfect periodic (sinusoidal) behavior and then by looking at data about Carbon Dioxide, using an inquiry-based model involving hypothesizing, experimental and computational modeling, and sense-making. }
+@description{
+Students are introduced to periodic functions through a dataset with perfect sinusoidal behavior: _height on a revolving Ferris wheel_. They see the same behavior reflected in the (x,y) coordinates of a point on a unit circle, and plot the graphs of the sine and cosine functions. Finally, they make the leap from degrees to radians.
+}
 
 @lesson-prereqs{fitting-models}
 
@@ -11,32 +13,17 @@
 
 | Lesson Goals
 | Students will be able to...
-
-- Read and interpret real-world data, presented in a scatter plot
-- Recognize periodic behavior in tables and graphs
-- Model periodic relationships using functions
-
+@objectives
 
 | Student-facing Lesson Goals
 |
 
-- Let's use Pyret to model periodic relationships in data
+- Let's talk about real-world data that's cyclical, going up and down at regular intervals over and over again.
 
 | Materials
 |[.materials-links]
 @material-links
 
-| Preparation
-|
-@preparation{
-- Much of the exploration in this lesson hinges on a custom-built interactive Desmos activity. +
-You will want to:
- * Open @starter-file{alg2-exploring-periodic-desmos}.
- * Make a link or code to share with your students.
- * Decide how you will share the link or code with students and, if you are using our Google Slides, add the appropriate link to the slide deck.
- * Set the pacing so that students are only able to interact with the first three slides. _(As the lesson progresses you will be directed to adjust the pacing or sync students to you so that they have access to relevant slides.)_
-- _If you're a first-time Desmos user, fear not!_ @dist-link{pages/desmos-instructions-alg2.adoc, _Here's what you need to do._}
-}
 |===
 
 == Looking for Patterns
@@ -47,140 +34,172 @@ Students are introduced to the notion of @vocab{periodic relationships}: related
 
 === Launch
 
-@right{@image{images/state-fair.png, 200}}Your physics teacher comes back from a trip to the state fair, and keeps raving about some amazing ride they took. The class keeps asking them for details: was it a Roller coaster? Bumper cars? Merry-Go-Round?
+@right{@image{images/state-fair.png, 200}}A physics teacher comes back from a trip to the state fair, and keeps raving about some amazing ride they took. The class keeps asking them for details: was it a Roller coaster? Bumper cars? Merry-Go-Round?
 
-Being a teacher, of course they decide to turn your casual curiosity into a _learning experience_, and share some data they recorded from their smart watch.
+Being a teacher, of course they decide to turn the class's polite curiosity into a _learning experience_, and share some data they recorded from their smart watch. How can we figure out what ride they went on?
+
+=== Investigate
 
 ++++
 <style>
-table.rideData tr * { padding: 0 !important; margin: 2px !important; }
+table.rideData tr * { padding: 0 !important; margin: 2px !important; line-height: 1.1; }
 table.rideData { width: 70%; margin: auto; }
 </style>
 ++++
 [.rideData, cols="^1a,^1a", options="header"]
 |===
 | `time` (minutes)  | `altitude` (feet)
-|  0				|   5.0
-|  5				|  55.0
-| 10				| 154.9
-| 15				| 205.0
-| 20				| 155.2
-| 25				|  55.2
-| 30				|   5.0
-| 35				|  54.7
-| 40				| 154.6
-| 45				| 205.0
-| 50				| 155.5
-| 55				|  55.5
-| 60				|   5.0
+|  0        |   5.0
+|  5        |  55.0
+| 10        | 154.9
+| 15        | 205.0
+| 20        | 155.2
+| 25        |  55.2
+| 30        |   5.0
+| 35        |  54.7
+| 40        | 154.6
+| 45        | 205.0
+| 50        | 155.5
+| 55        |  55.5
+| 60        |   5.0
 |===
 
-=== Investigate
+@slidebreak
+
 @lesson-instruction{
-Working in pairs or groups, complete questions 1-4 on @printable-exercise{exploring-periodic.adoc}.
+Working in pairs or groups, complete @printable-exercise{exploring-periodic.adoc}.
 }
 
 @QandA{
 @Q{What are some of your Noticings, and what did they make you Wonder?}
 @A{(Solicit a range of student responses)}
-@Q{What kind of ride do you think they were on?}
+@Q{What kind of ride do you think this teacher was on, and why?}
 @A{Answers will vary. Write them all down on the board!}
 @Q{What about this data supports your theory?}
 }
 
-@lesson-instruction{
-Complete the remaining questions on @printable-exercise{exploring-periodic.adoc}.
+@slidebreak
+
+The teacher was probably on a _Ferris wheel!_ We can tell because the ride keeps going up and down over and over, and it repeats this cycle over regular periods of about 30 minutes.
+
+@slidebreak
+
+You just created a *new type of data visualization*, called a @vocab{line graph}. They are useful in situations where the explanatory variable is @vocab{continuous}, meaning that you know there are values in between the points. 
+
+@lesson-point{
+It's not appropriate to connect the dots on _every_ scatter plot! 
 }
 
-=== Synthesize
-This worksheet had you create a *new type of data visualization*, called a @vocab{line graph}.
+How do we know whether or not our explanatory variable is continuous here?
 
-@lesson-point{Line graphs are often used instead of scatter plots when the explanatory variable is _time_. Time changes continuously, so it makes sense to connect the dots!}
+@slidebreak
 
 [cols="^1a, ^1a"]
 |===
 | @image{images/rides-scatter-plot.png} | @image{images/rides-combined-plot.png}
 |===
 
+While we might only have recorded Ferris wheel data every 5 minutes, we know that:
+
+- The Ferris wheel keeps turning and generating data for an infinite number of points "in between" the times represented in our scatter plot. 
+- The Ferris wheel existed at every one of those points, meaning there was `altitude` data to be gathered at all times.
+
 @slidebreak
 
-In this example, we know the Ferris wheel keeps turning, generating data "in between" the times represented in our scatter plot. Connecting those dots with the line gives us an *approximation* of what data is missing between those times, and helps us see the shape of the relationship.
+@ifslide{
+@right{@image{images/rides-combined-plot.png}}
+}
+
+Connecting the dots with the line gives us an *approximation* of what data is missing between those times, and helps us see the shape of the relationship.
+
+@lesson-point{Line graphs are often used instead of scatter plots when the explanatory variable is _time_.}
+
+@slidebreak
 
 @ifslide{
 @right{@image{images/rides-combined-plot.png}}
 }
 
 @QandA{
-@Q{Was it helpful to connect the dots to form a line graph?}
-@A{Yes - it was difficult to see the pattern until we added the line!}
-@A{We don't know for sure what the data looks like between those points, and we certainly don't know if it's linear!}
+@Q{Why was it helpful to connect the dots to form a line graph?}
+@A{It was difficult to see the pattern until we added the line!}
+
 @Q{Do `time` and `altitude` appear to be related?}
 @A{(Solicit a range of student responses, guiding the class to there being a relationship)}
-@Q{What kind of ride do you think this teacher was on, and why?}
-@A{A Ferris wheel, because the ride keeps going up and down over and over, and it takes the same amount of time to go up as it does to go down.}
-@Q{But what kind of relationship is it? Is it Linear? Quadratic? Something else?}
+
+@Q{What kind of relationship is it? Is it Linear? Quadratic? Something else?}
 @A{(Let students discuss)}
-@Q{Why might using straight lines to connect these dots be a problem?}
+
+@Q{Why might we not want to use straight lines to connect these dots?}
+@A{We don’t know for sure what the data looks like between those points, and we certainly don’t know if it’s linear!}
 }
 
-== Thinking in Circles
+=== Synthesize
+
+@QandA{
+@Q{When does it make sense to connect the dots on a scatter plot?}
+@A{When the explanatory variable is continuous, like time.}
+}
+
+
+== Unit Clocks
 
 === Overview
 Students begin to reason about points on the circumference of a circle, with their x- and y-coordinates varying as a function of _rotation_.
 
 === Launch
 
-@right{@image{images/ferris-wheel.png, 150}}Your teacher's seat on the Ferris Wheel can be thought of as a point on the circumference of a rotating circle.
+@right{@image{images/ferris-wheel.png, 150}}The teacher's seat on the Ferris wheel can be thought of as a point on the circumference of a rotating circle.
 
-- The y-value (`altitude`) goes from 5ft to 205ft then back down to 5, then up again, then down again...
-- This pattern of y-values repeats at regular intervals (every 30m)
+- The y-coordinate (`altitude`) goes from 5ft to 205ft then back down to 5, then up again, then down again...
+- This pattern of y-coordinates is _periodic_, repeating at regular intervals (over a period of 30 minutes)
 
-How do we figure out how far off the ground (y-coordinate) the seat is after some length of time?
+@slidebreak 
 
-@slidebreak
-
-Let's consider the models we've studied:
-
-- linear, exponential and logarithmic models either keep increasing forever or keep decreasing forever.
-- quadratic relationships grow one way until they reach a maxima or minima _once_, before growing in the other direction.
-
-*None of the tools in our modeling toolkit work for functions that keep repeating, going up and down over time!*
+None of the models we've seen so far will help us predict how far off the ground (y-coordinate) the seat is after a length of time (x-coordinate). Some of them increase or decrease forever (linear, exponential, logarithmic), and others change directions _once_ (quadratic), but not over and over in a cycle!
 
 @slidebreak
 
-This is a problem, because modeling cyclical relationships is _incredibly important_, for everyone from farmers to fishermen to healthcare providers! So many things in nature come in cycles:
+Modeling cyclical relationships is _incredibly important_, for everyone from farmers to fishermen to healthcare providers! +
+So many things in nature come in cycles:
 
-- The sun rises and sets every day: @math{\text{sun-height}(\text{time})} is periodic
-- The moon waxes and wanes: @math{\text{moon}(\text{date})} is periodic
-- the tides come in and out each day: @math{\text{tide}(\text{time})} is periodic
-- Tulips tend to bloom in the Spring: @math{\text{tulips}(\text{date})} is periodic
-- People tend to get sick in the winter: @math{\text{flu-cases}(\text{date})} is periodic
+- The sun rises and sets every day:  @math{\text{sun-height}(\text{time})} is a periodic function
+- The tides come in and out each day:  @math{\text{tide}(\text{time})} is a periodic function
+- People tend to get sick in the winter:  @math{\text{flu-cases}(\text{date})} is a periodic function
 
-In this lesson we'll explore a new class of functions - _@vocab{periodic functions}_ - that we can use to model cyclical relationships like these.
+We're going to explore a new class of functions - @vocab{periodic functions} - that we can use to model cyclical relationships like these.
 
-@strategy{A note on Vocabulary}{
+@strategy{Why not "Trigonometric"?}{
 
-You've probably heard of related terms _sinusoidal functions_ or _trigonometric functions_. We've chosen @vocab{periodic functions} because the term shows up often in both K-12 math _and_ science and engineering classes, in an attempt to balance the two. Note that "periodic" is also a broader term, as there are periodic functions that are _not_ sinusoidal/trigonometric. Science teachers may be quick to point out that periodic functions can be used to model relationships that _cycle_ (smooth ups-and-downs) and those that oscillate (any kind of up-and-down!).
-
-@center{@image{images/non-sinusoidal-graphs.png}}
-
-As always, we advise you to use the term that works best for your classroom context!
+@right{@image{images/non-sinusoidal-graphs.png, 175}}
+"Periodic" is a broader term than _trigonometric_ (or _sinusoidal_). Science and engineering teachers will be quick to point out that periodic functions can be used to model both relationships that _cycle_ (smooth ups-and-downs) and those that oscillate (any kind of up-and-down!) +
+{empty} +
+We've chosen to use @vocab{periodic functions}, because the term applies in _all_ of these classes. As always, we advise you to use the term that works best for your classroom context!
 }
 
-@slidebreak
+=== Investigate
 
-==== Unit Clocks
+To wrap our heads around periodic functions, let's think about something simpler than a Ferris wheel. Consider a simple clock that is centered around the origin, with a radius of 1.
 
-@right{@image{images/unit-circle-clock.png}}Let's think about a simpler case, of a clock with a radius 1 that is centered around the origin. +
- +
-We can draw a radius at any "time", on the clock hitting the circumference at some point (A, B).
+@teacher{Note that the "unit clock" we are referring to here is not the same thing as the *unit circle* commonly referenced in math textbooks. We are consciously making the choice to use the clock instead because it is far more familiar and less abstract for students. We encourage you to resist the temptation to jump to discussing unit circles at this time. We will discuss similarities and differences of clocks and unit circles later in the lesson. 
 
-_For example, when it's 12 o'clock, the radius lands at @math{(A = 0, B = 1)}._
+Heads up: You may need to remind your brain that, unlike unit circles, clock hands move clockwise!}
 
-That radius also forms the @vocab{hypotenuse} of a right triangle with sides @math{x} and @math{y}, shown here in green and blue.
+--
+@right{@image{images/unit-circle-clock.png, 225}}
+
+- The "hand" of the clock is just a radius, which hits the circumference at a point we'll call (A, B).
+- As time passes, the hand spins around the circle, taking (A, B) with it.
+	** When it's 12 o'clock, the radius lands at @math{(A = 0, B = 1)}.
+	** At 3 o'clock, the radius lands at @math{(A = 1, B = 0)}.
+	** At 6 o'clock, the radius lands at @math{(A = 0, B = -1)}.
+- That radius also forms the @vocab{hypotenuse} of a right triangle with sides @math{x} and @math{y}, shown here in green and blue.
+- As the point (A, B) moves around the circle, the values of @math{A} and @math{B} rise and fall between 1 and -1, over and over.
+--
 
 @lesson-instruction{
-- With a partner, complete questions 1-6 of @printable-exercise{unit-clock.adoc}.
+- With a partner, complete the first section ("A and B, around the clock
+") of @printable-exercise{unit-clock.adoc}.
 }
 
 @slidebreak
@@ -188,76 +207,134 @@ That radius also forms the @vocab{hypotenuse} of a right triangle with sides @ma
 @ifslide{@right{@image{images/unit-circle-clock.png}}}
 
 @QandA{
-@math{A} and @math{B} both vary as a function of @math{time}, giving us functions @math{A(time)} and @math{B(time)}.
-@Q{At what time does the radius land on the point (0,-1)?}
-@A{6pm?}
-@Q{When does @math{B(time)=0}, where the radius sits along the x-axis?}
-@A{3pm lands on (1,0)}
-@A{9pm lands on (-1,0)}
-@Q{At which time(s) does @math{A(time)=B(time)}, where the legs @math{x} and @math{y} are equal?}
+@math{A} and @math{B} both vary as a function of @math{\textit{time}}, giving us functions @math{A(\textit{time})} and @math{B(\textit{time})}.
+@Q{At what time(s) does the radius land on the point (0,-1)?}
+@A{6 o'clock}
+@Q{At what time(s) does @math{B(\textit{time})=0} so that the radius sits along the x-axis?}
+@A{3:00 lands on (1,0)}
+@A{9:00 lands on (-1,0)}
+@Q{At which time(s) does @math{A(\textit{time})=B(\textit{time})}, where the legs @math{x} and @math{y} are equal?}
 @A{1:30 and 7:30}
-@Q{When @math{A(time) = B(time)}, how could we calculate the length of @math{x} and @math{y} from this right triangle?}
-@A{We could use the Pythagorean Theorem: @hspace{1em} @math{x^2 + x^2 = 1^2}}
-}
-
-@teacher{
-Make sure you have created a link or code for your class to @starter-file{alg2-exploring-periodic-desmos} and paced the class so they only have access to Slide 1: Unit Clocks. Students will be using this slide to check their work on @printable-exercise{unit-clock.adoc}
+@Q{When @math{A(\textit{time}) = B(\textit{time})}, how could we calculate the length of @math{A} and @math{B} from this right triangle?}
+@A{We could use the Pythagorean Theorem, with @math{A = B}: @hspace{1em} @math{A^2 + A^2 = 1^2}}
 }
 
 @lesson-instruction{
-- With a partner, finish @printable-exercise{unit-clock.adoc}.
-- The end of the page will direct you to use the the link I shared to the Desmos File *Exploring Periodic Functions*.}
+- With a partner, complete the second section of @printable-exercise{unit-clock.adoc}.
+- Then open @starter-file{alg2-unit-clock} to complete the page.
+}
 
 @slidebreak
 
-@right{@image{images/pizza-slice2.png, 100}}As the point (A, B) travels around the circumference of a circle, it reflects a changing angle @math{θ}. It can be helpful to think of this as a pizza slice, with @math{θ} as the angle at the tip of the slice, and the edge of the crust as the amount of the circumference the point has traveled.
+@right{@image{images/pizza-slice2.png, 100}}As the point (A, B) travels around the circumference of a circle, it reflects a changing angle @math{θ}. Think of a pizza slice, with @math{θ} as the angle at the tip of the slice, and the crust as the amount of the circumference the point has traveled.
 
 @QandA{
-In our clock example, we divide the circle into twelve "slices", each representing one hour. How many slices would represent 15 minutes? An hour and a half? slice?
+In our clock example, we divide the circle into twelve "slices", each representing one hour.
 
-Of course, there are other ways besides 12 slices of "hours" to measure this angle!
-@Q{Can you think of another measure that divides a circle up differently?}
-@A{_Minutes_, which divide our circle up into 720 slices instead of 12. We could imagine one-and-a-half of these slices representing 90 seconds, or 2 slices for 120 seconds.
-** _Degrees_, divide a circle up into 360 slices instead of 12. How many minutes are represented by 1 degree? 2.5 degrees?
-** _Compass Directions_ like North, South, East, and West, which divide our circle up into 4 slices instead of 12. How many slices represent the angle between North and South? West and Southwest?
+@Q{How many of those slices would represent 2 hours?}
+@A{2 slices}
+
+@Q{How many of those slices would represent 3 hours?}
+@A{3 slices}
+
+@Q{How many of those slices would represent a half hour (i.e. - 30 minutes)?}
+@A{1/2 of a slice}
+
+@Q{How many of those slices would represent 15 minutes?}
+@A{1/4 of a slice}
+
+@Q{Of course, there are other ways besides 12 slices of "hours" to measure angles! Can you think of another measure that divides a circle up differently?}
+@A{_Degrees_, divide a circle up into 360 slices instead of 12.
+ - How many minutes are represented by 1 degree?
+   *** 2
+ - How many minutes are represented by 2.5 degrees?
+   *** 5
 }
-@Q{On our graph, would the shape of the curve change if we labeled the x-axis with 360 degrees instead of 12 hours?}
-@A{No -- all the intervals remain constant, so the only change is the *labels* on the x-axis.}
+@A{_Minutes_, which divide our 12-hours into 720 slices. We could imagine one-and-a-half of these slices representing 90 seconds, or 2 slices for 120 seconds.}
+@A{_Compass Directions_ like North, South, East, and West, which divide our circle up into 4 slices instead of 12.
+ - How many slices represent the angle between North and South?
+   *** 2
+ - How many slices represent the angle between West and Southwest?
+   *** half a slice
+}
 }
 
 @slidebreak
 
-==== Radians
-
-@ifslide{@right{@image{images/pizza-slice2.png, 200}}}Degrees aren't always the best way to divide up a circle.  We often want to use the *radius* of the circle in our calculations, just as we used the radius of the Ferris wheel to talk about altitude. In these cases, it would be nice to have a measurement of circumference that's _expressed in terms of radius_, to make the math cleaner...
+@lesson-point{We can divide a circle any way we want!}
 
 @slidebreak
 
-@right{@image{images/pizza-6-equilateral.png, 200}}What if we wanted a pizza slice where the length of the crust is exactly the same as the length of the radius? How many slices would there be in the pie?
+@lesson-instruction{
+In our clock animation we have 12 "slices", with 12 evenly-spaced labels around the clock.
+
+- Return to the @starter-file{alg2-unit-clock}, change `num-slices` to 360, and click "Run". What changed? What stayed the same?
+- Take a minute to play with `num-slices` and `num-labels`, making sure that `num-labels` divides evenly into `num-slices` with _no remainder!_
+- Can you divide the clock into 70 slices? 92?
+}
+
+=== Synthesize
+
+@QandA{
+@Q{Does changing the number of slices effect the way the curves are drawn? Why or why not?}
+@A{Let students discuss.}
+@A{The height of the curves depends only on the radius of the circle. Changing the number of circle-slices or names of the labels doesn't change the radius, nor will it change the curves. }
+}
+
+== From Hours to Radians
+
+=== Overview
+Students are introduced to @vocab{radians}, and practice converting between different units of angle measurement.
+
+=== Launch
+
+Conveniently, we can chop up circles based on whatever kind of math we want to do, and the devices we have available to do our computations with.
+
+- The Babylonians chose to use 360 slices to map out the "circle" representing the night sky, because 360 is roughly the number of days in a year and most easy-to-see constellations repeat their cycles annually. 360 is also easily divided by common numbers like 2, 3, 4, 6, 8, 9, 10, and 12, which makes calculating with those numbers a lot easier.
+
+@slidebreak
+
+- Babylonians also noticed that there were roughly 12 full moons each year and that 12 is a convenient number for calculations done people who only have their hands to count with, because a hand has 12 finger joints that can be touched with the thumb. They divided the night and day into 12 slices each (giving us 24 hours). Thousands of years later, the 12 slices of a circular @link{https://en.wikipedia.org/wiki/Sundial, sundials} Babylonians used to tell time became the 12 hours on a clock. 
+
+@slidebreak
+
+We often want to talk about the *distance* traveled around the circumference of a circle.
+
+- For example, if we're building an arch out of bricks, we want to know how many bricks to use.
+- We might also want to know _how far our teacher traveled_ on their trip around the Ferris wheel.
+
+Calculations involving circumference all involve the *radius* of the circle. Is there a way to divide the circle into slices so that radial calculations are easy? It would be nice to have a measurement of angle that's _expressed in terms of a radius_, to make the math cleaner...
+
+@slidebreak
+
+--
+@right{@image{images/clock-6-equilateral.png, 100}@image{images/clock-6-hexagon.png, 100}}
+Suppose the hand of our clock was made of rubber, and we could take it off and bend it around the circle. How many "clock hands" would it take to wrap all the way around the clock?
 
 - We can start by imagining each slice as an equilateral triangle, where all three sides are exactly one radius.
 - This would give us exactly six slices, with the tip of each slice having a 60° angle...
 @QandA{
-@Q{If each of our six slices were an equilateral triangle, our pizza wouldn't be round anymore.}
-@Q{What shape would we get instead?}
-@A{A hexagon!}
+@Q{We could go all the way around the clock circle with 6 of those triangles. Would 6 radii be enough distance to get around the circumference of our circle?}
+@A{No - they make a hexagon whose perimeter is almost as big as the circle, but not quite!}
 }
+--
 
 @slidebreak
 
-@ifslide{@right{@image{images/pizza-6.png, 200}}}In order to bend the outer edge of the triangle into a curve that lands on the edge of the circle, while keeping the length of the curve equal to the radius, we'd have to make the angle _just slightly less than 60°_.
+@ifslide{@right{@image{images/clock-6-hexagon.png, 200}}}In order to bend the outer edge of the triangle into a curve that lands on the edge of the circle, while keeping the length of the curve equal to the radius, we'd have to make the angle _just slightly less than 60°_.
 
 @lesson-point{Radian: the measure of the angle formed by carving out a radius's worth of the circumference}
 
 If @math{θ} of each "radian" slice is less than 60°, we can fit just slightly more than 6 of these slices in our pie. In fact, we can fit *exactly @math{2pi}* of these "radius slices"!
 
-@lesson-point{@math{360° = 2pi}}
-
+@lesson-point{@math{360° = 2\pi} radians}
 
 @slidebreak
 
 @QandA{
-@Q{If there are @math{2pi} radians in the whole circle, how many radians are in the _semi-circle_ between 3pm and 9pm on our clock?}
+@Q{Where else have you seen @math{pi} before?}
+@A{In all of the geometric formulas for circles and other shapes with circular bases and/or cross sections.}
+@Q{If there are @math{2\pi} radians in the whole circle, how many radians are in the _semi-circle_ between 3pm and 9pm on our clock?}
 @A{@math{1\pi}}
 @Q{How many radians are there in the _quarter-circle_ between 12pm and 3pm?}
 @A{@math{\pi \over 2}}
@@ -265,23 +342,21 @@ If @math{θ} of each "radian" slice is less than 60°, we can fit just slightly 
 @A{@math{\pi \over 6}}
 }
 
-@slidebreak
+=== Investigate
 
 Pyret knows about @math{\pi}, too!
 
 @lesson-instruction{
-- Open @starter-file{editor}
 - In the Interactions Area, try evaluating `PI` (all caps!). What do you get back?
 - Try computing the value of @math{3\pi}.
 - Try computing the value of @math{\pi / 2}.
-- Why do we need spaces around the multiplication and division signs?
 }
 
-@teacher{Be prepared to remind students to read the error messages when they type `3PI` instead of `3 * PI`  and `PI/2` instead of `PI / 2`}
+@teacher{Be prepared to remind students to read the error messages when they type `3PI` instead of `3 * PI`  and `PI/2` instead of `PI / 2`.}
 
 @slidebreak
 
-As with degrees, switching our unit-clock graph from hours to radians doesn't change the curve of our graph at all. It just changes the tick marks on the x-axis.
+As with hours, degrees, and compass directions, switching our unit-clock graph from hours to radians doesn't change the curve of our graph _at all_. It only changes the tick marks on the x-axis.
 
 *Note:* The conventions for labeling a clock are different from the conventions for labeling circles with Radians or Degrees.
 [cols="^5a,^1a,^5a", options="header", grid="none", stripes="none"]
@@ -289,7 +364,7 @@ As with degrees, switching our unit-clock graph from hours to radians doesn't ch
 
 | hours on a clock
 | vs
-| radians and degrees on a circle
+| radians and degrees on a unit circle
 
 | start from the top +
  (where 12 o'clock is)
@@ -310,7 +385,7 @@ As with degrees, switching our unit-clock graph from hours to radians doesn't ch
 
 | hours on a clock
 | vs
-| radians and degrees on a circle
+| radians and degrees on a unit circle
 
 | start from the top +
  (where 12 o'clock is)
@@ -324,15 +399,71 @@ As with degrees, switching our unit-clock graph from hours to radians doesn't ch
 |===
 }
 
-_These are conventions that people have agreed upon over time to make it easy to collaborate. If somebody wanted to make a clock with the numbers written backwards and have the hands move the other way, it would be possible to learn how to tell time using their clock... but it likely would be more confusing than helpful for most people if we hung a clock like that in our school._
+These are conventions that people have agreed upon over time to make it easy to collaborate. It's like driving on the right side of the road v. the left: it doesn't matter what we choose, as long as everyone makes the same choice!
+
+@slidebreak
+
+We could make a clock with the numbers written _backwards_ and have the hands move the other way! And as long as everyone uses the same clock, we can still tell time.
+
+Regardless of the direction the "hands" turn, or whether we're dividing the circle into hours, minutes, radians, or anything else, the plotted curves will always be the same.
+
+@lesson-instruction{
+- Complete the first question on @printable-exercise{converting-angles.adoc}
+}
+
+@slidebreak
+
+Mathematicians use special names for these functions. They call them sine and cosine, rather than "A" and "B"!
+
+In Pyret (and on most calculators) these functions consume @vocab{radians}, and their names are abbreviated as `sin` and `cos`.
+
+The contracts for these functions are: +
+@hspace{4em}
+@show{(contracts
+'("sin" ("Number") "Number")
+'("cos" ("Number") "Number")
+)}
 
 @slidebreak
 
 @lesson-instruction{
-Complete the table on @printable-exercise{converting-angles.adoc} with your partner, following the prompts in #1 and #2.
+- One of these two functions computes the "x values" from our unit circle (@math{A} on the unit clock). \
+- The other function computes the y-values (@math{B} on the clock).
+- To figure out which function is which, use Pyret to complete @printable-exercise{converting-angles.adoc}.
 }
+
+*Note:* The numbers that these functions expect aren't hours, minutes, pizza slices or degrees. _They consume @vocab{radians}!_
+
+@slidebreak
+
+- sine - the height of the right-triangle at a given angle ("time" in our example)
+- cosine - the width of the right-triangle at a given angle
+ 
+
+@strategy{Where did these Names Come From?}{
+
+@right{@image{images/Etymology.png, 125}}
+In ancient India, mathematicians thought that a vertical line drawn across the circle resembled the bowstring of a bow-and-arrow, which is also called a "cord". When cut in half, this "half-cord" represented the height of a right triangle formed by the angle! The Sanskrit word for "chord", _"jiva"_
+was mis-translated by Arabic mathematicians, who transliterated it as _"jiba"_^1^. +
+{empty} +
+In the 12th century, _"jiba"_ was translated into the Latin word _"sinus"_. The remaining part of the 180° or @math{\pi} in the semicircle formed by the bow is the "completion" of the "sinus", and the Latin prefix "co-" was used to name the length drawn by the remaining angle _"cosinus"_.
+
+{empty}
+
+[1] - Transliterating "v" and "b" sounds between languages is really common. Consider "veinte" the Spanish word for 20, which is often pronounced with a "b" instead.
+}
+
+When graphed, each of these functions shows us the relationship between the angle and the height (sine), or the angle and the height (cosine).
+
 
 === Synthesize
 
-TBD
+@QandA{
+@Q{Which function computes the horizontal leg @math{A}?}
+@A{`sin`}
+@Q{Which function computes the vertical leg @math{B}?}
+@A{`cos`}
+@Q{If `sin` and `cos` consumed and produced _degrees_ instead of _radians_, would the shape of the curve change? Why or why not?}
+@A{No. This would be exactly the same as changing the slices and labels around the circle: same graph, same curves, different markings.}
+}
 

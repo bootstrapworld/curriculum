@@ -26,6 +26,18 @@ table .autonum::after { content: ')' !important; }
 </style>
 ++++
 
+* If fillvertical space isn't working, this might address the issue
+++++
+<style>
+/* This page has an unusual configuration, where there's only one
+   2nd level section but it doesn't start at the beginning.
+   Stop that section from auto-growing, thereby freeing up vertical
+   space for the first section in order to maximize the table height
+ */
+#preamble_disabled + .lesson-section-1 { flex-grow: 0 !important; }
+</style>
+++++
+
 * For pages with lots of empty space at the top.
 ++++
 <style>
@@ -59,6 +71,14 @@ body.LessonNotes li {
   border: dotted 1px black; 
   p {margin-left: .25em !important; }
 }
+</style>
+++++
+
+* To shorten fill in the blanks from ?ANS
+++++
+<style>
+/* Shorten fill in the blanks from ?ANS
+.studentAnswerMedium { min-width: 70pt !important; }
 </style>
 ++++
 
@@ -105,7 +125,7 @@ Correlation does NOT imply causation.
     --width and --height determine the size of plane. Defaults to 3in x 3x.
     --min-gap determines the minimum space between graphs. Defaults to 20px.
 
-    --top_pct and --left_pct determine the origin's position. Defaults to (50%, 50%).
+    --top_pct and --left_pct determine the origin's position (btw 0 and 1). Defaults to (0.5, 0.5).
     --minors determines how many "minor axes" (incl the one behind major). Defaults to 7.
 
     --x_label defaults to 'x'
@@ -120,16 +140,10 @@ Correlation does NOT imply causation.
   --y_label: 'time';
 }
 </style>
+
+* If subscripts are being cut off of fitbruby
+ .ruby { bottom: -13px !important; }
+ .ruby .mathunicode { line-height: 1.5; }
 ++++
 
-* If fillvertical space isn't working, this might address the issue
-++++
-<style>
-/* This page has an unusual configuration, where there's only one
-   2nd level section but it doesn't start at the beginning.
-   Stop that section from auto-growing, thereby freeing up vertical
-   space for the first section in order to maximize the table height
- */
-#preamble_disabled + .lesson-section-1 { flex-grow: 0 !important; }
-</style>
-++++
+

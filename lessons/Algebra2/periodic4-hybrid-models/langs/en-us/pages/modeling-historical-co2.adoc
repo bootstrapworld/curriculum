@@ -8,8 +8,12 @@ td, .center { padding: 0 !important; }
 td .codetwo { color: black; background: none; }
 
 /* Shorten fill in the blanks */
-.fitb { min-width: 2em; padding-top: 1rem; }
+.fitb, .fitbruby { min-width: 2em; padding-top: 1rem; }
 .studentAnswerMedium { min-width: 70pt !important; }
+
+/* Add parentheses to autonums inside a table, and preserve padding */
+td .autonum::after{ content: ') ' !important; }
+td .autonum { padding-top: 1.2rem !important; }
 </style>
 ++++
 
@@ -24,63 +28,111 @@ td .codetwo { color: black; background: none; }
 }
 
 @link-instructions{
-The data below was generated from @starter-file{alg2-co2}, showing the amount of @COtwo in the atmosphere (parts per million) on specific dates from 1974 to 2023 (the `co2-table`). *NOTE:* the `date` column is the *decimal year* (so "June 15th, 2023" would be 2023.5).
+For this page, we are going to work with the data in the `co2-table` of the @starter-file{alg2-hybrid}, which tracks the amount of @COtwo in the atmosphere (parts per million) from 1974 to 2023.
 }
 
-== Looking for Patterns
+== Fitting a Linear Model
 
-@center{@image{../images/historical-scatter-plot.png, 450}}
+@n Use `lr-plot` to find the best linear model for the `co2-table` and record the function below (in Pyret and Function Notation):
 
-@n Use `lr-plot` to find the best linear model for the `co2-table`. What is its @math{S}-value? @fitbruby{15em}{@ifsoln{3.425}}{parts per million}
-
-@n Write the function below (in Pyret and Function Notation):
-
-[cols=".^1a, ^.^12a", frame="none", stripes="none"]
+@indented{
+[cols="1a, 5a", frame="none", stripes="none", grid="none"]
 |===
-| *Function Notation*
+.^| *Function Notation*
 |
-@math{\text{linear}(x) =} @fitbruby{70pt}{@ifsoln{1.8345}}{slope}x + @fitbruby{10em}{@ifsoln{-3296}}{y-intercept / vertical shift}
-| *Pyret Notation*
+@math{\text{linear}(x) =} @fitbruby{70pt}{@ifsoln{1.8345}}{slope}x {nbsp} + {nbsp} @fitbruby{10em}{@ifsoln{-3296}}{y-intercept / vertical shift}
+.>| *Pyret Notation*
 | @show{(code '(define (linear x) (+ (* (?ANS 1.8345) x)(?ANS -3296))))}
 |===
-
-@n Copy your periodic model from @printable-exercise{periodic3-fitting-models/pages/modeling-recent-co2.adoc} below:
-
-[cols=".^1a, ^.^12a", frame="none", stripes="none"]
-|===
-| *Function Notation*
-|
-@math{\text{periodic}(x) =} @fitbruby{70pt}{@ifsoln{4.13}}{amplitude} @math{\times}
-@math{sin}(
- @fitbruby{70pt}{@ifsoln{6.28}}{frequency} (x - @fitbruby{70pt}{@ifsoln{2023.1}}{horizontal shift})
-) + @fitbruby{70pt}{@ifsoln{419.87}}{vertical shift}
-
-| *Pyret Notation*
-| @show{(code `(define (periodic x) (+ (* (?ANS ,a) (sin (* (?ANS ,b) (- x (?ANS ,d))))) (?ANS ,c))))}
-|===
-
-== Creating Hybrid Models
-*We can think of @math{f(x) = A \sin(B(x - h)) + k} as being the sum of _two_ functions: @math{p(x) = A \sin(B(x - h))} and @math{q(x) = k}.*
-
-@n Which function defines the "up and down" wave (@math{p} or @math{q})? @fitb{4em}{@ifsoln{@math{p}}} Which function defines the line the wave "wraps around"? @fitb{}{@ifsoln{q}}
-
-@n What do you think would happen if @math{q} were changed so that @math{k} is a _higher_ number? @fitb{}{@ifsoln{The wave is shifted up}}
-
-@n What do you think would happen if @math{q} were changed so that @math{k} is a _lower_ number? @fitb{}{@ifsoln{The wave is shifted down}}
-
-@n What do you think would happen if @math{q} were changed to @math{q(x) = 2x + -3000} @fitb{}{@ifsoln{The wave would wrap around a sloping line}}
-
-@star Define a NEW function `hybrid` in Pyret, which combines your periodic model with the optimal linear one. Write your new model below, in Function or Pyret notation:
-
-[.FillVerticalSpace, cols="^1a", frame="none", options="noheader"]
-|===
-|
-@ifsoln{
-`fun hybrid(4.13 * sin(6.28 * (x - 2023.1))) + (1.8345 * x) + -3296 end`
-
-**OR**
-
-@math{hybrid(x) = 4.13 * sin(6.28(x - 2023.1))) + 1.8345x + -3296}
 }
+
+@n Update the definition for `linear-co2` in the starter file. Then complete the interpretation stem below.
+
+@indented{
+__*This model predicts* that we'll see a(n)__
+@fitbruby{7em}{@ifsoln{decrease}}{increase/decrease} _of_
+@fitbruby{5em}{@ifsoln{1.83453}}{rate of change}
+@fitbruby{20em}{@ifsoln{parts per million of @math{CO_2} in the atmosphere}}{x-variable} _every_
+@fitbruby{4em}{@ifsoln{year}}{x-units}.
+
+__*The error in the model* is described by an @vocab{S-value} of about__
+@fitbruby{3em}{@ifsoln{3.4}}{S}
+@fitbruby{3em}{@ifsoln{ppm}}{y-units}. @hspace{1em} _I_
+@fitbruby{18em}{@ifsoln{agree}}{strongly agree, agree, disagree, strongly disagree} _that this model is a good fit considering that_
+@fitbruby{7em}{@ifsoln{@math{CO_2} levels}}{y-variable} _in this dataset range from_
+@fitbruby{7em}{@ifsoln{327.28}}{lowest y-value} _to_
+@fitbruby{7em}{@ifsoln{424}}{highest y-value}.__
+}
+
+== Fitting your Periodic Model
+@link-instructions{Make sure you've updated the @starter-file{alg2-hybrid} so that `periodic-sin` matches what you found on @printable-exercise{periodic3-fitting-models/pages/modeling-recent-co2.adoc}}.
+
+[cols="5a, 2a", grid="none", frame="none"]
 |===
-What is the best @math{S}-value you can get? @fitbruby{10em}{@ifsoln{3.024}}{parts per million} 
+|@n Use `fit-model` to fit your `periodic-sin` model to the data in the `modern-table` and _sketch it_ on the scatter plot to the right.
+
+@n Complete the interpretation stem below.
+
+@indented{
+__*The error in the model* is described by an @vocab{S-value} of about__ +
+@fitbruby{2em}{@ifsoln{55.89}}{S}
+@fitbruby{3em}{@ifsoln{ppm}}{y-units}. @hspace{1em} _I_
+@fitbruby{17em}{@ifsoln{disagree}}{strongly agree, agree, disagree, strongly disagree}
+_that this model is a good fit considering that_
+@fitbruby{5em}{@ifsoln{@math{CO_2}}}{y-variable} _in this dataset ranges from about_
+@fitbruby{6em}{@ifsoln{327.28 ppm}}{lowest y-value} _to_ @fitbruby{6em}{@ifsoln{424 ppm}}{highest y-value}.
+}
+
+| @ifnotsoln{@center{@image{../images/historical-scatter-plot.png}}}
+@ifsoln{@center{@image{../images/historical-bad-fit.png}}}
+|===
+
+== Comparing Models
+
+@n Which model is better, the `linear` model or the `periodic-sin` model? @fitb{}{@ifsoln{linear}}
+
+@n How much
+@fitbruby{7em}{@ifsoln{less}}{more / less }
+error do we expect in predictions made with the `linear` model than with the `periodic-sin` model?
+
+@scrub{
+A note for future authors:
+- {&#8192;} is used below to add horizontal space.
+- \mbox{} is used to make the words in the fraction use normal font.
+}
+
+@indented{
+Percent Change &#8192; = &#8192;
+@math{
+\frac{&#8192; \mbox{Difference} &#8192; \mbox{between} &#8192; \mbox{the} &#8192; \mbox{S-values}&#8192;}
+{\mbox{S-value} &#8192; \mbox{for} &#8192; \mbox{linear} &#8192; \mbox{model}}
+\times 100 &#8192; = &#8192; }
+@ifnotsoln{@math{\frac{\qquad}{\qquad}}}
+@ifsoln{@math{\frac{52.465}{55.89} = 0.9387  &#8192; &rarr; &#8192;  ~94 \%}}
+}
+
+We expect predictions from the `linear` model to have
+@fitb{4em}{@ifsoln{~94}} percent
+@fitbruby{7em}{@ifsoln{less}}{ more / less }
+error than those from the `periodic-sin` model!
+
+== Comparing @vocab{S-values} doesn't always make sense
+
+We know that the `periodic-sin` model was a good fit for the data in the `recent-table` it was built with. And we know from looking at the graphs that the model fit the historical data worse and worse the farther we went back in time. But, even though that's true, it doesn't make sense to justify it by comparing the @math{\mbox{S-values}} below.
+
+@indented{
+[cols="^1a,^1a,^1a,^1a", options="header"]
+|===
+|					| recent-table	| modern-table 	| co2-table
+| @vocab{S-value}	| 1.2 			| 17.76			| 55.89
+| lowest y-value	| 415.74 		| 387.03 		| 327.28
+| highest y-value	| 424			| 424			| 424
+|===
+}
+
+@n Why wouldn't it make sense to compare the @math{\mbox{S-values}} in this table the way that we compared the @math{\mbox{S-values}} for how the linear and periodic models fit the `co2-table`? @fitb{}{}
+
+@fitb{}{@ifsoln{@math{\mbox{S-values}} only mean something when we consider them within the context of the range of the data. 
+}}
+
+@fitb{}{@ifsoln{We can compare @math{\mbox{S-values}} for different models when they're applied to the same dataset, but, in this case, we're looking at datasets with very different ranges!}}

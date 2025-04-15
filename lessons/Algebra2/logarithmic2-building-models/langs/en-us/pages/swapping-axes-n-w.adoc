@@ -4,7 +4,6 @@
 <style>
 /* Make autonums bold for matching pages */
 td .autonum:after { content: ')' !important; }
-td:first-child { padding-left: 0; }
 
 /* Add a top-margin to tables */
 table { margin-top: 1ex; }
@@ -26,10 +25,10 @@ The scatter plots below were made with the same data... we just _swapped_ the x-
 | @image{../images/MA-covid.png}
 | @image{../images/MA-covid-flipped.png}
 
-| @n What question might you answer from this graph? +
+<| @n What question might you answer from this graph? +
 @ifsoln{How many positive cases do we predict after @math{x} days?}
 @ifnotsoln{@vspace{5ex}}
-| @n What question might you answer from this graph?
+<| @n What question might you answer from this graph?
 @ifsoln{How many days do we predict until we pass @math{y} cases?}
 |===
 
@@ -57,21 +56,12 @@ The scatter plots below were made with the same data... we just _swapped_ the x-
 
 @vspace{1ex}
 
-This third scatter plot is our current dataset.
+@n This third scatter plot is our current dataset. Which of the scatter plots above does it resemble? @hspace{1em}
+@ifsoln-choice{_Days → Infections_} @hspace{1em} _Infections → Days_
 
-[cols="^1a,^1a", options="header"]
+
+[width=50%, cols="^1a", options="header"]
 |===
 | Per-Capita GDP → Median Life Expectancy
-|
 | @image{../images/wealth-health.png}
-|
-
-@vspace{3ex}
-
-@n Which of the scatter plots above does it resemble?
-
-@vspace{3ex}
-
-@ifsoln-choice{_Days → Infections_} @hspace{4em} _Infections → Days_
-
 |===

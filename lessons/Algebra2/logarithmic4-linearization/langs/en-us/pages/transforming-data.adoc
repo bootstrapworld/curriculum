@@ -23,12 +23,19 @@
 ++++
 <style>
 /* Shrink vertical spacing on fitbruby */
-.fitbruby{padding-top: 0.5rem;}
+.fitbruby{ padding-top: 0.5rem; }
+td .fitb { text-align: left; }
+
+/* Add some left-and-right margins to code-style font */
+.editbox { margin: 0 3px !important; }
+
+table.nomargin { margin-bottom: 0 !important; }
+table.nomargin td { 0 0.5em !important }
 </style>
 ++++
 
 @link-instructions{
-For this page, you'll need *Slide 7: Wealth-v-Health (Transformed)* of *Fitting Wealth-v-Health and Exploring Logarithmic Models (Desmos)*.
+For this page, you'll need *Slide 8: Wealth-v-Health (Transformed)* of *Fitting Wealth-v-Health and Exploring Logarithmic Models (Desmos)*.
 }
 
 @n Compare the two tables below from the Desmos file we are about to work with.
@@ -39,37 +46,48 @@ For this page, you'll need *Slide 7: Wealth-v-Health (Transformed)* of *Fitting 
 | Log(Wealth) vs. Health
 | What do you Notice or Wonder?
 
-| @image{../images/cropped-wealth-v-health-table.png, 90}
-| @image{../images/cropped-log-wealth-v-health-table.png, 100}
-| @ifsoln{
-- The 2nd columns are the same, but the 1st columns are really different.
-- The header for the x-column of the second table is a function that takes in the x&#8321;-value from the first table.
-- The first table is the same one we've seen before.
-}
+| @image{../images/cropped-wealth-v-health-table.png, 100}
+| @image{../images/cropped-log-wealth-v-health-table.png, 110}
+| 
+@fitb{}{@ifsoln{- The 2nd columns are the same, but the 1st columns are really different.}} +
+@fitb{}{@ifsoln{- The header for the x-column of the 2nd table is a _function_ that takes in the}} +
+@fitb{}{@ifsoln{  @hspace{2em} @math{x_1}-value from the first table.}} +
+@fitb{}{@ifsoln{- The first table is the same one we've seen before.}} +
+@fitb{}{} +
+@fitb{}{}
+
 |===
 
 == Fitting a Model
 
 @link-instructions{
-This slide contains two data tables.
+This slide contains two tables, a list and a function:
 
-- _The first table is in the @hspace{1em} `Wealth vs. Health`  @hspace{1em}folder and is the same table we've seen before._
-- _The second table is in the  @hspace{1em} `Log(Wealth) vs. Health`  @hspace{1em}folder._
-  * _The x-values in this table are defined to be the log of the x-values in the first table. (This is defined on line 4.)_
-  * _The y-values in this table are the same as the y-values in the first table. (This is defined on line 5.)_
+[.nomargin, cols="3a,2a", frame="none"]
+|===
+| 
+- `Wealth vs. Health` - the same table we've seen before.
+- @math{y_2} - a copy of the table's @math{y_1} column
+- @math{g(x)} - a function that takes in a number @math{x}, and produces @math{log_{10}(x)}
+
+|
+- `Log(Wealth) vs. Health` - a new table!
+  * _@math{x_2} uses @math{g(x)} on the @math{x_1} column in the first table._
+  * _@math{y_2} is our copy of the @math{y_1} column in the first table._
+|===
+
 }
-
 @n Notice how the red dots (representing the data points from the original table) are dispersed on the graph.
 
 - Hide these data points from the graph by clicking on the "points" circle ([.desmosbutton]#{points}#) at the top of the y&#8321; column.
 - Then click on the triangle ([.desmosbutton]#{caret}#) in front of the folder name to hide the table.
-- Turn ON the points for the @hspace{1em} `Log(Wealth) vs. Health`  @hspace{1em} table by clicking on the "points" circle ([.desmosbutton]#{points}#) at the top of the y&#8322; column
+- Turn ON the points for the `Log(Wealth) vs. Health` table by clicking on the "points" circle ([.desmosbutton]#{points}#) at the top of the y&#8322; column
 
-How does the new graph look different from the original graph? @fitb{}{}
+How does the new graph look different from the original graph? @fitb{}{@ifsoln{All the black datapoints are smashed against the y-axis!}}
 
-@fitb{}{@ifsoln{Our log transformation is so drastic that it looks like all the black datapoints are smashed against the y-axis!}}
+@fitb{}{@ifsoln{Our log transformation is *really* drastic!}}
 
-@n Scroll to the bottom of the @hspace{1em} `Log(Wealth) vs. Health`  @hspace{1em}table and click the [.desmosbutton]#{magnifying}# to rescale the graph.
+@n Scroll to the bottom of the `Log(Wealth) vs. Health` table and click the [.desmosbutton]#{magnifying}# to rescale the graph.
 
 @n Looking at the point cloud, the best model for this dataset would be (circle one): @hspace{3em} @ifsoln-choice{linear} @hspace{3em} quadratic @hspace{3em} exponential
 
@@ -86,13 +104,13 @@ How does the new graph look different from the original graph? @fitb{}{}
 
 [cols=".>2a,^1a,^1a", options="header", grid="none", frame="none", stripes="none"]
 |===
-3+^| Let's compare the coefficients from your linear and logarithmic models.
+3+^| Let's compare the model settings from your linear and logarithmic models.
 
 | *Linear* (From above)
 | @fitbruby{10em}{@ifsoln{~12 to ~16}}{slope (m)}
 | @fitbruby{11em}{@ifsoln{~8 to ~25}}{y-intercept / vertical shift}
 
-| *Logarithmic* (From @printable-exercise{logarithmic3-changing-scale/pages/changing-scale-linear-logarithmic.adoc})
+| *Logarithmic* (From @printable-exercise{logarithmic3-changing-scale/pages/fitting-logarithmic-models.adoc})
 | @fitbruby{10em}{@ifsoln{~12 to ~16}}{log coefficient (a)}
 | @fitbruby{10em}{@ifsoln{~8 to ~25}}{vertical shift (k)}
 |===
