@@ -1,0 +1,103 @@
+= Balancing Function Growth and Axis Growth (Linear)
+
+++++
+<style>
+/* Shrink vertical spacing on fitbs, and allow them to be smaller than normal */
+.fitb, .fitbruby{padding-top: 1rem; min-width: unset !important; }
+</style>
+++++
+
+////
+- Import Desmos Styles
+-
+- This includes some inline CSS which loads the Desmos font,
+- which includes special glyphs used for icons on Desmos.com
+-
+- It also defines the classname '.desmosbutton', which is used
+- to style all demos glyphs
+-
+- Finally, it defines AsciiDoc variables for glyphs we use:
+- {points}
+- {caret}
+- {magnifying}
+- {wrench}
+-
+- Here's an example of using these:
+- This is a wrench icon in desmos: [.desmosbutton]#{wrench}#
+////
+
+@include{fragments/desmos.adoc}
+
+@link-instructions{
+Make sure you're on *Slide 5: Changing the Scale (Linear)* of *Fitting Wealth-v-Health and Exploring Logarithmic Models*.
+}
+
+- On both the x- and y-axis (black numbers), you'll see a sequence of numbers showing the intervals _(for example, 0, 2, 4, 6 ...)_.
+
+@n What kind of growth do the sequences on these axes show? (circle one) @hspace{1em}
+@ifsoln-choice{Linear} 		@hspace{1em}
+Quadratic 					@hspace{1em}
+Exponential 				@hspace{1em}
+Logarithmic
+
+@n The function @math{f} is @fitbruby{16em}{@ifsoln{Linear}}{Linear, Quadratic, Exponential, or Logarithmic}, and its slope is @fitb{2em}{@ifsoln{2}}. @hspace{1em} Which two points on @math{f} are plotted here? @fitb{}{@ifsoln{(0, 0) and (1, 2)}}
+
+== Faking a Change in Slope
+
+- Click on the wrench button ([.desmosbutton]#{wrench}#) in the top-right corner of the Desmos graph to *open the "Graph Settings" window.*
+- *Change the scale of the y-axis* so that @math{-2 ≤ y ≤ 2}
+
+@n What kind of growth does the sequence of numbers on the *y-axis* show _now?_ @hspace{2em}
+@ifsoln-choice{Linear} 		@hspace{1em}
+Quadratic 					@hspace{1em}
+Exponential 				@hspace{1em}
+Logarithmic
+
+@n Did our two points on the line change? @fitb{2em}{@ifsoln{No}} @hspace{1em} Did the slope of @math{f} change? @fitb{2em}{@ifsoln{No}}. @hspace{1em} How did the graph change? @fitb{}{@ifsoln{The line got steeper}} + 
+@fitb{}{}
+
+@n What is going on here? @fitb{}{@ifsoln{The graph *looks* like it changed because we changed the scale, but all we did was "stretch" the y-axis}} +
+@fitb{}{}
+
+@n *Without changing the y-axis*, change the _x-axis_ to put the line roughly back where it was. What scale did you use? @hspace{1em} @fitb{3em}{} ≤ @math{x} ≤ @fitb{3em}{}
+
+== Faking a Change to Logarithmic
+
+- Open the "Graph Settings" window, and *expand the "More Options" section* by clicking the triangle ([.desmosbutton]#{caret}#).
+- *Change the y-axis* scale from `Linear` to `Logarithmic`.
+
+@n What kind of growth does the sequence of numbers on the *y-axis* show _now?_ @hspace{2em}
+Linear 						@hspace{1em}
+Quadratic 					@hspace{1em}
+@ifsoln-choice{Exponential} @hspace{1em}
+Logarithmic
+
+@n Did our two points on the line change? @fitb{2em}{@ifsoln{No}} @hspace{1em} Did the slope of @math{f} change? @fitb{2em}{@ifsoln{No}}. @hspace{1em} How did the graph change? @fitb{}{@ifsoln{Looks logarithmic}} + 
+@fitb{}{}
+
+@n What is going on here? @fitb{}{@ifsoln{We "squished" the y-axis exponentially, which made the linear growth of @math{f} appear logarithmic}} +
+@fitb{}{}
+
+== Faking a Change to Exponential
+
+- Change the y-axis scale back to `Linear`, and the `x-axis` scale to `Logarithmic`
+
+@n What kind of growth does the sequence of numbers on the *x-axis* show _now?_ @hspace{2em}
+Linear 						@hspace{1em}
+Quadratic 					@hspace{1em}
+@ifsoln-choice{Exponential} @hspace{1em}
+Logarithmic
+
+@n Did our two points on the line change? @fitb{2em}{@ifsoln{No}}. @hspace{1em} Did the slope of @math{f} change? @fitb{2em}{@ifsoln{No}}. @hspace{1em} How did the graph change? @fitb{}{} + 
+@fitb{}{@ifsoln{It looks exponential!}}
+
+@n What is going on here? @fitb{}{@ifsoln{We "squished" the x-axis exponentially, which made the linear growth of @math{f} appear exponential}} +
+@fitb{}{}
+
+@star *Make a prediction:* What do you think will happen if _both axes_ are switched to `Logarithmic`? @fitb{}{@ifsoln{answers will vary...}} +
+@fitb{}{}
+
+@n Change both scales to `Logarithmic`. Was your prediction accurate? @fitb{2em}{}. @hspace{1em} What happened, and why? @fitb{}{} +
+@fitb{}{@ifsoln{We "squished" both axes exponentially, so they balanced each other out}} +
+@fitb{}{}
+

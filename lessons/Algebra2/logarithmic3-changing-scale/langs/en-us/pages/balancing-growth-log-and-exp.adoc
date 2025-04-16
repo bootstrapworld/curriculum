@@ -1,0 +1,96 @@
+= Balancing Function Growth and Axis Growth (Logs and Exponents)
+
+++++
+<style>
+/* Shrink vertical spacing on fitbs, and allow them to be smaller than normal */
+.fitb, .fitbruby{padding-top: 1rem; min-width: unset !important; }
+</style>
+++++
+
+////
+- Import Desmos Styles
+-
+- This includes some inline CSS which loads the Desmos font,
+- which includes special glyphs used for icons on Desmos.com
+-
+- It also defines the classname '.desmosbutton', which is used
+- to style all demos glyphs
+-
+- Finally, it defines AsciiDoc variables for glyphs we use:
+- {points}
+- {caret}
+- {magnifying}
+- {wrench}
+-
+- Here's an example of using these:
+- This is a wrench icon in desmos: [.desmosbutton]#{wrench}#
+////
+
+@include{fragments/desmos.adoc}
+
+@link-instructions{
+Make sure you're on *Slide 6: Changing Scale (Exponential and Logarithmic)* of *Fitting Wealth-v-Health and Exploring Logarithmic Models*.
+}
+
+== Balancing Logarithmic Growth
+
+- The folder for a logarithmic function @math{g} is shown in red, and the folder for @math{h} is "turned off". *Do not* turn it on yet!
+- On both the x- and y-axis (black numbers), you'll see a sequence of numbers showing the intervals _(for example, 0, 2, 4, 6 ...)_.
+
+@n What kind of growth do the sequences on these axes show? (circle one) @hspace{1em}
+@ifsoln-choice{Linear} 		@hspace{1em}
+Quadratic 					@hspace{1em}
+Exponential 				@hspace{1em}
+Logarithmic
+
+@n The function @math{g} is @fitbruby{25em}{@ifsoln{Logarithmic}}{Linear, Quadratic, Exponential, or Logarithmic}, and its base is @fitb{5em}{@ifsoln{10}}.
+
+@vspace{1ex}
+
+- Click on the wrench button ([.desmosbutton]#{wrench}#) in the top-right corner of the Desmos graph to *open the "Graph Settings" window.*
+
+@n The x-axis goes from @fitb{2em}{} ≤ @math{x} ≤ @fitb{2em}{}. Can you change these numbers so that @math{g} looks linear? Why or why not? @fitb{}{@ifsoln{No, because logarithms}} +
+@fitb{}{@ifsoln{grow more slowly than linear functions. As long as the axis scales are linear, a logarithmic curve stays curved .}}
+
+@vspace{1ex}
+
+- Click on the wrench button ([.desmosbutton]#{wrench}#) and change the *x-axis* from `Linear` to `Logarithmic`
+
+@n Did our two points on the line change? @fitb{2em}{@ifsoln{No}} @hspace{1em} How did the graph change? @fitb{}{@ifsoln{It turned straight! It looks linear!}} + 
+@fitb{}{}
+
+@n What is going on here? @fitb{}{@ifsoln{We "squished" the x-axis exponentially, which balanced out the logarithmic growth on the y-axis}} +
+@fitb{}{}
+
+@vspace{1ex}
+
+- Change the *x-axis* back to `Linear`, and change the y-axis to `Logarithmic`
+
+@n What happened to the graph of @math{g}, and why? @fitb{}{@ifsoln{The curve got "sharper". By "squishing" the y-axis, we only made the logarithmic growth }} + 
+@fitb{}{@ifsoln{appear stronger (it looks like we took the "log of the log!)")}}
+
+== Balancing Exponential Growth
+
+- Set the scale for both axes back to `Linear`
+- "Turn off" the folder for @math{g}, and "turn on" the folder for our exponential function @math{h}
+
+@n The function @math{h} is @fitbruby{25em}{@ifsoln{Exponential}}{Linear, Quadratic, Exponential, or Logarithmic}, and its base is @fitb{5em}{@ifsoln{2}}.
+
+@n Without switching either axis to `Logarithmic`, can we change the minimum and maximum @math{x} or @math{y} that will make @math{h} look `Linear`? @fitb{}{@ifsoln{No}}
+
+@n *Make a prediction:* Which axis should we switch to `Logarithmic`, in order to make @math{h} look `Linear`? @fitb{}{@ifsoln{We should switch the y-axis}}
+
+@n Try it out! Was your prediction accurate? @fitb{2em}{}. @hspace{1em} What happened, and why? @fitb{}{@ifsoln{We "smooshed" the y-axis exponentially, which balanced out}} +
+@fitb{}{@ifsoln{the exponential growth of @math{h}}} +
+@fitb{}{}
+
+@vspace{1ex}
+
+- Change the *y-axis* back to `Linear`, and change the x-axis to `Logarithmic`
+
+@n What happened to the graph of @math{h}, and why? @fitb{}{@ifsoln{The curve got "sharper". By "squishing" the x-axis, we only made the exponential growth}} + 
+@fitb{}{@ifsoln{appear stronger (it looks like we took the "exponent of the exponent!)")}}
+
+@star Desmos forces us to choose between `Linear` and `Logarithmic` scales. If we wanted to make @math{g} appear linear *using the y-axis*, what kind of scale would we need? @fitb{}{}
+@fitb{}{@ifsoln{If we could make y shift to exponential scale, that would cancel out the logarithmic growth of @math{h}}} +
+@fitb{}{}
