@@ -105,7 +105,7 @@ for _,lesson in ipairs(lessons) do
   --
   if file_exists_p(title_file) then
     i = io.open(title_file)
-    title_txt = i:read():gsub('"', '\\"')
+    title_txt = i:read():gsub('"', '\\"'):gsub('&#x2c;', ',')
     i:close()
   end
   --
