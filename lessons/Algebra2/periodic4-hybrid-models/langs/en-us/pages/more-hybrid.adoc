@@ -1,6 +1,6 @@
 = More Models
 
-== Composing a `hybrid` model for the `co2-table`
+== Building a hybrid model for the entire `co2-table`
 
 @n How well would you expect our `hybrid-modern` model to fit the data in the full `co2-table` with data covering a span of 50 years? @ifnotsoln{@fitb{}{}}
 
@@ -40,10 +40,15 @@ error from predictions made with `hybrid-all` than with `hybrid-modern` model fo
 }
 
 == Comparing @vocab{S-values} doesn't always make sense
+@vspace{1ex}
 
 Throughout our work together, we have often compared @vocab{S-values} to get a sense for how much more or less error we expect from one model than another model. We just compared @vocab{S-values} for the `hybrid-all` and `hybrid-modern` models, for example.
 
-But it doesn't always make sense to compare @vocab{S-values}.
+@vspace{1ex}
+
+But it doesn't always make sense to compare @vocab{S-values}!
+
+@vspace{1ex}
 
 @indented{
 [cols="1a,1a,1a,1a", options="header"]
@@ -55,12 +60,12 @@ But it doesn't always make sense to compare @vocab{S-values}.
 |===
 }
 
-@n We built the `periodic-sin` model using the data in the `recent-table` and we know that it was a good fit for that data.  We also know from looking at the graphs that the model fit the historical data worse and worse the farther we went back in time. But why wouldn't it make sense to compare the @math{S-values} in this table as a way to quantify how much more error we'd expect from the `periodic-sin` model for the `co2-table`? @ifnotsoln{@fitb{}{}}
+@n We built the `periodic-sin` model using the data in the `recent-table` and we know that it was a good fit for that data.  We also know from looking at the graphs that the model fit the historical data worse and worse the farther we went back in time. But why wouldn't it make sense to compare the @math{\text{S-values}} in this table as a way to quantify how much more error we'd expect from the `periodic-sin` model for the `co2-table`? @ifnotsoln{@fitb{}{}}
 
-@fitb{}{@ifsoln{@math{S-values} only mean something when we consider them within the context of the range of the data. 
+@fitb{}{@ifsoln{@math{\text{S-values} only mean something when we consider them within the context of the range of the data.
 }}
 
-@fitb{}{@ifsoln{We can compare @math{S-values} for different models when they're applied to the same dataset, but, in this case, we're looking at datasets with very different ranges!}}
+@fitb{}{@ifsoln{We can compare @math{\text{S-values} for different models when they're applied to the same dataset, but, in this case, we're looking at datasets with very different ranges!}}
 
 @teacher{Data Scientists have many tools in their toolboxes and @vocab{S-values} are just one of them. If your students are already familiar with @math{r^2}, now would be a good time to point out that when it doesn't make sense to compare @vocab{S-values} we can fall back on some of our other tools.}
 
