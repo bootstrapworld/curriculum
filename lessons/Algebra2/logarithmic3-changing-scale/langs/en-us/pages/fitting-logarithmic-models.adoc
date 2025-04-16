@@ -2,12 +2,12 @@
 
 ++++
 <style>
-/* Push content to the top (instead of the default vertical distribution), which was leaving empty space at the top. */
+
 #content { display: block !important; }
 body.workbookpage .studentAnswerShort { min-width: 30pt; } .studentAnswerMedium { min-width: 30pt !important;}
 
 /* Shrink vertical spacing on fitbruby */
-.fitbruby{padding-top: 1.1rem;}
+.fitbruby{padding-top: 1rem;}
 
 </style>
 ++++
@@ -35,13 +35,21 @@ body.workbookpage .studentAnswerShort { min-width: 30pt; } .studentAnswerMedium 
 
 @link-instructions{To complete this page you will need Desmos and the @starter-file{alg2-countries} open on your computer.}
 
+@teacher{All numerical values on this page are provided for reference only! Definitions will vary as students will be fitting the curve by eye!}
+
+@ifsoln{@vspace{1ex}}
 
 == Fitting a Logarithmic Model @hspace{2em} __f(x) = a log~b~ x + k__
 @link-instructions{You should be on *Slide 7: Wealth-v-Health (Logarithmic)* of *Fitting Wealth-v-Health and Exploring Logarithmic Models (Desmos)*.}
 
-@n List the numbers labeling the x-axis tick marks from smallest to largest: @fitb{}{@ifsoln{50000, 100000, 150000, 200000}}
+- The x-axis should labeled with a sequence of numbers that looks something like this: @hspace{1em} _20000, 40000, 60000, 80000, 10000, 120000..._ 
 
-@n What kind of growth does the sequence you just wrote show (circle one): @hspace{2em} @ifsoln-choice{linear} @hspace{2em} quadratic @hspace{2em} exponential
+
+@n What kind of growth does the sequence on the x-axis show? (circle one) @ifnotsoln{@hspace{6em}} @ifsoln{@hspace{5em}}
+@ifsoln-choice{Linear} 		@hspace{1em}
+Quadratic 					@hspace{1em}
+Exponential 				@hspace{1em}
+Logarithmic
 
 @n Use the sliders for @math{a} and @math{k} to make the best-fitting logarithmic model you can find. Write it below. _(Note: Pyret's `log` always uses @math{b = 10})_
 
@@ -55,10 +63,10 @@ body.workbookpage .studentAnswerShort { min-width: 30pt; } .studentAnswerMedium 
 @show{(code '(define (logarithmic x) (+ (* (?ANS 9) (log x)) (?ANS 65))))}
 |===
 
-@indented{@teacher{Definitions will vary as students will be fitting the curve by eye! Numbers below are provided as a reference.}}
 
 
-@n Modify `logarithmic(x)` in the @starter-file{alg2-countries} to define this model, and fit it using `fit-model`.
+
+@n Define `logarithmic(x)` in the @starter-file{alg2-countries} to be this model, and fit it using `fit-model`.
 
 @vspace{1ex}
 
@@ -78,18 +86,19 @@ The error in the model is described by an @math{\text{S-value}} of about
 
 - Click on the wrench button ([.desmosbutton]#{wrench}#) in the top-right corner of the Desmos graph to *Open the "Graph Settings" window.*
 - *Expand the "More Options" section* by clicking the triangle ([.desmosbutton]#{caret}#).
-- *Change the x-axis scale* from `Linear` to `Logarithmic`.
-@scrub{
-- *Open the `Data Table` folder on the left side of the screen by clicking on the triangle ([.desmosbutton]#{caret}#)*
-- Scroll down to bottom of the table and find the magnifying glass ([.desmosbutton]#{magnifying}#) that appears to the bottom left.
-- Click on the magnifying glass to resize/rescale the graph to make all of the points in the table visible on the graph.
-}
+- *Change the x-axis scale* from `Linear` to `Logarithmic`. _(The x-axis labels should change to something like 100, 1000, @math{10^4}, @math{10^5}...)_
 
-@n What is the shape of the point cloud, after changing the @math{x} scale to `Logarithmic`?  @hspace{2em} @ifsoln-choice{Linear} @hspace{3em} Quadratic @hspace{3em} Exponential
+@n What kind of growth does the sequence on the x-axis show? (circle one) @ifnotsoln{@hspace{6em}} @ifsoln{@hspace{5em}}
+Linear 							@hspace{1em}
+Quadratic 						@hspace{1em}
+@ifsoln-choice{Exponential} 	@hspace{1em}
+Logarithmic
 
-@n List the numbers labeling the x-axis tick marks from smallest to largest: @fitb{}{@ifsoln{100, 1000, @math{10^4}, @math{10^5}}}
-
-@n What kind of growth does the sequence you just wrote show (circle one): @hspace{2em} linear @hspace{2em} quadratic @hspace{2em} @ifsoln-choice{exponential}
+@n What is the shape of the point cloud, after changing the @math{x} scale to `Logarithmic`?  @ifnotsoln{@hspace{1em}} @ifsoln{{nbsp}} 
+@ifsoln-choice{Linear} 	 	    @hspace{1em}
+Quadratic 						@hspace{1em}
+Exponential 					@hspace{1em}
+Logarithmic
 
 @n Adjust the sliders for @math{a} and @math{k} to improve the model. _Toggle back and forth between `logarithmic` and `linear` x-axis scales as you work._
 @ifnotsoln{
@@ -101,17 +110,40 @@ The error in the model is described by an @math{\text{S-value}} of about
 |===
 |
 @math{\text{logarithmic2}(x) = }
-@fitbruby{7em}{@ifsoln{~12 to ~16}}{log coefficient (b)}@math{\log_{10}(x) + }
+@fitbruby{7em}{@ifsoln{~12 to ~16}}{log coefficient (a)}@math{\log_{10}(x) + }
 @fitbruby{7em}{@ifsoln{~50 to ~60}}{vertical shift (k)}
-@hspace{1em} @ifsoln{MAYBE @hspace{1em}}
-@show{(code '(define (logarithmic2 x) (+ (* (?ANS 11.7 ) (log x)) (?ANS 60))))}
+@hspace{1em}
+@show{(code '(define (logarithmic2 x) (+ (* (?ANS 13 ) (log x)) (?ANS 60))))}
 |===
 
 @n In Pyret, define `logarithmic2(x)` to match this model.  Then use the `fit-model` function to find its @vocab{S-value}: @fitb{}{@ifsoln{less than 5 }}
 
-@n How will predictions made using `logarithmic2` compare to predictions made using `logarithmic`? @fitb{}{@ifsoln{They will be significantly better!}}
+@n How much
+@fitbruby{5em}{@ifsoln{less}}{more / less }
+error do we expect in predictions made using `logarithmic2` than with the `logarithmic` model?
 
-@fitb{}{}
+@vspace{1ex}
+
+@scrub{
+A note for future authors:
+- {&#8192;} is used below to add horizontal space.
+- \mbox{} is used to make the words in the fraction use normal font.
+}
+
+@indented{
+_Percent Change_ &#8192; = &#8192;
+@math{
+\frac{&#8192; \mbox{Difference} &#8192; \mbox{between} &#8192; \mbox{the} &#8192; \mbox{S-values}&#8192;}
+{\mbox{S-value} &#8192; \mbox{for} &#8192; \mbox{logarithmic} &#8192; \mbox{model}}
+\times 100 &#8192; = &#8192; }
+@ifnotsoln{@math{\frac{\qquad}{\qquad}}}
+
+We expect 
+@fitb{4em}{} percent
+@fitbruby{5em}{@ifsoln{less}}{ more / less }
+error from predictions made with `logarithmic2` than with the `logarithmic` model!
+}
+
 
 @n Do we know for sure that either of these models is optimal? Explain. @fitb{}{@ifsoln{No! We just did our best using our eyes.}}
 
