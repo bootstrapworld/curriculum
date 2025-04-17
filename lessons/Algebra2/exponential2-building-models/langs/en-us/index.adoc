@@ -23,10 +23,6 @@
 |[.materials-links]
 @material-links
 
-| Supplemental Materials
-|[.materials-links]
-@opt-material-links
-
 | Preparation
 | 
 @preparation{
@@ -56,14 +52,14 @@ Having identified that the Covid scatter plot appears neither linear nor quadrat
 
 Let's review what we know about the behavior of the models we've seen so far:
 
-@right{@image{images/difference-table-linear.png}}Remember that *linear functions* grow by _fixed intervals,_ so the growth is _constant_. In the table shown here, each time the x-value increases by 1, we see that the y-value increases by 2. This is true for any set of equal-sized intervals: a line needs to slope up or down at a constant rate in order to be a straight line! +
+@right{@image{images/difference-table-linear.png}}Remember that @vocab{linear functions} grow by _fixed intervals,_ so the growth is _constant_. In the table shown here, each time the x-value increases by 1, we see that the y-value increases by 2. This is true for any set of equal-sized intervals: a line needs to slope up or down at a constant rate in order to be a straight line! +
 {empty} +
 *If the growth is constant, the relationship is linear.*
 
 @clear
 @slidebreak
 
-@right{@image{images/difference-table-quadratic.png}}*Quadratic functions* grow by intervals that _increase by fixed amounts!_ In the table to the right, the blue arrows show a differently-sized jump between identical intervals, meaning _the function is definitely not linear!_ However, if we take a look at the _difference between those differences_(shown in red), we're back to constant growth! +
+@right{@image{images/difference-table-quadratic.png}}@vocab{Quadratic functions} grow by intervals that _increase by fixed amounts!_ In the table to the right, the blue arrows show a differently-sized jump between identical intervals, meaning _the function is definitely not linear!_ However, if we take a look at the _difference between those differences_(shown in red), we're back to constant growth! +
 {empty} +
 *If the "growth of the growth" is constant, the relationship is quadratic.*
 
@@ -286,39 +282,53 @@ If a new car sells for $32,000, and the resale value drops by one-eighth (12.5%)
 
 @slidebreak
 
-The more the car costs, the more an eighth of it costs. The car's highest value is in the first year, so the biggest price drop happens that year as well. As the years go by and the car's value drops, price will drop more and more slowly.
+The less the car costs, the less an eighth of it costs. The car's highest value is in the first year, so the biggest price drop happens that year as well. As the years go by and the car's value drops, price will drop more and more slowly.
 
-In fact, no matter how many years go by, the cost will never actually _reach_ zero! It will just keep getting closer by smaller and smaller amounts.
+In fact, no matter how many years go by, the cost will never actually _reach_ zero! It will just keep getting closer to zero by smaller and smaller amounts.
 
 @slidebreak
 
 *Let's write a function to model this change, so that we can calculate the car's value for each year without having to calculate the value for every year in between!*
 
-- We know the initial value @math{a} is $32,000
-- We also know that the base @math{b} must be less than one, since the value is dropping. But how do we compute it exactly?
+- We know the initial value @math{a} is @math{$32,000}.
+- With the car's value _dropping_, we know that the base @math{b} must be less than one. But how do we compute the base exactly?
 
 @slidebreak
 
-Let's look at the math we used to find the value after one year: @math{$32,000 - ($32,000 \times 0.125)}
+Let's look at the math: 
 
-- Factoring out $32,000 we get: @hspace{1em}@math{$32,000 \times (1 - 0.125)} @hspace{1em} or @hspace{1em}@math{$32,000 \times (0.875)}
-- With the value dropping by 12.5%, we have a growth factor of 87.5% (0.875).
+@indented{
+
+- To find the value after one year, we'd subtract @math{$32,000} minus an eighth of @math{$32,000}. 
+- @math{$32,000  - ($32,000 \times 0.125)}
+
+Factoring out @math{$32,000} we get: 
+
+- @math{$32,000 \times (1 - 0.125)} @hspace{1em} or 
+- @math{$32,000 \times (0.875)}
+
+With the value dropping by a @vocab{decay rate} (@math{r}) of 12.5%, we have a @vocab{decay factor} (@math{b}) of 87.5% (0.875).
 }
+Our function is: @math{f(x) = 32,000 \times 0.875^{x}}
 
-- So our function is @hspace{1em} @big{@math{f(x) = 32,000 \times 0.875^{x}}}
+@slidebreak
+
+In the scenario we just modeled, the value was dropping, so our function described @vocab{exponential decay}.
+To model scenarios where values rise, we use functions describing @vocab{exponential growth}.
 
 @lesson-point{
-The @vocab{growth factor} (@math{b}) will always be: @hspace{1em} @big{@math{b = 1 + r}}
+When the value is dropping, the @vocab{decay factor} (@math{b}) will be: @hspace{1em} @big{@math{b = 1 - r}} +
+When the value is rising, the @vocab{growth factor} (@math{b}) will be: @hspace{2em} @big{@math{b = 1 + r}} 
 }
 
 @slidebreak
-
-With the car's value _dropping_, this function describes @vocab{exponential decay}. If it were rising, the function would describe @vocab{exponential growth}.
 
 Consider a savings account that starts at $100 and grows by 3% (0.03) each year:
 
-- The initial value @math{a} is @math{100}, and @math{r} is 0.03
-- If @math{b = 1 + r}, then our function is @math{f(x) = 100 \times 1.03^{x}}
+- The initial value (@math{a}) is @math{100}. 
+- The @vocab{growth rate} (@math{r}) is 0.03, so the @vocab{growth factor} (@math{b}) is 1.03.
+- Our function is @math{f(x) = 100 \times 1.03^{x}}
+
 
 === Investigate
 *@vocab{Exponential growth} and @vocab{exponential decay} show up all the time!*
