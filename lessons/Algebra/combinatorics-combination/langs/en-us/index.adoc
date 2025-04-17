@@ -66,7 +66,7 @@ When order _doesn't_ matter, all the possible options are called @vocab{combinat
 Since there's no replacement, let's start by using our formula for `permutation-without-replacement` to compute all the possible permutations. +
 We have six items to choose from and are selecting four of them:
 
-@math{\mbox{permute-wo-replace}(6, 4) = \frac{6!}{(6 - 4)!} = \frac{6!}{2!} = 360}
+@math{\text{permute-wo-replace}(6, 4) = \frac{6!}{(6 - 4)!} = \frac{6!}{2!} = 360}
 
 @slidebreak
 
@@ -86,7 +86,7 @@ _This is the same question as_ *"How many permutations are there for the same fo
 
 Using our formula for "permutation without replacement" we get 24 duplicates:
 
-@math{\mbox{permute-wo-replace}(4, 4) = \frac{4!}{(4-4)!} = 4! = 24}
+@math{\text{permute-wo-replace}(4, 4) = \frac{4!}{(4-4)!} = 4! = 24}
 
 Now, we need to divide 'the number of permutations (without replacement) for choosing 4 courses out of six items" by "the number of duplicate permutations in any four-course platter".
 
@@ -99,11 +99,11 @@ Now, we need to divide 'the number of permutations (without replacement) for cho
 
 We can rewrite this using our functions from earlier:
 
-@math{\text{combinations}(items, choose) = \frac{\mbox{permute-wo-replace}(items, choose)}{\mbox{permute-wo-replace}(choose, choose)}}
+@math{\text{combinations}(items, choose) = \frac{\text{permute-wo-replace}(items, choose)}{\text{permute-wo-replace}(choose, choose)}}
 
 In this situation, we have 6 possible choices and we get to choose 4 times:
 
-@math{\text{combinations}(6, 4) = \frac{\mbox{permute-wo-replace}(6, 4)}{\mbox{permute-wo-replace}(4, 4)}}
+@math{\text{combinations}(6, 4) = \frac{\text{permute-wo-replace}(6, 4)}{\text{permute-wo-replace}(4, 4)}}
 
 @slidebreak
 
