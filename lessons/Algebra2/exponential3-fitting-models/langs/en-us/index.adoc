@@ -45,7 +45,7 @@ Students extend their sampling techniques to exponential relationships, experime
 
 === Launch
 
-Now that you're familiar with exponential functions, let's use them to model this Covid data!
+Now that you're familiar with @vocab{exponential functions}, let's use them to model this Covid data!
 
 @lesson-instruction{
 - Open @starter-file{program-list}, find your saved copy of the @starter-file{alg2-covid} and click "Run".
@@ -58,8 +58,8 @@ Now that you're familiar with exponential functions, let's use them to model thi
 @slidebreak
 
 @QandA{
-@Q{Does your scatter plot show exponential growth or exponential decay?}
-@A{The scatter plot shows @vocab{exponential growth}. The "hockey stick" is pointing up, meaning that positive cases are increasing.}
+@Q{Does your scatter plot show @vocab{exponential growth} or @vocab{exponential decay}?}
+@A{The scatter plot shows exponential growth. The "hockey stick" is pointing up, meaning that positive cases are increasing.}
 
 @Q{Can we make any conclusions about the value of @math{b}? Explain.}
 @A{Because we see exponential _growth_, we know that @math{b} must be greater than one.}
@@ -182,14 +182,18 @@ Exponential growth and decay can create enormously large and enormously small nu
 
 === Synthesize
 
-- What makes exponential models different from the linear and quadratic models you've seen before?
-- Is it always okay for Data Scientists to round off their numbers to speed up computation? Why or why not?
+@QandA{
+@Q{What makes exponential models different from the linear and quadratic models you've seen before?}
+@A{They don't have constant growth like linear models.}
+@A{Unlike quadratic models, they only grow or decay in one direction. The growth rate also changes much more quickly.}
+@Q{Is it always okay for Data Scientists to round off their numbers to speed up computation? Why or why not?}
+@A{No! Sometimes approximations put lives at risk and it's worth taking the time to maximize precision.}
+}
 
 @slidebreak
 
-Linear regression allows us to find the _computationally optimal model_, not just a model that "fit really well."
-
 @QandA{
+Linear regression allows us to find the _computationally optimal model_, not just a model that "fit really well."
 @Q{Do we know whether or not our exponential model is the _best?_}
 @A{We don't know!}
 @Q{How do you know?}
@@ -202,9 +206,9 @@ Linear regression allows us to find the _computationally optimal model_, not jus
 Students apply mental math to their models, and discover that it's very hard to reason about exponential growth.
 
 === Launch
-Even when epidemiologists came up with exponential models for Covid spread, policymakers who were genuinely worried failed to understand how quickly the pandemic would spread. Why?
+Even when epidemiologists came up with exponential models for Covid spread, policymakers who were genuinely worried failed to understand how quickly the virus would spread. Why?
 
-@teacher{Invite students to share their ideas. Some answers are likely to be political, and you will need to steer the conversation back to focusing on the math: even those who took the threat of Covid seriously underestimated how quickly it would spread. Why?}
+@teacher{Invite students to share their ideas. Some answers may be political. Steer the conversation back to focusing on the math: Those who took the threat of Covid seriously underestimated how quickly it would spread. Why?}
 
 === Investigate
 Models are helpful because they give us an easy way to make predictions about complex data. Oftentimes, we can just use mental arithmetic to do a quick calculation! So why did mental arithmetic fail for exponential models like ours?
@@ -213,15 +217,12 @@ Models are helpful because they give us an easy way to make predictions about co
 Use your model to make predictions on @printable-exercise{predicting-exponential-growth.adoc}.
 }
 
-=== Synthesize
-
 @teacher{Have students share their predictions for each of the time-spans in question 5.}
 
 @QandA{
 @Q{How accurate were your "guesstimates" for your models' predictions after 50 days? (Very accurate? Not accurate at all?)}
 @Q{How accurate were your "guesstimates" after 250 days?}
 @Q{How accurate were your "guesstimates" after 450 days?}
-@Q{How accurate were your "guesstimates" after 550 days?}
 }
 
 Chances are, your guesses got less accurate as the number of days increased!
@@ -243,3 +244,12 @@ This has been proven by some really fascinating studies - We know that the integ
 }
 
 Humans' inability to reason about exponential growth may have played a role in the sluggish response of many countries, and the tragic loss of life and decrease in public health that followed.
+
+=== Synthesize
+
+@QandA{
+@Q{When would you expect mental arithmetic to be an effective strategy for reasoning about the world?}
+@A{With smallish numbers.} 
+@A{With constant growth, rather than exponential growth.}	
+}
+
