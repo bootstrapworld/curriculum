@@ -26,8 +26,10 @@ node --input-type=module -e '
 import react from "@vitejs/plugin-react"
 import { defineConfig, build } from "vite"
 import { viteSingleFile } from "vite-plugin-singlefile"
-import { viteStaticCopy } from "vite-plugin-static-copy";
-import { glob } from "glob";
+import { viteStaticCopy } from "vite-plugin-static-copy"
+import { glob } from "glob"
+import { readFileSync} from "fs"
+
 
 const quizzes = glob.sync("distribution/*/lessons/*/assessments/*");
 const imageTypes = ["svg", "gif", "jpg", "png", "svg"];
@@ -64,4 +66,14 @@ const buildConfigs = quizzes.map( quiz => ({
 
 // wait until all of the builds are complete
 await Promise.all(buildConfigs.map( async c => await build(c)));
+
+
+for (const filePath of quizzes) {
+    const fileContent = fs.readFileSync(filePath + "/quiz.json", "utf-8");
+    try {
+      JSON.parse(fileContent);
+      } catch (e) {
+        console.error("The quiz.json file inside", filePath, "is not valid JSON!");
+      }
+}
 '
