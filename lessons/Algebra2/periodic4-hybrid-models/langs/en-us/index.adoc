@@ -1,5 +1,21 @@
 = Fitting Hybrid Models
 
+++++
+<style>
+/* Add custom CSS to make the math bold, and add coloring to nested circles */
+.hybridmath .mathunicode { font-weight: bold !important; }
+.hybridCOE { display: inline-block !important; }
+.hybridCOE .circleevalsexp { width: unset; vertical-align: middle; }
+
+.hybridCOE .expression { background: rgb(231 231 231) !important; }
+.hybridCOE .expression .expression { background: white !important; }
+
+/* Further customized CSS to make any nesting after level 2 50% opaque */
+.first .expression > .value { background: white !important; }
+.first .circleevalsexp > .expression > .expression > .expression { opacity: 0.5; }
+</style>
+++++
+
 @description{Students investigate how to combine the types of models they have already learned about. }
 
 @lesson-prereqs{periodic3-fitting-models}
@@ -79,30 +95,18 @@ Our `periodic-cos` model has two terms:
 - The periodic term @math{4.13 \times cos(2\pi(x - 2023.35))}, which described the wave that wrapped around the horizontal midline
 - The vertical shift @math{419.87}, which described the (fixed) y-coordinate of the midline
 
-++++
-<style>
-/* Add custom CSS to make the math bold, and add coloring to nested circles */
-.hybridmath .mathunicode { font-weight: bold !important; }
-.hybridCOE { display: inline-block !important; }
-.hybridCOE .circleevalsexp { width: unset; vertical-align: middle; }
-
-.hybridCOE .expression { background: rgb(231 231 231) !important; }
-.hybridCOE .expression .expression { background: white !important; }
-
-/* Further customized CSS to make any nesting after level 2 50% opaque */
-.first .expression > .value { background: white !important; }
-.first .circleevalsexp > .expression > .expression > .expression { opacity: 0.5; }
-</style>
-++++
-
 `periodic-cos2` splits these terms into _separate functions_, and then composes them:
 
-[.hybridCOE.first.center]
-@show{(coe '(+ (* 4.13 (sin (* (* 2 PI) (- x 2023.1)))) 419.87))} &rarr;
+[cols="^.^15a,^.^1a,^.^10a", frame="none", grid="none"]
+|===
+| [.hybridCOE.first]
+@show{(coe '(+ (* 4.13 (sin (* (* 2 PI) (- x 2023.1)))) 419.87))}
 
-[.hybridCOE.second.center]
+| &rarr;
+
+| [.hybridCOE.second]
 @show{(coe '(+ (wave-cos x) (midline-cos x)))}
-
+|===
 @slidebreak
 
 @lesson-instruction{
@@ -240,11 +244,15 @@ By replacing the vertical shift term in our periodic model with the linear model
 - Linear behavior for the midline representing the long-term trend...
 - Periodic behavior for the seasonal variation in @math{\text{CO}_2}
 
-[.hybridmath.center]
+[cols="^1a" grid="none", frame="none", stripes="none"]
+|===
+| [.hybridmath]
 @big{*@math{f(x) = 4.13 \times sin(2\pi(x - 2023.1)) + (1.8345x + -3296)}*}
 
-[.hybridCOE.center]
+|
+[.hybridCOE]
 @show{(coe '(+ (wave-sin x) (linear-modern x)))}
+|===
 
 @slidebreak
 
