@@ -1995,7 +1995,8 @@
                                     [else
                                       (let* ([link-text (and (>= (length lbl+text) 2)
                                                              (string-join (rest lbl+text) "&#x2c; "))]
-                                             [opt? (or (string=? directive "opt-starter-file") *optional-flag?*)]
+                                             ; [opt? (or (string=? directive "opt-starter-file") *optional-flag?*)]
+                                             [opt? (string=? directive "opt-starter-file")]
                                              [p (hash-ref c *proglang-sym* #f)])
                                         (cond [(not p)
                                                (unless *possibly-invalid-page?*
