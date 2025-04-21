@@ -6,7 +6,10 @@ Here are ten different family incomes: _$43k, $62k, $39k, $141k, $58k, $82k, $41
 
 @vspace{10ex}
 
-@center{@image{../images/numline.svg}}
+@center{
+@ifnotsoln{@image{../images/numline.svg}}
+@ifsoln{@image{../images/std-dev-2-box-plot-soln.png}}
+}
 
 @vspace{1ex}
 
@@ -51,13 +54,13 @@ _e.g. if the mean is $50k and a family's income is $82k, your arrow would stretc
 [.sideways-pyret-table, cols="^3,^1,^1,^1,^1,^1,^1,^1,^1,^1, ^1"]
 |===
 | income (in 10s of thousand)   | 39 | 41 | 43 | 58 | 62 | 68 | 73 | 73 | 82 | 141
-| distance from mean     		| 29 | 27 | 25 |  3 |  6 |  0 |  5 |  5 | 14 |  73
-| squared distance 	     		|841 |729 |625 |  9 | 36 |  0 | 25 | 25 |196 |5329
+| distance from mean     		| 29 | 27 | 25 | 10 |  6 |  0 |  5 |  5 | 14 |  73
+| squared distance 	     		|841 |729 |625 |100 | 36 |  0 | 25 | 25 |196 |5329
 |===
 }
 
-@n Add all the squared distances. What is their sum? @fitb{}{@ifsoln{7,815}}
+@n Add all the squared distances. What is their sum? @fitb{}{@ifsoln{7,906}}
 
-@n There are N=10 distances. What is N-1? @fitb{4rem}{@ifsoln{9}} @hspace{2rem} Divide the sum by _N-1_. What do you get? @fitb{}{@ifsoln{~868.33}}
+@n There are N=10 distances. What is N-1? @fitb{4rem}{@ifsoln{9}} @hspace{2rem} Divide the sum by _N-1_. What do you get? @fitb{}{@ifsoln{~878.44}}
 
-@n Take the square root to find the *standard deviation*! @fitb{}{@ifsoln{~29.47}}
+@n Take the square root to find the *standard deviation*! @fitb{}{@ifsoln{~29.64}}
