@@ -1980,8 +1980,8 @@
                             (let ([text (read-group i directive #:multiline? #t)]
                                   [old-optional-flag? *optional-flag?*])
                               (set! *optional-flag?* #t)
-                              (display "\n[.actually-openblock.indentedpara.optpara]\n=====\n" o)
-                              (display "[.optionaltag]##{empty}##\n" o)
+                              (display "\n[.actually-openblock.optpara]\n=====\n" o)
+                              ;(display "[.optionaltag]##{empty}##\n" o)
                               (expand-directives:string->port text o #:enclosing-directive directive)
                               (display "\n=====\n" o)
                               (set! *optional-flag?* old-optional-flag?))]

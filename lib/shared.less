@@ -236,9 +236,6 @@ body {
     vertical-align:     baseline;
     &:empty { display: none; } /* If empty after JS post-processing, hide */
   }
-  .optionaltag::before {
-    font-style: italic; 
-  }
   div.hiddenblock {
     display: none;
   }
@@ -534,11 +531,15 @@ lines on some browsers */
   /* Special links back to older, pre-remix materials */
   .old-materials p { width:100%; background:@translucent-bg-color; color:black; text-align:center; }
 
-  .optional:has(.q-and-a) {
+  .optpara {
     border: 2px;
-    padding: 15px;
     border-style: groove;
     border-radius: 20px;
+    background-color: transparent !important;
+    >.content:first-child>.paragraph:first-child {
+      font-style: italic;
+      margin-left: 20px;
+    }
     /* Override Asciidoc default here */
     .exampleblock > .content { 
       background-color: inherit; 
@@ -546,7 +547,6 @@ lines on some browsers */
       box-shadow:       none;
       border-radius:    20px;
     }
-    .q-and-a { border-radius: 20px; }
   }
 
   code { line-height: 1.5 !important; }
