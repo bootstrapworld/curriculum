@@ -23,12 +23,9 @@ For this page, you'll need to open the @opt-starter-file{alg2-fuel-efficiency} o
 
 @n Does there appear to be a relationship between speed and miles-per-gallon? @fitb{5em}{@ifsoln{Yes}}.
 
-@n _Looking at the numbers in the_ `mpg-table`, describe its *form* (e.g. - linear, non-linear, or none) and *strength* (strong, moderate, or weak). +
-If it appears to be linear, what is the *direction*? If it does _not_ appear to be linear, describe its shape.
-
-@fitb{}{@ifsoln{There seems to be a moderate/strong, nonlinear correlation. It looks like a parabola that opens down, with a dimple at the top.}}
-
-@fitb{}{}
+@n Looking at the numbers in the `mpg-table`, does it appear to be linear or nonlinear? Describe its shape. @fitb{}{} +
+@fitb{}{@ifsoln{There seems to be a nonlinear correlation.}} +
+@fitb{}{@ifsoln{It looks like a parabola that opens down, with a dimple at the top.}}
 
 @n Use @show{(code '(lr-plot mpg-table "model" "speed" "mpg"))} to find the optimal *linear* model. What is @math{S} for this model? @fitb{}{@ifsoln{~2.93}}
 
@@ -38,10 +35,8 @@ Write the model below, in both math and Pyret notation.
  @math{y =} @fitbruby{8em}{@ifsoln{@math{-0.01017}}}{slope}x + @fitbruby{8em}{@ifsoln{29.9459}}{y-intercept / vertical shift} @hspace{5em} @show{(code '(define (y x) (+ (* (?ANS -0.01017) x) (?ANS 29.9459))))}
 }
 
-@n Is the best-possible linear model a good fit? @fitb{5em}{@ifsoln{No}}. Why or why not? @fitb{}{}
-
-@fitb{}{@ifsoln{No - the S-value is off by almost 3 mpg, and the model does not follow the shape of the data}}
-
+@n Is the best-possible linear model a good fit? @fitb{5em}{@ifsoln{No}}. Why or why not? @fitb{}{} +
+@fitb{}{@ifsoln{No - the S-value is off by almost 3 mpg, and the model does not follow the shape of the data}} +
 @fitb{}{}
 
 == Fitting Curves
