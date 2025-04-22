@@ -4,32 +4,32 @@
 
 @n In the @starter-file{spell-checker}, the function `go` consumes a string and a dictionary... but what does it produce?
 
-- Test `go("pyret", WORDS-ALL)` in the Interactions Area and record the results in the left column of the table below.
-- In the second column, describe how each option differs from the input string ("pyret").
-- In the third column, record how many edits to the string "pyret" this algorithm makes. _(A single edit could entail replacing one letter with a different one, for instance.)_
+- Test `go("straw", WORDS)` in the Interactions Area and record the results in the left column of the table below.
+- In the second column, describe how each option differs from the input string ("straw").
+- In the third column, record how many edits to the string "straw" this algorithm makes. _(A single edit could entail replacing one letter with a different one, for instance.)_
 
 @vspace{1ex}
 
 @indented{
 [cols="1a, 3a, 1a", options="header", stripes="none"]
 |===
-| Suggestion  | How it's different from the string "pyret"	| Number of Edits
-| @ifsoln{beret} 		| @ifsoln{changed first 2 letters}				| @ifsoln{2} @vspace{1ex}
-| @ifsoln{egret}		| @ifsoln{changed first 2 letters}				| @ifsoln{2} @vspace{1ex}
-| @ifsoln{parer}		| @ifsoln{changed 2nd and 5th letters}			| @ifsoln{2} @vspace{1ex}
-| @ifsoln{puree}		| @ifsoln{changed 2nd and 5th letters}			| @ifsoln{2} @vspace{1ex}
-| @ifsoln{purer}		| @ifsoln{changed 2nd and 5th letters}			| @ifsoln{2} @vspace{1ex}
+| Suggestion  | How it's different from the string "straw"	| Number of Edits
+| @ifsoln{shrew}		| @ifsoln{changed 2nd and 4th letters}			| @ifsoln{2} @vspace{1ex}
+| @ifsoln{stead}		| @ifsoln{changed 2nd and 5th letters}			| @ifsoln{2} @vspace{1ex}
+| @ifsoln{steak}		| @ifsoln{changed 2nd and 5th letters}			| @ifsoln{2} @vspace{1ex}
+| @ifsoln{steam}		| @ifsoln{changed 2nd and 5th letters}			| @ifsoln{2} @vspace{1ex}
+| @ifsoln{strap}		| @ifsoln{changed 5th letter}					| @ifsoln{1} @vspace{1ex}
 |===
 }
 
-@n Test `go("cloaks", WORDS-ALL)` in the Interactions Area.
+@n Test `go("planet", WORDS)` in the Interactions Area.
 
-- Notice that "cloaks" has six letters, but all the suggested words have just five letters. What else can you conclude about the spell checker's algorithm?
+- Notice that "planet" has six letters, but all of the suggested words have five letters. What else can you conclude about the spell checker's algorithm?
 @fitb{}{@ifsoln{One of the edits can be the deletion of a letter.}} +
 @fitb{}{@ifsoln{The spell checker only proposes five-letter words.}}
-- To get from "cloaks" to "croak", delete @fitb{2em}{@ifsoln{s}} and change @fitb{2em}{@ifsoln{l}} to @fitb{2em}{@ifsoln{r}}.
-- To get from "cloaks" to "class", delete @fitb{2em}{@ifsoln{o}} and change @fitb{2em}{@ifsoln{k}} to @fitb{2em}{@ifsoln{s}}.
-- The spell checker makes just _one_ edit when it proposes @fitb{5em}{@ifsoln{"croak"}} as a match for "cloak".
+- To get from "planet" to "plait", delete @fitb{2em}{@ifsoln{n}} and change @fitb{2em}{@ifsoln{e}} to @fitb{2em}{@ifsoln{i}}.
+- To get from "planet" to "plank", delete @fitb{2em}{@ifsoln{t}} and change @fitb{2em}{@ifsoln{e}} to @fitb{2em}{@ifsoln{k}}.
+- The spell checker makes just _one_ edit when it proposes @fitb{5em}{@ifsoln{"plane"}} as a match for "planet".
 
 @vspace{1ex}
 
@@ -45,7 +45,7 @@
 
 @n What else do you notice? @fitb{}{@ifsoln{There are words for which the spellchecker offers no suggestions (e.g. "octagon").}}
 
-@fitb{}{@ifsoln{And there are words for which it proposes long lists (e.g. "silly" returns 41 suggestions!)}}
+@fitb{}{@ifsoln{And there are words for which it proposes long lists.}}
 
 @n Does this spell check program use the same algorithm as the @printable-exercise{first-spell-checker.adoc}? @fitb{}{@ifsoln{No.}}
 
