@@ -9,12 +9,14 @@ The player of the partially-completed Wordle game that we reviewed wants some Py
 [cols="1,1", stripes="none", options="header"]
 |===
 | Pyret Expression			| Number of suggestions returned
-| `go("games", WORDS-ALL)`	| @ifsoln{10}
 | `go("games", WORDS-100)` 	| @ifsoln{1}
 | `go("games", WORDS-1000)` | @ifsoln{5}
+| `go("games", WORDS-ALL)`	| @ifsoln{10}
 |===
 
-@n Which of these lines of code would you recommend for the player? @fitb{}{@ifsoln{`go("games", WORDS-ALL)` because it returned the most suggestions.}}
+@n Which of these lines of code would you recommend for the player? Why? @fitb{}{@ifsoln{`go("games", WORDS-ALL)` because it returned the}}
+
+@fitb{}{@ifsoln{most suggestions.}}
 
 @n The solution to the partially-completed game is in fact "camel". Look back at the suggestions in your Interactions Area. Did any of the lists include it? @fitb{}{@ifsoln{Yes. It's on the list from `WORDS-ALL`.}}
 
@@ -34,11 +36,9 @@ The player of the partially-completed Wordle game that we reviewed wants some Py
 @star Let's imagine that "W1" and "W2" represent two different five-letter words...
 
 @indented{
-If `go("W1", WORDS-ALL)` produces a list that includes "W2", +
-would you expect `go("W2", WORDS-ALL)` to produce a list that includes "W1"? +
-Why or Why Not?
+If `go("W1", WORDS-ALL)` produces a list that includes "W2", would you expect `go("W2", WORDS-ALL)` to produce a list that includes "W1"? Why or why not?
 }
 
-@fitb{}{@ifsoln{If and only if both words are in the WORDS-ALL}}
+@fitb{}{@ifsoln{If and only if both words are in the WORDS-ALL dataset!}}
 
 @star Can you produce an input that returns more than one word from the `WORDS-100` dictionary? If so, what is it? @fitb{}{@ifsoln{Answers will vary, but `go("cumin", WORDS-100)` will work.}}
