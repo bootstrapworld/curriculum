@@ -1,57 +1,42 @@
 = Supervised Machine Learning: Training ALVINN
 
-@n Imagine that ALVINN has trained on the 15 images collected during a half minute of driving. How well would you expect it to be able to predict steering angles at this point? Explain. @fitb{}{}
-
-@fitb{}{@ifsoln{A function built on just 15 ordered pairs is not going to have a high level of accuracy.}}
-
+@n Imagine that ALVINN has trained on the 15 images collected during a half minute of driving. How well would you expect it to be able to predict steering angles at this point? Explain. @fitb{}{} +
+@fitb{}{@ifsoln{A function built on just 15 ordered pairs is not going to have a high level of accuracy.}} +
 @fitb{}{@ifsoln{Given that 15 images is a relatively small amount, ALVINN's steering angle guesses will be essentially random.}}
 
 
 @n ALVINN has trained on the images collected during several _hours_ of driving on a sunny summer day on an *isolated one-lane road*.
 @vspace{1ex}
 
-- How well do you think ALVINN will be able to predict the steering angle on that designated road? Explain. @fitb{}{}
-
-@fitb{}{@ifsoln{ALVINN's best guesses about the steering angle will be accurate - but only for that particular road under similar conditions.}}
-
+- How well do you think ALVINN will be able to predict the steering angle on that designated road? Explain. @fitb{}{} +
+@fitb{}{@ifsoln{ALVINN's best guesses about the steering angle will be accurate - but only for that particular road under similar conditions.}} +
 @fitb{}{}
 
 
-- How safely would you expect ALVINN to drive on that same road on a snowy day. Explain. @fitb{}{}
-
-@fitb{}{@ifsoln{ALVINN will not be able to drive safely, because it has not received training on images of the road covered in snow.}}
-
+- How safely would you expect ALVINN to drive on that same road on a snowy day. Explain. @fitb{}{} +
+@fitb{}{@ifsoln{ALVINN will not be able to drive safely, because it has not received training on images of the road covered in snow.}} +
 @fitb{}{@ifsoln{ALVINN could only drive safely on a snowy road after training on images of a snowy road.}}
 
 
-@n If ALVINN did extensive training on that same road, in all weather conditions, and times of day, would you expect it to be able to safely drive on a busy two-lane road? Explain. @fitb{}{@ifsoln{Although ALVINN's training at this point enables accurate steering in a variety of conditions,}}
-
-@fitb{}{@ifsoln{ALVINN is not trained on busy four-lane roads. The steering angles differ when the road is wider, and the appearance of}}
-
-@fitb{}{@ifsoln{unexpected, unfamiliar objects (like other cars) could result in very dangerous driving.}}
-
+@n If ALVINN did extensive training on that same road, in all weather conditions, and times of day, would you expect it to be able to safely drive on a busy two-lane road? Explain. @fitb{}{@ifsoln{Although ALVINN's training at this point enables accurate steering in a variety of conditions,}} +
+@fitb{}{@ifsoln{ALVINN is not trained on busy four-lane roads. The steering angles differ when the road is wider, and the appearance of}} +
+@fitb{}{@ifsoln{unexpected, unfamiliar objects (like other cars) could result in very dangerous driving.}} +
 @fitb{}{}
 
-@n Omissions in the training of algorithms can result in erroneous outputs. Imagine that a self-driving car trained on isolated country roads, as well as city streets, and highways. What problematic (dangerous) omissions might be left out of its training? @fitb{}{}
-
-@fitb{}{@ifsoln{unexpected moving things like ambulance encounters, bikes, children running into the street to chase a ball, dogs, moose, et. }
-
-@fitb{}{@ifsoln{unexpected stationary objects like fallen trees and other debris}}
-
+@n Omissions in the training of algorithms can result in erroneous outputs. Imagine that a self-driving car trained on isolated country roads, as well as city streets, and highways. What problematic (dangerous) omissions might be left out of its training? @fitb{}{} +
+@fitb{}{@ifsoln{unexpected moving things like ambulance encounters, bikes, children running into the street to chase a ball, dogs, moose, etc. }} +
+@fitb{}{@ifsoln{unexpected stationary objects like fallen trees and other debris}} +
 @fitb{}{@ifsoln{hills, flooded roads, street car tracks, bike lanes, railroad crossings, draw bridges, etc.}}
 
 @n In addition to producing a steering angle for each image of the road, ALVINN produces a _numeric_ measure of "confidence" in its response.
 
-- What do you think causes ALVINN's "confidence" to increase? @fitb{}{}
-
+- What do you think causes ALVINN's "confidence" to increase? @fitb{}{} +
 @fitb{}{@ifsoln{ALVINN will be more confident when the image of the road matches an image from the training dataset.}}
 
-- What do you think causes ALVINN's "confidence" to decrease? @fitb{}{}
-
+- What do you think causes ALVINN's "confidence" to decrease? @fitb{}{} +
 @fitb{}{@ifsoln{ALVINN will be less confident when the image of the road is entirely unlike any image in the training dataset.}}
 
-- Is 100% "confidence" possible? @fitb{}{@ifsoln{100% confidence is not possible, given that ALVINN uses a regression function to determine steering angle }}
-
+- Is 100% "confidence" possible? @fitb{}{@ifsoln{100% confidence is not possible, given that ALVINN uses a regression function to determine steering angle }} +
 @fitb{}{@ifsoln{(rather than checking to see if a test image matches a training image).}}
 }
 

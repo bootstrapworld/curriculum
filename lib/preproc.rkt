@@ -1589,13 +1589,9 @@
                             (let ([n (string->number (read-group i directive))]
                                   [text (read-group i directive)])
                               ; (printf "doing @blanklines ~s\n" n)
-                              (let loop ([i 0])
-                                (unless (>= i n)
-                                  (display-begin-span ".fitb.stretch" o)
-                                  (display-end-span o)
-                                  (newline o)
-                                  (newline o)
-                                  (loop (+ i 1)))))]
+                              (display-begin-span ".blanklines" o #:attribs (format "style=\"height: ~arem\"" n))
+                              (display (expand-directives:string->string text #:enclosing-directive directive) o)
+                              (display-end-span o))]
                            [(string=? directive "duration")
                             (let ([txt (read-group i directive)])
                               (display (string-append
