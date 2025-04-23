@@ -532,13 +532,17 @@ lines on some browsers */
   .old-materials p { width:100%; background:@translucent-bg-color; color:black; text-align:center; }
 
   .optpara {
+
+    > .content > * { margin-top: 1em; }
+
     border: 2px;
     border-style: groove;
     border-radius: 20px;
     background-color: transparent !important;
-    >.content:first-child>.paragraph:first-child {
-      font-style: italic;
-      margin-left: 20px;
+    padding: 18px;
+
+    >.content:first-child > .paragraph:first-child p {
+      &::before { font-style: italic; }
     }
     /* Override Asciidoc default here */
     .exampleblock > .content { 
@@ -547,6 +551,7 @@ lines on some browsers */
       box-shadow:       none;
       border-radius:    20px;
     }
+
   }
 
   code { line-height: 1.5 !important; }
