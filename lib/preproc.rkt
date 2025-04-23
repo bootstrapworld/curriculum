@@ -1980,9 +1980,20 @@
                             (let ([text (read-group i directive #:multiline? #t)]
                                   [old-optional-flag? *optional-flag?*])
                               (set! *optional-flag?* #t)
-                              (display "[.optionaltag]##{empty}##\n" o)
+                              (display
+                                (enclose-span ".optionaltag"
+                                  (expand-directives:string->string
+                                    text #:enclosing-directive directive)) o)
+                              ;(display "\n" o)
+                              (set! *optional-flag?* old-optional-flag?))]
+                           [(string=? directive "opt-block")
+                            (let ([text (read-group i directive #:multiline? #t)]
+                                  [old-optional-flag? *optional-flag?*])
+                              (set! *optional-flag?* #t)
+                              (display "\n[.actually-openblock.optpara]\n=====\n" o)
+                              ;(display "[.optionaltag]##{empty}##\n" o)
                               (expand-directives:string->port text o #:enclosing-directive directive)
-                              (display "\n" o)
+                              (display "\n=====\n" o)
                               (set! *optional-flag?* old-optional-flag?))]
                           [(or (string=? directive "starter-file")
                                 (string=? directive "opt-starter-file"))
