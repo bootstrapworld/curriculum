@@ -164,12 +164,30 @@ The player has just three turns left!
 
 @Q{Each of the words you proposed was probably 2 edits away from "GAMES", the user's third guess. Why?}
 @A{Three of the letters are correct; we just need to substitute in different letters for _g_ and _s_.}
-}
 
+@Q{The player of this partially-completed Wordle game (above) wants some Pyret "assistance". They run `go("games", WORDS)`. Try it. Is Pyret able to produce the winning word?}
+
+@A{Pyret produces two words: `cameo` and `gamut`. Both of these guesses are incorrect. We know "cameo" is incorrect because it contains the (rejected) letter "o". We know "gamut" is incorrect because "e" must occupy the fourth space.}
+}
 
 @slidebreak
 
-The player of this partially-completed Wordle game (above) wants some Pyret "assistance". Let's explore how directing Pyret to access differently sized datasets influences the quality of assistance that the program provides.
+Pyret did *not* provide the correct Wordle solution. What a disappointment! 
+
+But why?
+
+There are basically two "parameters" that our spell checking program used: 
+
+- the *function* (what is outside of the parentheses) 
+- the *dictionary* (provided inside the parentheses, as an argument)
+ 
+We have discussed ways in which we could imagine making the function better. For instance, maybe we try swapping out an additional letter? 
+
+... but we have *not* yet considered another way of improving the quality of the output--without even touching the function. 
+
+How? We can _improve_ the dictionary argument!
+
+Let's explore how directing Pyret to access differently sized dictionaries influences the quality of the program's output.
 
 @lesson-instruction{
 - Complete @printable-exercise{pyret-spell-checker2.adoc} using the @starter-file{spell-checker}.
