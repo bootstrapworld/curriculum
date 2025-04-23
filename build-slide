@@ -147,8 +147,8 @@ for NATLANG in *; do
       if test -s "$idfile"; then
         id=$(cat "$idfile"|$SED -e 1q)
         # echo md2gslides with id $id
-        node $TOPDIR/node_modules/md2googleslides/bin/md2gslides.js $slidesmkd -a "$id" -e -n -t "$title" -c $templateSlidesId -p $parentFolderId -s $cssPath --use-fileio > .tmp.txt
-        # node $TOPDIR/node_modules/md2googleslides/bin/md2gslides.js $slidesmkd -a "$id" -e -n -t "$title" --use-fileio > .tmp.txt 2>.tmpe.txt
+        node $TOPDIR/node_modules/md2googleslides/bin/md2gslides.js $slidesmkd -a "$id" -e -n -t "$title" -c $templateSlidesId -p $parentFolderId -s $cssPath  > .tmp.txt
+        # node $TOPDIR/node_modules/md2googleslides/bin/md2gslides.js $slidesmkd -a "$id" -e -n -t "$title" > .tmp.txt 2>.tmpe.txt
         if grep -q 'Unable to generate slides' .tmp.txt; then
           echo Slides failed for $LESSON/$slidesmkd
           if grep -q 'must be less than the endIndex' .tmp.txt; then
@@ -159,7 +159,7 @@ for NATLANG in *; do
         # rm .tmp.txt
       else
         # echo md2gslides without id
-        $TOPDIR/node_modules/md2googleslides/bin/md2gslides.js $slidesmkd -n -t "$title" -c $templateSlidesId -p $parentFolderId -s $cssPath --use-fileio > .tmp.txt
+        $TOPDIR/node_modules/md2googleslides/bin/md2gslides.js $slidesmkd -n -t "$title" -c $templateSlidesId -p $parentFolderId -s $cssPath > .tmp.txt
         if grep -q 'Unable to generate slides' .tmp.txt; then
           echo Slides failed for $LESSON/$slidesmkd
           if grep -q 'must be less than the endIndex' .tmp.txt; then
