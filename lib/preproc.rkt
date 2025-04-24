@@ -1586,10 +1586,11 @@
                             (let ([text (read-group i directive #:multiline? #t)])
                               (expand-directives:string->port text o #:enclosing-directive directive))]
                            [(string=? directive "blanklines")
-                            (let ([n (string->number (read-group i directive))]
-                                  [text (read-group i directive)])
+                            (let* ([n (string->number (read-group i directive))]
+                                   [height (* n 2.2)] ; each line is 2.2rem tall (see shared.less)
+                                   [text (read-group i directive)])
                               ; (printf "doing @blanklines ~s\n" n)
-                              (display-begin-span ".blanklines" o #:attribs (format "style=\"height: ~arem\"" n))
+                              (display-begin-span ".blanklines" o #:attribs (format "style=\"height: ~arem\"" height))
                               (display (expand-directives:string->string text #:enclosing-directive directive) o)
                               (display-end-span o))]
                            [(string=? directive "duration")
