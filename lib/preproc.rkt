@@ -1585,16 +1585,13 @@
                            [(member directive '("ifnotslide" "preparation"))
                             (let ([text (read-group i directive #:multiline? #t)])
                               (expand-directives:string->port text o #:enclosing-directive directive))]
-                           [(string=? directive "page-of-lines")
-                            (let ([n (string->number (read-group i directive))])
-                              ; (printf "doing @page-of-lines ~s\n" n)
-                              (let loop ([i 0])
-                                (unless (>= i n)
-                                  (display-begin-span ".fitb.stretch" o)
-                                  (display-end-span o)
-                                  (newline o)
-                                  (newline o)
-                                  (loop (+ i 1)))))]
+                           [(string=? directive "blanklines")
+                            (let ([n (string->number (read-group i directive))]
+                                  [text (read-group i directive)])
+                              ; (printf "doing @blanklines ~s\n" n)
+                              (display-begin-span ".blanklines" o #:attribs (format "style=\"height: ~arem\"" n))
+                              (display (expand-directives:string->string text #:enclosing-directive directive) o)
+                              (display-end-span o))]
                            [(string=? directive "duration")
                             (let ([txt (read-group i directive)])
                               (display (string-append
@@ -1980,9 +1977,20 @@
                             (let ([text (read-group i directive #:multiline? #t)]
                                   [old-optional-flag? *optional-flag?*])
                               (set! *optional-flag?* #t)
-                              (display "[.optionaltag]##{empty}##\n" o)
+                              (display
+                                (enclose-span ".optionaltag"
+                                  (expand-directives:string->string
+                                    text #:enclosing-directive directive)) o)
+                              ;(display "\n" o)
+                              (set! *optional-flag?* old-optional-flag?))]
+                           [(string=? directive "opt-block")
+                            (let ([text (read-group i directive #:multiline? #t)]
+                                  [old-optional-flag? *optional-flag?*])
+                              (set! *optional-flag?* #t)
+                              (display "\n[.actually-openblock.optpara]\n=====\n" o)
+                              ;(display "[.optionaltag]##{empty}##\n" o)
                               (expand-directives:string->port text o #:enclosing-directive directive)
-                              (display "\n" o)
+                              (display "\n=====\n" o)
                               (set! *optional-flag?* old-optional-flag?))]
                           [(or (string=? directive "starter-file")
                                 (string=? directive "opt-starter-file"))
