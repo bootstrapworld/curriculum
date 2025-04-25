@@ -1275,10 +1275,12 @@
 
 (define (link-to-project-lessons-in-pathway o)
   ; (printf "doing link-to-project-lessons-in-pathway\n")
-  (let ([lessons (read-data-file
-                   (format "distribution/~a/courses/~a/.cached/.workbook-lessons.txt.kp"
-                           *natlang* *target-pathway*))]
+  (let ([lesson-categories (read-data-file
+                   (format "distribution/~a/courses/~a/.cached/.workbook-lessons.rkt.kp"
+                           *natlang* *target-pathway*) #:mode 'form)]
+        [lessons #f]
         [project-lessons '()])
+    (set! lessons (apply append (map rest lesson-categories)))
     (for ([lesson lessons])
       (let ([lesson-pl-file
               (format "distribution/~a/lessons/~a/.cached/.index-projectlessons.rkt.kp" *natlang* lesson)])
@@ -1296,9 +1298,11 @@
 (define (link-to-lessons-in-pathway o)
   ; (printf "link-to-lessons-in-pathway\n")
   ;
-  (let ([lessons (read-data-file
-                   (format "distribution/~a/courses/~a/.cached/.workbook-lessons.txt.kp"
-                           *natlang* *target-pathway*))])
+  (let ([lesson-categories (read-data-file
+                   (format "distribution/~a/courses/~a/.cached/.workbook-lessons.rkt.kp"
+                           *natlang* *target-pathway*) #:mode 'form)]
+        [lessons #f])
+    (set! lessons (apply append (map rest lesson-categories)))
     ;(printf "lessons = ~s\n" lessons)
     ;
     ;(fprintf o "~n.Lessons Used in This Pathway\n")
@@ -2218,7 +2222,6 @@
                              (fprintf o "\nlink:../index.shtml[Click here to return to lessons]\n\n")
                              ; (link-to-opt-projects o)
                              ; (link-to-notes-pages o)
-                             ;(display-exercise-collation o)
                              )])]
                   [(char=? c #\newline)
                    (newline o)
@@ -2602,73 +2605,6 @@
           [else
             #;(printf "WARNING: ~a: File ~a not found\n\n" (errmessage-context) id-file)
             #f])))
-
-#;(define (display-exercise-collation o)
-  ; (printf "doing display-exercise-collation\n" )
-  ; (printf "pwrd = ~s\n" *pathway-root-dir*)
-  ; (printf "cwd is ~s\n" (current-directory))
-  (let* ([pathway-lesson-order
-           (format "distribution/~a/courses/~a/.cached/.workbook-lessons.txt.kp"
-                   *natlang* *target-pathway*)]
-         [all-lessons (read-data-file pathway-lesson-order #:mode 'files)]
-         ;fixme -- why following?
-         ; [all-lessons (map (lambda (s) (regexp-replace "^\\.\\./\\.\\./" s "")) all-lessons)]
-         [lessons-with-exx
-           (filter (lambda (f)
-                      (file-exists?
-                        (format "distribution/~a/lessons/~a/.cached/.lesson-exercises.rkt.kp"
-                                *natlang* f)))
-                   all-lessons)]
-         [exx (map (lambda (lsn)
-                     (list lsn
-                           (read-data-file
-                             (format "distribution/~a/lessons/~a/.cached/.lesson-exercises.rkt.kp"
-                                     *natlang* lsn)
-                             #:mode 'forms)))
-                   lessons-with-exx)])
-    ; (printf "pathway-lesson-order is ~s (~s)\n" pathway-lesson-order (file-exists? pathway-lesson-order))
-    ; (printf "lessons-with-exx is ~s\n" lessons-with-exx)
-    ; (printf "exx is ~s\n" exx)
-    ; (printf "lessons= ~s\n\nexercises= ~s\n" all-lessons exx)
-
-    ; (link-to-opt-projects o)
-
-    (unless (null? exx)
-      (display "\n\n" o)
-      (display (hash-ref *common-text* 'workbook-links) o)
-      (display "\n\n" o)
-      (display (create-vspace "1ex") o)
-      (for ([lsn-exx exx])
-        ; (printf "lsn-exx is ~s\n" lsn-exx)
-        (let ([lsn (first lsn-exx)]
-              [exx (second lsn-exx)])
-          (fprintf o "\n\n**link:~alessons/~a/index.shtml[~a]**\n"
-                   *dist-root-dir*
-                   lsn
-                   (call-with-input-file
-                     (format "distribution/~a/lessons/~a/.cached/.index.titletxt"
-                             *natlang* lsn)
-                     port->string))
-          (for ([ex exx])
-            (let* ([ti (list-ref ex 1)]
-                   [exer (list-ref ex 0)]
-                   ; [exer (regexp-replace "\\.adoc" exer ".html")]
-                   [soln (regexp-replace "/pages/" exer "/solution-pages/")])
-
-              (when (string=? ti "")
-                (let ([exer.titletxt
-                        (build-path
-                          (format "distribution/~a/lessons" *natlang*)
-                          (path-replace-extension
-                            (regexp-replace "/pages/" exer "\\0.cached/.")
-                            ".titletxt"))])
-                  (when (file-exists? exer.titletxt)
-                    (set! ti (call-with-input-file exer.titletxt read-line)))))
-
-              (fprintf o "\n- ~a [ link:~alessons/~a[exercise] : link:~alessons/~a[solution] ]\n"
-                       ti *dist-root-dir* exer *dist-root-dir* soln)))
-          ))
-      )))
 
 (define (add-exercises)
   ; (printf "doing add-exercises ~s\n" *exercises-done*)
