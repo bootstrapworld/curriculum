@@ -1593,8 +1593,9 @@
                               (display
                                 (enclose-openblock
                                   ".blanklines"
-                                  (expand-directives:string->string
-                                    text #:enclosing-directive directive)
+                                  (lambda ()
+                                    (expand-directives:string->string
+                                      text #:enclosing-directive directive))
                                   #:attribs
                                   (format "style=\"height: ~arem\"" height))
                                 o))]
