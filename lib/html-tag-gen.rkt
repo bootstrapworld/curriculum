@@ -61,7 +61,9 @@
     (set! *openblock-nesting-level* (+ old-openblock-nesting-level 1))
     (let ([result
             (string-append
-              "\n%BEGINOPENBLOCKATTRIBS%" (if attribs (string-append " " attribs) "") "%ENDOPENBLOCKATTRIBS%\n"
+              "\n++++"
+              "\n<!-- %BEGINOPENBLOCKATTRIBS%" (if attribs (string-append " " attribs) "") "%ENDOPENBLOCKATTRIBS% -->"
+              "\n++++\n"
               "[.actually-openblock" classes "]\n"
               delimiter "\n"
               (s) "\n"
