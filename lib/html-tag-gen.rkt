@@ -53,13 +53,21 @@
 (define (enclose-div classes s #:attribs [attribs #f])
   (enclose-tag "div" classes s #:attribs attribs))
 
+(define *openblock-nesting-level* 0)
+
 (define (enclose-openblock classes s #:attribs [attribs #f])
-  (string-append
-    "\n%BEGINOPENBLOCKATTRIBS%" (if attribs (string-append " " attribs) "")
-    "%ENDOPENBLOCKATTRIBS%"
-    "\n[.actually-openblock" classes "]\n=====\n"
-    s
-    "\n=====\n"))
+  (let ([old-openblock-nesting-level *openblock-nesting-level*]
+        [delimiter (make-string (+ 5 *openblock-nesting-level*) #\=)])
+    (set! *openblock-nesting-level* (+ old-openblock-nesting-level 1))
+    (let ([result
+            (string-append
+              "\n%BEGINOPENBLOCKATTRIBS%" (if attribs (string-append " " attribs) "") "%ENDOPENBLOCKATTRIBS%\n"
+              "[.actually-openblock" classes "]\n"
+              delimiter "\n"
+              (s) "\n"
+              delimiter "\n")])
+      (set! *openblock-nesting-level* old-openblock-nesting-level)
+      result)))
 
 (define (enclose-textarea classes s #:multiline? [multiline? #f])
   (let ([textarea "code"]) ;shd be "textarea" eventually
