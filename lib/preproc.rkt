@@ -1878,9 +1878,12 @@
                                              ".teacherNote" converted-text)]) o))]
                            [(string=? directive "indented")
                             (let ([text (read-group i directive #:multiline? #t)])
-                              (display "\n[.actually-openblock.indentedpara]\n=====\n" o)
-                              (expand-directives:string->port text o #:enclosing-directive directive)
-                              (display "\n=====\n" o))]
+                              (display
+                                (enclose-openblock
+                                  ".indentedpara"
+                                  (lambda ()
+                                    (expand-directives:string->string text #:enclosing-directive directive)))
+                                o))]
                            [(string=? directive "ifproglang")
                             (let* ([proglang (read-group i directive)]
                                    [text (read-group i directive #:multiline? #t)])
@@ -1987,10 +1990,12 @@
                             (let ([text (read-group i directive #:multiline? #t)]
                                   [old-optional-flag? *optional-flag?*])
                               (set! *optional-flag?* #t)
-                              (display "\n[.actually-openblock.optpara]\n=====\n" o)
-                              ;(display "[.optionaltag]##{empty}##\n" o)
-                              (expand-directives:string->port text o #:enclosing-directive directive)
-                              (display "\n=====\n" o)
+                              (display
+                                (enclose-openblock
+                                  ".optpara"
+                                  (lambda ()
+                                    (expand-directives:string->string text  #:enclosing-directive directive)))
+                                o)
                               (set! *optional-flag?* old-optional-flag?))]
                           [(or (string=? directive "starter-file")
                                 (string=? directive "opt-starter-file"))
@@ -2147,10 +2152,13 @@
                               (display "{endsb}__" o))]
                            [(string=? directive "QandA")
                             (let ([text (read-group i directive #:multiline? #t)])
-                              (fprintf o "\n[~a.actually-openblock.q-and-a]\n====\n"
-                                      (if *optional-flag?* ".Optional" ""))
-                              (expand-directives:string->port text o #:enclosing-directive directive)
-                              (display "\n====\n" o))]
+                              (display
+                                (enclose-openblock
+                                  (format ".q-and-a~a"
+                                          (if *optional-flag?* ".Optional" ""))
+                                  (lambda ()
+                                    (expand-directives:string->string text  #:enclosing-directive directive)))
+                                o))]
                            [(string=? directive "Q")
                             (let ([text (read-group i directive #:multiline? #t)])
                               (display "\n* " o)
@@ -2371,12 +2379,15 @@
                 (fprintf o "include::~a/{cachedir}.index-sidebar.asc[]\n\n" *containing-directory*)
                 (call-with-output-file (build-path *containing-directory* ".cached" ".index-sidebar.asc")
                   (lambda (o)
-                    (display "\n[.actually-openblock.sidebar]\n=====\n" o)
-                    (display-prereqs-bar o)
-                    (display-standards-bar o)
-                    (display "%ENDSIDEBARCONTENT%" o)
-                    (display "\n=====\n" o)
-                    )
+                    (display
+                      (enclose-openblock
+                        ".sidebar"
+                        (lambda ()
+                          (call-with-output-string
+                            (lambda (o)
+                            (display-prereqs-bar o)
+                            (display-standards-bar o)
+                            (display "%ENDSIDEBARCONTENT%" o))))) o))
                   #:exists 'replace)
 
                 )

@@ -42,6 +42,7 @@ local function postproc(fhtml_cached, tipe)
   local f_mathjax_file = fhtml_cached:gsub('%.html$', '.asc.uses-mathjax')
   local f_codemirror_file = fhtml_cached:gsub('%.html$', '.asc.uses-codemirror')
   --
+  -- os.execute('cp ' .. fhtml_cached .. ' ' .. fhtml_cached .. '.save')
   local i = io.open(fhtml_cached, 'r')
   local o = io.open(fhtml, 'w')
   --
@@ -130,8 +131,10 @@ local function postproc(fhtml_cached, tipe)
     end
     --
     if x:find('%%BEGINOPENBLOCKATTRIBS%%') then
-      openblock_attribs = x:gsub('<p>%%BEGINOPENBLOCKATTRIBS%%(.*)%%ENDOPENBLOCKATTRIBS%%</p>', '%1')
-      if openblock_attribs == "" then openblock_attribs = false end
+      openblock_attribs = x:gsub('.-%%BEGINOPENBLOCKATTRIBS%%(.*)%%ENDOPENBLOCKATTRIBS%%.*', '%1')
+      if openblock_attribs == "" then
+        openblock_attribs = false
+      end
       goto continue
     end
     --
