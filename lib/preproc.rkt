@@ -2166,12 +2166,7 @@
                               (display "\n--\n" o))]
                            [(string=? directive "lesson-point")
                             (let ([text (read-group i directive #:multiline? #t)])
-                              ; caution: correlations*/index.adoc
-                              ; (display-openblock ".lesson-point" text directive o)
-                              (display "\n[.lesson-point]\n--\n" o)
-                              (expand-directives:string->port text o #:enclosing-directive directive)
-                              (display "\n--\n" o)
-                              )]
+                              (display-openblock ".lesson-point" text directive o))]
                            [(string=? directive "lesson-instruction")
                             (let ([text (read-group i directive #:multiline? #t)])
                               (display-openblock ".lesson-instruction" text directive o))]
