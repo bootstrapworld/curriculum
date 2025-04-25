@@ -18,8 +18,8 @@
 | Student-facing Lesson Goals
 |
 
-- Let's use functions to create pie and bar charts to visualize categorical data
-- Let's visualize categorical data grouped in different ways
+- Let's use functions to create pie and bar charts to visualize categorical data.
+- Let's visualize categorical data grouped in different ways.
 
 | Materials
 |[.materials-links]
@@ -29,7 +29,18 @@
 | Supplemental Materials
 |[.materials-links]
 @opt-material-links
-- @lesson-link{project-infographic}
+
+@ifproglang{pyret}{
+| Preparation
+| 
+- Decide whether or not you want to launch this lesson using the *Live Pyret Survey* and your class' own data. If so, follow the instructions on @dist-link{pages/live-pyret-survey-instructions.adoc} to:
+  * _Make a copy_ of the @opt-starter-file{bar-and-pie-chart-survey-form} and share it with your class. 
+    ** This makes a great "Do Now" as students enter the room, but could also be assigned for homework the night before.
+  * _Link the Google Sheet of their responses_ to the @opt-starter-file{bar-and-pie-chart-survey-starter}.
+  * _Click "Run"_ and then either:
+    ** Project the new Data Visualization they'll be introduced to today. 
+    ** Publish the starter file and share a link with your students.
+}
 
 | Key Points for the Facilitator
 | This lesson uses the @starter-file{expanded-animals}, which includes far more animals than the smaller sample represented in the animals starter file used in most of our lessons. 
@@ -51,6 +62,36 @@ Students learn one way of grouping data, showing the @vocab{frequency} of values
 
 === Launch
 
+@ifproglang{pyret}{
+@opt-block{
+@teacher{
+If you decided to launch today's class using our *Live Pyret Survey*, now is the time!
+
+When you click "Run", the @opt-starter-file{bar-and-pie-chart-survey-starter} builds a side-by-side `count` frequency table, `bar-chart` and `pie-chart` comparison. 
+
+@indented{
+Assuming you've already...
+
+1. Followed the @dist-link{pages/live-pyret-survey-instructions.adoc, Instructions to Set up and Link the Files} +
+2. Shared the *link you made to your class' copy* of the @opt-starter-file{bar-and-pie-chart-survey-form}
+
+The data visualizations will be generated using data from your students! +
+And they will continue to update in real time as more of your students complete the Google Form.
+}
+
+Project your screen and/or publish the starter file and share a link with your students.
+
+Facilitate a discussion about this new-to-them Pyret Data Visualization!
+}
+
+@lesson-instruction{
+- Open the *Google Form Survey* link I shared and submit your response.
+- Then look at the Survey Results being displayed in the new Data Visualization on the Board.
+- What do you Notice?
+- What do you Wonder?
+}
+}
+}
 @lesson-instruction{
 - Open the @starter-file{expanded-animals} and click "Run".
 - Then complete Part A of @printable-exercise{count-bar-pie.adoc}, by testing the expressions @show{(code '(count more-animals "species"))} and @show{(code '(bar-chart more-animals "species"))} in the Interactions Area.
