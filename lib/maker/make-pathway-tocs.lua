@@ -26,8 +26,15 @@ for _,course in ipairs(all_courses) do
   local lesson_units = sread_file(this_course_lessons_file)
   o:write('  \"' .. course .. '\": [\n')
   for _,lunit in ipairs(lesson_units) do
+    local unit_name = lunit[1]
+    if unit_name ~= '' then
+      o:write('     { "' .. unit_name .. '": [ \n')
+    end
     for i=2,#lunit do
-      o:write('     \"' .. lunit[i] .. '\",\n')
+      o:write('       \"' .. lunit[i] .. '\",\n')
+    end
+    if unit_name ~= '' then
+      o:write('     ] },\n')
     end
   end
   o:write('  ],\n')
