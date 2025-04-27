@@ -46,7 +46,6 @@
                                                  (if (eof-object? y) (reverse yy)
                                                      (loop2 (cons (format "~a" y) yy)))))))])
                                  (if (null? yy) xx (cons yy xx)))))))]
-            [(form) (read i)]
             [(forms) (let loop ([xx '()])
                        (let ([x (read i)])
                          (if (eof-object? x) (reverse xx)

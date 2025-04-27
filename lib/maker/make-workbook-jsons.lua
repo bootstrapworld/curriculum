@@ -8,7 +8,8 @@ local make_dir = os.getenv'MAKE_DIR'
 
 dofile(make_dir .. 'utils.lua')
 dofile(make_dir .. 'readers.lua')
-dofile(make_dir .. 'sread.lua')
+
+-- dofile('lib/maker/utils.lua')
 
 local natlang = os.getenv('NATLANG')
 
@@ -75,20 +76,19 @@ do
     end
 
     o:write('  "lessons": [\n')
-    local workbook_lessons_file = course_cache .. '.workbook-lessons.rkt.kp'
-    local lesson_categories = sread_file(workbook_lessons_file)
+    local workbook_lessons_file = course_cache .. '.workbook-lessons.txt.kp'
+    local w = io.open(workbook_lessons_file)
     local first_p = true
-    for _,categ in ipairs(lesson_categories) do
-      for _,lsn in ipairs(categ) do
-        if first_p then
-          first_p = false
-          o:write('    ')
-        else
-          o:write('  , ')
-        end
-        o:write(' "', lsn, '"\n')
+    for lsn in w:lines() do
+      if first_p then
+        first_p = false
+        o:write('    ')
+      else
+        o:write('  , ')
       end
+      o:write(' "', lsn, '"\n')
     end
+    w:close()
     o:write('  ],\n')
 
     local back_matter_workbook_pages_file = course_dir .. '/back-matter/pages/.cached/.workbook-pages.txt.kp'

@@ -68,20 +68,17 @@ for pl in $proglangs; do
   if test ! -f lesson-order.txt; then
     echo WARNING: No lesson-order.txt in pathway $targetpathway
     touch lesson-order.txt
-    touch .cached/.workbook-lessons.rkt.kp
-    # touch .cached/.workbook-lessons.txt.kp
+    touch .cached/.workbook-lessons.txt.kp
   else
-    $TOPDIR/${MAKE_DIR}make-workbook-lessons-list.lua lesson-order.txt .cached/.workbook-lessons.rkt.kp $pl
-    # grep -v '^ *;' lesson-order.txt |
-    #   $SED -e 's/\t/ /g' |
-    #   $SED -e 's/;.*//' |
-    #   $SED -e 's/ *$//' |
-    #   grep -v '^*$' |
-    #   grep -v '\[' |
-    #   $SED -e 's/^ *\(.*\)/\1/' > .cached/.workbook-lessons.txt.kp
-    # if test "$pl" != pyret -a "$pl" != none; then
-    #   $SED -i -e 's/.*/\0-'$pl'/' .cached/.workbook-lessons.txt.kp
-    # fi
+    grep -v '^ *;' lesson-order.txt |
+      $SED -e 's/\t/ /g' |
+      $SED -e 's/;.*//' |
+      $SED -e 's/ *$//' |
+      grep -v '^ *$' |
+      $SED -e 's/^ *\(.*\)/\1/' > .cached/.workbook-lessons.txt.kp
+    if test "$pl" != pyret -a "$pl" != none; then
+      $SED -i -e 's/.*/\0-'$pl'/' .cached/.workbook-lessons.txt.kp
+    fi
   fi
 
   cd ..
