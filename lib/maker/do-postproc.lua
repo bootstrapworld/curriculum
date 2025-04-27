@@ -42,6 +42,7 @@ local function postproc(fhtml_cached, tipe)
   local f_mathjax_file = fhtml_cached:gsub('%.html$', '.asc.uses-mathjax')
   local f_codemirror_file = fhtml_cached:gsub('%.html$', '.asc.uses-codemirror')
   --
+  os.execute('cp ' .. fhtml_cached .. ' ' .. fhtml_cached .. '.save')
   local i = io.open(fhtml_cached, 'r')
   local o = io.open(fhtml, 'w')
   --
@@ -55,6 +56,7 @@ local function postproc(fhtml_cached, tipe)
   local delete_line_p = false
   local read_end_sidebar_p = false
   local num_of_lines_past_end_sidebar = 0
+  local openblock_attribs = false
   --
   for x in i:lines() do
     if read_end_sidebar_p then
@@ -128,12 +130,24 @@ local function postproc(fhtml_cached, tipe)
       end
     end
     --
+    if x:find('%%BEGINOPENBLOCKATTRIBS%%') then
+      openblock_attribs = x:gsub('.-%%BEGINOPENBLOCKATTRIBS%%(.*)%%ENDOPENBLOCKATTRIBS%%.*', '%1')
+      if openblock_attribs == "" then
+        openblock_attribs = false
+      end
+      goto continue
+    end
+    --
     x = x:gsub('<pre>', '<pre><code class="' .. code_lang .. '">')
     x = x:gsub('</pre>', '</code></pre>')
     x = x:gsub('<code>', '<code class="' .. code_lang .. '">')
     x = x:gsub('<p> </p>', '<p></p>')
     --
-    x = x:gsub('class="exampleblock actually%-openblock ', 'class="openblock ')
+    if x:find('class="exampleblock .-actually%-openblock ') and openblock_attribs then
+      x = x:gsub('class=".-"', '%0' .. openblock_attribs)
+      openblock_attribs = false
+    end
+    x = x:gsub('class="exampleblock (.-)actually%-openblock ', 'class="openblock %1')
     x = x:gsub('class="openblock sidebar', 'class="sidebar')
     x = x:gsub('<div class="sidebar">', '</div>\n</div>\n</div>\n%0<div id="toggle"></div>')
     --

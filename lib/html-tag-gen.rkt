@@ -6,6 +6,7 @@
   enclose-tag
   enclose-span
   enclose-div
+  enclose-openblock
   enclose-textarea
   enclose-textarea-2
   enclose-math
@@ -49,8 +50,29 @@
 (define (enclose-span classes s #:attribs [attribs #f])
   (enclose-tag "span" classes s #:attribs attribs))
 
-(define (enclose-div classes s)
-  (enclose-tag "div" classes s))
+(define (enclose-div classes s #:attribs [attribs #f])
+  (enclose-tag "div" classes s #:attribs attribs))
+
+(define *openblock-nesting-level* 0)
+
+(define (enclose-openblock classes s #:attribs [attribs #f])
+  (let ([old-openblock-nesting-level *openblock-nesting-level*]
+        [delimiter (make-string (+ 5 *openblock-nesting-level*) #\=)])
+    (set! *openblock-nesting-level* (+ old-openblock-nesting-level 1))
+    (let ([result
+            (string-append
+              (if attribs
+                  (string-append
+                    "\n++++"
+                    "\n<!-- %BEGINOPENBLOCKATTRIBS% " attribs "%ENDOPENBLOCKATTRIBS% -->"
+                    "\n++++\n"
+                    ) "")
+              "[.actually-openblock" classes "]\n"
+              delimiter "\n"
+              (s) "\n"
+              delimiter "\n")])
+      (set! *openblock-nesting-level* old-openblock-nesting-level)
+      result)))
 
 (define (enclose-textarea classes s #:multiline? [multiline? #f])
   (let ([textarea "code"]) ;shd be "textarea" eventually
