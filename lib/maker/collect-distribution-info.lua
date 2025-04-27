@@ -25,10 +25,10 @@ function record_course_lessons(course, lo)
   if not file_exists_p(course_lessons_file) then
     return
   end
-  local lesson_categories = sread_file(course_lessons_file)
-  for _,c in ipairs(lesson_categories) do
-    for _,f in ipairs(c) do
-      lo:write(f, '\n')
+  local lesson_units = sread_file(course_lessons_file)
+  for _,lunit in ipairs(lesson_units) do
+    for i=2,#lunit do
+      lo:write(lunit[i], '\n')
     end
   end
 end

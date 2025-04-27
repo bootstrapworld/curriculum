@@ -1,6 +1,6 @@
 #! /usr/bin/env lua
 
--- last modified 2025-04-25
+-- last modified 2025-04-27
 
 -- print('doing make-pathway-tocs.lua')
 
@@ -23,11 +23,11 @@ for _,course in ipairs(all_courses) do
   local course_dir = distr_courses .. course .. '/'
   local this_course_lessons_file = course_dir .. '.cached/.workbook-lessons.rkt.kp'
   if not file_exists_p(this_course_lessons_file) then goto continue end
-  local lesson_categories = sread_file(this_course_lessons_file)
+  local lesson_units = sread_file(this_course_lessons_file)
   o:write('  \"' .. course .. '\": [\n')
-  for _,categ in ipairs(lesson_categories) do
-    for _,lsn in ipairs(categ) do
-      o:write('     \"' .. lsn .. '\",\n')
+  for _,lunit in ipairs(lesson_units) do
+    for i=2,#lunit do
+      o:write('     \"' .. lunit[i] .. '\",\n')
     end
   end
   o:write('  ],\n')

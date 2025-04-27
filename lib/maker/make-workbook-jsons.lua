@@ -76,17 +76,17 @@ do
 
     o:write('  "lessons": [\n')
     local workbook_lessons_file = course_cache .. '.workbook-lessons.rkt.kp'
-    local lesson_categories = sread_file(workbook_lessons_file)
+    local lesson_units = sread_file(workbook_lessons_file)
     local first_p = true
-    for _,categ in ipairs(lesson_categories) do
-      for _,lsn in ipairs(categ) do
+    for _,lunit in ipairs(lesson_units) do
+      for i=2,#lunit do
         if first_p then
           first_p = false
           o:write('    ')
         else
           o:write('  , ')
         end
-        o:write(' "', lsn, '"\n')
+        o:write(' "', lunit[i], '"\n')
       end
     end
     o:write('  ],\n')
