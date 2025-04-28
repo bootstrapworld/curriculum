@@ -733,8 +733,9 @@
                                 (expand-directives:string->port text o)))]
                            [(string=? directive "big")
                             (let ([text (string-trim (read-group i directive #:multiline? #t))])
+                              (display "<span style=\"font-size: 22pt\">" o)
                               (expand-directives:string->port text o)
-                              (display "{style=\"font-size: 22pt\"}" o))]
+                              (display "</span>" o))]
                            [(string=? directive "lesson-point")
                             (let ([text (string-trim (read-group i directive #:multiline? #t))])
                               (display ":pushpin: " o)
@@ -792,14 +793,14 @@
                               (set! *output-answers?* #f)
                               (exit-teacher-notes))]
                            [(string=? directive "Q")
-                            (let ([text (read-group i directive)])
+                            (let ([text (read-group i directive #:multiline? #t)])
                               (display "\n" o)
                               (unless *single-question?*
                                 (display "* &#8203;" o))
                               (expand-directives:string->port text o)
                               (display "\n" o))]
                            [(string=? directive "A")
-                            (let ([text (read-group i directive)])
+                            (let ([text (read-group i directive #:multiline? #t)])
                               (when *output-answers?*
                                 (display "\n  -  &#8203;" o)
                                 (expand-directives:string->port text o)
