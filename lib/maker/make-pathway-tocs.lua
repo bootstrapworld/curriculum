@@ -1,6 +1,6 @@
 #! /usr/bin/env lua
 
--- last modified 2025-04-27
+-- last modified 2025-04-28
 
 -- print('doing make-pathway-tocs.lua')
 
@@ -27,13 +27,13 @@ for _,course in ipairs(all_courses) do
   o:write('  \"' .. course .. '\": [\n')
   for _,lunit in ipairs(lesson_units) do
     local unit_name = lunit[1]
-    if unit_name ~= '' then
+    if unit_name ~= 'NO_UNIT' then
       o:write('     { "' .. unit_name .. '": [ \n')
     end
     for i=2,#lunit do
       o:write('       \"' .. lunit[i] .. '\",\n')
     end
-    if unit_name ~= '' then
+    if unit_name ~= 'NO_UNIT' then
       o:write('     ] },\n')
     end
   end
