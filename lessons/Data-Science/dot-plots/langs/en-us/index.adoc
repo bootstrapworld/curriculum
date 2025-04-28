@@ -34,8 +34,27 @@
 
 @material-links
 
+@ifproglang{pyret}{
+| Supplemental Materials
+|[.materials-links]
+@opt-material-links
+
 | Preparation
-| Decide if students will create a communal dot plot (1) via live survey or (2) via each student drawing one data point on a shared data visualization. BLAH BLAH BLAH
+|
+@preparation{
+- Decide how your students will create the communal dot plot. Options include:
+  * Use our Live Pyret Survey. 
+    ** _You'll see this option for displaying data collected from your class each time we introduce a new Pyret Data Visualization in a Bootstrap:Data Science lesson!_
+  * Have each student draw one data point on a shared data visualization.
+- To use the *Live Pyret Survey*, follow the instructions on @dist-link{pages/live-pyret-survey-instructions.adoc} to:
+  * _Make a copy_ of the @opt-starter-file{dot-plot-survey-form} and share it with your class. 
+    ** This makes a great "Do Now" as students enter the room, but could also be assigned for homework the night before.
+  * _Link the Google Sheet of their responses_ to the @opt-starter-file{dot-plot-survey-starter}.
+  * _Click "Run"_ and then either:
+    ** Project the new Data Visualization they'll be introduced to today. 
+    ** Publish the starter file and share a link with your students.
+}
+}
 |===
 
 
@@ -50,23 +69,65 @@ Students create and interpret dot plots, learning new vocabulary to informally d
 
 === Launch
 
-@teacher{Before class, decide if you want your students to create a communal dot plot (1) via live survey, or (2) via each student drawing their own data point on a shared display.
+@ifproglang{pyret}{
+@teacher{Before class, decide how you want your students to create a communal dot plot.}
 
-If you opt to do the live survey... FILL THIS IN.
-
-If you opt to have each student draw a data point:  Draw or project a number line on a piece of chart paper or on the board. Your number line should start at zero and go up to 15 by ones. If you have a student with a name that is more than 15 letters, extend the number line accordingly.}
+@opt-block{
+@teacher{
+If you opt to have each student draw a data point:  Draw or project a number line on a piece of chart paper or on the board. Your number line should start at zero and go up to 15 by ones. If you have a student with a name that is more than 15 letters, extend the number line accordingly.
+}
 
 @lesson-instruction{
-
 - Count how many letters are in your first name.
-- Once you have counted, follow your teachers' instructions to do one of the following:
-** Complete the live survey and watch our class data visualization appear and evolve.
-** Line up at the board to draw a dot above the number of letters in your first name. You may stack dots, but try to keep them evenly spaced.
+- Once you have counted, line up at the board to draw a dot above the number of letters in your first name. 
+- You may stack dots, but try to keep them evenly spaced.
+}
+}
 
-@image{images/number-line.png}
+@opt-block{
+@teacher{
+If you decided to launch today's class using our *Live Pyret Survey*, now is the time to display the results!
 
-- Congratulations! Your individual name length is now represented in our class dot plot.
-- Copy the class dot plot onto the top section of @printable-exercise{our-class-name-data.adoc}.
+When you click "Run", the @opt-starter-file{dot-plot-survey-starter} builds a dot plot. 
+
+@indented{
+Assuming you've already...
+
+1. Followed the @dist-link{pages/live-pyret-survey-instructions.adoc, Instructions to Set up and Link the Files} +
+2. Shared the *link you made to your class' copy* of the @opt-starter-file{dot-plot-survey-form}
+
+The data visualizations will be generated using data from your students! +
+And they will continue to update in real time as more of your students complete the Google Form.
+}
+
+Project your screen and/or publish the starter file and share a link with your students.
+}
+
+@lesson-instruction{
+- Open the *Google Form Survey* link I shared and submit your response.
+- Take a look at the results of our survey displayed in the new Data Visualization on the Board.
+- What do you Notice?
+- What do you Wonder?
+}
+}
+} 
+
+@ifproglang{codap}{
+@teacher{
+Draw or project a number line on a piece of chart paper or on the board. Your number line should start at zero and go up to 15 by ones. If you have a student with a name that is more than 15 letters, extend the number line accordingly.
+}
+
+@lesson-instruction{
+- Count how many letters are in your first name.
+- Once you have counted, line up at the board to draw a dot above the number of letters in your first name. 
+- You may stack dots, but try to keep them evenly spaced.
+}	
+}
+
+@lesson-instruction{
+Now that your individual name length is represented in our class dot plot... 
+
+- Turn to @printable-exercise{our-class-name-data.adoc} and copy each of the dots from the class dot plot onto the number line in the top section.
 - Put @printable-exercise{our-class-name-data.adoc} aside for now. We will return to it later in the lesson.
 }
 
@@ -75,7 +136,7 @@ If you teach students who are older than 10 or 11 years old, you may be asking y
 
 Students are generally successful interpreting dot plots (compared to, say, box plots and histograms) because on a dot plot, _individual cases are visible_. Educational research tells us that interpreting box plots and histograms is often difficult for students because they tend to view data as individual cases. Box plots and histograms only provide an _aggregate_ view.
 
-To combat this challenge, @citation{bakker-et-al-2005, "Bakker, Biehler, and Konold (2005)"} recommend building a strong foundation with data visualizations where _individual cases are visible_. In short: don't gloss over dot plots! When introducing dot plots and histograms, the research recommends pairing the less-familiar aggregate data visualizations with their corresponding (familiar) dot plots as we do in this lesson and others.
+To combat this challenge, @citation{bakker-et-al-2005, "Bakker, Biehler, and Konold (2005)"} recommend building a strong foundation with data visualizations where _individual cases are visible_. In short: don't gloss over dot plots! When introducing box plots and histograms, the research recommends pairing the less-familiar aggregate data visualizations with their corresponding (familiar) dot plots as we do in this lesson and others.
 }
 
 
