@@ -49,7 +49,9 @@ Students compare the fits of the Alabama-Alaska model and the Michigan-Californi
 === Launch
 
 @teacher{
-@opt{@opt-printable-exercise{review.adoc} circles back to what students learned in @lesson-link{fitting-models} so their understanding of @math{S}-values and @math{\text{residuals}} is fresh.}
+@opt{
+@opt-printable-exercise{review.adoc} circles back to what students learned in @lesson-link{fitting-models} so their understanding of @math{S}-values and @math{\text{residuals}} is fresh.
+}
 }
 
 @lesson-instruction{
@@ -76,8 +78,8 @@ Students compare the fits of the Alabama-Alaska model and the Michigan-Californi
 Compared to the size of the incomes in this dataset, an @vocab{S} value of $36,165 is pretty terrible. 
 __This model should not be trusted!__
 
-@teacher{
-@opt{Give students a chance to adjust their `al-ak` model by trial and error and practice defining a second model using Massachusetts and Nevada by having them complete @opt-printable-exercise{model-college-v-income-3.adoc}.
+@opt-block{
+Give students a chance to adjust their `al-ak` model by trial and error and practice defining a second model using Massachusetts and Nevada by having them complete @opt-printable-exercise{model-college-v-income-3.adoc}.
 
 @QandA{
 @Q{We made a model using Alabama and Alaska. The @math{S}-value for this `al-ak` model is ~36164.683.}
@@ -86,7 +88,6 @@ __This model should not be trusted!__
 @A{We expect significantly less error in predictions made from the `ma-nv` model.}
 @A{The @math{S}-value of the `ma-nv` is 28660 dollars less!}
 @A{We expect predictions made with the `ma-nv` model to 79% less error than predictions made with the `al-ak` model.}
-}
 }
 }
 
@@ -127,8 +128,10 @@ Percent Change &#8192; = &#8192;
 - Return to @printable-exercise{model-college-v-income-2.adoc} and complete the third section: *A Model of Your Own*, using two states that you identify as likely to produce a model with a better fit.
 }
 
-@teacher{@opt{For a side by side visual comparison of their models have students complete @opt-printable-exercise{graphing-models.adoc}. Students who did not complete @opt-printable-exercise{model-college-v-income-3.adoc} should just sketch the two models they made.
-}}
+@teacher{
+@opt{For a side by side visual comparison of their models have students complete @opt-printable-exercise{graphing-models.adoc}. Students who did not complete @opt-printable-exercise{model-college-v-income-3.adoc} should just sketch the two models they made.
+}
+}
 
 @QandA{
 @Q{What was the best model (lowest @vocab{S}!) you could come up with?}
@@ -151,7 +154,7 @@ Further discussion of @vocab{S} and @vocab{Residuals} may be appropriate for old
 @A{The model fits the data perfectly.}
 
 @Q{Is an @math{S}-value of 1000 bad?}
-@A{We have no way of knowing out of context! @math{S}-values only make sense when considered in the context of the range of the dataset! In our income dataset, 1000 is a pretty good @vocab{S}, because $1000 isn't a big margin of error. But in a dataset showing the number of students in a school, 1000 would be a very significant error!}
+@A{Without more context, we have no way of knowing! @math{S}-values only make sense when considered in the alongside the range of the dataset. In our income dataset, 1000 is a pretty good @vocab{S}, because $1000 isn't a big margin of error. But in a dataset showing the number of students in a school, 1000 would be a very significant error!}
 }
 
 == Finding the Best Linear Model
@@ -181,7 +184,8 @@ Let's use Pyret to find the best possible linear model for predicting median inc
 
 @lesson-instruction{
 - Turn to @printable-exercise{interpreting-linear-models.adoc} and complete the first section ("Build a Model Computationally").
-- Compare this optimal model to the models you built on @printable-exercise{model-college-v-income-2.adoc} (and, if you completed it, to the models you built on @opt{@opt-printable-exercise{model-college-v-income-3.adoc}}).
+- Compare this optimal model to the models you built on @printable-exercise{model-college-v-income-2.adoc}
+- @opt{If you completed @opt-printable-exercise{model-college-v-income-3.adoc}, compare the model on this page as well!}
 }
 
 @center{@image{images/lr-plot-college-v-income.png, 450}}
@@ -229,7 +233,7 @@ Models are only useful if we know how to use and interpret them!
 }
 
 @teacher{
-@opt{For more practice, have students choose to other columns in the dataset to explore the relationship between and build linear models for using @opt-printable-exercise{building-more-linear-models.adoc}.}
+@opt{For more practice, have students choose two other columns in the dataset to explore the relationship between and build linear models for using @opt-printable-exercise{building-more-linear-models.adoc}.}
 }
 
 === Synthesize
@@ -252,20 +256,22 @@ Suppose two new states were to join the union, one with a 30% college attendance
 @A{Reason why not: Washington, D.C. is not representative of the rest of the country at all. The unusual concentration of highly-educated people working for lower income is a special case because of all the government employees. Therefore, it's ok to remove.}
 
 @Q{How could we use scatter plots and linear models to find answers to _other_ questions, for example:
+
 - Do taller NBA players tend to make more three-pointers?
 - Do wealthier people live longer?
 }
 @A{Find a dataset that contains the explanatory variable and response variable, import it into Pyret, and build an lr-plot!}
 }
 
-
+@ifnotslide{
 @strategy{Optional Activity: Guess the Model!}{
 
-1. Divide students into teams of 2-4, and have each team come up with a linear, real-world scenario, then have them write down a linear function that fits this scenario on a sticky note. Make sure no one else can see the function!
+1. Divide students into small groups (2-4), and have each team come up with a linear, real-world scenario, then have them write down a linear function that fits this scenario on a sticky note. Make sure no one else can see the function!
 2. On the board or some flip-chart paper, have each team draw a _scatter plot_ for which their linear function is best fit. They should only draw the point cloud - _not the function itself!_ Finally, students title their scatter plot to describe their real-world scenario (e.g. - "total cost vs. number of tickets purchased").
-3. Have teams switch places or rotate, so that each team is in front of another team's scatter plot. Have them figure out the original function, write their best guess on a sticky note, and stick it next to the plot.
+3. Have teams rotate so that each team is in front of another team's scatter plot. Have them figure out the original function, write their best guess on a sticky note, and stick it next to the plot.
 4. Have teams return to their original scatter plot, and look at the model their colleagues guessed. How close were they? What strategies did the class use to figure out the model?
 
 - The slope and y-intercepts can be constrained to make the activity easier or harder. For example, limiting these model settings to whole numbers, positive numbers, etc.
 - To extend the activity, have the teams continue rotating so that each group adds their sticky note for the best-guess model. Then do a gallery walk so that students can reflect: were the models all pretty close? All over the place? Were the guesses for one model setting more tightly than the guesses for another?
+}
 }

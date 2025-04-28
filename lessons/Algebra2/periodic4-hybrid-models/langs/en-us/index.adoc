@@ -198,7 +198,7 @@ We built our `periodic-sin` model using data from a small window: _just one year
 
 @QandA{
 @Q{We built the `periodic-sin` model to fit the data in the `recent-table`. Why doesn't it do a good job of predicting @math{CO_2} levels for a larger time frame?}
-@A{Models are only reliable within the span of the data they fit. The fact that the model fit `recent-table` well means it's a good model _for that year_, but we can't make any assumptions about dates outside of the range of the training data.}
+@A{Models are only reliable within the span of the data from which they were created. The fact that the model fit `recent-table` well means it's a good model for the data in _that year_, but we can't make any assumptions about dates outside of the range of the training data.}
 }
 
 == Hybrid Models
@@ -282,8 +282,10 @@ We can visualize the body of the function using the Circles of Evaluation.
 @A{Before it goes viral, the growth of a meme probably looks linear (growing faster in the beginning than an exponential model), but eventually the steep part of the curve takes over, and the model looks exponential.}
 }
 
+@ifnotslide{
 @strategy{Going Deeper}{
 - If students look carefully at the fit of their hybrid periodic model to the `co2-table`, they'll see that the model _under-predicts_ at the beginning of the graph, then _over-predicts_ in the middle, the _under-predicts_ again at the end. Is it possible that there's an _even-better_ hybrid model, which mixes periodic growth with something other than linear?
 - Have your students refer back to @lesson-link{exponential1-exploring-covid}. As with the `recent-table` table in @starter-file{alg2-hybrid}, the starter file there constrains the dataset to show only recent data. This is done for the same reason: to introduce students to a more perfectly-exponential model. Now that students know how to combine terms from different models, they can go back and build a model that fits the entire Covid dataset!
+}
 }
 

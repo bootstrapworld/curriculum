@@ -710,9 +710,16 @@
                               (expand-directives:string->port text o)
                               (newline o)
                               (unless *pd?* (exit-teacher-notes)))]
+                           [(string=? directive "opt-block")
+                            (let ([text (read-group i directive #:multiline? #t)])
+                              (ensure-teacher-notes)
+                              (fprintf *teacher-notes* "\nThis material is optional.\n")
+                              (expand-directives:string->port text o)
+                              (newline *teacher-notes*)
+                              (exit-teacher-notes))]
                            [(member directive '("opt" "teacher"))
                             (let ([text (read-group i directive #:multiline? #t)])
-                              (when (string=? directive "opt")
+                              (when (member directive '("opt" "opt-block"))
                                 (set! text (string-append "_Optional:_ " text)))
                               (ensure-teacher-notes)
                               (newline *teacher-notes*)
@@ -785,14 +792,14 @@
                               (set! *output-answers?* #f)
                               (exit-teacher-notes))]
                            [(string=? directive "Q")
-                            (let ([text (read-group i directive)])
+                            (let ([text (read-group i directive #:multiline? #t)])
                               (display "\n" o)
                               (unless *single-question?*
                                 (display "* &#8203;" o))
                               (expand-directives:string->port text o)
                               (display "\n" o))]
                            [(string=? directive "A")
-                            (let ([text (read-group i directive)])
+                            (let ([text (read-group i directive #:multiline? #t)])
                               (when *output-answers?*
                                 (display "\n  -  &#8203;" o)
                                 (expand-directives:string->port text o)

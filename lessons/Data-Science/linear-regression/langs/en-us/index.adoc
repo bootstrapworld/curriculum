@@ -32,22 +32,25 @@
 
 | Supplemental Materials
 |[.materials-links]
-@opt-material-links
+@opt-material-links 
 
 | Preparation
 |
 @preparation{
 - Make sure students can access the @online-exercise{https://www.geogebra.org/m/ZcVIxKtF, Interactive Regression Line}
-
-- There are Desmos formative assessments at the end of each lesson section.
-  * Open the assessment you plan to administer (@assessment{lr-check1-desmos}, @assessment{lr-check2-desmos}, etc) and make a code or link to share with students.
-  * If you are using our Google Slides, add the appropriate link to the slide deck.
-  * _If you're a first-time Desmos user, fear not!_ @dist-link{pages/desmos-instructions.adoc, _Here's what you need to do._}
+@ifproglang{pyret}{
+- Decide whether or not you want to launch this lesson using the *Live Pyret Survey* and your class' own data. If so, follow the instructions on @dist-link{pages/live-pyret-survey-instructions.adoc} to:
+  * _Make a copy_ of @opt-starter-file{lr-plot-survey-form}. Share it with your class. 
+    ** This makes a great "Do Now" as students enter the room, but could also be assigned for homework the night before.
+  * _Link the corresponding Google Sheet_ to the @opt-starter-file{lr-plot-survey-starter}.
+  * _Click "Run"_ and then either:
+    ** Project the new Data Visualization they'll be introduced to today. 
+    ** Publish the starter file and share a link with your students.
+}
 }
 
 | Assessments
 | [.assessment-links]
-@assessments
 
 |===
 
@@ -62,6 +65,26 @@ Students are introduced to the _concept_ of @vocab{linear regression}, and learn
 _For teachers who have the need and the bandwidth to go deeper, this is a good opportunity to teach the algorithm behind linear regression. This algorithm is not part of Bootstrap:Data Science._
 
 === Launch
+
+
+@ifproglang{pyret}{
+@opt-block{
+@teacher{
+If you decided to launch today's class using our *Live Pyret Survey*, you'll probably want your students to complete the google form as they enter class. We won't actually look at the results until later in the lesson, though, so feel free to make another choice about how and when to have your students enter their data. 
+
+@indented{
+Make sure you've already...
+
+1. Followed the @dist-link{pages/live-pyret-survey-instructions.adoc, Instructions to Set up and Link the Files} +
+2. Shared the *link you made to your class' copy* of the @opt-starter-file{lr-plot-survey-form}
+}
+
+@lesson-instruction{
+- Open the *Google Form Survey* link I shared and submit your response.
+}
+}
+}
+}
 
 @strategy{Vocabulary Note}{
 
@@ -80,6 +103,8 @@ The line itself is computed through a process called _linear regression_, which 
 }
 
 @clear
+
+@slidebreak
 
 @lesson-instruction{
 - Make two scatter plots from the `animals-table`, using `age` as the explanatory variable in one visualization, and `pounds` as the @vocab{explanatory variable} in the other.
@@ -154,7 +179,7 @@ What did you observe as you experimented?
 
 Want to check student mastery of the content you've just taught? Administer @assessment{lr-check1-desmos} to get a snapshot of your students' current level of mastery.  Make sure you have created a link or code for your class to the assessment.
 
-If you'd prefer to wait until your students have completed the __entire__ lesson to check mastery, we also offer a cumulative assessment at the end of @link{https://www.bootstrapworld.org/materials/latest/en-us/lessons/linear-regression/index.shtml?pathway=data-science#_interpreting_linear_regression_lines_duration20_minutes, "Interpreting Linear Regression Lines"}, the last section of the lesson.
+If you'd prefer to wait until your students have completed the __entire__ lesson to check mastery, we also offer a cumulative assessment at the end of @link{https://www.bootstrapworld.org/materials/latest/en-us/lessons/linear-regression/index.shtml?pathway=data-science#_interpreting_linear_regression_lines_duration20_minutes, "Interpreting Linear Regression Lines" }, the last section of the lesson.
 
 }
 
@@ -168,13 +193,45 @@ Students are introduced to the @ifproglang{pyret}{`lr-plot` function in Pyret}@i
 
 === Launch
 
-@ifproglang{pyret}{Pyret} includes a powerful display called @ifproglang{pyret}{`lr-plot`}@ifproglang{codap}{Least Squares Line}, which (1) draws a scatter plot, (2) draws the line of best fit, and (3) even graphs the equation for that line.
+@proglang includes a powerful display called @ifproglang{pyret}{`lr-plot`}@ifproglang{codap}{Least Squares Line}, which (1) draws a scatter plot, (2) draws the line of best fit, and (3) even graphs the equation for that line.
 
 @ifproglang{pyret}{
-Just like the `scatter-plot` function, `lr-plot` takes in a Table and the names of *3 Columns*, the first of which will be used to label the points.}
+@opt-block{
+@teacher{
+If you decided to launch today's class using our *Live Pyret Survey*, now is the time to display the results!
+
+When you click "Run", the @opt-starter-file{lr-plot-survey-starter} builds a scatter plot with a linear regression line fit to the data. 
+
+@indented{
+Assuming you've already...
+
+1. Followed the @dist-link{pages/live-pyret-survey-instructions.adoc, Instructions to Set up and Link the Files} +
+2. Shared the *link you made to your class' copy* of the @opt-starter-file{box-plot-survey-form}
+
+The data visualizations will be generated using data from your students! +
+And they will continue to update in real time as more of your students complete the Google Form.
+}
+
+Project your screen and/or publish the starter file and share a link with your students.
+
+Facilitate a discussion about this new-to-them Pyret Data Visualization!
+}
+
+@lesson-instruction{
+- Take a look at the results of our survey displayed in the new Data Visualization on the Board.
+- What do you Notice?
+- What do you Wonder?
+}
+}
+
+@slidebreak
+
+Just like the `scatter-plot` function, `lr-plot` takes in a Table and the names of *3 Columns*, the first of which will be used to label the points.
+}
 
 @ifproglang{codap}{
-To perform linear regression in CODAP, simply create a scatter plot and select Least Squares Line from the `Measure` menu.}
+To perform linear regression in CODAP, simply create a scatter plot and select Least Squares Line from the `Measure` menu.
+}
 
 @slidebreak
 
@@ -196,8 +253,6 @@ To perform linear regression in CODAP, simply create a scatter plot and select L
 (2) The @vocab{line of best fit} is now drawn onto the scatter plot.
 
 (3) @ifproglang{pyret}{Above the display,}@ifproglang{codap}{In the yellow box on the display,} we see the @vocab{predictor function} for that line.
-
-
 
 @slidebreak
 
@@ -234,7 +289,6 @@ To perform linear regression in CODAP, simply create a scatter plot and select L
 @slidebreak
 
 (4) @ifproglang{pyret}{We also see the @math{r}-value is `+0.448`.}@ifproglang{codap}{We also see that the @math{R^2} value is `0.201`. When we know @math{R^2}, we can find @math{r} by taking the square root of @math{R^2}. The @math{r}-value is `+0.448`.}
-
 
 - The sign is positive, because the scatter plot point cloud and line of best fit both slope upward.
 
@@ -288,8 +342,6 @@ Statistical models are just proxies for the real world, drawn from a limited sam
 
 @ifproglang{pyret}{
 @strategy{Simpson's Paradox}{
-
-
 A common misconception is that "more data is always better", and the age-v-height worksheet challenges that assumption. Two sub-groups (girls and boys) can each have a strong correlation between age and height, but when they are combined the correlation is weaker. This phenomenon is called @link{https://en.wikipedia.org/wiki/Simpson's_paradox, Simpson's Paradox}. Statistics (especially AP!) teachers will want to dive deeper on this topic.
 
 }}

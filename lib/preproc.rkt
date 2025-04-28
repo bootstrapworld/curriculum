@@ -1414,6 +1414,7 @@
           (display p o) (newline o)))
       #:exists 'replace)))
 
+
 (define (init-flags in-file)
   ;(printf "doing init-flags\n")
   (set! *autonumber-index* 1)
@@ -1585,16 +1586,13 @@
                            [(member directive '("ifnotslide" "preparation"))
                             (let ([text (read-group i directive #:multiline? #t)])
                               (expand-directives:string->port text o #:enclosing-directive directive))]
-                           [(string=? directive "page-of-lines")
-                            (let ([n (string->number (read-group i directive))])
-                              ; (printf "doing @page-of-lines ~s\n" n)
-                              (let loop ([i 0])
-                                (unless (>= i n)
-                                  (display-begin-span ".fitb.stretch" o)
-                                  (display-end-span o)
-                                  (newline o)
-                                  (newline o)
-                                  (loop (+ i 1)))))]
+                           [(string=? directive "blanklines")
+                            (let ([n (string->number (read-group i directive))]
+                                  [text (read-group i directive)])
+                              ; (printf "doing @blanklines ~s\n" n)
+                              (display-begin-span ".blanklines" o #:attribs (format "style=\"height: ~arem\"" n))
+                              (display (expand-directives:string->string text #:enclosing-directive directive) o)
+                              (display-end-span o))]
                            [(string=? directive "duration")
                             (let ([txt (read-group i directive)])
                               (display (string-append
@@ -1881,9 +1879,7 @@
                                              ".teacherNote" converted-text)]) o))]
                            [(string=? directive "indented")
                             (let ([text (read-group i directive #:multiline? #t)])
-                              (display "\n[.actually-openblock.indentedpara]\n=====\n" o)
-                              (expand-directives:string->port text o #:enclosing-directive directive)
-                              (display "\n=====\n" o))]
+                              (display-openblock ".indentedpara" text directive o))]
                            [(string=? directive "ifproglang")
                             (let* ([proglang (read-group i directive)]
                                    [text (read-group i directive #:multiline? #t)])
@@ -1980,9 +1976,17 @@
                             (let ([text (read-group i directive #:multiline? #t)]
                                   [old-optional-flag? *optional-flag?*])
                               (set! *optional-flag?* #t)
-                              (display "[.optionaltag]##{empty}##\n" o)
-                              (expand-directives:string->port text o #:enclosing-directive directive)
-                              (display "\n" o)
+                              (display
+                                (enclose-span ".optionaltag"
+                                  (expand-directives:string->string
+                                    text #:enclosing-directive directive)) o)
+                              ;(display "\n" o)
+                              (set! *optional-flag?* old-optional-flag?))]
+                           [(string=? directive "opt-block")
+                            (let ([text (read-group i directive #:multiline? #t)]
+                                  [old-optional-flag? *optional-flag?*])
+                              (set! *optional-flag?* #t)
+                              (display-openblock ".optpara" text  directive o)
                               (set! *optional-flag?* old-optional-flag?))]
                           [(or (string=? directive "starter-file")
                                 (string=? directive "opt-starter-file"))
@@ -2139,10 +2143,10 @@
                               (display "{endsb}__" o))]
                            [(string=? directive "QandA")
                             (let ([text (read-group i directive #:multiline? #t)])
-                              (fprintf o "\n[~a.actually-openblock.q-and-a]\n====\n"
-                                      (if *optional-flag?* ".Optional" ""))
-                              (expand-directives:string->port text o #:enclosing-directive directive)
-                              (display "\n====\n" o))]
+                              (display-openblock
+                                (format ".q-and-a~a"
+                                        (if *optional-flag?* ".Optional" ""))
+                                text directive o))]
                            [(string=? directive "Q")
                             (let ([text (read-group i directive #:multiline? #t)])
                               (display "\n* " o)
@@ -2162,19 +2166,19 @@
                               (display "\n--\n" o))]
                            [(string=? directive "lesson-point")
                             (let ([text (read-group i directive #:multiline? #t)])
-                              (display "\n[.lesson-point]\n--\n" o)
-                              (expand-directives:string->port text o #:enclosing-directive directive)
-                              (display "\n--\n" o))]
+                              (display-openblock ".lesson-point" text directive o))]
                            [(string=? directive "lesson-instruction")
                             (let ([text (read-group i directive #:multiline? #t)])
-                              (display "\n[.lesson-instruction]\n--\n" o)
-                              (expand-directives:string->port text o #:enclosing-directive directive)
-                              (display "\n--\n" o))]
+                              (display-openblock ".lesson-instruction" text directive o))]
                            [(string=? directive "lesson-roleplay")
                             (let ([text (read-group i directive #:multiline? #t)])
+                              ; caution: filtering-and-buidling/index.adoc
+                              ; (display-openblock ".lesson-roleplay" text directive o)
                               (display "\n[lesson-roleplay]\n--\n" o)
                               (expand-directives:string->port text o #:enclosing-directive directive)
-                              (display "\n--\n" o))]
+                              (display "\n--\n" o)
+                              )
+                            ]
                            [(assoc directive *definitions*)
                             => (lambda (c)
                                  (expand-directives:string->port (cdr c) o #:enclosing-directive directive))]
@@ -2363,12 +2367,15 @@
                 (fprintf o "include::~a/{cachedir}.index-sidebar.asc[]\n\n" *containing-directory*)
                 (call-with-output-file (build-path *containing-directory* ".cached" ".index-sidebar.asc")
                   (lambda (o)
-                    (display "\n[.actually-openblock.sidebar]\n=====\n" o)
-                    (display-prereqs-bar o)
-                    (display-standards-bar o)
-                    (display "%ENDSIDEBARCONTENT%" o)
-                    (display "\n=====\n" o)
-                    )
+                    (display
+                      (enclose-openblock
+                        ".sidebar"
+                        (lambda ()
+                          (call-with-output-string
+                            (lambda (o)
+                            (display-prereqs-bar o)
+                            (display-standards-bar o)
+                            (display "%ENDSIDEBARCONTENT%" o))))) o))
                   #:exists 'replace)
 
                 )
@@ -2575,6 +2582,15 @@
   ;(printf "done preproc-adoc-file ~s\n\n" in-file)
 
   )
+
+(define (display-openblock class text directive o)
+  (display
+    (enclose-openblock
+      class
+      (lambda ()
+        (expand-directives:string->string
+          text #:enclosing-directive directive)))
+    o))
 
 (define (display-lesson-slides o)
   (let ([id-file (build-path *containing-directory* (format "slides-~a.id" *proglang*))])
