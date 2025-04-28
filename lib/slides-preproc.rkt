@@ -744,7 +744,7 @@
                             (let ([text (string-trim (read-group i directive #:multiline? #t))])
                               (expand-directives:string->port text o))]
                            [(member directive '("left" "right" "center"))
-                            (let ([fragment (read-group i directive #:multiline? #t)])
+                            (let ([fragment (string-trim (read-group i directive #:multiline? #t))])
                               (display (spaces-till-newline-inclusive i) o)
                               (expand-directives:string->port fragment o))]
                            [(string=? directive "math")
