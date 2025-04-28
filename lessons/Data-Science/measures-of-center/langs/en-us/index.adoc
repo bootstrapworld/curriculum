@@ -33,15 +33,24 @@
 | Preparation
 |
 @preparation{
-- During the kinesthetic activity in this lesson, you will split your students into groups of 3. Each group will need a ruler, a marker, tape, and 5 pennies.
-- There is an optional activity in this lesson that would require you to print an extra data cycle for your students.
-- The first section of the lesson is an introduction to measures of center. If you are confident that your students have a solid understanding of mean, median, and mode, you can jump to the second section of the lesson, where students will use @proglang to compute measures of center, and then consider which measure of center is the most appropriate. Looking for a do now to get the juices flowing before skipping ahead? Try @printable-exercise{mean-median-modes.adoc}.
+
+- Decide whether or not the first section of this lesson (an introduction to measures of center) is appropriate for your class. 
+  * If you are teaching it, each group of three students will need a ruler, a marker, tape, and 5 pennies for the kinesthetic activity.
+  * If you are confident that your students have a solid understanding of mean, median, and mode(s), you can jump to the second section of the lesson, where students will use @proglang to compute measures of center, and then consider which measure of center is the most appropriate. 
+  * Looking for a do now to get the juices flowing before skipping ahead? Try @printable-exercise{mean-median-modes.adoc}.
+@ifproglang{pyret}{
+- Decide whether or not you want to launch the second section of this lesson using the *Live Pyret Survey* and your class' own data. If so, follow the instructions on @dist-link{pages/live-pyret-survey-instructions.adoc} to:
+  * _Make a copy_ of the @opt-starter-file{moc-survey-form} and share it with your class. 
+    ** This makes a great "Do Now" as students enter the room, but could also be assigned for homework the night before or be completed when you get to the relevant section of the lesson - it's just one question long.
+  * _Link the Google Sheet of their responses_ to the @opt-starter-file{moc-survey-starter}.
+  * _Click "Run"_ .
+}
 - If you are using our Google Slides, adjust the slides based on which portions of the lesson you will be doing with your students.
 }
 
 |===
 
-== Mean, Median, and Mode(s)
+== Optional: Mean, Median, and Mode(s)
 
 @objective{measures-of-center-proglang}
 
@@ -51,12 +60,13 @@ Students learn how to compute three different measures of center.
 
 === Launch
 
-@teacher{If your students are confident with computing mean, median, and mode, you may want to skip to the next section of the lesson, where students will (1) use @proglang to compute various measures of center and (2) begin considering the usefulness of each measure of center.}
-
+@teacher{Engage your students with this section at whatever speed and level of depth you deem appropriate for them.}
 
 When working with dot plots, we often wondered, "What is a typical value in this sample?"
 
 \... and we often discovered that there were a variety of correct responses!
+
+@slidebreak
 
 When thinking about typicality, there are a few approaches:
 
@@ -66,21 +76,25 @@ When thinking about typicality, there are a few approaches:
 
 It turns out that these different ways of thinking about typicality are all different ways of "measuring the center".
 
+@slidebreak
+
 Another way of asking _"What value is typical?"_ would be _"Is there a value that all the others tend to cluster around?"_
 
 Statisticians have a more formal, mathematically-defined term for this: @vocab{central tendency}. Central tendency is a "summary" measure, that attempts to describe a whole set of data with a single value that represents the middle or "center" of its distribution. In other words, _a value that all the others tend to cluster around_.
 
 There are several different measures of central tendency. Data Scientists know what each measure is, and when to use it. And in the next few lessons, you'll learn that too.
 
-@teacher{If students struggle to arrive at correct responses for the prompts below, proceed with this lesson as written, at whatever speed and level of depth you deem appropriate for your students. If your students are successful at computing mean, median, and mode, you can skip to the second section of the lesson. You may also consider using @printable-exercise{mean-median-modes.adoc} as a warm up/review. If you know that your students do not know how to compute mean, median, and mode, you can skip the first question, below.}
+@teacher{If you know that your students do not know how to compute mean, median, and mode(s), you can skip the first question, below.}
 
+@slidebreak
 
 @QandA{
 @Q{Compute the mean, median, and mode for these datasets:
-** Dataset 1: 17, 23, 24, 23, 22
-** Dataset 2: 5, 5, 9, 9, 3, 29
-** Dataset 3: 8, 34, 15, 4, 76}
 
+- Dataset 1: 17, 23, 24, 23, 22
+- Dataset 2: 5, 5, 9, 9, 3, 29
+- Dataset 3: 8, 34, 15, 4, 76
+}
 @A{Solutions. *Dataset 1* - mean: 22; median: 23; mode: 23. *Dataset 2* - mean: 10; median: 7; modes: 5, 9. *Dataset 3* - mean: 27.4; median: 15; mode: none}
 
 @Q{Tell me everything you know about measures of center.}
@@ -98,12 +112,15 @@ We can think of the @vocab{mean} as the balancing point of a dataset, or the val
 Divide the class into groups of three. Supply each group with a marker, a ruler, tape, and 5 pennies.
 }
 
+@slidebreak
+
 @lesson-instruction{
 - We are going to build a seesaw (also known as a teeter-totter) with a marker and a ruler.
 - Tape the marker flat onto your desk using two pieces of tape.
 - Set the ruler on top of the marker; try to balance it so that it hovers parallel to the surface of the desk.
 }
 
+@slidebreak
 
 @QandA{
 @Q{To balance the ruler over the marker, where must the marker be positioned? Why?}
@@ -129,6 +146,7 @@ Very commonly, students develop a computational understanding of mean, but not a
 Interpreting the mean as the "fair share" can also help students think conceptually about mean. In other words: _What amount will each member of a group get if everything is distributed equally?_ Sometimes, a thought experiment is most appropriate for conveying the "fair share" interpretation, e.g. if there are five dogs of differing weights, how would we redistribute the weight so that each of the five dogs is an equal weight? If you have students who struggle to think about mean as a balancing point, you might consider sharing this alternative interpretation.
 }
 
+@slidebreak
 
 To compute the mean of any dataset, we add up all of the values, and then divide by the number of values in the dataset. This algorithm reveals to us our balance point--and we don't even need the pennies, the ruler, or the trial and error!
 
@@ -137,12 +155,15 @@ To compute the mean of any dataset, we add up all of the values, and then divide
 - When you are finished, compare your answers with a partner's answers and correct any mistakes.
 }
 
+@slidebreak
 
 ==== Median
 
 *There is another measure of center we can use* called the @vocab{median}. Instead of averaging the data points, it identifies the “middle” value, dividing the data into two groups. Half of the values are less than the median, and the other half are greater than median. In the image below, 40 Wall Street represents the median height of the dataset; three buildings are shorter, and three buildings are taller.
 
 @right{@image{images/buildings-by-height.png, 250}}
+
+@slidebreak
 
 The algorithm for finding the median of a quantitative column is:
 
@@ -219,7 +240,7 @@ red, green, red, yellow, blue, red, purple, purple
 @slidebreak
 
 @lesson-instruction{
-- Complete the Modes section of @printable-exercise{mean-median-modes.adoc}.
+- Complete the Mode(s) section of @printable-exercise{mean-median-modes.adoc}.
 - Compare your answers with a partner's. Correct any mistakes.
 }
 
@@ -265,6 +286,39 @@ Here are just a few examples of summary data being used for important things:
 Picking the wrong summary value (mean, median, or mode) can have serious implications!
 
 Let's learn how to use @proglang to quickly, easily compute the three different measures of center so the we can spend our energy thoughtfully deciding *which* measure of center is the most appropriate in a given situation, rather than number crunching.
+
+@slidebreak
+
+@ifproglang{pyret}{
+@opt-block{
+@teacher{
+If you decided to launch today's class using our *Live Pyret Survey*, now is the time!
+
+When you click "Run", the @opt-starter-file{moc-survey-starter} displays the `mean`, `median` and `mode(s)`. 
+
+@indented{
+Assuming you've already...
+
+1. Followed the @dist-link{pages/live-pyret-survey-instructions.adoc, Instructions to Set up and Link the Files} +
+2. Shared the *link you made to your class' copy* of the @opt-starter-file{moc-survey-form}
+
+The data visualizations will be generated using data from your students! +
+And they will continue to update in real time as more of your students complete the Google Form.
+}
+
+Project your screen and/or publish the starter file and share a link with your students.
+
+Facilitate a discussion about this new-to-them Pyret Data Visualization!
+}
+
+@lesson-instruction{
+- If you haven't already done so, open the *Google Form Survey* link I shared and submit your response.
+- Then look at the Survey Results being displayed on the Board.
+- What do you Notice?
+- What do you Wonder?
+}
+}
+}
 
 === Investigate
 

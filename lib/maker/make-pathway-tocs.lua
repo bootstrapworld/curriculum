@@ -1,12 +1,10 @@
 #! /usr/bin/env lua
 
--- last modified 2025-04-25
+-- last modified 2023-03-05
 
 -- print('doing make-pathway-tocs.lua')
 
 dofile(os.getenv('MAKE_DIR') .. 'utils.lua')
-dofile(os.getenv('MAKE_DIR') .. 'readers.lua')
-dofile(os.getenv('MAKE_DIR') .. 'sread.lua')
 
 local dist_dir = os.getenv('TOPDIR') .. '/distribution/' .. os.getenv('NATLANG') .. '/'
 
@@ -21,18 +19,15 @@ o:write('var pathwayTocs = {\n')
 
 for _,course in ipairs(all_courses) do
   local course_dir = distr_courses .. course .. '/'
-  local this_course_lessons_file = course_dir .. '.cached/.workbook-lessons.rkt.kp'
+  local this_course_lessons_file = course_dir .. '.cached/.workbook-lessons.txt.kp'
   if not file_exists_p(this_course_lessons_file) then goto continue end
-  local lesson_categories = sread_file(this_course_lessons_file)
+  local i = io.open(this_course_lessons_file)
   o:write('  \"' .. course .. '\": [\n')
-  for _,categ in ipairs(lesson_categories) do
-    for _,lsn in ipairs(categ) do
-      o:write('     \"' .. lsn .. '\",\n')
-    end
+  for lsn in i:lines() do
+    o:write('     \"' .. lsn .. '\",\n')
   end
   o:write('  ],\n')
   ::continue::
 end
 
 o:write('}\n')
-o:close()
