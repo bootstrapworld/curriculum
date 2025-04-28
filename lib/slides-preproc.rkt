@@ -733,9 +733,8 @@
                                 (expand-directives:string->port text o)))]
                            [(string=? directive "big")
                             (let ([text (string-trim (read-group i directive #:multiline? #t))])
-                              (display "<span style=\"font-size: 22pt\">" o)
                               (expand-directives:string->port text o)
-                              (display "</span>" o))]
+                              (display "{style=\"font-size: 22pt\"}" o))]
                            [(string=? directive "lesson-point")
                             (let ([text (string-trim (read-group i directive #:multiline? #t))])
                               (display ":pushpin: " o)

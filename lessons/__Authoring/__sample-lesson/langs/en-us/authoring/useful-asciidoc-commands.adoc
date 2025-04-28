@@ -75,6 +75,65 @@ _If you flag a word as a vocabulary word, be sure to add it to the glossary in b
 Vertical space is measured in "ex" (a unit equivalent to the height of the letter x.)
 @vspace{1ex}
 
+=== Bullet points
+
+- First level bullets can be written using hyphens.
+- It's important to leave a space after the dash and a blank line before the first line of the list
+  * Second level bullets can be written using an asterisk with 2 spaces before it
+     *** third level bullets
+     *** more third level bullets
+  * the list continues
+- however we need it to.
+
+For Questions and Answer sections (where A are hidden on slides)
+
+@QandA{
+@Q{What strategies did you use to match the dot plots to the box plots}
+@A{blah}
+
+@Q{overarching question
+
+ - subbullet of Q
+}
+@A{Answers will vary. Sample responses may include:
+ - I looked for the maximum and minimum values.
+ - I looked at the shape of the data, starting with whether or not it was symmetrical.
+ - I looked for tall clusters of points on the dot plot and matching narrow quarters on the box plot.
+}
+}
+
+
+@n we have a special autonumbering command that will
+
+@n keep numbering top to bottom
+
+@n even if you go in and out of a table or other formatting
+
+@n but it's new
+
+1. so you will see
+2. some pages that are
+3. numbered like this instead
+4. if you have energy, switch them to our new numbering command
+
+@star is used for challenge problems
+
+Checkboxes can be written as follows:
+@ifnotsoln{
+- [ ] There are potential outliers at @fitb{}{}
+}
+@ifsoln{
+- [x] There are potential outliers at @fitb{}{45 and 500}   
+}
+- [ ] There do not appear to be any potential outliers.
+
+Code for including an arrow
+[.embedded, cols="^.^3,^.^1,^.^3", grid="none", stripes="none" frame="none"]
+|===
+| @show{(coe '(+ 1 (* 2 3)))}
+| __?__ &rarr;
+| @show{(coe '(+ 2 (* 1 3)))}
+|===
 === Fill in the Blank lines for students to write on
 
 Width is measured in "em" (a unit equivalent to the width of the letter "m")
@@ -109,59 +168,7 @@ Lesson slides and other external links can also be linked using @link{}
 If you're using @link{} you need to use the file ending .html instead of .adoc
 }
 
-=== Bullet points
 
-- First level bullets can be written using hyphens.
-- It's important to leave a space after the dash and a blank line before the first line of the list
-  * Second level bullets can be written using an asterisk with 2 spaces before it
-  	 *** third level bullets
-     *** more third level bullets
-  * the list continues
-- however we need it to.
-
-For Questions and Answer sections (where A are hidden on slides)
-
-@QandA{
-@Q{What strategies did you use to match the dot plots to the box plots}
-@A{Answers will vary. Sample responses may include:
- - I looked for the maximum and minimum values.
- - I looked at the shape of the data, starting with whether or not it was symmetrical.
- - I looked for tall clusters of points on the dot plot and matching narrow quarters on the box plot.
-}
-}
-
-
-@n we have a special autonumbering command that will
-
-@n keep numbering top to bottom
-
-@n even if you go in and out of a table or other formatting
-
-@n but it's new
-
-1. so you will see
-2. some pages that are
-3. numbered like this instead
-4. if you have energy, switch them to our new numbering command
-
-@star is used for challenge problems
-
-Checkboxes can be written as follows:
-@ifnotsoln{
-- [ ] There are potential outliers at @fitb{}{}
-}
-@ifsoln{
-- [x] There are potential outliers at @fitb{}{45 and 500} 	
-}
-- [ ] There do not appear to be any potential outliers.
-
-Code for including an arrow
-[.embedded, cols="^.^3,^.^1,^.^3", grid="none", stripes="none" frame="none"]
-|===
-| @show{(coe '(+ 1 (* 2 3)))}
-| __?__ &rarr;
-| @show{(coe '(+ 2 (* 1 3)))}
-|===
 
 === Tables
 
