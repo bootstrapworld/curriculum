@@ -66,14 +66,14 @@ Here's the Contract:
 
 @slidebreak
 
-@ifslide{@show{(contract 'scatter-plot '((table-name Table) (labels String) (xs String) (ys String)) "Image")}}
-
 Let's see if there's a correlation between an animal's `age` and the `weeks` it takes to be adopted.
 
 @lesson-instruction{
 - Open the @starter-file{fitting-animals}.
 - Make a scatter plot, using the animals' `name` as the labels, their weight in `pounds` as the @vocab{explanatory variable} on the x-axis, and the `weeks` it took to be adopted as the @vocab{response variable} on the y-axis.
 }
+
+@ifslide{@show{(contract 'scatter-plot '((table-name Table) (labels String) (xs String) (ys String)) "Image")}}
 
 @slidebreak
 
@@ -99,6 +99,7 @@ Let's see if there's a correlation between an animal's `age` and the `weeks` it 
 Project the scatter plot at the front of the room, and have students come up to point out their patterns.
 }
 
+@slidebreak
 
 @lesson-instruction{
 - Turn to the first section of @printable-exercise{how-could-we-measure-good-fit-lizard.adoc} and use a straightedge to draw a line that summarizes the trend you see in the data.
@@ -242,7 +243,7 @@ The difference between any real @math{y} and predicted @math{y} is called the @v
 @slidebreak
 
 @QandA{
-@Q{How do @math{S} and @math{\text{R^2}} compare for the two models?}
+@Q{How do @math{S} and @math{R^2} compare for the two models?}
 @A{The values are positive for both models and both @math{S} and @math{R^2} values are smaller for `jo` than they are for `cy`.}
 
 @Q{Based on the @vocab{S} values of the plots you created on this page, what do you think @vocab{S} means?}
@@ -250,7 +251,7 @@ The difference between any real @math{y} and predicted @math{y} is called the @v
 }
 
 @slidebreak
-@ifslide{@right{@image{images/residual.png, 200}}}
+
 Just as there are different tools for finding the center or spread of a dataset, there are many different tools to calculate the fitness of a model, including @math{S} and @math{R^2}, which you just saw when fitting the models in @proglang.
 
 Statisticians and Data Scientists are careful to use the right tool for the job!
@@ -267,7 +268,10 @@ Statisticians and Data Scientists are careful to use the right tool for the job!
 - The closer the data points are to the model, the smaller the residuals are.
 - If a model fits the data perfectly, the @vocab{S} value would be 0.
 - @vocab{S} is expressed in terms of _units of the response variable_ (the y-axis), which makes it easy to understand.
-  * e.g. When fitting a model to this dataset, an @vocab{S} of `5` would mean _the standard deviation of the residuals is "5 weeks to adoption."_ 
+  * e.g. When fitting a model to this dataset, an @vocab{S} of `5` would mean _the standard deviation of the residuals is "5 weeks to adoption."_
+
+@slidebreak
+
 - When comparing two models for the same dataset, the model with the smaller @vocab{S} is the better model!
 - It doesn't make sense to compare @vocab{S} for models that describe different datasets.
 
@@ -282,6 +286,8 @@ The @math{S}-value always has to be considered in the context of the range of va
 - Consider the @math{S}-value of each model in the context of the range of the data described.
 - Decide how well the model is likely to predict values.
 }
+
+@slidebreak
 
 @QandA{
 @Q{Did you strongly agree that any of the models described were a good fit? Why?}
@@ -305,6 +311,8 @@ Now that we have a basic sense of what `fit-model` does, let's see it work live 
   ** Following this you will see two `fit-model` expressions: one takes in the function for `cy` and the other takes in the function for `jo`.
 - Uncomment the last two lines of code and click "Run".
 }
+
+@slidebreak
 
 @QandA{
 @Q{How do we know that the first Interactive Chart that pops up is fitting Cy's model to the data?}
@@ -349,6 +357,8 @@ Let's put everything we've learned together and interpret the models we've built
 - Confirm that your students are able to complete cy's model correctly.
 - If your students did not complete @opt-printable-exercise{lines-to-functions.adoc}, direct them to ignore the last section of the page they are about to complete.
 }
+
+@slidebreak
 
 @lesson-instruction{
 - Complete @printable-exercise{interpret-models.adoc}. +
