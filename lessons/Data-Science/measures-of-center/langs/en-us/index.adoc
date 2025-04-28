@@ -66,6 +66,8 @@ When working with dot plots, we often wondered, "What is a typical value in this
 
 \... and we often discovered that there were a variety of correct responses!
 
+@slidebreak
+
 When thinking about typicality, there are a few approaches:
 
 - identify the value that is most common
@@ -74,21 +76,27 @@ When thinking about typicality, there are a few approaches:
 
 It turns out that these different ways of thinking about typicality are all different ways of "measuring the center".
 
+@slidebreak
+
 Another way of asking _"What value is typical?"_ would be _"Is there a value that all the others tend to cluster around?"_
 
 Statisticians have a more formal, mathematically-defined term for this: @vocab{central tendency}. Central tendency is a "summary" measure, that attempts to describe a whole set of data with a single value that represents the middle or "center" of its distribution. In other words, _a value that all the others tend to cluster around_.
 
 There are several different measures of central tendency. Data Scientists know what each measure is, and when to use it. And in the next few lessons, you'll learn that too.
 
-@teacher{If you know that your students do not know how to compute mean, median, and mode, you can skip the first question, below.}
+@teacher{If you know that your students do not know how to compute mean, median, and mode(s), you can skip the first question, below.}
+
+@slidebreak
 
 @QandA{
-@Q{Compute the mean, median, and mode for these datasets:
-** Dataset 1: 17, 23, 24, 23, 22
-** Dataset 2: 5, 5, 9, 9, 3, 29
-** Dataset 3: 8, 34, 15, 4, 76}
-
-@A{Solutions. *Dataset 1* - mean: 22; median: 23; mode: 23. *Dataset 2* - mean: 10; median: 7; modes: 5, 9. *Dataset 3* - mean: 27.4; median: 15; mode: none}
+@Q{Compute the mean, median, and mode(s) for these datasets: +
+{nbsp} Dataset A: {nbsp} 17, 23, 24, 23, 22 +
+{nbsp} Dataset B: {nbsp} 5, 5, 9, 9, 3, 29 +
+{nbsp} Dataset C: {nbsp} 8, 34, 15, 4, 76
+}
+@A{A - mean: 22; median: 23; mode: 23.} 
+@A{B - mean: 10; median: 7; modes: 5, 9.}
+@A{C - mean: 27.4; median: 15; mode: none}
 
 @Q{Tell me everything you know about measures of center.}
 @A{The goal of this question is to gauge students' general level of comfort with mean, median, and mode. Take notes on the board, which you can add to as students make additional discoveries about measures of center during the instruction.}
@@ -105,12 +113,15 @@ We can think of the @vocab{mean} as the balancing point of a dataset, or the val
 Divide the class into groups of three. Supply each group with a marker, a ruler, tape, and 5 pennies.
 }
 
+@slidebreak
+
 @lesson-instruction{
 - We are going to build a seesaw (also known as a teeter-totter) with a marker and a ruler.
 - Tape the marker flat onto your desk using two pieces of tape.
 - Set the ruler on top of the marker; try to balance it so that it hovers parallel to the surface of the desk.
 }
 
+@slidebreak
 
 @QandA{
 @Q{To balance the ruler over the marker, where must the marker be positioned? Why?}
@@ -136,6 +147,7 @@ Very commonly, students develop a computational understanding of mean, but not a
 Interpreting the mean as the "fair share" can also help students think conceptually about mean. In other words: _What amount will each member of a group get if everything is distributed equally?_ Sometimes, a thought experiment is most appropriate for conveying the "fair share" interpretation, e.g. if there are five dogs of differing weights, how would we redistribute the weight so that each of the five dogs is an equal weight? If you have students who struggle to think about mean as a balancing point, you might consider sharing this alternative interpretation.
 }
 
+@slidebreak
 
 To compute the mean of any dataset, we add up all of the values, and then divide by the number of values in the dataset. This algorithm reveals to us our balance point--and we don't even need the pennies, the ruler, or the trial and error!
 
@@ -144,12 +156,15 @@ To compute the mean of any dataset, we add up all of the values, and then divide
 - When you are finished, compare your answers with a partner's answers and correct any mistakes.
 }
 
+@slidebreak
 
 ==== Median
 
 *There is another measure of center we can use* called the @vocab{median}. Instead of averaging the data points, it identifies the “middle” value, dividing the data into two groups. Half of the values are less than the median, and the other half are greater than median. In the image below, 40 Wall Street represents the median height of the dataset; three buildings are shorter, and three buildings are taller.
 
 @right{@image{images/buildings-by-height.png, 250}}
+
+@slidebreak
 
 The algorithm for finding the median of a quantitative column is:
 
@@ -272,6 +287,8 @@ Here are just a few examples of summary data being used for important things:
 Picking the wrong summary value (mean, median, or mode) can have serious implications!
 
 Let's learn how to use @proglang to quickly, easily compute the three different measures of center so the we can spend our energy thoughtfully deciding *which* measure of center is the most appropriate in a given situation, rather than number crunching.
+
+@slidebreak
 
 @ifproglang{pyret}{
 @opt-block{
