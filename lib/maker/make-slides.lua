@@ -311,6 +311,8 @@ local function get_slides(lsn_plan_adoc_file)
         else
           if directive == 'center' then
             curr_slide.containscenter = true
+          elseif directive == 'opt-block' then
+            curr_slide.header = 'Optional: ' .. curr_slide.header
           end
           curr_slide.text = curr_slide.text .. c .. directive
         end
