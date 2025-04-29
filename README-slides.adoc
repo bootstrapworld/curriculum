@@ -148,7 +148,9 @@ e.g., algebra-pyret, use
   it processes. So failing to mention this option is not so
   terrible.)
 
-== Slide-specific directives
+== Slide syntax
+
+=== Slide-specific directives
 
 The lesson-plan adoc files are typically split into slides at the 2-level
 sections, with the lower-level sections being ignored. An author
@@ -177,3 +179,50 @@ as these don't introduce a tacit slidebreak. (The less verbose
 directives `@pd-slide` and `@strategy` are built on top of
 `@ifpdslide` and `@strategy-basic`.)
 
+=== Unordered (aka bulleted) lists
+
+Because of the difference between how AsciiDoc and Markdown
+specify unordered lists, some care is needed when specifying them
+in the lesson plan so they translate correctly to the slide.
+
+==== AsciiDoc's unordered lists
+
+AsciiDoc uses _two_ ways to specify the items in an unordered list.
+Indentation does not matter:
+
+- A sequence of ``++*++``'s followed by space(s) introduces an item. The
+  number of ``++*++``'s indicates the depth of the item.
+
+- A single `++*++`, `-`, or `•`, followed by space(s), introduces an
+  item. An unordered list that uses a mix of these ornaments
+  assigns a different depth (only 1, 2, or 3 are possible) to each of these, in
+  text order. I.e., the first ornament used is at depth 1, the
+  second (if any) at depth 2, and the third (if any) at depth 3.
+
+==== Markdown's unordered lists
+
+Markdown uses `-` followed by space(s) to introduce an item.
+_Indentation matters!_ The number of spaces _before_ the `-`
+identifies the depth: the more spaces, the more depth. The actual
+number of spaces doesn't matter, only the relative order of their
+number within the list.
+
+==== How to write unordered lists in a lesson plan to satisfy slides
+
+For depth-1 lists, write unordered lists in AsciiDoc however
+you're comfortable: Use `++*++`, `-`, or `•` as you please. The
+converter will convert to the correct Markdown. For nested lists,
+however, for depths of 2 and above, use the multiple-`++*++` approach.
+I.e., do not rely on using different symbols to signal different
+depth.
+
+===== `@QandA` with author lists inside them
+
+The `@QandA`, `@Q`, `@A` lesson-plan directives sometimes imply an implicit
+unordered list. If you're introducing your own unordered list inside one of
+these directives' arguments, note that the implicit depth may be higher than
+might appear at first glance. So make sure to use the appropriate depth-2 (and
+higher) ornaments. If the text is meant only for slides, you may use indented
+`-`s, using sufficient spaces so you can avoid thinking about the actual depth.
+If the text is for both lesson-plan and slides, it's best to stick to multiple
+`++*++`s. Using multiple `++*++`s for depth greater than 1 _always works_.
