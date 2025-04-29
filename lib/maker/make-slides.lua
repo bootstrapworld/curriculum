@@ -107,6 +107,7 @@ local function newslide()
     section = false,
     suffix = '',
     containscenter = false,
+    containsoptblock = false,
     imageorientation = 'R',
     preparation = false,
   }
@@ -312,7 +313,7 @@ local function get_slides(lsn_plan_adoc_file)
           if directive == 'center' then
             curr_slide.containscenter = true
           elseif directive == 'opt-block' then
-            curr_slide.header = 'Optional: ' .. curr_slide.header
+            curr_slide.containsoptblock = true
           end
           curr_slide.text = curr_slide.text .. c .. directive
         end
@@ -451,6 +452,9 @@ local function make_slides_file(lplan_file, slides_file)
       if slide.section == 'Repeat' then slide.section = curr_section end
       if slide.section then curr_section = slide.section end
       curr_header = slide.header
+      if slide.containsoptblock then
+        curr_header = 'Optional: ' .. curr_header
+      end
       if (slide.level == 2 and slide.section) then
         if slide.numimages == 2 then slide.imageorientation = '' end
         if curr_section == 'Investigate' then
