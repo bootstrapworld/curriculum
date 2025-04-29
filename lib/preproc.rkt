@@ -2149,12 +2149,14 @@
                                 text directive o))]
                            [(string=? directive "Q")
                             (let ([text (read-group i directive #:multiline? #t)])
-                              (display "\n* " o)
-                              (expand-directives:string->port text o #:enclosing-directive directive))]
+                              (display "\n* %BEGINQBLOCKITEM%" o)
+                              (expand-directives:string->port text o #:enclosing-directive directive)
+                              (display "%ENDQBLOCKITEM%" o))]
                            [(string=? directive "A")
                             (let ([text (read-group i directive #:multiline? #t)])
-                              (display "\n** " o)
-                              (expand-directives:string->port text o #:enclosing-directive directive))]
+                              (display "\n** %BEGINABLOCKITEM%" o)
+                              (expand-directives:string->port text o #:enclosing-directive directive)
+                              (display "%ENDABLOCKITEM%" o))]
                            [(member directive '("strategy" "strategy-basic"))
                             (let* ([title (read-group i directive)]
                                    [text (read-group i directive #:multiline? #t)])
