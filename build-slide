@@ -129,6 +129,7 @@ for NATLANG in *; do
     rm -f $idfile
   fi
   if test -f $slidesmd; then
+    $SED -i 's/{nbsp}/ /g' $slidesmd
     $TOPDIR/lib/slides-preproc.rkt $slidesmd $slidesmkd
     if test -f $slidesmkd; then
       title=$(grep '^# ' $slidesmkd|$SED -e 1q|$SED -e 's/^#  *//')

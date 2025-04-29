@@ -632,6 +632,11 @@ lines on some browsers */
     clear:              both;
     p { margin: 0ex 1ex; }
   }
+
+  /* Let two adjacent lesson-points blend into each other */
+  .lesson-point:has(+.lesson-point) { border-bottom: none; }
+  .lesson-point + .lesson-point     { border-top:    none; }
+
   .teacherNote { 
     display:            inline-block;
     padding:            0 5px;

@@ -112,6 +112,8 @@ Let's start out by looking at _just one state_. We'll use Massachusetts for this
 *This is code you've never seen before!*
 
 - The first part of this code defines a _new function_ called `is-MA`, which tests a single Row to see if `state == "MA"`.
+
+@ifnotslide{
 @indented{
 ```
 # is-MA :: Row -> Boolean
@@ -119,12 +121,38 @@ Let's start out by looking at _just one state_. We'll use Massachusetts for this
 fun is-MA(r): r["state"] == "MA" end
 ```
 }
+}
+
+@ifslide{
+[cols="1a", frame="none", width=50%]
+|===
+|
+```
+# is-MA :: Row -> Boolean
+# consumes a Row, and checks if state == "MA" is equal to "MA":
+fun is-MA(r): r["state"] == "MA" end
+```
+|===
+}
 
 - The second part uses Pyret's `filter` function. This function consumes a table (in out example, `covid-table`) and a _function_ (`is-MA`), and produces a new table containing only _rows for which that function returns `true`._ This new table - containing only rows in Massachusetts - is given the name `MA-table`. 
+
+@ifnotslide{
 @indented{
 ```
 MA-table = filter(covid-table, is-MA)
 ```
+}	
+}
+
+@ifslide{
+[cols="1a", frame="none", width=50%]
+|===
+|
+```
+MA-table = filter(covid-table, is-MA)
+```
+|===
 }
 
 @slidebreak

@@ -113,9 +113,7 @@ Project the scatter plot at the front of the room, and have students come up to 
 
 By drawing a line through our cloud of points, we are defining a @vocab{Model}: a summary of the relationship between two variables in a dataset. This model allows us to *make predictions* about how long a new animal will stay at the shelter.
 
-@big{@center{
-@math{\text{Data} = \text{Model} + \text{Error}}
-}}
+@big{@center{@math{\text{Data} = \text{Model} + \text{Error}}}}
 
 No line will touch every dot, so _every model will have some error_, compared to the original data! But if the line is close enough to enough of the dots, the model can still help us reason about adoption time.
 
@@ -175,28 +173,34 @@ Pyret has a function called `fit-model`, that takes in a function and graphs it 
 }
 
 @slidebreak
+++++
+<style>
+.fit-model-code .editbox { width: 100%; }
+.fit-model-code pre, .fit-model-code td { padding: 0 !important; }
+</style>
+++++
+
+[.fit-model-code, cols="10a,1,10a", frame="none", grid="none"]
+|===
+|
+```
+# fit the cy model
+fit-model(
+  lizard-sample, "name", "pounds", "weeks", cy
+)
+```
+|
+|
+```
+# fit the jo model
+fit-model(
+  lizard-sample, "name", "pounds", "weeks", jo
+)
+```
+|===
 
 [cols="1a,1a", frame="none", grid="none"]
 |===
-|[subs="quotes"]
-```
-fit-model(
-  lizard-sample,
-  "name",
-  "pounds",
-  "weeks",
-  *cy*) # fit the cy model
-```
-|[subs="quotes"]
-```
-fit-model(
-  lizard-sample,
-  "name",
-  "pounds",
-  "weeks",
-  *jo*) # fit the jo model
-```
-
 | @centered-image{images/fit-cy-crop.png}
 | @centered-image{images/fit-jo-crop.png}
 |===

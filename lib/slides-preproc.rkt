@@ -157,10 +157,7 @@
 
 (define (make-mathjax-math text)
   (string-append
-    "\n$$\n"
-    text
-    "\n"
-    "$$\n"))
+    "\n$" text "$\n"))
 
 (define (read-math-rev-word s)
   (let loop ([s (rest s)] [r (list (first s))])
@@ -225,7 +222,7 @@
         (string-append "``" x "``"))))
 
 (define (iii-dollar-html x)
-  (string-append "\n\n@@@ html\n"
+  (string-append "\n\nhtml\n"
     "<link rel=\"stylesheet\" href=\"https://bootstrapworld.org/materials/latest/en-us/lib/curriculum.css\"/>\n"
     "<link rel=\"stylesheet\" href=\"https://bootstrapworld.org/materials/latest/en-us/lib/codemirror.css\"/>\n"
     "<link rel=\"stylesheet\" href=\"https://bootstrapworld.org/materials/latest/en-us/lib/style.css\"/>\n"
@@ -733,8 +730,9 @@
                                 (expand-directives:string->port text o)))]
                            [(string=? directive "big")
                             (let ([text (string-trim (read-group i directive #:multiline? #t))])
+                              (display "<span style=\"font-size: 22pt\">" o)
                               (expand-directives:string->port text o)
-                              (display "{style=\"font-size: 22pt\"}" o))]
+                              (display "</span>" o))]
                            [(string=? directive "lesson-point")
                             (let ([text (string-trim (read-group i directive #:multiline? #t))])
                               (display ":pushpin: " o)
@@ -743,7 +741,7 @@
                             (let ([text (string-trim (read-group i directive #:multiline? #t))])
                               (expand-directives:string->port text o))]
                            [(member directive '("left" "right" "center"))
-                            (let ([fragment (read-group i directive #:multiline? #t)])
+                            (let ([fragment (string-trim (read-group i directive #:multiline? #t))])
                               (display (spaces-till-newline-inclusive i) o)
                               (expand-directives:string->port fragment o))]
                            [(string=? directive "math")
