@@ -709,11 +709,7 @@
                               (unless *pd?* (exit-teacher-notes)))]
                            [(string=? directive "opt-block")
                             (let ([text (read-group i directive #:multiline? #t)])
-                              (ensure-teacher-notes)
-                              (fprintf *teacher-notes* "\nThis material is optional.\n")
-                              (expand-directives:string->port text o)
-                              (newline *teacher-notes*)
-                              (exit-teacher-notes))]
+                              (expand-directives:string->port text o))]
                            [(member directive '("opt" "teacher"))
                             (let ([text (read-group i directive #:multiline? #t)])
                               (when (member directive '("opt" "opt-block"))
