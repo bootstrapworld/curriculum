@@ -795,7 +795,7 @@
                            [(string=? directive "A")
                             (let ([text (read-group i directive #:multiline? #t)])
                               (when *output-answers?*
-                                (display "\n  -  &#8203;" o)
+                                (display "\n* &#8203;" o)
                                 (expand-directives:string->port text o)
                                 (display "\n" o)))]
                            [(string=? directive "ifslide")
