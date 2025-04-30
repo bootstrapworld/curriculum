@@ -146,12 +146,12 @@ local function postproc(fhtml_cached, tipe)
     --
     if x:find('<p>%%BEGINQBLOCKITEM%%') then
       x = x:gsub('<p>%%BEGINQBLOCKITEM%%', '<p class="qblock">')
-      item_attrib = 'qblock'
+      --item_attrib = 'qblock'
     end
     --
     if x:find('<p>%%BEGINABLOCKITEM%%') then
       x = x:gsub('<p>%%BEGINABLOCKITEM%%', '<p class="ablock">')
-      item_attrib = 'ablock'
+      --item_attrib = 'ablock'
     end
     --
     if item_attrib and (x:find('<li>') or x:find('<p>')) then

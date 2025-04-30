@@ -583,9 +583,22 @@ lines on some browsers */
   }
   .q-and-a { 
     min-height: 85px; 
-    .q-and-a-q *:not(.ulist), .q-and-a-a  *:not(.ulist, .ulist *) { display: inline; }
-    .q-and-a-q::before { content: 'Q: '; font-style: italic; font-weight: bold; }
-    .q-and-a-a::before { content: 'A: '; font-style: italic; font-weight: bold; }
+    li:has(p.qblock), li:has(p.ablock) {
+      list-style-type: none;
+    }
+    .qblock, .ablock {
+      font-style: normal;
+      display: inline;
+      &::before {
+        display: inline-block;
+        font-weight: bold;
+        margin-right: 0.3em;
+      }
+    }
+    .ablock { margin-left: -0.5em; }
+    .ablock, .ablock+.ulist p { font-style: italic; }
+    .ablock::before { content: 'A: '; }
+    .qblock::before { content: 'Q: '; }
   }
 
   /* COLLAPSED ELEMENTS: 
@@ -619,7 +632,6 @@ lines on some browsers */
   }
   .q-and-a > *:first-child::before { content: url('images/q-and-a.png') }
   .q-and-a table { background: none; }
-  .q-and-a .ulist .ulist li { font-style: italic; }
   .lesson-roleplay > *:first-child::before { content: url('images/lesson-roleplay.png') }
 
   .lesson-point {
