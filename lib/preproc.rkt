@@ -45,6 +45,8 @@
 
 (define *possibly-invalid-page?* #f)
 
+(define *inside-preparation?* #f)
+
 (define *pathway* "BOGUSPATHWAY")
 
 (define *lesson-plan* #f)
@@ -210,6 +212,8 @@
 
 (define *starter-files-used* '())
 (define *opt-starter-files-used* '())
+(define *starter-files-used-in-preparation* '())
+(define *starter-files-used-outside-preparation* '())
 
 (define *online-exercise-links* '())
 (define *opt-online-exercise-links* '())
@@ -1435,6 +1439,9 @@
   (set! *objectives-met* '())
   (set! *assessments-met* '())
   (set! *starter-files-used* '())
+  (set! *starter-files-used-in-preparation* '())
+  (set! *starter-files-used-outside-preparation* '(editor program-list))
+  (set! *inside-preparation?* #f)
   (set! *opt-starter-files-used* '())
   (set! *workbook-pages* '())
   (set! *natlang-glossary-list* '())
@@ -1583,9 +1590,14 @@
                                 (display "\n[.actually-openblock.hiddenblock]\n====\n" o)
                                 (expand-directives:string->port text o #:enclosing-directive directive)
                                 (display "\n====\n" o)))]
-                           [(member directive '("ifnotslide" "preparation"))
+                           [(string=? directive "ifnotslide")
                             (let ([text (read-group i directive #:multiline? #t)])
                               (expand-directives:string->port text o #:enclosing-directive directive))]
+                           [(string=? directive "preparation")
+                            (let ([text (read-group i directive #:multiline? #t)])
+                              (set! *inside-preparation?* #t)
+                              (expand-directives:string->port text o #:enclosing-directive directive)
+                              (set! *inside-preparation?* #f))]
                            [(string=? directive "blanklines")
                             (let ([n (string->number (read-group i directive))]
                                   [text (read-group i directive)])
@@ -1717,9 +1729,6 @@
                                      "WARNING: @material-links (~a, ~a) valid only in lesson plan"
                                      *lesson-subdir* *in-file*))
                             (fprintf o "\n[#material-links]\n&nbsp;\n")
-                            ; The line below can be deleted, once langTable links are generated via their own directive
-                            #;(when (member *proglang* '("pyret" "wescheme"))
-                              (fprintf o "* *Classroom visual:* link:javascript:showLangTable()[Language Table]"))
                             ]
                            [(string=? directive "opt-material-links")
                             (unless *lesson-plan*
@@ -1989,7 +1998,7 @@
                               (display-openblock ".optpara" text  directive o)
                               (set! *optional-flag?* old-optional-flag?))]
                           [(or (string=? directive "starter-file")
-                                (string=? directive "opt-starter-file"))
+                               (string=? directive "opt-starter-file"))
                             (let* ([lbl+text (read-commaed-group i directive read-group)]
                                    [lbl (string->symbol (first lbl+text))]
                                    [c (hash-ref *starter-files* lbl #f)])
@@ -2224,7 +2233,6 @@
                              (fprintf o "\nlink:../index.shtml[Click here to return to lessons]\n\n")
                              ; (link-to-opt-projects o)
                              ; (link-to-notes-pages o)
-                             ;(display-exercise-collation o)
                              )])]
                   [(char=? c #\newline)
                    (newline o)
@@ -2425,31 +2433,8 @@
 
         (call-with-output-file (path-replace-extension *out-file* "-extra-mat.asc")
           (lambda (o)
-            ; REQUIRED PRINTABLE PAGES
-            #;(unless (and (empty? *handout-exercise-links*) (empty? *printable-exercise-links*))
-              (fprintf o "\n* link:javascript:downloadLessonPDFs(false)[PDF of all Handouts and Pages]")
-              (fprintf o " [.showPageLinks]#link:javascript:showPageLinks(false)[ ]#")
-              (for ([x (reverse *handout-exercise-links*)])
-                (fprintf o "\n** ~a\n\n" x))
-              (let ([xx (sort *printable-exercise-links*
-                              (lambda (x y)
-                                (let ([x-i (index-of *workbook-pages* (first x))]
-                                      [y-i (index-of *workbook-pages* (first y))])
-                                  (unless x-i (set! x-i -1))
-                                  (unless y-i (set! y-i -1))
-                                  (cond [(and (= x-i -1) (= y-i -1)) #t]
-                                        [else (< x-i y-i)]))))])
-
-                (for ([x xx])
-                  (fprintf o "\n** ~a\n\n" (second x)))
-                )
-              )
             ; STARTER FILES
             (for ([x (reverse *starter-file-links*)])
-              (fprintf o "\n* ~a\n\n" x))
-            ; ONLINE EXERCISES --- to be removed onces all required online exercises
-            ; have been turned into starter files
-            #;(for ([x (map cdr (reverse *online-exercise-links*))])
               (fprintf o "\n* ~a\n\n" x))
             ; SLIDES
             (display-lesson-slides o)
@@ -2550,6 +2535,12 @@
                    (not *supplemental-materials-needed?*))
           (printf "WARNING: ~a: @opt-material-links missing\n\n" (errmessage-context)))
 
+        (for-each (lambda (sf)
+                    (unless (member sf *starter-files-used-outside-preparation*)
+                      (printf "WARNING: ~a: starter file ~s mentioned in @preparation but not used\n\n"
+                              (errmessage-context) sf)))
+                  *starter-files-used-in-preparation*)
+
         )
 
       (when (or *lesson-plan* *lesson*)
@@ -2609,72 +2600,7 @@
             #;(printf "WARNING: ~a: File ~a not found\n\n" (errmessage-context) id-file)
             #f])))
 
-#;(define (display-exercise-collation o)
-  ; (printf "doing display-exercise-collation\n" )
-  ; (printf "pwrd = ~s\n" *pathway-root-dir*)
-  ; (printf "cwd is ~s\n" (current-directory))
-  (let* ([pathway-lesson-order
-           (format "distribution/~a/courses/~a/.cached/.workbook-lessons.txt.kp"
-                   *natlang* *target-pathway*)]
-         [all-lessons (read-data-file pathway-lesson-order #:mode 'files)]
-         ;fixme -- why following?
-         ; [all-lessons (map (lambda (s) (regexp-replace "^\\.\\./\\.\\./" s "")) all-lessons)]
-         [lessons-with-exx
-           (filter (lambda (f)
-                      (file-exists?
-                        (format "distribution/~a/lessons/~a/.cached/.lesson-exercises.rkt.kp"
-                                *natlang* f)))
-                   all-lessons)]
-         [exx (map (lambda (lsn)
-                     (list lsn
-                           (read-data-file
-                             (format "distribution/~a/lessons/~a/.cached/.lesson-exercises.rkt.kp"
-                                     *natlang* lsn)
-                             #:mode 'forms)))
-                   lessons-with-exx)])
-    ; (printf "pathway-lesson-order is ~s (~s)\n" pathway-lesson-order (file-exists? pathway-lesson-order))
-    ; (printf "lessons-with-exx is ~s\n" lessons-with-exx)
-    ; (printf "exx is ~s\n" exx)
-    ; (printf "lessons= ~s\n\nexercises= ~s\n" all-lessons exx)
 
-    ; (link-to-opt-projects o)
-
-    (unless (null? exx)
-      (display "\n\n" o)
-      (display (hash-ref *common-text* 'workbook-links) o)
-      (display "\n\n" o)
-      (display (create-vspace "1ex") o)
-      (for ([lsn-exx exx])
-        ; (printf "lsn-exx is ~s\n" lsn-exx)
-        (let ([lsn (first lsn-exx)]
-              [exx (second lsn-exx)])
-          (fprintf o "\n\n**link:~alessons/~a/index.shtml[~a]**\n"
-                   *dist-root-dir*
-                   lsn
-                   (call-with-input-file
-                     (format "distribution/~a/lessons/~a/.cached/.index.titletxt"
-                             *natlang* lsn)
-                     port->string))
-          (for ([ex exx])
-            (let* ([ti (list-ref ex 1)]
-                   [exer (list-ref ex 0)]
-                   ; [exer (regexp-replace "\\.adoc" exer ".html")]
-                   [soln (regexp-replace "/pages/" exer "/solution-pages/")])
-
-              (when (string=? ti "")
-                (let ([exer.titletxt
-                        (build-path
-                          (format "distribution/~a/lessons" *natlang*)
-                          (path-replace-extension
-                            (regexp-replace "/pages/" exer "\\0.cached/.")
-                            ".titletxt"))])
-                  (when (file-exists? exer.titletxt)
-                    (set! ti (call-with-input-file exer.titletxt read-line)))))
-
-              (fprintf o "\n- ~a [ link:~alessons/~a[exercise] : link:~alessons/~a[solution] ]\n"
-                       ti *dist-root-dir* exer *dist-root-dir* soln)))
-          ))
-      )))
 
 (define (add-exercises)
   ; (printf "doing add-exercises ~s\n" *exercises-done*)
@@ -3014,9 +2940,18 @@
 (define (add-starter-file sf #:opt? [opt? #f])
   (when (or *lesson-plan*
             (and *lesson*
-                 (or
-                   (regexp-match "/pages$" *containing-directory*)
-                   (regexp-match "/solution-pages$" *containing-directory*))))
+                 (or (regexp-match "/pages$" *containing-directory*)
+                     (regexp-match "/solution-pages$" *containing-directory*))))
+    (when *lesson-plan*
+      (cond [*inside-preparation?*
+              (cond [(member sf *starter-files-used-in-preparation*) #f]
+                    [else (set! *starter-files-used-in-preparation*
+                            (cons sf *starter-files-used-in-preparation*))])]
+            [else
+              (cond [(member sf *starter-files-used-outside-preparation*) #f]
+                    [else (set! *starter-files-used-outside-preparation*
+                            (cons sf *starter-files-used-outside-preparation*))])]))
+
     ((if opt? add-opt-starter-file add-reqd-starter-file) sf)))
 
 (define (add-reqd-starter-file sf)
