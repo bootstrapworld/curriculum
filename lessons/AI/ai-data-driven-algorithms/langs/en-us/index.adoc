@@ -59,7 +59,9 @@ We rely on context clues, experience, and background. There were probably studen
 === Investigate
 
 
-The very first spell checker was developed in 1961 at Stanford University's Artificial Intelligence Laboratory. Its creators provided the spell checker program with a 10,000-word dictionary and a precise algorithm to follow. After scanning the text and extracting the words contained in it, the spell checker would compare each word with a known list of correctly spelled words. Here is what the algorithm did next:
+The very first spell checkers simply identified words that were spelled incorrectly without offering alternatives. Although modern spell checkers do more than merely _check spelling_, the term has stuck (and we will use it throughout this lesson).
+
+The first spell checking program that somewhat resembles what we are familiar with today was developed in 1971 at Stanford University's Artificial Intelligence Laboratory. Its creators provided the spell checker program with a 10,000-word dictionary and a precise algorithm to follow. After scanning the text and extracting the words contained in it, the spell checker would compare each word with a known list of correctly spelled words. Here is what the algorithm did next:
 
 [.indentedpara]
 --
@@ -68,11 +70,11 @@ The very first spell checker was developed in 1961 at Stanford University's Arti
 - *Next*, it would search the provided dictionary to see which alternatives were valid options.
 
 - *Finally*, it would produce a list of valid correctly spelled words for the user to choose from.
---
+-- 
 
 @slidebreak
 
-Unsurprisingly, spell checkers have evolved a lot since 1961—but exploring this particular algorithm can offer us interesting insights about one of the earliest forms of AI/ML.
+Unsurprisingly, spell checkers have evolved a lot since 1971—but exploring this particular algorithm can offer us interesting insights about one of the earliest forms of AI/ML.
 
 @lesson-instruction{
 - In Part 1 of @printable-exercise{first-spell-checker.adoc}, __you__ will be the computer, following the spell checking algorithm developed at Stanford University's Artificial Intelligence Laboratory in 1961.
@@ -133,11 +135,33 @@ By now, we have a decent sense of the extensive work that is happening behind th
 @A{Responses will vary, but should highlight the general idea that data informs how things are done.}
 }
 
+But how exactly is a spell checker data driven? 
+
+@QandA{
+
+In the screenshot below, we see a message that begins with a possibly misspelled word, "Cose." 
+
+@image{images/text-app.png, 175}
+
+@Q{What alternative words does the text messaging app provide the user?}
+@A{The user can select "Cose" (indicating that no error was made), "Code", or "Close".}
+
+@Q{We have discussed spell checking algorithms. What sort of _algorithm_ do you think the app used in developing possible alternative words?}
+@A{Responses will vary. Students may refer to the algorithms discussed in the first half of the lesson. They might also imagine more complicated algorithms--for instance, algorithms that consider the proximity of letters on the keyboard!}
+
+@Q{What sort of _data_ do you think the spell checking app used in developing possible alternative words?}
+@A{Responses will vary. Students may propose that the spell checking app has data on which words the user is most likely to type, or data on the topic of the text conversation and the most probably next word. Students may even propose that the dictionary of words the app draws from is a source of data!}
+}
+
+@teacher{Students will discuss a similar screenshot of a text messaging app in our lesson on @lesson-link{ai-statistical-lang-models}. During that lesson, however, students explore how generative AI uses data-driven algorithms to determine what word to produce next.}
+
 === Investigate
 
 @lesson-instruction{
+- You are now going to interact with a Pyret-based spell checking program. 
+- In this program, we have encoded a spell-checking algorithm (similar to the algorithm you already explored) in the function `alt-words`. 
 - Open the @starter-file{spell-checker} and click "Run".
-- Complete @printable-exercise{pyret-spell-checker.adoc} to discover how one spell checker works.
+- Complete @printable-exercise{pyret-spell-checker.adoc} to discover how the spell checker works.
 }
 
 As you were interacting with the @starter-file{spell-checker}, you observed that it only proposed five-letter words. This is because the dictionary it draws from is actually a Wordle dictionary!
@@ -178,9 +202,18 @@ But why?
 
 There are basically two "parameters" that our spell checking program used: 
 
-- the *function* (what is outside of the parentheses) 
-- the *dictionary* (provided inside the parentheses, as an argument)
- 
+[cols="^.^1,^.^1", stripes="none", grid="none", frame="none"]
+|===
+
+|the *function* 
+
+(what is outside of the parentheses) 
+
+| the *dictionary* 
+
+(provided inside the parentheses, as an argument)
+|===
+
 We have discussed ways in which we could imagine making the function better. For instance, maybe we try swapping out an additional letter? 
 
 … but we have *not* yet considered another way of improving the quality of the output - without even touching the function. 
