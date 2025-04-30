@@ -583,9 +583,6 @@ lines on some browsers */
   }
   .q-and-a { 
     min-height: 85px; 
-    li:has(p.qblock), li:has(p.ablock) {
-      list-style-type: none;
-    }
     .qblock, .ablock {
       font-style: normal;
       display: inline;
@@ -595,10 +592,12 @@ lines on some browsers */
         margin-right: 0.3em;
       }
     }
-    .ablock { margin-left: -0.5em; }
+    li:has(>.ablock)  {
+      margin-left: 1em;
+      list-style-type: none;
+      &::before { content: '→'; }
+    }
     .ablock, .ablock+.ulist p { font-style: italic; }
-    .ablock::before { content: 'A: '; }
-    .qblock::before { content: 'Q: '; }
   }
 
   /* COLLAPSED ELEMENTS: 
