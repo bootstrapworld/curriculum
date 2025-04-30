@@ -470,9 +470,8 @@ local function make_slides_file(lplan_file, slides_file)
         end
         local curr_layout = slide.style or (curr_section .. slide.imageorientation .. slide.suffix)
         if not memberp(curr_layout, allowed_slide_layouts) then
-          print('WARNING: Unknown slide template: ' .. curr_layout
-            .. ' in ' .. os.getenv('PWD') .. '.\n'
-            .. 'Falling back to ' .. curr_section .. slide.imageorientation)
+          print('WARNING: Probably empty slide! Unknown slide template in '
+            .. os.getenv('PWD'))
           slide.suffix = ''
           curr_layout = curr_section .. slide.imageorientation
         end
