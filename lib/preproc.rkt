@@ -2156,20 +2156,13 @@
                                 (format ".q-and-a~a"
                                         (if *optional-flag?* ".Optional" ""))
                                 text directive o))]
-                           [(string=? directive "Q")
+                           [(member directive '("Q" "A"))
                             (let ([text (read-group i directive #:multiline? #t)])
                               (set! text (regexp-replace* "(\n[ \t]*)-([ \t])" text "\\1**\\2"))
                               (set! text (regexp-replace* "(\n[ \t]*[*]+)([ \t])" text "\\1*\\2"))
-                              (display "\n* %BEGINQBLOCKITEM%" o)
+                              (fprintf o "\n* %BEGIN~aBLOCKITEM%" directive)
                               (expand-directives:string->port text o #:enclosing-directive directive)
-                              (display "%ENDQBLOCKITEM%" o))]
-                           [(string=? directive "A")
-                            (let ([text (read-group i directive #:multiline? #t)])
-                              (set! text (regexp-replace* "(\n[ \t]*)-([ \t])" text "\\1***\\2"))
-                              (set! text (regexp-replace* "(\n[ \t]*[*]+)([ \t])" text "\\1**\\2"))
-                              (display "\n** %BEGINABLOCKITEM%" o)
-                              (expand-directives:string->port text o #:enclosing-directive directive)
-                              (display "%ENDABLOCKITEM%" o))]
+                              (fprintf o "%END~aBLOCKITEM%" directive))]
                            [(member directive '("strategy" "strategy-basic"))
                             (let* ([title (read-group i directive)]
                                    [text (read-group i directive #:multiline? #t)])
