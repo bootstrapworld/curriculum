@@ -131,10 +131,12 @@ We transformed the data in three steps:
 
 @slidebreak
 
-@right{@image{images/lr-plot-transformed.png, 350}}Just like in Desmos, transforming the `pc-gdp` column with a log function produces a scatter plot showing a linear pattern in the data! +
-@vspace{1ex} +
-Pyret's `lr-plot` tool computes the best possible linear model for our transformed data: +
+@right{@image{images/lr-plot-transformed.png, 350}}Just like in Desmos, transforming the `pc-gdp` column with a log function produces a scatter plot showing a linear pattern in the data! 
+
+Pyret's `lr-plot` tool computes the best possible linear model for our transformed data: 
+
 @indented{@math{y = 11.9012x + ~24.2636}} 
+
 Our @math{S} has dropped to 4.49, showing a much better correlation than before.
 
 @clear
@@ -143,9 +145,9 @@ Our @math{S} has dropped to 4.49, showing a much better correlation than before.
 
 @right{@image{images/logarithmic-model.png, 350}}From @printable-exercise{transforming-data.adoc}, we know that the model settings used in the transformed, linear model are the same ones used in the logarithmic, untransformed model:
 
-@indented{@math{logarithmic3(x) = 11.9012 \log_{10}(x) + 24.2636}}
+@ifslide{@indented{@math{y = 11.9012x + ~24.2636}}}
 
-@indented{@show{(code '(define (logarithmic3 x) (+ (* 11.9012 (log x)) 24.2636)))}}
+@indented{@math{logarithmic3(x) = 11.9012 \log_{10}(x) + 24.2636}}
 
 The resulting logarithmic model can be fit to our original scatter plot, showing a much better fit than our 2-point-derived estimates.
 
