@@ -586,16 +586,12 @@ lines on some browsers */
     .qblock, .ablock {
       font-style: normal;
       display: inline;
-      &::before {
-        display: inline-block;
-        font-weight: bold;
-        margin-right: 0.3em;
-      }
     }
     li:has(>.ablock)  {
       margin-left: 1em;
       list-style-type: none;
       &::before { content: '→'; }
+      li { margin-left: 1em; }
     }
     .ablock, .ablock+.ulist p { font-style: italic; }
   }
