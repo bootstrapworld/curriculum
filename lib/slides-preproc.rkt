@@ -789,15 +789,16 @@
                             (let ([text (read-group i directive #:multiline? #t)])
                               (display "\n" o)
                               (unless *single-question?*
-                                (display "* &#8203;" o))
+                                (display "* &#8203; " o))
+                              (display "<b>" o)
                               (expand-directives:string->port text o)
-                              (display "\n" o))]
+                              (display "</b>\n" o))]
                            [(string=? directive "A")
                             (let ([text (read-group i directive #:multiline? #t)])
                               (when *output-answers?*
-                                (display "\n* &#8203;" o)
+                                (display "\n* &#8203; <i>" o)
                                 (expand-directives:string->port text o)
-                                (display "\n" o)))]
+                                (display "</i>\n" o)))]
                            [(string=? directive "ifslide")
                             (let ([text (read-group i directive #:multiline? #t)])
                               (expand-directives:string->port text o))]
