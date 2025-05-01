@@ -31,14 +31,16 @@
 
 === Overview
 
-Students consider one specific example of machine learning, evaluating how spell checkers' programmed behaviors compare and contrast with the behaviors of humans.
+Students consider one specific example of machine learning: evaluating how spell checkers' programmed behaviors compare and contrast with the behaviors of humans.
 
 
 === Launch
 
-The spell checker built into your web browser or word processing system is a classic example of @vocab{machine learning}. We are so used to receiving spell checking help that sometimes we don't even notice or acknowledge the way in which it happens automatically. But copy editing a document without the help of a spell checker would be laborious and error-prone!
+The spell checker built into your web browser or word processing system is a classic example of @vocab{machine learning}. We are so used to receiving spell-checking help that sometimes we don't even notice that's it's there. But copy-editing a document without the help of a spell checker would be laborious and error-prone!
 
-When we discuss and debate AI, the question of "what is intelligence?" often emerges. In this lesson, we will consider what sort of intelligence spell checking requires. When it comes to spell checking, how does the performance of a computer compare to that of a human? Do humans and computers use similar spell checking strategies, or do they approach the task from entirely different angles? How do their outcomes compare?
+When it comes to spell checking, how does the performance of a computer compare to that of a human? Do humans and computers use similar spell checking strategies, or do they approach the task from entirely different angles? How do their outcomes compare?
+
+When we discuss and debate AI, the question of "what is intelligence?" often emerges. Does a spell-checker exhibit any kind of "intelligence"? In this lesson, we're going to explore that question in detail.
 
 @slidebreak
 
@@ -53,23 +55,24 @@ When we discuss and debate AI, the question of "what is intelligence?" often eme
 
 You probably noticed that is was difficult to articulate how exactly you were able to locate and correct spelling mistakes. Why?
 
-We rely on context clues, experience, and background. There were probably students in your class who said that the spelling mistakes jumped off the page. They couldn't *not* see the mistakes. Other students relied on context clues or prior knowledge to locate and fix errors. Of course, the process of spell-checking varies not just by person but by situation, too. If a different word had been misspelled, perhaps a multi-syllabic and complex technical word, you might have relied on a different spell checking strategy. If you were from Britain rather than the United States, you might spell some words differently from others.
+Humans rely on context clues, experience, and background. There were probably students in your class who said that the spelling mistakes jumped off the page. They couldn't *not* see the mistakes! Other students relied on context clues or prior knowledge to locate and fix errors.
+
+Of course, the process of spell-checking varies not just by person but by situation, too. If a different word had been misspelled - perhaps a complex, technical word - you might have relied on a different spell checking strategy. If you were from Britain rather than the United States, you might spell some words differently from others (e.g. "color" v. "colour").
 
 
 === Investigate
 
+The very first spell checkers simply identified words that were spelled incorrectly without offering alternatives. Although modern spell checkers do more than merely _check spelling_ (they propose alternatives!), the term "spell checker" stuck around and we use it to this day!
 
-The very first spell checkers simply identified words that were spelled incorrectly without offering alternatives. Although modern spell checkers do more than merely _check spelling_ (they propose alternatives!), the term has stuck (and we will use it throughout this lesson).
-
-The first spell checking program that somewhat resembles what we are familiar with today was developed over fifty years ago. Its creators provided the spell checker program with a 10,000-word dictionary and a precise algorithm to follow. After scanning the text and extracting the words contained in it, the spell checker would compare each word with a known list of correctly spelled words. Here is what the algorithm did next:
+Modern spell checkers descend from a program written over fifty years ago. Its creators provided the spell checker program with a 10,000-word dictionary and a precise algorithm to follow. After scanning the text and extracting the words it contained, the spell checker would compare each word with a known list of correctly spelled words. Here is what the algorithm did next:
 
 [.indentedpara]
 --
-- *First*, it would develop alternative candidates for the misspelled word (input) by making one of the following adjustments: (1) replace a single letter with a different one, or (2) swap the positions of two adjacent letters.
+- *First*, it would develop possible alternatives for the misspelled word (input) by making one of the following adjustments: (1) replace a single letter with a different one, or (2) swap the positions of two adjacent letters.
 
-- *Next*, it would search the provided dictionary to see which alternatives were valid options.
+- *Next*, it would search its dictionary of correct spellings to see which of the alternatives were real words.
 
-- *Finally*, it would produce a list of valid correctly spelled words for the user to choose from.
+- *Finally*, it would produce the list of real, correctly spelled words for the user to choose from.
 -- 
 
 @slidebreak
@@ -77,7 +80,7 @@ The first spell checking program that somewhat resembles what we are familiar wi
 Unsurprisingly, spell checkers have evolved a lot over time - but exploring this particular algorithm can offer us interesting insights about one of the earliest forms of AI/ML.
 
 @lesson-instruction{
-- In Part 1 of @printable-exercise{first-spell-checker.adoc}, __you__ will be the computer, following an early spell checking algorithm.
+- In Part 1 of @printable-exercise{first-spell-checker.adoc}, _you_ will be the computer, following an early spell checking algorithm.
 - Reflect on the activity in Part 2.
 }
 
@@ -138,10 +141,8 @@ By now, we have a decent sense of the extensive work that is happening behind th
 But how exactly is a spell checker data driven? 
 
 @QandA{
-
-In the screenshot below, we see a message that begins with a possibly misspelled word, "Cose." 
-
-@image{images/text-app.png, 175}
+@right{@image{images/text-app.png, 175}}
+In the screenshot on the right, we see a message that begins with a possibly misspelled word, "Cose."
 
 @Q{What alternative words does the text messaging app provide the user?}
 @A{The user can select "Cose" (indicating that no error was made), "Code", or "Close".}
@@ -158,13 +159,13 @@ In the screenshot below, we see a message that begins with a possibly misspelled
 === Investigate
 
 @lesson-instruction{
-- You are now going to interact with a Pyret-based spell checking program. 
-- In this program, we have encoded a spell-checking algorithm (similar to the algorithm you already explored) in the function `alt-words`. 
+- Let's take a look at a spell checking program written in Pyret.
+- This program includes a built-in function called `alt-words`, which implements a spell-checking algorithm similar to the algorithm you already explored.
 - Open the @starter-file{spell-checker} and click "Run".
 - Complete @printable-exercise{pyret-spell-checker.adoc} to discover how the spell checker works.
 }
 
-As you were interacting with the @starter-file{spell-checker}, you observed that it only proposed five-letter words. This is because the dictionary it draws from is actually a Wordle dictionary!
+As you were interacting with the @starter-file{spell-checker}, you observed that it only proposed five-letter words. This is because the dictionary it draws from is actually a dictionary from the game "Wordle"!
 
 @teacher{Are you familiar with Wordle? If not, you can quickly learn the rules and play it @link{https://www.nytimes.com/games/wordle/index.html, "here"}. Before moving on with the lesson, be sure to check for students' familiarity with the game via a show of hands. If your students have _not_ played Wordle before, play one round as a class before proceeding.}
 
@@ -173,9 +174,7 @@ As you were interacting with the @starter-file{spell-checker}, you observed that
 
 @left{@image{images/wordle.png, 175}}
 
-
 Let's consider a partially-played Wordle game (left).
-
 
 The player has attempted three words so far: "WORTH", "MEDIA", and "GAMES". With each turn, we have learned something new. At this point, we know that _a_, _m_, and _e_ belong in the 2nd, 3rd, and 4th tiles, respectively. We know that the 1st and 5th tiles are _not_ occupied by _w_, _o_, _r_, _t_, _h_, _d_, _i_, _g_, or _s_.
 
@@ -204,23 +203,20 @@ There are basically two "parameters" that our spell checking program used:
 
 [cols="^.^1,^.^1", stripes="none", grid="none", frame="none"]
 |===
-
-|the *function* 
-
+| the *function*  +
 (what is outside of the parentheses) 
 
-| the *dictionary* 
-
+| the *dictionary* +
 (provided inside the parentheses, as an argument)
 |===
 
 We have discussed ways in which we could imagine making the function better. For instance, maybe we try swapping out an additional letter? 
 
-… but we have *not* yet considered another way of improving the quality of the output - without even touching the function. 
+… but there's another way to improve the quality of the output that we haven't discussed - without changing how the function works.
 
-How? We can _improve_ the dictionary argument!
+We can _improve_ the dictionary argument!
 
-Let's explore how directing Pyret to access differently sized dictionaries influences the quality of the program's output.
+Let's explore how directing Pyret to access differently-sized dictionaries influences the quality of the program's output.
 
 @lesson-instruction{
 - Complete @printable-exercise{pyret-spell-checker2.adoc} using the @starter-file{spell-checker}.
