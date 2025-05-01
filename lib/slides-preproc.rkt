@@ -799,6 +799,11 @@
                                 (display "\n* &#8203; <i>" o)
                                 (expand-directives:string->port text o)
                                 (display "</i>\n" o)))]
+                           [(string=? directive "ifproglang")
+                            (let* ([proglang (read-group i directive)]
+                                   [text (read-group i directive #:multiline? #t)])
+                              (when (string-ci=? proglang *proglang*)
+                                (expand-directives:string->port text o)))]
                            [(string=? directive "ifslide")
                             (let ([text (read-group i directive #:multiline? #t)])
                               (expand-directives:string->port text o))]
