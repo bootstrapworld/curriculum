@@ -199,23 +199,59 @@ fit-model(
 ```
 |===
 
-[cols="1a,1a", frame="none", grid="none"]
-|===
-| @centered-image{images/fit-cy-crop.png}
-| @centered-image{images/fit-jo-crop.png}
-|===
-
-
-
+@ifslide{
 @QandA{
-@Q{What do you Notice?}
-@Q{What do you Wonder?}
+@Q{What do you Notice and Wonder about the code?}
+}
+}
+
+@slidebreak
+
+@ifslide{
+[cols="^1a,^1a", frame="none", grid="none"]
+|===
+| Cy's Model
+| Jo's Model
+
+| @image{images/fit-cy-crop.png}
+| @image{images/fit-jo-crop.png}
+|===
+}
+
+@ifnotslide{
+[cols="^1a,^1a", frame="none", grid="none"]
+|===
+| @image{images/fit-cy-crop.png}
+| @image{images/fit-jo-crop.png}
+|===
+}
+
+@ifslide{
+@QandA{
+@Q{What do you Notice and Wonder about the Displays?}
 @Q{Compare the `fit-model` display for `cy` to the `fit-model` display for `jo`. How are they similar? How are they different?}
 @A{Both models have a blue line and red dots.}
 @A{The x-axis goes from 0 to 8 for both of them.}
 @A{The y-axis for `cy` is numbered 0 to 20. It goes from 3 to 9 for `jo`.}
 @A{`jo` has more red dots below the blue line than above it.}
 @A{The data points for `jo` more or less fill the vertical space of the display, whereas for `cy` there are only data points in the bottom half of the display.}
+}
+}
+
+@ifnotslide{
+@QandA{
+@Q{What do you Notice?}
+@Q{What do you Wonder?}
+@Q{Compare the `fit-model` display for `cy` to the `fit-model` display for `jo`. 
+  * How are they similar? 
+  * How are they different?
+}
+@A{Both models have a blue line and red dots.}
+@A{The x-axis goes from 0 to 8 for both of them.}
+@A{The y-axis for `cy` is numbered 0 to 20. It goes from 3 to 9 for `jo`.}
+@A{`jo` has more red dots below the blue line than above it.}
+@A{The data points for `jo` more or less fill the vertical space of the display, whereas for `cy` there are only data points in the bottom half of the display.}
+}
 }
 
 @slidebreak
@@ -317,16 +353,18 @@ Now that we have a basic sense of what `fit-model` does, let's see it work live 
 @Q{When you hover your mouse over the blue line, a box should pop up that says "Model". Move your mouse along the line. What information can we learn from the "Model" pop up windows?}
 @A{The coordinates of any point in the model.}
 
-@Q{When you hover your mouse over a data point, a box should pop up that says "Data". Move your mouse to a few different points and read the information contained in these pop ups. What can we lean from the "Data" pop up windows?}
+@Q{When you hover your mouse over a data point, a box should pop up that says "Data". Move your mouse to a few different points and read the information contained in these pop ups. What can we learn from the "Data" pop up windows?}
 @A{The x and y coordinates of each point in the data set, and the animals they are associated with.}
-}
 
-@QandA{
 @Q{There is one more kind of pop up window that will appear on this chart that says "Residuals". You can find them by hovering your mouse near any of the data points. Move your mouse to find and read a few of these. What can we learn from the "Residuals" pop up windows?}
 @A{The x and y coordinates of a data point}
 @A{The predicted y-value (`ŷ`) for that x-value}
 @A{The "Residual": the difference between `y` and `ŷ`}
+}
 
+@slidebreak
+
+@QandA{
 @Q{We've been looking at how well `cy` 's model fit the data. What do we need to do if we want to see how well `jo` 's model fits the data.}
 @A{Close the window and another interactive chart will pop up.}
 
