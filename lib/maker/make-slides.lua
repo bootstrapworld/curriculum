@@ -266,7 +266,7 @@ local function get_slides(lsn_plan_adoc_file)
           curr_slide.suffix = '-RP'
           curr_slide.text = curr_slide.text .. c .. directive
         elseif directive == 'slidebreak' then
-          if nested_in and (nested_in ~= 'ifproglang' and nested_in ~= 'ifpdslide') then
+          if nested_in and (nested_in ~= 'ifproglang' and nested_in ~= 'ifpdslide' and nested_in ~= 'ifslide') then
             terror('@slidebreak inside @' .. nested_in)
           end
           insert_slide_break()
