@@ -1,0 +1,125 @@
+= Writing Assessments
+
+== Installing the Infrastructure
+
+1. `git pull`
+2. `nvm use 22.5`
+3. `npm install`
+4. `npm update mdquiz`
+5. You're ready to rock `./build-mdquiz` once you write an assessment!
+
+== Writing an Assessment
+
+=== Setting up the assessments folder inside of the lesson
+
+1. An `assessments` folder can be added to any folder at the same level as `authoring`, `images`, `pages`, etc.
+2. The only thing we will see inside the `assessments` folder is subfolders, each one for a single assessment
+3. The folder for each assessment included in the lesson should be named to make it clear what the assessment is about / for.
+  - This folder must contain a file named `/* quiz.json`
+  - If an assessment uses images, they must be stored in this folder.
+
+You can look at `lessons/Data-Science/histograms-visualize/langs/en-us/assessments` for an example.
+
+=== Writing the `/* quiz.json` file
+
+1. It begins with a title that will end up being student-facing.
+
+2. Question Types:
+  - We currently have two fully functional question types: "MultipleChoice" and "ShortAnswer". 
+  - To insert a slide that does not ask a question, use the type "Informational".
+
+3. Every question must include
+
+   {
+    "type": "",
+    "prompt": {
+        "prompt": ""
+        },
+    "answer": {
+        "answer": ""
+        }
+    }
+
+4. Some questions have an additional "context", which provides clarifying information and/or hints for students answering the question. 
+
+    "context": "If there is no mode, write: none\n. If there is more than one mode, separate the numbers with commas, for example by writing: 5,7\n."
+    }, 
+
+5.  MultipleChoice questions also include "distractors". By default the order of the distractors and answer is randomized. To specify the order we should... TODO CONFIRM THIS WITH ES
+
+    "distractors": [
+          "`x` is stored in the immutable region of memory.",
+          "After being defined, `x` can be changed at most once.",
+          "You cannot create a reference to `x`.![alt text](./react.svg 'react logo')"
+        ]
+
+6. \n is used to insert a new line in the middle of a string.
+
+Below is an example of what the complete json might look like. 
+
+{
+  "title": "Mean, Median, Modes Checkin",
+  "questions": [
+    {
+      "type": "MultipleChoice",
+      "prompt": {
+        "prompt": "What does it mean if a variable `x` is immutable?\n",
+        "distractors": [
+          "`x` is stored in the immutable region of memory.",
+          "After being defined, `x` can be changed at most once.",
+          "You cannot create a reference to `x`.![alt text](./react.svg 'react logo')"
+        ]
+      },
+      "answer": {
+          "answer": "`x` cannot be changed after being assigned to a value."
+      },
+      "context": "Immutable means \"not mutable\", or not changeable.\n"
+    },
+    {
+        "type": "ShortAnswer",
+        "prompt": {
+            "prompt": "What is the keyword used after `let` to indicate that a variable can be mutated?"
+        },
+        "image": "./react.svg",
+        "answer": {
+            "answer": "mut"
+        },
+        "context": "For example, you can make a mutable variable `x` by writing: `let mut x = 1`.\n",
+        "id": "dbbaea6a-f469-464f-9d60-99ae98456b6a"
+    },
+    {
+        "type": "Informational",
+        "prompt": {
+            "prompt": "Hello! Good news! This is just a poster, no questions to answer."
+        },
+        "image": "https://www.bootstrapworld.org/images/icon.png",
+        "context": "It's so awesome!\n",
+    }
+    ]
+  }
+
+
+=== To build your quiz
+
+1. Type `./build-mdquiz` in your terminal.
+  - If you get an error like the following one `The quiz.json file inside distribution/en-us/lessons/measures-of-center/assessments/mean-median-modes-checkin is not valid JSON!`
+    ** Open a browser window and type "json validator" or navigate directly to https://jsonlint.com/
+    ** Select All and copy the contents of your `/* quiz.json` file. 
+    ** Paste the full contents of the document into the json validator. 
+    ** Click "validate" and it will identify the first issue with the file. Identify and repeat validation until you get a "JSON is valid!" message.
+    ** Update the file in sublime and rerun `./build-mdquiz`.
+2. Navigate to `distribution/lessons/name-of-lesson/assessments/name-of-assessment/index.html`
+
+You'll see a webpage pop up. It will say:
+
+Quiz +
+# of questions +
+Start
+
+When you click Start you will see the first question and you will need to enter a bogus answer (just choose A) in order to see the next question.
+
+After you complete the quiz you will see a summary of the quiz.
+
+
+
+  
