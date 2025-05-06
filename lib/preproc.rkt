@@ -2001,7 +2001,8 @@
                                (string=? directive "opt-starter-file"))
                             (let* ([lbl+text (read-commaed-group i directive read-group)]
                                    [lbl (string->symbol (first lbl+text))]
-                                   [c (hash-ref *starter-files* lbl #f)])
+                                   [c (hash-ref *starter-files* lbl #f)]
+                                   [autoinclude? (hash-ref c 'autoinclude #t)])
                               (cond [(not c)
                                      (printf "WARNING: ~a: Ill-named @~a ~a\n\n"
                                              (errmessage-context) directive lbl)]
@@ -2016,7 +2017,7 @@
                                                (printf "WARNING: ~a: @~a ~a missing for ~a\n\n"
                                                        (errmessage-context) directive lbl *proglang*))]
                                               [else
-                                                (let* ([newly-added? (add-starter-file lbl #:opt? opt?)]
+                                                (let* ([newly-added? (add-starter-file lbl autoinclude? #:opt? opt?)]
                                                        [starter-file-title
                                                          (regexp-replace* #rx","
                                                            (or (and p (hash-ref p 'title #f))
@@ -2038,8 +2039,7 @@
                                                            title
                                                            ", window=\"&#x5f;blank\""
                                                            )])
-                                                  (when (and newly-added?
-                                                             (hash-ref c 'autoinclude #t))
+                                                  (when (and newly-added? autoinclude?)
                                                     (let* ([materials-link-output
                                                              (format
                                                                "link:pass:[~a][~a~a]"
@@ -2930,21 +2930,25 @@
   ; (printf "doing add-prereq/check ~s\n\n" sym)
   (add-prereq sym #:check? check-in-langtable?))
 
-(define (add-starter-file sf #:opt? [opt? #f])
+(define (add-starter-file sf autoinclude? #:opt? [opt? #f])
   (when (or *lesson-plan*
             (and *lesson*
                  (or (regexp-match "/pages$" *containing-directory*)
                      (regexp-match "/solution-pages$" *containing-directory*))))
     (when *lesson-plan*
       (cond [*inside-preparation?*
-              (cond [(member sf *starter-files-used-in-preparation*) #f]
-                    [else (set! *starter-files-used-in-preparation*
-                            (cons sf *starter-files-used-in-preparation*))])]
+              (unless (member sf *starter-files-used-in-preparation*)
+                (set! *starter-files-used-in-preparation*
+                  (cons sf *starter-files-used-in-preparation*)))
+              (unless autoinclude?
+                (unless (member sf *starter-files-used-outside-preparation*)
+                  (set! *starter-files-used-outside-preparation*
+                    (cons sf *starter-files-used-outside-preparation*))))]
             [else
-              (cond [(member sf *starter-files-used-outside-preparation*) #f]
-                    [else (set! *starter-files-used-outside-preparation*
-                            (cons sf *starter-files-used-outside-preparation*))])]))
-
+              (unless (member sf *starter-files-used-outside-preparation*)
+                (set! *starter-files-used-outside-preparation*
+                  (cons sf *starter-files-used-outside-preparation*)))]))
+    ;
     ((if opt? add-opt-starter-file add-reqd-starter-file) sf)))
 
 (define (add-reqd-starter-file sf)
