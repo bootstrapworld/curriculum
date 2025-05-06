@@ -45,13 +45,18 @@ You can look at `lessons/Data-Science/histograms-visualize/langs/en-us/assessmen
     "context": "If there is no mode, write: none\n. If there is more than one mode, separate the numbers with commas, for example by writing: 5,7\n."
     }, 
 
-5.  MultipleChoice questions also include "distractors". By default the order of the distractors and answer is randomized. To specify the order we should... TODO CONFIRM THIS WITH ES
+5.  MultipleChoice questions also include "distractors". By default the order of the distractors and answer is randomized. If an `answerIndex` is given, the answer will be located at that index and the remaining indices will be populated by the distractors, _in order_. (In the example below, the choices will be ordered as "8, 12, <answer>, 18. Removing `"answerIndex": 2` will randomize all the choices.)
 
-    "distractors": [
-          "`x` is stored in the immutable region of memory.",
-          "After being defined, `x` can be changed at most once.",
-          "You cannot create a reference to `x`.![alt text](./react.svg 'react logo')"
-        ]
+    "prompt": {
+        "prompt": "A teacher surveys her students on how many hours of TV they watch per week. (See display for results.)\n\nHow many students did the teacher survey?\n",
+        "image": "hours-dist.png",
+        "distractors": [
+          "8",
+          "12",
+          "18"
+        ],
+        "answerIndex": 2
+      },
 
 6. \n is used to insert a new line in the middle of a string.
 
