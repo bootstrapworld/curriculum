@@ -790,9 +790,11 @@
                               (display "\n" o)
                               (unless *single-question?*
                                 (display "* &#8203; " o))
-                              (display "<b>" o)
+                              (when *output-answers?*
+                                (display "<b>" *teacher-notes*))
                               (expand-directives:string->port text o)
-                              (display "</b>\n" o))]
+                              (when *output-answers?*
+                                (display "</b>\n" *teacher-notes*)))]
                            [(string=? directive "A")
                             (let ([text (read-group i directive #:multiline? #t)])
                               (when *output-answers?*
