@@ -789,7 +789,7 @@
                             (let ([text (read-group i directive #:multiline? #t)])
                               (display "\n" o)
                               (unless *single-question?*
-                                (display "* &#8203; " o))
+                                (display "* " o))
                               (when *output-answers?*
                                 (display "<b>" *teacher-notes*))
                               (expand-directives:string->port text o)
@@ -798,7 +798,7 @@
                            [(string=? directive "A")
                             (let ([text (read-group i directive #:multiline? #t)])
                               (when *output-answers?*
-                                (display "\n* &#8203; <i>" o)
+                                (display "\n* <i>" o)
                                 (expand-directives:string->port text o)
                                 (display "</i>\n" o)))]
                            [(string=? directive "ifproglang")
