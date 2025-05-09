@@ -23,6 +23,7 @@
 (define (string->uniqid s)
   (when (path? s)
     (set! s (path->string s)))
+  (set! s (string-append s "-" *season* "-" *year*))
   (string->number
     (substring
       (bytes->hex-string
