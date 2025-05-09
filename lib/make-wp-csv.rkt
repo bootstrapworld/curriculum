@@ -7,8 +7,8 @@
 
 (define *dist-en-us* "distribution/en-us")
 
-(define *season* "spring")
-(define *year* (number->string (date-year (current-date))))
+(define *season* (or (getenv "SEMESTER") "spring"))
+(define *year* (or (getenv "YEAR") (number->string (date-year (current-date)))))
 
 (define *official-date*
   (format "~a-~a-01" *year* (if (string=? *season* "fall") "09" "01")))
@@ -23,6 +23,7 @@
 (define (string->uniqid s)
   (when (path? s)
     (set! s (path->string s)))
+  (set! s (string-append s "-" *season* "-" *year*))
   (string->number
     (substring
       (bytes->hex-string
