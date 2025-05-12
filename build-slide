@@ -134,6 +134,9 @@ for NATLANG in *; do
     if test -f $slidesmkd; then
       title=$(grep '^# ' $slidesmkd|$SED -e 1q|$SED -e 's/^#  *//')
       title="AUTO-GEN:$title - $PROGLANG"
+      if test -n "$PD"; then
+        title="$title (PD)"
+      fi
 
       # warn if used without -f and --rebuild
       if test -z "$regenid"; then
