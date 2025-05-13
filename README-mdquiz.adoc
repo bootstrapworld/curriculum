@@ -54,9 +54,24 @@ You can look at `lessons/Data-Science/histograms-visualize/langs/en-us/assessmen
         "answerIndex": 2
       },
 
-5. \n\n is used to insert a new line in the middle of a string.
+6. MultipleChoice Questions can also be used as Multiple Select / Multi Check questions by declaring more than one answer. _Here's an example from the dot-plots formative assessment._
 
-6. This is how to <b>bold</b> something.
+"prompt": {"prompt": "Consider how the dot plot below would be different if the student named Sebastian weren’t in the class. Select each statement below that correctly describes a new dot plot of the class’ names without Sebastian. ![](./names2.png)",
+              "distractors" : [
+                "There are no gaps in the display."
+              ]
+          },
+           "answer" : {
+            "answer" : [
+              "Without the dot representing Sebastian, the range is 4 letters.",
+              "The most common name length (6 letters) is also the longest name length.",
+              "Variability decreases."
+            ]
+          }
+
+7. \n\n is used to insert a new line in the middle of a string.
+
+8. This is how to **bold** something.
 
 Below is an example of what the complete json might look like. 
 
@@ -78,7 +93,6 @@ Below is an example of what the complete json might look like.
             "answer": "`x` cannot be changed after being assigned to a value."
         }
       },
-// Multi-Select Questions are simple MultipleChoice Questions with more than one answer!
       {
           "type": "ShortAnswer",
           "prompt": {
@@ -100,7 +114,7 @@ Below is an example of what the complete json might look like.
 
 There is one more question type called Multi-part, but it can only be used for assessments that have a single question! For this question type, whatever you write in multipart will appear on every slide.
 
-
+[options="nowrap"]
 "multipart": {
     "q": "Twenty-nine individuals are represented by the points in the chart below.\nThe x-axis indicates the number of years worked for a particular company, and the y-axis represents salary.\n\nThe questions on the next 3 slides will focus on this chart.\n\n ![](./salary-lr-plot.png)"
   },
