@@ -23,15 +23,14 @@ done
    exit 0
  fi
 
-node --input-type=module -e '
+output="$(node --input-type=module -e '
 import react from "@vitejs/plugin-react"
 import { defineConfig, build } from "vite"
 import { viteSingleFile } from "vite-plugin-singlefile"
 import { viteStaticCopy } from "vite-plugin-static-copy"
-import pkg from "glob";
-const  { glob } = pkg;
+import pkg from "glob"
+const  { glob } = pkg
 import { readFileSync} from "fs"
-
 
 const quizzes = glob.sync("distribution/*/lessons/*/assessments/*");
 const imageTypes = ["svg", "gif", "jpg", "png", "svg"];
@@ -39,25 +38,18 @@ const imageTypes = ["svg", "gif", "jpg", "png", "svg"];
 // create the JSON objects for each of our quizzes
 const buildConfigs = quizzes.map( quiz => ({
   plugins: [
-    react(), 
+    react(),
     viteSingleFile(),
-/*
-    // copy all image files from demo/, since they are not inlined
-    viteStaticCopy({
-      targets: [
-        {
-          src: imageTypes.map(t => quiz+"/*."+t),
-          dest: quiz+"/images"
-        }
-      ]
-    })
-*/    
   ],
   build: {
+    logLevel: "silent",
     root: "distribution",
     minify: false,
     outDir: "./",
     emptyOutDir: false,
+    onConsoleLog(log) {
+      return "@"+log
+    },
     rollupOptions: {
       input: quiz+"/index.html",
     }
@@ -69,7 +61,6 @@ const buildConfigs = quizzes.map( quiz => ({
 // wait until all of the builds are complete
 await Promise.all(buildConfigs.map( async c => await build(c)));
 
-
 for (const filePath of quizzes) {
     const fileContent = fs.readFileSync(filePath + "/quiz.json", "utf-8");
     try {
@@ -78,4 +69,15 @@ for (const filePath of quizzes) {
         console.error("The quiz.json file inside", filePath, "is not valid JSON!");
       }
 }
-'
+' 2>&1)"
+
+
+RED='\033[0;31m'
+NC='\033[0m' # No Color
+
+phrase="✗ Build failed"
+result="${output#*"$phrase"}"
+echo -e "
+
+${RED}✗ Build failed${NC}$result"
+
