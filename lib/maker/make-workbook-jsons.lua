@@ -8,6 +8,7 @@ local make_dir = os.getenv'MAKE_DIR'
 
 dofile(make_dir .. 'utils.lua')
 dofile(make_dir .. 'readers.lua')
+
 dofile(make_dir .. 'sread.lua')
 
 local natlang = os.getenv('NATLANG')
@@ -88,7 +89,9 @@ do
         end
         o:write(' "', lunit[i], '"\n')
       end
+      o:write(' "', lsn, '"\n')
     end
+    w:close()
     o:write('  ],\n')
 
     local back_matter_workbook_pages_file = course_dir .. '/back-matter/pages/.cached/.workbook-pages.txt.kp'

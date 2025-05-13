@@ -45,17 +45,18 @@ table .autonum::after { content: ')' !important;}
 | @n
 |
 @show{(coe '(* (+ b c) (- f g)))}
-@show{(coe '(* (+ f g) (- b c)))}
+@show{(coe '(* (- f g) (+ b c)))}
 @show{(coe '(* (+ c b) (- f g)))}
-@show{(coe '(* (+ b c) (- g f)))}|
+@ifsoln-choice{@show{(coe '(* (+ b c) (- g f)))}}
+| @ifsoln{The 4th circle changes the order of terms being subtracted, so it is not equivalent.}
 
 | @n
 |
 @show{(coe '(* 3 (+ (+ h w) 4)))}
-@show{(coe '(* (+ (+ h w) f) 3))}
-@show{(coe '(* (+ h w) (+ 4 3)))}
+@show{(coe '(* (+ (+ h w) 4) 3))}
+@ifsoln-choice{@show{(coe '(* (+ h w) (+ 4 3)))}}
 @show{(coe '(* 3 (+ 4 (+ h w))))}
-|
+| @ifsoln{All but the 3rd circle involve a sum being tripled.}
 
 | @n
 |

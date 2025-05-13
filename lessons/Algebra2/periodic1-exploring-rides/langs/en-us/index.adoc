@@ -1,4 +1,4 @@
-= Exploring Ferris Wheel Data
+= Exploring Carnival Ride Data
 
 @description{
 Students are introduced to periodic functions through a dataset with perfect sinusoidal behavior: _height on a revolving Ferris wheel_. They see the same behavior reflected in the (x,y) coordinates of a point on a unit circle, and plot the graphs of the sine and cosine functions. Finally, they make the leap from degrees to radians.
@@ -40,6 +40,12 @@ Being a teacher, of course they decide to turn the class's polite curiosity into
 
 === Investigate
 
+@lesson-instruction{
+Working in pairs or groups, complete @printable-exercise{exploring-periodic.adoc}.
+}
+
+@slidebreak
+
 ++++
 <style>
 table.rideData tr * { padding: 0 !important; margin: 2px !important; line-height: 1.1; }
@@ -63,12 +69,6 @@ table.rideData { width: 70%; margin: auto; }
 | 55        |  55.5
 | 60        |   5.0
 |===
-
-@slidebreak
-
-@lesson-instruction{
-Working in pairs or groups, complete @printable-exercise{exploring-periodic.adoc}.
-}
 
 @QandA{
 @Q{What are some of your Noticings, and what did they make you Wonder?}
@@ -185,17 +185,17 @@ To wrap our heads around periodic functions, let's think about something simpler
 
 Heads up: You may need to remind your brain that, unlike unit circles, clock hands move clockwise!}
 
---
-@right{@image{images/unit-circle-clock.png, 225}}
+@slidebreak
 
-- The "hand" of the clock is just a radius, which hits the circumference at a point we'll call (A, B).
+- @right{@image{images/unit-circle-clock.png, 225}}The "hand" of the clock is just a radius, which hits the circumference at a point we'll call (A, B).
 - As time passes, the hand spins around the circle, taking (A, B) with it.
 	** When it's 12 o'clock, the radius lands at @math{(A = 0, B = 1)}.
 	** At 3 o'clock, the radius lands at @math{(A = 1, B = 0)}.
 	** At 6 o'clock, the radius lands at @math{(A = 0, B = -1)}.
 - That radius also forms the @vocab{hypotenuse} of a right triangle with sides @math{x} and @math{y}, shown here in green and blue.
 - As the point (A, B) moves around the circle, the values of @math{A} and @math{B} rise and fall between 1 and -1, over and over.
---
+
+@slidebreak
 
 @lesson-instruction{
 - With a partner, complete the first section ("A and B, around the clock
@@ -219,6 +219,8 @@ Heads up: You may need to remind your brain that, unlike unit circles, clock han
 @A{We could use the Pythagorean Theorem, with @math{A = B}: @hspace{1em} @math{A^2 + A^2 = 1^2}}
 }
 
+@slidebreak
+
 @lesson-instruction{
 - With a partner, complete the second section of @printable-exercise{unit-clock.adoc}.
 - Then open @starter-file{alg2-unit-clock} to complete the page.
@@ -226,7 +228,11 @@ Heads up: You may need to remind your brain that, unlike unit circles, clock han
 
 @slidebreak
 
-@right{@image{images/pizza-slice2.png, 100}}As the point (A, B) travels around the circumference of a circle, it reflects a changing angle @math{θ}. Think of a pizza slice, with @math{θ} as the angle at the tip of the slice, and the crust as the amount of the circumference the point has traveled.
+@ifnotslide{@right{@image{images/pizza-slice2.png, 100}}}As the point (A, B) travels around the circumference of a circle, it reflects a changing angle @math{θ}. Think of a pizza slice, with @math{θ} as the angle at the tip of the slice, and the crust as the amount of the circumference the point has traveled.
+
+@ifslide{@image{images/pizza-slice2.png, 50}}
+
+@slidebreak
 
 @QandA{
 In our clock example, we divide the circle into twelve "slices", each representing one hour.
@@ -245,16 +251,16 @@ In our clock example, we divide the circle into twelve "slices", each representi
 
 @Q{Of course, there are other ways besides 12 slices of "hours" to measure angles! Can you think of another measure that divides a circle up differently?}
 @A{_Degrees_, divide a circle up into 360 slices instead of 12.
- - How many minutes are represented by 1 degree?
+ * How many minutes are represented by 1 degree?
    *** 2
- - How many minutes are represented by 2.5 degrees?
+ * How many minutes are represented by 2.5 degrees?
    *** 5
 }
 @A{_Minutes_, which divide our 12-hours into 720 slices. We could imagine one-and-a-half of these slices representing 90 seconds, or 2 slices for 120 seconds.}
 @A{_Compass Directions_ like North, South, East, and West, which divide our circle up into 4 slices instead of 12.
- - How many slices represent the angle between North and South?
+ * How many slices represent the angle between North and South?
    *** 2
- - How many slices represent the angle between West and Southwest?
+ * How many slices represent the angle between West and Southwest?
    *** half a slice
 }
 }
@@ -307,17 +313,18 @@ Calculations involving circumference all involve the *radius* of the circle. Is 
 
 @slidebreak
 
---
 @right{@image{images/clock-6-equilateral.png, 100}@image{images/clock-6-hexagon.png, 100}}
 Suppose the hand of our clock was made of rubber, and we could take it off and bend it around the circle. How many "clock hands" would it take to wrap all the way around the clock?
 
 - We can start by imagining each slice as an equilateral triangle, where all three sides are exactly one radius.
 - This would give us exactly six slices, with the tip of each slice having a 60° angle...
+
+@slidebreak
+
 @QandA{
 @Q{We could go all the way around the clock circle with 6 of those triangles. Would 6 radii be enough distance to get around the circumference of our circle?}
 @A{No - they make a hexagon whose perimeter is *almost* as big as the circle, but not quite!}
 }
---
 
 @slidebreak
 
@@ -407,6 +414,8 @@ We could make a clock with the numbers written _backwards_ and have the hands mo
 
 Regardless of the direction the "hands" turn, or whether we're dividing the circle into hours, minutes, radians, or anything else, the plotted curves will always be the same.
 
+@slidebreak
+
 @lesson-instruction{
 - Complete the first question on @printable-exercise{converting-angles.adoc}
 }
@@ -415,7 +424,7 @@ Regardless of the direction the "hands" turn, or whether we're dividing the circ
 
 Mathematicians use special names for these functions. They call them sine and cosine, rather than "A" and "B"!
 
-In Pyret (and on most calculators) these functions consume @vocab{radians}, and their names are abbreviated as `sin` and `cos`.
+In Pyret (and on most calculators) these functions consume @vocab{radians} and their names are abbreviated as `sin` and `cos`.
 
 The contracts for these functions are: +
 @hspace{4em}
@@ -427,19 +436,17 @@ The contracts for these functions are: +
 @slidebreak
 
 @lesson-instruction{
-- One of these two functions computes the "x values" from our unit circle (@math{A} on the unit clock). \
+- One of these two functions computes the "x values" from our unit circle (@math{A} on the unit clock). 
 - The other function computes the y-values (@math{B} on the clock).
 - To figure out which function is which, use Pyret to complete @printable-exercise{converting-angles.adoc}.
+- Remember: `sin` and `cos` consume @vocab{radians}... not hours, minutes, pizza slices or degrees!
 }
-
-*Note:* The numbers that these functions expect aren't hours, minutes, pizza slices or degrees. _They consume @vocab{radians}!_
 
 @slidebreak
 
-- sine - the height of the right-triangle at a given angle ("time" in our example)
-- cosine - the width of the right-triangle at a given angle
+- @vocab{sine} - the height of the right-triangle at a given angle ("time" in our example)
+- @vocab{cosine} - the width of the right-triangle at a given angle
  
-
 @strategy{Where did these Names Come From?}{
 
 @right{@image{images/Etymology.png, 125}}

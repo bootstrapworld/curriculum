@@ -1,7 +1,7 @@
 #!/bin/bash
 
 export SEMESTER=fall
-export YEAR=2025-beta
+export YEAR=2025
 
 bootstraproot=https://bootstrapworld.org/materials/$SEMESTER$YEAR
 SED=sed
@@ -132,10 +132,14 @@ for NATLANG in *; do
     rm -f $idfile
   fi
   if test -f $slidesmd; then
+    $SED -i 's/{nbsp}/ /g' $slidesmd
     $TOPDIR/lib/slides-preproc.rkt $slidesmd $slidesmkd
     if test -f $slidesmkd; then
       title=$(grep '^# ' $slidesmkd|$SED -e 1q|$SED -e 's/^#  *//')
       title="AUTO-GEN:$title - $PROGLANG"
+      if test -n "$PD"; then
+        title="$title (PD)"
+      fi
 
       # warn if used without -f and --rebuild
       if test -z "$regenid"; then

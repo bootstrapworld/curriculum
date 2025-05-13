@@ -35,6 +35,14 @@
 |[.materials-links]
 @opt-material-links
 
+| Preparation
+| @preparation{
+- Decide whether you plan to: 
+  * Launch this lesson with @opt-printable-exercise{review.adoc}
+  * Give students more practice with defining and refining models using @opt-printable-exercise{model-college-v-income-3.adoc}
+- If yes, you'll need to make copies and/or share links. If you are using our Google Slides, you may also want to adjust them accordingly.
+}
+
 |===
 
 == Fitting and Comparing Linear Models
@@ -79,7 +87,11 @@ Compared to the size of the incomes in this dataset, an @vocab{S} value of $36,1
 __This model should not be trusted!__
 
 @opt-block{
+@teacher{
 Give students a chance to adjust their `al-ak` model by trial and error and practice defining a second model using Massachusetts and Nevada by having them complete @opt-printable-exercise{model-college-v-income-3.adoc}.
+}
+
+@slidebreak
 
 @QandA{
 @Q{We made a model using Alabama and Alaska. The @math{S}-value for this `al-ak` model is ~36164.683.}
@@ -132,6 +144,8 @@ Percent Change &#8192; = &#8192;
 @opt{For a side by side visual comparison of their models have students complete @opt-printable-exercise{graphing-models.adoc}. Students who did not complete @opt-printable-exercise{model-college-v-income-3.adoc} should just sketch the two models they made.
 }
 }
+ 
+@slidebreak
 
 @QandA{
 @Q{What was the best model (lowest @vocab{S}!) you could come up with?}
@@ -154,7 +168,7 @@ Further discussion of @vocab{S} and @vocab{Residuals} may be appropriate for old
 @A{The model fits the data perfectly.}
 
 @Q{Is an @math{S}-value of 1000 bad?}
-@A{We have no way of knowing out of context! @math{S}-values only make sense when considered in the context of the range of the dataset! In our income dataset, 1000 is a pretty good @vocab{S}, because $1000 isn't a big margin of error. But in a dataset showing the number of students in a school, 1000 would be a very significant error!}
+@A{Without more context, we have no way of knowing! @math{S}-values only make sense when considered in the alongside the range of the dataset. In our income dataset, 1000 is a pretty good @vocab{S}, because $1000 isn't a big margin of error. But in a dataset showing the number of students in a school, 1000 would be a very significant error!}
 }
 
 == Finding the Best Linear Model
@@ -175,6 +189,8 @@ We've learned how to measure how well linear models fit the data and to decide w
 
 Luckily statisticians have developed an algorithm called @vocab{linear regression}, which, given any dataset, considers every point and produces the best possible linear model, known as the @vocab{line of best fit}.
 
+@slidebreak
+
 Pyret's `lr-plot` function uses linear regression to graph the best possible linear model on top of a scatter plot of the dataset, and tell us the slope, y-intercept and @vocab{S-value} of the model.
 
 
@@ -187,6 +203,8 @@ Let's use Pyret to find the best possible linear model for predicting median inc
 - Compare this optimal model to the models you built on @printable-exercise{model-college-v-income-2.adoc}
 - @opt{If you completed @opt-printable-exercise{model-college-v-income-3.adoc}, compare the model on this page as well!}
 }
+
+@slidebreak
 
 @center{@image{images/lr-plot-college-v-income.png, 450}}
 
@@ -218,8 +236,10 @@ Models are only useful if we know how to use and interpret them!
 - Then answer the question.
 }
 
+@slidebreak
+
 @QandA{
-@Q{How could we use the model to predict the median income for a state with a 30% college attendance rate.}
+@Q{How could we use the model to predict the median income for a state with a 30% college attendance rate?}
 @A{Compute `al-ak(30)` by substituting 30 into the equation for @math{x}.}
 @A{@math{5614 \times 30 + 83616 = ~252306}}
 }
@@ -256,8 +276,8 @@ Suppose two new states were to join the union, one with a 30% college attendance
 @A{Reason why not: Washington, D.C. is not representative of the rest of the country at all. The unusual concentration of highly-educated people working for lower income is a special case because of all the government employees. Therefore, it's ok to remove.}
 
 @Q{How could we use scatter plots and linear models to find answers to _other_ questions, for example:
-- Do taller NBA players tend to make more three-pointers?
-- Do wealthier people live longer?
+  * Do taller NBA players tend to make more three-pointers?
+  * Do wealthier people live longer?
 }
 @A{Find a dataset that contains the explanatory variable and response variable, import it into Pyret, and build an lr-plot!}
 }
@@ -265,9 +285,9 @@ Suppose two new states were to join the union, one with a 30% college attendance
 @ifnotslide{
 @strategy{Optional Activity: Guess the Model!}{
 
-1. Divide students into teams of 2-4, and have each team come up with a linear, real-world scenario, then have them write down a linear function that fits this scenario on a sticky note. Make sure no one else can see the function!
+1. Divide students into small groups (2-4), and have each team come up with a linear, real-world scenario, then have them write down a linear function that fits this scenario on a sticky note. Make sure no one else can see the function!
 2. On the board or some flip-chart paper, have each team draw a _scatter plot_ for which their linear function is best fit. They should only draw the point cloud - _not the function itself!_ Finally, students title their scatter plot to describe their real-world scenario (e.g. - "total cost vs. number of tickets purchased").
-3. Have teams switch places or rotate, so that each team is in front of another team's scatter plot. Have them figure out the original function, write their best guess on a sticky note, and stick it next to the plot.
+3. Have teams rotate so that each team is in front of another team's scatter plot. Have them figure out the original function, write their best guess on a sticky note, and stick it next to the plot.
 4. Have teams return to their original scatter plot, and look at the model their colleagues guessed. How close were they? What strategies did the class use to figure out the model?
 
 - The slope and y-intercepts can be constrained to make the activity easier or harder. For example, limiting these model settings to whole numbers, positive numbers, etc.

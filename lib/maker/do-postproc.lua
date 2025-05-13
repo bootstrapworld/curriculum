@@ -57,6 +57,7 @@ local function postproc(fhtml_cached, tipe)
   local read_end_sidebar_p = false
   local num_of_lines_past_end_sidebar = 0
   local openblock_attribs = false
+  local item_attrib = false
   --
   for x in i:lines() do
     if read_end_sidebar_p then
@@ -142,6 +143,26 @@ local function postproc(fhtml_cached, tipe)
     x = x:gsub('</pre>', '</code></pre>')
     x = x:gsub('<code>', '<code class="' .. code_lang .. '">')
     x = x:gsub('<p> </p>', '<p></p>')
+    --
+    if x:find('<p>%%BEGINQBLOCKITEM%%') then
+      x = x:gsub('<p>%%BEGINQBLOCKITEM%%', '<p class="qblock">')
+      --item_attrib = 'qblock'
+    end
+    --
+    if x:find('<p>%%BEGINABLOCKITEM%%') then
+      x = x:gsub('<p>%%BEGINABLOCKITEM%%', '<p class="ablock">')
+      --item_attrib = 'ablock'
+    end
+    --
+    if item_attrib and (x:find('<li>') or x:find('<p>')) then
+      x = x:gsub('<li>', '<li class="' .. item_attrib .. '">')
+      x = x:gsub('<p>', '<p class="' .. item_attrib .. '">')
+    end
+    --
+    if x:find('%%END[QA]BLOCKITEM%%') then
+      x = x:gsub('%%END[QA]BLOCKITEM%%', '')
+      item_attrib = false
+    end
     --
     if x:find('class="exampleblock .-actually%-openblock ') and openblock_attribs then
       x = x:gsub('class=".-"', '%0' .. openblock_attribs)
