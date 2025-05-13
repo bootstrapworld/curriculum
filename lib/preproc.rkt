@@ -241,6 +241,9 @@
   (format "~a" *in-file*)
   )
 
+(define (authoring-resource?)
+  (regexp-match "/authoring" *containing-directory*))
+
 (define read-group (*make-read-group #:code (lambda z (apply code z))
                                      #:errmessage-file-context errmessage-file-context))
 
@@ -744,6 +747,7 @@
           (unless (file-exists? img-anonymized-qn)
             (cond [(file-exists? img-qn)
                    (rename-file-or-directory img-qn img-anonymized-qn #t)]
+                  [(authoring-resource?) #f]
                   [else (printf "WARNING: ~a: Image file ~a not found\n\n"
                                 (errmessage-context) img-qn)]))))
 
@@ -762,7 +766,8 @@
           (set! image-license (hash-ref image-attribs 'license ""))
           (set! image-source (hash-ref image-attribs 'source "")))
 
-        (unless (or *narrative* *target-pathway* *teacher-resources*)
+        (unless (or *narrative* *target-pathway* *teacher-resources*
+                    (authoring-resource?))
           (when (hash? images-hash)
             (cond [(not image-attribs)
                    (printf "WARNING**: Image ~a missing from dictionary ~a/lesson-images.json\n"
