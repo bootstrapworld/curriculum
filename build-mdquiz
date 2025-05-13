@@ -71,17 +71,12 @@ for (const filePath of quizzes) {
 }
 ' 2>&1)"
 
-
 RED='\033[0;31m'
 NC='\033[0m' # No Color
 
 phrase="✗ Build failed"
 result="${output#*"$phrase"}"
 
-if [[ $result == $output ]]; then
-  "Building MDQuiz succeeded!"
-else
-  echo -e "
+echo -e "
 
 ${RED}✗ Build failed${NC}$result"
-fi
