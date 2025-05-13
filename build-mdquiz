@@ -28,7 +28,8 @@ import react from "@vitejs/plugin-react"
 import { defineConfig, build } from "vite"
 import { viteSingleFile } from "vite-plugin-singlefile"
 import { viteStaticCopy } from "vite-plugin-static-copy"
-import { glob } from "glob";
+import pkg from "glob"
+const  { glob } = pkg
 import { readFileSync} from "fs"
 
 const quizzes = glob.sync("distribution/*/lessons/*/assessments/*");
