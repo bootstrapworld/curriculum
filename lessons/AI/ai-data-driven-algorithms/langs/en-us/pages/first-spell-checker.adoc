@@ -1,5 +1,12 @@
 = The First Spell Checker
 
+++++
+<style>
+/* Push content to the top (instead of the default vertical distribution), which was leaving empty space at the top. */
+#content { display: block !important; }
+</style>
+++++
+
 The very first spell checker would use misspelled words as inputs.
 
 - *First*, it would develop alternative candidates for the misspelled word (input) by making one of the following adjustments: (1) replace a single letter with a different one, or (2) swap the positions of two adjacent letters.
@@ -7,6 +14,8 @@ The very first spell checker would use misspelled words as inputs.
 - *Next*, it would search the provided dictionary to see which alternatives were valid options.
 
 - *Finally*, it would produce a list of valid correctly spelled words for the user to choose from.
+
+@vspace{1ex}
 
 == Part 1: Follow the Algorithm ("wello")
 
@@ -24,11 +33,15 @@ The very first spell checker would use misspelled words as inputs.
 
 @n Are any of the candidates you listed above _actual_ words? If so, circle them. How many _plausible_ candidates did you find? @fitb{8em}{}
 
-@n In question 1 above, there were only five blanks for you to fill in. Approximately how many more *additional* candidates do you think you could you generate by replacing one letter? @hspace{1em} about 10 more @hspace{3em} about 50 more @hspace{3em} about 100 more @hspace{3em} about 1000 more
+@n In question 1 above, there were only five blanks for you to fill in. Approximately how many more *additional* candidates do you think you could generate by replacing one letter? @hspace{1em} about 10 more @hspace{3em} about 50 more @hspace{3em} about 100 more @hspace{3em} about 1000 more
 
 @vspace{1ex}
 
-@teacher{A computer would generate 125 options. After replacing the first letter in the word with each of the letters in the alphabet, it would return the first letter to "w" and try replacing each of the other letters in the word with all of the other letters in the alphabet.}
+@teacher{
+A computer would generate 125 options. After replacing the first letter in the word with each of the letters in the alphabet, it would return the first letter to "w" and try replacing each of the other letters in the word with all of the other letters in the alphabet.
+
+@vspace{1ex}
+}
 
 
 == Part 2: Reflect
@@ -37,9 +50,15 @@ The very first spell checker would use misspelled words as inputs.
 
 @fitb{}{@ifsoln{For example, if two separate letters in a word are incorrect, the spell checker has no chance of proposing the correct word!}}
 
+@fitb{}{}
+
+@fitb{}{}
+
 @n How is the first spell checker's algorithm similar to whatever strategy *you* use when spell checking your writing? @fitb{}{@ifsoln{We can't}}
 
 @fitb{}{@ifsoln{think of any similarities! Maybe your students will have ideas, though.}}
+
+@fitb{}{}
 
 @fitb{}{}
 
