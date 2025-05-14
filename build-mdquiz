@@ -23,7 +23,9 @@ done
    exit 0
  fi
 
-output="$(node --input-type=module -e '
+outputf=.tmp.build-mdquiz.txt
+
+node --input-type=module -e '
 import react from "@vitejs/plugin-react"
 import { defineConfig, build } from "vite"
 import { viteSingleFile } from "vite-plugin-singlefile"
@@ -69,15 +71,18 @@ for (const filePath of quizzes) {
         console.error("The quiz.json file inside", filePath, "is not valid JSON!");
       }
 }
-' 2>&1)"
-
+' 2>&1 > $outputf
 
 RED='\033[0;31m'
 NC='\033[0m' # No Color
 
 phrase="✗ Build failed"
-result="${output#*"$phrase"}"
-echo -e "
 
-${RED}✗ Build failed${NC}$result"
-
+if ! grep "$phrase" $outputf; then
+  echo Build successful
+else
+  n=$(grep -n "$phrase" $outputf|head -1|cut -d: -f1)
+  n=$((n + 1))
+  echo ${RED}✗ Build failed${NC}
+  tail -n +$n $outputf
+fi
