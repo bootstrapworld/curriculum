@@ -5,9 +5,8 @@ function process_assessments() {
     for dd in $d/*; do
       if test -d $dd; then
         rm -f $dd/index.html
-        rm -f $dd/quiz-style.css
         cp -pu node_modules/mdquiz/dist/lib.js $dd/
-        cp -pu lib/quiz-files/* $dd/
+        cp -pu lib/quiz-files/index.html $dd/
       fi
     done
   done
@@ -30,8 +29,7 @@ import react from "@vitejs/plugin-react"
 import { defineConfig, build } from "vite"
 import { viteSingleFile } from "vite-plugin-singlefile"
 import { viteStaticCopy } from "vite-plugin-static-copy"
-import pkg from "glob"
-const  { glob } = pkg
+import { glob } from "glob"
 import { readFileSync} from "fs"
 
 const quizzes = glob.sync("distribution/*/lessons/*/assessments/*");
