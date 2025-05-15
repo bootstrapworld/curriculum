@@ -77,7 +77,7 @@ NC='\033[0m' # No Color
 phrase="✗ Build failed"
 
 if ! grep "$phrase" $outputf; then
-  echo Build successful
+  echo All quizzes were build successfully!
 else
   n=$(grep -n "$phrase" $outputf|head -1|cut -d: -f1)
   n=$((n + 1))
