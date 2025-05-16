@@ -43,20 +43,24 @@ Here are some discoveries we have made so far:
 
 @slidebreak
 
-What we need is a way to check if bags are _similar_! To do this, we will represent our bags as points.
+What we need is a way to check if bags are _similar_! 
 
-- We locate points in two-dimensional space with ordered pairs.
-- We can represent the bag for Document a (`"be": 2, "doo": 3`) like this: (2, 3)
-- If we were to plot a point for Document a on the be-doo plane, it would produce this:
+One strategy PROGRAMMERS? use for this is to represent bags of words as points in space.
+
+Let's see how that would work for Documents a and b.
+
+- We already know that *Document a* "doo be doo be doo" can be represented as the bag or words (`"be": 2, "doo": 3`). 
+- Written as a coordinate pair, it would like this: (2, 3)
+- Plotting that point on the be-doo plane looks like this:
 
 @center{@image{images/3-2.png, 150}}
 
+When we plot a point on the _coordinate_ plane, we locate @math{x} on the horizontal axis and then we locate @math{y} on the vertical axis. There is no such protocol with the bag-of-words model. That said, it is crucial to adhere to the _same word order_ for bags of words that you are comparing!
 
 @QandA{
-
-@Q{How would you represent the Document b ("doo doo be doo be") as a point on the doo-be plane?}
-
-@A{The point would be in the exact same position as the point for Document a. When we plot a point on the _coordinate_ plane, we locate @math{x} on the horizontal axis and then we locate @math{y} on the vertical axis. There is no such protocol with the bag-of-words model. That said, it is crucial to adhere to the _same word order_ for each bag of words. Because we decided on "be" then "doo" for Document a, we must use "be" then "doo" for Document b also.}
+@Q{How would you represent Document b ("doo doo be doo be") as a point on the be-doo plane?}
+@A{The point would be in the exact same position as the point for Document a.}
+@A{Because we decided on "be" then "doo" for Document a, we must use "be" then "doo" for Document b also.}
 }
 
 === Investigate
@@ -85,9 +89,8 @@ Let's look at some slightly more complicated documents and consider how to plot 
 
 |===
 
+@scrub{THIS SECTION COULD BE REFORMMATED AND TIGHTENED UP.}
 *We have a problem.*  We can plainly see that Documents c and d are *not* the same ... but their points are...
-
-
 
 @QandA{
 @Q{What went wrong here?}
@@ -156,18 +159,11 @@ Compressing text into bags of words gives us a coarse-grained notion of similari
 
 === Launch
 
-
-Our primitive plagiarism detector determined if two documents matched perfectly. That plagiarism detector was not especially useful.
-
-Our slightly-less-primitive plagiarism detector determined if two documents' bag-of-words summaries were identical or not... which was also not very useful.
-
-@slidebreak
-
-What we would like is something richer. When we ask people whether two documents are the same, they rarely give us a black-and-white "yes" or "no" answer. Instead they tend to speak about shades of similarity. Likewise, we would like our computer to give us a range of values, not just two, that give us a sense of how similar the two documents are. In other words, we would like the output to be a Number, not just a Boolean.
+When we ask people whether two documents are the same, they rarely give us a black-and-white "yes" or "no" answer. Instead they tend to speak about shades of similarity. Likewise, we would like our computer to give us a range of values that give us a sense of how similar the two documents are. In other words, we would like the output to be a Number, not just a Boolean (identical, not identical).
 
 === Investigate
 
-It turns out that the bag of words model lends itself especially well to that. Recall that using it, we can plot each point in a multi-dimensional space. Now suppose we draw a ray from the origin of the space through of those points. We can then ask: What is the angle between the two rays?
+Now that we know how to represent our bag of words summaries as points in space, we can draw a ray from the origin through each of those points and ask: What is the angle between the two rays?
 
 Take, for example, this comparison between two strings: `stringA` ("doo doo doo doo") and `stringB` ("be be be be").
 
@@ -303,7 +299,7 @@ Here are three different lines of code.
 
 === Overview
 
-We made bags of words with jazz vocalization in order to make meaningful "sentences" with very few different words. What happens when we try to handle something closer to ordinary “language”?
+We made bags of words with jazz vocalization in order to make meaningful "sentences" with very few different words. Obviously, most student essays will contain many more words than these jazz vocalizations do. What happens when we try to handle something closer to ordinary “language”?
 
 
 === Launch
@@ -315,43 +311,59 @@ So far, we've looked at four documents.
 - Document c: "doo be doo be doo doo doo"
 - Document d: "be bop bop bop be bop bop"
 
-Although the documents contain 24 words in total, there are just *_three_* unique words: doo, be, and bop. As a result, we are able to plot these documents as points in a *_three_*-dimensional space.
+Although the documents contain 24 words in total, there are just *_three_* unique words: doo, be, and bop... so we can plot each of these documents as points in a *_three_*-dimensional space.
 
 @slidebreak
 
-Let's add a fifth document, Document e, to our collection.
+Obviously, most texts will contain more than three unique words!
 
-- Document e: "doo be bop ski bop bop"
+@lesson-instruction{
+Take a minute to consider what it would like to plot a point for  "doo be bop ski bop bop" in _four-dimensional_ space. 
+}
 
-Now we have thirty words total, made up of _four_ unique words: doo, be, bop, and *ski*. Plotting all of our documents would require the use of a _four-dimensional_ space. Having trouble visualizing a four-dimensional space? You're not alone.
+Having trouble visualizing a four-dimensional space? You're not alone! 
+
+Fortunately, computers--unlike humans--have no issue working with multi-dimensional spaces, even when they have hundreds of thousands of dimensions.
 
 
 === Investigate
 
-A teacher who wants to catch plagiarism will likely opt for a plagiarism detector that has trained on an _extremely_ large collection of documents.
+A @vocab{training corpus} is a collection of data used to train AI/ML models, enabling them to learn patterns and make predictions. 
 
-A @vocab{training corpus} is a collection of data used to train AI/ML models, enabling them to learn patterns and make prediction. Processing a large training corpus will produce a complex, multi-dimensional model. Every single additional word will add another dimension to the space. Fortunately, computers--unlike humans--have no issue working with multi-dimensional spaces that have hundreds of thousands of dimensions.
+@QandA{
+@Q{Imagine a plagiarism detector that compares student essays to short strings of jazz vocalizations (such as Documents a-e, that we have worked with in this lesson). Does this comparison seem logical or useful? Explain.}
+@A{Totally not useful!}
+@A{Students tend to plagiarize from documents that are at least somewhat connected to the assigned essay topic. It seems very unlikely that a student, assigned to write an essay in academic language, would plagiarize jazz lyrics.}
+}
 
 @slidebreak
 
+A teacher who wants to catch plagiarism will likely opt for a plagiarism detector that has trained on an _extremely_ large collection of documents.
+Processing a large training corpus will produce a complex, multi-dimensional model. Every single additional word will add another dimension to the space. 
+
 @QandA{
-
-@Q{Imagine a plagiarism detector that compares student essays to short strings of jazz vocalizations (such as Documents a-e, that we have worked with in this lesson). Does this comparison seem logical or useful? Explain.}
-@A{Totally not useful! It seems very unlikely that a student, assigned to write an essay in academic language, would plagiarize jazz lyrics. Students tend to plagiarize from documents that are at least somewhat connected to the assigned essay topic.}
-
 @Q{What sorts of documents make up the training corpus of an _effective_ plagiarism detector? List as many as you can.}
-@A{The corpus would likely include: essays written and submitted by students currently in the class; essays written and submitted by students previously in the class; Wikipedia articles; articles on relevant topics that are available on the internet, etc.}
+@A{The corpus would likely include: 
+  * essays written and submitted by students currently in the class
+  * essays written and submitted by students previously in the class
+  * Wikipedia articles
+  * articles on relevant topics that are available on the internet, etc.
+}
 
 @Q{Let's say your teacher asks all 20 students in her class to write a 500-word essay. She plans to feed those 20 essays into a plagiarism detector to use as the training corpus, allowing her to detect if two students submitted essays that were a little too similar. *About* how many dimensions will there be in the model?}
 
 @A{Students should provide a wide range of estimates.}
-@A{An estimate of 10,000 dimensions (20 essays multiplied by 500 words) is the largest possible estimate here--but it is not necessarily a good estimate. In English, we commonly repeat and reuse words like "the", "and", "a", and so on.}
+@A{The largest possible estimate would be 10,000 dimensions (20 essays multiplied by 500 words) --but it is not a good estimate, because we commonly repeat and reuse words like "the", "and", "a", and so on.}
 
-@A{Other considerations: Did all of the students write about the same topic? How sophisticated is the student writing? Did all students actually write 500 words?}
+@A{Before making an estimate, students might have clarifying questions, like: 
+  * Did all of the students write about the same topic? 
+  * How sophisticated is the student writing? 
+  * Did all students actually write 500 words?
+}
 
-@A{Taking all of the above into consideration, we can predict that there would probably be at least a few thousand dimensions in the model.}
+@A{A reasonable prediction would probably be that there would be at least a few thousand dimensions in the model.}
 
-@Q{What happens if we train on the internet?}
+@Q{What happens if we train our plagiarism detector on the internet?}
 }
 
 @slidebreak
@@ -366,6 +378,12 @@ Complete @printable-exercise{human-judgment.adoc}.}
 @QandA{
 Although we can't visualize the multi-dimensional spaces for `wiki-article` and `student-essay`, we _can_ apply what we have learned to consider angle differences.
 
+```
+wiki-article = "The elephant has been a contributor to Thai society and its icon for many centuries. The elephant has had a considerable impact on Thai culture. The Thai elephant is the official national animal of Thailand. The elephant found in Thailand is the Indian elephant, a subspecies of the Asian elephant."
+
+student-essay = "The elephant is a contributor to Thai society. It has been an icon of Thai life for many centuries. The elephant, which it is possible to see found in every part of Thailand, is the Indian elephant, which is a subspecies of the Asian elephant. The Thai elephant has a considerable impact on culture. The elephant is the official national animal of Thailand."
+```
+
 @Q{Do you predict that the angle difference for the `wiki-article` and `student-essay` will be closer to 0° or closer to 90°?}
 
 @A{Since the student essay is nearly identical to the wikipedia article, we would expect a difference closer to zero. (It's actually ~23.706°.)}
@@ -376,42 +394,58 @@ Although we can't visualize the multi-dimensional spaces for `wiki-article` and 
 
 === Overview
 
-Now that we've seen how to create a compressed representation of one piece of text, we look at how we can handle many pieces of text.
+Now that we've seen how to create a compressed representation of one piece of text, how can we handle many pieces of text?
 
 === Launch
 
-Recall that we started with string-matching, then moved from that to bags of words. We still compared bags for being identical, which was too coarse. We therefore improved on that to create `angle-difference`, which gives us a range of values indicating how similar two documents are.
+So far, we have only looked at pairs of documents. Each time we use the `angle-difference` function, Pyret converts both documents to bags of words, then computes the angle between the two. But a real plagiarism detector will compare against _many_ documents--and each document will be compared against _many_ student submissions and that work takes a long time!
 
-So far, we have only looked at pairs of documents. Each time, Pyret converts both documents to bags of words, then computes the angle between the two. But as we saw earlier, a real plagiarism detector will compare against _many_ documents--and each document will be compared against _many_ student submissions. It would be wasteful to repeat a lot of this work over and over.
-
-We will therefore see the next step of this process: training.
-
+To avoid repeating a lot of this work over and over, we need the next step of the process: training.
 
 === Investigate
 
-We are now ready to learn about training a model. In training, we take a number of sources and combine all of them into one corpus. Training is the act of converting each source into our representation; the model is an aggregate of all the corpus data.
+Training takes a number of sources, generates bags of words for each, and combines all of them into one corpus. The model is an aggregate of all the corpus data.
 
-Specifically, let's suppose the teacher wants a plagiarism detector for (short) animal essays. We've already seen a paragraph about the elephant. She gathers up paragraphs describing nine other animals. Each one is turned into a bag of words. The key to creating a model is that all this work is done _once_; it can then be used on many different student submissions.
+Specifically, let's suppose the teacher wants a plagiarism detector for (short) animal essays. In addition to the paragraph we've already seen about the elephant, she gathers up paragraphs describing nine other animals. Each one is turned into a bag of words and added to our model. All this work is only done _once_; it can then be used on many different student submissions.
+
+@lesson-point{Once a model is trained, the corpus can be queried as many times as we want without having to repeat any of the work done during training!}
 
 @slidebreak
 
 @lesson-instruction{
-Use the @starter-file{plagiarism} to complete the first section (`distance-to`) of @printable-exercise{explore-model.adoc}.}
+Let's return to the @starter-file{plagiarism}. 
 
-Before we trained our model, we could use `angle-difference` to compute the angle difference between two different articles. Now, with one command (`distance-to)`, we can compare a given article to every other article in the corpus. This way, we don't have to recompute the bags for each of those documents every time; we do it once and save that work.
+- We've seen that `angle-difference` takes in any two articles we give it, builds their bag of words, and computes the difference. 
+- The `distance-to` function is much more powerful, allowing us to compare any article to all of the articles that we trained our model on without recomputing the bags for each of those documents every time.
 
-@slidebreak
-
-It's nice to be able to see all of the different angle differences... but the information provided by `distance-to` is still inconclusive. For instance, is the angle difference of ~23.706° between `elephant-article` and `student-essay` small enough to say with certainty that plagiarism occurred? Or do we need to improve the model?
-
-@lesson-instruction{
-Use the @starter-file{plagiarism} to complete the second section (`string-to-bag-cleaned`) of @printable-exercise{explore-model.adoc}.}
+Turn to the first section of @printable-exercise{explore-model.adoc} and complete the questions to explore how `distance-to` works.
+}
 
 @slidebreak
 
 @QandA{
-The function you just explored was called `string-to-bag-cleaned`.
+@Q{What are some advantages of working with `distance-to` instead of `angle-difference`?}
+@A{It's nice to be able to see all of the different angle difference.}
 
+@Q{Is `distance-to` sophisticated enough to be able to determine with certainty whether or not plagiarism occurred?}
+@A{No. Knowing that the angle difference between `elephant-article` and `student-essay` is ~23.706° just let's us know that plagiarism is possible.}
+
+@Q{What ideas do you have for how we might be able to improve the model to get more conclusive results?}
+@A{Solicit student answers before exploring the next iteration.}
+}
+
+@slidebreak
+
+Removing common words can simplify text processing and increase focus on more meaningful words. 
+
+@lesson-instruction{
+- Let's take a look at another function in the @starter-file{plagiarism}: `string-to-bag-cleaned`.
+- Complete the second section of @printable-exercise{explore-model.adoc} to explore what it does.
+}
+
+@slidebreak
+
+@QandA{
 @Q{What did "cleaning" our bags of words entail? What did we remove from the bags when we used this function?}
 @A{We removed words that are commonly used in the English language.}
 
@@ -421,20 +455,16 @@ The function you just explored was called `string-to-bag-cleaned`.
 
 @slidebreak
 
-*Stopwords* are common words that are often filtered out in text analysis. Removing them can simplify text processing and increase focus on more meaningful words.
-
-Let's consider how removing stopwords alters the results produced.
-
+The common words that are often filtered out in text analysis are called *Stopwords*. 
 @lesson-instruction{
-Use the @starter-file{plagiarism} to complete @printable-exercise{distance-to-cleaned.adoc}.}
-
+- Let's consider how removing stopwords alters the results produced.
+- Use the @starter-file{plagiarism} to complete @printable-exercise{distance-to-cleaned.adoc}.
+}
 
 === Synthesize
 
 @QandA{
-
 @Q{Now that you understand a little bit more about how plagiarism detection programs work, what advice would you offer to a teacher who is considering using one... or to a student who is trying to get away with plagiarism?}
-
 @A{Students' responses will vary.}
 }
 
