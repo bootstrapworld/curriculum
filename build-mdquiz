@@ -22,6 +22,8 @@ done
    exit 0
  fi
 
+echo ➤ Building quizzes
+
 outputf=.tmp.build-mdquiz.txt
 
 node --input-type=module -e '
@@ -77,7 +79,7 @@ NC='\033[0m' # No Color
 phrase="✗ Build failed"
 
 if ! grep "$phrase" $outputf; then
-  echo All quizzes were build successfully!
+  echo All quizzes were built successfully!
 else
   n=$(grep -n "$phrase" $outputf|head -1|cut -d: -f1)
   n=$((n + 1))
