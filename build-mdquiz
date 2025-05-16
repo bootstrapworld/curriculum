@@ -1,21 +1,36 @@
 #! /bin/bash
 
-function process_assessments() {
-  for d in "$@"; do
-    for dd in $d/*; do
-      if test -d $dd; then
-        rm -f $dd/index.html
-        cp -pu node_modules/mdquiz/dist/lib.js $dd/
-        cp -pu lib/quiz-files/index.html $dd/
-      fi
-    done
-  done
-}
-
+# Make sure we're on a recent make
 make
 
+# index.html for the assessment page,
+# which loads the quiz and displays it
+indexHTML='<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module">
+        import buildQuiz from "./lib.js";
+        import quizConfig from "./quiz.json?raw" with {type: "json"};
+        buildQuiz('root', quizConfig)
+    </script>
+  </body>
+</html>'
+
+# Given a list of assessment directories, replace
+# the index.html file with a fresh one and
+# add the mdquiz JS file
 for d in $(find distribution -type d -name assessments); do
-  process_assessments $d
+  for dd in $d/*; do
+    if test -d $dd; then
+      echo "$indexHTML" > $dd/index.html
+      cp -pu node_modules/mdquiz/dist/lib.js $dd/
+    fi
+  done
 done
 
  if [[ " $* " == *" --clean "* ]]; then
