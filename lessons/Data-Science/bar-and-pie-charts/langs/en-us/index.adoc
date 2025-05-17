@@ -18,8 +18,8 @@
 | Student-facing Lesson Goals
 |
 
-- Let's use functions to create pie and bar charts to visualize categorical data
-- Let's visualize categorical data grouped in different ways
+- Let's use functions to create pie and bar charts to visualize categorical data.
+- Let's visualize categorical data grouped in different ways.
 
 | Materials
 |[.materials-links]
@@ -29,7 +29,19 @@
 | Supplemental Materials
 |[.materials-links]
 @opt-material-links
-- @lesson-link{project-infographic}
+
+| Preparation
+| 
+@ifproglang{pyret}{
+- Decide whether or not you want to launch this lesson using the *Live Pyret Survey* and your class' own data. If so, follow the instructions on @dist-link{pages/live-pyret-survey-instructions.adoc} to:
+  * _Make a copy_ of the @opt-starter-file{bar-and-pie-chart-survey-form} and share it with your class. 
+    ** This makes a great "Do Now" as students enter the room, but could also be assigned for homework the night before.
+  * _Link the Google Sheet of their responses_ to the @opt-starter-file{bar-and-pie-chart-survey-starter}.
+  * _Click "Run"_ and then either:
+    ** Project the new Data Visualization they'll be introduced to today. 
+    ** Publish the starter file and share a link with your students.
+}
+- If you are using our google slides, some optional things have been included. You may want to go through and remove those slides before class if you don't plan to use them.
 
 | Key Points for the Facilitator
 | This lesson uses the @starter-file{expanded-animals}, which includes far more animals than the smaller sample represented in the animals starter file used in most of our lessons. 
@@ -50,6 +62,39 @@
 Students learn one way of grouping data, showing the @vocab{frequency} of values in a dataset using bar and pie charts.
 
 === Launch
+
+@ifproglang{pyret}{
+@opt-block{
+@teacher{
+If you decided to launch today's class using our *Live Pyret Survey*, now is the time!
+
+When you click "Run", the @opt-starter-file{bar-and-pie-chart-survey-starter} builds a `bar-chart` and `pie-chart` side-by-side. 
+
+@indented{
+Assuming you've already...
+
+1. Followed the @dist-link{pages/live-pyret-survey-instructions.adoc, Instructions to Set up and Link the Files} +
+2. Shared the *link you made to your class' copy* of the @opt-starter-file{bar-and-pie-chart-survey-form}
+
+The data visualizations will be generated using data from your students! +
+And they will continue to update in real time as more of your students complete the Google Form.
+}
+
+Project your screen and/or publish the starter file and share a link with your students.
+
+Facilitate a discussion about this new-to-them Pyret Data Visualization!
+}
+
+@lesson-instruction{
+- Open the *Google Form Survey* link I shared and submit your response.
+- Then look at the Survey Results being displayed in the new Data Visualization on the Board.
+- What do you Notice?
+- What do you Wonder?
+}
+}
+}
+
+@slidebreak
 
 @lesson-instruction{
 - Open the @starter-file{expanded-animals} and click "Run".
@@ -146,6 +191,25 @@ Grouping by value works well when lots of different data points can be sorted in
 - When would you want to use one chart instead of another?
 - Which visualizations do you find it easier to interpret? Why?
 - What questions about the dataset are you curious to investigate using these visualizations?
+
+@slidebreak
+
+@opt-block{
+@teacher{
+If you're looking for more conversation starters about when to use a bar chart vs. a pie chart, you might enjoy facilitating a discussion using @link{https://barvpie.netlify.app/?numbers=200%2c204%2c0%2c105%2c10%2c60%2c250%2c115, this teaching tool from Evan Peck}, which builds side by side comparisons of the pie and bar charts that would be generated from a list summarizing the frequencies of each category.
+}
+
+@QandA{
+@centered-image{images/barvpie.png}
+@Q{What question(s) would be easier to answer from the pie chart?}
+@A{Estimate what fraction of the dataset Item 8 represents.}
+
+@Q{What question(s) would be easier to answer from the bar chart?}
+@A{Which item was most common?}
+@A{Which items were not represented?}
+@A{Were any of the items equally common?}
+}
+}
 
 @strategy{Optional Extension}{
 

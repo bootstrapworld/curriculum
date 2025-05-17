@@ -536,6 +536,13 @@ lines on some browsers */
 
   .optpara {
 
+    &::before {
+      font-family: "Open Sans","DejaVu Sans",sans-serif;
+      font-weight: 300;
+      display: block;
+      font-size: 1.25em;
+    }
+
     > .content > * { margin-top: 1em; }
 
     border: 2px;
@@ -544,9 +551,7 @@ lines on some browsers */
     background-color: transparent !important;
     padding: 18px;
 
-    >.content:first-child > .paragraph:first-child p {
-      &::before { font-style: italic; }
-    }
+
     /* Override Asciidoc default here */
     .exampleblock > .content { 
       background-color: inherit; 
@@ -578,9 +583,17 @@ lines on some browsers */
   }
   .q-and-a { 
     min-height: 85px; 
-    .q-and-a-q *:not(.ulist), .q-and-a-a  *:not(.ulist, .ulist *) { display: inline; }
-    .q-and-a-q::before { content: 'Q: '; font-style: italic; font-weight: bold; }
-    .q-and-a-a::before { content: 'A: '; font-style: italic; font-weight: bold; }
+    .qblock, .ablock {
+      font-style: normal;
+      display: inline;
+    }
+    li:has(>.ablock)  {
+      margin-left: 1em;
+      list-style-type: none;
+      &::before { content: '→'; }
+      li { margin-left: 1em; }
+    }
+    .ablock, .ablock+.ulist p { font-style: italic; }
   }
 
   /* COLLAPSED ELEMENTS: 
@@ -614,7 +627,6 @@ lines on some browsers */
   }
   .q-and-a > *:first-child::before { content: url('images/q-and-a.png') }
   .q-and-a table { background: none; }
-  .q-and-a .ulist .ulist li { font-style: italic; }
   .lesson-roleplay > *:first-child::before { content: url('images/lesson-roleplay.png') }
 
   .lesson-point {
@@ -627,6 +639,11 @@ lines on some browsers */
     clear:              both;
     p { margin: 0ex 1ex; }
   }
+
+  /* Let two adjacent lesson-points blend into each other */
+  .lesson-point:has(+.lesson-point) { border-bottom: none; }
+  .lesson-point + .lesson-point     { border-top:    none; }
+
   .teacherNote { 
     display:            inline-block;
     padding:            0 5px;

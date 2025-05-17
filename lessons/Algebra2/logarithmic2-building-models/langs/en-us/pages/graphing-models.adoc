@@ -24,6 +24,8 @@
 /* Make autonums inside tables look consistent with those outside */
 .autonum { font-weight: bold; padding-top: 2px !important; }
 .autonum:after { content: ')' !important; }
+.fitbruby { min-width: unset !important; }
+.fitruby, .fitb { padding-top: 1.1rem; }
 
 /* Cut the padding under each section */
 .sect1 { padding: 0 !important; }
@@ -46,7 +48,7 @@
   --height:   1.4in;
   --left_pct: 0.10;
   --top_pct:  0.85;
-  --minors:   8.0;
+  --minors:   0;
 }
 
 p.tableblock:has(.solution) {
@@ -57,14 +59,15 @@ p.tableblock:has(.solution) {
 </style>
 ++++
 @link-instructions{
-For this page, you'll need to have *Fitting Wealth-v-Health and Exploring Logarithmic Models (Desmos)* open to *Slide 4: Exploring Logarithmic Functions*.
+You'll need to have *Fitting Wealth-v-Health and Exploring Logarithmic Models (Desmos)* open to *Slide 4: Exploring Logarithmic Functions*.
 }
 
 The curve you'll see is the graph of @math{r(x)}, an logarithmic function. Another, *identical* curve @math{s(x)} is hiding behind it. +
-@n Use the starting values of @math{a}, @math{b}, and @math{k} in Desmos to complete the following equation: @math{r(x) = s(x) = } 
-@fitbruby{2em}{@ifsoln{1}}{@math{a}}
-(@fitbruby{2em}{@ifsoln{2}}{@math{b}}) @math{^x +}
-@fitbruby{2em}{@ifsoln{0}}{@math{k}} 
+@n Use the starting values of @math{a}, @math{b}, and @math{k} to complete the following equation: @math{r(x) = s(x) = }
+@math{f(x) = }
+@fitbruby{4.5em}{@ifsoln{1}}{log coefficient}
+@math{log}@fitbruby{1.5em}{@math{_{\;}}}{base}@math{(x)}@hspace{0.5em}@math{+}
+@fitbruby{4em}{@ifsoln{0}}{vertical shift}
 
 == Base @math{b}
 @link-instructions{Keep {nbsp} *k*{nbsp} at @math{0} and {nbsp} *a*{nbsp} at @math{1}. Change the value of {nbsp} *b*{nbsp} as indicated on each grid below.}
@@ -116,18 +119,20 @@ The curve you'll see is the graph of @math{r(x)}, an logarithmic function. Anoth
 == Logarithmic Coefficient @math{a}
 @link-instructions{Set {nbsp} *k*{nbsp} to @math{0} and {nbsp} *b*{nbsp} to @math{10}, then zoom out out so you can see as far as @math{x = 1,000}.}
 
-Change @math{h(x)} to @math{h(x) = 1 \log_{10} (x) + 0} so that the blue curve lands on top of the red curve.
+Change @math{s(x)} to @math{s(x) = 1 \log_{10} (x) + 0} so that the blue curve lands on top of the red curve.
 
 @n In each graph, *label the coordinates where @math{x = 10} and @math{x = 100} and @math{x = 1000}.*
 
 [.FillVerticalSpace.graph, cols="1,1,1", frame="none", options="noheader"]
 |===
-| @math{a = 2}
+| @math{a = -2}
 
   @ifsoln{@image{../images/-2log_10(x)+0.png}}
-| @math{a = 4}
+
+| @math{a = 0}
 
   @ifsoln{@image{../images/0log_10(x)+0.png}}
+
 | @math{a = 2}
 
   @ifsoln{@image{../images/2log_10(x)+0.png}}

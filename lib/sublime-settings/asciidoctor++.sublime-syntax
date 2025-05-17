@@ -20,6 +20,10 @@ contexts:
     - match: '@Q|@A'
       scope: error
 
+    # Use our own matching for code snippets, since Sublime's default gets tripped up
+    - match: '`[^`]+`'
+      scope: code
+
     # match "muted" directives WITH arguments
     #- match: '@([^\{\s]+)(\{[^\}]*\}){0,1}\{'
     - match: '@\b(center|left|right|fitb|fitbruby|vspace|hspace|show|showsoln|ifsoln|ifnotsoln)\b(\{[^\}]+\})\{'
@@ -57,8 +61,8 @@ contexts:
     - match: '{nbsp}'
       scope: directive.muted
 
-    # don't let '~' screw up the whole damned document
-    - match: '[~#]'
+    # don't let '~', '#', or '#_' screw up the whole damned document
+    - match: '[~#]_{0,1}'
       scope: main
 
     # mute table formatting statements

@@ -107,6 +107,7 @@ local function newslide()
     section = false,
     suffix = '',
     containscenter = false,
+    containsoptblock = false,
     imageorientation = 'R',
     preparation = false,
   }
@@ -265,7 +266,7 @@ local function get_slides(lsn_plan_adoc_file)
           curr_slide.suffix = '-RP'
           curr_slide.text = curr_slide.text .. c .. directive
         elseif directive == 'slidebreak' then
-          if nested_in and (nested_in ~= 'ifproglang' and nested_in ~= 'ifpdslide') then
+          if nested_in and (nested_in ~= 'ifproglang' and nested_in ~= 'ifpdslide' and nested_in ~= 'ifslide') then
             terror('@slidebreak inside @' .. nested_in)
           end
           insert_slide_break()
@@ -311,6 +312,8 @@ local function get_slides(lsn_plan_adoc_file)
         else
           if directive == 'center' then
             curr_slide.containscenter = true
+          elseif directive == 'opt-block' then
+            curr_slide.containsoptblock = true
           end
           curr_slide.text = curr_slide.text .. c .. directive
         end
@@ -449,6 +452,9 @@ local function make_slides_file(lplan_file, slides_file)
       if slide.section == 'Repeat' then slide.section = curr_section end
       if slide.section then curr_section = slide.section end
       curr_header = slide.header
+      if slide.containsoptblock then
+        curr_header = 'Optional: ' .. curr_header
+      end
       if (slide.level == 2 and slide.section) then
         if slide.numimages == 2 then slide.imageorientation = '' end
         if curr_section == 'Investigate' then
@@ -464,9 +470,8 @@ local function make_slides_file(lplan_file, slides_file)
         end
         local curr_layout = slide.style or (curr_section .. slide.imageorientation .. slide.suffix)
         if not memberp(curr_layout, allowed_slide_layouts) then
-          print('WARNING: Unknown slide template: ' .. curr_layout
-            .. ' in ' .. os.getenv('PWD') .. '.\n'
-            .. 'Falling back to ' .. curr_section .. slide.imageorientation)
+          print('WARNING: Probably empty slide! Unknown slide template in '
+            .. os.getenv('PWD'))
           slide.suffix = ''
           curr_layout = curr_section .. slide.imageorientation
         end

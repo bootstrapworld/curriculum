@@ -1,0 +1,124 @@
+= Writing Assessments
+
+== Installing the Infrastructure
+
+1. `git pull`
+2. `nvm use 22.5`
+3. `npm install`
+4. `npm update mdquiz`
+5. You're ready to rock `./build-mdquiz` once you write an assessment!
+
+== Writing an Assessment
+
+=== Setting up the assessments folder inside of the lesson
+
+1. An `assessments` folder can be added to any folder at the same level as `authoring`, `images`, `pages`, etc.
+2. The only thing we will see inside the `assessments` folder is subfolders, each one for a single assessment
+3. The folder for each assessment included in the lesson should be named to make it clear what the assessment is about / for.
+  - This folder must contain a file named `/* quiz.json`
+  - If an assessment uses images, they must be stored in this folder.
+
+You can look at `lessons/Data-Science/histograms-visualize/langs/en-us/assessments` for an example.
+
+=== Writing the `/* quiz.json` file
+
+1. It begins with a title that will end up being student-facing.
+
+2. Question Types:
+  - We currently have two fully functional question types: "MultipleChoice" and "ShortAnswer". 
+  - To insert a slide that does not ask a question, use the type "Informational".
+
+3. Every question must include
+
+   {
+    "type": "",
+    "prompt": {
+        "prompt": ""
+        },
+    "answer": {
+        "answer": ""
+        }
+    }
+
+4.  MultipleChoice questions also include "distractors". By default the order of the distractors and answer is randomized. If an `answerIndex` is given, the answer will be located at that index and the remaining indices will be populated by the distractors, _in order_. (In the example below, the choices will be ordered as "8, 12, <answer>, 18. Removing `"answerIndex": 2` will randomize all the choices.)
+
+    "prompt": {
+        "prompt": "A teacher surveys her students on how many hours of TV they watch per week. (See display for results.)\n\nHow many students did the teacher survey?\n",
+        "image": "hours-dist.png",
+        "distractors": [
+          "8",
+          "12",
+          "18"
+        ],
+        "answerIndex": 2
+      },
+
+5. \n\n is used to insert a new line in the middle of a string.
+
+6. This is how to <b>bold</b> something.
+
+Below is an example of what the complete json might look like. 
+
+[options="nowrap"]
+  {
+    "title": "Emmanuel's Demo Quizs",
+    "questions": [
+      {
+        "type": "MultipleChoice",
+        "prompt": {
+          "prompt": "What does it mean if a variable `x` is immutable?\n",
+          "distractors": [
+            "`x` is stored in the immutable region of memory.",
+            "After being defined, `x` can be changed at most once.",
+            "You cannot create a reference to `x`.![alt text](./react.svg 'react logo')"
+          ]
+        },
+        "answer": {
+            "answer": "`x` cannot be changed after being assigned to a value."
+        }
+      },
+      {
+          "type": "ShortAnswer",
+          "prompt": {
+              "prompt": "What is the keyword used after `let` to indicate that a variable can be mutated?"
+          },
+          "image": "./react.svg",
+          "answer": {
+              "answer": "mut"
+          }
+      },
+      {
+          "type": "Informational",
+          "prompt": {
+              "prompt": "Hello! Good news! This is just a poster, no questions to answer."
+          },
+          "image": "https://www.bootstrapworld.org/images/icon.png"
+      }
+      ]
+    }
+
+
+=== To build your quiz
+
+1. Type `./build-mdquiz` in your terminal.
+  - If you get an error like the following one `The quiz.json file inside distribution/en-us/lessons/measures-of-center/assessments/mean-median-modes-checkin is not valid JSON!`
+    ** Open a browser window and type "json validator" or navigate directly to https://jsonlint.com/
+    ** Select All and copy the contents of your `/* quiz.json` file. 
+    ** Paste the full contents of the document into the json validator. 
+    ** Click "validate" and it will identify the first issue with the file. Identify and repeat validation until you get a "JSON is valid!" message.
+    ** Update the file in sublime and rerun `./build-mdquiz`.
+2. Navigate to `distribution/lessons/name-of-lesson/assessments/name-of-assessment/index.html`
+
+You'll see a webpage pop up. It will say:
+
+Quiz +
+# of questions +
+Start
+
+When you click Start you will see the first question and you will need to enter a bogus answer (just choose A) in order to see the next question.
+
+After you complete the quiz you will see a summary of the quiz.
+
+
+
+  

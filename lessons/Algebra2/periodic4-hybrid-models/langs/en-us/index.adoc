@@ -72,8 +72,8 @@ fun periodic-cos2(x):     wave-cos(x)      +      midline-cos(x) end
 @QandA{
 @Q{What is going on in `periodic-cos2` and why does it produce the same graph as `periodic-cos`?}
 @A{`periodic-cos2` is composed of two functions called `midline-cos` and `wave-cos`:
-  - `midline-cos` is just the vertical shift of the `periodic-cos` function.
-  - `wave-cos` is all of the parts of the `periodic-cos` function except for that vertical shift.
+  * `midline-cos` is just the vertical shift of the `periodic-cos` function.
+  * `wave-cos` is all of the parts of the `periodic-cos` function except for that vertical shift.
 }
 }
 @slidebreak
@@ -92,15 +92,15 @@ fun periodic-cos2(x):     wave-cos(x)      +      midline-cos(x) end
 
 Our `periodic-cos` model has two terms:
 
-- The periodic term @math{4.13 \times cos(2\pi(x - 2023.35))}, which described the wave that wrapped around the horizontal midline
-- The vertical shift @math{419.87}, which described the (fixed) y-coordinate of the midline
+- The *periodic term* (@math{4.13 \times cos(2\pi(x - 2023.35))}), which described the wave that wrapped around the horizontal midline
+- The *vertical shift* (@math{419.87}), which described the (fixed) y-coordinate of the midline
 
 `periodic-cos2` splits these terms into _separate functions_, and then composes them:
 
 [cols="^.^15a,^.^1a,^.^10a", frame="none", grid="none"]
 |===
 | [.hybridCOE.first]
-@show{(coe '(+ (* 4.13 (sin (* (* 2 PI) (- x 2023.1)))) 419.87))}
+@show{(coe '(+ (* 4.13 (cos (* (* 2 PI) (- x 2023.1)))) 419.87))}
 
 | &rarr;
 
@@ -122,6 +122,8 @@ Our `periodic-cos` model has two terms:
 === Investigate
 
 We built our `periodic-sin` model using data from a small window: _just one year_. The scatter plot we just looked at on @printable-exercise{choosing-the-best-model.adoc} was also generated from @math{\text{CO}_2} data and had a very different shape!
+
+@slidebreak
 
 @lesson-instruction{
 - Open the @starter-file{alg2-hybrid} and click "Run".
@@ -168,11 +170,11 @@ We built our `periodic-sin` model using data from a small window: _just one year
 
 @Q{How would you describe how our `periodic-sin` model fits the shape of the data from the `modern-table`?}
 @A{Answers will vary. Make sure discussion addresses residuals. Sample responses may include:
- - While they both have a wave, they look pretty different!
- - The model undulates around a horizontal line and the data undulates around a diagonal line.
- - The y-intercepts are in completely different places.
- - When we fit the `periodic-sin` model to the data we see the model as a horizontal wave at the top, eventually lining up with the points on the right hand side of the graph. 
- - We also see vertical residuals showing the distance between each data point and the model.
+ * While they both have a wave, they look pretty different!
+ * The model undulates around a horizontal line and the data undulates around a diagonal line.
+ * The y-intercepts are in completely different places.
+ * When we fit the `periodic-sin` model to the data we see the model as a horizontal wave at the top, eventually lining up with the points on the right hand side of the graph.
+ * We also see vertical residuals showing the distance between each data point and the model.
 }
 }
 
@@ -198,7 +200,7 @@ We built our `periodic-sin` model using data from a small window: _just one year
 
 @QandA{
 @Q{We built the `periodic-sin` model to fit the data in the `recent-table`. Why doesn't it do a good job of predicting @math{CO_2} levels for a larger time frame?}
-@A{Models are only reliable within the span of the data they fit. The fact that the model fit `recent-table` well means it's a good model _for that year_, but we can't make any assumptions about dates outside of the range of the training data.}
+@A{Models are only reliable within the span of the data from which they were created. The fact that the model fit `recent-table` well means it's a good model for the data in _that year_, but we can't make any assumptions about dates outside of the range of the training data.}
 }
 
 == Hybrid Models
@@ -274,8 +276,10 @@ We can visualize the body of the function using the Circles of Evaluation.
 @A{Because it captures both the overarching trend and the seasonal trend.}
 
 @Q{Why doesn't it make sense to compare the following @vocab{S-values}?
- - the error we expect for predictions made from our `periodic-sin` model with the data in the `modern-table` 
- - the error we expect for predictions made from our `periodic-sin` model with the data in the `recent-table`}
+ 
+* the error we expect for predictions made from our `periodic-sin` model with the data in the `modern-table`
+* the error we expect for predictions made from our `periodic-sin` model with the data in the `recent-table`
+}
 @A{The datasets have completely different ranges!}
 
 @Q{Internet memes start out being shared from friend to friend, growing slowly until they "go viral". What would a hybrid model for meme growth look like, and what kinds of models would need to be combined?}

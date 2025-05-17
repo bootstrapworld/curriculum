@@ -31,18 +31,24 @@
 
 @material-links
 
+@ifproglang{pyret}{
+
+| Supplemental Materials
+|[.materials-links]
+@opt-material-links
+
 | Preparation
 |
 @preparation{
-@ifproglang{pyret}{
-- The launch of this lesson uses a live pyret survey to generate a histogram of your class' own commuting data in real time. Follow the instructions on @dist-link{pages/live-pyret-survey-instructions.adoc} to
-  * _make a copy_ of the @starter-file{histogram-survey-form} for your class and
-  * _link the responses from the form_ to the @starter-file{histogram-survey-starter}
+- Decide whether or not you want to launch this lesson using the *Live Pyret Survey* and your class' own data. If so, follow the instructions on @dist-link{pages/live-pyret-survey-instructions.adoc} to:
+  * _Make a copy_ of the @opt-starter-file{histogram-survey-form} and share it with your class. 
+    ** This makes a great "Do Now" as students enter the room, but could also be assigned for homework the night before.
+  * _Link the Google Sheet of their responses_ to the @opt-starter-file{histogram-survey-starter}.
+  * _Click "Run"_ and then either:
+    ** Project the new Data Visualization they'll be introduced to today. 
+    ** Publish the starter file and share a link with your students.
+- If you are using our Google Slides, you will see the word "Optional" in the title of any slide that corresponds to an optional section of the lesson plan. Adjust the slides based on which portions of the lesson you will be doing with your students.
 }
-- There is an @starter-file{histograms, interactive Desmos activity} in the lesson, as well as Desmos formative assessments.
-  * Open the Desmos activity you plan to use and make a code or link to share with students.
-  * If you are using our Google Slides, add the appropriate link to the slide deck. 
-  * _If you're a first-time Desmos user, fear not!_ @dist-link{pages/desmos-instructions.adoc, _Here's what you need to do._}
 }
 
 |===
@@ -60,12 +66,47 @@ Students learn about histograms, considering how they are both similar to and di
 
 === Launch
 
+@ifproglang{pyret}{
+@opt-block{
+@teacher{
+If you decided to launch today's class using our *Live Pyret Survey*, now is the time!
+
+When you click "Run", the @opt-starter-file{histogram-survey-starter} builds a side-by-side `dot-plot` and `histogram` comparison. 
+
+@indented{
+Assuming you've already...
+
+1. Followed the @dist-link{pages/live-pyret-survey-instructions.adoc, Instructions to Set up and Link the Files} +
+2. Shared the *link you made to your class' copy* of the @opt-starter-file{histogram-survey-form}
+
+The data visualizations will be generated using data from your students! +
+And they will continue to update in real time as more of your students complete the Google Form.
+}
+
+Project your screen and/or publish the starter file and share a link with your students.
+
+Facilitate a discussion about this new-to-them Pyret Data Visualization!
+}
+
+@lesson-instruction{
+- Open the *Google Form Survey* link I shared and submit your response.
+- Then look at the Survey Results being displayed in the new Data Visualization on the Board.
+- What do you Notice?
+- What do you Wonder?
+}
+}
+@slidebreak
+}
+
+
 A @vocab{histogram}, like a @vocab{dot plot}, is data visualization that displays quantitative data. Let's explore the ways that histograms are similar to and different from dot plots.
 
 @lesson-instruction{
 - Turn to @printable-exercise{compare-dot-plots-histograms.adoc}.
 - Complete the first section. Be prepared to share your responses.
 }
+
+@slidebreak
 
 @QandA{
 @Q{What do you Notice about the dot plot (left) and the histogram (right), which both display distribution of weeks?}
@@ -94,7 +135,6 @@ Now, let's think more deeply about the sort of information that dot plots and hi
 - Record your responses in the *dot plot* column of the table. If there is a question that you *cannot* answer, put an X.
 }
 
-
 Next, we'll use a histogram to answer the same questions.
 
 @lesson-instruction{
@@ -102,14 +142,18 @@ Next, we'll use a histogram to answer the same questions.
 - Use *only the histogram* to answer the same set of questions. Record your responses in the *histogram* column of the table. If there is a question that you cannot answer, put an X.
 }
 
+@slidebreak
+
 @QandA{
 @Q{Given that this is your first time interpreting a histogram: What questions do you have about reading a histogram?}
 
 @A{Possible questions include:
-- *How is this different from a bar chart?* Histograms show the distribution of quantitative data, not categorical. Histograms' bars cannot be reordered, as they allow us to see the shape of a dataset. We can reorder bars in a bar chart.
-- *Are the values on the tick marks included in the bar?* On a histogram, each bar _includes_ the left-end value but not the right-end value.}
-- *How was the size of the intervals (bins) determined?* This is a great question! But it's too big to tackle today. @vocab{Bin} size varies depending on the data being displayed. We will explore this and other questions about histograms in @lesson-link{histograms-visualize}.
+* *How is this different from a bar chart?* Histograms show the distribution of quantitative data, not categorical. Histograms' bars cannot be reordered, as they allow us to see the shape of a dataset. We can reorder bars in a bar chart.
+* *Are the values on the tick marks included in the bar?* On a histogram, each bar _includes_ the left-end value but not the right-end value.}
+* *How was the size of the intervals (bins) determined?* This is a great question! But it's too big to tackle today. @vocab{Bin} size varies depending on the data being displayed. We will explore this and other questions about histograms in @lesson-link{histograms-visualize}.
 }
+
+@slidebreak
 
 @lesson-instruction{
 - Respond to the questions in the Reflection section of @printable-exercise{compare-dot-plots-histograms.adoc}.
@@ -131,7 +175,9 @@ How do we prevent this misconception? The authors have two recommendations:
 
 }
 
-Lets think more deeply about dot plots and histograms, two data visualizations of both the frequency and distribution of quantitative data.
+@slidebreak
+
+Let's think more deeply about dot plots and histograms, two data visualizations of both the frequency and distribution of quantitative data.
 
 @lesson-instruction{
 - Complete @printable-exercise{match-dot-plots-histograms.adoc}.
@@ -171,6 +217,8 @@ Students create histograms by hand and in @proglang, and then use the histograms
 We have already discussed how histograms are similar to and different from dot plots: both display the frequency and distribution of quantitative data--but histograms give us a collective overview of the data, while dot plots allow us to see individual points.
 
 During this lesson, we will get comfortable making histograms by hand and in @proglang.
+
+@slidebreak
 
 @lesson-instruction{
 - Turn to the first section of @printable-exercise{making-histograms.adoc} and use the data provided to complete the frequency table and corresponding data visualization.
@@ -215,6 +263,5 @@ or maximum.}
 
 @Q{Can we identify how *many* data points are in a dataset from a histogram?}
 @A{Yes. Assuming that the y-axis is clearly labeled, we can add the bar heights to determine how many data points are in a dataset. This of course becomes more complicated when we have larger datasets.}
-
 }
 

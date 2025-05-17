@@ -40,6 +40,7 @@ You will want to:
  * Make a link or code to share with your students.
  * Decide how you will share the link or code with students and, if you are using our Google Slides, add the appropriate link to the slide deck.
  * _If you're a first-time Desmos user, fear not!_ @dist-link{pages/desmos-instructions.adoc, _Here's what you need to do._}
+- If you are using our Google Slides, adjust them based on which portions of the lesson you will be doing with your students.
 }
 
 |===
@@ -68,6 +69,8 @@ We'd expect students to be able to surface much of the following:
 - Diagonal lines have both a @vocab{y-intercept} and an @vocab{x-intercept}.
 - Horizontal lines have a constant rate of change of zero.
 }
+
+@slidebreak
 
 [cols=".^2a,^.^1a", grid="none", frame="none"]
 |===
@@ -132,7 +135,9 @@ _States with higher percentages of college graduates tend to have higher median 
 
 @slidebreak
 
+
 @QandA{
+@ifslide{@right{@image{images/college-v-income.png}}}
 @Q{What do you notice about the shape of this scatter plot? What pattern do you see?}
 @A{This scatter plot appears to show a positive, linear relationship: +
 _States with higher percentages of college graduates tend to have higher median household incomes._}
@@ -145,7 +150,10 @@ _States with higher percentages of college graduates tend to have higher median 
 - Note that some of these new points would require changing the x-min, x-max, y-min and/or y-max of our scatter plot, which we can do by typing in the cells on the right side of the scatter plot and clicking "Redraw".
 }
 
+@slidebreak
+
 @QandA{
+@ifslide{@right{@image{images/college-v-income.png}}}
 Suppose the United States were to add a new state. +
 _Based on the data for the existing 50 states (plus DC!)..._
 
@@ -159,6 +167,8 @@ _Based on the data for the existing 50 states (plus DC!)..._
 @A{Answers will vary. But should be upwards of 65,000}
 }
 
+@slidebreak
+
 @lesson-point{
 When we see patterns in data, we can use those patterns to _make predictions_.
 }
@@ -169,7 +179,12 @@ We can draw a line to model all the possible predictions at once and then we can
 
 In this case, we're looking for a @vocab{model} of the relationship between college graduation and income.
 
-@big{@center{@math{\text{median-income}(\text{pct-college}) =} @fitbruby{1em}{m}{slope} @math{\times \text{pct-college} +} @fitbruby{3em}{b}{y-intercept}}}
+@slidebreak
+
+[cols="1a", frame="none"]
+|===
+|@big{@center{@math{\text{median-income}(\text{pct-college}) =} @fitbruby{1em}{m}{slope} @math{\times \text{pct-college} +} @fitbruby{3em}{b}{y-intercept}}}
+|===
 
 In the function above, we know that `pct-college` is our _explanatory variable_. The slope and y-intercept are _model settings:_ numbers that specify the shape of our linear model.
 
@@ -189,7 +204,7 @@ We want to know: _Are there model settings for @math{m} and @math{b} that will f
 @slidebreak
 
 @teacher{
-Confirm that students were able to successfully compute slope and y-intercept, define and test `al-ak(x)` in Pyret, and test how well `al-ak(x)` predicted several states' median income given the percentage of the population with at least a college degree.
+Confirm that students were able to successfully compute the slope and y-intercept, define and test `al-ak(x)` in Pyret, and find how well `al-ak(x)` predicted several states' median income given the percentage of the population with at least a college degree.
 }
 
 @QandA{
@@ -224,6 +239,8 @@ The *Slope-Intercept* form of the line we've been using tells us about the slope
 
 To prepare ourselves for that thinking, let's look at how horizontal shifts would fit into our linear model.
 
+@slidebreak
+
 @lesson-point{
 @math{f(x) = m(x-h) + k} is the expanded slope-intercept form, which allows us to change both the horizontal (@math{h}) and vertical shift (@math{k}).
 }
@@ -246,6 +263,8 @@ Let's take a moment to explore how @vocab{horizontal shifts} work with linear fu
 - Open *Exploring Horizontal Shift in Linear Models (Desmos)*.
 - Use the slider activities to complete @opt-printable-exercise{exploring-horizontal.adoc}.
 }
+
+@slidebreak
 
 @QandA{
 @Q{Were you able to find any instances where the transformation from a horizontal shift couldn't be achieved by a vertical shift instead?}
