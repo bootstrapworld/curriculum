@@ -42,9 +42,10 @@
 Students learn to diagram expressions using the Circles of Evaluation. This tool has deep roots in both @lesson-link{order-of-operations} and @lesson-link{function-composition}, and math teachers may want to take a detour through one or both of these lessons to support those learning goals.
 
 === Launch
+@slidestyle{Launch}
 By now, you're familiar with a number of table operations: visualizing (as a bar chart, histogram, etc.), filtering, sorting, and building - but what if we want to perform _multiple operations?_ Visualizing, Sorting, Filtering and Building are powerful operations, but when they are _combined_ they become even more powerful!
 
-@slidebreak
+@slidebreak{Launch}
 
 A journalist comes to the shelter who wants to write a story about a successful pet adoption -- but she has a very specific set of criteria. The reporter wants to report on the adoption of an animal that weighs *more than 9 kilograms* (they don't use "pounds" in Britain!).
 
@@ -53,7 +54,7 @@ A journalist comes to the shelter who wants to write a story about a successful 
 @A{We need to filter, showing only rows that are greater than 9kg. We also need to add a column that shows weight in kilograms, dividing pounds by 2.2.}
 }
 
-@slidebreak
+@slidebreak{Launch}
 
 @lesson-point{
 Order matters: Build, Filter, Sort.
@@ -64,7 +65,7 @@ Order matters: Build, Filter, Sort.
 @A{(Sample responses:) It will crash! The computer won't like it!}
 }
 
-@slidebreak
+@slidebreak{Launch}
 
 If we use our functions in the wrong order (trying to filter by a column that doesn’t exist yet), we might wind up crashing the program. But even worse, the program might run but produce nonsensical results! We need a way to think about our table operations that lets us plan out what we want to do. Fortunately, you already know a tool that does exactly this: the @vocab{Circles of Evaluation}!
 
@@ -72,7 +73,7 @@ If we use our functions in the wrong order (trying to filter by a column that do
 
 *_2) The arguments of the function are written left-to-right, in the middle of the Circle._*
 
-@slidebreak
+@slidebreak{LaunchR}
 
 Values like Numbers, String, and Booleans are still written by themselves. It's only when we want to _use a function_ that we need to draw a Circle, and write the values inside from left-to-right.
 
@@ -80,7 +81,7 @@ Let's try diagramming what we need to do for the journalist, using the Circles o
 
 @show{(coe '(build-column animals-table "kilos" kilograms))}
 
-@slidebreak
+@slidebreak{LaunchR}
 
 But we also need to filter by that new column, so that we only have animals weighing more than 9kg! That means we need _another_ Circle of Evaluation. We know `filter` goes at the top. But what table are we using for the first argument? It can't be the animals-table again, because that doesn't have a `"kilos"` column.
 
@@ -92,13 +93,14 @@ Our first Circle of Evaluation _produces a table_, and that's the one we want to
 
 
 === Investigate
+@slidestyle{Investigate}
 
 @lesson-instruction{
 - Complete @printable-exercise{composing-table-operations.adoc}.
 - When you've checked your answers with the rest of the class, complete @printable-exercise{composing-table-operations-order-matters.adoc}
 }
 
-@slidebreak
+@slidebreak{Investigate}
 
 To convert a Circle of Evaluation into code, *we start at the outside and work our way in*. After each function we write a pair of parentheses, and then convert each argument inside the Circle. The code for this Circle of Evaluation would be @show{(code '(box-plot (filter (filter animals-table is-dog) is-young) "age"))}.
 
@@ -121,9 +123,11 @@ Complete @printable-exercise{planning-table-operations.adoc}.
 }
 
 === Synthesize
+@slidestyle{Synthesize}
 
 Was it helpful to think about the Circles, without worrying about @proglang? Why or why not?
 
 == Additional Exercises
+@slidestyle{Supplemental}
 
 @opt-printable-exercise{coe-to-code-2.adoc}

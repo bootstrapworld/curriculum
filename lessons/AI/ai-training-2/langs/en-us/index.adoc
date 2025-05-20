@@ -35,13 +35,14 @@
 Students explore the importance of data normalization, when we organize data to follow a standard pattern.
 
 === Launch
+@slidestyle{Launch}
 
 Here are some discoveries we have made so far:
 
 - Checking if two texts are identical is not an effective way of detecting plagiarism.
 - Summarizing documents as bags of words, and _then_ checking for identicality is better than comparing two texts... but it is also not an effective way of detecting plagiarism.
 
-@slidebreak
+@slidebreak{LaunchC}
 
 What we need is a way to check if bags are _similar_! To do this, we will represent our bags as points.
 
@@ -60,6 +61,7 @@ What we need is a way to check if bags are _similar_! To do this, we will repres
 }
 
 === Investigate
+@slidestyle{Investigate}
 
 Let's look at some slightly more complicated documents and consider how to plot their points in a multi-dimensional space.
 
@@ -101,7 +103,7 @@ Let's look at some slightly more complicated documents and consider how to plot 
 *Forgetting to normalize data and consider dimensionality* are common mistakes. Students will discover what these entail during the remainder of the lesson.
 }
 
-@slidebreak
+@slidebreak{InvestigateC}
 
 To solve this problem, let's start by taking a closer look at our data.
 
@@ -109,7 +111,7 @@ First we must recognize that Documents c and d contain a total of *three* differ
 
 @center{@image{images/scat-venn-diagram.png, 150}}
 
-@slidebreak
+@slidebreak{InvestigateR}
 
 We must revise our bag-of-words summaries and our points!
 
@@ -132,6 +134,7 @@ It is a bit trickier to envision plotting these points, but not impossible!
 We started out with two documents. Now, in place of our two documents, we have two points that exist at specific locations in a multi-dimensional space.
 
 === Synthesize
+@slidestyle{Synthesize}
 
 
 @QandA{
@@ -155,17 +158,19 @@ We started out with two documents. Now, in place of our two documents, we have t
 Compressing text into bags of words gives us a coarse-grained notion of similarity. Let's explore how to produce a more refined notion of similarity.
 
 === Launch
+@slidestyle{Launch}
 
 
 Our primitive plagiarism detector determined if two documents matched perfectly. That plagiarism detector was not especially useful.
 
 Our slightly-less-primitive plagiarism detector determined if two documents' bag-of-words summaries were identical or not... which was also not very useful.
 
-@slidebreak
+@slidebreak{Launch}
 
 What we would like is something richer. When we ask people whether two documents are the same, they rarely give us a black-and-white "yes" or "no" answer. Instead they tend to speak about shades of similarity. Likewise, we would like our computer to give us a range of values, not just two, that give us a sense of how similar the two documents are. In other words, we would like the output to be a Number, not just a Boolean.
 
 === Investigate
+@slidestyle{Investigate}
 
 It turns out that the bag of words model lends itself especially well to that. Recall that using it, we can plot each point in a multi-dimensional space. Now suppose we draw a ray from the origin of the space through of those points. We can then ask: What is the angle between the two rays?
 
@@ -206,7 +211,7 @@ Ordered pair: (4,0)
 The angle formed is 90°.
 |===
 
-@slidebreak
+@slidebreak{Investigate}
 
 If two documents are identical, they will be at the same point in space, and have the same ray extending from the origin to that point. That means the angle between those rays will be 0°. Even if one document just rearranges the other, their bags of words will be identical—thereby again making the angle between the lines 0°.
 
@@ -220,7 +225,7 @@ If two documents are identical, they will be at the same point in space, and hav
 ** Approximate the angle size.
 }
 
-@slidebreak
+@slidebreak{Investigate}
 
 As the documents contain different words, the angles between the lines will grow. To reflect this, we can use the `angle-difference` function. It will give us a value between 0° (if the two are identical) and 90° (if the two have nothing in common).
 
@@ -242,7 +247,7 @@ The contract for `angle-difference` is below.
 # angle-difference :: (String, String) -> Number
 ```
 
-@slidebreak
+@slidebreak{Investigate-DN}
 
 @lesson-instruction{
 Let's try the `angle-difference` function in Pyret.
@@ -274,6 +279,7 @@ For the purposes of this curriculum, you can ignore this difference. In particul
 
 
 === Synthesize
+@slidestyle{Synthesize}
 
 @QandA{
 
@@ -307,6 +313,7 @@ We made bags of words with jazz vocalization in order to make meaningful "senten
 
 
 === Launch
+@slidestyle{Launch}
 
 So far, we've looked at four documents.
 
@@ -317,7 +324,7 @@ So far, we've looked at four documents.
 
 Although the documents contain 24 words in total, there are just *_three_* unique words: doo, be, and bop. As a result, we are able to plot these documents as points in a *_three_*-dimensional space.
 
-@slidebreak
+@slidebreak{Launch}
 
 Let's add a fifth document, Document e, to our collection.
 
@@ -327,12 +334,13 @@ Now we have thirty words total, made up of _four_ unique words: doo, be, bop, an
 
 
 === Investigate
+@slidestyle{Investigate}
 
 A teacher who wants to catch plagiarism will likely opt for a plagiarism detector that has trained on an _extremely_ large collection of documents.
 
 A @vocab{training corpus} is a collection of data used to train AI/ML models, enabling them to learn patterns and make prediction. Processing a large training corpus will produce a complex, multi-dimensional model. Every single additional word will add another dimension to the space. Fortunately, computers--unlike humans--have no issue working with multi-dimensional spaces that have hundreds of thousands of dimensions.
 
-@slidebreak
+@slidebreak{Investigate}
 
 @QandA{
 
@@ -354,13 +362,14 @@ A @vocab{training corpus} is a collection of data used to train AI/ML models, en
 @Q{What happens if we train on the internet?}
 }
 
-@slidebreak
+@slidebreak{Investigate}
 
 @lesson-instruction{
 Complete @printable-exercise{human-judgment.adoc}.}
 
 
 === Synthesize
+@slidestyle{Synthesize}
 
 
 @QandA{
@@ -379,6 +388,7 @@ Although we can't visualize the multi-dimensional spaces for `wiki-article` and 
 Now that we've seen how to create a compressed representation of one piece of text, we look at how we can handle many pieces of text.
 
 === Launch
+@slidestyle{Launch}
 
 Recall that we started with string-matching, then moved from that to bags of words. We still compared bags for being identical, which was too coarse. We therefore improved on that to create `angle-difference`, which gives us a range of values indicating how similar two documents are.
 
@@ -388,26 +398,27 @@ We will therefore see the next step of this process: training.
 
 
 === Investigate
+@slidestyle{Investigate}
 
 We are now ready to learn about training a model. In training, we take a number of sources and combine all of them into one corpus. Training is the act of converting each source into our representation; the model is an aggregate of all the corpus data.
 
 Specifically, let's suppose the teacher wants a plagiarism detector for (short) animal essays. We've already seen a paragraph about the elephant. She gathers up paragraphs describing nine other animals. Each one is turned into a bag of words. The key to creating a model is that all this work is done _once_; it can then be used on many different student submissions.
 
-@slidebreak
+@slidebreak{Investigate-DN}
 
 @lesson-instruction{
 Use the @starter-file{plagiarism} to complete the first section (`distance-to`) of @printable-exercise{explore-model.adoc}.}
 
 Before we trained our model, we could use `angle-difference` to compute the angle difference between two different articles. Now, with one command (`distance-to)`, we can compare a given article to every other article in the corpus. This way, we don't have to recompute the bags for each of those documents every time; we do it once and save that work.
 
-@slidebreak
+@slidebreak{Investigate-DN}
 
 It's nice to be able to see all of the different angle differences... but the information provided by `distance-to` is still inconclusive. For instance, is the angle difference of ~23.706° between `elephant-article` and `student-essay` small enough to say with certainty that plagiarism occurred? Or do we need to improve the model?
 
 @lesson-instruction{
 Use the @starter-file{plagiarism} to complete the second section (`string-to-bag-cleaned`) of @printable-exercise{explore-model.adoc}.}
 
-@slidebreak
+@slidebreak{Investigate}
 
 @QandA{
 The function you just explored was called `string-to-bag-cleaned`.
@@ -419,7 +430,7 @@ The function you just explored was called `string-to-bag-cleaned`.
 @A{Invite student discussion before sharing the explanation provided in the lesson.}
 }
 
-@slidebreak
+@slidebreak{Investigate-DN}
 
 *Stopwords* are common words that are often filtered out in text analysis. Removing them can simplify text processing and increase focus on more meaningful words.
 
@@ -430,6 +441,7 @@ Use the @starter-file{plagiarism} to complete @printable-exercise{distance-to-cl
 
 
 === Synthesize
+@slidestyle{Synthesize}
 
 @QandA{
 

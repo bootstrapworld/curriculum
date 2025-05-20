@@ -58,6 +58,7 @@
 This section motivates the combination of function definition and column lookups, applying algebraic thinking to Data Science. Students review the concepts of column lookups and function definition by writing functions that consume rows and use the value of one column to create an image.
 
 === Launch
+@slidestyle{LaunchC}
 
 
 @center{@image{images/age-v-weeks-species-dot.png}}
@@ -69,7 +70,7 @@ This is a scatter plot of the animals dataset, showing the age on the x-axis and
 @A{Sample responses: More colorful, prettier, pictures of animals, etc.}
 }
 
-@slidebreak
+@slidebreak{LaunchC}
 
 @ifslide{@center{@image{images/age-v-weeks-species-dot.png}}
 }
@@ -80,7 +81,7 @@ This scatter plot isn't just _prettier_ - it's also more useful! Scatter plots t
 @A{`species`}
 }
 
-@slidebreak
+@slidebreak{Launch}
 
 To dig deeper into your data, sometimes you need to see more than 2 variables at once! By processing each Row separately, we can make use of all the columns we want to draw beautiful, creative, and insightful data visualizations. In this lesson, you'll learn how to do just that.
 
@@ -92,6 +93,7 @@ But how do we process each Row separately?
 Let's put those two concepts together, and define functions that consume Rows!
 
 === Investigate
+@slidestyle{Investigate}
 
 @lesson-instruction{
 - Turn to @printable-exercise{age-bc.adoc}, and complete the top half of the page (questions 1 and 2).
@@ -104,7 +106,7 @@ Note that the code for `age-bc` is just the function-version of the code student
 Review student answers. Every student should have the same code for this part!
 }
 
-@slidebreak
+@slidebreak{Investigate-DN}
 
 @lesson-instruction{
 - You could imagine doing this for every animal in the shelter, but that would be a lot of very repetitive work. This is exactly what functions are made for!
@@ -114,7 +116,7 @@ Review student answers. Every student should have the same code for this part!
 
 @teacher{Review the Contract, Examples and Definition with students, making sure to point out the connections between each representation!}
 
-@slidebreak
+@slidebreak{Investigate}
 
 @lesson-instruction{
 - Turn to @printable-exercise{species-tag.adoc}, and complete the top half of the page (questions 1 and 2).
@@ -128,6 +130,7 @@ Note that the code for `species-tag` is just the function-version of the code st
 }
 
 === Synthesize
+@slidestyle{Synthesize}
 @QandA{
 @Q{One of the functions we wrote used the `age` column, and the other used the `species` column. One is a Number and the other is a String, so why did both functions consume _Rows?_}
 @A{What a function consumes is not the same as the _work the function does_. Both functions consumed Rows, but one function looked up the `age` column - a Number - and the other looked up the `species` column - a String.}
@@ -145,18 +148,19 @@ Students are introduced to @show{(code 'image-scatter-plot)}, which consumes a f
 *CS or Programming teachers take note:* `image-scatter-plot` is an example of a _higher order function_, or a function that consumes another function as its input. Curiosity and creativity combine to motivate more advanced programming.
 
 === Launch
+@slidestyle{Launch}
 
 @QandA{
 @Q{Do you think an animal's weight affects how long it stays at the shelter? Why or why not?}
 @A{Many apartment buildings have limits on how heavy a pet can be, which could make bigger animals harder to adopt.}
 }
 
-@slidebreak
+@slidebreak{Launch}
 
 @lesson-instruction{If we're looking for a relationship between two variables, we know that we need a scatter plot! +
 Let's start out by making a scatter plot to look for a relationship between Pounds and Weeks.}
 
-@slidebreak
+@slidebreak{LaunchC}
 
 @center{@image{images/pounds-v-weeks.png, 450}}
 
@@ -166,11 +170,12 @@ There seems to be a positive relationship, but it's not very strong.
 @A{Invite students to share their ideas and explain their rationale. Possible responses: Maybe fixed animals are adopted more quickly. Maybe some species are adopted more quickly. Maybe age plays a role...}
 }
 
-@slidebreak
+@slidebreak{Launch}
 
 Let's say we want to consider the influence of *age* on how how quickly an animal is adopted - while simultaneously considering the relationship between pounds and weeks to adoption. Fortunately, there's a way to do this... _custom scatter plots!_
 
 === Investigate
+@slidestyle{Investigate-DN}
 
 @lesson-instruction{
 - Open the @starter-file{custom-scatter-plot}.
@@ -180,7 +185,7 @@ Let's say we want to consider the influence of *age* on how how quickly an anima
 
 @teacher{_Discuss as a class, or in small groups. See explanation, below, of the `image-scatter-plot` Contract._}
 
-@slidebreak
+@slidebreak{Investigate}
 
 The Contract for `image-scatter-plot` looks pretty different from other @dist-link{Contracts.shtml, Contracts} we've seen.
 
@@ -190,7 +195,7 @@ This Domain is interesting: Table, String, String and...*a Function that consume
 
 @lesson-instruction{What do you think the resulting custom scatter plot will look like? You may want to refer back to @printable-exercise{age-bc.adoc}.}
 
-@slidebreak
+@slidebreak{Investigate}
 
 @lesson-instruction{
 Complete questions 8, 9, and 10 on @printable-exercise{image-scatter-explore.adoc} to see the scatter plot that will be generated and then experiment with modifying its code.}
@@ -203,7 +208,7 @@ Complete questions 8, 9, and 10 on @printable-exercise{image-scatter-explore.ado
 
 @lesson-instruction{Complete the bottom section of the page on *Understanding Custom Visualizations*.}
 
-@slidebreak
+@slidebreak{InvestigateC}
 
 @QandA{
 @Q{How did having the dots labeled with the _species_ change your understanding of the data?}
@@ -236,6 +241,7 @@ We could, for example, represent the Animals using the following code:
 }
 
 === Synthesize
+@slidestyle{Synthesize}
 @QandA{
 @Q{What other ways could we use the columns in each row of the Animals Table to pack more information into our scatter plots?}
 @A{Use legs and age to determine width and height of a rectangle}
@@ -254,6 +260,7 @@ Students discover how to use @vocab{conditionals} - @vocab{piecewise functions} 
 *NOTE:* Math teachers may want their students to confront piecewise functions more deeply, and CS teachers may want to spend more time on conditionals. While not specifically a Data Science lesson, the @lesson-link{piecewise-functions-conditionals/} lesson includes a lot of supporting material and practice pages for these topics, with greater emphasis on the math connections.
 
 === Launch
+@slidestyle{Launch}
 So far, we've seen that...
 
 * the `scatter-plot` function makes uniform blue dots
@@ -264,6 +271,7 @@ How could we use _different color dots_ for each species? Or perhaps draw differ
 This requires a more powerful kind of function, known in math as a @vocab{piecewise function} because it has more than one "piece". In programming, these are often called "conditional" functions, because each piece is used depending on which condition is met.
 
 === Investigate
+@slidestyle{Investigate-DN}
 
 @lesson-instruction{
 * Open the @starter-file{piecewise-visualizations}, save a copy, and click "Run".
@@ -271,7 +279,7 @@ This requires a more powerful kind of function, known in math as a @vocab{piecew
 * Can you come up with another piecewise function?
 }
 
-@slidebreak
+@slidebreak{Investigate}
 
 @QandA{
 @Q{What did the function produce for a dog Row?}
@@ -330,7 +338,7 @@ end
 
 }
 
-@slidebreak
+@slidebreak{Investigate}
 
 Pyret allows us to create advanced versions of several types of data visualizations!
 
@@ -341,7 +349,7 @@ Pyret allows us to create advanced versions of several types of data visualizati
   '("image-pie-chart" ("Table" "String" "(Row -> Image)") "Image")
 )}
 
-@slidebreak
+@slidebreak{Investigate}
 
 We can *add a legend* to our visualizations by creating a "legend image" using the `text` function. This image can then be attached to their visualization using the `above` or `beside` function. For example:
 
@@ -355,5 +363,6 @@ above(chart, legend)
 ```
 
 === Synthesize
+@slidestyle{Synthesize}
 - How do piecewise functions expand what is possible for displaying data?
 - How could you see this power being used to help express complex relationships?

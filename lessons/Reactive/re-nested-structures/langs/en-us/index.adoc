@@ -27,17 +27,18 @@
 Students are introduced to the need for nested data structures, as a way of managing complexity.
 
 === Launch
+@slidestyle{Launch}
 Now that you know all about data structures, you’re able to use them to make video games and animations from scratch, including games that are much more complex than those you worked on in Bootstrap:Algebra.
 
 However, as you add more things to your game, you quickly end up with a large number of elements in your data structure. (If you have multiple characters in your game, each with their own position, speed, costume, etc. that all change, your structure can become quite long and unwieldy.)
 
-@slidebreak
+@slidebreak{Launch}
 
 Making changes to your structure can get extremely complex, requiring lots of changes to your `next-tick` and `next-state-key` functions. One way to manage this complexity is to use _nested  structures_.
 
 For example, if each of our 4 game characters have their own x and y coordinates, we could make one `Position` structure to use for each character. Then, instead of our game structure containing 8 numbers, it contains 4 `Position` structures.
 
-@slidebreak
+@slidebreak{Launch-DN}
 
 Let’s start out with a small animation to explore the benefits of nested structures. Open the @starter-file{pinwheels1} in Pyret, and click "Run". We see four colorful pinwheels spinning in the breeze.
 
@@ -55,7 +56,7 @@ STARTING-PINWHEELS = pinwheel(60, 3, 25, 70)
 
 The only things that change in this animation are the angles of rotation for each of the 4 pinwheels.
 
-@slidebreak
+@slidebreak{Launch}
 
 As usual, we have a `next-state-tick` function to handle updating the state of the animation, and a `draw-state` function to draw the animation.
 
@@ -66,16 +67,17 @@ We also have two @vocab{helper functions} to do some of the work for these main 
 
 Our `next-state-tick` function just calls `update-pinwheel` for each of the wheels. *Most of the work happens in these helper functions!*
 
-@slidebreak
+@slidebreak{Launch}
 
 *Suppose we wanted each of the pinwheels to spin at a different speed.* We already know that any changeable part of the animation will need to be added to the structure, so means having to add 4 new fields to the `PinwheelState` structure.
 
 === Investigate
+@slidestyle{Investigate}
 @lesson-instruction{
 Print out the following @handout{non-nested-pinwheels.adoc, code screenshot} from the pinwheels file and underline or highlight each spot in the code you would need to change in order to add a speed to each pinwheel. Once you’ve identified which sections of the code will need to change, edit the program on the computer so that each pinwheel spins at a different speed.
 }
 
-@slidebreak
+@slidebreak{Investigate-DN}
 
 Now we have a nice animation of pinwheels spinning at different speeds, but this could have been a lot easier if we had started off by making each individual pinwheel _its own structure_.
 
@@ -83,7 +85,7 @@ Now we have a nice animation of pinwheels spinning at different speeds, but this
 Open the @starter-file{pinwheels2} on your computer and take a look at the code. What differences do you see between this starter file and the first?
 }
 
-@slidebreak
+@slidebreak{Investigate}
 
 This time, the `PinwheelState` data structure contains four _structures_, instead Numbers. The angle of rotation is now contained inside the `Pinwheel` structure:
 
@@ -103,7 +105,7 @@ end
 STARTING-PINWHEELS = pinwheels(pw(60), pw(3), pw(25), pw(70))
 ```
 
-@slidebreak
+@slidebreak{Investigate}
 @ifslide{
 ```
 # A Pinwheel is an angle of rotation
@@ -133,12 +135,12 @@ STARTING-PINWHEELS = pinwheels(pw(60), pw(3), pw(25), pw(70))
 @A{`STARTING-PINWHEELS.p1.angle`}
 }
 
-@slidebreak
+@slidebreak{Investigate}
 
 Another change between the non-nested and nested versions of the code is that in the nested version, our @vocab{helper functions} `update-pinwheel` and `draw-pinwheel` now take in a `Pinwheel` data structure, as opposed to just a Number. The animation still works and looks the same on the outside, and the code hasn’t changed too drastically.
 
 
-@slidebreak
+@slidebreak{Investigate}
 
 Let's make each pinwheel spin at a different speed.
 
@@ -149,13 +151,13 @@ Let's make each pinwheel spin at a different speed.
 
 @teacher{Point out the differences in underlining between the two code screenshots. Note that when students finish this activity, both of the animations will look the same- but one program will have been much more straightforward to modify! We wrote a bit more code at the beginning to set up the nested structures, but that paid off later by giving us more flexibility to change the behavior of the pinwheels.}
 
-@slidebreak
+@slidebreak{Investigate}
 
 @ifnotslide{@center{@image{images/adding-speed.png, 800}}}
 
 Just by looking at the differences on paper, we can see the difference in complexity of changing our animations. In order to make each pinwheel spin at a different speed, much more of the non-nested program will need to change, as opposed to the nested version where only the `Pinwheel` structure, `STARTING-PINWHEELS` instance, and the `update-pinwheel` function need to be edited.
 
-@slidebreak
+@slidebreak{Investigate}
 
 What if we wanted to add a breeze to our animation, and make the pinwheels move left across the screen? Let’s assume that each pinwheel moves at the same speed, but each of their x-coordinates will need to change.
 
@@ -168,7 +170,7 @@ Compare @handout{non-nested-pinwheels.adoc, Non-Nested Pinwheels} and @handout{n
 }
 @scrub{
 
-@slidebreak
+@slidebreak{Synthesize}
 
 @ifnotslide{@center{@image{images/adding-x-coordinates.png, 800}}}
 
@@ -181,6 +183,7 @@ Nested Pinwheels+Speed
 }
 
 === Synthesize
+@slidestyle{Synthesize}
 
 Compare the updating functions for the non-nested version of the code:
 
@@ -234,7 +237,7 @@ The nested version is shorter, and it’s also more _readable_. If each pinwheel
 
 The `next-state-tick` function doesn't need to change _at all_. This offers you lots more flexibility when making changes to your code, or adding things to a program.
 
-@slidebreak
+@slidebreak{Synthesize}
 
 How do nested structures work in a complex video game? Here’s the original data block and some sample instances from a video game in which a player tries to catch the target, and avoid a danger:
 
@@ -254,7 +257,7 @@ end
 START = game(320, 100, 600, 75, 5, 1500, 250, 10, 0)
 PLAY  = game(320, 100, 600, 75, 5, 300, 250, 20, 0)
 ```
-@slidebreak
+@slidebreak{Synthesize}
 
 To clean up the `GameState` structure and allow more flexibility in our code, we defined a new structure to represent a `Character`, which contains a single set of x and y-coordinates:
 
@@ -275,7 +278,7 @@ START = game(char(320, 100), char(600, 75), 5, char(1500, 250), 10, 0)
 PLAY  = game(char(320, 100), char(600, 75), 5, char(300, 250), 20, 0)
 ```
 
-@slidebreak
+@slidebreak{Synthesize}
 
 @QandA{
 For the nested structures version of Ninja Cat:
@@ -288,7 +291,7 @@ For the nested structures version of Ninja Cat:
 
 @teacher{Have students discuss the pros and cons of writing a game using nested or non-nested structures.}
 
-@slidebreak
+@slidebreak{Synthesize}
 
 Now take a look at YOUR video games.
 

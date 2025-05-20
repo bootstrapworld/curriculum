@@ -36,9 +36,11 @@ This lesson is part of a series of features meant to come at the end of the Boot
 ////
 
 === Launch
+@slidestyle{Launch}
 The score is something that will be changing in the game, so you can be sure that it has to be added to the `___State` data structure. In our example Ninja Cat program, we’ve called our structure `GameState`, which currently contains the x and y-coordinates for our player, danger, and target, plus the speed of the danger, and speed of the target. Your game(s) will likely have different structures.
 
 === Investigate
+@slidestyle{Investigate}
 @lesson-instruction{
 - What data type is a score? Number, String, Image, or Boolean?
 - What would be the score in your starting game state? (we called this `START` in our game.)
@@ -47,7 +49,7 @@ The score is something that will be changing in the game, so you can be sure tha
 
 Remember: Since your structure is changing, you now have to go through your game code -- _every_ time you call the constructor function for your structure (ours is `game()`), the score must be included. It may be helpful to add the score as the very first or last field of the structure, to make this easier.
 
-@slidebreak
+@slidebreak{Investigate}
 
 @lesson-instruction{
 How would you get the `score` out of one of your instances?
@@ -75,7 +77,7 @@ end
 Your students will likely have radically different games at this point in the course. This lesson is not meant to be followed exactly, but rather used to give students an idea of what steps they should take to add a scoring system to their own games. For extra practice, students can work through adding a scoring system to the Ninja Cat program as well as their own games.
 }
 
-@slidebreak
+@slidebreak{Investigate}
 
 Now that the game has a score, that score needs to actually increase or decrease depending on what happens in the game. For our Ninja Cat game, we’ll say that the score should go up by 30 points when Ninja Cat collides with the ruby (target), and down by 20 points when she collides with the dog (danger).
 
@@ -85,13 +87,13 @@ Now that the game has a score, that score needs to actually increase or decrease
 - Hint: How many dangers does your game have? If there are multiple things your player could hit to lose points, remember to check for each possible collision condition!
 }
 
-@slidebreak
+@slidebreak{Investigate}
 
 If you completed the optional challenge at the end of the @lesson-link{re-adding-collisions/, Collisions Feature} to write the function `game-over`, you already have your own @vocab{helper function} to check whether or not your game over condition is met.
 
 That will be the first condition inside `next-state-tick`, since we don’t want the game to continue if it’s already over! (In our Ninja Cat game, game-over returns true if the cat collides with the dog, AND the cat is on the ground.)
 
-@slidebreak
+@slidebreak{Investigate}
 
 After checking whether or not the game is over, the next three conditions in our `next-state-tick` function check whether the player has collided with the danger and target, as well as whether the player is jumping on the danger.
 
@@ -144,7 +146,7 @@ fun next-state-tick(g):
 ```
 }
 
-@slidebreak
+@slidebreak{Investigate}
 
 Change your own game code so that your score increases and decreases depending on various game conditions:
 
@@ -154,7 +156,7 @@ Change your own game code so that your score increases and decreases depending o
 
 There are lots of ways to implement a scoring system, and which one you choose will depend on the specific mechanics of your individual game.
 
-@slidebreak
+@slidebreak{Investigate}
 
 Now your scoring system is in place, but how will the person playing your game know what their score is? You’ll want to display the score on the screen.
 
@@ -162,7 +164,7 @@ Now your scoring system is in place, but how will the person playing your game k
 Which function handles how the game state is drawn?
 }
 
-@slidebreak
+@slidebreak{Investigate}
 
 In the `draw-state` function, images are placed onto the background using `translate` to draw the game. But the score is represented by a Number: we need a way to represent it as an Image. Thankfully, Pyret has some built-in functions that can help with this: the function `num-to-string` takes in a Number for its domain and returns a String representation of that number. This string can then be passed to the text function to return an Image that can be used in `draw-state`.
 
@@ -172,7 +174,7 @@ In the `draw-state` function, images are placed onto the background using `trans
 @Q{How large should the text of the score be? Where should it be placed on your game scene?}
 }
 
-@slidebreak
+@slidebreak{Investigate}
 
 The expression:  
 

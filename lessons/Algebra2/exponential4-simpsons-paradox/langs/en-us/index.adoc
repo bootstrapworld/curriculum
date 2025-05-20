@@ -43,6 +43,7 @@
 Students discuss an example of Simpson's Paradox, which motivates splitting a dataset into grouped samples using filters. They then discover another motivation for filtering: scatter plots like our covid dataset show _multiple_ @vocab{correlations}, instead of just one. Finally, they learn how to filter a dataset and apply that knowledge to filtering the Covid dataset into samples grouped by state.
 
 === Launch
+@slidestyle{Launch}
 
 
 @teacher{
@@ -69,13 +70,13 @@ A college is looking at enrollment and housing data for students who've decided 
 @A{(Give students time to talk about this, and explain their thinking!  )}
 }
 
-@slidebreak
+@slidebreak{Launch}
 
 It _looks_ like the two variables are significantly related: undecided majors are more likely to live on campus than decided ones!
 
 But there's a *third variable hiding in the background*: freshmen college students are far less likely to have picked a major than seniors, _and_ they are much more likely to live on campus.
 
-@slidebreak
+@slidebreak{Launch}
 
 When we filter by this important third variable, it turns out that there is _no correlation_ between between deciding on a major and living on- or off-campus, for both Freshmen and Non-Freshmen.
 
@@ -100,14 +101,14 @@ When we filter by this important third variable, it turns out that there is _no 
 
 What _looks_ like a correlation between having-a-major and living-on-campus is actually a correlation between _age_ and living-on-campus.
 
-@slidebreak
+@slidebreak{Launch}
 
 @ifnotslide{@right{@image{images/Simpsons_animation.gif, 300}}}
 A third variable lurking in the data can play tricks by obscuring relationships between two other variables - or by creating the appearance of a relationship where none exists!
 
 We often think that the more data we include in our sample the more clearly we'll see any potential relationships. But, in certain circumstances, the correlations in our sub-groups cancel each other out when we put the groups together. This is called @link{https://en.Wikipedia.org/wiki/Simpson%27s_paradox, Simpson's Paradox.}
 
-@slidebreak
+@slidebreak{LaunchR}
 
 @ifslide{@image{images/Simpsons_animation.gif, 300}}
 
@@ -116,12 +117,13 @@ Simpson's Paradox: visible trends in sub-groups _disappear_ or even _reverse_ wh
 }
 
 === Investigate
+@slidestyle{InvestigateC-DN}
 
 Sometimes filtering the data into subsets is the only way to see what's really going on. In our @starter-file{alg2-covid}, the subgroups had such strong relationships that the scatter plot for all our New England states doesn't look much like a scatter plot at all - it looks like someone took a marker and drew in five different curvy lines!
 
 @center{@image{images/positive-v-day.png, 400}}
 
-@slidebreak
+@slidebreak{Investigate}
 
 @QandA{
 @Q{How is a @vocab{grouped sample} different from a @vocab{random sample}?}
@@ -131,7 +133,7 @@ Sometimes filtering the data into subsets is the only way to see what's really g
 @A{Diseases spread more rapidly in densely-populated areas, since it's easier for the infection to jump from one person to another. Unfortunately, we can't _see_ the density data in our table, so that dimension is missing from our dataset! This is exactly what happened in our college example: we couldn't see the age of the students, which skewed our interpretation of the scatter plot.}
 }
 
-@slidebreak
+@slidebreak{Investigate-DN}
 
 @teacher{Make sure you've advanced your teacher dashboard of @starter-file{alg2-covid-desmos} to the fifth slide ("Exponential Model for VT") so that students will be looking at the correct screen when they are directed to return to Desmos part way through @printable-exercise{modeling-other-states.adoc}}
 
@@ -141,7 +143,7 @@ Now that we've explored the Massachusetts data, we are ready to explore some of 
 - Working in pairs or small groups, complete the first section of @printable-exercise{modeling-other-states.adoc} using the @starter-file{alg2-covid}.
 }
 
-@slidebreak
+@slidebreak{Investigate-DN}
 
 @QandA{
 @Q{What are `is-MA` and `MA-table` doing?}
@@ -162,6 +164,7 @@ Now that we've explored the Massachusetts data, we are ready to explore some of 
 It's extremely common for students to believe that filtering a table _changes the original table_, but this is NOT how it works in Pyret! Instead, the `filter` function always produces a _new_ table, containing only the Rows for which the supplied function evaluates to `true`.
 
 === Synthesize
+@slidestyle{Synthesize}
 
 @QandA{
 @Q{How would you explain Simpson's Paradox to someone who missed class today?}

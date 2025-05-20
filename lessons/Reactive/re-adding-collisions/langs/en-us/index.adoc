@@ -29,13 +29,14 @@
 Students implement a simple Boolean-producing function, which composes with the distance function they implemented.
 
 === Launch
+@slidestyle{Launch}
 Once we know how to calculate the distance between two points, what do we do with it? How does that help us implement collision in our games?
 
 @lesson-instruction{
 How close should your danger and your player be, before they hit each other?
 }
 
-@slidebreak
+@slidebreak{Launch}
 
 @lesson-instruction{
 - Turn to @printable-exercise{is-collision.adoc} you’ll find the Word Problem for `is-collision`.
@@ -43,20 +44,21 @@ How close should your danger and your player be, before they hit each other?
 - When you’re done, type it into your game, underneath `distance`.
 }
 
-@slidebreak
+@slidebreak{Launch-DN}
 
 Now that you have a function which will check whether two things are colliding, you can use it in your game! For extra practice, You can also implement collision detection in this @starter-file{ninja-cat-collisions}.
 
 This is the program we’ll be altering for this lesson. In Ninja Cat, when the cat collides with the dog, we want to put the dog offscreen so that it can come back to attack again.
 
 === Investigate
+@slidestyle{Investigate}
 @lesson-instruction{
 Out of the major functions in the game (`next-state-tick`, `draw-state`, or `next-state-key`), which do you think you’ll need to edit to handle collisions, changing the `GameState` when two characters collide?
 }
 
 We’ll need to make some more `if` branches for `next-state-tick`.
 
-@slidebreak
+@slidebreak{Investigate}
 
 @QandA{
 @Q{How could you check whether the cat and dog are colliding? Have you written a function to check that?}
@@ -65,7 +67,7 @@ We’ll need to make some more `if` branches for `next-state-tick`.
 @Q{How do you get the `dangerx` out of the `GameState`? `dangery`?}
 }
 
-@slidebreak
+@slidebreak{Investigate}
 
 ```
 if is-collision(
@@ -77,7 +79,7 @@ if is-collision(
 
 Remember that `next-state-tick` produces a GameState, so what function should come first in our result?
 
-@slidebreak
+@slidebreak{Investigate}
 ```
 if is-collision(
   g.playerx,
@@ -95,7 +97,7 @@ game(
   ...targetspeed...)
 ```
 
-@slidebreak
+@slidebreak{Investigate}
 
 @QandA{
 @Q{What should happen when the cat and dog collide?}
@@ -108,7 +110,7 @@ We could choose a number and always place it at the same y-coordinate each time,
 @show{ (contract "random" '("Number") "Number" )}
 
 
-@slidebreak
+@slidebreak{Investigate}
 
 ```
 if is-collision(
@@ -131,7 +133,7 @@ Collision detection must be part of the next-state-tick function because the gam
 
 @teacher{Students may assume that draw-state should handle collision detection, but point out that the Range of draw-state is an Image, and their function must return a new GameState in order to set the locations of the characters after a collision.}
 
-@slidebreak
+@slidebreak{Investigate}
 
 @lesson-instruction{
 Once you’ve finished, write another branch to check whether the player and the target have collided. *Challenges:*

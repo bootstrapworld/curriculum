@@ -26,13 +26,14 @@
 Students decompose a complex problem (implementing Pong) into simpler sub-problems, and implement the paddle portion of the game.
 
 === Launch
+@slidestyle{Launch}
 In @lesson-link{re-structures-reactors-animations}, you practiced decomposing simple animations into their data structures and functions. Let’s consider how a 2-player game of Pong works:
 
 - There are two "players", each represented by a paddle on either side of the screen.
 - Each paddle can move up and down, as long as they remain on the screen.
 - There is also a ping-pong ball, which moves at any angle and can be on or off the screen.
 
-@slidebreak
+@slidebreak{Launch}
 
 Let’s start out by adding the paddles, making sure they can move up and down, and then we’ll add the ball later.
 
@@ -43,7 +44,7 @@ Using a blank Animation Design Worksheet, figure out how the paddles behave thro
 @teacher{Students should realize that each paddle is simply a y-coordinate, since neither paddle can ever move left or right.}
 
 
-@slidebreak
+@slidebreak{Launch}
 
 Here is one possible structure that we could use to model the two players:  
 ```
@@ -58,7 +59,7 @@ end
 
 We can imagine a few sample `PongState` instances, in which the paddles are at different locations on the screen. If you haven’t already, it would be a good idea to define a sample state for when the game starts, and maybe two other states where the paddles are at other locations.
 
-@slidebreak
+@slidebreak{Launch}
 
 @lesson-instruction{
 We’ll need to answer some questions, in order to write our `draw-state` function.
@@ -69,6 +70,7 @@ We’ll need to answer some questions, in order to write our `draw-state` functi
 }
 
 === Investigate
+@slidestyle{Investigate}
 The paddles don’t move on their own, so right now there’s no `next-state-tick` function. However, they DO move when a user hits a key! That means we’ll need to define `next-state-key`, and answer a few questions in the process:
 
 @QandA{
@@ -80,14 +82,14 @@ The paddles don’t move on their own, so right now there’s no `next-state-tic
 
 @teacher{Have students discuss their answers to these questions, before moving on to next-state-key.}
 
-@slidebreak
+@slidebreak{Investigate}
 
 @lesson-instruction{
 Use the Design Recipe to write the code for `next-state-key`
 }
 
 
-@slidebreak
+@slidebreak{Investigate}
 
 At this point, we know how to change the `PongState` in response to a key-press and how to draw that `PongState` as an image. Let’s build a `reactor`, which uses a `PongState` instance as the starting state and hooks up these functions to the `on-key` and `to-draw` event handlers.
 
@@ -99,7 +101,7 @@ pong-react = reactor:
 end
 ```
 
-@slidebreak
+@slidebreak{Investigate}
 @ifslide{
 ```
 pong-react = reactor:
@@ -111,7 +113,7 @@ end
 }
 When you run this reactor with `pong-react.interact()`, you should see your initial instance drawn on the screen, and the paddle positions should change based on the keys you press! Do all four keys do what you expect them to do? What happens if you hit some _other_ key?
 
-@slidebreak
+@slidebreak{Investigate}
 
 Right now, what happens if you keep moving one of the paddles up or down? Will it go off the edge of the screen? We should prevent that!
 
@@ -124,6 +126,7 @@ Right now, what happens if you keep moving one of the paddles up or down? Will i
 @teacher{Give the class 2-3 minutes to discuss, and then have different teams share back before they start to implement.}
 
 === Synthesize
+@slidestyle{Synthesize}
 
 How many different solutions did you come up with? What do they have in common?
 
@@ -134,6 +137,7 @@ How many different solutions did you come up with? What do they have in common?
 Students modify the game State to add a ball, which can move in two dimensions.
 
 === Launch
+@slidestyle{Launch}
 
 Now that we’ve got our paddles set up, it’s time to start thinking about the ball.
 
@@ -145,6 +149,7 @@ Now that we’ve got our paddles set up, it’s time to start thinking about the
 - When does the ball’s direction change?
 
 === Investigate
+@slidestyle{Investigate}
 @lesson-instruction{
 Use an Animation Design Worksheet to add one part of the ball’s behavior to your game.
 }
@@ -159,7 +164,7 @@ You probably needed to add `ballX` and `ballY` fields to your State, to make sur
 
 @teacher{Some students will hard-code numbers for moving the ball. That’s okay! Once they start thinking about changing direction, those numbers will have to become fields in pongState, which change in response to paddle collisions.}
 
-@slidebreak
+@slidebreak{Investigate}
 
 Now the game is starting to come together! We’ve got two paddles moving up and down, and we make sure they stay on the screen. Meanwhile, we have a ball that can move in any direction...but so far the ball doesn’t know how to bounce! It’s time to plan out what bouncing will look like, and wire it all together.
 
@@ -170,7 +175,7 @@ Now the game is starting to come together! We’ve got two paddles moving up and
 
 @teacher{The goal of this activity is to have students get their collision-detection working, in preparation for the bouncing behavior.}
 
-@slidebreak
+@slidebreak{Investigate}
 
 @lesson-instruction{
 - When a ball moves up and to the right, what happens to `ballX` and `ballY`?
@@ -184,7 +189,7 @@ Now the game is starting to come together! We’ve got two paddles moving up and
 This activity is pretty sophisticated! You’ll want to make sure there are plenty of visual scaffolds for students, or (even better!) have them generate these diagrams themselves.
 }
 
-@slidebreak
+@slidebreak{Investigate}
 
 By now, you may have noticed that the _direction_ of the ball needs to change, and therefore needs to be added to our `PongState` structure. There are different ways we could represent _direction_: it could be a String (e.g. "`north`", "`southeast`", "`west`", etc), or it could be a pair of Numbers that represent how much the ball is moving in the x- and y-direction from frame to frame.
 
@@ -195,7 +200,7 @@ What other ways could you represent direction? What are the pros and cons of eac
 @teacher{Note: the pair-of-numbers representation is deeply aligned to physics, in which the pair represents a vector that translates the ball’s position over time.}
 
 
-@slidebreak
+@slidebreak{Investigate}
 
 Here is one way to represent this, using Numbers to keep track of direction:
 
@@ -211,13 +216,13 @@ data pongState:
 end
 ```
  
-@slidebreak
+@slidebreak{Investigate}
 
 When the game begins, we can start out with `moveX` and `moveY` being specific numbers that move the ball up and to the right. We can change these later, or even make them randomized every time the game starts!
 
 Before we worry about the paddles, let’s start by thinking about the top and bottom walls of the game screen.
 
-@slidebreak
+@slidebreak{Investigate}
 
 @lesson-instruction{
 - What should happen if the ball hits the top of bottom of the screen?
@@ -226,7 +231,7 @@ Before we worry about the paddles, let’s start by thinking about the top and b
 }
 
 
-@slidebreak
+@slidebreak{Investigate}
 
 Now let’s make some sample instances for when the game begins, when the ball is about to hit a wall, and then immediately after:
 
@@ -243,13 +248,13 @@ pongStateB = pong(200, 300, 150, 280, 20, 10)
 pongStateC = pong(200, 300, 550, 320, 20, -10)
 ```
 
-@slidebreak
+@slidebreak{Investigate}
 
 The ball starts out moving up and to the right, but once it hits a wall the direction needs to change. Instead of moving _up_ (adding 10 each tick), it’s now moving _down_ (adding -10 each tick) after bouncing off the wall.
 
 *Note:* Once the ball hits the wall, _its y-position needs to change!_ If the ball stays where it is, it will still be considered to have "hit" the wall on the next tick. This will cause the ball to jitter back and forth, as it constantly hits the same wall over and over.
 
-@slidebreak
+@slidebreak{Investigate}
 
 @lesson-instruction{
 Change `next-state-tick` so that it generates the next `PongState` using the ball’s previous position and the `move` fields. Then, add conditionals to `next-state-tick` so that it will _change the direction_ of the ball when it’s hit a wall.
@@ -260,7 +265,7 @@ Some students may ask about having the ball change angle based on where the it h
 }
 
 
-@slidebreak
+@slidebreak{Investigate}
 
 Let’s walk through our new `next-state-tick` function:
 
@@ -282,7 +287,7 @@ fun next-state-tick(w):
 end
 ```
 
-@slidebreak
+@slidebreak{Investigate}
 
 If a collision with an upper or lower wall occurs, we need to do two things.
 
@@ -290,7 +295,7 @@ If a collision with an upper or lower wall occurs, we need to do two things.
 
 (2) Flip the y-direction so that the ball is moving in the opposite direction. This is easy to do, by multiplying `moveY` by −1.
 
-@slidebreak
+@slidebreak{Investigate}
 
 Now it’s time to start thinking about a different kind of collision: what happens when the ball hits a paddle?
 

@@ -36,6 +36,7 @@
 Students explore song recommendation, another example of data-driven algorithms at work. Students consider how data aggregation is a key component of machine learning.
 
 === Launch
+@slidestyle{Launch}
 
 Data is at the heart of @vocab{data science} and @vocab{data-driven algorithms} are at the heart of Machine Learning and AI.  When collecting, organizing, and drawing general conclusions from data with the help of computers, providing _more_ data often produces better results, but we must also consider how other variables can influence the quality of output.
 
@@ -52,17 +53,18 @@ Data is at the heart of @vocab{data science} and @vocab{data-driven algorithms} 
 }
 
 === Investigate
+@slidestyle{Investigate}
 
 It's likely that Michelle could get better suggestions without Spotify making any changes to the code base. But it's also possible that changing the code would improve Michelle's experience!  Let's consider song recommendation in more depth and explore the idea that sometimes _it is helpful for algorithms to change_.
 
-@slidebreak
+@slidebreak{Investigate}
 
 Very broadly, a song recommendation system does two things:
 
 - aggregate a user's listening history to build a detailed profile of their musical tastes
 - given a new song, determine whether or not to recommend that song
 
-@slidebreak
+@slidebreak{Investigate}
 
 What does building the profile for a listener entail?
 
@@ -72,14 +74,14 @@ What does building the profile for a listener entail?
 - Then, you will (informally) design your own song recommendation system!
 }
 
-@slidebreak
+@slidebreak{Investigate}
 
 @QandA{
 @Q{What would your song recommendation system's algorithm prioritize?}
 @A{Answers will vary!}
 }
 
-@slidebreak
+@slidebreak{Investigate}
 
 @vocab{Training} is the act of transforming data into a model. As you discovered, song recommendation systems need @vocab{training} in order to make recommendations. In the case of Spotify, the model is a _summary_ of the user's listening habits. Using this model, Spotify answers questions about new, unseen data (e.g. Do we expect Michelle to like the latest Taylor Swift song... or not?).
 
@@ -89,6 +91,7 @@ When Michelle observed that Spotify must have updated its algorithms, she was *p
 or a lot... and that there's no way for us to know!}
 
 === Synthesize
+@slidestyle{Synthesize}
 
 @QandA{
 In machine learning, we generally start with a large chunk of data. A model is then generated from the data. That model is generally expected to be a lot smaller than the original chunk of data (but it may still be huge!). The model can be queried from to get answers.
@@ -109,6 +112,7 @@ In machine learning, we generally start with a large chunk of data. A model is t
 Students practice thinking like a hacker to determine the basic requirements of a successful plagiarism detection program. They consider the "bag-of-words" model, which a user can query to better understand how similar or different two documents are.
 
 === Launch
+@slidestyle{Launch}
 
 As a student, you probably know what it feels like to be under surveillance.
 
@@ -117,7 +121,7 @@ As a student, you probably know what it feels like to be under surveillance.
 - When you submit an essay to your English or History teacher, you can expect that they will check for plagiarism - perhaps by running it through a plagiarism detector to be certain that all words and thoughts are your own.
 - You might even got to a school where adults are stationed around the building and in the hallways or use cameras to check that students are dressed and behaving a certain way.
 
-@slidebreak
+@slidebreak{Launch}
 
 Good designers of these systems have to practice adversarial thinking and imagine all the ways that someone might try to _hack_ or _fool_ them.  Let's practice thinking like a designer.
 
@@ -142,7 +146,7 @@ In this exercise, we are trying to get students to engage in *Adversarial Thinki
 Just because students excel at thinking in this way doesn't mean they are ethically compromised. Focus on and commend their creativity and reasoning instead of judging them.
 }
 
-@slidebreak
+@slidebreak{Launch-DN}
 
 To understand the workings of plagiarism detection, we'll start by looking at a simple detector.
 
@@ -151,7 +155,7 @@ To understand the workings of plagiarism detection, we'll start by looking at a 
 - With a partner, complete @printable-exercise{primitive-plagiarism-detector.adoc}.
 }
 
-@slidebreak
+@slidebreak{Launch}
 
 @teacher{Debrief the page with your class.}
 
@@ -164,7 +168,7 @@ To understand the workings of plagiarism detection, we'll start by looking at a 
 @A{Answers will vary.}
 }
 
-@slidebreak
+@slidebreak{Launch}
 
 As we discussed, plagiarizers usually alter at least a few words of the original document. Sometimes they change the ordering of the text, and sometimes they delete a sentence or word here and there.
 
@@ -176,6 +180,7 @@ As we discussed, plagiarizers usually alter at least a few words of the original
 Rather than detecting identicality, we need to determine the _closeness_ of two documents. To do that, we summarize each document, and then compute the distance between the summaries.
 
 === Investigate
+@slidestyle{Investigate}
 
 One standard way to summarize a document is by creating a "bag of words" model. Let's try it on two documents (below); each document is an example of jazz "scatting", when a vocalist improvises with nonsense syllables.
 
@@ -188,7 +193,7 @@ The bag-of-words summary for *Document a* looks like this: `"be": 2, "doo": 3`
 A bag-of-words model represents text as an unordered collection of words with their frequencies.
 }
 
-@slidebreak
+@slidebreak{Investigate}
 
 As you can see, we've taken the original sentence and disregarded word order, creating a collection that focuses solely on *word frequency*.
 
@@ -204,7 +209,7 @@ _Note: We could have written these bag-of-words summaries as `"doo": 3, "be": 2`
 
 The bag-of-words summary for both documents is exactly the same!
 
-@slidebreak
+@slidebreak{Investigate-DN}
 
 A plagiarism detector that uses this model, taking stock of word frequency and word order, could compare the bags instead of the documents. If it did so, it would conclude that the two bags of words are a perfect match... and that Document a and Document b are suspiciously similar.
 
@@ -214,7 +219,7 @@ A plagiarism detector that uses this model, taking stock of word frequency and w
 - With a partner, complete @printable-exercise{slightly-less-primitive-detector.adoc}.
 }
 
-@slidebreak
+@slidebreak{Investigate}
 
 @QandA{
 
@@ -231,6 +236,7 @@ Checking if two bags of words are identical *is* an improvement from checking if
 @teacher{If your students are ready to think about plotting points in a multi-dimensional space, you can continue on to @lesson-link{ai-training-2} to learn about a major upgrade to our plagiarism detection algorithm.}
 
 === Synthesize
+@slidestyle{Synthesize}
 
 @QandA{
 @Q{What similarities are there between a system that recommends songs and `bag-equality` plagiarism detection?}

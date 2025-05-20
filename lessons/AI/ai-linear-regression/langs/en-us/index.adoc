@@ -37,6 +37,7 @@
 Students learn about ALVINN (autonomous Land Vehicle in a Neural Network) as an example of supervised machine learning and regression.
 
 === Launch
+@slidestyle{LaunchR}
 
 @right{@image{images/navlab.png, 400}}
 
@@ -44,7 +45,7 @@ Meet ALVINN (pictured to the right).
 
 ALVINN (short for Autonomous Land Vehicle in a Neural Network) was developed in 1989 by a team of computer scientists at Carnegie Mellon University. ALVINN is the forebear of today's self-driving cars: a retrofitted Army ambulance equipped with sensors, computers, and actuators (the part of a machine that allows movement). ALVINN had about one-tenth of the processing power of an Apple Watch - but was able to safely drive at 70 miles per hour (albeit on a very closed course) by the early 1990s! How did it happen?
 
-@slidebreak
+@slidebreak{Launch}
 
 As with all machine learning, ALVINN required training.
 
@@ -56,7 +57,7 @@ Here's what ALVINN's training entailed:
 - Every two seconds, ALVINN digitized an image of the road ahead and recorded the chosen steering direction.
 - Training images were reduced in resolution to 30x32 pixels and provided as inputs associated with the corresponding "correct" steering angles as their outputs.
 
-@slidebreak
+@slidebreak{Launch}
 
 The human driver in this context is often referred to as the _supervisor_; it is their tagging of input-output pairs that makes supervised machine learning possible.
 
@@ -77,13 +78,13 @@ Note: These images were selected for illustrative purposes. The 30x32 pixel imag
 |===
 
 
-@slidebreak
+@slidebreak{Launch}
 
 ALVINN then uses the set of inputs and outputs to create a @vocab{function}, which we can summarize with contract notation:
 
 @show{(contract 'steer '((road-image Image)) "Number")}
 
-@slidebreak
+@slidebreak{Launch}
 
 @QandA{
 @Q{What information does ALVINN process before producing a steering angle?}
@@ -98,7 +99,7 @@ ALVINN then uses the set of inputs and outputs to create a @vocab{function}, whi
 @A{If we know that we're going to be taking a left turn, we might switch lanes and slow down ahead of time.}
 }
 
-@slidebreak
+@slidebreak{Launch}
 
 @lesson-point{
 ALVINN's function dramatically reduces the complexity of the data and predicts the value of the @vocab{response variable} as though it is completely dependent on the @vocab{explanatory variable}.
@@ -109,12 +110,13 @@ After ALVINN has done some reasonable amount of training, a human pushes ALVINN'
 As ALVINN drives, it produces steering angles it learned from the human driver (who demonstrated the steering angle at each segment of the road), along with a numeric measure of "confidence" in the angle provided.
 
 === Investigate
+@slidestyle{Investigate}
 
 The process described above is an example of @vocab{regression}, a machine learning algorithm that can be trained to predict continuous real-number outputs (like steering angle!).
 
 @vocab{Linear regression}, which you may already have heard of or worked with, is one of the most basic types of regression, because it involves the use of a **_linear_** @vocab{predictor function}. Machine learning incorporates other more complex nonlinear regression types, too (for example: quadratic, polynomial, etc).
 
-@slidebreak
+@slidebreak{Investigate}
 
 Let's apply what we know about machine learning to ALVINN and its training.
 
@@ -124,7 +126,7 @@ With a partner, complete @printable-exercise{alvinn-training.adoc}.
 
 @teacher{Review students' responses, allowing time for discussion, questions, and disagreement.}
 
-@slidebreak
+@slidebreak{Investigate}
 
 While responding to the questions on the worksheet, you hopefully arrived at a few conclusions about ALVINN:
 
@@ -149,6 +151,7 @@ Many students will suspect that ALVINN has thoughts and feelings of its own, a m
 
 
 === Synthesize
+@slidestyle{Synthesize}
 
 @QandA{
 
@@ -174,6 +177,7 @@ _Hint: Think back to the case study from @lesson-link{ai-data-driven-algorithms}
 === Overview
 
 === Launch
+@slidestyle{Launch}
 
 Did you know that every driver on the road is required to have car insurance?
 
@@ -231,5 +235,6 @@ When there are three or more explanatory variables, it becomes impossible to vis
 
 
 === Synthesize
+@slidestyle{Synthesize}
 
 }
