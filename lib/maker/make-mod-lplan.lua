@@ -280,7 +280,7 @@ local function get_slides(lsn_plan_adoc_file)
           if c2 == '{' then
             curr_slide.style = read_group(i, directive)
           elseif nested_in == 'ifpdslide' then
-            curr_slide.style = course_string .. ' Title and Body'
+            -- curr_slide.style = course_string .. ' Title and Body'
           end
         elseif directive == 'slidestyle' then
           curr_slide.style = read_group(i, directive)
@@ -313,7 +313,7 @@ local function get_slides(lsn_plan_adoc_file)
         elseif directive == 'strategy' then
           local arg1 = read_group(i, directive)
           local arg2 = read_group(i, directive, not 'scheme', 'multiline')
-          arg = '@ifpdslide{@slidebreak\n@strategy-basic{' .. arg1 .. '}{' .. arg2 .. '}}\n'
+          arg = '@ifpdslide{@slidebreak{' .. course_string .. ' Title and Body}\n@strategy-basic{' .. arg1 .. '}{' .. arg2 .. '}}\n'
           scan_directives(io.open_buffered(false, arg), directive, dont_count_image_p)
         else
           if directive == 'center' then
@@ -516,7 +516,9 @@ local function make_slides_file(lplan_file, slides_file)
         -- o:write('@slidebreak\n')
         -- o:write('{layout="', curr_layout, '"}\n')
         -- o:write('# ', curr_header, '\n\n')
-        breaks_o:write(curr_layout, '\n')
+        if not curr_layout:match('Title and Body') then
+          breaks_o:write(curr_layout, '\n')
+        end
         local slide_lines = string_split(slide.text, '\n')
         -- for _,l1 in ipairs(slide_lines) do
         --   -- escape leading # so it doesn't become md comment
