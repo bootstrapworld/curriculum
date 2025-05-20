@@ -9,6 +9,12 @@ dofile(make_dir .. 'readers.lua')
 
 local file_being_read = 'noneyet'
 
+local breaks_o = 'noneyet'
+
+local slidebreaks_file = 'noneyet'
+
+local mod_lplan_file = 'noneyet'
+
 local function errmsg_file_context()
   return os.getenv('PWD') .. '/' .. file_being_read
 end
@@ -103,14 +109,24 @@ local function newslide()
     text = '',
     level = 2,
     header = '',
+    numimages = 0,
     section = false,
+    suffix = '',
+    containscenter = false,
     containsoptblock = false,
+    imageorientation = 'R',
     preparation = false,
   }
 end
 
 -- Note: we're counting levels using the AsciiDoc convention. It's one less than the number of ='s
 
+local function set_imageorientation(slide)
+  slide.imageorientation = ((slide.numimages == 2) and '') or 
+    ((slide.containscenter and 'C') or 
+    ((slide.numimages == 0) and '') or 
+    'R')
+end
 
 local function get_slides(lsn_plan_adoc_file)
   if not file_exists_p(lsn_plan_adoc_file) then return end
@@ -134,6 +150,7 @@ local function get_slides(lsn_plan_adoc_file)
       return false
     end
     if not txt:match('%S') then return false end
+    set_imageorientation(curr_slide)
     slides[n + 1] = curr_slide
     return true
   end
@@ -171,6 +188,9 @@ local function get_slides(lsn_plan_adoc_file)
           if arg:match('%(coe') then
             coeIdx = coeIdx + 1
             if not inside_table_p then
+              if not dont_count_image_p then
+                curr_slide.numimages = curr_slide.numimages + 1
+              end
               curr_slide.text = curr_slide.text .. '@autogen-image{coe' .. coeIdx .. '}{images/AUTOGEN-COE' .. coeIdx .. '.png}'
             end
           else
@@ -182,6 +202,12 @@ local function get_slides(lsn_plan_adoc_file)
           local arg = read_group(i, directive)
           imgIdx = imgIdx + 1
           if not inside_table_p then
+            if (not dont_count_image_p) then
+              curr_slide.numimages = curr_slide.numimages + 1
+            end
+            if directive == 'centered-image' then
+              curr_slide.containscenter = true
+            end
             curr_slide.text = curr_slide.text .. '@autogen-image{img' .. imgIdx .. '}{images/AUTOGEN-IMAGE' .. imgIdx .. '.png}'
           end
         elseif inside_table_p then
@@ -240,8 +266,10 @@ local function get_slides(lsn_plan_adoc_file)
           inside_lesson_instruction = true
           curr_slide.text = curr_slide.text .. c .. directive
         elseif directive == 'starter-file' then
+          curr_slide.suffix = '-DN'
           curr_slide.text = curr_slide.text .. c .. directive
         elseif directive == 'lesson-roleplay' then
+          curr_slide.suffix = '-RP'
           curr_slide.text = curr_slide.text .. c .. directive
         elseif directive == 'slidebreak' then
           if nested_in and (nested_in ~= 'ifproglang' and nested_in ~= 'ifpdslide' and nested_in ~= 'ifslide') then
@@ -288,7 +316,9 @@ local function get_slides(lsn_plan_adoc_file)
           arg = '@ifpdslide{@slidebreak\n@strategy-basic{' .. arg1 .. '}{' .. arg2 .. '}}\n'
           scan_directives(io.open_buffered(false, arg), directive, dont_count_image_p)
         else
-          if directive == 'opt-block' then
+          if directive == 'center' then
+            curr_slide.containscenter = true
+          elseif directive == 'opt-block' then
             curr_slide.containsoptblock = true
           end
           curr_slide.text = curr_slide.text .. c .. directive
@@ -331,7 +361,7 @@ local function get_slides(lsn_plan_adoc_file)
               if (new_header == 'Synthesize') then
                 curr_slide.header = new_header
                 curr_slide.text = '@teacher{\n' .. curr_slide.text .. '}\n'
-                curr_slide.section = true
+                curr_slide.section = 'Synthesize'
               else
                 terror("Saw 'Common Misconceptions' that was not immediately followed by 'Synthesize'")
               end
@@ -342,9 +372,9 @@ local function get_slides(lsn_plan_adoc_file)
               curr_slide.level = new_level
 
               curr_slide.section = ((curr_slide.level == 2) and
-              (new_header:match('Launch') or
-              new_header:match('Investigate') or
-              new_header:match('Synthesize')))
+              ((new_header:match('Launch') and 'Launch') or
+              (new_header:match('Investigate') and 'Investigate') or
+              (new_header:match('Synthesize') and 'Synthesize')))
 
               if new_header == 'Overview' and not old_slide_substantial_p then
                 -- print('reusing old header', old_header)
@@ -390,39 +420,71 @@ local function get_slides(lsn_plan_adoc_file)
   if n > 1 then
     local last_slide = slides[n]
     if not last_slide.section and (last_slide.header == "Additional Exercises") then
-      last_slide.section = true
+      last_slide.section = 'Supplemental'
       last_slide.level = 2 -- knock down to level 2 so the slide contents will be printed in make_slides_file
     end
   end
   return slides
 end
 
+local function make_mod_lplan_file(lplan_file, slidebreaks_file, mod_lplan_file)
+  -- print('doing make-mod_lplan_file', lplan_file, slidebreaks_file, mod_lplan_file)
+  -- print('in ', os.getenv('PWD'))
+  local i1 = io.open(lplan_file, 'r')
+  local i2 = io.open(slidebreaks_file, 'r')
+  local o = io.open(mod_lplan_file, 'w')
+  local style
+  for line1 in i1:lines() do
+    if line1:match('^===%s') and (line1:match('Launch') or line1:match('Investigate') or line1:match('Synthesize')) then
+      style = i2:read()
+      o:write(line1, '\n')
+      o:write('@slidestyle{', style or 'scrubbed?', '}\n')
+    elseif line1:match('@slidebreak%s*$') then
+      style = i2:read()
+      o:write('@slidebreak{', style or 'scrubbed?', '}\n')
+    elseif line1:match('^==%s') and line1:match('Additional Exercises') then
+      style = i2:read()
+      o:write(line1, '\n')
+      o:write('@slidestyle{', style or 'scrubbed?', '}\n')
+    else
+      o:write(line1, '\n')
+    end
+  end
+  i1:close()
+  i2:close()
+  o:close()
+end
+
 local function make_slides_file(lplan_file, slides_file)
   if not file_exists_p(lplan_file) then return end
+  slidebreaks_file = lplan_file .. '-breaks'
+  mod_lplan_file = lplan_file .. '-mod'
+  breaks_o = io.open(slidebreaks_file, 'w')
+  mod_o = io.open(mod_lplan_file, 'w')
   local slides = get_slides(lplan_file)
   --print('got ' .. #slides .. ' slides')
   local slides_last_idx = #slides
   local curr_header = 'notsetyet'
   local curr_section = 'notsetyetI'
-  local o = io.open(slides_file, 'w')
+  -- local o = io.open(slides_file, 'w')
 
   for k,slide in ipairs(slides) do
     --print('doing slide ' .. k .. ' of level ' .. slide.level)
     if k == 1 then
-      if slide.header then
-        o:write('@slidebreak\n')
-        o:write('{layout="', course_string, ' Title Slide"}\n')
-        o:write('# ', slide.header, '\n\n')
-        o:write('<!--\n')
-        o:write('\n\nThis is the **'..proglang..'** version of this lesson. Make sure you are using the right software tool (WeScheme, Pyret, CODAP, etc...')
-        o:write('\n\nTo learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en')
-        if slide.preparation then
-          o:write('\n\nPreparation:\n')
-          o:write(slide.preparation)
-          o:write('\n')
-        end
-        o:write('\n\n-->\n')
-      end
+      -- if slide.header then
+      --   o:write('@slidebreak\n')
+      --   o:write('{layout="', course_string, ' Title Slide"}\n')
+      --   o:write('# ', slide.header, '\n\n')
+      --   o:write('<!--\n')
+      --   o:write('\n\nThis is the **'..proglang..'** version of this lesson. Make sure you are using the right software tool (WeScheme, Pyret, CODAP, etc...')
+      --   o:write('\n\nTo learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en')
+      --   if slide.preparation then
+      --     o:write('\n\nPreparation:\n')
+      --     o:write(slide.preparation)
+      --     o:write('\n')
+      --   end
+      --   o:write('\n\n-->\n')
+      -- end
     else
       -- print('outputting slide', slide.section, slide.level, slide.header)
       if slide.section == 'Repeat' then slide.section = curr_section end
@@ -432,53 +494,69 @@ local function make_slides_file(lplan_file, slides_file)
         curr_header = 'Optional: ' .. curr_header
       end
       if (slide.level == 2 and slide.section) then
-        local curr_layout = slide.style
+        if slide.numimages == 2 then slide.imageorientation = '' end
+        if curr_section == 'Investigate' then
+          if slide.numimages == 2 then slide.suffix = '2' end
+        elseif curr_section == 'Launch' then
+          if slide.imageorientation == 'R' then
+            if slide.suffix ~= '' then slide.suffix = '' end
+          end
+        elseif curr_section == 'Synthesize' then
+          if slide.suffix ~= '' then
+            slide.suffix = ''
+          end
+        end
+        local curr_layout = slide.style or (curr_section .. slide.imageorientation .. slide.suffix)
         if not memberp(curr_layout, allowed_slide_layouts) then
           print('WARNING: Probably empty slide! Unknown slide template in '
             .. os.getenv('PWD'))
-          curr_layout = "Bogus-layout"
+          slide.suffix = ''
+          curr_layout = curr_section .. slide.imageorientation
         end
-        o:write('@slidebreak\n')
-        o:write('{layout="', curr_layout, '"}\n')
-        o:write('# ', curr_header, '\n\n')
+        -- o:write('@slidebreak\n')
+        -- o:write('{layout="', curr_layout, '"}\n')
+        -- o:write('# ', curr_header, '\n\n')
+        breaks_o:write(curr_layout, '\n')
         local slide_lines = string_split(slide.text, '\n')
-        for _,l1 in ipairs(slide_lines) do
-          -- escape leading # so it doesn't become md comment
-          l1 = l1:gsub('^(%s+)#', '%1\\#')
-          -- four hyphens becomes four backticks
-          l1 = l1:gsub('^%-%-%-%-$', '````')
-          -- __stuff__ becomes _stuff_
-          l1 = l1:gsub('__(.-)__', '_%1_')
-          -- leading unicode_bullet<space> becomes md item
-          l1 = l1:gsub('^%s*•%s',        '- ')
-          -- ^ ** becomes md subitem
-          l1 = l1:gsub('^%s*%*%*%s',     '  - ')
-          -- ^ *** becomes md subsubitem
-          l1 = l1:gsub('^%s*%*%*%*%s',   '    - ')
-          -- ^ **** becomes md subsubsubitem
-          l1 = l1:gsub('^%s*%*%*%*%*%s', '      - ')
-          -- adoc-style autonumbered item ^. becomes md-style autonumbered item
-          l1 = l1:gsub('^%.%s', '1. ')
-          -- **stuff** becomes *stuff*
-          l1 = l1:gsub('%*%*(.-)%*%*', '*%1*')
-          -- *stuffwnospace* becomes __stuffwnospace__
-          l1 = l1:gsub('%*([^* ].-%S)%*', '__%1__')
-          -- *onenonspace* becomes __onenonspace__
-          l1 = l1:gsub('%*(%S)%*', '__%1__')
-          -- snip trailing space
-          l1 = l1:gsub(' %+$', '') -- would <br> work here?
-          -- snip trailing +
-          l1 = l1:gsub('^%+$', '') -- ditto
-          -- resolve variables
-          l1 = l1:gsub('{two%-colons}', '::')
-          l1 = l1:gsub('{empty}', '')
-          l1 = l1:gsub('{plus}', '+')
-          o:write(l1, '\n')
-        end
+        -- for _,l1 in ipairs(slide_lines) do
+        --   -- escape leading # so it doesn't become md comment
+        --   l1 = l1:gsub('^(%s+)#', '%1\\#')
+        --   -- four hyphens becomes four backticks
+        --   l1 = l1:gsub('^%-%-%-%-$', '````')
+        --   -- __stuff__ becomes _stuff_
+        --   l1 = l1:gsub('__(.-)__', '_%1_')
+        --   -- leading unicode_bullet<space> becomes md item
+        --   l1 = l1:gsub('^%s*•%s',        '- ')
+        --   -- ^ ** becomes md subitem
+        --   l1 = l1:gsub('^%s*%*%*%s',     '  - ')
+        --   -- ^ *** becomes md subsubitem
+        --   l1 = l1:gsub('^%s*%*%*%*%s',   '    - ')
+        --   -- ^ **** becomes md subsubsubitem
+        --   l1 = l1:gsub('^%s*%*%*%*%*%s', '      - ')
+        --   -- adoc-style autonumbered item ^. becomes md-style autonumbered item
+        --   l1 = l1:gsub('^%.%s', '1. ')
+        --   -- **stuff** becomes *stuff*
+        --   l1 = l1:gsub('%*%*(.-)%*%*', '*%1*')
+        --   -- *stuffwnospace* becomes __stuffwnospace__
+        --   l1 = l1:gsub('%*([^* ].-%S)%*', '__%1__')
+        --   -- *onenonspace* becomes __onenonspace__
+        --   l1 = l1:gsub('%*(%S)%*', '__%1__')
+        --   -- snip trailing space
+        --   l1 = l1:gsub(' %+$', '') -- would <br> work here?
+        --   -- snip trailing +
+        --   l1 = l1:gsub('^%+$', '') -- ditto
+        --   -- resolve variables
+        --   l1 = l1:gsub('{two%-colons}', '::')
+        --   l1 = l1:gsub('{empty}', '')
+        --   l1 = l1:gsub('{plus}', '+')
+        --   -- o:write(l1, '\n')
+        -- end
       end
     end
   end
-  o:close()
+  -- o:close()
+  breaks_o:close()
+  make_mod_lplan_file(lplan_file, slidebreaks_file, mod_lplan_file)
 end
 
 make_slides_file(lplan_file, slides_file)
