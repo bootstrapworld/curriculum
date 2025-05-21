@@ -23,11 +23,11 @@
 Students are introduced to Pyret's `if-then-else` construct.
 
 === Launch
-@slidestyle{Launch}
+@slidebreak{Launch}
 Sometimes we want our functions to behave one way for a certain input or condition, but _a totally different way_ for a different input or condition. Piecewise functions in mathematics also have this property (think about absolute value!). So how do we write conditionals in Pyret?
 
 === Investigate
-@slidestyle{Investigate-DN}
+@slidebreak{Investigate-DN}
 
 @lesson-instruction{
 Open the @starter-file{what-to-wear}. After reading through the definition for the `wear` function:
@@ -41,7 +41,7 @@ Open the @starter-file{what-to-wear}. After reading through the definition for t
 }
 
 === Synthesize
-@slidestyle{Synthesize}
+@slidebreak{Synthesize}
 An `if` expression has four parts:
 
 1. An `if` clause
@@ -78,11 +78,11 @@ Another way to recognize a piecewise function when looking at your examples is t
 Students connect conditional functions with behaviors in games, and write one from scratch.
 
 === Launch
-@slidestyle{Launch-DN}
+@slidebreak{Launch-DN}
 Let’s revisit the @starter-file{package-delivery} drone from earlier. We’re going to write a function that tells us where the package is for a given `DeliveryState`. This is the kind of function you might need to write later on in your game. For example, you may need to know whether a character has reached a portal at a certain part of the screen to advance to the next level, or if they’ve fallen into dangerous lava!
 
 === Investigate
-@slidestyle{InvestigateR}
+@slidebreak{InvestigateR}
 @lesson-instruction{
 @right{@image{images/bgimage.png, 400}}Open your workbook to @printable-exercise{location.adoc}. Use the design recipe to write a function to tell you where the falling box is (either "`road`", "`house`", "`delivery zone`", or "`air`"), based on the `DeliveryState`.
 }
@@ -114,7 +114,7 @@ Experiment with this function!
 Turn to @printable-exercise{bug-hunting.adoc}. In the left column, we’ve given you broken or buggy Pyret code. On the right, we’ve given you space to either write out the correct code, or write an explanation of the problems with the provided code. Work through this page, then check with your partner to confirm you’ve found all the bugs!
 
 === Synthesize
-@slidestyle{Synthesize}
+@slidebreak{Synthesize}
 These experiments show an important connection between functions that work with instances of a data structure, and the way we draw those instances. In our design for the animation, we have an understanding of what different regions of the screen mean. Here, we see that the draw-state and location functions both share this understanding to give consistent information about the animation.
 
 == Colorful Sun
@@ -123,7 +123,7 @@ These experiments show an important connection between functions that work with 
 Students return to an animation they've created before, and enhance it by using conditionals.
 
 === Launch
-@slidestyle{Launch}
+@slidebreak{Launch}
 Let’s return to your @link{https://code.pyret.org/editor#share=0B9rKDmABYlJVSm94cFA4T3R2NTA, sunset animation} from the previous unit. Currently, the sun’s x and y-coordinate change to make it move across the screen and disappear behind the horizon. In this unit, we’ll make the animation a bit more realistic, by changing the color of the sun as it gets lower in the sky. At the top of the screen, the sun should be yellow, then change to orange as it gets to the middle of the screen, and then become red as it reaches the bottom, close to the horizon.
 
 @slidebreak{Launch}
@@ -131,7 +131,7 @@ Let’s return to your @link{https://code.pyret.org/editor#share=0B9rKDmABYlJVSm
 In programming, it is fairly common that you will change a program that you’ve already written to do something new or different. Modifying existing code is a valuable skill, and one that we want to practice with this exercise. It is so useful, in fact, that we’ve created a worksheet to help you map out what needs to change in an existing animation to support new behavior.
 
 === Investigate
-@slidestyle{Investigate}
+@slidebreak{Investigate}
 @lesson-instruction{
 Turn to @printable-exercise{animation-worksheet.adoc} and @printable-exercise{animation-worksheet-samples.adoc}. Fill in the description of the animation change and three sample images at the top of the first page. If you don’t have colored pencils, just make an annotation near each sketch as to what color the sun should be in that sketch.
 }
@@ -232,7 +232,7 @@ Edit the sunset animation so that the animation restarts.
 - Use that question to help yourself figure out which function to modify. You could use the space for examples of functions at the end of your worksheet on extending the animation to write a new example before you modify your code.
 }
 === Synthesize
-@slidestyle{Synthesize}
+@slidebreak{Synthesize}
 This question about the color of the sun is an especially good question-and it likely to come up-from students who may have experience programming with variables and updates in other languages, such as Scratch (where the color would have changed to red). In our approach, where we simply determine the sun color from the y-coordinate, the sun should naturally restart as yellow. Of course, if students had maintained the sun color as a separate field in their data structure, they would have to consider this issue, and manually reset the sun color as well as the y-coordinate when restarting the animation.
 
 @opt{In addition to changing the color of the sun, have the background color change as well: it should be light blue when the sun is high in the sky, and get darker as the sun sets.}

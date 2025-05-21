@@ -1584,7 +1584,7 @@
                                   #f
                                   (display-header-comment prose o)
                                   ))]
-                           [(member directive '("scrub" "slidestyle"))
+                           [(member directive '("scrub" "slideoverride"))
                             (read-group i directive)]
                            [(member directive '("ifslide" "pd-slide" "ifpdslide"))
                             (let ([text (read-group i directive #:multiline? #t)])

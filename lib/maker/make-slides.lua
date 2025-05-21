@@ -254,7 +254,7 @@ local function get_slides(lsn_plan_adoc_file)
           elseif nested_in == 'ifpdslide' then
             curr_slide.style = course_string .. ' Title and Body'
           end
-        elseif directive == 'slidestyle' then
+        elseif directive == 'slideoverride' then
           curr_slide.style = read_group(i, directive)
         elseif directive == 'A' then
           if not nested_in or nested_in ~= 'QandA' then
