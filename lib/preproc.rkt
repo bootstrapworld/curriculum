@@ -1959,8 +1959,10 @@
                            [(string=? directive "slidebreak")
                             (display (enclose-span ".slidebreak" "") o)
                             (let ([c (peek-char i)])
-                              (when (and (char? c) (char=? c #\{))
-                                (read-group i directive)))]
+                              (cond [(and (char? c) (char=? c #\{))
+                                     (read-group i directive)]
+                                    [else (printf "WARNING: ~a: Invalid @slidebreak\n"
+                                                  (errmessage-context))]))]
                            [(string=? directive "Bootstrap")
                             (fprintf o "https://www.bootstrapworld.org/[Bootstrap]")]
                            [(hash-ref *simple-directives* (string->symbol directive) #f)
