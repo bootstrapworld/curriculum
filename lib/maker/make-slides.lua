@@ -6,6 +6,7 @@ local make_dir = os.getenv'TOPDIR' .. '/' .. os.getenv'MAKE_DIR'
 
 dofile(make_dir .. 'utils.lua')
 dofile(make_dir .. 'readers.lua')
+dofile(make_dir .. 'adoc-to-md.lua')
 
 local file_being_read = 'noneyet'
 
@@ -441,40 +442,7 @@ local function make_slides_file(lplan_file, slides_file)
         o:write('@slidebreak\n')
         o:write('{layout="', curr_layout, '"}\n')
         o:write('# ', curr_header, '\n\n')
-        local slide_lines = string_split(slide.text, '\n')
-        for _,l1 in ipairs(slide_lines) do
-          -- escape leading # so it doesn't become md comment
-          l1 = l1:gsub('^(%s+)#', '%1\\#')
-          -- four hyphens becomes four backticks
-          l1 = l1:gsub('^%-%-%-%-$', '````')
-          -- __stuff__ becomes _stuff_
-          l1 = l1:gsub('__(.-)__', '_%1_')
-          -- leading unicode_bullet<space> becomes md item
-          l1 = l1:gsub('^%s*•%s',        '- ')
-          -- ^ ** becomes md subitem
-          l1 = l1:gsub('^%s*%*%*%s',     '  - ')
-          -- ^ *** becomes md subsubitem
-          l1 = l1:gsub('^%s*%*%*%*%s',   '    - ')
-          -- ^ **** becomes md subsubsubitem
-          l1 = l1:gsub('^%s*%*%*%*%*%s', '      - ')
-          -- adoc-style autonumbered item ^. becomes md-style autonumbered item
-          l1 = l1:gsub('^%.%s', '1. ')
-          -- **stuff** becomes *stuff*
-          l1 = l1:gsub('%*%*(.-)%*%*', '*%1*')
-          -- *stuffwnospace* becomes __stuffwnospace__
-          l1 = l1:gsub('%*([^* ].-%S)%*', '__%1__')
-          -- *onenonspace* becomes __onenonspace__
-          l1 = l1:gsub('%*(%S)%*', '__%1__')
-          -- snip trailing space
-          l1 = l1:gsub(' %+$', '') -- would <br> work here?
-          -- snip trailing +
-          l1 = l1:gsub('^%+$', '') -- ditto
-          -- resolve variables
-          l1 = l1:gsub('{two%-colons}', '::')
-          l1 = l1:gsub('{empty}', '')
-          l1 = l1:gsub('{plus}', '+')
-          o:write(l1, '\n')
-        end
+        write_adoc_as_md(slide.text, o)
       end
     end
   end
