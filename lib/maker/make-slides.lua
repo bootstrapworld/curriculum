@@ -127,6 +127,7 @@ local function get_slides(lsn_plan_adoc_file)
   local imgIdx = 0
   local curr_slide
   local curr_slide_header = ''
+  local writing_curr_slide_text_p = true
 
   local function set_current_slide()
     -- add curr_slide, if valid, to list of slides
@@ -149,6 +150,12 @@ local function get_slides(lsn_plan_adoc_file)
     return curr_slide
   end
 
+  local function update_curr_slide_text(str)
+    if writing_curr_slide_text_p then
+      curr_slide.text = curr_slide.text .. str
+    end
+  end
+
   local function scan_directives (i, nested_in, dont_count_image_p)
     if not nested_in then curr_slide = newslide() end
     while true do
@@ -161,7 +168,7 @@ local function get_slides(lsn_plan_adoc_file)
       elseif c == '\n' then
         if not inside_css_p and
           (not inside_table_p or not beginning_of_line_p) then
-          curr_slide.text = curr_slide.text .. c
+          update_curr_slide_text(c)
         end
         beginning_of_line_p = true
       elseif c == '@' and not inside_css_p then
@@ -172,18 +179,18 @@ local function get_slides(lsn_plan_adoc_file)
           if arg:match('%(coe') then
             coeIdx = coeIdx + 1
             if not inside_table_p then
-              curr_slide.text = curr_slide.text .. '@autogen-image{coe' .. coeIdx .. '}{images/AUTOGEN-COE' .. coeIdx .. '.png}'
+              update_curr_slide_text('@autogen-image{coe' .. coeIdx .. '}{images/AUTOGEN-COE' .. coeIdx .. '.png}')
             end
           else
             if not inside_table_p then
-              curr_slide.text = curr_slide.text .. c .. directive .. '{' .. arg .. '}'
+              update_curr_slide_text(c .. directive .. '{' .. arg .. '}')
             end
           end
         elseif directive == 'image' or directive == 'centered-image' then
           local arg = read_group(i, directive)
           imgIdx = imgIdx + 1
           if not inside_table_p then
-            curr_slide.text = curr_slide.text .. '@autogen-image{img' .. imgIdx .. '}{images/AUTOGEN-IMAGE' .. imgIdx .. '.png}'
+            update_curr_slide_text('@autogen-image{img' .. imgIdx .. '}{images/AUTOGEN-IMAGE' .. imgIdx .. '.png}')
           end
         elseif inside_table_p then
           if directive == 'preparation' and #slides == 0 then
@@ -221,29 +228,29 @@ local function get_slides(lsn_plan_adoc_file)
             scan_directives(io.open_buffered(false, txt), nested_in or directive, dont_count_image_p)
           end
         elseif directive == 'proglang' then
-          curr_slide.text = curr_slide.text .. nicer_case(proglang)
+          update_curr_slide_text(nicer_case(proglang))
         elseif directive == 'star' then
-          curr_slide.text = curr_slide.text .. '★'
+          update_curr_slide_text('★')
         elseif directive == 'ifslide' then
           local txt = read_group(i, directive, not 'scheme', 'multiline')
           scan_directives(io.open_buffered(false, txt), directive, dont_count_image_p)
         elseif directive == 'teacher' or directive == 'QandA' then
           local txt = read_group(i, directive, not 'scheme', 'multiline')
-          curr_slide.text = curr_slide.text .. '@' .. directive .. '{'
+          update_curr_slide_text('@' .. directive .. '{')
           scan_directives(io.open_buffered(false, txt), directive, dont_count_image_p)
-          curr_slide.text = curr_slide.text .. '}'
+          update_curr_slide_text('}')
         elseif directive == 'ifpathway' then
           local pwys = read_group(i, directive)
           ignore_spaces(i)
           local text = read_group(i, directive, not 'scheme', 'multiline')
-          curr_slide.text = curr_slide.text .. '@teacher{\nIF PATHWAY IS ' .. pwys .. '\n' .. text .. '}\n'
+          update_curr_slide_text('@teacher{\nIF PATHWAY IS ' .. pwys .. '\n' .. text .. '}\n')
         elseif directive == 'lesson-instruction' then
           inside_lesson_instruction = true
-          curr_slide.text = curr_slide.text .. c .. directive
+          update_curr_slide_text(c .. directive)
         elseif directive == 'starter-file' then
-          curr_slide.text = curr_slide.text .. c .. directive
+          update_curr_slide_text(c .. directive)
         elseif directive == 'lesson-roleplay' then
-          curr_slide.text = curr_slide.text .. c .. directive
+          update_curr_slide_text(c .. directive)
         elseif directive == 'slidebreak' then
           if nested_in and (nested_in ~= 'ifproglang' and nested_in ~= 'ifpdslide' and nested_in ~= 'ifslide') then
             terror('@slidebreak inside @' .. nested_in)
@@ -262,23 +269,23 @@ local function get_slides(lsn_plan_adoc_file)
             terror('@A outside @QandA')
           end
           local arg = read_group(i, directive, not 'scheme', 'multiline')
-          curr_slide.text = curr_slide.text .. c .. directive .. '{'
+          update_curr_slide_text(c .. directive .. '{')
           scan_directives(io.open_buffered(false, arg), directive, 'dont count images')
-          curr_slide.text = curr_slide.text .. '}'
+          update_curr_slide_text('}')
         elseif directive == 'ifpdslide' then
           local arg2 = read_group(i, directive, not 'scheme', 'multiline')
-          curr_slide.text = curr_slide.text .. c .. directive .. '{'
+          update_curr_slide_text(c .. directive .. '{')
           scan_directives(io.open_buffered(false, arg2), directive, dont_count_image_p)
-          curr_slide.text = curr_slide.text .. '}'
+          update_curr_slide_text('}')
         elseif directive == 'strategy-basic' then
           if nested_in ~= 'ifpdslide' then
             terror('@strategy outside @ifpdslide')
           end
           local arg1 = read_group(i, directive)
           local arg2 = read_group(i, directive, not 'scheme', 'multiline')
-          curr_slide.text = curr_slide.text .. c .. directive .. '{' .. arg1 .. '}{'
+          update_curr_slide_text(c .. directive .. '{' .. arg1 .. '}{')
           scan_directives(io.open_buffered(false, arg2), directive, dont_count_image_p)
-          curr_slide.text = curr_slide.text .. '}'
+          update_curr_slide_text('}')
         elseif directive == 'pd-slide' then
           local arg = read_group(i, directive, not 'scheme', 'multiline')
           arg = '@ifpdslide{@slidebreak\n' .. arg .. '}\n'
@@ -292,7 +299,7 @@ local function get_slides(lsn_plan_adoc_file)
           if directive == 'opt-block' then
             curr_slide.containsoptblock = true
           end
-          curr_slide.text = curr_slide.text .. c .. directive
+          update_curr_slide_text(c .. directive)
         end
       elseif beginning_of_line_p then
         beginning_of_line_p = false
@@ -301,7 +308,7 @@ local function get_slides(lsn_plan_adoc_file)
         elseif c == '+' and inside_css_p and read_if_poss(i, '+++') then
           inside_css_p = false
         elseif c == '-' and read_if_poss(i, '---') then
-          curr_slide.text = curr_slide.text .. '----'
+          update_curr_slide_text('----')
           inside_code_display_p = not inside_code_display_p
         elseif c == '/' and (not inside_code_display_p) and read_if_poss(i, '/') then
           i:read()
@@ -313,7 +320,7 @@ local function get_slides(lsn_plan_adoc_file)
           beginning_of_line_p = true
           -- print('L = ' .. L)
           if not L then
-            curr_slide.text = curr_slide.text .. c
+            update_curr_slide_text(c)
             set_current_slide()
             break
           else
@@ -323,7 +330,7 @@ local function get_slides(lsn_plan_adoc_file)
             local new_level = ((L:match('^ ') and 0) or (L:match('^= ') and 1) or (L:match('^== ') and 2) or 3)
             local new_header = L:gsub('^=*%s*(.*)', '%1'):gsub('@duration.*', '')
             if (new_level == 3) then
-              curr_slide.text = curr_slide.text .. '\n\n**' .. new_header .. '**\n\n'
+              update_curr_slide_text('\n\n**' .. new_header .. '**\n\n')
               -- insert_slide_break()
             elseif ((curr_slide.level == 2) and (curr_slide_header == "Common Misconceptions") and (new_level == 2)) then
               if (new_header == 'Synthesize') then
@@ -362,17 +369,17 @@ local function get_slides(lsn_plan_adoc_file)
           beginning_of_line_p = true
           if inside_table_p then
             tableIdx = tableIdx + 1
-            curr_slide.text = curr_slide.text .. '@autogen-image{table' .. tableIdx .. '}{images/AUTOGEN-TABLE' .. tableIdx .. '.png}'
+            update_curr_slide_text('@autogen-image{table' .. tableIdx .. '}{images/AUTOGEN-TABLE' .. tableIdx .. '.png}')
           end
         elseif inside_table_p then
           --noop
         else
-          curr_slide.text = curr_slide.text .. c
+          update_curr_slide_text(c)
         end
       elseif inside_css_p or inside_table_p then
         --noop
       else
-          curr_slide.text = curr_slide.text .. c
+          update_curr_slide_text(c)
       end
     end
     i:close()
