@@ -126,31 +126,31 @@ local function get_slides(lsn_plan_adoc_file)
   local coeIdx = 0
   local imgIdx = 0
   local curr_slide
+  local curr_slide_header = ''
 
   local function set_current_slide()
+    -- add curr_slide, if valid, to list of slides
     local n = #slides
     local txt = curr_slide.text
     if txt == '' or
-      (n == 0 and curr_slide.header == '') then
+      (n == 0 and curr_slide_header == '') then
       return false
     end
     if not txt:match('%S') then return false end
+    curr_slide.header = curr_slide_header
     slides[n + 1] = curr_slide
     return true
   end
 
   local function insert_slide_break()
-    local old_header = curr_slide.header
     set_current_slide()
     curr_slide = newslide()
     curr_slide.section = 'Repeat'
-    curr_slide.header = old_header
     return curr_slide
   end
 
   local function scan_directives (i, nested_in, dont_count_image_p)
     if not nested_in then curr_slide = newslide() end
-    local curr_text_before_pd_slide = false
     while true do
       local c = i:read(1)
       if not c then
@@ -320,24 +320,20 @@ local function get_slides(lsn_plan_adoc_file)
             if nested_in and nested_in ~= 'ifproglang' then
               terror('\"=' .. L .. '\" inside @' .. nested_in)
             end
-            new_level = ((L:match('^ ') and 0) or (L:match('^= ') and 1) or (L:match('^== ') and 2) or 3)
-            new_header = L:gsub('^=*%s*(.*)', '%1'):gsub('@duration.*', '')
-            -- print('new_level', new_level)
-            -- print('new_header', new_header)
-            -- print('curr_slide.level', curr_slide.level)
+            local new_level = ((L:match('^ ') and 0) or (L:match('^= ') and 1) or (L:match('^== ') and 2) or 3)
+            local new_header = L:gsub('^=*%s*(.*)', '%1'):gsub('@duration.*', '')
             if (new_level == 3) then
               curr_slide.text = curr_slide.text .. '\n\n**' .. new_header .. '**\n\n'
               -- insert_slide_break()
-            elseif ((curr_slide.level == 2) and (curr_slide.header == "Common Misconceptions") and (new_level == 2)) then
+            elseif ((curr_slide.level == 2) and (curr_slide_header == "Common Misconceptions") and (new_level == 2)) then
               if (new_header == 'Synthesize') then
-                curr_slide.header = new_header
+                curr_slide_header = new_header
                 curr_slide.text = '@teacher{\n' .. curr_slide.text .. '}\n'
                 curr_slide.section = true
               else
                 terror("Saw 'Common Misconceptions' that was not immediately followed by 'Synthesize'")
               end
             else
-              local old_header = curr_slide.header
               local old_slide_substantial_p = set_current_slide()
               curr_slide = newslide()
               curr_slide.level = new_level
@@ -348,13 +344,10 @@ local function get_slides(lsn_plan_adoc_file)
               new_header:match('Synthesize')))
 
               if new_header == 'Overview' and not old_slide_substantial_p then
-                -- print('reusing old header', old_header)
-                new_header = old_header
               elseif new_level > 1 then
-                new_header = old_header
+              else
+                curr_slide_header = new_header
               end
-              curr_slide.header = new_header
-              -- print('curr slide header = ' .. curr_slide.header)
             end
           end
         elseif c == '[' then
