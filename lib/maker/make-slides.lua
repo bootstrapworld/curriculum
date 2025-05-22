@@ -110,8 +110,7 @@ local function newslide()
   }
 end
 
--- Note: we're counting levels using the AsciiDoc convention. It's one less than the number of ='s
-
+-- Note: we're counting levels using the AsciiDoc convention. It's -1+ the number of ='s
 
 local function get_slides(lsn_plan_adoc_file)
   if not file_exists_p(lsn_plan_adoc_file) then return end
@@ -133,6 +132,7 @@ local function get_slides(lsn_plan_adoc_file)
     -- add curr_slide, if valid, to list of slides
     local n = #slides
     local txt = curr_slide.text
+    if n == 0 then txt = 'keep-title-slide' end
     if txt == '' or
       (n == 0 and curr_slide_header == '') then
       return false
@@ -147,6 +147,7 @@ local function get_slides(lsn_plan_adoc_file)
     set_current_slide()
     curr_slide = newslide()
     curr_slide.section = 'Repeat'
+    writing_curr_slide_text_p = true
     return curr_slide
   end
 
@@ -343,6 +344,7 @@ local function get_slides(lsn_plan_adoc_file)
             else
               local old_slide_substantial_p = set_current_slide()
               curr_slide = newslide()
+              writing_curr_slide_text_p = false
               curr_slide.level = new_level
 
               curr_slide.section = ((curr_slide.level == 2) and
@@ -351,7 +353,9 @@ local function get_slides(lsn_plan_adoc_file)
               new_header:match('Synthesize')))
 
               if new_header == 'Overview' and not old_slide_substantial_p then
+                -- keep existing curr_slide_header
               elseif new_level > 1 then
+                -- keep existing curr_slide_header
               else
                 curr_slide_header = new_header
               end
@@ -424,7 +428,7 @@ local function make_slides_file(lplan_file, slides_file)
         end
         o:write('\n\n-->\n')
       end
-    else
+    else -- k >= 2
       -- print('outputting slide', slide.section, slide.level, slide.header)
       if slide.section == 'Repeat' then slide.section = curr_section end
       if slide.section then curr_section = slide.section end
