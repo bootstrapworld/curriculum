@@ -53,14 +53,18 @@ Logarithmic
 
 @n Use the sliders for @math{a} and @math{k} to make the best-fitting logarithmic model you can find. Write it below. _(Note: Pyret's `log` always uses @math{b = 10})_
 
+@indented{
+@ifsoln{*NOTE:* The answers to question 2 and 3 are just a sample - many other (similar) answers are valid!}
+}
+
 [cols="^1a", grid="none", frame="none", stripes="none"]
 |===
 |
 @math{\text{logarithmic}(x) = }
-@fitbruby{7em}{@ifsoln{9}}{log coefficient (a)}@math{\log_{10}(x) + }
-@fitbruby{7em}{@ifsoln{65}}{vertical shift (k)}
+@fitbruby{7em}{@ifsoln{7.2}}{log coefficient (a)}@math{\log_{10}(x) + }
+@fitbruby{7em}{@ifsoln{45}}{vertical shift (k)}
 @hspace{3em}
-@show{(code '(define (logarithmic x) (+ (* (?ANS 9) (log x)) (?ANS 65))))}
+@show{(code '(define (logarithmic x) (+ (* (?ANS 7.2) (log x)) (?ANS 45))))}
 |===
 
 
@@ -72,9 +76,9 @@ Logarithmic
 
 @indented{
 The error in the model is described by an @math{\text{S-value}} of about
-@fitbruby{1em}{@ifsoln{5.14   }}{S}
+@fitbruby{1em}{@ifsoln{5.79}}{S}
 @fitbruby{4em}{@ifsoln{years}}{units}. @hspace{1em} I
-@fitbruby{18em}{}{strongly agree, agree, disagree, strongly disagree} that this model is a good fit considering that
+@fitbruby{18em}{agree or disagree - not strong}{strongly agree, agree, disagree, strongly disagree} that this model is a good fit considering that
 @fitbruby{14em}{@ifsoln{median life-expectancy}}{y-variable} in this dataset ranges from 
 @fitbruby{6em}{@ifsoln{52.1}}{lowest y-value} to 
 @fitbruby{6em}{@ifsoln{85.5}}{highest y-value}.
@@ -111,9 +115,9 @@ Logarithmic
 |
 @math{\text{logarithmic2}(x) = }
 @fitbruby{7em}{@ifsoln{~12 to ~16}}{log coefficient (a)}@math{\log_{10}(x) + }
-@fitbruby{7em}{@ifsoln{~50 to ~60}}{vertical shift (k)}
+@fitbruby{7em}{@ifsoln{~8 to ~25}}{vertical shift (k)}
 @hspace{1em}
-@show{(code '(define (logarithmic2 x) (+ (* (?ANS 13 ) (log x)) (?ANS 60))))}
+@show{(code '(define (logarithmic2 x) (+ (* (?ANS 13 ) (log x)) (?ANS 18))))}
 |===
 
 @n In Pyret, define `logarithmic2(x)` to match this model.  Then use the `fit-model` function to find its @vocab{S-value}: @fitb{}{@ifsoln{less than 5 }}

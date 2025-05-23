@@ -3,7 +3,7 @@
 dofile(os.getenv('TOPDIR') .. '/' .. os.getenv('MAKE_DIR') .. 'utils.lua')
 
 function make_titletxt_file(f)
-  -- print('doing make_titletxt_file', f)
+  -- print('doing make_titletxt_file', f, os.getenv'PWD')
   if not file_exists_p(f) then return end
   local dir = ''
   local base = f
@@ -17,8 +17,8 @@ function make_titletxt_file(f)
   for L in i:lines() do
     if L:find('^=%s') then
       local o = io.open(titletxt_file, 'w+')
-      o:write((L:gsub('^=%s+', ''):gsub(',', '&#x2c;')))
-      o:write('\n')
+      L = L:gsub('^=%s+', ''):gsub(',', '&#x2c;'):gsub('{nbsp}', ' ')
+      o:write(L, '\n')
       o:close()
       break
     end

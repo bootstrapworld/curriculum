@@ -1135,8 +1135,10 @@
 
 (define (store-title title-txt)
   (unless *other-dir*
-    (let ([title-file (path-replace-extension *out-file* ".titletxt")]
-          [title-txt (regexp-replace* #rx"," (regexp-replace* #rx"\\[.*?\\]##(.*?)##" title-txt "\\1") "\\&#x2c;")])
+    (let ([title-file (path-replace-extension *out-file* ".titletxt")])
+      (set! title-txt (regexp-replace* #rx"\\[.*?\\]##(.*?)##" title-txt "\\1"))
+      (set! title-txt (regexp-replace* #rx"," title-txt "\\&#x2c;"))
+      (set! title-txt (regexp-replace* #rx"{nbsp}" title-txt " "))
       (call-with-output-file title-file
         (lambda (o)
           (display title-txt o) (newline o))
