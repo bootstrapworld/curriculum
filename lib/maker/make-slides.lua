@@ -134,11 +134,10 @@ local function get_slides(lsn_plan_adoc_file)
   local function set_current_slide()
     -- add curr_slide, if valid, to list of slides
     local n = #slides
-    if not curr_slide then return false end
-    local txt = curr_slide.text or ''
+    local txt = curr_slide and curr_slide.text or ''
     if n == 0 then txt = 'keep-title-slide' end
     if txt == '' or (n == 0 and curr_slide_header == '') or not txt:match('%S') then
-      -- print('discarding empty slide')
+      -- print('discarding empty slide in ' .. errmsg_file_context())
       return false
     end
     curr_slide.header = curr_slide_header
@@ -357,10 +356,12 @@ local function get_slides(lsn_plan_adoc_file)
                 terror("Saw 'Common Misconceptions' that was not immediately followed by 'Synthesize'")
               end
             else
-              local old_slide_substantial_p = set_current_slide()
-              -- curr_slide = false
-              curr_slide = {}
-              writing_curr_slide_text_p = false
+              local old_slide_substantial_p
+              if new_level ~= 0 then
+                old_slide_substantial_p = set_current_slide()
+                curr_slide = false
+                writing_curr_slide_text_p = false
+              end
               curr_slide_level = new_level
               -- curr_slide.level = curr_slide_level
 
