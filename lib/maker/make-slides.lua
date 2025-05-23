@@ -21,7 +21,6 @@ local terror = make_error_function(errmsg_file_context)
 
 local lplan_file = 'index.adoc'
 
-
 -- make it zlides.md for now, when completely debugged rename to slides.md
 local slides_file = 'zlides.md'
 
@@ -126,19 +125,30 @@ local function get_slides(lsn_plan_adoc_file)
   local imgIdx = 0
   local curr_slide
   local curr_slide_header = ''
+  local curr_slide_level = 0
+  local curr_slide_section = false
+  local curr_slide_style = ''
+  local curr_slide_preparation = false
   local writing_curr_slide_text_p = true
 
   local function set_current_slide()
     -- add curr_slide, if valid, to list of slides
     local n = #slides
-    local txt = curr_slide.text
+    if not curr_slide then return false end
+    local txt = curr_slide.text or ''
     if n == 0 then txt = 'keep-title-slide' end
-    if txt == '' or
-      (n == 0 and curr_slide_header == '') then
+    if txt == '' or (n == 0 and curr_slide_header == '') or not txt:match('%S') then
+      -- print('discarding empty slide')
       return false
     end
-    if not txt:match('%S') then return false end
     curr_slide.header = curr_slide_header
+    curr_slide.level = curr_slide_level
+    curr_slide.section = curr_slide_section
+    curr_slide.style = curr_slide_style
+    if n == 0 and curr_slide_preparation then
+      curr_slide.preparation = curr_slide_preparation
+      curr_slide_preparation = false
+    end
     slides[n + 1] = curr_slide
     return true
   end
@@ -146,7 +156,8 @@ local function get_slides(lsn_plan_adoc_file)
   local function insert_slide_break()
     set_current_slide()
     curr_slide = newslide()
-    curr_slide.section = 'Repeat'
+    curr_slide_level = 2
+    curr_slide_section = 'Repeat'
     writing_curr_slide_text_p = true
     return curr_slide
   end
@@ -195,7 +206,7 @@ local function get_slides(lsn_plan_adoc_file)
           end
         elseif inside_table_p then
           if directive == 'preparation' and #slides == 0 then
-            curr_slide.preparation = read_group(i, directive, not 'scheme', 'multiline')
+            curr_slide_preparation = read_group(i, directive, not 'scheme', 'multiline')
           end
         elseif directive == 'clear' then
           --noop
@@ -259,12 +270,12 @@ local function get_slides(lsn_plan_adoc_file)
           insert_slide_break()
           local c2 = buf_peek_char(i)
           if c2 == '{' then
-            curr_slide.style = read_group(i, directive)
+            curr_slide_style = read_group(i, directive)
           elseif nested_in == 'ifpdslide' then
-            curr_slide.style = course_string .. ' Title and Body'
+            curr_slide_style = course_string .. ' Title and Body'
           end
         elseif directive == 'slideoverride' then
-          curr_slide.style = read_group(i, directive)
+          curr_slide_style = read_group(i, directive)
         elseif directive == 'A' then
           if not nested_in or nested_in ~= 'QandA' then
             terror('@A outside @QandA')
@@ -298,7 +309,9 @@ local function get_slides(lsn_plan_adoc_file)
           scan_directives(io.open_buffered(false, arg), directive, dont_count_image_p)
         else
           if directive == 'opt-block' then
-            curr_slide.containsoptblock = true
+            if writing_curr_slide_text_p then
+              curr_slide.containsoptblock = true
+            end
           end
           update_curr_slide_text(c .. directive)
         end
@@ -333,24 +346,29 @@ local function get_slides(lsn_plan_adoc_file)
             if (new_level == 3) then
               update_curr_slide_text('\n\n**' .. new_header .. '**\n\n')
               -- insert_slide_break()
-            elseif ((curr_slide.level == 2) and (curr_slide_header == "Common Misconceptions") and (new_level == 2)) then
+            elseif ((curr_slide_level == 2) and (curr_slide_header == "Common Misconceptions") and (new_level == 2)) then
               if (new_header == 'Synthesize') then
                 curr_slide_header = new_header
-                curr_slide.text = '@teacher{\n' .. curr_slide.text .. '}\n'
-                curr_slide.section = true
+                if writing_curr_slide_text_p then
+                  curr_slide.text = '@teacher{\n' .. curr_slide.text .. '}\n'
+                end
+                curr_slide_section = true
               else
                 terror("Saw 'Common Misconceptions' that was not immediately followed by 'Synthesize'")
               end
             else
               local old_slide_substantial_p = set_current_slide()
-              curr_slide = newslide()
+              -- curr_slide = false
+              curr_slide = {}
               writing_curr_slide_text_p = false
-              curr_slide.level = new_level
+              curr_slide_level = new_level
+              -- curr_slide.level = curr_slide_level
 
-              curr_slide.section = ((curr_slide.level == 2) and
+              curr_slide_section = ((curr_slide_level == 2) and
               (new_header:match('Launch') or
               new_header:match('Investigate') or
               new_header:match('Synthesize')))
+              -- curr_slide.section = curr_slide_section
 
               if new_header == 'Overview' and not old_slide_substantial_p then
                 -- keep existing curr_slide_header
@@ -439,7 +457,7 @@ local function make_slides_file(lplan_file, slides_file)
       if (slide.level == 2 and slide.section) then
         local curr_layout = slide.style
         if not memberp(curr_layout, allowed_slide_layouts) then
-          print('WARNING: Probably empty slide! Unknown slide template in '
+          print('WARNING: Probably empty slide! Unknown slide template ' .. curr_layout .. ' in '
             .. os.getenv('PWD'))
           curr_layout = "Bogus-layout"
         end
