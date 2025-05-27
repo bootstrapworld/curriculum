@@ -52,15 +52,18 @@ The goal of that training? Learning how to steer.
 
 Here's what ALVINN's training entailed:
 
-1. A person drove the vehicle while a front-facing video camera recorded the road.
-  * The human driver in this context is often referred to as the _supervisor_; it is their tagging of input-output pairs that makes supervised machine learning possible.
-2. Every two seconds, ALVINN...  
-  * digitized an image of the road ahead 
-  * recorded the steering direction chosen by the driver
+(1) A person drove the vehicle while a front-facing video camera recorded the road.
+
+  *** The human driver in this context is often referred to as the _supervisor_; it is their tagging of input-output pairs that makes supervised machine learning possible.
+
+(2) Every two seconds, ALVINN...  
+
+  *** digitized an image of the road ahead 
+  *** recorded the steering direction chosen by the driver
 
 @slidebreak
 
-3. ALVINN's training data can be represented as an input-output table, with training images (reduced in resolution to 30x32 pixels) as inputs  and their associated corresponding "correct" steering angles as outputs.
+(3) ALVINN's training data can be represented as an input-output table, with training images (reduced in resolution to 30x32 pixels) as inputs  and their associated corresponding "correct" steering angles as outputs.
   
 
 @indented{
@@ -81,7 +84,7 @@ Note: These images were selected for illustrative purposes. The 30x32 pixel imag
 
 @slidebreak
 
-4. Using the set of inputs and outputs, ALVINN generates a @vocab{function} for predicting steering angles, which we can summarize using contract-notation:
+(4) Using the set of inputs and outputs, ALVINN generates a @vocab{function} for predicting steering angles, which we can summarize using contract-notation:
 
 @indented{
 @show{(contract 'steer '((road-image Image)) "Number")}
@@ -93,7 +96,7 @@ ALVINN's function dramatically reduces the complexity of the data and predicts t
 
 @slidebreak
 
-5. After training is complete, a human can push ALVINN's run switch and the vehicle will begin driving.  As ALVINN drives, it produces steering angles it learned from the human driver (who demonstrated the steering angle at each segment of the road), along with a numeric measure of "confidence" in the angle provided.
+(5) After training is complete, a human can push ALVINN's run switch and the vehicle will begin driving.  As ALVINN drives, it produces steering angles it learned from the human driver (who demonstrated the steering angle at each segment of the road), along with a numeric measure of "confidence" in the angle provided.
 
 @slidebreak
 
