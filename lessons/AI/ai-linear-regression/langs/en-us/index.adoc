@@ -34,7 +34,7 @@
 @objective{car-function}
 
 === Overview
-Students learn about ALVINN (autonomous Land Vehicle in a Neural Network) as an example of supervised machine learning and regression.
+Students learn about ALVINN (Autonomous Land Vehicle in a Neural Network) as an example of supervised machine learning and regression.
 
 === Launch
 
@@ -52,20 +52,18 @@ The goal of that training? Learning how to steer.
 
 Here's what ALVINN's training entailed:
 
-- A person drove the vehicle while a front-facing video camera recorded the road.
-- Every two seconds, ALVINN digitized an image of the road ahead and recorded the chosen steering direction.
-- Training images were reduced in resolution to 30x32 pixels and provided as inputs associated with the corresponding "correct" steering angles as their outputs.
+1. A person drove the vehicle while a front-facing video camera recorded the road.
+  * The human driver in this context is often referred to as the _supervisor_; it is their tagging of input-output pairs that makes supervised machine learning possible.
+2. Every two seconds, ALVINN...  
+  * digitized an image of the road ahead 
+  * recorded the steering direction chosen by the driver
 
 @slidebreak
 
-The human driver in this context is often referred to as the _supervisor_; it is their tagging of input-output pairs that makes supervised machine learning possible.
+3. ALVINN's training data can be represented as an input-output table, with training images (reduced in resolution to 30x32 pixels) as inputs  and their associated corresponding "correct" steering angles as outputs.
+  
 
-Once ALVINN's training data has been collected, it can be represented with a table, as below.
-
-@teacher{
-Note: These images were selected for illustrative purposes. The 30x32 pixel images produced by ALVINN were of much lower quality!
-}
-
+@indented{
 [cols="^.^1,^.^1", stripes="none", options="header"]
 |===
 
@@ -76,18 +74,32 @@ Note: These images were selected for illustrative purposes. The 30x32 pixel imag
 
 |===
 
+@teacher{
+Note: These images were selected for illustrative purposes. The 30x32 pixel images produced by ALVINN were of much lower quality!
+}
+}
 
 @slidebreak
 
-ALVINN then uses the set of inputs and outputs to create a @vocab{function}, which we can summarize with contract notation:
+4. Using the set of inputs and outputs, ALVINN generates a @vocab{function} for predicting steering angles, which we can summarize using contract-notation:
 
+@indented{
 @show{(contract 'steer '((road-image Image)) "Number")}
+}
+
+@lesson-point{
+ALVINN's function dramatically reduces the complexity of the data and predicts the value of the @vocab{response variable} as though it is completely dependent on the @vocab{explanatory variable}.
+}
+
+@slidebreak
+
+5. After training is complete, a human can push ALVINN's run switch and the vehicle will begin driving.  As ALVINN drives, it produces steering angles it learned from the human driver (who demonstrated the steering angle at each segment of the road), along with a numeric measure of "confidence" in the angle provided.
 
 @slidebreak
 
 @QandA{
 @Q{What information does ALVINN process before producing a steering angle?}
-@A{ALVINN instantaneously processes the image of the road in front of him in order to produce a steering angle.}
+@A{ALVINN instantaneously processes the image of the road in front of it in order to produce a steering angle.}
 
 @Q{When humans make decisions about which way to steer, we are working with a lot of other information besides the image of the road in the moment. What examples can you come up with?}
 
@@ -98,23 +110,18 @@ ALVINN then uses the set of inputs and outputs to create a @vocab{function}, whi
 @A{If we know that we're going to be taking a left turn, we might switch lanes and slow down ahead of time.}
 }
 
-@slidebreak
+@strategy{Computers aren't people!}{
 
-@lesson-point{
-ALVINN's function dramatically reduces the complexity of the data and predicts the value of the @vocab{response variable} as though it is completely dependent on the @vocab{explanatory variable}.
+In conversations about AI, computers often get anthropomorphized (given human-like traits) when they are not in fact human. This anthropomorphization of AI is a slippery slope that can block students from understanding the mechanics of machine learning.
+
+We urge you to avoid referring to ALVINN as "him" or "he".
+
+Many students will suspect that ALVINN has thoughts and feelings of its own, a misconception that is important to correct.
+
+A machine's "confidence" is very different from a human's confidence. When you discuss ALVINN's "confidence", highlight that this score is a numeric value, which is the result of *mathematical computation*. All machine learning relies on data, functions, and computation.
 }
 
-After ALVINN has done some reasonable amount of training, a human pushes ALVINN's run switch and the vehicle begins driving.
-
-As ALVINN drives, it produces steering angles it learned from the human driver (who demonstrated the steering angle at each segment of the road), along with a numeric measure of "confidence" in the angle provided.
-
 === Investigate
-
-The process described above is an example of @vocab{regression}, a machine learning algorithm that can be trained to predict continuous real-number outputs (like steering angle!).
-
-@vocab{Linear regression}, which you may already have heard of or worked with, is one of the most basic types of regression, because it involves the use of a **_linear_** @vocab{predictor function}. Machine learning incorporates other more complex nonlinear regression types, too (for example: quadratic, polynomial, etc).
-
-@slidebreak
 
 Let's apply what we know about machine learning to ALVINN and its training.
 
@@ -128,7 +135,7 @@ With a partner, complete @printable-exercise{alvinn-training.adoc}.
 
 While responding to the questions on the worksheet, you hopefully arrived at a few conclusions about ALVINN:
 
-- At the beginning of training, ALVINN's guesses about the best steering direction are basically random.
+- At the beginning of training, ALVINN's guesses about the best steering direction are not good.
 - As ALVINN receives more examples, it becomes better at predicting and can imitate the steering reactions of a human driver.
 - Training on one surface does not help ALVINN on any other surface! Failure to repeat the same training for a variety of road types (two-lane, four-lane, intersections, covered with leaves, covered with snow, etc.) would lead to bad outcomes.
 
@@ -136,16 +143,13 @@ While responding to the questions on the worksheet, you hopefully arrived at a f
 In supervised machine learning, the computer trains on example input-output pairs tagged by a human and learns a function that maps from input to output.
 }
 
-@strategy{Computers aren't people!}{
+@scrub{
+The process described above is an example of @vocab{regression}, a machine learning algorithm that can be trained to predict continuous real-number outputs (like steering angle!).
 
-A machine's "confidence" is very different from a human's confidence. When you discuss ALVINN's "confidence", highlight that this score is a numeric value, which is the result of *mathematical computation*. All machine learning relies on data, functions, and computation.
+@vocab{Linear regression}, which you may already have heard of or worked with, is one of the most basic types of regression, because it involves the use of a **_linear_** @vocab{predictor function}. Machine learning incorporates other more complex nonlinear regression types, too (for example: quadratic, polynomial, etc).
 
-In conversations about AI, computers often get anthropomorphized (given human-like traits) when they are not in fact human. This anthropomorphization of AI is a slippery slope that can block students from understanding the mechanics of machine learning.
-
-We urge you to avoid referring to ALVINN as "him" or "he".
-
-Many students will suspect that ALVINN has thoughts and feelings of its own, a misconception that is important to correct.
 }
+
 
 
 === Synthesize
