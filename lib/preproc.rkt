@@ -1139,6 +1139,7 @@
       (set! title-txt (regexp-replace* #rx"\\[.*?\\]##(.*?)##" title-txt "\\1"))
       (set! title-txt (regexp-replace* #rx"," title-txt "\\&#x2c;"))
       (set! title-txt (regexp-replace* #rx"{nbsp}" title-txt " "))
+      (set! title-txt (regexp-replace* #rx"@proglang" title-txt (nicer-case *proglang*)))
       (call-with-output-file title-file
         (lambda (o)
           (display title-txt o) (newline o))
@@ -1153,7 +1154,7 @@
     (store-title title-txt)
     (fprintf o "[.~a]\n" *proglang*)
     (display #\= o)
-    (display title o)
+    (expand-directives:string->port title o)
     (newline o)
     (newline o)
 
