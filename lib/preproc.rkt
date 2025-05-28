@@ -2077,12 +2077,16 @@
                            (fprintf o "\ninclude::~a/{cachedir}.index-assessments.asc[]\n" *containing-directory*)]
                           [(string=? directive "assessment")
                            (let* ([args (read-commaed-group i directive read-group)]
-                                  [lbl (first args)] [text (second args)]
+                                  [lbl (first args)]
+                                  [text (string-join (rest args) ", ")]
                                   [dir (build-path *containing-directory* "assessments" lbl)])
+                             (when (string=? text "")
+                               (printf "WARNING: ~a: assessment ~a missing second argument\n"
+                                       (errmessage-context) lbl))
                              (unless (directory-exists?
                                        (build-path *containing-directory* "assessments" lbl))
-                               (printf "WARNING: ~a: assessment ~a not found\n"
-                                       (errmessage-context) lbl))
+                               (printf "WARNING: ~a uses ~a with nonexistent directory ~a\n"
+                                       (errmessage-context) directive lbl))
                              (unless (assoc lbl *assessments-met*)
                                  (set! *assessments-met*
                                    (cons (cons lbl text) *assessments-met*)))
