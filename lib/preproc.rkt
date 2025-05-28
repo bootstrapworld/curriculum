@@ -1139,6 +1139,7 @@
       (set! title-txt (regexp-replace* #rx"\\[.*?\\]##(.*?)##" title-txt "\\1"))
       (set! title-txt (regexp-replace* #rx"," title-txt "\\&#x2c;"))
       (set! title-txt (regexp-replace* #rx"{nbsp}" title-txt " "))
+      (set! title-txt (regexp-replace* #rx"@proglang" title-txt (nicer-case *proglang*)))
       (call-with-output-file title-file
         (lambda (o)
           (display title-txt o) (newline o))
@@ -1153,7 +1154,7 @@
     (store-title title-txt)
     (fprintf o "[.~a]\n" *proglang*)
     (display #\= o)
-    (display title o)
+    (expand-directives:string->port title o)
     (newline o)
     (newline o)
 
@@ -2075,29 +2076,21 @@
                           [(string=? directive "assessments")
                            (fprintf o "\ninclude::~a/{cachedir}.index-assessments.asc[]\n" *containing-directory*)]
                           [(string=? directive "assessment")
-                           (let* ([lbl (string->symbol (read-group i directive))]
-                                  [c (hash-ref *assessments* lbl #f)]
-                                  [title (and c (hash-ref c 'title #f))]
-                                  [url (and c (hash-ref c 'url #f))]
-                                  [pl-specific (and c (hash-ref c *proglang-sym* #f))])
-                             (when pl-specific
-                               (let ([x (hash-ref pl-specific 'title #f)])
-                                 (when x (set! title x)))
-                               (let ([x (hash-ref pl-specific 'url #f)])
-                                 (when x (set! url x))))
-                             (unless title (set! title url))
-                             (cond [(not c)
-                                    (printf "WARNING: ~a: Ill-named @~a ~a\n\n" (errmessage-context) directive lbl)]
-                                   [(not url)
-                                    (printf "WARNING: ~a: @~a ~a missing for ~a\n\n"
-                                            (errmessage-context) directive
-                                            lbl *proglang*)]
-                                   [else
-                                     (unless (assoc url *assessments-met*)
-                                       (set! *assessments-met*
-                                         (cons (cons url title)
-                                               *assessments-met*)))
-                                     (fprintf o "link:pass:[~a][~a]" url title)]))]
+                           (let* ([args (read-commaed-group i directive read-group)]
+                                  [lbl (first args)]
+                                  [text (string-join (rest args) ", ")]
+                                  [dir (build-path *containing-directory* "assessments" lbl)])
+                             (when (string=? text "")
+                               (printf "WARNING: ~a: assessment ~a missing second argument\n"
+                                       (errmessage-context) lbl))
+                             (unless (directory-exists?
+                                       (build-path *containing-directory* "assessments" lbl))
+                               (printf "WARNING: ~a uses ~a with nonexistent directory ~a\n"
+                                       (errmessage-context) directive lbl))
+                             (unless (assoc lbl *assessments-met*)
+                                 (set! *assessments-met*
+                                   (cons (cons lbl text) *assessments-met*)))
+                             (fprintf o "link:pass:[assessments/~a/index.html][~a]" lbl text))]
                           [(string=? directive "citation")
                            (let* ([args (read-commaed-group i directive read-group)]
                                   [args-len (length args)]
@@ -2641,7 +2634,7 @@
     (lambda (o)
       (unless (null? *assessments-met*)
         (for ([asst (reverse *assessments-met*)])
-          (fprintf o "- link:pass:[~a][~a]\n"
+          (fprintf o "- link:pass:[assessments/~a/index.html][~a]\n"
                    (car asst) (cdr asst)))))
     #:exists 'replace))
 
