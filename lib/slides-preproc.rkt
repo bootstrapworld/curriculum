@@ -829,10 +829,8 @@
                                    [lbl (string->symbol (first args))]
                                    [c (hash-ref *citations* lbl #f)]
                                    [in-text (and c (hash-ref c 'in-text #f))]
-                                   ;FIXME: should we use private-url?
                                    [url (hash-ref c 'public-url)]
-                                   [link #f]
-                                   [apa (and c (hash-ref c 'apa #f))])
+                                   [link #f])
                               (cond [(> (length args) 1)
                                      (set! in-text
                                        (expand-directives:string->string
@@ -841,23 +839,13 @@
                                       (set! in-text
                                         (expand-directives:string->string in-text))]
                                     [else lbl])
-                              (unless apa (set! apa lbl))
-                              (set! link (format "<a href=\"~a\">~a</a>"
-                                                 url in-text))
                               (cond [(not c)
                                      (printf "WARNING: ~a: Undefined @~a ~a\n\n"
                                              (errmessage-file-context) directive lbl)]
                                     [(not in-text)
                                      (printf "WARNING: ~a: @~a ~a missing\n\n"
                                              (errmessage-file-context) directive lbl)]
-                                    [else (display
-                                            (enclose-span ".citation"
-                                              (string-append link
-                                                ;FIXME: do we need apa-citation?
-                                                ;(enclose-span ".apa-citation" apa)
-                                                )
-                                              )
-                                            o)]))]
+                                    [else (fprintf o "[~a](~a)" in-text url)]))]
                            [(assoc directive *definitions*)
                             => (lambda (c)
                                  (expand-directives:string->port (cdr c) o))]
