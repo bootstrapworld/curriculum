@@ -32,6 +32,15 @@
 
 (define *pd?* (getenv "PD"))
 
+(define *citations*
+  (let ([citations-file (format "~a/distribution/~a/citations.js" *topdir* *natlang*)])
+    (if (file-exists? citations-file)
+        (call-with-input-file citations-file
+          (lambda (i)
+            (read i) (read i) (read i)
+            (read-json i)))
+        '())))
+
 (define *starter-files*
   (let ([starter-files-file (format "~a/distribution/~a/starterFiles.js"
                                     *topdir* *natlang*)])
@@ -257,6 +266,10 @@
   (let ([x (coe-spans exp)])
     (if *outputting-table?* x
         (iii-dollar-html x))))
+
+(define (enclose-span class s)
+  (string-append "<span class=\""
+    (substring class 1) "\">" s "</span>"))
 
 (define (coe-spans exp)
   (cond [(list? exp)
@@ -811,6 +824,40 @@
                               (expand-directives:string->port text o))]
                            [(string=? directive "ifnotslide")
                             (read-group i directive)]
+                           [(string=? directive "citation")
+                            (let* ([args (read-commaed-group i directive read-group)]
+                                   [lbl (string->symbol (first args))]
+                                   [c (hash-ref *citations* lbl #f)]
+                                   [in-text (and c (hash-ref c 'in-text #f))]
+                                   ;FIXME: should we use private-url?
+                                   [url (hash-ref c 'public-url)]
+                                   [link #f]
+                                   [apa (and c (hash-ref c 'apa #f))])
+                              (cond [(> (length args) 1)
+                                     (set! in-text
+                                       (expand-directives:string->string
+                                         (second args)))]
+                                    [in-text
+                                      (set! in-text
+                                        (expand-directives:string->string in-text))]
+                                    [else lbl])
+                              (unless apa (set! apa lbl))
+                              (set! link (format "<a href=\"~a\">~a</a>"
+                                                 url in-text))
+                              (cond [(not c)
+                                     (printf "WARNING: ~a: Undefined @~a ~a\n\n"
+                                             (errmessage-file-context) directive lbl)]
+                                    [(not in-text)
+                                     (printf "WARNING: ~a: @~a ~a missing\n\n"
+                                             (errmessage-file-context) directive lbl)]
+                                    [else (display
+                                            (enclose-span ".citation"
+                                              (string-append link
+                                                ;FIXME: do we need apa-citation?
+                                                ;(enclose-span ".apa-citation" apa)
+                                                )
+                                              )
+                                            o)]))]
                            [(assoc directive *definitions*)
                             => (lambda (c)
                                  (expand-directives:string->port (cdr c) o))]
