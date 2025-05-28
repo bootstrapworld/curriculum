@@ -845,6 +845,9 @@
                                     [(not in-text)
                                      (printf "WARNING: ~a: @~a ~a missing\n\n"
                                              (errmessage-file-context) directive lbl)]
+                                    [(string=? url "")
+                                     (printf "WARNING: ~a: @~a ~a missing URL\n\n"
+                                             (errmessage-file-context) directive lbl)]
                                     [else (fprintf o "[~a](~a)" in-text url)]))]
                            [(assoc directive *definitions*)
                             => (lambda (c)
