@@ -67,44 +67,38 @@ Students will think of words like "door", "box", "microwave", "laptop"...
 Let's look a little more closely at the words we generated.
 
 @QandA{
-@Q{Which words had the _most_ tally marks?}
-@Q{Which words had the _least_ tally marks?}
+@Q{Which words were suggested most often?}
+@Q{Which words were suggested least often?}
 @Q{Are you surprised by the most and least common words? Why or why not?}
-@Q{What was our class probability of proposing each of our top three words?}
-@A{For example: If there are 25 students in your class, and 8 students chose “door”, the probability of a student choosing that word is 8/25.}
-}
-
-@teacher{If your students are comfortable computing the probability of choosing each word, they may do so in pairs or individually. If not, this can be a teacher-led task. Laying a solid foundation is worth the time: students will compute probability throughout the lesson.
+@Q{What fraction of our class proposed each of our top three words?}
+@A{For example: If there are 25 students in your class, and 8 students chose “door”, it was chosen 8/25ths of the time.}
 }
 
 @slidebreak
 
+Statistical lanuage models are built on the assumption that the fraction of the time that a word follows a series of words in a training corpus can help predict the likelihood of it being the right word to follow that same series of words in a future scenario. In this lesson, we will refer to that fraction as its @vocab{probability}.
 
 @QandA{
 @Q{Do you think a text messaging app with a predictive text feature would produce the same results as our class? Why or why not?}
-@A{Answers will vary.}
+@A{Answers will vary. Invite conversation.}
 @A{An app probably not suggest all the same words.}
 @A{Our class is a pretty small sample, all from the same generation and geography and we are all currently at school so our minds are primed to respond differently than if we were somewhere else.}
 }
 
-@teacher{
-@right{@image{images/texting-app.png, 200}}Invite conversation. Then share this image from a text messaging app.
-}
-
-@ifslide{@image{images/texting-app.png, 200}}
-
 @slidebreak
 
-
-Similar to other AI systems we've discussed, your predictive text feature is trained on a large amount of data, in this case, text.
+Similar to other AI systems we've discussed, predictive text features are trained on a large amount of data, in this case, text.
 
 During training:
+
+@right{@image{images/texting-app.png, 200}} 
 
 1. The computer extracts each use of the phrase "Close the" from the training dataset, along with the subsequent word.
 2. It then determines the probability of each possible next word.
 3. When making a suggestion, it offers the words that had the highest probability of following "Close the" in the training dataset.
 
-In this particular @vocab{training corpus}, "door", "doors", and "house"  most commonly appeared after "Close the". As a result, those words are suggested.
+Consider this screenshot from a text messaging app.  In the @vocab{training corpus} it was built on, "door", "doors", and "house"  most commonly appeared after "Close the". +
+As a result, those words are suggested.
 
 @slidebreak
 
@@ -116,20 +110,14 @@ But are all users recommended the _same_ completions?
 @A{This question is a great opportunity to revisit previous concepts, in particular the process of training and sampling that students discussed when thinking about @lesson-link{ai-training, "plagiarism detection"}.}
 }
 
-
 @slidebreak
 
-Not all phones will propose the same completions for a variety of reasons:
+For a variety of reasons, not all phones will propose the same completions:
 
-- Even the same phone won't necessarily propose the same word every time. There might be multiple words with equal probability, in which case the system must use some method of random selection.
-
+- There might be multiple words with equal probability, in which case the system must use some method of random selection. As a result, even the same phone won't necessarily propose the same word every time. 
 - Not all phones use the same system. Systems are generally built with at least a little bit of randomness; the amount of randomness varies from system to system.
-
 - A messaging app also includes a model of the text that _the actual user_ composes. The app therefore offers a degree of personalization based on what the user has chosen in the past. Similarly, the app can take into account the word suggestions that you have previously accepted.
-
 - Some predictive text features even take into account the specific message that you are composing! For instance, typing first letter of an unusual word that you used in the same message triggers the app to propose that unusual word.
-
-
 
 @slidebreak
 
@@ -141,7 +129,6 @@ Not all phones will propose the same completions for a variety of reasons:
 }
 
 Phenomena 3 and 4 above suggest that sometimes making a usable tool requires that we step out of bounds! Although pure statistical language models are powerful, the upgrades that programmers develop can make the AI _better_ at completing the task that it was designed to complete.
-
 
 @slidebreak
 
@@ -160,8 +147,6 @@ Throughout the lesson, we'll explore the very important "sometimes not" parenthe
 @Q{Can you think of other things besides human spoken languages that a similar approach might work for?}
 @A{With statistical language modeling, AI can compose music, play chess games, and more. The "text" need not be made up of words: any symbolic notation at all will do.}
 }
-
-
 
 == Constructing a Statistical Language Model
 
@@ -202,6 +187,14 @@ First, we will decompose the title of our corpus into differently sized chunks (
 
 The formal word computer scientists use in this context is not "chunk" but @vocab{n-gram}. In an @math{n}-gram, @math{n} represents the number of words in the chunk. For special cases where @math{n} is 1, 2, or 3, the @math{n}-grams are called unigrams, bigrams, and trigrams.
 
+@QandA{
+@Q{What other series of words have you encountered that begin with "uni", "bi", and "tri"?}
+@A{Answers will vary!}
+@A{unicycle, bicycle, tricycle}
+@A{(monomial), binomial, trinomial...}
+@A{triangle, n-gon}
+@A{unilateral, bilateral...}
+}
 
 === Investigate
 
@@ -346,10 +339,10 @@ This term also attributes intent and consciousness to the AI, giving it human qu
 @QandA{
 Critics of ChatGPT and other language models raise a variety of concerns. Consider each of them, below.
 
-@Q{This form of AI often has trouble with _facts_. Put another way, ChatGPT sometimes "makes stuff up." Why does this happen? What is actually going on?}
+@Q{ChatGPT sometimes "makes stuff up." Why does this happen? What is actually going on?}
 @A{When ChatGPT produces false or misleading information, it is not glitching nor is there a bug. ChatGPT is just doing what it does, following the model as it ought to.}
 
-@Q{Others complain that ChatGPT has biases that can be seen in its text output. Where do these biases come from?}
+@Q{ChatGPT has biases that can be seen in its text output. Where do these biases come from?}
 @A{If there are biases in the corpus, there will likely be biases in the output!}
 }
 
@@ -368,7 +361,7 @@ It's time to peek behind the curtain and see how a computer can put a statistica
 - Draw a tic-tac-toe grid on your paper and play a game of tic-tac-toe with your neighbor. +
 _In case you need a refresher on the game:_
   * The tic-tac-toe board is a 3x3 grid.
-  * One person will draw and *X* in one of the squares.
+  * One person will draw an *X* in one of the squares.
   * The other person will draw and *O* in one of the squares.
   * Keep taking turns - the goal is to get three in a row or block your neighbor from getting three in a row.
   * The game ends when one of you gets three in a row or the grid is full.
@@ -394,7 +387,7 @@ We're going to explore Soekia, a simplified text generation tool designed for st
 @lesson-instruction{
 - Open a browser window and make sure it is filling the full width of your screen.
 - Go to @link{http://bootstrapworld.org/SoekiaGPT/} and click the "LOOK INSIDE" button at the top right of your screen.
-- Scroll to the right until the green, right-most panel ("Documents") is in view.
+- Scroll all the way the right so that the green, right-most panel ("Documents") and the icons in its top right corner are in view.
 - Click the "Collections" icon (the middle of the three icons in the upper right corner).
 - From the drop-down menu that appears, select the "tic-tac-toe" icon (second from the bottom).
 - Complete @printable-exercise{tic-tac-toe.adoc}
