@@ -33,7 +33,7 @@
 (define *pd?* (getenv "PD"))
 
 (define *citations*
-  (let ([citations-file (format "~a/distribution/~a/citations.js" *topdir* *natlang*)])
+  (let ([citations-file (format "~a/distribution/~a/lib/citations.js" *topdir* *natlang*)])
     (if (file-exists? citations-file)
         (call-with-input-file citations-file
           (lambda (i)

@@ -141,9 +141,9 @@ distribution/$(NATLANG)/lib/starterFiles.js: $(PROGDIR)/combine-dicts.js $(PROGD
 
 ###############################################################################
 
-assessments: distribution/$(NATLANG)/assessments.js
+assessments: distribution/$(NATLANG)/lib/assessments.js
 
-distribution/$(NATLANG)/assessments.js: $(PROGDIR)/combine-dicts.js $(PROGDIR)/assessments
+distribution/$(NATLANG)/lib/assessments.js: $(PROGDIR)/combine-dicts.js $(PROGDIR)/assessments
 	@echo ➤ Build $@
 	@node $+ $@
 
@@ -162,18 +162,18 @@ distribution/$(NATLANG)/lib/dictionaries.js: $(alignment-dictionaries)
 
 ###############################################################################
 
-learningObjectives: distribution/$(NATLANG)/learningObjectives.js
+learningObjectives: distribution/$(NATLANG)/lib/learningObjectives.js
 
-distribution/$(NATLANG)/learningObjectives.js: $(PROGDIR)/combine-dicts.js $(PROGDIR)/learningObjectives
+distribution/$(NATLANG)/lib/learningObjectives.js: $(PROGDIR)/combine-dicts.js $(PROGDIR)/learningObjectives
 	@echo ➤ Build $@
 	@node $+ $@
 
 
 ###############################################################################
 
-citations: distribution/$(NATLANG)/citations.js
+citations: distribution/$(NATLANG)/lib/citations.js
 
-distribution/$(NATLANG)/citations.js: $(PROGDIR)/combine-dicts.js $(PROGDIR)/citations
+distribution/$(NATLANG)/lib/citations.js: $(PROGDIR)/combine-dicts.js $(PROGDIR)/citations
 	@echo ➤ Build $@
 	@node $+ $@
 

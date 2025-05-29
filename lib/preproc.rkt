@@ -181,7 +181,7 @@
         '())))
 
 (define *assessments*
-  (let ([assessments-file (format "distribution/~a/assessments.js" *natlang*)])
+  (let ([assessments-file (format "distribution/~a/lib/assessments.js" *natlang*)])
     (if (file-exists? assessments-file)
         (call-with-input-file assessments-file
           (lambda (i)
@@ -190,7 +190,7 @@
         '())))
 
 (define *learning-objectives*
-  (let ([learning-objectives-file (format "distribution/~a/learningObjectives.js" *natlang*)])
+  (let ([learning-objectives-file (format "distribution/~a/lib/learningObjectives.js" *natlang*)])
     (if (file-exists? learning-objectives-file)
         (call-with-input-file learning-objectives-file
           (lambda (i)
@@ -199,7 +199,7 @@
         '())))
 
 (define *citations*
-  (let ([citations-file (format "distribution/~a/citations.js" *natlang*)])
+  (let ([citations-file (format "distribution/~a/lib/citations.js" *natlang*)])
     (if (file-exists? citations-file)
         (call-with-input-file citations-file
           (lambda (i)
