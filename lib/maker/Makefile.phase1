@@ -11,7 +11,8 @@ initialization:
 	@$(MAKE_DIR)dir-hoist-timestamp.sh pathways lessons
 	@$(CP) -upr shared/langs/en-us/* $(PROGDIR)
 	@$(CP) -upr lib/codemirror.css distribution/$(NATLANG)/lib
-	@node_modules/less/bin/lessc shared/langs/$(NATLANG)/curriculum.less > distribution/$(NATLANG)/lib/curriculum.css	
+	@node_modules/less/bin/lessc shared/langs/$(NATLANG)/curriculum.less > distribution/$(NATLANG)/lib/curriculum.css
+	@node_modules/less/bin/lessc shared/langs/$(NATLANG)/curriculum-wp.less > distribution/$(NATLANG)/lib/curriculum-wp.css
 	@if test $(NATLANG) != en-us -a -d shared/langs/$(NATLANG); then \
 		$(CP) -upr shared/langs/$(NATLANG)/* $(PROGDIR); fi
 	@mkdir -p distribution/$(NATLANG)/lib/Badges
