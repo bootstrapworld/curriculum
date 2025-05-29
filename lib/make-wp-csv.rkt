@@ -46,12 +46,15 @@
     (set! s (regexp-replace* #rx"href=\"index.pdf\"" s
               (format "href=\"~aindex.pdf\"" static-prefix)))
     (set! s (regexp-replace* #rx"/courses/" s "/lessons/"))
-    (set! s (regexp-replace* #rx"href=\"[^\"]*?/lessons/([^/]*?)/index\\.shtml\"" s
-              (format "href=\"/materials/~a/lessons/\\1/\"" *season-year*)))
-    (set! s (regexp-replace* #rx"href=\"[^\"]*?/lessons/([^/]*?)/pages/([^/]*?)\\.(html|pdf)\"" s
-              (format "href=\"/materials/~a/lessons/\\1/\\2/\"" *season-year*)))
-    (set! s (regexp-replace* #rx"href=\"[^\"]*?/lessons/([^/]*?)/solution-pages/([^/]*?)\\.(html|pdf)\"" s
-              (format "href=\"/materials/~a/lessons/\\1/\\2-solution/\"" *season-year*)))
+
+    (set! s (regexp-replace* #rx"href=\"[^\"]*?/lessons/" s (format "href=\"/materials/~a/lessons/" *season-year*)))
+
+    (set! s (regexp-replace* #rx"(href=\"[^\"]*?/lessons/[^/]*?/)index\\.shtml\"" s
+              (format "\\1\"")))
+    (set! s (regexp-replace* #rx"(href=\"[^\"]*?/lessons/[^/]*?/)pages/([^/]*?)\\.(html|pdf)\"" s
+              (format "\\1\\2/\"")))
+    (set! s (regexp-replace* #rx"(href=\"[^\"]*?/lessons/[^/]*?/)solution-pages/([^/]*?)\\.(html|pdf)\"" s
+              (format "\\1\\2-solution/\"")))
 
     (set! s (regexp-replace* #rx"(href=\"[^\"]*?/)index.shtml\"" s "\\1\""))
 
