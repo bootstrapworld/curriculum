@@ -53,18 +53,18 @@
               (format "href=\"/materials/~a/lessons/\\1/\\2-solution/\"" *season-year*)))
 
     (set! s (regexp-replace* #rx"href=\"[^\"]*?\\./Contracts\\.shtml\"" s
-              (format "href=\"/wp-content/themes/pro-child/static-resources/~a/lib/Contracts.shtml\"" *season-year*)))
+              (format "href=\"/wp-content/themes/pro-child/static-resources/~a/~alib/Contracts.shtml\"" *season-year* *natlang*)))
 
     (set! s (regexp-replace* #rx"src=\"[^\"]*?/lib/([^/]*?\\.js)\"" s
-              (format "src=\"/wp-content/themes/pro-child/static-resources/~a/lib/\\1\"" *season-year*)))
+              (format "src=\"/wp-content/themes/pro-child/static-resources/~a/~a/lib/\\1\"" *season-year* *natlang*)))
     (set! s (regexp-replace* #rx"src=\"[.][^\"]*?/([^/]*?\\.js)\"" s
-              (format "src=\"/wp-content/themes/pro-child/static-resources/~a/lib/\\1\"" *season-year*)))
+              (format "src=\"/wp-content/themes/pro-child/static-resources/~a/~a/lib/\\1\"" *season-year* *natlang*)))
 
     (set! s (regexp-replace* #rx"href=\"[^\"]*?/lib/([^/]*?\\.css)\"" s
-              (format "href=\"/wp-content/themes/pro-child/static-resources/~a/lib/\\1\"" *season-year*)))
+              (format "href=\"/wp-content/themes/pro-child/static-resources/~a/~a/lib/\\1\"" *season-year* *natlang*)))
 
     (set! s (regexp-replace* #rx"src=\"[^\"]*?/lib/images/([^/]*?\\.png)\"" s
-              (format "src=\"/wp-content/themes/pro-child/static-resources/~a/lib/images/\\1\"" *season-year*)))
+              (format "src=\"/wp-content/themes/pro-child/static-resources/~a/~a/lib/images/\\1\"" *season-year* *natlang*)))
 
     (set! s (regexp-replace* #rx"src=\"[^\"]*?(images/[^/]*?\\.(png|svg))\"" s (format "src=\"~a\\1\"" static-prefix)))
 
