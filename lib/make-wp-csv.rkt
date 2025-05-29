@@ -45,7 +45,9 @@
       (set! s (regexp-replace* #rx"\n" s " ")))
     (set! s (regexp-replace* #rx"href=\"index.pdf\"" s
               (format "href=\"~aindex.pdf\"" static-prefix)))
-    (set! s (regexp-replace* #rx"/courses/" s "/lessons/"))
+
+    (unless (regexp-match #rx"href=\"[^\"]*/images/" s)
+      (set! s (regexp-replace* #rx"(href=\"[^\"]*)/courses/" s "\\1/lessons/")))
 
     (set! s (regexp-replace* #rx"href=\"[^\"]*?/lessons/" s (format "href=\"/materials/~a/lessons/" *season-year*)))
 
@@ -71,6 +73,8 @@
 
     (set! s (regexp-replace* #rx"src=\"[^\"]*?/lib/images/([^/]*?\\.png)\"" s
               (format "src=\"/wp-content/themes/pro-child/static-resources/~a/~a/lib/images/\\1\"" *season-year* *natlang*)))
+
+    ; (set! s (regexp-replace* #rx"src=\"[^\"]*?(images/[^/]*?\\.(png|svg))\"" s (format "src=\"/wp-content/themes/pro-child/static-resources/~a/~a/lib/\\1\"" *season-year* *natlang*)))
 
     (set! s (regexp-replace* #rx"src=\"[^\"]*?(images/[^/]*?\\.(png|svg))\"" s (format "src=\"~a\\1\"" static-prefix)))
 
@@ -98,9 +102,11 @@
           *season-year*
           f))
 
-(define (make-lesson-static-url f)
+(define (make-lesson-static-url f coursep)
   (when (path? f) (set! f (path->string f)))
-  (format "/wp-content/themes/pro-child/static-resources/~a/lib/lessons/~a/" *season-year* f))
+  (format "/wp-content/themes/pro-child/static-resources/~a/lib/~a/~a/" *season-year*
+          (if coursep "courses" "lessons")
+          f))
 
 (define (get-curriculum-group course)
   (let ([course (path->string course)])
@@ -154,7 +160,8 @@
                    (format "~a ~a" (string-titlecase *season*) *year*) ;season
                    *type* ; type
                    "" ; child categories
-                   (escaped-file-content lesson-plan-file #:static-prefix (make-lesson-static-url lesson-dir)) ; raw code
+                   (escaped-file-content lesson-plan-file #:static-prefix
+                                         (make-lesson-static-url lesson-dir coursep)) ; raw code
                    "publish"
                    curr-group
                    *official-date*
@@ -169,7 +176,7 @@
   (for ([lesson-dir (directory-list umbrella-dir)])
     (let* ([curr-group (if coursep (get-curriculum-group lesson-dir) "")]
            [lesson-id (string->uniqid lesson-dir)]
-           [static-prefix (make-lesson-static-url lesson-dir)]
+           [static-prefix (make-lesson-static-url lesson-dir coursep)]
            [lesson-dir-path (build-path umbrella-dir lesson-dir)]
            [mult-ling (multilingual? lesson-dir-path)]
            [lesson-plan-file (path->string (build-path lesson-dir-path "index.shtml"))])
