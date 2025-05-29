@@ -45,6 +45,7 @@
       (set! s (regexp-replace* #rx"\n" s " ")))
     (set! s (regexp-replace* #rx"href=\"index.pdf\"" s
               (format "href=\"~aindex.pdf\"" static-prefix)))
+    (set! s (regexp-replace* #rx"/courses/" s "/lessons/"))
     (set! s (regexp-replace* #rx"href=\"[^\"]*?/lessons/([^/]*?)/index\\.shtml\"" s
               (format "href=\"/materials/~a/lessons/\\1/\"" *season-year*)))
     (set! s (regexp-replace* #rx"href=\"[^\"]*?/lessons/([^/]*?)/pages/([^/]*?)\\.(html|pdf)\"" s
