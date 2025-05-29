@@ -49,12 +49,12 @@
               (format "href=\"/wp-content/themes/pro-child/static-resources/~a/lib/Contracts.shtml\"" *season-year*)))
 
     (set! s (regexp-replace* #rx"src=\"[^\"]*?/lib/([^/]*?\\.js)\"" s
-              (format "src=\"/wp-content/themes/pro-child/static-resources/~a/lib/js/\\1\"" *season-year*)))
+              (format "src=\"/wp-content/themes/pro-child/static-resources/~a/lib/\\1\"" *season-year*)))
     (set! s (regexp-replace* #rx"src=\"[.][^\"]*?/([^/]*?\\.js)\"" s
-              (format "src=\"/wp-content/themes/pro-child/static-resources/~a/lib/js/\\1\"" *season-year*)))
+              (format "src=\"/wp-content/themes/pro-child/static-resources/~a/lib/\\1\"" *season-year*)))
 
     (set! s (regexp-replace* #rx"href=\"[^\"]*?/lib/([^/]*?\\.css)\"" s
-              (format "href=\"/wp-content/themes/pro-child/static-resources/~a/lib/css/\\1\"" *season-year*)))
+              (format "href=\"/wp-content/themes/pro-child/static-resources/~a/lib/\\1\"" *season-year*)))
 
     (set! s (regexp-replace* #rx"src=\"[^\"]*?/lib/images/([^/]*?\\.png)\"" s
               (format "src=\"/wp-content/themes/pro-child/static-resources/~a/lib/images/\\1\"" *season-year*)))
