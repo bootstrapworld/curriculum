@@ -39,11 +39,11 @@
     (set! s (regexp-replace* #rx"href=\"index.pdf\"" s
               (format "href=\"~aindex.pdf\"" static-prefix)))
     (set! s (regexp-replace* #rx"href=\"[^\"]*?/lessons/([^/]*?)/index\\.shtml\"" s
-              (format "href=\"/materials/lessons/~a/\\1/\"" *season-year*)))
+              (format "href=\"/materials/~a/lessons/\\1/\"" *season-year*)))
     (set! s (regexp-replace* #rx"href=\"[^\"]*?/lessons/([^/]*?)/pages/([^/]*?)\\.(html|pdf)\"" s
-              (format "href=\"/materials/lessons/~a/\\1/\\2/\"" *season-year*)))
+              (format "href=\"/materials/~a/lessons/\\1/\\2/\"" *season-year*)))
     (set! s (regexp-replace* #rx"href=\"[^\"]*?/lessons/([^/]*?)/solution-pages/([^/]*?)\\.(html|pdf)\"" s
-              (format "href=\"/materials/lessons/~a/\\1/\\2-solution/\"" *season-year*)))
+              (format "href=\"/materials/~a/lessons/\\1/\\2-solution/\"" *season-year*)))
 
     (set! s (regexp-replace* #rx"href=\"[^\"]*?\\./Contracts\\.shtml\"" s
               (format "href=\"/wp-content/themes/pro-child/static-resources/~a/lib/Contracts.shtml\"" *season-year*)))
