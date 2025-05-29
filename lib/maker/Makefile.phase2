@@ -251,9 +251,9 @@ $(eval $(foreach adocf,$(narrative-adoc-files),$(call make-build-narrative-rule,
 
 lesson-images-json-files := $(wildcard distribution/$(NATLANG)/lessons/*/images/lesson-images.json)
 
-images: distribution/$(NATLANG)/images.js
+images: distribution/$(NATLANG)/lib/images.js
 
-distribution/$(NATLANG)/images.js: $(lesson-images-json-files)
+distribution/$(NATLANG)/lib/images.js: $(lesson-images-json-files)
 	@echo ➤ Make $@
 	@$(MAKE_DIR)make-images-js.lua $@
 
