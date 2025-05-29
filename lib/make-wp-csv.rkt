@@ -53,7 +53,7 @@
               (format "href=\"/materials/~a/lessons/\\1/\\2-solution/\"" *season-year*)))
 
     (set! s (regexp-replace* #rx"href=\"[^\"]*?\\./Contracts\\.shtml\"" s
-              (format "href=\"/wp-content/themes/pro-child/static-resources/~a/~alib/Contracts.shtml\"" *season-year* *natlang*)))
+              (format "href=\"/wp-content/themes/pro-child/static-resources/~a/~a/lib/Contracts.shtml\"" *season-year* *natlang*)))
 
     (set! s (regexp-replace* #rx"src=\"[^\"]*?/lib/([^/]*?\\.js)\"" s
               (format "src=\"/wp-content/themes/pro-child/static-resources/~a/~a/lib/\\1\"" *season-year* *natlang*)))

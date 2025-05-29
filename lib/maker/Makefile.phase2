@@ -259,9 +259,9 @@ distribution/$(NATLANG)/images.js: $(lesson-images-json-files)
 
 ##########################################################################
 
-dependency-graph: distribution/$(NATLANG)/dependency-graph.js distribution/$(NATLANG)/starterFiles.js
+dependency-graph: distribution/$(NATLANG)/lib/dependency-graph.js distribution/$(NATLANG)/lib/starterFiles.js
 
-distribution/$(NATLANG)/dependency-graph.js: $(all-lesson-plan-adoc-files)
+distribution/$(NATLANG)/lib/dependency-graph.js: $(all-lesson-plan-adoc-files)
 	@echo ➤ Make $@
 	@$(MAKE_DIR)make-dependency-graph.lua $@
 	@$(MAKE_DIR)check-graph.sh

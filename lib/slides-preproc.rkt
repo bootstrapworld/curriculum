@@ -42,7 +42,7 @@
         '())))
 
 (define *starter-files*
-  (let ([starter-files-file (format "~a/distribution/~a/starterFiles.js"
+  (let ([starter-files-file (format "~a/distribution/~a/lib/starterFiles.js"
                                     *topdir* *natlang*)])
     (if (file-exists? starter-files-file)
         (call-with-input-file starter-files-file

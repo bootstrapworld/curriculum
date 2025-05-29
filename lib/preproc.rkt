@@ -172,7 +172,7 @@
     read-json))
 
 (define *starter-files*
-  (let ([starter-files-file (format "distribution/~a/starterFiles.js" *natlang*)])
+  (let ([starter-files-file (format "distribution/~a/lib/starterFiles.js" *natlang*)])
     (if (file-exists? starter-files-file)
         (call-with-input-file starter-files-file
           (lambda (i)
