@@ -38,6 +38,10 @@ local function postproc(fhtml_cached, tipe)
   if fhtml_cached:find('^[^/]*/[^/]*-wescheme') then
     code_lang = 'wescheme'
   end
+  local prog_lang = code_lang
+  if fhtml_cached:find('^[^/]*/[^/]*-codap') then
+    prog_lang = 'codap'
+  end
   local f_comment_file = fhtml_cached:gsub('%.html$', '') .. '-comment.txt'
   local f_mathjax_file = fhtml_cached:gsub('%.html$', '.asc.uses-mathjax')
   local f_codemirror_file = fhtml_cached:gsub('%.html$', '.asc.uses-codemirror')
@@ -262,19 +266,28 @@ local function postproc(fhtml_cached, tipe)
     --
     if add_body_id_p then
       add_body_id_p = false
+      local klass = prog_lang
       if tipe == 'workbookpage' then
-        o:write('<div id="body" class="workbookpage">\n')
+        klass = klass .. ' workbookpage'
       elseif tipe == 'pathwayindependent' then
         if fhtml_cached:match('/pages/') or fhtml_cached:match('/textbooks/') then
-          o:write('<div id="body" class="workbookpage">\n')
+          klass = klass .. ' workbookpage'
         else
-          o:write('<div id="body" class="narrativepage">\n')
+          klass = klass .. ' narrativepage'
         end
-      elseif not memberp(tipe, {'lessonplan', 'datasheetpage'}) then
-        o:write('<div id="body" class="narrativepage">\n')
+        if fhtml_cached:find('/courses/[^/]-/back%-matter/') then
+          klass = klass .. ' back-matter'
+        elseif fbase:find('^notes%-') then
+          klass = klass .. ' LessonNotes'
+        end
+      elseif tipe == 'lessonplan' then
+        klass = klass .. ' LessonPlan'
+      elseif not memberp(tipe, {'datasheetpage'}) then
+        klass = klass .. ' narrativepage'
       else
-        o:write('<div id="body">\n')
+        -- noop
       end
+      o:write('<div id="body" class="' .. klass .. '">\n')
     end
     --
     if add_codemirror_p then
