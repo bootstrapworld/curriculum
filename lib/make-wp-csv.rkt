@@ -88,7 +88,7 @@
               "src=\"https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js\""))
 
     (set! s (regexp-replace #rx"src=\"[^\"]*?/images/CCbadge.png\"" s
-                            (format "src=\"~aimages/CCbadge.png\"" lib-prefix)))
+                            (format "src=\"~alib/images/CCbadge.png\"" lib-prefix)))
 
     ;double double-quotes
     (set! s (regexp-replace* #rx"\"" s "\"\""))
