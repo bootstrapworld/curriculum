@@ -106,7 +106,7 @@
 
 (define (make-lesson-static-url f coursep)
   (when (path? f) (set! f (path->string f)))
-  (format "/wp-content/themes/pro-child/static-resources/~a/lib/~a/~a/" *season-year*
+  (format "/wp-content/themes/pro-child/static-resources/~a/~a/~a/" *season-year*
           (if coursep "courses" "lessons")
           f))
 
