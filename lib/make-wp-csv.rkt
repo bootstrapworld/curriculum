@@ -63,7 +63,7 @@
     (set! s (regexp-replace* #rx"(href=\"[^\"]*?/)index.shtml" s "\\1"))
 
     (set! s (regexp-replace* #rx"href=\"[^\"]*?\\./Contracts\\.shtml\"" s
-              (format "href=\"/wp-content/themes/pro-child/static-resources/~a/~a/lib/Contracts.shtml\"" *season-year* *natlang*)))
+              (format "href=\"/wp-content/themes/pro-child/static-resources/~a/~a/Contracts.shtml\"" *season-year* *natlang*)))
 
     (set! s (regexp-replace* #rx"src=\"[^\"]*?/lib/([^/]*?\\.js)\"" s
               (format "src=\"/wp-content/themes/pro-child/static-resources/~a/~a/lib/\\1\"" *season-year* *natlang*)))
@@ -106,7 +106,7 @@
 
 (define (make-lesson-static-url f coursep)
   (when (path? f) (set! f (path->string f)))
-  (format "/wp-content/themes/pro-child/static-resources/~a/~a/~a/" *season-year*
+  (format "/wp-content/themes/pro-child/static-resources/~a/~a/~a/~a/" *season-year* *natlang*
           (if coursep "courses" "lessons")
           f))
 
@@ -147,27 +147,27 @@
              [title-file (path->string (build-path lesson-dir-path ".cached/.index.titletxt"))])
         ; (printf "lesson-dir = ~s; umbrella-dir = ~s\n" lesson-dir umbrella-dir)
         (when (file-exists? lesson-plan-file)
-          ;id, title, permalink, archive, parent, seasons, type, child-categories, curriculum-materials-raw-code, post status, date, curriculum-group, multilingual
+          ;id, title, slug, archive, parent, seasons, type, child-categories, curriculum-materials-raw-code, post status, date, curriculum-group, multilingual
           (fprintf o "~a,\"~a\",~a,~a,~a,~a,~a,~a,\"~a\",~a,~a,~a,~a\n"
-                   (string->uniqid lesson-dir) ;id
+                   (string->uniqid lesson-dir)                                        ; id
                    (string-trim
                      (if (file-exists? title-file)
                          (escaped-file-content title-file #:kill-newlines? #t)
                          (path->string lesson-dir)
-                         )) ;title
+                         ))                                                           ; title
                    lesson-dir
-                   ;(make-lesson-permalink lesson-dir) ;permalink
-                   "" ; parent
-                   *archive* ; archive
-                   (format "~a ~a" (string-titlecase *season*) *year*) ;season
-                   *type* ; type
-                   "" ; child categories
+                   ;(make-lesson-permalink lesson-dir) ;permalink (unused)
+                   ""                                                                 ; parent
+                   *archive*                                                          ; archive
+                   (format "~a ~a" (string-titlecase *season*) *year*)                ; season
+                   *type*                                                             ; type
+                   ""                                                                 ; child categories
                    (escaped-file-content lesson-plan-file #:static-prefix
                                          (make-lesson-static-url lesson-dir coursep)) ; raw code
-                   "publish"
-                   curr-group
-                   *official-date*
-                   mult-ling
+                   "publish"                                                          ; post status
+                   get-curriculum-group                                               ; curriculum-group
+                   *official-date*                                                    ; ???
+                   mult-ling                                                          ; multilingual
                    ))))))
 
 (define (convert-sub-pages o #:umbrella-dir [umbrella-dir #f] #:pages [pages #f])
@@ -229,7 +229,7 @@
 
 (define *season-year* (format "~a-~a" *season* *year*))
 
-(define *archive* "FALSE")
+(define *archive* "True")
 (define *type* #f)
 
 (call-with-output-file *csv-file*
