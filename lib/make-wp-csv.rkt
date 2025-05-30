@@ -60,7 +60,7 @@
     (set! s (regexp-replace* #rx"(href=\"[^\"]*?/lessons/[^/]*?/)solution-pages/([^/]*?)\\.(html|pdf)\"" s
               (format "\\1\\2-solution/\"")))
 
-    (set! s (regexp-replace* #rx"(href=\"[^\"]*?/)index.shtml\"" s "\\1\""))
+    (set! s (regexp-replace* #rx"(href=\"[^\"]*?/)index.shtml" s "\\1"))
 
     (set! s (regexp-replace* #rx"href=\"[^\"]*?\\./Contracts\\.shtml\"" s
               (format "href=\"/wp-content/themes/pro-child/static-resources/~a/~a/lib/Contracts.shtml\"" *season-year* *natlang*)))
