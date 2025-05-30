@@ -157,8 +157,8 @@
                          ))                                                           ; title
                    lesson-dir
                    ;(make-lesson-permalink lesson-dir) ;permalink (unused)
-                   ""                                                                 ; parent
                    *archive*                                                          ; archive
+                   ""                                                                 ; parent
                    (format "~a ~a" (string-titlecase *season*) *year*)                ; season
                    *type*                                                             ; type
                    ""                                                                 ; child categories
