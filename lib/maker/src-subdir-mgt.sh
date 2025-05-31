@@ -110,6 +110,7 @@ function set_up_lesson_dir() {
   echo $pl > .cached/.record-proglang
   echo $superdir > .cached/.record-superdir
   if test "$superdir" != Projects; then
+    # ${TOPDIR}/${MAKE_DIR}make-mod-lplan.lua
     ${TOPDIR}/${MAKE_DIR}make-slides.lua
   fi
   touch .cached/.redo

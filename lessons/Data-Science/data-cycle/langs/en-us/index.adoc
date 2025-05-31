@@ -46,6 +46,7 @@ Students learn about the _Data Cycle_, which is a scaffold to support them in as
 * _The Data Cycle is from the @link{http://introdatascience.org/, Mobilizing IDS project} and the @link{https://www.amstat.org/asa/files/pdfs/GAISE/GAISEPreK12_Intro.pdf, Guidelines for Assessment and Instruction in Statistics Education (GAISE) Report.}_
 
 === Launch
+@slidebreak{Launch-DN}
 
 Data Science is all about _asking questions of data_.
 
@@ -62,7 +63,7 @@ Data Science is all about _asking questions of data_.
 - Are more animals male or female?
 }
 
-@slidebreak
+@slidebreak{Launch}
 
 @QandA{
 @Q{What strategies did you use?}
@@ -75,11 +76,11 @@ Data Science is all about _asking questions of data_.
 * How did you know to use that visualization? How did you know what rows and columns to use?
 }
 
-@slidebreak
+@slidebreak{Launch}
 
 Data Scientists ask a ton of questions, and each question adds a chapter to their *data story*. Even if a question turns out to be a dead-end, it's valuable to share what the question was and what work you did to answer it!
 
-@slidebreak
+@slidebreak{LaunchR}
 
 The Data Cycle is a _roadmap_, which helps guide us in the process of data analysis.
 
@@ -94,6 +95,7 @@ The Data Cycle is a _roadmap_, which helps guide us in the process of data analy
 4) We *Interpret the Data* by answering our original question and summarizing the process we took and the results of our analysis. Sometimes the data cycle ends here, but often these interpretations lead to new questions... and the cycle begins again.
 
 === Investigate
+@slidebreak{Investigate}
 
 Let's take the Data Cycle for a spin!
 
@@ -105,7 +107,7 @@ _First we have to think of a good question._
 - Turn to your partner and discuss what ideas you have about how you might answer this question.
 }
 
-@slidebreak
+@slidebreak{Investigate}
 
 (2) *Consider Data:*
 _To get the computer to answer our question, we'll need to decide what part of our dataset to focus on!_
@@ -121,7 +123,7 @@ _To get the computer to answer our question, we'll need to decide what part of o
 @A{Just the fixed column.}
 }
 
-@slidebreak
+@slidebreak{Investigate}
 
 (3) *Analyze the Data:*
 
@@ -132,7 +134,7 @@ We could use `count`, `bar-chart` or `pie-chart` to do this analysis and answer 
 
 @indented{_Pie charts might be the best choice, because we care more about the ratio ("2x as many fixed as unfixed") than the actual count ("20 fixed vs. 10 fixed")_.}
 
-@slidebreak
+@slidebreak{Investigate-DN}
 
 @ifslide{
 (3) *Analyze the Data (continued):*
@@ -152,14 +154,18 @@ Once we've decided what to make and we know which rows and columns we're plottin
 - With your partner, build a @ifproglang{pyret}{pie chart} @ifproglang{codap}{bar chart} to determine whether more animals are fixed or unfixed.
 }
 
-@slidebreak
+@ifproglang{pyret}{@slidebreak{InvestigateR}}
+@ifproglang{codap}{@slidebreak{Investigate}}
 
 (4) *Interpret the Data:*
 _Now that we've built our visualization, we can think about what we can learn from it and what else we might want to know. Even the answers to "simple" questions can lead to more interesting questions down the road!_
 
+@ifproglang{pyret}{
+@right{@image{images/fixed.png, 300}}
+}
+
 @QandA{
-@Q{What does `true` mean in the visualization?@ifproglang{pyret}{ +
-@image{images/fixed.png}}}
+@Q{What does `true` mean in this visualization?}
 @A{"Fixed" is a Boolean column, so true means "yes - the animal is fixed"}
 @Q{Are more animals fixed or unfixed?}
 @A{fixed}
@@ -175,11 +181,11 @@ _Now that we've built our visualization, we can think about what we can learn fr
 _The Data Story describes how each step in the Data Cycle was used to go from a question to an answer, and then to the next question. When analyzing a real dataset, Data Scientists might explore lots of questions, resulting in many different Data Stories to tell._
 }
 
-@slidebreak
+@slidebreak{Investigate}
 
 Let's take a look at a story that's been written about the Data Cycle we just completed.
 
-@slidebreak
+@slidebreak{Investigate}
 
 @indented{
 _"We wanted to know if more animals at the shelter were fixed or unfixed. To answer this, we made a @ifproglang{pyret}{`pie-chart`}@ifproglang{codap}{bar chart} using the `"fixed"` column of all the animals in the shelter. We found that more animals were fixed (18) than unfixed (14). This made us wonder if that percentage is the same for all species and all ages - and whether fixed animals get adopted faster than unfixed ones."_
@@ -198,11 +204,12 @@ _"We wanted to know if more animals at the shelter were fixed or unfixed. To ans
 }
 }
 
-@slidebreak
+@slidebreak{Investigate}
 
 Each chapter in the Data Story is valuable, and each turn of the Data Cycle is another chapter to add to your story!
 
 === Synthesize
+@slidebreak{Synthesize}
 
 @QandA{
 @Q{What are the four steps of the Data Cycle?}
@@ -223,9 +230,10 @@ Each chapter in the Data Story is valuable, and each turn of the Data Cycle is a
 Students consider the range of questions we can ask about data and practice categorizing them as "lookup", "arithmetic", "statistical" or questions that simply can't be answered based on the data.
 
 === Launch
+@slidebreak{Launch}
 How do we know what questions to ask? There’s an art to asking the right questions, and good Data Scientists think hard about what kind of questions can and can’t be answered.
 
-@slidebreak
+@slidebreak{Launch}
 
 Most questions can be broken down into one of four categories:
 
@@ -233,13 +241,13 @@ Most questions can be broken down into one of four categories:
 
 - *Arithmetic questions* - Answered by doing calculations (comparing, averaging, summing, etc.) with values from one single column. Examples of arithmetic questions might be “How much does the heaviest animal weigh?” or “What is the average age of animals from the shelter?”
 
-@slidebreak
+@slidebreak{Launch}
 
 - *Statistical questions* - These kinds of questions are the most interesting! And are often best asked with "in general" attached, because we expect some variability and the answer isn't black and white. If we ask "are dogs heavier than cats?", we know that not every dog is heavier than every cat! We just want to know if it is _generally true_ or _generally false_!
 
 - *Questions we can't answer* - We might wonder where the animal shelter is located, or what time of year the data was gathered! But the data in the table won’t help us answer that question, so as Data Scientists we might need to do some research beyond the data. And if nothing turns up, we simply recognize that there are limits to what we can analyze.
 
-@slidebreak
+@slidebreak{Launch}
 
 @QandA{
 @Q{What kind of question is "Are more animals fixed or unfixed?"? How do you know?}
@@ -253,6 +261,7 @@ Most questions can be broken down into one of four categories:
 }
 
 === Investigate
+@slidebreak{Investigate}
 
 @lesson-instruction{
 Find the table at the bottom of @printable-exercise{which-question-type.adoc}. +
@@ -271,6 +280,7 @@ Students generally struggle to make the leap into asking statistical questions. 
 - A _statistical_ question would be "What's the *typical* weight of an animal?", because it does not specify a particular arithmetic process. The answer could be the mean, the median, or even the mode! Figuring out which one to use depends on the distribution of the data, which we discuss in detail in our @lesson-link{measures-of-center} lesson.
 
 === Synthesize
+@slidebreak{Synthesize}
 
 - How would you explain the difference between Lookup, Arithmetic, and Statistical questions?
 - When you looked back at your Wonders from the Animals Dataset, were they mostly Lookup questions? Arithmetic? Statistical?
@@ -282,6 +292,7 @@ Students generally struggle to make the leap into asking statistical questions. 
 Students bridge from a human-language question into something more formal, by specifying the rows and columns they would need to examine.
 
 === Launch
+@slidebreak{Launch}
 
 Tables are made of *Rows* and *Columns*.
 
@@ -291,7 +302,7 @@ Each Row represents _one member of our population_.
 - In a weather forecast, each row might represent the weather at a particular hour.
 - In a dataset of students, each row might represent one of you!
 
-@slidebreak
+@slidebreak{Launch}
 
 Columns, on the other hand, represent information _about each row_.
 
@@ -299,7 +310,7 @@ Columns, on the other hand, represent information _about each row_.
 - Our weather table might have columns for temperature, wind, and whether or not it will rain.
 - Every student could have columns for their name, height, hair color, birthday, favorite food, etc.
 
-@slidebreak
+@slidebreak{Launch}
 
 @lesson-point{
 When considering data...
@@ -318,7 +329,7 @@ When considering data...
 - first, we'll need to make a new table of the _rows for cats_,
 - then, we'll focus on the `pounds` column _of our new table_.
 
-@slidebreak
+@slidebreak{Launch}
 
 Data scientists filter tables to make new tables all the time!
 
@@ -336,6 +347,7 @@ While we haven't learned how to @ifproglang{codap}{@lesson-link{codap-filtering,
 }
 
 === Investigate
+@slidebreak{Investigate}
 
 
 @lesson-instruction{
@@ -357,6 +369,7 @@ Have students share their answers and discuss any questions they have about thes
 }
 
 === Synthesize
+@slidebreak{Synthesize}
 
 How does asking "Which rows? Which columns?" help us figure out @ifproglang{pyret}{what code to write}@ifproglang{codap}{which configurations to use}?
 
@@ -371,6 +384,7 @@ If you'd like to start your students with a mini version of the Data Cycle, have
 }
 
 === Launch
+@slidebreak{Launch}
 
 Throughout the remainder of Bootstrap:Data Science we will be using Data Cycle pages to help us answer our questions and tell our data stories.
 
@@ -380,7 +394,7 @@ Throughout the remainder of Bootstrap:Data Science we will be using Data Cycle p
 - Let's take a moment to Notice and Wonder about how @printable-exercise{data-cycle-fixed.adoc} is formatted.
 }
 
-@slidebreak
+@slidebreak{Launch-DN}
 
 @QandA{
 So far we have always worked with the Animals Starter File, which is a sample taken from a larger dataset. +
@@ -397,6 +411,7 @@ To complete this page we will be working with the @starter-file{expanded-animals
 
 
 === Investigate
+@slidebreak{Investigate}
 
 @lesson-instruction{
 - Complete @printable-exercise{data-cycle-fixed.adoc}.
@@ -408,6 +423,7 @@ To complete this page we will be working with the @starter-file{expanded-animals
 
 
 === Synthesize
+@slidebreak{Synthesize}
 
 @ifproglang{pyret}{
 How do Contracts and the Data Cycle work together to help us figure out what code to write to answer our questions?
@@ -425,6 +441,7 @@ How does the Data Cycle help you to answer (and ask) questions?
 Students are introduced to the Data Cycle Pages they will be working with for the remainder of Bootstrap:Data Science.
 
 === Launch
+@slidebreak{Launch}
 
 Once we know what data we need, we can turn our attention to what we want the computer to do for us!
 
@@ -433,6 +450,7 @@ Once we know what data we need, we can turn our attention to what we want the co
 - Do we want to filter out certain rows to make a new table?
 
 === Investigate
+@slidebreak{Investigate}
 
 @ifproglang{pyret}{
 Let's get some practice going from questions to code.}
@@ -456,6 +474,7 @@ Let's give a full data cycle a try with some of the visualization we've already 
 }
 
 === Synthesize
+@slidebreak{Synthesize}
 
 @ifproglang{pyret}{
 How do Contracts and the Data Cycle work together to help us figure out what code to write to answer our questions
