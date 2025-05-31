@@ -262,3 +262,11 @@ function read_commaed_group(ip, directive, read_group)
   end
   return r
 end
+
+function first_line(f)
+  local i = io.open(f)
+  if not i then return false end
+  local x = i:read()
+  i:close()
+  return x
+end

@@ -20,20 +20,6 @@ local function calculate_dist_root_dir(fhtml_cached)
   return f
 end
 
-local function get_proglang(fhtml_cached)
-  local f = false
-  if fhtml_cached:match('/courses/') then
-    f = fhtml_cached:gsub('(distribution/[^/]+/courses/[^/]+)/.*', '%1/.cached/.record-proglang')
-  elseif fhtml_cached:match('/lessons/') then
-    f = fhtml_cached:gsub('(distribution/[^/]+/lessons/[^/]+)/.*', '%1/.cached/.record-proglang')
-  else
-    -- noop
-  end
-  if f and file_exists_p(f) then return first_line(f)
-  else return 'pyret'
-  end
-end
-
 local function postproc(fhtml_cached, tipe)
   -- print('doing postproc', fhtml_cached, tipe)
   if not file_exists_p(fhtml_cached) then return end
@@ -49,9 +35,12 @@ local function postproc(fhtml_cached, tipe)
   local fhtml = fdir .. '/' .. fbase
   -- print('fhtml is', fhtml)
   local code_lang = 'pyret'
-  local proglang = get_proglang(fhtml_cached)
-  if proglang == 'wescheme' then
-    code_lang = 'racket'
+  if fhtml_cached:find('^[^/]*/[^/]*-wescheme') then
+    code_lang = 'wescheme'
+  end
+  local prog_lang = code_lang
+  if fhtml_cached:find('^[^/]*/[^/]*-codap') then
+    prog_lang = 'codap'
   end
   local f_comment_file = fhtml_cached:gsub('%.html$', '') .. '-comment.txt'
   local f_mathjax_file = fhtml_cached:gsub('%.html$', '.asc.uses-mathjax')
@@ -277,7 +266,7 @@ local function postproc(fhtml_cached, tipe)
     --
     if add_body_id_p then
       add_body_id_p = false
-      local klass = proglang
+      local klass = prog_lang
       if tipe == 'workbookpage' then
         klass = klass .. ' workbookpage'
       elseif tipe == 'pathwayindependent' then
