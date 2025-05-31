@@ -78,7 +78,7 @@ local function postproc(fhtml_cached, tipe)
         add_comment_p = true
       end
       --
-      if memberp(tipe, {'lessonplan', 'pathwaynarrative', 'pathwayresource'}) then
+      if memberp(tipe, {'lessonplan', 'pathwaynarrative', 'pathwayresource', 'workbookpage'}) then
         add_body_id_p = true
         add_end_body_id_p = true
       end
@@ -262,7 +262,19 @@ local function postproc(fhtml_cached, tipe)
     --
     if add_body_id_p then
       add_body_id_p = false
-      o:write('<div id="body">\n')
+      if tipe == 'workbookpage' then
+        o:write('<div id="body" class="workbookpage">\n')
+      elseif tipe == 'pathwayindependent' then
+        if fhtml_cached:match('/pages/') or fhtml_cached:match('/textbooks/') then
+          o:write('<div id="body" class="workbookpage">\n')
+        else
+          o:write('<div id="body" class="narrativepage">\n')
+        end
+      elseif not memberp(tipe, {'lessonplan', 'datasheetpage'}) then
+        o:write('<div id="body" class="narrativepage">\n')
+      else
+        o:write('<div id="body">\n')
+      end
     end
     --
     if add_codemirror_p then
@@ -282,11 +294,11 @@ local function postproc(fhtml_cached, tipe)
         o:write('<script async defer src="https://unpkg.com/pdf-lib@1.4.0"></script>\n')
         o:write('<script async defer src="https://unpkg.com/@pdf-lib/fontkit/dist/fontkit.umd.min.js"></script>\n')
         o:write('<script async defer src="https://unpkg.com/downloadjs@1.4.7"></script>\n')
-        o:write('<script src="' .. local_dist_root_dir .. 'dependency-graph.js"></script>\n')
+        o:write('<script src="' .. local_dist_root_dir .. 'lib/dependency-graph.js"></script>\n')
         o:write('<script src="' .. local_dist_root_dir .. 'lib/makeWorkbook.js"></script>\n')
         o:write('<script src="' .. local_dist_root_dir .. 'lib/dictionaries.js"></script>\n')
-        o:write('<script src="' .. local_dist_root_dir .. 'pathway-tocs.js"></script>\n')
-        o:write('<script src="' .. local_dist_root_dir .. 'starterFiles.js"></script>\n')
+        o:write('<script src="' .. local_dist_root_dir .. 'lib/pathway-tocs.js"></script>\n')
+        o:write('<script src="' .. local_dist_root_dir .. 'lib/starterFiles.js"></script>\n')
       end
       o:write('<script src="' .. local_dist_root_dir .. 'lib/bootstraplesson.js"></script>\n')
       o:write('<script>var pathway;</script>\n')

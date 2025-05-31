@@ -251,17 +251,17 @@ $(eval $(foreach adocf,$(narrative-adoc-files),$(call make-build-narrative-rule,
 
 lesson-images-json-files := $(wildcard distribution/$(NATLANG)/lessons/*/images/lesson-images.json)
 
-images: distribution/$(NATLANG)/images.js
+images: distribution/$(NATLANG)/lib/images.js
 
-distribution/$(NATLANG)/images.js: $(lesson-images-json-files)
+distribution/$(NATLANG)/lib/images.js: $(lesson-images-json-files)
 	@echo ➤ Make $@
 	@$(MAKE_DIR)make-images-js.lua $@
 
 ##########################################################################
 
-dependency-graph: distribution/$(NATLANG)/dependency-graph.js distribution/$(NATLANG)/starterFiles.js
+dependency-graph: distribution/$(NATLANG)/lib/dependency-graph.js distribution/$(NATLANG)/lib/starterFiles.js
 
-distribution/$(NATLANG)/dependency-graph.js: $(all-lesson-plan-adoc-files)
+distribution/$(NATLANG)/lib/dependency-graph.js: $(all-lesson-plan-adoc-files)
 	@echo ➤ Make $@
 	@$(MAKE_DIR)make-dependency-graph.lua $@
 	@$(MAKE_DIR)check-graph.sh

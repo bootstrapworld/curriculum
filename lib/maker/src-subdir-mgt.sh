@@ -92,7 +92,7 @@ function make_solution_pages() {
 function check_slide_id() {
   local slideidfile=$1
   local ascfile=.cached/.index.asc
-  local depgraphfile=$TOPDIR/distribution/$NATLANG/dependency-graph.js
+  local depgraphfile=$TOPDIR/distribution/$NATLANG/lib/dependency-graph.js
   test ! -f $ascfile && return
   test ! -f $slideidfile && return
   test $ascfile -nt $slideidfile && return
