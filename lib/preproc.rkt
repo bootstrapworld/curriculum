@@ -172,7 +172,7 @@
     read-json))
 
 (define *starter-files*
-  (let ([starter-files-file (format "distribution/~a/starterFiles.js" *natlang*)])
+  (let ([starter-files-file (format "distribution/~a/lib/starterFiles.js" *natlang*)])
     (if (file-exists? starter-files-file)
         (call-with-input-file starter-files-file
           (lambda (i)
@@ -181,7 +181,7 @@
         '())))
 
 (define *assessments*
-  (let ([assessments-file (format "distribution/~a/assessments.js" *natlang*)])
+  (let ([assessments-file (format "distribution/~a/lib/assessments.js" *natlang*)])
     (if (file-exists? assessments-file)
         (call-with-input-file assessments-file
           (lambda (i)
@@ -190,7 +190,7 @@
         '())))
 
 (define *learning-objectives*
-  (let ([learning-objectives-file (format "distribution/~a/learningObjectives.js" *natlang*)])
+  (let ([learning-objectives-file (format "distribution/~a/lib/learningObjectives.js" *natlang*)])
     (if (file-exists? learning-objectives-file)
         (call-with-input-file learning-objectives-file
           (lambda (i)
@@ -199,7 +199,7 @@
         '())))
 
 (define *citations*
-  (let ([citations-file (format "distribution/~a/citations.js" *natlang*)])
+  (let ([citations-file (format "distribution/~a/lib/citations.js" *natlang*)])
     (if (file-exists? citations-file)
         (call-with-input-file citations-file
           (lambda (i)
@@ -1587,7 +1587,7 @@
                                   #f
                                   (display-header-comment prose o)
                                   ))]
-                           [(member directive '("scrub" "slidestyle"))
+                           [(string=? directive "scrub")
                             (read-group i directive)]
                            [(member directive '("ifslide" "pd-slide" "ifpdslide"))
                             (let ([text (read-group i directive #:multiline? #t)])
@@ -1962,8 +1962,10 @@
                            [(string=? directive "slidebreak")
                             (display (enclose-span ".slidebreak" "") o)
                             (let ([c (peek-char i)])
-                              (when (and (char? c) (char=? c #\{))
-                                (read-group i directive)))]
+                              (cond [(and (char? c) (char=? c #\{))
+                                     (read-group i directive)]
+                                    [else (printf "WARNING: ~a: Invalid @slidebreak\n"
+                                                  (errmessage-context))]))]
                            [(string=? directive "Bootstrap")
                             (fprintf o "https://www.bootstrapworld.org/[Bootstrap]")]
                            [(hash-ref *simple-directives* (string->symbol directive) #f)
@@ -2076,29 +2078,21 @@
                           [(string=? directive "assessments")
                            (fprintf o "\ninclude::~a/{cachedir}.index-assessments.asc[]\n" *containing-directory*)]
                           [(string=? directive "assessment")
-                           (let* ([lbl (string->symbol (read-group i directive))]
-                                  [c (hash-ref *assessments* lbl #f)]
-                                  [title (and c (hash-ref c 'title #f))]
-                                  [url (and c (hash-ref c 'url #f))]
-                                  [pl-specific (and c (hash-ref c *proglang-sym* #f))])
-                             (when pl-specific
-                               (let ([x (hash-ref pl-specific 'title #f)])
-                                 (when x (set! title x)))
-                               (let ([x (hash-ref pl-specific 'url #f)])
-                                 (when x (set! url x))))
-                             (unless title (set! title url))
-                             (cond [(not c)
-                                    (printf "WARNING: ~a: Ill-named @~a ~a\n\n" (errmessage-context) directive lbl)]
-                                   [(not url)
-                                    (printf "WARNING: ~a: @~a ~a missing for ~a\n\n"
-                                            (errmessage-context) directive
-                                            lbl *proglang*)]
-                                   [else
-                                     (unless (assoc url *assessments-met*)
-                                       (set! *assessments-met*
-                                         (cons (cons url title)
-                                               *assessments-met*)))
-                                     (fprintf o "link:pass:[~a][~a]" url title)]))]
+                           (let* ([args (read-commaed-group i directive read-group)]
+                                  [lbl (first args)]
+                                  [text (string-join (rest args) ", ")]
+                                  [dir (build-path *containing-directory* "assessments" lbl)])
+                             (when (string=? text "")
+                               (printf "WARNING: ~a: assessment ~a missing second argument\n"
+                                       (errmessage-context) lbl))
+                             (unless (directory-exists?
+                                       (build-path *containing-directory* "assessments" lbl))
+                               (printf "WARNING: ~a uses ~a with nonexistent directory ~a\n"
+                                       (errmessage-context) directive lbl))
+                             (unless (assoc lbl *assessments-met*)
+                                 (set! *assessments-met*
+                                   (cons (cons lbl text) *assessments-met*)))
+                             (fprintf o "link:pass:[assessments/~a/index.html][~a]" lbl text))]
                           [(string=? directive "citation")
                            (let* ([args (read-commaed-group i directive read-group)]
                                   [args-len (length args)]
@@ -2642,7 +2636,7 @@
     (lambda (o)
       (unless (null? *assessments-met*)
         (for ([asst (reverse *assessments-met*)])
-          (fprintf o "- link:pass:[~a][~a]\n"
+          (fprintf o "- link:pass:[assessments/~a/index.html][~a]\n"
                    (car asst) (cdr asst)))))
     #:exists 'replace))
 
