@@ -6,7 +6,7 @@
 (require racket/date)
 
 (define *dist-en-us* "distribution/en-us")
-
+(define *archive* "False")
 (define *season* (or (getenv "SEMESTER") "spring"))
 (define *year* (or (getenv "YEAR") (number->string (date-year (current-date)))))
 
@@ -229,7 +229,6 @@
 
 (define *season-year* (format "~a-~a" *season* *year*))
 
-(define *archive* "True")
 (define *type* #f)
 
 (call-with-output-file *csv-file*
