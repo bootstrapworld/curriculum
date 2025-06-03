@@ -1,12 +1,12 @@
 @import (inline) url("./asciidoctor.css");
-@import (inline) 'https://www.bootstrapworld.org/styles.css';
 
 /************************************************************************************
 * SYSTEMWIDE STYLES
 */
 
 @font-color: #75328A;
-@translucent-bg-color: #75328AAA;
+@translucent-bg-color: #468fafAA;
+@translucent-bg-color2: #f26b45AA;
 @text-font: 'Lato', Arial, Helvetica, sans-serif;
 @code-font: Hack, "Courier New", monospace;
 @code-comment-color: #cd7054;
@@ -15,8 +15,6 @@
 @print-section-heading: lightgray;
 @table-header: #eee;
 @lesson-block-vertical-space: 1em;
-
-html, body { font-size: 9pt; }
 
 .lesson-content {
   font-family:    @text-font;
@@ -134,7 +132,7 @@ html, body { font-size: 9pt; }
 
   /* The footer at the bottom of every page */
   .acknowledgmentsect {
-    position: absolute;
+    position: relative;
     top: 100%;
     margin-top: 20px;
   }
@@ -152,7 +150,7 @@ html, body { font-size: 9pt; }
   }
 
   /* Show the standard footer at the bottom of each page...*/
-  #footer {
+  div#body #footer {
     background: rgba(0,0,0,0.5);
     padding-left: 10px !important;
     position:   fixed;
@@ -196,7 +194,7 @@ html, body { font-size: 9pt; }
   }
 
   /* These items should always max-out pagewidth, and have no padding */
-  #header, #content, #footer {
+  #header, #content, div#body #footer {
     width: 100% !important; max-width: 100% !important; padding: 0;
   }
 
@@ -265,7 +263,7 @@ html, body { font-size: 9pt; }
   }
 }
 
-body:not(.LessonPlan, .narrativepage) p {
+div#body:not(.LessonPlan, .narrativepage) p {
   overflow:     hidden; 
   margin:       0px;
   line-height:  1.3;
@@ -400,13 +398,45 @@ lines on some browsers */
   }
 }
 
+
+
+/************************************************************************************
+* SIDEBAR STYLES
+*/.sidebar {
+  display:    block;
+  height:     100%;
+  padding:    20px;
+  background: #e9e9e9;
+  color:      black;
+  box-shadow: 1px 2px 5px 2px rgba(0,0,0,0.33);
+  border-radius: 20px;
+  overflow:   scroll;
+  user-select: none;
+  #toggle { display: none;}
+  .sidebarlessons {
+    margin-top:  30px;
+    input[type="checkbox"] { margin-right: 5px; }
+    ul {
+      background: white;
+      margin:     0px;
+      box-shadow: inset -1px 0px 2px gray;
+      max-height: 200px;
+      overflow:   scroll;
+      padding:    10px;
+      font-size:  10pt !important;
+      li * { color: black; }
+      li:nth-child(odd) { background: @translucent-bg-color; }
+    }
+  }
+  .sidebarpractices ul { font-size:  0.75rem !important; margin: 0; }
+}
+
 /************************************************************************************
 * LESSON PAGE STYLES
 */
-.LessonPlan {
+div#body.LessonPlan {
   font-size: 12pt;
 
-  #content { font-size: 9pt; }
   .other-proglang::before { font-style: italic; }
 
   /* The summary table at the top of each lesson */
@@ -421,84 +451,11 @@ lines on some browsers */
       pointer-events: none;
       &::before { font-size: 12pt; content: "Slides are not yet available for this lesson"; }
     }
-    &.left-header tr td:nth-child(1) { background-color: #b7d893; }
+    &.left-header tr td:nth-child(1) { background-color: @translucent-bg-color2; }
     &.left-header tr td:nth-child(1) p { font-weight: bold; }
 
     /* Custom materials link styles */ 
     .Optional::before, .OptProject::before, .handout::before { color: gray;}
-  }
-
-  /* Lesson sidebar */
-  @keyframes slideInFromLeft {
-      0% { transform: translateX(-100%); }
-    100% { transform: translateX(0);     }
-  }
-
-  .sidebar {
-    animation:  0.5s ease-out 0s 1 slideInFromLeft;
-    display:    block;
-    position:   fixed;
-    top:        0px;
-    left:       0px;
-    width:      225px;
-    height:     100%;
-    background: #e8f3dd;
-    transition: all 0.5s;
-    color:      black;
-    box-shadow: -1px 2px 4px black;
-    z-index:    9999;
-    overflow:   scroll;
-    user-select: none;
-    &.closed {
-      left:  -225px;
-      width: 265px;
-      height: 30px;
-    }
-    .paragraph { width: 205px; }
-    #toggle {
-      top:    0;
-      right:  0;
-      position: absolute;
-      width:  40px;
-      height: 30px;
-      text-align:  center;
-      border: 0;
-      margin: 0 !important;
-      background: @translucent-bg-color;
-      &:after { content: '≫'; font-size: 20px;}
-    }
-
-    &:not(.closed) #toggle:after { content: '«'; }
-    &:hover * { opacity: 1; }
-    > * { margin: 0px 10px !important; }
-    > *, .sidebar > * > * { opacity: 0.4; transition: opacity 0.5s; }
-    label { display: inline; font-size: 0.8rem; }
-    select { border:  none; }
-    strong { color: black; margin: 0; }
-    li { list-style-type: none; margin-bottom: 5px;}
-    table { background: none !important; border: none; width: auto; }
-    table td, table tr { padding: 0; background: none; border: 0; }
-    table .title { display: none; }
-    dl * { font-size:  9pt !important; margin: 0; display: inline; }
-    dl { line-height: 0.4rem; }
-    dd::after { content: '\A'; white-space: pre; }
-    dt::after { content: ' ·'; white-space: pre; font-size: 0.7rem; }
-    table dt { margin-top: 10px; }
-    .sidebarlessons { 
-      margin-top:  30px; 
-      input[type="checkbox"] { margin-right: 5px; }
-      ul {
-        background: white;
-        margin:     0px;
-        box-shadow: inset -1px 0px 2px gray;
-        max-height: 250px;
-        overflow:   scroll;
-        padding:    10px;
-        font-size:  10pt !important;
-      }
-      li:nth-child(odd) { background: #b7d89333; }
-    }
-    .sidebarpractices ul { font-size:  0.75rem !important; margin: 0; }
   }
 
   h2 { font-size: 1.75em; font-weight: normal; }
@@ -563,7 +520,6 @@ lines on some browsers */
   }
 
   code { line-height: 1.5 !important; }
-  .codesexp, .circleevalsexp, .editbox, .cm-s-scheme { font-size: 0.8em; }
 
   .lesson-instruction, .lesson-roleplay, .q-and-a {
     min-height: 50px;
@@ -662,22 +618,22 @@ lines on some browsers */
 */
 
 /* Maximize vertical space for content */
-body.workbookpage, body.workbookpage #content,
-body.workbookpage #preamble_disabled,
-body.workbookpage #preamble_disabled .sectionbody,
-body.workbookpage #content .sect1.lesson-section-1 {
+div#body.workbookpage, div#body.workbookpage #content,
+div#body.workbookpage #preamble_disabled,
+div#body.workbookpage #preamble_disabled .sectionbody,
+div#body.workbookpage #content .sect1.lesson-section-1 {
   padding:   0;
   display: flex; 
   flex-direction: column; 
   justify-content: flex-start; 
 }
-body.workbookpage #content .sect1.lesson-section-1 .sectionbody { display: contents; }
+div#body.workbookpage #content .sect1.lesson-section-1 .sectionbody { display: contents; }
 
-body.solution-page {
+div#body.solution-page {
   .fitbruby, .fitb { font-style: italic; }
 }
 
-body.workbookpage {
+div#body.workbookpage {
   font-size: 9pt; /* Use a tiny font for print, but then zoom in @screen */
   color: black !important;
 
@@ -896,7 +852,7 @@ table.contracts-table {
 
 
 /* TODO(Emmanuel): do we even need all of these? Clean up */
-body:not(.LessonPlan) {
+div#body:not(.LessonPlan) {
   p:empty { min-height: 0; margin: 0; padding: 0; } /* Empty p tags should take up no space */
 
   #header { margin-bottom: 5px !important; }
@@ -912,7 +868,7 @@ body:not(.LessonPlan) {
 }
 
 /* Don't use flex to space out content on notes pages */
-body.LessonNotes {
+div#body.LessonNotes {
   #content { display: block !important; }
   li { margin-bottom: 10px; }
 }
@@ -1296,9 +1252,6 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
 */
 
 @media screen {
-  html { height: 100%; display: flex; padding-left: 3em;}
-
-  div#body { max-width: 700px; }
 
   .web-page-only {
     font-weight:      bold;
@@ -1309,7 +1262,7 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
   #savetodrive-div { height: 30px !important; }
 
   /* on WB pages zoom the page 1.25x for a big screen */
-  body.workbookpage, body.LessonPlan #content {
+  div#body.workbookpage {
     transform-origin: left top; 
     transform: scale(calc(12 / 9)); 
     #savetodrive-div { transform: scale(0.8); }
@@ -1318,9 +1271,9 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
   /********************************************************************
    *  Collapsing Headers 
    */
-   .LessonPlan, .TeacherResources {
+   div#body.LessonPlan, .TeacherResources {
       /* add a bottom padding to prevent browser-scroll */
-      #body { padding-bottom:  10in; }  
+      padding-bottom:  5in;
       /* adjust colors */
       h2 {
         background-color: @translucent-bg-color;
@@ -1344,7 +1297,7 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
           margin-right: 5px;
         }
         &.active::after { content: '▲'; }
-        &.active, &:hover { background-color: #b7d893; }
+        &.active, &:hover { background-color: @translucent-bg-color2; }
       }
       /* set collapsed size and transition rules */
       .sect1:not(.acknowledgmentsect) .sectionbody {
@@ -1391,7 +1344,7 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
 
 @media print {
   .noprint { display: none; }
-  body.LessonPlan { 
+  div#body.LessonPlan {
     width: 7.5in; 
     .preamble tr td:last-child > * { background: white !important; }
   }
@@ -1410,7 +1363,7 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
 
   /* Change coloring of body text, lesson summary table, and code */
   html { -webkit-print-color-adjust: exact; }
-  div#body, body { color: black; }
+  div#body { color: black; }
   .listingblock pre:not(.highlight) { background: none !important; }
 
   .LessonPlan {
@@ -1432,7 +1385,7 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
     .preamble tr td > * { max-height: 1000px; }
   }
   
-  body.workbookpage {
+  div#div#body.workbookpage {
     /* Use B&W colors for headers */
     #header> h1:first-child, .sect1 > h1:first-child { 
       color: black;
