@@ -48,11 +48,12 @@ Visme URLs for tree diagrams:
 Students are introduced to the concept of @vocab{permutation} (with replacement). They  compute a number of permutations by hand using tree diagrams, then learn the formula for computing permutations with replacement.
 
 === Launch
+@slidebreak{LaunchR}
 @right{@image{images/pizza.png}}
 
 Luigi's Family Restaurant is about to open, and it's going to be the hottest restaurant in town. They have a menu with six different dishes, and they plan to offer a four-course "Italian Safari" dinner for the low-low price of $9.95 per person. 
 
-@slidebreak
+@slidebreak{Launch-DN}
 
 @lesson-instruction{
 - Open @starter-file{permutations-and-combinations}, save a copy, and click "Run".
@@ -60,13 +61,13 @@ Luigi's Family Restaurant is about to open, and it's going to be the hottest res
 - Try typing some of them into the Interactions Area to see what each menu item looks like.
 }
 
-@slidebreak
+@slidebreak{LaunchR}
 
 @ifslide{@right{@image{images/pizza.png}}}
 
 The gimmick is that diners can _choose the order of the courses:_ you might start with Lasagna, but your friend can start with the Chicken Parmesan, and so on. And if your friend happens to really, *really* like Chicken Parmesan, they can choose to eat it for all four courses!
 
-@slidebreak
+@slidebreak{LaunchR}
 
 @ifslide{@right{@image{images/pizza.png}}}
 
@@ -76,7 +77,7 @@ In fact, Luigi himself guarantees free food for life for anyone who can eat ever
 
 If you ate dinner there every night, how long would it take to try each one? In other words, _how many ways can you reshuffle those four courses_?
 
-@slidebreak
+@slidebreak{LaunchR}
 
 @ifslide{@right{@image{images/pizza.png}}}
 
@@ -84,7 +85,7 @@ Luigi isn't going to give away free food just because you order four courses - h
 
 In situations where order matters, the list of possible options is called @vocab{permutations}.
 
-@slidebreak
+@slidebreak{Launch}
 
 *With or without replacement?*
 
@@ -95,6 +96,7 @@ Luigi is a nice guy, so once you order lasagna it is "replaced" with the option 
 With six dishes to choose from and four courses to eat, how many @vocab{permutations} are there? How many meals would we have to eat, to get free food for life?
 
 === Investigate
+@slidebreak{Investigate}
 
 @lesson-instruction{
 - In pairs or small groups, follow the instructions for the `PERMUTATIONS` section, completing 1a, 1b, and 1c.
@@ -115,7 +117,7 @@ Luigi has six possible dishes to choose from.
 
 It's useful to use _tree diagrams_, so we can see what our possible choices are. A tree diagram is a way of tracking a series of events. In this case, each course we choose is an event.
 
-@slidebreak
+@slidebreak{InvestigateR}
 
 @right{@image{images/6-1-course-permute-w-replacement.png}} Let's diagram all permutations for a 1-course meal. 
 
@@ -125,7 +127,7 @@ With six menu items, there are just six possible 1-course @vocab{permutations}: 
 
 In less than a week, we'd have tried all the possibilities!
 
-@slidebreak
+@slidebreak{Investigate}
 
 But what about a 2-course meal? Each of our 1st-course choices has _another tree_ underneath it! After we've picked our first course, how many options do we have for the second?
 
@@ -142,7 +144,7 @@ In other words, someone could order:
 
 That's six possible orders with Lasagna as the first course. 
 
-@slidebreak
+@slidebreak{InvestigateR}
 
 But, each of the other first course options also comes with six possible second course order options... 
 
@@ -154,14 +156,14 @@ That's @math{6 \times 6} !
 
 So, instead of taking six days to try all the permutations, now it takes _36 days_ - more than a month!
 
-@slidebreak
+@slidebreak{Investigate}
 
 @lesson-instruction{
 - For practice with tree-diagrams and permutations, complete @printable-exercise{tree-diagrams.adoc}.
 - How many permutations would there be in a 3-course meal?
 }
 
-@slidebreak
+@slidebreak{Investigate}
 
 @ifslide{*How many permutations would there be in a 3-course meal?*}
 
@@ -169,7 +171,7 @@ We had 36 possible 2-course meals, so choosing a third course means that each "e
 
 @math{6 \times 6  \times 6 = 6^3 = 216} possible 3-course meals.
 
-@slidebreak
+@slidebreak{Investigate}
 
 The number of @vocab{permutations} is computed based on two things:
 
@@ -178,7 +180,7 @@ The number of @vocab{permutations} is computed based on two things:
 - How many times we get to _choose_.
   * 1-course meal? 3-course meal?
 
-@slidebreak
+@slidebreak{Investigate}
 
 Let's see this as a function: 
 
@@ -195,7 +197,7 @@ Let's see this as a function:
 @A{@math{\text{permute-w-replace}(6, 4) = 6^{4} = 1296}}
 }
 
-@slidebreak
+@slidebreak{Investigate}
 
 @ifslide{*How many permutations are there for a 4-course meal chosen from Luigi's 6-item menu?*
 
@@ -204,7 +206,7 @@ Let's see this as a function:
 
 With four courses, it would take more than _3.5 years_ to try them all -- if we ate dinner at Luigi's every night!
 
-@slidebreak
+@slidebreak{Investigate}
 
 In @proglang, we can raise a 6 to the power of four with the @show{(code 'expt)} function.
 
@@ -215,6 +217,7 @@ For example, @show{(code '(expt 6 4))} will compute @math{6^4}.
 }
 
 === Synthesize
+@slidebreak{Synthesize}
 
 @QandA{
 @Q{What are some other real world examples that require permutation?}
@@ -227,13 +230,14 @@ For example, @show{(code '(expt 6 4))} will compute @math{6^4}.
 Students build on their understanding of @vocab{permutation}, now extending it to situations _without_ replacement. They compute a number of permutations by hand using tree diagrams, then learn the formula for computing permutations without replacement.
 
 === Launch
+@slidebreak{Launch}
 After a few months, Luigi realizes that he's losing money. He could either raise his prices, or streamline the cooking process. 
 
 His daughter observes that there's no way to predict how many ingredients to buy, since some people might want four courses of Soup and others might want four courses of ziti. 
 
 Without being able to predict the ingredients, Luigi winds up buying too much of one thing and not enough of another - resulting in a lot of wasted food and unhappy customers!
 
-@slidebreak
+@slidebreak{Launch}
 
 Luigi proposes an important change to his "Italian Safari deal": +
 *No item can be ordered twice.*
@@ -244,7 +248,7 @@ With no one ordering four of the same thing and far fewer choices to make, it's 
 
 Now how long would it take to try every permutation?
 
-@slidebreak
+@slidebreak{LaunchR}
 
 @right{@image{images/4-1-course-permute-wo-replacement.png}} Let's start by drawing the tree diagram for the first course:
 
@@ -254,7 +258,7 @@ There are *four* possible items we could eat for our first course, so we have 4 
 
 *How many branches are there for the second course, under each first course choice?*
 
-@slidebreak
+@slidebreak{LaunchR}
 
 @right{@image{images/4-2-course-permute-wo-replacement.png}}We can't order the same thing twice so... 
 
@@ -263,7 +267,7 @@ There are *four* possible items we could eat for our first course, so we have 4 
 - No matter what we choose for our first course, we only have three choices left for our second course. 
 
 @clear
-@slidebreak
+@slidebreak{LaunchR}
 @ifslide{@right{@image{images/4-2-course-permute-wo-replacement.png}}} 
 
 This is called @vocab{permutation} *without replacement*. 
@@ -275,7 +279,7 @@ Now there are only @math{4 \times 3 = 12} permutations for the first two courses
 @A{2}
 }
 
-@slidebreak
+@slidebreak{LaunchR}
 
 We can visualize our four courses as a four-level tree, with each set of branches getting smaller and smaller until there's only one option left. In this tree diagram, you can see a _partial_ drawing of all four courses.
 
@@ -288,7 +292,7 @@ We can visualize our four courses as a four-level tree, with each set of branche
 - Chicken, Soup, Ravioli & Pizza
 - Chicken, Soup, Pizza & Ravioli
 
-@slidebreak
+@slidebreak{Launch}
 @clear
 
 That's six different permutations that start with Chicken, and we have four different other possible meals to start with.
@@ -305,7 +309,7 @@ Reminder: @math{0! = 1} @link{https://www.chilimath.com/lessons/intermediate-alg
 
 Now we could try all the permutations in just under a month!
 
-@slidebreak
+@slidebreak{Launch}
 
 *Luigi decides this makes it too easy, and now that his kitchen is running smoothly he decides to bring back the original six-item menu.*
 
@@ -315,7 +319,7 @@ In this situation, there might be six items on the menu, but we want to _stop mu
 
 With this number of possible combinations, it would take almost a year to try them all! And with less wasted food and a faster kitchen, Luigi has a lot of happy customers and a lot of money in the bank.
 
-@slidebreak
+@slidebreak{Launch}
 
 We can write this relationship as a function:
 
@@ -326,13 +330,13 @@ We can write this relationship as a function:
 
 @math{\text{permute-wo-replace}(\text{items}, \text{choose}) = \frac{\text{items}!}{(\text{items} - \text{choose})!}}
 
-@slidebreak
+@slidebreak{Launch}
 
 @lesson-instruction{
 For practice, complete @printable-exercise{permutation.adoc}.
 }
 
-@slidebreak
+@slidebreak{Launch}
 
 In Pyret, we can compute the factorial of 6 with the `factorial` function. 
 
@@ -343,12 +347,14 @@ For example, @show{(code '(factorial 6))} will compute @math{6 \times 5 \times 4
 }
 
 === Synthesize
+@slidebreak{Synthesize}
 
 - What is the difference between permutation with or without replacement?
 
 - What are some real-world examples of each?
 
 == Additional Exercises
+@slidebreak{Supplemental}
 
 - @opt-printable-exercise{tree-diagrams2.adoc}
 - @opt-printable-exercise{permute-w-replace-dr.adoc}

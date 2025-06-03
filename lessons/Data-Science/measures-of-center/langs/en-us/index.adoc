@@ -13,7 +13,6 @@
 
 | Lesson Goals
 | Students will be able to...
-
 @objectives
 
 | Student-facing Lesson Goals
@@ -30,14 +29,19 @@
 |[.materials-links]
 @opt-material-links
 
+| Assessments
+| 
+@assessments
+
 | Preparation
 |
 @preparation{
 
 - Decide whether or not the first section of this lesson (an introduction to measures of center) is appropriate for your class. 
-  * If you are teaching it, each group of three students will need a ruler, a marker, tape, and 5 pennies for the kinesthetic activity.
+  * Want to get a sense of what your students already know before you decide? @scrub{@assessment{mean-median-modes-checkin, Use our online assessment!}} 
+  * Looking for a do now to get the juices flowing before skipping ahead?
+  * If you are teaching this section, each group of three students will need a ruler, a marker, tape, and 5 pennies for the kinesthetic activity.
   * If you are confident that your students have a solid understanding of mean, median, and mode(s), you can jump to the second section of the lesson, where students will use @proglang to compute measures of center, and then consider which measure of center is the most appropriate. 
-  * Looking for a do now to get the juices flowing before skipping ahead? Try @printable-exercise{mean-median-modes.adoc}.
 
 @ifproglang{pyret}{
 - Decide whether or not you want to launch the second section of this lesson using the *Live Pyret Survey* and your class' own data. If so, follow the instructions on @dist-link{pages/live-pyret-survey-instructions.adoc} to:
@@ -59,14 +63,15 @@
 Students learn how to compute three different measures of center.
 
 === Launch
+@slidebreak{Launch}
 
-@teacher{Engage your students with this section at whatever speed and level of depth you deem appropriate for them.}
+@teacher{By the end of this section, students should be able to answer the questions on @printable-exercise{mean-median-modes.adoc}, which are the same as @scrub{@assessment{mean-median-modes-checkin}}.  Engage your students with this section at whatever speed and level of depth you deem appropriate for them or skip to the next if you're confident they already know how to cumpute measures of center.}
 
 When working with dot plots, we often wondered, "What is a typical value in this sample?"
 
 \... and we often discovered that there were a variety of correct responses!
 
-@slidebreak
+@slidebreak{Launch}
 
 When thinking about typicality, there are a few approaches:
 
@@ -76,7 +81,7 @@ When thinking about typicality, there are a few approaches:
 
 It turns out that these different ways of thinking about typicality are all different ways of "measuring the center".
 
-@slidebreak
+@slidebreak{Launch}
 
 Another way of asking _"What value is typical?"_ would be _"Is there a value that all the others tend to cluster around?"_
 
@@ -86,7 +91,7 @@ There are several different measures of central tendency. Data Scientists know w
 
 @teacher{If you know that your students do not know how to compute mean, median, and mode(s), you can skip the first question, below.}
 
-@slidebreak
+@slidebreak{Launch}
 
 @QandA{
 @Q{Compute the mean, median, and mode for these datasets:
@@ -105,6 +110,7 @@ There are several different measures of central tendency. Data Scientists know w
 
 
 === Investigate
+@slidebreak{Investigate}
 
 ==== Mean
 
@@ -114,7 +120,7 @@ We can think of the @vocab{mean} as the balancing point of a dataset, or the val
 Divide the class into groups of three. Supply each group with a marker, a ruler, tape, and 5 pennies.
 }
 
-@slidebreak
+@slidebreak{Investigate}
 
 @lesson-instruction{
 - We are going to build a seesaw (also known as a teeter-totter) with a marker and a ruler.
@@ -122,7 +128,7 @@ Divide the class into groups of three. Supply each group with a marker, a ruler,
 - Set the ruler on top of the marker; try to balance it so that it hovers parallel to the surface of the desk.
 }
 
-@slidebreak
+@slidebreak{Investigate}
 
 @QandA{
 @Q{To balance the ruler over the marker, where must the marker be positioned? Why?}
@@ -148,7 +154,7 @@ Very commonly, students develop a computational understanding of mean, but not a
 Interpreting the mean as the "fair share" can also help students think conceptually about mean. In other words: _What amount will each member of a group get if everything is distributed equally?_ Sometimes, a thought experiment is most appropriate for conveying the "fair share" interpretation, e.g. if there are five dogs of differing weights, how would we redistribute the weight so that each of the five dogs is an equal weight? If you have students who struggle to think about mean as a balancing point, you might consider sharing this alternative interpretation.
 }
 
-@slidebreak
+@slidebreak{Investigate}
 
 To compute the mean of any dataset, we add up all of the values, and then divide by the number of values in the dataset. This algorithm reveals to us our balance point--and we don't even need the pennies, the ruler, or the trial and error!
 
@@ -157,7 +163,7 @@ To compute the mean of any dataset, we add up all of the values, and then divide
 - When you are finished, compare your answers with a partner's answers and correct any mistakes.
 }
 
-@slidebreak
+@slidebreak{InvestigateR}
 
 ==== Median
 
@@ -165,7 +171,7 @@ To compute the mean of any dataset, we add up all of the values, and then divide
 
 @right{@image{images/buildings-by-height.png, 250}}
 
-@slidebreak
+@slidebreak{Investigate}
 
 The algorithm for finding the median of a quantitative column is:
 
@@ -177,7 +183,7 @@ The algorithm for finding the median of a quantitative column is:
 @teacher{
 Address the common misconception that the median is just a cut point in the data. Yes, the median is the middle value, but it is also a *measure of center*, meaning that it offers a characterization of the *entire* group of datapoints. Measures of center always summarize the values of a dataset with a single number.}
 
-@slidebreak
+@slidebreak{Investigate}
 
 Consider this list of ages: `25, 26, 28, 28, 28, 29, 29, 30, 30, 31, 32`
 
@@ -185,7 +191,7 @@ Consider this list of ages: `25, 26, 28, 28, 28, 29, 29, 30, 30, 31, 32`
 Here 29 is the @vocab{median}. It's the middle number of the list and it separates the "bottom half” (5 values below it) from the "top half” (5 values above it).
 }
 
-@slidebreak
+@slidebreak{Investigate}
 
 Now consider this list of ages: `3, 7, 9, 21`
 
@@ -196,14 +202,14 @@ There is no middle number. So the median of this list will be the mean of the tw
 @math{7 + 9 = 16 and 16 \div 2 = 8}
 }
 
-@slidebreak
+@slidebreak{Investigate}
 
 @lesson-instruction{
 - Complete the Median section of @printable-exercise{mean-median-modes.adoc}.
 - Compare your answers with a partner.
 }
 
-@slidebreak
+@slidebreak{Investigate}
 
 ==== Mode(s)
 
@@ -214,7 +220,7 @@ Median and mean always produce one number and many datasets are what we call “
 - If all values are equally common, then there is no mode at all!
 - If two or more values are equally common, there can be more than one mode.
 
-@slidebreak
+@slidebreak{Investigate}
 
 Consider the following three datasets:
 
@@ -228,7 +234,7 @@ Consider the following three datasets:
 - The modes (plural!) of the last dataset are 1 and 4, because 1 and 4 both appear more often than any other element, and because they appear equally often.
 
 
-@slidebreak
+@slidebreak{Investigate}
 
 Can you find the mode(s) of this dataset?
 
@@ -239,7 +245,7 @@ red, green, red, yellow, blue, red, purple, purple
 @teacher{The mode here is red, which appears three times on the list. Highlight for students that *yes*, we can find the mode of a categorical dataset!}
 
 
-@slidebreak
+@slidebreak{Investigate}
 
 @lesson-instruction{
 - Complete the Mode(s) section of @printable-exercise{mean-median-modes.adoc}.
@@ -249,6 +255,7 @@ red, green, red, yellow, blue, red, purple, purple
 
 
 === Synthesize
+@slidebreak{Synthesize}
 
 @QandA{
 
@@ -273,6 +280,7 @@ red, green, red, yellow, blue, red, purple, purple
 Students use @proglang to compute measure of center, and then consider which measure of center is most appropriate in a given situation.
 
 === Launch
+@slidebreak{Launch}
 
 Summarizing a big dataset means that some information gets lost, so it's important to pick an appropriate summary.
 
@@ -283,13 +291,13 @@ Here are just a few examples of summary data being used for important things:
 - Adults are often summarized by a single number -- like their credit score -- which determines their ability to get a job or a home loan.
 - When buying uniforms for a sports team, a coach might look for the most common size that the players wear.
 
-@slidebreak
+@slidebreak{Launch}
 
 Picking the wrong summary value (mean, median, or mode) can have serious implications!
 
 Let's learn how to use @proglang to quickly, easily compute the three different measures of center so the we can spend our energy thoughtfully deciding *which* measure of center is the most appropriate in a given situation, rather than number crunching.
 
-@slidebreak
+@slidebreak{Launch}
 
 @ifproglang{pyret}{
 @opt-block{
@@ -323,6 +331,7 @@ Facilitate a discussion about this new-to-them Pyret Data Visualization!
 }
 
 === Investigate
+@slidebreak{Investigate-DN}
 
 
 @ifproglang{codap}{
@@ -365,7 +374,7 @@ To compute the mean and median in CODAP, create a graph of randomly distributed 
 @teacher{Question 3 requires students to _apply_ their knowledge of mean *and* median, which can be quite difficult. Commonly, students' understanding of center does not extend beyond algorithms. Invite students to think back to what they know about histograms and histogram shape. Challenge them to think deeply about how a histogram's shape relates to its measures of center. We will continue to consider this topic in the next lesson section.}
 
 
-@slidebreak
+@slidebreak{Investigate}
 
 
 Let's summarize some of the key ideas we encountered while thinking about the best measure of center to summarize the pounds column of the animals dataset.
@@ -383,12 +392,12 @@ Let's summarize some of the key ideas we encountered while thinking about the be
 @A{The @vocab{mode} is a useful measure of center when we have a dataset with a small number of values. Mode is also our only measure of center that can be used with categorical data.}
 }
 
-@slidebreak
+@slidebreak{Investigate}
 
 Consider how many policies or laws are informed by statistics! Knowing about measures of center helps us see through and critique misleading statements.
 
 
-@slidebreak
+@slidebreak{Investigate}
 
 @lesson-instruction{
 - Use @proglang to complete @printable-exercise{critiquing-findings.adoc}.
@@ -396,6 +405,7 @@ Consider how many policies or laws are informed by statistics! Knowing about mea
 }
 
 === Synthesize
+@slidebreak{Synthesize}
 
 @QandA{
 @Q{Do you trust this statement?: _In 2003, the average American family earned $43,000 a year -- well above the poverty line! Therefore, very few Americans were living in poverty._ Why or why not?}
@@ -414,6 +424,7 @@ Students apply what they have learned about measures of center to their chosen d
 }
 
 === Launch
+@slidebreak{Launch}
 Let’s review what we have learned about computing and interpreting three measures of center - mean, median, and mode(s).
 
 @QandA{
@@ -427,6 +438,7 @@ Let’s review what we have learned about computing and interpreting three measu
 }
 
 === Investigate
+@slidebreak{Investigate-DN}
 
 Let’s connect what we know about measures of center to your chosen dataset.
 
@@ -439,7 +451,7 @@ Complete @printable-exercise{data-cycle-practice-2.adoc, "two Data Cycles"} that
 
 @teacher{Invite students to discuss their results and consider how to interpret them.}
 
-@slidebreak
+@slidebreak{Investigate-DN}
 
 @lesson-instruction{
 *It’s time to add to your @starter-file{exploration-project}.*
@@ -449,7 +461,7 @@ Complete @printable-exercise{data-cycle-practice-2.adoc, "two Data Cycles"} that
 - On the next slide, repeat with `Column B` using the second column you're interested in.
 }
 
-@slidebreak
+@slidebreak{Investigate}
 
 @lesson-instruction{
 - Add your interpretations to the two "Measures of Center and Spread" slides. 
@@ -457,6 +469,7 @@ Complete @printable-exercise{data-cycle-practice-2.adoc, "two Data Cycles"} that
 }
 
 === Synthesize
+@slidebreak{Synthesize}
 
 @teacher{Have students share their findings.}
 
@@ -469,6 +482,7 @@ Complete @printable-exercise{data-cycle-practice-2.adoc, "two Data Cycles"} that
 - When you compared your findings with other students, did you make any interesting discoveries? (For instance: Did everyone find mode(s)? Did anyone have a measure of center that was dramatically influenced by an outlier?)
 
 == Additional Exercises
+@slidebreak{Supplemental}
 - @opt-starter-file{matching-modes}
 
 

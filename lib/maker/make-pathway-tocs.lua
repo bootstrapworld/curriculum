@@ -1,7 +1,6 @@
 #! /usr/bin/env lua
 
--- last modified 2025-05-13
-
+-- last modified 2025-05-29
 -- print('doing make-pathway-tocs.lua')
 
 dofile(os.getenv('MAKE_DIR') .. 'utils.lua')
@@ -14,7 +13,7 @@ local distr_courses = dist_dir .. 'courses/'
 
 local all_courses = dofile(os.getenv 'COURSES_LIST_FILE')
 
-local tocs_file = dist_dir .. 'pathway-tocs.js'
+local tocs_file = dist_dir .. 'lib/pathway-tocs.js'
 local o = io.open(tocs_file, 'w+')
 
 o:write('var pathwayTocs = {\n')

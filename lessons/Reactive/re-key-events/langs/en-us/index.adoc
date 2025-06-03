@@ -23,13 +23,14 @@
 Students learn about _events_, and add key-event handling to their games.
 
 === Launch 
+@slidebreak{Launch}
 We’ve already seen one kind of interactivity in our programs: getting the next state from the current state on a tick-event. This is perfect for animations that happen on their own, without any user intervention. In a game, that might be clouds moving across the sky or a ball bouncing on its own.
 
 An important kind of behavior in _interactive_ programs is to respond user input, such as key-presses. A key-press - like the tick of a clock - is a kind of @vocab{event}, and we’ll re-use the idea of an event handler like `on-tick` and a function like `next-state-tick`.
 
 For key-events, the event @vocab{handler} is called `on-key`, and our function `next-state-key` will compute the next state from the current one after a key event. We’re going to use this idea to build up a @vocab{reactor} with a character moving in two dimensions, where the movement is triggered by key-presses.
 
-@slidebreak
+@slidebreak{Launch-DN}
 
 @lesson-instruction{Open up the @starter-file{moving-character}.}
 
@@ -39,7 +40,7 @@ This file contains a data block for representing a character’s position (`Char
 Write an example instance of a `CharState` where both the x field and the y field are between 100 and 500. Give it the name `middle`. We’ve filled in a picture of Sam the Butterfly from Bootstrap:Algebra. There is a drawing function called `draw-state` provided that simply draws the character image on a white background at the x and y coordinate in a `CharState`.
 }
 
-@slidebreak
+@slidebreak{Launch}
 
 @lesson-instruction{
 Run the program, and use `draw-state` to draw the example instance you created above. Did it appear where you expected?
@@ -47,14 +48,14 @@ Run the program, and use `draw-state` to draw the example instance you created a
 
 This is a reminder that it’s often useful, when working on programs that use data to represent positions in an image, to make sure we understand what values in the data structure correspond to which drawing behavior.
 
-@slidebreak
+@slidebreak{Launch}
 
 @lesson-instruction{
 Write an example instance that represents the butterfly in the top-right corner of the window. Give it a meaningful name of your own choice. Re-run the program, and check using `draw-state` that it showed up where you expect.
 }
 
 
-@slidebreak
+@slidebreak{Launch}
 
 There is also a contract for a function `next-state-key`, which looks like:
 
@@ -76,7 +77,7 @@ Let's compare the contract of `next-state-key` to the contract of `next-state-ti
 @A{Both produce the next state.}
 }
 
-@slidebreak
+@slidebreak{Launch}
 @ifslide{
 ```
 # next-state-key :: CharState, String -> CharState
@@ -88,7 +89,7 @@ Let's compare the contract of `next-state-key` to the contract of `next-state-ti
 }
 When a key-event happens, the next state may differ depending on _which_ key was pressed. That means the `next-state-key` function needs both the current state _and_ which key was pressed as parts of its domain. That’s why `next-state-key` has an additional `String` input, which represents the key pressed by the user.
 
-@slidebreak
+@slidebreak{Launch}
 
 @lesson-instruction{
 Create an example instance that corresponds to the position 5 pixels to the _right_ of the example instance you wrote above. Use `draw-state` to check it, as before.
@@ -97,6 +98,7 @@ Create an example instance that corresponds to the position 5 pixels to the _rig
 This gives us a good input and output test for the examples block when working on `next-state-key`. What call to `next-state-key` should connect these two example instances?
 
 === Investigate
+@slidebreak{Investigate}
 
 @lesson-instruction{
 Use the Design Recipe to fill in your examples and definition of `next-state-key`. Use the sample instances you created before in the examples block.
@@ -104,7 +106,7 @@ Use the Design Recipe to fill in your examples and definition of `next-state-key
 
 It’s an important point that next-state-key takes in an extra piece of information: the pressed key. This makes it much richer in terms of its purpose statement, which should describe what different keys ought to do to the state of the reactor. Students will create something like this completed file by adding a `next-state-key` function
 
-@slidebreak
+@slidebreak{Investigate}
 
 @lesson-instruction{
 Once you’ve implemented `next-state-key`, experiment with it in the Interactions Area:
@@ -122,13 +124,13 @@ draw-state(
 }
 }
 
-@slidebreak
+@slidebreak{Investigate}
 
 As with tick-events, we can manually pass key-press strings into this function, see what the next state would be, and even draw that state to see what it looks like.
 
 We still want to hook this function up to a reactor, so that it actually _handles key-presses_ from a running game. To do this, we use the `on-key` option to specify that our `next-state-key` function should be called when the user presses a key.
 
-@slidebreak
+@slidebreak{Investigate}
 
 We don’t need to specify an `on-tick` handler, since for now the only movement in our program comes from key-presses). Our reactor with a `to-draw` and `on-key` handler looks like this:
  
@@ -158,6 +160,7 @@ If it doesn’t, check:
 At this point, students have implemented enough to understand the behind-the-scenes work that was going on in @lesson-link{inequalities3-sam, Sam the Butterfly} from Bootstrap:Algebra.
 }
 === Synthesize
+@slidebreak{Synthesize}
 @lesson-roleplay{
 To act out a reactor with key-events, we will need four students:
 
@@ -172,7 +175,7 @@ To act out a reactor with key-events, we will need four students:
 
 @teacher{Give each student a few sheets of paper and something to write with.}
 
-@slidebreak
+@slidebreak{Synthesize}
 
 - When a key is "pressed" by the keyboard, the reactor writes down the current state _and the key that was pressed_, then shows their paper to `next-state-key`.
 
@@ -196,13 +199,14 @@ Optional: use `num-to-string` and `text` to display the position at the top of t
 This activity introduces students to Reactor programs that use key-events _and_ tick events. Students create a "digital pet", which responds to key commands but also changes state on its own.
 
 === Launch
+@slidebreak{Launch-DN}
 You’ve seen how to use functions to compute the next state in a game or animation for both tick and key events. We can combine these to make an interactive "`digital-pet`" from scratch!
 
 @lesson-instruction{
 Open the @starter-file{virtual-pet}. Run it. You will see a frame come up, showing a cat face and green status bars for the cat’s sleep and hunger.
 }
 
-@slidebreak
+@slidebreak{Launch}
 
 Notice that not much is happening! To make this game more interesting, we want to add three behaviors to it:
 
@@ -211,11 +215,12 @@ Notice that not much is happening! To make this game more interesting, we want t
 - the image of the cat should change when hunger and sleep both reach 0 (and the player loses the game)
 
 === Investigate
+@slidebreak{Investigate}
 In this lesson, you will extend the animation _three times_ - once for each of these behaviors, by adding or changing the functions that make up an animation.
 
 To do this, you will use the _Animation Extension Worksheet_. Note that none of these extension require adding any new fields to the data definition! You will only need to add and edit functions like `next-state-tick`, `next-state-key`, and `draw-state`.
 
-@slidebreak
+@slidebreak{Investigate}
 
 Let's do the animation extension worksheet together:
 
@@ -227,7 +232,7 @@ For this extension, we want to decrease the hunger by 2 and the sleep by 1 each 
 Open your workbook to @printable-exercise{pet-animation-worksheet.adoc} and @printable-exercise{pet-animation-worksheet-samples.adoc}, which shows you the extension worksheet filled in for this extension.
 }
 
-@slidebreak
+@slidebreak{Investigate}
 
 In this filled-in worksheet, the description from the problem is written down into the "goal" part of the worksheet. This is like the @vocab{Purpose Statement} for the feature.
 
@@ -235,7 +240,7 @@ In this filled-in worksheet, the description from the problem is written down in
 Think about what sketches you would draw to illustrate the animation with this new behavior. Then check out the ones we drew on the example worksheet. Notice that they focus on the bars having different lengths.
 }
 
-@slidebreak
+@slidebreak{Investigate}
 
 Next, we consider the tables that summarize what now changes in the animation.
 
@@ -245,7 +250,7 @@ What changes between frames now that didn’t in the starter file for the virtua
 
 The worksheet identifies that both hunger and sleep are changing in new ways. Since they aren’t new fields, this feature is completely dependent on existing data. We therefore leave the second table empty (since we aren’t adding new fields).
 
-@slidebreak
+@slidebreak{Investigate}
 
 Now we need to identify the parts that we need to write or update. We don’t need to change the data definition at all, because no new fields were added!
 
@@ -253,7 +258,7 @@ We _may_ need to update the `draw-state` function, since the size of the bars ch
 
 Since `next-state-tick` has been added for this feature, *we need to add a `on-tick` handler to the reactor.*
 
-@slidebreak
+@slidebreak{Investigate}
 
 Now that we’ve planned what work needs to be done (on paper), we can start thinking about the code. As always, we write examples before we write functions, so we are clear on what we are trying to do.
 
@@ -261,7 +266,7 @@ Now that we’ve planned what work needs to be done (on paper), we can start thi
 Come up with two example instances of `PetState` that illustrate what should happen as we change the sleep and hunger fields. You can see the ones we chose on the worksheet. What’s another good example for us to use in coding and testing?
 }
 
-@slidebreak
+@slidebreak{Investigate}
 
 In our samples, we estimate a bit from looking at the pictures, but note that we pick numbers that would work with the desired behavior -- `MIDPET` represents the state after 25 ticks, because hunger is 50 less (decreased by 2 each tick), and sleep is 25 less (decreased by 1 on each tick). The `LOSEPET` sample instance corresponds to the state when both hunger and sleep values are 0.
 
@@ -269,7 +274,7 @@ In our samples, we estimate a bit from looking at the pictures, but note that we
 Use your sample instances to write examples of the `next-state-tick` function, which we marked as a to-do item on the first page of the worksheet.
 }
 
-@slidebreak
+@slidebreak{Investigate}
 
 Now we need to use this information to edit the current code, checking off the boxes we identified as we go.
 
@@ -279,7 +284,7 @@ Look at the `draw-state` function: how will it need to change to draw boxes for 
 
 The `draw-state` function already does this, so we can check the `draw-state` changes off as being done (without doing additional work).
 
-@slidebreak
+@slidebreak{Investigate}
 
 @lesson-instruction{
 Develop `next-state-tick`, using the contract in the starter file and the examples from the worksheet.
@@ -291,7 +296,7 @@ Once we’ve finished using the design recipe to implement `next-state-tick`, we
 Edit the `pet-react` reactor to include `next-state-tick` alongside the `on-tick` handler.
 }
 
-@slidebreak
+@slidebreak{InvestigateR}
 
 @right{@image{images/cat-decreasing-bars.gif, 800}}Before moving on, make sure you have an animation like the one shown on the right. You should have ended up with something like this for your reactor:
 
@@ -303,7 +308,7 @@ pet-react = reactor:
 end
 ```
 
-@slidebreak
+@slidebreak{Investigate}
 
 @lesson-point{Modification 2: Key Events}
 
@@ -319,7 +324,7 @@ Next, we’ll add key events to the game so the player can increase them so they
 
 As you fill in the worksheet, think about useful sketches that capture this new feature, whether you need new fields, and which functions are affected.
 
-@slidebreak
+@slidebreak{Investigate}
 
 @lesson-instruction{
 When you’ve implemented `next-state-key`, you can add it to the reactor at the bottom of the file with:
@@ -336,7 +341,7 @@ end
 ...and test out your game!
 }
 
-@slidebreak
+@slidebreak{Investigate}
 
 @lesson-point{
 Modification 3: Change the Pet Image When Game is Lost
@@ -349,17 +354,19 @@ Modification 3: Change the Pet Image When Game is Lost
 }
 
 === Synthesize
+@slidebreak{Synthesize}
 You now know everything you need to build interactive games that react to the keyboard, draw an image, and change over time!
 
 These are the fundamentals of building up an interactive program, and there are a lot of games, simulations, or activities you can build already. For example, you could @lesson-link{re-making-pong, build Pong}, or the extended Ninja Cat, a more involved Pet Simulator, a game with levels, and much, much more.
 
-@slidebreak
+@slidebreak{Synthesize}
 
 Some of these ideas are more straightforward than others with what you know. The rest of the workbook and units are designed to show you different _features_ that you can add to interactive programs.
 
 You can work through them all if you like, or come up with an idea for your own program, and try the ones that will help you build your very own program!
 
 == Additional Exercises
+@slidebreak{Supplemental}
 
 - Find your own images to create a different virtual pet Stop the bars from overflowing some maximum (produce something like this completed game). 
 - Add an `x-coord` to the `PetState` so the pet moves around, either on key-press or based on clock ticks.
