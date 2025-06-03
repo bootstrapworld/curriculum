@@ -7,8 +7,8 @@ local image_js_file = ...
 local make_dir = os.getenv'MAKE_DIR'
 
 dofile(make_dir .. 'utils.lua')
-
 dofile(make_dir .. 'readers.lua')
+dofile(make_dir .. 'jread.lua')
 
 local file_being_read = 'none-yet'
 
@@ -61,17 +61,29 @@ local function report_missing_images(logf, image_json_file)
 end
 
 for _,lesson in ipairs(lessons) do
-  local lesson_image_file = lessons_dir .. lesson .. '/images/lesson-images.json'
+  local lesson_image_list_file = lessons_dir .. lesson .. '/images/.cached/.image-list.txt.kp'
   local missing_image_logf = lessons_dir .. lesson .. '/.cached/.missing-image-files.txt'
   report_missing_images(missing_image_logf, lesson_image_file)
-  if not file_exists_p(lesson_image_file) then goto continue end
-  -- print('lesson_image_file is ' .. lesson_image_file)
-  o:write('"' .. lesson .. '": ')
-  local bi = io.open_buffered(lesson_image_file)
-  file_being_read = lesson_image_file
-  expand_some_directives(bi, o)
-  bi:close()
-  o:write(',\n')
+  if not file_exists_p(lesson_image_list_file) then goto continue end
+  o:write('"' .. lesson .. '": {\n')
+  local fi = io.open(lesson_image_list_file)
+  for image_file in fi:lines() do
+    local lesson_image_file = lessons_dir .. lesson .. '/images/' .. image_file
+    file_being_read = lesson_image_file
+    local j_obj = read_json_file(lesson_image_file)
+    local j_keys = j_obj.__json_keys
+    local last_index = #j_keys
+    for i,k in ipairs(j_keys) do
+      o:write('"' .. k .. '": ')
+      local v = j_obj[k]
+      local bi = io.open_buffered(false, json_hash_stringify(v))
+      expand_some_directives(bi, o)
+      bi:close()
+      o:write((i == last_index) and '\n' or ',\n')
+    end
+  end
+  fi:close()
+  o:write('},\n')
   ::continue::
 end
 
