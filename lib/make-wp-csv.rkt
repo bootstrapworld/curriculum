@@ -27,6 +27,10 @@
   (build-path *dist-en-us*
               (format "curriculum-~a.csv" *official-date*)))
 
+(define *csv-archive-file*
+  (build-path *dist-en-us*
+              (format "curriculum-archive-~a.csv" *official-date*)))
+
 (define (string->uniqid s)
   (when (path? s)
     (set! s (path->string s)))
@@ -133,14 +137,12 @@
            (>= n 2)))
         "true" "false")))
 
-                   
-
-
-(define (convert-top-pages o #:umbrella-dir [umbrella-dir #f])
+(define (convert-top-pages o oa #:umbrella-dir [umbrella-dir #f])
   (let ([coursep (regexp-match "courses$" umbrella-dir)])
     (for ([lesson-dir (directory-list umbrella-dir)])
       ; (printf "lesson-dir = ~s; umbrella-dir = ~s; coursep = ~s\n" lesson-dir umbrella-dir coursep)
-      (let* ([curr-group (if coursep (get-curriculum-group lesson-dir) "")]
+      (let* ([uniqid (string->uniqid lesson-dir)]
+             [curr-group (if coursep (get-curriculum-group lesson-dir) "")]
              [lesson-dir-path (build-path umbrella-dir lesson-dir)]
              [mult-ling (multilingual? lesson-dir-path)]
              [lesson-plan-file (path->string (build-path lesson-dir-path "index.shtml"))]
@@ -149,7 +151,7 @@
         (when (file-exists? lesson-plan-file)
           ;id, title, slug, archive, parent, seasons, type, child-categories, curriculum-materials-raw-code, post status, date, curriculum-group, multilingual
           (fprintf o "~a,\"~a\",~a,~a,~a,~a,~a,~a,\"~a\",~a,~a,~a,~a\n"
-                   (string->uniqid lesson-dir)                                        ; id
+                   uniqid                                        ; id
                    (string-trim
                      (if (file-exists? title-file)
                          (escaped-file-content title-file #:kill-newlines? #t)
@@ -168,9 +170,11 @@
                    get-curriculum-group                                               ; curriculum-group
                    *official-date*                                                    ; ???
                    mult-ling                                                          ; multilingual
-                   ))))))
+                   )
+          (fprintf oa "~a,True\n" uniqid)
+          )))))
 
-(define (convert-sub-pages o #:umbrella-dir [umbrella-dir #f] #:pages [pages #f])
+(define (convert-sub-pages o oa #:umbrella-dir [umbrella-dir #f] #:pages [pages #f])
   ; (printf "doing convert-sub-pages ~a\n" pages)
   (let ([coursep (regexp-match "courses$" umbrella-dir)]
         [solutions? (regexp-match "solution-pages" pages)]
@@ -193,6 +197,7 @@
                      [p-prime (format "~a~a" p-base
                                 (if (not solutions?) "" "-solution"))]
                      [lesson/p (format "~a/~a" lesson-dir p-prime)]
+                     [uniqid (string->uniqid lesson/p)]
                      [page-file (path->string (build-path pages-dir-path p))]
                      [page-title-file (path->string (build-path pages-dir-path ".cached"
                                                                 (string-append "."
@@ -202,7 +207,7 @@
                   ; (printf "going ahead with ~a\n" p)
                   ;id, title, permalink, archive, parent, seasons, type, child-categories, curriculum-materials-raw-code, post status, date, curriculum-group, multilingual
                   (fprintf o "~a,\"~a\",~a,~a,~a,~a,~a,~a,\"~a\",~a,~a,~a,~a\n"
-                           (string->uniqid lesson/p) ;id
+                           uniqid ;id
                            (string-trim (escaped-file-content page-title-file #:kill-newlines? #t)) ;title
                            p-prime
                            ;(make-lesson-permalink lesson/p) ; permalink
@@ -216,7 +221,9 @@
                            curr-group
                            *official-date*
                            mult-ling
-                           )))))))))))
+                           )
+                  (fprintf oa "~a,True\n" uniqid)
+                  ))))))))))
 
 (let* ([cla (current-command-line-arguments)]
        [n (vector-length cla)])
@@ -233,25 +240,29 @@
 
 (call-with-output-file *csv-file*
   (lambda (o)
-    (fprintf o "ID,Title,Slug,Archive,Parent,Seasons,Type,Child Categories,Curriculum Materials Raw Code,Post Status,Curriculum Group,Date,Multilingual\n")
-    (set! *type* "lesson")
-    (convert-top-pages o #:umbrella-dir *lessons-dir*)
-    (set! *type* "course")
-    (convert-top-pages o #:umbrella-dir *courses-dir*)
-    (set! *type* "workbook-page")
-    (convert-sub-pages o #:umbrella-dir *lessons-dir* #:pages "pages")
-    (set! *type* "solution-page")
-    (convert-sub-pages o #:umbrella-dir *lessons-dir* #:pages "solution-pages")
-    (set! *type* "resource")
-    (convert-sub-pages o #:umbrella-dir *courses-dir* #:pages "front-matter/pages")
-    (convert-sub-pages o #:umbrella-dir *courses-dir* #:pages "front-matter/solution-pages")
-    (convert-sub-pages o #:umbrella-dir *courses-dir* #:pages "back-matter/pages")
-    (convert-sub-pages o #:umbrella-dir *courses-dir* #:pages "back-matter/solution-pages")
-    (convert-sub-pages o #:umbrella-dir *courses-dir* #:pages "resources")
-    (convert-sub-pages o #:umbrella-dir *courses-dir* #:pages "resources/pages")
-    (convert-sub-pages o #:umbrella-dir *courses-dir* #:pages "resources/solution-pages")
-    (convert-sub-pages o #:umbrella-dir *courses-dir* #:pages "resources/protected")
-    (convert-sub-pages o #:umbrella-dir *courses-dir* #:pages "resources/protected/pages")
-    (convert-sub-pages o #:umbrella-dir *courses-dir* #:pages "resources/protected/solution-pages")
-    )
+    (call-with-output-file *csv-archive-file*
+      (lambda (oa)
+        (fprintf o "ID,Title,Slug,Archive,Parent,Seasons,Type,Child Categories,Curriculum Materials Raw Code,Post Status,Curriculum Group,Date,Multilingual\n")
+        (fprintf oa "ID,Archive\n")
+        (set! *type* "lesson")
+        (convert-top-pages o oa #:umbrella-dir *lessons-dir*)
+        (set! *type* "course")
+        (convert-top-pages o oa #:umbrella-dir *courses-dir*)
+        (set! *type* "workbook-page")
+        (convert-sub-pages o oa #:umbrella-dir *lessons-dir* #:pages "pages")
+        (set! *type* "solution-page")
+        (convert-sub-pages o oa #:umbrella-dir *lessons-dir* #:pages "solution-pages")
+        (set! *type* "resource")
+        (convert-sub-pages o oa #:umbrella-dir *courses-dir* #:pages "front-matter/pages")
+        (convert-sub-pages o oa #:umbrella-dir *courses-dir* #:pages "front-matter/solution-pages")
+        (convert-sub-pages o oa #:umbrella-dir *courses-dir* #:pages "back-matter/pages")
+        (convert-sub-pages o oa #:umbrella-dir *courses-dir* #:pages "back-matter/solution-pages")
+        (convert-sub-pages o oa #:umbrella-dir *courses-dir* #:pages "resources")
+        (convert-sub-pages o oa #:umbrella-dir *courses-dir* #:pages "resources/pages")
+        (convert-sub-pages o oa #:umbrella-dir *courses-dir* #:pages "resources/solution-pages")
+        (convert-sub-pages o oa #:umbrella-dir *courses-dir* #:pages "resources/protected")
+        (convert-sub-pages o oa #:umbrella-dir *courses-dir* #:pages "resources/protected/pages")
+        (convert-sub-pages o oa #:umbrella-dir *courses-dir* #:pages "resources/protected/solution-pages")
+        )
+      #:exists 'replace))
   #:exists 'replace)
