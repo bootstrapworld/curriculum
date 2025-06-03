@@ -10,13 +10,19 @@
 (define *season* (or (getenv "SEMESTER") "spring"))
 (define *year* (or (getenv "YEAR") (number->string (date-year (current-date)))))
 
+(define *current-date* (current-date))
+
 (define *official-date*
   ; (format "~a-~a-01" *year* (if (string=? *season* "fall") "09" "01"))
-  (let* ([x (current-date)]
+  (let* ([x *current-date*]
          [y (date-year x)] [m (date-month x)] [d (date-day x)])
     (format "~a-~a~a-~a~a" y
             (if (< m 10) "0" "") m
             (if (< d 10) "0" "") d)))
+
+(define *timestamp*
+  (format "~a-~a" *official-date*
+          (+ (date-hour *current-date*) (date-minute *current-date*))))
 
 (define *natlang* "en-us")
 
@@ -25,11 +31,11 @@
 
 (define *csv-file*
   (build-path *dist-en-us*
-              (format "curriculum-~a.csv" *official-date*)))
+              (format "curriculum-~a.csv" *timestamp*)))
 
 (define *csv-archive-file*
   (build-path *dist-en-us*
-              (format "curriculum-archive-~a.csv" *official-date*)))
+              (format "curriculum-archive-~a.csv" *timestamp*)))
 
 (define (string->uniqid s)
   (when (path? s)
