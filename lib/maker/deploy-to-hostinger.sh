@@ -61,7 +61,9 @@ for f in adoc asc aux md id rkt rkt.kp titletxt txt txt.kp; do
   find $DEPLOYABLES_DIR -name \*.$f -delete
 done
 
-find $DEPLOYABLES_DIR -name lesson-images.json -delete
+for f in $(find $DEPLOYABLES_DIR -name images -type d); do
+  find $f -name \*.json -delete
+done
 
 cat > $DEPLOYABLES_DIR/deploy-to-public_html.sh <<EOF
 DEPLOY_DIR=\$HOME/public_html/materials/$SEMESTER_YEAR

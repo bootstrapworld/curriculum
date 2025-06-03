@@ -3,6 +3,7 @@
 #lang racket
 
 (require json)
+(require racket/hash)
 (require "readers.rkt")
 (require "utils.rkt")
 (require "function-directives.rkt")
@@ -80,16 +81,30 @@
 (define (errmessage-file-context)
   (format "~a/~a" *lesson* *in-file*))
 
+(define (combine-json-files json-files)
+  (let ([h-obj #f])
+    (for ([json-file json-files])
+      (let ([new-hash (call-with-input-file json-file read-json)])
+        (if h-obj
+            (hash-union! h-obj new-hash)
+            (set! h-obj new-hash))))
+    (unless h-obj (set! h-obj #t))
+    h-obj))
+
 (define (make-image img width)
   ; (printf "make-image ~s (w ~s) in ~s\n" img width (current-directory))
   (set! *num-images-processed* (+ *num-images-processed* 1))
 
   (unless *images-hash*
-    (let ([json-file "images/lesson-images.json"])
-      (cond [(file-exists? json-file)
-             (set! *images-hash* (call-with-input-file json-file read-json))]
-            [else
-              (set! *images-hash* #t)])))
+    (let ([json-list-file "images/.cached/.image-list.txt.kp"]
+          [json-files '()])
+
+      (when (file-exists? json-list-file)
+        (set! json-files (map (lambda (f) (build-path "images" f))
+                              (read-data-file json-list-file))))
+
+      (set! *images-hash* (combine-json-files json-files))))
+
 
   ; (printf "*images-hash* = ~s\n" *images-hash*)
 

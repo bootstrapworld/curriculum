@@ -61,16 +61,20 @@ local function report_missing_images(logf, image_json_file)
 end
 
 for _,lesson in ipairs(lessons) do
-  local lesson_image_file = lessons_dir .. lesson .. '/images/lesson-images.json'
+  local lesson_image_list_file = lessons_dir .. lesson .. '/images/.cached/.image-list.txt.kp'
   local missing_image_logf = lessons_dir .. lesson .. '/.cached/.missing-image-files.txt'
   report_missing_images(missing_image_logf, lesson_image_file)
-  if not file_exists_p(lesson_image_file) then goto continue end
-  -- print('lesson_image_file is ' .. lesson_image_file)
+  if not file_exists_p(lesson_image_list_file) then goto continue end
   o:write('"' .. lesson .. '": ')
-  local bi = io.open_buffered(lesson_image_file)
-  file_being_read = lesson_image_file
-  expand_some_directives(bi, o)
-  bi:close()
+  local fi = io.open(lesson_image_list_file)
+  for image_file in fi:lines() do
+    local lesson_image_file = lessons_dir .. lesson .. '/images/' .. image_file
+    local bi = io.open_buffered(lesson_image_file)
+    file_being_read = lesson_image_file
+    expand_some_directives(bi, o)
+    bi:close()
+  end
+  fi:close()
   o:write(',\n')
   ::continue::
 end

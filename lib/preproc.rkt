@@ -1,6 +1,7 @@
 #lang racket
 
 (require json)
+(require racket/hash)
 ; (require file/sha1)
 (require "readers.rkt")
 (require "utils.rkt")
@@ -685,40 +686,56 @@
   ; (printf "doing clean-up-url-in-image-text ~s\n" text)
   (regexp-replace* #rx"https://" text ""))
 
-(define (read-image-json-file-in image-dir)
-  (let ([json-file (build-path image-dir "lesson-images.json")]
+(define (combine-json-files json-files)
+  (let ([h-obj #f])
+    (for ([json-file json-files])
+      (let ([new-hash (call-with-input-file json-file read-json)])
+        (if h-obj
+            (hash-union! h-obj new-hash)
+            (set! h-obj new-hash))))
+    (unless h-obj (set! h-obj #t))
+    h-obj))
+
+(define (read-image-json-files-in image-dir)
+  (let ([json-list-file (build-path image-dir ".cached" ".image-list.txt.kp")]
+        [json-files '()]
         [images-hash #f]
         [missing-image-log-file #f]
         [missing-images '()])
+
+    (when (file-exists? json-list-file)
+      (set! json-files
+        (map (lambda (x) (build-path image-dir x))
+             (read-data-file json-list-file))))
+
+    (when (and (null? json-files) (or *lesson-plan* *lesson*))
+        (printf "!! WARNING: ~a: Image json files not found\n" (errmessage-context)))
 
     (when *lesson*
       (set! missing-image-log-file
         (format "distribution/~a/lessons/~a/.cached/.missing-image-files.txt"
                 *natlang* *lesson*)))
 
-    (cond [(file-exists? json-file)
-           (set! images-hash (call-with-input-file json-file read-json))
-           ; (printf "images-hash is ~s\n" images-hash)
-           (set! *images-hash-list*
-             (cons (cons *containing-directory* images-hash) *images-hash-list*))
-           (unless (or *narrative* *target-pathway* *teacher-resources*)
-             (hash-for-each images-hash
-               (lambda (key val)
-                 (let* ([image-file (build-path image-dir (symbol->string key))]
-                        [anon-image-file (anonymize-filename image-file)])
-                   (unless (file-exists? anon-image-file)
-                     (cond [(file-exists? image-file)
-                            (rename-file-or-directory image-file anon-image-file #t)]
-                           [else
-                             (unless (member key missing-images)
-                               (set! missing-images (cons key missing-images)))
-                             #;(printf "WARNING: ~a: Image file ~a not found\n" (errmessage-context) image-file)
-                             ]))))))]
-          [else
-            (when (or *lesson-plan* *lesson*)
-              (unless (member json-file *missing-image-json-files*)
-                (set! *missing-image-json-files* (cons json-file *missing-image-json-files*))
-                (printf "!! WARNING: Image json file ~a not found\n" json-file)))])
+    (unless images-hash
+      (set! images-hash (combine-json-files json-files)))
+
+    (when (hash? images-hash)
+      ; (printf "images-hash is ~s\n" images-hash)
+      (set! *images-hash-list*
+        (cons (cons *containing-directory* images-hash) *images-hash-list*))
+      (unless (or *narrative* *target-pathway* *teacher-resources*)
+        (hash-for-each images-hash
+          (lambda (key val)
+            (let* ([image-file (build-path image-dir (symbol->string key))]
+                   [anon-image-file (anonymize-filename image-file)])
+              (unless (file-exists? anon-image-file)
+                (cond [(file-exists? image-file)
+                       (rename-file-or-directory image-file anon-image-file #t)]
+                      [else
+                        (unless (member key missing-images)
+                          (set! missing-images (cons key missing-images)))
+                        #;(printf "WARNING: ~a: Image file ~a not found\n" (errmessage-context) image-file)
+                        ])))))))
 
     (when missing-image-log-file
       (call-with-output-file missing-image-log-file
@@ -738,7 +755,7 @@
     (let-values ([(image-dir image-file ign) (split-path img-qn)])
 
       (unless images-hash
-        (set! images-hash (read-image-json-file-in image-dir)))
+        (set! images-hash (read-image-json-files-in image-dir)))
 
       (unless (or *narrative* *target-pathway* *teacher-resources*)
         (let* ([img-anonymized (anonymize-filename img)]
