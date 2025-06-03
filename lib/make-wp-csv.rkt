@@ -22,7 +22,7 @@
 
 (define *timestamp*
   (format "~a-~a" *official-date*
-          (+ (date-hour *current-date*) (date-minute *current-date*))))
+          (+ (* 60 (date-hour *current-date*)) (date-minute *current-date*))))
 
 (define *natlang* "en-us")
 
