@@ -36,6 +36,7 @@
 Students are introduced to _syntax errors_, the error messages they generate, and how to read those errors and fix them.
 
 === Launch
+@slidebreak{Launch}
 People often think that computers can't make mistakes, because they are "just machines". 
 
 - But who builds those machines? 
@@ -43,15 +44,15 @@ People often think that computers can't make mistakes, because they are "just ma
 
 @lesson-point{_Human beings_ are always behind the scenes: writing code, designing chips, and even training Artificial Intelligences! *And humans make mistakes!*}
 
-@slidebreak
+@slidebreak{LaunchR}
 
 @right{@image{images/hopper.jpg, 200}}In the 1940s, computers weren't made from tiny microprocessors. They were made from large wires, vacuum tubes, gears and dials. In 1946, the legendary programmer Grace Hopper (pictured) had a problem. She was certain that her code was right, but for some reason it wasn't running correctly.
 
-@slidebreak
+@slidebreak{LaunchR}
 
 @right{@image{images/bug.jpg, 200}}She traced the wires and relays, and eventually found a _moth_ that had gotten stuck and electrocuted! By disrupting the parts of the computer, it was causing the program to run incorrectly, and produce unexpected results! She wrote her findings into her notes, and even included the body of the moth. *This moth is the origin of the term "bug" in programming.*
 
-@slidebreak
+@slidebreak{Launch}
 
 Knowing how to find and fix bugs is a valuable skill for any programmer, and the kind of logical thinking you gain by fixing errors can help you find mistakes _outside_ of a program as well!
 
@@ -63,7 +64,7 @@ When you Run a program, you expect the computer to do three things:
 
 In this lesson, we'll be talking about different kinds of mistakes, which can happen in each of those three phases@ifnotslide{:}@ifslide{.}
 
-@slidebreak
+@slidebreak{Launch}
 
 (1)@vocab{Syntax Errors} - Invalid code that the computer cannot even _read_, resulting in an error message. 
   * These are often typos, missing characters like a semicolon or parenthesis, or missing keywords like @ifproglang{wescheme}{`define`} @ifproglang{pyret}{`fun` or `end`}.
@@ -76,6 +77,7 @@ In this lesson, we'll be talking about different kinds of mistakes, which can ha
   * When there's a logic error in the code, the computer reads and runs the code just fine...but the result isn't what the programmer expected!
 
 === Investigate
+@slidebreak{Investigate}
 Here are a few simple examples of syntax errors:
 
 - `"hello`
@@ -87,7 +89,7 @@ Syntax Errors prevent the computer from _reading_ code
 
 Can you find the problems?
 
-@slidebreak
+@slidebreak{Investigate}
 
 @lesson-instruction{
 - Complete @printable-exercise{syntax-errors-matching.adoc} in pairs or small groups. 
@@ -95,6 +97,7 @@ Can you find the problems?
 }
 
 === Synthesize
+@slidebreak{Synthesize}
 Have students share back their findings. Leave time for discussion! The key here is to have students reflect on how useful it is to _read the error messages_ first, even the few errors that may not be as helpful as the others.
 
 - Which syntax errors were the easiest to find? The hardest?
@@ -109,6 +112,7 @@ Have students share back their findings. Leave time for discussion! The key here
 Students are introduced to _contract errors_. They read the error messages they generate, and discuss strategies to fix them.
 
 === Launch
+@slidebreak{Launch}
 With no syntax errors, the computer can _read_ our code and try to run it. 
 
 But a program can still have problems _running_! 
@@ -123,7 +127,7 @@ Here are a few examples of programs that have perfect syntax, but will generate 
 
 Can you spot the problems?
 
-@slidebreak
+@slidebreak{Launch}
 
 A program might be running along just fine, but as soon as a function is given the wrong type of value, the program halts with an error!
 
@@ -132,11 +136,13 @@ Contract Errors stop the program from finishing _running_.
 }
 
 === Investigate
+@slidebreak{Investigate}
 @lesson-instruction{
 In pairs or small groups, complete @printable-exercise{contract-errors-matching.adoc}. For each piece of code, be sure to discuss as a team before deciding on the mistake.
 }
 
 === Synthesize
+@slidebreak{Synthesize}
 Have students share back their findings. Leave time for discussion! When facilitating this discussion, drive home the point that reading the error and consulting the Contracts are critical strategies for fixing these bugs.
 
 - Which Contract errors were the easiest to find? The hardest?
@@ -153,11 +159,12 @@ Students are introduced to _logic errors_, which are quite different from the ot
 Key point: This is where good habits like writing thorough examples and good comments are really helpful!
 
 === Launch
+@slidebreak{Launch}
 Ho-ming wanted to write a function to produce green triangles, and she went straight to coding the definition:
 
 @show{(code '(define (gt size) (triangle 100 "solid" "green")))}
 
-@slidebreak
+@slidebreak{Launch}
 
 She clicked "Run" and didn't get any syntax errors, so she was feeling really confident. 
 
@@ -168,7 +175,7 @@ But when she tried to make triangles of _different_ sizes, her heart broke: all 
 - Did she have a syntax error? Why or why not?
 - Did she have a Contract error? Why or why not?
 
-@slidebreak
+@slidebreak{Launch}
 
 Ho-ming's mistake was that the function `gt` always made triangles of size 100! 
 
@@ -178,7 +185,7 @@ The computer had no trouble reading her code, and she followed the Contract for 
 
 _As far as the computer is concerned, there's nothing wrong with her code!_
 
-@slidebreak
+@slidebreak{Launch}
 
 @lesson-point{
 Logic Errors don't prevent code from running!
@@ -190,7 +197,7 @@ The problem is that the code didn't work the way she expected. Another way to th
 Logic Errors occur in our brains, not on the computer!
 }
 
-@slidebreak
+@slidebreak{Launch}
 
 The only way to prevent logic errors - or to fix them when they happen! - is to be disciplined about the way we program. By thinking through a problem in multiple ways, we are less likely to make a mistake. 
 
@@ -201,6 +208,7 @@ What are some other ways Ho-ming could have thought through this function?
 - *She could have written Examples*, which would have helped her see how the input is used. And even if she made the exact same mistake, at least her examples would have generated a warning to alert her to the problem!
 
 === Investigate
+@slidebreak{Investigate-DN}
 The Design Recipe helps us avoid logic errors, by demanding that we think through a problem in multiple ways. Even if _one_ of our steps is wrong, we can check our work by comparing it to the other steps.
 
 @lesson-instruction{
@@ -209,6 +217,7 @@ The Design Recipe helps us avoid logic errors, by demanding that we think throug
 }
 
 === Synthesize
+@slidebreak{Synthesize}
 
 @teacher{Have students share back their findings. Leave time for discussion! The main idea for this discussion is that Logic Errors happen in the programmer's mind, _not_ in the code. The best way to help prevent them is to think things through completely, and there are many strategies to do this. The Design Recipe, for example, forces students to think through the same solution in multiple representation - and the computer checks that those representations match.}
 

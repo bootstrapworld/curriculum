@@ -41,6 +41,7 @@
 Students explore how text prediction relies on statistical language modeling.
 
 === Launch
+@slidebreak{Launch}
 
 While texting, emailing, or even conducting a web search, you've probably noticed that your thoughts and sentences are sometimes finished for you! Predictive text is now a common feature of many apps, and it is made possible by a certain form of AI: the statistical language model.
 
@@ -48,7 +49,7 @@ While texting, emailing, or even conducting a web search, you've probably notice
 Make sure you've made a copy of the @online-exercise{https://docs.google.com/forms/u/1/d/1C1WSad_IrVT0pd_IXG7yCCM30CVoIibv9kBDKnEJ5RI/copy, survey} and have created a link to share with students, so that you can look at your data as a class!
 }
 
-@slidebreak
+@slidebreak{Launch}
 
 @lesson-instruction{
 - Consider this start of a phrase: "Close the..."
@@ -63,6 +64,7 @@ Students will think of words like "door", "box", "microwave", "laptop"...
 }
 
 === Investigate
+@slidebreak{Investigate}
 
 Let's look a little more closely at the words we generated.
 
@@ -77,7 +79,7 @@ Let's look a little more closely at the words we generated.
 @teacher{If your students are comfortable computing the probability of choosing each word, they may do so in pairs or individually. If not, this can be a teacher-led task. Laying a solid foundation is worth the time: students will compute probability throughout the lesson.
 }
 
-@slidebreak
+@slidebreak{Investigate2}
 
 
 @QandA{
@@ -93,7 +95,7 @@ Let's look a little more closely at the words we generated.
 
 @ifslide{@image{images/texting-app.png, 200}}
 
-@slidebreak
+@slidebreak{Investigate}
 
 
 Similar to other AI systems we've discussed, your predictive text feature is trained on a large amount of data, in this case, text.
@@ -106,7 +108,7 @@ During training:
 
 In this particular @vocab{training corpus}, "door", "doors", and "house"  most commonly appeared after "Close the". As a result, those words are suggested.
 
-@slidebreak
+@slidebreak{Investigate}
 
 But are all users recommended the _same_ completions?
 
@@ -117,7 +119,7 @@ But are all users recommended the _same_ completions?
 }
 
 
-@slidebreak
+@slidebreak{Investigate}
 
 Not all phones will propose the same completions for a variety of reasons:
 
@@ -131,7 +133,7 @@ Not all phones will propose the same completions for a variety of reasons:
 
 
 
-@slidebreak
+@slidebreak{Investigate}
 
 @QandA{
 @Q{We just considered four reasons why different phones sometimes propose different completions. Do each of these four reasons represent _statistical_ phenomena? Why or why not?}
@@ -143,7 +145,7 @@ Not all phones will propose the same completions for a variety of reasons:
 Phenomena 3 and 4 above suggest that sometimes making a usable tool requires that we step out of bounds! Although pure statistical language models are powerful, the upgrades that programmers develop can make the AI _better_ at completing the task that it was designed to complete.
 
 
-@slidebreak
+@slidebreak{Investigate}
 
 You have just considered the workings and in-context use of a @vocab{statistical language model}. Hopefully you have discovered that, although it sometimes may _seem_ like your texting app can read your mind... it can't. It doesn't know the rules of grammar, the meanings of words, or your intentions when you are composing a text. It just knows @vocab{probability}, which it uses in ways that are often very impressive (but sometimes not!).
 
@@ -151,6 +153,7 @@ You have just considered the workings and in-context use of a @vocab{statistical
 Throughout the lesson, we'll explore the very important "sometimes not" parenthetical, above.}
 
 === Synthesize
+@slidebreak{Synthesize}
 
 @QandA{
 
@@ -172,12 +175,13 @@ Throughout the lesson, we'll explore the very important "sometimes not" parenthe
 Students construct a statistical language model by decomposing the text and computing the probabilities of different words appearing.
 
 === Launch
+@slidebreak{Launch}
 
 The best way to make sense of statistical language modeling is to try it yourself! We'll start by constructing a model.
 
 For our corpus, we will use the folk song @handout{old-lady-lyrics.adoc, "There Was an Old Lady Who Swallowed a Fly"}, which tells the nonsensical story of an old lady who swallows a fly, and the unfortunate series of events that follow.
 
-@slidebreak
+@slidebreak{Launch}
 
 First, we will decompose the title of our corpus into differently sized chunks (one word at a time, two words at a time, etc.):
 
@@ -204,6 +208,7 @@ The formal word computer scientists use in this context is not "chunk" but @voca
 
 
 === Investigate
+@slidebreak{Investigate}
 
 Let's dig a little deeper...
 
@@ -223,7 +228,7 @@ The phrase "there was an old lady who swallowed a..." is repeated in our corpus!
 }
 
 
-@slidebreak
+@slidebreak{Investigate}
 
 In the example you just worked through, you computed the probability that "was" appears after the unigram "there" by dividing 4 (how many times we see "was" follow "there") by 4 (how many times we see "there" followed by anything). +
 
@@ -242,7 +247,7 @@ We can represent this computation with a special notation:
 
 
 
-@slidebreak
+@slidebreak{Investigate}
 
 @QandA{
 
@@ -259,6 +264,7 @@ Are you and your students interested in exploring probability in more depth? Che
 }
 
 === Synthesize
+@slidebreak{Synthesize}
 
 @QandA{
 In our corpus, there were _four_ possible completions for the unigram "the", but there were only _three_ possible completions for the 3-gram "to catch the". +
@@ -275,6 +281,7 @@ _In this corpus_, as the n-gram gets longer, the number of completion options de
 Students use their statistical language model in a generative way, to produce output.
 
 === Launch
+@slidebreak{Launch}
 
 Having built a language model, what can we do with it? We can use it in a generative way: we can produce output!
 
@@ -285,6 +292,7 @@ How might we go about doing that?
 - We repeat this second step forever! ...or, more realistically, until we decide to stop the program. A simple statistical language model, however, will generate text ad infinitum.
 
 === Investigate
+@slidebreak{Investigate}
 
 Let's give this process a try, returning to our "Old Lady" corpus.
 
@@ -305,7 +313,7 @@ Let's give this process a try, returning to our "Old Lady" corpus.
 }
 
 
-@slidebreak
+@slidebreak{Investigate}
 
 @lesson-instruction{
 - Complete the second section of @printable-exercise{sampling.adoc}.
@@ -320,7 +328,7 @@ Let's give this process a try, returning to our "Old Lady" corpus.
 }
 
 
-@slidebreak
+@slidebreak{Investigate}
 
 Modern statistical language models often invite users to adjust the @vocab{temperature} of the generated text, which influences the level of randomness. For instance, ChatGPT users are encouraged to use a _low_ temperature for more focused and less creative tasks. They are encouraged to use a _higher_ temperature for more random and increasingly creative tasks.
 
@@ -342,6 +350,7 @@ This term also attributes intent and consciousness to the AI, giving it human qu
 }
 
 === Synthesize
+@slidebreak{Synthesize}
 
 @QandA{
 Critics of ChatGPT and other language models raise a variety of concerns. Consider each of them, below.
@@ -361,6 +370,7 @@ Critics of ChatGPT and other language models raise a variety of concerns. Consid
 Students consider whether statistical language modeling requires language.
 
 === Launch
+@slidebreak{Launch}
 
 It's time to peek behind the curtain and see how a computer can put a statistical language model to use! Let's play a quick game to prepare ourselves for making sense of the tool we'll be working with.
 
@@ -374,7 +384,7 @@ _In case you need a refresher on the game:_
   * The game ends when one of you gets three in a row or the grid is full.
 }
 
-@slidebreak
+@slidebreak{LaunchR}
 
 @lesson-instruction{
 @right{@image{images/docA.png, 150}}
@@ -388,6 +398,7 @@ _This info might help you get started:_
 }
 
 === Investigate
+@slidebreak{Investigate}
 
 We're going to explore Soekia, a simplified text generation tool designed for student learning. As we explore, we are going to consider: What is the role of _language_ in a statistical language model?
 
@@ -405,6 +416,7 @@ Invite students to share their discoveries. We encourage you to allow students t
 }
 
 === Synthesize
+@slidebreak{Synthesize}
 
 @QandA{
 @Q{Does a statistical language model require language? How do you know?}
@@ -419,6 +431,7 @@ Invite students to share their discoveries. We encourage you to allow students t
 Students engage with Soekia to discover some of the nuances of statistical language modeling.
 
 === Launch
+@slidebreak{Launch}
 
 Let's dig deeper into Soekia!
 
@@ -464,7 +477,7 @@ As students are working, you can share the three tips, below.
 Advance to the next slide for student-facing tips on navigating Soekia.
 }
 
-@slidebreak
+@slidebreak{Launch}
 
 If you feel overwhelmed as you work, here are some tips:
 
@@ -479,6 +492,7 @@ After they complete the "Closer Look" worksheet, invite students to share what t
 }
 
 === Investigate
+@slidebreak{Investigate}
 
 @lesson-instruction{
 - Turn to @printable-exercise{soekia-temperature.adoc}.
@@ -492,6 +506,7 @@ As we have discussed @vocab{temperature} is the parameter that controls the rand
 }
 
 === Synthesize
+@slidebreak{Synthesize}
 
 @QandA{
 @Q{A student argues that AI is a reliably correct and credible source of information. How would you respond?}

@@ -56,13 +56,14 @@
 Students discover the need for distance calculation (first in one dimension, then in two) in video games.
 
 === Launch
+@slidebreak{Launch-DN}
 
 @lesson-instruction{
 - Sign in to @starter-file{program-list}, open your saved Game Starter File, and click "Run".
 - Take a minute to play with your games and think about what is left to do.
 }
 
-@slidebreak
+@slidebreak{LaunchR}
 
 @right{@image{images/screenshot.jpg, 200}}
 
@@ -76,7 +77,7 @@ It's almost fully-playable!
 
 @teacher{If your students haven't completed these other sections yet, make sure you leave time for them to do so! Here's a link to a @opt-starter-file{sample-game-no-collision} you can use if you're demoing on the board.}
 
-@slidebreak
+@slidebreak{Launch}
 
 @QandA{
 @Q{What is missing from the game?}
@@ -87,14 +88,14 @@ It's almost fully-playable!
 @teacher{Here's a link to a @opt-starter-file{sample-game-no-collision} you can use if you're demoing on the board.}
 }
 
-@slidebreak
+@slidebreak{Launch}
 
 @QandA{
 @Q{What does it mean for characters to 'hit' one another? To collide?}
 @A{The characters touch.}
 }
 
-@slidebreak
+@slidebreak{Launch-RP}
 
 @teacher{In the following activity, your students will role play two game characters moving across the screen.  Draw or project a "number line" on the floor or across a wall of your classroom as the backdrop for the roleplay.}
 
@@ -104,7 +105,7 @@ This number line represents the x-axis in our game. I need two volunteers to rep
 Each image in the game is located based on its center, in the case of a human, our location would probably be given by our belly buttons.  But the images in our game are much larger than their center points that locate them on the screen, so let's have our `DANGER` and `PLAYER` hold their arms out like a T to represent the full width of the images they represent.
 }
 
-@slidebreak
+@slidebreak{Launch}
 
 @QandA{
 @Q{Are our characters currently colliding?}
@@ -121,7 +122,7 @@ Each image in the game is located based on its center, in the case of a human, o
 @A{The goal is to illicit the response that students would subtract the smaller coordinate from the larger one (or subtract in any order and take the absolute value).}
 } 
 
-@slidebreak
+@slidebreak{Launch-RP}
 
 @lesson-roleplay{
 Let's have our `DANGER` and `TARGET` each take a step toward each other.
@@ -134,7 +135,7 @@ Let's have our `DANGER` and `TARGET` each take a step toward each other.
 @A{No.}
 }
 
-@slidebreak
+@slidebreak{Launch-RP}
 
 @lesson-roleplay{
 Let's have our `DANGER` and `TARGET` switch places.
@@ -151,12 +152,13 @@ Let's have our `DANGER` and `TARGET` switch places.
 }
 
 === Investigate
+@slidebreak{Investigate}
 
 Our game computes 1-dimensional distance (vertical or horizontal) using a function called `line-length`. Let's explore how it works!
 
 @lesson-instruction{Turn to the first section of @printable-exercise{line-length-explore.adoc}, find the definition of `line-length` in your game starter file and take a few minutes to record your Notices and Wonders with your partner.}
 
-@slidebreak
+@slidebreak{Investigate}
 
 @QandA{
 
@@ -170,7 +172,7 @@ Our game computes 1-dimensional distance (vertical or horizontal) using a functi
 
 }
 
-@slidebreak
+@slidebreak{Investigate}
 
 @lesson-instruction{Complete @printable-exercise{line-length-explore.adoc} with your partner.}
 
@@ -186,7 +188,7 @@ Our game computes 1-dimensional distance (vertical or horizontal) using a functi
 
 We just practiced computing the distance in 1-dimension, which is useful if the Player and Danger have the same x- or y-coordinate. But how do we compute the distance between two points when both the x- _and_ y-coordinates are different?
 
-@slidebreak
+@slidebreak{Investigate}
 
 @lesson-instruction{
 - Scroll down to `4. Collisions` in your game file and look for the `distances-color` definition. 
@@ -216,6 +218,7 @@ Here's a link to a @opt-starter-file{sample-game-w-distance} to use if you're de
 Our `line-length` function computes the horizontal and vertical distance between two characters, but in order to compute the _diagonal_ distance between two characters in a video game, we'll need a special formula that considers _both the vertical and the horizontal_ distances between them!
 
 === Synthesize
+@slidebreak{Synthesize}
 
 Why do we care how far apart our game characters are?
 
@@ -226,6 +229,7 @@ Why do we care how far apart our game characters are?
 Students explore visual proofs of the Pythagorean Theorem as a foundation for understanding the distance formula.
 
 === Launch
+@slidebreak{Launch}
 
 @lesson-instruction{
 Let's take a few minutes to explore and respond to @opt-starter-file{right-trianglesDesmos}.}
@@ -237,6 +241,7 @@ Let's take a few minutes to explore and respond to @opt-starter-file{right-trian
 }
 
 === Investigate
+@slidebreak{InvestigateR}
 
 As we saw in the GeoGebra activities, there is a special relationship between the area of the 3 squares that can be drawn using the 3 legs of a right triangle to determine the lengths of the sides:
 
@@ -249,7 +254,7 @@ The areas of the two smaller squares will add up to the area of the larger squar
 @ifslide{@right{@image{images/pythag-diagram.png}}}
 
 
-@slidebreak
+@slidebreak{InvestigateR}
 
 @ifslide{@right{@image{images/pythag-diagram.png}}}
 
@@ -263,7 +268,7 @@ If we label the two legs `a` and `b` and the hypotenuse `c`, as seen in the diag
 @A{If we solve the Pythagorean Theorem for @math{c} instead of @math{c^2}, it calculates diagonal distance based on horizontal and vertical distances!}
 }
 
-@slidebreak
+@slidebreak{InvestigateC}
 
 @center{@big{@math{c = \sqrt{a^2 + b^2}}}}
 
@@ -291,6 +296,7 @@ In our case, the lengths A and B are computed by the `line-length` function we a
 // FD Suggests we write a better review page for teachers to use here!//
 
 === Synthesize
+@slidebreak{Synthesize}
 
 - The Pythagorean Theorem describes right triangles. Why is it also able to help us find distance?
 
@@ -301,10 +307,11 @@ In our case, the lengths A and B are computed by the `line-length` function we a
 Students extend their understanding of _distance_ from one dimension to two.
 
 === Launch
+@slidebreak{Launch}
 
 We know that we can use the Pythagorean Theorem to find the hypotenuse of a triangle from the lengths of its legs. And we know that there are hidden right triangles connecting the characters in our game. Now we have to figure out how to apply what we know in our game code.
 
-@slidebreak
+@slidebreak{LaunchC}
 
 @QandA{
 @Q{If we had one player at (0,0) and another player at (4,3), we'd see a right triangle and the lengths of the legs would be 3 and 4. 
@@ -318,6 +325,7 @@ How would we use the Pythagorean Theorem to find the hypotenuse of the triangle?
 @opt{On @printable-exercise{distance-write-code-from-lengths.adoc} we've provided screenshots from two games where the horizontal and vertical distances between the characters are shown. Students are asked to write the code to calculate the distance between these characters using the Pythagorean Theorem. You could also have them do the computations (using a calculator) and compare their results to what their code evaluates to.}
 
 === Investigate
+@slidebreak{Investigate}
 
 @lesson-instruction{
 - With your partner, complete the reading code section of @printable-exercise{distance-on-coordinate-plane.adoc}.
@@ -346,7 +354,7 @@ This effectively rewrites the distance formula as:
 
 @clear
 
-@slidebreak
+@slidebreak{Investigate}
 
 @QandA{
 @Q{What is `line-length` being used for in the code?}
@@ -354,7 +362,7 @@ This effectively rewrites the distance formula as:
 @A{To compute the vertical distance between the y-coordinates of the 2 characters.}
 }
 
-@slidebreak
+@slidebreak{Investigate}
 
 @lesson-instruction{
 - Turn to @printable-exercise{distance-coe.adoc}. Convert the expression to a Circle of Evaluation, and then to code.
@@ -363,7 +371,7 @@ This effectively rewrites the distance formula as:
 
 @opt{For more practice writing code to generate the distance between two fixed points, have students complete @printable-exercise{distance-from-game-coordinates.adoc} and  @opt-printable-exercise{distance-from-game-coordinates-2.adoc}.}
 
-@slidebreak
+@slidebreak{Investigate}
 
 @lesson-point{
 All of the distance work we've done so far has been focused on a screenshot of a moment in time.
@@ -375,7 +383,7 @@ With the game stopped in that moment, we knew either the exact location of our c
 To calculate the distance between objects whose locations are constantly changing, we need to use variables!
 }
 
-@slidebreak
+@slidebreak{InvestigateR}
 
 @lesson-instruction{
 - @right{@image{images/pxpy2.png, 300}}Turn to @printable-exercise{distance-dr.adoc} and use the Design Recipe to help you write a function that takes in two @vocab{coordinate} pairs (four numbers) of two characters (@math{px, py}) and (@math{cx, cy}) and returns the distance between those two points.
@@ -411,10 +419,12 @@ instead of `...sqrt(sqr(line-length(x2 x1)) + sqr(line-length(y2 y1)))...` }
 In this situation, remind students to look back at what they circled and labeled in the example steps. _This is why we label!_
 
 === Synthesize
+@slidebreak{Synthesize}
 
 - Where do you see one formula being used inside the other?
 
 == Additional Exercises
+@slidebreak{Supplemental}
 
 - Use the Design Recipe to solve @opt-printable-exercise{line-length.adoc}.
 - Modify `line-length` to make use of the absolute value function: @show{(code 'abs)}.

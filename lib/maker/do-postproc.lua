@@ -20,20 +20,6 @@ local function calculate_dist_root_dir(fhtml_cached)
   return f
 end
 
-local function get_proglang(fhtml_cached)
-  local f = false
-  if fhtml_cached:match('/courses/') then
-    f = fhtml_cached:gsub('(distribution/[^/]+/courses/[^/]+)/.*', '%1/.cached/.record-proglang')
-  elseif fhtml_cached:match('/lessons/') then
-    f = fhtml_cached:gsub('(distribution/[^/]+/lessons/[^/]+)/.*', '%1/.cached/.record-proglang')
-  else
-    -- noop
-  end
-  if f and file_exists_p(f) then return first_line(f)
-  else return 'pyret'
-  end
-end
-
 local function postproc(fhtml_cached, tipe)
   -- print('doing postproc', fhtml_cached, tipe)
   if not file_exists_p(fhtml_cached) then return end
@@ -49,9 +35,8 @@ local function postproc(fhtml_cached, tipe)
   local fhtml = fdir .. '/' .. fbase
   -- print('fhtml is', fhtml)
   local code_lang = 'pyret'
-  local proglang = get_proglang(fhtml_cached)
-  if proglang == 'wescheme' then
-    code_lang = 'racket'
+  if fhtml_cached:find('^[^/]*/[^/]*-wescheme') then
+    code_lang = 'wescheme'
   end
   local f_comment_file = fhtml_cached:gsub('%.html$', '') .. '-comment.txt'
   local f_mathjax_file = fhtml_cached:gsub('%.html$', '.asc.uses-mathjax')
@@ -277,28 +262,19 @@ local function postproc(fhtml_cached, tipe)
     --
     if add_body_id_p then
       add_body_id_p = false
-      local klass = proglang
       if tipe == 'workbookpage' then
-        klass = klass .. ' workbookpage'
+        o:write('<div id="body" class="workbookpage">\n')
       elseif tipe == 'pathwayindependent' then
         if fhtml_cached:match('/pages/') or fhtml_cached:match('/textbooks/') then
-          klass = klass .. ' workbookpage'
+          o:write('<div id="body" class="workbookpage">\n')
         else
-          klass = klass .. ' narrativepage'
+          o:write('<div id="body" class="narrativepage">\n')
         end
-        if fhtml_cached:find('/courses/[^/]-/back%-matter/') then
-          klass = klass .. ' back-matter'
-        elseif fbase:find('^notes%-') then
-          klass = klass .. ' LessonNotes'
-        end
-      elseif tipe == 'lessonplan' then
-        klass = klass .. ' LessonPlan'
-      elseif not memberp(tipe, {'datasheetpage'}) then
-        klass = klass .. ' narrativepage'
+      elseif not memberp(tipe, {'lessonplan', 'datasheetpage'}) then
+        o:write('<div id="body" class="narrativepage">\n')
       else
-        -- noop
+        o:write('<div id="body">\n')
       end
-      o:write('<div id="body" class="' .. klass .. '">\n')
     end
     --
     if add_codemirror_p then

@@ -59,12 +59,13 @@ _*This lesson is unplugged* and does not require a computer._
 Students are introduced to the concept of @vocab{validity}, and a number of possible threats that might make an analysis invalid.
 
 === Launch
+@slidebreak{Launch}
 
 As good Data Scientists, the staff at the animal shelter are constantly gathering data about their animals, their volunteers, and the people who come to visit. 
 
 But just because they have data doesn’t mean the conclusions they draw from it are correct! 
 
-@slidebreak
+@slidebreak{Launch}
 
 @lesson-instruction{
 Suppose the shelter staff surveyed 1,000 cat-owners and found that 95% of them thought cats were the best pet. 
@@ -72,7 +73,7 @@ Suppose the shelter staff surveyed 1,000 cat-owners and found that 95% of them t
 Could they really claim that people generally prefer cats to dogs?
 }
 
-@slidebreak
+@slidebreak{Launch}
 
 @lesson-point{
 There’s more to data analysis than simply collecting data and crunching numbers.
@@ -80,7 +81,7 @@ There’s more to data analysis than simply collecting data and crunching number
 
 In the example of the cat-owning survey, the claim that “people prefer cats to dogs” is *invalid* because the data itself wasn’t representative of the whole population (of _course_ cat-owners are partial to cats!).
 
-@slidebreak
+@slidebreak{Launch}
 
 *Data Scientists have several major @vocab{Threats to Validity} to worry about:*
 
@@ -88,7 +89,7 @@ In the example of the cat-owning survey, the claim that “people prefer cats to
 
   * This is the problem with surveying _cat owners_ to find out which animal is most loved!
 
-@slidebreak
+@slidebreak{Launch}
 
 *2) Bias in the study design* - Data was gathered in such a way that it influenced the results, for example, researchers might:
 
@@ -97,7 +98,7 @@ In the example of the cat-owning survey, the claim that “people prefer cats to
   * Judge other cultures on the standards of their own culture rather than the standards of the one being studied. This is known as "culture bias".
 
 @ifslide{@teacher{The list continues on the next slide.}}
-@slidebreak
+@slidebreak{Launch}
 
 *3) Poor choice of summary data* - Even if the selection is unbiased, sometimes outliers are so extreme that they make the mean completely useless at best - and misleading at worst. For example:
 
@@ -114,6 +115,7 @@ More examples of @vocab{confounding variables} can be found in the @lesson-link{
 And there are many other threats to validity out there!
 
 === Investigate
+@slidebreak{Investigate}
 
 @lesson-instruction{
 - On @printable-exercise{threats-to-validity-1.adoc} and @printable-exercise{threats-to-validity-2.adoc}, you’ll find four different claims backed by four different datasets.
@@ -122,7 +124,7 @@ And there are many other threats to validity out there!
 - @opt{Respond to @opt-printable-exercise{selection-bias-v-biased-study.adoc}}
 }
 
-@slidebreak
+@slidebreak{Investigate}
 
 Life is messy, and there are _always_ threats to validity. 
 
@@ -131,6 +133,7 @@ Data Science is about doing the best you can to _minimize_ those threats, and to
 When you do your own analysis, make sure you include a discussion of possible threats to validity!
 
 === Synthesize
+@slidebreak{Synthesize}
 
 Why is it important to consider potential threats to validity?
 
@@ -153,6 +156,7 @@ If you'd prefer to wait until your students have completed the __entire__ lesson
 Students are asked to consider the ways in which statistics are misused in popular culture, and become critical consumers of some statistical claims. Finally, they are given the opportunity to misuse their _own_ statistics, to better understand how someone might distort data for their own ends.
 
 === Launch
+@slidebreak{Launch}
 
 You have already seen a number of ways that statistics can be misused:
 
@@ -166,7 +170,7 @@ You have already seen a number of ways that statistics can be misused:
 - A politician telling us that the tallest bar in a _bar chart_ makes up the largest percentage of the whole sample.
 - An advertisement telling us that the tallest bar in a _histogram_ makes up the largest percentage of the whole sample.
 
-@slidebreak
+@slidebreak{Launch}
 
 There are many other ways to mislead the audience, including:
 
@@ -177,6 +181,7 @@ There are many other ways to mislead the audience, including:
 With all the news being shared through newspapers, television, radio, and social media, it’s important to be critical consumers of information!
 
 === Investigate
+@slidebreak{Investigate-DN}
 @lesson-instruction{
 - On @printable-exercise{fake-news.adoc}, you’ll find some deliberately misleading claims made by slimy Data Scientists. 
   * Identify why each of these claims should not be trusted.
@@ -192,6 +197,7 @@ With all the news being shared through newspapers, television, radio, and social
 }
 
 === Synthesize
+@slidebreak{Synthesize}
 
 - Where have you seen statistics misused in the real world?
 - Over the next several weeks, keep your eyes peeled for misused statistics and bring the examples you find to class to share!
@@ -213,6 +219,7 @@ Alternatively, we offer a compilation of all four Checkpoints in @assessment{thr
 Students are confronted with the concept of _outliers:_ data points that stray far from the rest of the data and appear to confound observed patterns and groupings. Data Scientists take the decision of whether or not to keep outliers very seriously, as there can be profound implications for validity.
 
 === Launch
+@slidebreak{LaunchR}
 @right{@image{images/height-outlier.png, 300}}Suppose we survey the heights of 12 year olds, and almost all values are clustered between 50-70in. There's a very low outlier, however, at 6in.
 
 @QandA{
@@ -220,13 +227,13 @@ Students are confronted with the concept of _outliers:_ data points that stray f
 @A{Probably not! This is almost certainly junk data from a typo (maybe someone meant to type "60" instead of "6"?).}
 }
 
-@slidebreak
+@slidebreak{LaunchR}
 @ifslide{@right{@image{images/height-outlier.png, 300}}}
 This typo could throw off our analysis completely! This one data point will destroy the mean, forcing us to use a different measure of center even if the rest of the data is symmetric.
 
 "Junk" data is harmful, because it can drastically change our results! If we blindly keep every outlier, it can become a serious threat to the validity of our analysis!
 
-@slidebreak
+@slidebreak{LaunchR}
 
 @right{@image{images/stadium-outlier.png, 300}}Suppose we survey the number of minutes it takes for fans to find their seats at a stadium, and almost all values are clustered between 4-16 minutes. There's a very high outlier, however, at 35 minutes.
 
@@ -235,11 +242,12 @@ This typo could throw off our analysis completely! This one data point will dest
 @A{It's very possible! Maybe it's someone who takes a long time getting up stairs, or someone who had to go far out of their way to use the wheelchair ramp!}
 }
 
-@slidebreak
+@slidebreak{LaunchR}
 @ifslide{@right{@image{images/stadium-outlier.png, 300}}}
 If we choose to _remove_ or _keep_ an outlier without thinking carefully, it can become a serious threat to the validity of our analysis!
 
 === Investigate
+@slidebreak{Investigate}
 @lesson-point{Outliers... do they stay or do they go?}
 
 As a data scientist, an outlier is _always a reason to look closer_. And whether you decide to keep or remove it from your dataset, make sure you explain your reasons in your write-up!
@@ -250,20 +258,21 @@ With your partner, complete @printable-exercise{outliers-discussion.adoc}.
 
 These points are called _unusual observations_. Unusual observations in a scatter plot are like outliers in a histogram or dot plot, but more complicated because it’s the _combination_ of x and y values that makes them stand apart from the rest of the cloud.
 
-@slidebreak
+@slidebreak{Investigate}
 
 @lesson-point{Unusual observations are _always_ worth thinking about!}
 
 Sometimes unusual observations are _just random_. Felix seems to have been adopted quickly, considering how much he weighs. Maybe he just met the right family early, or maybe we find out he lives nearby, got lost and his family came to get him. In that case, we might need to do some deep thinking about whether or not it’s appropriate to remove him from our dataset.
-@slidebreak
+@slidebreak{Investigate}
 
 Sometimes unusual observations can give you a _deeper insight_ into your data. Maybe Felix is a special, popular (and heavy!) breed of cat, and we discover that our dataset is missing an important column for breed!
 
-@slidebreak
+@slidebreak{Investigate}
 
 Sometimes unusual observations _are the points we are looking for!_ What if we wanted to know which restaurants are a good value, and which are rip-offs? We could make a scatter plot of restaurant reviews vs. prices, and look for an observation that’s high above the rest of the points. That would be a restaurant whose reviews are unusually good for the price. An observation way below the cloud would be a really bad deal.
 
 === Synthesize
+@slidebreak{Synthesize}
 
 @QandA{
 The school cafeteria surveyed 100 students about their favorite foods, and most chose things like pizza, spaghetti, Caesar salad, etc. But two students chose foods that no one else heard of!
@@ -273,7 +282,7 @@ The school cafeteria surveyed 100 students about their favorite foods, and most 
 @A{What if those foods aren't real, and the two students were just messing around?}
 }
 
-@slidebreak
+@slidebreak{Synthesize}
 
 @QandA{
 @Q{If Data Scientists are the ones deciding whether an outlier is important or irrelevant, why does it matter _who_ those Data Scientists are?}
@@ -286,6 +295,7 @@ This is a great opportunity to remind students that @lesson-link{computing-needs
 }
 
 == Additional Exercises
+@slidebreak{Supplemental}
 
 - @opt-printable-exercise{identifying-threats-3.adoc}
 
