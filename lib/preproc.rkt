@@ -690,9 +690,9 @@
   (let ([h-obj #f])
     (for ([json-file json-files])
       (let ([new-hash (call-with-input-file json-file read-json)])
-        (if h-obj
-            (hash-union! h-obj new-hash)
-            (set! h-obj new-hash))))
+        (unless h-obj (set! h-obj (make-hash)))
+        (hash-union! h-obj new-hash #:combine/key (lambda (k v1 v2) v1))
+        ))
     (unless h-obj (set! h-obj #t))
     h-obj))
 
