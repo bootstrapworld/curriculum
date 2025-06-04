@@ -72,8 +72,8 @@
 
     (set! s (regexp-replace* #rx"(href=\"[^\"]*?/)index.shtml" s "\\1"))
 
-    (set! s (regexp-replace* #rx"href=\"[^\"]*?\\./Contracts\\.shtml\"" s
-              (format "href=\"/wp-content/themes/pro-child/static-resources/~a/~a/Contracts.shtml\"" *season-year* *natlang*)))
+    (set! s (regexp-replace* #rx"href=\"[^\"]*?\\./(Alignments|Contracts|Glossary)\\.shtml" s
+              (format "href=\"/wp-content/themes/pro-child/static-resources/~a/~a/\\1.shtml" *season-year* *natlang*)))
 
     (set! s (regexp-replace* #rx"src=\"[^\"]*?/lib/([^/]*?\\.js)\"" s
               (format "src=\"/wp-content/themes/pro-child/static-resources/~a/~a/lib/\\1\"" *season-year* *natlang*)))
@@ -85,6 +85,8 @@
 
     (set! s (regexp-replace* #rx"src=\"[^\"]*?/lib/images/([^/]*?\\.png)\"" s
               (format "src=\"/wp-content/themes/pro-child/static-resources/~a/~a/lib/images/\\1\"" *season-year* *natlang*)))
+
+    (set! s (regexp-replace* #rx"href=\"[^\"]*?(workbook/[^/]*?\\.(pdf))\"" s (format "href=\"~a\\1\"" static-prefix)))
 
     ; (set! s (regexp-replace* #rx"src=\"[^\"]*?(images/[^/]*?\\.(png|svg))\"" s (format "src=\"/wp-content/themes/pro-child/static-resources/~a/~a/lib/\\1\"" *season-year* *natlang*)))
 
