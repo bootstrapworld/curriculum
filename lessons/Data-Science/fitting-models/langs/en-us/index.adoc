@@ -6,7 +6,7 @@
 ++++
 @description{Students learn how to fit a linear model to a scatter plot, using the _S_-value (Standard Deviation of Residuals) of model fitness.}
 
-@lesson-prereqs{contracts-tables}
+@lesson-prereqs{contracts-strings-images}
 
 @keywords{linear, slope, intercept, slope-intercept, S, Sres, error}
 
@@ -50,6 +50,7 @@
 Students learn that the patterns they intuitively see in a scatter plot represents a _relationship_ between the explanatory and response variables, called a @vocab{model}. They consider two different models for a simple dataset, and brainstorm how we could measure which fits better.
 
 === Launch
+@slidebreak{LaunchC}
 
 Pyret has a function for making scatter plots, which has _four_ things in its Domain:
 
@@ -64,9 +65,9 @@ Here's the Contract:
 @show{(contract 'scatter-plot '((table-name Table) (labels String) (xs String) (ys String)) "Image")}
 }
 
-@slidebreak
+@slidebreak{Launch-DN}
 
-Let's see if there's a correlation between an animal's `age` and the `weeks` it takes to be adopted.
+Let's see if there's a correlation between an animal's `age` in the shelter, and the `weeks` it takes to be adopted.
 
 @lesson-instruction{
 - Open the @starter-file{fitting-animals}.
@@ -75,7 +76,7 @@ Let's see if there's a correlation between an animal's `age` and the `weeks` it 
 
 @ifslide{@show{(contract 'scatter-plot '((table-name Table) (labels String) (xs String) (ys String)) "Image")}}
 
-@slidebreak
+@slidebreak{LaunchC}
 
 @center{@image{images/sp2.png, 400}}
 
@@ -99,7 +100,7 @@ Let's see if there's a correlation between an animal's `age` and the `weeks` it 
 Project the scatter plot at the front of the room, and have students come up to point out their patterns.
 }
 
-@slidebreak
+@slidebreak{Launch}
 
 @lesson-instruction{
 - Turn to the first section of @printable-exercise{how-could-we-measure-good-fit-lizard.adoc} and use a straightedge to draw a line that summarizes the trend you see in the data.
@@ -109,7 +110,7 @@ Project the scatter plot at the front of the room, and have students come up to 
   * Where do you picture it crossing the y-axis?
 }
 
-@slidebreak
+@slidebreak{LaunchC}
 
 By drawing a line through our cloud of points, we are defining a @vocab{Model}: a summary of the relationship between two variables in a dataset. This model allows us to *make predictions* about how long a new animal will stay at the shelter.
 
@@ -117,12 +118,13 @@ By drawing a line through our cloud of points, we are defining a @vocab{Model}: 
 
 No line will touch every dot, so _every model will have some error_, compared to the original data! But if the line is close enough to enough of the dots, the model can still help us reason about adoption time.
 
-@slidebreak
+@slidebreak{LaunchR}
 @ifslide{@right{@image{images/sp2.png, 400}}}
 
 The line that is _closest_ to all the other points is known as the @vocab{line of best fit}, meaning it is the _best possible summary_ of the relationship and therefore the _best possible model_.
 
 === Investigate
+@slidebreak{Investigate}
 
 While most of us might have pictured similar lines (models!), it's likely that different people see slightly _different_ lines. How do we know which model is best? _How do we know whose @vocab{model} has the least error?_
 
@@ -132,6 +134,7 @@ While most of us might have pictured similar lines (models!), it's likely that d
 }
 
 === Synthesize
+@slidebreak{Synthesize}
 
 @QandA{
 @Q{What criteria did you come up with for how to assess whether or not a model is a good fit for the data?}
@@ -156,6 +159,7 @@ Push students to recognize that in order for this measurement to be useful they 
 Students test out their linear models using a Pyret function called `fit-model`, which draws the residuals and computes a measure of fitness called the Standard Deviation of the Residuals (@math{S}).
 
 === Launch
+@slidebreak{Launch}
 
 Pyret has a function called `fit-model`, that takes in a function and graphs it on top of a scatter plot.
 
@@ -165,14 +169,14 @@ Pyret has a function called `fit-model`, that takes in a function and graphs it 
 @A{Unlike `scatter-plot`, it _consumes a function_!}
 }
 
-@slidebreak
+@slidebreak{Launch}
 
 @lesson-instruction{
 - Take a few minutes to consider the code and data visualizations on @printable-exercise{intro-fit-model.adoc}.
 - Record your observations and be ready to share them with the class.
 }
 
-@slidebreak
+@slidebreak{Launch}
 ++++
 <style>
 .fit-model-code .editbox { width: 100%; }
@@ -202,7 +206,7 @@ fit-model(
 @Q{What do you Notice and Wonder about the code?}
 }
 
-@slidebreak
+@slidebreak{Launch}
 
 [cols="^1a,^1a", frame="none", grid="none"]
 |===
@@ -250,7 +254,7 @@ fit-model(
 }
 }
 
-@slidebreak
+@slidebreak{LaunchR}
 
 @right{@image{images/residual.png, 200}}When we graph a model in Pyret, we can see that:
 
@@ -259,7 +263,7 @@ fit-model(
 
 The difference between any real @math{y} and predicted @math{y} is called the @vocab{residual}, and it measures how far off that one point in the model is from the actual data. The smaller the residuals, the better a model fits!
 
-@slidebreak
+@slidebreak{Launch}
 
 @QandA{
 @Q{There are three terms in the legend at the bottom. What do they refer to?}
@@ -268,7 +272,7 @@ The difference between any real @math{y} and predicted @math{y} is called the @v
 @A{Residuals refer to the vertical black lines connecting the data points to the model, representing the distance between the data and the value the model predicts. They vary in length depending on how far above or below the model the data is situated.}
 }
 
-@slidebreak
+@slidebreak{Launch}
 
 @QandA{
 @Q{How do @math{S} and @math{R^2} compare for the two models?}
@@ -278,7 +282,7 @@ The difference between any real @math{y} and predicted @math{y} is called the @v
 @A{Answers will vary, but students should have some sense of the idea that if one model has a lower @vocab{S} value than another model of the same data it indicates a better fit.}
 }
 
-@slidebreak
+@slidebreak{Launch}
 
 Just as there are different tools for finding the center or spread of a dataset, there are many different tools to calculate the fitness of a model, including @math{S} and @math{R^2}, which you just saw when fitting the models in @proglang.
 
@@ -288,7 +292,7 @@ Statisticians and Data Scientists are careful to use the right tool for the job!
 - We want a measure of _error_, so the measure should be zero for a perfect model fits every point (i.e. - has no residuals).
 - We want a measure that's concrete, and easy to understand.
 
-@slidebreak
+@slidebreak{LaunchR}
 
 @ifslide{@right{@image{images/residual.png, 200}}}
 @vocab{S} is a measure of fitness, which refers to the @vocab{Standard Deviation of the Residuals}.
@@ -298,12 +302,12 @@ Statisticians and Data Scientists are careful to use the right tool for the job!
 - @vocab{S} is expressed in terms of _units of the response variable_ (the y-axis), which makes it easy to understand.
   * e.g. When fitting a model to this dataset, an @vocab{S} of `5` would mean _the standard deviation of the residuals is "5 weeks to adoption."_
 
-@slidebreak
+@slidebreak{Launch}
 
 - When comparing two models for the same dataset, the model with the smaller @vocab{S} is the better model!
 - It doesn't make sense to compare @vocab{S} for models that describe different datasets.
 
-@slidebreak
+@slidebreak{Launch}
 
 @lesson-point{
 The @math{S}-value always has to be considered in the context of the range of values that the model is predicting!
@@ -315,7 +319,7 @@ The @math{S}-value always has to be considered in the context of the range of va
 - Decide how well the model is likely to predict values.
 }
 
-@slidebreak
+@slidebreak{Launch}
 
 @QandA{
 @Q{Did you strongly agree that any of the models described were a good fit? Why?}
@@ -329,7 +333,7 @@ The @math{S}-value always has to be considered in the context of the range of va
 @A{For the sixth scenario, even though the @math{S}-value was only 1, it was much bigger than any of the numbers in the range, which maxed out at two hundredths.}
 }
 
-@slidebreak
+@slidebreak{Launch-DN}
 
 Now that we have a basic sense of what `fit-model` does, let's see it work live in Pyret!
 
@@ -340,7 +344,7 @@ Now that we have a basic sense of what `fit-model` does, let's see it work live 
 - Uncomment the last two lines of code and click "Run".
 }
 
-@slidebreak
+@slidebreak{Launch}
 
 @QandA{
 @Q{How do we know that the first Interactive Chart that pops up is fitting Cy's model to the data?}
@@ -358,7 +362,7 @@ Now that we have a basic sense of what `fit-model` does, let's see it work live 
 @A{The "Residual": the difference between `y` and `ŷ`}
 }
 
-@slidebreak
+@slidebreak{Launch}
 
 @QandA{
 @Q{We've been looking at how well `cy` 's model fit the data. What do we need to do if we want to see how well `jo` 's model fits the data.}
@@ -373,7 +377,7 @@ If students know how to compute the equation of a line that crosses between two 
 }
 
 
-@slidebreak
+@slidebreak{Launch}
 
 Let's put everything we've learned together and interpret the models we've built and the statistics we've gathered about them.
 
@@ -388,7 +392,7 @@ Let's put everything we've learned together and interpret the models we've built
 - If your students did not complete @opt-printable-exercise{lines-to-functions.adoc}, direct them to ignore the last section of the page they are about to complete.
 }
 
-@slidebreak
+@slidebreak{Launch}
 
 @lesson-instruction{
 - Complete @printable-exercise{interpret-models.adoc}. +
@@ -404,6 +408,7 @@ When students are coming up with models on their own, they aren't bound by the a
 }
 
 === Synthesize
+@slidebreak{Synthesize}
 
 @QandA{
 @Q{Why do we need to know the Range of the dataset in order to interpret an @vocab{S-value}?}
@@ -428,7 +433,7 @@ When students are coming up with models on their own, they aren't bound by the a
 [.algebra-2]
 === What about Non-linear Models and Algebra 2?
 
-There's no reason thing have to stop at line of best fit! Algebra 2 and Integrated 3 teachers - or Data Science teachers looking to count their course as an alternative to Algebra 2 - can extend this modeling work using our @dist-link{courses/algebra-2/, Algebra 2} materials, which covers quadratic, exponential, logarithmic, and periodic models!
+There's no reason things have to stop at line of best fit! Algebra 2 and Integrated 3 teachers - or Data Science teachers looking to count their course as an alternative to Algebra 2 - can extend this modeling work using our @dist-link{courses/algebra-2/, Algebra 2} materials, which covers quadratic, exponential, logarithmic, and periodic models!
 }
 
 == Additional Practice

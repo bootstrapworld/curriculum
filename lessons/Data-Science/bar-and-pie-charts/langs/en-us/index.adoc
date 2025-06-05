@@ -1,6 +1,6 @@
 = Bar and Pie Charts
 
-@description{Students use data visualizations like bar and pie charts to create 1- and 2-level groupings to visualize the distribution of categorical data.}
+@description{Students use data visualizations like bar and pie charts to create 1- and 2-level groupings to visualize the distribution of categorical data. _This lesson optionally includes @lesson-link{project-infographic}_🎨 .}
 
 @lesson-prereqs{ds-intro, contracts-visualizations}
 
@@ -62,6 +62,7 @@
 Students learn one way of grouping data, showing the @vocab{frequency} of values in a dataset using bar and pie charts.
 
 === Launch
+@slidebreak{Launch}
 
 @ifproglang{pyret}{
 @opt-block{
@@ -94,14 +95,14 @@ Facilitate a discussion about this new-to-them Pyret Data Visualization!
 }
 }
 
-@slidebreak
+@slidebreak{Launch-DN}
 
 @lesson-instruction{
 - Open the @starter-file{expanded-animals} and click "Run".
 - Then complete Part A of @printable-exercise{count-bar-pie.adoc}, by testing the expressions @show{(code '(count more-animals "species"))} and @show{(code '(bar-chart more-animals "species"))} in the Interactions Area.
 }
 
-@slidebreak
+@slidebreak{Launch}
 @QandA{
 @Q{How do the frequency table and bar chart you just made compare?}
 @A{The height of each bar matches the frequency with which each species occurs at the shelter.}
@@ -110,6 +111,7 @@ Facilitate a discussion about this new-to-them Pyret Data Visualization!
 }
 
 === Investigate
+@slidebreak{Investigate}
 
 @opt{Have students complete @opt-printable-exercise{bar-chart-notice.adoc} and @opt-printable-exercise{pie-chart-notice.adoc}.
 }
@@ -118,7 +120,7 @@ Facilitate a discussion about this new-to-them Pyret Data Visualization!
 Turn to @printable-exercise{bar-and-pie-notice.adoc} and take two minutes to notice and wonder about the visualizations. Then compare your Notices and Wonders with your partner.
 }
  
-@slidebreak
+@slidebreak{Investigate2}
 
 @image{images/count-more-species.png, 160} @image{images/bar-more-species.png, 385}
 
@@ -133,7 +135,7 @@ Both `bar-chart` and `count` *group the data in one column by value*, creating "
 @vocab{Bar charts} group data _by value_ to show frequency.
 }
 
-@slidebreak
+@slidebreak{InvestigateR}
 
 @right{@image{images/pie-more-species.png, 275}}@vocab{Pie charts} show us the @vocab{percentage} of the data points that fall in each category. Hovering over a pie slice reveals the label, as well as the frequency and the percentage of the whole. In this example we see that there is 1 animal that is a snail, representing 3.1% of the population.
 
@@ -149,14 +151,14 @@ While bars in some bar charts should follow some logical order (alphabetical, sm
 @ifnotslide{@infer}
 @ifslide{@teacher{@infer}}
 
-@slidebreak
+@slidebreak{Investigate}
 
 @lesson-instruction{
 - Complete @printable-exercise{matching-bar-to-pie.adoc} with your partner.
 - Then return to @printable-exercise{count-bar-pie.adoc} and complete parts B & C.
 }
 
-@slidebreak
+@slidebreak{Investigate}
 
 @QandA{
 @Q{What information is provided in bar charts that is hidden in pie charts?}
@@ -169,7 +171,7 @@ While bars in some bar charts should follow some logical order (alphabetical, sm
 @A{Grouping by value works well for @vocab{categorical data}, when lots of different data points can be sorted into a smaller number of buckets. But for @vocab{quantitative data} - which can have lots of different values - the number of buckets is too large to be useful.}
 }
 
-@slidebreak
+@slidebreak{Investigate}
 
 @lesson-point{
 Grouping by value works well when lots of different data points can be sorted into a smaller number of buckets.
@@ -186,13 +188,14 @@ Grouping by value works well when lots of different data points can be sorted in
 - Relatedly, pie charts only have a wedge for each category whose population is large enough to claim a percentage of the pie. Unlike in bar charts, empty categories will not be included in a pie chart. 
 
 === Synthesize
+@slidebreak{Synthesize}
 
 - How is `pie-chart` similar to `bar-chart`? How is it different?
 - When would you want to use one chart instead of another?
 - Which visualizations do you find it easier to interpret? Why?
 - What questions about the dataset are you curious to investigate using these visualizations?
 
-@slidebreak
+@slidebreak{SynthesizeC}
 
 @opt-block{
 @teacher{
@@ -243,11 +246,12 @@ Open the @opt-starter-file{hair} to try them out!
 Students learn how to create _groups within groups_, showing the relative frequency of one variable across values of another variable using stacked and multi bar charts.
 
 === Launch
+@slidebreak{Launch}
 
 @lesson-instruction{Turn to @printable-exercise{intro-stacked-multi.adoc} and complete Part A now.
 }
 
-@slidebreak
+@slidebreak{Launch}
 
 Comparing groups is great, but sometimes we want to compare _sub-groups across groups_. In this example, we want to compare the distribution of sexes across each species.
 
@@ -257,6 +261,7 @@ Comparing groups is great, but sometimes we want to compare _sub-groups across g
 }
 
 === Investigate
+@slidebreak{Investigate}
 
 Pyret has two functions that let us specify both a group and a subgroup:
 
@@ -268,7 +273,7 @@ Pyret has two functions that let us specify both a group and a subgroup:
 Complete Part B of @printable-exercise{intro-stacked-multi.adoc}
 }
 
-@slidebreak
+@slidebreak{Investigate}
 
 [cols="1a,1a", frame="none", stripes="none"]
 |===
@@ -282,6 +287,7 @@ Complete Part B of @printable-exercise{intro-stacked-multi.adoc}
 
 
 === Synthesize
+@slidebreak{Synthesize}
 All of the charts we've looked at in this lesson work with @vocab{categorical data}, showing us the frequency of values in one or two groups.
 
 - What are some of the questions you asked about the animals dataset using these visualizations? And what did you learn?
@@ -290,6 +296,7 @@ All of the charts we've looked at in this lesson work with @vocab{categorical da
 - What kinds of questions are better answered by multi bar charts?
 
 == Additional Exercises  
+@slidebreak{Supplemental}
 
 - For more practice making and interpreting these chart types in Pyret, we have a second teaching dataset for you to work with! You can have students create additional visualizations using @opt-starter-file{food}.
 - For more practice without a computer, have students turn to @opt-printable-exercise{matching-stacked-to-multi.adoc}.

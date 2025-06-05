@@ -1,20 +1,27 @@
 = More Models
 
+@link-instructions{Open your copy of @starter-file{alg2-hybrid} and click "Run".}
+
 == Building a hybrid model for the entire `co2-table`
 
-@n How well would you expect our `hybrid-modern` model to fit the data in the full `co2-table` with data covering a span of 50 years? @ifnotsoln{@fitb{}{}}
+@n How well would you expect our `hybrid-modern` model to fit the data in the _full_ `co2-table`, with data covering a span of 50 years?
 
 @fitb{}{@ifsoln{Better than our periodic model did, but once we're out of the data range it was built on it will probably need some adjusting.}}
 
-@n Let's test it out. What @vocab{S-value} do you get? @fitb{}{@ifsoln{~12.379}}
+@n Let's test it out. What @vocab{S-value} do you get? @fitb{}{@ifsoln{~12.241}}
 
-@n Find the section of the starter file that says "HYBRID MODEL for the full co2-table". Define `hybrid-all` as a model that fits all of the data well. Be sure to think through which functions you will need to define in order to be able to compose your function definition.
-@teacher{the line of best fit for the full `co2-table` data is @math{y = 1.83453x - 3296.8}}
+@vspace{1ex}
+
+At the bottom of the Definitions Area, find the section titled "HYBRID MODEL for the full co2-table". 
+
+@n Define `hybrid-all` as a model that fits the full dataset, referring back to `hybrid-modern` to help you think through which functions you will need to define in order to be able to compose your function definition. 
+
+@ifsoln{@vspace{1ex}}
+@indented{@teacher{the line of best fit for the full `co2-table` data is @math{y = 1.83453x - 3296.8}}}
 
 @n Use `fit-model` to fit your new `hybrid-all` model to the `co2-table`. What is the @vocab{S-value} of `hybrid-all` with this data? @fitb{}{@ifsoln{~2.937}}
 
-@n How much @fitbruby{5em}{@ifsoln{less}}{more / less }
-error do we expect in predictions made using `hybrid-all` than with the `hybrid-modern` model for our `co2-table` data?
+@n Compute the change in @vocab{S-values} between `hybrid-all` and `hybrid-modern`, when used with the `co2-table`:
 
 @vspace{1ex}
 
@@ -24,49 +31,73 @@ A note for future authors:
 - \text{} is used to make the words in the fraction use normal font.
 }
 
-@indented{
+@hspace{1em}
 _Percent Change_ &#8192; = &#8192;
 @math{
 \frac{&#8192; \text{Difference} &#8192; \text{between} &#8192; \text{the} &#8192; \text{S-values}&#8192;}
 {\text{S-value} &#8192; \text{for} &#8192; \text{linear} &#8192; \text{model}}
 \times 100 &#8192; = &#8192; }
-@ifnotsoln{@math{\frac{\qquad}{\qquad}}}
+@ifnotsoln{@math{\frac{\qquad\qquad}{\qquad\qquad}}}
 @ifsoln{@math{\frac{9.442}{12.379} = 0.76  &#8192; &rarr; &#8192;  ~76\%}}
 
-We expect 
+@hspace{1em}
+"For `co2-table`, we expect
 @fitb{4em}{@ifsoln{~76}} percent
 @fitbruby{5em}{@ifsoln{less}}{ more / less }
-error from predictions made with `hybrid-all` than with `hybrid-modern` model for our `co2-table` data!
-}
+error from predictions made with `hybrid-all` than with `hybrid-modern`."
 
-== Comparing @vocab{S-values} doesn't always make sense
+== Comparing __S__-values doesn't always make sense
 @vspace{1ex}
 
-Throughout our work together, we have often compared @vocab{S-values} to get a sense for how much more or less error we expect from one model than another model. We just compared @vocab{S-values} for the `hybrid-all` and `hybrid-modern` models, for example.
+You've had a lot of practice comparing the @vocab{S-values} of two different models on the same dataset (including what you just did on this page!), to quantify the error between them. *But can we compare the @vocab{S-values} for one model fit to _two different datasets?_*
 
-@vspace{1ex}
-
-But it doesn't always make sense to compare @vocab{S-values}!
+@n In the first row of the table below, we've fit the `periodic-cos` model to all three datasets.
 
 @vspace{1ex}
 
 @indented{
-[cols="1a,1a,1a,1a", options="header"]
+[cols="2a,^1a,^1a,^1a", options="header"]
 |===
-|					| recent-table	| modern-table 	| co2-table
-| @vocab{S-value}	| 1.2 			| 17.76			| 55.89
-| lowest y-value	| 415.74 		| 387.03 		| 327.28
-| highest y-value	| 424			| 424			| 424
+|
+| `recent-table`
+| `modern-table`
+| `co2-table`
+
+| @vocab{S-value} of `periodic-cos`
+| ~1.2ppm
+| ~17.76ppm
+| ~55.89ppm
+
+| lowest y-value (@math{CO_2} in ppm)
+| 415.74ppm
+| 387.03ppm
+| 327.28ppm
+
+| highest y-value (@math{CO_2} in ppm)
+| 424ppm
+| 424ppm
+| 424ppm
 |===
 }
 
-@n We built the `periodic-sin` model using the data in the `recent-table` and we know that it was a good fit for that data.  We also know from looking at the graphs that the model fit the historical data worse and worse the farther we went back in time. But why wouldn't it make sense to compare the @math{\text{S-values}} in this table as a way to quantify how much more error we'd expect from the `periodic-sin` model for the `co2-table`? @ifnotsoln{@fitb{}{}}
+@vspace{1ex}
 
-@fitb{}{@ifsoln{@math{\text{S-values} only mean something when we consider them within the context of the range of the data.
-}}
+The `periodic-cos` model was built from `recent-table`, _so there's no surprise_ it was a good fit for `recent-table`! But for datasets that reach farther and farther back in time, that model fits worse and worse.
 
-@fitb{}{@ifsoln{We can compare @math{\text{S-values} for different models when they're applied to the same dataset, but, in this case, we're looking at datasets with very different ranges!}}
+@n It's tempting to compare the @math{\text{S-values}} in this table, to quantify how much more error we'd expect from the `periodic-sin` model for the `co2-table`. *Why shouldn't we?*
+
+@fitb{}{@ifsoln{@math{\text{S-values}} only mean something when we consider them within the context of the range of the data. We can compare @math{\text{S-values} for different models}}} +
+@fitb{}{@ifsoln{models when they're applied to the same dataset, but, in this case, we're looking at datasets with very different ranges!}}
+
+@ifnotsoln{
+@fitb{}{}
+}
+@ifsoln{
+@vspace{1ex}
 
 @teacher{Data Scientists have many tools in their toolboxes and @vocab{S-values} are just one of them. If your students are already familiar with @math{r^2}, now would be a good time to point out that when it doesn't make sense to compare @vocab{S-values} we can fall back on some of our other tools.}
+}
 
 @star Just as there's nothing to say that midlines have to be horizontal, there’s also nothing to say that midlines need to be straight! If you look closely, the `co2-table`’s midline almost looks quadratic… can you come up with a `hybrid-curve` model for the `co2-table` that can beat the @vocab{S-value} you just found?
+
+@fitb{}{}

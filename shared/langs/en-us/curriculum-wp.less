@@ -1,0 +1,85 @@
+@import (less) url("../../../lib/shared.less");
+
+.handout::before {content: "Handout: ";}
+.optionaltag::before { content: "Optional: "; }
+.optpara::before { content: "Optional"; }
+
+/*****************************************************
+ * Proglang-Specific Strings
+ */
+.pyret {
+  .other-proglang::before {
+    content: "This lesson plan has students programming in Pyret. ";
+  }
+}
+.wescheme {  
+  .other-proglang::before {
+    content: "This lesson plan has students programming in WeScheme. ";
+  }
+}
+.codap {
+ .other-proglang::before {
+    content: "This lesson plan has students use CODAP. ";
+  }
+}
+
+/*****************************************************
+ * DESIGN RECIPE
+ */
+body.workbookpage .recipe_word_problem p::before      { content: 'Directions: '; }
+body.workbookpage .recipe_name .ruby::after           { content: "function name"; }
+body.workbookpage.codap .recipe_name .ruby::after     { content: "Transformer name"; }
+
+body.workbookpage .recipe_purpose .ruby::after        { content: "what does the function do?"; }
+body.workbookpage.codap .recipe_purpose .ruby::after  { content: "Purpose: what does the formula do for each row?"; }
+
+body.workbookpage .recipe_domain .ruby::after         { content: "Domain"; }
+body.workbookpage .recipe_range .ruby::after          { content: "Range"; }
+body.workbookpage .recipe_variables .ruby::after      { content: "variable(s)"; }
+body.workbookpage .recipe_example_inputs .ruby::after { content: "input(s)"; }
+body.workbookpage .recipe_example_body .ruby::after {
+  content: "what the function produces";
+}
+body.workbookpage .recipe_definition_body .ruby::after{ 
+  content: "what the function does with those variable(s)"; 
+}
+
+body.workbookpage.codap .codap_example_tables+table { border-width: 0; }
+body.workbookpage.codap .codap_example_tables+table>tbody>tr>td{ padding-top: 0; }
+
+body.workbookpage.codap .recipe_formula .ruby::after {
+  content: 'i.e. Weight < 20 or Species = "rabbit". Pay careful attention to capitalization and quotation marks.';
+}
+
+body.workbookpage.codap .ExampleTableTitle { text-align:  center; font-size: 0.7rem;}
+body.workbookpage.codap .ExampleTableTitle p { font-weight: bold; min-height: unset; }
+
+/*****************************************************
+ * DATA CYCLE 
+ */
+body.workbookpage .data-cycle-question .ruby::after { content: "What question do you have?"; }
+body.workbookpage .data-cycle-type-of-question::after { content: "What type of question is this? (circle one) "; }
+body.workbookpage .data-cycle-lookup::after     { content: " Lookup "; }
+body.workbookpage .data-cycle-arithmetic::after { content: " Arithmetic "; }
+body.workbookpage .data-cycle-statistical::after{ content: " Statistical "; }
+body.workbookpage .data-cycle-rows .ruby::after {
+  content: "Which Rows should we investigate? (All the rows, just the cats, fixed dogs, etc.)";
+}
+body.workbookpage .data-cycle-cols .ruby::after   { content: "What Column(s) do we need? (age, weight-in-kilograms, weeks, etc.)"; }
+body.workbookpage .data-cycle-filter .ruby::after {
+  content: "If you only need some rows, define your filter function here (Need help? Use the Design Recipe!)";
+}
+body.workbookpage.codap .data-cycle-filter .ruby::after {
+  content:  "If you only need some rows, write an expression for your Filter Transformer here."
+}
+body.workbookpage .data-cycle-build .ruby::after {
+  content: "If you need to make a new column, define your builder function here (Need help? Use the Design Recipe!)";
+}
+body.workbookpage.codap .data-cycle-build .ruby::after{
+  content: "If you need to Transform or Build an attribute, write the expression for your Transformer here.";
+}
+body.workbookpage .data-cycle-expression .ruby::after   { content: "What code will make the table or display you want?"; }
+body.workbookpage.codap .data-cycle-expression .ruby::after   { content: "What display, measure, or table do you want to create (i.e., median, bar chart, scatterplot, etc.)?"; }
+
+body.workbookpage .data-cycle-finding .ruby::after      { content: "What did you find out? What can you infer?"; }
+body.workbookpage .data-cycle-new-question .ruby::after { content: "What - if any - new question(s) does this raise?"; }

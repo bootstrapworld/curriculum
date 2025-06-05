@@ -11,14 +11,21 @@
 (define *year* (or (getenv "YEAR") (number->string (date-year (current-date)))))
 
 (define *official-date*
-  (format "~a-~a-01" *year* (if (string=? *season* "fall") "09" "01")))
+  ; (format "~a-~a-01" *year* (if (string=? *season* "fall") "09" "01"))
+  (let* ([x (current-date)]
+         [y (date-year x)] [m (date-month x)] [d (date-day x)])
+    (format "~a-~a~a-~a~a" y
+            (if (< m 10) "0" "") m
+            (if (< d 10) "0" "") d)))
 
 (define *natlang* "en-us")
 
 (define *lessons-dir* (format "~a/lessons" *dist-en-us*))
 (define *courses-dir* (format "~a/courses" *dist-en-us*))
 
-(define *csv-file* (build-path *dist-en-us* "curriculum.csv"))
+(define *csv-file*
+  (build-path *dist-en-us*
+              (format "curriculum-~a.csv" *official-date*)))
 
 (define (string->uniqid s)
   (when (path? s)
@@ -38,26 +45,38 @@
       (set! s (regexp-replace* #rx"\n" s " ")))
     (set! s (regexp-replace* #rx"href=\"index.pdf\"" s
               (format "href=\"~aindex.pdf\"" static-prefix)))
-    (set! s (regexp-replace* #rx"href=\"[^\"]*?/lessons/([^/]*?)/index\\.shtml\"" s
-              (format "href=\"/materials/lessons/~a/\\1/\"" *season-year*)))
-    (set! s (regexp-replace* #rx"href=\"[^\"]*?/lessons/([^/]*?)/pages/([^/]*?)\\.(html|pdf)\"" s
-              (format "href=\"/materials/lessons/~a/\\1/\\2/\"" *season-year*)))
-    (set! s (regexp-replace* #rx"href=\"[^\"]*?/lessons/([^/]*?)/solution-pages/([^/]*?)\\.(html|pdf)\"" s
-              (format "href=\"/materials/lessons/~a/\\1/\\2-solution/\"" *season-year*)))
+    (set! s (regexp-replace* #rx"(href=\"[^\"]*/curriculum)(\\.css\")" s
+              "\\1-wp\\2"))
+
+    (unless (regexp-match #rx"href=\"[^\"]*/images/" s)
+      (set! s (regexp-replace* #rx"(href=\"[^\"]*)/courses/" s "\\1/lessons/")))
+
+    (set! s (regexp-replace* #rx"href=\"[^\"]*?/lessons/" s (format "href=\"/materials/~a/lessons/" *season-year*)))
+
+    (set! s (regexp-replace* #rx"(href=\"[^\"]*?/lessons/[^/]*?/)index\\.shtml\"" s
+              (format "\\1\"")))
+    (set! s (regexp-replace* #rx"(href=\"[^\"]*?/lessons/[^/]*?/)pages/([^/]*?)\\.(html|pdf)\"" s
+              (format "\\1\\2/\"")))
+    (set! s (regexp-replace* #rx"(href=\"[^\"]*?/lessons/[^/]*?/)solution-pages/([^/]*?)\\.(html|pdf)\"" s
+              (format "\\1\\2-solution/\"")))
+
+    (set! s (regexp-replace* #rx"(href=\"[^\"]*?/)index.shtml" s "\\1"))
 
     (set! s (regexp-replace* #rx"href=\"[^\"]*?\\./Contracts\\.shtml\"" s
-              (format "href=\"/wp-content/themes/pro-child/static-resources/~a/lib/Contracts.shtml\"" *season-year*)))
+              (format "href=\"/wp-content/themes/pro-child/static-resources/~a/~a/Contracts.shtml\"" *season-year* *natlang*)))
 
     (set! s (regexp-replace* #rx"src=\"[^\"]*?/lib/([^/]*?\\.js)\"" s
-              (format "src=\"/wp-content/themes/pro-child/static-resources/~a/lib/js/\\1\"" *season-year*)))
+              (format "src=\"/wp-content/themes/pro-child/static-resources/~a/~a/lib/\\1\"" *season-year* *natlang*)))
     (set! s (regexp-replace* #rx"src=\"[.][^\"]*?/([^/]*?\\.js)\"" s
-              (format "src=\"/wp-content/themes/pro-child/static-resources/~a/lib/js/\\1\"" *season-year*)))
+              (format "src=\"/wp-content/themes/pro-child/static-resources/~a/~a/lib/\\1\"" *season-year* *natlang*)))
 
     (set! s (regexp-replace* #rx"href=\"[^\"]*?/lib/([^/]*?\\.css)\"" s
-              (format "href=\"/wp-content/themes/pro-child/static-resources/~a/lib/css/\\1\"" *season-year*)))
+              (format "href=\"/wp-content/themes/pro-child/static-resources/~a/~a/lib/\\1\"" *season-year* *natlang*)))
 
     (set! s (regexp-replace* #rx"src=\"[^\"]*?/lib/images/([^/]*?\\.png)\"" s
-              (format "src=\"/wp-content/themes/pro-child/static-resources/~a/lib/images/\\1\"" *season-year*)))
+              (format "src=\"/wp-content/themes/pro-child/static-resources/~a/~a/lib/images/\\1\"" *season-year* *natlang*)))
+
+    ; (set! s (regexp-replace* #rx"src=\"[^\"]*?(images/[^/]*?\\.(png|svg))\"" s (format "src=\"/wp-content/themes/pro-child/static-resources/~a/~a/lib/\\1\"" *season-year* *natlang*)))
 
     (set! s (regexp-replace* #rx"src=\"[^\"]*?(images/[^/]*?\\.(png|svg))\"" s (format "src=\"~a\\1\"" static-prefix)))
 
@@ -69,7 +88,7 @@
               "src=\"https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js\""))
 
     (set! s (regexp-replace #rx"src=\"[^\"]*?/images/CCbadge.png\"" s
-                            (format "src=\"~aimages/CCbadge.png\"" lib-prefix)))
+                            (format "src=\"~alib/images/CCbadge.png\"" lib-prefix)))
 
     ;double double-quotes
     (set! s (regexp-replace* #rx"\"" s "\"\""))
@@ -85,9 +104,11 @@
           *season-year*
           f))
 
-(define (make-lesson-static-url f)
+(define (make-lesson-static-url f coursep)
   (when (path? f) (set! f (path->string f)))
-  (format "/wp-content/themes/pro-child/static-resources/~a/lib/lessons/~a/" *season-year* f))
+  (format "/wp-content/themes/pro-child/static-resources/~a/~a/~a/~a/" *season-year* *natlang*
+          (if coursep "courses" "lessons")
+          f))
 
 (define (get-curriculum-group course)
   (let ([course (path->string course)])
@@ -126,26 +147,27 @@
              [title-file (path->string (build-path lesson-dir-path ".cached/.index.titletxt"))])
         ; (printf "lesson-dir = ~s; umbrella-dir = ~s\n" lesson-dir umbrella-dir)
         (when (file-exists? lesson-plan-file)
-          ;id, title, permalink, archive, parent, seasons, type, child-categories, curriculum-materials-raw-code, post status, date, curriculum-group, multilingual
+          ;id, title, slug, archive, parent, seasons, type, child-categories, curriculum-materials-raw-code, post status, date, curriculum-group, multilingual
           (fprintf o "~a,\"~a\",~a,~a,~a,~a,~a,~a,\"~a\",~a,~a,~a,~a\n"
-                   (string->uniqid lesson-dir) ;id
+                   (string->uniqid lesson-dir)                                        ; id
                    (string-trim
                      (if (file-exists? title-file)
                          (escaped-file-content title-file #:kill-newlines? #t)
                          (path->string lesson-dir)
-                         )) ;title
+                         ))                                                           ; title
                    lesson-dir
-                   ;(make-lesson-permalink lesson-dir) ;permalink
-                   "" ; parent
-                   *archive* ; archive
-                   (format "~a ~a" (string-titlecase *season*) *year*) ;season
-                   *type* ; type
-                   "" ; child categories
-                   (escaped-file-content lesson-plan-file #:static-prefix (make-lesson-static-url lesson-dir)) ; raw code
-                   "publish"
-                   curr-group
-                   *official-date*
-                   mult-ling
+                   ;(make-lesson-permalink lesson-dir) ;permalink (unused)
+                   *archive*                                                          ; archive
+                   ""                                                                 ; parent
+                   (format "~a ~a" (string-titlecase *season*) *year*)                ; season
+                   *type*                                                             ; type
+                   ""                                                                 ; child categories
+                   (escaped-file-content lesson-plan-file #:static-prefix
+                                         (make-lesson-static-url lesson-dir coursep)) ; raw code
+                   "publish"                                                          ; post status
+                   get-curriculum-group                                               ; curriculum-group
+                   *official-date*                                                    ; ???
+                   mult-ling                                                          ; multilingual
                    ))))))
 
 (define (convert-sub-pages o #:umbrella-dir [umbrella-dir #f] #:pages [pages #f])
@@ -156,7 +178,7 @@
   (for ([lesson-dir (directory-list umbrella-dir)])
     (let* ([curr-group (if coursep (get-curriculum-group lesson-dir) "")]
            [lesson-id (string->uniqid lesson-dir)]
-           [static-prefix (make-lesson-static-url lesson-dir)]
+           [static-prefix (make-lesson-static-url lesson-dir coursep)]
            [lesson-dir-path (build-path umbrella-dir lesson-dir)]
            [mult-ling (multilingual? lesson-dir-path)]
            [lesson-plan-file (path->string (build-path lesson-dir-path "index.shtml"))])
@@ -207,7 +229,7 @@
 
 (define *season-year* (format "~a-~a" *season* *year*))
 
-(define *archive* "FALSE")
+(define *archive* "True")
 (define *type* #f)
 
 (call-with-output-file *csv-file*

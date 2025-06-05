@@ -70,6 +70,17 @@ function save_previously_built_solution_pages() {
   mv solution-pages .previously-built-solution-pages
 }
 
+function make_image_list() {
+  test -d images || return
+  local image_list_file='images/.cached/.image-list.txt.kp'
+  if test -f $image_list_file; then rm $image_list_file; fi
+  for f in images/*.json; do
+    if test -f $f; then
+      echo ${f#*/} >> $image_list_file
+    fi
+  done
+}
+
 function make_solution_pages() {
   # echo doing make_solution_pages
   test -d solution-pages-2 && rm -fr solution-pages-2
@@ -92,7 +103,7 @@ function make_solution_pages() {
 function check_slide_id() {
   local slideidfile=$1
   local ascfile=.cached/.index.asc
-  local depgraphfile=$TOPDIR/distribution/$NATLANG/dependency-graph.js
+  local depgraphfile=$TOPDIR/distribution/$NATLANG/lib/dependency-graph.js
   test ! -f $ascfile && return
   test ! -f $slideidfile && return
   test $ascfile -nt $slideidfile && return
@@ -110,6 +121,7 @@ function set_up_lesson_dir() {
   echo $pl > .cached/.record-proglang
   echo $superdir > .cached/.record-superdir
   if test "$superdir" != Projects; then
+    # ${TOPDIR}/${MAKE_DIR}make-mod-lplan.lua
     ${TOPDIR}/${MAKE_DIR}make-slides.lua
   fi
   touch .cached/.redo
@@ -120,6 +132,8 @@ function set_up_lesson_dir() {
   done
   #
   make_solution_pages
+
+  make_image_list
 
   # echo calling collect-work-pages.lua in $(pwd)
   $TOPDIR/${MAKE_DIR}collect-workbook-pages.lua

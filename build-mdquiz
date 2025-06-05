@@ -1,35 +1,52 @@
 #! /bin/bash
 
-function process_assessments() {
-  for d in "$@"; do
-    for dd in $d/*; do
-      if test -d $dd; then
-        rm -f $dd/index.html
-        rm -f $dd/quiz-style.css
-        cp -pu node_modules/mdquiz/dist/lib.js $dd/
-        cp -pu lib/quiz-files/* $dd/
-      fi
-    done
-  done
-}
-
+# Make sure we're on a recent make
 make
 
+# index.html for the assessment page,
+# which loads the quiz and displays it
+indexHTML='<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module">
+        import buildQuiz from "./lib.js";
+        import quizConfig from "./quiz.json?raw" with {type: "json"};
+        buildQuiz('root', quizConfig)
+    </script>
+  </body>
+</html>'
+
+# Given a list of assessment directories, replace
+# the index.html file with a fresh one and
+# add the mdquiz JS file
 for d in $(find distribution -type d -name assessments); do
-  process_assessments $d
+  for dd in $d/*; do
+    if test -d $dd; then
+      echo "$indexHTML" > $dd/index.html
+      cp -pu node_modules/mdquiz/dist/lib.js $dd/
+    fi
+  done
 done
 
  if [[ " $* " == *" --clean "* ]]; then
    exit 0
  fi
 
-output="$(node --input-type=module -e '
+echo ➤ Building quizzes
+
+outputf=.tmp.build-mdquiz.txt
+
+node --input-type=module -e '
 import react from "@vitejs/plugin-react"
 import { defineConfig, build } from "vite"
 import { viteSingleFile } from "vite-plugin-singlefile"
 import { viteStaticCopy } from "vite-plugin-static-copy"
-import pkg from "glob"
-const  { glob } = pkg
+import { glob } from "glob"
 import { readFileSync} from "fs"
 
 const quizzes = glob.sync("distribution/*/lessons/*/assessments/*");
@@ -69,14 +86,19 @@ for (const filePath of quizzes) {
         console.error("The quiz.json file inside", filePath, "is not valid JSON!");
       }
 }
-' 2>&1)"
+
+' > $outputf 2>&1
 
 RED='\033[0;31m'
 NC='\033[0m' # No Color
 
 phrase="✗ Build failed"
-result="${output#*"$phrase"}"
 
-echo -e "
-
-${RED}✗ Build failed${NC}$result"
+if ! grep "$phrase" $outputf; then
+  echo All quizzes were built successfully!
+else
+  n=$(grep -n "$phrase" $outputf|head -1|cut -d: -f1)
+  n=$((n + 1))
+  echo ${RED}✗ Build failed${NC}
+  tail -n +$n $outputf
+fi

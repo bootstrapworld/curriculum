@@ -6,6 +6,8 @@
 
 @keywords{exponential, quadratic, square}
 
+@add-to-lang{filter}
+
 [@lesson-intro-table]
 |===
 
@@ -44,12 +46,14 @@ You will want to:
 Students explore the Covid dataset, focusing on the growth in positive test cases for the state of Massachusetts (they will eventually explore other states later on).
 
 === Launch
+@slidebreak{Launch}
 
 In late 2019, COVID-19 began to spread across the globe. Most of us heard terms like "flatten the curve" and "infection rate" in videos and on the news.
 
 Even in the Spring of 2020, very few people understood the impact Covid would have on the world. But Data Scientists who were looking at the data knew differently. Let's take a look at some of that data!
 
 === Investigate
+@slidebreak{Investigate-DN}
 
 @lesson-instruction{
 - We're going to look at the daily total of confirmed, positive cases for New England (Rhode Island, Maine, Vermont, New Hampshire, Massachusetts, and Connecticut) from summer 2020 until the end of the year.
@@ -73,6 +77,7 @@ To use all available data, open the @starter-file{alg2-covid} and change the sou
 }
 
 === Synthesize
+@slidebreak{SynthesizeR}
 
 @lesson-instruction{
 @right{@image{images/multiple-models.png, 350}}
@@ -97,9 +102,11 @@ Review student answers to confirm that students have made a number of observatio
 Students use Pyret to perform linear regression on the data from Massachusetts and discuss whether or not the optimal linear model is a good fit for the data.
 
 === Launch
+@slidebreak{Launch}
 Let's start out by looking at _just one state_. We'll use Massachusetts for this investigation, but you can do your own investigation about any state you like after finishing this one!
 
 === Investigate
+@slidebreak{Investigate}
 
 @lesson-instruction{
 - Turn to @printable-exercise{linear-models.adoc}, and complete the first two questions.
@@ -107,7 +114,7 @@ Let's start out by looking at _just one state_. We'll use Massachusetts for this
 - Don't be afraid to experiment by changing the code in the Definitions Area!
 }
 
-@slidebreak
+@slidebreak{Investigate}
 
 *This is code you've never seen before!*
 
@@ -117,7 +124,7 @@ Let's start out by looking at _just one state_. We'll use Massachusetts for this
 @indented{
 ```
 # is-MA :: Row -> Boolean
-# consumes a Row, and checks if state == "MA" is equal to "MA":
+# consumes a Row, and checks if state == "MA"
 fun is-MA(r): r["state"] == "MA" end
 ```
 }
@@ -155,7 +162,7 @@ MA-table = filter(covid-table, is-MA)
 |===
 }
 
-@slidebreak
+@slidebreak{Investigate}
 
 @lesson-instruction{
 - Complete @printable-exercise{linear-models.adoc}.
@@ -163,7 +170,7 @@ MA-table = filter(covid-table, is-MA)
 
 The definition @show{(code '(define MA-table (filter covid-table is-MA)))} _filters_ our dataset, keeping only the rows for which `state = "MA"`. We could create other helper functions like `is-MA`, and use them with the `filter` function to get datasets for any state we want!
 
-@slidebreak
+@slidebreak{Investigate}
 
 @QandA{
 @Q{Did you see a @vocab{correlation} between date and the total number of confirmed, positive cases in this dataset?}
@@ -173,7 +180,7 @@ The definition @show{(code '(define MA-table (filter covid-table is-MA)))} _filt
 @A{It appears to be a strong nonlinear relationship.}
 }
 
-@slidebreak
+@slidebreak{Investigate}
 
 @vocab{Linear models} capture _straight-line relationships_, where one quantity varies proportionally based on another. In linear models, we expect the @vocab{response variable} to grow by equal amounts over equal intervals in the @vocab{explanatory variable}.
 
@@ -194,6 +201,7 @@ But ultimately, straight-line, linear models just don't behave like this curve, 
 *The number of positive cases is growing too fast to be fit with a linear model that grows at a constant rate!*
 
 === Synthesize
+@slidebreak{Synthesize}
 - Would a linear model fit just the first few months of the data?
 - If we _only_ knew about first few weeks, would it be ok to use a linear model? Why or why not?
 
@@ -205,6 +213,7 @@ But ultimately, straight-line, linear models just don't behave like this curve, 
 Students try to fit a quadratic model to this data. This section makes heavy use of interactive slider activities we've built in Desmos to support open-ended experimentation. The ultimate goal is that students discover the need for models beyond linear and quadratic functions.
 
 === Launch
+@slidebreak{Launch-DN}
 
 Maybe linear isn't the way to go, here!
 
@@ -223,7 +232,7 @@ Make sure you've:
 
 @teacher{Have students share their resulting models. Which one fits best?}
 
-@slidebreak
+@slidebreak{Launch}
 
 In @vocab{quadratic models}, one quantity varies based on the _square_ of another. Unlike linear models that grow evenly, we expect the response variable to grow by different amounts over equal intervals in the explanatory variable.
 
@@ -232,13 +241,14 @@ In @vocab{quadratic models}, one quantity varies based on the _square_ of anothe
 @Q{Why or why not?}
 }
 
-@slidebreak
+@slidebreak{LaunchR}
 
 @right{@image{images/MA-covid-quadratic.png, 300}}Quadratic models change their rate of growth over time, which definitely makes them a better fit for this data than linear ones. It's very likely we could find a quadratic model with a lower @vocab{S-value} than our linear model! +
 @vspace{1ex} +
 But this data starts out almost flat and then suddenly takes off like a rocket - quadratic models just don't have that kind of explosive growth, so our model will never be as good as it _could_ be.
 
 === Synthesize
+@slidebreak{Synthesize}
 
 - This data grows very slowly in the beginning and then grows very quickly. Can you think of any other situations in real life that act like this?
 - Can you think of any graphs that might act like this?
