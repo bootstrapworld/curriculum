@@ -38,7 +38,7 @@
   }
   /* Set Defaults (many asciidoc overrides) */
   h1 {
-    font-size:      2rem;
+    font-size:      1.3rem;
     font-weight:    bold;
     font-family:    @text-font;
   }
@@ -374,10 +374,10 @@ lines on some browsers */
 /************************************************************************************
 * NARRATIVE PAGE STYLES
 */
-.narrativepage {
+div#body.narrativepage {
   font-size: 12pt;
   .logo     { float: right; }
-  .logo img { max-width: 375px; }
+  .logo img { max-width: 300px; }
   #lesson-list {
     *         { display:inline; margin-bottom: 0px; margin-left: 0px; }
     dt        { margin-top: 15px; display: inline-block; font-size: 17px;}
@@ -638,6 +638,7 @@ div#body.solution-page {
 div#body.workbookpage {
   font-size: 9pt; /* Use a tiny font for print, but then zoom in @screen */
   color: black !important;
+  .paragraph { white-space: nowrap; }
 
   #header > h1:first-child { text-align: center; }
 
@@ -857,7 +858,6 @@ table.contracts-table {
 div#body:not(.LessonPlan) {
   p:empty { min-height: 0; margin: 0; padding: 0; } /* Empty p tags should take up no space */
 
-  #header { margin-bottom: 5px !important; }
   #header> h1:first-child,
   .sect1 > h1:first-child,
   .sect1 > h2:first-child,
@@ -1261,14 +1261,7 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
     line-height:      2.5rem;
   }
 
-  #savetodrive-div { height: 30px !important; }
-
-  /* on WB pages zoom the page 1.25x for a big screen */
-  div#body.workbookpage {
-    transform-origin: left top; 
-    transform: scale(calc(12 / 9)); 
-    #savetodrive-div { transform: scale(0.8); }
-  }
+  #savetodrive-div { display: none; }
 
   /********************************************************************
    *  Collapsing Headers 
@@ -1345,7 +1338,6 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
 @page landscape { size: letter landscape; margin: 0.5in; }
 
 @media print {
-  .noprint { display: none; }
   div#body.LessonPlan {
     width: 7.5in; 
     .preamble tr td:last-child > * { background: white !important; }
@@ -1358,7 +1350,13 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
    display: none !important; visibility: hidden; float: none;
   }
   div#body{ position: static; } /* page-break fails on absolute positioning */
-  
+  .noprint { display:none; }
+
+  /* WordPress Rules */
+  body { width: 7.5in; }
+  .x-row-inner>div:last-child { display: none; }
+  .x-section { border-top: none !important; }
+
   /* Override AsciiDoc print default */
   p {margin: 0px; font-size: 1rem; font-weight: normal;}
   #content { margin: auto; }
@@ -1387,7 +1385,8 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
     .preamble tr td > * { max-height: 1000px; }
   }
   
-  div#div#body.workbookpage {
+  div#body.workbookpage {
+
     /* Use B&W colors for headers */
     #header> h1:first-child, .sect1 > h1:first-child { 
       color: black;
