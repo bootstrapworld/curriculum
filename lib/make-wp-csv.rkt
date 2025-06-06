@@ -50,7 +50,7 @@
 (define (escape-html s #:kill-newlines? [kill-newlines? #f] #:static-prefix [static-prefix #f])
   (let ([lib-prefix #f])
     (when static-prefix
-      (set! lib-prefix (regexp-replace #rx"/lessons/[^/]*?/" static-prefix "/")))
+      (set! lib-prefix (regexp-replace #rx"/(courses|lessons)/[^/]*?/" static-prefix "/")))
     (when kill-newlines?
       (set! s (regexp-replace* #rx"\n" s " ")))
     (set! s (regexp-replace* #rx"href=\"index.pdf\"" s
