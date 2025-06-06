@@ -70,7 +70,7 @@
     (set! s (regexp-replace* #rx"(href=\"[^\"]*?/lessons/[^/]*?/)solution-pages/([^/]*?)\\.(html|pdf)\"" s
               (format "\\1\\2-solution/\"")))
 
-    (set! s (regexp-replace* #rx"(href=\")[^\"]*?(assessments/[^\"]*)\"" s (format "\\1~a\\2" static-prefix)))
+    (set! s (regexp-replace* #rx"(href=\")[^\"]*?(assessments/[^\"]*\")" s (format "\\1~a\\2" static-prefix)))
 
     (set! s (regexp-replace* #rx"(href=\"[^\"]*?/)index.shtml" s "\\1"))
 
