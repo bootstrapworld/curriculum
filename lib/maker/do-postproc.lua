@@ -93,7 +93,7 @@ local function postproc(fhtml_cached, tipe)
         add_comment_p = true
       end
       --
-      if memberp(tipe, {'lessonplan', 'pathwaynarrative', 'pathwayresource', 'workbookpage'}) then
+      if memberp(tipe, {'lessonplan', 'pathwaynarrative', 'pathwayresource'}) then
         add_body_id_p = true
         add_end_body_id_p = true
       end
