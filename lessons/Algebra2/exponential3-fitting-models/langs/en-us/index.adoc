@@ -44,6 +44,7 @@
 Students extend their sampling techniques to exponential relationships, experimenting in Desmos to come up with plausible models.
 
 === Launch
+@slidebreak{Launch-DN}
 
 Now that you're familiar with @vocab{exponential functions}, let's use them to model this Covid data!
 
@@ -55,7 +56,7 @@ Now that you're familiar with @vocab{exponential functions}, let's use them to m
 
 @teacher{Project the questions on the next slide to guide small group discussion.}
 
-@slidebreak
+@slidebreak{Launch}
 
 @QandA{
 @Q{Does your scatter plot show @vocab{exponential growth} or @vocab{exponential decay}?}
@@ -72,6 +73,7 @@ Now that you're familiar with @vocab{exponential functions}, let's use them to m
 }
 
 === Investigate
+@slidebreak{Investigate-DN}
 
 @teacher{Make sure your students have a link to  @starter-file{alg2-covid-desmos} and you've advanced your teacher dashboard of to the fourth slide ("Exponential Model for MA") so that students are looking at the correct screen.
 
@@ -89,6 +91,7 @@ In the next activity, students will use our custom slider activity to find promi
 - What do you notice? Are they clustered around a particular value, or completely spread out?  Are there any values that are really far from the others?
 
 === Synthesize
+@slidebreak{Synthesize}
 
 - Is an exponential model a good fit for this data?
 
@@ -100,6 +103,7 @@ In the next activity, students will use our custom slider activity to find promi
 Students take their Desmos-derived model settings back to Pyret, to formalize their understanding. They are also exposed to computational limitations, which arise when dealing with extremely small or extremely large numbers.
 
 === Launch
+@slidebreak{LaunchR}
 @right{@image{images/neutrino-detector.jpg, 250}}
 Scientists send satellites to far-away planets and reason about the mass of tiny particles, like the neutrinos we see in this image. The numbers involved in these calculations are *very big* or *very small*, and can involve hundreds or even _thousands_ of digits.
 
@@ -110,14 +114,14 @@ In math, this isn't a problem: numbers can be infinitely large or small, and hav
 @A{Solicit ideas from the class...}
 }
 
-@slidebreak
+@slidebreak{LaunchR}
 
 @right{@image{images/satellite-neptune.jpg, 250}}
 *Almost every programming language uses _approximations_ of long numbers*, in the same way a model approximates real data. If you’ve ever asked a calculator to compute @math{1 \div 3}, you’ve probably seen it displayed as @math{0.333333} instead of @math{ 0.\overline{3}}. This is an example of the approximation trick at work!
 
 The number "one octillion" is a 28-digit number: one followed by _27 zeros_. A computer can just store the one at the front and remember that there are 27 zeroes. That's 3 digits, rather than 28! Numbers like a "one octillion and four " get approximated as "roughly octillion".
 
-@slidebreak
+@slidebreak{Launch}
 
 @lesson-instruction{
 - Turn to the first section of @printable-exercise{computational-limits.adoc}.
@@ -133,6 +137,7 @@ The number "one octillion" is a 28-digit number: one followed by _27 zeros_. A c
 }
 
 === Investigate
+@slidebreak{Investigate-DN}
 
 Pyret's function @show{(code 'expt)} is the function that we use for exponents. It takes in two numbers: the base and the power. @show{(code '(expt 10 2))}, for example will produce @math{10^2}.
 
@@ -142,7 +147,7 @@ Pyret's function @show{(code 'expt)} is the function that we use for exponents. 
 - Be prepared to discuss what you observed.
 }
 
-@slidebreak
+@slidebreak{Investigate-DN}
 
 Pyret has a special kind of Number, called a _RoughNum_, which chops off digits for faster calculation. But unlike other languages, Pyret wants to put the programmer in control. It will never drop digits _unless you tell it to!_
 
@@ -151,7 +156,7 @@ Pyret has a special kind of Number, called a _RoughNum_, which chops off digits 
 - Be prepared to discuss what you observed.
 }
 
-@slidebreak
+@slidebreak{Investigate}
 
 @QandA{
 @Q{Why do you think Pyret won't let us compare two RoughNums?}
@@ -159,7 +164,7 @@ Pyret has a special kind of Number, called a _RoughNum_, which chops off digits 
 @A{A Number takes up exactly one point on the number line. A RoughNum, on the other hand, takes up a _range_ of points on the number line (in this case, all the ones that are "roughly 3"). That makes precise equality tests impossible!}
 }
 
-@slidebreak
+@slidebreak{Investigate}
 
 To turn a number into a RoughNum, we use the approximation symbol `~`. For example, the RoughNum `~3`, is "roughly three." This tells Pyret to round off the calculation, prioritizing *speed* over *accuracy* to get a result that is "roughly accurate". Any computations performed on a RoughNum will also produce RoughNums.
 
@@ -171,7 +176,7 @@ To turn a number into a RoughNum, we use the approximation symbol `~`. For examp
 @A{Pyret is trying to show us that the result was based on an estimate, and therefore is also an estimate.}
 }
 
-@slidebreak
+@slidebreak{Investigate-DN}
 
 Exponential growth and decay can create enormously large and enormously small numbers, which can slow down computation. When we try to fit our exponential models to the data, it could take a VERY long time to compute!
 
@@ -181,6 +186,7 @@ Exponential growth and decay can create enormously large and enormously small nu
 }
 
 === Synthesize
+@slidebreak{Synthesize}
 
 @QandA{
 @Q{What makes exponential models different from the linear and quadratic models you've seen before?}
@@ -190,7 +196,7 @@ Exponential growth and decay can create enormously large and enormously small nu
 @A{No! Sometimes approximations put lives at risk and it's worth taking the time to maximize precision.}
 }
 
-@slidebreak
+@slidebreak{Synthesize}
 
 @QandA{
 Linear regression allows us to find the _computationally optimal model_, not just a model that "fit really well."
@@ -206,11 +212,13 @@ Linear regression allows us to find the _computationally optimal model_, not jus
 Students apply mental math to their models, and discover that it's very hard to reason about exponential growth.
 
 === Launch
+@slidebreak{Launch}
 Even when epidemiologists came up with exponential models for Covid spread, policymakers who were genuinely worried failed to understand how quickly the virus would spread. Why?
 
 @teacher{Invite students to share their ideas. Some answers may be political. Steer the conversation back to focusing on the math: Those who took the threat of Covid seriously underestimated how quickly it would spread. Why?}
 
 === Investigate
+@slidebreak{Investigate}
 Models are helpful because they give us an easy way to make predictions about complex data. Oftentimes, we can just use mental arithmetic to do a quick calculation! So why did mental arithmetic fail for exponential models like ours?
 
 @lesson-instruction{
@@ -227,7 +235,7 @@ Use your model to make predictions on @printable-exercise{predicting-exponential
 
 Chances are, your guesses got less accurate as the number of days increased!
 
-@slidebreak
+@slidebreak{Investigate}
 
 *Why was it so much harder to guesstimate the farther out we got, when the number of days was always increasing by a fixed amount?*
 
@@ -235,7 +243,7 @@ Humans evolved in nature, so our brains evolved to be really good at working wit
 
 But when numbers grow really, really, _really_ fast...we get lost! Our brains lose track of differences when two numbers get really enormous.
 
-@slidebreak
+@slidebreak{Investigate}
 
 *Exponential growth poses a problem for those of us with human brains*, because the numbers get so big, so fast that it can be difficult to wrap our heads around it!
 
@@ -246,6 +254,7 @@ This has been proven by some really fascinating studies - We know that the integ
 Humans' inability to reason about exponential growth may have played a role in the sluggish response of many countries, and the tragic loss of life and decrease in public health that followed.
 
 === Synthesize
+@slidebreak{Synthesize}
 
 @QandA{
 @Q{When would you expect mental arithmetic to be an effective strategy for reasoning about the world?}

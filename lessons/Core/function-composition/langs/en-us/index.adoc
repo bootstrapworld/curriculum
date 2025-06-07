@@ -6,7 +6,7 @@ table table td { padding: 0; }
 table tr:first-of-type td:nth-of-type(2) { border-bottom: none !important; }
 </style>
 ++++
-@description{Students learn to combine image transformation functions using Circles of Evaluation.}
+@description{Students learn to combine image transformation functions using Circles of Evaluation. _This lesson optionally includes @lesson-link{project-logo}_🎨.}
 
 @lesson-prereqs{order-of-operations, contracts-strings-images}
 
@@ -56,6 +56,7 @@ table tr:first-of-type td:nth-of-type(2) { border-bottom: none !important; }
 Students are given a scaffolded activity that forces them to use the output of one function as the input to another - to _compose_ them.
 
 === Launch
+@slidebreak{Launch}
 @teacher{
 - Divide students into groups of 3 and distribute a set of @handout{function-cards.adoc} to each group. _(If you're teaching remotely you can use the @opt-starter-file{functioncardsDesmos} instead.)_
 - Write down pairs of integers on the board, representing the "starting numbers" and "ending numbers". These integers should range from -50 to +50, but you can change the difficulty of the activity by making that span wider (more difficult) or more narrow (less difficult). You can find a random integer generator @link{https://www.google.com/search?q=random+number, here}.
@@ -67,7 +68,7 @@ Students are given a scaffolded activity that forces them to use the output of o
 - According to its Contract, what is the function's Name, Domain, and Range?
 }
 
-@slidebreak
+@slidebreak{Launch}
 
 These cards represent a collection of functions, each of which takes an input and produces an output. For example, we can start with the number `4`, and give it to the function `add1`. The output will be `5`.
 
@@ -77,7 +78,7 @@ We can also _compose_ functions, meaning that the output of one is immediately p
 @vocab{Function composition} is the act of connecting two or more functions so that they work together to produce an outcome. The output ("range") of one function is used as the input ("domain") of the next.
 }
 
-@slidebreak
+@slidebreak{Launch}
 
 For example, let's say we are going to compose two different functions: `add1` and `double`. Passing `4` into the `add1` function produces `5`. Passing that output into `double` produces an output of `10`:
 
@@ -98,7 +99,7 @@ For example, let's say we are going to compose two different functions: `add1` a
 
 |===
 
-@slidebreak
+@slidebreak{Launch}
 
 What if, starting with `4`, we composed `add1`, `double` _and_ `half`?
 
@@ -126,6 +127,7 @@ What if, starting with `4`, we composed `add1`, `double` _and_ `half`?
 |===
 
 === Investigate
+@slidebreak{Investigate}
 
 @lesson-instruction{
 - For each pair of numbers on the board, figure out which functions to compose to get from the starting number to the ending number.
@@ -138,7 +140,7 @@ Give students time to experiment with this!
 To make the activity more challenging, ask students to find the shortest path from the starting number to the ending number, using the smallest number of compositions. You can also show students a starting number and an ending number and: ask them to give a card back; ask them which cards are the most valuable; give them a blank card and let them come up with a new function.
 }
 
-@slidebreak
+@slidebreak{Investigate}
 
 There are two ways of thinking about the activity you just completed.
 
@@ -170,7 +172,7 @@ _half( double( add1(4) ) )_
 
 }
 
-@slidebreak
+@slidebreak{Investigate}
 
 @indented{
 [cols="^.^6a,.<1,^.^3a", frame="none", stripes="none"]
@@ -208,6 +210,7 @@ Some students may notice that both representations use @vocab{function notation}
 }
 
 === Synthesize
+@slidebreak{Synthesize}
 
 Did it matter what order you put the cards in? Why or why not?
 
@@ -246,10 +249,12 @@ With your group, on a new piece of chart paper, draw a Circle of Evaluation show
 The Circles of Evaluation are extended to functions that do more than compute values.
 
 === Launch
+@slidebreak{Launch}
 
 The functions available to us in @proglang can be composed just like the Function Cards from the activity. Our job as programmers is to figure out how to compose functions to achieve our goals in the most clever or elegant way possible.
 
 === Investigate
+@slidebreak{Investigate-DN}
 
 @lesson-instruction{
 - Have students open @starter-file{program-list} in their browser, and @ifproglang{wescheme}{"Log In"} @ifproglang{pyret}{"Sign In"} using a valid Google account (Gmail, Google Classroom, YouTube, etc.) and their password for that account.
@@ -276,6 +281,7 @@ Encourage students to practice writing comments in the code to describe what is 
 @opt{If you have time, you can have students work with @printable-exercise{function-composition-scale-xy.adoc} and/or @opt-starter-file{functioncompDesmos} - or use either one for assessment!}
 
 === Synthesize
+@slidebreak{Synthesize}
 
 @QandA{
 @Q{What do all of these functions have in common?}
@@ -297,7 +303,7 @@ Encourage students to practice writing comments in the code to describe what is 
 @strategy{Fun with Images!}{
 Now that students have learned how to use all of these image-composing functions, you may want to give them a chance to create a design of their own, tasking them with using at least 4 functions to create an image of their choosing.
 
-Our @lesson-link{transform-compose-images/} and @lesson-link{project-flags/} also dive deeper into image composition.
+Our @lesson-link{transform-compose-images/} and @lesson-link{project-flags/} lessons also dive deeper into image composition.
 }
 
 == Composing Multiple Ways
@@ -306,6 +312,7 @@ Our @lesson-link{transform-compose-images/} and @lesson-link{project-flags/} als
 Students identify multiple expressions that will create the same image, and think about the merits of one expression over another.
 
 === Launch
+@slidebreak{Launch}
 
 As is often true with solving math problems, there is more than one way to get the same composed image.
 
@@ -316,6 +323,7 @@ Suppose I wrote the code: @show{(code '(scale 3 (circle 50 "solid" "red")))}.
 }
 
 === Investigate
+@slidebreak{Investigate}
 
 @lesson-instruction{
 Complete @printable-exercise{more-than-one-way.adoc}
@@ -329,6 +337,7 @@ There is a special function that lets us test whether or not two images are equa
 We can use it to test whether the expressions we wrote really build the same images.
 
 === Synthesize
+@slidebreak{Synthesize}
 
 - Could we have written more expressions to create the same images?
 - Are all of the ways to write the code equally efficient?

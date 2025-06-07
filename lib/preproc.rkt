@@ -1,6 +1,7 @@
 #lang racket
 
 (require json)
+(require racket/hash)
 ; (require file/sha1)
 (require "readers.rkt")
 (require "utils.rkt")
@@ -172,7 +173,7 @@
     read-json))
 
 (define *starter-files*
-  (let ([starter-files-file (format "distribution/~a/starterFiles.js" *natlang*)])
+  (let ([starter-files-file (format "distribution/~a/lib/starterFiles.js" *natlang*)])
     (if (file-exists? starter-files-file)
         (call-with-input-file starter-files-file
           (lambda (i)
@@ -181,7 +182,7 @@
         '())))
 
 (define *assessments*
-  (let ([assessments-file (format "distribution/~a/assessments.js" *natlang*)])
+  (let ([assessments-file (format "distribution/~a/lib/assessments.js" *natlang*)])
     (if (file-exists? assessments-file)
         (call-with-input-file assessments-file
           (lambda (i)
@@ -190,7 +191,7 @@
         '())))
 
 (define *learning-objectives*
-  (let ([learning-objectives-file (format "distribution/~a/learningObjectives.js" *natlang*)])
+  (let ([learning-objectives-file (format "distribution/~a/lib/learningObjectives.js" *natlang*)])
     (if (file-exists? learning-objectives-file)
         (call-with-input-file learning-objectives-file
           (lambda (i)
@@ -199,7 +200,7 @@
         '())))
 
 (define *citations*
-  (let ([citations-file (format "distribution/~a/citations.js" *natlang*)])
+  (let ([citations-file (format "distribution/~a/lib/citations.js" *natlang*)])
     (if (file-exists? citations-file)
         (call-with-input-file citations-file
           (lambda (i)
@@ -685,40 +686,56 @@
   ; (printf "doing clean-up-url-in-image-text ~s\n" text)
   (regexp-replace* #rx"https://" text ""))
 
-(define (read-image-json-file-in image-dir)
-  (let ([json-file (build-path image-dir "lesson-images.json")]
+(define (combine-json-files json-files)
+  (let ([h-obj #f])
+    (for ([json-file json-files])
+      (let ([new-hash (call-with-input-file json-file read-json)])
+        (unless h-obj (set! h-obj (make-hash)))
+        (hash-union! h-obj new-hash #:combine/key (lambda (k v1 v2) v1))
+        ))
+    (unless h-obj (set! h-obj #t))
+    h-obj))
+
+(define (read-image-json-files-in image-dir)
+  (let ([json-list-file (build-path image-dir ".cached" ".image-list.txt.kp")]
+        [json-files '()]
         [images-hash #f]
         [missing-image-log-file #f]
         [missing-images '()])
+
+    (when (file-exists? json-list-file)
+      (set! json-files
+        (map (lambda (x) (build-path image-dir x))
+             (read-data-file json-list-file))))
+
+    (when (and (null? json-files) (or *lesson-plan* *lesson*))
+        (printf "!! WARNING: ~a: Image json files not found\n" (errmessage-context)))
 
     (when *lesson*
       (set! missing-image-log-file
         (format "distribution/~a/lessons/~a/.cached/.missing-image-files.txt"
                 *natlang* *lesson*)))
 
-    (cond [(file-exists? json-file)
-           (set! images-hash (call-with-input-file json-file read-json))
-           ; (printf "images-hash is ~s\n" images-hash)
-           (set! *images-hash-list*
-             (cons (cons *containing-directory* images-hash) *images-hash-list*))
-           (unless (or *narrative* *target-pathway* *teacher-resources*)
-             (hash-for-each images-hash
-               (lambda (key val)
-                 (let* ([image-file (build-path image-dir (symbol->string key))]
-                        [anon-image-file (anonymize-filename image-file)])
-                   (unless (file-exists? anon-image-file)
-                     (cond [(file-exists? image-file)
-                            (rename-file-or-directory image-file anon-image-file #t)]
-                           [else
-                             (unless (member key missing-images)
-                               (set! missing-images (cons key missing-images)))
-                             #;(printf "WARNING: ~a: Image file ~a not found\n" (errmessage-context) image-file)
-                             ]))))))]
-          [else
-            (when (or *lesson-plan* *lesson*)
-              (unless (member json-file *missing-image-json-files*)
-                (set! *missing-image-json-files* (cons json-file *missing-image-json-files*))
-                (printf "!! WARNING: Image json file ~a not found\n" json-file)))])
+    (unless images-hash
+      (set! images-hash (combine-json-files json-files)))
+
+    (when (hash? images-hash)
+      ; (printf "images-hash is ~s\n" images-hash)
+      (set! *images-hash-list*
+        (cons (cons *containing-directory* images-hash) *images-hash-list*))
+      (unless (or *narrative* *target-pathway* *teacher-resources*)
+        (hash-for-each images-hash
+          (lambda (key val)
+            (let* ([image-file (build-path image-dir (symbol->string key))]
+                   [anon-image-file (anonymize-filename image-file)])
+              (unless (file-exists? anon-image-file)
+                (cond [(file-exists? image-file)
+                       (rename-file-or-directory image-file anon-image-file #t)]
+                      [else
+                        (unless (member key missing-images)
+                          (set! missing-images (cons key missing-images)))
+                        #;(printf "WARNING: ~a: Image file ~a not found\n" (errmessage-context) image-file)
+                        ])))))))
 
     (when missing-image-log-file
       (call-with-output-file missing-image-log-file
@@ -738,7 +755,7 @@
     (let-values ([(image-dir image-file ign) (split-path img-qn)])
 
       (unless images-hash
-        (set! images-hash (read-image-json-file-in image-dir)))
+        (set! images-hash (read-image-json-files-in image-dir)))
 
       (unless (or *narrative* *target-pathway* *teacher-resources*)
         (let* ([img-anonymized (anonymize-filename img)]
@@ -1587,7 +1604,7 @@
                                   #f
                                   (display-header-comment prose o)
                                   ))]
-                           [(member directive '("scrub" "slidestyle"))
+                           [(string=? directive "scrub")
                             (read-group i directive)]
                            [(member directive '("ifslide" "pd-slide" "ifpdslide"))
                             (let ([text (read-group i directive #:multiline? #t)])
@@ -1969,8 +1986,10 @@
                            [(string=? directive "slidebreak")
                             (display (enclose-span ".slidebreak" "") o)
                             (let ([c (peek-char i)])
-                              (when (and (char? c) (char=? c #\{))
-                                (read-group i directive)))]
+                              (cond [(and (char? c) (char=? c #\{))
+                                     (read-group i directive)]
+                                    [else (printf "WARNING: ~a: Invalid @slidebreak\n"
+                                                  (errmessage-context))]))]
                            [(string=? directive "Bootstrap")
                             (fprintf o "https://www.bootstrapworld.org/[Bootstrap]")]
                            [(hash-ref *simple-directives* (string->symbol directive) #f)
@@ -2083,29 +2102,21 @@
                           [(string=? directive "assessments")
                            (fprintf o "\ninclude::~a/{cachedir}.index-assessments.asc[]\n" *containing-directory*)]
                           [(string=? directive "assessment")
-                           (let* ([lbl (string->symbol (read-group i directive))]
-                                  [c (hash-ref *assessments* lbl #f)]
-                                  [title (and c (hash-ref c 'title #f))]
-                                  [url (and c (hash-ref c 'url #f))]
-                                  [pl-specific (and c (hash-ref c *proglang-sym* #f))])
-                             (when pl-specific
-                               (let ([x (hash-ref pl-specific 'title #f)])
-                                 (when x (set! title x)))
-                               (let ([x (hash-ref pl-specific 'url #f)])
-                                 (when x (set! url x))))
-                             (unless title (set! title url))
-                             (cond [(not c)
-                                    (printf "WARNING: ~a: Ill-named @~a ~a\n\n" (errmessage-context) directive lbl)]
-                                   [(not url)
-                                    (printf "WARNING: ~a: @~a ~a missing for ~a\n\n"
-                                            (errmessage-context) directive
-                                            lbl *proglang*)]
-                                   [else
-                                     (unless (assoc url *assessments-met*)
-                                       (set! *assessments-met*
-                                         (cons (cons url title)
-                                               *assessments-met*)))
-                                     (fprintf o "link:pass:[~a][~a]" url title)]))]
+                           (let* ([args (read-commaed-group i directive read-group)]
+                                  [lbl (first args)]
+                                  [text (string-join (rest args) ", ")]
+                                  [dir (build-path *containing-directory* "assessments" lbl)])
+                             (when (string=? text "")
+                               (printf "WARNING: ~a: assessment ~a missing second argument\n"
+                                       (errmessage-context) lbl))
+                             (unless (directory-exists?
+                                       (build-path *containing-directory* "assessments" lbl))
+                               (printf "WARNING: ~a uses ~a with nonexistent directory ~a\n"
+                                       (errmessage-context) directive lbl))
+                             (unless (assoc lbl *assessments-met*)
+                                 (set! *assessments-met*
+                                   (cons (cons lbl text) *assessments-met*)))
+                             (fprintf o "link:pass:[assessments/~a/index.html][~a]" lbl text))]
                           [(string=? directive "citation")
                            (let* ([args (read-commaed-group i directive read-group)]
                                   [args-len (length args)]
@@ -2649,7 +2660,7 @@
     (lambda (o)
       (unless (null? *assessments-met*)
         (for ([asst (reverse *assessments-met*)])
-          (fprintf o "- link:pass:[~a][~a]\n"
+          (fprintf o "- link:pass:[assessments/~a/index.html][~a]\n"
                    (car asst) (cdr asst)))))
     #:exists 'replace))
 

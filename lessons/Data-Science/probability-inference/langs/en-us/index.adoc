@@ -54,6 +54,7 @@
 Students consider a classic randomness scenario: the @vocab{probability} that a coin will land on heads or tails. From a data science perspective, this can be flipped from a discussion of _probability_ to one of _inference_. Specifically, "based on the number of coin flips we observed, what can we conclude about the fairness of a coin?"
 
 === Launch
+@slidebreak{Launch}
 
 @right{@image{images/tails.png, 110}}@right{@image{images/heads.png, 110}}A casino dealer (called a "croupier") invites you to play a game of chance. They’ll flip a coin repeatedly. On each flip, the croupier gives you a dollar if it comes up tails. If it comes up heads, you pay them a dollar.
 
@@ -68,6 +69,7 @@ Students consider a classic randomness scenario: the @vocab{probability} that a 
 }
 
 === Investigate
+@slidebreak{Investigate-DN}
 
 A fair coin should land on "heads" about as often as it lands on "tails": half the time.
 
@@ -89,7 +91,7 @@ The above starter file is in Pyret, a coding platform that will be unfamiliar to
 
 @teacher{Have students share back their sample results and their predictions after 5 samples.}
 
-@slidebreak
+@slidebreak{Investigate}
 
 @lesson-instruction{Complete the rest of @printable-exercise{fair-coins.adoc}.}
 
@@ -102,13 +104,13 @@ The above starter file is in Pyret, a coding platform that will be unfamiliar to
 
 In Statistics and Data Science, samples like these don't *prove* anything about the coins! Instead, they either _produce enough evidence to reject the null hypothesis, or fail to do so_. If the null hypothesis is actually false, larger samples give us a better chance of producing evidence to reject it.
 
-@slidebreak
+@slidebreak{Investigate}
 
 The chances of getting "heads" from a fair coin three times in a row aren't too small: 1-in-8! Maybe it was just the luck of the draw, and the coin is still fair.
 
 Should we suspect a scam if the croupier’s coin flipped heads 10 times in a row?
 
-@slidebreak
+@slidebreak{Investigate}
 
 The probability of a fair coin getting all heads for 10 flips in a row is @math{({\frac{1}{2}})^{10}}, or roughly 0.001.
 
@@ -140,6 +142,7 @@ Students may think that _any_ sample from a fair coin should have an equal numbe
 This is where arithmetic thinking and statistical thinking diverge: it's not a question of what is _possible_, but rather what is _probable or improbable_.
 
 === Synthesize
+@slidebreak{Synthesize}
 
 @QandA{
 @Q{What is the relationship between how weighted a coin is and the number of flips you need to suspect that it’s weighted?}
@@ -158,6 +161,7 @@ This is where arithmetic thinking and statistical thinking diverge: it's not a q
 Statistical inference involves looking at a sample and trying to _infer something you don’t know_ about a larger population. This requires a sort of backwards reasoning, kind of like making a guess about a _cause_, based on the _effect_ that we see.
 
 === Launch
+@slidebreak{Launch}
 
 *Probability reasons forwards.*
 
@@ -165,7 +169,7 @@ Because we know that the chance of coming up heads each time for a "population" 
 
 "Based on what we know is true in the population, what’s the chance of this or that happening in a sample?" _This is the kind of reasoning involved in probability._
 
-@slidebreak
+@slidebreak{Launch}
 
 *Inference reasons backwards.*
 
@@ -175,17 +179,17 @@ In other words, we looked at sample results and used them to decide what to beli
 
 "Based on what we saw in our sample, what do we believe is true about the population the sample came from?" _This is the kind of reasoning involved in inference._
 
-@slidebreak
+@slidebreak{Launch}
 
 @vocab{Statistical inference} uses information from a sample to draw conclusions about the larger population from which the sample was taken. It is used in practically every field of study you can imagine: medicine, business, politics, history... even art!
 
-@slidebreak
+@slidebreak{Launch}
 Suppose we want to estimate what percentage of all Americans plan to vote for a certain candidate.  We don't have time to ask every single person who they’re voting for, so pollsters instead take a _sample_ of Americans, and _infer_ how all Americans feel based on the sample.
 
-@slidebreak
+@slidebreak{Launch}
 Just like our coin-flip, we can start out with the null hypothesis: assuming that the vote is split equally. Flipping a coin 10 times isn't enough to infer whether it's weighted, and polling 10 people isn't enough to convince us that one candidate is in the lead. _But if we survey enough people_ we can be fairly confident in inferring something about the whole population.
 
-@slidebreak
+@slidebreak{Launch}
 
 @lesson-point{Sample size matters!}
 
@@ -198,7 +202,7 @@ Suppose we were able to make a million phone calls to use voters...
 @A{Calling only certain segments of the population will not reveal the way an entire population will vote.}
 }
 
-@slidebreak
+@slidebreak{Launch}
 
 @QandA{
 @Q{We're taking a survey of religions in our neighborhood.}
@@ -212,7 +216,7 @@ Suppose we were able to make a million phone calls to use voters...
 
 When designing a survey or collecting data, Data Scientists need to make sure they are working hard to get a good, random sample that reflects the population. Lazy surveys can result in some really bad data! _But poor sampling can also happen when someone is trying to hide something, or to oppress or erase a group of people._
 
-@slidebreak
+@slidebreak{Launch}
 
 - A teacher who wants the class to vote for a trip to the dinosaur museum might only call on the students who they know love dinosaurs, and then say "well, everyone I asked wanted that one!"
 - A mayor who wants to claim that they ended homelessness could order census-takers to only talk to people in verified home addresses. Since homeless people don't typically have an address, the census would show no homeless people in the city!
@@ -221,6 +225,7 @@ When designing a survey or collecting data, Data Scientists need to make sure th
 Can you think of other examples where biased sampling could result in intentionally or unintentionally misleading results?
 
 === Investigate
+@slidebreak{Investigate-DN}
 
 The main reason for doing inference is to guess about something that’s _unknown_ for the whole population.
 
@@ -228,7 +233,6 @@ A useful step along the way is to practice with situations where we happen to _k
 
 The Animals Dataset we've been using is just one _sample_ taken from a very large animal shelter.
 
-@slidebreak
 @ifproglang{pyret}{
 How much can we infer about the whole population of hundreds of animals, by looking at just this one sample?
 
@@ -244,13 +248,14 @@ Let’s see what happens if we switch from smaller to larger sample sizes.
 }
 
 @ifproglang{codap}{
+@slidebreak{Investigate}
 We're going to analyze which is better at guessing the truth about an entire population - a small sample of 10 randomly selected animals, or a large sample of 40 randomly selected animals.
 
 @lesson-instruction{
 Select `Sampler` from the Plugins drop-down menu.
 }
 
-@slidebreak
+@slidebreak{InvestigateR}
 
 @right{@image{images/sampler-plugin-default.PNG,250}} The `Sampler` plugin features a _Mixer_, _Spinner_, and _Collector_. Today, we’ll be using the _Collector_, which chooses a specified number of cases from a dataset.
 
@@ -264,7 +269,7 @@ What do you _notice_ about the `Sampler`? What do you _wonder_?
 Possible Wonders include: _How many turquoise balls are there? Why is there that amount? How many brackets are alongside the collection of turquoise balls? Why are there that many?_
 }
 
-@slidebreak
+@slidebreak{Investigate}
 
 *With or without "replacement"?*
 
@@ -272,7 +277,7 @@ If we pick cards from a deck, each sample _changes the outcomes_ of the ones tha
 
 That's the difference between sampling with or without replacement. If it's like rolling dice or flipping a coin, it's sampling _with_ replacement. If it's like drawing cards from a deck, it's sampling _without_ replacement.
 
-@slidebreak
+@slidebreak{Investigate}
 
 @lesson-instruction{
 - Can you think of other examples for each?
@@ -282,7 +287,7 @@ That's the difference between sampling with or without replacement. If it's like
 
 @teacher{Discuss with the class, making sure everyone understands which one this is!}
 
-@slidebreak
+@slidebreak{Investigate}
 
 @lesson-instruction{
 - Designate the number of items to collect in each sample, and the number of samplings to take.
@@ -296,7 +301,7 @@ That's the difference between sampling with or without replacement. If it's like
 Ensure that students understand all the components of the new table they’ve created! Now that students are comfortable using the `Sampler`, it's time to dig into the data.
 }
 
-@slidebreak
+@slidebreak{Investigate}
 
 @lesson-instruction{
 - We want `large-sample` (on the worksheet) to be its own unique table! To produce a new table using `Sampler`, reopen the plugin rather than simply modifying the number of items.
@@ -320,6 +325,7 @@ In a statistics-focused class, or if appropriate for your learning goals, this i
 }
 
 === Synthesize
+@slidebreak{Synthesize}
 
 - Were larger samples always better for guessing the truth about the whole population? If so, how much better?
 - Why is taking a @vocab{random sample} important for avoiding bias in our analyses?

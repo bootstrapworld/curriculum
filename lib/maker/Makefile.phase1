@@ -1,6 +1,6 @@
 include $(MAKE_DIR)utils.mk
 
-phase1: initialization .git/hooks/pre-commit node_modules courses-and-lessons page-not-found glossary bootstraplessonjs starterFiles assessments learningObjectives dictionaries citations
+phase1: initialization .git/hooks/pre-commit node_modules courses-and-lessons page-not-found glossary bootstraplessonjs starterFiles learningObjectives dictionaries citations
 
 ###############################################################################
 
@@ -11,7 +11,8 @@ initialization:
 	@$(MAKE_DIR)dir-hoist-timestamp.sh pathways lessons
 	@$(CP) -upr shared/langs/en-us/* $(PROGDIR)
 	@$(CP) -upr lib/codemirror.css distribution/$(NATLANG)/lib
-	@node_modules/less/bin/lessc shared/langs/$(NATLANG)/curriculum.less > distribution/$(NATLANG)/lib/curriculum.css	
+	@node_modules/less/bin/lessc shared/langs/$(NATLANG)/curriculum.less > distribution/$(NATLANG)/lib/curriculum.css
+	@node_modules/less/bin/lessc shared/langs/$(NATLANG)/curriculum-wp.less > distribution/$(NATLANG)/lib/curriculum-wp.css
 	@if test $(NATLANG) != en-us -a -d shared/langs/$(NATLANG); then \
 		$(CP) -upr shared/langs/$(NATLANG)/* $(PROGDIR); fi
 	@mkdir -p distribution/$(NATLANG)/lib/Badges
@@ -133,17 +134,9 @@ distribution/$(NATLANG)/lib/bootstraplesson.js: lib/bootstraplesson.js
 
 ###############################################################################
 
-starterFiles: distribution/$(NATLANG)/starterFiles.js
+starterFiles: distribution/$(NATLANG)/lib/starterFiles.js
 
-distribution/$(NATLANG)/starterFiles.js: $(PROGDIR)/combine-dicts.js $(PROGDIR)/starterFiles
-	@echo ➤ Build $@
-	@node $+ $@
-
-###############################################################################
-
-assessments: distribution/$(NATLANG)/assessments.js
-
-distribution/$(NATLANG)/assessments.js: $(PROGDIR)/combine-dicts.js $(PROGDIR)/assessments
+distribution/$(NATLANG)/lib/starterFiles.js: $(PROGDIR)/combine-dicts.js $(PROGDIR)/starterFiles
 	@echo ➤ Build $@
 	@node $+ $@
 
@@ -162,18 +155,18 @@ distribution/$(NATLANG)/lib/dictionaries.js: $(alignment-dictionaries)
 
 ###############################################################################
 
-learningObjectives: distribution/$(NATLANG)/learningObjectives.js
+learningObjectives: distribution/$(NATLANG)/lib/learningObjectives.js
 
-distribution/$(NATLANG)/learningObjectives.js: $(PROGDIR)/combine-dicts.js $(PROGDIR)/learningObjectives
+distribution/$(NATLANG)/lib/learningObjectives.js: $(PROGDIR)/combine-dicts.js $(PROGDIR)/learningObjectives
 	@echo ➤ Build $@
 	@node $+ $@
 
 
 ###############################################################################
 
-citations: distribution/$(NATLANG)/citations.js
+citations: distribution/$(NATLANG)/lib/citations.js
 
-distribution/$(NATLANG)/citations.js: $(PROGDIR)/combine-dicts.js $(PROGDIR)/citations
+distribution/$(NATLANG)/lib/citations.js: $(PROGDIR)/combine-dicts.js $(PROGDIR)/citations
 	@echo ➤ Build $@
 	@node $+ $@
 
