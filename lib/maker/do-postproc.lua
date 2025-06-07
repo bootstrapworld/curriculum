@@ -93,7 +93,7 @@ local function postproc(fhtml_cached, tipe)
         add_comment_p = true
       end
       --
-      if memberp(tipe, {'lessonplan', 'pathwaynarrative', 'pathwayresource', 'workbookpage'}) then
+      if memberp(tipe, {'lessonplan', 'pathwaynarrative', 'pathwayresource'}) then
         add_body_id_p = true
         add_end_body_id_p = true
       end
@@ -277,28 +277,7 @@ local function postproc(fhtml_cached, tipe)
     --
     if add_body_id_p then
       add_body_id_p = false
-      local klass = proglang
-      if tipe == 'workbookpage' then
-        klass = klass .. ' workbookpage'
-      elseif tipe == 'pathwayindependent' then
-        if fhtml_cached:match('/pages/') or fhtml_cached:match('/textbooks/') then
-          klass = klass .. ' workbookpage'
-        else
-          klass = klass .. ' narrativepage'
-        end
-        if fhtml_cached:find('/courses/[^/]-/back%-matter/') then
-          klass = klass .. ' back-matter'
-        elseif fbase:find('^notes%-') then
-          klass = klass .. ' LessonNotes'
-        end
-      elseif tipe == 'lessonplan' then
-        klass = klass .. ' LessonPlan'
-      elseif not memberp(tipe, {'datasheetpage'}) then
-        klass = klass .. ' narrativepage'
-      else
-        -- noop
-      end
-      o:write('<div id="body" class="' .. klass .. '">\n')
+      o:write('<div id="body">\n')
     end
     --
     if add_codemirror_p then
