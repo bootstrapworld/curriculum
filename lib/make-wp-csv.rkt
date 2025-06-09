@@ -101,15 +101,27 @@
     (set! s (regexp-replace* #rx"src=\"[^\"]*?/extlib/mathjax/[^/]*?\\.js\"" s
               "src=\"https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.min.js\""))
 
-    (set! s (regexp-replace #rx"src=\"[^\"]*?/images/CCbadge.png\"" s
+    (set! s (regexp-replace* #rx"src=\"[^\"]*?/images/CCbadge.png\"" s
                             (format "src=\"~alib/images/CCbadge.png\"" lib-prefix)))
 
     ;double double-quotes
     (set! s (regexp-replace* #rx"\"" s "\"\""))
     s))
 
-(define (escaped-file-content f #:kill-newlines? [kill-newlines? #f] #:static-prefix [static-prefix #f])
-  (escape-html (file->string f) #:kill-newlines? kill-newlines? #:static-prefix static-prefix))
+(define (escape-backslash-in-mathjax-line y)
+  (if (regexp-match #rx"\\$\\$.*?\\$\\$" y)
+      (regexp-replace* #rx"\\\\" y "\\\\\\\\")
+      y))
+
+(define (escape-backslash-in-mathjax s)
+  (let ([x-lines (string-split s "\n")])
+    (string-join (map escape-backslash-in-mathjax-line x-lines) "\n")))
+
+(define (escaped-file-content f #:kill-newlines? [kill-newlines? #f]
+                              #:static-prefix [static-prefix #f])
+  (escape-backslash-in-mathjax
+    (escape-html (file->string f)
+                 #:kill-newlines? kill-newlines? #:static-prefix static-prefix)))
 
 (define (make-lesson-permalink f)
   ; (printf "doing make-lesson-permalink ~a\n" f)
