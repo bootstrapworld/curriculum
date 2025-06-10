@@ -1,0 +1,237 @@
+[.beta]
+= Statistical Language Modeling (2)
+
+@description{Students consider how statistics and probability drive AI text generation, learning that language models can produce text that sounds credible but may not actually be credible.}
+
+@lesson-prereqs{ai-training-2}
+
+@keywords{}
+
+[@lesson-intro-table]
+|===
+| Lesson Goals
+| Students will be able to...
+
+@objectives
+
+| Student-facing Lesson Goals
+|
+
+- Let's explore how probability influences the output of generative AI models.
+
+
+| Materials
+|[.materials-links]
+@material-links
+
+| Preparation
+| @preparation{
+}
+|===
+
+
+== Meet Soekia
+
+=== Overview
+
+Students engage with Soekia to discover some of the nuances of a student-friendly statistical language model.
+
+
+=== Launch
+@slidebreak{Launch}
+
+In the @lesson-link{ai-statistical-lang-models, "previous lesson"}, you learned about @vocab{statistical language models} and how they rely on probability to generate text.  You constructed your own language model from the folk song "There Was an Old Lady Who Swallowed a Fly."
+
+In this lesson, you will explore Soekia, a simplified text generation tool designed for student learning. Soekia offers us one example of @vocab{Natural Language Processing}, or using computers to process language. 
+
+@lesson-instruction{
+- Open a browser window and make sure it is filling the full width of your screen.
+- Go to @link{http://bootstrapworld.org/SoekiaGPT/}.
+- The blue-colored panel occupying most of your screen is where text generation takes place. This is the level typically visible to the user when using a chatbot. 
+- Click on the right-facing arrow (image below) to tell Soekia to generate a fairy tale and follow along and read the text until Soekia finishes writing.
+
+@center{@image{images/text-gen.png, 150}}
+}
+
+@QandA{
+@Q{What do you Notice?}
+@A{Different words appear in different colors.}
+@A{The fairy tale sounds a little strange.}
+@A{I can change the prompt but I Soekia still usually gives me something that sort of resembles a fairy tale.}
+
+@Q{What do you Wonder?}
+@A{Why does the story sound so odd?}
+@A{Does ChatGPT use the same algorithm as Soekia?}
+@A{Will Soekia tell a different story each time I ask it for a story?}
+
+@Q{Some of the words in your fairy tale may be highlighted with different colors (green, pink, orange, etc). If this is not the case, click the eye icon beneath the generated text.}
+@Q{Hover your mouse over one or two of the highlighted words in the fairy tale. What appears?}
+@A{Each color corresponds with a different document; documents are labelled with letters of the alphabet.}
+}
+
+=== Investigate
+@slidebreak{Investigate}
+
+It's time to peek behind the curtain to see how a computer can put a statistical language model to use! 
+
+@lesson-instruction{
+- Open a browser window and make sure it is filling the full width of your screen.
+- Go to @link{http://bootstrapworld.org/SoekiaGPT/}.
+- Click the "LOOK INSIDE" button in the upper right-hand corner of the screen.
+}
+
+Now, in addition to the blue text generation panel, we see three additional panels: documents, n-grams, and suggested words.
+
+@image{images/four-panels.png}
+
+There is a LOT to discover in each panel! The @prinable-exercise{soekia-intro.adoc} worksheet will prompt you to interact with a few specific features of each panel. After you have a basic sense of each panel's purpose, take a moment to Notice and Wonder. Get curious, click around, and consider how each panel relates to the others that you have already explored.
+
+@lesson-instruction{
+Complete the first section (Documents) on @printable-exercise{soekia-intro.adoc}.
+}
+
+@QandA{
+
+@Q{What did you Notice about the _Documents_ panel?}
+@A{There are 12 documents.}
+@A{Each document is a different color.}
+@A{The colors correspond with the colors that appeared (highlighting words) in the _Text generation_ panel.}
+@A{If I click on the icons in the upper right, I can change the training corpus.}
+@A{If I change the prompt in the _Text generation_ panel, the green lines at the bottom of the document change. These lines indicate how closely the wording of the prompt corresponds with the text in the document.}
+
+@Q{What did you Wonder about the _Documents_ panel?}
+@A{Can I change these documents for different ones?}
+@A{Why haven't I heard of some of these fairy tales?}
+@A{What is the relationship between this _Documents_ panel and the _N-grams_ panel next to it?}
+}
+
+@teacher{Invite students to share their discoveries. Some of your students may discover that they can change the training corpus so that the documents include not fairy tales but tic tac toe games, musical compositions, and chess matches! In the subsequent section of the lesson, students will explore these other document collections in greater depth.}
+
+@lesson-instruction{
+Complete the second section (N-grams) on  @printable-exercise{soekia-intro.adoc}.
+}
+
+@QandA{
+
+@Q{What did you Notice about the _N-grams_ panel?}
+@A{All of the n-grams come directly from the documents.}
+@A{I can sort the n-grams either alphabetically or by frequency.}
+@A{Soekia interprets punctuation marks as words.}
+@A{I can tell Soekia to produce unigrams, digrams, trigrams, etc.}
+
+@Q{What did you Wonder about the _N-grams_ panel?}
+@A{Why does Soekia interpret a line break as a word?}
+@A{How does Soekia decide which n-gram it will use in the fairy tale?}
+}
+
+@teacher{During @lesson-link{ai-statistical-lang-models}, students computed the frequency of different n-grams in smaller training corpus, the song "There Was an Old Lady Who Swallowed a Fly". That is precisely what Soekia is doing in the _N-grams_ panel!}
+
+@lesson-instruction{
+Complete the third section (Suggested Words) on  @printable-exercise{soekia-intro.adoc}.
+}
+
+@QandA{
+
+@Q{What did you Notice about the _Suggested words_ panel?}
+@A{The _Suggested words_ panel updates automatically as Soekia generates text.}
+@A{Soekia often suggests a 5-gram and the shorter n-grams that are contained within that 5-gram (e.g., "the wind in the trees", "wind in the trees", "in the trees" and "trees").}
+
+@Q{What did you Wonder about the _Suggested words_ panel?}
+@A{What are the different ways that I can customize the selection?}
+@A{How does changing the temperature affect the output?}
+}
+
+
+=== Synthesize
+@slidebreak{Synthesize}
+
+@QandA{
+
+@Q{Describe in your own words what happens in each of Soekia's inner panels.}
+@A{The _Documents_ panel contains the training corpus.}
+@A{Soekia processes the documents and produces a list of all possible n-grams (for a given n) in the _N-grams_ panel.}
+@A{In the _Suggested words_ panel, Soekia offers possible completions for different inputs.}
+@A{The user can set the temperature to choose word suggestions that occur frequently (low temperature) or to suggest words more randomly (high temperature).}
+@A{In the _Text Generation_ panel, the output appears automatically or the user can opt to select each word from a a list of suggestions.}
+}
+
+
+== What Makes a Language?
+
+=== Overview
+
+Students discover that statistical language models do not require natural languages to function.
+
+=== Launch
+@slidebreak{Launch}
+
+Let's take a break from Soekia for a quick game of tic-tac-toe!
+
+@lesson-instruction{
+- Draw a tic-tac-toe grid on your paper and play a game of tic-tac-toe with your neighbor. +
+_In case you need a refresher on the game:_
+  * The tic-tac-toe board is a 3x3 grid.
+  * One person will draw an *X* in one of the squares.
+  * The other person will draw and *O* in one of the squares.
+  * Keep taking turns - the goal is to get three in a row or block your neighbor from getting three in a row.
+  * The game ends when one of you gets three in a row or the grid is full.
+}
+
+@slidebreak{LaunchR}
+
+@lesson-instruction{
+@right{@image{images/docA.png, 150}}
+
+- Now draw another tic-tac-toe grid on your paper on which to play the game described by Document A with your neighbor. +
+_This info might help you get started:_
+  * Think of the tic-tac-toe grid as a 3x3 coordinate plane.
+  * Each row of the document contains two pieces of information:
+  	*** the player whose turn it is (X or O)
+  	*** the ordered pair (x, y) for the location of the player's move on that turn
+}
+
+
+=== Investigate
+@slidebreak{Investigate}
+
+Did you notice that the collection of fairy tales you explored during the first half of this lesson is just one of several available training corpuses? Let's explore some of the others.
+
+@lesson-instruction{
+- Open a browser window and make sure it is filling the full width of your screen.
+- Go to @link{http://bootstrapworld.org/SoekiaGPT/} and click the "LOOK INSIDE" button at the top right of your screen.
+- Scroll all the way the right so that the green, right-most panel ("Documents") and the icons in its top right corner are in view.
+- Click the "Collections" icon (the middle of the three icons in the upper right corner).
+- From the drop-down menu that appears, select the "tic-tac-toe" icon (second from the bottom).
+- A pop-up will appear that says "Load new collection?" Select "Continue".
+- Complete the first section of @printable-exercise{tic-tac-toe.adoc}
+}
+
+Soekia is a great tool for allowing us to look behind the curtain and watch @vocab{Natural Language Processing} at work. 
+
+Interestingly - as the tic-tac-toe corpus reveals - Natural Language Processing does not actually require a natural language! (A natural language is a language used by humans, like English.) Because we could parse the tic-tac-toe text into n-grams and then determine the likelihood of each n-gram's appearance, Soekia was able to apply the very same algorithms to produce output.
+
+@QandA{
+@Q{Can you think of any other artificial languages that Soekia will be able to process?}
+@A{Possible examples: chess moves, musical notation}
+
+@Q{What is required of an artificial language, in order for it to successfully undergo natural language processing?}
+@A{It must be broken up with spaces so that it can be interpreted as "words", even if it is not made up of actual words.}
+}
+
+@lesson-instruction{
+- Go to @link{http://bootstrapworld.org/SoekiaGPT/} and click the "LOOK INSIDE" button at the top right of your screen.
+- Scroll all the way the right so that the green, right-most panel ("Documents") and the icons in its top right corner are in view.
+- Click the "Collections" icon (the middle of the three icons in the upper right corner).
+- From the drop-down menu that appears, select the "Music in ABC Notation" icon (vertically in the middle).
+- A pop-up will appear that says "Load new collection?" Select "Continue".
+- Complete the second section of @printable-exercise{tic-tac-toe.adoc}, "Soekia & Natural Language Processing." 
+}
+
+
+=== Synthesize
+@slidebreak{Synthesize}
+
+@QandA{
+@Q{A student argues that AI is a reliably correct and credible source of information. How would you respond?}
+@A{The output that AI produces depends on the corpus on which it is trained, but also the language model used to generate the text. The very same process that generates so-called "hallucinatory" text _also_ generates the "non-hallucinatory" text. AI does not actually have any way of assessing for correctness and credibility; it simply produces one output after the next based on a model.}
+}
