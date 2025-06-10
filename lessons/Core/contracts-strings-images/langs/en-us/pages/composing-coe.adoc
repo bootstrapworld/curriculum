@@ -3,6 +3,15 @@
 ++++
 <style>
 table .autonum::after { content: ')' !important; }
+
+/* For the bottom table, make the first row 2x tall
+ * Center the circles, and add space below the
+ * autonum-based prompt
+*/
+.bottom { grid-template-rows: 2fr 1fr !important; }
+.bottom .circleevalsexp { text-align: center; }
+.bottom .autonum { margin-bottom: 30px; }
+
 </style>
 ++++
 
@@ -43,21 +52,22 @@ _Suppose we want to see the `text` "Diego" written vertically in yellow letters 
 
 _Suppose you wanted the computer to show your name in your favorite color and rotate it so that it's diagonal..._
 
-[.FillVerticalSpace, cols=".<1a, .<1a", stripes="none", grid="none", frame="none"]
+[.bottom.FillVerticalSpace, cols=".<1a, .<1a", stripes="none", frame="none"]
 |===
 
-| @n Draw the circle of evaluation to: +
- generate the image of your name in your favorite color
+| @center{*Write your name (any size), in your favorite color*} +
+  @n Draw the circle of evaluation: +
+  @showsoln{(coe '(text "Shriram" 90 "purple"))}
 
-| @n Draw the circle of evaluation to: +
- `rotate` the image so that it's diagonal
+| @center{*`rotate` the image so that it's diagonal*} +
+  @n Draw the circle of evaluation: +
+  @showsoln{(coe exp2)}
 
-^| @showsoln{(coe '(text "Shriram" 90 "purple"))}  	^| @showsoln{(coe exp2)}
-@ifnotsoln{@vspace{35ex}}
 
-| @n Convert the Circle of Evaluation to code.		 | @n Convert the Circle of Evaluation to code.
 
-| @showsoln{(code '(text "Shriram" 90 "purple"))} 	 | @showsoln{(code exp2)}
- @ifnotsoln{@vspace{3ex}}
+| @n Convert the Circle of Evaluation to code: +
+  @showsoln{(code '(text "Shriram" 90 "purple"))}
+| @n Convert the Circle of Evaluation to code: +
+  @showsoln{(code exp2)}
 |===
 
