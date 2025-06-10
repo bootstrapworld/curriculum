@@ -43,7 +43,7 @@ Students explore how text prediction relies on statistical language modeling.
 === Launch
 @slidebreak{Launch}
 
-While texting, emailing, or even conducting a web search, you've probably noticed that your thoughts and sentences are sometimes finished for you! Predictive text is now a common feature of many apps, and it is made possible by a certain form of AI: the statistical language model.
+While texting, emailing, or even conducting a web search, you've probably noticed that your thoughts and sentences are sometimes finished for you! Predictive text is now a common feature of many apps, and it is made possible by a certain form of AI: the @vocab{statistical language model}.
 
 @teacher{
 Make sure you've made a copy of the @online-exercise{https://docs.google.com/forms/u/1/d/1C1WSad_IrVT0pd_IXG7yCCM30CVoIibv9kBDKnEJ5RI/copy, survey} and have created a link to share with students, so that you can look at your data as a class!
@@ -189,7 +189,7 @@ First, we will decompose the title of our corpus into differently sized chunks (
 
 |===
 
-The formal word computer scientists use in this context is not "chunk" but @vocab{n-gram}. In an @math{n}-gram, @math{n} represents the number of words in the chunk. For special cases where @math{n} is 1, 2, or 3, the @math{n}-grams are called unigrams, bigrams, and trigrams.
+The formal word computer scientists use in this context is not "chunk" but @vocab{n-gram}. In an @math{n}-gram, @math{n} represents the number of words in the chunk. For special cases where @math{n} is 1, 2, or 3, the @math{n}-grams are called @vocab{unigrams}, @vocab{bigrams}, and @vocab{trigrams}.
 
 @QandA{
 @Q{What other series of words have you encountered that begin with "uni", "bi", and "tri"?}
@@ -353,164 +353,4 @@ Critics of ChatGPT and other language models raise a variety of concerns. Consid
 
 @Q{ChatGPT has biases that can be seen in its text output. Where do these biases come from?}
 @A{If there are biases in the corpus, there will likely be biases in the output!}
-}
-
-
-== What Makes a Language?
-
-=== Overview
-
-Students consider whether statistical language modeling requires language.
-
-=== Launch
-@slidebreak{Launch}
-
-It's time to peek behind the curtain and see how a computer can put a statistical language model to use! Let's play a quick game to prepare ourselves for making sense of the tool we'll be working with.
-
-@lesson-instruction{
-- Draw a tic-tac-toe grid on your paper and play a game of tic-tac-toe with your neighbor. +
-_In case you need a refresher on the game:_
-  * The tic-tac-toe board is a 3x3 grid.
-  * One person will draw an *X* in one of the squares.
-  * The other person will draw and *O* in one of the squares.
-  * Keep taking turns - the goal is to get three in a row or block your neighbor from getting three in a row.
-  * The game ends when one of you gets three in a row or the grid is full.
-}
-
-@slidebreak{LaunchR}
-
-@lesson-instruction{
-@right{@image{images/docA.png, 150}}
-
-- Now draw another tic-tac-toe grid on your paper on which to play the game described by Document A with your neighbor. +
-_This info might help you get started:_
-  * Think of the tic-tac-toe grid as a 3x3 coordinate plane.
-  * Each row of the document contains two pieces of information:
-  	*** the player whose turn it is (X or O)
-  	*** the ordered pair (x, y) for the location of the player's move on that turn
-}
-
-=== Investigate
-@slidebreak{Investigate}
-
-We're going to explore Soekia, a simplified text generation tool designed for student learning. As we explore, we are going to consider: What makes a _language_ in a statistical language model?
-
-@lesson-instruction{
-- Open a browser window and make sure it is filling the full width of your screen.
-- Go to @link{http://bootstrapworld.org/SoekiaGPT/} and click the "LOOK INSIDE" button at the top right of your screen.
-- Scroll all the way the right so that the green, right-most panel ("Documents") and the icons in its top right corner are in view.
-- Click the "Collections" icon (the middle of the three icons in the upper right corner).
-- A pop-up will appear that says "Load new collection?" Select "Continue".
-- From the drop-down menu that appears, select the "tic-tac-toe" icon (second from the bottom).
-- Complete the first section of @printable-exercise{tic-tac-toe.adoc}
-}
-
-@teacher{
-Invite students to share their discoveries. We encourage you to allow students the opportunity to play with Soekia. There are many possible discoveries awaiting your students!
-}
-
-@QandA{
-
-Think back to @printable-exercise{sampling.adoc}. Let's compare the process that you used to generate text with Soekia's algorithm. 
-
-
-
-}
-
-=== Synthesize
-@slidebreak{Synthesize}
-
-@QandA{
-@Q{Does a statistical language model require language? How do you know?}
-@A{No. It just needs some sort of corpus. Natural language is absolutely not needed. Chess games, musical compositions, and tic-tac-toe games are all adequate!}
-}
-
-
-== Deep Dive: Soekia
-
-=== Overview
-
-Students engage with Soekia to discover some of the nuances of statistical language modeling.
-
-=== Launch
-@slidebreak{Launch}
-
-Let's dig deeper into Soekia!
-
-@lesson-instruction{
-- Go to @link{http://bootstrapworld.org/SoekiaGPT/}
-- Complete the first section of @printable-exercise{soekia-intro.adoc}.
-- When you're done, let's do a quick survey: Raise your hand if your story was largely inspired by "Felicia and the Pot of Pinks".
-}
-
-@teacher{
-The vast majority of students will have a story that is primarily sourced from "Felicia and the Pot of Pinks". On the next section of the worksheet, students will discover exactly _why_ this is the case. Feel free to use this mystery as incentive to move on to the next section of the page!
-}
-
-@lesson-instruction{
-- Complete the second section of @printable-exercise{soekia-intro.adoc}.
-}
-
-@QandA{
-@Q{Why were so many of our initial stories all about Felicia and the Pot of Pinks?}
-@A{The green bar indicates how closely the document matches the box on the "Generate Text" panel. The story "Felicia and the Pot of Pinks" includes the word "tale" once, "fairy" four times, and the word "me" more than a dozen times. With these frequencies, it is a much closer match to "Write me a fairy tale" than any of the other documents.}
-}
-
-Let's review what we have done so far:
-
-- We have interacted with Soekia's text generation panel. With modern AI, the text generating interface is the only element that we are privy to. Unlike the AI we use daily, Soekia allowed us to glimpse which words and phrases came from which sources.
-
-- We have also peeked at Soekia's documents panel, or corpus. This is a critical feature of all text-generating AI, but ordinarily, it is hidden from us. Soekia also revealed to us the level of alignment between each document and what _we_ typed into the box on the "Generate Text" panel.
-
-Let's explore the two remaining panels!
-
-@lesson-instruction{
-- Turn to @printable-exercise{soekia-closer-look.adoc}.
-- Be prepared to share your responses with the class.
-}
-
-@ifnotslide{
-@teacher{
-As students are working, you can share the three tips, below.
-}
-}
-
-@ifslide{
-Advance to the next slide for student-facing tips on navigating Soekia.
-}
-
-@slidebreak{Launch}
-
-If you feel overwhelmed as you work, here are some tips:
-
-- Click "Pause" to review each of the four panels. Ask yourself, "How is _this_ panel related to each of the other panels, in particular, the _adjacent_ panels?"
-
-- Get curious! *Clicking* is powerful. Each time you click, you access previously hidden information. You can click a document, an @math{n}-gram, a suggested word, or even words that appear on the text generation panel.
-
-- To slow down text generation and to allow time to observe changes as they occur, click the "Choose yourself" icon and use your mouse to select words. (You will be prompted to do this in the next activity.)
-
-@teacher{
-After they complete the "Closer Look" worksheet, invite students to share what they learned. In particular, have students share their predictions and whether they were correct or not. See if, as a class, you can develop an understanding of any unexpected outcomes.
-}
-
-=== Investigate
-@slidebreak{Investigate}
-
-@lesson-instruction{
-- Turn to @printable-exercise{soekia-temperature.adoc}.
-- Pause for class discussion once you have completed the first section.
-}
-
-As we have discussed @vocab{temperature} is the parameter that controls the randomness of the model's output as it generates text.
-
-@QandA{
-@Q{AI sometimes generates false or misleading information. Do you think this is more likely to occur at a high temperature or a low temperature? Explain.}
-}
-
-=== Synthesize
-@slidebreak{Synthesize}
-
-@QandA{
-@Q{A student argues that AI is a reliably correct and credible source of information. How would you respond?}
-@A{The output that AI produces depends on the corpus on which it is trained, but also the language model used to generate the text. The very same process that generates so-called "hallucinatory" text _also_ generates the "non-hallucinatory" text. AI does not actually have any way of assessing for correctness and credibility; it simply produces one output after the next based on a model.}
 }
