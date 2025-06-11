@@ -1169,7 +1169,7 @@
       (set! *first-level-section-titles* '()))
     (set! *page-title* title-txt)
     (store-title title-txt)
-    (fprintf o "[.~a]\n" *proglang*)
+    ; (fprintf o "[.~a]\n" *proglang*)
     (display #\= o)
     (expand-directives:string->port title o)
     (newline o)
@@ -2351,7 +2351,7 @@
           (call-with-output-file *out-file*
             (lambda (o)
 
-              (cond [*lesson-plan* (display "[.LessonPlan]\n" o)]
+              (cond ;[*lesson-plan* (display "[.LessonPlan]\n" o)]
                     [*narrative* (display "[.narrative]\n" o)]
                     [*solutions-mode?* (display "[.solution-page]\n" o)]
                     )
