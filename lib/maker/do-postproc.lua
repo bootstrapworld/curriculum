@@ -2,6 +2,8 @@
 
 dofile(os.getenv'MAKE_DIR' .. 'utils.lua')
 
+local website_branch_p = (shell_output('git branch --show-current')[1] == 'website')
+
 local pathwayindependent_batchf =  os.getenv'ADOC_POSTPROC_PATHWAYINDEPENDENT_INPUT'
 local workbookpage_batchf =  os.getenv'ADOC_POSTPROC_WORKBOOKPAGE_INPUT'
 local lessonplan_batchf =  os.getenv'ADOC_POSTPROC_LESSONPLAN_INPUT'
@@ -93,7 +95,7 @@ local function postproc(fhtml_cached, tipe)
         add_comment_p = true
       end
       --
-      if memberp(tipe, {'lessonplan', 'pathwaynarrative', 'pathwayresource'}) then
+      if memberp(tipe, {'lessonplan', 'pathwaynarrative', 'pathwayresource', 'workbookpage'}) then
         add_body_id_p = true
         add_end_body_id_p = true
       end
@@ -277,7 +279,35 @@ local function postproc(fhtml_cached, tipe)
     --
     if add_body_id_p then
       add_body_id_p = false
-      o:write('<div id="body">\n')
+      if website_branch_p then
+        local klass = proglang
+        if tipe == 'workbookpage' then
+          klass = klass .. ' workbookpage'
+          if fbase:find('^notes%-') then
+            klass = klass .. ' LessonNotes'
+          end
+        elseif tipe == 'pathwayindependent' then
+          if fhtml_cached:match('/pages/') or fhtml_cached:match('/textbooks/') then
+            klass = klass .. ' workbookpage'
+          else
+            klass = klass .. ' narrativepage'
+          end
+          if fhtml_cached:find('/courses/[^/]-/back%-matter/') then
+            klass = klass .. ' back-matter'
+          elseif fbase:find('^notes%-') then
+            klass = klass .. ' LessonNotes'
+          end
+        elseif tipe == 'lessonplan' then
+          klass = klass .. ' LessonPlan'
+        elseif not memberp(tipe, {'datasheetpage'}) then
+          klass = klass .. ' narrativepage'
+        else
+          -- noop
+        end
+        o:write('<div id="body" class="' .. klass .. '">\n')
+      else
+        o:write('<div id="body">\n')
+      end
     end
     --
     if add_codemirror_p then

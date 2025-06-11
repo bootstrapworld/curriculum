@@ -111,3 +111,13 @@ function first_line(f)
   i:close()
   return x
 end
+
+function shell_output(cmd)
+  local result = {}
+  local o = io.popen(cmd)
+  for L in o:lines() do
+    table.insert(result, L)
+  end
+  o:close()
+  return result
+end
