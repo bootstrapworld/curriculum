@@ -14,6 +14,7 @@
 @print-section-heading: lightgray;
 @table-header: #eee;
 @lesson-block-vertical-space: 1em;
+@ruby-height: 13px; /* Note(Emmanuel): use this for positioning and font size! */
 
 html, body { font-size: 9pt; }
 
@@ -52,7 +53,14 @@ body {
   p       { margin: 10px 0px; font-size: inherit; }
   sup     { font-size: smaller; top: -0.55em; left: 1px; }
   sub     { font-size: smaller; bottom: -0.35em; }
-  code    { display: inline-block; padding: 0 !important; line-height: 1em !important; }
+  code    {
+    font-family: @code-font;
+    border: none;
+    display: inline-block;
+    padding: 0 !important;
+    line-height: 1em !important;
+    font-size: inherit;
+  }
   mark    { background: none; color: inherit; }
   em, strong { margin: 0px 2px; }
   .listingblock pre { margin: 3px 0px; padding: 0; }
@@ -314,7 +322,7 @@ lines on some browsers */
   vertical-align:     baseline;
 }
 .fitbruby { 
-  margin-bottom: 0.75rem;
+  margin-bottom: -12px;
 }
 .fitbruby .ruby, .recipe .ruby:after, .data-cycle .ruby:after {
   position:           absolute;

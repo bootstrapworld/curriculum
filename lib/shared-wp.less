@@ -5,6 +5,8 @@ div#body { font-size: 9pt; }
 div#body {
   margin: 8px;
   line-height: normal;
+  text-size-adjust: 100%;
+
   a:focus{outline:thin dotted}
   pre{white-space:pre-wrap}
   table{border-collapse:collapse;border-spacing:0}
@@ -28,7 +30,7 @@ div#body {
   table thead{background:#f7f8f7}
   table thead tr th,table thead tr td{padding:.5em .625em .625em;font-size:inherit;color:rgba(0,0,0,.8);text-align:left}
   table tr th,table tr td{padding:.5625em .625em;font-size:inherit;color:rgba(0,0,0,.8)}
-  table tr.even,table tr.alt,table tr:nth-of-type(even){background:#f8f8f7}
+  table tr.even,table tr.alt,table tr:nth-of-type(even){background:#f8f8f7 !important; }
   table thead tr th,table tbody tr td,table tr td{display:table-cell;line-height:1.6}
   h1,h2,h3,h4,h5,h6{line-height:1.2;word-spacing:-.05em}
   h1 strong,h2 strong,h4 strong,h5 strong,h6 strong{font-weight:400}
@@ -37,7 +39,7 @@ div#body {
   *:not(pre)>code{font-style:normal!important;letter-spacing:0;padding:.1em .5ex;word-spacing:-.15em;background-color:#f7f7f8;-webkit-border-radius:4px;border-radius:4px;line-height:1.45;text-rendering:optimizeSpeed;word-wrap:break-word}
   *:not(pre)>code.nobreak{word-wrap:normal}
   *:not(pre)>code.nowrap{white-space:nowrap}
-  pre,pre>code{line-height:1.45;color:rgba(0,0,0,.9);font-family:"Droid Sans Mono","DejaVu Sans Mono",monospace;font-weight:400;text-rendering:optimizeSpeed}
+  pre,pre>code{line-height:1.45;color:rgba(0,0,0,.9);font-weight:400;text-rendering:optimizeSpeed}
   em em{font-style:normal}
   #header,#content{width:100%;margin-left:auto;margin-right:auto;margin-top:0;margin-bottom:0;max-width:62.5em;*zoom:1;position:relative;padding-left:.9375em;padding-right:.9375em}
   #header::before,#header::after,#content::before,#content::after{content:" ";display:table}
@@ -104,6 +106,78 @@ div#body {
   }
 }
 
+
+/************************************************************************************
+* FONTS
+*/
+/* lato-regular - latin_latin-ext */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 400;
+  src: url('fonts/lato/lato-v24-latin_latin-ext-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* lato-italic - latin_latin-ext */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Lato';
+  font-style: italic;
+  font-weight: 400;
+  src: url('fonts/lato/lato-v24-latin_latin-ext-italic.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* lato-700 - latin_latin-ext */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 700;
+  src: url('fonts/lato/lato-v24-latin_latin-ext-700.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* lato-900 - latin_latin-ext */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 900;
+  src: url('fonts/lato/lato-v24-latin_latin-ext-900.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* lato-900italic - latin_latin-ext */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Lato';
+  font-style: italic;
+  font-weight: 900;
+  src: url('fonts/lato/lato-v24-latin_latin-ext-900italic.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+@font-face {
+  font-family: 'Hack';
+  src: url('fonts/hack/hack-regular.woff2') format('woff2'), url('fonts/hack/hack-regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Hack';
+  src: url('fonts/hack/hack-bold.woff2') format('woff2'), url('fonts/hack/hack-bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Hack';
+  src: url('fonts/hack/hack-italic.woff2') format('woff2'), url('fonts/hack/hack-italic.woff') format('woff');
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Hack';
+  src: url('fonts/hack/hack-bolditalic.woff2') format('woff2'), url('fonts/hack/hack-bolditalic.woff') format('woff');
+  font-weight: 700;
+  font-style: italic;
+}
+
 /************************************************************************************
 * SYSTEMWIDE STYLES
 */
@@ -119,6 +193,7 @@ div#body {
 @print-section-heading: lightgray;
 @table-header: #eee;
 @lesson-block-vertical-space: 1em;
+@ruby-height: 0.8rem; /* Note(Emmanuel): use this for positioning and font size! */
 
 div#body{
   font-family:    @text-font;
@@ -155,7 +230,14 @@ div#body{
   p       { margin: 10px 0px; font-size: inherit; }
   sup     { font-size: smaller; top: -0.55em; left: 1px; }
   sub     { font-size: smaller; bottom: -0.35em; }
-  code    { display: inline-block; padding: 0 !important; line-height: 1em !important; }
+  code    {
+    border: none;
+    font-family: @code-font;
+    display: inline-block;
+    padding: 0 !important;
+    line-height: 1em !important;
+    font-size: inherit;
+  }
   mark    { background: none; color: inherit; }
   em, strong { margin: 0px 2px; }
   .listingblock pre { margin: 3px 0px; padding: 0; }
@@ -410,7 +492,7 @@ div#body{
     vertical-align:     baseline;
   }
   .fitbruby {
-    margin-bottom: 0.75rem;
+    margin-bottom: @ruby-height;
   }
   .fitbruby .ruby, .recipe .ruby:after, .data-cycle .ruby:after {
     position:           absolute;
@@ -444,7 +526,7 @@ div#body{
       position:           absolute;
       width:              1000px;
       left:               0;
-      bottom :            -1px;
+      bottom :            0px;
     }
   }
 
@@ -1447,6 +1529,7 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
   body { width: 7.5in; }
   .x-row-inner>div:last-child { display: none; }
   .x-section { border-top: none !important; }
+  #raw_code_container { margin-left: 1px; }
 
 
   /* Elements we don't want printed */
@@ -1514,6 +1597,7 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
   }
 
   div#body {
+    margin: 0;
     /* Page Breaks for printed lesson plans, projects, and TR pages */
     h3, h2 { break-after: avoid !important; page-break-after: avoid !important; }
     h3+.paragraph, h2+.paragraph { break-before: avoid !important; page-break-before: avoid !important; }
