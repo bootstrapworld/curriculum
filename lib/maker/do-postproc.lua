@@ -3,6 +3,7 @@
 dofile(os.getenv'MAKE_DIR' .. 'utils.lua')
 
 local website_branch_p = (shell_output('git branch --show-current')[1] == 'website')
+website_branch_p = true
 
 local pathwayindependent_batchf =  os.getenv'ADOC_POSTPROC_PATHWAYINDEPENDENT_INPUT'
 local workbookpage_batchf =  os.getenv'ADOC_POSTPROC_WORKBOOKPAGE_INPUT'
@@ -96,6 +97,7 @@ local function postproc(fhtml_cached, tipe)
         add_comment_p = true
       end
       if x:find('landscape') then
+        x = x:gsub('landscape', '')
         add_landscape_p = true
       end
       --
@@ -114,22 +116,22 @@ local function postproc(fhtml_cached, tipe)
       --
       --fixme datasheetpage?
       if tipe == 'workbookpage' then
-        x = x:gsub('<body class="', '%0workbookpage ')
+        -- x = x:gsub('<body class="', '%0workbookpage ')
       elseif tipe == 'pathwayindependent' then
         if fhtml_cached:match('/pages/') or fhtml_cached:match('/textbooks/') then
-          x = x:gsub('<body class="', '%0workbookpage ')
+          -- x = x:gsub('<body class="', '%0workbookpage ')
         else
-          x = x:gsub('<body class="', '%0narrativepage ')
+          -- x = x:gsub('<body class="', '%0narrativepage ')
         end
       elseif not memberp(tipe, {'workbookpage', 'lessonplan', 'datasheetpage'}) then
-        x = x:gsub('^<body class="', '%0narrativepage ')
+        -- x = x:gsub('^<body class="', '%0narrativepage ')
       end
       if tipe == 'workbookpage' then
         if fhtml_cached:find('/courses/[^/]-/back%-matter/') then
-          x = x:gsub('<body class="', '%0back-matter ')
+          -- x = x:gsub('<body class="', '%0back-matter ')
         end
         if fbase:find('^notes%-') then
-          x = x:gsub('<body class="', '%0LessonNotes ')
+          -- x = x:gsub('<body class="', '%0LessonNotes ')
         end
       end
       --
