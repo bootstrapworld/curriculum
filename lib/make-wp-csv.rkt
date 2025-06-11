@@ -159,6 +159,11 @@
            (>= n 2)))
         "true" "false")))
 
+(define (get-proglang dir)
+  (let ([f (build-path dir ".cached" ".record-proglang")])
+    (cond [(not (file-exists? f)) "Pyret"]
+          [else (call-with-input-file f read-line)])))
+
 (define (convert-top-pages o oa #:umbrella-dir [umbrella-dir #f])
   (let ([coursep (regexp-match "courses$" umbrella-dir)])
     (for ([lesson-dir (directory-list umbrella-dir)])
@@ -166,13 +171,12 @@
       (let* ([uniqid (string->uniqid lesson-dir)]
              [curr-group (if coursep (get-curriculum-group lesson-dir) "")]
              [lesson-dir-path (build-path umbrella-dir lesson-dir)]
-             [mult-ling (multilingual? lesson-dir-path)]
              [lesson-plan-file (path->string (build-path lesson-dir-path "index.shtml"))]
              [title-file (path->string (build-path lesson-dir-path ".cached/.index.titletxt"))])
         ; (printf "lesson-dir = ~s; umbrella-dir = ~s\n" lesson-dir umbrella-dir)
         (when (file-exists? lesson-plan-file)
-          ;id, title, slug, archive, parent, seasons, type, child-categories, curriculum-materials-raw-code, post status, date, curriculum-group, multilingual
-          (fprintf o "~a,\"~a\",~a,~a,~a,~a,~a,~a,\"~a\",~a,~a,~a,~a\n"
+          ;id, title, slug, archive, parent, seasons, type, child-categories, curriculum-materials-raw-code, post status, date, curriculum-group, multilingual, proglang
+          (fprintf o "~a,\"~a\",~a,~a,~a,~a,~a,~a,\"~a\",~a,~a,~a,~a,~a\n"
                    uniqid                                        ; id
                    (string-trim
                      (if (file-exists? title-file)
@@ -191,7 +195,8 @@
                    "publish"                                                          ; post status
                    get-curriculum-group                                               ; curriculum-group
                    *official-date*                                                    ; ???
-                   mult-ling                                                          ; multilingual
+                   (multilingual? lesson-dir-path)                                    ; multilingual
+                   (get-proglang lesson-dir-path)                                     ; proglang
                    )
           (fprintf oa "~a,True\n" uniqid)
           )))))
@@ -206,7 +211,6 @@
            [lesson-id (string->uniqid lesson-dir)]
            [static-prefix (make-lesson-static-url lesson-dir coursep)]
            [lesson-dir-path (build-path umbrella-dir lesson-dir)]
-           [mult-ling (multilingual? lesson-dir-path)]
            [lesson-plan-file (path->string (build-path lesson-dir-path "index.shtml"))])
       (let ([pages-dir-path (build-path lesson-dir-path pages)])
         (when (directory-exists? pages-dir-path)
@@ -227,8 +231,8 @@
                 ; (printf "page-title-file is ~a\n" page-title-file)
                 (when (file-exists? page-title-file)
                   ; (printf "going ahead with ~a\n" p)
-                  ;id, title, permalink, archive, parent, seasons, type, child-categories, curriculum-materials-raw-code, post status, date, curriculum-group, multilingual
-                  (fprintf o "~a,\"~a\",~a,~a,~a,~a,~a,~a,\"~a\",~a,~a,~a,~a\n"
+                  ;id, title, permalink, archive, parent, seasons, type, child-categories, curriculum-materials-raw-code, post status, date, curriculum-group, multilingual, proglang
+                  (fprintf o "~a,\"~a\",~a,~a,~a,~a,~a,~a,\"~a\",~a,~a,~a,~a,~a\n"
                            uniqid ;id
                            (string-trim (escaped-file-content page-title-file #:kill-newlines? #t)) ;title
                            p-prime
@@ -242,7 +246,8 @@
                            (if solutions? "private" "publish")
                            curr-group
                            *official-date*
-                           mult-ling
+                           (multilingual? lesson-dir-path)
+                           (get-proglang lesson-dir-path)
                            )
                   (fprintf oa "~a,True\n" uniqid)
                   ))))))))))
@@ -264,7 +269,7 @@
   (lambda (o)
     (call-with-output-file *csv-archive-file*
       (lambda (oa)
-        (fprintf o "ID,Title,Slug,Archive,Parent,Seasons,Type,Child Categories,Curriculum Materials Raw Code,Post Status,Curriculum Group,Date,Multilingual\n")
+        (fprintf o "ID,Title,Slug,Archive,Parent,Seasons,Type,Child Categories,Curriculum Materials Raw Code,Post Status,Curriculum Group,Date,Multilingual,Proglang\n")
         (fprintf oa "ID,Archive\n")
         (set! *type* "lesson")
         (convert-top-pages o oa #:umbrella-dir *lessons-dir*)
