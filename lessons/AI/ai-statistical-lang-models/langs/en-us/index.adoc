@@ -83,28 +83,43 @@ Statistical lanuage models are built on the assumption that the fraction of the 
 @QandA{
 @Q{Do you think a text messaging app with a predictive text feature would produce the same results as our class? Why or why not?}
 @A{Answers will vary. Invite conversation.}
-@A{An app probably not suggest all the same words.}
+@A{An app will probably not suggest all the same words.}
 @A{Our class is a pretty small sample, all from the same generation and geography and we are all currently at school so our minds are primed to respond differently than if we were somewhere else.}
 }
 
-@slidebreak{InvestigateR}
+@slidebreak{Investigate}
 
 Similar to other AI systems we've discussed, predictive text features are trained on a large amount of data, in this case, text.
 
 During training:
 
-@right{@image{images/texting-app.png, 200}}
-
 1. The computer extracts each use of the phrase "Close the" from the training dataset, along with the subsequent word.
 2. It then determines the probability of each possible next word.
-3. When making a suggestion, it offers the words that had the highest probability of following "Close the" in the training dataset.
 
-Consider this screenshot from a text messaging app.  In the @vocab{training corpus} it was built on, "door", "doors", and "house"  most commonly appeared after "Close the". +
-As a result, those words are suggested.
+@ifnotslide{@right{@image{images/texting-app.png, 200}} When making a suggestion: 
+
+@hspace{1em}It offers the words that had the highest probability of following "Close the" in the training dataset.
+
+Consider this screenshot from a text messaging app. +  
+In the @vocab{training corpus} it was built on, "door", "doors", and "house"  most commonly appeared after "Close the". +
+As a result, those words are suggested. +
+But are all users recommended the _same_ completions?
+}
+
+@ifslide{When making a suggestion: 
+
+@hspace{1em}It offers the words that had the highest probability of following "Close the" in the training dataset.
+
+@slidebreak{InvestigateR}
+
+@image{images/texting-app.png, 200}
+Consider this screenshot from a text messaging app. +  
+In the @vocab{training corpus} it was built on, "door", "doors", and "house"  most commonly appeared after "Close the". +
+As a result, those words are suggested. +
+But are all users recommended the _same_ completions?
+}
 
 @slidebreak{Investigate}
-
-But are all users recommended the _same_ completions?
 
 @QandA{
 @Q{What do you think? Will your phone suggest the same words as your classmates' phones would? Why or why not?}
@@ -148,7 +163,7 @@ Throughout the lesson, we'll explore the very important "sometimes not" parenthe
 @A{Statistical language modeling will work for any language! The AI does not need to "know" anything about the rules of grammar; it just follows rules that enable it to identify patterns.}
 
 @Q{Can you think of other things besides human spoken languages that a similar approach might work for?}
-@A{With statistical language modeling, AI can compose music, play chess games, and more. The "text" need not be made up of words: any symbolic notation at all will do.}
+@A{With statistical language modeling, AI can compose music, play chess games, and more. The "text" does not need to be made up of words: any symbolic notation at all will do as long as it uses spaces to separate the symbolic "words".}
 }
 
 == Constructing a Statistical Language Model
@@ -157,7 +172,7 @@ Throughout the lesson, we'll explore the very important "sometimes not" parenthe
 
 === Overview
 
-Students construct a statistical language model by decomposing the text and computing the probabilities of different words appearing.
+Students construct a statistical language model by decomposing the text and computing the probabilities of different words following each other.
 
 === Launch
 @slidebreak{Launch}
@@ -192,12 +207,14 @@ First, we will decompose the title of our corpus into differently sized chunks (
 The formal word computer scientists use in this context is not "chunk" but @vocab{n-gram}. In an @math{n}-gram, @math{n} represents the number of words in the chunk. For special cases where @math{n} is 1, 2, or 3, the @math{n}-grams are called @vocab{unigrams}, @vocab{bigrams}, and @vocab{trigrams}.
 
 @QandA{
-@Q{What other series of words have you encountered that begin with "uni", "bi", and "tri"?}
+@Q{What other collections of words have you encountered that begin with "uni", "bi", and "tri"?}
 @A{Answers will vary!}
 @A{unicycle, bicycle, tricycle}
 @A{(monomial), binomial, trinomial...}
 @A{triangle, n-gon}
-@A{unilateral, bilateral...}
+@A{biceps, triceps, (quadriceps)}
+@A{unicorn}
+
 }
 
 === Investigate
@@ -223,7 +240,9 @@ The phrase "there was an old lady who swallowed a..." is repeated in our corpus!
 
 @slidebreak{Investigate}
 
-In the example you just worked through, you computed the probability that "was" appears after the unigram "there" by dividing 4 (how many times we see "was" follow "there") by 4 (how many times we see "there" followed by anything). +
+In the example you just worked through, you computed the probability that "was" appears after the unigram "there"...
+
+@indented{by dividing 4 _(how many times we see "there" followed by "was")_ by 4 _(how many times we see "there" followed by anything)_.}
 
 We can represent this computation with a special notation:
 
@@ -244,7 +263,7 @@ We can represent this computation with a special notation:
 
 @QandA{
 
-@Q{What @vocab{training corpus} did you use to construct a language model?}
+@Q{What @vocab{training corpus} did we use to construct the language model?}
 @A{The song lyrics, including the title of the song, were our corpus.}
 
 @Q{Make a prediction: How can we make use of the ratios we completed on @printable-exercise{constructing-model.adoc}?}
@@ -260,10 +279,14 @@ Are you and your students interested in exploring probability in more depth? Che
 @slidebreak{Synthesize}
 
 @QandA{
-In our corpus, there were _four_ possible completions for the unigram "the", but there were only _three_ possible completions for the 3-gram "to catch the". +
-_In this corpus_, as the n-gram gets longer, the number of completion options decreases.
+In our song corpus, 
 
-@Q{Do you think the above statement is true of other corpuses?}
+- there were _four_ possible completions for the unigram "the"
+- there were only _three_ possible completions for the 3-gram "to catch the"
+
+We can say that, _in this corpus_, as the n-gram gets longer, the number of completion options decreases.
+
+@Q{Do you think it will generally be true of other corpuses that as the n-gram gets longer, the number of completion options decreases?}
 @A{Yes, in general, this is a true statement: longer phrases have fewer possible completions than single words.}
 }
 
