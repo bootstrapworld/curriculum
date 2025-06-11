@@ -1,8 +1,40 @@
 /************************************************************************************
+* WordPress-Specific Stuff
+*/
+@media print {
+  body { width: 7.5in; }
+  *:has(#raw_code_container) {
+    border-top: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    min-height: unset !important
+  };
+  .x-row-inner>div:last-child { display: none; }
+  #raw_code_container { margin-left: 1px; }
+}
+
+@media screen {
+  div#body.workbookpage:not(.landscape) {
+    width: 8.5in !important;
+    height: unset !important;
+    padding: 0.5in !important;
+    box-shadow: 0 0 5px gray;
+  }
+  div#body.workbookpage.landscape {
+    width: 11in !important;
+    height: unset !important;
+    padding: 0.5in !important;
+    box-shadow: 0 0 5px gray;
+  }
+}
+
+
+/************************************************************************************
 * ASCIIDOCTOR STYLES
 */
-div#body { font-size: 9pt; }
 div#body {
+  box-sizing: content-box;
+  font-size: 9pt;
   margin: 8px;
   line-height: normal;
   text-size-adjust: 100%;
@@ -96,7 +128,6 @@ div#body {
   h1,h2,p,td.content,span.alt{letter-spacing:-.01em}
   p strong,td.content strong{letter-spacing:-.005em}
   .exampleblock>.content{background-color:#fffef7;border-color:#e0e0dc;-webkit-box-shadow:0 1px 4px #e0e0dc;box-shadow:0 1px 4px #e0e0dc}
-  @page{margin:1.25cm .75cm}
   @media print{
     a{color:inherit!important;text-decoration:underline!important}
     a.bare,a[href^="#"],a[href^="mailto:"]{text-decoration:none!important}
@@ -824,7 +855,7 @@ div#body.solution-page {
 }
 
 div#body.workbookpage {
-  font-size: 9pt; /* Use a tiny font for print, but then zoom in @screen */
+  font-size: 9pt;
   color: black !important;
 
   #header > h1:first-child { text-align: center; }
@@ -1524,13 +1555,6 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
 @page landscape { size: letter landscape; margin: 0.5in; }
 
 @media print {
-
-  /* WordPress Rules */
-  body { width: 7.5in; }
-  .x-row-inner>div:last-child { display: none; }
-  .x-section { border-top: none !important; }
-  #raw_code_container { margin-left: 1px; }
-
 
   /* Elements we don't want printed */
   ::-webkit-scrollbar { display:  none; }
