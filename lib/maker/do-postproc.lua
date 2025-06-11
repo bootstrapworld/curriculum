@@ -69,6 +69,7 @@ local function postproc(fhtml_cached, tipe)
   local add_mathjax_p = false
   local add_codemirror_p = false
   local add_body_id_p = false
+  local add_landscape_p = false
   local add_end_body_id_p = false
   local delete_line_p = false
   local read_end_sidebar_p = false
@@ -93,6 +94,9 @@ local function postproc(fhtml_cached, tipe)
     if x:find('^<body') then
       if file_exists_p(f_comment_file) then
         add_comment_p = true
+      end
+      if x:find('landscape') then
+        add_landscape_p = true
       end
       --
       if memberp(tipe, {'lessonplan', 'pathwaynarrative', 'pathwayresource', 'workbookpage'}) then
@@ -304,6 +308,11 @@ local function postproc(fhtml_cached, tipe)
         else
           -- noop
         end
+        if add_landscape_p then
+          add_landscape_p = false
+          klass = klass .. ' landscape'
+        end
+        --
         o:write('<div id="body" class="' .. klass .. '">\n')
       else
         o:write('<div id="body">\n')
