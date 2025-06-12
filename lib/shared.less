@@ -23,6 +23,7 @@ div#body {
   width:          100%; /* needed to undo effect of html{display:flex} */
   display:        block;
   position:       relative;
+  max-width:      700px;
   -webkit-font-smoothing: antialiased;
   &.beta::after {
     position: absolute;
@@ -302,18 +303,18 @@ div#body {
     content: '\00200b';
   }
 }
-  /* use 'thin' instead of 1px border to try and avoid disappearing
-  lines on some browsers */
-  .fitb, .fitbruby, .fitb.stretch::after, .fitbruby.stretch::after {
-    padding-top:        @top-padding-for-writing;
-    position:           relative;
-    display:            inline-block;
-    min-width:          4em;
-    text-align:         center;
-    line-height:        1rem;
-    border-bottom:      solid thin gray;
-    vertical-align:     baseline;
-  }
+/* use 'thin' instead of 1px border to try and avoid disappearing
+lines on some browsers */
+.fitb, .fitbruby, .fitb.stretch::after, .fitbruby.stretch::after {
+  padding-top:        @top-padding-for-writing;
+  position:           relative;
+  display:            inline-block;
+  min-width:          4em;
+  text-align:         center;
+  line-height:        1rem;
+  border-bottom:      solid thin gray;
+  vertical-align:     baseline;
+}
 div#body{
   .fitbruby {
     margin-bottom: 0.75rem;
@@ -458,7 +459,7 @@ div#body:not(.LessonPlan, .narrativepage) p {
 /************************************************************************************
 * NARRATIVE PAGE STYLES
 */
-.narrativepage {
+div#body.narrativepage {
   font-size: 12pt;
   .logo     { float: right; }
   .logo img { max-width: 375px; }
