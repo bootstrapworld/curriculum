@@ -3,6 +3,7 @@
 dofile(os.getenv'MAKE_DIR' .. 'utils.lua')
 
 local website_branch_p = (shell_output('git branch --show-current')[1] == 'website')
+website_branch_p = true
 
 local pathwayindependent_batchf =  os.getenv'ADOC_POSTPROC_PATHWAYINDEPENDENT_INPUT'
 local workbookpage_batchf =  os.getenv'ADOC_POSTPROC_WORKBOOKPAGE_INPUT'
@@ -69,6 +70,7 @@ local function postproc(fhtml_cached, tipe)
   local add_mathjax_p = false
   local add_codemirror_p = false
   local add_body_id_p = false
+  local add_landscape_p = false
   local add_end_body_id_p = false
   local delete_line_p = false
   local read_end_sidebar_p = false
@@ -94,6 +96,10 @@ local function postproc(fhtml_cached, tipe)
       if file_exists_p(f_comment_file) then
         add_comment_p = true
       end
+      if x:find('landscape') then
+        x = x:gsub('landscape', '')
+        add_landscape_p = true
+      end
       --
       if memberp(tipe, {'lessonplan', 'pathwaynarrative', 'pathwayresource', 'workbookpage'}) then
         add_body_id_p = true
@@ -110,22 +116,22 @@ local function postproc(fhtml_cached, tipe)
       --
       --fixme datasheetpage?
       if tipe == 'workbookpage' then
-        x = x:gsub('<body class="', '%0workbookpage ')
+        -- x = x:gsub('<body class="', '%0workbookpage ')
       elseif tipe == 'pathwayindependent' then
         if fhtml_cached:match('/pages/') or fhtml_cached:match('/textbooks/') then
-          x = x:gsub('<body class="', '%0workbookpage ')
+          -- x = x:gsub('<body class="', '%0workbookpage ')
         else
-          x = x:gsub('<body class="', '%0narrativepage ')
+          -- x = x:gsub('<body class="', '%0narrativepage ')
         end
       elseif not memberp(tipe, {'workbookpage', 'lessonplan', 'datasheetpage'}) then
-        x = x:gsub('^<body class="', '%0narrativepage ')
+        -- x = x:gsub('^<body class="', '%0narrativepage ')
       end
       if tipe == 'workbookpage' then
         if fhtml_cached:find('/courses/[^/]-/back%-matter/') then
-          x = x:gsub('<body class="', '%0back-matter ')
+          -- x = x:gsub('<body class="', '%0back-matter ')
         end
         if fbase:find('^notes%-') then
-          x = x:gsub('<body class="', '%0LessonNotes ')
+          -- x = x:gsub('<body class="', '%0LessonNotes ')
         end
       end
       --
@@ -304,6 +310,11 @@ local function postproc(fhtml_cached, tipe)
         else
           -- noop
         end
+        if add_landscape_p then
+          add_landscape_p = false
+          klass = klass .. ' landscape'
+        end
+        --
         o:write('<div id="body" class="' .. klass .. '">\n')
       else
         o:write('<div id="body">\n')
