@@ -301,20 +301,7 @@ div#body {
   .fitbruby::before, .fitb::before {
     content: '\00200b';
   }
-}
-/* use 'thin' instead of 1px border to try and avoid disappearing
-lines on some browsers */
-.fitb, .fitbruby, .fitb.stretch::after, .fitbruby.stretch::after {
-  padding-top:        @top-padding-for-writing;
-  position:           relative;
-  display:            inline-block;
-  min-width:          4em;
-  text-align:         center;
-  line-height:        1rem;
-  border-bottom:      solid thin gray;
-  vertical-align:     baseline;
-}
-div#body{
+
   .fitbruby {
     margin-bottom: 0.75rem;
   }
@@ -355,22 +342,18 @@ div#body{
   }
 
   .vocab { font-weight: bold; font-style: italic; color: @font-color; }
-
-  #material-links p, #opt-material-links p {
-    .showPageLinks a {
-      text-decoration: none;
-      &::after { content: ' ▼ '; }
-    }
-    &+.ulist {
-      transition: 1s ease-in; max-height: 0; overflow: hidden;
-      padding-left: 5px; margin: 0; font-style: italic; font-size: smaller;
-      .pageNum { float: right; margin-right: 10%; }
-    }
-  }
-  #material-links p.open, #opt-material-links p.open {
-    .showPageLinks a::after { content: ' ▲ '; }
-    &+.ulist { transition: 1s ease-in; max-height: 1000px; }
-  }
+}
+/* use 'thin' instead of 1px border to try and avoid disappearing
+lines on some browsers */
+.fitb, .fitbruby, .fitb.stretch::after, .fitbruby.stretch::after {
+  padding-top:        @top-padding-for-writing;
+  position:           relative;
+  display:            inline-block;
+  min-width:          4em;
+  text-align:         center;
+  line-height:        1rem;
+  border-bottom:      solid thin gray;
+  vertical-align:     baseline;
 }
 
 div#body:not(.LessonPlan, .narrativepage) p {
@@ -510,6 +493,22 @@ div#body.LessonPlan {
 
     /* Custom materials link styles */
     .Optional::before, .OptProject::before, .handout::before { color: gray;}
+
+    #material-links p, #opt-material-links p {
+      .showPageLinks a {
+        text-decoration: none;
+        &::after { content: ' ▼ '; }
+      }
+      &+.ulist {
+        transition: 1s ease-in; max-height: 0; overflow: hidden;
+        padding-left: 5px; margin: 0; font-style: italic; font-size: smaller;
+        .pageNum { float: right; margin-right: 10%; }
+      }
+    }
+    #material-links p.open, #opt-material-links p.open {
+      .showPageLinks a::after { content: ' ▲ '; }
+      &+.ulist { transition: 1s ease-in; max-height: 1000px; }
+    }
   }
 
   h2 { font-size: 1.75em; font-weight: normal; }
@@ -692,6 +691,7 @@ div#body.solution-page {
 
 div#body.workbookpage {
   max-width: unset;
+  color: black;
   font-size: 9pt; /* Use a tiny font for print, but then zoom in @screen */
 
   #header > h1:first-child { text-align: center; margin-bottom: 0;}
@@ -709,7 +709,9 @@ div#body.workbookpage {
   #content > .sect1 {
     flex-grow: 1;
   }
-  /* Some sections shouldn't grow at all, and should basically just be block-level elements */
+  /* Some sections shouldn't grow at all, and should basically just be block-level elements
+   * (This allows *other* sections to grow, taking up the available space)
+  */
   #content > .sect1.no-flex-section { flex-grow: 0; }
 
   /* In some cases, AsiiDoc will put an empty preamble containing
@@ -933,23 +935,6 @@ div#body.workbookpage {
   .value { border: dotted 1px black; border-radius: 50%; padding: 0 3px; }
 }
 
-/************************************************************************************
-* CONTRACTS & MISC
-*/
-/* Back-of-the-book contracts table */
-div#body table.contracts-table {
-  border-collapse: collapse;
-  border: none;
-  p  { margin-top: 0; }
-  td { padding: .1em .625em !important; height: 23pt; }
-  tr:nth-child(odd) { border-top: solid 2px black; }
-  tbody tr:nth-child(odd) * { color: @code-comment-color !important; }
-  tbody tr:nth-child(odd) td:first-child .tableblock { margin-left: 1em; }
-  tbody tr:nth-child(odd) td:first-child::before { position: absolute;  }
-  tbody tr:nth-child(even) * { font-family: monospace; white-space: pre; }
-}
-
-
 /* TODO(Emmanuel): do we even need all of these? Clean up */
 div#body:not(.LessonPlan) {
   p:empty { min-height: 0; margin: 0; padding: 0; } /* Empty p tags should take up no space */
@@ -972,7 +957,7 @@ div#body.LessonNotes {
   li { margin-bottom: 10px; }
 }
 /************************************************************************************
-* DESIGN RECIPE, DATA CYCLE, AND STUDENT ANSWER STYLING
+* CONTRACTS TABLE, DESIGN RECIPE, DATA CYCLE, AND STUDENT ANSWER STYLING
 */
 
 div#body{
@@ -1004,6 +989,19 @@ div#body{
     }
     /* If there's a section break between data cycles, eat up all vertical space */
     &+div.paragraph:not(.data-cycle) { margin: auto 0; }
+  }
+
+  /* Back-of-the-book contracts table */
+  table.contracts-table {
+    border-collapse: collapse;
+    border: none;
+    p  { margin-top: 0; }
+    td { padding: .1em .625em !important; height: 23pt; }
+    tr:nth-child(odd) { border-top: solid 2px black; }
+    tbody tr:nth-child(odd) * { color: @code-comment-color !important; }
+    tbody tr:nth-child(odd) td:first-child .tableblock { margin-left: 1em; }
+    tbody tr:nth-child(odd) td:first-child::before { position: absolute;  }
+    tbody tr:nth-child(even) * { font-family: monospace; white-space: pre; }
   }
 
   /* We use tables (perhaps not the best idea) for our DR headings */
@@ -1194,7 +1192,7 @@ div#body{
 * TEACHER RESOURCES PAGE
 */
 
-div#body{
+div#body {
   .pathway_external_links ul li { margin-top: 3ex 0ex; list-style-type: none; }
 
   td.tableblock .listingblock { margin-bottom: 0 !important; }
