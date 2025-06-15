@@ -43,11 +43,9 @@ do
     end
 
   else
-    local ls_output = io.popen('ls ' .. courses_dir)
-    for course in ls_output:lines() do
+    for _,course in ipairs(shell_output('ls ' .. courses_dir)) do
       o:write(' \"' .. course .. '\",\n')
     end
-    ls_output:close()
   end
 
   o:write('}\n')
@@ -215,9 +213,8 @@ do
   -- if select_courses then
   --   goto exit_do_block
   -- end
-  local ls_output = io.popen('ls ' .. lessons_dir)
   local o = io.open(os.getenv 'LESSONS_LIST_FILE', 'w+')
-  for lesson in ls_output:lines() do
+  for _,lesson in ipairs(shell_output('ls ' .. lessons_dir)) do
     local lesson_dir = lessons_dir .. '/' .. lesson
     if file_exists_p(lesson_dir .. '/.proglang-ignore') then
       goto continue
@@ -235,7 +232,6 @@ do
     o:write(lesson, '\n')
     ::continue::
   end
-  ls_output:close()
   o:close()
   -- ::exit_do_block::
 end
