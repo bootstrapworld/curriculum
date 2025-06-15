@@ -692,6 +692,8 @@ div#body.solution-page {
 div#body.workbookpage {
   max-width: unset;
   color: black;
+  top: 0;
+  left: 0;
   font-size: 9pt; /* Use a tiny font for print, but then zoom in @screen */
 
   #header > h1:first-child { text-align: center; margin-bottom: 0;}
@@ -760,12 +762,13 @@ div#body.workbookpage {
             display: contents;
             > * { width: 100%; }
           }
-          &.valign-top    {     align-items: start;  }
+          &.valign-top    {     align-content: flex-start;  }
           &.valign-middle {     align-items: center; }
           &.valign-bottom {     align-items: end;    }
           &.halign-left   { justify-content: left;   }
           &.halign-center { justify-content: center; }
-          &.halign-right  { justify-content: right;  }         }
+          &.halign-right  { justify-content: right;  }
+        }
       }
       > tr:nth-of-type(even) > td { background-color: #f8f8f7; }
     }
