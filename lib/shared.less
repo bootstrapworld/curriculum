@@ -991,7 +991,7 @@ div#body{
       font-family: @code-font;
     }
     /* If there's a section break between data cycles, eat up all vertical space */
-    &+div.paragraph:not(.data-cycle) { margin: auto 0; }
+    &+div.paragraph:not(.data-cycle):has(+.data-cycle) { margin: auto 0; }
   }
 
   /* Back-of-the-book contracts table */
