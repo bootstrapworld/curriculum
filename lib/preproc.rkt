@@ -1636,6 +1636,20 @@
                                          (create-begin-tag "span" ".duration")
                                          txt
                                          (create-end-tag "span")) o))]
+                           [(string=? directive "glossary-entry")
+                            (let* ([arg (read-group i directive)]
+                                   [arg1 (regexp-replace* #rx" " arg "_")])
+                              (display (enclose-tag "a" "" arg
+                                         #:attribs
+                                         (format "name=\"glossary_~a\"" arg1)) o))]
+                           [(string=? directive "vocab-link")
+                            (let* ([arg-as-given (read-group i directive)]
+                                   [arg (assoc-glossary arg-as-given)]
+                                   [arg (if arg (car arg) "missing")]
+                                   [arg-link-form (regexp-replace* #rx" " arg "_")])
+                              (display (enclose-span ".vocab"
+                                         (format "link:#glossary_~a[~a]"
+                                                 arg-link-form arg-as-given)) o))]
                            [(string=? directive "vocab")
                             (let* ([arg (read-group i directive)]
                                    [s (assoc-glossary arg)])
