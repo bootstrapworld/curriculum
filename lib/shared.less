@@ -5,7 +5,7 @@
 * SYSTEMWIDE STYLES
 */
 html { font-size: 9pt; }
-
+body { width: 100%; }
 @font-color: #75328A;
 @translucent-bg-color: #75328AAA;
 @text-font: 'Lato', Arial, Helvetica, sans-serif;
@@ -41,12 +41,12 @@ div#body {
   /* Set Defaults (many asciidoc overrides) */
   h1 {
     font-size:      24px;
-    font-weight:    bold;
+    font-weight:    900;
     font-family:    @text-font;
     line-height:    30px;
   }
   h2 {
-    margin:          0; /* 1ex bottom margin */
+    margin:          0;
     font-family:    @text-font;
   }
   .prefix { font-style: italic; color: gray; }
@@ -697,7 +697,7 @@ div#body.workbookpage {
   font-size: 9pt; /* Use a tiny font for print, but then zoom in @screen */
 
   #header > h1:first-child { text-align: center; margin-bottom: 0;}
-
+  h1 { font-weight: bold; }
   /* Code that shows up in headers should not have the usual background */
   h2 .editbox, h2 .editbox *, h2 .pyret { color: black; background: none; margin: 0 5px; }
 
@@ -1314,7 +1314,7 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
 */
 
 @media screen {
-  html { height: 100%; display: flex; padding-left: 3em;}
+  html { height: 100%; display: flex; }
 
   .web-page-only {
     font-weight:      bold;
@@ -1331,6 +1331,7 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
     #savetodrive-div { transform: scale(0.8); }
   }
 
+  div#body.workbookpage { padding-left: 3em; }
   /********************************************************************
    *  Collapsing Headers
    */
