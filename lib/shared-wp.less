@@ -919,7 +919,7 @@ body.LessonNotes {
 /************************************************************************************
 * DESIGN RECIPE, DATA CYCLE, AND STUDENT ANSWER STYLING
 */
-
+div#body{
 /* Data Cycle tables should have borders */
 .data-cycle { 
   border-collapse: collapse;
@@ -933,13 +933,13 @@ body.LessonNotes {
 
   /* Ruby text in the Data Cycle needs to be slightly larger than normal */
   .fitbruby .ruby { 
-    font-size:  0.75rem !important; 
+    font-size:  0.75rem !important;
     user-select: none;
-    &::after { bottom: 0 !important; color: black; text-align: left !important; } 
+    &::after { bottom: 0 !important; color: black; text-align: left !important; }
   }
   .question_type { display: block; font-size: 10px; }
   .question_type.chosen { 
-    font-style: italic; font-weight: bold; border: solid 1px black; 
+    font-style: italic; font-weight: bold; border: solid 1px black;
     border-radius: 50%;
     &::after { display: none; };
   }
@@ -1015,28 +1015,28 @@ table.recipe_title    {
   }
   .solution.recipe_name { text-align: right !important; min-width: 6em; } /* no whitespace in pyret */
   /* Indenting for function body and example bodies */
-  .recipe_example_line:not(.keyword_only) > .content, 
+  .recipe_example_line:not(.keyword_only) > .content,
   .recipe_definition_body { margin-left: 2ex; }
-  /* Conditionals */  
-  .recipe_condition { 
-    position: relative; 
-    margin-left: 1em; 
+  /* Conditionals */
+  .recipe_condition {
+    position: relative;
+    margin-left: 1em;
     width: 90%;
     .answers { margin-left: 1em; text-align: left;}
     .questions { margin-left: 3em; text-align: left;}
-    .questions::after { 
-      content: ":"; 
-      position: absolute; 
-      left: 100%; 
-      top: 0px; 
+    .questions::after {
+      content: ":";
+      position: absolute;
+      left: 100%;
+      top: 0px;
       width: 1em;
     }
     +.recipe:nth-last-child(3) .answers::before,
-    .questions::before { 
-      position: absolute; 
-      left: -2em; 
-      color: #75328A; 
-      font-weight: bold; 
+    .questions::before {
+      position: absolute;
+      left: -2em;
+      color: #75328A;
+      font-weight: bold;
       font-family: @text-font;
     }
     /* the 1st condition ("if") */
@@ -1048,12 +1048,12 @@ table.recipe_title    {
     }
     /* the last condition ("else") */
     +.recipe:nth-last-child(3) {
-      .fitbruby:first-child { 
-        margin-left: 3em; 
+      .fitbruby:first-child {
+        margin-left: 3em;
         &:before  { content: "else:"; }
       }
     }
-    +.recipe_line:not(.recipe_condition) .solution { 
+    +.recipe_line:not(.recipe_condition) .solution {
       border-bottom: none; margin-left: 2em; font-style: normal; text-align: left;
     }
   }
@@ -1062,25 +1062,25 @@ table.recipe_title    {
   .contracts-table tr:nth-child(odd) td:first-child::before { content: '#'; }
 }
 
-.wescheme {  
+.wescheme {
   .recipe_purpose, .recipe_contract .recipe_name {
     &::before { content: ';'; }
   }
   .recipe_example_body { margin-left: 1em;}
-  .recipe_condition { 
-    position: relative; 
-    margin-left: 2em; 
+  .recipe_condition {
+    position: relative;
+    margin-left: 2em;
     width: 90%;
     .questions { margin-left: 1em; text-align: left; }
     .answers { margin-left: 1em; margin-right: 1em; text-align: left; }
     .questions::before { content: "["; position: absolute; left: -1ex; color: @font-color; }
-    .answers::after { 
-      content: "]"; 
-      position: absolute; 
+    .answers::after {
+      content: "]";
+      position: absolute;
       left: calc(100% + 2pt);
-      bottom: 0; 
-      color: @font-color; 
-      width: unset; 
+      bottom: 0;
+      color: @font-color;
+      width: unset;
       font-style: unset;
       font-size: unset;
       font-family: unset;
@@ -1130,7 +1130,7 @@ table.recipe_title    {
   .codap_example_tables+table table * { margin: 0; padding: 0; }
   .codap_example_tables+table table * { text-align: center; height: 2rem; }
   .recipe_domain, .recipe_range { width:  40%; }
-} 
+}
 
 /************************************************************************************
 * TEACHER RESOURCES PAGE
