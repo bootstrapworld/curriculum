@@ -17,7 +17,6 @@
 
 | Student-facing Lesson Goals
 |
-
 - Let's think about training, the act of transforming data into a model.
 
 | Materials
@@ -25,7 +24,6 @@
 @material-links
 
 |===
-
 
 == Song Recommendation Systems
 
@@ -37,8 +35,6 @@ Students explore song recommendation, another example of data-driven algorithms 
 
 === Launch
 @slidebreak{Launch}
-
-Data is at the heart of @vocab{data science} and @vocab{data-driven algorithms} are at the heart of Machine Learning and AI.  When collecting, organizing, and drawing general conclusions from data with the help of computers, providing _more_ data often produces better results, but we must also consider how other variables can influence the quality of output.
 
 @lesson-instruction{
 - Read @printable-exercise{case-study-michelle.adoc}.
@@ -61,7 +57,7 @@ It's likely that Michelle could get better suggestions without Spotify making an
 
 Very broadly, a song recommendation system does two things:
 
-- aggregate a user's listening history to build a detailed profile of their musical tastes
+- collect a user's listening history to build a detailed profile of their musical tastes
 - given a new song, determine whether or not to recommend that song
 
 @slidebreak{Investigate}
@@ -83,12 +79,17 @@ What does building the profile for a listener entail?
 
 @slidebreak{Investigate}
 
-
 As you discovered, song recommendation systems need @vocab{training} in order to make recommendations. 
 
 @lesson-point{@vocab{Training} is the act of transforming data into a model. }
 
-In the case of Spotify, the model is a _summary_ of the user's listening habits. Using this model, Spotify answers questions about new, unseen data (e.g. Do we expect Michelle to like the latest Taylor Swift song... or not?).
+@slidebreak{Investigate}
+
+In machine learning, we generally start with a large chunk of data. A model is then generated from the data. That model is generally expected to be a lot smaller than the original chunk of data (but it may still be huge!). The model can be queried from to get answers.
+
+@slidebreak{Investigate}
+
+In the case of Spotify, the model is a _summary_ of the users' listening habits. Using this model, Spotify answers questions about new, unseen data (e.g. Do we expect Michelle to like the latest Taylor Swift song... or not?).
 
 When Michelle observed that Spotify must have updated its algorithms, she may have been correct...
 
@@ -104,9 +105,7 @@ or a lot... and that there's no way for us to know!}
 @slidebreak{Synthesize}
 
 @QandA{
-In machine learning, we generally start with a large chunk of data. A model is then generated from the data. That model is generally expected to be a lot smaller than the original chunk of data (but it may still be huge!). The model can be queried from to get answers.
 @Q{Why do you think models are generally smaller than the training data?}
-
 @A{Generally, the model *summarizes* the data, eliminating all but its most essential features--the features that enable it to make predictions, generate text, etc.}
 
 @Q{What advantages might there be to the model being smaller than the training data?}
@@ -136,9 +135,7 @@ As a student, you probably know what it feels like to be under surveillance.
 Good designers of these systems have to practice adversarial thinking and imagine all the ways that someone might try to _hack_ or _fool_ them.  Let's practice thinking like a designer.
 
 @QandA{
-
 @Q{Imagine that your teacher announces that they will be running all student writing through a plagiarism detector and you are a student who wants to plagiarize. Exercise some creativity: What are your strategies for evading detection?}
-
 @A{Responses will vary, but may include the following:
   * replace common words with synonyms
   * change the ordering of sentences and paragraphs
@@ -223,7 +220,6 @@ The bag-of-words summary for both documents is exactly the same!
 
 A plagiarism detector that uses this model, taking stock of word frequency and word order, could compare the bags instead of the documents. If it did so, it would conclude that the two bags of words are a perfect match... and that Document a and Document b are suspiciously similar.
 
-
 @lesson-instruction{
 - Open the @starter-file{plagiarism}.
 - With a partner, complete @printable-exercise{slightly-less-primitive-detector.adoc}.
@@ -232,18 +228,14 @@ A plagiarism detector that uses this model, taking stock of word frequency and w
 @slidebreak{Investigate}
 
 @QandA{
-
 @Q{How is the `bag-equality` plagiarism detector different from our primitive `simple-equality` plagiarism detector?}
 @A{The `bag-equality` plagiarism detector compares two bag-of-words summaries, rather than simply comparing two texts.}
-
 
 @Q{How is the `bag-equality` plagiarism detector similar to our primitive `simple-equality` plagiarism detector?}
 @A{Like our primitive plagiarism detector, it checks for identicality. It determines if the two bags of words are identical or not.}
 }
 
 Checking if two bags of words are identical *is* an improvement from checking if two texts are identical.
-
-@teacher{If your students are ready to think about plotting points in a multi-dimensional space, you can continue on to @lesson-link{ai-training-2} to learn about a major upgrade to our plagiarism detection algorithm.}
 
 === Synthesize
 @slidebreak{Synthesize}
@@ -252,7 +244,6 @@ Checking if two bags of words are identical *is* an improvement from checking if
 @Q{What similarities are there between a system that recommends songs and `bag-equality` plagiarism detection?}
 @A{Both systems build summaries of the available data and then work with those summaries.}
 }
-
 
 
 == Data Normalization
@@ -299,13 +290,10 @@ When we plot a point on the _coordinate_ plane, we locate @math{x} on the horizo
 Let's look at some slightly more complicated documents and consider how to plot their points in a multi-dimensional space.
 
 - Document c: "doo be doo be doo doo doo"
-
 - Document d: "be bop bop bop be bop bop"
-
 
 [cols="1,2,2", options="header", stripes="none"]
 |===
-
 | Document
 | Bag-of-words summary
 | Point
@@ -317,7 +305,6 @@ Let's look at some slightly more complicated documents and consider how to plot 
 | d
 | `"be": 2, "bop": 5`
 | (2, 5)
-
 |===
 
 @scrub{THIS SECTION COULD BE REFORMATTED AND TIGHTENED UP.}
@@ -329,7 +316,6 @@ Let's look at some slightly more complicated documents and consider how to plot 
  * The points were written as if there were only two items in the list... but, in fact there are three different items!
  * 5 represents "doo" in the first point and "bop" in the second point... but we've lost that information.}
 }
-
 
 @teacher{
 *Forgetting to normalize data and consider dimensionality* are common mistakes. Students will discover what these entail during the remainder of the lesson.
@@ -351,7 +337,6 @@ We must revise our bag-of-words summaries and our points!
 
 @right{@image{images/2pts.png, 150}}
 
-
 The new bag-of-words summary for Document c is `"be": 2, "bop": 0, "doo": 5`, which we can represent as (2, 0, 5).
 
 The new bag-of-words summary for Document d is `"be": 2, "bop": 5, "doo": 0`, and we can represent it as (2, 5, 0).
@@ -368,19 +353,13 @@ We started out with two documents. Now, in place of our two documents, we have t
 === Synthesize
 @slidebreak{Synthesize}
 
-
 @QandA{
-
 @Q{Earlier in the lesson, you learned that generally, models _summarize_ the data, eliminating all but the most essential features. Which features of the starting document does the bag of words eliminate? Which features does it preserve?}
-
 @A{The bag-of-words model eliminates word order. It preserves word count.}
 
 @Q{Why is it important for the bag-of-words summary to acknowledge when a word occurs zero times?}
-
 @A{Each point exists in a multi-dimensional space. To compare points and consider their closeness, the points must exist in the same multi-dimensional space. When we omit a word that occurs zero times, we are in fact omitting a dimension and constructing a broken model.}
 }
-
-
 
 
 == Computing Closeness with Angle Difference
@@ -404,31 +383,23 @@ Take, for example, this comparison between two strings: `stringA` ("doo doo doo 
 [cols="<.^8a,<.^8a,<.>8a",  stripes="none"]
 |===
 |
-
 `StringA`: `doo doo doo doo`
-
 [cols="1,1",options="header"]
 !===
 ! Word  ! Frequency
 ! be ! 0
 ! doo! 4
 !===
-
 Ordered pair: (0,4)
-
 |
-
 `StringB`: `be be be be`
-
 [cols="1,1",options="header"]
 !===
 ! Word  ! Frequency
 ! be ! 4
 ! doo! 0
 !===
-
 Ordered pair: (4,0)
-
 |
 
 @center{@image{images/soln1.png, 150}}
@@ -442,7 +413,6 @@ If two documents are identical, they will be at the same point in space, and hav
 
 @lesson-instruction{
 - Complete @printable-exercise{angle-difference.adoc} using your knowledge of bags of words and plotting points.
-
 ** First, fill in the frequency tables by referring to the provided string.
 ** Translate the bags of words to ordered pairs.
 ** Plot the points.
@@ -455,7 +425,6 @@ If two documents are identical, they will be at the same point in space, and hav
 As the documents contain different words, the angles between the lines will grow. To reflect this, we can use the `angle-difference` function. It will give us a value between 0° (if the two are identical) and 90° (if the two have nothing in common).
 
 @strategy{Points, Rays, and Vectors}{
-
 As you've discovered, our plagiarism detector computes the angle difference between rays extending from the origin to various points that we have plotted space.
 
 In machine learning, we generally refer to these bag-of-word representations *not* as _points_, but as _vectors_. Why? A point represents a location in space, whereas a vector represents a magnitude and a direction.
@@ -464,7 +433,6 @@ To reduce the amount of new vocabulary introduced in this lesson, we have opted 
 
 If you or your students are wondering why we wouldn't just compute the _distance_ between points, rather than complicating things and introducing angles... it's because typically, machine learning uses vectors, not points.
 }
-
 
 The contract for `angle-difference` is below.
 
@@ -500,14 +468,10 @@ The plot thickens, especially if you have older students who have learned some t
 For the purposes of this curriculum, you can ignore this difference. In particular, if your students have never even heard of the cosine, that's fine! For students who are familiar with cosine and curious to explore, the @starter-file{plagiarism} contains a `cosine-similarity function`.
 }
 
-
-
-
 === Synthesize
 @slidebreak{Synthesize}
 
 @QandA{
-
 Here are three different lines of code.
 
 `angle-difference("hello world", "hello")`
@@ -521,7 +485,6 @@ Here are three different lines of code.
 
 @Q{Which line of code produces 45°? How do you know?}
 @A{`angle-difference("hello world", "hello")`; the two strings have one word in common; they are not entirely different nor are they identical.}
-
 
 @Q{Which line of code produces 0°? How do you know?}
 @A{`angle-difference("hello", "hello")`; the two strings are exactly the same.}
