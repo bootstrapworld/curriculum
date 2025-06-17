@@ -31,30 +31,25 @@
     function populateGlossary() {
 
       function possibleEntryWords(word) {
-        let result = [word];
+        let entries = [word];
         let root;
-        if (word.match(/ies$/) {
-          result.push(word.replace(/ies$/, 'y'));
-        } else if (word.match(/es$/) {
+        if (word.match(/ies$/)) {
+          entries.push(word.replace(/ies$/, 'y'));
+        } else if (word.match(/es$/)) {
           root = word.replace(/es$/, '');
-          result.push(root, root + 'e');
-        } else if (word.match(/s$/) {
-          result.push(word.replace(/s$/, '');
-        } else if (word.match(/ied$/) {
-          result.push(word.replace(/ied$/, 'y'));
-        } else if (word.match(/ed$/) {
+          entries.push(root, root + 'e');
+        } else if (word.match(/s$/)) {
+          entries.push(word.replace(/s$/, ''));
+        } else if (word.match(/ied$/)) {
+          entries.push(word.replace(/ied$/, 'y'));
+        } else if (word.match(/ed$/)) {
           root = word.replace(/ed$/, '');
-          result.push(root, root + 'e');
-        } else if (word.match(/ing$/) {
+          entries.push(root, root + 'e');
+        } else if (word.match(/ing$/)) {
           root = word.replace(/ing$/, '');
-          result.push(root, root + 'e');
+          entries.push(root, root + 'e');
         }
-        return result;
-      }
-
-      function singular(word) {
-        // do something here to extract singular form...
-        return word;
+        return entries;
       }
 
       // if just one lesson, add it to the title
@@ -85,8 +80,10 @@
         const matches = /@vocab{([^}]+)}/g.exec(definitionHTML);
         if(matches) {
           const vocab = matches[1];
-          const singular = singular(vocab);
-          const link  = `<a href="#${vocab}">${vocab}</a>`;
+          const possibleWords = possibleEntryWords(vocab);
+          const key = possibleWords.find(w => glossary.get(w))
+          console.log('found @vocab', matches, 'possibleWords:', possibleWords, 'chosen word', key);
+          const link  = `<a href="#${key}">${key}</a>`;
           definitionHTML = definitionHTML.replace(matches[0], link);
         }
         dd.innerHTML = "<p>" + definitionHTML + "</p>";
