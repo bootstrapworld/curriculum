@@ -108,10 +108,6 @@ local function postproc(fhtml_cached, tipe)
         add_analytics_p = true
       end
       --
-      if tipe == 'pathwayresource' then -- TEACHERRESOURCEPAGE
-        x = x:gsub('^<body class="', '%0TeacherResources ')
-      end
-      --
       --fixme datasheetpage?
       --
     end
@@ -285,6 +281,9 @@ local function postproc(fhtml_cached, tipe)
         elseif tipe == 'lessonplan' then
           klass = klass .. ' LessonPlan'
         elseif not memberp(tipe, {'datasheetpage'}) then
+          if tipe == 'pathwayresource' then
+            klass = klass .. ' TeacherResources'
+          end
           klass = klass .. ' narrativepage'
         else
           -- noop
