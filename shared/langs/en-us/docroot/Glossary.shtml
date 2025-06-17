@@ -29,6 +29,29 @@
     lessons = lesson? [lesson] : lessons || Object.keys(graph);
 
     function populateGlossary() {
+
+      function possibleEntryWords(word) {
+        let result = [word];
+        let root;
+        if (word.match(/ies$/) {
+          result.push(word.replace(/ies$/, 'y'));
+        } else if (word.match(/es$/) {
+          root = word.replace(/es$/, '');
+          result.push(root, root + 'e');
+        } else if (word.match(/s$/) {
+          result.push(word.replace(/s$/, '');
+        } else if (word.match(/ied$/) {
+          result.push(word.replace(/ied$/, 'y'));
+        } else if (word.match(/ed$/) {
+          root = word.replace(/ed$/, '');
+          result.push(root, root + 'e');
+        } else if (word.match(/ing$/) {
+          root = word.replace(/ing$/, '');
+          result.push(root, root + 'e');
+        }
+        return result;
+      }
+
       function singular(word) {
         // do something here to extract singular form...
         return word;
