@@ -101,10 +101,8 @@ local function postproc(fhtml_cached, tipe)
         add_landscape_p = true
       end
       --
-      if memberp(tipe, {'lessonplan', 'pathwaynarrative', 'pathwayresource', 'workbookpage'}) then
-        add_body_id_p = true
-        add_end_body_id_p = true
-      end
+      add_body_id_p = true
+      add_end_body_id_p = true
       --
       if memberp(tipe, {'lessonplan', 'pathwaynarrative'}) then
         add_analytics_p = true
@@ -115,25 +113,6 @@ local function postproc(fhtml_cached, tipe)
       end
       --
       --fixme datasheetpage?
-      if tipe == 'workbookpage' then
-        -- x = x:gsub('<body class="', '%0workbookpage ')
-      elseif tipe == 'pathwayindependent' then
-        if fhtml_cached:match('/pages/') or fhtml_cached:match('/textbooks/') then
-          -- x = x:gsub('<body class="', '%0workbookpage ')
-        else
-          -- x = x:gsub('<body class="', '%0narrativepage ')
-        end
-      elseif not memberp(tipe, {'workbookpage', 'lessonplan', 'datasheetpage'}) then
-        -- x = x:gsub('^<body class="', '%0narrativepage ')
-      end
-      if tipe == 'workbookpage' then
-        if fhtml_cached:find('/courses/[^/]-/back%-matter/') then
-          -- x = x:gsub('<body class="', '%0back-matter ')
-        end
-        if fbase:find('^notes%-') then
-          -- x = x:gsub('<body class="', '%0LessonNotes ')
-        end
-      end
       --
     end
     --
