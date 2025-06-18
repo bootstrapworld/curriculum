@@ -42,12 +42,16 @@ echo ➤ Checking jsons
 JQ=$(which jq)
 
 if test -n "$JQ"; then
+  json_error=
   for jf in distribution/*/lessons/*/assessments/*/*.json; do
     cat $jf | $JQ -e >/dev/null 2>&1 && continue
+    json_error=1
     echo $jf is invalid JSON!
   done
-  echo Please fix JSON files first!
-  exit 1
+  if test -n "$json_error"; then
+    echo Please fix JSON files first!
+    exit 1
+  fi
 fi
 
 echo ➤ Building quizzes
