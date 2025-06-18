@@ -307,14 +307,14 @@ Let's look at some slightly more complicated documents and consider how to plot 
 | (2, 5)
 |===
 
-@scrub{THIS SECTION COULD BE REFORMATTED AND TIGHTENED UP.}
 *We have a problem.*  We can plainly see that Documents c and d are *not* the same ... but their points are...
 
 @QandA{
 @Q{What went wrong here?}
 @A{The point is to draw out student thinking here rather than to get to any particular answer. The remainder of the lesson will dig into the details. Students might suggest:
  * The points were written as if there were only two items in the list... but, in fact there are three different items!
- * 5 represents "doo" in the first point and "bop" in the second point... but we've lost that information.}
+ * 5 represents "doo" in the first point and "bop" in the second point... but we've lost that information.
+}
 }
 
 @teacher{
@@ -325,7 +325,13 @@ Let's look at some slightly more complicated documents and consider how to plot 
 
 To solve this problem, let's start by taking a closer look at our data.
 
-First we must recognize that Documents c and d contain a total of *three* different words. Because there are three words, we need to use a *three* dimensional space, rather than a coordinate plane, which has just two dimensions. We can use a Venn Diagram to visualize the data:
+First we must recognize that Documents c and d contain a total of *three* different words. 
+
+@lesson-point{
+Because there are three words, we need to use a *three* dimensional space, rather than a coordinate plane, which has just two dimensions. 
+}
+
+We can use a Venn Diagram to visualize the data:
 
 @center{@image{images/scat-venn-diagram.png, 150}}
 
@@ -333,19 +339,32 @@ First we must recognize that Documents c and d contain a total of *three* differ
 
 We must revise our bag-of-words summaries and our points!
 
+- Document c: "doo be doo be doo doo doo"
+- Document d: "be bop bop bop be bop bop"
+
+[cols="1,2,2", options="header", stripes="none"]
+|===
+| Document
+| Bag-of-words summary
+| Point
+
+| c
+| `"be": 2, "bop": 0, "doo": 5`
+| (2, 0, 5)
+
+| d
+| `"be": 2, "bop": 5, "doo": 0`
+| (2, 5, 0)
+|===
 @teacher{Normalizing data requires that we consider _all_ the words; when a word occurs zero times in a document, we acknowledge it. Instead of glossing over the dimension, we indicate that a given word occurred zero times.}
-
-@right{@image{images/2pts.png, 150}}
-
-The new bag-of-words summary for Document c is `"be": 2, "bop": 0, "doo": 5`, which we can represent as (2, 0, 5).
-
-The new bag-of-words summary for Document d is `"be": 2, "bop": 5, "doo": 0`, and we can represent it as (2, 5, 0).
 
 It is a bit trickier to envision plotting these points, but not impossible!
 
 @QandA{
-@Q{In the 3-dimensional space to the right (above), which point represents @math{c}? How do you know?}
-@A{The one on the bottom. It's at point (2,5) on the be-doo plane, and has moved 0 in the bop direction.}
+@Q{@right{@image{images/2pts.png, 150}}In the 3-dimensional space to the right, which point represents @math{c}?}
+@A{The one on the bottom.} 
+@Q{How do you know?}
+@A{It's at point (2,5) on the be-doo plane, and has moved 0 in the bop direction.}
 }
 
 We started out with two documents. Now, in place of our two documents, we have two points that exist at specific locations in a multi-dimensional space.
