@@ -37,6 +37,19 @@ done
    exit 0
  fi
 
+echo ➤ Checking jsons
+
+JQ=$(which jq)
+
+if test -n "$JQ"; then
+  for jf in distribution/*/lessons/*/assessments/*/*.json; do
+    cat $jf | $JQ -e >/dev/null 2>&1 && continue
+    echo $jf is invalid JSON!
+  done
+  echo Please fix JSON files first!
+  exit 1
+fi
+
 echo ➤ Building quizzes
 
 outputf=.tmp.build-mdquiz.txt
