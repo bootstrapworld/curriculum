@@ -1,5 +1,5 @@
 @import (inline) url("./asciidoctor.less");
-@import 'https://www.bootstrapworld.org/styles.css';
+@import (inline) 'https://www.bootstrapworld.org/styles.css';
 
 /************************************************************************************
 * SYSTEMWIDE STYLES
@@ -8,6 +8,7 @@ html { font-size: 9pt; }
 body { width: 100%; }
 @font-color: #75328A;
 @translucent-bg-color: #75328AAA;
+@translucent-bg-color2: #b7d89333;
 @text-font: 'Lato', Arial, Helvetica, sans-serif;
 @code-font: Hack, "Courier New", monospace;
 @code-comment-color: #cd7054;
@@ -88,7 +89,6 @@ div#body {
         padding: 5px;
       }
     }
-
   }
 
   /* Make .mathunicode and MathJax look similar */
@@ -142,7 +142,7 @@ div#body {
 
   /* The footer at the bottom of every page */
   .acknowledgmentsect {
-    position: absolute;
+    position: relative;
     top: 100%;
     margin-top: 20px;
   }
@@ -214,6 +214,7 @@ div#body {
     display:            block;
   }
   .lesson-section-2    { clear: both; width: 100%; margin: 20px 0px; }
+
   .sectionbreak {
     display:          block;
     width:            auto;
@@ -301,7 +302,6 @@ div#body {
   .fitbruby::before, .fitb::before {
     content: '\00200b';
   }
-
   .fitbruby {
     margin-bottom: 0.75rem;
   }
@@ -364,6 +364,7 @@ div#body:not(.LessonPlan, .narrativepage) p {
 
 /************************************************************************************
 * SIDEBAR STYLES
+*
 */
 
 @keyframes slideInFromLeft {
@@ -434,7 +435,7 @@ div#body:not(.LessonPlan, .narrativepage) p {
       padding:    10px !important;
       font-size:  10pt !important;
     }
-    li:nth-child(odd) { background: #b7d89333; }
+    li:nth-child(odd) { background: @translucent-bg-color2; }
   }
   .sidebarpractices ul { font-size:  0.75rem !important; margin: 0; }
 }
@@ -488,7 +489,7 @@ div#body.LessonPlan {
       pointer-events: none;
       &::before { font-size: 12pt; content: "Slides are not yet available for this lesson"; }
     }
-    &.left-header tr td:nth-child(1) { background-color: #b7d893; }
+    &.left-header tr td:nth-child(1) { background-color: @translucent-bg-color2; }
     &.left-header tr td:nth-child(1) p { font-weight: bold; }
 
     /* Custom materials link styles */
@@ -689,11 +690,11 @@ div#body.solution-page {
 }
 
 div#body.workbookpage {
-  max-width: unset;
-  color: black;
+  font-size: 9pt; /* Use a tiny font for print, but then zoom in @screen */
+  color: black !important;
   top: 0;
   left: 0;
-  font-size: 9pt; /* Use a tiny font for print, but then zoom in @screen */
+  max-width: unset;
 
   #header > h1:first-child { text-align: center; margin-bottom: 0;}
   h1 { font-weight: bold; }
@@ -737,7 +738,7 @@ div#body.workbookpage {
     &::before { content: 'Teachers:'; display: inline; font-weight: bold; }
   }
 
-  /* Given adjacent sections some padding */
+  /* Give adjacent sections some padding */
   .lesson-section-1+.lesson-section-1 { border: none; margin-top: 1ex; }
 
   .linkInstructions { font-style: italic; }
@@ -761,7 +762,7 @@ div#body.workbookpage {
             display: contents;
             > * { width: 100%; }
           }
-          &.valign-top    {     align-content: flex-start;  }
+          &.valign-top    {   align-content: flex-start;  }
           &.valign-middle {     align-items: center; }
           &.valign-bottom {     align-items: end;    }
           &.halign-left   { justify-content: left;   }
@@ -1361,7 +1362,7 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
           margin-right: 5px;
         }
         &.active::after { content: '▲'; }
-        &.active, &:hover { background-color: #b7d893; }
+        &.active, &:hover { background-color: @translucent-bg-color2; }
       }
       /* set collapsed size and transition rules */
       .sect1:not(.acknowledgmentsect) .sectionbody {
@@ -1415,7 +1416,7 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
   a[href]::after { content: none !important; }
   #savetodrive-div, .copyright, #footer, #outOfDate, .web-page-only, .section-link,
   .acknowledgmentsect, .sidebar, .CodeMirror div.CodeMirror-cursor, #MathJax_Message {
-   display: none !important; visibility: hidden; float: none;
+    display: none !important; visibility: hidden; float: none;
   }
   div#body{ position: static; } /* page-break fails on absolute positioning */
 
@@ -1455,15 +1456,15 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
 
   div#body.workbookpage {
     /* Use B&W colors for headers */
-    #header> h1:first-child, .sect1 > h1:first-child { 
+    #header> h1:first-child, .sect1 > h1:first-child {
       color: black;
     }
     .sect1 > h2:first-child, .sect1 > h3:first-child, .sect2 > h3:first-child {
       color: white;
     }
 
-    .recipe_title, h2 { 
-      background: @print-section-heading !important; 
+    .recipe_title, h2 {
+      background: @print-section-heading !important;
       td:last-child { border: 2px solid @print-section-heading !important; }
     }
     h2, table.recipe_title p { color: black !important; }
