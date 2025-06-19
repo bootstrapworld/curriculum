@@ -1,14 +1,9 @@
-@import (inline) url("./asciidoctor.less");
-@import (inline) 'https://www.bootstrapworld.org/styles.css';
-
 /************************************************************************************
 * SYSTEMWIDE STYLES
 */
-html { font-size: 9pt; }
-body { width: 100%; }
 @font-color: #75328A;
 @translucent-bg-color: #75328AAA;
-@translucent-bg-color2: #b7d89333;
+@translucent-bg-color2: #b7d893;
 @text-font: 'Lato', Arial, Helvetica, sans-serif;
 @code-font: Hack, "Courier New", monospace;
 @code-comment-color: #cd7054;
@@ -17,6 +12,7 @@ body { width: 100%; }
 @print-section-heading: lightgray;
 @table-header: #eee;
 @lesson-block-vertical-space: 1em;
+@ruby-height: 13px; /* Note(Emmanuel): use this for positioning and font size! */
 
 div#body {
   font-family:    @text-font;
@@ -1472,7 +1468,7 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
     .acknowledgmentsect:last-child { flex-grow: 0 !important; } /* Even when invisible, flex-grow will take up space */
     .recipe_condition *::before, *::after { color: black !important; }
   }
-  div#body{
+  div#body {
     margin: 0;
     /* Page Breaks for printed lesson plans, projects, and TR pages */
     h3, h2 { break-after: avoid !important; page-break-after: avoid !important; }
