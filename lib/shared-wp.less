@@ -1,218 +1,10 @@
-/************************************************************************************
-* WordPress-Specific Stuff
-*/
-@media print {
-  body { width: 7.5in; }
-  *:has(#raw_code_container) {
-    border-top: none !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    min-height: unset !important
-  };
-  .x-row-inner>div:last-child { display: none; }
-  #raw_code_container { margin-left: 1px; }
-}
-
-@media screen {
-  div#body.workbookpage:not(.landscape) {
-    width: 8.5in !important;
-    height: unset !important;
-    padding: 0.5in !important;
-    box-shadow: 0 0 5px gray;
-  }
-  div#body.workbookpage.landscape {
-    width: 11in !important;
-    height: unset !important;
-    padding: 0.5in !important;
-    box-shadow: 0 0 5px gray;
-  }
-}
-
-
-/************************************************************************************
-* ASCIIDOCTOR STYLES
-*/
-div#body {
-  box-sizing: content-box;
-  font-size: 9pt;
-  margin: 8px;
-  line-height: normal;
-  text-size-adjust: 100%;
-
-  a:focus{outline:thin dotted}
-  pre{white-space:pre-wrap}
-  table{border-collapse:collapse;border-spacing:0}
-  *,*::before,*::after{-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box}
-  a:hover{cursor:pointer}
-  img{max-width:100%;height:auto;-ms-interpolation-mode:bicubic}
-  img,svg{display:inline-block;vertical-align:middle}
-  .left{float:left!important}
-  .right{float:right!important}
-  .center{margin-left:auto;margin-right:auto}
-  .stretch{width:100%}
-  div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,p,blockquote,th,td{margin:0;padding:0;direction:ltr}
-  a img{border:none}
-  p{text-rendering:optimizeLegibility}
-  ul,ol,dl{font-size:1em;line-height:1.6;margin-bottom:1.25em;list-style-position:outside;font-family:inherit}
-  ul,ol{margin-left:1.5em}
-  ul.square li ul,ul.circle li ul,ul.disc li ul{list-style:inherit}
-  dl dt{margin-bottom:.3125em;font-weight:bold}
-  dl dd{margin-bottom:1.25em}
-  table{background:#fff;margin-bottom:1.25em;border:solid 1px #dedede}
-  table thead{background:#f7f8f7}
-  table thead tr th,table thead tr td{padding:.5em .625em .625em;font-size:inherit;color:rgba(0,0,0,.8);text-align:left}
-  table tr th,table tr td{padding:.5625em .625em;font-size:inherit;color:rgba(0,0,0,.8)}
-  table tr.even,table tr.alt,table tr:nth-of-type(even){background:#f8f8f7 !important; }
-  table thead tr th,table tbody tr td,table tr td{display:table-cell;line-height:1.6}
-  h1,h2,h3,h4,h5,h6{line-height:1.2;word-spacing:-.05em}
-  h1 strong,h2 strong,h4 strong,h5 strong,h6 strong{font-weight:400}
-  .clearfix::before,.clearfix::after{content:" ";display:table}
-  .clearfix::after{clear:both}
-  *:not(pre)>code{font-style:normal!important;letter-spacing:0;padding:.1em .5ex;word-spacing:-.15em;background-color:#f7f7f8;-webkit-border-radius:4px;border-radius:4px;line-height:1.45;text-rendering:optimizeSpeed;word-wrap:break-word}
-  *:not(pre)>code.nobreak{word-wrap:normal}
-  *:not(pre)>code.nowrap{white-space:nowrap}
-  pre,pre>code{line-height:1.45;color:rgba(0,0,0,.9);font-weight:400;text-rendering:optimizeSpeed}
-  em em{font-style:normal}
-  #header,#content{width:100%;margin-left:auto;margin-right:auto;margin-top:0;margin-bottom:0;max-width:62.5em;*zoom:1;position:relative;padding-left:.9375em;padding-right:.9375em}
-  #header::before,#header::after,#content::before,#content::after{content:" ";display:table}
-  #header::after,#content::after{clear:both}
-  #content>h1:first-child:not([class]){color:rgba(0,0,0,.85);border-bottom:1px solid #ddddd8;padding-bottom:8px;margin-top:0;padding-top:1rem;margin-bottom:1.25rem}
-  .literalblock pre,.listingblock pre:not(.highlight),.listingblock pre[class="highlight"],.listingblock pre[class^="highlight "],.listingblock pre.CodeRay,.listingblock pre.prettyprint{background:#f7f7f8}
-  .literalblock pre,.literalblock pre[class],.listingblock pre,.listingblock pre[class]{-webkit-border-radius:4px;border-radius:4px;word-wrap:break-word;padding:1em;}
-  .literalblock pre.nowrap,.literalblock pre[class].nowrap,.listingblock pre.nowrap,.listingblock pre[class].nowrap{overflow-x:auto;white-space:pre;word-wrap:normal}
-  @media screen and (min-width:768px){
-    .literalblock pre,.literalblock pre[class],.listingblock pre,.listingblock pre[class]{font-size:.90625em}
-  }
-  .literalblock.output pre{color:#f7f7f8;background-color:rgba(0,0,0,.9)}
-  .listingblock>.content{position:relative}
-  table.tableblock{max-width:100%;border-collapse:separate}
-  p.tableblock:last-child{margin-bottom:0}
-  td.tableblock>.content{margin-bottom:-1.25em}
-  table.tableblock,th.tableblock,td.tableblock{border:0 solid #dedede}
-  table.grid-all>thead>tr>.tableblock,table.grid-all>tbody>tr>.tableblock{border-width:0 1px 1px 0}
-  table.grid-cols>*>tr>.tableblock{border-width:0 1px 0 0}
-  table.grid-rows>thead>tr>.tableblock,table.grid-rows>tbody>tr>.tableblock{border-width:0 0 1px}
-  table.grid-all>*>tr>.tableblock:last-child,table.grid-cols>*>tr>.tableblock:last-child{border-right-width:0}
-  table.grid-all>tbody>tr:last-child>.tableblock,table.grid-all>thead:last-child>tr>.tableblock,table.grid-rows>tbody>tr:last-child>.tableblock,table.grid-rows>thead:last-child>tr>.tableblock{border-bottom-width:0}
-  table.frame-all{border-width:1px}
-  table.frame-sides{border-width:0 1px}
-  table.stripes-all tr,table.stripes-odd tr:nth-of-type(odd){background:#f8f8f7}
-  table.stripes-none tr,table.stripes-odd tr:nth-of-type(even){background:none}
-  th.halign-left,td.halign-left{text-align:left}
-  th.halign-right,td.halign-right{text-align:right}
-  th.halign-center,td.halign-center{text-align:center}
-  th.valign-top,td.valign-top{vertical-align:top}
-  th.valign-bottom,td.valign-bottom{vertical-align:bottom}
-  th.valign-middle,td.valign-middle{vertical-align:middle}
-  table thead th{font-weight:bold}
-  tbody tr th{display:table-cell;line-height:1.6;background:#f7f8f7}
-  tbody tr th,tbody tr th p{color:rgba(0,0,0,.8);font-weight:bold}
-  p.tableblock>code:only-child{background:none;padding:0}
-  p.tableblock{font-size:1em}
-  ul.checklist,ul.none,ol.none{list-style-type:none}
-  ul.checklist{margin-left:.625em}
-  ul.checklist li>p:first-child>.fa-square-o:first-child,ul.checklist li>p:first-child>.fa-check-square-o:first-child{width:1.25em;font-size:.8em;position:relative;bottom:.125em}
-  ul.checklist li>p:first-child>input[type="checkbox"]:first-child{margin-right:.25em}
-  ol{margin-left:1.75em}
-  ul li ol{margin-left:1.5em}
-  dl dd{margin-left:1.125em}
-  dl dd:last-child,dl dd:last-child>:last-child{margin-bottom:0}
-  ol>li p,ul>li p,ul dd,ol dd,.olist .olist,.ulist .ulist,.ulist .olist,.olist .ulist{margin-bottom:.625em}
-  .th{line-height:0;display:inline-block;border:solid 4px #fff;-webkit-box-shadow:0 0 0 1px #ddd;box-shadow:0 0 0 1px #ddd}
-  a.image{text-decoration:none;display:inline-block}
-  .big{font-size:larger}
-  .small{font-size:smaller}
-  .underline{text-decoration:underline}
-  .overline{text-decoration:overline}
-  dt,th.tableblock,td.content{text-rendering:optimizeLegibility}
-  h1,h2,p,td.content,span.alt{letter-spacing:-.01em}
-  p strong,td.content strong{letter-spacing:-.005em}
-  .exampleblock>.content{background-color:#fffef7;border-color:#e0e0dc;-webkit-box-shadow:0 1px 4px #e0e0dc;box-shadow:0 1px 4px #e0e0dc}
-  @media print{
-    a{color:inherit!important;text-decoration:underline!important}
-    a.bare,a[href^="#"],a[href^="mailto:"]{text-decoration:none!important}
-    a[href^="http:"]:not(.bare)::after,a[href^="https:"]:not(.bare)::after{content:"(" attr(href) ")";display:inline-block;font-size:.875em;padding-left:.25em}
-    thead{display:table-header-group}
-    p,blockquote,dt,td.content{font-size:1em;orphans:3;widows:3}
-  }
-}
-
-
-/************************************************************************************
-* FONTS
-*/
-/* lato-regular - latin_latin-ext */
-@font-face {
-  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-  font-family: 'Lato';
-  font-style: normal;
-  font-weight: 400;
-  src: url('fonts/lato/lato-v24-latin_latin-ext-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
-}
-/* lato-italic - latin_latin-ext */
-@font-face {
-  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-  font-family: 'Lato';
-  font-style: italic;
-  font-weight: 400;
-  src: url('fonts/lato/lato-v24-latin_latin-ext-italic.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
-}
-/* lato-700 - latin_latin-ext */
-@font-face {
-  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-  font-family: 'Lato';
-  font-style: normal;
-  font-weight: 700;
-  src: url('fonts/lato/lato-v24-latin_latin-ext-700.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
-}
-/* lato-900 - latin_latin-ext */
-@font-face {
-  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-  font-family: 'Lato';
-  font-style: normal;
-  font-weight: 900;
-  src: url('fonts/lato/lato-v24-latin_latin-ext-900.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
-}
-/* lato-900italic - latin_latin-ext */
-@font-face {
-  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-  font-family: 'Lato';
-  font-style: italic;
-  font-weight: 900;
-  src: url('fonts/lato/lato-v24-latin_latin-ext-900italic.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
-}
-@font-face {
-  font-family: 'Hack';
-  src: url('fonts/hack/hack-regular.woff2') format('woff2'), url('fonts/hack/hack-regular.woff') format('woff');
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Hack';
-  src: url('fonts/hack/hack-bold.woff2') format('woff2'), url('fonts/hack/hack-bold.woff') format('woff');
-  font-weight: 700;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Hack';
-  src: url('fonts/hack/hack-italic.woff2') format('woff2'), url('fonts/hack/hack-italic.woff') format('woff');
-  font-weight: 400;
-  font-style: italic;
-}
-
-@font-face {
-  font-family: 'Hack';
-  src: url('fonts/hack/hack-bolditalic.woff2') format('woff2'), url('fonts/hack/hack-bolditalic.woff') format('woff');
-  font-weight: 700;
-  font-style: italic;
-}
+@import (inline) url("./asciidoctor.less");
+@import (inline) url("./wordpress.less");
 
 /************************************************************************************
 * SYSTEMWIDE STYLES
 */
-
+body { width: 100%; }
 @font-color: #013a63;
 @translucent-bg-color: #468fafAA;
 @translucent-bg-color2: #f26b45AA;
@@ -232,6 +24,7 @@ div#body{
   width:          100%; /* needed to undo effect of html{display:flex} */
   display:        block;
   position:       relative;
+  /* max-width:      700px; */
   -webkit-font-smoothing: antialiased;
   &.beta::after { 
     position: absolute;
@@ -248,12 +41,13 @@ div#body{
   }
   /* Set Defaults (many asciidoc overrides) */
   h1 {
-    font-size:      2rem;
-    font-weight:    bold;
+    font-size:      24px;
+    font-weight:    900;
     font-family:    @text-font;
+    line-height:    30px;
   }
   h2 {
-    margin:          0; /* 1ex bottom margin */
+    margin:          0;
     font-family:    @text-font;
   }
   .prefix { font-style: italic; color: gray; }
@@ -295,7 +89,6 @@ div#body{
         padding: 5px;
       }
     }
-
   }
   
   /* Make .mathunicode and MathJax look similar */
@@ -509,7 +302,9 @@ div#body{
   .fitbruby::before, .fitb::before {
     content: '\00200b';
   }
-
+  .fitbruby {
+    margin-bottom: 0.75rem;
+  }
   /* use 'thin' instead of 1px border to try and avoid disappearing
   lines on some browsers */
   .fitb, .fitbruby, .fitb.stretch::after, .fitbruby.stretch::after {
@@ -521,9 +316,6 @@ div#body{
     line-height:        1rem;
     border-bottom:      solid thin gray;
     vertical-align:     baseline;
-  }
-  .fitbruby {
-    margin-bottom: @ruby-height;
   }
   .fitbruby .ruby, .recipe .ruby:after, .data-cycle .ruby:after {
     position:           absolute;
@@ -562,22 +354,6 @@ div#body{
   }
 
   .vocab { font-weight: bold; font-style: italic; color: @font-color; }
-
-  #material-links p, #opt-material-links p {
-    .showPageLinks a {
-      text-decoration: none;
-      &::after { content: ' ▼ '; }
-    }
-    &+.ulist {
-      transition: 1s ease-in; max-height: 0; overflow: hidden;
-      padding-left: 5px; margin: 0; font-style: italic; font-size: smaller;
-      .pageNum { float: right; margin-right: 10%; }
-    }
-  }
-  #material-links p.open, #opt-material-links p.open {
-    .showPageLinks a::after { content: ' ▲ '; }
-    &+.ulist { transition: 1s ease-in; max-height: 1000px; }
-  }
 }
 
 div#body:not(.LessonPlan, .narrativepage) p {
@@ -590,6 +366,8 @@ div#body:not(.LessonPlan, .narrativepage) p {
 * SIDEBAR STYLES
 * NOTE: In WordPress, the sidebar lives outside of the normal container!
 */
+
+
 .sidebar {
   display:    block;
   height:     100%;
@@ -621,14 +399,53 @@ div#body:not(.LessonPlan, .narrativepage) p {
   .sidebarpractices ul { font-size:  0.75rem !important; margin: 0; }
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /************************************************************************************
 * NARRATIVE PAGE STYLES
 */
-
-/* Hide rating widget on narrative pages */
-.x-row-inner:has(#body.narrativepage) .rmp-rating-widget { display: none !important; }
 div#body.narrativepage {
   font-size: 12pt;
+  p {line-height:1.6;}
   .logo     { float: right; }
   .logo img { max-width: 300px; }
   #lesson-list {
@@ -651,14 +468,13 @@ div#body.narrativepage {
   }
 }
 
-
-
 /************************************************************************************
 * LESSON PAGE STYLES
 */
 div#body.LessonPlan {
   font-size: 12pt;
 
+  /* #content { font-size: 9pt; } */
   .other-proglang::before { font-style: italic; }
 
   /* The summary table at the top of each lesson */
@@ -678,10 +494,28 @@ div#body.LessonPlan {
 
     /* Custom materials link styles */ 
     .Optional::before, .OptProject::before, .handout::before { color: gray;}
+
+    #material-links p, #opt-material-links p {
+      .showPageLinks a {
+        text-decoration: none;
+        &::after { content: ' ▼ '; }
+      }
+      &+.ulist {
+        transition: 1s ease-in; max-height: 0; overflow: hidden;
+        padding-left: 5px; margin: 0; font-style: italic; font-size: smaller;
+        .pageNum { float: right; margin-right: 10%; }
+      }
+    }
+    #material-links p.open, #opt-material-links p.open {
+      .showPageLinks a::after { content: ' ▲ '; }
+      &+.ulist { transition: 1s ease-in; max-height: 1000px; }
+    }
   }
 
   h2 { font-size: 1.75em; font-weight: normal; }
   h3 { font-size: 18pt; font-weight: 300;  }
+  .lesson-section-2 h3 { font-size: 1.5em; font-style: italic; margin: 0px; }
+
   /* Special styling of teacherNotes used inside overview sections */
   h3[id^="_overview"]~.paragraph .teacherNote {  
     width: 100%;
@@ -742,6 +576,7 @@ div#body.LessonPlan {
   }
 
   code { line-height: 1.5 !important; }
+  .codesexp, .circleevalsexp, .editbox, .cm-s-scheme { font-size: 0.8em; }
 
   .lesson-instruction, .lesson-roleplay, .q-and-a {
     min-height: 50px;
@@ -808,7 +643,6 @@ div#body.LessonPlan {
   .lesson-roleplay > *:first-child::before { content: url('images/lesson-roleplay.png') }
 
   .lesson-point {
-    font-weight:        bold;
     color:              black;
     border-style:       solid;
     margin-left:        2em;
@@ -849,6 +683,7 @@ div#body.workbookpage #content .sect1.lesson-section-1 {
   flex-direction: column; 
   justify-content: flex-start; 
 }
+div#body.workbookpage #content .sect1.lesson-section-1 .sectionbody { display: contents; }
 
 div#body.solution-page {
   .fitbruby, .fitb { font-style: italic; }
@@ -857,10 +692,12 @@ div#body.solution-page {
 div#body.workbookpage {
   font-size: 9pt;
   color: black !important;
+  top: 0;
+  left: 0;
+  /* max-width: unset; */
 
   #header > h1:first-child { text-align: center; }
-  #content .sect1.lesson-section-1 .sectionbody { display: contents; }
-
+  h1 { font-weight: bold; }
   /* Code that shows up in headers should not have the usual background */
   h2 .editbox, h2 .editbox *, h2 .pyret { color: black; background: none; margin: 0 5px; }
 
@@ -874,7 +711,9 @@ div#body.workbookpage {
   #content > .sect1 { 
     flex-grow: 1;
   }
-  /* Some sections shouldn't grow at all, and should basically just be block-level elements */
+  /* Some sections shouldn't grow at all, and should basically just be block-level elements
+   * (This allows *other* sections to grow, taking up the available space)
+  */
   #content > .sect1.no-flex-section { flex-grow: 0; }
 
   /* In some cases, AsiiDoc will put an empty preamble containing
@@ -899,7 +738,7 @@ div#body.workbookpage {
     &::before { content: 'Teachers:'; display: inline; font-weight: bold; }
   }
 
-  /* Given adjacent sections some padding */
+  /* Give adjacent sections some padding */
   .lesson-section-1+.lesson-section-1 { border: none; margin-top: 1ex; }
 
   .linkInstructions { font-style: italic; }
@@ -923,12 +762,13 @@ div#body.workbookpage {
             display: contents; 
             > * { width: 100%; }
           }
-          &.valign-top    {     align-items: start;  } 
+          &.valign-top    {   align-content: flex-start;  }
           &.valign-middle {     align-items: center; } 
           &.valign-bottom {     align-items: end;    } 
           &.halign-left   { justify-content: left;   }
           &.halign-center { justify-content: center; }
-          &.halign-right  { justify-content: right;  }         }
+          &.halign-right  { justify-content: right;  }
+        }
       }
       > tr:nth-of-type(even) > td { background-color: #f8f8f7; }
     } 
@@ -1037,15 +877,6 @@ div#body.workbookpage {
     line-height: 2.2rem;
   }
 
-  .studentAnswerShort  { min-width: 20pt;  }
-  .studentAnswerMedium { min-width: 100pt; }
-  .studentAnswerLong   { min-width: 140pt; }
-
-  .circleevalsexp .studentBlockAnswerFilled { 
-    font-weight: bold; font-style: italic; display: inline-block; 
-    .value { border: dotted 1px black; border-radius: 50%; padding: 0 3px; }
-  }
-
   .sect1 > h2:first-child, .sect1 > h3:first-child, .sect2 > h3:first-child {
     background:   @translucent-bg-color;
     font-weight:  600;
@@ -1054,24 +885,58 @@ div#body.workbookpage {
     padding:      1px 10px !important;
     margin-top:   2px;
   }
+
+  /* compact tables */
+  table.data-table {
+    td, th {
+      margin:       0;
+      padding:      0 5px;
+      width:        1px;
+    }
+  }
+
+  /* class for tables containing Pyret data */
+  table.pyret-table {
+    border-collapse:    collapse;
+    width:              100%;
+    table-layout:       auto;
+    display:            table!important;
+    border:             1px black solid;
+    border-radius:      1em;
+    overflow:           hidden;
+    background:         #eee;
+    tr:nth-child(even){ background-color: #f2f2f2 }
+    thead { box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2); }
+    td p { margin: 0px; }
+    td, th {
+      border:             none;
+      border-right:       1px white solid;
+      color:              #1f1180;
+      font-family:        @code-font;
+    }
+  }
+
+  table.sideways-pyret-table {
+    p { margin: 0px }
+    tr { background: none; text-align: right; }
+    td:first-child {
+      display: table-cell;
+      background: @table-header !important;
+      text-align: center;
+      width: 50px;
+    }
+    td:first-child p { font-weight: bold; }
+  }
 }
 
-/************************************************************************************
-* CONTRACTS & MISC
-*/
-/* Back-of-the-book contracts table */
-div#body table.contracts-table {
-  border-collapse: collapse;
-  border: none;
-  p  { margin-top: 0; }
-  td { padding: .1em .625em !important; height: 23pt; }
-  tr:nth-child(odd) { border-top: solid 2px black; }
-  tbody tr:nth-child(odd) * { color: @code-comment-color !important; }
-  tbody tr:nth-child(odd) td:first-child .tableblock { margin-left: 1em; }
-  tbody tr:nth-child(odd) td:first-child::before { position: absolute;  }
-  tbody tr:nth-child(even) * { font-family: monospace; white-space: pre; }
-}
+.studentAnswerShort  { min-width: 20pt;  }
+.studentAnswerMedium { min-width: 100pt; }
+.studentAnswerLong   { min-width: 140pt; }
 
+.circleevalsexp .studentBlockAnswerFilled {
+  font-weight: bold; font-style: italic; display: inline-block;
+  .value { border: dotted 1px black; border-radius: 50%; padding: 0 3px; }
+}
 
 /* TODO(Emmanuel): do we even need all of these? Clean up */
 div#body:not(.LessonPlan) {
@@ -1093,12 +958,13 @@ div#body:not(.LessonPlan) {
 div#body.LessonNotes {
   #content { display: block !important; }
   li { margin-bottom: 10px; }
+  .sect1.lesson-section-1 { margin-bottom: 1.25em; }
 }
 /************************************************************************************
-* DESIGN RECIPE, DATA CYCLE, AND STUDENT ANSWER STYLING
+* CONTRACTS TABLE, DESIGN RECIPE, DATA CYCLE, AND STUDENT ANSWER STYLING
 */
 
-div#body {
+div#body{
   /* Data Cycle tables should have borders */
   .data-cycle {
     border-collapse: collapse;
@@ -1126,7 +992,20 @@ div#body {
       font-family: @code-font;
     }
     /* If there's a section break between data cycles, eat up all vertical space */
-    &+div.paragraph:not(.data-cycle) { margin: auto 0; }
+    &+div.paragraph:not(.data-cycle):has(+.data-cycle) { margin: auto 0; }
+  }
+
+  /* Back-of-the-book contracts table */
+  table.contracts-table {
+    border-collapse: collapse;
+    border: none;
+    p  { margin-top: 0; }
+    td { padding: .1em .625em !important; height: 23pt; }
+    tr:nth-child(odd) { border-top: solid 2px black; }
+    tbody tr:nth-child(odd) * { color: @code-comment-color !important; }
+    tbody tr:nth-child(odd) td:first-child .tableblock { margin-left: 1em; }
+    tbody tr:nth-child(odd) td:first-child::before { position: absolute;  }
+    tbody tr:nth-child(even) * { font-family: monospace; white-space: pre; }
   }
 
   /* We use tables (perhaps not the best idea) for our DR headings */
@@ -1185,6 +1064,7 @@ div#body {
     /* If there's a section break between recipes, eat up all vertical space */
     &+div.paragraph:not(.recipe) { margin: auto 0; }
   }
+
 
   /* Proglang-specific adaptations */
   &.pyret {
@@ -1311,6 +1191,7 @@ div#body {
     .recipe_domain, .recipe_range { width:  40%; }
   }
 }
+
 /************************************************************************************
 * TEACHER RESOURCES PAGE
 */
@@ -1412,48 +1293,6 @@ td.halign-center .circleevalsexp { text-align: center; }
 .pyretkeyword, .hljs-keyword              { font-weight: bold; margin-right: 1ex; }
 * + .pyretkeyword { margin-left: 1ex;}
 
-/* compact tables */
-table.data-table {
-  td, th {
-    margin:       0;
-    padding:      0 5px;
-    width:        1px;
-  }
-}
-
-/* class for tables containing Pyret data */
-table.pyret-table {
-  border-collapse:    collapse;
-  width:              100%;
-  table-layout:       auto;
-  display:            table!important;
-  border:             1px black solid;
-  border-radius:      1em;
-  overflow:           hidden;
-  background:         #eee;
-  tr:nth-child(even){ background-color: #f2f2f2 }
-  thead { box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2); }
-  td p { margin: 0px; }
-  td, th {
-    border:             none;
-    border-right:       1px white solid;
-    color:              #1f1180;
-    font-family:        @code-font;
-  }
-}
-
-table.sideways-pyret-table {
-  p { margin: 0px }
-  tr { background: none; text-align: right; }
-  td:first-child {
-    display: table-cell;
-    background: @table-header !important;
-    text-align: center;
-    width: 50px;
-  }
-  td:first-child p { font-weight: bold; }
-}
-
 .obeyspaces { white-space: pre-wrap; }
 
 div.leftColumn .obeyspaces, div.rightColumn .obeyspaces {
@@ -1485,6 +1324,15 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
 
   #savetodrive-div { display: none; }
 
+
+
+
+
+
+
+
+
+  /* div#body.workbookpage { padding-left: 3em; */
   /********************************************************************
    *  Collapsing Headers 
    */
@@ -1548,6 +1396,11 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
    }
 }
 
+/*
+@media all and (max-width: 600px) {
+  html { padding-left: 0 !important;}
+}
+*/
 /************************************************************************************
  * PRINT MEDIA
  */
@@ -1555,16 +1408,17 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
 @page landscape { size: letter landscape; margin: 0.5in; }
 
 @media print {
+  color: black;
 
   /* Elements we don't want printed */
+  .noprint { display: none; }
   ::-webkit-scrollbar { display:  none; }
   a[href]::after { content: none !important; }
   #savetodrive-div, .copyright, #footer, #outOfDate, .web-page-only, .section-link,
   .acknowledgmentsect, .sidebar, .CodeMirror div.CodeMirror-cursor, #MathJax_Message {
-   display: none !important; visibility: hidden; float: none;
+    display: none !important; visibility: hidden; float: none;
   }
   div#body{ position: static; } /* page-break fails on absolute positioning */
-  .noprint { display:none; }
 
   /* Override AsciiDoc print default */
   p {margin: 0px; font-size: 1rem; font-weight: normal;}
@@ -1601,7 +1455,6 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
   }
   
   div#body.workbookpage {
-
     /* Use B&W colors for headers */
     #header> h1:first-child, .sect1 > h1:first-child { 
       color: black;
@@ -1619,7 +1472,6 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
     .acknowledgmentsect:last-child { flex-grow: 0 !important; } /* Even when invisible, flex-grow will take up space */
     .recipe_condition *::before, *::after { color: black !important; }
   }
-
   div#body {
     margin: 0;
     /* Page Breaks for printed lesson plans, projects, and TR pages */
@@ -1632,5 +1484,12 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
 
     /* Get rid of collapsing headers */
     .sect1.lesson-section-1, .sect1.lesson-section-1 .sectionbody { max-height: unset !important; }
+
+    /* Override AsciiDoc print default
+    p {
+      margin: 0px;
+      font-size: 1rem;
+      font-weight: normal;
+    } */
   }
 }
