@@ -8,6 +8,7 @@ html { font-size: 9pt; }
 body { width: 100%; }
 @font-color: #75328A;
 @translucent-bg-color: #75328AAA;
+@translucent-bg-color2: #b7d89333;
 @text-font: 'Lato', Arial, Helvetica, sans-serif;
 @code-font: Hack, "Courier New", monospace;
 @code-comment-color: #cd7054;
@@ -356,7 +357,6 @@ div#body {
   .vocab { font-weight: bold; font-style: italic; color: @font-color; }
 }
 
-
 div#body:not(.LessonPlan, .narrativepage) p {
   overflow:     hidden;
   margin:       0px;
@@ -365,6 +365,7 @@ div#body:not(.LessonPlan, .narrativepage) p {
 
 /************************************************************************************
 * SIDEBAR STYLES
+*
 */
 
 @keyframes slideInFromLeft {
@@ -435,7 +436,7 @@ div#body:not(.LessonPlan, .narrativepage) p {
       padding:    10px !important;
       font-size:  10pt !important;
     }
-    li:nth-child(odd) { background: #b7d89333; }
+    li:nth-child(odd) { background: @translucent-bg-color2; }
   }
   .sidebarpractices ul { font-size:  0.75rem !important; margin: 0; }
 }
@@ -489,7 +490,7 @@ div#body.LessonPlan {
       pointer-events: none;
       &::before { font-size: 12pt; content: "Slides are not yet available for this lesson"; }
     }
-    &.left-header tr td:nth-child(1) { background-color: #b7d893; }
+    &.left-header tr td:nth-child(1) { background-color: @translucent-bg-color2; }
     &.left-header tr td:nth-child(1) p { font-weight: bold; }
 
     /* Custom materials link styles */
@@ -1362,7 +1363,7 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
           margin-right: 5px;
         }
         &.active::after { content: '▲'; }
-        &.active, &:hover { background-color: #b7d893; }
+        &.active, &:hover { background-color: @translucent-bg-color2; }
       }
       /* set collapsed size and transition rules */
       .sect1:not(.acknowledgmentsect) .sectionbody {
@@ -1416,7 +1417,7 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
   a[href]::after { content: none !important; }
   #savetodrive-div, .copyright, #footer, #outOfDate, .web-page-only, .section-link,
   .acknowledgmentsect, .sidebar, .CodeMirror div.CodeMirror-cursor, #MathJax_Message {
-   display: none !important; visibility: hidden; float: none;
+    display: none !important; visibility: hidden; float: none;
   }
   div#body{ position: static; } /* page-break fails on absolute positioning */
 
@@ -1456,15 +1457,15 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
 
   div#body.workbookpage {
     /* Use B&W colors for headers */
-    #header> h1:first-child, .sect1 > h1:first-child { 
+    #header> h1:first-child, .sect1 > h1:first-child {
       color: black;
     }
     .sect1 > h2:first-child, .sect1 > h3:first-child, .sect2 > h3:first-child {
       color: white;
     }
 
-    .recipe_title, h2 { 
-      background: @print-section-heading !important; 
+    .recipe_title, h2 {
+      background: @print-section-heading !important;
       td:last-child { border: 2px solid @print-section-heading !important; }
     }
     h2, table.recipe_title p { color: black !important; }
@@ -1472,7 +1473,7 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
     .acknowledgmentsect:last-child { flex-grow: 0 !important; } /* Even when invisible, flex-grow will take up space */
     .recipe_condition *::before, *::after { color: black !important; }
   }
-  div#body{
+  div#body {
     margin: 0;
     /* Page Breaks for printed lesson plans, projects, and TR pages */
     h3, h2 { break-after: avoid !important; page-break-after: avoid !important; }

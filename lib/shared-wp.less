@@ -4,6 +4,7 @@
 /************************************************************************************
 * SYSTEMWIDE STYLES
 */
+
 body { width: 100%; }
 @font-color: #013a63;
 @translucent-bg-color: #468fafAA;
@@ -26,7 +27,7 @@ div#body{
   position:       relative;
   /* max-width:      700px; */
   -webkit-font-smoothing: antialiased;
-  &.beta::after { 
+  &.beta::after {
     position: absolute;
     top: 40%;
     left: 40%;
@@ -75,8 +76,8 @@ div#body{
   .citation {
     position: relative;
     .apa-citation { display: none; }
-    &:hover { 
-      .apa-citation { 
+    &:hover {
+      .apa-citation {
         display: inline-block;
         position: absolute;
         top: 100%;
@@ -90,7 +91,7 @@ div#body{
       }
     }
   }
-  
+
   /* Make .mathunicode and MathJax look similar */
   .MathJax, .mathunicode {
     display: inline-block;
@@ -107,22 +108,22 @@ div#body{
     sup { font-size: 65% !important; }
     sub { font-size: 65% !important; }
   }
-  .MathJax { 
+  .MathJax {
     margin: 0 !important;
-    font-family: MJXZERO, 'MJXTEX'; 
+    font-family: MJXZERO, 'MJXTEX';
     font-size: inherit !important;
   }
-  .mathunicode { 
-    font-family: MJXZERO, 'MJXTEX'; 
+  .mathunicode {
+    font-family: MJXZERO, 'MJXTEX';
     font-size: inherit !important;
     line-height: 0;
   }
   em .mathunicode, em .MathJax * { font-family: 'MJXTEX-I'; margin-right: 1px;}
   strong .mathunicode, strong .MathJax * { font-family: 'MJXTEX-B'; margin-right: 1px;}
-  em strong .mathunicode, strong em .mathunicode, strong .MathJax .TEX-I, em .MathJax .TEX-B { 
+  em strong .mathunicode, strong em .mathunicode, strong .MathJax .TEX-I, em .MathJax .TEX-B {
     font-family: 'MJXTEX-BI'; margin-right: 1px;
   }
-  
+
   table, td.tableblock>.content { margin-bottom: 0px; }
   tr th.tableblock code, td.tableblock code { background: none; }
   td.tableblock pre { background: none !important; }
@@ -133,9 +134,9 @@ div#body{
   }
 
   #content { margin: 0; }
-  /* 
-    When used in a header, exponents should be medium 
-    and there's no need for a bottom border 
+  /*
+    When used in a header, exponents should be medium
+    and there's no need for a bottom border
   */
   #header>h1:only-child { border-bottom: none; }
   #header sup { font-size: medium; }
@@ -224,9 +225,9 @@ div#body{
 
   /* Images and Captions */
   .image-figure { display: inline-block; }
-  .image-figure .image-caption { 
-    display:    block; 
-    font-style: italic; 
+  .image-figure .image-caption {
+    display:    block;
+    font-style: italic;
     line-height: 1.1;
     word-break: break-word;
     text-align: center;
@@ -245,12 +246,12 @@ div#body{
     &:empty { display: none; } /* If empty after JS post-processing, hide */
   }
   .optionaltag::before {
-     font-style: italic; 
+     font-style: italic;
    }
   div.hiddenblock {
     display: none;
   }
-  
+
   .strategy-box {
     background:         #efefef;
     border:             solid #1a73b5 5px !important;
@@ -492,7 +493,7 @@ div#body.LessonPlan {
     &.left-header tr td:nth-child(1) { background-color: @translucent-bg-color2; }
     &.left-header tr td:nth-child(1) p { font-weight: bold; }
 
-    /* Custom materials link styles */ 
+    /* Custom materials link styles */
     .Optional::before, .OptProject::before, .handout::before { color: gray;}
 
     #material-links p, #opt-material-links p {
@@ -517,9 +518,9 @@ div#body.LessonPlan {
   .lesson-section-2 h3 { font-size: 1.5em; font-style: italic; margin: 0px; }
 
   /* Special styling of teacherNotes used inside overview sections */
-  h3[id^="_overview"]~.paragraph .teacherNote {  
+  h3[id^="_overview"]~.paragraph .teacherNote {
     width: 100%;
-    border-width: 0 0 0 1px !important; 
+    border-width: 0 0 0 1px !important;
     padding-left: 20px;
   }
 
@@ -566,9 +567,9 @@ div#body.LessonPlan {
 
 
     /* Override Asciidoc default here */
-    .exampleblock > .content { 
-      background-color: inherit; 
-      border:           none; 
+    .exampleblock > .content {
+      background-color: inherit;
+      border:           none;
       box-shadow:       none;
       border-radius:    20px;
     }
@@ -594,8 +595,8 @@ div#body.LessonPlan {
       margin-top:10px;
     }
   }
-  .q-and-a { 
-    min-height: 85px; 
+  .q-and-a {
+    min-height: 85px;
     .qblock, .ablock {
       font-style: normal;
       display: inline;
@@ -609,7 +610,7 @@ div#body.LessonPlan {
     .ablock, .ablock+.ulist p { font-style: italic; }
   }
 
-  /* COLLAPSED ELEMENTS: 
+  /* COLLAPSED ELEMENTS:
    * divs that contain a .slidebreak or divs that are .hiddenblock are
    * considered *collapsed*, since they take up no space in the lesson plan
    */
@@ -617,7 +618,7 @@ div#body.LessonPlan {
   .paragraph:has(.slidebreak) p { margin: 0 !important; }
   @collapse: :is(div:has(>p .slidebreak), .hiddenblock);
 
-  /* 
+  /*
    * CONTENT BOXES: lesson-instruction, lesson-roleplay, teacherNote, q-and-a, lesson-point...
    *
    * When two of the same content boxes are separated by one or more @{collapse}d
@@ -633,10 +634,10 @@ div#body.LessonPlan {
   .teacherNote        + @{collapse} + .teacherNote,
   .teacherNote        + @{collapse} + @{collapse} + .teacherNote,
 
-  .q-and-a            + @{collapse} + .q-and-a, 
-  .q-and-a            + @{collapse} + @{collapse} + .q-and-a { 
+  .q-and-a            + @{collapse} + .q-and-a,
+  .q-and-a            + @{collapse} + @{collapse} + .q-and-a {
     margin: 0;
-    > *:first-child::before { display: none; } 
+    > *:first-child::before { display: none; }
   }
   .q-and-a > *:first-child::before { content: url('images/q-and-a.png') }
   .q-and-a table { background: none; }
@@ -656,10 +657,10 @@ div#body.LessonPlan {
   .lesson-point:has(+.lesson-point) { border-bottom: none; }
   .lesson-point + .lesson-point     { border-top:    none; }
 
-  .teacherNote { 
+  .teacherNote {
     display:            inline-block;
     padding:            0 5px;
-    border:             black dashed 1px; 
+    border:             black dashed 1px;
     font-style:         italic;
     width:              100%;
     table { margin: 10px; width: calc(100% - 20px); }
@@ -679,9 +680,9 @@ div#body.workbookpage #preamble_disabled,
 div#body.workbookpage #preamble_disabled .sectionbody,
 div#body.workbookpage #content .sect1.lesson-section-1 {
   padding:   0;
-  display: flex; 
-  flex-direction: column; 
-  justify-content: flex-start; 
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 div#body.workbookpage #content .sect1.lesson-section-1 .sectionbody { display: contents; }
 
@@ -696,7 +697,7 @@ div#body.workbookpage {
   left: 0;
   /* max-width: unset; */
 
-  #header > h1:first-child { text-align: center; }
+  #header > h1:first-child { text-align: center; margin-bottom: 0;}
   h1 { font-weight: bold; }
   /* Code that shows up in headers should not have the usual background */
   h2 .editbox, h2 .editbox *, h2 .pyret { color: black; background: none; margin: 0 5px; }
@@ -708,7 +709,7 @@ div#body.workbookpage {
   /* Make content of page as tall as possible */
   #content, #preamble_disabled, #preamble_disabled .sectionbody,
   #preamble_disabled .sectionbody table.FillVerticalSpace,
-  #content > .sect1 { 
+  #content > .sect1 {
     flex-grow: 1;
   }
   /* Some sections shouldn't grow at all, and should basically just be block-level elements
@@ -720,18 +721,18 @@ div#body.workbookpage {
      only a grandchild for custom styles. In this situation, no display
      is needed
    */
-  #preamble_disabled:has(>.sectionbody>style:only-child) { 
-    display: none; 
+  #preamble_disabled:has(>.sectionbody>style:only-child) {
+    display: none;
   }
 
-  /* Top-level (non-nested) tables should have vertical margins 
+  /* Top-level (non-nested) tables should have vertical margins
   * Make an exception for DR titles, Data Cycles, Graphs & Templates
   */
-  .sectionbody > table:not(.data-cycle, .recipe_title, .graph, .template) { 
-    margin: 1ex 0; 
+  .sectionbody > table:not(.data-cycle, .recipe_title, .graph, .template) {
+    margin: 1ex 0;
   }
 
-  .teacherNote { 
+  .teacherNote {
     font-style: italic; display: inline;
     line-height: 1.3;
     * { display: inline; }
@@ -744,7 +745,7 @@ div#body.workbookpage {
   .linkInstructions { font-style: italic; }
 
   /* make .FillVerticalSpace tables use CSS grid layout */
-  table.FillVerticalSpace { 
+  table.FillVerticalSpace {
     display: grid;
     height: 100%;
     grid-template-columns: auto;
@@ -753,32 +754,32 @@ div#body.workbookpage {
     > colgroup { display: none; }
     > tbody, > thead {
       display: contents;
-      > tr { 
-        display: contents; 
+      > tr {
+        display: contents;
         /* Try to mimic AsciiDoc's TD formatting classes */
-        > td { 
+        > td {
           display: flex; flex-wrap: wrap; position: relative;
-          > .content { 
-            display: contents; 
+          > .content {
+            display: contents;
             > * { width: 100%; }
           }
           &.valign-top    {   align-content: flex-start;  }
-          &.valign-middle {     align-items: center; } 
-          &.valign-bottom {     align-items: end;    } 
+          &.valign-middle {     align-items: center; }
+          &.valign-bottom {     align-items: end;    }
           &.halign-left   { justify-content: left;   }
           &.halign-center { justify-content: center; }
           &.halign-right  { justify-content: right;  }
         }
       }
       > tr:nth-of-type(even) > td { background-color: #f8f8f7; }
-    } 
+    }
   }
   /* Override AsciiDoc table defaults based on asciidoc classnames */
-  table.FillVerticalSpace.stripes-none tr:nth-of-type(even) > td { 
-    background: none ; 
+  table.FillVerticalSpace.stripes-none tr:nth-of-type(even) > td {
+    background: none ;
   }
 
-  /* 
+  /*
     "Graph" tables provide a pure-CSS solution for all coordinate planes.
 
     They rely on a set up CSS variables, with reasonable defaults:
@@ -792,9 +793,9 @@ div#body.workbookpage {
       --y_label defaults to 'y'
   */
   table.graph {
-    grid-gap: var(--min-gap, 20px); 
+    grid-gap: var(--min-gap, 20px);
     margin-top: 5px;
-    
+
     td {
       padding: 0;
       border: none !important;
@@ -803,13 +804,13 @@ div#body.workbookpage {
         linear-gradient(270deg, lightblue 2px, transparent 2px),
         linear-gradient(rgba(150, 150, 150, .3) 1px, transparent 0px),
         linear-gradient(270deg, rgba(150, 150, 150, .3) 1px, transparent 1px);
-      background-size: 
-        var(--width, 3in) var(--width, 3in), 
-        var(--width, 3in) var(--width, 3in), 
+      background-size:
+        var(--width, 3in) var(--width, 3in),
+        var(--width, 3in) var(--width, 3in),
         calc(var(--width, 3in) / var(--minors, 7)) calc(var(--width, 3in) / var(--minors, 7)),
         calc(var(--width, 3in) / var(--minors, 7)) calc(var(--width, 3in) / var(--minors, 7));
-      background-position: 
-        calc(var(--width , 3in) * var(--left_pct, .50)) 
+      background-position:
+        calc(var(--width , 3in) * var(--left_pct, .50))
         calc(var(--height, 3in) * var(--top_pct , .50));
       width:  var(--width,  3in);
       height: var(--height, 3in);
@@ -830,18 +831,18 @@ div#body.workbookpage {
     }
 
     /* Location and style of the coefficient value */
-    td p > .mathunicode:first-child { 
+    td p > .mathunicode:first-child {
       top:        6px;
       right:      3px;
-      position:   absolute; 
-      background: white; 
+      position:   absolute;
+      background: white;
       z-index:    10;
     }
 
     /* Squeeze solution img to the exact dimensions of the td */
     .solution *:not(img) { display: contents; }
-    .solution, .solution img { 
-      position: absolute; width: 100%; height: 100%; 
+    .solution, .solution img {
+      position: absolute; width: 100%; height: 100%;
     }
   }
 
@@ -856,9 +857,9 @@ div#body.workbookpage {
   &.solution-page .teacherNote { display: unset; }
 
   /* Auto-numbering - Add space and a right-paren, unless it's inside a table. */
-  .autonum { 
-    display: inline-block; 
-    padding-top: @top-padding-for-writing; 
+  .autonum {
+    display: inline-block;
+    padding-top: @top-padding-for-writing;
     &::after { content: ')'; }
     &.star::after { content: unset !important; }
   }
@@ -1315,6 +1316,7 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
 */
 
 @media screen {
+  html { height: 100%; display: flex; }
 
   .web-page-only {
     font-weight:      bold;
@@ -1322,8 +1324,7 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
     line-height:      2.5rem;
   }
 
-  #savetodrive-div { display: none; }
-
+  #savetodrive-div { display: none; height: 30px !important; }
 
 
 
@@ -1334,7 +1335,7 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
 
   /* div#body.workbookpage { padding-left: 3em; */
   /********************************************************************
-   *  Collapsing Headers 
+   *  Collapsing Headers
    */
    div#body.LessonPlan, div#body.TeacherResources {
       /* add a bottom padding to prevent browser-scroll */
@@ -1379,8 +1380,8 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
           bottom   : 0;
           left     : 0;
           pointer-events   : none;
-          background-image : linear-gradient(to bottom, 
-                            rgba(255,255,255, 0), 
+          background-image : linear-gradient(to bottom,
+                            rgba(255,255,255, 0),
                             rgba(255,255,255, 1) 90%);
           width    : 100%;
           height   : 10em;
@@ -1390,17 +1391,17 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
       /* don't add the fade for summaries or active sections */
       .lessonSummary .sectionbody { max-height: unset; }
       .lessonSummary .sectionbody, h2.active+.sectionbody {
-        &::after { display: none; } 
+        &::after { display: none; }
       }
       .sect1:not(.acknowledgmentsect) h2:not(.active)+.sectionbody h3 { display: none; }
    }
 }
 
-/*
+
 @media all and (max-width: 600px) {
   html { padding-left: 0 !important;}
 }
-*/
+
 /************************************************************************************
  * PRINT MEDIA
  */
@@ -1453,18 +1454,18 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
     .sect1+.sect1 { border-top: solid 3px black; }
     .preamble tr td > * { max-height: 1000px; }
   }
-  
+
   div#body.workbookpage {
     /* Use B&W colors for headers */
-    #header> h1:first-child, .sect1 > h1:first-child { 
+    #header> h1:first-child, .sect1 > h1:first-child {
       color: black;
     }
     .sect1 > h2:first-child, .sect1 > h3:first-child, .sect2 > h3:first-child {
       color: white;
     }
 
-    .recipe_title, h2 { 
-      background: @print-section-heading !important; 
+    .recipe_title, h2 {
+      background: @print-section-heading !important;
       td:last-child { border: 2px solid @print-section-heading !important; }
     }
     h2, table.recipe_title p { color: black !important; }
