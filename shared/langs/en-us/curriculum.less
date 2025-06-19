@@ -1,5 +1,15 @@
-@import (less) url("../../../lib/shared.less");
+/* Base: asciidoctor CSS, followed by the website stylesheet */
+@import (less) url("../../../lib/asciidoctor.less");
+@import (inline)'https://www.bootstrapworld.org/styles.css';
 
+/* Additional base rules */
+html { font-size: 9pt; }
+body { width: 100%; }
+
+/* Add our curriculum-specific CSS */
+@import (less) url("../../../lib/core.less");
+
+/* And now our english-specific rules */
 .handout::before {content: "Handout: ";}
 .optionaltag::before { content: "Optional: "; }
 .optpara::before { content: "Optional"; }
