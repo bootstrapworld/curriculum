@@ -306,18 +306,6 @@ div#body {
   .fitbruby {
     margin-bottom: 0.75rem;
   }
-  /* use 'thin' instead of 1px border to try and avoid disappearing
-  lines on some browsers */
-  .fitb, .fitbruby, .fitb.stretch::after, .fitbruby.stretch::after {
-    padding-top:        @top-padding-for-writing;
-    position:           relative;
-    display:            inline-block;
-    min-width:          4em;
-    text-align:         center;
-    line-height:        1rem;
-    border-bottom:      solid thin gray;
-    vertical-align:     baseline;
-  }
   .fitbruby .ruby, .recipe .ruby:after, .data-cycle .ruby:after {
     position:           absolute;
     display:            inline-block;
@@ -355,6 +343,18 @@ div#body {
   }
 
   .vocab { font-weight: bold; font-style: italic; color: @font-color; }
+}
+/* use 'thin' instead of 1px border to try and avoid disappearing
+lines on some browsers */
+.fitb, .fitbruby, .fitb.stretch::after, .fitbruby.stretch::after {
+  padding-top:        @top-padding-for-writing;
+  position:           relative;
+  display:            inline-block;
+  min-width:          4em;
+  text-align:         center;
+  line-height:        1rem;
+  border-bottom:      solid thin gray;
+  vertical-align:     baseline;
 }
 
 div#body:not(.LessonPlan, .narrativepage) p {
