@@ -195,7 +195,7 @@
                    (escaped-file-content lesson-plan-file #:static-prefix
                                          (make-lesson-static-url lesson-dir coursep)) ; raw code
                    "publish"                                                          ; post status
-                   get-curriculum-group                                               ; curriculum-group
+                   curr-group                                                         ; curriculum-group
                    *official-date*                                                    ; ???
                    (multilingual? lesson-dir-path)                                    ; multilingual
                    (get-proglang lesson-dir-path)                                     ; proglang
