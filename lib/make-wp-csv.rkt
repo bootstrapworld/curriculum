@@ -81,6 +81,8 @@
               (format "src=\"/wp-content/themes/pro-child/static-resources/~a/~a/lib/\\1\"" *season-year* *natlang*)))
     (set! s (regexp-replace* #rx"src=\"[.][^\"]*?/([^/]*?\\.js)\"" s
               (format "src=\"/wp-content/themes/pro-child/static-resources/~a/~a/lib/\\1\"" *season-year* *natlang*)))
+    (set! s (regexp-replace* #rx"(src=\"[^\"]*/lib/bootstraplesson)\\.js" s
+              "\\1-wp.js"))
 
     (set! s (regexp-replace* #rx"href=\"[^\"]*?/lib/([^/]*?\\.css)\"" s
               (format "href=\"/wp-content/themes/pro-child/static-resources/~a/~a/lib/\\1\"" *season-year* *natlang*)))
@@ -193,7 +195,7 @@
                    (escaped-file-content lesson-plan-file #:static-prefix
                                          (make-lesson-static-url lesson-dir coursep)) ; raw code
                    "publish"                                                          ; post status
-                   get-curriculum-group                                               ; curriculum-group
+                   curr-group                                                         ; curriculum-group
                    *official-date*                                                    ; ???
                    (multilingual? lesson-dir-path)                                    ; multilingual
                    (get-proglang lesson-dir-path)                                     ; proglang

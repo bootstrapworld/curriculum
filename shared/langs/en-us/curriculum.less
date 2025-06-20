@@ -1,5 +1,12 @@
-@import (less) url("../../../lib/shared.less");
+/* Base: asciidoctor CSS, followed by the website stylesheet */
+@import (less) url("../../../lib/asciidoctor.less");
+@import (inline)'https://www.bootstrapworld.org/styles.css';
 
+/* Add our curriculum-specific CSS, then rule-changes for the old website */
+@import (less) url("../../../lib/core.less");
+@import (less) url("../../../lib/old-site.less");
+
+/* And now our english-specific rules */
 .handout::before {content: "Handout: ";}
 .optionaltag::before { content: "Optional: "; }
 .optpara::before { content: "Optional"; }
@@ -12,7 +19,7 @@
     content: "This lesson plan has students programming in Pyret. ";
   }
 }
-.wescheme {  
+.wescheme {
   .other-proglang::before {
     content: "This lesson plan has students programming in WeScheme. ";
   }
@@ -41,7 +48,7 @@ div#body.workbookpage .recipe_example_body .ruby::after {
   content: "what the function produces";
 }
 div#body.workbookpage .recipe_definition_body .ruby::after{
-  content: "what the function does with those variable(s)"; 
+  content: "what the function does with those variable(s)";
 }
 
 div#body.workbookpage.codap .codap_example_tables+table { border-width: 0; }
@@ -55,7 +62,7 @@ div#body.workbookpage.codap .ExampleTableTitle { text-align:  center; font-size:
 div#body.workbookpage.codap .ExampleTableTitle p { font-weight: bold; min-height: unset; }
 
 /*****************************************************
- * DATA CYCLE 
+ * DATA CYCLE
  */
 div#body.workbookpage .data-cycle-question .ruby::after { content: "What question do you have?"; }
 div#body.workbookpage .data-cycle-type-of-question::after { content: "What type of question is this? (circle one) "; }

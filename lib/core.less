@@ -1,13 +1,9 @@
-@import (inline) url("./asciidoctor.less");
-@import 'https://www.bootstrapworld.org/styles.css';
-
 /************************************************************************************
 * SYSTEMWIDE STYLES
 */
-html { font-size: 9pt; }
-body { width: 100%; }
 @font-color: #75328A;
 @translucent-bg-color: #75328AAA;
+@translucent-bg-color2: #b7d893;
 @text-font: 'Lato', Arial, Helvetica, sans-serif;
 @code-font: Hack, "Courier New", monospace;
 @code-comment-color: #cd7054;
@@ -16,6 +12,7 @@ body { width: 100%; }
 @print-section-heading: lightgray;
 @table-header: #eee;
 @lesson-block-vertical-space: 1em;
+@ruby-height: 13px; /* Note(Emmanuel): use this for positioning and font size! */
 
 div#body {
   font-family:    @text-font;
@@ -88,7 +85,6 @@ div#body {
         padding: 5px;
       }
     }
-
   }
 
   /* Make .mathunicode and MathJax look similar */
@@ -142,7 +138,7 @@ div#body {
 
   /* The footer at the bottom of every page */
   .acknowledgmentsect {
-    position: absolute;
+    position: relative;
     top: 100%;
     margin-top: 20px;
   }
@@ -214,6 +210,7 @@ div#body {
     display:            block;
   }
   .lesson-section-2    { clear: both; width: 100%; margin: 20px 0px; }
+
   .sectionbreak {
     display:          block;
     width:            auto;
@@ -301,7 +298,6 @@ div#body {
   .fitbruby::before, .fitb::before {
     content: '\00200b';
   }
-
   .fitbruby {
     margin-bottom: 0.75rem;
   }
@@ -363,83 +359,6 @@ div#body:not(.LessonPlan, .narrativepage) p {
 }
 
 /************************************************************************************
-* SIDEBAR STYLES
-*/
-
-@keyframes slideInFromLeft {
-    0% { transform: translateX(-100%); }
-  100% { transform: translateX(0);     }
-}
-
-.sidebar {
-  animation:  0.5s ease-out 0s 1 slideInFromLeft;
-  display:    block;
-  position:   fixed;
-  top:        0px;
-  left:       0px;
-  width:      225px;
-  height:     100%;
-  background: #e8f3dd;
-  transition: all 0.5s;
-  color:      black;
-  box-shadow: -1px 2px 4px black;
-  z-index:    9999;
-  overflow:   scroll;
-  user-select: none;
-  &.closed {
-    left:  -225px;
-    width: 265px;
-    height: 30px;
-  }
-  .paragraph { width: 205px; }
-  #toggle {
-    top:    0;
-    right:  0;
-    position: absolute;
-    width:  40px;
-    height: 30px;
-    text-align:  center;
-    border: 0;
-    margin: 0 !important;
-    background: @translucent-bg-color;
-    &:after { content: '≫'; font-size: 20px;}
-  }
-
-  &:not(.closed) #toggle:after { content: '«'; }
-  &:hover * { opacity: 1; }
-  > * { margin: 0px 10px !important; }
-  > *, .sidebar > * > * { opacity: 0.4; transition: opacity 0.5s; }
-  label { display: inline; font-size: 0.8rem; }
-  select { border:  none; width: 100%; }
-  strong { color: black; margin: 0; }
-  li { list-style-type: none; margin-bottom: 5px !important; }
-  table { background: none !important; border: 0 !important; width: auto; }
-  table td, table tr { padding: 0 !important; background: none !important; border: 0 !important; }
-  table .title { display: none; }
-  dl * { font-size:  9pt !important; margin: 0; display: inline; }
-  dl { line-height: 1.4rem !important; }
-  dd { margin-left: 0 !important; }
-  dd::after { content: '\A'; white-space: pre; }
-  dt::after { content: ' ·'; white-space: pre; font-size: 0.7rem; }
-  table dt { margin-top: 10px; }
-  .sidebarlessons {
-    margin-top:  30px !important;
-    input[type="checkbox"] { margin-right: 5px; }
-    ul {
-      background: white;
-      margin:     0px !important;
-      box-shadow: inset -1px 0px 2px gray;
-      max-height: 250px;
-      overflow:   scroll;
-      padding:    10px !important;
-      font-size:  10pt !important;
-    }
-    li:nth-child(odd) { background: #b7d89333; }
-  }
-  .sidebarpractices ul { font-size:  0.75rem !important; margin: 0; }
-}
-
-/************************************************************************************
 * NARRATIVE PAGE STYLES
 */
 div#body.narrativepage {
@@ -473,7 +392,6 @@ div#body.narrativepage {
 div#body.LessonPlan {
   font-size: 12pt;
 
-  #content { font-size: 9pt; }
   .other-proglang::before { font-style: italic; }
 
   /* The summary table at the top of each lesson */
@@ -488,7 +406,7 @@ div#body.LessonPlan {
       pointer-events: none;
       &::before { font-size: 12pt; content: "Slides are not yet available for this lesson"; }
     }
-    &.left-header tr td:nth-child(1) { background-color: #b7d893; }
+    &.left-header tr td:nth-child(1) { background-color: @translucent-bg-color2; }
     &.left-header tr td:nth-child(1) p { font-weight: bold; }
 
     /* Custom materials link styles */
@@ -689,11 +607,11 @@ div#body.solution-page {
 }
 
 div#body.workbookpage {
-  max-width: unset;
-  color: black;
+  font-size: 9pt; /* Use a tiny font for print, but then zoom in @screen */
+  color: black !important;
   top: 0;
   left: 0;
-  font-size: 9pt; /* Use a tiny font for print, but then zoom in @screen */
+  max-width: unset;
 
   #header > h1:first-child { text-align: center; margin-bottom: 0;}
   h1 { font-weight: bold; }
@@ -737,7 +655,7 @@ div#body.workbookpage {
     &::before { content: 'Teachers:'; display: inline; font-weight: bold; }
   }
 
-  /* Given adjacent sections some padding */
+  /* Give adjacent sections some padding */
   .lesson-section-1+.lesson-section-1 { border: none; margin-top: 1ex; }
 
   .linkInstructions { font-style: italic; }
@@ -761,7 +679,7 @@ div#body.workbookpage {
             display: contents;
             > * { width: 100%; }
           }
-          &.valign-top    {     align-content: flex-start;  }
+          &.valign-top    {   align-content: flex-start;  }
           &.valign-middle {     align-items: center; }
           &.valign-bottom {     align-items: end;    }
           &.halign-left   { justify-content: left;   }
@@ -1361,7 +1279,7 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
           margin-right: 5px;
         }
         &.active::after { content: '▲'; }
-        &.active, &:hover { background-color: #b7d893; }
+        &.active, &:hover { background-color: @translucent-bg-color2; }
       }
       /* set collapsed size and transition rules */
       .sect1:not(.acknowledgmentsect) .sectionbody {
@@ -1415,7 +1333,7 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
   a[href]::after { content: none !important; }
   #savetodrive-div, .copyright, #footer, #outOfDate, .web-page-only, .section-link,
   .acknowledgmentsect, .sidebar, .CodeMirror div.CodeMirror-cursor, #MathJax_Message {
-   display: none !important; visibility: hidden; float: none;
+    display: none !important; visibility: hidden; float: none;
   }
   div#body{ position: static; } /* page-break fails on absolute positioning */
 
@@ -1455,15 +1373,15 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
 
   div#body.workbookpage {
     /* Use B&W colors for headers */
-    #header> h1:first-child, .sect1 > h1:first-child { 
+    #header> h1:first-child, .sect1 > h1:first-child {
       color: black;
     }
     .sect1 > h2:first-child, .sect1 > h3:first-child, .sect2 > h3:first-child {
       color: white;
     }
 
-    .recipe_title, h2 { 
-      background: @print-section-heading !important; 
+    .recipe_title, h2 {
+      background: @print-section-heading !important;
       td:last-child { border: 2px solid @print-section-heading !important; }
     }
     h2, table.recipe_title p { color: black !important; }
@@ -1471,7 +1389,7 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
     .acknowledgmentsect:last-child { flex-grow: 0 !important; } /* Even when invisible, flex-grow will take up space */
     .recipe_condition *::before, *::after { color: black !important; }
   }
-  div#body{
+  div#body {
     margin: 0;
     /* Page Breaks for printed lesson plans, projects, and TR pages */
     h3, h2 { break-after: avoid !important; page-break-after: avoid !important; }
