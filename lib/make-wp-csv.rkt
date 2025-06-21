@@ -208,51 +208,55 @@
   (let ([coursep (regexp-match "courses$" umbrella-dir)]
         [solutions? (regexp-match "solution-pages" pages)]
         [protected? (regexp-match "protected" pages)])
-  (for ([lesson-dir (directory-list umbrella-dir)])
-    (let* ([curr-group (if coursep (get-curriculum-group lesson-dir) "")]
-           [lesson-id (string->uniqid lesson-dir)]
-           [static-prefix (make-lesson-static-url lesson-dir coursep)]
-           [lesson-dir-path (build-path umbrella-dir lesson-dir)]
-           [lesson-plan-file (path->string (build-path lesson-dir-path "index.shtml"))])
-      (let ([pages-dir-path (build-path lesson-dir-path pages)])
-        (when (directory-exists? pages-dir-path)
-          (for ([p (directory-list pages-dir-path)])
-            ; (printf "doing p = ~a\n" p)
-            (set! p (path->string p))
-            (when (regexp-match #rx"\\.html" p)
-              ;id, title, permalink, lesson-parent, unit-raw-code
-              (let* ([p-base (regexp-replace #rx"\\.html" p "")]
-                     [p-prime (format "~a~a" p-base
-                                (if (not solutions?) "" "-solution"))]
-                     [lesson/p (format "~a/~a" lesson-dir p-prime)]
-                     [uniqid (string->uniqid lesson/p)]
-                     [page-file (path->string (build-path pages-dir-path p))]
-                     [page-title-file (path->string (build-path pages-dir-path ".cached"
-                                                                (string-append "."
-                                                                  (regexp-replace #rx"\\.html" p ".titletxt"))))])
-                ; (printf "page-title-file is ~a\n" page-title-file)
-                (when (file-exists? page-title-file)
-                  ; (printf "going ahead with ~a\n" p)
-                  ;id, title, permalink, archive, parent, seasons, type, child-categories, curriculum-materials-raw-code, post status, date, curriculum-group, multilingual, proglang
-                  (fprintf o "~a,\"~a\",~a,~a,~a,~a,~a,~a,\"~a\",~a,~a,~a,~a,~a\n"
-                           uniqid ;id
-                           (string-trim (escaped-file-content page-title-file #:kill-newlines? #t)) ;title
-                           p-prime
-                           ;(make-lesson-permalink lesson/p) ; permalink
-                           *archive* ; archive
-                           lesson-id ; parent
-                           (format "~a ~a" (string-titlecase *season*) *year*) ;season
-                           *type* ; type
-                           (if (not solutions?) "Xyz" "Xyz Solution") ; child categ
-                           (escaped-file-content page-file #:static-prefix static-prefix) ; raw code
-                           (if solutions? "private" "publish")
-                           curr-group
-                           *official-date*
-                           (multilingual? lesson-dir-path)
-                           (get-proglang lesson-dir-path)
-                           )
-                  (fprintf oa "~a,True\n" uniqid)
-                  ))))))))))
+    (for ([lesson-dir (directory-list umbrella-dir)])
+      (let* ([curr-group (if coursep (get-curriculum-group lesson-dir) "")]
+             [lesson-id (string->uniqid lesson-dir)]
+             [static-prefix (make-lesson-static-url lesson-dir coursep)]
+             [lesson-dir-path (build-path umbrella-dir lesson-dir)]
+             [lesson-plan-file (path->string (build-path lesson-dir-path "index.shtml"))]
+             [pages-dir-path (build-path lesson-dir-path pages)]
+             [page-list '()])
+        (cond [(directory-exists? pages-dir-path)
+               (set! page-list (map path->string (directory-list pages-dir-path)))]
+              [(file-exists? pages-dir-path)
+               (set! pages-dir-path (regexp-replace #rx"/index.shtml$" pages ""))
+               (set! page-list (list "index.shtml"))])
+        (for ([p page-list])
+          ; (printf "doing p = ~a\n" p)
+          (when (regexp-match #rx"\\.s?html" p)
+            ;id, title, permalink, lesson-parent, unit-raw-code
+            (let* ([p-base (regexp-replace #rx"\\.s?html" p "")]
+                   [p-prime (format "~a~a" p-base
+                              (if (not solutions?) "" "-solution"))]
+                   [lesson/p (format "~a/~a" lesson-dir p-prime)]
+                   [uniqid (string->uniqid lesson/p)]
+                   [page-file (path->string (build-path pages-dir-path p))]
+                   [page-title-file (path->string (build-path pages-dir-path ".cached"
+                                                              (string-append "."
+                                                                (regexp-replace #rx"\\.s?html" p ".titletxt"))))])
+              ; (printf "page-title-file is ~a\n" page-title-file)
+              (when (file-exists? page-title-file)
+                ; (printf "going ahead with ~a\n" p)
+                ;id, title, permalink, archive, parent, seasons, type, child-categories, curriculum-materials-raw-code, post status, date, curriculum-group, multilingual, proglang
+                (fprintf o "~a,\"~a\",~a,~a,~a,~a,~a,~a,\"~a\",~a,~a,~a,~a,~a\n"
+                  uniqid ;id
+                  (string-trim (escaped-file-content page-title-file #:kill-newlines? #t)) ;title
+                  p-prime
+                  ;(make-lesson-permalink lesson/p) ; permalink
+                  *archive* ; archive
+                  lesson-id ; parent
+                  (format "~a ~a" (string-titlecase *season*) *year*) ;season
+                  *type* ; type
+                  (if (not solutions?) "Xyz" "Xyz Solution") ; child categ
+                  (escaped-file-content page-file #:static-prefix static-prefix) ; raw code
+                  (if solutions? "private" "publish")
+                  curr-group
+                  *official-date*
+                  (multilingual? lesson-dir-path)
+                  (get-proglang lesson-dir-path)
+                  )
+                (fprintf oa "~a,True\n" uniqid)
+                ))))))))
 
 (let* ([cla (current-command-line-arguments)]
        [n (vector-length cla)])
@@ -287,6 +291,7 @@
         (convert-sub-pages o oa #:umbrella-dir *courses-dir* #:pages "back-matter/pages")
         (convert-sub-pages o oa #:umbrella-dir *courses-dir* #:pages "back-matter/solution-pages")
         (convert-sub-pages o oa #:umbrella-dir *courses-dir* #:pages "resources")
+        (convert-sub-pages o oa #:umbrella-dir *courses-dir* #:pages "resources/index.shtml")
         (convert-sub-pages o oa #:umbrella-dir *courses-dir* #:pages "resources/pages")
         (convert-sub-pages o oa #:umbrella-dir *courses-dir* #:pages "resources/solution-pages")
         (convert-sub-pages o oa #:umbrella-dir *courses-dir* #:pages "resources/protected")
