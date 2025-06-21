@@ -214,18 +214,23 @@
              [static-prefix (make-lesson-static-url lesson-dir coursep)]
              [lesson-dir-path (build-path umbrella-dir lesson-dir)]
              [lesson-plan-file (path->string (build-path lesson-dir-path "index.shtml"))]
-             [pages-dir-path (build-path lesson-dir-path pages)]
+             [pages-dir-path (path->string (build-path lesson-dir-path pages))]
+             [teacher-resource-page? #f]
              [page-list '()])
         (cond [(directory-exists? pages-dir-path)
                (set! page-list (map path->string (directory-list pages-dir-path)))]
               [(file-exists? pages-dir-path)
-               (set! pages-dir-path (regexp-replace #rx"/index.shtml$" pages ""))
+               (set! teacher-resource-page? #t)
+               ; (printf "pages-dir-path⁰ = ~s\n" pages-dir-path)
+               (set! pages-dir-path (regexp-replace #rx"/index.shtml$" pages-dir-path ""))
+               ; (printf "pages-dir-path¹ = ~s\n" pages-dir-path)
                (set! page-list (list "index.shtml"))])
         (for ([p page-list])
           ; (printf "doing p = ~a\n" p)
           (when (regexp-match #rx"\\.s?html" p)
             ;id, title, permalink, lesson-parent, unit-raw-code
-            (let* ([p-base (regexp-replace #rx"\\.s?html" p "")]
+            (let* ([p-base (if teacher-resource-page? "resources"
+                               (regexp-replace #rx"\\.s?html" p ""))]
                    [p-prime (format "~a~a" p-base
                               (if (not solutions?) "" "-solution"))]
                    [lesson/p (format "~a/~a" lesson-dir p-prime)]
@@ -234,9 +239,13 @@
                    [page-title-file (path->string (build-path pages-dir-path ".cached"
                                                               (string-append "."
                                                                 (regexp-replace #rx"\\.s?html" p ".titletxt"))))])
-              ; (printf "page-title-file is ~a\n" page-title-file)
+              ; (when teacher-resource-page?
+              ;   (printf "page-title-file is ~a in ~a\n" page-title-file (current-directory)))
               (when (file-exists? page-title-file)
-                ; (printf "going ahead with ~a\n" p)
+                ; (when teacher-resource-page?
+                ;   (printf "going ahead with ~a\n" p)
+                ;   (printf "p-base = ~s; prime = ~s\n" p-base p-prime)
+                ;   )
                 ;id, title, permalink, archive, parent, seasons, type, child-categories, curriculum-materials-raw-code, post status, date, curriculum-group, multilingual, proglang
                 (fprintf o "~a,\"~a\",~a,~a,~a,~a,~a,~a,\"~a\",~a,~a,~a,~a,~a\n"
                   uniqid ;id
@@ -290,7 +299,7 @@
         (convert-sub-pages o oa #:umbrella-dir *courses-dir* #:pages "front-matter/solution-pages")
         (convert-sub-pages o oa #:umbrella-dir *courses-dir* #:pages "back-matter/pages")
         (convert-sub-pages o oa #:umbrella-dir *courses-dir* #:pages "back-matter/solution-pages")
-        (convert-sub-pages o oa #:umbrella-dir *courses-dir* #:pages "resources")
+        ; (convert-sub-pages o oa #:umbrella-dir *courses-dir* #:pages "resources")
         (convert-sub-pages o oa #:umbrella-dir *courses-dir* #:pages "resources/index.shtml")
         (convert-sub-pages o oa #:umbrella-dir *courses-dir* #:pages "resources/pages")
         (convert-sub-pages o oa #:umbrella-dir *courses-dir* #:pages "resources/solution-pages")
