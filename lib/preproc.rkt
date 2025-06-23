@@ -1652,10 +1652,13 @@
                                                  arg-link-form arg-as-given)) o))]
                            [(string=? directive "vocab")
                             (let* ([arg (read-group i directive)]
-                                   [s (assoc-glossary arg)])
+                                   [s (assoc-glossary arg)]
+                                   [def (second s)])
                               (when (string=? arg "")
                                 (printf "WARNING: Directive @vocab has ill-formed argument\n\n"))
-                              (display (enclose-span ".vocab" arg) o)
+                              (display (enclose-span
+                                          ".vocab" arg
+                                          #:attribs (string-append "title=\"" def "\"")) o)
                               (cond [s (unless (member s *glossary-items*)
                                          (set! *glossary-items* (cons s *glossary-items*)))]
                                     [else
