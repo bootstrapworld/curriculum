@@ -1,4 +1,4 @@
-= Supervised Machine Learning: Training ALVINN
+= Supervised Machine Learning: Training a Self-Driving Car
 
 ++++
 <style>
@@ -14,47 +14,46 @@ table .autonum::after { content: ')' !important; }
 [cols="3a,1a", grid="none", frame="none"]
 |===
 |
-@n _Refer to the weather forecast (right) in your response._ 
+@n _Refer to the weather forecast (right) in your response._ During a week of daytime test drives:
 
-- During a week of test drives, ALVINN steers safely on Wednesday and Friday. 
-- On the other days, ALVINN’s driving is unsafe and unpredictable. 
+- On Wednesday and Friday, the self-driving car drives safely.
+- On the other days, the self-driving car is unsafe. 
 
 @vspace{1ex}
 
-Think about the training corpus of data that prepared ALVINN to produce these results. 
-
-What was wrong with the training data. How do you know? 
+What might explain why the car drove unsafely on some days? 
 |@image{../images/forecast.png, 220}
 |===
 
-@blanklines{4}{@ifsoln{ALVINN's best guesses about the steering angle will be accurate when the conditions of the road are similar to the training data. Given that ALVINN drove unsafely on days when the weather was cloudy, raining, and snowing, we can assume that the training data did not include these conditions.}
-}
+@blanklines{4}{@ifsoln{
+Given that the car drove unsafely only on days when the weather wasn't sunny, it probably wasn't trained on varied enough conditions.
+}}
 
 @n Imagine that a self-driving car has done extensive training on a one-lane road, in all weather conditions, and at all times of day. Would you expect it to be able to safely drive on a busy two-lane road? Explain.
 
-@blanklines{3}{@ifsoln{Although ALVINN's training at this point enables accurate steering in a variety of conditions, ALVINN is not trained on busy multi-lane roads. The steering angles differ when the road is wider, and the appearance of unexpected, unfamiliar objects (like other cars) could result in very dangerous driving.
+@blanklines{3}{@ifsoln{
+Although ALVINN's training at this point enables accurate steering in a variety of conditions, ALVINN is not trained on busy multi-lane roads. The steering angles differ when the road is wider, and the appearance of unexpected, unfamiliar objects (like other cars) could result in very dangerous driving.
 }}
 
 @n Imagine that a self-driving car trained on isolated country roads, as well as city streets, and highways in all weather conditions and times of day. It would be pretty safe on many roads! What might it still not be prepared to navigate safely? 
 
-@blanklines{3}{@ifsoln{
+@blanklines{4}{@ifsoln{
 *Unexpected moving things* like ambulance encounters, bikes, children running into the street to chase a ball, dogs, moose, etc. 
-*Unexpected stationary objects* like fallen trees and other debris, hills, flooded roads, street car tracks, bike lanes, railroad crossings, draw bridges, etc.
+*Unexpected stationary objects* like fallen trees and other debris, hills, flooded roads, street car tracks, bike lanes, railroad crossings, draw bridges, etc. *Weather in other geographies* For example, many self-driving cars are trained in the Bay Area of California, which cannot prepare a vehicle for all of Alaska's driving conditions.
 }}
 
 == Confidence Rating
 
 @n In addition to producing a steering angle for each image of the road, ALVINN produces a _numeric_ measure of "confidence" in its response.
 
-- What do you think causes ALVINN's "confidence" to increase? @fitb{}{}
+- What do you think causes ALVINN's "confidence" to increase or decrease? 
 
-@fitb{}{@ifsoln{ALVINN will be more confident when the image of the road matches an image from the training dataset.}}
+@blanklines{3}{@ifsoln{
+*Confidence will be higher* when the image of the road matches an image from the training dataset.  *Confidence will be lower* when the image of the road is entirely unlike any image in the training dataset.
+}}
 
-- What do you think causes ALVINN's "confidence" to decrease? @fitb{}{}
+- Is 100% "confidence" possible? 
 
-@fitb{}{@ifsoln{ALVINN will be less confident when the image of the road is entirely unlike any image in the training dataset.}}
-
-- Is 100% "confidence" possible? @fitb{}{@ifsoln{100% confidence is not possible, given that ALVINN uses a regression function to determine steering angle }}
-
-@fitb{}{@ifsoln{(rather than checking to see if a test image matches a training image).}}
-
+@blanklines{3}{@ifsoln{
+100% confidence is not possible, because, once the model is constructed, ALVINN will only have access to a lossy version of the original data. Since it is not comparing new images to the original images, if it encounters a patch of road it's seen before under identical conditions, it won't recognize it.
+}}
