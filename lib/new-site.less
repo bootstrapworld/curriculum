@@ -1,6 +1,7 @@
 /************************************************************************************
 * WordPress-Specific Stuff
 */
+
 @media print {
   body { width: 7.5in; }
   *:has(#raw_code_container) {
@@ -15,7 +16,16 @@
 }
 
 @media screen {
+  body { width: 100%; }
+
   #raw_code_container { margin-top: 20px; }
+
+  /* Allow Lesson Plans and TeacherResources to be as wide as the window allows */
+  #raw_code_container:has(#body.LessonPlan, #body.TeacherResources),
+  #body.LessonPlan, #body.TeacherResources {
+    width: unset;
+    max-width: unset;
+  }
   .lesson-content+div { margin-left: 0em !important; min-width: 2.5in !important; }
 
   div#body.workbookpage:not(.landscape) {
