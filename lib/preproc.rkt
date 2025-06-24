@@ -2126,7 +2126,7 @@
                              (unless (assoc lbl *assessments-met*)
                                  (set! *assessments-met*
                                    (cons (cons lbl text) *assessments-met*)))
-                             (fprintf o "link:pass:[assessments/~a/index.html][~a]" lbl text))]
+                             (fprintf o "link:pass:[assessments/~a/index.html][~a, role=quiz]" lbl text))]
                           [(string=? directive "citation")
                            (let* ([args (read-commaed-group i directive read-group)]
                                   [args-len (length args)]
@@ -2670,7 +2670,7 @@
     (lambda (o)
       (unless (null? *assessments-met*)
         (for ([asst (reverse *assessments-met*)])
-          (fprintf o "- link:pass:[assessments/~a/index.html][~a]\n"
+          (fprintf o "- link:pass:[assessments/~a/index.html][~a, role=quiz]\n"
                    (car asst) (cdr asst)))))
     #:exists 'replace))
 
