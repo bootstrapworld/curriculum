@@ -10,14 +10,9 @@ Let's compare the output of `distance-to(chimpanzee-article)` with the output of
 
 @fitb{}{@ifsoln{both with and without stopwords.}}
 
-@fitb{}{}
+@n When we used `distance-to-cleaned`, the angle measures were generally larger. Why? @fitb{}{@ifsoln{The articles are _more different_ }}
 
-
-@n When we used `distance-to-cleaned`, the angle measures were generally larger. Why? @fitb{}{@ifsoln{The articles are _more different_ after the stopwords}}
-
-@fitb{}{@ifsoln{are removed. When we remove stopwords, we end up comparing more meaningful sets of words.}}
-
-@fitb{}{}
+@fitb{}{@ifsoln{after the stopwords are removed. When we remove stopwords, we end up comparing more meaningful sets of words.}}
 
 @n When we used `distance-to-cleaned`, four articles produced an angle measure of 90°. What does this tell us? @fitb{}{@ifsoln{Articles separated by 90° are as different as possible. In other words, when we remove words like the, as, and of, there are no commonalities}}
 
@@ -29,27 +24,29 @@ Let's compare the output of `distance-to(chimpanzee-article)` with the output of
 
 Follow the steps below to make some discoveries about the `mystery-article`.
 
-@n Type `distance-to(mystery-article)` in the Interactions Area. Look at the different angle measurements produced. Do you notice any outliers? @fitb{5em}{@ifsoln{Yes}} Explain. @fitb{}{@ifsoln{All of the angle differences are between 58° and 72°, except for `giraffe-article`, which has an angle }}
+@n Type `distance-to(mystery-article)` in the Interactions Area. Look at the different angle measurements produced. Do you notice any outliers? @fitb{5em}{@ifsoln{Yes}} Explain. @fitb{}{@ifsoln{All of the angle differences are between 58° and 72°, }}
 
-@fitb{}{@ifsoln{difference of ~48.541°.}}
+@fitb{}{@ifsoln{except for `giraffe-article`, which has an angle difference of ~48.738°.}}
 
-@fitb{}{}
+@n Think back to when you compared `student-essay` with `elephant-article`. Those two paragraphs were virtually identical, which resulted in an angle difference of about 23.706°. The difference between these two rays (`giraffe-article` and `mystery-article`) is much greater, but still seems unusual. Can you make any hypotheses about `mystery-article`? @fitb{}{@ifsoln{Maybe the mystery article is about an animal that is similar or related to the giraffe, }}
 
-@n Think back to when you compared `student-essay` with `elephant-article`. Those two paragraphs were virtually identical, which resulted in an angle difference of about 23.706°. The difference between these two rays (`giraffe-article` and `mystery-article`) is much greater, but still seems unusual. Can you make any hypotheses about `mystery-article`? @fitb{}{@ifsoln{Maybe the mystery article is about an}}
-
-@fitb{}{@ifsoln{animal that is similar or related to the giraffe, meaning that some of the same words would be used to describe it.}}
-
-@fitb{}{}
+@fitb{}{@ifsoln{meaning that some of the same words would be used to describe it.}}
 
 @n Let’s investigate further. Type `distance-to-cleaned(mystery-essay)`. What do you notice? @fitb{}{@ifsoln{All of the angle differences}}
 
 @fitb{}{@ifsoln{increased to 88° or greater, except for `giraffe-article`, which now has an angle difference of 76°.}}
 
-@fitb{}{}
 
 @n Time for the reveal! Type `mystery-article` into the Interactions Area. Why was the angle difference between this article and `giraffe-article` small? @fitb{}{@ifsoln{The mystery article is about okapis, which are closely related to giraffes. Several unique words appear in both articles,}}
 
 @fitb{}{@ifsoln{including "okapi", "giraffe", "ossicone", etc.}}
 
-@fitb{}{}
+== Part 3: Revisiting student-essay
 
+@n  Type `distance-to-cleaned(student-essay)` in the Interactions Area. What do you Notice? What do you Wonder?
+
+@fitb{}{@ifsoln{*Notice*: With the stop words removed, there is no angle difference between the ray representing `student-essay` and the }}
+
+@fitb{}{@ifsoln{ray representing `elephant-essay`. This student would have an extremely difficult time convincing their teacher that they did not plagiarize.}}
+
+@fitb{}{@ifsoln{*Wonder*: When a plagiarism detector produces an output of zero, is there any way that the student is innocent?}}

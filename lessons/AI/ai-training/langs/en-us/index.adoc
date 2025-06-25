@@ -23,6 +23,15 @@
 |[.materials-links]
 @material-links
 
+| Preparation
+| 
+@preparation{
+- The final section of this lesson involves an activity where students measure the angle difference between rays. 
+- If you'd like your students to practice using their protractors, be sure to have have protractors available for @printable-exercise{angle-difference.adoc}. 
+- Alternatively, you can have your students estimate angle size using what they know about angle measures and the activity will still be valuable.
+}
+
+
 |===
 
 == Song Recommendation Systems
@@ -159,12 +168,12 @@ To understand the workings of plagiarism detection, we'll start by looking at a 
 
 @lesson-instruction{
 - Open the @starter-file{plagiarism}.
-- With a partner, complete @printable-exercise{primitive-plagiarism-detector.adoc}.
+- With a partner, complete the first two sections of @printable-exercise{primitive-plagiarism-detector.adoc}.
 }
 
 @slidebreak{Launch}
 
-@teacher{Debrief the page with your class.}
+@teacher{Debrief the page with your class using the prompts below.}
 
 @QandA{
 @Q{What does the `simple-equality` detector do?}
@@ -177,12 +186,23 @@ To understand the workings of plagiarism detection, we'll start by looking at a 
 
 @slidebreak{Launch}
 
-As we discussed, plagiarizers usually alter at least a few words of the original document. Sometimes they change the ordering of the text, and sometimes they delete a sentence or word here and there.
+Plagiarizers usually alter at least a few words of the original document. Sometimes they change the ordering of the text, and sometimes they delete a sentence or word here and there.
 
 - If the `simple-equality` detector finds a match, we can be certain that identicality exists.
 - If the detector does not find a match, all we know is that the two documents are not identical.
 
 *We need a more sophisticated plagiarism detector!*
+
+@slidebreak{Launch}
+
+@teacher{The last section of @printable-exercise{primitive-plagiarism-detector.adoc} invites students to think about _measuring similarity_. Remind students about the mountain sorting activity that they completed during @lesson-link{ai-intro} to recontextualize the concept of measuring similarity.}
+
+@lesson-instruction{
+- Yara and Xola agree that there has to be a way to measure the _similarity_ of the two essays.
+- With a partner, complete the last section of @printable-exercise{primitive-plagiarism-detector.adoc}, where you will consider two proposals for measuring similarity - and then develop your own method for measuring similarity!
+}
+
+@slidebreak{Launch}
 
 Rather than detecting identicality, we need to determine the _closeness_ of two documents. To do that, we summarize each document, and then compute the distance between the summaries.
 
@@ -243,6 +263,13 @@ Checking if two bags of words are identical *is* an improvement from checking if
 @QandA{
 @Q{What similarities are there between a system that recommends songs and `bag-equality` plagiarism detection?}
 @A{Both systems build summaries of the available data and then work with those summaries.}
+
+@Q{Can you think of any other apps or technologies that _measure similarity_ in some way?}
+
+@A{Image retrieval - finding images similar to a given image from a large database}
+@A{Facial recognition - identifying and verifying individuals based on facial features}
+@A{Product recommendation - suggesting items for purchase based on a customer's browsing history}
+
 }
 
 
@@ -266,23 +293,31 @@ Here are some discoveries we have made so far:
 
 What we need is a way to check if bags are _similar_!
 
-One strategy PROGRAMMERS? use for this is to represent bags of words as points in space.
+One strategy programmers use for this is to represent bags of words as points in space.
 
 Let's see how that would work for Documents a and b.
 
-- We already know that *Document a* "doo be doo be doo" can be represented as the bag or words (`"be": 2, "doo": 3`).
+- We already know that *Document a* "doo be doo be doo" can be represented as the bag of words (`"be": 2, "doo": 3`).
 - Written as a coordinate pair, it would like this: (2, 3)
 - Plotting that point on the be-doo plane looks like this:
 
 @center{@image{images/3-2.png, 150}}
 
-When we plot a point on the _coordinate_ plane, we locate @math{x} on the horizontal axis and then we locate @math{y} on the vertical axis. There is no such protocol with the bag-of-words model. That said, it is crucial to adhere to the _same word order_ for bags of words that you are comparing!
+When we plot a point on the _coordinate_ plane, we locate @math{x} on the horizontal axis and then we locate @math{y} on the vertical axis. Similarly, bags must use same word order if we want meaningful results. 
 
 @QandA{
 @Q{How would you represent Document b ("doo doo be doo be") as a point on the be-doo plane?}
 @A{The point would be in the exact same position as the point for Document a.}
 @A{Because we decided on "be" then "doo" for Document a, we must use "be" then "doo" for Document b also.}
 }
+
+The decision we just made - to use "be" then "doo" for both bags of words - is an example of @vocab{data normalization}. 
+
+@lesson-point{
+Don't skip data normalization! 
+}
+
+Data normalization is the act of adapting and modifying disparate data so that they all have the same characteristics (making them easy to compare and otherwise compute with). Failure to normalize data can lead to useless and confusing outputs.
 
 === Investigate
 @slidebreak{Investigate}
@@ -317,9 +352,7 @@ Let's look at some slightly more complicated documents and consider how to plot 
 }
 }
 
-@teacher{
-*Forgetting to normalize data and consider dimensionality* are common mistakes. Students will discover what these entail during the remainder of the lesson.
-}
+In the example above, we forgot the @vocab{data normalization}. How can we fix it?
 
 @slidebreak{InvestigateC}
 
@@ -331,9 +364,9 @@ To solve this problem, let's start by taking a closer look at our data.
 [cols="3a,^4a, 4a", grid="none", frame="none"]
 |===
 |
-When we use a Venn Diagram to visualize the data:
+When we use a Venn Diagram to visualize the data...
 | @image{images/scat-venn-diagram.png, 150}
-|We recognize that Documents c and d +
+|...we recognize that Documents c and d +
 contain a total of *three different words*!
 |===
 
@@ -364,7 +397,9 @@ We must revise our bag-of-words summaries and our points!
 | `"be": 2, "bop": 5, "doo": 0`
 | (2, 5, 0)
 |===
-@teacher{Normalizing data requires that we consider _all_ the words; when a word occurs zero times in a document, we acknowledge it. Instead of glossing over the dimension, we indicate that a given word occurred zero times.}
+
+
+Normalizing data requires that we consider _all_ the words; when a word occurs zero times in a document, we acknowledge it. Instead of glossing over the dimension, we indicate that a given word occurred zero times. When we include *all* of the words from both documents, we produce a model with the correct @vocab{dimensionality}. For the bag-of-words model, the dimensionality equals how many different words are in the corpus.
 
 It is a bit trickier to envision plotting these points, but not impossible!
 
@@ -403,7 +438,7 @@ When we ask people whether two documents are the same, they rarely give us a bla
 === Investigate
 @slidebreak{Investigate}
 
-Now that we know how to represent our bag of words summaries as points in space, we can draw a ray from the origin through each of those points and ask: What is the angle between the two rays?
+Now that we know how to represent our bag of words summaries as points in space, we can draw a @vocab{ray} from the origin through each of those points and ask: What is the angle between the two rays?
 
 Take, for example, this comparison between two strings: `stringA` ("doo doo doo doo") and `stringB` ("be be be be").
 
