@@ -42,9 +42,7 @@ Meet ALVINN!
 
 @center{@image{images/navlab.png, 400}} 
 
-ALVINN (short for Autonomous Land Vehicle in a Neural Network) was developed in 1989 by a team of computer scientists at Carnegie Mellon University. ALVINN is the forebear of today's self-driving cars: a retrofitted Army ambulance equipped with sensors, computers, and actuators (the part of a machine that allows movement). ALVINN had about one-tenth of the processing power of an Apple Watch - but was able to safely drive at 70 miles per hour (albeit on a very limited course) by the early 1990s! How did it happen?  
-
-
+ALVINN (short for Autonomous Land Vehicle in a Neural Network) was developed in 1989 by a team of computer scientists at Carnegie Mellon University. ALVINN is the forebear of today's self-driving cars: a retrofitted Army ambulance equipped with sensors, computers, and actuators (the part of a machine that allows movement). ALVINN had about one-tenth of the processing power of an Apple Watch - but was able to safely drive on a very limited course at 70 miles per hour by the early 1990s! How did it happen?  
 
 @slidebreak{Launch}
 
@@ -84,15 +82,17 @@ Note: These images were selected for illustrative purposes. The 30x32 pixel imag
 
 @slidebreak{Launch}
 
-(4) Using the set of inputs and outputs, ALVINN generates a @vocab{function} for predicting steering angles, which we can summarize using contract-notation. _Note that the actual contract is more complex, and would include a second Number for the measure of confidence._
+(4) Using the set of inputs and outputs, ALVINN generates a @vocab{function} for predicting steering angles from Images, which we can summarize using contract-notation. 
 
 @indented{
 @show{(contract 'steer '((road-image Image)) "Number")}
 }
 
 @lesson-point{
-ALVINN's function dramatically reduces the complexity of the data and predicts the value of the @vocab{response variable} as though it is completely dependent on the @vocab{explanatory variable}.
+In the `steer` function, the Image is the @vocab{explanatory variable} and the steering angle is the @vocab{response variable}.
 }
+
+_Note that the actual contract is more complex, and would include a second Number for the measure of confidence. And, as was the case for other models we've seen, the model is @vocab{lossy} - meaning that some of the original information in the dataset was lost through the process of summarizing and compressing the data to build the model._
 
 @slidebreak{Launch}
 
