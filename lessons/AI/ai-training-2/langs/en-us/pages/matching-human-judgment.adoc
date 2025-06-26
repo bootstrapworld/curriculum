@@ -1,0 +1,63 @@
+= The Importance of Human Judgment
+
+== How Many Dimensions?
+
+@vspace{1ex}
+
+A teacher asks students to write an essay on one of three topics: modern art, soccer, or zebras. The teacher feeds the essays to a plagiarism detector *to compare the essays to one another.* It plots 32 points in a 1023-dimensional space.
+
+@n What does the number 32 tell us? @fitb{}{@ifsoln{The teacher has provided the plagiarism detector with 32 student essays.}}
+
+@n What does the number 1023 tell us? @fitb{}{@ifsoln{In sum, the essays include 1023 different words.}}
+
+@n After thinking on it, the teacher realizes that students don't merely copy one another's writing; instead, they copy/paste text from the internet! The teacher opens her plagiarism detection software and tells it to consume a large @vocab{training corpus} of internet text about modern art, soccer, and zebras. How many dimensions will the space contain, now?
+
+@vspace{1ex}
+
+*Circle one:* @hspace{1em} more dimensions @hspace{5em}  the same amount of dimensions @hspace{5em} fewer dimensions
+
+@n Explain your choice. 
+
+@blanklines{4}{
+@ifsoln{The space will contain more dimensions. For a bag-of-words model, dimensionality reflects how many different words are in the corpus. We can assume that a large corpus of internet text will use more words than the students in the teacher's class did.}
+}
+
+== Assessing the Output
+
+++++
+<style>
+p {margin: 0px 0px;}
+.center, .centered-image { padding: 0.5ex 0ex; }
+img { width: 230px; }
+
+/* Format matching answers to render with an arrow */
+.solution::before{ content: ' → '; }
+</style>
+++++
+
+@link-instructions{
+On the left is a description of the output of a plagiarism detector. On the right is an interpretation of what each output means. Match the description of each output with the correct interpretation.}
+
+[.FillVerticalSpace, cols=".^5a,.^2a,2, .^2a,.^10a", stripes="none", grid="none", frame="none"]
+|===
+| The 32 points are scattered seemingly randomly all over a 1023-dimensional space, with no apparent clustering.
+|*1* @ifsoln{D}||*A*
+| One likely explanation is that the three large, loose clusters represent the three different topics: modern art, zebras, and soccer. Students who write about one topic are likely to use similar terminology, and that terminology will differ by topic. 
+
+
+| The 32 points are scattered seemingly randomly, but there are two points plotted extremely close together.
+|*2* @ifsoln{B}||*B*
+| With the exception of two essays, students appear to have written essays with a range of different words that appear in varying frequencies. The teacher should focus on those two essays. 
+
+
+| There appear to be three large, loose clusters of randomly plotted points.
+|*3* @ifsoln{A}||*C*
+| One of the topics was far less popular than the others, and only one student opted to write about that topic. The teacher should have no need to worry.
+
+
+| There appear to be two large, loose clusters of randomly plotted points, with one point positioned far away from the two clusters.
+|*4* @ifsoln{C}||*D*
+| The models for the documents are not close; students appear to have written essays with a range of different words that appear in varying frequencies. The teacher should have no need to worry.
+|===
+
+
