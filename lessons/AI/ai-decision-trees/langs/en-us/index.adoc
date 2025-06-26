@@ -294,25 +294,18 @@ Students build a decision tree that predicts whether different individuals will 
 === Launch
 @slidebreak{Launch}
 
-We have seen instances where the extremely simple decision trees we've built classify successfully as well as instances where they fail.
+Have you ever done some online shopping—say, for a new pair of sneakers—only to discover that, for the next several days, you encounter _advertisements for sneakers_ lurking in every corner of the internet that you visit?!
 
-How do decision trees built from large datasets decide — at every level and every node — which attributes are the most informative ones to ask questions about so that they can make relatively accurate predictions, recommendations, and diagnoses?!
+@slidebreak{Investigate}
+
+Websites can store small data files called "cookies" on your device that can be used to remember details like where you were the last time you visited a site. One particular kind of cookie, the tracking cookie, allows AI designed for marketing to use your individual browsing habits to decide which ads you will be the most susceptible to.
+
+But how does the cookie know what you will be susceptible to?  *How do decision trees built from large datasets decide — at every level and every node — which attributes are the most informative ones to ask questions about,* so that they can make relatively accurate predictions, recommendations, and diagnoses?!
 
 It turns out, there's an algorithm for that, and it's relatively straightforward.
 
 === Investigate
 @slidebreak{Investigate}
-
-Have you ever done some online shopping—say, for a new pair of sneakers—only to discover that, for the next several days, you encounter _advertisements for sneakers_ lurking in every corner of the internet that you visit?!
-
-Is it a coincidence?
-
-@slidebreak{Investigate}
-
-No. Websites can store small data files on your device. These "cookies" can be used to remember where you were the last time you visited a site, or a setting that you changed and want to keep the next time you visit a site. One particular kind of cookie, the tracking cookie, allows AI designed for marketing to use your individual browsing habits to decide which ads you will be the most susceptible to.
-
-@slidebreak{Investigate}
-
 
 We're going to create a decision tree that predicts whether or not different customers at a particular online store will purchase a video game or not. To do so, we must first train the computer! We will use a training dataset that characterizes 14 different shoppers and then indicates whether or not each one purchased a video game.
 
@@ -323,44 +316,18 @@ We're going to create a decision tree that predicts whether or not different cus
 @A{There are only three new customers; two out of three times, new customers buy the video game.}
 @Q{Can you foresee any problems with making a decision tree based on this dataset? If so, what are they?}
 @A{Responses will vary.}
-@A{We only have data on 14 users.}
+@A{We only have data on 14 visitors.}
+@A{All of the visitors are between 14 and 38 years old.}
+@A{We don't know a lot about their gaming habits.}
 }
-
-@slidebreak{Investigate}
-
-One problem with this dataset is that _age is continuous_. That won’t work!
-
-We need to break these ages down into different groups - which will become different _branches_ that grow out of a _decision node_.
 
 @slidebreak{Investigate}
 
 @lesson-instruction{
-- Let's complete @printable-exercise{part-1.adoc} together, starting with "age" as the root node.
-- For now, let’s agree to create three groups: teenagers, twenties, and thirties.
-- This page introduces a new tool that we will use to complete all the levels of our model: the @vocab{decision stump}.
+One challenge for processing this dataset is that _age is continuous_ and decision trees are built with _branches_ that grow out of a _decision node_.  We'll need to start by defining discrete age groups.
+
+For now, let’s agree to create three groups: teenagers, twenties, and thirties.
 }
-
-@ifslide{
-@teacher{Advance to the next slide for more information on decision stumps.}
-}
-
-@slidebreak{Investigate}
-
-A @vocab{decision stump} is a one-level decision tree that makes a prediction based on the value of just a single input feature.
-
-- The stump has three branches because we are considering customers in their teens, twenties and thirties.
-- The left-most leaf node ("teens") represents the five teens in our training dataset: Jan (16), Jose (19), Jillian (14), Ariella (16), and Danial (19).
-** Jan, Jose, and Jillian did *not* purchase the game, so they are represented by the letter N (for "no").
-** Ariella and Danial *did* purchase the game, so they are represented by the letter Y (for "yes").
-** We illustrate the teens' decisions with the following shorthand: N N N Y Y
-- Finally, we place checkmarks below correctly predicted values to indicate how successful our rule was.
-** Our rule predicted that individuals in their teens would *not* purchase the game, so we place checkmarks by the Ns that represent Jan, Jose, and Jillian. Our rule was correct for them.
-** We leave the Ys *without* checkmarks; our rule was wrong for Danial and Ariella.
-- We complete the same process for customers in their twenties and in their thirties, representing each individual in the training dataset with a "Y" or "N", and then placing checkmarks to indicate when our rule was successful.
-
-@slidebreak{Investigate}
-
-As we move down the tree, our job is to figure out _which questions_ we should ask and _when_ we should ask them... just like when we play 20 Questions! Decision stumps will help us decide which questions produce a greater @vocab{information gain}.
 
 @strategy{Why Start the Tree with "Age"?}{
 Students will likely notice that we seemingly arbitrarily started the tree with "age" as the root node. _Extremely perceptive_ students may notice that for both "age" and "interest", the likelihood of a correct prediction is 10/14. In other words, starting with "interest in game" produces the same information gain as starting with "age" as the root... *so how do we decide?*
@@ -370,26 +337,128 @@ It turns out there's more than one correct way to build a decision tree! In gene
 Because the "age" node splits _three_ ways and the "interest in game" node splits _two_ ways, we opt to start the tree with "age".
 }
 
+@slidebreak{InvestigateR}
+
+@center{@image{images/age-stump.png, 180}}
+
+A @vocab{decision stump} is a one-level decision tree that makes a prediction based on the value of just a single input feature.
+
+- First, we list the outcome for each of the individuals in a group's training data.
+- Then, we right a rule: which outcome should the computer predict for this group?
+- Finally, we calculate what percentage of the rule's predictions are correct for the individuals in our training data.
+
+@lesson-instruction{Let's complete the first section of @printable-exercise{part-1.adoc} together, starting with "age" as the root node.}
+
+- This stump has three branches because we are considering customers in their teens, twenties and thirties.
+- The left-most leaf node ("teens") represents the five teens in our training dataset: Jan (16), Jose (19), Jillian (14), Ariella (16), and Danial (19).
+** Jan, Jose, and Jillian did *not* purchase the game, so they are represented by the letter N (for "no").
+** Ariella and Danial *did* purchase the game, so they are represented by the letter Y (for "yes").
+** We illustrate the teens' decisions with the following shorthand: N N N Y Y
+- The other leaf nodes similarly summarize the puchasing habits of the individuals in their age groups.
+
+@QandA{
+@Q{What else do you notice and wonder about the decision stump?}
+@A{Everyone in their twenties bought the game.}
+@A{Three out of 5 people in their thirties bought the game.}
+@A{On the other decision trees we've seen the arrows were labeled "yes" and "no", but here their labeled "teens", "twenties", "thirties".}
+@A{Decision trees usually have a single choice at the end of the arrow, but here we see N N N Y Y.}
+}
+
+@slidebreak{InvestigateR}
+
+@ifslide{@image{images/age-stump.png, 180}}
+
+On a decision tree, each branch has to point to a single choice... and right now we have N N N Y Y for teens.
+
+@QandA{
+@Q{What prediction should we make for teens? Why?}
+@A{They won't buy the game. Because more teens didn't buy the game than did.}
+@Q{What predictions should we make for the other age groups?}
+@A{People in their twenties and thirties will buy the game.}
+}
+
 @slidebreak{Investigate}
 
-There are two possible questions we could use at the next level of our decision tree :
+@lesson-instruction{
+Now that we have our rule, we need to calculate how effectively it predicts the outcomes for our training data. We'll start by placing checkmarks beneath each outcome (Y or N) that our rule would have correctly predicted.
+}
+
+@slidebreak{Investigate}
+
+Our rule predicted that individuals in their teens would *not* purchase the game, so:
+
+- We place checkmarks by the Ns that represent Jan, Jose, and Jillian. Our rule was correct for them.
+- We leave the Ys without checkmarks; our rule was wrong for Danial and Ariella.
+
+Our rule was correct for 3 out of 5 individuals or 60% of the time.
+
+@lesson-instruction{
+- Complete the first section of @printable-exercise{part-1.adoc}.
+- Add checkmarks to indicate when our rule was successful for customers in their twenties and thirties.
+- Calculate how effectively our rule predicted outcomes for each age group and the dataset as a whole.
+}
+
+@slidebreak{InvestigateR}
+
+@center{@image{images/age-stump-checks.png, 180}}
+
+Our rule was pretty effective! It correctly predicted the outcome 10 out of 14 times! And for people in their twenties it was 100% accurate. By utilizing other columns of data, we might be able to make the rule even better! 
+
+There are two possible questions we could use at the next level of our decision tree:
 
 - Is the individual a frequent customer, an infrequent customer, or a new customer?
 - Has the individual expressed interest in a particular video game?
 
 @slidebreak{Investigate}
 
-@lesson-instruction{
-- As you complete @printable-exercise{part-2.adoc} you will create and compare different __decision stumps__.
-- These "stumps" will help you determine which question will produce the biggest information gain.
-- Be ready to share which attributes you plan to add to the second level of your tree.
+As we move down the tree, our job is to figure out _which questions_ we should ask and _when_ we should ask them... just like when we play 20 Questions! 
+
+@lesson-point{
+Decision stumps help us decide which questions produce a greater @vocab{information gain}.
 }
 
 @slidebreak{Investigate}
 
 @lesson-instruction{
-- Complete the first section @printable-exercise{build-and-test.adoc}, then let's share the rules we developed.
-- "Test the Tree" by completing the second section of @printable-exercise{build-and-test.adoc}.
+- Complete the last section of @printable-exercise{part-1.adoc}
+- Then complete @printable-exercise{part-2.adoc}.
+** You will create and compare different decision stumps for these columns of data.
+** The stumps will help you determine which question will produce the biggest information gain.
+}
+
+@slidebreak{Investigate}
+
+@QandA{
+@Q{Which attributes do you plan to utilize for the second level of the decision tree?}
+@A{Interest in Games for Teens}
+@A{Shopping History for People in their Thirties}
+@A{Since our rule for people in their Twenties was 100% accurate, it will be a leaf node!}
+}
+
+@slidebreak{Investigate}
+
+@lesson-instruction{
+Complete the first section @printable-exercise{build-and-test.adoc}.
+}
+
+@slidebreak{Investigate}
+
+@QandA{
+@Q{What rules did you write?}
+@A{Interested teens will buy the game}
+@A{Everyone in their twenties will by the game.} 
+@A{Previous customers in their thirties will by the game.}
+}
+
+@slidebreak{Investigate}
+
+@lesson-instruction{
+Complete @printable-exercise{build-and-test.adoc}.
+}
+
+@QandA{
+@Q{After adding in the test data, what rules would you suggest we change?}
+@A{Not all people in their twenties would buy the game. We should probably build decision stumps for people in their twenties for the other available columns and figure out what attribute to add to our tree.}
 }
 
 === Synthesize
@@ -401,7 +470,7 @@ There are two possible questions we could use at the next level of our decision 
 @A{If the tree has been designed to prioritize efficiency over accuracy, it may produce wrong predictions and recommendations.}
 @A{If the training dataset does not accurately represent the broader population, predictions and recommendations will be incorrect.}
 
-@Q{After testing our tree, we discovered that it was not as accurate as we might have presumed. Can you think of any examples of when _missing data_ can create problems?}
+@Q{After testing our tree, we discovered that it was not as accurate as we might have presumed. Can you think of any examples of when _missing data_ can lead to predictions with serious negative consequences?}
 @A{Responses will vary.}
 @A{When various populations are underrepresented in training datasets, the resulting technology reflects that, and we end up with AI that fails to meet the needs of those populations.}
 }
