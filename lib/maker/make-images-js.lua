@@ -63,7 +63,7 @@ end
 for _,lesson in ipairs(lessons) do
   local lesson_image_list_file = lessons_dir .. lesson .. '/images/.cached/.image-list.txt.kp'
   local missing_image_logf = lessons_dir .. lesson .. '/.cached/.missing-image-files.txt'
-  report_missing_images(missing_image_logf, lesson_image_file)
+  report_missing_images(missing_image_logf, lesson_image_list_file)
   if not file_exists_p(lesson_image_list_file) then goto continue end
   o:write('"' .. lesson .. '": {\n')
   local fi = io.open(lesson_image_list_file)
