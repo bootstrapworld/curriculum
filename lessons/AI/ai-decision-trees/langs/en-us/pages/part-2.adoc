@@ -7,75 +7,82 @@
 </style>
 ++++
 
-@link-instructions{You will need to refer to the training data on @printable-exercise{part-1.adoc} to respond to the prompts below.} Let's decide what decision nodes to use in the 2nd level of our tree.
+@link-instructions{Refer to the training data on @printable-exercise{part-1.adoc}.} Decide what decision nodes to use in the 2nd level of our tree.
 
-== Shopping History as the Decision Node
+== For Teens - Is Shopping History or Interest in Game a better Indicator?
 
-@n Let's look at the "shopping history" and "age" columns of the training dataset and see what we can learn about how customer's purchasing habits correspond to their decision to buy.
+@n Use the decision stumps below to make rules that predict whether or not teens would buy the game based on each category. 
 
-@indented{
-[cols=".^1a, .^2a", stripes="none", grid="none", frame="none"]
+[cols="1a,1a", stripes="none"]
 |===
-| previous customers in their teens:
-| @fitbruby{7em}{@ifsoln{1}}{# who bought} out of @fitbruby{7em}{@ifsoln{4}}{# in group} individuals buy the game.
+^| @center{@image{../images/history-stump-teens-checks.png, 180}}  	
+^| @center{@image{../images/interest-stump-teens-checks.png, 180}}
 
-| new customers in their teens:
-| @fitbruby{7em}{@ifsoln{1}}{# who bought} out of @fitbruby{7em}{@ifsoln{1}}{# in group} individuals buy the game.
+| Predict that 											
+
+- new teenage customers @fitbruby{5em}{@ifsoln{will}}{will / won't} buy
+- previous teenage customers @fitbruby{5em}{@ifsoln{will not}}{will / won't} buy
+
+| Predict that 
+
+- interested teenage shoppers @fitbruby{5em}{@ifsoln{will}}{will / won't} buy
+- uninterested teenage shoppers @fitbruby{5em}{@ifsoln{will not}}{will / won't} buy
+
 |===
-}
 
-@n Let's use what we've learned to write our rule.
+Place a checkmark below each value that the computer would predict correctly. 
 
-@indented{
-Predict that
-*previous teenage customers* @fitbruby{5em}{@ifsoln{will not}}{will / will not} buy the game and
-*new teenage customers* @fitbruby{5em}{@ifsoln{will}}{will / will not} buy the game.
-}
+@n Use the decision stumps to determine how well each rule predicts whether or not teens would buy the game.
 
-@n Create a decision stump for "shopping history" with a root node of "teens". @n Place a checkmark below each value that the computer would predict correctly.
-
-
-@ifnotsoln{@center{@image{../images/blank-stump.png, 180}}}
-
-
-@ifsoln{@center{@image{../images/history-stump.png, 180}}}
-
-@n A computer following this rule for our training data would make @fitb{3em}{@ifsoln{4}} correct predictions out of 5 attempts (@fitb{3em}{@ifsoln{80}} % accuracy).
-
-== Interest in Game as the Decision Node
-
-@n Let's look at the "shopping history" and "age" columns of the training dataset and see what we can learn about how customer's purchasing habits correspond to their decision to buy.
-
-@indented{
-[cols=".^1a, .^2a", stripes="none", grid="none", frame="none"]
+[cols="1a,1a", stripes="none"]
 |===
-| interested teens:
-| @fitbruby{7em}{@ifsoln{2}}{# who bought} out of @fitbruby{7em}{@ifsoln{2}}{# in group} individuals buy the game.
-| uninterested teens
-| @fitbruby{7em}{@ifsoln{0}}{# who bought} out of @fitbruby{7em}{@ifsoln{3}}{# ingroup} individuals buy the game.
+| For our training data, this rule 
+
+- would make @fitb{3em}{@ifsoln{4}} correct predictions out of 5 attempts 
+- is @fitb{3em}{@ifsoln{80}} % accurate
+| For our training data, this rule 
+
+- would make @fitb{3em}{@ifsoln{5}} correct predictions out of 5 attempts 
+- is @fitb{3em}{@ifsoln{100}} % accurate
 |===
-}
 
-@n Let's use what we've learned to write our rule.
+@n Will you use shopping history or interest for your second decision node for teens? @fitb{}{@ifsoln{Interest in game.}}
 
-@indented{
-Predict that
-*interested teenage shoppers* @fitbruby{5em}{@ifsoln{will}}{will / will not} buy the game and
-*uninterested teenage shoppers* @fitbruby{5em}{@ifsoln{will not}}{will / will not} buy the game.
-}
+== For People in their Thirties - Is Shopping History or Interest in Game a better Indicator?
 
-@n Create a decision stump for teenagers' interest in the game. Place a checkmark below each value that the computer would predict correctly.
+@n Complete the decision stumps below to make rules that predict whether or not people in their thirties would buy the game.
+
+[cols="1a,1a", stripes="none"]
+|===
+^| @center{@image{../images/blank-stump.png, 180}}  	
+^| @center{@image{../images/blank-stump.png, 180}}
+
+| Predict that 											
+
+- new customer in their thirties @fitbruby{5em}{@ifsoln{will}}{will / won't} buy
+- previous customer in their thirties @fitbruby{5em}{@ifsoln{will not}}{will / won't} buy
+
+| Predict that 
+
+- interested customer in their thirties @fitbruby{5em}{@ifsoln{will}}{will / won't} buy
+- uninterested customer in their thirties @fitbruby{5em}{@ifsoln{will not}}{will / won't} buy
+
+|===
+
+@n Use the decision stumps to determine how well each rule predicts whether customer in their thirties would buy the game.
+
+[cols="1a,1a", stripes="none"]
+|===
+| For our training data, this rule 
+
+- would make @fitb{3em}{@ifsoln{5}} correct predictions out of 5 attempts 
+- is @fitb{3em}{@ifsoln{100}} % accurate
+| For our training data, this rule 
+
+- would make @fitb{3em}{@ifsoln{3}} correct predictions out of 5 attempts 
+- is @fitb{3em}{@ifsoln{60}} % accurate
+|===
+
+@n Will you use shopping history or interest for your second decision node for customer in their thirties? @fitb{}{@ifsoln{Shopping History}}
 
 
-@ifnotsoln{@center{@image{../images/blank-stump.png, 180}}}
-
-@ifsoln{@center{@image{../images/interest-stump.png, 180}}}
-
-
-@n A computer following this rule for our training data would make @fitb{3em}{@ifsoln{5}} correct predictions out of 5 attempts (@fitb{3em}{@ifsoln{100}} % accuracy).
-
-== What decision attribute should we use?
-
-@n Will you use shopping history or interest for your second decision node? Explain your response. @fitb{}{@ifsoln{Interest in game. }}
-
-@fitb{}{@ifsoln{When we use this decision attribute, our rule is correct 100% of the time; when we use shopping history, the rule is correct 80% of the time.}}
