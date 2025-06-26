@@ -6,6 +6,60 @@
 We describe here the directories and files in the `curriculum`
 directory, and how to use the programs provided.
 
+== Git basics
+
+=== Cloning the repo
+(This only works if you have been given access!)
+
+Clone the repo directly, then `cd` into the folder:
+
+  git clone https://github.com/bootstrapworld/curriculum
+  cd curriculum
+
+=== Creating your private branch in the original repo
+
+Alternatively -- and this will work only for greenlisted members
+-- clone the repo directly and add your own branch, e.g.,
+
+  git clone https://github.com/bootstrapworld/curriculum
+  cd curriculum
+  git checkout -b my-sandbox
+
+You can pull and merge from `master` as needed:
+
+  git checkout master
+  git pull
+  git checkout my-sandbox
+  git merge master
+
+If conflicts arise, you will be given a way to resolve them.
+
+=== Making a fork of the repo
+Fork this repo to your GitHub account (say, `jrandomuser`). (This is done using
+obvious buttons on the GitHub page.)
+
+In your terminal, clone your fork thusly:
+
+   git clone https://github.com/jrandomuser/curriculum
+
+This will create a local repo where you can try things, change
+things, etc. But first, to retain connection with the original do:
+
+  git remote add upstream https://github.com/bootstrapworld/curriculum
+
+Every time the original changes, update like so:
+
+  git fetch upstream
+  git merge upstream/master
+
+You are probably in your own `master` branch. Even if you’re
+“branching out” to other new branches, the above merge will
+mostly work.  “Mostly” because merge often triggers conflicts
+depending on how far you have diverged from the original. At the
+very least, make sure you’ve checked in all your changes that you
+care about, before you attempt a merge. For changes you aren’t
+ready to check in, save the concerned files somewhere else, and
+make sure there are no “modified” files in your directory.
 
 == Setting up your environment
 
@@ -624,60 +678,6 @@ standards. (The mode of inclusion may change in subsequent
 versions depending on how predictable lesson-plan formats
 become. For now, we need a placeholder.)
 
-== Git basics
-
-=== Cloning the repo
-(This only works if you have been given access!)
-
-Clone the repo directly, then `cd` into the folder:
-
-  git clone https://github.com/bootstrapworld/curriculum
-  cd curriculum
-
-=== Creating your private branch in the original repo
-
-Alternatively -- and this will work only for greenlisted members
--- clone the repo directly and add your own branch, e.g.,
-
-  git clone https://github.com/bootstrapworld/curriculum
-  cd curriculum
-  git checkout -b my-sandbox
-
-You can pull and merge from `master` as needed:
-
-  git checkout master
-  git pull
-  git checkout my-sandbox
-  git merge master
-
-If conflicts arise, you will be given a way to resolve them.
-
-=== Making a fork of the repo
-Fork this repo to your GitHub account (say, `jrandomuser`). (This is done using
-obvious buttons on the GitHub page.)
-
-In your terminal, clone your fork thusly:
-
-   git clone https://github.com/jrandomuser/curriculum
-
-This will create a local repo where you can try things, change
-things, etc. But first, to retain connection with the original do:
-
-  git remote add upstream https://github.com/bootstrapworld/curriculum
-
-Every time the original changes, update like so:
-
-  git fetch upstream
-  git merge upstream/master
-
-You are probably in your own `master` branch. Even if you’re
-“branching out” to other new branches, the above merge will
-mostly work.  “Mostly” because merge often triggers conflicts
-depending on how far you have diverged from the original. At the
-very least, make sure you’ve checked in all your changes that you
-care about, before you attempt a merge. For changes you aren’t
-ready to check in, save the concerned files somewhere else, and
-make sure there are no “modified” files in your directory.
 
 == Authoring guidelines
 
