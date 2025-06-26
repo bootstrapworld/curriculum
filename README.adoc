@@ -6,8 +6,366 @@
 We describe here the directories and files in the `curriculum`
 directory, and how to use the programs provided.
 
-For a generated document tree, please see
-https://bootstrapworld.org/materials/spring2023/en-us
+== Git basics
+
+=== Cloning the repo
+(This only works if you have been given access!)
+
+Clone the repo directly, then `cd` into the folder:
+
+  git clone https://github.com/bootstrapworld/curriculum
+  cd curriculum
+
+=== Creating your private branch in the original repo
+
+Alternatively -- and this will work only for greenlisted members
+-- clone the repo directly and add your own branch, e.g.,
+
+  git clone https://github.com/bootstrapworld/curriculum
+  cd curriculum
+  git checkout -b my-sandbox
+
+You can pull and merge from `master` as needed:
+
+  git checkout master
+  git pull
+  git checkout my-sandbox
+  git merge master
+
+If conflicts arise, you will be given a way to resolve them.
+
+=== Making a fork of the repo
+Fork this repo to your GitHub account (say, `jrandomuser`). (This is done using
+obvious buttons on the GitHub page.)
+
+In your terminal, clone your fork thusly:
+
+   git clone https://github.com/jrandomuser/curriculum
+
+This will create a local repo where you can try things, change
+things, etc. But first, to retain connection with the original do:
+
+  git remote add upstream https://github.com/bootstrapworld/curriculum
+
+Every time the original changes, update like so:
+
+  git fetch upstream
+  git merge upstream/master
+
+You are probably in your own `master` branch. Even if you’re
+“branching out” to other new branches, the above merge will
+mostly work.  “Mostly” because merge often triggers conflicts
+depending on how far you have diverged from the original. At the
+very least, make sure you’ve checked in all your changes that you
+care about, before you attempt a merge. For changes you aren’t
+ready to check in, save the concerned files somewhere else, and
+make sure there are no “modified” files in your directory.
+
+== Setting up your environment
+
+After cloning the repository, you will need a Unix-like environment to build the curriculum:
+
+  - If you're already on some flavor of unix, you're there! ✅
+  - If you're on Windows, you'll want to install
+    https://docs.microsoft.com/en-us/windows/wsl/install[WSL2] to give yourself a Linux environment first (we recommend Ubuntu).
+  - If you're on MacOS, your environment is close but missing some Unix tools. You'll want to go to the https://brew.sh/[Homebrew] website, install Homebrew, and follow the "Next Steps" directions on the page.
+
+You can skip this section and scroll down to your operating system if you're ready to install. But if you're curious about _which tools_ are installed, here they are:
+
+* Bash, which keeps all the scripts humming. (This is already available on Linux, macOS, and WSL) ✅
+* `jq`, used for checking correctness of JSON files
+* Racket, to do pre-processing and other bookkeeping.
+* Asciidoctor, a Ruby program, to generate HTML from AsciiDoc.
+* Lua, used for postprocessing.
+* Node, A javascript runtime used by the packages below.
+* NVM, or the "Node Version Manager". Allows us to use a specific version of Node.
+* Several Node packages:
+  - `puppeter`, and HTML -> PDF generator that converts web pages into PDF documents
+  - `puppeteer-cluster` to build the hundreds of pages we have in parallel.
+  - `pdf-lib`, which handles collecting all the PDFs and adding page numbers
+  - `md2googleslides`, which generates slide decks from markdown files in each of the lesson plans
+  - `mathjax`, which generates beautifully formatted math output
+
+=== In macOS...
+
+* Most packages can be installed via `brew`, with the following terminal command:
++
+  brew install gnu-sed curl make coreutils gnu-tar lua asciidoctor pkg-config cairo pango libpng jpeg giflib librsvg pixman nvm jq racket
+
+* Mac users will also need to add these unix tools to their `$PATH`. In the terminal, run `open ~/.zshrc` to edit your configuration file. Add the following to the bottom of the file, then save and quit-and-reopen your terminal:
++
+  # add every gnu tool we have as a prefix to the path
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+  if type brew &>/dev/null; then
+    HOMEBREW_PREFIX=$(brew --prefix)
+    for d in ${HOMEBREW_PREFIX}/opt/*/libexec/gnubin; do export PATH=$d:$PATH; done
+  fi
+
+=== In Unix or WSL...
+
+* Most packages can be installed via `sudo apt-get install`, with the following terminal command:
++
+  sudo apt-get install jq asciidoctor lua5.4 curl
++
+
+* To install Racket:
++
+  sudo apt-add-repository ppa:plt/racket
+  sudo apt install racket
++
+
+* To install NVM:
++
+  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+
+
+=== Additional Tools for Sublime
+
+If you use the https://www.sublimetext.com/[Sublime Text Editor], we've also created some tools that make authoring more pleasant and readable.
+
+* Make sure your curriculum folder is open on the screen (in the Finder on MacOS, or Explorer on Windows)
+* In that window, navigate to the `lib/sublime-settings` folder. The files there are the ones we want to copy into your Sublime Settings folder!
+* Open your unix terminal, and type `open ~/Library/Application\ Support/` (MacOS) or `explorer.exe %APPDATA%` (Windows) to open _another_ folder window.
+* In that window, navigate to `Sublime Text/Packages/User/`.
+** Note: on some sysetms, the folder may be called "Sublime Text 3"
+* Copy both files from the `curriculum/lib/sublime-settings` folder into your `Sublime Text/Packages/User` folder.
+* Quit and relaunch Sublime Text.
+* Navigate to the View dropdown menu and select Syntax. Switch the mode from Asciidoctor to Asciidoctor+ when viewing an .adoc file. Sublime will remember your preference for all future adoc files.
+
+== Building and deploying using the Makefile
+
+**Be sure you have link:#setting-up-your-environment[set up your environment] before building**
+
+The top directory contains `Makefile`. Type `make` to build the distribution,
+to populate the `distribution/` directory with the built documentation.
+
+`make` can take optional targets on the command line:
+
+- `book` -- creates the PDF versions of the HTML files, as also the
+  workbook PDFs. By default, these are not created as it is a relatively
+  time-consuming process and is required only after the author is sure
+  that the HTML conversions have been thoroughly debugged
+
+- `clean` -- removes `distribution/` so the next make builds from
+  scratch. If this is the only option, there is no build done!
+
+- `csv` -- makes a CSV version of the entire converted (`en-us` version
+  only, for now) docs in `distribution/en-us/curriculum.csv`
+
+- `deploy` -- deploys. (See section on "Deployment")
+
+- `force` -- removes `distribution/` and builds from scratch
+
+- `help` -- displays a brief help message
+
+- `linkcheck` -- checks the various internal and external links in
+  the documents to ensure they are valid. By default, this check isn't
+  done to save time
+
+`make` can take the following variable settings on the command line to guide the
+build:
+
+- `NATLANG=lang` -- builds for the natural language `lang`. The default is
+  `en-us` (**En**glish *US*) . Currently, the only other language that has
+  significant support is `es-mx` (**es**pañol **m**e**x**icano)
+
+- `SEMESTER=season` -- typically either `fall` or
+  `spring`. The default is `fall`
+
+- `YEAR=yyyy` -- typically the four-digit year
+  of the Common Era. The default is the current year followed by
+  `-BETA`
+
+- `COURSE=p1,p2,\...` -- if `book` is also specified, this makes the
+  workbook PDFs and the related lesson PDFs _only_ for the comma-separated
+  pathways `p1`, `p2`, `\...` specified
+
+- `DEBUGADOC=nonempty` -- this runs Asciidoctor individually on each file.
+  This is slow as molasses, but helps locate any AsciiDoc syntax error
+  such as unterminated table blocks, as
+  opposed to preprocessing errors. `nonempty` is any non-empty
+  alphanumeric string. Some mnemonic values are `yes`, `y`, `true`, `t`,
+  `1`.
+
+- `TPC=n` -- We use puppeteer-cluster to generate the thousands of PDF files use in the student workbooks. By default, the cluster runs 2 tabs per core (TPC). This can be set to a higher number via this commandline argument, gaining speed at the cost of possible race-conditions.
+
+[CAUTION]
+--
+`NATLANG`, `SEMESTER`, `YEAR`, `COURSE`, `DEBUGADOC`, and `TPC` are _makefile_
+variables, *not* shell environment variables! You cannot set them as
+environment variables and expect `make` to pick them up. To set,
+`NATLANG`, say, to `es-mx`, use
+
+  make NATLANG=es-mx
+
+Calls such as
+
+  NATLANG=es-mx make
+  NATLANG=es-mx; make
+  export NATLANG=es-mx; make
+
+will not work! This is intentional: to avoid the build picking up
+environment variables that were possibly set for other purposes.
+--
+
+The doctree for the built pathway (e.g., `data-science`) for the prose language `en-us`,
+resides in
+`distribution/en-us/courses/`. Thus:
+
+    distribution/
+      en-us/
+        courses/
+          data-science/
+            index.shtml
+            workbook/
+              workbook.pdf
+              workbook-long.pdf
+              opt-exercises.pdf
+            resources/
+              protected/
+                workbook-sols.pdf
+                workbook-long-sols.pdf
+                opt-exercises-sols.pdf
+
+Here `index.shtml` is the web page corresponding to the pathway
+narrative. The student workbooks in `workbook/` are
+
+- `workbook.pdf`, the basic student workbook
+- `workbook-long.pdf`, above plus the optional exercises
+- `opt-exercises.pdf`, just the optional exercises
+
+The teacher workbooks in `resources/protected` are
+
+- `workbook-sols.pdf`, the basic teacher workbook, i.e., with solutions
+- `workbook-long-sols.pdf`, above plus the optional exercises
+- `opt-exercises-sols.pdf`, just the optional exercises
+
+These filenames are standard and do not vary with course. Their location
+identifies which course they describe.
+
+Note that many workbook PDFs can be created: the students’ versions
+are created
+in the `workbook` directory; the teachers’ versions in
+the “protected” directory
+`resources/protected`.
+
+Pages under `resources/protected` may prompt you for a teacher
+password, which is available on signing up with Bootstrapworld.
+
+The lessons referred to by the various pathways reside in
+`distribution/en-us/lessons/`. Thus:
+
+     distribution/
+       en-us/
+         lessons/
+           sample-lesson/
+             index.shtml
+             pages/
+             solution-pages/
+
+For slide generation, please see
+link:./README-slides.adoc[].
+
+For more on the build process in general, see
+link:lib/maker/doc/index.adoc[].
+
+=== Sensible re-making
+
+As expected of `make`, subsequent calls to it will only rebuild those
+files in the `distribution/` that need to be updated, based on
+modifications to the source files in the repo.
+
+However, if you haven't changed the source docs, but there have been
+changes to the building programs themselves (in `lib/`), or the
+library/data files (in `shared/`), you will often need to regenerate the
+entire `distribution/` from scratch.
+
+You can manually delete the `distribution` directory and make again.
+
+Alternatively, you can use the `make` target `clean`:
+
+   make clean
+
+This deletes any existing `distribution` (it is not an error if it doesn't
+exist). A subsequent `make` builds anew.
+
+You can also use `make force` followed by any other options (if needed).
+This implicitly calls `make clean` before proceeding with the other
+options.
+
+Remember, re-making the entire distribution takes time, and is often too
+drastic a step if you're working on one or two lessons, are
+satisfied with local debugging, and immediate deployment is not the
+goal. In such cases, you can simply go into `distribution/en-us/lessons`
+and manually delete only those lessons that you want rebuilt. You can also manually
+delete pathways in `distribution/en-us/courses` to rebuild specific
+pathways. A subsequent `make` (even without `force`) will cleanly re-make
+just your desired lessons and/or pathways, leaving the rest of the
+`distribution/` untouched.
+
+Be careful while deleting stuff in `distribution/` expecting them to be
+regenerated. Deleting at too fine a grain (just one file, say) may not
+always succeed in regenerating it. It's best to stick to deleting whole
+lessons or pathways.
+
+=== Deployment
+(This section is relevant only to administrators.)
+
+* You'll want sshpass in your environment to smooth the deployment process
+
+  - on Linux/WSL: `sudo apt-get install sshpass`
+  - on macOS: <Emmanuel, write this when someone needs it!>
+
+
+* After ``make``-ing the distribution, it may be deployed to the web host
+using the `make` target `deploy`:
+
+    make deploy
+
+We
+currently deploy to:
+https://www.bootstrapworld.org
+
+A typical `make deploy` goes to something like
+https://www.bootstrapworld.org/materials/fall2023, assuming that
+the environment variables `SEASON` and `YEAR` are `fall` and `2023`
+respectively. These environment variables may be set at your OS
+command line or in your shell profile, or on the `make` command line, e.g.,
+
+    make SEASON=fall YEAR=2023 deploy
+
+IMPORTANT: If `SEASON` and `YEAR` are not set externally _and_ are not
+supplied on the `make`
+command line, the default values of `fall` and `yyyy-BETA` (where `yyyy`
+is the current year) are used. This is to prevent inadvertently
+overwriting
+a currently active deployment. _Always explicitly set `SEASON` and
+`YEAR` when deploying in earnest._
+
+Deployment requires that you have enabled SSH access to the website machine,
+and that the environment variables `HOSTINGER_IPADDR`,
+`HOSTINGER_USER`, and `HOSTINGER_PORT` are set to the appropriate values.
+
+TIP: You are allowed to set these environment variables as makefile
+variables, i.e., as options to `make`. However, it may be more
+convenient to store these as environment variables, as, once set, they are unlikely
+to change.
+
+You will be prodded for your webhost password,
+once to copy the files over and another time
+to unpack them on the webhost machine.
+
+[TIP]
+--
+Deployment uses
+SSH to interact with your webhost.
+account. This can be slow. If you're updating an already deployed
+doctree, you may set the variable `SKIPLIB` to save yourself the time taken
+to recopy the large mathjax library, since it's unlikely to have
+changed:
+
+    make SKIPLIB=true deploy
+--
 
 == Structure of the `curriculum` directory
 
@@ -265,238 +623,6 @@ subdirectory, where an `.adoc` file describes the “Teacher
 Resources” page. There should be only one such `.adoc` file, but
 it can be named anything (not necessarily `index.adoc`).
 
-== Building and deploying using the Makefile
-
-The top dir contains `Makefile`. Type `make` to build the distribution,
-to populate the `distribution/` directory with the built documentation.
-
-`make` can take optional targets on the command line:
-
-- `book` -- creates the PDF versions of the HTML files, as also the
-  workbook PDFs. By default, these are not created as it is a relatively
-  time-consuming process and is required only after the author is sure
-  that the HTML conversions have been thoroughly debugged
-
-- `clean` -- removes `distribution/` so the next make builds from
-  scratch. If this is the only option, there is no build done!
-
-- `csv` -- makes a CSV version of the entire converted (`en-us` version
-  only, for now) docs in `distribution/en-us/curriculum.csv`
-
-- `deploy` -- deploys. (See section on "Deployment")
-
-- `force` -- removes `distribution/` and builds from scratch
-
-- `help` -- displays a brief help message
-
-- `linkcheck` -- checks the various internal and external links in
-  the documents to ensure they are valid. By default, this check isn't
-  done to save time
-
-`make` can take the following variable settings on the command line to guide the
-build:
-
-- `NATLANG=lang` -- builds for the natural language `lang`. The default is
-  `en-us` (**En**glish *US*) . Currently, the only other language that has
-  significant support is `es-mx` (**es**pañol **m**e**x**icano)
-
-- `SEMESTER=season` -- typically either `fall` or
-  `spring`. The default is `fall`
-
-- `YEAR=yyyy` -- typically the four-digit year
-  of the Common Era. The default is the current year followed by
-  `-BETA`
-
-- `COURSE=p1,p2,\...` -- if `book` is also specified, this makes the
-  workbook PDFs and the related lesson PDFs _only_ for the comma-separated
-  pathways `p1`, `p2`, `\...` specified
-
-- `DEBUGADOC=nonempty` -- this runs Asciidoctor individually on each file.
-  This is slow as molasses, but helps locate any AsciiDoc syntax error
-  such as unterminated table blocks, as
-  opposed to preprocessing errors. `nonempty` is any non-empty
-  alphanumeric string. Some mnemonic values are `yes`, `y`, `true`, `t`,
-  `1`.
-
-- `TPC=n` -- We use puppeteer-cluster to generate the thousands of PDF files use in the student workbooks. By default, the cluster runs 2 tabs per core (TPC). This can be set to a higher number via this commandline argument, gaining speed at the cost of possible race-conditions.
-
-[CAUTION]
---
-`NATLANG`, `SEMESTER`, `YEAR`, `COURSE`, `DEBUGADOC`, and `TPC` are _makefile_
-variables, *not* shell environment variables! You cannot set them as
-environment variables and expect `make` to pick them up. To set,
-`NATLANG`, say, to `es-mx`, use
-
-  make NATLANG=es-mx
-
-Calls such as
-
-  NATLANG=es-mx make
-  NATLANG=es-mx; make
-  export NATLANG=es-mx; make
-
-will not work! This is intentional: to avoid the build picking up
-environment variables that were possibly set for other purposes.
---
-
-The doctree for the built pathway (e.g., `data-science`) for the prose language `en-us`,
-resides in
-`distribution/en-us/courses/`. Thus:
-
-    distribution/
-      en-us/
-        courses/
-          data-science/
-            index.shtml
-            workbook/
-              workbook.pdf
-              workbook-long.pdf
-              opt-exercises.pdf
-            resources/
-              protected/
-                workbook-sols.pdf
-                workbook-long-sols.pdf
-                opt-exercises-sols.pdf
-
-Here `index.shtml` is the web page corresponding to the pathway
-narrative. The student workbooks in `workbook/` are
-
-- `workbook.pdf`, the basic student workbook
-- `workbook-long.pdf`, above plus the optional exercises
-- `opt-exercises.pdf`, just the optional exercises
-
-The teacher workbooks in `resources/protected` are
-
-- `workbook-sols.pdf`, the basic teacher workbook, i.e., with solutions
-- `workbook-long-sols.pdf`, above plus the optional exercises
-- `opt-exercises-sols.pdf`, just the optional exercises
-
-These filenames are standard and do not vary with course. Their location
-identifies which course they describe.
-
-Note that many workbook PDFs can be created: the students’ versions
-are created
-in the `workbook` directory; the teachers’ versions in
-the “protected” directory
-`resources/protected`.
-
-Pages under `resources/protected` may prompt you for a teacher
-password, which is available on signing up with Bootstrapworld.
-
-The lessons referred to by the various pathways reside in
-`distribution/en-us/lessons/`. Thus:
-
-     distribution/
-       en-us/
-         lessons/
-           sample-lesson/
-             index.shtml
-             pages/
-             solution-pages/
-
-For slide generation, please see
-link:./README-slides.adoc[].
-
-For more on the build process in general, see
-link:lib/maker/doc/index.adoc[].
-
-=== Sensible re-making
-
-As expected of `make`, subsequent calls to it will only rebuild those
-files in the `distribution/` that need to be updated, based on
-modifications to the source files in the repo.
-
-However, if you haven't changed the source docs, but there have been
-changes to the building programs themselves (in `lib/`), or the
-library/data files (in `shared/`), you will often need to regenerate the
-entire `distribution/` from scratch.
-
-You can manually delete the `distribution` directory and make again.
-
-Alternatively, you can use the `make` target `clean`:
-
-   make clean
-
-This deletes any existing `distribution` (it is not an error if it doesn't
-exist). A subsequent `make` builds anew.
-
-You can also use `make force` followed by any other options (if needed).
-This implicitly calls `make clean` before proceeding with the other
-options.
-
-Remember, re-making the entire distribution takes time, and is often too
-drastic a step if you're working on one or two lessons, are
-satisfied with local debugging, and immediate deployment is not the
-goal. In such cases, you can simply go into `distribution/en-us/lessons`
-and manually delete only those lessons that you want rebuilt. You can also manually
-delete pathways in `distribution/en-us/courses` to rebuild specific
-pathways. A subsequent `make` (even without `force`) will cleanly re-make
-just your desired lessons and/or pathways, leaving the rest of the
-`distribution/` untouched.
-
-Be careful while deleting stuff in `distribution/` expecting them to be
-regenerated. Deleting at too fine a grain (just one file, say) may not
-always succeed in regenerating it. It's best to stick to deleting whole
-lessons or pathways.
-
-=== Deployment
-(This section is relevant only to administrators.)
-
-* You'll want sshpass in your environment to smooth the deployment process
-
-  - on Linux/WSL: `sudo apt-get install sshpass`
-  - on macOS: <Emmanuel, write this when someone needs it!>
-
-
-* After ``make``-ing the distribution, it may be deployed to the web host
-using the `make` target `deploy`:
-
-    make deploy
-
-We
-currently deploy to:
-https://www.bootstrapworld.org
-
-A typical `make deploy` goes to something like
-https://www.bootstrapworld.org/materials/fall2023, assuming that
-the environment variables `SEASON` and `YEAR` are `fall` and `2023`
-respectively. These environment variables may be set at your OS
-command line or in your shell profile, or on the `make` command line, e.g.,
-
-    make SEASON=fall YEAR=2023 deploy
-
-IMPORTANT: If `SEASON` and `YEAR` are not set externally _and_ are not
-supplied on the `make`
-command line, the default values of `fall` and `yyyy-BETA` (where `yyyy`
-is the current year) are used. This is to prevent inadvertently
-overwriting
-a currently active deployment. _Always explicitly set `SEASON` and
-`YEAR` when deploying in earnest._
-
-Deployment requires that you have enabled SSH access to the website machine,
-and that the environment variables `HOSTINGER_IPADDR`,
-`HOSTINGER_USER`, and `HOSTINGER_PORT` are set to the appropriate values.
-
-TIP: You are allowed to set these environment variables as makefile
-variables, i.e., as options to `make`. However, it may be more
-convenient to store these as environment variables, as, once set, they are unlikely
-to change.
-
-You will be prodded for your webhost password,
-once to copy the files over and another time
-to unpack them on the webhost machine.
-
-[TIP]
---
-Deployment uses
-SSH to interact with your webhost.
-account. This can be slow. If you're updating an already deployed
-doctree, you may set the variable `SKIPLIB` to save yourself the time taken
-to recopy the large mathjax library, since it's unlikely to have
-changed:
-
-    make SKIPLIB=true deploy
---
 
 == Standards compliance
 
@@ -552,131 +678,6 @@ standards. (The mode of inclusion may change in subsequent
 versions depending on how predictable lesson-plan formats
 become. For now, we need a placeholder.)
 
-== Git basics
-
-=== Cloning the repo
-(This only works if you have been given access!)
-
-Clone the repo directly, then `cd` into the folder:
-
-  git clone https://github.com/bootstrapworld/curriculum
-  cd curriculum
-
-=== Creating your private branch in the original repo
-
-Alternatively -- and this will work only for greenlisted members
--- clone the repo directly and add your own branch, e.g.,
-
-  git clone https://github.com/bootstrapworld/curriculum
-  cd curriculum
-  git checkout -b my-sandbox
-
-You can pull and merge from `master` as needed:
-
-  git checkout master
-  git pull
-  git checkout my-sandbox
-  git merge master
-
-If conflicts arise, you will be given a way to resolve them.
-
-=== Making a fork of the repo
-Fork this repo to your GitHub account (say, `jrandomuser`). (This is done using
-obvious buttons on the GitHub page.)
-
-In your terminal, clone your fork thusly:
-
-   git clone https://github.com/jrandomuser/curriculum
-
-This will create a local repo where you can try things, change
-things, etc. But first, to retain connection with the original do:
-
-  git remote add upstream https://github.com/bootstrapworld/curriculum
-
-Every time the original changes, update like so:
-
-  git fetch upstream
-  git merge upstream/master
-
-You are probably in your own `master` branch. Even if you’re
-“branching out” to other new branches, the above merge will
-mostly work.  “Mostly” because merge often triggers conflicts
-depending on how far you have diverged from the original. At the
-very least, make sure you’ve checked in all your changes that you
-care about, before you attempt a merge. For changes you aren’t
-ready to check in, save the concerned files somewhere else, and
-make sure there are no “modified” files in your directory.
-
-== Setting up your environment
-
-You will need a Unix-like environment to construct documents from this repo:
-
-  - If you're already on some flavor of unix, you're there! ✅
-  - If you're on Windows, you'll want to install
-    https://docs.microsoft.com/en-us/windows/wsl/install[WSL2] to give yourself a Linux environment first (we recommend Ubuntu).
-  - If you're on MacOS, your environment is close but missing some Unix tools. You'll want to install https://brew.sh/[Homebrew] first, * then follow the "Next Steps" directions Homebrew suggests.
-
-The subsections that follow will walk you through installing the following tools:
-
-* Bash, which keeps all the scripts humming. (This is already available on Linux, macOS, and WSL) ✅
-* `jq`, used for checking correctness of JSON files
-* Racket, to do pre-processing and other bookkeeping.
-* Asciidoctor, a Ruby program, to generate HTML from AsciiDoc.
-* Lua, used for postprocessing.
-* Node, A javascript runtime used by the packages below.
-* NVM, or the "Node Version Manager". Allows us to use a specific version of Node.
-* Several Node packages:
-  - `puppeter`, and HTML -> PDF generator that converts web pages into PDF documents
-  - `puppeteer-cluster` to build the hundreds of pages we have in parallel.
-  - `pdf-lib`, which handles collecting all the PDFs and adding page numbers
-  - `md2googleslides`, which generates slide decks from markdown files in each of the lesson plans
-  - `mathjax`, which generates beautifully formatted math output
-
-=== In macOS...
-
-* Most packages can be installed via `brew`, with the following terminal command:
-+
-  brew install gnu-sed curl make coreutils gnu-tar lua asciidoctor pkg-config cairo pango libpng jpeg giflib librsvg pixman nvm jq racket
-
-* Mac users will also need to add these unix tools to their `$PATH`. In the terminal, run `open ~/.zshrc` to edit your configuration file. Add the following to the bottom of the file, then save and quit-and-reopen your terminal:
-+
-  # add every gnu tool we have as a prefix to the path
-  eval "$(/opt/homebrew/bin/brew shellenv)"
-  if type brew &>/dev/null; then
-    HOMEBREW_PREFIX=$(brew --prefix)
-    for d in ${HOMEBREW_PREFIX}/opt/*/libexec/gnubin; do export PATH=$d:$PATH; done
-  fi
-
-=== In Unix or WSL...
-
-* Most packages can be installed via `sudo apt-get install`, with the following terminal command:
-+
-  sudo apt-get install jq asciidoctor lua5.4 curl
-+
-
-* To install Racket:
-+
-  sudo apt-add-repository ppa:plt/racket
-  sudo apt install racket
-+
-
-* To install NVM:
-+
-  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
-
-
-=== Additional Tools for Sublime
-
-If you use the https://www.sublimetext.com/[Sublime Text Editor], we've also created some tools that make authoring more pleasant and readable.
-
-* Make sure your curriculum folder is open on the screen (in the Finder on MacOS, or Explorer on Windows)
-* In that window, navigate to the `lib/sublime-settings` folder. The files there are the ones we want to copy into your Sublime Settings folder!
-* Open your unix terminal, and type `open ~/Library/Application\ Support/` (MacOS) or `explorer.exe %APPDATA%` (Windows) to open _another_ folder window.
-* In that window, navigate to `Sublime Text/Packages/User/`.
-** Note: on some sysetms, the folder may be called "Sublime Text 3"
-* Copy both files from the `curriculum/lib/sublime-settings` folder into your `Sublime Text/Packages/User` folder.
-* Quit and relaunch Sublime Text. 
-* Navigate to the View dropdown menu and select Syntax. Switch the mode from Asciidoctor to Asciidoctor+ when viewing an .adoc file. Sublime will remember your preference for all future adoc files.
 
 == Authoring guidelines
 
