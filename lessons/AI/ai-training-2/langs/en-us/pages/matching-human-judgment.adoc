@@ -8,18 +8,18 @@ A teacher asks students to write an essay on one of three topics: modern art, so
 
 @n What does the number 32 tell us? @fitb{}{@ifsoln{The teacher has provided the plagiarism detector with 32 student essays.}}
 
-@n What does the number 1023 tell us? @fitb{}{@ifsoln{In sum, the essays include 1023 different words.}}
+@n What does the number 1023 tell us? @fitb{}{@ifsoln{If we combine the three essays into a single document and count the distinct words, we get 1023.}}
 
-@n After thinking on it, the teacher realizes that students don't merely copy one another's writing; instead, they copy/paste text from the internet! The teacher opens her plagiarism detection software and tells it to consume a large @vocab{training corpus} of internet text about modern art, soccer, and zebras. How many dimensions will the space contain, now?
+@n The teacher knows, of course, that students don't merely copy one another's writing; instead, they copy/paste text from the internet! The teacher opens her plagiarism detection software and tells it to consume a large @vocab{training corpus} of internet text about modern art, soccer, and zebras. How many dimensions will the space contain, now?
 
 @vspace{1ex}
 
-*Circle one:* @hspace{1em} more dimensions @hspace{5em}  the same amount of dimensions @hspace{5em} fewer dimensions
+*Circle one:* @hspace{1em} more dimensions @hspace{5em}  the same number of dimensions @hspace{5em} fewer dimensions
 
 @n Explain your choice. 
 
 @blanklines{4}{
-@ifsoln{The space will contain more dimensions. For a bag-of-words model, dimensionality reflects how many different words are in the corpus. We can assume that a large corpus of internet text will use more words than the students in the teacher's class did.}
+@ifsoln{The space will contain more dimensions. For a bag-of-words model, dimensionality reflects how many different words are in the corpus. We can assume that a large corpus of internet text will use many more words than the students in the teacher's class did.}
 }
 
 == Assessing the Output
@@ -47,7 +47,7 @@ On the left is a description of the output of a plagiarism detector. On the righ
 
 | The points are clustered into three groups, but two of the points are almost on top of one another.
 |*2* @ifsoln{B}||*B*
-| Two of the essays use almost the same words, in almost the same frequencies. This is probably plagiarism, and the teacher should take a closer look at those essays.
+| Two of the essays use almost the same words, in almost the same frequencies. This look suspicious, and the teacher should take a closer look at those essays for potential plagiarism.
 
 
 | The points are clustered into three groups.
@@ -57,7 +57,7 @@ On the left is a description of the output of a plagiarism detector. On the righ
 
 | Almost all the points are clustered into two groups, but one point is positioned very far away from both clusters.
 |*4* @ifsoln{C}||*D*
-| Every student appears to have written essays about entirely different topics! The teacher has no reason to suspect plagiarism, but they should _probably_ worry about their students ignoring the assignment!
+| Every student appears to have written essays about entirely different topics! The teacher has no reason to suspect plagiarism, but they should _probably_ worry about their students not following the assignment!
 |===
 
 
