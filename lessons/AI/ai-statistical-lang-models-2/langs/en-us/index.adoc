@@ -83,9 +83,7 @@ In this lesson, you will explore Soekia, a simplified text generation tool desig
 It's time to peek behind the curtain to see how a computer can put a statistical language model to use! 
 
 @lesson-instruction{
-- Open a browser window and make sure it is filling the full width of your screen.
-- Go to @starter-file{soekia}.
-- Click the "LOOK INSIDE @image{images/arrow-forward-icon.png, 15}" button in the upper right-hand corner of the screen.
+- Click the "LOOK INSIDE @image{images/arrow-forward-icon.png, 15}" button in the upper right-hand corner of @starter-file{soekia, "Soekia"}.
 }
 
 Now, in addition to the blue text generation panel, we see three additional panels: documents, n-grams, and suggested words.
@@ -186,21 +184,39 @@ _In case you need a refresher on the game:_
   * The other person will draw and *O* in one of the squares.
   * Keep taking turns - the goal is to get three in a row or block your neighbor from getting three in a row.
   * The game ends when one of you gets three in a row or the grid is full.
+
+Here is a sequence of 5 images showing a game in progress.
+
+@image{images/tic-tac-toe-5-turns.png}
+
+Let's make up a notation to represent this sequence, knowing that:
+
+- the tic-tac-toe grid is a 3x3 coordinate plane with the origin (0,0) in the bottom left corner
+
+- for each move, our notation must indicate: 
+
+  *** the player whose turn it is (X or O)
+
+  *** the ordered pair (x, y) for the location of the player's move on that turn 
 }
 
-@slidebreak{LaunchR}
+@QandA{
+@Q{How would you annotate the first move in this tic-tac-toe game?}
+@A{X22}
 
-@lesson-instruction{
-@right{@image{images/docA.png, 150}}
+@Q{How would you annotate the second move in this tic-tac-toe game?}
+@A{O23}
 
-- Now draw another tic-tac-toe grid on your paper on which to play the game described by Document A with your neighbor. +
-_This info might help you get started:_
-  * Think of the tic-tac-toe grid as a 3x3 coordinate plane with the origin (0,0) in the bottom left corner.
-  * Each row of the document contains two pieces of information:
-  	*** the player whose turn it is (X or O)
-  	*** the ordered pair (x, y) for the location of the player's move on that turn
+@Q{Annotate the remainder of the moves.}
+@A{X12, O13, X33}
+
+@Q{@right{@image{images/docA.png, 50}} Can you translate this "document" written in tic-tac-toe notation into a standard game on a tic-tac-toe board?}
+
+@A{Here is the game played out on a tic-tac-toe board: 
+
+@center{@image{images/tic-tac-toe-solution.png, 75}}
 }
-
+}
 
 === Investigate
 @slidebreak{Investigate}
@@ -242,8 +258,9 @@ Just like a natural language, the tic-tac-toe text can be parsed into n-grams an
 @slidebreak{Synthesize}
 
 @QandA{
-@Q{A student argues that AI is a reliably correct and credible source of information. How would you respond?}
-@A{The output that AI produces depends on the corpus on which it is trained, but also the language model used to generate the text.}
-@A{AI does not actually have any way of assessing for correctness and credibility; it simply produces one output after the next based on a model.}
+@Q{A student argues that ChatGPT - which was built on the concept of language modeling - is a reliably correct and credible source of information. How would you respond?}
+@A{The output that ChatGPT produces depends on the corpus on which it is trained.}
+@A{ChatGPT does not actually have any way of assessing for correctness and credibility; it simply produces one output after the next based on a model.}
 @A{The very same process that generates so-called "hallucinatory" text _also_ generates the "non-hallucinatory" text.}
+@A{The student arguing that ChatGPT is a reliable source of information needs to understand ChatGPT's output _sometimes_ happens to match reality... but sometimes it does not!}
 }
