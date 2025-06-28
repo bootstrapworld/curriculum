@@ -4,39 +4,60 @@ Use @starter-file{plagiarism} to respond to the questions, below.
 
 == distance-to
 
-@n In the Interactions Area, type `distance-to(student-essay)`. The table that appears displays the angle difference between `student-essay` and each of the other animal articles in the corpus.
+@n In the Interactions Area, type `distance-to(student-essay)`. The table that appears displays the angle difference between `student-essay` and each of the other animal articles in the corpus. Use the information to fill in the blanks, below.
 
-@indented{
-a) Which article is the _most similar_ to student-essay? @fitb{}{@ifsoln{`elephant-article`}}
+[cols="5,5,3", options="header", stripes="none"]
+|===
 
-b) What is the angle difference between `student-essay` and the _most similar_ article in the corpus? @fitb{}{@ifsoln{~23.706°}}
+|
+| *article*
+| *angle difference*
 
-c) Which article is the _most different_ from `student-essay`? @fitb{}{@ifsoln{`hamster-article`}}
+| most similar to `student-essay`
+| @ifsoln{`elephant-article`}
+| @ifsoln{~23.706°}
 
-d) What is the angle difference between `student-essay` and the _most different_ article? @fitb{}{@ifsoln{~77.620°}}
-}
+| most different from `student-essay`
+| @ifsoln{`hamster-article`}
+| @ifsoln{~77.620°}
 
-@n Our corpus is made up of ten articles about different animals. Which other animals, aside from elephant and hamster, are represented in the corpus? List them here:
-@fitb{}{@ifsoln{polar bear, rhino, blue whale, giraffe, manatee, chimpanzee, badger, snail}}
+|===
 
-@fitb{}{}
+@n In the Interactions Area, type `distance-to(chimpanzee-article)`. One of the angle differences listed in the table that appears is zero. What does that tell you? @fitb{}{@ifsoln{When two articles have an angle difference of 0°, their bags of words are identical.}}
 
+@fitb{}{@ifsoln{In this case, `chimpanzee-article` has an angle difference of 0° from itself.}}
 
-@n In the Interactions Area, type `distance-to(chimpanzee-article)`.
+@n Use the output of `distance-to(chimpanzee-article)` to fill in the blanks, below.
 
-@indented{
-a) One of the angle differences listed in the table is zero. What does that tell you? @fitb{}{@ifsoln{When two articles have an angle difference of 0°,}}
+[cols="5,5,3", options="header", stripes="none"]
+|===
 
-@fitb{}{@ifsoln{their bags of words are identical. In this case, `chimpanzee-article` has an angle difference of 0° from itself.}}
+|
+| *article*
+| *angle difference*
 
-b) Which article is the most similar to `chimpanzee-article`? @fitb{}{@ifsoln{`giraffe-article`}}
+| most similar to `chimpanzee-article`
+| @ifsoln{`giraffe-article`}
+| @ifsoln{~59.206°}
 
-c) What is the angle difference between `chimpanzee-article` and the _most similar_ article? @fitb{}{@ifsoln{~59.206°}}
+| most different from `chimpanzee-article`
+| @ifsoln{`rhino-article`}
+| @ifsoln{~72.619°}
 
-d) Which article is the most different from chimpanzee-article? @fitb{}{@ifsoln{`rhino-article`}}
+|===
 
-e) What is the angle difference between `chimpanzee-article` and the _most different_ article? @fitb{}{@ifsoln{~72.619°}}
-}
+@n Is `distance-to` sophisticated enough to be able to determine with certainty whether or not plagiarism occurred? Explain. 
+
+@fitb{}{@ifsoln{No. If two essays have an unusually small angle difference, that is a signal for a human to investigate further.}}
+
+@fitb{}{@ifsoln{A plagiarism detector cannot conclusively decide if plagiarism occurred.}}
+
+@n Can you think of any ways to improve this model? @fitb{}{@ifsoln{Students may propose giving more weight to important words.}}
+
+@fitb{}{@ifsoln{They may propose eliminating unimportant words from the analysis. Students may suggest somehow incorporating synonyms into the model,}}
+
+@fitb{}{@ifsoln{or analyzing sentence structure for similarity. Responses will vary.}}
+
 
 == string-to-bag-cleaned
 

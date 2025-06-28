@@ -1,22 +1,34 @@
 = A Pyret Spell Checker: Exploring Different Dataset Sizes
 
-The player of the partially-completed Wordle game that we reviewed wants some Pyret "assistance".  @link-instructions{Open the @starter-file{spell-checker} and click "Run".}
+++++
+<style>
+/* Format autonumbering inside the table correctly */
+table .autonum::after { content: ')' !important; }
+</style>
+++++
 
+The player of the partially-completed Wordle game wants some Pyret "assistance".  @link-instructions{Open the @starter-file{spell-checker} and click "Run".}
 
+[cols="3a,1a", stripes="none", frame="none", grid="none"]
+|===
+|
 @n In the Interactions Area, test each of the three lines of code (below).
+
 @vspace{1ex}
 
 [cols="1,1", stripes="none", options="header"]
-|===
-| Pyret Expression					| Number of suggestions returned
-| `alt-words("games", WORDS-100)` 	| @ifsoln{1}
-| `alt-words("games", WORDS-1000)` 	| @ifsoln{5}
-| `alt-words("games", WORDS-ALL)`	| @ifsoln{10}
+!===
+! Pyret Expression					! Number of suggestions returned
+! `alt-words("games", WORDS-100)` 	! @ifsoln{1}
+! `alt-words("games", WORDS-1000)` 	! @ifsoln{5}
+! `alt-words("games", WORDS-ALL)`	! @ifsoln{10}
+!===
+| @image{../images/wordle.png,150}
 |===
 
-@n Which of these lines of code would you recommend for the player? Why? @fitb{}{@ifsoln{`alt-words("games", WORDS-ALL)` because it returned the}}
+@n Which line of code would you recommend for the player? Why? @fitb{}{@ifsoln{`alt-words("games", WORDS-ALL)`} }
 
-@fitb{}{@ifsoln{most suggestions.}}
+@fitb{}{@ifsoln{because it returned the most suggestions.}}
 
 @n The solution to the partially-completed game is in fact "camel". Look back at the suggestions in your Interactions Area. Did any of the lists include it? @fitb{}{@ifsoln{Yes. It's on the list from `WORDS-ALL`.}}
 
@@ -35,18 +47,23 @@ The player of the partially-completed Wordle game that we reviewed wants some Py
 @fitb{}{}
 
 @n As you might have guessed, the `WORDS-1000` dictionary contains 1000 words and the `WORDS-ALL` dictionary contains even more (2314). How does that help explain the fact that `alt-words("games", WORDS-ALL)` returned the most suggestions? @fitb{}{} +
-@fitb{}{@ifsoln{larger datasets have more information to draw from!}} +
-@fitb{}{}
+@fitb{}{@ifsoln{Larger datasets have more information to draw from!}} 
 
-@star Let's imagine that "W1" and "W2" represent two different five-letter words...
+@star Let's imagine that 
 
 @indented{
-If `alt-words("W1", WORDS-ALL)` produces a list that includes "W2", would you expect `alt-words("W2", WORDS-ALL)` to produce a list that includes "W1"? Why or why not?
+
+- @math{W1} and @math{W2} represent two different five-letter words
+- `alt-words("W1", WORDS-ALL)` produces a list that includes @math{W2}
 }
 
-@fitb{}{@ifsoln{If and only if both words are in the WORDS-ALL dataset!}} +
-@fitb{}{} +
-@fitb{}{}
+@vspace{1ex}
 
-@star Can you produce an input that returns more than one word from the `WORDS-100` dictionary? If so, what is it? @fitb{}{@ifsoln{Answers will vary, but `alt-words("comic", WORDS-100)` will work.}} +
-@fitb{}{}
+Would you expect `alt-words("W2", WORDS-ALL)` to produce a list that includes @math{W1}? Why or why not?
+
+@fitb{}{@ifsoln{If and only if both words are in the WORDS-ALL dataset!}} +
+@fitb{}{} 
+
+@star Can you produce an input that returns more than one word from the `WORDS-100` dictionary? If so, what is it? @fitb{}{}
+
+@fitb{}{@ifsoln{Answers will vary, but `alt-words("comic", WORDS-100)` will work.}} 
