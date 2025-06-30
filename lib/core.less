@@ -139,9 +139,8 @@ div#body {
 
   /* The footer at the bottom of every page */
   .acknowledgmentsect {
-    position: relative;
-    top: 100%;
-    margin-top: 20px;
+    position: absolute;
+    bottom: -2in;
   }
   .acknowledgment {
     padding-bottom:   5px !important;
@@ -787,11 +786,12 @@ div#body.workbookpage {
   .blanklines {
     display: block;
     position: relative;
-    background-image: linear-gradient(black 1px, transparent 1px);
+    background-image: url('images/2.2rem-ruled lines.png');
     background-size: 100% 2.2rem;
     background-position-y: 1.7rem;
     margin-left: 5px;
     line-height: 2.2rem;
+    margin-top: 0.6rem;
     .solution { position: fixed; }
   }
 
@@ -1255,7 +1255,7 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
     #savetodrive-div { transform: scale(0.8); }
   }
 
-  div#body.workbookpage { padding-left: 3em; }
+  div#body.workbookpage { margin-left: 3em; }
   /********************************************************************
    *  Collapsing Headers
    */
@@ -1340,7 +1340,7 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
   a[href]::after { content: none !important; }
   #savetodrive-div, .copyright, #footer, #outOfDate, .web-page-only, .section-link,
   .acknowledgmentsect, .sidebar, .CodeMirror div.CodeMirror-cursor, #MathJax_Message {
-    display: none !important; visibility: hidden; float: none;
+    display: none !important; float: none;
   }
   div#body{ position: static; } /* page-break fails on absolute positioning */
 
@@ -1393,27 +1393,6 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
     }
     h2, table.recipe_title p { color: black !important; }
 
-    .acknowledgmentsect:last-child { flex-grow: 0 !important; } /* Even when invisible, flex-grow will take up space */
     .recipe_condition *::before, *::after { color: black !important; }
-  }
-  div#body {
-    margin: 0;
-    /* Page Breaks for printed lesson plans, projects, and TR pages */
-    h3, h2 { break-after: avoid !important; page-break-after: avoid !important; }
-    h3+.paragraph, h2+.paragraph { break-before: avoid !important; page-break-before: avoid !important; }
-    table { break-inside: auto; }
-    tr td { page-break-inside: avoid !important; break-inside: avoid !important; page-break-after: auto; }
-    thead { display: table-header-group; }
-    tfoot { display: table-footer-group; }
-
-    /* Get rid of collapsing headers */
-    .sect1.lesson-section-1, .sect1.lesson-section-1 .sectionbody { max-height: unset !important; }
-
-    /* Override AsciiDoc print default */
-    p {
-      margin: 0px;
-      font-size: 1rem;
-      font-weight: normal;
-    }
   }
 }

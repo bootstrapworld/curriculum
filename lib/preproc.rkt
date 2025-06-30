@@ -1627,7 +1627,7 @@
                             (let ([n (string->number (read-group i directive))]
                                   [text (read-group i directive)])
                               ; (printf "doing @blanklines ~s\n" n)
-                              (display-begin-span ".blanklines" o #:attribs (format "style=\"height: ~arem\"" n))
+                              (display-begin-span ".blanklines" o #:attribs (format "style=\"height: ~arem\"" (* 2.2 n)))
                               (display (expand-directives:string->string text #:enclosing-directive directive) o)
                               (display-end-span o))]
                            [(string=? directive "duration")
@@ -2126,7 +2126,7 @@
                              (unless (assoc lbl *assessments-met*)
                                  (set! *assessments-met*
                                    (cons (cons lbl text) *assessments-met*)))
-                             (fprintf o "link:pass:[assessments/~a/index.html][~a]" lbl text))]
+                             (fprintf o "link:pass:[assessments/~a/index.html][~a, role=quiz]" lbl text))]
                           [(string=? directive "citation")
                            (let* ([args (read-commaed-group i directive read-group)]
                                   [args-len (length args)]
@@ -2670,7 +2670,7 @@
     (lambda (o)
       (unless (null? *assessments-met*)
         (for ([asst (reverse *assessments-met*)])
-          (fprintf o "- link:pass:[assessments/~a/index.html][~a]\n"
+          (fprintf o "- link:pass:[assessments/~a/index.html][~a, role=quiz]\n"
                    (car asst) (cdr asst)))))
     #:exists 'replace))
 

@@ -37,11 +37,14 @@ Students consider one specific example of machine learning: evaluating how spell
 === Launch
 @slidebreak{Launch}
 
-The spell checker built into your web browser or word processing system is a classic example of @vocab{machine learning}. We are so used to receiving spell-checking help that sometimes we don't even notice that's it's there. But copy-editing a document without the help of a spell checker would be laborious and error-prone!
+The spell checker built into your web browser or word processing system is a classic example of @vocab{machine learning}. 
 
-When it comes to spell checking, how does the performance of a computer compare to that of a human? Do humans and computers use similar spell checking strategies, or do they approach the task from entirely different angles? How do their outcomes compare?
+We are so used to receiving spell-checking help that sometimes we don't even notice that's it's there. But copy-editing a document without the help of a spell checker would be laborious and error-prone! 
 
-When we discuss and debate AI, the question of "what is intelligence?" often emerges. Does a spell-checker exhibit any kind of "intelligence"? In this lesson, we're going to explore that question in detail.
+- Do humans and computers use similar spell checking strategies or approach the task from entirely different angles? 
+- How do spell-checking outcomes from humans and computers compare?
+
+As with discussions about other forms of AI, we might wonder whether a spell-checker exhibits any kind of "intelligence" and what intelligence actually is... 
 
 @slidebreak{Launch}
 
@@ -54,17 +57,22 @@ When we discuss and debate AI, the question of "what is intelligence?" often eme
 
 @slidebreak{Launch}
 
-You probably noticed that is was difficult to articulate how exactly you were able to locate and correct spelling mistakes. Why?
+@QandA{
+@Q{You probably noticed that is was difficult to articulate how exactly you were able to locate and correct spelling mistakes. Why?}
+}
 
-Humans rely on context clues, experience, and background. There were probably students in your class who said that the spelling mistakes jumped off the page. They couldn't *not* see the mistakes! Other students relied on context clues or prior knowledge to locate and fix errors.
+@slidebreak{Launch}
 
-Of course, the process of spell-checking varies not just by person but by situation, too. If a different word had been misspelled - perhaps a complex, technical word - you might have relied on a different spell checking strategy. If you were from Britain rather than the United States, you might spell some words differently from others (e.g. "color" v. "colour").
+When humans spell check, they rely on context clues, experience, and background. There were probably students in your class who said that the spelling mistakes jumped off the page. They couldn't *not* see the mistakes! 
+
+Of course, the process of spell-checking varies not just by person, but by situation, too. For example:
+
+- If a complex, technical word had been misspelled you might have relied on a different spell checking strategy. 
+- If you were from the U.K. rather than the U.S., you might spell some words differently from others (e.g. "color" v. "colour").
 
 
 === Investigate
 @slidebreak{Investigate}
-
-The very first spell checkers simply identified words that were spelled incorrectly without offering alternatives. Although modern spell checkers do more than merely _check spelling_ (they propose alternatives!), the term "spell checker" stuck around and we use it to this day!
 
 Modern spell checkers descend from a program written over fifty years ago. Its creators provided the spell checker program with a 10,000-word dictionary and a precise algorithm to follow. After scanning the text and extracting the words it contained, the spell checker would compare each word with a known list of correctly spelled words. Here is what the algorithm did next:
 
@@ -74,16 +82,16 @@ Modern spell checkers descend from a program written over fifty years ago. Its c
 
 - *Next*, it would search its dictionary of correct spellings to see which of the alternatives were real words.
 
-- *Finally*, it would produce the list of real, correctly spelled words for the user to choose from.
+- *Finally*, it would produce a list of real, correctly spelled words for the user to choose from.
 -- 
 
 @slidebreak{Investigate}
 
-Unsurprisingly, spell checkers have evolved a lot over time - but exploring this particular algorithm can offer us interesting insights about one of the earliest forms of AI/ML.
+Exploring this particular algorithm can offer us interesting insights about one of the earliest forms of AI/ML.
 
 @lesson-instruction{
-- In Part 1 of @printable-exercise{first-spell-checker.adoc}, _you_ will be the computer, following an early spell checking algorithm.
-- Reflect on the activity in Part 2.
+- In Part 1 of @printable-exercise{first-spell-checker.adoc}, _you_ will be the computer, following an early spell checker's algorithm.
+- Reflect on the activity and how it compares to your own strategies in Part 2.
 }
 
 @teacher{
@@ -98,10 +106,13 @@ After students have completed the activity, invite them to share their responses
 @A{There is an extremely limited number of ways in which a word can be misspelled. For example, if two separate letters in a word are incorrect, the spell checker has no chance of proposing the correct word!}
 
 @Q{How is the first spell checker's algorithm similar to whatever strategy *you* use when spell checking your writing?}
-@A{We can't think of any similarities! See what your students propose, and discuss.}
+@A{See what your students propose, and discuss. If they come up with any similarities, we'd love to hear what they are!}
 
 @Q{How is the first spell checker's algorithm different from whatever strategy *you* use when spell checking your writing?}
-@A{Human spell checking relies a lot on context, instinct, and previously acquired knowledge of spelling. The first spell checker did not use any of these tools that humans use. The spell checker has the ability to enumerate thousands of words; no human would even think to approach a spelling error in this way. A human wouldn't have the time or ability to list so many words.}
+@A{When you check spelling, you rely a lot on context, instinct, and previously acquired knowledge.}
+@A{The first spell checking program did not have, or use, any of these strengths.}
+@A{In contrast, however, a human would not have the time, ability, or concentration to systematically list out thousands of potential words, whereas the computer has no difficulty doing so.}
+@A{Therefore, the strategies used by the human and computer may be extremely different for a similar task.}
 }
 
 
@@ -130,32 +141,49 @@ Students explore both the algorithm and the datasets that power a Pyret-based sp
 === Launch
 @slidebreak{LaunchR}
 
-By now, we have a decent sense of the extensive work that is happening behind the scenes when we spell check our writing. We have *not*, however, discussed an essential truth about spell checkers and in fact *all modern AI*: it is "data-driven".
+By now, we have a decent sense of the extensive work that is happening behind the scenes when we spell check our writing. We have *not*, however, discussed an essential truth:
+
+@lesson-point{Spell checkers, and in fact *all modern AI*, are "data-driven".}
 
 @QandA{
 @Q{Where have you encountered the term "data-driven" before, if at all?}
-@A{Sample responses: data-driven *decision making* is informed by collecting or analyzing data; data-driven *health care* involves using data to think about the effectiveness of different treatments; a data-driven *teacher* will reteach topics that students struggled with.}
+@A{Sample responses: 
+  * data-driven *decision making* is informed by collecting or analyzing data
+  * data-driven *health care* involves using data to think about the effectiveness of different treatments
+  * data-driven *teachers* will reteach topics that students struggled with
+}
 
-@Q{Have you ever met anyone who is "data-driven"? (Teachers? Coaches? Parents?) Explain.}
+@Q{Have you ever met someone who is "data-driven"? _(Teachers? Coaches? Parents?)_ How so?}
 
 @Q{What do you think it means to be "data-driven"?}
 @A{Responses will vary, but should highlight the general idea that data informs how things are done.}
 }
 
-But how exactly is a spell checker data driven? 
+But how exactly is a spell checker data-driven? 
+
+@slidebreak{LaunchR}
+
+@lesson-instruction{
+Take a look at this screenshot of a text messaging app's suggestions for the possibly misspelled word "Cose".
+}
+
+@center{@image{images/text-app.png, 250}}
 
 @QandA{
-@right{@image{images/text-app.png, 175}}
-In the screenshot on the right, we see a message that begins with a possibly misspelled word, "Cose."
+@Q{What alternative words does the text messaging app provide the user to choose from?}
+@A{The original word "Cose" - indicating that no error was made}
+@A{Two alternatives: "Code" and "Close"}
 
-@Q{What alternative words does the text messaging app provide the user?}
-@A{The user can select "Cose" (indicating that no error was made), "Code", or "Close".}
-
-@Q{We have discussed spell checking algorithms. What sort of _algorithm_ do you think the app used in developing possible alternative words?}
-@A{Responses will vary. Students may refer to the algorithms discussed in the first half of the lesson. They might also imagine more complicated algorithms - for instance, algorithms that consider the proximity of letters on the keyboard!}
+@Q{What sort of _algorithm_ do you think the app used in developing possible alternative words?}
+@A{Responses will vary.}
+@A{Students may refer to the algorithms discussed in the first half of the lesson.} 
+@A{Students might also imagine more complicated algorithms - for instance, algorithms that consider the proximity of letters on the keyboard!}
 
 @Q{What sort of _data_ do you think the spell checking app used in developing possible alternative words?}
-@A{Responses will vary. Students may propose that the spell checking app has data on which words the user is most likely to type, or data on the topic of the text conversation and the most probably next word. Students may even propose that the dictionary of words the app draws from is a source of data!}
+@A{Responses will vary.}
+@A{Which words the user is most likely to type}
+@A{The topic of the text conversation and the most probable next word} 
+@A{The dictionary of words the app draws from}
 }
 
 @teacher{Students will discuss a similar screenshot of a text messaging app in our lesson on @lesson-link{ai-statistical-lang-models}. During that lesson, however, students explore how generative AI uses data-driven algorithms to determine what word to produce next.}
@@ -177,14 +205,21 @@ As you were interacting with the @starter-file{spell-checker}, you observed that
 
 @slidebreak{InvestigateR}
 
-@left{@image{images/wordle.png, 175}}
 
-Let's consider a partially-played Wordle game (left).
+[cols="7a,1,18a", grid="none", frame="none"]
+|===
+|@image{images/wordle.png}
+|
+|
+Let's consider this partially-played Wordle game.
 
-The player has attempted three words so far: "WORTH", "MEDIA", and "GAMES". With each turn, we have learned something new. At this point, we know that _a_, _m_, and _e_ belong in the 2nd, 3rd, and 4th tiles, respectively. We know that the 1st and 5th tiles are _not_ occupied by _w_, _o_, _r_, _t_, _h_, _d_, _i_, _g_, or _s_.
+The player has attempted three words so far: "WORTH", "MEDIA", and "GAMES". With each turn, we have learned something new. At this point, we know that:
+
+- _a_, _m_, and _e_ belong in the 2nd, 3rd, and 4th tiles, respectively.
+- The 1st and 5th tiles are _not_ occupied by _w_, _o_, _r_, _t_, _h_, _d_, _i_, _g_, or _s_.
 
 The player has just three turns left!
-
+|===
 
 @QandA{
 @Q{What word would _you_ try next?}
@@ -193,39 +228,38 @@ The player has just three turns left!
 @Q{Each of the words you proposed was probably 2 edits away from "GAMES", the user's third guess. Why?}
 @A{Three of the letters are correct; we just need to substitute in different letters for _g_ and _s_.}
 
-@Q{The player of this partially-completed Wordle game (above) wants some Pyret "assistance". They run `alt-words("games", WORDS)`. Try it. Is Pyret able to produce the winning word?}
-
-@A{Pyret produces two words: `cameo` and `gamut`. Both of these guesses are incorrect. We know "cameo" is incorrect because it contains the (rejected) letter "o". We know "gamut" is incorrect because "e" must occupy the fourth space.}
+@Q{The player of this partially-completed Wordle game wants some Pyret "assistance". +
+They run `alt-words("games", WORDS)`. Try it. Is Pyret able to produce the winning word?
+}
+@A{Pyret produces two words: `cameo` and `gamut`.}
+@A{We know "cameo" is incorrect because it contains the (rejected) letter "o".} 
+@A{We know "gamut" is incorrect because "e" must occupy the fourth space.}
 }
 
 @slidebreak{Investigate-DN}
 
-Pyret did *not* provide the correct Wordle solution. What a disappointment! 
+Disappointingly, Pyret did *not* provide the correct Wordle solution. But why?
 
-But why?
+There are basically two "parameters" that our spell-checking program used: 
 
-There are basically two "parameters" that our spell checking program used: 
+@indented{
+1. the *function* : what is outside of the parentheses
 
-[cols="^.^1,^.^1", stripes="none", grid="none", frame="none"]
-|===
-| the *function*  +
-(what is outside of the parentheses) 
+2. the *dictionary* : provided inside the parentheses, as an argument
+}
 
-| the *dictionary* +
-(provided inside the parentheses, as an argument)
-|===
+We've discussed some ways we could make the _function_ better. (e.g. Maybe try swapping out an additional letter?) 
 
-We have discussed ways in which we could imagine making the function better. For instance, maybe we try swapping out an additional letter? 
-
-… but there's another way to improve the quality of the output that we haven't discussed - without changing how the function works.
-
-We can _improve_ the dictionary argument!
-
-Let's explore how directing Pyret to access differently-sized dictionaries influences the quality of the program's output.
+But it's also possible to improve the quality of the output _without changing how the function works_... by improving the _dictionary argument_!  Let's explore how directing Pyret to access differently-sized dictionaries influences the quality of the program's output.
 
 @lesson-instruction{
 - Complete @printable-exercise{pyret-spell-checker2.adoc} using the @starter-file{spell-checker}.
 - If you finish early, try the two challenges at the bottom of the page.
+}
+
+@QandA{
+@Q{What did you discover about the dictionaries in @starter-file{spell-checker}?}
+@Q{Why did the same `alt-words` function not always return the same results?}
 }
 
 @lesson-point{

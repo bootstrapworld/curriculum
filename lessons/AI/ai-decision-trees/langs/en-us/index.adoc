@@ -37,10 +37,10 @@ Students are introduced to scenarios in which decision trees are used, and then 
 === Launch
 @slidebreak{Launch}
 
-Consider each of three situations described below:
+Consider each of the three situations described below:
 
 - You just finished watching a YouTube video. Another video appears... and it is exactly the kind of video you would want to watch.
-- Two individuals who work for the same company and earn the same salary apply for a loan by filling out the same online form at the local bank. One of them is granted a loan, the other is not.
+- Two individuals who work for the same company and earn the same salary apply for a loan by filling out the same online form at the local bank. One of them is granted a loan, but the other is not.
 - A news anchor displays a map with some states colored blue and others colored red. She explains that the map's predictions for the upcoming election were developed using historical census data.
 
 On the surface, these situations may not seem to have a lot in common. If you dig a little deeper, however, you will discover that, in each of these scenarios, a computer uses data to drive the way that it makes recommendations, decisions, and predictions.
@@ -68,10 +68,15 @@ Decision trees are a form of @vocab{supervised learning}, because the computer i
 As a class, we are going to play a game to help us understand the sort of thinking that decision trees imitate.
 
 @teacher{The game we are going to play is a simplified version of 20 questions. If students are familiar with 20 questions, discussing the strategies they use when playing the game will help them to make connections.}
+
 @QandA{
 @Q{Show of hands: Have you ever played 20 Questions?}
-@A{*If the majority of your students haven't played 20 Questions, the discussion questions below are irrelevant; skip straight to the instructions about how our game will work*}
-@Q{What are the rules?}
+}
+
+@teacher{If the majority of your students haven't played 20 Questions, the discussion questions below are irrelevant; skip straight to the instructions about how our game will work.}
+
+@QandA{
+@Q{What are the rules of 20 questions?}
 @A{1 player is “it”. They have to think of a secret person, place or thing. The other players can ask up 20 yes or no questions to help them guess the secret person, place, or thing.}
 @Q{What strategies do you use when choosing the questions you will ask?}
 @A{Ask questions that are likely to eliminate many objects--but be careful! A question that is too narrow could end up resulting in very little information gained.}
@@ -97,7 +102,7 @@ We're going to play a modified version of that game. Here's how it works:
 
 @right{@image{images/spoon-game.png, 150}}
 
-This activity focuses on showing students the process of building a *decision tree*. The first round of this game will produce a diagram similar to the one on the right, which models a game with the secret word "spoon".  The number of questions required to "guess" the object--most likely between two and four--will depend on what your students ask.
+This activity focuses on showing students the process of building a @vocab{decision tree}. The first round of this game will produce a diagram similar to the one on the right, which models a game with the secret word "spoon".  The number of questions required to "guess" the object--most likely between two and four--will depend on what your students ask.
 
 Note that this diagram is *not* a complete decision tree, but a portion of one. The remainder of the tree will grow over the course of the lesson.
 
@@ -165,12 +170,21 @@ Let's imagine that our first round had started with the question, "Is it a utens
 
 @slidebreak{Investigate}
 
-Notice that after Round 2 the topmost question — "is it a utensil?" — splits left ("yes, it is a utensil") *and* right ("no, it is not a utensil").
+Notice that after Round 2 the topmost question — "is it a utensil?" — splits left ("yes, it is a utensil") *and* right ("no, it is not a utensil"). Our diagram begins with two unique pathways from the top of the tree to two unique items. Some decision tree diagrams will have more than two unique pathways!
 
-Our diagram begins with two unique pathways from the top of the tree to two unique items.
+@lesson-instruction{
+Let's learn the terminology used to describe decision trees.
+}
 
-Put another way: +
-_There are two branches splitting from the tree's root node. Each branch leads to a decision node, which eventually leads to a leaf node._
+
+==== Decision Tree Terminology
+
+@right{@image{images/terminology-tree.png, 300}}
+
+- The @vocab{root node} is the very top @vocab{node} that represents the entire population or sample before any splitting occurs.
+- @vocab{Splitting} is the process of dividing a node into sub-nodes (decision and/or leaf nodes) with branches. These branches will not necessarily be equal in size.
+- @vocab{Decision nodes} split from the root node, or from other nodes.
+- A @vocab{leaf node} is a node that does not split. Just like leaves on most trees, leaf nodes are found at the tip of a branch.
 
 @slidebreak{InvestigateR}
 
@@ -178,21 +192,7 @@ _There are two branches splitting from the tree's root node. Each branch leads t
 Let's identify the root node, branches, decision nodes, and leaf nodes on our tree so far.
 }
 
-@teacher{Discuss your in-progress tree to help students locate the different parts. The parts are intuitively named, but formal definitions are below if needed.}
-
-@vspace{1ex}
-
-@right{@image{images/terminology-tree.png, 300}}
-
-- The *root node* is the very top node that represents the entire population or sample before any splitting occurs.
-- @vocab{Splitting} is the process of dividing a node into sub-nodes (decision and/or leaf nodes) with branches. These branches will not necessarily be equal in size.
-- *Decision nodes* split from the root node, or from other nodes.
-- A *leaf node* is a node that does not split. Just like leaves on most trees, leaf nodes are found at the tip of a branch.
-
-@vspace{1ex}
-
-@slidebreak{InvestigateR}
-
+@teacher{Discuss your in-progress tree to help students locate the different parts. The parts are intuitively named, but formal definitions are above if needed.}
 
 @lesson-instruction{
 - With a partner, turn to @printable-exercise{decision-tree.adoc} and complete the decision tree so that all six items are categorized.
@@ -200,7 +200,6 @@ Let's identify the root node, branches, decision nodes, and leaf nodes on our tr
 }
 
 @teacher{
-
 @right{@image{images/tree4.png, 400}}
 
 The completed tree for the first question looks like this.
@@ -208,15 +207,18 @@ The completed tree for the first question looks like this.
 To create a different tree, students can either choose one of the questions from levels 2 or 3 as their root node, or they can generate an entirely different starting question.
 
 As students finish, invite them to draw their trees on the board. Ideally, you will have a wide assortment of trees! If students are not developing interesting trees, urge them to think of *entirely* different questions than those posed in the sample tree.
-
 }
 
 @slidebreak{Investigate}
 
-
 @QandA{
-@Q{After looking at the decision trees of your classmates: What do these trees all have in common? How are they different?}
-@A{Answers will vary. Many trees will have the same number of nodes, although probably not all. Many questions asked will likely be the same, but not every question.}
+@Q{Take a look at the decision trees you and your classmates made:
+  * What do these trees all have in common?
+  * How are they different?
+}
+@A{Answers will vary.}
+@A{Many trees will have the same number of nodes, although probably not all.}
+@A{Many questions asked will likely be the same, but not every question.}
 }
 
 @slidebreak{Investigate}
@@ -232,7 +234,6 @@ Invite students to share and explain their responses before emphasizing the main
 }
 
 @slidebreak{Investigate}
-
 
 You just observed that a decision tree
 
@@ -250,22 +251,15 @@ The only way this tree stands a chance of correctly identifying a chopstick or a
 
 @slidebreak{Investigate}
 
-
 As we built our decision trees, we were able to draw on everything we know about every knife, spoon, spork, plate, bowl or mug that we have ever seen. Our decision trees were imperfect because they didn't know about the utensils we either forgot to include or didn't know about.
 
 If you were asked to create a decision tree to identify common animals or foods, you could probably draw on a wealth of knowledge to create a similarly good one without much difficulty.
 
-@slidebreak{InvestigateC}
-
-
-Imagine that you are tasked with building a decision tree that can determine an iris' species (_setosa_, _virginica_, and _versicolor_) based on the varying plant measurements. It would be far more challenging to build this tree than it was to build the common tableware classification tree we just made because... !
-
-@centered-image{images/iris-data.png}
-
 @slidebreak{Investigate}
 
-
+@lesson-point{
 When computers build decision trees, they don't have life experience to draw upon. They only use the data we provide... and that data can sometimes be limited or messy! As a result, we may end up with models that are not 100% accurate.
+}
 
 === Synthesize
 @slidebreak{Synthesize}
@@ -273,17 +267,23 @@ When computers build decision trees, they don't have life experience to draw upo
 In AI, efficiency and accuracy are often in conflict:
 
 - AI is *efficient* when the computer performs a task with minimal time, memory, energy or data.
-
 - AI is *accurate* when the computer performs its task with correct, relevant, and consistent results.
 
 Striking the perfect balance is an ongoing challenge for computer scientists, and it is a challenge with far-reaching implications.
 
 @QandA{
 @Q{Why is it advantageous for AI to be efficient?}
-@A{Responses will vary, but may include: reduced delays, an improved user experience, greater scalability, decreased environmental impact.}
+@A{Responses will vary.}
+@A{reduced delays}
+@A{an improved user experience}
+@A{greater scalability}
+@A{decreased environmental impact}
+
 @Q{Can you think of any reasons *not* to maximize an AI's efficiency?}
-@A{Responses will vary, but students will likely observe that an increase in efficiency leads to a decrease in accuracy.}
+@A{Responses will vary.}
+@A{an increase in efficiency leads to a decrease in accuracy.}
 }
+
 
 == Decision Trees from Training Datasets @duration{25 minutes}
 
@@ -294,27 +294,18 @@ Students build a decision tree that predicts whether different individuals will 
 === Launch
 @slidebreak{Launch}
 
-We have already built some extremely simple decision trees. And we have seen instances where these trees classify successfully as well as instances where they fail.
+Have you ever done some online shopping—say, for a new pair of sneakers—only to discover that, for the next several days, you encounter _advertisements for sneakers_ lurking in every corner of the internet that you visit?!
 
-How do decision trees built from large datasets decide — at every level and every node — which attributes are the most informative ones to ask questions about so that they can make relatively accurate predictions, recommendations, and diagnoses?!
+@slidebreak{Investigate}
+
+Websites can store small data files called "cookies" on your device that can be used to remember details like where you were the last time you visited a site. One particular kind of cookie, the tracking cookie, allows AI designed for marketing to use your individual browsing habits to decide which ads you will be the most susceptible to.
+
+But how does the cookie know what you will be susceptible to?  *How do decision trees built from large datasets decide — at every level and every node — which attributes are the most informative ones to ask questions about,* so that they can make relatively accurate predictions, recommendations, and diagnoses?!
 
 It turns out, there's an algorithm for that, and it's relatively straightforward.
 
-
 === Investigate
 @slidebreak{Investigate}
-
-Have you ever done some online shopping—say, for a new pair of sneakers—only to discover that, for the next several days, you encounter _advertisements for sneakers_ lurking in every corner of the internet that you visit?!
-
-Is it a coincidence?
-
-@slidebreak{Investigate}
-
-
-No. Websites can store small data files on your device. These "cookies" can be used to remember where you were the last time you visited a site, or a setting that you changed and want to keep the next time you visit a site. One particular kind of cookie, the tracking cookie, allows AI designed for marketing to use your individual browsing habits to decide which ads you will be the most susceptible to.
-
-@slidebreak{Investigate}
-
 
 We're going to create a decision tree that predicts whether or not different customers at a particular online store will purchase a video game or not. To do so, we must first train the computer! We will use a training dataset that characterizes 14 different shoppers and then indicates whether or not each one purchased a video game.
 
@@ -325,46 +316,18 @@ We're going to create a decision tree that predicts whether or not different cus
 @A{There are only three new customers; two out of three times, new customers buy the video game.}
 @Q{Can you foresee any problems with making a decision tree based on this dataset? If so, what are they?}
 @A{Responses will vary.}
+@A{We only have data on 14 visitors.}
+@A{All of the visitors are between 14 and 38 years old.}
+@A{We don't know a lot about their gaming habits.}
 }
 
 @slidebreak{Investigate}
-
-
-One problem with this dataset is that _age is continuous_. That won’t work!
-
-We need to break these ages down into different groups - which will become different _branches_ that grow out of a _decision node_. *For now, let’s agree to create three groups: teenagers, twenties, and thirties.*
-
-We can use a different representation for this--called a @vocab{decision stump}--than we did with the yes-no questions we saw in our previous decision trees.
-
-
-@slidebreak{Investigate}
-
 
 @lesson-instruction{
-- We will complete @printable-exercise{level-1.adoc} together, starting with "age" as the root node.
-- As we create the first level of our tree, you will discover a tool that we use to complete all the levels of our model: the decision stump.
+One challenge for processing this dataset is that _age is continuous_ and decision trees are built with _branches_ that grow out of a _decision node_.  We'll need to start by defining discrete age groups.
+
+For now, let’s agree to create three groups: teenagers, twenties, and thirties.
 }
-
-@teacher{
-Students are introduced to the @vocab{decision stump} in question 4 on @printable-exercise{level-1.adoc}. Be prepared to guide students through building the decision stump. They will need to use (1) the rule that you wrote in question 1 and (2) the training dataset.}
-
-@slidebreak{Investigate}
-
-A @vocab{decision stump} is a one-level decision tree that makes a prediction based on the value of just a single input feature.
-
-- The stump has three branches because we are considering customers in their teens, twenties and thirties.
-- The left-most leaf node ("teens") represents the five teens in our training dataset: Jan (16), Jose (19), Jillian (14), Ariella (16), and Danial (19).
-** Jan, Jose, and Jillian did *not* purchase the game, so they are represented by the letter N (for "no").
-** Ariella and Danial *did* purchase the game, so they are represented by the letter Y (for "yes").
-** We illustrate the teens' decisions with the following shorthand: N N N Y Y
-- Finally, we place checkmarks below correctly predicted values to indicate how successful our rule was.
-** Our rule predicted that individuals in their teens would *not* purchase the game, so we place checkmarks by the Ns that represent Jan, Jose, and Jillian. Our rule was correct.
-** We leave the Ys *without* checkmarks; our rule was wrong for Danial and Ariella.
-- We complete the same process for customers in their twenties and in their thirties, representing each individual in the training dataset with a "Y" or "N", and then placing checkmarks to indicate when our rule was successful.
-
-@slidebreak{Investigate}
-
-As we move down the tree, our job is to figure out _which questions_ we should ask and _when_ we should ask them... just like when we play 20 Questions! Decision stumps will help us decide which questions produce a greater information gain.
 
 @strategy{Why Start the Tree with "Age"?}{
 Students will likely notice that we seemingly arbitrarily started the tree with "age" as the root node. _Extremely perceptive_ students may notice that for both "age" and "interest", the likelihood of a correct prediction is 10/14. In other words, starting with "interest in game" produces the same information gain as starting with "age" as the root... *so how do we decide?*
@@ -374,26 +337,128 @@ It turns out there's more than one correct way to build a decision tree! In gene
 Because the "age" node splits _three_ ways and the "interest in game" node splits _two_ ways, we opt to start the tree with "age".
 }
 
+@slidebreak{InvestigateR}
+
+@center{@image{images/stump.png, 180}}
+
+A @vocab{decision stump} is a one-level decision tree that makes a prediction based on the value of just a single input feature.
+
+- First, we list the outcome for each of the individuals in a group's training data.
+- Then, we right a rule: which outcome should the computer predict for this group?
+- Finally, we calculate what percentage of the rule's predictions are correct for the individuals in our training data.
+
+@lesson-instruction{Let's complete the first section of @printable-exercise{part-1.adoc} together, starting with "age" as the root node.}
+
+- This stump has three branches because we are considering customers in their teens, twenties and thirties.
+- The left-most leaf node ("teens") represents the five teens in our training dataset: Jan (16), Jose (19), Jillian (14), Ariella (16), and Danial (19).
+** Jan, Jose, and Jillian did *not* purchase the game, so they are represented by the letter N (for "no").
+** Ariella and Danial *did* purchase the game, so they are represented by the letter Y (for "yes").
+** We illustrate the teens' decisions with the following shorthand: N N N Y Y
+- The other leaf nodes similarly summarize the purchasing habits of the individuals in their age groups.
+
+@QandA{
+@Q{What else do you notice and wonder about the decision stump?}
+@A{Everyone in their twenties bought the game.}
+@A{Three out of 5 people in their thirties bought the game.}
+@A{On the other decision trees we've seen the arrows were labeled "yes" and "no", but here their labeled "teens", "twenties", "thirties".}
+@A{Decision trees usually have a single choice at the end of the arrow, but here we see N N N Y Y.}
+}
+
+@slidebreak{InvestigateR}
+
+@ifslide{@image{images/age-stump.png, 180}}
+
+On a decision tree, each branch has to point to a single choice... and right now we have N N N Y Y for teens.
+
+@QandA{
+@Q{What prediction should we make for teens? Why?}
+@A{They won't buy the game. Because more teens didn't buy the game than did.}
+@Q{What predictions should we make for the other age groups?}
+@A{People in their twenties and thirties will buy the game.}
+}
+
 @slidebreak{Investigate}
 
-There are two possible questions we could use at the next level of our decision tree :
+@lesson-instruction{
+Now that we have our rule, we need to calculate how effectively it predicts the outcomes for our training data. We'll start by placing checkmarks beneath each outcome (Y or N) that our rule would have correctly predicted.
+}
+
+@slidebreak{Investigate}
+
+Our rule predicted that individuals in their teens would *not* purchase the game, so:
+
+- We place checkmarks by the Ns that represent Jan, Jose, and Jillian. Our rule was correct for them.
+- We leave the Ys without checkmarks; our rule was wrong for Danial and Ariella.
+
+Our rule was correct for 3 out of 5 individuals or 60% of the time.
+
+@lesson-instruction{
+- Add checkmarks to the decision tree on @printable-exercise{part-1.adoc} to indicate when our rule was successful for customers in their twenties and thirties.
+- Calculate how effectively our rule predicted outcomes for each age group and the dataset as a whole (Question 4).
+- Finish the remaining questions in the first section.
+}
+
+@slidebreak{InvestigateR}
+
+@center{@image{images/age-stump-checks.png, 180}}
+
+Our rule was pretty effective! It correctly predicted the outcome 10 out of 14 times! And for people in their twenties it was 100% accurate. By utilizing other columns of data, we might be able to make the rule even better! 
+
+There are two possible questions we could use at the next level of our decision tree:
 
 - Is the individual a frequent customer, an infrequent customer, or a new customer?
 - Has the individual expressed interest in a particular video game?
 
 @slidebreak{Investigate}
 
-@lesson-instruction{
-- As you complete @printable-exercise{level-2.adoc} you will create and compare different __decision stumps__.
-- These "stumps" will help you determine which question will produce the biggest information gain.
-- Be ready to share which attributes you plan to add to the second level of your tree.
+As we move down the tree, our job is to figure out _which questions_ we should ask and _when_ we should ask them... just like when we play 20 Questions! 
+
+@lesson-point{
+Decision stumps help us decide which questions produce a greater @vocab{information gain}.
 }
 
 @slidebreak{Investigate}
 
 @lesson-instruction{
-- Complete the first section @printable-exercise{build-and-test.adoc}, then let's share the rules we developed.
-- "Test the Tree" by completing the second section of @printable-exercise{build-and-test.adoc}.
+- Complete the last section of @printable-exercise{part-1.adoc}
+- Then complete @printable-exercise{part-2.adoc}.
+** You will create and compare different decision stumps for these columns of data.
+** The stumps will help you determine which question will produce the biggest information gain.
+}
+
+@slidebreak{Investigate}
+
+@QandA{
+@Q{Which attributes do you plan to utilize for the second level of the decision tree?}
+@A{Interest in Games for Teens}
+@A{Shopping History for People in their Thirties}
+@A{Since our rule for people in their Twenties was 100% accurate, it will be a leaf node!}
+}
+
+@slidebreak{Investigate}
+
+@lesson-instruction{
+Complete the first section @printable-exercise{build-and-test.adoc}.
+}
+
+@slidebreak{Investigate}
+
+@QandA{
+@Q{What rules did you write?}
+@A{Interested teens will buy the game}
+@A{Everyone in their twenties will by the game.} 
+@A{Previous customers in their thirties will by the game.}
+}
+
+@slidebreak{Investigate}
+
+@lesson-instruction{
+Complete the second and third sections of @printable-exercise{build-and-test.adoc}.
+}
+
+@QandA{
+@Q{After adding in the test data, what rules would you suggest we change?}
+@A{Not all people in their twenties would buy the game. We should probably build decision stumps for people in their twenties for the other available columns and figure out what attribute to add to our tree.}
 }
 
 === Synthesize
@@ -405,7 +470,7 @@ There are two possible questions we could use at the next level of our decision 
 @A{If the tree has been designed to prioritize efficiency over accuracy, it may produce wrong predictions and recommendations.}
 @A{If the training dataset does not accurately represent the broader population, predictions and recommendations will be incorrect.}
 
-@Q{After testing our tree, we discovered that it was not as accurate as we might have presumed. Can you think of any examples of when _missing data_ can create problems?}
+@Q{After testing our tree, we discovered that it was not as accurate as we might have presumed. Can you think of any examples of when _missing data_ can lead to predictions with serious negative consequences?}
 @A{Responses will vary.}
 @A{When various populations are underrepresented in training datasets, the resulting technology reflects that, and we end up with AI that fails to meet the needs of those populations.}
 }

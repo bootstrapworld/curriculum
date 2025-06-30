@@ -7,50 +7,37 @@ table .autonum::after { content: ')' !important; }
 </style>
 ++++
 
-On @printable-exercise{level-2.adoc}, we decided that the decision mode at the end of the "teens" branch should be "interest in game". Let's create the rest of the tree and test it out. You can refer to the training dataset on @handout{decision-tree-data.adoc}.
+@link-instructions{For this page you will need to refer to your decisions from @printable-exercise{part-2.adoc}.} 
 
 == Build and Understand the Tree
 
-@vspace{1ex}
-
-Fill in the remainder of the tree using the algorithm you have learned (left) before filling in the blanks (right).
-
-@vspace{1ex}
+Complete the tree (left), then fill in the blanks (right).
 
 [cols="1,1", stripes="none"]
 |===
-
 |
 @ifnotsoln{@center{@image{../images/tree-w-blanks.png, 350}}}
-
 @ifsoln{@center{@image{../images/final-tree.png, 350}}}
-
 |
 
 @n The root node of this tree is @fitb{10em}{@ifsoln{age}}.
 
+@vspace{1ex}
 
 @n The first set of branches includes: +
 @fitb{8em}{@ifsoln{teens}}, @fitb{8em}{@ifsoln{twenties}}, and @fitb{8em}{@ifsoln{thirties}}.
 
-@vspace{1ex}
-
-@n Write the rules that this decision tree follows. Predict that:
-
-a) @fitb{12em}{@ifsoln{interested}} teens will buy the game.
-
-b) @fitb{12em}{@ifsoln{everyone}} in their twenties will buy the game.
-
-c) @fitb{12em}{@ifsoln{previous customers}} in their thirties will buy the game.
+@n Write the rules that this decision tree follows. Predict that: + 
+{nbsp}@fitbruby{12em}{@ifsoln{interested}}{interested / uninterested} teens will buy the game. +
+{nbsp}@fitbruby{12em}{@ifsoln{everyone}}{who?} in their 20s will buy the game. +
+{nbsp}@fitbruby{12em}{@ifsoln{previous customers}}{who?} in their 30s will buy the game.
 
 |===
 
 
 == Test the Tree
 
-@vspace{1ex}
-
-@n Complete the table below based on whether our decision tree predicts if Kat, Billy, or Chen will buy the game.
+@n Below is a new set of potential customers. Use the decision tree and rules above to predict whether or not they will buy the game.
 
 @vspace{1ex}
 
@@ -62,20 +49,17 @@ c) @fitb{12em}{@ifsoln{previous customers}} in their thirties will buy the game.
 | Chen	    | twenties 	| previous customer | no  				| none		| @ifsoln{will buy}
 |===
 
-@n Compare the test data with the decision tree recommendations. For which customers was the computer correct?  @hspace{1em} @ifsoln-choice{Kat} @hspace{1em} Billy @hspace{1em} Chen
+@n Compare the "buys game" column with the predictions. For which customers was the computer correct?  @hspace{1em} @ifsoln-choice{Kat} @hspace{1em} Billy @hspace{1em} Chen
 
-@n Based on this new test data, which rule (see Q3, above) needs to change? Why? @fitb{}{@ifsoln{We need to change Rule b,}}
+@n Should we change any of our rules based on the addition of this new data? Why? @fitb{}{}
 
-@fitb{}{@ifsoln{that all individuals in their 20s will buy the game. The new test data contradicts the rule.}}
+@fitb{}{@ifsoln{We shouldn't predict that all individuals in their 20s will buy the game. The new test data contradicts the rule.}}
 
 == Reflect
 
-@n The decision tree we built was correct 100% of the time with our training dataset, but correct only 33% of with our test dataset. Why?
+@n Our rules made 100% accurate predictions with our training dataset, but were only 33% accurate with our test dataset. Why?
+@blanklines{2}{@ifsoln{The training dataset is small, and only represents a sample of the population. The sample was not representative, as there are individuals in their twenties who choose not to purchase, among others who contradict the training data.}}
 
-@fitb{}{@ifsoln{The training dataset is small, and only represents a sample of the population. The sample was not representative,}}
+@n What could we do to improve the quality of this decision tree? @fitb{}{}
 
-@fitb{}{@ifsoln{as there are individuals in their twenties who choose not to purchase, among others who contradict the training data.}}
-
-@n What could we do to improve the quality of this decision tree? @fitb{}{@ifsoln{We would need to collect a bigger, more representative dataset,}}
-
-@fitb{}{@ifsoln{and then build the tree again.}}
+@blanklines{4}{@ifsoln{We would need to collect a bigger, more representative dataset, and then build the tree again.}}
