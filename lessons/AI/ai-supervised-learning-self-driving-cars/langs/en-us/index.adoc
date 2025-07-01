@@ -46,7 +46,7 @@ ALVINN (short for Autonomous Land Vehicle in a Neural Network) was developed in 
 
 @slidebreak{Launch}
 
-As with all machine learning, ALVINN required training.
+As with all machine learning, ALVINN required @vocab{training}.
 
 The goal of that training? Learning how to steer.
 
@@ -54,7 +54,7 @@ Here's what ALVINN's training entailed:
 
 (1) A person drove the vehicle while a front-facing video camera recorded the road.
 
-- The human driver in this context - the context of @vocab{supervised learning} - is often referred to as the _supervisor_. 
+- In the context of @vocab{supervised learning}, the human driver is often referred to as the supervisor. 
 - The supervisor demonstrates the learning process.
 - The input-output pairs form the @vocab{training corpus}.
 
@@ -95,7 +95,7 @@ In the `steer` function, the Image is the @vocab{explanatory variable} and the s
 
 _Note that the actual contract is more complex, and would include a second `Number` for the measure of confidence. And, as was the case for other models we've seen, the model is @vocab{lossy} - meaning that some of the original information in the dataset was lost through the process of summarizing and compressing the data to build the model._
 
-- In @vocab{supervised learning}, the abstraction of the function - what does the function actually look like? - takes place after demonstration.
+- In @vocab{supervised learning}, the abstraction of the function - the act of shrinking the @vocab{training} - takes place after (or sometimes in tandem with) demonstration.
 - In this example, the learned function is so complex that we're representing it in shorthand, with contract notation.
 
 @slidebreak{Launch}
@@ -133,10 +133,10 @@ A machine's "confidence" is very different from a human's confidence. When you d
 In discovering the details of ALVINN's @vocab{supervised learning}, you may have noticed three big events:
 
 - Demonstration of the learning process
-- Function abstraction - when the machine finds a function that generalizes well to new, unseen data
-- Use the function!
+- Function abstraction - the machine learning algorithm finds a function that generalizes (hopefully well!) to new, unseen data
+- Use the function! Apply it on new data.
 
-As you explore other examples of @vocab{supervised learning} in this curriculum, you will notice that - regardless of the unique specifics - all three phases occur in the same order. 
+As you explore other examples of @vocab{supervised learning} in this curriculum, you will notice that - regardless of the context - all three phases occur. 
 
 === Investigate
 @slidebreak{Investigate}
@@ -168,7 +168,13 @@ The process described above is an example of @vocab{regression}, a machine learn
 
 }
 
+The case of ALVINN is just one example of supervised learning. There are countless others!
 
+- *Spam detection.* When email users indicate that an email they have received is spam (_demonstration_), they are contributing to a massive, labeled dataset that can be used to train a model to classify emails as _spam_ or _not spam_. The "supervision" comes from the fact that the training data includes examples of both spam and legitimate emails, each labeled correctly.
+
+- *Image classification.* When you do an image search for "apple", how does the computer return all those apples? In 2006, a large visual database (ImageNet) was created to develop and improve visual object recognition software. Since then, millions of images have been hand-annotated (_demonstration_), creating a large dataset to use for training. 
+
+- *Handwriting Recognition.* The United States Postal Services uses handwritten address interpretation systems to read handwritten addresses on envelopes. The MNIST database (Modified National Institute of Standards and Technology database) is the database used for the training of such systems; it includes thousands of labelled images of handwritten digits.  
 
 === Synthesize
 @slidebreak{Synthesize}
