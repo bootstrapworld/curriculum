@@ -32,7 +32,7 @@
 
 === Overview
 
-Students are introduced to scenarios in which decision trees are used, and then play a game to help them build a frame of reference.
+Students consider technologies that make predictions and recommendations, and then play a game to help them build a frame of reference for diagramming the decision-making process.
 
 === Launch
 @slidebreak{Launch}
@@ -50,17 +50,13 @@ On the surface, these situations may not seem to have a lot in common. If you di
 @QandA{
 @Q{What kind of data do you think is used for recommending videos?}
 @A{Viewing history, search history, channel subscriptions, likes, dislikes, google activity, "not interested" feedback}
+
 @Q{What kind of data do you think is used for classifying loan requests?}
 @A{Debt, assets, payment history, number of open accounts, delinquent accounts, income/revenue, expenses, overdrafts in the last 90 days}
+
 @Q{What kind of data do you think is used to predict election outcomes?}
 @A{Census data including voter race, gender, income level, party affiliation, age, etc.}
 }
-
-@slidebreak{Launch}
-
-A @vocab{decision tree} is a machine learning algorithm that uses a tree-like model to show decisions and their possible consequences. The scenarios above all use decision trees to arrive at their recommendations.
-
-Decision trees are a form of @vocab{supervised learning}, because the computer is trained on data that already contains the desired categorizations. In other words, the computer trains on example data tagged by a human, and then learns a function that maps from input to output.
 
 === Investigate
 @slidebreak{Investigate}
@@ -78,6 +74,7 @@ As a class, we are going to play a game to help us understand the sort of thinki
 @QandA{
 @Q{What are the rules of 20 questions?}
 @A{1 player is “it”. They have to think of a secret person, place or thing. The other players can ask up 20 yes or no questions to help them guess the secret person, place, or thing.}
+
 @Q{What strategies do you use when choosing the questions you will ask?}
 @A{Ask questions that are likely to eliminate many objects--but be careful! A question that is too narrow could end up resulting in very little information gained.}
 @A{Start with questions that will quickly limit possibilities.}
@@ -85,23 +82,37 @@ As a class, we are going to play a game to help us understand the sort of thinki
 
 @slidebreak{InvestigateR}
 
+@center{@image{images/fork-knife-spoon-mug-plate-cup.jpeg, 350}}
+
 @lesson-instruction{
 
 We're going to play a modified version of that game. Here's how it works:
 
 - In our game there are six possible categories: *spoon, knife, cup, plate, fork, and mug*.
-
 - I will write one of them down on a piece of paper.
-
 - You will ask me yes/no questions (however many you need!) until you figure out how to categorize the object that I chose.
+- As you ask questions, I will record them in a diagram on the board.
+}
 
-- As you ask questions, I will record them on the board.
+@teacher{
+
+@right{@image{images/spoon-game.png, 150}}
+
+The first round of this game will produce a diagram similar to the one on the right, which models a game with the secret word "spoon".  The number of questions required to "guess" the object--most likely between two and four--will depend on what your students ask.
+
+Important diagramming conventions:
+
+- Be sure to label arrows with "yes" or "no".
+- "Yes" arrows point to the left, and "no" arrows point to the right. 
+
+As students ask questions, support them in noticing how effective their questions are in sorting the items on the list. "Does it have a handle?" split the list between two options that do not have handles (cup, plate) and four that do (spoon, knife, fork, and mug). Other questions could have guaranteed eliminating three choices (half!).
+
+Debrief the activity by posing the questions below. Note that the provided answers correspond with the sample diagram (on the right). Adjust responses to match the diagram that your class produces!
 }
 
 @slidebreak{Investigate}
 
 @QandA{
-
 @Q{How many questions did we ask in order to determine how to correctly categorize the object?}
 @A{This answer will depend on what your students ask!}
 @A{In the example sequence we've diagrammed above, there were 4 questions.}
@@ -115,6 +126,10 @@ We're going to play a modified version of that game. Here's how it works:
 
 @Q{How did we decide which questions to ask?}
 @A{We had to keep track of which items were eliminated and which items remained in order to pose useful questions.}
+
+@Q{What do you notice and wonder about the diagram I made?}
+@A{Each question is in a bubble.}
+@A{The questions are connected by arrows, which point left when the answer is "Yes" and right when the answer is "No"}
 }
 
 @slidebreak{Investigate}
@@ -128,7 +143,27 @@ Let's play _another_ round of the game with a new item.
 @Q{How are the diagrams we drew similar and how are they different?}
 }
 
+@slidebreak{Investigate}
+
+Let's imagine that our first round had started with the question, "Is it a utensil?" and had led us to "knife".  After the first round, our diagram might have looked like the diagram on the left (below). If the second round started with the same question, we could have just added to the original diagram... and we might have ended up with something like what you see on the right.
+
+[cols="^.3a,^2a,3a", grid="none", frame="none", stripes="none"]
+|===
+| @hspace{8em}**Round 1**
+|
+| @hspace{8em}**Round 2**
+
+| @image{images/tree1.png, 120}
+| @image{images/arrow.png, 50}
+| @image{images/tree2.png, 370}
+|===
+
+@slidebreak{Investigate}
+
+Notice that after Round 2 the topmost question — "is it a utensil?" — splits left ("yes, it is a utensil") *and* right ("no, it is not a utensil"). Our diagram begins with two unique pathways to two unique items. If we were asking categorization questions that were complex than yes or no questions, we would have more than two unique pathways!
+
 === Synthesize
+@slidebreak{Synthesize}
 
 @QandA{
 @Q{If we want to get to the correct categorization as quickly as possible, what would we want to be true about the first question we ask?}
@@ -144,56 +179,16 @@ Let's play _another_ round of the game with a new item.
 
 === Launch
 
-Unlike in our game, where you got to choose the questions, @vocab{decision trees} are built from training data sets that contain the answers from a collection of predetermined questions.
+@slidebreak{Launch}
+
+A @vocab{decision tree} is a machine learning algorithm that uses a tree-like model similar to the diagram we just made to show decisions and their possible consequences. Many softwares that make recommendations utilize decision trees.
+
+Unlike humans, who can generate their own questions, computers generate @vocab{decision trees} from training data sets that contain the answers from a collection of predetermined questions.
+
+Decision trees are a form of @vocab{supervised learning}, because the data the computer is trained on already contains the desired categorizations (tagged by a human), and the computer just learns a function that maps from input to output.
 
 === Investigate
 
-
-@teacher{
-
-@right{@image{images/spoon-game.png, 150}}
-
-This activity focuses on showing students the process of building a @vocab{decision tree}. The first round of this game will produce a diagram similar to the one on the right, which models a game with the secret word "spoon".  The number of questions required to "guess" the object--most likely between two and four--will depend on what your students ask.
-
-Note that this diagram is *not* a complete decision tree, but a portion of one. The remainder of the tree will grow over the course of the lesson.
-
-Important decision tree conventions:
-
-- Be sure to label arrows with "yes" or "no".
-
-- "Yes" arrows point to the left, and "no" arrows point to the right. 
-
-As students ask questions, support them in noticing how effective their questions are in sorting the items on the list. "Does it have a handle?" split the list between two options that do not have handles (cup, plate) and four that do (spoon, knife, fork, and mug). Other questions could have guaranteed eliminating three choices (half!).
-
-Debrief the activity by posing the questions below. Note that the provided answers correspond with the sample diagram (on the right). Adjust responses to match the diagram that your class produces!
-}
-
-
-
-@slidebreak{Investigate}
-
-Let's imagine that our first round had started with the question, "Is it a utensil?" and had led us to "knife".  After the first round, our tree might have looked like the diagram on the left (below). If the second round started with the same question, we could have just added to the original diagram... and we might have ended up with something like what you see on the right.
-
-[cols="^.3a,^2a,3a", grid="none", frame="none", stripes="none"]
-|===
-
-| @hspace{8em}**Round 1**
-
-|
-
-| @hspace{8em}**Round 2**
-
-| @image{images/tree1.png, 120}
-
-| @image{images/arrow.png, 50}
-
-| @image{images/tree2.png, 370}
-
-|===
-
-@slidebreak{Investigate}
-
-Notice that after Round 2 the topmost question — "is it a utensil?" — splits left ("yes, it is a utensil") *and* right ("no, it is not a utensil"). Our diagram begins with two unique pathways from the top of the tree to two unique items. Some decision tree diagrams will have more than two unique pathways!
 
 @lesson-instruction{
 Let's learn the terminology used to describe decision trees.
@@ -496,6 +491,11 @@ Complete the second and third sections of @printable-exercise{build-and-test.ado
 @Q{After testing our tree, we discovered that it was not as accurate as we might have presumed. Can you think of any examples of when _missing data_ can lead to predictions with serious negative consequences?}
 @A{Responses will vary.}
 @A{When various populations are underrepresented in training datasets, the resulting technology reflects that, and we end up with AI that fails to meet the needs of those populations.}
+
+@Q{You have learned that @vocab{supervised learning} includes three steps: (1) demonstration of the learning process, (2) function abstraction, and (3) using the function. Describe what each step includes for the @vocab{supervised learning} of a @vocab{decision tree}.}
+@A{Demonstration: For decision trees, the demonstration is the labeling of the data so that the computer learns the desired output (or "correct answer") for each data point. During the lesson, we knew whether the individuals in our training set would buy the video game or not.}
+@A{Function abstraction: Information gain determines the best way to split data at each node, producing the tree-like structure that can be used to predict outcomes.}
+@A{Use: The decision tree predicts outcomes for new, unseen data.}
 }
 
 
