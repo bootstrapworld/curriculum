@@ -160,7 +160,7 @@ Let's imagine that our first round had started with the question, "Is it a utens
 
 @slidebreak{Investigate}
 
-Notice that after Round 2 the topmost question — "is it a utensil?" — splits left ("yes, it is a utensil") *and* right ("no, it is not a utensil"). Our diagram begins with two unique pathways to two unique items. If we were asking categorization questions that were complex than yes or no questions, we would have more than two unique pathways!
+Notice that after Round 2 the topmost question — "is it a utensil?" — splits left ("yes, it is a utensil") *and* right ("no, it is not a utensil"). Our diagram begins with two unique pathways to two unique items. If we were asking categorization questions that were more complex than yes or no questions, we would have more than two unique pathways!
 
 === Synthesize
 @slidebreak{Synthesize}
@@ -171,7 +171,7 @@ Notice that after Round 2 the topmost question — "is it a utensil?" — splits
 }
 
 
-== What is a Decision Tree? @duration{25 minutes}
+== Decision Trees from Training Datasets @duration{25 minutes}
 
 @objective{ai-create-tree}
 
@@ -181,19 +181,18 @@ Notice that after Round 2 the topmost question — "is it a utensil?" — splits
 
 @slidebreak{Launch}
 
-A @vocab{decision tree} is a machine learning algorithm that uses a tree-like model similar to the diagram we just made to show decisions and their possible consequences. Many softwares that make recommendations utilize decision trees.
+A @vocab{decision tree} is a model produced by a machine learning algorithm that uses a tree-like model similar to the diagram we just made to show decisions and their possible consequences. Many softwares that make recommendations utilize decision trees.
 
 Unlike humans, who can generate their own questions, computers generate @vocab{decision trees} from training data sets that contain the answers from a collection of predetermined questions.
 
-Decision trees are a form of @vocab{supervised learning}, because the data the computer is trained on already contains the desired categorizations (tagged by a human), and the computer just learns a function that maps from input to output.
+Creating a decision trees is a form of @vocab{supervised learning}, because the data the computer is trained on already contains the desired categorizations (tagged by a human), and the computer just learns a function that maps from input to output.
 
 === Investigate
 
-
 @lesson-instruction{
-Let's learn the terminology used to describe decision trees.
+- The diagram I made of our 20 questions game is a partial decision tree.
+- Let's learn the terminology used to describe decision trees.
 }
-
 
 ==== Decision Tree Terminology
 
@@ -212,36 +211,64 @@ Let's identify the root node, branches, decision nodes, and leaf nodes on our tr
 
 @teacher{Discuss your in-progress tree to help students locate the different parts. The parts are intuitively named, but formal definitions are above if needed.}
 
-@lesson-instruction{
-- With a partner, turn to @printable-exercise{decision-tree.adoc} and complete the decision tree so that all six items are categorized.
-- Then, draw an entirely different decision tree - one which has a __different__ question at its root.
-}
-
-@teacher{
-@right{@image{images/tree4.png, 400}}
-
-The completed tree for the first question looks like this.
-
-To create a different tree, students can either choose one of the questions from levels 2 or 3 as their root node, or they can generate an entirely different starting question.
-
-As students finish, invite them to draw their trees on the board. Ideally, you will have a wide assortment of trees! If students are not developing interesting trees, urge them to think of *entirely* different questions than those posed in the sample tree.
-}
-
 @slidebreak{Investigate}
+@lesson-instruction{
+- Turn to the first section of @printable-exercise{decision-tree.adoc} and take a few minutes to record your notices and wonderings about how the dataset and decision tree are connected.
+}
+
+@slidebreak{InvestigateR}
+
+[.data-table, cols="1,2,2,2,2,2,2", stripes="none", options="header"]
+|===
+| Item    | flat? | has-handle? | has-tines? | untensil?  | used-to-chop? | category
+| A       | no    | yes         | no         | no         | no            | cup
+| B       | no    | yes         | yes        | yes        | no            | fork
+| C       | yes   | yes         | no         | yes        | yes           | knife
+| D       | no    | no          | no         | no         | no            | mug
+| E       | yes   | yes         | no         | no         | no            | plate 
+| F       | no    | no          | no         | yes        | no            | spoon
+| G       | yes   | yes         | no         | yes        | yes           | knife
+|===
+
+@right{@image{images/tree4.png, 400}
 
 @QandA{
-@Q{Take a look at the decision trees you and your classmates made:
-  * What do these trees all have in common?
-  * How are they different?
-}
-@A{Answers will vary.}
-@A{Many trees will have the same number of nodes, although probably not all.}
-@A{Many questions asked will likely be the same, but not every question.}
+Let's think about how the table translates to the tree and then consider how the tree connects back to the table.
+@Q{Where do the column headers end up in the tree?}
+@A{They are our root and decision nodes.}
+
+@Q{Where do the categories end up in the tree?}
+@A{They are our leaf nodes.}
+
+@Q{What rows of the table are we thinking about when the tree asks "used-to-chop?"}
+@A{The rows that are utensils.}
+
+@Q{What rows of the table are we thinking about when the tree asks "has-a-handle"?}
+@A{The rows that are neither utensils nor flat.}
 }
 
 @slidebreak{Investigate}
 
-Let's take a step back and see how well some of our decision trees will perform.
+@lesson-instruction{Turn to the second section of printable-exercise{decision-tree.adoc} and follow the directions to make a new decision tree from the same table, using `flat?` as the root node with `used-to-chop` as the first decision node for "yes" and `utensil?` as the first decision node for "no".}
+
+@slidebreak{Investigate}
+
+
+@QandA{
+Take a look at the two decision trees we made for this dataset:
+@Q{What do these trees have in common?}
+@Q{How are they different?}using `flat?` as the root node with `used-to-chop` as the first decision node for "yes" and `utensil?` as the first decision node for "no"
+}
+
+[cols="1a,1a"]
+|===
+|@image{images/tree4.png}
+|@image{images/flat-tree-soln.jpg}
+|===
+
+@slidebreak{Investigate}
+
+Let's take a step back and see how our decision trees perform with new inputs.
 
 @lesson-instruction{
 Complete @printable-exercise{comparing-trees.adoc}.
@@ -280,6 +307,7 @@ When computers build decision trees, they don't have life experience to draw upo
 }
 
 === Synthesize
+
 @slidebreak{Synthesize}
 
 In AI, efficiency and accuracy are often in conflict:
@@ -303,7 +331,7 @@ Striking the perfect balance is an ongoing challenge for computer scientists, an
 }
 
 
-== Decision Trees from Training Datasets @duration{25 minutes}
+== Decision Stumps: Optimizing Predictions @duration{25 minutes}
 
 === Overview
 
