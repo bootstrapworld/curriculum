@@ -303,6 +303,8 @@ Let's see how that would work for Documents a and b.
 
 @center{@image{images/3-2.png, 150}}
 
+@slidebreak{Investigate}
+
 When we plot a point on the _coordinate_ plane, we typically locate @math{x} on the horizontal axis and @math{y} on the vertical axis. Similarly, bags must use same word order if we want meaningful results. 
 
 @QandA{
@@ -310,6 +312,8 @@ When we plot a point on the _coordinate_ plane, we typically locate @math{x} on 
 @A{The point would be in the exact same position as the point for Document a.}
 @A{Because we decided on "be" then "doo" for Document a, we must use "be" then "doo" for Document b also.}
 }
+
+@slidebreak{Investigate}
 
 The decision we just made - to use "be" then "doo" for both bags of words - is an example of @vocab{data normalization}. Data normalization is the act of adapting and modifying disparate data so that they all have the same characteristics (making them easy to compare and otherwise compute with).
 
@@ -342,6 +346,8 @@ Let's look at some slightly more complicated documents and consider how to plot 
 | (2, 5)
 |===
 
+@slidebreak{Investigate}
+
 *We have a problem.*  We can plainly see that Documents c and d are *not* the same ... but their points are...
 
 @QandA{
@@ -352,9 +358,32 @@ Let's look at some slightly more complicated documents and consider how to plot 
 }
 }
 
-In the example above, we forgot the @vocab{data normalization}. How can we fix it?
+
+- Document c: "doo be doo be doo doo doo"
+- Document d: "be bop bop bop be bop bop"
+
+@ifslide{
+[cols="1,2,2", options="header", stripes="none"]
+|===
+| Document
+| Bag-of-words summary
+| Point
+
+| c
+| `"be": 2, "doo": 5`
+| (2, 5)
+
+| d
+| `"be": 2, "bop": 5`
+| (2, 5)
+|===
+}
+
 
 @slidebreak{InvestigateC}
+
+
+In the example @ifnotslide{above}, we forgot the @vocab{data normalization}. How can we fix it?
 
 To solve this problem, let's start by taking a closer look at our data.
 
@@ -399,7 +428,12 @@ We must revise our bag-of-words summaries and our points!
 |===
 
 
+@slidebreak{Investigate}
+
 Normalizing data requires that we consider _all_ the words; when a word occurs zero times in a document, we acknowledge it. Instead of glossing over the dimension, we indicate that a given word occurred zero times. When we include *all* of the words from both documents, we produce a model with the correct @vocab{dimensionality}. For the bag-of-words model, the dimensionality equals how many different words are in the corpus.
+
+@slidebreak{Investigate}
+
 
 It is a bit trickier to envision plotting these points, but not impossible!
 
@@ -410,11 +444,33 @@ It is a bit trickier to envision plotting these points, but not impossible!
 @A{It's at point (2,5) on the be-doo plane, and has moved 0 in the bop direction.}
 }
 
+@ifslide{
+[cols="1,2,2", options="header", stripes="none"]
+|===
+| Document
+| Bag-of-words summary
+| Point
+
+| c
+| `"be": 2, "bop": 0, "doo": 5`
+| (2, 0, 5)
+
+| d
+| `"be": 2, "bop": 5, "doo": 0`
+| (2, 5, 0)
+|===
+}
+
+@slidebreak{Investigate}
+
 Let's recap:
 
 - We started out with two documents. 
 - Now, in place of our two documents, we have two points that exist at specific locations in a multi-dimensional space.
 - We are going to think about how to make use of those points very soon...
+
+@slidebreak{Investigate}
+
 
 @lesson-instruction{
 - But first, let's practice!
@@ -422,7 +478,9 @@ Let's recap:
 - You will also get an opportunity to _reverse_ the process. (You will convert plotted points into bags and text!)
 }
 
-@teacher{Once students have completed @printable-exercise{plotting-bows.adoc}, reflect on the activity by discussing the prompts below.}
+@slidebreak{InvestigateC}
+
+@teacher{Once students have completed @printable-exercise{plotting-bows.adoc}, reflect on the activity by discussing the prompts @ifnotslide{below}.}
 
 @QandA{
 @Q{Which cells on @printable-exercise{plotting-bows.adoc} had more than one correct solution? Why?}
