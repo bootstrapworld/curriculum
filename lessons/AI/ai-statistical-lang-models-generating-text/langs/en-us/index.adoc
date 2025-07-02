@@ -78,7 +78,7 @@ Let's look a little more closely at the words we generated.
 
 @slidebreak{Investigate2}
 
-Statistical lanuage models are built on the assumption that the fraction of the time that a word follows a series of words in a training corpus can help predict the likelihood of it being the right word to follow that same series of words in a future scenario. In this lesson, we will refer to that fraction as its @vocab{probability}.
+Statistical language models are built on the assumption that the fraction of the time that a word follows a series of words in a training corpus can help predict the likelihood of it being the right word to follow that same series of words in a future scenario. In this lesson, we will refer to that fraction as its @vocab{probability}.
 
 @QandA{
 @Q{Do you think a text messaging app with a predictive text feature would produce the same results as our class? Why or why not?}
@@ -136,6 +136,7 @@ For a variety of reasons, not all phones will propose the same completions:
 - A messaging app also includes a model of the text that _the actual user_ composes. The app therefore offers a degree of personalization based on what the user has chosen in the past. Similarly, the app can take into account the word suggestions that you have previously accepted.
 - Some predictive text features even take into account the specific message that you are composing! For instance, typing first letter of an unusual word that you used in the same message triggers the app to propose that unusual word.
 
+@scrub{
 @slidebreak{Investigate}
 
 @QandA{
@@ -146,6 +147,7 @@ For a variety of reasons, not all phones will propose the same completions:
 }
 
 Phenomena 3 and 4 above suggest that sometimes making a usable tool requires that we step out of bounds! Although pure statistical language models are powerful, the upgrades that programmers develop can make the AI _better_ at completing the task that it was designed to complete.
+}
 
 @slidebreak{Investigate}
 
@@ -204,6 +206,9 @@ First, we will decompose the title of our corpus into differently sized chunks (
 
 |===
 
+@slidebreak{Launch}
+
+
 The formal word computer scientists use in this context is not "chunk" but @vocab{n-gram}. In an @math{n}-gram, @math{n} represents the number of words in the chunk. For special cases where @math{n} is 1, 2, or 3, the @math{n}-grams are called @vocab{unigrams}, @vocab{bigrams}, and @vocab{trigrams}.
 
 @QandA{
@@ -252,6 +257,8 @@ We can represent this computation with a special notation:
 	{\textit{count(there was)}}
 	{\textit{count(there...)}} = {\frac{5}{5}}}
 }
+
+@slidebreak{Investigate}
 
 @lesson-instruction{
 - Complete @printable-exercise{constructing-model.adoc}.
