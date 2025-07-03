@@ -327,9 +327,9 @@ Have you ever done some online shopping—say, for a new pair of sneakers—only
 
 @slidebreak{Investigate}
 
-Websites can store small data files called "cookies" on your device that can be used to remember details like where you were the last time you visited a site. One particular kind of cookie, the tracking cookie, allows AI designed for marketing to use your individual browsing habits to decide which ads you will be the most susceptible to.
+Websites can store small data files called "cookies" on your device that can be used to remember details like where you were the last time you visited a site. One particular kind of cookie, the tracking cookie, allows AI designed for marketing to use your individual browsing habits to decide which ads you will be the most susceptible to. Companies use tracking cookies to compile large datasets about visitors. They then build models to decide which ads to display.
 
-But how does the cookie know what you will be susceptible to?  *How do decision trees built from large datasets decide — at every level and every node — which attributes are the most informative ones to ask questions about,* so that they can make relatively accurate predictions, recommendations, and diagnoses?!
+*How do decision trees built from large datasets decide — at every level and every node — which attributes are the most informative ones to ask questions about,* so that they can make relatively accurate predictions, recommendations, and diagnoses?!
 
 It turns out, there's an algorithm for that, and it's relatively straightforward.
 
@@ -355,45 +355,46 @@ We're going to create a decision tree that predicts whether different customers 
 @lesson-instruction{
 Before we process any dataset, we should consider whether the data are at a good granularity for the problem. For video game purchases, do we expect the difference between 17 and 18 year olds to matter, or is a general "teenager" category sufficient? If our data are too fine-grained, our models might not detect patterns that would otherwise be meaningful. 
 
-For now, let’s agree to create three groups: teenagers, twenties, and thirties. We could compute a new column in our dataset with these categories.
-}
-
-@strategy{Why Start the Tree with "Age"?}{
-Students will likely notice that we seemingly arbitrarily started the tree with "age" as the root node. _Extremely perceptive_ students may notice that for both "age" and "interest", the likelihood of a correct prediction is 10/14. In other words, starting with "interest in game" produces the same information gain as starting with "age" as the root... *so how do we decide?*
-
-It turns out there's more than one correct way to build a decision tree! In general, however, we want to avoid tall, skinny trees that pose one useless question after the other. Rather, it is beneficial to start with an attribute that will result in a _wider_ tree.
-
-Because the "age" node splits _three_ ways and the "interest in game" node splits _two_ ways, we opt to start the tree with "age".
+For now, let’s agree to create three groups: teens, twenties, and thirties. We can compute a new column in our dataset with these categories (and will see that on the next worksheet).
 }
 
 @slidebreak{InvestigateR}
 
+When we drew a decision tree for 20 Questions, we discussed starting with questions that might distinguish among the possible outcomes. Looking at our training dataset, the "age" column has three possible values, whereas "shopping history" and "interest in game" each have only two ("yes" or "no"). This suggests that "age" might be a good variable to put at the root of our tree.
+
+What does that initial node look like? For starters, we draw a decision node and label it with "age" (the column name we are exploring). We then add one branch for each of the possible values in the column (here, "teens", "twenties", and "thirties"). At the end of the arrows for each branch, we will build additional nodes for the subset of the dataset with the corresponding "age" value. Specifically:
+
+**NEED NEW PICTURE HERE WITH THE BRANCH STRUCTURE AND PERSON NAMES, NO Y/N**
+
+@slidebreak{InvestigateR}
+
+Before we create additional decision nodes, we want to explore the accuracy of prediction that we would get up to this point in the tree. To do this, we extend our previous diagram to summarize the prediction and accuracy at each branch. We call this a @vocab{decision stump}. In the following picture, we have filled in the values from the "buys game" column for the dataset that remains within each "age" category.
+
 @center{@image{images/stump.png, 180}}
-
-A @vocab{decision stump} is a one-level decision tree that makes a prediction based on the value of just a single input feature.
-
-- First, we list the outcome for each of the individuals in a group's training data.
-- Then, we right a rule: which outcome should the computer predict for this group?
-- Finally, we calculate what percentage of the rule's predictions are correct for the individuals in our training data.
-
-@lesson-instruction{Let's complete the first section of @printable-exercise{part-1.adoc} together, starting with "age" as the root node.}
-
-- This stump has three branches because we are considering customers in their teens, twenties and thirties.
-- The left-most leaf node ("teens") represents the five teens in our training dataset: Jan (16), Jose (19), Jillian (14), Ariella (16), and Danial (19).
-** Jan, Jose, and Jillian did *not* purchase the game, so they are represented by the letter N (for "no").
-** Ariella and Danial *did* purchase the game, so they are represented by the letter Y (for "yes").
-** We illustrate the teens' decisions with the following shorthand: N N N Y Y
-- The other leaf nodes similarly summarize the purchasing habits of the individuals in their age groups.
 
 @QandA{
 @Q{What else do you notice and wonder about the decision stump?}
 @A{Everyone in their twenties bought the game.}
 @A{Three out of 5 people in their thirties bought the game.}
 @A{On the other decision trees we've seen the arrows were labeled "yes" and "no", but here their labeled "teens", "twenties", "thirties".}
-@A{Decision trees usually have a single choice at the end of the arrow, but here we see N N N Y Y.}
+@A{Our decision stumps include nodes labeled like N N N Y Y.}
 }
 
+Now, we need to determine two things:
+
+- What decision would we currently predict at each branch, based on the training data? We use whichever outcome appears most frequently at each branch.
+- For what percentage of the rows at each branch is that prediction accurate?
+
+@lesson-instruction{Let's complete the first section of @printable-exercise{part-1.adoc} together to work out these details.}
+
 @slidebreak{InvestigateR}
+
+- This stump has three branches because we are considering customers in their teens, twenties and thirties.
+- The left-most leaf node ("teens") represents the five teens in our training dataset: Jan, Jose, Jillian, Ariella, and Danial.
+** Jan, Jose, and Jillian did *not* purchase the game, so they are represented by the letter N (for "no").
+** Ariella and Danial *did* purchase the game, so they are represented by the letter Y (for "yes").
+** We illustrate the teens' decisions with the following shorthand: N N N Y Y
+- The other leaf nodes similarly summarize the purchasing habits of the individuals in their age groups.
 
 @ifslide{@image{images/age-stump.png, 180}}
 
@@ -401,29 +402,29 @@ On a decision tree, each branch has to point to a single choice... and right now
 
 @QandA{
 @Q{What prediction should we make for teens? Why?}
-@A{They won't buy the game. Because more teens didn't buy the game than did.}
-@Q{What predictions should we make for the other age groups?}
-@A{People in their twenties and thirties will buy the game.}
+@A{They won't buy the game. The majority of teens in the training data didn't buy the game, so we use that decision for the entire group.}
+@Q{What predictions should we make for the other age groups? Why?}
+@A{People in their twenties and thirties will buy the game. Everyone in their twenties bought the game, and a majority of those in their thirties bought the game.}
 }
 
 @slidebreak{Investigate}
 
 @lesson-instruction{
-Now that we have our rule, we need to calculate how effectively it predicts the outcomes for our training data. We'll start by placing checkmarks beneath each outcome (Y or N) that our rule would have correctly predicted.
+Now that we have our prediction, we need to calculate how accurate it is for each of our age groups. We'll start by placing checkmarks beneath each outcome (Y or N) that we would have correctly predicted.
 }
 
 @slidebreak{Investigate}
 
-Our rule predicted that individuals in their teens would *not* purchase the game, so:
+We predicted that individuals in their teens would *not* purchase the game, so:
 
-- We place checkmarks by the Ns that represent Jan, Jose, and Jillian. Our rule was correct for them.
-- We leave the Ys without checkmarks; our rule was wrong for Danial and Ariella.
+- We place checkmarks by the Ns that represent Jan, Jose, and Jillian. Our prediction was correct for them.
+- We leave the Ys without checkmarks; our prediction was wrong for Danial and Ariella.
 
-Our rule was correct for 3 out of 5 individuals or 60% of the time.
+Our prediction was correct for 3 out of 5 individuals or 60% of the time.
 
 @lesson-instruction{
-- Add checkmarks to the decision tree on @printable-exercise{part-1.adoc} to indicate when our rule was successful for customers in their twenties and thirties.
-- Calculate how effectively our rule predicted outcomes for each age group and the dataset as a whole (Question 4).
+- Add checkmarks to the decision tree on @printable-exercise{part-1.adoc} to indicate when our prediction was successful for customers in their twenties and thirties.
+- Calculate how effectively we predicted outcomes for each age group and the dataset as a whole (Question 4).
 - Finish the remaining questions in the first section.
 }
 
@@ -431,7 +432,7 @@ Our rule was correct for 3 out of 5 individuals or 60% of the time.
 
 @center{@image{images/age-stump-checks.png, 180}}
 
-Our rule was pretty effective! It correctly predicted the outcome 10 out of 14 times! And for people in their twenties it was 100% accurate. By utilizing other columns of data, we might be able to make the rule even better! 
+Our prediction was pretty effective! It was correct 10 out of 14 times! And for people in their twenties it was 100% accurate. By utilizing other columns of data, we might be able to make the prediction even better! 
 
 There are two possible questions we could use at the next level of our decision tree:
 
@@ -461,7 +462,7 @@ Decision stumps help us decide which questions produce a greater @vocab{informat
 @Q{Which attributes do you plan to utilize for the second level of the decision tree?}
 @A{Interest in Games for Teens}
 @A{Shopping History for People in their Thirties}
-@A{Since our rule for people in their Twenties was 100% accurate, it will be a leaf node!}
+@A{Since our prediction for people in their Twenties was 100% accurate, we insert a leaf node with a decision to buy the game!}
 }
 
 @slidebreak{Investigate}
@@ -473,10 +474,10 @@ Complete the first section @printable-exercise{build-and-test.adoc}.
 @slidebreak{Investigate}
 
 @QandA{
-@Q{What rules did you write?}
+@Q{What predictions did you make?}
 @A{Interested teens will buy the game}
-@A{Everyone in their twenties will by the game.} 
-@A{Previous customers in their thirties will by the game.}
+@A{Everyone in their twenties will buy the game.} 
+@A{Previous customers in their thirties will buy the game.}
 }
 
 @slidebreak{Investigate}
@@ -485,9 +486,11 @@ Complete the first section @printable-exercise{build-and-test.adoc}.
 Complete the second and third sections of @printable-exercise{build-and-test.adoc}.
 }
 
+@scrub{
 @QandA{
 @Q{After adding in the test data, what rules would you suggest we change?}
 @A{Not all people in their twenties would buy the game. We should probably build decision stumps for people in their twenties for the other available columns and figure out what attribute to add to our tree.}
+}
 }
 
 === Synthesize

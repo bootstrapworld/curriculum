@@ -10,17 +10,17 @@
 [.data-table, cols="2,2,3,2,2", stripes="none", options="header"]
 |===
 | name 		| age      | shopping history 	|  interest in game | buys game
-| Jan 		| teenager | previous customer 	| no  				| no
-| Jose 		| teenager | previous customer 	| no 				| no
+| Jan 		| teens    | previous customer 	| no  				| no
+| Jose 		| teens    | previous customer 	| no 				| no
 | Maribel 	| twenties | previous customer  	| no  				| yes
 | Noah		| thirties | previous customer	| no  				| yes
 | Sydney 	| thirties | previous customer 	| yes 				| yes
 | Mariana 	| thirties | new customer 		| yes 				| no
 | Rasula	| twenties | new customer 		| yes 				| yes
-| Jillian	| teenager | previous customer 	| no 				| no
-| Ariella	| teenager | new customer  		| yes  				| yes
+| Jillian	| teens    | previous customer 	| no 				| no
+| Ariella	| teens    | new customer  		| yes  				| yes
 | Isabela	| thirties | previous customer	| yes 				| yes
-| Danial	| teenager | previous customer 	| yes 				| yes
+| Danial	| teens    | previous customer 	| yes 				| yes
 | Kate		| twenties | previous customer	| no 				| yes
 | Taikhoom	| twenties | previous customer 	| yes  				| yes
 | Peter 	| thirties | new customers		| no 				| no
@@ -36,31 +36,32 @@ The @vocab{decision stump} below splits the above training data by age and indic
 
 @teacher{Students won't see the check marks - they will add them in question 3.}
 
-@n What do we learn from the Yes/No lists beneath each of the three branches? @fitb{}{}
+@n Where do the Y/N lists beneath each of the three branches come from? @fitb{}{}
 
 @fitb{}{@ifsoln{ 2 of the 5 teens bought the game, 4 of the 4 people in their twenties bought the game, and 3 of the 5 people in their thirties bought the game.}}
 
-@n When should the computer predict that an individual will buy the game? @hspace{1em} Let's write a rule: 
+@n What prediction will our current model (decision stump) make for each group?
 
 @indented{
-- individual *will buy the game* if they are in their @fitbruby{15em}{@ifsoln{twenties}}{teens / twenties / thirties} or @fitbruby{15em}{@ifsoln{thirties}}{teens / twenties / thirties}
-- individual *will not buy the game* if they are in their @fitbruby{15em}{@ifsoln{teens}}{teens / twenties / thirties}
+- people in their teens @fitbruby{15em}{@ifsoln{will not}}{will / will not} buy the game
+- people in their twenties @fitbruby{15em}{@ifsoln{will}}{will / will not} buy the game
+- people in their thirties @fitbruby{15em}{@ifsoln{will}}{will / will not} buy the game
 }
 
-@n Place checkmarks below each of the values in the decision stump that the rule would predict correctly.
+@n Place checkmarks below each of the values in the stump leaves for which our prediction is correct.
 
 @n Find the likelihood of a correct prediction for each age group. 
 @hspace{2em} teens: 	@fitb{3em}{@ifsoln{60}}%
 @hspace{2em} twenties: @fitb{3em}{@ifsoln{100}}%
 @hspace{2em} thirties:@fitb{3em}{@ifsoln{60}}%
 
-@n Which (if any) of the leaf nodes for "age" are pure? (_Pure_ means that the leaf contains exclusively one single value.) @fitb{}{@ifsoln{"twenties"}}
+@n Which (if any) of the stump leaves for "age" have the same value for all rows? @fitb{}{@ifsoln{"twenties"}}
 
-@n Overall, how well would this rule work for our data? @hspace{1em} @fitb{2em}{@ifsoln{10}} _correct predictions out of 14 attempts._ @hspace{1em} (@fitb{2em}{@ifsoln{71}} % accuracy).
+@n Overall, how accurate is the current prediction across our entire dataset? @hspace{1em} @fitb{2em}{@ifsoln{10}} _correct predictions out of 14 attempts._ @hspace{1em} (@fitb{2em}{@ifsoln{71}} % accuracy).
 
-== Improving Our Rule
+== Improving Our Prediction
 
-We wrote our rule without considering all of the columns in our training data. If we add another level to our tree, we might be able to write a rule that does a better job of predicting who will and won't buy the game!  
+We made our prediction without considering all of the columns in our training data. If we add another level to our tree, we might be able to improve our accuracy!
 
 @n Before moving on to the second level of his decision tree, Ernie removed all of the rows for people in their twenties. Bert said, 
 
@@ -71,6 +72,6 @@ Explain Ernie's (correct) decision to Bert. @fitb{}{@ifsoln{Since all customers 
 @fitb{}{@ifsoln{which means there won't be any branches for these rows to train the AI to make decisions for.}}
 }
 
-@n We used "age" as our root node. What options do we have for our decision node? @fitbruby{10em}{@ifsoln{interest in game}}{[column]} or @fitbruby{10em}{@ifsoln{shopping history}}{[column]}
+@n We used "age" as our root node. What questions could we ask at our second-level decision node? @fitbruby{10em}{@ifsoln{interest in game}}{[column]} or @fitbruby{10em}{@ifsoln{shopping history}}{[column]}
 
 
