@@ -318,7 +318,7 @@ When computers build decision trees, they don't have life experience to draw upo
 
 === Overview
 
-Students build a decision tree that predicts whether different individuals will purchase a video game or not.
+Students build a decision tree that predicts whether different individuals will purchase a video game.
 
 === Launch
 @slidebreak{Launch}
@@ -336,14 +336,14 @@ It turns out, there's an algorithm for that, and it's relatively straightforward
 === Investigate
 @slidebreak{Investigate}
 
-We're going to create a decision tree that predicts whether or not different customers at a particular online store will purchase a video game or not. To do so, we must first train the computer! We will use a training dataset that characterizes 14 different shoppers and then indicates whether or not each one purchased a video game.
+We're going to create a decision tree that predicts whether different customers at a particular online store will purchase a video game. To do so, we must first train a model! We will use a training dataset of 14 different shoppers that indicates whether or not each one purchased a video game.
 
 @QandA{
 @Q{With your partner, look over the @handout{decision-tree-data.adoc, Training Dataset}. What do you Notice? What do you wonder?}
 @A{Possible responses:}
 @A{Individuals in their twenties always buy the video game.} 
 @A{There are only three new customers; two out of three times, new customers buy the video game.}
-@Q{Can you foresee any problems with making a decision tree based on this dataset? If so, what are they?}
+@Q{Can you foresee any problems with making predictions based on this dataset? If so, what are they?}
 @A{Responses will vary.}
 @A{We only have data on 14 visitors.}
 @A{All of the visitors are between 14 and 38 years old.}
@@ -353,9 +353,9 @@ We're going to create a decision tree that predicts whether or not different cus
 @slidebreak{Investigate}
 
 @lesson-instruction{
-One challenge for processing this dataset is that _age is continuous_ and decision trees are built with _branches_ that grow out of a _decision node_.  We'll need to start by defining discrete age groups.
+Before we process any dataset, we should consider whether the data are at a good granularity for the problem. For video game purchases, do we expect the difference between 17 and 18 year olds to matter, or is a general "teenager" category sufficient? If our data are too fine-grained, our models might not detect patterns that would otherwise be meaningful. 
 
-For now, let’s agree to create three groups: teenagers, twenties, and thirties.
+For now, let’s agree to create three groups: teenagers, twenties, and thirties. We could compute a new column in our dataset with these categories.
 }
 
 @strategy{Why Start the Tree with "Age"?}{
@@ -502,6 +502,10 @@ Complete the second and third sections of @printable-exercise{build-and-test.ado
 @Q{After testing our tree, we discovered that it was not as accurate as we might have presumed. Can you think of any examples of when _missing data_ can lead to predictions with serious negative consequences?}
 @A{Responses will vary.}
 @A{When various populations are underrepresented in training datasets, the resulting technology reflects that, and we end up with AI that fails to meet the needs of those populations.}
+
+@Q{We collapsed specific ages into categories (teenager, etc) to align the granularity of our data with the granularity of recommendations that we wanted from the decision tree. What if we had not done that, and instead created a branch for each individual age? How would individual branches have affected the decision tree and its recommendations?}
+@A{The tree would have had many more branches and decision nodes.}
+@A{We would likely have needed more training data with more samples at each age to get to acceptable accuracy.}
 
 @Q{You have learned that @vocab{supervised learning} includes three steps: (1) demonstration of the learning process, (2) function abstraction, and (3) using the function. Describe what each step includes for the @vocab{supervised learning} of a @vocab{decision tree}.}
 @A{Demonstration: For decision trees, the demonstration is the labeling of the data so that the computer learns the desired output (or "correct answer") for each data point. During the lesson, we knew whether the individuals in our training set would buy the video game or not.}
