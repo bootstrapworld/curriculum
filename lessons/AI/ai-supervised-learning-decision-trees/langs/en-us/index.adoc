@@ -176,24 +176,24 @@ Notice that after Round 2 the topmost question — "is it a utensil?" — splits
 @objective{ai-create-tree}
 
 === Overview
+Students are introduced to decision trees and how the information contained in them is connected to the table of data they are generated from. 
 
 === Launch
 
 @slidebreak{Launch}
 
-A @vocab{decision tree} is a model produced by a machine learning algorithm that uses a tree-like model similar to the diagram we just made to show decisions and their possible consequences. Many softwares that make recommendations utilize decision trees.
+A @vocab{decision tree} is a model produced by a machine learning algorithm that uses a tree-like model to show decisions and their possible consequences. The diagram of our 20-questions game is a partial decision tree. Many computer programs that make recommendations or predictions utilize decision trees.
 
-Unlike humans, who can generate their own questions, computers generate @vocab{decision trees} from training data sets that contain the answers from a collection of predetermined questions.
+Unlike humans, who can generate their own questions, computers generate decision trees from training @vocab{datasets} that contain the answers from a collection of predetermined questions.
 
 Creating a decision trees is a form of @vocab{supervised learning}, because the data the computer is trained on already contains the desired categorizations (tagged by a human), and the computer just learns a function that maps from input to output.
 
 === Investigate
+@slidebreak{Investigate}
 
 @lesson-instruction{
-- The diagram I made of our 20 questions game is a partial decision tree.
-- Let's learn the terminology used to describe decision trees.
+- Let's learn the terminology used to describe decision trees and apply it to the partial decision tree from our 20 questions game.
 }
-
 ==== Decision Tree Terminology
 
 @right{@image{images/terminology-tree.png, 300}}
@@ -203,13 +203,8 @@ Creating a decision trees is a form of @vocab{supervised learning}, because the 
 - @vocab{Decision nodes} split from the root node, or from other nodes.
 - A @vocab{leaf node} is a node that does not split. Just like leaves on most trees, leaf nodes are found at the tip of a branch.
 
-@slidebreak{InvestigateR}
-
-@lesson-instruction{
-Let's identify the root node, branches, decision nodes, and leaf nodes on our tree so far.
+@teacher{Discuss the partial decision tree you made during your 20 questions game to help students identify the root node, branches, decision nodes, and leaf nodes on the tree so far.
 }
-
-@teacher{Discuss your in-progress tree to help students locate the different parts. The parts are intuitively named, but formal definitions are above if needed.}
 
 @slidebreak{Investigate}
 @lesson-instruction{
@@ -230,7 +225,7 @@ Let's identify the root node, branches, decision nodes, and leaf nodes on our tr
 | G       | yes   | yes         | no         | yes        | yes           | knife
 |===
 
-@right{@image{images/tree4.png, 400}}
+@center{@image{images/tree4.png, 400}}
 
 @QandA{
 Let's think about how the table translates to the tree and then consider how the tree connects back to the table.
@@ -253,18 +248,23 @@ Let's think about how the table translates to the tree and then consider how the
 
 @slidebreak{Investigate}
 
+[cols="1a,1a"]
+|===
+|@image{images/tree4.png}
+|@image{images/flat-tree-soln.jpeg}
+|===
 
 @QandA{
 Take a look at the two decision trees we made for this dataset:
 @Q{What do these trees have in common?}
-@Q{How are they different?}using `flat?` as the root node with `used-to-chop` as the first decision node for "yes" and `utensil?` as the first decision node for "no"
-}
+@A{They have a root node, 4 decision nodes and 6 leaf nodes.}
+@A{They have the same number of levels.}
+@A{Each time they fork there are two options: yes/no.}
 
-[cols="1a,1a"]
-|===
-|@image{images/tree4.png}
-|@image{images/flat-tree-soln.jpg}
-|===
+@Q{How are they different?}
+@A{The root node of the first decision tree splits the categories in half so that there are 3 leaf nodes on the left branch and 3 leaf nodes on the right. The root node of the second tree splits the categories into 2 leaf nodes on the left branch and 4 leaf nodes on the right.}
+@A{The first decision tree has the same number of levels on the left and right branches, whereas the second decision tree has a shorter left branch than right branch.}
+}
 
 @slidebreak{Investigate}
 
@@ -283,16 +283,9 @@ Invite students to share and explain their responses before emphasizing the main
 You just observed that a decision tree
 
 - can accurately label and categorize the inputs _that it has been trained to label and categorize_
-- falters when offered inputs that are either *unknown* (like chopstick) or *ambiguous* (like spork)
+- can falter when offered inputs that are *unknown*
 
 The only way this tree stands a chance of correctly identifying a chopstick or a spork is if we offer it more training!
-
-@QandA{
-@Q{Why is it advantageous for AI to be efficient?}
-@A{Responses will vary, but may include: reduced delays, an improved user experience, greater scalability, decreased environmental impact.}
-@Q{Can you think of any reasons *not* to maximize an AI's efficiency?}
-@A{Responses will vary, but students will likely observe that an increase in efficiency leads to a decrease in accuracy.}
-}
 
 @slidebreak{Investigate}
 
@@ -310,24 +303,14 @@ When computers build decision trees, they don't have life experience to draw upo
 
 @slidebreak{Synthesize}
 
-In AI, efficiency and accuracy are often in conflict:
-
-- AI is *efficient* when the computer performs a task with minimal time, memory, energy or data.
-- AI is *accurate* when the computer performs its task with correct, relevant, and consistent results.
-
-Striking the perfect balance is an ongoing challenge for computer scientists, and it is a challenge with far-reaching implications.
-
 @QandA{
-@Q{Why is it advantageous for AI to be efficient?}
-@A{Responses will vary.}
-@A{reduced delays}
-@A{an improved user experience}
-@A{greater scalability}
-@A{decreased environmental impact}
+@Q{Will a decision tree always have the same number of leaf nodes as there were rows in the training dataset? Why or why not?}
+@A{No. Generally mutliple rows of a training dataset will be assigned the same tag. The training dataset we saw in this lesson section contained multiple knives, for example.}
 
-@Q{Can you think of any reasons *not* to maximize an AI's efficiency?}
-@A{Responses will vary.}
-@A{an increase in efficiency leads to a decrease in accuracy.}
+@Q{Explain how the decision tree and training dataset correspond to each other.}
+@A{The column headers from the table are the questions that will get asked in the root and decision nodes of the decision tree.}
+@A{The data in each column are the answers to those questions which become the arrow labels of the decision tree (yes and no, for this dataset).}
+@A{The output categories from the table are the leaf nodes in the decision tree.}
 }
 
 
@@ -528,3 +511,31 @@ Complete the second and third sections of @printable-exercise{build-and-test.ado
 
 
 
+@scrub{
+@QandA{
+@Q{Why is it advantageous for AI to be efficient?}
+@A{Responses will vary, but may include: reduced delays, an improved user experience, greater scalability, decreased environmental impact.}
+@Q{Can you think of any reasons *not* to maximize an AI's efficiency?}
+@A{Responses will vary, but students will likely observe that an increase in efficiency leads to a decrease in accuracy.}
+}
+
+In AI, efficiency and accuracy are often in conflict:
+
+- AI is *efficient* when the computer performs a task with minimal time, memory, energy or data.
+- AI is *accurate* when the computer performs its task with correct, relevant, and consistent results.
+
+Striking the perfect balance is an ongoing challenge for computer scientists, and it is a challenge with far-reaching implications.
+
+@QandA{
+@Q{Why is it advantageous for AI to be efficient?}
+@A{Responses will vary.}
+@A{reduced delays}
+@A{an improved user experience}
+@A{greater scalability}
+@A{decreased environmental impact}
+
+@Q{Can you think of any reasons *not* to maximize an AI's efficiency?}
+@A{Responses will vary.}
+@A{an increase in efficiency leads to a decrease in accuracy.}
+}
+}
