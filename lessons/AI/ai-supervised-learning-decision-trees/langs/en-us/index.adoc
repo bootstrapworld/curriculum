@@ -1,7 +1,7 @@
 [.beta]
 = Supervised Learning: Decision Trees
 
-@description{Students explore the technology behind YouTube video recommendations and election outcome predictions. They develop and analyze decision trees to predict individuals’ purchasing decisions.}
+@description{Students explore an approach to recommending videos and predicting election outcomes. They develop and analyze decision trees to predict individuals’ purchasing decisions.}
 
 @lesson-prereqs{ai-training-bags-of-words}
 
@@ -26,7 +26,7 @@
 
 |===
 
-== Making Predictions @duration{25 minutes}
+== Modeling Predictions @duration{25 minutes}
 
 @objective{ai-create-tree}
 
@@ -43,7 +43,7 @@ Consider each of the three situations described below:
 - Two individuals who work for the same company and earn the same salary apply for a loan by filling out the same online form at the local bank. One of them is granted a loan, but the other is not.
 - A news anchor displays a map with some states colored blue and others colored red. She explains that the map's predictions for the upcoming election were developed using historical census data.
 
-On the surface, these situations may not seem to have a lot in common. If you dig a little deeper, however, you will discover that, in each of these scenarios, a computer uses data to drive the way that it makes recommendations, decisions, and predictions.
+On the surface, these situations may not seem to have a lot in common. If you dig a little deeper, however, you will discover that, in each of these scenarios, a program leverages known outcomes to make new recommendations, decisions, and predictions.
 
 @slidebreak{Launch}
 
@@ -55,13 +55,13 @@ On the surface, these situations may not seem to have a lot in common. If you di
 @A{Debt, assets, payment history, number of open accounts, delinquent accounts, income/revenue, expenses, overdrafts in the last 90 days}
 
 @Q{What information do you think is used to predict election outcomes?}
-@A{Census data including voter race, gender, income level, party affiliation, and age, as well as prior year's results}
+@A{Census data including voter race, gender, income level, party affiliation, and age, as well as prior years' results}
 }
 
 === Investigate
 @slidebreak{Investigate}
 
-As a class, we are going to play a game to help us understand the sort of thinking that decision trees imitate.
+As a class, we are going to play a game to help us understand the decision-making process that decision trees imitate.
 
 @teacher{The game we are going to play is a simplified version of 20 questions. If students are familiar with 20 questions, discussing the strategies they use when playing the game will help them to make connections.}
 
@@ -88,7 +88,7 @@ As a class, we are going to play a game to help us understand the sort of thinki
 
 We're going to play a modified version of that game. Here's how it works:
 
-- In our game there are six possible categories: *spoon, knife, cup, plate, fork, and mug*.
+- In our game, the "secret" will be an object from one of six possible categories: *spoon, knife, cup, plate, fork, and mug*.
 - I will write one of them down on a piece of paper.
 - You will ask me yes/no questions (however many you need!) until you figure out how to categorize the object that I chose.
 - As you ask questions, I will record them in a diagram on the board.
@@ -129,7 +129,7 @@ Debrief the activity by posing the questions below. Note that the provided answe
 @A{We had to keep track of which items were eliminated and which items remained in order to pose useful questions.}
 
 @Q{What do you notice and wonder about the diagram I made?}
-@A{Each question is in a bubble.}
+@A{Each question is in a rectangle.}
 @A{The questions are connected by arrows, which point left when the answer is "Yes" and right when the answer is "No"}
 }
 
@@ -161,12 +161,16 @@ Let's imagine that our first round had started with the question, "Is it a utens
 
 @slidebreak{Investigate}
 
-Notice that after Round 2 the topmost question — "is it a utensil?" — splits left ("yes, it is a utensil") *and* right ("no, it is not a utensil"). Our diagram begins with two unique pathways to two unique items. If we were asking categorization questions that were more complex than yes or no questions, we would have more than two unique pathways!
+Notice that after Round 2 the topmost question — "is it a utensil?" — splits left ("yes, it is a utensil") *and* right ("no, it is not a utensil"). Our diagram begins with two unique paths to two unique categories. If we were asking categorization questions that were more complex than yes or no questions, we would have more than two unique paths!
+
+With two paths branching off of the "utensil?" point, this diagram looks a bit like an upside-down tree (with the root at the top and the branches growing down). Computer scientists refer to data of this shape as a tree (and yes, they draw them upside-down). As we continue this exercise, our tree will gain more branches.
 
 === Synthesize
 @slidebreak{Synthesize}
 
 @QandA{
+@Q{How does someone use a tree of questions to make predictions?}
+@A{Ask the question at the root of the tree, then follow the branches to ask additional questions until we get to a category at the end of a path.}
 @Q{If we want to get to the correct categorization as quickly as possible, what would we want to be true about the first question we ask?}
 @A{We would want it to split the list of options as evenly as possible to guarantee eliminating a significant number of options right off the bat.}
 }
