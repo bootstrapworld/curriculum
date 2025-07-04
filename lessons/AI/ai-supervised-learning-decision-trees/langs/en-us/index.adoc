@@ -181,34 +181,35 @@ With two paths branching off of the "utensil?" point, this diagram looks a bit l
 @objective{ai-create-tree}
 
 === Overview
-Students are introduced to decision trees and how the information contained in them is connected to the table of data they are generated from. 
+Students are introduced to decision trees and how they arise from datasets.
 
 === Launch
 
 @slidebreak{Launch}
 
-A @vocab{decision tree} is a @vocab{model} produced by a machine learning algorithm that uses a tree-like model to show decisions and their possible consequences. The diagram of our 20-questions game is a partial decision tree. Many computer programs that make recommendations or predictions utilize decision trees.
+A @vocab{decision tree} is a tree-shaped @vocab{model} that shows decisions and their predicted outcomes. The diagram of our 20-questions game is a partial decision tree. Many computer programs that make recommendations or predictions utilize decision trees.
 
-Unlike humans, who can generate their own questions, computers generate decision trees from training @vocab{datasets} that contain the answers from a collection of predetermined questions.
+Unlike humans, who can generate their own questions, machine-learning algorithms generate decision trees from training @vocab{datasets}, using the column headers as questions.
 
-Creating a decision trees is a form of @vocab{supervised learning}, because the data the computer is trained on already contains the desired categorizations (tagged by a human), and the computer just learns a function that maps from input to output.
+Creating a decision tree is a form of @vocab{supervised learning}, because the training data already contains the desired outcomes (as one column), and the algorithm just learns a function that maps from input to outcomes.
 
 === Investigate
 @slidebreak{Investigate}
 
 @lesson-instruction{
-- Let's learn the terminology used to describe decision trees and apply it to the partial decision tree from our 20 questions game.
+- Let's learn the terminology used to describe decision trees and apply it to the decision tree from our 20 questions game.
 }
 ==== Decision Tree Terminology
 
 @right{@image{images/terminology-tree.png, 300}}
 
-- A @vocab{Decision node} splits the data around the values of a specific attribute in a dataset. The attribute serves as the "question" that is being asked.
+- A @vocab{Decision node} splits a dataset around the values in one of its columns. The attribute in the column serves as the "question" that is being asked.
 - The @vocab{root node} is the very top @vocab{Decision node}. It represents an entire dataset.
-- @vocab{Splitting} is the process of creating branches and additional nodes corresponding to subsets of a dataset.
-- A @vocab{leaf node} is a node that does not split. Just like leaves on most trees, leaf nodes are found at the tip of a branch. A leaf node reflects a specific recommendation or prediction from the model (and contains a value from the column being predicted in the dataset).
+- @vocab{Splitting} is the process of creating branches and additional nodes corresponding to subsets of a dataset based on values in one column.
+- A @vocab{leaf node} is a node that contains a predicted or recommended outcome. These outcomes come from a designated column in the original dataset. Leaf nodes have no outgoing branches.
+- The sequence of questions from the root node to an outcome is called a path. 
 
-@teacher{Discuss the partial decision tree you made during your 20 questions game to help students identify the root node, branches, decision nodes, and leaf nodes on the tree so far.
+@teacher{Discuss the decision tree you made during your 20 questions game to help students identify the root node, decision nodes, leaf nodes, and paths on the tree so far.
 }
 
 @slidebreak{Investigate}
@@ -234,11 +235,20 @@ Creating a decision trees is a form of @vocab{supervised learning}, because the 
 
 @QandA{
 Let's think about how the table translates to the tree and then consider how the tree connects back to the table.
-@Q{Where do the column headers end up in the tree?}
-@A{They are our root and decision nodes.}
+@Q{Which column from the table does the tree predict?}
+@A{"category"}
 
-@Q{Where do the categories end up in the tree?}
-@A{They are our leaf nodes.}
+@Q{Where do the column headers end up in the tree?}
+@A{The predicted column name isn't in the tree. Most of the others are the questions in our decision nodes.}
+
+@Q{Where is the "Item" column in the tree?}
+@A{It isn't part of the tree, because that column doesn't contain information that is relevant to making a prediction. That column is there for other data-management purposes.}
+
+@Q{Where do the values in the "category" column end up in the tree?}
+@A{They are in the leaf nodes.}
+
+@Q{Where do the values in the "used to chop?" column end up in the tree?}
+@A{They label the branches out of the "used to chop?" decision node.}
 
 @Q{What rows of the table are we thinking about when the tree asks "used-to-chop?"}
 @A{The rows that are utensils.}
@@ -249,7 +259,7 @@ Let's think about how the table translates to the tree and then consider how the
 
 @slidebreak{Investigate}
 
-@lesson-instruction{Turn to the second section of printable-exercise{decision-tree.adoc} and follow the directions to make a new decision tree from the same table, using `flat?` as the root node with `used-to-chop` as the first decision node for "yes" and `utensil?` as the first decision node for "no".}
+@lesson-instruction{Turn to the second section of @printable-exercise{decision-tree.adoc} and follow the directions to make a new decision tree from the same table, using `flat?` as the root node with `used-to-chop` as the decision node for "yes" and `utensil?` as the decision node for "no".}
 
 @slidebreak{Investigate}
 
@@ -264,7 +274,7 @@ Take a look at the two decision trees we made for this dataset:
 @Q{What do these trees have in common?}
 @A{They have a root node, 4 decision nodes and 6 leaf nodes.}
 @A{They have the same number of levels.}
-@A{Each time they fork there are two options: yes/no.}
+@A{Each time they branch there are two options: yes/no.}
 
 @Q{How are they different?}
 @A{The root node of the first decision tree splits the categories in half so that there are 3 leaf nodes on the left branch and 3 leaf nodes on the right. The root node of the second tree splits the categories into 2 leaf nodes on the left branch and 4 leaf nodes on the right.}
@@ -273,7 +283,7 @@ Take a look at the two decision trees we made for this dataset:
 
 @slidebreak{Investigate}
 
-Let's take a step back and see how our decision trees perform with new inputs.
+Let's use our decision trees to make predictions on new data (instead of just the training data).
 
 @lesson-instruction{
 Complete @printable-exercise{comparing-trees.adoc}.
@@ -287,21 +297,33 @@ Invite students to share and explain their responses before emphasizing the main
 
 You just observed that a decision tree
 
-- can accurately label and categorize the inputs _that it has been trained to label and categorize_
-- can falter when offered inputs that are *unknown*
+- can accurately categorize items that were represented in the training dataset
+- can falter when offered inputs that were **not** represented
 
-The only way this tree stands a chance of correctly identifying a chopstick or a spork is if we offer it more training!
+We can add more training data to improve the accuracy, but encountering new objects or situations is common in real-world settings. But these examples emphasize the importance of having a good representation (set of questions) of the objects or situations that we want to make predictions about!
 
 @slidebreak{Investigate}
 
-As we built our decision trees, we were able to draw on everything we know about every knife, spoon, spork, plate, bowl or mug that we have ever seen. Our decision trees were imperfect because they didn't know about the utensils we either forgot to include or didn't know about.
-
-If you were asked to create a decision tree to identify common animals or foods, you could probably draw on a wealth of knowledge to create a similarly good one without much difficulty.
+When we were playing 20 Questions, we could draw on everything we know about knives, spoons, sporks, plates, bowls or mugs to generate questions. We could always add new questions if we hadn't yet identified an object.
 
 @slidebreak{Investigate}
 
 @lesson-point{
-When computers build decision trees, they don't have life experience to draw upon. They only use the data we provide... and that data can sometimes be limited or messy! As a result, we may end up with models that are not 100% accurate.
+Computers build decision trees from datasets. The columns in a dataset are **fixed before the tree gets generated**. Since the questions can't change on the fly, it is important that we start from robust training data that
+
+- has columns for enough attributes to distinguish between outcomes, and
+- has enough rows to capture different combinations of those attributes.  
+}
+
+@QandA{
+Let's think about this issue of having enough training data.
+@Q{What might determine whether we can create a training dataset with at least one row per combination of attributes?}
+@A{There are two key factors:}
+@A{How many columns are there?}
+@A{How many values are possible in each column?}
+
+@Q{How many variables do you think a recommendation system like YouTube uses?}
+@A{YouTube considers roughly one billion variables!}
 }
 
 === Synthesize
@@ -310,11 +332,11 @@ When computers build decision trees, they don't have life experience to draw upo
 
 @QandA{
 @Q{Will a decision tree always have the same number of leaf nodes as there were rows in the training dataset? Why or why not?}
-@A{No. Generally multiple rows of a training dataset will be assigned the same tag. The training dataset we saw in this lesson section contained multiple knives, for example.}
+@A{No. Generally multiple rows of a training dataset will have the same prediction. The training dataset we saw in this lesson section contained multiple knives, for example.}
 
 @Q{Explain how the decision tree and training dataset correspond to each other.}
 @A{The column headers from the table are the questions that will get asked in the root and decision nodes of the decision tree.}
-@A{The data in each column are the answers to those questions which become the arrow labels of the decision tree (yes and no, for this dataset).}
+@A{The data in each column are the answers to those questions which become the arrow labels of the decision tree ("yes" and "no", for this dataset).}
 @A{The output categories from the table are the leaf nodes in the decision tree.}
 }
 
