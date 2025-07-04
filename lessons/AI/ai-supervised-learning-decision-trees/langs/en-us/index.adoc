@@ -345,7 +345,7 @@ Let's think about this issue of having enough training data.
 
 === Overview
 
-Students build a decision tree that predicts whether different individuals will purchase a video game.
+Students build a decision tree that predicts whether someone will purchase a video game.
 
 === Launch
 @slidebreak{Launch}
@@ -354,7 +354,7 @@ Have you ever done some online shopping—say, for a new pair of sneakers—only
 
 @slidebreak{Investigate}
 
-Websites can store small data files called "cookies" on your device that can be used to remember details like where you were the last time you visited a site. One particular kind of cookie, the tracking cookie, allows AI designed for marketing to use your individual browsing habits to decide which ads you will be the most susceptible to. Companies use tracking cookies to compile large datasets about visitors. They then build models to decide which ads to display.
+Websites can store small data files called "cookies" on your device that can be used to remember details like where you were the last time you visited the site. One particular kind of cookie, the tracking cookie, helps companies compile large datasets about visitors. They then use machine learning to decide which ads to display.
 
 *How do decision trees built from large datasets decide — at every level and every node — which attributes are the most informative ones to ask questions about,* so that they can make relatively accurate predictions, recommendations, and diagnoses?!
 
@@ -363,7 +363,7 @@ It turns out, there's an algorithm for that, and it's relatively straightforward
 === Investigate
 @slidebreak{Investigate}
 
-We're going to create a decision tree that predicts whether different customers at a particular online store will purchase a video game. To do so, we must first train a model! We will use a training dataset of 14 different shoppers that indicates whether or not each one purchased a video game.
+We're going to create a decision tree that predicts whether customers at a particular online store will purchase a video game. We will use a training dataset of 14 different shoppers that indicates whether or not each one purchased a video game. 
 
 @QandA{
 @Q{With your partner, look over the @handout{decision-tree-data.adoc, Training Dataset}. What do you Notice? What do you wonder?}
@@ -377,6 +377,8 @@ We're going to create a decision tree that predicts whether different customers 
 @A{We don't know a lot about their gaming habits.}
 }
 
+Our model will predict the value in the "buys game" column using the other columns as the questions.
+
 @slidebreak{Investigate}
 
 @lesson-instruction{
@@ -387,7 +389,7 @@ For now, let’s agree to create three groups: teens, twenties, and thirties. We
 
 @slidebreak{InvestigateR}
 
-When we drew a decision tree for 20 Questions, we discussed starting with questions that might distinguish among the possible outcomes. Looking at our training dataset, the "age" column has three possible values, whereas "shopping history" and "interest in game" each have only two ("yes" or "no"). This suggests that "age" might be a good variable to put at the root of our tree.
+When we drew a decision tree for 20 Questions, we discussed starting with questions that might distinguish among the possible outcomes.Which variable in our training set might do this? The "age" column has three possible values, whereas "shopping history" and "interest in game" each have only two ("yes" or "no"). This suggests that "age" might be a good variable to put at the root of our tree.
 
 What does that initial node look like? For starters, we draw a decision node and label it with "age" (the column name we are exploring). We then add one branch for each of the possible values in the column (here, "teens", "twenties", and "thirties"). At the end of the arrows for each branch, we will build additional nodes for the subset of the dataset with the corresponding "age" value. Specifically:
 
@@ -395,7 +397,7 @@ What does that initial node look like? For starters, we draw a decision node and
 
 @slidebreak{InvestigateR}
 
-Before we create additional decision nodes, we want to explore the accuracy of prediction that we would get up to this point in the tree. To do this, we extend our previous diagram to summarize the prediction and accuracy at each branch. We call this a @vocab{decision stump}. In the following picture, we have filled in the values from the "buys game" column for the dataset that remains within each "age" category.
+Before we create additional decision nodes, we want to explore the accuracy of prediction that we would get up to this point in the tree. To do this, we adapt our previous diagram to summarize the prediction and accuracy at each branch. We call this new diagram a @vocab{decision stump}. In the following picture, we have filled in the values from the "buys game" column for the dataset that remains within each "age" category.
 
 @center{@image{images/stump.png, 180}}
 
@@ -403,20 +405,20 @@ Before we create additional decision nodes, we want to explore the accuracy of p
 @Q{What else do you notice and wonder about the decision stump?}
 @A{Everyone in their twenties bought the game.}
 @A{Three out of 5 people in their thirties bought the game.}
-@A{On the other decision trees we've seen the arrows were labeled "yes" and "no", but here their labeled "teens", "twenties", "thirties".}
+@A{On the other decision trees we've seen the arrows were labeled "yes" and "no", but here they're labeled "teens", "twenties", "thirties".}
 @A{Our decision stumps include nodes labeled like N N N Y Y.}
 }
 
 Now, we need to determine two things:
 
-- What decision would we currently predict at each branch, based on the training data? We use whichever outcome appears most frequently at each branch.
+- What decision would we currently predict at each node, based on the training data? We use whichever outcome appears most frequently in the remaining dataset (summarized by our N N N Y Y labels).
 - For what percentage of the rows at each branch is that prediction accurate?
 
 @lesson-instruction{Let's complete the first section of @printable-exercise{part-1.adoc} together to work out these details.}
 
 @slidebreak{InvestigateR}
 
-- This stump has three branches because we are considering customers in their teens, twenties and thirties.
+- This stump has three branches because there are three values in the "age" column.
 - The left-most leaf node ("teens") represents the five teens in our training dataset: Jan, Jose, Jillian, Ariella, and Danial.
 ** Jan, Jose, and Jillian did *not* purchase the game, so they are represented by the letter N (for "no").
 ** Ariella and Danial *did* purchase the game, so they are represented by the letter Y (for "yes").
@@ -425,11 +427,11 @@ Now, we need to determine two things:
 
 @ifslide{@image{images/age-stump.png, 180}}
 
-On a decision tree, each branch has to point to a single choice... and right now we have N N N Y Y for teens.
+We need to replace each outcome label (like N N N Y Y) with a predicted outcome.
 
 @QandA{
 @Q{What prediction should we make for teens? Why?}
-@A{They won't buy the game. The majority of teens in the training data didn't buy the game, so we use that decision for the entire group.}
+@A{They won't buy the game. We predict this because the majority of teens in the training data didn't buy the game.}
 @Q{What predictions should we make for the other age groups? Why?}
 @A{People in their twenties and thirties will buy the game. Everyone in their twenties bought the game, and a majority of those in their thirties bought the game.}
 }
@@ -437,7 +439,7 @@ On a decision tree, each branch has to point to a single choice... and right now
 @slidebreak{Investigate}
 
 @lesson-instruction{
-Now that we have our prediction, we need to calculate how accurate it is for each of our age groups. We'll start by placing checkmarks beneath each outcome (Y or N) that we would have correctly predicted.
+Now that we have our predictions, we need to calculate how accurate they are for each of our age groups. We'll start by placing checkmarks beneath each outcome (Y or N) that we would have correctly predicted.
 }
 
 @slidebreak{Investigate}
@@ -459,19 +461,17 @@ Our prediction was correct for 3 out of 5 individuals or 60% of the time.
 
 @center{@image{images/age-stump-checks.png, 180}}
 
-Our prediction was pretty effective! It was correct 10 out of 14 times! And for people in their twenties it was 100% accurate. By utilizing other columns of data, we might be able to make the prediction even better! 
-
-There are two possible questions we could use at the next level of our decision tree:
+Our prediction was pretty effective! It was correct 10 out of 14 times! And for people in their twenties it was 100% accurate. Can we make the predictions more accurate for the other two groups? Yes! We still have two columns of data to consider:
 
 - Is the individual a frequent customer, an infrequent customer, or a new customer?
 - Has the individual expressed interest in a particular video game?
 
 @slidebreak{Investigate}
 
-As we move down the tree, our job is to figure out _which questions_ we should ask and _when_ we should ask them... just like when we play 20 Questions! 
+As we move down the tree, our job is to figure out _which column to use next_.
 
 @lesson-point{
-Decision stumps help us decide which questions produce a greater @vocab{information gain}.
+Decision stumps help us decide how columns would impact our predictions.
 }
 
 @slidebreak{Investigate}
@@ -480,7 +480,7 @@ Decision stumps help us decide which questions produce a greater @vocab{informat
 - Complete the last section of @printable-exercise{part-1.adoc}
 - Then complete @printable-exercise{part-2.adoc}.
 ** You will create and compare different decision stumps for these columns of data.
-** The stumps will help you determine which question will produce the biggest information gain.
+** The stumps will help you determine which question will produce the biggest improvement in accuracy.
 }
 
 @slidebreak{Investigate}
@@ -510,14 +510,7 @@ Complete the first section @printable-exercise{build-and-test.adoc}.
 @slidebreak{Investigate}
 
 @lesson-instruction{
-Complete the second and third sections of @printable-exercise{build-and-test.adoc}.
-}
-
-@scrub{
-@QandA{
-@Q{After adding in the test data, what rules would you suggest we change?}
-@A{Not all people in their twenties would buy the game. We should probably build decision stumps for people in their twenties for the other available columns and figure out what attribute to add to our tree.}
-}
+Complete the second and third sections of @printable-exercise{build-and-test.adoc} to try making predictions about customers who were not in the training dataset.
 }
 
 === Synthesize
@@ -525,34 +518,32 @@ Complete the second and third sections of @printable-exercise{build-and-test.ado
 
 @QandA{
 @Q{What are some reasons that a decision tree might produce an inaccurate prediction or recommendation?}
-@A{If the sample is inconsistent and the prediction represents closer to 50% of the sample population than 100% of the population.}
-@A{If the tree has been designed to prioritize efficiency over accuracy, it may produce wrong predictions and recommendations.}
-@A{If the training dataset does not accurately represent the broader population, predictions and recommendations will be incorrect.}
+@A{The prediction might represent closer to 50% of the training population rather than 100% of the population.}
+@A{The training dataset might not completely represent the broader population, either in not having enough variables (columns) or enough samples (rows).}
+@A{The training dataset could be inconsistent, in that the labeled outcomes for two rows are different while the rest of the columns have the same values.}
 
-@Q{After testing our tree, we discovered that it was not as accurate as we might have presumed. Can you think of any examples of when _missing data_ can lead to predictions with serious negative consequences?}
+@Q{After testing our tree, we discovered that it was not as accurate as we had expected or hoped. Can you think of concrete, real-world examples of how a training dataset might underrepresent a population?}
 @A{Responses will vary.}
-@A{When various populations are underrepresented in training datasets, the resulting technology reflects that, and we end up with AI that fails to meet the needs of those populations.}
+@A{Medical systems being trained on only adults, but not children.}
+@A{Tutoring systems trained on only native speakers of a language.}
+@A{Music recommendation systems being trained on narrow set of genres.}
 
 @Q{We collapsed specific ages into categories (teenager, etc) to align the granularity of our data with the granularity of recommendations that we wanted from the decision tree. What if we had not done that, and instead created a branch for each individual age? How would individual branches have affected the decision tree and its recommendations?}
 @A{The tree would have had many more branches and decision nodes.}
 @A{We would likely have needed more training data with more samples at each age to get to acceptable accuracy.}
 
 @Q{You have learned that @vocab{supervised learning} includes three steps: (1) demonstration of the learning process, (2) function abstraction, and (3) using the function. Describe what each step includes for the @vocab{supervised learning} of a @vocab{decision tree}.}
-@A{Demonstration: For decision trees, the demonstration is the labeling of the data so that the computer learns the desired output (or "correct answer") for each data point. During the lesson, we knew whether the individuals in our training set would buy the video game or not.}
-@A{Function abstraction: Information gain determines the best way to split data at each node, producing the tree-like structure that can be used to predict outcomes.}
-@A{Use: The decision tree predicts outcomes for new, unseen data.}
+@A{Demonstration: For decision trees, the demonstration is the labeling of the data so that the computer learns the desired outcome (or "correct answer") for each data point. During the lesson, we knew whether the individuals in our training set would buy the video game.}
+@A{Function abstraction: Creating the decision tree yields a model of how variables affect outcomes.}
+@A{Use: Follow the decision tree to find the predicted outcome for a new input (set of values for the question variables).}
+
+@Q{What are the key differences between building a decision tree and playing a game of 20 Questions?}
+@A{In 20 Questions, we generate new questions as we play, whereas a decision tree is built from a fixed dataset}
+@A{In 20 Questions, the answers are all yes/no, whereas there can be multiple answers to a question in a decision tree}
+@A{In 20 Questions, we generate new questions each time we play the game. A decision tree is a model that will be used to make multiple predictions over the same input variables.}
 }
-
-
 
 @scrub{
-@QandA{
-@Q{Why is it advantageous for AI to be efficient?}
-@A{Responses will vary, but may include: reduced delays, an improved user experience, greater scalability, decreased environmental impact.}
-@Q{Can you think of any reasons *not* to maximize an AI's efficiency?}
-@A{Responses will vary, but students will likely observe that an increase in efficiency leads to a decrease in accuracy.}
-}
-
 In AI, efficiency and accuracy are often in conflict:
 
 - AI is *efficient* when the computer performs a task with minimal time, memory, energy or data.
