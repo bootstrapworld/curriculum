@@ -3,7 +3,7 @@
 ++++
 <style>
 /* Shrink vertical spacing on fitbruby */
-.fitbruby{padding-top: 0.5rem; padding-bottom: 0.5rem}
+.fitbruby{padding-top: 0.3rem; padding-bottom: 0.3rem}
 </style>
 ++++
 
@@ -30,7 +30,7 @@
 
 The @vocab{decision stump} below splits the above training data by age and indicates whether the individuals in each group buy the game. 
 
-@ifnotsoln{@center{@image{../images/stump.png, 200}}}
+@ifnotsoln{@center{@image{../images/stump.png, 180}}}
 
 @ifsoln{@center{@image{../images/age-stump-checks.png, 170}}}
 
@@ -57,21 +57,15 @@ The @vocab{decision stump} below splits the above training data by age and indic
 
 @n Which (if any) of the stump leaves for "age" have the same value for all rows? @fitb{}{@ifsoln{"twenties"}}
 
-@n Overall, how accurate is the current prediction across our entire dataset? @hspace{1em} @fitb{2em}{@ifsoln{10}} _correct predictions out of 14 attempts._ @hspace{1em} (@fitb{2em}{@ifsoln{71}} % accuracy).
+@n How accurate is the current prediction across our entire dataset? @hspace{1em} @fitb{1em}{@ifsoln{10}} _correct predictions out of 14 attempts._ (@fitb{1em}{@ifsoln{71}} % accuracy).
 
 == Improving Our Prediction
 
 We made our prediction without considering all of the columns in our training data. If we add another level to our tree, we might be able to improve our accuracy!
 
-@n Before moving on to the second level of his decision tree, Ernie removed all of the rows for people in their twenties. Bert said, 
+@n Before moving on to the second level of his decision tree, Ernie removed all of the rows for people in their twenties. Bert said, _"I don't think that's a good idea! Why would we alter our dataset just because we're starting the second level of the tree?"_ Explain Ernie's (correct) decision to Bert. @fitb{}{@ifsoln{Since all customers in their twenties buy the game, it's a leaf node, which means there won't be any branches}} +
+@fitb{}{@ifsoln{for these rows to train the AI to make decisions for.}}
 
-@vspace{1ex}
-@indented{
-_"I don't think that's a good idea! Why would we alter our dataset just because we're starting the second level of the tree?"_ +
-Explain Ernie's (correct) decision to Bert. @fitb{}{@ifsoln{Since all customers in their twenties buy the game, it's a leaf node,}} +
-@fitb{}{@ifsoln{which means there won't be any branches for these rows to train the AI to make decisions for.}}
-}
-
-@n We used "age" as our root node. What questions could we ask at our second-level decision node? @fitbruby{10em}{@ifsoln{interest in game}}{[column]} or @fitbruby{10em}{@ifsoln{shopping history}}{[column]}
+@n We used "age" as our root node. What questions could we ask at our second-level decision node? @fitbruby{8em}{@ifsoln{interest in game}}{[column]} or @fitbruby{8em}{@ifsoln{shopping history}}{[column]}
 
 
