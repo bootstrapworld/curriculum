@@ -214,8 +214,26 @@ Creating a decision tree is a form of @vocab{supervised learning}, because the t
 
 @slidebreak{Investigate}
 @lesson-instruction{
-- Turn to the first section of @printable-exercise{decision-tree.adoc} and take a few minutes to record your notices and wonderings about how the dataset and decision tree are connected.
+- Turn to the first section of @printable-exercise{decision-tree.adoc} and take a few minutes to record your Noticings and Wonderings about how the dataset and decision tree @ifslide{(below)} are connected.
 }
+
+
+@ifslide{
+[.data-table, cols="1,2,2,2,2,2,2", stripes="none", options="header"]
+|===
+| Item    | flat? | has-handle? | has-tines? | utensil?  | used-to-chop? | category
+| A       | no    | yes         | no         | no         | no            | cup
+| B       | no    | yes         | yes        | yes        | no            | fork
+| C       | yes   | yes         | no         | yes        | yes           | knife
+| D       | no    | no          | no         | no         | no            | mug
+| E       | yes   | yes         | no         | no         | no            | plate 
+| F       | no    | no          | no         | yes        | no            | spoon
+| G       | yes   | yes         | no         | yes        | yes           | knife
+|===
+
+@center{@image{images/tree4.png, 400}}
+}
+
 
 @slidebreak{InvestigateR}
 
@@ -270,7 +288,7 @@ Let's think about how the table translates to the tree and then consider how the
 |===
 
 @QandA{
-Take a look at the two decision trees we made for this dataset:
+Take a look at the two decision trees (above) that we made for this dataset:
 @Q{What do these trees have in common?}
 @A{They have a root node, 4 decision nodes and 6 leaf nodes.}
 @A{They have the same number of levels.}
@@ -352,7 +370,7 @@ Students build a decision tree that predicts whether someone will purchase a vid
 
 Have you ever done some online shopping—say, for a new pair of sneakers—only to discover that, for the next several days, you encounter _advertisements for sneakers_ lurking in every corner of the internet that you visit?!
 
-@slidebreak{Investigate}
+@slidebreak{Launch}
 
 Websites can store small data files called "cookies" on your device that can be used to remember details like where you were the last time you visited the site. One particular kind of cookie, the tracking cookie, helps companies compile large datasets about visitors. They then use machine learning to decide which ads to display.
 
@@ -382,14 +400,18 @@ Our model will predict the value in the "buys game" column using the other colum
 @slidebreak{Investigate}
 
 @lesson-instruction{
-Before we process any dataset, we should consider whether the data are at a good granularity for the problem. For video game purchases, do we expect the difference between 17 and 18 year olds to matter, or is a general "teenager" category sufficient? If our data are too fine-grained, our models might not detect patterns that would otherwise be meaningful. 
+Before we process any dataset, we should consider whether the data are at a good level of specificity for the problem. For video game purchases, do we expect the difference between 17 and 18 year olds to matter, or is a general "teenager" category sufficient? If our data are too fine-grained, our models might not detect patterns that would otherwise be meaningful. 
 
-For now, let’s agree to create three groups: teens, twenties, and thirties. We can compute a new column in our dataset with these categories (and will see that on the next worksheet).
+For now, let's agree to create three groups: teens, twenties, and thirties. We can compute a new column in our dataset with these categories (and will see that on the next worksheet).
 }
+
+@slidebreak{Investigate}
+
+When we drew a decision tree for 20 Questions, we discussed starting with questions that might distinguish among the possible outcomes. Which variable in our training set might do this? The "age" column has three possible values, whereas "shopping history" and "interest in game" each have only two ("yes" or "no"). This suggests that "age" might be a good variable to put at the root of our tree.
+
 
 @slidebreak{InvestigateR}
 
-When we drew a decision tree for 20 Questions, we discussed starting with questions that might distinguish among the possible outcomes.Which variable in our training set might do this? The "age" column has three possible values, whereas "shopping history" and "interest in game" each have only two ("yes" or "no"). This suggests that "age" might be a good variable to put at the root of our tree.
 
 What does that initial node look like? For starters, we draw a decision node and label it with "age" (the column name we are exploring). We then add one branch for each of the possible values in the column (here, "teens", "twenties", and "thirties"). At the end of the arrows for each branch, we will build additional nodes for the subset of the dataset with the corresponding "age" value. Specifically:
 
@@ -402,19 +424,23 @@ Before we create additional decision nodes, we want to explore the accuracy of p
 @center{@image{images/stump.png, 180}}
 
 @QandA{
-@Q{What else do you notice and wonder about the decision stump?}
+@Q{What else do you Notice and Wonder about the decision stump?}
 @A{Everyone in their twenties bought the game.}
 @A{Three out of 5 people in their thirties bought the game.}
 @A{On the other decision trees we've seen the arrows were labeled "yes" and "no", but here they're labeled "teens", "twenties", "thirties".}
 @A{Our decision stumps include nodes labeled like N N N Y Y.}
 }
 
+@slidebreak{Investigate}
+
 Now, we need to determine two things:
 
 - What decision would we currently predict at each node, based on the training data? We use whichever outcome appears most frequently in the remaining dataset (summarized by our N N N Y Y labels).
 - For what percentage of the rows at each branch is that prediction accurate?
 
-@lesson-instruction{Let's complete the first section of @printable-exercise{part-1.adoc} together to work out these details.}
+@lesson-instruction{
+Let's complete the first section of @printable-exercise{part-1.adoc} together to work out these details.
+}
 
 @slidebreak{InvestigateR}
 
@@ -425,7 +451,9 @@ Now, we need to determine two things:
 ** We illustrate the teens' decisions with the following shorthand: N N N Y Y
 - The other leaf nodes similarly summarize the purchasing habits of the individuals in their age groups.
 
-@ifslide{@image{images/age-stump.png, 180}}
+@ifslide{@image{images/stump.png, 180}}
+
+@slidebreak{InvestigateR}
 
 We need to replace each outcome label (like N N N Y Y) with a predicted outcome.
 
@@ -434,6 +462,9 @@ We need to replace each outcome label (like N N N Y Y) with a predicted outcome.
 @A{They won't buy the game. We predict this because the majority of teens in the training data didn't buy the game.}
 @Q{What predictions should we make for the other age groups? Why?}
 @A{People in their twenties and thirties will buy the game. Everyone in their twenties bought the game, and a majority of those in their thirties bought the game.}
+
+@ifslide{@image{images/stump.png, 180}}
+
 }
 
 @slidebreak{Investigate}
@@ -522,15 +553,17 @@ Complete the second and third sections of @printable-exercise{build-and-test.ado
 @A{The training dataset might not completely represent the broader population, either in not having enough variables (columns) or enough samples (rows).}
 @A{The training dataset could be inconsistent, in that the labeled outcomes for two rows are different while the rest of the columns have the same values.}
 
-@Q{After testing our tree, we discovered that it was not as accurate as we had expected or hoped. Can you think of concrete, real-world examples of how a training dataset might underrepresent a population?}
+@Q{After testing our tree, we discovered that it was not as accurate as we had expected or hoped. Can you think of concrete, real-world examples of how a training dataset might under represent a population?}
 @A{Responses will vary.}
 @A{Medical systems being trained on only adults, but not children.}
 @A{Tutoring systems trained on only native speakers of a language.}
 @A{Music recommendation systems being trained on narrow set of genres.}
 
-@Q{We collapsed specific ages into categories (teenager, etc) to align the granularity of our data with the granularity of recommendations that we wanted from the decision tree. What if we had not done that, and instead created a branch for each individual age? How would individual branches have affected the decision tree and its recommendations?}
+@Q{We collapsed specific ages into categories (teenager, etc) to align the specificity of our data with the specificity of recommendations that we wanted from the decision tree. What if we had not done that, and instead created a branch for each individual age? How would individual branches have affected the decision tree and its recommendations?}
 @A{The tree would have had many more branches and decision nodes.}
 @A{We would likely have needed more training data with more samples at each age to get to acceptable accuracy.}
+
+@slidebreak{Synthesize}
 
 @Q{You have learned that @vocab{supervised learning} includes three steps: (1) demonstration of the learning process, (2) function abstraction, and (3) using the function. Describe what each step includes for the @vocab{supervised learning} of a @vocab{decision tree}.}
 @A{Demonstration: For decision trees, the demonstration is the labeling of the data so that the computer learns the desired outcome (or "correct answer") for each data point. During the lesson, we knew whether the individuals in our training set would buy the video game.}
