@@ -1,16 +1,22 @@
-= Meet Soekia! (Continued)
+= Meet Soekia! (N-Grams)
 
-@link-instructions{Respond to the prompts below by interacting with @starter-file{soekia}}
+@link-instructions{
+Respond to the prompts below by interacting with @starter-file{soekia} using the {nbsp} @image{../images/paw-icon.png, 15} *Intelligent Monkeys?* collection.
+} 
 
-== N-Grams
+== Exploring the N-Grams Panel
 
-The orange _N-grams_ panel is where Soekia lists out possible n-grams and their frequency of occurrence within the training corpus. The default setting ("3") displays a list of every trigram that appears in the training corpus. 
+The orange _N-grams_ panel is where Soekia lists possible n-grams and how frequently they occur in the training corpus. The default setting ("3") displays a list of every trigram. Clicking on the other numbers at the top will display lists of n-grams of other lengths. 
 
-@n The most common trigram appears at the top of the list. Click on it. What do you learn? @fitb{}{@ifsoln{I can see how many times the trigram appears,}}
+@n Hover your mouse over the 3. How many different trigrams are there in this collection? @fitb{3em}{@ifsoln{91}} How does that compare to the number of n-grams of other lengths? @fitb{}{@ifsoln{Surprisingly there are more trigrams than n-grams of any other length.}}
 
-@fitb{}{@ifsoln{and in which documents.}}
+@n The most common trigram appears at the top of the list. Click on it. What do you learn? @fitb{}{}
 
-@n At the top of the orange _N-grams_ panel, select "4" to indicate that you want Soekia to display 4-grams. What is the most common 4-gram in the corpus? @fitb{}{@ifsoln{Lord Marquis of Carabas}}
+@fitb{}{@ifsoln{This trigram appears 7 times in the collection. The documents it appears in are listed.}}
+
+@n Click on the 5-grams tab. Notice that all of the 5-grams occur equally often. Can you explain why this might be? @fitb{}{}
+
+@fitb{}{@ifsoln{This is a very small collection of one sentence documents so no collection of 5 letters appears more than once.}}
 
 @vspace{1ex}
 
@@ -18,42 +24,38 @@ Take a minute to explore the N-Grams Panel, by scrolling through the list of N-G
 
 @n What do you Notice? What do you Wonder? 
 
-@blanklines{4}{
+@blanklines{3}{
 @ifsoln{
-*Possible Noticings:* Punctuation counts as a word! The green bar under each trigram indicates how often it appears in the corpus. The most common trigram appears almost as twice as frequently as the next most common trigram. *Possible Wonderings:* Why does Soekia interpret a period as a word? Why do individual 5-grams appear so much less frequently than individual unigrams?
+*Possible Noticings:* Punctuation counts as a word! The green bar under each trigram indicates how often it appears in the corpus. The most common trigram appears more than twice as frequently as the next most common trigram. *Possible Wonderings:* Why does Soekia interpret a period as a word? Why do individual 5-grams appear so much less frequently than individual unigrams?
 }
 }
 
-== Suggested words
+== Predicting the Next Word using N-Grams
 
-In the _Suggested words_ panel, Soekia offers possible completions for different inputs. Click on one of the suggestions. 
+Without introducing any randomization into the algorithm, Soekia generates text by selecting words one at a time from the most-frequent valid n-gram of the highest order available. 
 
-@n What information appears? @fitb{}{@ifsoln{We learn how many times the suggestion is used in the training corpus, }}
+@n Soekia must select the first word from the unigram tab labelled *1*. What do you expect it to choose as the first "word"? @fitb{}{@ifsoln{a period}}
 
-@fitb{}{@ifsoln{and in which document it appears.}}
+@n When choosing the second word, Soekia will first look at the bigrams to find the most frequently occurring bigram that begins with the first "word". If none exist, it will default to the next most popular unigram.  What do you expect Soekia to choose for the second "word". 
+@fitb{10em}{@ifsoln{intelligent}} Which list did you select it from? @fitb{}{@ifsoln{unigrams (1). There were no bigrams that started with a period.}}
+
+@n Why do you think there weren't any bigrams that began with the most popular "word"? @fitb{}{@ifsoln{The most frequent "word" in this collection was a period. There was never a "word" after a period because the documenst are only one sentence long!}}
+
+@n When choosing the third word, Soekia will first look at the trigrams to find the most frequently occurring trigram that begins with the thir "word". If none exist, it will look for a bigram beginning with the second word. If none exist, it will default to the next most popular unigram.  What do you expect Soekia to choose for the third "word". @fitb{10em}{@ifsoln{animals}} Which list did you select it from? @fitb{}{@ifsoln{bigrams (2)}}
 
 @vspace{1ex}
 
-- Click "Customize temperature/ number of suggestions" on the middle of the left-side of the _Suggested words_ panel. Set the temperature to *low*. 
-- In the _Generate Text_ panel, click @image{../images/send-icon.png, 15} to tell a fairy tale. 
+Soekia will continue choosing the highest available valid n-gram. 
 
-@n Once a few sentences have appeared, read and rate the story: @hspace{1em} _It makes no sense._ @hspace{1em} _It sort of makes sense?_ @hspace{1em} _Wow! It makes sense!_
+@n What do you expect Soekia to choose for the fourth "word"? @fitb{10em}{@ifsoln{a period}}  fifth "word"? @fitb{10em}{@ifsoln{intelligent}} the sixth "word"? @fitb{10em}{@ifsoln{animals}}
 
-@vspace{1ex}
+== Testing our Prediction
 
-- In the _Generate Text_ panel, click @image{../images/reset-icon.png, 15} to delete the story and start over. 
-- In the _Suggested words_ panel, click "Customize temperature/ number of suggestions" and set the temperature to *high*.
-- In the _Generate Text_ panel, click @image{../images/send-icon.png, 15} to tell another fairy tale. 
+- In the _Suggested words_ panel, click "Customize temperature/ number of suggestions" and set the temperature to *low*. 
+- In the _Generate Text_ panel, click @image{../images/send-icon.png, 15}. 
 
-@n Once a few sentences have appeared, read and rate the story: @hspace{1em} _It makes no sense._ @hspace{1em} _It sort of makes sense?_ @hspace{1em} _Wow! It makes sense!_
+@n How does Soekia answer the question _How intelligent are monkeys?..._ @fitb{}{@ifsoln{. intelligent animals. intelligent animals. etc.}}
 
-@vspace{1ex}
+@n How does that text compare to your prediction? @fitb{}{}
 
-Spend some time clicking and exploring the _Suggested words_ panel. 
 
-@n What do you Notice about the _Suggested words_ panel? What do you Wonder about the _Suggested words_ panel? 
-
-@blanklines{4}{
-@ifsoln{Possible Noticings: The _Suggested words_ panel updates automatically as Soekia generates text. Soekia often suggests a 5-gram and the shorter n-grams that are contained within that 5-gram (e.g., "the wind in the trees", "wind in the trees", "in the trees" and "trees"). Possible Wonderings: What are the different ways that I can customize the selection? How does changing the temperature affect the output?
-}
-}
