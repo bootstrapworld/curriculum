@@ -3,7 +3,7 @@
 
 @description{Students consider how statistics and probability drive AI text generation, learning that language models can produce text that sounds credible but may not actually be credible.}
 
-@lesson-prereqs{ai-training-2-language-in-practice}
+@lesson-prereqs{ai-statistical-lang-models-generating-text}
 
 @keywords{}
 
@@ -42,9 +42,9 @@ Students engage with Soekia to discover some of the nuances of a student-friendl
 === Launch
 @slidebreak{Launch}
 
-In @lesson-link{ai-statistical-lang-models-generating-text}, you learned about @vocab{statistical language models} and how they rely on probability to generate text.  You constructed your own language model from the folk song "There Was an Old Lady Who Swallowed a Fly."
+You've already learned about how @vocab{statistical language models} rely on probability to generate text and constructed your own language model from the folk song "There Was an Old Lady Who Swallowed a Fly" in our @lesson-link{ai-statistical-lang-models-generating-text} lesson.
 
-In this lesson, you will explore Soekia, a simplified text generation tool designed for student learning. Soekia offers us one example of @vocab{Natural Language Processing}, or using computers to process language. 
+In this lesson, you will explore Soekia, a simplified text generation tool designed for student learning. Soekia offers us one example of @vocab{Natural Language Processing}.
 
 @slidebreak{Launch}
 
@@ -53,10 +53,9 @@ In this lesson, you will explore Soekia, a simplified text generation tool desig
 - Open a browser window and make sure it is filling the full width of your screen.
 - Go to @starter-file{soekia}.
 - The blue-colored panel occupying most of your screen is where text generation takes place. This is the level typically visible to the user when using a chatbot. 
-- We're going to tell Soekia to generate a fairy tale. 
-- To tell Soekia to start writing, click on the @image{images/send-icon.png,15}.
+- We're going to tell Soekia to generate a fairy tale by clicking on the @image{images/send-icon.png,15}.
 - Follow along and read the text until Soekia finishes writing.
-- When Soekia is done writing, follow the prompts and respond to the questions in the first section of @printable-exercise{meet-soekia-1.adoc}. 
+- Then complete the first section of @printable-exercise{meet-soekia-1.adoc}. 
 }
 
 @slidebreak{Launch}
@@ -67,10 +66,10 @@ In this lesson, you will explore Soekia, a simplified text generation tool desig
 @A{Different words appear in different colors.}
 @A{The fairy tale sounds a little strange.}
 @A{We can pause, speed up or just add one word at a time using the play controls beneath the text window.}
-@A{We can ask Soekia to write another paragraph by clicking "Resume Automatically".}
+@A{We can ask Soekia to write another paragraph by clicking "@image{images/android-icon.png,15} Resume Automatically".}
 @A{We can manually select the next word from a list if we want.}
 @A{In order to write a new story, we can click on the reset icon @image{images/reset-icon.png,15} to delete what's been generated.}
-@A{We can copy the text that's been generated to our clipboard.}
+@A{We can copy the text that's been generated to our clipboard using the @image{images/copy-icon.png,15}.}
 @A{We can turn color-coding of the words on and off by clicking on @image{images/eye-icon.png,15}.}
 
 
@@ -88,28 +87,29 @@ In this lesson, you will explore Soekia, a simplified text generation tool desig
 === Investigate
 @slidebreak{Investigate}
 
-It's time to peek behind the curtain to see how a computer can put a statistical language model to use! 
+It's time to peek behind the curtain to see where the fairytale you read is coming from! 
 
 @lesson-instruction{
 - Click the "LOOK INSIDE @image{images/arrow-forward-icon.png, 15}" button in the upper right-hand corner of @starter-file{soekia, "Soekia"}.
 }
 
-Now, in addition to the blue text generation panel, we see three additional panels: documents, n-grams, and suggested words.
+Now, in addition to the blue text generation panel, we see three additional panels: suggested words, n-grams, and documents.
 
 @image{images/four-panels.png}
 
 @slidebreak{Investigate}
 
-There is a LOT to discover in each panel! @printable-exercise{meet-soekia-1.adoc} and @printable-exercise{meet-soekia-2.adoc} will prompt you to interact with a few specific features of each panel. After you have a basic sense of each panel's purpose, take a moment to Notice and Wonder. Get curious, click around, and consider how each panel relates to the others that you have already explored.
+There is a LOT to discover in each panel! 
 
 @lesson-instruction{
-Complete the second section (Documents) on @printable-exercise{meet-soekia-1.adoc}.
+- Let's start with the Documents panel and complete @printable-exercise{meet-soekia-1.adoc}.
+- Then turn to @printable-exercise{meet-soekia-2.adoc}, which will prompt you to interact with a few specific features of the other panels. 
+- After you have a basic sense of each panel's purpose, take a moment to Notice and Wonder. Get curious, click around, and consider how each panel relates to the others that you have already explored.
 }
 
 @slidebreak{Investigate}
 
 @QandA{
-
 @Q{What did you Notice about the _Documents_ panel?}
 @A{There are 12 documents.}
 @A{Each document is a different color.}
@@ -127,12 +127,7 @@ Complete the second section (Documents) on @printable-exercise{meet-soekia-1.ado
 
 @slidebreak{Investigate}
 
-@lesson-instruction{
-Complete the first section (N-grams) on  @printable-exercise{meet-soekia-2.adoc}.
-}
-
 @QandA{
-
 @Q{What did you Notice about the _N-grams_ panel?}
 @A{All of the n-grams come directly from the documents.}
 @A{I can sort the n-grams either alphabetically or by frequency.}
@@ -148,12 +143,7 @@ Complete the first section (N-grams) on  @printable-exercise{meet-soekia-2.adoc}
 
 @slidebreak{Investigate}
 
-@lesson-instruction{
-Complete the second section (Suggested Words) on  @printable-exercise{meet-soekia-2.adoc}.
-}
-
 @QandA{
-
 @Q{What did you Notice about the _Suggested words_ panel?}
 @A{The _Suggested words_ panel updates automatically as Soekia generates text.}
 @A{Soekia often suggests a 5-gram and the shorter n-grams that are contained within that 5-gram (e.g., "the wind in the trees", "wind in the trees", "in the trees" and "trees").}
@@ -163,20 +153,16 @@ Complete the second section (Suggested Words) on  @printable-exercise{meet-soeki
 @A{How does changing the temperature affect the output?}
 }
 
-
 === Synthesize
 @slidebreak{Synthesize}
 
 @QandA{
-
 @Q{Describe in your own words what happens in each of Soekia's inner panels.}
 @A{The _Documents_ panel contains the training corpus.}
 @A{Soekia processes the documents and produces a list of all possible n-grams (for a given n) in the _N-grams_ panel.}
 @A{In the _Suggested words_ panel, Soekia offers possible completions for different inputs.}
 @A{The user can set the temperature to choose word suggestions that occur frequently (low temperature) or to suggest words more randomly (high temperature).}
 @A{In the _Text Generation_ panel, the output appears automatically or the user can opt to select each word from a a list of suggestions.}
-
-
 
 @Q{@vocab{Supervised learning} includes three steps: the demonstration of the learning process, function abstraction, and using the function. Describe what each step includes for the @vocab{supervised learning} of a @vocab{statistical language model}.}
 @A{Demonstration: For statistical language models, the demonstration phase is less obvious than in the other cases we have studied (self-driving cars and decision trees). Essentially, a human supervisor is needed to select the documents that form the @vocab{training corpus}. The demonstration that “given an n-gram, the completion is ____” is implicit, not overt. It would be mindbogglingly overwhelming for a human to have to demonstrate each of these completions! There is some degree of self-supervision occurring with this type of model.}
@@ -217,12 +203,9 @@ Here is a sequence of 5 images showing a game in progress.
 Let's make up a notation to represent this sequence, knowing that:
 
 - the tic-tac-toe grid is a 3x3 coordinate plane with the origin (0,0) in the bottom left corner
-
 - for each move, our notation must indicate: 
-
-  *** the player whose turn it is (X or O)
-
-  *** the ordered pair (x, y) for the location of the player's move on that turn 
+  * the player whose turn it is (X or O)
+  * the ordered pair (x, y) for the location of the player's move on that turn 
 }
 
 @teacher{Allow students time to work with a partner to annotate the 5 tic-tac-toe turns represented above.}
@@ -240,7 +223,6 @@ Let's make up a notation to represent this sequence, knowing that:
 @A{X12, O13, X33}
 
 @Q{@right{@image{images/docA.png, 50}} Can you translate this "document" written in tic-tac-toe notation into a standard game on a tic-tac-toe board?}
-
 @A{Here is the game played out on a tic-tac-toe board: 
 
 @center{@image{images/tic-tac-toe-solution.png, 75}}}
@@ -287,7 +269,6 @@ Just like a natural language, the tic-tac-toe text can be parsed into n-grams an
 @Q{Does Natural Language Processing require natural language? Explain.}  
 @A{No, Natural Language Processing - and statistical language modeling, too - works on artificial languages, such as chess and music notation. As long as the language can be broken into "words" that are separated by spaces, then the text can be processed just like a natural language. The very same algorithms can be applied to a wide variety of languages - both natural and artificial.}
 }
-
 
 === Synthesize
 @slidebreak{Synthesize}
