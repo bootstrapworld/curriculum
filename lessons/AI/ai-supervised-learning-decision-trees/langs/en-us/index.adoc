@@ -336,9 +336,10 @@ Computers build decision trees from datasets. The columns in a dataset are **fix
 @QandA{
 Let's think about this issue of having enough training data.
 @Q{What might determine whether we can create a training dataset with at least one row per combination of attributes?}
-@A{There are two key factors:}
-@A{How many columns are there?}
-@A{How many values are possible in each column?}
+@A{There are two key factors:
+  * How many columns are there?
+  * How many values are possible in each column?
+}
 
 @Q{How many variables do you think a recommendation system like YouTube uses?}
 @A{YouTube considers roughly one billion variables!}
@@ -353,7 +354,7 @@ Let's think about this issue of having enough training data.
 @A{No. Generally multiple rows of a training dataset will have the same prediction. The training dataset we saw in this lesson section contained multiple knives, for example.}
 
 @Q{Explain how the decision tree and training dataset correspond to each other.}
-@A{The column headers from the table are the questions that will get asked in the root and decision nodes of the decision tree.}
+@A{The column headers from the table are the questions that will get asked in the decision nodes of the decision tree.}
 @A{The data in each column are the answers to those questions which become the arrow labels of the decision tree ("yes" and "no", for this dataset).}
 @A{The output categories from the table are the leaf nodes in the decision tree.}
 }
@@ -415,13 +416,13 @@ When we drew a decision tree for 20 Questions, we discussed starting with questi
 
 What does that initial node look like? For starters, we draw a decision node and label it with "age" (the column name we are exploring). We then add one branch for each of the possible values in the column (here, "teens", "twenties", and "thirties"). At the end of the arrows for each branch, we will build additional nodes for the subset of the dataset with the corresponding "age" value. Specifically:
 
-@center{@image{images/age-stump-with-names.png, 180}}
+@center{@image{images/age-stump-with-names.png, 350}}
 
 @slidebreak{InvestigateR}
 
 Before we create additional decision nodes, we want to explore the accuracy of prediction that we would get up to this point in the tree. To do this, we adapt our previous diagram to summarize the prediction and accuracy at each branch. We call this new diagram a @vocab{decision stump}. In the following picture, we have filled in the values from the "buys game" column for the dataset that remains within each "age" category.
 
-@center{@image{images/stump.png, 180}}
+@center{@image{images/stump.png, 350}}
 
 @QandA{
 @Q{What else do you Notice and Wonder about the decision stump?}
@@ -435,7 +436,8 @@ Before we create additional decision nodes, we want to explore the accuracy of p
 
 Now, we need to determine two things:
 
-- What decision would we currently predict at each node, based on the training data? We use whichever outcome appears most frequently in the remaining dataset (summarized by our N N N Y Y labels).
+- What decision would we currently predict at each node, based on the training data? 
+  * We use whichever outcome appears most frequently in the remaining dataset (summarized by our N N N Y Y labels).
 - For what percentage of the rows at each branch is that prediction accurate?
 
 @lesson-instruction{
@@ -444,14 +446,15 @@ Let's complete the first section of @printable-exercise{part-1.adoc} together to
 
 @slidebreak{InvestigateR}
 
-- This stump has three branches because there are three values in the "age" column.
+This stump has three branches because there are three values in the "age" column:
+
 - The left-most leaf node ("teens") represents the five teens in our training dataset: Jan, Jose, Jillian, Ariella, and Danial.
-** Jan, Jose, and Jillian did *not* purchase the game, so they are represented by the letter N (for "no").
-** Ariella and Danial *did* purchase the game, so they are represented by the letter Y (for "yes").
-** We illustrate the teens' decisions with the following shorthand: N N N Y Y
+  * Jan, Jose, and Jillian did *not* purchase the game, so they are represented by the letter N (for "no").
+  * Ariella and Danial *did* purchase the game, so they are represented by the letter Y (for "yes").
+  * We illustrate the teens' decisions with the following shorthand: N N N Y Y
 - The other leaf nodes similarly summarize the purchasing habits of the individuals in their age groups.
 
-@ifslide{@image{images/stump.png, 180}}
+@ifslide{@image{images/stump.png, 350}}
 
 @slidebreak{InvestigateR}
 
@@ -463,7 +466,7 @@ We need to replace each outcome label (like N N N Y Y) with a predicted outcome.
 @Q{What predictions should we make for the other age groups? Why?}
 @A{People in their twenties and thirties will buy the game. Everyone in their twenties bought the game, and a majority of those in their thirties bought the game.}
 
-@ifslide{@image{images/stump.png, 180}}
+@ifslide{@image{images/stump.png, 350}}
 
 }
 
@@ -490,7 +493,7 @@ Our prediction was correct for 3 out of 5 individuals or 60% of the time.
 
 @slidebreak{InvestigateR}
 
-@center{@image{images/age-stump-checks.png, 180}}
+@center{@image{images/age-stump-checks.png, 350}}
 
 Our prediction was pretty effective! It was correct 10 out of 14 times! And for people in their twenties it was 100% accurate. Can we make the predictions more accurate for the other two groups? Yes! We still have two columns of data to consider:
 
@@ -557,7 +560,7 @@ Complete the second and third sections of @printable-exercise{build-and-test.ado
 @A{Responses will vary.}
 @A{Medical systems being trained on only adults, but not children.}
 @A{Tutoring systems trained on only native speakers of a language.}
-@A{Music recommendation systems being trained on narrow set of genres.}
+@A{Music recommendation systems being trained on a narrow set of genres.}
 
 @Q{We collapsed specific ages into categories (teenager, etc) to align the specificity of our data with the specificity of recommendations that we wanted from the decision tree. What if we had not done that, and instead created a branch for each individual age? How would individual branches have affected the decision tree and its recommendations?}
 @A{The tree would have had many more branches and decision nodes.}
@@ -569,8 +572,8 @@ Complete the second and third sections of @printable-exercise{build-and-test.ado
 @A{Use: Follow the decision tree to find the predicted outcome for a new input (set of values for the question variables).}
 
 @Q{What are the key differences between building a decision tree and playing a game of 20 Questions?}
-@A{In 20 Questions, we generate new questions as we play, whereas a decision tree is built from a fixed dataset}
-@A{In 20 Questions, the answers are all yes/no, whereas there can be multiple answers to a question in a decision tree}
+@A{In 20 Questions, we generate new questions as we play, whereas a decision tree is built from a fixed dataset.}
+@A{In 20 Questions, the answers are all yes/no, whereas there can be multiple answers to a question in a decision tree.}
 @A{In 20 Questions, we generate new questions each time we play the game. A decision tree is a model that will be used to make multiple predictions over the same input variables.}
 }
 
