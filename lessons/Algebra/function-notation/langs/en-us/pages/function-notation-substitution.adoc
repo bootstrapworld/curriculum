@@ -5,33 +5,99 @@
 /* Push content to the top (instead of the default vertical distribution), which was leaving empty space at the top. */
 #content { display: block !important; }
 
+.part1>tbody>tr>td:nth-child(2) p { margin: 20px 0 !important; }
+
 /* Make every single math instance inside .boldHeader bold */
-.boldHeader th .MathJax, .boldHeader th .mathunicode {
+.part2 th .MathJax, .boldHeader th .mathunicode {
 	font-weight: bold !important; font-style: italic;
 }
+
+.part2 .autonum { margin-right: 20px; }
 
 td .autonum:after, th .autonum:after { content: ") " !important; }
 </style>
 ++++
 
 == Part 1
+Four different functions (_f, g, h,_ and _k_) are defined in the middle column below. In each row of the tables below, substitute the given value into the expression and evaluate. (The first one has been completed for you)
 
-Complete each *row* of the table below, substituting the given value into the expression and evaluating.
-
-[cols="^1a, ^8a, ^4a, ^8a, ^4a", options="header"]
+[.part1, cols="2a,^.^1a,2a", grid="none", frame="none"]
 |===
-|  | Function Definition	  	| Expression 		| Substitution 					| Evaluates to
-|@n| @math{f(x) = x + 2} 		| @math{f(3)} 		| @math{3 + 2}						| @math{5}
-|@n| @math{g(x) = x - 1} 		| @math{g(6)} 		| @ifsoln{@math{6 - 1}}			| @ifsoln{@math{5}}
-|@n| @math{h(x) = 3x}			| @math{h(4)} 		| @ifsoln{@math{3(4)}}			| @ifsoln{@math{12}}
-|@n| @math{k(x) = 2x - 1}		| @math{k(5)} 		| @ifsoln{@math{2(5) - 1}}		| @ifsoln{@math{9}}
+|
+[cols="^.^1a, ^.^4a, ^.^8a, ^.^4a", options="header"]
+!===
+!
+! Expression
+! Substitution
+! Evaluates to
+
+! @n
+! @math{f(3)}
+! @math{3 + 2}
+! @math{5}
+
+! @n
+! @math{f(6)}
+! @ifsoln{@math{6 + 2}}
+! @ifsoln{@math{8}}
+
+! @n
+! @math{g(6)}
+! @ifsoln{@math{6 - 1}}
+! @ifsoln{@math{5}}
+
+! @n
+!@math{g(3)}
+! @ifsoln{@math{3 - 1}}
+! @ifsoln{@math{2}}
+!===
+
+|
+@math{f(x) = x + 2} +
+
+@math{g(x) = x - 1} +
+
+@math{h(x) = 3x} +
+
+@math{k(x) = 2x - 1}
+
+
+|
+[cols="^.^1a, ^.^4a, ^.^8a, ^.^4a", options="header"]
+!===
+!
+! Expression
+! Substitution
+! Evaluates to
+
+! @n
+! @math{h(4)}
+! @ifsoln{@math{3(4)}}
+! @ifsoln{@math{12}}
+
+! @n
+! @math{h(7)}
+! @ifsoln{@math{3(7)}}
+! @ifsoln{@math{21}}
+
+! @n
+! @math{k(5)}
+! @ifsoln{@math{2(5) - 1}}
+! @ifsoln{@math{9}}
+
+! @n
+! @math{k(3)}
+! @ifsoln{@math{2(3) - 1}}
+! @ifsoln{@math{5}}
+!===
+
 |===
 
 == Part 2
 
 Each *column* below includes four different functions. Beneath each of them are a collection of different expressions for you to evaluate.
 
-[.boldHeader, cols="1a,1a,1a,1a", options="header"]
+[.part2, cols="1a,1a,1a,1a", options="header"]
 |===
 | @n @math{m(x) = -2x + 3}
 | @n @math{n(x) = -x + 7}
