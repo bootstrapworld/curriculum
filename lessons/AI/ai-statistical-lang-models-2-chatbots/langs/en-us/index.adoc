@@ -128,36 +128,67 @@ There is a LOT to discover in each panel!
 @slidebreak{Investigate}
 
 @lesson-instruction{
-- Before we start exploring the other panels, we'll want to find a smaller and shorter collection of documents. Go to the collections @image{images/collection-icon.png, 15} drop down menu and select {nbsp} @image{images/paw-icon.png, 13} *Intelligent Monkeys?*
-- Once you have the collection open, take a look at the N-Grams panel. By default you should see the `3` tab selected, displaying all of the possible @vocab{trigrams} in the collection, sorted from most to least frequently occurring. 
-- Turn to @printable-exercise{meet-soekia-2.adoc}, which will prompt you to interact with a few specific features of the other panels. 
-- After you have a basic sense of each panel's purpose, take a moment to Notice and Wonder. Get curious, click around, and consider how each panel relates to the others that you have already explored.
-
+- Before we start exploring the other panels, we'll want to find a smaller and shorter collection of documents. Go to the collections @image{images/collection-icon.png, 15} drop down menu and select {nbsp} @image{images/paw-icon.png, 13} _Intelligent Monkeys?_
+- Once you have the collection open, take a look at the _N-grams_ panel. By default you should see `3` selected at the top, meaning that all of the possible @vocab{trigrams} in the collection will be displayed, sorted from most to least frequently occurring. 
+- Complete @printable-exercise{meet-soekia-2.adoc}.
+- If you finish before we're ready to discuss as a class, see if you can predict the first 5 words Soekia would produce from the weather collection @image{images/cloud-icon.png, 15}. _Note: When you switch collections, the temperature will automatically reset to 60, so you'll need to reset it to low._
 }
+
+@slidebreak{Investigate}
+
+@lesson-instruction{
+You were just introduced to how Soekia scans the various lists in the _N-grams_ panel to generate the next word in the text field when the temperature is set to low. You were also introduced to the idea that not all of the lists are "valid n-grams" from the get go. Let's confirm that the process made sense.
+}
+
+@slidebreak{Investigate}
+
 @QandA{
-@Q{What did you Notice about the _N-grams_ panel?}
+@Q{When predicting the next word, when will Soekia choose a word from the list of unigrams?}
+@A{For the first word. And for any other word, when it doesn't find a match for a bigger n-gram that uses the previous words.}
+
+@Q{If the first four words in the text generation field were "Once upon a time", what would Soekia look for in the _N-grams_ tabs to choose the next word?}
+@A{First it would look for the most frequently occurring 5-gram that starts with "Once upon a time"}
+@A{If there wasn't one, it would look for the most frequently occurring 4-gram that starts with "upon a time"}
+@A{If there wasn't one, it would look for the most frequently occurring trigram that starts with "a time"}
+@A{If there wasn't one, it would look for the most frequently occurring bigram thar starts with "time"}
+@A{If there wasn't one, it would look for the next most frequently occurring unigram.}
+
+@Q{What else did you Notice about the _N-grams_ panel?}
 @A{All of the n-grams come directly from the documents.}
 @A{I can sort the n-grams either alphabetically or by frequency.}
 @A{Soekia interprets punctuation marks as words.}
 @A{I can tell Soekia to produce unigrams, digrams, trigrams, etc.}
+@A{Soekia computes the frequency of each n-gram, just like we did from the "There Was an Old Lady Who Swallowed a Fly" corpus in the @lesson-link{ai-statistical-lang-models-generating-text} lesson.}
 
 @Q{What did you Wonder about the _N-grams_ panel?}
 @A{Why does Soekia interpret punctuation as a word?}
 @A{How does Soekia decide which n-gram it will use in the fairy tale?}
 }
 
-@teacher{During @lesson-link{ai-statistical-lang-models-generating-text}, students computed the frequency of different n-grams in smaller training corpus, the song "There Was an Old Lady Who Swallowed a Fly". That is precisely what Soekia is doing in the _N-grams_ panel!}
+@slidebreak{Investigate}
+
+We just looked at how Soekia chooses the next word with the temperature set to low, but what does that mean? 
+
+When the temperature is zero we are following an algorithm that very rigidly returns the most frequently occuring @vocab{n-grams} in the corpus. Higher temperatures introduce some degree of randomization. In fact, when the temperature is 60 it means there’s a 60% chance that we will look outside the first set (the most frequently occurring n-grams).
+
+But why would we want to introduce randomness into our text generation? There are many reasons!
+
+- When we asked Soekia to generate text with zero randomization from the {nbsp} @image{images/paw-icon.png, 13} _Intelligent Monkeys?_ collection, sticking to the most frequent n-grams trapped us in a repetitive three word loop!
+- We might not want the same prompt to generate the exact same content every time.
+- We might want to generate text that pushes us to think creatively beyond the bounds of the box our ideas are stuck in.
 
 @slidebreak{Investigate}
 
+@lesson-instruction{
+- Return to Soekia and open the @image{images/cloud-icon.png, 15} weather collection.  
+- In the _Suggested words_ panel, click "Customize temperature/ number of suggestions" and set the temperature to *low*. Then click  @image{images/send-icon.png, 15} in the _Generate Text_ panel and watch as the text is generated both there and in the _Suggested words_ panel.
+- Repeat the process for other temperature settings, noticing how the language changes.
+}
+
 @QandA{
-@Q{What did you Notice about the _Suggested words_ panel?}
+@Q{What did you Notice?}
 @A{The _Suggested words_ panel updates automatically as Soekia generates text.}
 @A{Soekia often suggests a 5-gram and the shorter n-grams that are contained within that 5-gram (e.g., "the wind in the trees", "wind in the trees", "in the trees" and "trees").}
-
-@Q{What did you Wonder about the _Suggested words_ panel?}
-@A{What does it mean to customize the temperature?}
-@A{How does changing the temperature affect the output?}
 }
 
 === Synthesize
