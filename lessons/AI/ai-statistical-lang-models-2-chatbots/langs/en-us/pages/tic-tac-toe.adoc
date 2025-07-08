@@ -1,71 +1,60 @@
-= What Makes a Language?
+= Tic Tac Toe
 
-Respond to the prompts below by interacting with @starter-file{soekia}.
+== Warmup: Play A Game of Tic Tac Toe
 
-== Soekia & Tic-Tac-Toe 
+[cols="1,.^3a,1,4a,1", grid="none",frame="none"]
+|===
+|
+|
+@image{../images/tic-tac-toe-board.png}
+|
+| _In case you need a refresher on the game:_ 
 
-Access the _Documents_ panel by clicking the "LOOK INSIDE @image{../images/arrow-forward-icon.png, 15}" button in the upper right-hand corner of @starter-file{soekia, "Soekia"}. 
+- The tic-tac-toe board is a 3x3 grid.
+- One person will draw an *X* in one of the squares.
+- The other person will draw and *O* in one of the squares.
+- Keep taking turns - the goal is to get three in a row or block your neighbor from getting three in a row.
+- The game ends when one of you gets three in a row or the grid is full.
+|
+|===
 
-- Click @image{../images/collection-icon.png,15} and select @image{../images/grid-icon.png, 15} from the drop-down menu.
+== Annotating a Game of Tic Tac Toe
 
-@n Describe what you see. @fitb{}{@ifsoln{There are twenty-six documents. Document 1 is the same tic-tac-toe game we already played.}}
+@image{../images/tic-tac-toe-5-turns.png}
 
-@fitb{}{@ifsoln{Each document is a different color. It looks like they probably all narrate different possible tic-tac-toe games.}}
+@n Complete the table by translating the 5 turn sequence above into our tic tac toe annotation.
+@indented{_For Reference:_ 
 
-@n How are the documents of the tic-tac-toe collection *similar* to the documents of the fairy tale collection? How are they *different*? 
+- _If player X makes a move in the bottom right corner, we would describe that turn as: {nbsp} X31_
+- _If player O makes a move in the middle of the left column, we would describe that turn as: {nbsp} O12_
+}
 
-@fitb{}{@ifsoln{Both types of documents contain letters from the alphabet. The fairy tale documents contain sentences and paragraphs of words in English.}}
+[cols="^1a,^1a,^1a,^1a,^1a", options="header"]
+|===
+| 1st move  	| 2nd move  	| 3rd move  	| 4th move 		| 5th move
+| @ifsoln{X22}	| @ifsoln{O23}	| @ifsoln{X21}	| @ifsoln{O13}	| @ifsoln{X33}	@vspace{1ex}
+|===
 
-@fitb{}{@ifsoln{The tic-tac-toe documents use a special notation (made up of letters and numbers) to represent the moves of the tic-tac-toe game.}}
+== Translating Notation to the Game Board
 
-@fitb{}{@ifsoln{Both document types can interpreted as a series of unigrams, bigrams, trigrams, etc.}}
+@n Translate the list of moves below into a game played on the tic tac toe board.
 
-@vspace{1ex}
+[cols="1,.^4a,1,3a,1", grid="none",frame="none"]
+|===
+| 
+|
+- @big{X32}
+- @big{O22}
+- @big{X12}
+- @big{O11}
+- @big{X33}
+- @big{O13}
+- @big{X31}
+| 
+|
+@ifnotsoln{@image{../images/tic-tac-toe-board.png}}
+@ifsoln{@image{../images/tic-tac-toe-solution.png}}
+|
+|===
 
-In the _Generate Text_ panel, 
-
-- Click @image{../images/send-icon.png, 15} to tell Soekia to generate a set of game moves. 
-- Click ▶️ *TicTacToe-player* (beneath the list of moves) to see a visualization of the game you just generated. _Note that the player only appears after you have generated and paused a tic-tac-toe game._
-
-@n In what ways does the game seem *similar* to a normal game of tic-tac-toe? In what ways does it seem *different*?
-
-@blanklines{3}{
-@ifsoln{*Similarities:* Xs and Os alternate, gradually filling up the board. *Differences:* The game keeps adding Xs and Os after the grid is already filled up until all 45 moves from the list have been used up!
-}}
-
-
-== Thinking About Natural Language Processing 
-
-In the _Documents_ panel, 
-
-- Click @image{../images/collection-icon.png,15} and select @image{../images/music-icon.png,15} from the dropdown menu. 
-
-In the _Generate Text_ panel, 
-
-- Click @image{../images/send-icon.png, 15} to tell Soekia to write you some music. Click ▶️ *Music-Player* to try playing your composition.
- 
-@n What do you Notice? What do you Wonder? @fitb{}{}
-
-@fitb{}{}
-
-@n @right{@image{../images/repeat-sign.png, 75}}In musical notation, a "repeat sign" (pictured on right) indicates that a section of the music should be repeated. Does Soekia's music player repeat sections of the music when it arrives at a repeat sign? Why or why not? 
-
-@fitb{}{@ifsoln{No, Soekia does not repeat sections of the music. Soekia does not know anything about making music!}}
-
-@fitb{}{@ifsoln{It is simply adhering to the rules of probability to generate songs.}}
-
-@vspace{1ex}
-
-In the _Documents_ panel, 
-
-- Click @image{../images/collection-icon.png,15} and select @image{../images/chess-icon.png,15} from the bottom of the dropdown menu. 
-
-In the _Generate Text_ panel, 
-
-- Click @image{../images/send-icon.png, 15} to tell Soekia to generate a set of chess moves. Click ▶️ *Chess-Player* to visualize the game. 
- 
-@n In actual chess, a player starts with two knights and there is no way to gain additional knights. How come additional knights sometimes appear in this chess game?
-
-@fitb{}{@ifsoln{If Soekia's algorithm dictates that a knight needs to be moved, Soekia finds a way to move a knight!}}
-
-@fitb{}{}
+@n Is there a winner? @fitb{}{@ifsoln{Yes! X wins the game.}}

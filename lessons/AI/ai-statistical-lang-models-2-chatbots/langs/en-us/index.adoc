@@ -71,7 +71,7 @@ In this lesson, you will explore Soekia, a simplified text generation tool desig
 @A{In order to write a new story, we can click on the reset icon @image{images/reset-icon.png,15} to delete what's been generated.}
 @A{We can copy the text that's been generated to our clipboard using the @image{images/copy-icon.png,15}.}
 @A{We can turn color-coding of the words on and off by clicking on @image{images/eye-icon.png,15}.}
-@A{We can switch from continuous text generation to single word {nbsp} @image{images/single-step-icon.png, 15} {nbsp} or fast text generation mode {nbsp} @image{images/fast-icon.png,15}.
+@A{We can switch from continuous text generation to {nbsp} "@image{images/single-step-icon.png, 15} single word"  {nbsp} or {nbsp} "@image{images/fast-icon.png,15} fast" text generation mode {nbsp} @image{images/fast-icon.png,15}.
 }
 
 
@@ -104,7 +104,8 @@ Now, in addition to the blue text generation panel, we see three additional pane
 There is a LOT to discover in each panel! 
 
 @lesson-instruction{
-- Let's start with the Documents panel and complete @printable-exercise{meet-soekia-1.adoc}.
+- Let's start with the Documents panel. 
+- Turn to @printable-exercise{meet-soekia-1.adoc} and complete the page with your partner.
 }
 
 @slidebreak{Investigate}
@@ -130,7 +131,7 @@ There is a LOT to discover in each panel!
 @lesson-instruction{
 - Before we start exploring the other panels, we'll want to find a smaller and shorter collection of documents. Go to the collections @image{images/collection-icon.png, 15} drop down menu and select {nbsp} @image{images/paw-icon.png, 13} _Intelligent Monkeys?_
 - Once you have the collection open, take a look at the _N-grams_ panel. By default you should see `3` selected at the top, meaning that all of the possible @vocab{trigrams} in the collection will be displayed, sorted from most to least frequently occurring. 
-- Complete @printable-exercise{meet-soekia-2.adoc}.
+- Turn to @printable-exercise{meet-soekia-2.adoc} and complete the page with your partner.
 - If you finish before we're ready to discuss as a class, see if you can predict the first 5 words Soekia would produce from the weather collection @image{images/cloud-icon.png, 15}. _Note: When you switch collections, the temperature will automatically reset to 60, so you'll need to reset it to low._
 }
 
@@ -203,7 +204,7 @@ But why would we want to introduce randomness into our text generation? There ar
 @A{In the _Text Generation_ panel, the output appears automatically or the user can opt to select each word from a a list of suggestions.}
 
 @Q{@vocab{Supervised learning} includes three steps: the demonstration of the learning process, function abstraction, and using the function. Describe what each step includes for the @vocab{supervised learning} of a @vocab{statistical language model}.}
-@A{Demonstration: For statistical language models, the demonstration phase is less obvious than in the other cases we have studied (self-driving cars and decision trees). Essentially, a human supervisor is needed to select the documents that form the @vocab{training corpus}. The demonstration that “given an n-gram, the completion is ____” is implicit, not overt. It would be mindbogglingly overwhelming for a human to have to demonstrate each of these completions! There is some degree of self-supervision occurring with this type of model.}
+@A{Demonstration: For statistical language models, the demonstration phase is less obvious than in the other cases we have studied (self-driving cars and decision trees). Essentially, a human supervisor is needed to select the documents that form the @vocab{training corpus}. The demonstration that “given an n-gram, the completion is ____” is implicit, not overt. It would be mindbogglingly overwhelming for a human to have to demonstrate each of these completions! Instead the "supervision" comes from the probabilities the computer has calculated from the corpus.}
 @A{Function abstraction: A statistical language model assigns probabilities to different word sequences, indicating how likely it is that they will occur based on the preceding words (or n-grams).}
 @A{Use: Function use involves generating text, one word at a time, based on probability.}
 }
@@ -224,47 +225,54 @@ Students discover that statistical language models do not require natural langua
 Let's take a break from Soekia for a quick game of tic-tac-toe!
 
 @lesson-instruction{
-- Draw a tic-tac-toe grid on your paper and play a game of tic-tac-toe with your neighbor. +
-_In case you need a refresher on the game:_
+- Turn to the first section of @printable-exercise{tic-tac-toe.adoc} and play a game of tic-tac-toe with your neighbor. @ifnotslide{_If you need a refresher on how to play the game, you'll find directions on the page.}_}
+@ifslide{_In case you need a refresher on the game:_
   * The tic-tac-toe board is a 3x3 grid.
   * One person will draw an *X* in one of the squares.
   * The other person will draw and *O* in one of the squares.
   * Keep taking turns - the goal is to get three in a row or block your neighbor from getting three in a row.
   * The game ends when one of you gets three in a row or the grid is full.
+}
 
 @slidebreak{Launch}
 
-Here is a sequence of 5 images showing a game in progress.
+In order to communicate with Soekia about tic tac toe games, we'll need to record the moves using an annotation.
+
+- Let's think of the 3x3 tic-tac-toe grid as a first quadrant coordinate plane with the origin (0,0) in the bottom left corner
+- For each move, our notation must indicate: 
+  * the player whose turn it is (X or O)
+  * the ordered pair (x, y) for the location of the player's move on that turn 
+- If player X makes a move in the bottom right corner, we would describe that turn as: {nbsp} X31
+- If player O makes a move in the middle of the left column, we would describe that turn as: {nbsp} O12
+
+@slidebreak{Launch}
+
+@lesson-instruction{Turn to the second section of @printable-exercise{tic-tac-toe.adoc} and work with your partner to annotate the 5-turn sequence that is drawn for you.}
+
+@slidebreak{Launch}
 
 @image{images/tic-tac-toe-5-turns.png}
 
-Let's make up a notation to represent this sequence, knowing that:
-
-- the tic-tac-toe grid is a 3x3 coordinate plane with the origin (0,0) in the bottom left corner
-- for each move, our notation must indicate: 
-  * the player whose turn it is (X or O)
-  * the ordered pair (x, y) for the location of the player's move on that turn 
+@QandA{
+@Q{How did you annotate the moves in this tic-tac-toe game?}
+@A{X22, O23, X12, O13, X33}
 }
-
-@teacher{Allow students time to work with a partner to annotate the 5 tic-tac-toe turns represented above.}
 
 @slidebreak{Launch}
 
+@lesson-instruction{Turn to the third section of @printable-exercise{tic-tac-toe.adoc} and work with your partner to translate the "document" written in our tic-tac-toe notation into a standard game on a tic-tac-toe board.}
+
+@slidebreak{Launch}
+
+
+Here is the game played out on a tic-tac-toe board: 
+
+[cols="1a, 2a", grid="none", frame="none"]
+|===
+|@image{images/docA.png}
+|@image{images/tic-tac-toe-solution.png, 75}}}
+|===
 @QandA{
-@Q{How would you annotate the first move in this tic-tac-toe game?}
-@A{X22}
-
-@Q{How would you annotate the second move in this tic-tac-toe game?}
-@A{O23}
-
-@Q{Annotate the remainder of the moves.}
-@A{X12, O13, X33}
-
-@Q{@right{@image{images/docA.png, 50}} Can you translate this "document" written in tic-tac-toe notation into a standard game on a tic-tac-toe board?}
-@A{Here is the game played out on a tic-tac-toe board: 
-
-@center{@image{images/tic-tac-toe-solution.png, 75}}}
-
 @Q{Is there a winner?}
 @A{Yes! X wins the game.}
 }
@@ -276,8 +284,8 @@ Did you notice that the collection of fairy tales you explored during the first 
 
 @lesson-instruction{
 - Open a browser window and make sure it is filling the full width of your screen.
-- Follow the directions on @printable-exercise{tic-tac-toe.adoc} to load the Tic-Tac-Toe training corpus in Soekia.
-- Complete the first section of @printable-exercise{tic-tac-toe.adoc}
+- Follow the directions on @printable-exercise{what-makes-a-language.adoc} to load the Tic-Tac-Toe training corpus in Soekia.
+- Complete the first section of @printable-exercise{what-makes-a-language.adoc}
 }
 
 @slidebreak{Investigate}
@@ -299,13 +307,13 @@ Just like a natural language, the tic-tac-toe text can be parsed into n-grams an
 @slidebreak{Investigate}
 
 @lesson-instruction{
-- Follow the directions in the second section of @printable-exercise{tic-tac-toe.adoc} to access the "Music in ABC Notation" training corpus.
-- Complete the second section of @printable-exercise{tic-tac-toe.adoc}, "Thinking About Natural Language Processing." 
+- Follow the directions in the second section of @printable-exercise{what-makes-a-language.adoc} to access the "Music in ABC Notation" training corpus.
+- Complete the second section of @printable-exercise{what-makes-a-language.adoc}, "Thinking About Natural Language Processing." 
 }
 
 @QandA{
 @Q{Does Natural Language Processing require natural language? Explain.}  
-@A{No, Natural Language Processing - and statistical language modeling, too - works on artificial languages, such as chess and music notation. As long as the language can be broken into "words" that are separated by spaces, then the text can be processed just like a natural language. The very same algorithms can be applied to a wide variety of languages - both natural and artificial.}
+@A{No, Natural Language Processing works on artificial languages, such as chess and music notation. As long as the language can be broken into "words", then the text can be processed just like a natural language. The very same algorithms can be applied to a wide variety of languages - both natural and artificial.}
 }
 
 === Synthesize
