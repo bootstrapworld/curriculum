@@ -1,5 +1,22 @@
 = There Was an Old Lady Who Swallowed a Fly
-
+++++
+<style>
+	#body { counter: line-number 0; }
+	.paragraph { counter-increment: line-number; margin: 0.5ex 0 !important; }
+	.sectionbody > * { position: relative; }
+	.sectionbody p { margin-left: 2em !important; }
+	.sectionbody p:before {
+		color: gray;
+		display: inline-block;
+		content: counter(line-number) !important;
+		position: absolute;
+		left: 0;
+		width: 100%;
+		border-bottom: 1px dashed #ddd;
+	}
+	.indentedpara p:before { left: -3em; width: calc(100% + 3em);}
+</style>
+++++
 There was an old lady who swallowed a fly,
 
 I don't know why she swallowed a fly – perhaps she'll die!
