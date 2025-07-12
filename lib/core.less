@@ -338,6 +338,17 @@ div#body {
   }
 
   .vocab { font-weight: bold; font-style: italic; color: @font-color; }
+
+  /* compact tables */
+  table.data-table {
+    td, th {
+      margin:       0;
+      padding:      0 5px;
+      width:        1px;
+      p { line-height: 1.3; margin: 0; }
+    }
+  }
+
 }
 /* use 'thin' instead of 1px border to try and avoid disappearing
 lines on some browsers */
@@ -348,7 +359,7 @@ lines on some browsers */
   min-width:          4em;
   text-align:         center;
   line-height:        1rem;
-  border-bottom:      solid thin gray;
+  border-bottom:      solid thin black;
   vertical-align:     baseline;
 }
 
@@ -786,11 +797,10 @@ div#body.workbookpage {
   .blanklines {
     display: block;
     position: relative;
-    background-image: linear-gradient(black 1px, transparent 1px);
-    background-size: 100% 2.2rem;
-    background-position-y: 1.7rem;
+    background-image: url('images/2.2rem-ruled lines.png');
     margin-left: 5px;
     line-height: 2.2rem;
+    margin-top: 0.6rem;
     .solution { position: fixed; }
   }
 
@@ -801,15 +811,6 @@ div#body.workbookpage {
     color:        white;
     padding:      1px 10px !important;
     margin-top:   2px;
-  }
-
-  /* compact tables */
-  table.data-table {
-    td, th {
-      margin:       0;
-      padding:      0 5px;
-      width:        1px;
-    }
   }
 
   /* class for tables containing Pyret data */

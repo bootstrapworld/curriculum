@@ -1627,7 +1627,7 @@
                             (let ([n (string->number (read-group i directive))]
                                   [text (read-group i directive)])
                               ; (printf "doing @blanklines ~s\n" n)
-                              (display-begin-span ".blanklines" o #:attribs (format "style=\"height: ~arem\"" n))
+                              (display-begin-span ".blanklines" o #:attribs (format "style=\"height: ~arem\"" (* 2.2 n)))
                               (display (expand-directives:string->string text #:enclosing-directive directive) o)
                               (display-end-span o))]
                            [(string=? directive "duration")
