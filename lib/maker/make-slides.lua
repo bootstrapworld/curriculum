@@ -456,7 +456,7 @@ local function make_slides_file(lplan_file, slides_file)
       if (slide.level == 2 and slide.section) then
         local curr_layout = slide.style
         if not memberp(curr_layout, allowed_slide_layouts) then
-          print('WARNING: Probably empty slide! Unknown slide template ' .. curr_layout .. ' in '
+          print('WARNING: Probably empty slide or template in wrong case! Unknown slide template ' .. curr_layout .. ' in '
             .. os.getenv('PWD'))
           curr_layout = "Bogus-layout"
         end
