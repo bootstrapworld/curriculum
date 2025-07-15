@@ -422,23 +422,34 @@ The rules are simple:
 @do{
 (define expd '(text "Diego" 150 "yellow"))
 (define exprd '(rotate 90 (text "Diego" 150 "yellow")))
-
 }
+
+++++
+<style>
+.circle2 .expression { background: aquamarine !important; }
+.circle2 .expression .expression { background: white !important; }
+</style>
+++++
 
 @slidebreak{Investigate}
 
 _Circles of Evaluation let us see the structure._
 
-[cols="^4, ^.^1,^5", grid="none", stripes="none", frame="none"]
+[cols="^4a, ^.^1a, ^5a", grid="none", stripes="none", frame="none"]
 |===
 
 |We can start by generating the Diego image.
 |
 |And then use the `rotate` function to rotate it 90 degrees.
 
-| @show{(coe expd)}  | &rarr; 	| @show{(coe exprd)}
+| @show{(coe expd)}
+| &rarr;
+| [.circle2]
+@show{(coe exprd)}
 
-| @show{(code expd)} | 			| @show{(code exprd)}
+| @show{(code expd)}
+|
+| @show{(code exprd)}
 
 |===
 

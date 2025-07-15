@@ -1,6 +1,6 @@
-#!/bin/bash
+#! /usr/bin/env bash
 
-# last modified 2023-03-08
+# last modified 2025-07-11
 
 find distribution/$NATLANG/{lessons,courses} -type f \
   -name \.\*internal-links.txt.kp |
