@@ -1994,7 +1994,13 @@
                            [(string=? directive "funname")
                             (fprintf o "`~a`" (get-function-name))]
                            [(string=? directive "slidebreak")
+                            (unless *lesson-plan*
+                              (error 'ERROR
+                                     "@slidebreak (~a) valid only in lesson plan"
+                                     (errmessage-file-context)))
                             (display (enclose-span ".slidebreak" "") o)
+                            (display (html-comment "start_slide") o)
+                            (newline o)
                             (let ([c (peek-char i)])
                               (cond [(and (char? c) (char=? c #\{))
                                      (read-group i directive)]
@@ -2245,6 +2251,9 @@
                    (when (span-stack-present?)
                      (printf "WARNING: ~a: Header can't be inside span\n\n"
                              (errmessage-context)))
+                   (when *lesson-plan*
+                     (display (html-comment "stop_slide") o)
+                     (newline o))
                    (cond [*title-reached?*
                            (cond [*first-subsection-reached?* #f]
                                  [(check-first-subsection i o)
@@ -2389,6 +2398,10 @@
 
               (unless *other-dir*
                 (fprintf o "\n\n"))
+
+              (when *lesson-plan*
+                (display (html-comment "end_all_slides") o)
+                (newline o))
 
               (unless (or *other-dir* (truthy-getenv "NOCOLOPHON"))
                 ;(fprintf o "\n\n")
