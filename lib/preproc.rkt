@@ -1982,6 +1982,19 @@
                                          o))]
                                     [else (set! possible-beginning-of-line?
                                             (skip-1-newline-if-possible i o))]))]
+                           [(member directive '("ifselfguided" "ifnotselfguided"))
+                            (let* ([text (read-group i directive #:multiline? #t)]
+                                   [contains-nl? (regexp-match "^ *\n" text)]
+                                   [converted-text (expand-directives:string->string
+                                                text #:enclosing-directive directive)]
+                                   [class-name (substring directive 2)])
+                              (display
+                                (cond [contains-nl?
+                                        (format "\n\n[.actually-openblock.~a]\n====\n~a\n====\n"
+                                          class-name converted-text)]
+                                      [else
+                                        (enclose-span (format ".~a" class-name)
+                                          converted-text)]) o))]
                            [(or (string=? directive "ifpathway")
                                 (string=? directive "ifnotpathway"))
                             (let ([pathways (read-commaed-group i directive read-group)]
