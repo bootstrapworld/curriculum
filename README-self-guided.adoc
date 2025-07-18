@@ -1,0 +1,40 @@
+= Generating JSON object for self-guided book
+
+The build process automatically generates the files containing the
+JSON required for the self-guided book. The content of these files
+are extracted from their corresponding lesson-plan files. We do
+something similar for generating the slides pages too. 
+
+Each page in the book corresponds to a slide. Note that each slide
+starts with a `@slidebreak` (mandatory) and ends with either a
+following `@slidebreak` or an AsciiDoc section, whichever comes
+earlier. This content becomes the `lessonText` field for that
+page.
+
+A book page also has one of the fields: `editorCode`,
+`imageConfig`, or `videoConfig`. To insert these in the
+lesson-plan file, use the directives
+
+  @editorconfig{...}
+  @imageconfig{...}
+  @videoconfig{...}
+
+(The directive names are uniform and in lower case.)
+
+If a page content doesn't mention either of these, they inherit
+them from the just-previous page.
+
+The starting default used is 
+
+  @editorconfig{{}}
+
+Two conditional directives are available to exclusively enable or
+disable content from the book pages:
+
+  @ifselfguided{...}
+
+uses the enclosed context for the book but nothing else, whereas
+
+  @ifnotselfguided{...}
+
+uses the enclosed context for everything but the book.
