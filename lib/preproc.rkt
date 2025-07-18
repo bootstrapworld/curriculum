@@ -130,6 +130,10 @@
 
 (define *enclosing-directive* #f)
 
+(define *self-guided-counter* 0)
+(define *self-guided-text?* #f)
+(define *self-guided-context* "")
+
 (define *external-url-index*
   (let ([f (string-append *pathway-root-dir* "external-index.rkt")])
     (if (file-exists? f)
@@ -1477,6 +1481,9 @@
   (set! *definitions* '())
   (set! *local-scheme-definitions* '())
   (set! *enclosing-directive* #f)
+  (set! *self-guided-counter* 0)
+  (set! *self-guided-text?* #f)
+  (set! *self-guided-context* "editorCode: {}")
 
   (set! *pyret?* (string=? *proglang* "pyret"))
 
@@ -1559,6 +1566,26 @@
 
 (define *needs-objectives?* #f)
 (define *uses-objectives?* #f)
+
+(define (start-slidebreak o)
+  (stop-slidebreak o)
+  (set! *self-guided-counter* (+ *self-guided-counter* 1))
+  (set! *self-guided-text?* #t)
+  (display (html-comment "start_slide") o)
+  (newline o))
+
+(define (stop-slidebreak o)
+  (when *self-guided-text?*
+    (set! *self-guided-text?* #f)
+    (let ([json-sub-file
+            (build-path *containing-directory* ".cached"
+                        (format ".index-sg-~a.json" *self-guided-counter*))])
+      (call-with-output-file json-sub-file
+        (lambda (o)
+          (fprintf o "{ ~a }\n" *self-guided-context*))
+        #:exists 'replace)
+      (display (html-comment "stop_slide") o)
+      (newline o))))
 
 (define (expand-directives i o)
         ;(printf "doing expand-directives\n")
@@ -2011,14 +2038,27 @@
                               (error 'ERROR
                                      "@slidebreak (~a) valid only in lesson plan"
                                      (errmessage-file-context)))
+                            (start-slidebreak o)
+                            (display (html-comment (format "*** ~a ***" *self-guided-counter*)) o)
                             (display (enclose-span ".slidebreak" "") o)
-                            (display (html-comment "start_slide") o)
-                            (newline o)
                             (let ([c (peek-char i)])
                               (cond [(and (char? c) (char=? c #\{))
                                      (read-group i directive)]
                                     [else (printf "WARNING: ~a: Invalid @slidebreak\n"
                                                   (errmessage-context))]))]
+                           [(member directive '("editorconfig" "imageconfig" "videoconfig"))
+                            (unless *lesson-plan*
+                              (error 'ERROR
+                                     "~a (~a) valid only in lesson plan"
+                                     directive (errmessage-file-context)))
+                            (let ([text (read-group i directive #:multiline? #t)])
+                              (set! *self-guided-context*
+                                (format "~a: ~a\n"
+                                  (case directive
+                                    [("editorconfig") "editorCode"] ;maybe make uniform
+                                    [("imageconfig") "imageConfig"]
+                                    [("videoconfig") "videoConfig"])
+                                  text)))]
                            [(string=? directive "Bootstrap")
                             (fprintf o "https://www.bootstrapworld.org/[Bootstrap]")]
                            [(hash-ref *simple-directives* (string->symbol directive) #f)
@@ -2265,8 +2305,7 @@
                      (printf "WARNING: ~a: Header can't be inside span\n\n"
                              (errmessage-context)))
                    (when *lesson-plan*
-                     (display (html-comment "stop_slide") o)
-                     (newline o))
+                     (stop-slidebreak o))
                    (cond [*title-reached?*
                            (cond [*first-subsection-reached?* #f]
                                  [(check-first-subsection i o)
@@ -2413,6 +2452,7 @@
                 (fprintf o "\n\n"))
 
               (when *lesson-plan*
+                (stop-slidebreak o)
                 (display (html-comment "end_all_slides") o)
                 (newline o))
 

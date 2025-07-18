@@ -341,7 +341,48 @@ local function postproc(fhtml_cached, tipe)
   --
   i:close()
   o:close()
+end
 
+local function extract_self_guided(fhtml_cached)
+  if not file_exists_p(fhtml_cached) then return end
+  local fdir = fhtml_cached:gsub('/%.cached/%.index%.html$', '')
+  local fhtml = fdir .. '/index.shtml'
+  local fjson = fdir .. '/book.json' -- rename?
+  local i = io.open(fhtml, 'r')
+  local o = io.open(fjson, 'w')
+  local writing_p = false
+  local skip_one_more_line_p = false
+  local counter = 0
+  o:write('export const selfGuidedBookBits = [\n')
+  for x in i:lines() do
+    if writing_p then
+      if skip_one_more_line_p then
+        skip_one_more_line_p = false
+      elseif x:match('stop_slide') then
+        o:write('</div>`\n},\n')
+        writing_p = false
+      else
+        o:write(x, '\n')
+      end
+    elseif x:match('end_all_slides') then break -- needed?
+    elseif x:match('start_slide') then
+      writing_p = true
+      skip_one_more_line_p = true
+      counter = counter + 1
+      -- print('counter=', counter)
+      local editorconfig_file = fdir .. '/.cached/.index-sg-' .. counter .. '.json'
+      local editorconfig = '""'
+      if file_exists_p(editorconfig_file) then
+        editorconfig = table.concat(read_file_lines(editorconfig_file), '\n')
+      end
+      o:write('{\neditorCode: ', editorconfig, ',\nlessonText: `\n')
+    else
+      --noop
+    end
+  end
+  o:write(']\n')
+  i:close()
+  o:close()
 end
 
 local function run_postproc(batchf, tipe)
@@ -349,6 +390,7 @@ local function run_postproc(batchf, tipe)
   local files = dofile(batchf)
   for _,f in ipairs(files) do
     postproc(f, tipe)
+    if tipe == 'lessonplan' then extract_self_guided(f) end
   end
 end
 
