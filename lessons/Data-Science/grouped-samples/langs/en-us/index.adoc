@@ -37,7 +37,7 @@
 == Problems with a Single Population
 
 === Overview
-This activity is all about @vocab{grouped samples}: Students make a bunch of non-random samples from the Animals Dataset, and see how each samples might answer the same question differently.
+This activity is all about @vocab{grouped samples}: Students make a bunch of non-random samples from the Animals Dataset, and see how each sample might answer the same question differently.
 
 === Launch
 @slidebreak{LaunchC}
@@ -141,9 +141,16 @@ A “kitten” is an animal who _is a cat_ and who _is young_. How would you def
 
 === Synthesize
 @slidebreak{Synthesize}
-- How could we make a bar chart showing the distribution of `sex` in the `kittens` sample?
-- How could we filter _and_ sort a table?
-- How can we combine functions?
+
+@QandA{
+@Q{How could we make a bar chart showing the distribution of `sex` in the `kittens` sample?}
+@A{
+@show{(code '(bar-chart(filter(filter animals-table is-cat) is-young) "sex"))}
+}
+
+@Q{How could we filter _and_ sort a table?}
+@A{As with double-filtering a table, we would compose our filter and sort functions in either order.}
+}
 
 == Displaying Samples
 
@@ -182,7 +189,7 @@ Let's start with question: _what's the ratio of fixed to unfixed *cats* at the s
 === Investigate
 @slidebreak{Investigate-DN}
 @lesson-instruction{
-- Use the @starter-file{animals} to complete @printable-exercise{data-visualizations2.adoc}. Apply what you've learned about samples to make more sophisticated data visualizations.
+- Use the @starter-file{grouped-samples} to complete @printable-exercise{data-visualizations2.adoc}. Apply what you've learned about samples to make more sophisticated data visualizations.
 - Complete @printable-exercise{data-cycle-categorical.adoc}.
 }
 
@@ -197,5 +204,12 @@ Blank Design Recipes are also available @printable-exercise{design-recipe-helper
 
 === Synthesize
 @slidebreak{Synthesize}
-- What connections do you see between the "Consider Data" and "Analyze Data" steps?
-- How do we know when we need to filter? How do we know when we _don't?_
+
+@QandA{
+@Q{What connections do you see between the "Consider Data" and "Analyze Data" steps?}
+@A{When we Analyze Data we decide what to do with the columns and rows we identified as relevant in the Consider Data phase.}
+
+@Q{How do we know when we need to filter? How do we know when we _don't?_}
+@A{When we want all of the rows, we don't need to filter.} 
+@A{When we only want some of the rows, we need to filter.}
+}

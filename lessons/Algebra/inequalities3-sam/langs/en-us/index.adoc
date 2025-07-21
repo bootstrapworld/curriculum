@@ -125,8 +125,13 @@ If a car starts up when you turn the key, does that mean we know the sunroof wor
 === Synthesize
 @slidebreak{Synthesize}
 
-- Does @show{(code 'safe-left?)} work correctly? How do you know?
-- Does @show{(code 'safe-right?)} work correctly? How do you know?
+@QandA{
+@Q{Does @show{(code 'safe-left?)} work correctly? How do you know?}
+@A{If students wrote examples, they will know have confirmation that the tests passed.}
+
+@Q{Does @show{(code 'safe-right?)} work correctly? How do you know?}
+@A{If students wrote examples, they will know have confirmation that the tests passed.}
+}
 
 == Protecting Sam on Both Sides
 
@@ -244,9 +249,18 @@ These are two different strategies.
 - The other is bottom up: write the pieces and then figure out how to stitch them together.
 }
 
-- How did it feel when you clicked Run, and saw Sam hit both walls for the first time?
-- Are there multiple solutions for @show{(code 'onscreen?)}?
-- Is this _Top-Down_ or _Bottom-Up_ design?
+@QandA{
+@Q{How did it feel when you clicked Run, and saw Sam hit both walls for the first time?}
+
+@Q{Are there multiple solutions for @show{(code 'onscreen?)}?}
+@A{Since order doesn't matter for AND we could have used:
+  * @show{(code 'safe-left?)} AND @show{(code 'safe-right?)} or 
+  * @show{(code 'safe-right?)} AND @show{(code 'safe-left?)}
+}
+
+@Q{Is this _Top-Down_ or _Bottom-Up_ design?}
+@Q{Bottom-Up. We defined the pieces (@show{(code 'safe-left?)}, @show{(code 'safe-right?)}) first. Then we put them together.}
+}
 
 
 == Boundary Detection in the Game
@@ -290,7 +304,12 @@ Students who tackled the optional @show{(code 'safe-top?)} and @show{(code 'safe
 === Synthesize
 @slidebreak{Synthesize}
 
-The same code that "trapped" Sam also "resets" the `DANGER` and the `TARGET`. What is actually going on?
+@QandA{
+@Q{Why are we able to reuse the code that "trapped" Sam to "reset" the `DANGER` and the `TARGET`?}
+@A{In both programs, it's just checking whether the character has reached the edge of the screen.}
+@A{In Sam the Butterfly, when the character reaches the edge of the screen the arrows aren't allowed to move Sam anymore.}
+@A{In our game, when the character reaches the edge of the screen, the behind the scenes code has instructions about what to do when the character is no longer @show{(code 'onscreen?)}}
+}
 
 == Additional Exercises
 @slidebreak{Supplemental}

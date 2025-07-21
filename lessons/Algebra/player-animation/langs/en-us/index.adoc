@@ -110,10 +110,23 @@ Once they've gotten their danger moving diagonally, they're ready to build upon 
 
 === Synthesize
 @slidebreak{Synthesize}
-- How is this function similar to the piecewise functions you've seen before? How is it different?
-- How could we change this function so that the "W" key makes the player go up, instead of the arrow key?
-- How could we change this function so that the "W" key makes the player go up, _in addition to_ the arrow key?
-- Suppose your little brother or sister walks by and hits a random key. What should happen if you hit a random key that doesn’t have a meaning in your function? What happens now?
+
+@QandA{
+@Q{How is this function similar to the piecewise functions you've seen before? How is it different?}
+
+@Q{How could we change this function to use the "W" key to make the player go up instead of the arrow key?}
+@A{
+@ifproglang{pyret}{We just need to replace `if (key == "up"):` with `if (key == "W"):`}
+}
+
+@Q{How could we change this function so that both the "W" key and the arrow key make the player go up?}
+@A{
+@ifproglang{pyret}{We would leave `if (key == "up"):` and add another line that says `else if (key == "W"):`}
+}
+
+@Q{Suppose your little brother or sister walks by and hits a random key. What should happen if you hit a random key that doesn’t have a meaning in your function? What happens now?}
+@A{Right now nothing will change. If a random key is hit it will return the same y-coordinate it took in.}
+}
 
 == Cheat Codes and Customizations
 
@@ -150,9 +163,15 @@ Adding useful @vocab{comments} to code is an important part of programming. It l
 === Synthesize
 @slidebreak{Synthesize}
 
-- What features did you add to customize your games?
-- What would it take to make the player move left and right? 
-- Why can't we do this without changing the Contract?
+@QandA{
+@Q{What features did you add to customize your games?}
+
+@Q{What would it take to make the player move left and right?}
+@A{We would need to be able to change both the x and y coordinate} 
+
+@Q{Why can't we do this without changing the Contract?}
+@Q{Right now the Contract takes in a single Number and returns a single Number}
+}
 
 @ifnotslide{
 @strategy{Pedagogy Note}{
