@@ -353,17 +353,21 @@ local function extract_self_guided(fhtml_cached)
   local writing_p = false
   local skip_one_more_line_p = false
   local counter = 0
+  local page_header = ''
   o:write('export const selfGuidedBookBits = [\n')
   for x in i:lines() do
     if writing_p then
       if skip_one_more_line_p then
         skip_one_more_line_p = false
+        o:write(page_header, '\n')
       elseif x:match('stop_slide') then
         o:write('</div>`\n},\n')
         writing_p = false
       else
         o:write(x, '\n')
       end
+    elseif x:match('^<h2') then
+      page_header = x
     elseif x:match('end_all_slides') then break -- needed?
     elseif x:match('start_slide') then
       writing_p = true
