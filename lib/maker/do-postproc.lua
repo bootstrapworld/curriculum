@@ -375,7 +375,7 @@ local function extract_self_guided(fhtml_cached)
       if file_exists_p(editorconfig_file) then
         editorconfig = table.concat(read_file_lines(editorconfig_file), '\n')
       end
-      o:write('{\neditorCode: ', editorconfig, ',\nlessonText: `\n')
+      o:write('{\n', editorconfig, ',\nlessonText: `\n')
     else
       --noop
     end

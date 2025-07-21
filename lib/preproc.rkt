@@ -1572,7 +1572,8 @@
   (set! *self-guided-counter* (+ *self-guided-counter* 1))
   (set! *self-guided-text?* #t)
   (display (html-comment "start_slide") o)
-  (newline o))
+  ; (newline o)
+  )
 
 (define (stop-slidebreak o)
   (when *self-guided-text?*
@@ -1582,7 +1583,7 @@
                         (format ".index-sg-~a.json" *self-guided-counter*))])
       (call-with-output-file json-sub-file
         (lambda (o)
-          (fprintf o "{ ~a }\n" *self-guided-context*))
+          (fprintf o "~a\n" *self-guided-context*))
         #:exists 'replace)
       (display (html-comment "stop_slide") o)
       (newline o))))
@@ -2039,8 +2040,9 @@
                                      "@slidebreak (~a) valid only in lesson plan"
                                      (errmessage-file-context)))
                             (start-slidebreak o)
-                            (display (html-comment (format "*** ~a ***" *self-guided-counter*)) o)
+                            (display (html-comment (format "slidenum ~a" *self-guided-counter*)) o)
                             (display (enclose-span ".slidebreak" "") o)
+                            (newline o)
                             (let ([c (peek-char i)])
                               (cond [(and (char? c) (char=? c #\{))
                                      (read-group i directive)]
@@ -2052,6 +2054,7 @@
                                      "~a (~a) valid only in lesson plan"
                                      directive (errmessage-file-context)))
                             (let ([text (read-group i directive #:multiline? #t)])
+                              ; (printf "xconfig = ~a\n" text)
                               (set! *self-guided-context*
                                 (format "~a: ~a\n"
                                   (case directive
