@@ -360,7 +360,7 @@ local function extract_self_guided(fhtml_cached)
       if skip_one_more_line_p then
         skip_one_more_line_p = false
         o:write(page_header, '\n')
-      elseif x:match('stop_slide') then
+      elseif x:match('stop_self_guided_piece') then
         o:write('</div>`\n},\n')
         writing_p = false
       else
@@ -368,8 +368,8 @@ local function extract_self_guided(fhtml_cached)
       end
     elseif x:match('^<h2') then
       page_header = x
-    elseif x:match('end_all_slides') then break -- needed?
-    elseif x:match('start_slide') then
+    elseif x:match('end_self_guided') then break -- needed?
+    elseif x:match('start_self_guided_piece') then
       writing_p = true
       skip_one_more_line_p = true
       counter = counter + 1

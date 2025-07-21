@@ -262,14 +262,16 @@ local function get_slides(lsn_plan_adoc_file)
           update_curr_slide_text(c .. directive)
         elseif directive == 'lesson-roleplay' then
           update_curr_slide_text(c .. directive)
-        elseif directive == 'slidebreak' then
+        elseif directive == 'slidebreak' or directive == 'slideonlybreak' then
           if nested_in and (nested_in ~= 'ifproglang' and nested_in ~= 'ifpdslide' and nested_in ~= 'ifslide') then
             terror('@slidebreak inside @' .. nested_in)
           end
           insert_slide_break()
           local c2 = buf_peek_char(i)
           if c2 == '{' then
-            curr_slide_style = read_group(i, directive)
+            -- curr_slide_style = read_group(i, directive)
+            local slidebreak_args = read_commaed_group(i, directive, read_group)
+            curr_slide_style = slidebreak_args[1]
           elseif nested_in == 'ifpdslide' then
             curr_slide_style = course_string .. ' Title and Body'
           end
