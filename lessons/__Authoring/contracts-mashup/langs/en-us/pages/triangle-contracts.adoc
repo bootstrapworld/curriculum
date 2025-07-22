@@ -1,0 +1,81 @@
+= Triangle Contracts
+
+++++
+<style>
+.forceShading .obeyspaces {
+	display: inline-block;
+	width: 85%;
+	background: #f7f7f8 !important;
+}
+.forceShading .fitbruby { padding-top: 0.5rem; }
+</style>
+++++
+
+Respond to the questions. Go to @starter-file{editor} to test your code.
+
+@n What kind of triangle does the `triangle` function produce?  @fitb{}{@ifsoln{equilateral}}
+@vspace{1ex}
+
+There are lots of other kinds of triangles!  And @proglang has lots of other functions that make triangles!
+
+@vspace{1ex}
+
+[.forceShading]
+--
+@hspace{3em} @show{(contract 'triangle '((size Number) (fill-style String) (color String)) "Image")}
+
+@hspace{3em} @show{(contract 'right-triangle '((base Number) (height Number) (fill-style String) (color String)) "Image")}
+
+@hspace{3em} @show{(contract 'isosceles-triangle '((leg Number) (angle Number) (fill-style String) (color String)) "Image")}
+
+--
+
+@n Why do you think @show{(code 'triangle)} only needs one number, while @show{(code 'right-triangle)} and @show{(code 'isosceles-triangle)} need two numbers?
+
+@fitb{}{@ifsoln{`triangle` makes equilateral triangles, which are all the same shape (with three 60° angles and 3 equal sides) so we just need to know a size. }}
+
+@fitb{}{@ifsoln{`right-triangle` and `isosceles-triangle` can be long & skinny or half-square, so we need more details to get their shapes right.}}
+
+@n Write @show{(code 'right-triangle)} expressions for the images below using `100` as one argument for each.
+
+[.indented-para]
+--
+[cols="^.^8a, <.^14a", stripes="none", grid="none", frame="none"]
+|===
+| @centered-image{../images/right-50-100.png}
+| @fitb{}{@showsoln{(code '(right-triangle 50 100 "solid" "black")) }}
+
+| @centered-image{../images/right-100-50.png}
+| @fitb{}{@showsoln{(code '(right-triangle 100 50 "solid" "black")) }}
+|===
+
+--
+
+@n Write @show{(code 'isosceles-triangle)} expressions for the images below using `100` as one argument for each.
+
+[.indented-para]
+--
+[cols="^.^8a, <.^14a", stripes="none", grid="none", frame="none"]
+|===
+| @centered-image{../images/isosceles-100-30.png}
+| @fitb{}{@showsoln{(code '(isosceles-triangle 100  30 "solid" "black")) }}
+
+| @centered-image{../images/isosceles-100-130.png}
+| @fitb{}{@showsoln{(code '(isosceles-triangle 100 130 "solid" "black")) }}
+|===
+
+--
+
+@n Write 2 expressions that would build *right-isosceles* triangles. Use @show{(code 'right-triangle)} for one expression and @show{(code 'isosceles-triangle)} for the other expression.
+
+[cols="1a, 4a",stripes="none", grid="none", frame="none"]
+|===
+|@centered-image{../images/right-isosceles.png, 80}
+| [cols="1a", stripes="none", grid="none", frame="none"]
+!===
+! @fitb{}{@showsoln{(code '(right-triangle 100 100 "solid" "black")) }}
+! @fitb{}{@showsoln{(code '(isosceles-triangle 100 90 "solid" "black")) }}
+!===
+|===
+
+@n Which do you like better? Why? @fitb{}{}

@@ -1,0 +1,96 @@
+= Catching Bugs when Making Triangles
+
+++++
+<style>
+.error { font-family: Hack, "Courier New", monospace; background: #efefef; }
+</style>
+++++
+
+== Learning about a Function through Error Messages
+
+@n Type `triangle` into the Interactions Area of @starter-file{editor} and hit "Enter". What do you learn? @fitb{}{@ifsoln{triangle is a function}}
+
+@n We know that all functions will need an open parenthesis and at least one input! Type @show{(code '(triangle 80))} in the Interactions Area and hit Enter/return. Read the error message. What hint does it give us about how to use this function? 
+
+@fitb{}{@ifsoln{The function expects 3 arguments.}}
+
+@n Using the hint from the error message, experiment until you can make a triangle. What is the contract for `triangle`?
+
+@fitb{}{@showsoln{(contract 'triangle '(Number String String) "Image")}}
+
+@n Read the explanation below. Then explain the difference in your own words.
+
+@indented{
+*syntax errors* -  when the computer cannot make sense of the code because of unclosed strings, missing commas or parentheses,  etc.
+*contract errors* - when the function isn't given what it needs (the wrong type or number of arguments are used)
+}
+
+ The difference between *syntax errors* and *contract errors* is: @fitb{}{}
+
+@fitb{}{}
+
+== Finding Mistakes with Error Messages
+
+_The following lines of code are all BUGGY! Read the code and the error messages below. See if you can find the mistake WITHOUT typing it into @proglang._
+
+@n `triangle(20, "solid" "red")`
+
+[.indentedpara.error]
+--
+Pyret didn't understand your program around
+
+triangle(20, "solid" *"red"*)
+
+--				
+
+@hspace{2em} This is a @fitbruby{10em}{@ifsoln{syntax}}{contract / syntax} error. The problem is that @fitb{}{ @ifsoln{There is a missing comma after solid.}}
+
+
+@n `triangle(20, "solid")`
+
+[.indentedpara.error]
+--
+This @span{.underline}{application expression} errored:
+
+*triangle*(_20_, _"solid"_)
+
+@span{.underline}{_2 arguments_} were passed to the @span{.underline}{*operator*}.
+The @span{.underline}{*operator*} evaluated to a function accepting 3 parameters.
+An @span{.underline}{application expression} expects the number of parameters and @span{.underline}{_arguments_} to be the same.
+--
+
+@hspace{2em} This is a @fitbruby{10em}{@ifsoln{contract}}{contract / syntax} error. The problem is that @fitb{}{@ifsoln{the color is undefined.}}
+
+
+
+@n `triangle(20, 10, "solid", "red")`
+
+[.indentedpara.error]
+--
+This @span{.underline}{application expression} errored:
+
+*triangle*(20, 10, "solid", _"red"_)
+
+@span{.underline}{_4 arguments_} were passed to the @span{.underline}{*operator*}.
+The @span{.underline}{*operator*} evaluated to a function accepting 3 parameters.
+An @span{.underline}{application expression} expects the number of parameters and @span{.underline}{_arguments_} to be the same.
+--
+
+@hspace{2em} This is a @fitbruby{10em}{@ifsoln{contract}}{contract / syntax} error. The problem is that @fitb{}{ @ifsoln{There are too many numbers.}}
+
+
+
+@n `triangle (20, "solid", "red")`
+
+[.indentedpara.error]
+--
+Pyret thinks this code is probably a function call:
+
+*triangle* _(20, "solid", "red")_
+
+Function calls must not have space between the @span{.underline}{*function expression*} and the @span{.underline}{_arguments_}.
+--
+
+@hspace{2em} This is a @fitbruby{10em}{@ifsoln{syntax}}{contract / syntax} error. The problem is that @fitb{}{@ifsoln{There shouldn't be a space between triangle and the parentheses.}}
+
+
