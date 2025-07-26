@@ -581,7 +581,8 @@
          [external-link? #f]
          [domain-name #f])
     (when (regexp-match #rx"://" link) (set! external-link? #t))
-    (when external-link?
+    ; If there's no custom link-text, add the domain in parens
+    (when (and external-link? (string=? link-text ""))
       (set! domain-name (extract-domain-name link)))
     (when domain-name
       (set! link-text (string-append link-text " (" domain-name ")")))
