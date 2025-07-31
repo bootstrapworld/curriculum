@@ -6,7 +6,7 @@
 
 @keywords{linear, slope, intercept, slope-intercept, S, Sres, error}
 
-@add-to-lang{fit-model, S}
+@add-to-lang{fit-model, S, lr-plot}
 
 [@lesson-intro-table]
 |===
@@ -153,7 +153,7 @@ Percent Change &#8192; = &#8192;
 @Q{What was the best model (lowest @vocab{S}!) you could come up with?}
 @Q{How did your model compare to the `al-ak` model?}
 @Q{When we compared the @math{\text{S-values}} of the models, why did we divide by the @math{\text{S-value}} from the `al-ak` model?}
-@A{Because we were asking how much more or less error we expected in predictions made with our model than with the `al-ak` model - we were comparing to the `al-ak` model.}
+@A{Because we were asking how much more or less error we expected in predictions made with our model than with the `al-ak` model -- we were comparing to the `al-ak` model.}
 @A{If we had divide the `change in S` by the @math{\text{S-value}} of our model it would have answered a different question: "How much more or less error do we expect in predictions made with the `al-ak` model than with our model?"}
 }
 
@@ -271,14 +271,21 @@ Models are only useful if we know how to use and interpret them!
 @Q{When does it make sense to make an `lr-plot`?}
 @A{When we've identified that the form of the data is linear}
 
-@Q{Our model is built from data about all of the existing states. College attendance rates range from 18.3% (West Virginia) to 52.4% (Washington, DC). +
-Suppose two new states were to join the union, one with a 30% college attendance rate and the other with a 90% attendance rate. Is our model more reliable for one of these states than another? Why or why not?
+@Q{Our model is built from data about all of the existing states. College attendance rates range from 18.3% (West Virginia) to 52.4% (Washington, DC).
+
+- Suppose two new states were to join the union, one with a 30% college attendance rate and the other with a 90% attendance rate.
+- Is our model more reliable for one of these states than another? Why or why not?
 }
+}
+
+@slidebreak{Synthesize}
+
+@QandA{
 @A{This model is much more reliable for the 30% state than the 90% one!}
-@A{A model is only as good as the data it was based on and the data in this dataset ranges from 18.3% to 52%.}
+@A{A model is only as good as the data it was based on and the data in this dataset ranges from 18.3% to 52%, so extrapolating all the way out to 90% is probably not a good idea.}
 
 @Q{If we could remove any row from this dataset to make our line fit better, which would you remove?}
-@A{Washington, D.C. - it's an outlier in virtually every measure!}
+@A{Washington, D.C. -- it's an outlier in virtually every measure!}
 
 @Q{Is it fair to remove that row? Why or why not?}
 @A{Reason why: Washington, D.C. is a major metropolitan area! You can just erase those people to make the line *fit* better!}
@@ -295,7 +302,7 @@ Suppose two new states were to join the union, one with a 30% college attendance
 @strategy{Optional Activity: Guess the Model!}{
 
 1. Divide students into small groups (2-4), and have each team come up with a linear, real-world scenario, then have them write down a linear function that fits this scenario on a sticky note. Make sure no one else can see the function!
-2. On the board or some flip-chart paper, have each team draw a _scatter plot_ for which their linear function is best fit. They should only draw the point cloud - _not the function itself!_ Finally, students title their scatter plot to describe their real-world scenario (e.g. - "total cost vs. number of tickets purchased").
+2. On the board or some flip-chart paper, have each team draw a _scatter plot_ for which their linear function is best fit. They should only draw the point cloud -- _not the function itself!_ Finally, students title their scatter plot to describe their real-world scenario (e.g. - "total cost vs. number of tickets purchased").
 3. Have teams rotate so that each team is in front of another team's scatter plot. Have them figure out the original function, write their best guess on a sticky note, and stick it next to the plot.
 4. Have teams return to their original scatter plot, and look at the model their colleagues guessed. How close were they? What strategies did the class use to figure out the model?
 

@@ -3154,6 +3154,7 @@
         [else (error 'ERROR "sexp->block: unknown s-exp")]))
 
 (define (sexp exp #:form [form "circofeval"])
+  (printf "DEAD CODE\n")
   (when (string? exp)
     (set! exp (with-input-from-string exp read)))
   (cond [(string=? form "circofeval")

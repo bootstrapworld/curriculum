@@ -581,7 +581,7 @@
          [external-link? #f]
          [domain-name #f])
     (when (regexp-match #rx"://" link) (set! external-link? #t))
-    (when external-link?
+    (when (and (not (string=? directive "link")) external-link?)
       (set! domain-name (extract-domain-name link)))
     (when domain-name
       (set! link-text (string-append link-text " (" domain-name ")")))
