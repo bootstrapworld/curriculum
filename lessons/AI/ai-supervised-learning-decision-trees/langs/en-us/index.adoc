@@ -67,15 +67,11 @@ As a class, we are going to play a game to help us understand the decision-makin
 
 @QandA{
 @Q{Show of hands: Have you ever played 20 Questions?}
-}
 
-@teacher{If the majority of your students haven't played 20 Questions, the discussion questions below are irrelevant; skip straight to the instructions about how our game will work.}
-
-@QandA{
 @Q{What are the rules of 20 questions?}
 @A{1 player is “it”. They have to think of a secret person, place or thing. The other players can ask up 20 yes or no questions to help them guess the secret person, place, or thing.}
 
-@Q{What strategies do you use when choosing the questions you will ask?}
+@Q{What strategies do you use when choosing the questions you will ask, assuming you want to find the object with as few questions as possible?}
 @A{Ask questions that are likely to eliminate many objects--but be careful! A question that is too narrow could end up resulting in very little information gained.}
 @A{Start with questions that will quickly limit possibilities.}
 }
@@ -224,10 +220,10 @@ Creating a decision tree is a form of @vocab{supervised learning}, because the t
 [.data-table, cols="1,2,2,2,2,2,2", stripes="none", options="header"]
 |===
 | Item    | flat? | has-handle? | has-tines? | utensil?  | used-to-chop? | category
-| A       | no    | yes         | no         | no         | no            | cup
+| A       | no    | no          | no         | no         | no            | cup
 | B       | no    | yes         | yes        | yes        | no            | fork
 | C       | yes   | yes         | no         | yes        | yes           | knife
-| D       | no    | no          | no         | no         | no            | mug
+| D       | no    | yes         | no         | no         | no            | mug
 | E       | yes   | yes         | no         | no         | no            | plate 
 | F       | no    | no          | no         | yes        | no            | spoon
 | G       | yes   | yes         | no         | yes        | yes           | knife
@@ -242,10 +238,10 @@ Creating a decision tree is a form of @vocab{supervised learning}, because the t
 [.data-table, cols="1,2,2,2,2,2,2", stripes="none", options="header"]
 |===
 | Item    | flat? | has-handle? | has-tines? | utensil?  | used-to-chop? | category
-| A       | no    | yes         | no         | no         | no            | cup
+| A       | no    | no          | no         | no         | no            | cup
 | B       | no    | yes         | yes        | yes        | no            | fork
 | C       | yes   | yes         | no         | yes        | yes           | knife
-| D       | no    | no          | no         | no         | no            | mug
+| D       | no    | yes         | no         | no         | no            | mug
 | E       | yes   | yes         | no         | no         | no            | plate 
 | F       | no    | no          | no         | yes        | no            | spoon
 | G       | yes   | yes         | no         | yes        | yes           | knife
@@ -405,7 +401,7 @@ Our model will predict the value in the "buys game" column using the other colum
 @lesson-instruction{
 Before we process any dataset, we should consider whether the data are at a good level of specificity for the problem. For video game purchases, do we expect the difference between 17 and 18 year olds to matter, or is a general "teenager" category sufficient? If our data are too fine-grained, our models might not detect patterns that would otherwise be meaningful. 
 
-For now, let's agree to create three groups: teens, twenties, and thirties. We can compute a new column in our dataset with these categories (and will see that on the next worksheet).
+For now, let's agree to create three groups: teens, twenties, and thirties. We can compute a new column in our dataset with these categories (and will see that on the next worksheet, @printable-exercise{part-1.adoc}).
 }
 
 @slidebreak{Investigate}
