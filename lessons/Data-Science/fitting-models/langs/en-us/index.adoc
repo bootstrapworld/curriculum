@@ -61,20 +61,30 @@ Here's the Contract:
 @show{(contract 'scatter-plot '((table-name Table) (labels String) (xs String) (ys String)) "Image")}
 }
 
+Let's look at some data on lizards from an animal shelter...
+
 @slidebreak{Launch-DN}
 
-Let's see if there's a correlation between an animal's `age` in the shelter, and the `weeks` it takes to be adopted.
-
 @lesson-instruction{
-- Open the @starter-file{fitting-animals}.
-- Make a scatter plot, using the animals' `name` as the labels, their weight in `pounds` as the @vocab{explanatory variable} on the x-axis, and the `weeks` it took to be adopted as the @vocab{response variable} on the y-axis.
+
+- Open the @starter-file{fitting-animals} and click "Run".
+- Type `lizard-sample` into the Interactions Area. What columns are in this table?
+- Make a scatter plot, using the following columns:
+  ** labels - the lizard's `name`
+  ** @vocab{explanatory variable} (x-axis) - weight in `pounds`
+  ** @vocab{response variable} (y-axis) - `weeks` to be adoption.
 }
 
 @ifslide{@show{(contract 'scatter-plot '((table-name Table) (labels String) (xs String) (ys String)) "Image")}}
 
 @slidebreak{LaunchC}
 
-@center{@image{images/sp2.png, 400}}
+[cols="^.^1a, ^2a, ^.^1a", frame="none", grid="none"]
+|===
+| @image{images/lizard-small.png, 200}
+| @image{images/sp2.png, 400}
+| @image{images/lizard-large.png, 200}
+|===
 
 @QandA{
 @Q{Do you see a pattern here, that relates `weeks` to `pounds`? If so, how would you describe it?}
