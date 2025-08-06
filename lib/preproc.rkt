@@ -2132,9 +2132,17 @@
                                   [args-len (length args)]
                                   [lbl (string->symbol (first args))]
                                   [c (hash-ref *citations* lbl #f)]
-                                  [in-text (and c (hash-ref c 'in-text #f))]
-                                  [link (string-append "link:" (hash-ref c 'public-url) "[" in-text "]")]
-                                  [apa (and c (hash-ref c 'apa #f))])
+                                  [in-text (and (> args-len 1) (second args))]
+                                  [link ""]
+                                  [apa #f])
+                             (when c
+                               (unless in-text
+                                 (set! in-text (hash-ref c 'in-text "")))
+                               (set! apa (hash-ref c 'apa #f)))
+                             (unless in-text (set! in-text ""))
+                             (set! link (string-append "link:"
+                                          (if c (hash-ref c 'public-url "") "")
+                                          "[" in-text "]"))
                              (cond [(> (length args) 1)
                                     (set! in-text
                                       (expand-directives:string->string
