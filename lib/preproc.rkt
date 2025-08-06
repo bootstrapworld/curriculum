@@ -2044,11 +2044,12 @@
                             (when (member directive '("slidebreak" "slideonlybreak"))
                               (display (enclose-span ".slidebreak" "") o)
                               (newline o))
-                            (let ([c (peek-char i)])
-                              (cond [(and (char? c) (char=? c #\{))
-                                     (read-group i directive)]
-                                    [else (printf "WARNING: ~a: Invalid ~a\n" directive
-                                                  (errmessage-context))]))]
+                            (unless (string=? directive "selfguidedbreak")
+                              (let ([c (peek-char i)])
+                                (cond [(and (char? c) (char=? c #\{))
+                                       (read-group i directive)]
+                                      [else (printf "WARNING: ~a: Invalid ~a\n" directive
+                                              (errmessage-context))])))]
                            [(member directive '("editorconfig" "imageconfig" "videoconfig"))
                             (unless *lesson-plan*
                               (error 'ERROR
