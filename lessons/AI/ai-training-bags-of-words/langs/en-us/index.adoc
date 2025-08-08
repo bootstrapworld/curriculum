@@ -27,7 +27,7 @@
 | 
 @preparation{
 - The final section of this lesson involves an activity where students measure the angle difference between rays. 
-- If you'd like your students to practice using their protractors, be sure to have have protractors available for @printable-exercise{angle-difference.adoc}. 
+- If you'd like your students to practice using their protractors, be sure to have have protractors available for @printable-exercise{angle-difference.adoc}. If your students will not use protractors, we recommend printing @opt-printable-exercise{angle-difference-no-protractor.adoc}, a second version of the worksheet that uses more easily approximated angles (e.g., 45°, 90°).
 - Alternatively, you can have your students estimate angle size using what they know about angle measures and the activity will still be valuable.
 }
 
@@ -567,18 +567,22 @@ The angle formed is 90°.
 
 If two documents are identical, they will be at the same point in space, and have the same ray extending from the origin to that point. That means the angle between those rays will be 0°. Even if one document just rearranges the other, their bags of words will be identical—thereby again making the angle between the lines 0°.
 
+@teacher{
+If you want your students to practice measuring angles with a protractor, we recommend using @printable-exercise{angle-difference.adoc}. If you do not have protractors available or would prefer that your students approximate angle size without measuring, we recommend printing and distributing @opt-printable-exercise{angle-difference-no-protractor.adoc} instead.
+}
+
 @lesson-instruction{
-- Complete @printable-exercise{angle-difference.adoc} using your knowledge of bags of words and plotting points.
+- Complete @printable-exercise{angle-difference.adoc} or @opt-printable-exercise{angle-difference-no-protractor.adoc} using your knowledge of bags of words and plotting points.
 ** First, fill in the frequency tables by referring to the provided string.
 ** Translate the bags of words to ordered pairs.
 ** Plot the points.
 ** Draw a ray from the origin to each of the points.
-** Approximate the angle size.
+** Measure or approximate the angle size.
 }
 
 @slidebreak{Investigate}
 
-As the documents contain different words, the angles between the lines will grow. To reflect this, we can use the `angle-difference` function. It will give us a value between 0° (if the two are identical) and 90° (if the two have nothing in common).
+As the documents contain different words, the angles between the rays will grow. To reflect this, we can use the `angle-difference` function. It will give us a value between 0° (if the two are identical) and 90° (if the two have nothing in common).
 
 @strategy{Points, Rays, and Vectors}{
 As you've discovered, our plagiarism detector computes the angle difference between rays extending from the origin to various points that we have plotted space.
@@ -589,6 +593,14 @@ To reduce the amount of new vocabulary introduced in this lesson, we have opted 
 
 If you or your students are wondering why we wouldn't just compute the _distance_ between points, rather than complicating things and introducing angles... it's because typically, machine learning uses vectors, not points.
 }
+
+When two documents are represented as two points in space, @vocab{angle difference} is the difference between the angles formed by rays from the origin through those points. 
+
+@lesson-point{
+Angle difference can be used to measure the similarity of two documents.
+}
+
+
 
 The contract for `angle-difference` is below.
 
