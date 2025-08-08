@@ -114,6 +114,10 @@
     };
 
     function populateselectedList(parent, lessonNames, useDays) {
+      if(!useDays) {
+        lessonNames = lessonNames.sort((a,b) =>
+            graph[a].title < graph[b].title? -1 : 1);
+      }
       lessonNames.forEach((l, idx) => {
         const lesson = graph[l];
         const sectionsHTML = graph[l].sections.map(sec => 
