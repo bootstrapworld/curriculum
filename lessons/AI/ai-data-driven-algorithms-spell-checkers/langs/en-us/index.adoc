@@ -139,7 +139,37 @@ After students have completed the activity, invite them to share their responses
 Students explore both the algorithm and the datasets that power a Pyret-based spell checker, discovering that @vocab{data-driven algorithms} are at the heart of AI.
 
 === Launch
-@slidebreak{Launch}
+
+@QandA{
+
+@right{@image{images/wordle-water.png, 250}}
+
+@Q{What do you Notice?}
+@A{There are three five-letter words.}
+@A{Some letters are grey, one is yellow, some are green.}
+@A{Once a green letter appears, its position remains the same.}
+@A{It's a game of Wordle!}
+
+@Q{What do you Wonder?}
+@A{What is the solution?}
+@A{What did the player choose "radio" as their first guess?}
+@A{Should we guess "later" or "water" next?}
+
+@Q{Have you seen this game before? What are the rules?}
+@A{It's Wordle!}
+@A{When playing, you have six attempts to guess the five-letter word.}
+@A{Each guess must be a real word.}
+@A{Color feedback includes *green* (the letter is in the word and in the correct position), *yellow* (the letter is in the word but in the wrong position), and *grey* (the letter is not in the word).}
+
+}
+
+@teacher{
+Are you familiar with Wordle? If not, you can quickly learn the rules and play it @link{https://www.nytimes.com/games/wordle/index.html, "here"}. Before moving on with the lesson, be sure to check for students' familiarity with the game via a show of hands. If any of your students have _not_ played Wordle before, play one round as a class before proceeding. Later in the lesson, students will interact with a @starter-file{spell-checker} that draws its suggestions from a Wordle dictionary.
+}
+
+
+=== Investigate
+@slidebreak{Investigate}
 
 By now, we have a decent sense of the extensive work that is happening behind the scenes when we spell check our writing. We have *not*, however, discussed an essential truth:
 
@@ -159,59 +189,42 @@ By now, we have a decent sense of the extensive work that is happening behind th
 @A{Responses will vary, but should highlight the general idea that data informs how things are done.}
 }
 
-But how exactly is a spell checker data-driven? 
+But how exactly is a spell checker data-driven? And how do spell checkers measure similarity, as we discussed during @lesson-link{ai-intro}?
 
-@slidebreak{LaunchR}
-
-@lesson-instruction{
-Take a look at this screenshot of a text messaging app's suggestions for the possibly misspelled word "Cose".
-}
-
-@center{@image{images/text-app.png, 250}}
-
-@QandA{
-@Q{What alternative words does the text messaging app provide the user to choose from?}
-@A{The original word "Cose" -- indicating that no error was made}
-@A{Two alternatives: "Code" and "Close"}
-
-@Q{What sort of _algorithm_ do you think the app used in developing possible alternative words?}
-@A{Responses will vary.}
-@A{Students may refer to the algorithms discussed in the first half of the lesson.} 
-@A{Students might also imagine more complicated algorithms -- for instance, algorithms that consider the proximity of letters on the keyboard!}
-
-@Q{What sort of _data_ do you think the spell checking app used in developing possible alternative words?}
-@A{Responses will vary.}
-@A{Which words the user is most likely to type}
-@A{The topic of the text conversation and the most probable next word} 
-@A{The dictionary of words the app draws from}
-}
-
-@teacher{Students will discuss a similar screenshot of a text messaging app in our lesson on @lesson-link{ai-statistical-lang-models-generating-text}. During that lesson, however, students explore how generative AI uses data-driven algorithms to determine what word to produce next.}
-
-=== Investigate
 @slidebreak{Investigate-DN}
 
 @lesson-instruction{
 - Let's take a look at a spell checking program written in Pyret.
 - This program includes a built-in function called `alt-words`, which implements a spell-checking algorithm similar to the algorithm you already explored.
 - Open the @starter-file{spell-checker} and click "Run".
-- Complete @printable-exercise{pyret-spell-checker.adoc} to discover how the spell checker works.
+- Complete Question 1 on @printable-exercise{pyret-spell-checker.adoc} to discover how the spell checker works.
 }
+
+@slidebreak{Investigate}
+
+The third column of the table you completed was titled "Number of Edits." A more technical term with the same meaning is @vocab{edit distance}. @vocab{Edit distance} is one way that we can measure the similarity of two strings! 
+
+@slidebreak{Investigate-DN}
+
+@lesson-instruction{
+Complete the rest of @printable-exercise{pyret-spell-checker.adoc}.
+}
+
+@teacher{If students get stuck on questions 3 and 4, invite them to view the @link{https://docs.google.com/spreadsheets/d/1RlwxGM1oZd6VfJDwuVNxGIwznB2yGyjwfuKHdXg6Gz8/, "dictionaries spreadsheet"} that is included in the Definitions area.}
 
 As you were interacting with the @starter-file{spell-checker}, you observed that it only proposed five-letter words. This is because the dictionary it draws from is actually a dictionary from the game "Wordle"!
 
-@teacher{Are you familiar with Wordle? If not, you can quickly learn the rules and play it @link{https://www.nytimes.com/games/wordle/index.html, "here"}. Before moving on with the lesson, be sure to check for students' familiarity with the game via a show of hands. If your students have _not_ played Wordle before, play one round as a class before proceeding.}
 
 
 @slidebreak{InvestigateR}
 
 
-[cols="7a,1,18a", grid="none", frame="none"]
+[cols="7a,18a", grid="none", frame="none"]
 |===
-|@image{images/wordle.png}
+|@image{images/wordle.png, 200}
 |
-|
-Let's consider this partially-played Wordle game.
+
+Let's consider a different partially-played Wordle game.
 
 The player has attempted three words so far: "WORTH", "MEDIA", and "GAMES". With each turn, we have learned something new. At this point, we know that:
 
@@ -275,9 +288,21 @@ When we offered _more representative data_ to our rudimentary Pyret spell checke
 
 @QandA{
 
-@Q{In this lesson, you discovered that providing _more_ data often produces better results. Think about some of the different recommendation systems you have interacted with (e.g., YouTube, Spotify, etc). In your experience, how does the amount of data provided influence the quality of the recommendations made?}
+Look at the screenshot (right) of a text messaging app's suggestions for the possibly misspelled word "Cose". The app suggests the original word ("Cose"), indicating that no error was made, along with two alternatives: "Code" and "Close".
 
-@A{A brand new YouTube user has not provided any data about what sort of videos they like to watch. YouTube cannot make specific recommendations without this data! As a user watches more videos, the system collects data about the user's interests, preferences, and more. With more data, YouTube can provide better recommendations.}
+@right{@image{images/text-app.png, 250}}
+
+
+@Q{What sort of _algorithm_ do you think the app used in developing possible alternative words?}
+@A{Responses will vary.}
+@A{Students may refer to the algorithms discussed in the first half of the lesson.} 
+@A{Students might also imagine more complicated algorithms - for instance, algorithms that consider the proximity of letters on the keyboard!}
+
+@Q{What sort of _data_ do you think the spell checking app used in developing possible alternative words?}
+@A{Responses will vary.}
+@A{Which words the user is most likely to type}
+@A{The topic of the text conversation and the most probable next word} 
+@A{The dictionary of words the app draws from}
 }
 
-
+@teacher{Students will discuss a similar screenshot of a text messaging app in our lesson on @lesson-link{ai-stat-lang-models-generating-text}. During that lesson, however, students explore how generative AI uses data-driven algorithms to determine what word to produce next.}

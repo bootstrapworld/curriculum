@@ -1,0 +1,72 @@
+= Tic Tac Toe
+
+== Warmup: Play A Game of Tic Tac Toe
+
+[cols="1,.^3a,1,4a,1", grid="none",frame="none"]
+|===
+|
+|
+@image{../images/tic-tac-toe-board.png, 150}
+|
+| _In case you need a refresher on the game:_ 
+
+- The tic-tac-toe board is a 3x3 grid.
+- One person will draw an *X* in one of the squares.
+- The other person will draw and *O* in one of the squares.
+- Keep taking turns -- the goal is to get three in a row or block your neighbor from getting three in a row.
+- The game ends when one of you gets three in a row or the grid is full.
+|
+|===
+
+== Design a Tic Tac Toe Notation
+
+
+In order to communicate with Soekia about tic tac toe games, we'll need to record the moves using an annotation.
+
+- Let's think of the 3x3 tic-tac-toe grid as a first quadrant coordinate plane with the origin (0,0) in the bottom left corner
+- For each move, our notation must indicate: 
+  * the player whose turn it is (X or O)
+  * the ordered pair (x, y) for the location of the player's move on that turn 
+
+@n How would you annotate the first turn (above)? @fitb{10em}{} @hspace{5em} The second turn? @fitb{10em}{}
+
+== Annotating a Game of Tic Tac Toe
+
+@image{../images/tic-tac-toe-5-turns.png}
+
+@n Complete the table by translating the 5 turn sequence above into our tic tac toe annotation.
+@indented{_For Reference:_ 
+
+- _If player X makes a move in the bottom right corner, we would describe that turn as: {nbsp} X31_
+- _If player O makes a move in the middle of the left column, we would describe that turn as: {nbsp} O12_
+}
+
+[cols="^1a,^1a,^1a,^1a,^1a", options="header"]
+|===
+| 1st move  	| 2nd move  	| 3rd move  	| 4th move 		| 5th move
+| @ifsoln{X22}	| @ifsoln{O23}	| @ifsoln{X21}	| @ifsoln{O13}	| @ifsoln{X33}	@vspace{1ex}
+|===
+
+== Translating Notation to the Game Board
+
+@n Translate the list of moves below into a game played on the tic tac toe board.
+
+[cols="1,.^4a,1,3a,1", grid="none",frame="none"]
+|===
+| 
+|
+- @big{X32}
+- @big{O22}
+- @big{X12}
+- @big{O11}
+- @big{X33}
+- @big{O13}
+- @big{X31}
+| 
+|
+@ifnotsoln{@image{../images/tic-tac-toe-board.png, 150}}
+@ifsoln{@image{../images/tic-tac-toe-solution.png, 150}}
+|
+|===
+
+@n Is there a winner? @fitb{}{@ifsoln{Yes! X wins the game.}}

@@ -27,7 +27,7 @@
 | 
 @preparation{
 - The final section of this lesson involves an activity where students measure the angle difference between rays. 
-- If you'd like your students to practice using their protractors, be sure to have have protractors available for @printable-exercise{angle-difference.adoc}. 
+- If you'd like your students to practice using their protractors, be sure to have have protractors available for @printable-exercise{angle-difference.adoc}. If your students will not use protractors, we recommend printing @opt-printable-exercise{angle-difference-no-protractor.adoc}, a second version of the worksheet that uses more easily approximated angles (e.g., 45°, 90°).
 - Alternatively, you can have your students estimate angle size using what they know about angle measures and the activity will still be valuable.
 }
 
@@ -144,19 +144,17 @@ Students practice thinking like a hacker to determine the basic requirements of 
 === Launch
 @slidebreak{Launch}
 
-As a student, you probably know what it feels like to be under surveillance.
+A student in your class has been accused of plagiarism because an AI plagiarism detector flagged their essay. 
 
-- When you use the internet at your school or on a school-issued computer, software probably monitors your web use and blocks you from visiting a multitude of sites.
-- When you take a test, it's likely proctored.
-- You might even go to a school where adults are stationed around the building and in the hallways or use cameras to check that students are dressed and behaving a certain way.
-- When you submit an essay to your English or History teacher, you can expect that they will check for plagiarism -- perhaps by running it through a plagiarism detector to be certain that all words and thoughts are your own.
+Your teacher seems to believe that the plagiarism detector can be trusted with 100% certainty -- but the student is your friend, and they assure you that they did not plagiarize.
 
-@slidebreak{Launch}
+Let's learn how a plagiarism detector works so that we can defend the student.
 
-Good designers of these systems have to imagine all the ways that someone might try to _hack_ or _fool_ them. This is called "adversarial thinking". Let's practice thinking like a designer.
+@scrub{
+But first, a though experiment: How are plagiarism detectors designed, anyhow?! Good designers of these systems have to imagine all the ways that someone might try to _hack_ or _fool_ them. This is called "adversarial thinking". Let's practice thinking like a designer.
 
 @QandA{
-@Q{Imagine that your teacher announces that they will be running all student writing through a plagiarism detector and you are a student who wants to plagiarize. Exercise some creativity: What are your strategies for evading detection?}
+@Q{What are some strategies that students might use to evade detection by a plagiarism detector?}
 @A{Responses will vary, but may include the following:
   * replace common words with synonyms
   * change the ordering of sentences and paragraphs
@@ -174,7 +172,18 @@ In this exercise, we are trying to get students to engage in *Adversarial Thinki
 Just because students excel at thinking in this way doesn't mean they are ethically compromised. Focus on and commend their creativity and reasoning instead of judging them.
 }
 
-@slidebreak{Launch-DN}
+As a student, you probably know what it feels like to be under surveillance.
+
+- When you use the internet at your school or on a school-issued computer, software probably monitors your web use and blocks you from visiting a multitude of sites.
+- When you take a test, it's likely proctored.
+- You might even go to a school where adults are stationed around the building and in the hallways or use cameras to check that students are dressed and behaving a certain way.
+- When you submit an essay to your English or History teacher, you can expect that they will check for plagiarism -- perhaps by running it through a plagiarism detector to be certain that all words and thoughts are your own.
+}
+
+
+=== Investigate
+
+@slidebreak{Investigate-DN}
 
 To understand the workings of plagiarism detection, we'll start by looking at a simple detector.
 
@@ -183,29 +192,29 @@ To understand the workings of plagiarism detection, we'll start by looking at a 
 - With a partner, complete the first two sections of @printable-exercise{primitive-plagiarism-detector.adoc}.
 }
 
-@slidebreak{Launch}
+@slidebreak{Investigate}
 
 @teacher{Debrief the page with your class using the prompts below.}
 
 @QandA{
 @Q{What does the `simple-equality` detector do?}
-@A{Takes in two documents and returns `true` if they match exactly and `false` if they don't match exactly.}
+@A{Takes in two documents and returns `true` if they match exactly and `false` if they don't match exactly. The function does not include punctuation, capitalization or spacing when deciding if two strings match.}
 @Q{How would you evaluate the effectiveness of the `simple-equality` detector?}
-@A{It doesn't work very well! We have no way of knowing how similar the documents are unless they are an exact match. Whether two documents are almost identical or have nothing in common, we will be told that they aren't a match.}
+@A{It doesn't work very well! We have no way of knowing how similar the documents are unless they are basically an exact match. Whether two documents are almost identical or have nothing in common, we will be told that they aren't a match.}
 @Q{What might a more effective plagiarism detector do differently?}
 @A{Answers will vary.}
 }
 
-@slidebreak{Launch}
+@slidebreak{Investigate}
 
 Plagiarizers usually alter at least a few words of the original document. Sometimes they change the ordering of the text, and sometimes they delete a sentence or word here and there.
 
-- If the `simple-equality` detector finds a match, we can be certain that identicality exists.
+- If the `simple-equality` detector finds a match, we can be certain that identicality exists (disregarding spaces, punctuation, and capitalization).
 - If the detector does not find a match, all we know is that the two documents are not identical.
 
 *We need a more sophisticated plagiarism detector!*
 
-@slidebreak{Launch}
+@slidebreak{Investigate}
 
 @teacher{The last section of @printable-exercise{primitive-plagiarism-detector.adoc} invites students to think about _measuring similarity_. Remind students about the mountain sorting activity that they completed during @lesson-link{ai-intro} to recontextualize the concept of measuring similarity.}
 
@@ -214,11 +223,10 @@ Plagiarizers usually alter at least a few words of the original document. Someti
 - With a partner, complete the last section of @printable-exercise{primitive-plagiarism-detector.adoc}, where you will consider two proposals for measuring similarity -- and then develop your own method for measuring similarity!
 }
 
-@slidebreak{Launch}
+@slidebreak{Investigate}
 
 Rather than detecting identicality, we need to determine the _closeness_ of two documents. To do that, we summarize each document, and then compute the distance between the summaries.
 
-=== Investigate
 @slidebreak{Investigate}
 
 One standard way to summarize a document is by creating a @vocab{"bag of words" model}. Let's try it on two documents (below); each document is an example of jazz "scatting", when a vocalist improvises with nonsense syllables.
@@ -567,18 +575,22 @@ The angle formed is 90°.
 
 If two documents are identical, they will be at the same point in space, and have the same ray extending from the origin to that point. That means the angle between those rays will be 0°. Even if one document just rearranges the other, their bags of words will be identical—thereby again making the angle between the lines 0°.
 
+@teacher{
+If you want your students to practice measuring angles with a protractor, we recommend using @printable-exercise{angle-difference.adoc}. If you do not have protractors available or would prefer that your students approximate angle size without measuring, we recommend printing and distributing @opt-printable-exercise{angle-difference-no-protractor.adoc} instead.
+}
+
 @lesson-instruction{
-- Complete @printable-exercise{angle-difference.adoc} using your knowledge of bags of words and plotting points.
+- Complete @printable-exercise{angle-difference.adoc} or @opt-printable-exercise{angle-difference-no-protractor.adoc} using your knowledge of bags of words and plotting points.
 ** First, fill in the frequency tables by referring to the provided string.
 ** Translate the bags of words to ordered pairs.
 ** Plot the points.
 ** Draw a ray from the origin to each of the points.
-** Approximate the angle size.
+** Measure or approximate the angle size.
 }
 
 @slidebreak{Investigate}
 
-As the documents contain different words, the angles between the lines will grow. To reflect this, we can use the `angle-difference` function. It will give us a value between 0° (if the two are identical) and 90° (if the two have nothing in common).
+As the documents contain different words, the angles between the rays will grow. To reflect this, we can use the `angle-difference` function. It will give us a value between 0° (if the two are identical) and 90° (if the two have nothing in common).
 
 @strategy{Points, Rays, and Vectors}{
 As you've discovered, our plagiarism detector computes the angle difference between rays extending from the origin to various points that we have plotted space.
@@ -589,6 +601,14 @@ To reduce the amount of new vocabulary introduced in this lesson, we have opted 
 
 If you or your students are wondering why we wouldn't just compute the _distance_ between points, rather than complicating things and introducing angles... it's because typically, machine learning uses vectors, not points.
 }
+
+When two documents are represented as two points in space, @vocab{angle difference} is the difference between the angles formed by rays from the origin through those points. 
+
+@lesson-point{
+Angle difference can be used to measure the similarity of two documents.
+}
+
+
 
 The contract for `angle-difference` is below.
 
