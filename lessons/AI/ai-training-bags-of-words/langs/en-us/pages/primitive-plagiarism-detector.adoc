@@ -13,9 +13,7 @@
 
 |===
 
-@n Do *you* think the student who submitted this essay on Elephants in Thailand committed plagiarism? Explain. @fitb{}{@ifsoln{Yes. These texts appear}}
-
-@fitb{}{@ifsoln{to be nearly identical, except that the student-submitted essay replaces "has been" with "is", along with other minor changes.}}
+@n Do *you* think the student who submitted this essay on Elephants in Thailand committed plagiarism? Circle one: @hspace{1em} Yes @hspace{2em} No
 
 
 == Detect Identicality
@@ -24,11 +22,22 @@ Open the @starter-file{plagiarism} and click "Run".
 - The two paragraphs above are defined in the starter file as `wiki-article` and `student-essay`, respectively.
 - The file also defines a function `simple-equality`, which takes in two Strings and produces a Boolean: `true` indicates that there is a match; `false` indicates that there is not a match.
 
+
+@n Record if the output is `true` or `false` for each line of code:
+
+
+@indented{
+`simple-equality("hello", "goodbye")` @fitb{5em}{@ifsoln{`false`}} @hspace{2em}
+`simple-equality("hello", "HELLO")` @fitb{5em}{@ifsoln{`true`}} @hspace{2em} 
+`simple-equality("hello", "helo")` @fitb{5em}{@ifsoln{`false`}} @hspace{3em}
+`simple-equality("hello,", " Hello.")` @fitb{5em}{@ifsoln{`false`}}
+}
+
+@n How does `simple-equality` deal with punctuation, capitalization, and spaces? @fitb{}{@ifsoln{It looks for a perfect match, but disregards punctuation, }}
+
+@fitb{}{@ifsoln{capitalization, and spaces.}}
+
 @n Compare the essays using `simple-equality(student-essay, wiki-article)`. What does the program return? @fitb{}{@ifsoln{`false`}}
-
-@n What are some problems with this plagiarism detector? @fitb{}{@ifsoln{This plagiarism detector has absolutely no nuance! It simply looks for}}
-
-@fitb{}{@ifsoln{a perfect match. It does not pick up on word substitutions, additions, or deletions.}}
 
 
 == Building a Better Plagiarism Detector
@@ -47,14 +56,14 @@ Xola: I figured out the four most common words in each essay. In the wiki-articl
 
 @n What do you like about Yara's method? What are its shortcomings?
 
-@blanklines{3}{
+@blanklines{2}{
  @ifsoln{*Strength:* Yara's method considers that some words are more important than others. *Weakness:* If a student replaced important words with synonyms, Yara's method would fail.
 }
 }
 
 @n What do you like about Xola's method? What are its shortcomings?
 
-@blanklines{3}{
+@blanklines{2}{
  @ifsoln{*Strength:* Xola's strategy of counting and cataloging words could be useful in detecting minor differences between essays. *Weakness*: Xola is counting common words only, meaning that she ends up counting lots of unimportant words, like "the", "of", etc. 
 }
 }
