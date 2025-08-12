@@ -1,0 +1,87 @@
+= Decision Tree: Predicting Shopping Behavior -- Part 2
+
+++++
+<style>
+/* Shrink vertical spacing on fitbruby */
+.fitbruby{padding-top: 0.5rem;}
+</style>
+++++
+
+
+== For Teens -- Is Shopping History or Interest in Game a better Indicator?
+
+@n Use the decision stumps below to make rules that predict whether or not teens would buy the game based on each category. 
+
+[cols="20a,21a", stripes="none"]
+|===
+^| @ifnotsoln{@image{../images/stump-teens-SH-no-checks.png, 180}}   @ifsoln{@image{../images/history-stump-teens-checks.png, 180}} 
+^| @ifnotsoln{@image{../images/stump-teens-IG-no-checks.png, 180}}   @ifsoln{@image{../images/interest-stump-teens-checks.png, 180}}
+
+| Predict that 											
+
+- previous teenage customers @fitbruby{}{@ifsoln{will not buy}}{will buy / will not buy / no prediction}
+- new teenage customers @fitbruby{}{@ifsoln{will buy}}{will buy / will not buy / no prediction}
+
+| Predict that 
+
+- interested teenage shoppers @fitbruby{}{@ifsoln{will buy}}{will buy / will not buy / no prediction}
+- uninterested teenage shoppers @fitbruby{}{@ifsoln{will not buy}}{will buy / will not buy / no prediction}
+
+|===
+
+Place a checkmark below each value that the computer would predict correctly. 
+
+@n Use the decision stumps to determine how well each rule predicts whether or not teens would buy the game.
+
+[cols="20a,21a", stripes="none"]
+|===
+| For our training data, this rule 
+
+- would make @fitb{3em}{@ifsoln{4}} correct predictions out of 5 attempts 
+- is @fitb{3em}{@ifsoln{80}} % accurate
+| For our training data, this rule 
+
+- would make @fitb{3em}{@ifsoln{5}} correct predictions out of 5 attempts 
+- is @fitb{3em}{@ifsoln{100}} % accurate
+|===
+
+@n Will you use shopping history or interest for your second decision node for teens? @fitb{}{@ifsoln{Interest in game.}}
+
+== For People in their Thirties -- Is Shopping History or Interest in Game a better Indicator?
+@link-instructions{Refer to the training data on @printable-exercise{part-1.adoc} to complete the stumps below.} 
+
+@n Complete the decision stumps below to make rules that predict whether or not people in their thirties would buy the game.
+
+[cols="20a,21a", stripes="none"]
+|===
+^| @ifnotsoln{@image{../images/stump-thirties-SH-blank.png, 180}} @ifsoln{@image{../images/stump-thirties-SH-checks.png, 180}}
+^| @ifnotsoln{@image{../images/stump-thirties-IG-blank.png, 180}} @ifsoln{@image{../images/stump-thirties-IG-checks.png, 180}}
+
+| Predict that 											
+
+- new customers in their 30s @fitbruby{}{@ifsoln{will buy}}{will buy / will not buy / no prediction}
+- previous customers in their 30s @fitbruby{}{@ifsoln{will not buy}}{will buy / will not buy / no prediction}
+
+| Predict that 
+
+- interested customers in their 30s @fitbruby{}{@ifsoln{will buy}}{will buy / will not buy / no prediction}
+- uninterested customers in their 30s @fitbruby{}{@ifsoln{no prediction}}{will buy / will not buy / no prediction}
+|===
+
+@n Add checkmarks to the correct predictions. Then determine how well each rule predicts which customers in their thirties buy the game.
+
+[cols="20a,21a", stripes="none"]
+|===
+| For our training data, this rule 
+
+- would make @fitb{3em}{@ifsoln{5}} correct predictions out of 5 attempts 
+- is @fitb{3em}{@ifsoln{100}} % accurate
+| For our training data, this rule 
+
+- would make @fitb{3em}{@ifsoln{3}} correct predictions out of 5 attempts 
+- is @fitb{3em}{@ifsoln{60}} % accurate
+|===
+
+@n Will you use shopping history or interest for your second decision node for customer in their thirties? @fitb{}{@ifsoln{Shopping History}}
+
+

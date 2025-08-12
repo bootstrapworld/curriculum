@@ -1,0 +1,81 @@
+= Meet Soekia! (n-grams)
+
+++++
+<style>
+/* Shrink vertical spacing on fitbruby */
+.fitb{padding-top: 0.6rem; }
+</style>
+++++
+
+@link-instructions{
+Respond to the prompts below by interacting with @starter-file{soekia} using the {nbsp} @image{../images/paw-icon.png, 15} *Intelligent Monkeys?* collection.
+} 
+
+== Exploring the N-Grams Panel
+
+The orange _N-grams_ panel is where Soekia lists possible @vocab{n-grams} and how frequently they occur in the training corpus. The default setting (*3*) displays a list of every @vocab{trigram}. Clicking on the other numbers at the top will display lists of @vocab{n-grams} of other lengths. 
+
+@n Hover your mouse over the *3*. How many different @vocab{trigrams} are there in this collection? @fitb{3em}{@ifsoln{91}} How does that compare to the number of @vocab{n-grams} of other lengths? @fitb{}{@ifsoln{Surprisingly there are more trigrams than n-grams of any other length.}}
+
+@n The most common @vocab{trigram} appears at the top of the list. Click on it. What do you learn? @fitb{}{}
+
+@fitb{}{@ifsoln{This trigram appears 7 times in the collection. The documents it appears in are listed.}}
+
+@n Click on the *5* tab. Notice that all of the 5-word @vocab{n-grams} occur equally often. Can you explain why this might be? @fitb{}{}
+
+@fitb{}{@ifsoln{This is a very small collection of one sentence documents so no collection of 5 words appears more than once.}}
+
+@n Take a minute to explore the _N-grams_ Panel. What do you Notice? What do you Wonder? 
+
+@blanklines{3}{
+@ifsoln{
+*Possible Noticings:* Punctuation counts as a word! The green bar under each trigram indicates how often it appears in the corpus. The most common trigram appears more than twice as frequently as the next most common trigram. *Possible Wonderings:* Why does Soekia interpret a period as a word? Why do individual 5-grams appear so much less frequently than individual unigrams?
+}
+}
+
+== Predicting the Next Word using N-Grams
+@link-instructions{
+For this section, make sure you are in the @image{../images/paw-icon.png, 15} *Intelligent Monkeys?* collection. {nbsp} Go to the _Suggested words_ panel, click on "Customize temperature/ number of suggestions", and set the temperature to *low*.
+} 
+
+@vspace{1ex}
+
+Without introducing any randomization into the algorithm, Soekia generates text by selecting words one at a time from the most-frequent valid @vocab{n-gram} of the highest order available. 
+
+@n For the first "word", Soekia looks in the *1* tab to find the most frequently occurring @vocab{unigram}. What do you expect it to choose? @fitb{}{@ifsoln{a period}}
+
+@n To choose the second "word", Soekia:
+
+- Looks at the *2* tab to find the most frequently occurring @vocab{bigram} that begins with the first "word".
+- If there isn't one, it will return to the *1* tab and select the next most popular @vocab{unigram}.  
+
+@hspace{1em}What do you expect Soekia to choose?
+@fitb{10em}{@ifsoln{intelligent}} 
+Which list did you select it from? 
+@fitb{}{@ifsoln{unigrams (1), because there were no bigrams that started with a period.}}
+
+@n Why do you think there weren't any bigrams that began with the most popular "word"? _Hint: Read the documents closely!_ @fitb{}{}
+
+@fitb{}{@ifsoln{The most frequent "word" in this collection was a period. There was never a "word" after a period because the documents are only one sentence long!}}
+
+@n To choose the third "word", Soekia:
+
+- Looks at the *3* tab to find the most frequently occurring @vocab{trigram} that begins with the first and second "words". 
+- If there isn't one, it will look in the *2* tab for the most frequently occurring @vocab{bigram} beginning with the second "word". 
+- If there isn't one, it will return to the *1* tab and select the next most popular @vocab{unigram}. 
+ 
+@hspace{1em}What do you expect Soekia to choose? @fitb{10em}{@ifsoln{animals}} Which list did you select it from? @fitb{}{@ifsoln{bigrams (2)}}
+
+@n Continuing this process, what do you expect Soekia to choose for the: +
+@hspace{1em}fourth "word"? @fitb{12em}{@ifsoln{a period}}  @hspace{1em} fifth "word"? @fitb{12em}{@ifsoln{intelligent}} @hspace{1em} sixth "word"? @fitb{12em}{@ifsoln{animals}}
+
+== Testing our Prediction
+@link-instructions{
+For this section, make sure you are still in the @image{../images/paw-icon.png, 15} *Intelligent Monkeys?* collection with the temperature set to *low*.
+} 
+
+@n How does Soekia answer the question _How intelligent are monkeys?..._ when you click @image{../images/send-icon.png, 15} @fitb{}{@ifsoln{. intelligent animals. intelligent animals. etc.}}
+
+@n How does that text compare to your prediction? @fitb{}{}
+
+

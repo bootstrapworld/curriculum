@@ -1,0 +1,65 @@
+= Building and Testing a Decision Tree
+
+++++
+<style>
+/* Format autonumbering inside the table correctly */
+table .autonum::after { content: ')' !important; }
+</style>
+++++
+
+@link-instructions{For this page you will need to refer to your decisions from @printable-exercise{part-2.adoc}.} 
+
+== Build and Understand the Tree
+
+Complete the tree (left), then fill in the blanks (right).
+
+[cols="1,1", stripes="none"]
+|===
+|
+@ifnotsoln{@center{@image{../images/tree-w-blanks.png, 350}}}
+@ifsoln{@center{@image{../images/final-tree.png, 350}}}
+|
+
+@n The root node of this tree is @fitb{10em}{@ifsoln{age}}.
+
+@vspace{1ex}
+
+@n The first set of branches includes: +
+@fitb{8em}{@ifsoln{teens}}, @fitb{8em}{@ifsoln{twenties}}, and @fitb{8em}{@ifsoln{thirties}}.
+
+@n Write the rules that this decision tree follows. Predict that: + 
+{nbsp}@fitbruby{12em}{@ifsoln{interested}}{interested / uninterested} teens will buy the game. +
+{nbsp}@fitbruby{12em}{@ifsoln{everyone}}{who?} in their 20s will buy the game. +
+{nbsp}@fitbruby{12em}{@ifsoln{previous customers}}{who?} in their 30s will buy the game.
+
+|===
+
+
+== Test the Tree
+
+@n Below is a new set of potential customers. Use the decision tree and rules above to predict whether or not they will buy the game.
+
+@vspace{1ex}
+
+[cols="2,2,3,2,2,2", stripes="none", options="header"]
+|===
+| name 		| age 		| shopping history 	| interest in game 	| buys game | model predicts
+| Kat 		| teen 		| new customer		| yes 				| yes		| @ifsoln{will buy}
+| Billy		| twenties	| new customer		| no 				| no		| @ifsoln{will buy}
+| Chen	    | twenties 	| previous customer | no  				| no		| @ifsoln{will buy}
+|===
+
+@n Compare the "buys game" column with the predictions. For which customers was the computer correct?  @hspace{1em} @ifsoln-choice{Kat} @hspace{1em} Billy @hspace{1em} Chen
+
+@n Should we change any of our rules based on the addition of this new data? Why? @fitb{}{}
+
+@fitb{}{@ifsoln{We shouldn't predict that all individuals in their 20s will buy the game. The new test data contradicts the rule.}}
+
+== Reflect
+
+@n Our rules made 100% accurate predictions with our training dataset, but were only 33% accurate with our test dataset. Why?
+@blanklines{2}{@ifsoln{The training dataset is small, and only represents a sample of the population. The sample was not representative, as there are individuals in their twenties who choose not to purchase, among others who contradict the training data.}}
+
+@n What could we do to improve the quality of this decision tree? @fitb{}{}
+
+@blanklines{4}{@ifsoln{We would need to collect a bigger, more representative dataset, and then build the tree again.}}

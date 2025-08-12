@@ -1169,7 +1169,7 @@
       (set! *first-level-section-titles* '()))
     (set! *page-title* title-txt)
     (store-title title-txt)
-    (fprintf o "[.~a]\n" *proglang*)
+    ; (fprintf o "[.~a]\n" *proglang*)
     (display #\= o)
     (expand-directives:string->port title o)
     (newline o)
@@ -1645,7 +1645,7 @@
                             (let ([n (string->number (read-group i directive))]
                                   [text (read-group i directive)])
                               ; (printf "doing @blanklines ~s\n" n)
-                              (display-begin-span ".blanklines" o #:attribs (format "style=\"height: ~arem\"" n))
+                              (display-begin-span ".blanklines" o #:attribs (format "style=\"height: ~arem\"" (* 2.2 n)))
                               (display (expand-directives:string->string text #:enclosing-directive directive) o)
                               (display-end-span o))]
                            [(string=? directive "duration")
@@ -1654,12 +1654,31 @@
                                          (create-begin-tag "span" ".duration")
                                          txt
                                          (create-end-tag "span")) o))]
+                           [(string=? directive "glossary-entry")
+                            (let* ([arg (read-group i directive)]
+                                   [arg1 (regexp-replace* #rx" " arg "_")])
+                              (display (enclose-tag "a" "" arg
+                                         #:attribs
+                                         (format "name=\"glossary_~a\"" arg1)) o))]
+                           [(string=? directive "vocab-link")
+                            (let* ([arg-as-given (read-group i directive)]
+                                   [arg (assoc-glossary arg-as-given)]
+                                   [arg (if arg (car arg) "missing")]
+                                   [arg-link-form (regexp-replace* #rx" " arg "_")])
+                              (display (enclose-span ".vocab"
+                                         (format "link:#glossary_~a[~a]"
+                                                 arg-link-form arg-as-given)) o))]
                            [(string=? directive "vocab")
                             (let* ([arg (read-group i directive)]
-                                   [s (assoc-glossary arg)])
+                                   [s (assoc-glossary arg)]
+                                   [def (if s (second s) "missing")])
+                              (when (string=? def "missing")
+                                (printf "Warning: Not found in glossary: ~s\n" arg))
                               (when (string=? arg "")
                                 (printf "WARNING: Directive @vocab has ill-formed argument\n\n"))
-                              (display (enclose-span ".vocab" arg) o)
+                              (display (enclose-span
+                                          ".vocab" arg
+                                          #:attribs (string-append "title=\"" def "\"")) o)
                               (cond [s (unless (member s *glossary-items*)
                                          (set! *glossary-items* (cons s *glossary-items*)))]
                                     [else
@@ -2127,15 +2146,23 @@
                              (unless (assoc lbl *assessments-met*)
                                  (set! *assessments-met*
                                    (cons (cons lbl text) *assessments-met*)))
-                             (fprintf o "link:pass:[assessments/~a/index.html][~a]" lbl text))]
+                             (fprintf o "link:pass:[assessments/~a/index.html][~a, role=quiz]" lbl text))]
                           [(string=? directive "citation")
                            (let* ([args (read-commaed-group i directive read-group)]
                                   [args-len (length args)]
                                   [lbl (string->symbol (first args))]
                                   [c (hash-ref *citations* lbl #f)]
-                                  [in-text (and c (hash-ref c 'in-text #f))]
-                                  [link (string-append "link:" (hash-ref c 'public-url) "[" in-text "]")]
-                                  [apa (and c (hash-ref c 'apa #f))])
+                                  [in-text (and (> args-len 1) (second args))]
+                                  [link ""]
+                                  [apa #f])
+                             (when c
+                               (unless in-text
+                                 (set! in-text (hash-ref c 'in-text "")))
+                               (set! apa (hash-ref c 'apa #f)))
+                             (unless in-text (set! in-text ""))
+                             (set! link (string-append "link:"
+                                          (if c (hash-ref c 'public-url "") "")
+                                          "[" in-text "]"))
                              (cond [(> (length args) 1)
                                     (set! in-text
                                       (expand-directives:string->string
@@ -2369,7 +2396,7 @@
           (call-with-output-file *out-file*
             (lambda (o)
 
-              (cond [*lesson-plan* (display "[.LessonPlan]\n" o)]
+              (cond ;[*lesson-plan* (display "[.LessonPlan]\n" o)]
                     [*narrative* (display "[.narrative]\n" o)]
                     [*solutions-mode?* (display "[.solution-page]\n" o)]
                     )
@@ -2671,7 +2698,7 @@
     (lambda (o)
       (unless (null? *assessments-met*)
         (for ([asst (reverse *assessments-met*)])
-          (fprintf o "- link:pass:[assessments/~a/index.html][~a]\n"
+          (fprintf o "- link:pass:[assessments/~a/index.html][~a, role=quiz]\n"
                    (car asst) (cdr asst)))))
     #:exists 'replace))
 
@@ -3155,6 +3182,7 @@
         [else (error 'ERROR "sexp->block: unknown s-exp")]))
 
 (define (sexp exp #:form [form "circofeval"])
+  (printf "DEAD CODE\n")
   (when (string? exp)
     (set! exp (with-input-from-string exp read)))
   (cond [(string=? form "circofeval")

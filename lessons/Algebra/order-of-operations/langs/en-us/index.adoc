@@ -133,7 +133,7 @@ This math problem went viral on social media recently, with math teachers arguin
 
 *The rules for drawing Circles of Evaluation are simple:*
 
-1) Every Circle must have one - and only one! - @ifproglang{pyret}{operator or} function, written at the top.
+1) Every Circle must have one -- and only one! -- @ifproglang{pyret}{operator or} function, written at the top.
 
 2) The inputs @ifproglang{wescheme}{to the function} are written left-to-right, inside the Circle.
 
@@ -237,6 +237,12 @@ Let's see if we can settle the internet debate about what @math{6 \div 2(1 + 2)}
 |===
 }
 
+@pd-slide{
+- Because students want to code, Circles of Evaluation increase engagement!
+- Feel free to spend lots of tine on Circles of Evaluation.
+- There are ~20 additional practice pages in the Additional Exercises section at the end of the lesson.
+}
+
 @strategy{Pedagogy Note}{
 Circles of Evaluation are a great way to get older students to re-engage with (and finally understand) the order of operations while their focus and motivation are on learning to code.  Because we recognize this work to be so foundational, and know that some teachers choose to spend a whole week on it, we have developed lots of additional materials to help scaffold and stretch. You will find about 20 additional pages linked in @link{#_additional_exercises, the Additional Exercises section} at the the end of this lesson.
 }
@@ -244,7 +250,6 @@ Circles of Evaluation are a great way to get older students to re-engage with (a
 === Synthesize
 @slidebreak{Synthesize}
 
-- Is there more than one way to draw the Circle for @smath{(+ 1 2)}? If so, is one way more "correct" than the other?
 - Did you always prefer working outside-in to inside-out? Or did different strategies work better for different _kinds_ of problems? Why?
 @teacher{Challenge students to try using the OTHER way to draw the Circle of Evaluation for the next one they draw!}
 - Up until now, we didn't have a visual spatial model for _reading_ arithmetic expressions... How do Circles of Evaluation compare to previous methods you've learned for _computing_ what arithmetic expressions evaluate to (PEMDAS, GEMDAS, etc)?
@@ -254,12 +259,14 @@ Circles of Evaluation are a great way to get older students to re-engage with (a
 
 @math{1 + 3}   ... versus ... @math{f(1, 3)}
 
+Can you draw the Circle of Evaluation for each one?
+
+@teacher{
 - The first expression is what math looks like when kids are younger. The second expression is what math looks like when kids get to algebra.
 - The "verb" in the first option is called an *operator*, but in the second option it's called a *function*. Grammatical rules for math say operators go _between_ their inputs, and functions go _in front_.
 
 Conceptually, these are identical! But with different vocabulary and grammar, it's hard to get kids to see the connection between them.
-
-Can you draw the Circle of Evaluation for each one? Do the Circles make the connection clearer?
+}
 }
 
 == From Circles of Evaluation to Code
@@ -282,7 +289,7 @@ When converting a Circle of Evaluation to code, it's useful to imagine a "spider
 @lesson-instruction{
 @ifproglang{wescheme}{
 - The first thing the spider does is enter the circle by crossing over a curved line (an open parenthesis!).
-- She then visits the operation - also called the _function_ - at the top.
+- She then visits the operation -- also called the _function_ -- at the top.
 - After that, she crawls from left to right, visiting each of the inputs to the function.
 - Finally, she has to leave the circle by crossing another curved line (a close parenthesis).
 }
@@ -396,7 +403,7 @@ Create space for students to learn at their own speed by directing speedy studen
 }
 
 @strategy{Strategies For English Language Learners}{
-MLR 7 - Compare and Connect: Gather students' graphic organizers to highlight and analyze a few of them as a class, asking students to compare and connect different representations.
+MLR 7 -- Compare and Connect: Gather students' graphic organizers to highlight and analyze a few of them as a class, asking students to compare and connect different representations.
 }
 
 === Common Misconceptions
@@ -456,7 +463,7 @@ Turn to @printable-exercise{beyond-operations-notice.adoc}. You will see two Cir
 @ifproglang{wescheme}{
 [cols="^1,^2", grid="none", frame="none"]
 |===
-| @show{(coe `(* 10 -4))}	| @show{(coe `(text "Good work!" 50 "red"))}
+| @show{(coe '(* 10 -4))}	| @show{(coe '(text "Good work!" 50 "red"))}
 |===
 }
 
@@ -487,11 +494,16 @@ Complete Part B on @printable-exercise{beyond-operations-notice.adoc}.
 
 Now that we understand the structure of Circles of Evaluation, we can use them to write code for any function!
 
+@QandA{
 @ifproglang{pyret}{
-- What's the difference between how Pyret handles Operators and Functions?
+@Q{What's the difference between how Pyret handles Operators and Functions?}
+@A{Functions are written in front of the parentheses that contain a comma-separated list of their inputs}
+@A{Operators are written between the inputs. Parentheses are only necessary when we need to specify the order for applying multiple Operators.}
 }
-- What are you curious about after what we've explored today?
-- What other things could you imagine functions doing?
+
+@A{What are you curious about after what we've explored today?}
+@A{What other things could you imagine functions doing?}
+}
 
 
 == Additional Exercises

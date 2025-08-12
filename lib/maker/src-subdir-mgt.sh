@@ -1,4 +1,4 @@
-#!/bin/bash
+#! /usr/bin/env bash
 
 function adjustproglangsubdirs() {
   # echo adjustproglangsubdirs "$@" in $(pwd)

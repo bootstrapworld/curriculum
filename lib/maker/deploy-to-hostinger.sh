@@ -1,4 +1,4 @@
-#!/bin/bash
+#! /usr/bin/env bash
 
 test ! -d distribution && echo distribution/ not found\; make it first && exit 0
 

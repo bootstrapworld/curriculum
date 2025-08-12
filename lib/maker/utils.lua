@@ -103,3 +103,21 @@ function make_error_function(errmsg_file_context)
     error('ERROR in ' .. errmsg_file_context() .. ':\n' .. s)
   end
 end
+
+function first_line(f)
+  local i = io.open(f)
+  if not i then return false end
+  local x = i:read()
+  i:close()
+  return x
+end
+
+function shell_output(cmd)
+  local result = {}
+  local o = io.popen(cmd)
+  for L in o:lines() do
+    table.insert(result, L)
+  end
+  o:close()
+  return result
+end

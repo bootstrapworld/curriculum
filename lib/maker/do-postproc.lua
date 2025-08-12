@@ -2,6 +2,9 @@
 
 dofile(os.getenv'MAKE_DIR' .. 'utils.lua')
 
+local website_branch_p = (shell_output('git branch --show-current')[1] == 'website')
+website_branch_p = true
+
 local pathwayindependent_batchf =  os.getenv'ADOC_POSTPROC_PATHWAYINDEPENDENT_INPUT'
 local workbookpage_batchf =  os.getenv'ADOC_POSTPROC_WORKBOOKPAGE_INPUT'
 local lessonplan_batchf =  os.getenv'ADOC_POSTPROC_LESSONPLAN_INPUT'
@@ -20,6 +23,20 @@ local function calculate_dist_root_dir(fhtml_cached)
   return f
 end
 
+local function get_proglang(fhtml_cached)
+  local f = false
+  if fhtml_cached:match('/courses/') then
+    f = fhtml_cached:gsub('(distribution/[^/]+/courses/[^/]+)/.*', '%1/.cached/.record-proglang')
+  elseif fhtml_cached:match('/lessons/') then
+    f = fhtml_cached:gsub('(distribution/[^/]+/lessons/[^/]+)/.*', '%1/.cached/.record-proglang')
+  else
+    -- noop
+  end
+  if f and file_exists_p(f) then return first_line(f)
+  else return 'pyret'
+  end
+end
+
 local function postproc(fhtml_cached, tipe)
   -- print('doing postproc', fhtml_cached, tipe)
   if not file_exists_p(fhtml_cached) then return end
@@ -35,8 +52,9 @@ local function postproc(fhtml_cached, tipe)
   local fhtml = fdir .. '/' .. fbase
   -- print('fhtml is', fhtml)
   local code_lang = 'pyret'
-  if fhtml_cached:find('^[^/]*/[^/]*-wescheme') then
-    code_lang = 'wescheme'
+  local proglang = get_proglang(fhtml_cached)
+  if proglang == 'wescheme' then
+    code_lang = 'racket'
   end
   local f_comment_file = fhtml_cached:gsub('%.html$', '') .. '-comment.txt'
   local f_mathjax_file = fhtml_cached:gsub('%.html$', '.asc.uses-mathjax')
@@ -52,6 +70,7 @@ local function postproc(fhtml_cached, tipe)
   local add_mathjax_p = false
   local add_codemirror_p = false
   local add_body_id_p = false
+  local add_landscape_p = false
   local add_end_body_id_p = false
   local delete_line_p = false
   local read_end_sidebar_p = false
@@ -77,40 +96,19 @@ local function postproc(fhtml_cached, tipe)
       if file_exists_p(f_comment_file) then
         add_comment_p = true
       end
-      --
-      if memberp(tipe, {'lessonplan', 'pathwaynarrative', 'pathwayresource'}) then
-        add_body_id_p = true
-        add_end_body_id_p = true
+      if x:find('landscape') then
+        x = x:gsub('landscape', '')
+        add_landscape_p = true
       end
+      --
+      add_body_id_p = true
+      add_end_body_id_p = true
       --
       if memberp(tipe, {'lessonplan', 'pathwaynarrative'}) then
         add_analytics_p = true
       end
       --
-      if tipe == 'pathwayresource' then -- TEACHERRESOURCEPAGE
-        x = x:gsub('^<body class="', '%0TeacherResources ')
-      end
-      --
       --fixme datasheetpage?
-      if tipe == 'workbookpage' then
-        x = x:gsub('<body class="', '%0workbookpage ')
-      elseif tipe == 'pathwayindependent' then
-        if fhtml_cached:match('/pages/') or fhtml_cached:match('/textbooks/') then
-          x = x:gsub('<body class="', '%0workbookpage ')
-        else
-          x = x:gsub('<body class="', '%0narrativepage ')
-        end
-      elseif not memberp(tipe, {'workbookpage', 'lessonplan', 'datasheetpage'}) then
-        x = x:gsub('^<body class="', '%0narrativepage ')
-      end
-      if tipe == 'workbookpage' then
-        if fhtml_cached:find('/courses/[^/]-/back%-matter/') then
-          x = x:gsub('<body class="', '%0back-matter ')
-        end
-        if fbase:find('^notes%-') then
-          x = x:gsub('<body class="', '%0LessonNotes ')
-        end
-      end
       --
     end
     --
@@ -262,7 +260,43 @@ local function postproc(fhtml_cached, tipe)
     --
     if add_body_id_p then
       add_body_id_p = false
-      o:write('<div id="body">\n')
+      if website_branch_p then
+        local klass = proglang
+        if tipe == 'workbookpage' then
+          klass = klass .. ' workbookpage'
+          if fbase:find('^notes%-') then
+            klass = klass .. ' LessonNotes'
+          end
+        elseif tipe == 'pathwayindependent' then
+          if fhtml_cached:match('/pages/') or fhtml_cached:match('/textbooks/') then
+            klass = klass .. ' workbookpage'
+          else
+            klass = klass .. ' narrativepage'
+          end
+          if fhtml_cached:find('/courses/[^/]-/back%-matter/') then
+            klass = klass .. ' back-matter'
+          elseif fbase:find('^notes%-') then
+            klass = klass .. ' LessonNotes'
+          end
+        elseif tipe == 'lessonplan' then
+          klass = klass .. ' LessonPlan'
+        elseif not memberp(tipe, {'datasheetpage'}) then
+          if tipe == 'pathwayresource' then
+            klass = klass .. ' TeacherResources'
+          end
+          klass = klass .. ' narrativepage'
+        else
+          -- noop
+        end
+        if add_landscape_p then
+          add_landscape_p = false
+          klass = klass .. ' landscape'
+        end
+        --
+        o:write('<div id="body" class="' .. klass .. '">\n')
+      else
+        o:write('<div id="body">\n')
+      end
     end
     --
     if add_codemirror_p then

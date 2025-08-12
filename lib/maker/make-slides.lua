@@ -287,9 +287,9 @@ local function get_slides(lsn_plan_adoc_file)
           scan_directives(io.open_buffered(false, arg2), directive, dont_count_image_p)
           update_curr_slide_text('}')
         elseif directive == 'strategy-basic' then
-          if nested_in ~= 'ifpdslide' then
-            terror('@strategy outside @ifpdslide')
-          end
+          -- if nested_in ~= 'ifpdslide' then
+          --   terror('@strategy outside @ifpdslide')
+          -- end
           local arg1 = read_group(i, directive)
           local arg2 = read_group(i, directive, not 'scheme', 'multiline')
           update_curr_slide_text(c .. directive .. '{' .. arg1 .. '}{')
@@ -302,7 +302,8 @@ local function get_slides(lsn_plan_adoc_file)
         elseif directive == 'strategy' then
           local arg1 = read_group(i, directive)
           local arg2 = read_group(i, directive, not 'scheme', 'multiline')
-          arg = '@ifpdslide{@slidebreak\n@strategy-basic{' .. arg1 .. '}{' .. arg2 .. '}}\n'
+          -- arg = '@ifpdslide{@slidebreak\n@strategy-basic{' .. arg1 .. '}{' .. arg2 .. '}}\n'
+          arg = '@strategy-basic{' .. arg1 .. '}{' .. arg2 .. '}\n'
           scan_directives(io.open_buffered(false, arg), directive, dont_count_image_p)
         else
           if directive == 'opt-block' then
@@ -456,7 +457,7 @@ local function make_slides_file(lplan_file, slides_file)
       if (slide.level == 2 and slide.section) then
         local curr_layout = slide.style
         if not memberp(curr_layout, allowed_slide_layouts) then
-          print('WARNING: Probably empty slide! Unknown slide template ' .. curr_layout .. ' in '
+          print('WARNING: Probably empty slide or template in wrong case! Unknown slide template ' .. curr_layout .. ' in '
             .. os.getenv('PWD'))
           curr_layout = "Bogus-layout"
         end
