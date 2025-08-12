@@ -38,6 +38,7 @@ local function get_proglang(fhtml_cached)
 end
 
 local function postproc(fhtml_cached, tipe)
+  local page_title = ''
   -- print('doing postproc', fhtml_cached, tipe)
   if not file_exists_p(fhtml_cached) then return end
   local local_dist_root_dir = calculate_dist_root_dir(fhtml_cached)
@@ -191,7 +192,6 @@ local function postproc(fhtml_cached, tipe)
     end
     --
     if x:find('</head>') then
-      local page_title = ''
       local adoc_file = fhtml:gsub('%.s?html', '.adoc')
       -- print('adoc_file is', adoc_file)
       if file_exists_p(adoc_file) then
@@ -341,20 +341,24 @@ local function postproc(fhtml_cached, tipe)
   --
   i:close()
   o:close()
+  if tipe == 'lessonplan' then
+    return page_title
+  end
 end
 
-local function extract_self_guided(fhtml_cached)
+local function extract_self_guided(fhtml_cached, lesson_title)
   if not file_exists_p(fhtml_cached) then return end
   local fdir = fhtml_cached:gsub('/%.cached/%.index%.html$', '')
   local fhtml = fdir .. '/index.shtml'
-  local fjson = fdir .. '/book.json' -- rename?
+  local fjson = fdir .. '/selfGuidedBits.jsx'
   local i = io.open(fhtml, 'r')
   local o = io.open(fjson, 'w')
   local writing_p = false
   local skip_one_more_line_p = false
   local counter = 0
   local page_header = ''
-  o:write('export const selfGuidedBookBits = [\n')
+  o:write('export const selfGuidedTitle = "' .. lesson_title .. '"\n\n')
+  o:write('export const selfGuidedBits = [\n')
   for x in i:lines() do
     if writing_p then
       if skip_one_more_line_p then
@@ -393,8 +397,8 @@ local function run_postproc(batchf, tipe)
   -- print('doing run_postproc', batchf, tipe)
   local files = dofile(batchf)
   for _,f in ipairs(files) do
-    postproc(f, tipe)
-    if tipe == 'lessonplan' then extract_self_guided(f) end
+    local title = postproc(f, tipe)
+    if tipe == 'lessonplan' then extract_self_guided(f, title) end
   end
 end
 
