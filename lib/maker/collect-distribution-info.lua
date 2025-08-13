@@ -3,6 +3,8 @@
 local make_dir = os.getenv'MAKE_DIR'
 
 dofile(make_dir .. 'utils.lua')
+dofile(make_dir .. 'readers.lua')
+dofile(make_dir .. 'sread.lua')
 
 local natlang = os.getenv 'NATLANG'
 
@@ -19,13 +21,15 @@ local courses_dir = 'distribution/' .. natlang .. '/courses'
 local lessons_dir = 'distribution/' .. natlang .. '/lessons'
 
 function record_course_lessons(course, lo)
-  local course_lessons_file = courses_dir .. '/' .. course .. '/.cached/.workbook-lessons.txt.kp'
+  local course_lessons_file = courses_dir .. '/' .. course .. '/.cached/.workbook-lessons.rkt.kp'
   if not file_exists_p(course_lessons_file) then
     return
   end
-  local i = io.open(course_lessons_file, 'r')
-  for L in i:lines() do
-    lo:write(L, '\n')
+  local lesson_units = sread_file(course_lessons_file)
+  for _,lunit in ipairs(lesson_units) do
+    for i=2,#lunit do
+      lo:write(lunit[i], '\n')
+    end
   end
 end
 

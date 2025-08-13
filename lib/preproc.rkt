@@ -1303,11 +1303,13 @@
     (link-to-project-lessons-short-form "Lesson" project-lessons o)))
 
 (define (link-to-project-lessons-in-pathway o)
-  ; (printf "doing link-to-project-lessons-in-pathway\n")
-  (let ([lessons (read-data-file
-                   (format "distribution/~a/courses/~a/.cached/.workbook-lessons.txt.kp"
-                           *natlang* *target-pathway*))]
+  ; (printf "doing link-to-project-lessons-in-pathway ~s\n" *target-pathway*)
+  (let ([lesson-units (read-data-file
+                   (format "distribution/~a/courses/~a/.cached/.workbook-lessons.rkt.kp"
+                           *natlang* *target-pathway*) #:mode 'form)]
+        [lessons #f]
         [project-lessons '()])
+    (set! lessons (apply append (map rest lesson-units)))
     (for ([lesson lessons])
       (let ([lesson-pl-file
               (format "distribution/~a/lessons/~a/.cached/.index-projectlessons.rkt.kp" *natlang* lesson)])
@@ -1325,57 +1327,73 @@
 (define (link-to-lessons-in-pathway o)
   ; (printf "link-to-lessons-in-pathway\n")
   ;
-  (let ([lessons (read-data-file
-                   (format "distribution/~a/courses/~a/.cached/.workbook-lessons.txt.kp"
-                           *natlang* *target-pathway*))])
+  (let* ([lesson-units
+           (read-data-file
+             (format "distribution/~a/courses/~a/.cached/.workbook-lessons.rkt.kp"
+                     *natlang* *target-pathway*) #:mode 'form)]
+         [num-lunits (length lesson-units)]
+         [lessons #f])
+    (set! lessons (apply append (map rest lesson-units)))
+    ; (printf "*** num-lunits = ~s\n" num-lunits)
+    ; (printf "*** lesson-units = ~s\n" lesson-units)
     ;(printf "lessons = ~s\n" lessons)
     ;
     ;(fprintf o "~n.Lessons Used in This Pathway\n")
     (print-lessons-intro o)
-    (fprintf o "[#lesson-list]\n")
-    (for ([lesson lessons])
-      ;(printf "tackling lesson ~s\n" lesson)
-      (let* ([lesson-index-file (format "lessons/~a/index.shtml" lesson)]
-             [lesson-directory (format "distribution/~a/lessons/~a" *natlang* lesson)]
-             [lesson-title-file (format "~a/.cached/.index.titletxt"
-                                        lesson-directory)]
-             [lesson-desc-file (format "~a/.cached/.index-desc.txt.kp"
-                                       lesson-directory)]
-             [lesson-title lesson]
-             [lesson-description #f])
-        (unless (directory-exists? lesson-directory)
-          (printf "WARNING: Course ~a referring to nonexistent lesson ~a\n\n"
-                  *target-pathway* lesson))
-        (when (file-exists? lesson-title-file)
-          ;(printf "~a exists\n" lesson-title-file)
-          (set! lesson-title (call-with-input-file lesson-title-file read-line)))
-        ;(printf "lesson-title is ~s\n" lesson-title)
-        (when (file-exists? lesson-desc-file)
-          ;(printf "~a exists\n" lesson-desc-file)
-          (set! lesson-description
-            (call-with-input-file lesson-desc-file
-              (lambda (i)
-                (let ([r ""])
-                  (let loop ()
-                    (let ([x (read-line i)])
-                      (unless (eof-object? x)
-                        (set! r (string-append r "\n" x))
-                        (loop))))
-                  r)))))
-        ;(printf "lesson-description is ~s\n" lesson-description)
-        ;lesson-index-file (shtml) doesn't exist yet, but shd we at least check for index.adoc?
-        (if (string-prefix? lesson "project-")
-          (fprintf o "link:pass:[~a~a?pathway=~a][~a, role=project] ::" *dist-root-dir* lesson-index-file *target-pathway* lesson-title)
-          (fprintf o "link:pass:[~a~a?pathway=~a][~a] ::" *dist-root-dir* lesson-index-file *target-pathway* lesson-title)
-          )
 
-        (if lesson-description
-            (display lesson-description o)
-            (display " {nbsp}" o))
-        ;(when lesson-description
-        ;(display lesson-description o)
-        ;(newline o))
-        (newline o)))
+    (for ([lunit lesson-units])
+      ; (printf "lunit = ~s\n" lunit)
+      (let ([lunit-name (first lunit)] [lessons (rest lunit)])
+        ; (printf "lunit-name = ~s\n" lunit-name)
+        (when (or (> num-lunits 1) (not (string=? lunit-name "")))
+          (fprintf o "\n[.lesson-unit]\n=== ~a\n" lunit-name))
+
+        (fprintf o "[.lesson-list]\n")
+        (for ([lesson lessons])
+          ;(printf "tackling lesson ~s\n" lesson)
+          (let* ([lesson-index-file (format "lessons/~a/index.shtml" lesson)]
+                 [lesson-directory (format "distribution/~a/lessons/~a" *natlang* lesson)]
+                 [lesson-title-file (format "~a/.cached/.index.titletxt"
+                                            lesson-directory)]
+                 [lesson-desc-file (format "~a/.cached/.index-desc.txt.kp"
+                                           lesson-directory)]
+                 [lesson-title lesson]
+                 [lesson-description #f])
+            (unless (directory-exists? lesson-directory)
+              (printf "WARNING: Course ~a referring to nonexistent lesson ~a\n\n"
+                      *target-pathway* lesson))
+            (when (file-exists? lesson-title-file)
+              ;(printf "~a exists\n" lesson-title-file)
+              (set! lesson-title (call-with-input-file lesson-title-file read-line)))
+            ;(printf "lesson-title is ~s\n" lesson-title)
+            (when (file-exists? lesson-desc-file)
+              ;(printf "~a exists\n" lesson-desc-file)
+              (set! lesson-description
+                (call-with-input-file lesson-desc-file
+                  (lambda (i)
+                    (let ([r ""])
+                      (let loop ()
+                        (let ([x (read-line i)])
+                          (unless (eof-object? x)
+                            (set! r (string-append r "\n" x))
+                            (loop))))
+                      r)))))
+            ;(printf "lesson-description is ~s\n" lesson-description)
+            ;lesson-index-file (shtml) doesn't exist yet, but shd we at least check for index.adoc?
+            (if (string-prefix? lesson "project-")
+                (fprintf o "link:pass:[~a~a?pathway=~a][~a, role=project] ::" *dist-root-dir* lesson-index-file *target-pathway* lesson-title)
+                (fprintf o "link:pass:[~a~a?pathway=~a][~a] ::" *dist-root-dir* lesson-index-file *target-pathway* lesson-title)
+                )
+
+            (if lesson-description
+                (display lesson-description o)
+                (display " {nbsp}" o))
+            ;(when lesson-description
+            ;(display lesson-description o)
+            ;(newline o))
+            (newline o)))))
+
+
       (for ([lesson lessons])
         ;(printf "tackling lesson i ~s\n" lesson)
         (let ([lesson-asc-file

@@ -1,10 +1,11 @@
 #! /usr/bin/env lua
 
 -- last modified 2025-05-29
-
 -- print('doing make-pathway-tocs.lua')
 
 dofile(os.getenv('MAKE_DIR') .. 'utils.lua')
+dofile(os.getenv('MAKE_DIR') .. 'readers.lua')
+dofile(os.getenv('MAKE_DIR') .. 'sread.lua')
 
 local dist_dir = os.getenv('TOPDIR') .. '/distribution/' .. os.getenv('NATLANG') .. '/'
 
@@ -19,15 +20,25 @@ o:write('var pathwayTocs = {\n')
 
 for _,course in ipairs(all_courses) do
   local course_dir = distr_courses .. course .. '/'
-  local this_course_lessons_file = course_dir .. '.cached/.workbook-lessons.txt.kp'
+  local this_course_lessons_file = course_dir .. '.cached/.workbook-lessons.rkt.kp'
   if not file_exists_p(this_course_lessons_file) then goto continue end
-  local i = io.open(this_course_lessons_file)
+  local lesson_units = sread_file(this_course_lessons_file)
   o:write('  \"' .. course .. '\": [\n')
-  for lsn in i:lines() do
-    o:write('     \"' .. lsn .. '\",\n')
+  for _,lunit in ipairs(lesson_units) do
+    local unit_name = lunit[1]
+    if unit_name ~= 'NO_UNIT' then
+      o:write('     { "' .. unit_name .. '": [ \n')
+    end
+    for i=2,#lunit do
+      o:write('       \"' .. lunit[i] .. '\",\n')
+    end
+    if unit_name ~= 'NO_UNIT' then
+      o:write('     ] },\n')
+    end
   end
   o:write('  ],\n')
   ::continue::
 end
 
 o:write('}\n')
+o:close()

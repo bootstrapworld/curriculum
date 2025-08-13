@@ -16,6 +16,7 @@ export OLDFORMAT
 export PROGLANG
 export PD
 nomake=
+skipnode=
 lsn=
 
 if test $# -eq 0; then
@@ -33,6 +34,8 @@ else
       shift; PROGLANG="$1"; shift
     elif test "$1" = --nomake; then
       nomake=1; shift
+    elif test "$1" = --skipnode; then
+      skipnode=1; shift
     elif test "$1" = --pd; then
       PD=1; shift
     elif test "$1" = --rebuild; then
@@ -148,7 +151,9 @@ for NATLANG in *; do
         fi
       fi
 
-      if test -s "$idfile"; then
+      if test -n "$skipnode"; then
+        :
+      elif test -s "$idfile"; then
         id=$(cat "$idfile"|$SED -e 1q)
         # echo md2gslides with id $id
         node $TOPDIR/node_modules/md2googleslides/bin/md2gslides.js $slidesmkd -a "$id" -e -n -t "$title" -c $templateSlidesId -p $parentFolderId -s $cssPath  > .tmp.txt
