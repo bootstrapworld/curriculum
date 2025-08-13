@@ -141,8 +141,8 @@ export function SelfGuided() {
   return (
     <>
     <div id="banner">
-      <img src="images/icon.png" height="50" />
-      <span>Bootstrap :: Winter Hour of Code</span>
+      <img src="./icon.png" height="50" />
+      <span>Bootstrap :: {selfGuidedTitle}</span>
     </div>
     <div id="progressbar" style={{width: (index + 1) * (100 / numSelfGuidedPages) + "%"}}></div>
     <h1>{selfGuidedTitle}</h1>
