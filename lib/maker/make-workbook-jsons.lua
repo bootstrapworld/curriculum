@@ -89,9 +89,7 @@ do
         end
         o:write(' "', lunit[i], '"\n')
       end
-      o:write(' "', lsn, '"\n')
     end
-    w:close()
     o:write('  ],\n')
 
     local back_matter_workbook_pages_file = course_dir .. '/back-matter/pages/.cached/.workbook-pages.txt.kp'
@@ -127,5 +125,3 @@ do
     o:close()
   end
 end
-
--- print('done make-workbook-jsons-2.lua')
