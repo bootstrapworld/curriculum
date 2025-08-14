@@ -27,7 +27,7 @@ for _,course in ipairs(all_courses) do
   for _,lunit in ipairs(lesson_units) do
     local unit_name = lunit[1]
     if unit_name ~= 'NO_UNIT' then
-      o:write('     { "' .. unit_name .. '": [ \n')
+      o:write('     { "title":"' .. unit_name .. '", "lessons": [ \n')
     end
     for i=2,#lunit do
       o:write('       \"' .. lunit[i] .. '\",\n')
