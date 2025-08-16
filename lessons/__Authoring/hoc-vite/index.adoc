@@ -1,0 +1,376 @@
+@slidebreak{}
+@editorconfig{{
+      definitionsAtLastRun: `
+use context starter2024
+text("Hello!", 200, "purple")
+        ` ,
+      editorContents: `
+use context starter2024
+text("Hello!", 200, "purple")
+        `
+}}
+
+
+== 1. Welcome to Bootstrap's Hour of Code!
+
+We're going to use Pyret to write programs that make images.
+
+On the right, you should see an embedded version of our Pyret Editor, which works like a chat program...
+
+-  The code we've written appears in the blue bubble.
+-  The `text` function takes in 3 inputs: _a message, a size, and a color_.
+
+-  The Editor automatically runs each line of code you submit and responds with the result.
+-  If there's an error, the Editor will get stuck until you fix it.
+
+1.   Try *clicking on the code* and editing the message.
+2.   Then hit "Enter" or click the *Update responses* button in the top left to re-run the code.
+
+You can also always click 🔄, to reset the editor to where it was the first time you saw any card.
+
+@slidebreak{}
+@editorconfig{{
+      definitionsAtLastRun: `use context starter2024`,
+      editorContents: `use context starter2024`,
+}}
+
+== 2. Coding Images
+
+What do you think the following code will do?
+
+  star(50, "solid", "blue")
+ 
+1.   <input type="button" value="Make a prediction, then click here" onclick='addToEditor(\`
+star(50, "solid", "blue")
+\`, 0)' /> to add it to the editor and see the result!
+  
+  
+2. You can also click on the code on the right to change it!
++ 
+Try changing the 50 to another number. Then hit "Enter" or click the *Update responses* button to re-run the code. What happens?
+  
+3. Try changing the color.
+
+@slidebreak{}
+@editorconfig{{
+      definitionsAtLastRun: `
+use context starter2024
+star(50, "outline", "fuchsia")
+`,
+      editorContents: `
+use context starter2024
+star(50, "outline", "fuchsia")
+`,
+}}
+
+== 3. More Shape Functions!
+
+There are lots of other functions that will produce an image... and some of them take the same arguments as `star`:  _ a Number and two Strings._
+ Here are a few for you to try!
+
+. Can you write the code to make a solid, green `circle` with a radius of 26?
+  
+. Can you make an outlined, red `triangle` of size 45?
+  
+. Can you make two different purple `square`s with side-lengths of 104?
+
+@slidebreak{}
+
+@editorconfig{{
+      definitionsAtLastRun: `
+use context starter2024
+star(50, "solid", "blue")
+rectangle(50, "solid", "blue")
+`,
+      editorContents: `
+use context starter2024
+star(50, "solid", "blue")
+rectangle(50, "solid", "blue")
+`,
+}}
+
+== 4. What about Errors?!
+
+There are also image-producing functions that need more arguments than `star`, <tt>circle`, <tt>triangle`, or <tt>square`.
+          
+The error message we see here tells us that `rectangle` needs 4 arguments, but was only given 3.
+          
+- _Think about it:_ What might be missing?
+
+- _Try it:_Take 1 minute to see if you can figure out how to change the code to successfully build a `rectangle` before advancing to the next slide.
+            
+          
+*Note: The Editor needs you to fix the code that generated the error and will not be able to run new lines of code until you do!*
+
+@slidebreak{}
+
+@editorconfig{{
+      definitionsAtLastRun: `
+use context starter2024
+rectangle(50, 100, "solid", "orange")
+`,
+      editorContents: `
+use context starter2024
+rectangle(50, 100, "solid", "orange")
+`,
+}}
+
+== 5. What Makes Rectangles Different?
+          
+          Why does `rectangle` need two numbers, while square only needed one?
+           
+          <ul>
+            -  _Think about it:_ What do you think will happen if you switch the order of the numbers and hit "Enter".
+             
+            - _Try it:_ Make a prediction, <input type="button" value=" then click here to switch 100 and 50" onclick='addToEditor(\`rectangle(100, 50, "solid", "orange")\`)' /> to test it out!
+          </ul>
+          `
+    },
+
+@slidebreak{}
+@editorconfig{{
+      definitionsAtLastRun: `
+use context starter2024
+`,
+      editorContents: `
+use context starter2024
+`,
+}}
+
+== 6. More Images
+
+          Let's explore some more functions that require the same arguments as `rectangle`: _two Numbers and two Strings_.
+          
+           <ol>
+         -  *Take a moment to imagine an ellipse in your mind.* 
+          <ul>
+            -  Either write the code to generate an `ellipse` on your own or <input type="button" value="Click here to see the code for an ellipse" onclick='addToEditor(\`ellipse(100, 50, "solid", "orange")\`)' /> in the Editor.
+
+            -  How would you explain what an ellipse is to someone else?
+           </ul>
+            - Can you make a tall ellipse?
+            - Can you make an ellipse that looks like a circle?
+            
+
+            - *Experiment with `right-triangle`.*
+            
+            <ul>
+            - Why does `right-triangle` need two numbers, while <tt>triangle` only needed one?
+          </ul>
+          </ol>
+          `
+    },
+
+@slidebreak{}
+@editorconfig{{
+      definitionsAtLastRun: `
+use context starter2024
+nose = isosceles-triangle(100, 340, "solid", "orange")
+`,
+      editorContents: `
+use context starter2024
+nose = isosceles-triangle(100, 340, "solid", "orange")
+`,
+}}
+
+== 7. Defining Functions
+
+          Sometimes it is useful to define functions so that we can reuse them without having to write out all of the code.
+          
+          Here we have defined a nose.
+          
+          <ol>
+            - What do you think will happen if you type `nose` in a new line of code and hit "Enter"?  Test it out.
+            - What do you think will happen if you change the color of the nose and click the *Update responses* button to re-run the code?  Test it out.
+            - Define `mouth` to be another shape of your choosing.
+            </ol>
+            `
+    },
+
+@slidebreak{}
+@editorconfig{{
+      definitionsAtLastRun: `
+use context starter2024
+head = circle(6, "outline", "darkgray")
+torso = circle(8, "outline", "darkgray")
+base = circle(10, "outline", "darkgray")
+`,
+      editorContents: `
+use context starter2024
+head = circle(6, "outline", "darkgray")
+torso = circle(8, "outline", "darkgray")
+base = circle(10, "outline", "darkgray")
+`,
+}}
+
+== 8. Composing Functions
+          <ol>
+            
+          *Defining functions simplifies the process of combining them.*
+          
+            - What do you think this next line of code will do?
+          
+          `body = above(torso, base)`
+          
+           Make a prediction, then <input type="button" value="click here to see what the body looks like" onclick='addToEditor(\`body = above(torso, base)\`)' /> in the editor!
+          
+            - YOUR TURN: Can you write the code to place the head above the body?
+          </ol>
+          `
+    },
+
+@slidebreak{}
+@editorconfig{{
+      definitionsAtLastRun: `
+use context starter2024
+brim = rectangle(70, 15, "solid", "black")
+`,
+      editorContents: `
+use context starter2024
+brim = rectangle(70, 15, "solid", "black")
+`,
+}}
+
+== 9. Composing a Top Hat
+
+          <ol>
+            - Define  `top` to be a solid black rectangle that is 50 x 30.
+            
+            - Define `top-hat` to put the <tt>brim` below the <tt>top`.
+            
+            - Can you make the same image using `above`?
+          </ol>
+          `
+    },
+
+@slidebreak{}
+@editorconfig{{
+      definitionsAtLastRun: `
+use context starter2024
+eye-white = circle(30, "solid", "lightgray")
+pupil = circle(10, "solid", "black")
+`,
+      editorContents: `
+use context starter2024
+eye-white = circle(30, "solid", "lightgray")
+pupil = circle(10, "solid", "black")
+`,
+}}
+
+
+== 10. Overlaying Images
+          Just as we can place an image `above` or <tt>below` another image, we can also <tt>overlay` an image on top of another image.
+          
+          <ol>
+            - What do you think this next line of code will do?
+              
+              `overlay(pupil, eye-white)`
+              
+               <input type="button" value="Make a prediction, then click here" onclick='addToEditor(\`overlay(pupil, eye-white)\`)' /> to add it to the editor and see the result!
+            - Where on the eye-white does the pupil get placed?
+            - What do you think we'd see if we typed `overlay(eye-white, pupil)` instead?
+              </p>
+               <input type="button" value="Make a prediction, then click here" onclick='addToEditor(\`overlay(eye-white, pupil)\`)' /> to add it to the editor and see the result! What happened?!
+          </ol>
+          `
+    },
+
+@slidebreak{}
+@editorconfig{{
+      definitionsAtLastRun: `
+use context starter2024
+eye-white = circle(30, "outline", "black")
+pupil = circle(10, "solid", "black")
+`,
+      editorContents: `
+use context starter2024
+eye-white = circle(30, "outline", "black")
+pupil = circle(10, "solid", "black")
+`,
+}}
+
+== 11. Placing Images Using Coordinates
+
+Sometimes we want *to place the top image somewhere other than on the center* of the bottom image.
+
+This requires a function called `translate`, which takes in two Images and two Numbers.
+
+- The first Number is the x-coordinate.
+- The second Number is the y-coordinate.
+- The bottom left corner of the bottom image is (0,0).
+ 
+_Think about it:_ What image do you think the expression `translate(pupil, 10, 30, eye-white)` will generate? Make a prediction!
+
+_Try it out:_<input type="button" value="Click here" onclick='addToEditor(\`translate(pupil, 10, 30, eye-white)\`)' /> to add it to the editor and test it out!
+
+@slidebreak{}
+
+@editorconfig{{
+      definitionsAtLastRun: `
+use context starter2024
+eye-white = circle(30, "outline", "black")
+pupil = circle(10, "solid", "black")
+translate(pupil, 10, 30, eye-white)
+`,
+      editorContents: `
+use context starter2024
+eye-white = circle(30, "outline", "black")
+pupil = circle(10, "solid", "black")
+translate(pupil, 10, 30, eye-white)
+`,
+}}
+
+== 12. Making Googley Eyes
+
+- Use `translate` to place the <tt>pupil` on the center of the <tt>eye-white`.
+
+- Use `translate` to place the <tt>pupil` on the bottom of the <tt>eye-white`.
+
+- Use `translate` to place the <tt>pupil` on the <tt>eye-white` wherever you think it makes the best looking googley eye!
+
+@slidebreak{}
+
+@videoConfig{videos/eye.mov}
+
+== 13. Full Pyret
+
+So far we have been working in the Parley version of Pyret. More complex programs get written with the same exact code, but in a different view.
+
+On the right is a video of our classic Pyret editor in action.
+
+- The Definitions Area on the left side contains much of the code we've written today.
+- In Parley, code was evaluated as you typed it.
+- In classic Pyret, code from the Definitions area is only evaluated when you click "Run". 
+- On the right side we have the Interactions Area, where a user is evaluating `eye` and <tt>googley-eye`.
+- Anytime we make a change to the code in the Definitions area, we need to click "Run" again. Doing so will clear all of the code from the Interactions area.
+
+              
+
+If you'd like to watch the video again, click on the screen.
+
+
+<input type="button" value="Click here to open Pyret in a new window" onclick="window.open('https://code.pyret.org/editor#share=1bJJzrW_XM1gQzg1oghlW98HSIsA9WWt0&v=31c9aaf', '_blank')"/> when you're ready to play around with this file in the classic Pyret editor.
+
+
+
+@slidebreak{}
+
+@imageConfig{images/snowmanpuzzle2.png}
+
+
+== 14. Your Task
+
+Now that you're
+
+- familiar with Pyret
+- know how to define image-producing functions
+- know how to compose more complex images with them using coordinates
+
+          
+you're ready to solve a puzzle!
+          
+When you open the file linked below and click "Run", you will see a jumbled collection of objects that need to be placed to compose a winter wonderland scene.
+          
+The pieces have been defined behind the scenes so you won't be able to change them... but you don't have to use them all and, once you have successfully created an image that will make sense to other viewers, you can use what you've learned to improve upon it by defining any additional values you like!
+          
+<input type="button" value="Click here to open the Winter Wonderland Puzzle" onclick="window.open('https://code.pyret.org/editor#share=1Lgax_uAdFxUJzyGKPbx2BESj9BNkTK3i&v=1904b2c', '_blank')"/>  in a new Pyret window and click "Run" to load the initial image.</a>

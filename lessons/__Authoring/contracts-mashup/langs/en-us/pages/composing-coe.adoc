@@ -1,0 +1,73 @@
+= Composing with Circles of Evaluation 
+
+++++
+<style>
+table .autonum::after { content: ')' !important; }
+
+/* For the bottom table, make the first row 2x tall
+ * Center the circles, and add space below the
+ * autonum-based prompt
+*/
+.bottom { grid-template-rows: 2fr 1fr !important; }
+.bottom .circleevalsexp { text-align: center; }
+.bottom .autonum { margin-bottom: 30px; }
+
+</style>
+++++
+
+[.no-flex-section]
+== Notice and Wonder
+
+@do{
+(define exp1 '(rotate 90 (text "Diego" 150 "yellow")))
+(define exp2 '(rotate 45 (text "Shriram" 90 "purple")))
+
+}
+
+_Suppose we want to see the `text` "Diego" written vertically in yellow letters of size 150. Let's use Circles of Evaluation to look at the structure:_
+
+[cols="^4, ^.^1,^5", grid="none", stripes="none", frame="none"]
+|===
+
+|We can start by generating the Diego image.
+|
+|And then use the `rotate` function to rotate it 90 degrees.
+
+| @show{(coe '(text "Diego" 150 "yellow"))}  | &rarr; 	| @show{(coe exp1)}
+
+| @show{(code '(text "Diego" 150 "yellow"))} | 			| @show{(code exp1)}
+
+|===
+
+
+@n What do you Notice? @fitb{}{}
+
+@fitb{}{}
+
+@n What do you Wonder?@fitb{}{}
+
+@fitb{}{}
+
+== Let's Rotate an Image of Your Name!
+
+_Suppose you wanted the computer to show your name in your favorite color and rotate it so that it's diagonal..._
+
+[.bottom.FillVerticalSpace, cols=".<1a, .<1a", stripes="none", frame="none"]
+|===
+
+| @center{*Write your name (any size), in your favorite color*} +
+  @n Draw the circle of evaluation: +
+  @showsoln{(coe '(text "Shriram" 90 "purple"))}
+
+| @center{*`rotate` the image so that it's diagonal*} +
+  @n Draw the circle of evaluation: +
+  @showsoln{(coe exp2)}
+
+
+
+| @n Convert the Circle of Evaluation to code: +
+  @showsoln{(code '(text "Shriram" 90 "purple"))}
+| @n Convert the Circle of Evaluation to code: +
+  @showsoln{(code exp2)}
+|===
+

@@ -48,10 +48,6 @@ $(eval $(foreach adocf,$(pathway-independent-adoc-files),$(call make-build-pathw
 
 ###############################################################################
 
-# relevant-lessons := $(foreach \
-# 	lesson-name,$(shell \
-# 	cat $(RELEVANT_LESSONS_INPUT)),distribution/$(NATLANG)/lessons/$(lesson-name))
-
 all-lessons := $(wildcard distribution/$(NATLANG)/lessons/*)
 
 ifndef COURSE
@@ -294,6 +290,7 @@ specials: preproc
 postproc: preproc
 	@echo ➤ Postproc
 	@$(MAKE_DIR)do-postproc.lua
+	@$(MAKE_DIR)make-self-guided.sh
 
 tocs: preproc
 	@echo ➤ Make pathway-tocs.js

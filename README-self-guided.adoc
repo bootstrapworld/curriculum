@@ -1,0 +1,81 @@
+= Generating JSON object for self-guided book
+
+The build process automatically generates the files containing the
+JSON required for the self-guided book. The content of these files
+are extracted from their corresponding lesson-plan files. We do
+something similar for generating the slides pages too.
+
+Each page in the book typically corresponds to a slide. Note that each slide
+starts with a `@slidebreak` (mandatory) and ends with either a
+following `@slidebreak` or an AsciiDoc section, whichever comes
+earlier. This content becomes the `lessonText` field for that
+page.
+
+== Making the book pages different from the slides
+
+In some situations, we don't want an exact 1-to-1 correspondence
+between slides and book pages: In such cases, we replace
+`@slidebreak` with one of the following:
+
+1. `@slideonlybreak` — the following piece of text is used to
+   construct a slide but is ignored in the book
+
+2. `@selfguidedbreak` — the following piece of text will be
+   used in the book but ignored for slides
+
+The older directive `@slidebreak`, of course, ensures the following piece of text is
+included in both book and slides. (We may need to change these
+names later to be more uniform.)
+
+== {editor,image,video}config
+
+A book page also has one of the fields: `editorCode`,
+`imageConfig`, or `videoConfig`. To insert these in the
+lesson-plan file, use the directives
+
+  @editorconfig{...}
+  @imageconfig{...}
+  @videoconfig{...}
+
+Note: The directive names are uniform and in lower case. Here are
+some example uses:
+
+  @editorconfig{{
+    definitionsAtLastRun: `
+      use context starter2024
+      text("Hello!", 200, "purple")
+    `,
+    editorContents: `
+      use context starter2024
+      text("Hello!", 200, "purple")
+    `
+  }}
+
+  @imageconfig{images/snowmanpuzzle2.png}
+
+  @videoconfig{videos/eye.mov}
+
+If a page content doesn't mention either of these, they inherit
+them from the just-previous page.
+
+The starting default used is
+
+  @editorconfig{{}}
+
+== Conditional text
+
+Two conditional directives are available to exclusively enable or
+disable content from the book pages:
+
+  @ifselfguided{...}
+
+uses the enclosed context for the book but nothing else, whereas
+
+  @ifnotselfguided{...}
+
+uses the enclosed context for everything but the book.
+
+Note these can only be used for texts within slides, and cannot be
+used to enclose `@slidebreak`. To conditionally allow or disallow
+entire slide texts in the book, use `@selfguidedbreak` and
+`@slideonlybreak`, described above.

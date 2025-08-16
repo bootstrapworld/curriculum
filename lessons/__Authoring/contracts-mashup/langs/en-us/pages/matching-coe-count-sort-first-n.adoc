@@ -1,0 +1,57 @@
+[.landscape]
+= Matching Descriptions to Circles of Evaluation: sort, count, first-n-rows
+
+++++
+<style>
+/* Format matching answers to render with an arrow */
+.solution::before{ content: ' → '; }
+</style>
+++++
+
+@do{
+
+(define expA '(count (first-n-rows animals-table 8) "weeks"))
+(define expB '(first-n-rows (sort animals-table "weeks" false) 1))
+(define expC '(first-n-rows (sort animals-table "pounds" true) 8))
+(define expD '(sort (first-n-rows animals-table 8) "pounds" false))
+(define expE '(first-n-rows (sort animals-table "weeks" true) 1))
+
+}
+Match each prompt on the left to the Circle of Evaluation used to answer it.
+
+
+[.FillVerticalSpace, cols="<.^5a,^.^3a,3,^.^1a,^.^10a", stripes="none", grid="none", frame="none"]
+|===
+| We want to see the 8 lightest animals.
+|*1* @ifsoln{C} ||*A*
+| @show{(coe expA)}
+
+| We want to see the animal who was adopted the quickest.
+|*2* @ifsoln{E} ||*B*
+| @show{(coe expB)}
+
+| We want to take the first 8 animals from the table and order them from heaviest to lightest.
+|*3* @ifsoln{D} ||*C*
+| @show{(coe expC)}
+
+| We want to know the count by weeks to adoption of the first 8 animals.
+|*4* @ifsoln{A} ||*D*
+| @show{(coe expD)}
+
+|
+| ||*E*
+| @show{(coe expE)}
+
+|===
+
+
+@star Translate each Circle of Evaluation into code and test it out in the @starter-file{animals} to confirm it does what you'd expect it to.
+
+@indented{_Hint:_ The Code for A is @hspace{1em} @show{(code expA)} +
+@ifsoln{ The other circles would translate to the following code: +
+B) @show{(code expB)} +
+C) @show{(code expC)} +
+D) @show{(code expD)} +
+E) @show{(code expE)}
+}
+}

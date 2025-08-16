@@ -130,6 +130,10 @@
 
 (define *enclosing-directive* #f)
 
+(define *self-guided-counter* 0)
+(define *self-guided-text?* #f)
+(define *self-guided-context* "")
+
 (define *external-url-index*
   (let ([f (string-append *pathway-root-dir* "external-index.rkt")])
     (if (file-exists? f)
@@ -1495,6 +1499,9 @@
   (set! *definitions* '())
   (set! *local-scheme-definitions* '())
   (set! *enclosing-directive* #f)
+  (set! *self-guided-counter* 0)
+  (set! *self-guided-text?* #f)
+  (set! *self-guided-context* "editorCode: {}")
 
   (set! *pyret?* (string=? *proglang* "pyret"))
 
@@ -1577,6 +1584,27 @@
 
 (define *needs-objectives?* #f)
 (define *uses-objectives?* #f)
+
+(define (start-self-guided-break o)
+  (stop-self-guided-break o)
+  (set! *self-guided-counter* (+ *self-guided-counter* 1))
+  (set! *self-guided-text?* #t)
+  (display (html-comment "start_self_guided_piece") o)
+  ; (newline o)
+  )
+
+(define (stop-self-guided-break o)
+  (when *self-guided-text?*
+    (set! *self-guided-text?* #f)
+    (let ([json-sub-file
+            (build-path *containing-directory* ".cached"
+                        (format ".index-sg-~a.json" *self-guided-counter*))])
+      (call-with-output-file json-sub-file
+        (lambda (o)
+          (fprintf o "~a\n" *self-guided-context*))
+        #:exists 'replace)
+      (display (html-comment "stop_self_guided_piece") o)
+      (newline o))))
 
 (define (expand-directives i o)
         ;(printf "doing expand-directives\n")
@@ -2002,6 +2030,19 @@
                                          o))]
                                     [else (set! possible-beginning-of-line?
                                             (skip-1-newline-if-possible i o))]))]
+                           [(member directive '("ifselfguided" "ifnotselfguided"))
+                            (let* ([text (read-group i directive #:multiline? #t)]
+                                   [contains-nl? (regexp-match "^ *\n" text)]
+                                   [converted-text (expand-directives:string->string
+                                                text #:enclosing-directive directive)]
+                                   [class-name (substring directive 2)])
+                              (display
+                                (cond [contains-nl?
+                                        (format "\n\n[.actually-openblock.~a]\n====\n~a\n====\n"
+                                          class-name converted-text)]
+                                      [else
+                                        (enclose-span (format ".~a" class-name)
+                                          converted-text)]) o))]
                            [(or (string=? directive "ifpathway")
                                 (string=? directive "ifnotpathway"))
                             (let ([pathways (read-commaed-group i directive read-group)]
@@ -2013,13 +2054,36 @@
                                        pathways)) o))]
                            [(string=? directive "funname")
                             (fprintf o "`~a`" (get-function-name))]
-                           [(string=? directive "slidebreak")
-                            (display (enclose-span ".slidebreak" "") o)
-                            (let ([c (peek-char i)])
-                              (cond [(and (char? c) (char=? c #\{))
-                                     (read-group i directive)]
-                                    [else (printf "WARNING: ~a: Invalid @slidebreak\n"
-                                                  (errmessage-context))]))]
+                           [(member directive '("slidebreak" "slideonlybreak" "selfguidedbreak"))
+                            (unless *lesson-plan*
+                              (error 'ERROR "~a (~a) valid only in lesson plan"
+                                     directive (errmessage-file-context)))
+                            (when (member directive '("slidebreak" "selfguidedbreak"))
+                              (start-self-guided-break o))
+                            ; (display (html-comment (format "slidenum ~a" *self-guided-counter*)) o)
+                            (when (member directive '("slidebreak" "slideonlybreak"))
+                              (display (enclose-span ".slidebreak" "") o)
+                              (newline o))
+                            (unless (string=? directive "selfguidedbreak")
+                              (let ([c (peek-char i)])
+                                (cond [(and (char? c) (char=? c #\{))
+                                       (read-group i directive)]
+                                      [else (printf "WARNING: ~a: Invalid ~a\n" directive
+                                              (errmessage-context))])))]
+                           [(member directive '("editorconfig" "imageconfig" "videoconfig"))
+                            (unless *lesson-plan*
+                              (error 'ERROR
+                                     "~a (~a) valid only in lesson plan"
+                                     directive (errmessage-file-context)))
+                            (let ([text (read-group i directive #:multiline? #t)])
+                              ; (printf "xconfig = ~a\n" text)
+                              (set! *self-guided-context*
+                                (format "~a: ~a\n"
+                                  (case directive
+                                    [("editorconfig") "editorCode"] ;maybe make uniform
+                                    [("imageconfig") "imageConfig"]
+                                    [("videoconfig") "videoConfig"])
+                                  text)))]
                            [(string=? directive "Bootstrap")
                             (fprintf o "https://www.bootstrapworld.org/[Bootstrap]")]
                            [(hash-ref *simple-directives* (string->symbol directive) #f)
@@ -2273,6 +2337,8 @@
                    (when (span-stack-present?)
                      (printf "WARNING: ~a: Header can't be inside span\n\n"
                              (errmessage-context)))
+                   (when *lesson-plan*
+                     (stop-self-guided-break o))
                    (cond [*title-reached?*
                            (cond [*first-subsection-reached?* #f]
                                  [(check-first-subsection i o)
@@ -2417,6 +2483,11 @@
 
               (unless *other-dir*
                 (fprintf o "\n\n"))
+
+              (when *lesson-plan*
+                (stop-self-guided-break o)
+                (display (html-comment "end_self_guided") o)
+                (newline o))
 
               (unless (or *other-dir* (truthy-getenv "NOCOLOPHON"))
                 ;(fprintf o "\n\n")
