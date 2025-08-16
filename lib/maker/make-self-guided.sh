@@ -1,7 +1,7 @@
 #! /usr/bin/env bash
 
-# this is the dir containing the generic parts
-self_guided_dir=$TOPDIR/distribution/$NATLANG/lib/self-guided
+lib_dir=$TOPDIR/distribution/$NATLANG/lib
+self_guided_dir=$lib_dir/self-guided
 
 function create_local_self_guided() {
   local g=$1
@@ -9,6 +9,7 @@ function create_local_self_guided() {
   (cd $g
   mkdir -p self-guided
   cd self-guided
+  ln -sf $lib_dir/curriculum.css
   for sgf in $(ls $self_guided_dir); do
     # soft link to node_modules subdir from the generic dir;
     # other files copied
