@@ -33,6 +33,7 @@
 Students review value definitions in Pyret, and practice extracting individual Rows for later use. They are also introduced to _column lookups_, which allow them to extract a specific value from a Row.
 
 === Launch
+@slidebreak{Launch-DN}
 
 You've learned how to write functions that work with Numbers, Strings, and Images. But as Data Scientists, we want to write functions that work with _Rows_. To do that, we'll need to take Rows apart and use the values stored in their columns.
 
@@ -41,7 +42,7 @@ You've learned how to write functions that work with Numbers, Strings, and Image
 - In the Interactions Area, evaluate a few of the sample rows you see defined in the file.
 }
 
-@slidebreak
+@slidebreak{Launch}
 
 @QandA{
 @Q{What are the names of the sample rows you see defined?}
@@ -54,7 +55,7 @@ You've learned how to write functions that work with Numbers, Strings, and Image
 @A{The second row.}
 }
 
-@slidebreak
+@slidebreak{Launch}
 
 Notice that we could have defined the first row from the animals table using:
 
@@ -65,7 +66,7 @@ But, it's often more useful to name our Row definitions according to the _proper
 `cat-row = row-n(animals-table, 0)`
 
 
-@slidebreak
+@slidebreak{Launch}
 
 If we were analyzing a subset of lizards, it would make sense to add a definition for `lizard-row` to the Animals Dataset.
 
@@ -74,7 +75,7 @@ If we were analyzing a subset of lizards, it would make sense to add a definitio
 - Define a new Row called `myPet`, to be your favorite animal at the shelter.
 }
 
-@slidebreak
+@slidebreak{Launch}
 
 We can access _specific columns_ of a Row, by using a *Row Accessor*.
 
@@ -83,15 +84,16 @@ We can access _specific columns_ of a Row, by using a *Row Accessor*.
   ** or the name of a row that we have already defined
 - Row accessors end with square brackets `[ ]` containing the name of the column where the value can be found.
 
+@slidebreak{Launch}
+
 Here are three examples that use row accessors to get at different columns from the first row in the animals-table.
 ++++
 <style>
-.comparisonTable th { text-align: center; }
 .comparisonTable .highlight { background: #f7f7f8 !important; }
 </style>
 ++++
 @indented{
-[.comparisonTable, cols="^1a,^1a", options="header", frame="none"]
+[.comparisonTable, cols="^1a,^1a", options="header", frame="none", width=80%]
 |===
 | Without Predefined Rows
 | Using Predefined Rows
@@ -103,7 +105,6 @@ row-n(animals-table, 0)["name"]
 row-n(animals-table, 0)["age"]
 row-n(animals-table, 0)["fixed"]
 ```
-
 .>|
 
 ```
@@ -118,6 +119,7 @@ cat-row["fixed"]
 }
 
 === Investigate
+@slidebreak{Investigate}
 
 Sometimes we want to ask questions about a specific Row, or do some computations with that Row:
 
@@ -128,12 +130,16 @@ Sometimes we want to ask questions about a specific Row, or do some computations
 
 We can use our knowledge of lookups, operators and functions to do just that!
 
+@slidebreak{Investigate}
+
 @lesson-instruction{
 - Turn to @printable-exercise{lookup-questions-matching.adoc} and find the `pets-table` at the top of the page. All of the questions on this page will refer back to that table.
 - Complete the page, discussing your thinking with a partner.
 }
 
 @teacher{Confirm that students have correctly completed the page before moving on. If they need more matching practice before moving on have them complete @opt-printable-exercise{more-practice-w-lookups.adoc}, which focuses on the `shapes-table`.}
+
+@slidebreak{Investigate-DN}
 
 Now that we know how to lookup a value for a specific column of a row, let's practice some of the things we might be able to do with that information!
 
@@ -149,6 +155,7 @@ Have students share their most creative uses of lookups. Did anyone use three or
 }
 
 === Synthesize
+@slidebreak{Synthesize}
 
 @QandA{
 @Q{Why is it helpful to be able to lookup values from a Row?}
@@ -162,6 +169,7 @@ Have students share their most creative uses of lookups. Did anyone use three or
 Students use different representations of functions to define functions that consume _Rows_. They also discover _functions that consume other functions_ and compose a scatter plot function with a function they've defined.
 
 === Launch
+@slidebreak{Launch}
 
 By now you've had a chance to explore functions on your own, thinking of them in terms of several different representations:
 
@@ -171,18 +179,33 @@ By now you've had a chance to explore functions on your own, thinking of them in
 
 Now it's time to use those representations to help us work with Rows!
 
-@slidebreak
+@slidebreak{Launch-DN}
 
 @lesson-instruction{
 - Open the @starter-file{row-functions}, save a copy, and click "Run".
-- Scroll until you see the definition for `cat-row`. What will you get back if you evaluate `cat-row` in the Interactions Area?
-- What species is the animal?
-- What is its name?
-- How old is it?
-- Complete the top half of @printable-exercise{functions-with-lookups.adoc}.
+- Scroll until you see the definition for `cat-row`. 
+}
+
+@slidebreak{Launch}
+
+@QandA{
+@Q{What will you get back if you evaluate `cat-row` in the Interactions Area?}
+@A{The first row of the table}
+@A{Sasha's row.}
+@Q{What species is the animal?}
+@A{cat}
+@Q{How old is it?}
+@A{1}
+}
+
+@slidebreak{Launch}
+
+@lesson-instruction{
+Complete the top half of @printable-exercise{functions-with-lookups.adoc}.
 }
 
 === Investigate
+@slidebreak{Investigate}
 
 Let's look at an example to see how lookups can work hand-in-hand with function definitions!
 
@@ -198,8 +221,11 @@ Whatever your answer is the precise description of what to do for your example!
 }
 }
 
-@slidebreak
+@slidebreak{Investigate}
 
+@ifslide{
+Let's review your answers for the `age-gt` section of @printable-exercise{functions-with-lookups.adoc}.
+}
 ```
 # CONTRACT:
 # age-gt :: Row -> Image
@@ -218,35 +244,59 @@ fun age-gt(r):       triangle(5 *       r["age"], "solid", "green") end
 
 ```
 
-@teacher{Review student answers from the `age-gt` section of @printable-exercise{functions-with-lookups.adoc}.}
+@teacher{
+Review student answers from the `age-gt` section of @printable-exercise{functions-with-lookups.adoc}.
 
+@ifslide{
+
+(6) What is the Domain of `age-gt`? &rarr; Row
+- The Range? &rarr; Image
+- How many examples are provided? &rarr; 4
+
+(7) According to the comment below the Contract, what should this function do, when given a Row? 
+
+&rarr; consume an animal, and draw a solid green triangle whose size is 5x the age of the animal
+
+*The first two examples use `cat-row` and `dog-row`. And so do the third and fourth examples!*
+
+(8) Which pair of examples does the definition look more like? 
+
+&rarr; The last two examples.
+
+(9) Why is it helpful to include the first two examples? 
+
+&rarr; They show us exactly what should be produced for `cat-row` and `dog-row` -- the two Rows representing "Sasha" and "Toggle", based on their `age` (`1` and `3`).
+
+(10) Why can't we write our definition using only the first two examples? 
+
+&rarr; They don't show us how the computer should look up the `age` from the row!
+
+(11) In the last two examples the numbers `3` and `1` have been replaced! Where do these examples get the numbers from?
+
+&rarr; Row Lookups!
+
+}
+}
+
+@slidebreak{Investigate}
+
+@ifslide{
+```
+examples:
+  age-gt(cat-row) is triangle(5 *          1,     "solid", "green")
+  age-gt(dog-row) is triangle(5 *          3,     "solid", "green")
+
+  age-gt(cat-row) is triangle(5 * cat-row["age"], "solid", "green")
+  age-gt(dog-row) is triangle(5 * dog-row["age"], "solid", "green")
+end
+```
+}
 *Both pairs of examples are _correct_!*
 
 - In the first pair, we see the values 1 and 3, which makes it easy for us picture the two triangles... but there's no explanation of where the values are coming from.
 - The last pair shows how those values are _looked up_ from the example rows, which makes it easier to write a definition that the computer can use for any row!
 
-@slidebreak
-
-@ifslide{
-
-```
-# CONTRACT:
-# age-gt :: Row -> Image
-# consumes an animal, and draws a solid green triangle whose
-# size is 5x the number age of the animal as the size
-
-examples:
-  age-gt(cat-row) is triangle(5 *          1,     "solid", "green")
-  age-gt(dog-row) is triangle(5 *          3,     "solid", "green")
-
-  age-gt(cat-row) is triangle(5 * cat-row["age"], "solid", "green")
-  age-gt(dog-row) is triangle(5 * dog-row["age"], "solid", "green")
-end
-
-fun age-gt(r):       triangle(5 *       r["age"], "solid", "green") end
-
-```
-}
+@slidebreak{Investigate}
 
 *You can use both kinds of examples in your code! Programmers often use a mix of the two.*
 
@@ -254,6 +304,7 @@ fun age-gt(r):       triangle(5 *       r["age"], "solid", "green") end
 - And sometimes we need to show all of our work, to make sure we are defining the function correctly!
 
 === Synthesize
+@slidebreak{Synthesize}
 
 @QandA{
 @Q{Why might it be beneficial to include both kinds of examples?}

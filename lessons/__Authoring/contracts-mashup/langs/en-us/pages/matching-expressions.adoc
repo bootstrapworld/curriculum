@@ -1,0 +1,76 @@
+= Matching Expressions and Contracts
+
+++++
+<style>
+#content td { padding-left: 0 !important; padding-right: 0 !important;}
+#content td * {font-size: .85rem !important;}
+#content .listingblock pre { padding: 0 !important; }
+
+/* Format matching answers to render with an arrow */
+.solution::before{ content: ' → '; }
+</style>
+++++
+
+_Match_ the Contract (left) with the expression that uses it correctly (right). +
+_Note: The contracts on this page are not defined in Pyret and cannot be tested in the editor._
+
+[.FillVerticalSpace, cols=">.^17a,^.^3a,5,^.^1a,.^13a",stripes="none",grid="none",frame="none", options="header"]
+|===
+|  Contract|  || |Expression
+| @show{(contract "make-id" '("String" "Number") "Image")}
+| *@n* @ifsoln{B}
+|| *A*
+| @show{(code '(make-id "Savannah" "Lopez" 32))}
+
+| @show{(contract "make-id" '("String" "Number" "String") "Image")}
+| *@n* @ifsoln{C}
+|| *B*
+| @show{(code '(make-id "Pilar" 17))}
+
+| @show{(contract "make-id" '("String") "Image")}
+| *@n* @ifsoln{E}
+|| *C*
+| @show{(code '(make-id "Akemi" 39 "red"))}
+
+| @show{(contract "make-id" '("String" "String") "Image")}
+| *@n* @ifsoln{D}
+|| *D*
+| @show{(code '(make-id "Raïssa" "McCracken"))}
+
+| @show{(contract "make-id" '("String" "String" "Number") "Image")}
+| *@n* @ifsoln{A}
+|| *E*
+| @show{(code '(make-id "von Einsiedel"))}
+
+|===
+
+@vspace{3ex}
+
+[.FillVerticalSpace, cols=">.^17a,^.^2a,5,^.^1a,.^13a", stripes="none", grid="none", frame="none", options="header"]
+|===
+|  Contract|  || |Expression
+| @show{(contract "is-capital" '("String" "String") "Boolean")}
+| *@n* @ifsoln{C}
+|| *A*
+| @show{(code '(show-pop "Juneau" "AK" 31848))}
+
+| @show{(contract "is-capital" '("String" "String" "String") "Boolean")}
+| *@n* @ifsoln{E}
+|| *B*
+| @show{(code '(show-pop "San Juan" 395426))}
+
+| @show{(contract "show-pop" '("String" "Number") "Image")}
+| *@n* @ifsoln{B}
+|| *C*
+| @show{(code '(is-capital "Accra" "Ghana"))}
+
+| @show{(contract "show-pop" '("String" "String" "Number") "Image")}
+| *@n* @ifsoln{A}
+|| *D*
+| @show{(code '(show-pop 3751351 "Oklahoma"))}
+
+| @show{(contract "show-pop" '("Number" "String") "Number")}
+| *@n* @ifsoln{D}
+|| *E*
+| @show{(code '(is-capital "Albany" "NY" "USA"))}
+|===

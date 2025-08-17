@@ -6,7 +6,7 @@
 </style>
 ++++
 
-@description{Students learn about the importance of careful data collection, by confronting a "dirty" dataset. They then design a simple survey of their own, gather their data, and import it into Pyret}
+@description{Students learn about the importance of careful data collection, by confronting a "dirty" dataset. They then design a simple survey of their own, gather their data, and import it into Pyret. _This lesson optionally includes @lesson-link{project-design-a-survey}_🎨.}
 
 @ifproglang{pyret}{
 @lesson-prereqs{contracts-visualizations}}
@@ -29,7 +29,7 @@
 | Student-facing Lesson Goals
 |
 
-- Let's learn to identify when data is "dirty" - and should be avoided!
+- Let's learn to identify when data is "dirty" -- and should be avoided!
 - Let's learn how to collect clean data
 
 | Materials
@@ -55,6 +55,7 @@
 Students analyze a "dirty" dataset to develop an understanding of why it's important to have "clean" data.
 
 === Launch
+@slidebreak{Launch}
 There are lots of reasons to gather data:
 
 * A company might want to survey its customers to see if they are happy with the product.
@@ -66,6 +67,7 @@ There are lots of reasons to gather data:
 *Not all data is created equal.* Only _clean_ data can be properly processed and analyzed. But what does it mean for data to be clean? What does it mean for data to be dirty?
 
 === Investigate
+@slidebreak{Investigate-DN}
 
 Humans make mistakes, and that can happen when we are collecting data or entering data. Either way, the result is dirty data. There is a _lot_ of dirty data out there that Data Scientists have to deal with!
 
@@ -77,9 +79,18 @@ Let's take a look at some dirty data.
 }
 
 === Synthesize
+@slidebreak{Synthesize}
 
-* What were some ways that the data was "dirty"?
-* What ideas do you have for how the survey designers could have solicited better data?
+@QandA{
+@Q{What were some ways that the data was "dirty"?}
+@A{Answers will vary}
+@A{Some people gave age to the nearest year while other people gave more precise answers.}
+@A{The form only had options for us to select that we were in grade 5,7,9,11... but required us to pick one... so those answers might be wrong.}
+@A{Not all heights were given in inches. And some people included the word inches, so their entries aren't reading as a Number.}
+@A{Some people didn't enter their wingspan measurements, because the question wasn't required.}
+
+@Q{What ideas do you have for how the survey designers could have solicited better data?}
+}
 
 @strategy{Pedagogy Note!}{
 
@@ -94,17 +105,18 @@ Students analyze a sample dataset to consider the different ways that data can b
 
 
 === Launch
+@slidebreak{Launch}
 Sometimes data is so "dirty" that it can't even be processed by tools like @proglang! Here are four ways that data can be dirty:
 
-(1) *Missing Data* - A column containing some cells with data, but some cells left blank.
+(1) *Missing Data* -- A column containing some cells with data, but some cells left blank.
 
-(2) *Inconsistent Types* - A column where some values have one data type and some cells have another. For example, a `years` column where almost every cell is a Number, but one cell contains the string `"5 years old"`.
+(2) *Inconsistent Types* -- A column where some values have one data type and some cells have another. For example, a `years` column where almost every cell is a Number, but one cell contains the string `"5 years old"`.
 
-(3) *Inconsistent Units* - A column where the data types are the same, but they represent different units. For example, a `weight` column where some entries are in pounds but others are in kilograms.
+(3) *Inconsistent Units* -- A column where the data types are the same, but they represent different units. For example, a `weight` column where some entries are in pounds but others are in kilograms.
 
-(4) *Inconsistent Naming* - Inconsistent spelling and capitalization for entries lead to them being counted as different. For example, a species column where some entries are "cat" and others are "Cat" will not give us a full picture of the cats.
+(4) *Inconsistent Naming* -- Inconsistent spelling and capitalization for entries lead to them being counted as different. For example, a species column where some entries are "cat" and others are "Cat" will not give us a full picture of the cats.
 
-@slidebreak
+@slidebreak{Launch-DN}
 
 @lesson-instruction{
 - Open @starter-file{new-animals} and complete @printable-exercise{dirty-data.adoc} in pairs or small groups.
@@ -113,8 +125,9 @@ Sometimes data is so "dirty" that it can't even be processed by tools like @prog
 Have students share their results when they are finished.
 
 === Investigate
+@slidebreak{Investigate}
 
-@ifproglang{pyret}{Pyret is pretty smart, and does a lot of checking to make sure data is clean before analyzing it. Many tools - like Google Sheets, Microsoft Excel, etc. - don't. Suppose you tried to analyze this data in a tool that doesn't do all this checking...}
+@ifproglang{pyret}{Pyret is pretty smart, and does a lot of checking to make sure data is clean before analyzing it. Many tools -- like Google Sheets, Microsoft Excel, etc. -- don't. Suppose you tried to analyze this data in a tool that doesn't do all this checking...}
 
 @lesson-instruction{
 - What would happen if you tried to make a pie chart from a categorical column, but three of the cells were blank?
@@ -122,7 +135,7 @@ Have students share their results when they are finished.
 - What would happen if you made a scatter plot examining `pounds` v. `weeks`, but two of the cells in the `weeks` column were actually showing the _days_ to adoption?
 }
 
-@slidebreak
+@slidebreak{Investigate}
 
 Sometimes, there's an easy way to clean up the data. Chanel and Bibbles have String values for their weights, but we can easily change them to be numbers representing pounds.
 
@@ -132,19 +145,30 @@ But what if the data is missing, like the `weight` for our dogs? Or what if it's
 It's never as simple as just deleting dirty rows!
 }
 
-@slidebreak
+@slidebreak{Investigate}
 
 Suppose we decided to delete all the rows with blank cells, removing Mona, Rover, Susie Q, and Happy. How might that bias our analysis? _Removing all the dogs makes it look like this shelter doesn't have any!_
 
 Suppose we decided to delete all the rows with weird data, having inconsistent types or units we don't recognize? We could delete Boss and Porsche, but how might that bias our analysis? _Removing all the female lizards might affect the kind of food or habitat the shelter needs to buy!_
 
 === Synthesize
+@slidebreak{Synthesize}
 
-These animal examples were a useful way to illustrate the problem, but dirty data shows up _everywhere_. Imagine a dataset about people in your town, which asks about height, religion, race, address, and job.
+These animal examples were a useful way to illustrate the problem, but dirty data shows up _everywhere_. 
 
-1. If unemployed people leave the `job` field blank, why would it be a problem to delete those rows?
-2. Suppose the `height` field is full of junk data. Some people leave it blank, some write their height in inches, some write it in centimeters, some write a combination like "5 feet, 9 inches" and others write "I'm taller than my brother." Can we just delete all those rows?
-3. Suppose the `race` question had people choose from a list. What might happen to our data if the list left out an option for one group of people?
+@QandA{
+Imagine a dataset about people in your town, which asks about height, religion, race, address, and job.
+
+@Q{If unemployed people leave the `job` field blank, why would it be a problem to delete those rows?}
+@A{Because then we would be completely excluding people who are unemployed from our analysis!}
+
+@Q{Suppose the `height` field is full of junk data. Some people leave it blank, some write their height in inches, some write it in centimeters, some write a combination like "5 feet, 9 inches" and others write "I'm taller than my brother." Can we just delete all those rows?}
+@A{There might be nothing left if we did that!}
+
+@Q{Suppose the `race` question asked people to select an option from a list. What might happen to our data if the list left out an option for one group of people?}
+@A{It would be misrepresentative. This happens all the time!}
+}
+
 
 == Data Hygiene
 
@@ -152,7 +176,8 @@ These animal examples were a useful way to illustrate the problem, but dirty dat
 Students open a google form survey containing "bad" questions. They identify why the questions are problematic, and then create a copy of the survey with their proposed fixes.
 
 === Launch
-The way we ask questions - and check responses - plays a big role in how clean our data is.
+@slidebreak{Launch-DN}
+The way we ask questions -- and check responses -- plays a big role in how clean our data is.
 
 It is often said that a person's height is generally the same as their "wingspan" (the length from fingertip to fingertip when their arms are outstretched). Suppose we want to test this for ourselves, by surveying students at a school.
 
@@ -170,56 +195,57 @@ You can also print out a copy of the survey for students to study on paper. It's
 Be sure to make your own copy of @starter-file{bad-survey} and share a link to it with your students.
 }
 
-@slidebreak
+@slidebreak{Launch}
 
 @lesson-instruction{
 - Open the Height v WingSpan survey.
 - Complete @printable-exercise{bad-survey.adoc} in pairs or small groups.
 }
 
-@slidebreak
+@slidebreak{Launch}
 
 While it's almost impossible to _guarantee_ 100% clean data, most survey tools include advanced options to help Data Scientists get data that is as clean possible. Here's an overview of those tools:
 
-@slidebreak
+@slidebreak{LaunchR}
 
 @indented{
-(1) @right{@image{images/required.png}} *Required Questions* - By making a question "required", we can eliminate missing data and blank cells. Which questions on the survey should be required?
+(1) @right{@image{images/required.png}} *Required Questions* -- By making a question "required", we can eliminate missing data and blank cells. Which questions on the survey should be required?
 
 @clear
 @vspace{5ex}
 
 }
 
-@slidebreak
+@slidebreak{LaunchR}
 
 @indented{
-(2) @right{@image{images/format.png}} *Question Format* - When you have a fixed number of categories, a drop-down can ensure that everyone selects one - and only one! - category. Questions 1 and 3 might be a good candidates for drop-downs. Question 3 is especially bad, because it allows respondents to select multiple grades!
+(2) @right{@image{images/format.png}} *Question Format* -- When you have a fixed number of categories, a drop-down can ensure that everyone selects one -- and only one! -- category. Questions 1 and 3 might be a good candidates for drop-downs. Question 3 is especially bad, because it allows respondents to select multiple grades!
 
 @clear
 @vspace{5ex}
 }
 
-@slidebreak
+@slidebreak{LaunchR}
 
 @indented{
-(3) @right{@image{images/description.png}} *Descriptive Instructions* - Sometimes it's helpful to just add instructions! This can remind respondents to use inches instead of centimeters, for example, or give them extra guidance to answer accurately.
+(3) @right{@image{images/description.png}} *Descriptive Instructions* -- Sometimes it's helpful to just add instructions! This can remind respondents to use inches instead of centimeters, for example, or give them extra guidance to answer accurately.
 @clear
 
 @clear
 @vspace{5ex}
 }
 
-@slidebreak
+@slidebreak{Launch}
 
 @indented{
-(4) @right{@image{images/validate.png}} *Adding Validation* - Most survey tools allow you to specify whether some data should be a number or a string, which helps guard against inconsistent types. Often, you can even specify parameters for the data as well, such as "strings that are email addresses", or "numbers between 24 and 96". Questions 2 and 4 would benefit from some validation. @right{@image{images/validation.png}}
+(4) @right{@image{images/validate.png}} *Adding Validation* -- Most survey tools allow you to specify whether some data should be a number or a string, which helps guard against inconsistent types. Often, you can even specify parameters for the data as well, such as "strings that are email addresses", or "numbers between 24 and 96". Questions 2 and 4 would benefit from some validation. @right{@image{images/validation.png}}
 
 @vspace{5ex}
 @clear
 }
 
 === Investigate
+@slidebreak{Investigate}
 
 @lesson-instruction{
 @link{https://docs.google.com/forms/d/1gm-3Ts8LTVkrWBZmDneWc36HxkU8tzcmh_yEt7mbWPg/copy, Make a copy of the bad survey}, and work in pairs or small groups to fix it!
@@ -228,6 +254,7 @@ While it's almost impossible to _guarantee_ 100% clean data, most survey tools i
 Have student share back what changes they made, and what they discussed.
 
 === Synthesize
+@slidebreak{Synthesize}
 
 - Have you ever taken a survey, where the answer you want to give isn't listed?
 - Have you ever taken a survey, where you just _know_ the questions are going to result in bad data?
@@ -235,5 +262,6 @@ Have student share back what changes they made, and what they discussed.
 - When someone shares a dataset that they've cleaned or modified in some way, is it important for them to share their modifications? Why or why not?
 
 == Additional Exercises
+@slidebreak{Supplemental}
 
 * If you are interested in digging into the idea that there's lots of important data that's not being collected, we recommend reading @link{https://www.NYtimes.com/2017/05/10/opinion/the-census-wont-collect-lgbt-data-thats-a-problem.html, "The Census Won't Collect L.G.B.T. Data. That's a Problem"} with your class.

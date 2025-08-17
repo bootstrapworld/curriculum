@@ -1,4 +1,4 @@
-= Linearizing Logarithmic Models
+= Linearizing Logarithmic Data
 
 @description{Students investigate logarithmic relationships in data about countries of the world, using an inquiry-based model involving hypothesizing, experimental and computational modeling, and sense-making.}
 
@@ -55,14 +55,15 @@ Having discovered that changing the scale of a graph allows us to _see_ logarith
 Note: This also opens the door for teaching inverse functions!
 
 === Launch
+@slidebreak{Launch}
 
-We've seen that changing the scale on the x-axis from linear to logarithmic cancels out the logarithmic behavior by _shrinking the x-axis_ to have intervals that grow exponentially and squishing the points to appear linear.
+We've seen that changing the scale on the x-axis from linear to logarithmic cancels out the logarithmic behavior by _shrinking the x-axis_ to have intervals that grow exponentially and squishing the points so we *perceive* them as linear.
 
-@slidebreak
+@slidebreak{Launch}
 
 Instead of plotting `pc-gdp` on a _logarithmic_ x-axis, we could *transform the x-coordinates themselves* and plot `log(pc-gdp)` on a _linear_ x-axis.  This would allow us to be able to use linear regression to obtain an optimal linear model!
 
-@slidebreak
+@slidebreak{Launch-DN}
 
 @teacher{Sync or pace students to *Slide 8: Wealth-v-Health (Transformed)* of @starter-file{alg2-log-desmos}.}
 
@@ -72,7 +73,7 @@ Instead of plotting `pc-gdp` on a _logarithmic_ x-axis, we could *transform the 
 - Use it to complete @printable-exercise{transforming-data.adoc}.
 }
 
-@slidebreak
+@slidebreak{Launch}
 
 @QandA{
 @Q{What values did you come up with for @math{m} and @math{b} in your best-guess linear model?}
@@ -85,7 +86,7 @@ Instead of plotting `pc-gdp` on a _logarithmic_ x-axis, we could *transform the 
 @A{Changing the scale just made things *look* linear, but the data wasn't any different.}
 }
 
-@slidebreak
+@slidebreak{Launch}
 
 @lesson-point{
 The @vocab{slope} in the transformed, linear model is the same as the @vocab{log coefficient} in the untransformed logarithmic model.
@@ -96,18 +97,19 @@ The @vocab{vertical shift} in the transformed, linear model is the same as the @
 }
 
 === Investigate
+@slidebreak{Investigate}
 
 
 Now that we know how the model settings in our linear model of transformed data relate to the model settings in our logarithmic model, let's return to Pyret to run linear regression on the transformed data, find the best possible linear model (the @vocab{line of best fit}), and use its model settings to define our *optimal _logarithmic_ model!*
 
-@slidebreak
+@slidebreak{Investigate-DN}
 
 @lesson-instruction{
 - Open @starter-file{alg2-countries}, and turn to @printable-exercise{logarithmic-models.adoc}.
 - Complete the first part ("Transforming: From Logarithmic Plots to Linear Ones"), then pause for class discussion.
 }
 
-@slidebreak
+@slidebreak{Investigate}
 
 We transformed the data in three steps:
 
@@ -117,35 +119,36 @@ We transformed the data in three steps:
 
 @teacher{Address any student questions about `build-column`, the Pyret function they've just discovered. Make sure that students have recorded the slope and vertical shift for their regression line. Then, emphasize the following key ideas.}
 
-@slidebreak
+@slidebreak{Investigate}
 
 - At each point in our linear model, @math{y} is the _predicted median lifespan_, and @math{x} is the _log of per-capita gdp in dollars_.
 - We want @math{x} to represent the *original, untransformed* value, simply using _per-capita gdp in thousands_ as-is...
 
-@slidebreak
+@slidebreak{Investigate}
 
 @lesson-instruction{
 - Now let's find our optimized @vocab{logarithmic model}.
 - Complete the second part ("Inverting: From Linear Models to Logarithmic Ones") of @printable-exercise{logarithmic-models.adoc}.
 }
 
-@slidebreak
+@slidebreak{InvestigateR}
 
-@right{@image{images/lr-plot-transformed.png, 350}}Just like in Desmos, transforming the `pc-gdp` column with a log function produces a scatter plot showing a linear pattern in the data! +
-@vspace{1ex} +
-Pyret's `lr-plot` tool computes the best possible linear model for our transformed data: +
+@right{@image{images/lr-plot-transformed.png, 350}}Just like in Desmos, transforming the `pc-gdp` column with a log function produces a scatter plot showing a linear pattern in the data! 
+
+Pyret's `lr-plot` tool computes the best possible linear model for our transformed data: 
+
 @indented{@math{y = 11.9012x + ~24.2636}} 
+
 Our @math{S} has dropped to 4.49, showing a much better correlation than before.
 
 @clear
 
-@slidebreak
+@slidebreak{InvestigateR}
 
 @right{@image{images/logarithmic-model.png, 350}}From @printable-exercise{transforming-data.adoc}, we know that the model settings used in the transformed, linear model are the same ones used in the logarithmic, untransformed model:
 
-@indented{@math{logarithmic3(x) = 11.9012 \log_{10}(x) + 24.2636}}
-
-@indented{@show{(code '(define (logarithmic3 x) (+ (* 11.9012 (log x)) 24.2636)))}}
+@center{@math{linear(x) = 11.9012x + 24.2636}}
+@center{@math{logarithmic3(x) = 11.9012 \log_{10}(x) + 24.2636}}
 
 The resulting logarithmic model can be fit to our original scatter plot, showing a much better fit than our 2-point-derived estimates.
 
@@ -154,6 +157,7 @@ The resulting logarithmic model can be fit to our original scatter plot, showing
 
 
 === Synthesize
+@slidebreak{Synthesize}
 
 @QandA{
 @Q{Why is the @vocab{S-value} for our logarithmic model the same as the @vocab{S-value} for our linear model after transforming?}
@@ -162,23 +166,26 @@ The resulting logarithmic model can be fit to our original scatter plot, showing
 @Q{Suppose all the tech companies in the Bay Area (Google, Apple, Facebook, etc.) decided to secede and form their own country with a `pc-gdp` far, far beyond the range of the rest of the data. Would it be appropriate to use our model to predict the `median-lifespan` for their employees? Why or why not?}
 }
 
-@slidebreak
+@slidebreak{Synthesize}
 
 @QandA{
 @Q{Is it possible for someone to live to their 6000th birthday?}
 @Q{According to our model, is there a `pc-gdp` that would allow someone to live to 6000 years old?}
 @A{YES! It's logarithmic so we're talking an unimaginable `pc-gdp`, but a logarithm will keep rising forever.}
 @Q{If so, should we throw away the model?}
-@A{NO! When building a model from data, a Data Scientist's job is to find the model that _best fits the data_. In this case, the best-fit model happens to be logarithmic - even if it's biologically impossible!}
+@A{NO! When building a model from data, a Data Scientist's job is to find the model that _best fits the data_. In this case, the best-fit model happens to be logarithmic -- even if it's biologically impossible!}
 }
 
 == Additional Exercises
+@slidebreak{Supplemental}
 
 For more practice transforming data and programming with filters: 
 
-@indented{
-@opt-printable-exercise{transforming-wealth-practice.adoc} is a guided activity that repeats the Data Science and @vocab{Linearization} techniques used here, but with the idea of exploring the relationship of universal healthcare with respect to wealth and median lifespan.
-}
+- @opt-printable-exercise{transforming-wealth-practice.adoc} is a guided activity that repeats the Data Science and @vocab{Linearization} techniques used here, but with the idea of exploring the relationship of universal healthcare with respect to wealth and median lifespan.
+
+- Rather than log-scaling the `pc-gdp`, students can transform the `median-lifespan` column using an exponential scale. _Note: Since this relationship has a nonzero y-intercept, the graph will need to be translated to properly take the inverse!_
+
+- Students can also return to the dataset from @lesson-link{exponential1-exploring-covid} and log-scale the `positive` column to linearize that dataset and apply linear regression. _Note: Since that relationship has a nonzero y-intercept, the graph will need to be translated down!_ Students can also transform the `days` column using an exponential scale.
 
 @teacher{
 We are working on collecting more datasets that can be modeled with logarithmic functions so that we can offer students more practice with using linear regression to build logarithmic models.
@@ -190,7 +197,7 @@ We are working on collecting more datasets that can be modeled with logarithmic 
 @strategy{Optional Activity: Guess the Model!}{
 
 1. Divide students into small groups (2-4), and have each team come up with a logarithmic, real-world scenario, then have them write down a logarithmic function that fits this scenario on a sticky note. Make sure no one else can see the function!
-2. On the board or some flip-chart paper, have each team draw a _scatter plot_ for which their logarithmic function is best fit. They should only draw the point cloud - _not the function itself!_ Finally, students title their scatter plot to describe their real-world scenario (e.g. - "Age of a Person from Birth to 16 vs. Number of Cells in their Body").
+2. On the board or some flip-chart paper, have each team draw a _scatter plot_ for which their logarithmic function is best fit. They should only draw the point cloud -- _not the function itself!_ Finally, students title their scatter plot to describe their real-world scenario (e.g. "Age of a Person from Birth to 16 vs. Number of Cells in their Body").
 3. Have teams rotate, so that each team is in front of another team's scatter plot. Have them figure out the original function, write their best guess on a sticky note, and stick it next to the plot.
 4. Have teams return to their original scatter plot, and look at the model their colleagues guessed. How close were they? What strategies did the class use to figure out the model?
 

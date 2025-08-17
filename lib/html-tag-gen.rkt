@@ -22,6 +22,7 @@
   string-multiply
   fitb
   hspace
+  html-comment
   )
 
 (define (create-begin-tag tag-name classes #:attribs [attribs #f])
@@ -160,3 +161,6 @@
                       (format "style=\"width: ~a\"" width))
     (create-end-tag "span"))
   )
+
+(define (html-comment str)
+  (format "%CURRICULUMCOMMENTSTART% ~a %CURRICULUMCOMMENTSTOP%" str))

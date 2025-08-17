@@ -1,0 +1,1410 @@
+/************************************************************************************
+* SYSTEMWIDE STYLES
+*/
+@font-color: #75328A;
+@translucent-bg-color: #75328AAA;
+@translucent-bg-color2: #b7d893;
+@text-font: 'Lato', Arial, Helvetica, sans-serif;
+@code-font: Hack, "Courier New", monospace;
+@code-comment-color: #cd7054;
+@top-padding-for-writing: 1.2rem;
+@top-padding-for-dr: 1rem;
+@print-section-heading: lightgray;
+@table-header: #eee;
+@lesson-block-vertical-space: 1em;
+@ruby-height: 13px; /* Note(Emmanuel): use this for positioning and font size! */
+
+div#body {
+  font-family:    @text-font;
+  color:          @font-color;
+  width:          100%; /* needed to undo effect of html{display:flex} */
+  display:        block;
+  position:       relative;
+  -webkit-font-smoothing: antialiased;
+  &.beta::after {
+    position: absolute;
+    top: 40%;
+    left: 40%;
+    transform: rotate(-45deg);
+    content: "BETA";
+    opacity: 0.2;
+    line-height: 3em;
+    color: gray;
+    font-size: 100pt;
+    font-weight: bold;
+    z-index: -1;
+  }
+  /* Set Defaults (many asciidoc overrides) */
+  h1 {
+    font-size:      24px;
+    font-weight:    900;
+    font-family:    @text-font;
+    line-height:    30px;
+  }
+  h2 {
+    margin:          0;
+    font-family:    @text-font;
+  }
+  h3 { font-size: 16px; font-weight: bold;  }
+  .prefix { font-style: italic; color: gray; }
+  a       { color:  #2156a5 !important; }
+  p       { margin: 10px 0px; font-size: inherit; }
+  sup     { font-size: smaller; top: -0.55em; left: 1px; }
+  sub     { font-size: smaller; bottom: -0.35em; }
+  code    {
+    border: none;
+    font-family: @code-font;
+    display: inline-block;
+    padding: 0 !important;
+    line-height: 1em !important;
+    font-size: inherit;
+  }
+  mark    { background: none; color: inherit; }
+  em, strong { margin: 0px 2px; }
+  .listingblock pre { margin: 3px 0px; padding: 0; }
+  .indentedpara { margin-left: 3em; }
+  table thead * {font-size: unset !important;} /* unset asciidoc thead sizes */
+  ul { line-height: inherit; }
+  .ulist ul { margin-bottom: 0px; }
+  .ulist p  { margin: 5px 0px; }
+  .quad { display: inline-block; }
+  .citation {
+    position: relative;
+    .apa-citation { display: none; }
+    &:hover {
+      .apa-citation {
+        display: inline-block;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 300px;
+        background: lightyellow;
+        font-size: 6pt;
+        line-height: initial;
+        border: 1px solid gray;
+        padding: 5px;
+      }
+    }
+  }
+
+  /* Make .mathunicode and MathJax look similar */
+  .MathJax, .mathunicode {
+    display: inline-block;
+    font-weight: normal !important;
+    margin-left: 2px;
+    margin-right: 3px;
+
+    .overbar {
+      border-top: 1px solid;
+      display: inline-block;
+      line-height: 1;
+      margin-left: 2px;
+    }
+    sup { font-size: 65% !important; }
+    sub { font-size: 65% !important; }
+  }
+  .MathJax {
+    margin: 0 !important;
+    font-family: MJXZERO, 'MJXTEX';
+    font-size: inherit !important;
+  }
+  .mathunicode {
+    font-family: MJXZERO, 'MJXTEX';
+    font-size: inherit !important;
+    line-height: 0;
+    i+sup { margin-left: 2px; }
+  }
+  em .mathunicode { font-family: 'MJXTEX-I';}
+  strong .mathunicode { font-family: 'MJXTEX-B'; }
+  em strong .mathunicode, strong em .mathunicode, strong .MathJax .TEX-I, em .MathJax .TEX-B {
+    font-family: 'MJXTEX-BI';
+  }
+
+  table, td.tableblock>.content { margin-bottom: 0px; }
+  tr th.tableblock code, td.tableblock code { background: none; }
+  td.tableblock pre { background: none !important; }
+  tr th.tableblock {
+    background:       @table-header !important;
+    padding:          .2em .5em;
+    font-size:        1rem;
+  }
+
+  #content { margin: 0; }
+  /*
+    When used in a header, exponents should be medium
+    and there's no need for a bottom border
+  */
+  #header>h1:only-child { border-bottom: none; }
+  #header sup { font-size: medium; }
+
+  /* The footer at the bottom of every page */
+  .acknowledgmentsect {
+    position: absolute;
+    bottom: -2in;
+  }
+  .acknowledgment {
+    padding-bottom:   5px !important;
+    font-size:        12px !important;
+    font-style:       italic !important;
+    line-height:      inherit !important;
+    * { line-height: inherit !important; }
+    img {
+      width:            94px !important;
+      height:           37px !important;
+      float:            right !important;
+    }
+  }
+
+  /* Show the standard footer at the bottom of each page...*/
+  #footer {
+    background: rgba(0,0,0,0.5);
+    padding-left: 10px !important;
+    position:   fixed;
+    top:        calc(100% + 250px); /* leave 250px space for acknowledgements button */
+    padding:    0;
+    z-index:    999;
+  }
+  /* But not if it's an extra-long page */
+  &.canBeLongerThanAPage #footer { display: none; }
+
+  /* Hide anything that we only want seen on Google drive */
+  .gdrive-only { display: none; visibility: hidden; }
+
+  /* Hide anything that's only for the self-guided book */
+  .selfguided { display: none; visibility: hidden; }
+
+  /* Warn the user the Save-to-Drive is broken on Safari */
+  #safariWarning { display: none; }
+  #savetodrive-div:hover + #safariWarning {
+    display:          block;
+    background:       @translucent-bg-color;
+    color:            white;
+    padding:          5px;
+    margin-top:       75px;
+    border-radius:    5px;
+    font-size:        10pt;
+    line-height:      1rem;
+  }
+
+  /* outOfDate warning */
+  #outOfDate {background: black; color: white; display: block; width: 100%; position: fixed; z-index: 9999;}
+  #outOfDate a {color: lightblue;}
+
+  /* images and floated images */
+  .left  { text-align: left  !important; }
+  .right { text-align: right !important; }
+  .right .image-figure { margin-left: 1em; margin-bottom: 1em; }
+  .center, .centered-image {
+    display:          block;
+    margin-left:      auto;
+    margin-right:     auto;
+    text-align:       center !important;
+    padding:          1ex 0ex;
+  }
+
+  /* These items should always max-out pagewidth, and have no padding */
+  #header, #content, #footer {
+    width: 100% !important; max-width: 100% !important; padding: 0;
+  }
+
+  /* Sections */
+  .lesson-section-1, .lesson-section-1+.lesson-section-1 {
+    clear:              both;
+    display:            block;
+  }
+  .lesson-section-2    { clear: both; width: 100%; margin: 20px 0px; }
+
+  .sectionbreak {
+    display:          block;
+    width:            auto;
+    border-bottom:    solid 3px black;
+    margin:           3px 0px;
+  }
+
+  /* Images and Captions */
+  .image-figure { display: inline-block; }
+  .image-figure .image-caption {
+    display:    block;
+    font-style: italic;
+    line-height: 1.1;
+    word-break: break-word;
+    text-align: center;
+    margin:  0;
+    color:      black;
+    &:empty { display: none; }
+  }
+  .editbox {
+    width:              auto;
+    background-color:   #f7f7f8;
+    margin:             2px;
+    padding:            0 2px;
+    text-align:         left;
+    line-height:        1.3;
+    vertical-align:     baseline;
+    &:empty { display: none; } /* If empty after JS post-processing, hide */
+  }
+  .optionaltag::before {
+     font-style: italic;
+   }
+  div.hiddenblock {
+    display: none;
+  }
+
+  .strategy-box {
+    background:         #efefef;
+    border:             solid #1a73b5 5px !important;
+    width:              75%;
+    margin-left:        auto;
+    margin-right:       auto;
+    padding:            0 15px;
+    display:            block;
+    clear:              both;
+    position:           relative;
+    td { width: 8in; }
+    a { color: blue; text-decoration: underline; }
+    .title, .title p {
+      width:              100%;
+      display:            block;
+      text-align:         center;
+      font-weight:        bold;
+      font-size:          1.5rem;
+    }
+  }
+
+  /*  RULES FOR GLOSSARY ITEMS  */
+  .glossary {
+    margin-bottom: 20px;
+    * { display: inline; font-size: 16px;}
+    dt::after { content: '::'; margin: 0px 5px; }
+    dd        { margin: 0px; }
+    dd::after { content: '\A'; white-space: pre; }
+    .title    {
+      display: block;
+      font-weight: bold !important;
+      color: inherit;
+      font-size: 18px;
+    }
+  }
+
+  .alignedEntries { display: none; }
+  .coverageElement { display: none; }
+  .standard-menu-container {
+    padding:          10px;
+    display:          flex;
+    justify-content:  space-between;
+    div:nth-child(1) { width: 75%; }
+    div:nth-child(2) { width: 25%;}
+  }
+
+  .vspace { display: inline-block; }
+
+  .fitbruby::before, .fitb::before {
+    content: '\00200b';
+  }
+  .fitbruby {
+    margin-bottom: 0.75rem;
+  }
+  .fitbruby .ruby, .recipe .ruby:after, .data-cycle .ruby:after {
+    position:           absolute;
+    display:            inline-block;
+    bottom:             -11.85px;
+    left:               0;
+    font-size:          9.5px;
+    line-height:        14px;
+    font-weight:        normal;
+    width:              100%;
+    text-align:         center;
+    font-style:         normal;
+    font-family:        @text-font;
+    white-space:        nowrap;
+    user-select:        none;
+  }
+  /* Rubies are sensitive to line-height, so force
+    the same font and special superscript behavior
+  */
+  .ruby * { font-family: @text-font !important; background: none !important; }
+  .ruby  sup { top: -0.3em; font-size: 7px; }
+
+  .fitb.stretch, .fitbruby.stretch {
+    margin-left:        5px;
+    vertical-align:     baseline;
+    width:              auto;
+    border-color:       transparent; /* hide the normal underline */
+    /* add an underline that goes past the end of the page */
+    &::after {
+      content:"\00a0";
+      position:           absolute;
+      width:              1000px;
+      left:               0;
+      bottom :            -1px;
+    }
+  }
+
+  .vocab { font-weight: bold; font-style: italic; color: @font-color; }
+
+  /* compact tables */
+  table.data-table {
+    td, th {
+      margin:       0;
+      padding:      0 5px;
+      width:        1px;
+      p { line-height: 1.3; margin: 0; }
+    }
+  }
+
+}
+/* use 'thin' instead of 1px border to try and avoid disappearing
+lines on some browsers */
+.fitb, .fitbruby, .fitb.stretch::after, .fitbruby.stretch::after {
+  padding-top:        @top-padding-for-writing;
+  position:           relative;
+  display:            inline-block;
+  min-width:          4em;
+  text-align:         center;
+  line-height:        1rem;
+  border-bottom:      solid thin black;
+  vertical-align:     baseline;
+}
+
+div#body:not(.LessonPlan, .narrativepage) p {
+  overflow:     hidden;
+  margin:       0px;
+  line-height:  1.3;
+}
+
+/************************************************************************************
+* NARRATIVE PAGE STYLES
+*/
+div#body.narrativepage {
+  font-size: 12pt;
+  p {line-height:1.6;}
+  h2 { margin-top: 20px; }
+  .logo     { float: right; }
+  .logo img { max-width: 375px; }
+  #_no_unit { display: none; }
+  .lesson-list { /* was #lesson-list */
+    *         { display:inline; margin-bottom: 0px; margin-left: 0px; }
+    dt        { margin-top: 15px; display: inline-block; font-size: 17px;}
+    dt a.project {
+      &::before { content: '🎨 '; text-decoration: none; }
+    }
+    dd:after  { display: block; content: ''; }
+    dd:before { display: inline; content: ' :: '; font-weight: bold; }
+  }
+
+  .course-banner {
+    font-style: italic;
+    background: #B6D990aa;
+    border: @font-color 1px dashed;
+    padding: 5px;
+    margin-bottom: 2rem;
+    a { color: black; text-decoration: underline; }
+  }
+
+  .lesson-unit h3 {
+    margin-top: 30px;
+    font-size: 18px;
+    padding-left: 5px !important;
+    background: rgb(184 154 196 / 40%);
+  }
+}
+
+/************************************************************************************
+* LESSON PAGE STYLES
+*/
+div#body.LessonPlan {
+  font-size: 12pt;
+
+  .other-proglang::before { font-style: italic; }
+
+  /* The summary table at the top of each lesson */
+  .preamble {
+    color: black;
+    background: transparent;
+    /* Hide slide links intentionally left blank, and display useful feedback */
+    a[href$='Intentionally-left-blank-as-this-lesson-does-not-have-any-slides/'] {
+      font-size: 0;
+      text-decoration: none;
+      color: black !important;
+      pointer-events: none;
+      &::before { font-size: 12pt; content: "Slides are not yet available for this lesson"; }
+    }
+    &.left-header tr td:nth-child(1) { background-color: @translucent-bg-color2; }
+    &.left-header tr td:nth-child(1) p { font-weight: bold; }
+
+    /* Custom materials link styles */
+    .Optional::before, .OptProject::before, .handout::before { color: gray;}
+
+    #material-links p, #opt-material-links p {
+      .showPageLinks a {
+        text-decoration: none;
+        &::after { content: ' ▼ '; }
+      }
+      &+.ulist {
+        transition: 1s ease-in; max-height: 0; overflow: hidden;
+        padding-left: 5px; margin: 0; font-style: italic; font-size: smaller;
+        .pageNum { float: right; margin-right: 10%; }
+      }
+    }
+    #material-links p.open, #opt-material-links p.open {
+      .showPageLinks a::after { content: ' ▲ '; }
+      &+.ulist { transition: 1s ease-in; max-height: 1000px; }
+    }
+  }
+
+  h2 { font-size: 1.75em; font-weight: normal; }
+  .lesson-section-2 h3 { font-size: 1.5em; font-style: italic; margin: 0px; }
+
+  /* Special styling of teacherNotes used inside overview sections */
+  h3[id^="_overview"]~.paragraph .teacherNote {
+    width: 100%;
+    border-width: 0 0 0 1px !important;
+    padding-left: 20px;
+  }
+
+  /* Lesson sections are comprised of content blocks, each separated by the same amount of space */
+  .lesson-section-2 > *,
+  .lesson-section-3 > * { margin-top: @lesson-block-vertical-space; }
+
+  .lesson-section-1, .lesson-section-1+.lesson-section-1 {
+    border-top:         solid 2px black;
+  }
+
+  /* Direct link to a section of a lesson */
+  .section-link a {
+    margin-left:        -1.75em;
+    padding-right:      0.5em;
+    vertical-align:     middle;
+    text-decoration:    none !important;
+    font-size:          .9rem;
+    position:           relative;
+    left:               -2em;
+  }
+  /* class for styling duration info in headers */
+  .duration { position: absolute; right: 0px; font-style: italic; font-weight: 200; min-width: 150px; }
+  .duration { display: none; }
+  /* Special links back to older, pre-remix materials */
+  .old-materials p { width:100%; background:@translucent-bg-color; color:black; text-align:center; }
+
+  .optpara {
+
+    &::before {
+      font-family: "Open Sans","DejaVu Sans",sans-serif;
+      font-weight: 300;
+      display: block;
+      font-size: 1.25em;
+    }
+
+    > .content > * { margin-top: 1em; }
+
+    border: 2px;
+    border-style: groove;
+    border-radius: 20px;
+    background-color: transparent !important;
+    padding: 18px;
+
+
+    /* Override Asciidoc default here */
+    .exampleblock > .content {
+      background-color: inherit;
+      border:           none;
+      box-shadow:       none;
+      border-radius:    20px;
+    }
+
+  }
+
+  code { line-height: 1.5 !important; }
+  .codesexp, .circleevalsexp { font-size: 0.8em; }
+
+  .lesson-instruction, .lesson-roleplay, .q-and-a {
+    min-height: 50px;
+    background: #eee;
+    display:    flow-root;
+    clear:      both;
+    padding-right: 5px;
+    > *:first-child { margin-left: 60px; }
+    > *:first-child::before {
+      content:  url('images/lesson-instruction.png');
+      height:   50px;
+      width:    50px;
+      float:    left;
+      margin-left:-50px;
+      margin-top:10px;
+    }
+  }
+  .q-and-a {
+    min-height: 85px;
+    .qblock, .ablock {
+      font-style: normal;
+      display: inline;
+    }
+    li:has(>.ablock)  {
+      margin-left: 1em;
+      list-style-type: none;
+      &::before { content: '→'; }
+      li { margin-left: 1em; }
+    }
+    .ablock, .ablock+.ulist p { font-style: italic; }
+  }
+
+  /* COLLAPSED ELEMENTS:
+   * divs that contain a .slidebreak or divs that are .hiddenblock are
+   * considered *collapsed*, since they take up no space in the lesson plan
+   */
+  .paragraph:has(.slidebreak) { clear: both; margin: 0 !important; }
+  .paragraph:has(.slidebreak) p { margin: 0 !important; }
+  @collapse: :is(div:has(>p .slidebreak), .hiddenblock);
+
+  /*
+   * CONTENT BOXES: lesson-instruction, lesson-roleplay, teacherNote, q-and-a, lesson-point...
+   *
+   * When two of the same content boxes are separated by one or more @{collapse}d
+   * elements (see above), make it look like the second box is part of the first
+   */
+
+  .lesson-instruction + @{collapse} + .lesson-instruction,
+  .lesson-instruction + @{collapse} + @{collapse} + .lesson-instruction,
+
+  .lesson-roleplay    + @{collapse} + .lesson-roleplay,
+  .lesson-roleplay    + @{collapse} + @{collapse} + .lesson-roleplay,
+
+  .teacherNote        + @{collapse} + .teacherNote,
+  .teacherNote        + @{collapse} + @{collapse} + .teacherNote,
+
+  .q-and-a            + @{collapse} + .q-and-a,
+  .q-and-a            + @{collapse} + @{collapse} + .q-and-a {
+    margin: 0;
+    > *:first-child::before { display: none; }
+  }
+  .q-and-a > *:first-child::before { content: url('images/q-and-a.png') }
+  .q-and-a table { background: none; }
+  .lesson-roleplay > *:first-child::before { content: url('images/lesson-roleplay.png') }
+
+  .lesson-point {
+    color:              black;
+    border-style:       solid;
+    margin-left:        2em;
+    margin-right:       2em;
+    border-width:       2px 0px;
+    clear:              both;
+    p { margin: 0ex 1ex; }
+  }
+
+  /* Let two adjacent lesson-points blend into each other */
+  .lesson-point:has(+.lesson-point) { border-bottom: none; }
+  .lesson-point + .lesson-point     { border-top:    none; }
+
+  .teacherNote {
+    display:            inline-block;
+    padding:            0 5px;
+    border:             black dashed 1px;
+    font-style:         italic;
+    width:              100%;
+    table { margin: 10px; width: calc(100% - 20px); }
+  }
+
+  /* text within a table should inherit from the color outside the table */
+  .sectionbody td { color: inherit; }
+}
+
+/************************************************************************************
+* WORKBOOK PAGES
+*/
+
+/* Maximize vertical space for content */
+div#body.workbookpage, div#body.workbookpage #content,
+div#body.workbookpage #preamble_disabled,
+div#body.workbookpage #preamble_disabled .sectionbody,
+div#body.workbookpage #content .sect1.lesson-section-1 {
+  padding:   0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+div#body.workbookpage #content .sect1.lesson-section-1 .sectionbody { display: contents; }
+
+div#body.solution-page {
+  .fitbruby, .fitb { font-style: italic; }
+}
+
+div#body.workbookpage {
+  font-size: 9pt; /* Use a tiny font for print, but then zoom in @screen */
+  color: black !important;
+  top: 0;
+  left: 0;
+  max-width: unset;
+
+  #header > h1:first-child { text-align: center; margin-bottom: 0;}
+  h1 { font-weight: bold; }
+  /* Code that shows up in headers should not have the usual background */
+  h2 .editbox, h2 .editbox *, h2 .pyret { color: black; background: none; margin: 0 5px; }
+
+  /* set page dimensions */
+  &:not(.landscape) { width: 7.5in; height: 9.8in; }
+  &.landscape { width: 9.8in; height:  7.5in; page: landscape; } /* define 'landscape' page type */
+
+  /* Make content of page as tall as possible */
+  #content, #preamble_disabled, #preamble_disabled .sectionbody,
+  #preamble_disabled .sectionbody table.FillVerticalSpace,
+  #content > .sect1 {
+    flex-grow: 1;
+  }
+  /* Some sections shouldn't grow at all, and should basically just be block-level elements
+   * (This allows *other* sections to grow, taking up the available space)
+  */
+  #content > .sect1.no-flex-section { flex-grow: 0; }
+
+  /* In some cases, AsiiDoc will put an empty preamble containing
+     only a grandchild for custom styles. In this situation, no display
+     is needed
+   */
+  #preamble_disabled:has(>.sectionbody>style:only-child) {
+    display: none;
+  }
+
+  /* Top-level (non-nested) tables should have vertical margins
+  * Make an exception for DR titles, Data Cycles, Graphs & Templates
+  */
+  .sectionbody > table:not(.data-cycle, .recipe_title, .graph, .template) {
+    margin: 1ex 0;
+  }
+
+  .teacherNote {
+    font-style: italic; display: inline;
+    line-height: 1.3;
+    * { display: inline; }
+    &::before { content: 'Teachers:'; display: inline; font-weight: bold; }
+  }
+
+  /* Give adjacent sections some padding */
+  .lesson-section-1+.lesson-section-1 { border: none; margin-top: 1ex; }
+
+  .linkInstructions { font-style: italic; }
+
+  /* make .FillVerticalSpace tables use CSS grid layout */
+  table.FillVerticalSpace {
+    display: grid;
+    height: 100%;
+    grid-template-columns: auto;
+    grid-template-rows: max-content;
+    &.SameHeight { grid-template-rows: auto; }
+    > colgroup { display: none; }
+    > tbody, > thead {
+      display: contents;
+      > tr {
+        display: contents;
+        /* Try to mimic AsciiDoc's TD formatting classes */
+        > td {
+          display: flex; flex-wrap: wrap; position: relative;
+          > .content {
+            display: contents;
+            > * { width: 100%; }
+          }
+          &.valign-top    {   align-content: flex-start;  }
+          &.valign-middle {     align-items: center; }
+          &.valign-bottom {     align-items: end;    }
+          &.halign-left   { justify-content: left;   }
+          &.halign-center { justify-content: center; }
+          &.halign-right  { justify-content: right;  }
+        }
+      }
+      > tr:nth-of-type(even) > td { background-color: #f8f8f7; }
+    }
+  }
+  /* Override AsciiDoc table defaults based on asciidoc classnames */
+  table.FillVerticalSpace.stripes-none tr:nth-of-type(even) > td {
+    background: none ;
+  }
+
+  /*
+    "Graph" tables provide a pure-CSS solution for all coordinate planes.
+
+    They rely on a set up CSS variables, with reasonable defaults:
+      --width and --height determine the size of plane. Defaults to 3in x 3x.
+      --min-gap determines the minimum space between graphs. Defaults to 20px.
+
+      --top_pct and --left_pct determine the origin's position. Defaults to (50%, 50%).
+      --minors determines how many "minor axes" (incl the one behind major). Defaults to 7.
+
+      --x_label defaults to 'x'
+      --y_label defaults to 'y'
+  */
+  table.graph {
+    grid-gap: var(--min-gap, 20px);
+    margin-top: 5px;
+
+    td {
+      padding: 0;
+      border: none !important;
+      background-image:
+        linear-gradient(lightblue 2px, transparent 2px),
+        linear-gradient(270deg, lightblue 2px, transparent 2px),
+        linear-gradient(rgba(150, 150, 150, .3) 1px, transparent 0px),
+        linear-gradient(270deg, rgba(150, 150, 150, .3) 1px, transparent 1px);
+      background-size:
+        var(--width, 3in) var(--width, 3in),
+        var(--width, 3in) var(--width, 3in),
+        calc(var(--width, 3in) / var(--minors, 7)) calc(var(--width, 3in) / var(--minors, 7)),
+        calc(var(--width, 3in) / var(--minors, 7)) calc(var(--width, 3in) / var(--minors, 7));
+      background-position:
+        calc(var(--width , 3in) * var(--left_pct, .50))
+        calc(var(--height, 3in) * var(--top_pct , .50));
+      width:  var(--width,  3in);
+      height: var(--height, 3in);
+    }
+    /* Add labels for axes */
+    td::before, td::after { position: absolute; font-style: italic; }
+
+    td::after {
+      content: var(--x_label, 'x\0000A0\0000A0');
+      right:   1%;
+      top:     calc(var(--height , 3in) * var(--top_pct, .50));
+    }
+    td::before {
+      content: var(--y_label, '\0000A0\0000A0y');
+      left:    calc(var(--width , 3in) * (var(--left_pct, .50) - .08));
+      top:     2%;
+      transform: rotate(270deg);
+    }
+
+    /* Location and style of the coefficient value */
+    td p > .mathunicode:first-child {
+      top:        6px;
+      right:      3px;
+      position:   absolute;
+      background: white;
+      z-index:    10;
+    }
+
+    /* Squeeze solution img to the exact dimensions of the td */
+    .solution *:not(img) { display: contents; }
+    .solution, .solution img {
+      position: absolute; width: 100%; height: 100%;
+    }
+  }
+
+  /* Make code match text size/layout */
+  p .editbox, pre .editbox { font-size: 9pt !important; margin: 0; line-height: 1rem; }
+
+  /* Some elements show either solution mode or a blank */
+  .solution, .solution code, .solution .MJX-TEX { font-style: italic !important; }
+  .blank    { color: rgba(0,0,0,0); }
+  .chosen::after { content: '✅'; }
+  .teacherNote { display: none; }
+  &.solution-page .teacherNote { display: unset; }
+
+  /* Auto-numbering - Add space and a right-paren, unless it's inside a table. */
+  .autonum {
+    display: inline-block;
+    padding-top: @top-padding-for-writing;
+    &::after { content: ')'; }
+    &.star::after { content: unset !important; }
+  }
+  th .autonum, td .autonum {
+    padding-top: 0;
+    &::after { content: none;}
+  }
+
+  .blanklines {
+    display: block;
+    position: relative;
+    background-image: url('images/2.2rem-ruled lines.png');
+    margin-left: 5px;
+    line-height: 2.2rem;
+    margin-top: 0.6rem;
+    .solution { position: fixed; }
+  }
+
+  .sect1 > h2:first-child, .sect1 > h3:first-child, .sect2 > h3:first-child {
+    background:   @translucent-bg-color;
+    font-weight:  600;
+    font-size:    12pt;
+    color:        white;
+    padding:      1px 10px !important;
+    margin-top:   2px;
+  }
+
+  /* class for tables containing Pyret data */
+  table.pyret-table {
+    border-collapse:    collapse;
+    width:              100%;
+    table-layout:       auto;
+    display:            table!important;
+    border:             1px black solid;
+    border-radius:      1em;
+    overflow:           hidden;
+    background:         #eee;
+    tr:nth-child(even){ background-color: #f2f2f2 }
+    thead { box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2); }
+    td p { margin: 0px; }
+    td, th {
+      border:             none;
+      border-right:       1px white solid;
+      color:              #1f1180;
+      font-family:        @code-font;
+    }
+  }
+
+  table.sideways-pyret-table {
+    p { margin: 0px }
+    tr { background: none; text-align: right; }
+    td:first-child {
+      display: table-cell;
+      background: @table-header !important;
+      text-align: center;
+      width: 50px;
+    }
+    td:first-child p { font-weight: bold; }
+  }
+}
+
+.studentAnswerShort  { min-width: 20pt;  }
+.studentAnswerMedium { min-width: 100pt; }
+.studentAnswerLong   { min-width: 140pt; }
+
+.circleevalsexp .studentBlockAnswerFilled {
+  font-weight: bold; font-style: italic; display: inline-block;
+  .value { border: dotted 1px black; border-radius: 50%; padding: 0 3px; }
+}
+
+/* TODO(Emmanuel): do we even need all of these? Clean up */
+div#body:not(.LessonPlan) {
+  p:empty { min-height: 0; margin: 0; padding: 0; } /* Empty p tags should take up no space */
+
+  #header { margin-bottom: 5px !important; }
+  #header> h1:first-child,
+  .sect1 > h1:first-child,
+  .sect1 > h2:first-child,
+  .sect1 > h3:first-child,
+  .sect2 > h3:first-child {
+    width:            100%;
+    padding:          5px 0px;
+  }
+  .description { display: none; }
+}
+
+/* Don't use flex to space out content on notes pages */
+div#body.LessonNotes {
+  #content { display: block !important; }
+  li { margin-bottom: 10px; }
+  .sect1.lesson-section-1 { margin-bottom: 1.25em; }
+}
+/************************************************************************************
+* CONTRACTS TABLE, DESIGN RECIPE, DATA CYCLE, AND STUDENT ANSWER STYLING
+*/
+
+div#body{
+  /* Data Cycle tables should have borders */
+  .data-cycle {
+    border-collapse: collapse;
+    width: 100%;
+    td:first-of-type { background: @print-section-heading; border: solid white; min-width: 1in; }
+    td { padding: 0.2rem 0.325rem; }
+    td p.tableblock { font-size: 1rem; }
+
+    .fitbruby { text-align: left !important; }
+    .fitbruby.stretch { margin-left: 0 !important; }
+
+    /* Ruby text in the Data Cycle needs to be slightly larger than normal */
+    .fitbruby .ruby {
+      font-size:  0.75rem !important;
+      user-select: none;
+      &::after { bottom: 0 !important; color: black; text-align: left !important; }
+    }
+    .question_type { display: block; font-size: 10px; }
+    .question_type.chosen {
+      font-style: italic; font-weight: bold; border: solid 1px black;
+      border-radius: 50%;
+      &::after { display: none; };
+    }
+    .data-cycle-expression, .data-cycle-filter, .data-cycle-build {
+      font-family: @code-font;
+    }
+    /* If there's a section break between data cycles, eat up all vertical space */
+    &+div.paragraph:not(.data-cycle):has(+.data-cycle) { margin: auto 0; }
+  }
+
+  /* Back-of-the-book contracts table */
+  table.contracts-table {
+    border-collapse: collapse;
+    border: none;
+    p  { margin-top: 0; }
+    td { padding: .1em .625em !important; height: 23pt; }
+    tr:nth-child(odd) { border-top: solid 2px black; }
+    tbody tr:nth-child(odd) * { color: @code-comment-color !important; }
+    tbody tr:nth-child(odd) td:first-child .tableblock { margin-left: 1em; }
+    tbody tr:nth-child(odd) td:first-child::before { position: absolute;  }
+    tbody tr:nth-child(even) * { font-family: monospace; white-space: pre; }
+  }
+
+  /* We use tables (perhaps not the best idea) for our DR headings */
+  table.recipe_title    {
+    background: @translucent-bg-color; border: @translucent-bg-color;
+    td { padding: 0px; margin: 0px; border: none; vertical-align: middle;}
+    td:last-child { border: 2px solid @translucent-bg-color !important; }
+    td:last-child .content { width: 16px; height: 16px; background: white; }
+    p { color: white; font-weight: bold; margin: 0px; padding-left: 10px; min-height:unset !important;}
+  }
+
+
+  /* common height for headless and non-headless DRs with no directions */
+  .recipe_word_problem p::before { font-weight: bold; }
+  .recipe_word_problem p {
+    margin-bottom: 0.05in !important;
+    &:empty { min-height: 0.6in !important; }
+  }
+
+  .recipe {
+
+    /* Under a heading come the instructions */
+    .recipe_instructions * { font-style: italic; font-size: .85rem; }
+
+    /* all paragraph tags are full-width, with no margin. If pushed to a new line, they wrap */
+    p { display: flex; flex-wrap: wrap; align-items: baseline;}
+
+    /* All student answers have a bottom-border, and a "ruby" printed in black */
+    p .fitb, p .fitbruby {
+      word-spacing: 2pt; padding-top: @top-padding-for-dr;
+      &:after { word-spacing: 0; }
+    }
+
+    /* We're using the ruby itself to hang the content, and it's already positioned correctly */
+    .ruby:after { bottom: 0 !important; }
+
+    /* Format fitrubies: mostly left, but a few in the center or on the right */
+    .fitbruby { text-align: left !important; font-family: @code-font; }
+    .recipe_example_inputs, .recipe_variables, .recipe_domain { text-align: center !important; }
+
+    .fitbruby.recipe_name          { min-width: 20%; }
+    .fitbruby.recipe_range         { min-width: 12%; text-align: center !important; }
+    .fitbruby.recipe_example_inputs{ min-width: 20%; white-space: nowrap; }
+    .fitbruby.recipe_variables     { min-width: 30%; white-space: nowrap; }
+    .fitbruby.recipe_cond { flex-grow: unset !important; min-width:  10%; }
+
+    /* Some things should grow to fill the width of their containing line */
+    .recipe_domain, .recipe_purpose, .fitbruby.questions, .fitbruby.answers { flex-grow: 1; }
+
+    /* Contract and Purpose get lang-specific comment symbols */
+    .recipe_purpose, &.recipe_contract .recipe_name {
+      padding-left: 1em;
+      &::before { color: black; position: absolute; left: 0; }
+    }
+    &.fitbruby.recipe_condition *::before, *::after { color: @font-color; }
+    /* If there's a section break between recipes, eat up all vertical space */
+    &+div.paragraph:not(.recipe) { margin: auto 0; }
+  }
+
+
+  /* Proglang-specific adaptations */
+  &.pyret {
+
+    .recipe_purpose, .recipe_contract .recipe_name {
+      &::before { content: '#'; }
+    }
+    .solution.recipe_name { text-align: right !important; min-width: 6em; } /* no whitespace in pyret */
+    /* Indenting for function body and example bodies */
+    .recipe_example_line:not(.keyword_only) > .content,
+    .recipe_definition_body { margin-left: 2ex; }
+    /* Conditionals */
+    .recipe_condition {
+      position: relative;
+      margin-left: 1em;
+      width: 90%;
+      .answers { margin-left: 1em; text-align: left;}
+      .questions { margin-left: 3em; text-align: left;}
+      .questions::after {
+        content: ":";
+        position: absolute;
+        left: 100%;
+        top: 0px;
+        width: 1em;
+      }
+      +.recipe:nth-last-child(3) .answers::before,
+      .questions::before {
+        position: absolute;
+        left: -2em;
+        color: #75328A;
+        font-weight: bold;
+        font-family: @text-font;
+      }
+      /* the 1st condition ("if") */
+      .questions::before { content: "if"; }
+      /* the next n-1 conditions ("if else")*/
+      +.recipe_condition {
+        .questions { margin-left: 4em; }
+        .questions::before { content: "else if"; left: -3em; }
+      }
+      /* the last condition ("else") */
+      +.recipe:nth-last-child(3) {
+        .fitbruby:first-child {
+          margin-left: 3em;
+          &:before  { content: "else:"; }
+        }
+      }
+      +.recipe_line:not(.recipe_condition) .solution {
+        border-bottom: none; margin-left: 2em; font-style: normal; text-align: left;
+      }
+    }
+    .wrapper p > *:nth-last-child(1) { flex-grow: 1; }
+    strong { margin: 0; padding: 0; }
+    .contracts-table tr:nth-child(odd) td:first-child::before { content: '#'; }
+  }
+
+  &.wescheme {
+    .recipe_purpose, .recipe_contract .recipe_name {
+      &::before { content: ';'; }
+    }
+    .recipe_example_body { margin-left: 1em;}
+    .recipe_condition {
+      position: relative;
+      margin-left: 2em;
+      width: 90%;
+      .questions { margin-left: 1em; text-align: left; }
+      .answers { margin-left: 1em; margin-right: 1em; text-align: left; }
+      .questions::before { content: "["; position: absolute; left: -1ex; color: @font-color; }
+      .answers::after {
+        content: "]";
+        position: absolute;
+        left: calc(100% + 2pt);
+        bottom: 0;
+        color: @font-color;
+        width: unset;
+        font-style: unset;
+        font-size: unset;
+        font-family: unset;
+      }
+
+      &:last-child >::after {
+        content: ") )";
+        white-space: nowrap;
+        position: absolute;
+        left: 100%;
+        bottom: 0;
+        line-height: 18px;
+        margin-bottom: 0.9rem;
+      }
+    }
+    .wrapper p > *:nth-last-child(2) { flex-grow:  1; }
+    strong { margin: 0; padding: 0; }
+    .contracts-table tr:nth-child(odd) td:first-child::before { content: ';'; }
+  }
+
+  &.codap {
+    .data-cycle-expression { font-family: inherit; }
+
+    .cm-keyword { font-weight: normal !important; }
+    .transformer_type td:last-child .content { width: 0; height: 0px; background: none; }
+    .recipe_title .paragraph, .codap .recipe_title p { display: inline; }
+    .recipe_name { display: flex !important; }
+    .transformer_type p::before {
+      width: 1.1rem;
+      height: 1.1rem;
+      background: white;
+      display: inline-block;
+      margin:  0 2px 2px 0;
+      vertical-align: middle;
+    }
+    div.transformer_type { margin-left: 2em; }
+    div.transformer_type p::before { content: ""; }
+    table.transformer_type td:first-of-type .content { display: flex; flex: row; }
+    table.transformer_type td:first-of-type .paragraph { white-space: nowrap; }
+    div.transformer_type.chosen p::after {
+      position: relative;
+      top: -19px;
+      left: 9px;
+    }
+    .recipe_formula, .codap_transformer { display:  flex !important; }
+    .codap_transformer p { width:  100%; }
+    .codap_example_tables+table table * { margin: 0; padding: 0; }
+    .codap_example_tables+table table * { text-align: center; height: 2rem; }
+    .recipe_domain, .recipe_range { width:  40%; }
+  }
+}
+
+/************************************************************************************
+* TEACHER RESOURCES PAGE
+*/
+
+div#body {
+  .pathway_external_links ul li { margin-top: 3ex 0ex; list-style-type: none; }
+
+  td.tableblock .listingblock { margin-bottom: 0 !important; }
+
+  #lesson-info-table table {
+    border: none;
+    td:nth-of-type(1) { line-height: 1.3; }
+    th:nth-of-type(2), td:nth-of-type(2) { width: 20%; text-align: center; };
+    th:nth-of-type(3), td:nth-of-type(3) { text-align: right; };
+    td { padding: 0.1em 0.5em; height: 55px; vertical-align: top; }
+  }
+
+  .materials-links {
+    li:hover { background-color: #0001 }
+    .pageNum { float: right; }
+  }
+
+  #exercises_and_solutions .materials-links p { margin: 2px 0; }
+}
+
+/************************************************************************************
+* FORMATTING OF CIRCLES, AND TEXT CODE
+*/
+.codesexp, .circleevalsexp, .editbox, .cm-s-scheme, .CodeMirror {
+  font-family: @code-font;
+}
+
+td.halign-center .circleevalsexp { text-align: center; }
+
+.circleevalsexp {
+  .expression {
+    display:            inline-block;
+    padding-top:        6px;
+    margin:             2px 5px;
+    clear:              none;
+    border:             2px solid black;
+    background:         white;
+    text-align:         center;
+    border-radius:      20px;
+  }
+  .value {
+    display:            inline-block;
+    margin:             0.5rem 0.4rem;
+    vertical-align:     top;
+  }
+  .operator {
+    display:            block;
+    height:             1.1rem;
+    text-align:         center;
+    line-height:        0.5rem;
+    width:              100%;
+    border-bottom:      solid 2px black;
+    border-radius:      15px 15px 0px 0px;
+    .value { margin: 0 0.5rem; } /* When in operator position, drop the margins */
+  }
+  /* Display ONLY 5px hspaces that are after the first one (keeps args centered) */
+  .hspace { display: none; }
+  .hspace ~ .hspace { display: inline-block; width: 0.5ex; }
+  .lParen, .rParen { display: none; } /* Don't show parens in Circle mode */
+
+  /* fill-in-the-blanks inside circles need no border */
+  .fitb { border: none; padding: 0;}
+}
+
+.codesexp, .circleevalsexp, .editbox, .cm-s-scheme {
+  width:              100%;
+  margin:             0px 3px;
+  display:            inline-block;
+  padding:            0px;
+  color:              #666;
+  font-style:         normal;
+  clear:              both;
+}
+
+/* WESCHEME COLORS */
+.wescheme-string,     .cm-scheme-string   { color: forestgreen;}
+.wescheme-number,     .cm-scheme-number   { color: blue;}
+.wescheme-boolean,    .cm-scheme-boolean  { color: darkred;}
+.wescheme-character,  .cm-scheme-character{ color: orange;}
+.wescheme-symbol,     .cm-scheme-symbol   { color: steelblue;}
+.wescheme-comment,    .cm-scheme-comment  { color: @code-comment-color; }
+.cm-scheme-punctuation                    { color: black;}
+.cm-scheme-rparen                         { color: black;}
+
+/* PYRET COLORS */
+.cm-s-default.CodeMirror                  { color: black; }
+.cm-comment, .hljs-comment                { color: @code-comment-color; }
+.cm-boolean                               { color: darkred; }
+.cm-builtin, .hljs-built_in               { color: #555; }
+.cm-variable, .hljs-name                  { color: #4d5966; }
+.cm-keyword                               { color: black; font-weight: bold; }
+.cm-number, .hljs-number                  { color: navy; }
+.cm-roughnum                              { color: blue; }
+.cm-bad-number                            { color: red; font-weight: bold; }
+.cm-string, .hljs-string                  { color: forestgreen; }
+.cm-type                                  { color: #374049; }
+.cm-function-name                         { color: #374049; }
+.cm-unterminated-string                   { color: red; font-weight: bold; }
+.pyretkeyword, .hljs-keyword              { font-weight: bold; margin-right: 1ex; }
+* + .pyretkeyword { margin-left: 1ex;}
+
+.obeyspaces { white-space: pre-wrap; }
+
+div.leftColumn .obeyspaces, div.rightColumn .obeyspaces {
+  display: inline-block;
+}
+
+.codetwo {
+  font-family: @code-font;
+  font-size: 0.85rem;
+  background-color: #f7f7f8;
+  color: #666;
+  word-break: break-word;
+}
+
+code.pyret-comment { background-color: #f7f7f8 !important; color: #a50; }
+code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
+
+/************************************************************************************
+* SCREEN MEDIA
+*/
+
+@media screen {
+  html { height: 100%; display: flex; }
+
+  .web-page-only {
+    font-weight:      bold;
+    font-style:       italic;
+    line-height:      2.5rem;
+  }
+
+  #savetodrive-div { display: none; height: 30px !important; }
+
+  /* on WB pages zoom the page 1.25x for a big screen */
+  div#body.workbookpage, div#body.LessonPlan #content {
+    transform-origin: left top;
+    transform: scale(calc(12 / 9));
+    #savetodrive-div { transform: scale(0.8); }
+  }
+
+  div#body.workbookpage { margin-left: 3em; }
+  /********************************************************************
+   *  Collapsing Headers
+   */
+   div#body.LessonPlan, div#body.TeacherResources {
+      /* add a bottom padding to prevent browser-scroll */
+      padding-bottom:  5in;
+      /* adjust colors */
+      h2 {
+        background-color: @translucent-bg-color;
+        color: white;
+        font-weight: 600;
+        font-size: 1.75em;
+        cursor: pointer;
+        padding: 5px !important;
+        width: 100%;
+        border: none;
+        text-align: left;
+        outline: none;
+        /* add the plus/minus signs ("expand me" / "collapse me") for discoverability */
+        &::after {
+          content: '▼';
+          width: 16px;
+          font-size: 16px;
+          line-height: 30px;
+          color: white;
+          font-weight: bold;
+          float: left;
+          margin-right: 5px;
+        }
+        &.active::after { content: '▲'; }
+        &.active, &:hover { background-color: @translucent-bg-color2; }
+      }
+      /* set collapsed size and transition rules */
+      .sect1:not(.acknowledgmentsect) .sectionbody {
+        padding: 10px 18px;
+        max-height: 100px;
+        overflow: hidden;
+        transition: max-height 0.2s ease-out;
+        position: relative;
+        /* Add a white fade to hint for discoverability */
+        &::after {
+          content  : "";
+          position : absolute;
+          z-index  : 1;
+          bottom   : 0;
+          left     : 0;
+          pointer-events   : none;
+          background-image : linear-gradient(to bottom,
+                            rgba(255,255,255, 0),
+                            rgba(255,255,255, 1) 90%);
+          width    : 100%;
+          height   : 10em;
+        }
+      }
+      .sect1:not(.acknowledgmentsect) h2+.sectionbody:after { height: 4em; }
+      /* don't add the fade for summaries or active sections */
+      .lessonSummary .sectionbody { max-height: unset; }
+      .lessonSummary .sectionbody, h2.active+.sectionbody {
+        &::after { display: none; }
+      }
+      .sect1:not(.acknowledgmentsect) h2:not(.active)+.sectionbody h3 { display: none; }
+   }
+}
+
+
+@media all and (max-width: 600px) {
+  html { padding-left: 0 !important;}
+}
+
+/************************************************************************************
+ * PRINT MEDIA
+ */
+@page { size: letter portrait; margin: 0.5in; }
+@page landscape { size: letter landscape; margin: 0.5in; }
+
+@media print {
+  color: black;
+
+  /* Elements we don't want printed */
+  .noprint { display: none; }
+  ::-webkit-scrollbar { display:  none; }
+  a[href]::after { content: none !important; }
+  #savetodrive-div, .copyright, #footer, #outOfDate, .web-page-only, .section-link,
+  .acknowledgmentsect, .sidebar, .CodeMirror div.CodeMirror-cursor, #MathJax_Message {
+    display: none !important; float: none;
+  }
+  div#body{ position: static; } /* page-break fails on absolute positioning */
+
+  /* Override AsciiDoc print default */
+  p {margin: 0px; font-size: 1rem; font-weight: normal;}
+  #content { margin: auto; }
+
+  /* Change coloring of body text, lesson summary table, and code */
+  html { -webkit-print-color-adjust: exact; }
+
+  .listingblock pre:not(.highlight) { background: none !important; }
+
+  /* Don't print box-shadows */
+  * {-webkit-box-shadow:none!important;box-shadow:none!important;text-shadow:none!important}
+
+  div#body.LessonPlan {
+
+    width: 7.5in;
+    .preamble tr td:last-child > * { background: white !important; }
+
+    .lessonSummary {
+      break-after:  page !important;
+      page-break-after:  always !important;
+    }
+    .lesson-section-1 {
+      break-before: page !important;
+      page-break-before: always !important;
+    }
+    .lesson-section-2 p, .strategy-box, .circleevalsexp, .image,
+    img, .MathJax, #_additional_exercises + .sectionbody {
+      break-inside: avoid !important; page-break-inside: avoid !important;
+    }
+    .left-header tr td:nth-child(1) { background-color: lightgray; }
+    .sect1+.sect1 { border-top: solid 3px black; }
+    .preamble tr td > * { max-height: 1000px; }
+  }
+
+  div#body.workbookpage {
+    /* Use B&W colors for headers */
+    #header> h1:first-child, .sect1 > h1:first-child {
+      color: black;
+    }
+    .sect1 > h2:first-child, .sect1 > h3:first-child, .sect2 > h3:first-child {
+      color: white;
+    }
+
+    .recipe_title, h2 {
+      background: @print-section-heading !important;
+      td:last-child { border: 2px solid @print-section-heading !important; }
+    }
+    h2, table.recipe_title p { color: black !important; }
+
+    .recipe_condition *::before, *::after { color: black !important; }
+  }
+}

@@ -1,4 +1,4 @@
-= Writing Functions with the Design Recipe
+= Writing Table Functions with the Design Recipe
 
 @description{Students use the Design Recipe to define @ifproglang{pyret}{functions that consume rows}@ifproglang{codap}{Transformers}, developing a structured approach to answering questions by transforming tables.}
 
@@ -36,8 +36,8 @@
 
 | Key Points for the Facilitator
 |
-- Code should be easy to read! There may be other people looking at your code who could use a hint about what it does, and even the person who wrote the code could benefit from a note here and there. @vocab{Comments} are parts of a program that the computer ignores - they are for human eyes only!
-- The @vocab{Purpose Statement} is a structured way of restating the problem. In a computer program, it's written as a comment in the code - something the computer doesn't read.
+- Code should be easy to read! There may be other people looking at your code who could use a hint about what it does, and even the person who wrote the code could benefit from a note here and there. @vocab{Comments} are parts of a program that the computer ignores -- they are for human eyes only!
+- The @vocab{Purpose Statement} is a structured way of restating the problem. In a computer program, it's written as a comment in the code -- something the computer doesn't read.
 - Remind students that the @vocab{Domain} and @vocab{Range} of a function must be a _set_ of possible inputs and outputs. In math, some of these sets have shorthands like Integers, Rationals, etc. In programming, we have shorthands for @vocab{data types} like Number, String, Image, Boolean, etc.
 - If students struggle with creating the examples, use "Where'd You Get That" to help students build up their understanding around the concept.
 
@@ -50,9 +50,10 @@
 In this lesson students build on what they already know about multiple representations of functions (contracts, examples and definitions) to write purpose statements and gain fluency with the Design Recipe.
 
 === Launch
+@slidebreak{Launch}
 We might want to define functions to help us filter rows, build columns, or represent data with images. We can _say_ what we want the function to do pretty easily, but it can be surprisingly hard to see the computation behind those words.
 
-@slidebreak
+@slidebreak{Launch}
 
 _The struggle is real._
 
@@ -60,13 +61,13 @@ Anyone who has dealt with a word problem knows this challenge! It's easy to read
 
 We are going to learn a strategy for breaking down word problems, called the *Design Recipe*.
 
-@slidebreak
+@slidebreak{Launch}
 
 Programmers and Mathematicians alike find it helpful to restate a problem in their own words. After all, if you can't explain a problem to someone else, you probably don't understand it yourself!
 
 In the *Design Recipe* we call this first step *Writing a Purpose Statement*.
 
-@slidebreak
+@slidebreak{Launch}
 
 We write @vocab{Purpose Statements}, because Contracts don't provide enough details to generate examples and write a @vocab{function definition}.
 
@@ -78,7 +79,7 @@ For example, the Contract for `bar-chart` says it needs a Table and a String, bu
 
 _The @vocab{Purpose Statement} includes all the stuff we need that's missing from the Contract._
 
-@slidebreak
+@slidebreak{Launch}
 
 @lesson-instruction{
 - On @printable-exercise{matching-wp-purpose.adoc}, we see four data science problems and four @vocab{purpose statements}.
@@ -87,13 +88,14 @@ _The @vocab{Purpose Statement} includes all the stuff we need that's missing fro
 - What do you Notice about those purpose statements? Do they have anything in common?
 }
 
-@slidebreak
+@slidebreak{Launch}
 
 @lesson-point{
 Purpose statements should have enough details to allow us to write examples _without_ looking at the word problem!
 }
 
 === Investigate
+@slidebreak{Investigate}
 
 @lesson-instruction{
 - Turn to @printable-exercise{pages/create-examples-contracts-purpose-1.adoc}, read the purpose statements, and write examples that satisfy each of the contracts and purpose statements.
@@ -101,7 +103,7 @@ Purpose statements should have enough details to allow us to write examples _wit
 - @opt{For more practice, complete @printable-exercise{pages/create-examples-contracts-purpose-2.adoc}.}
 }
 
-@slidebreak
+@slidebreak{Investigate}
 
 A good @vocab{Purpose Statement} must have three things:
 
@@ -113,7 +115,7 @@ A good @vocab{Purpose Statement} must have three things:
 3. All the _relevant information_ about how to produce that output
 }
 
-@slidebreak
+@slidebreak{Investigate}
 
 But what does _"relevant information"_ really mean?
 
@@ -125,7 +127,7 @@ But what does _"relevant information"_ really mean?
 @A{What we do with the information contained in that row}
 }
 
-@slidebreak
+@slidebreak{InvestigateR}
 @lesson-instruction{
 @right{@image{images/confused-robot.png, 150}}
 
@@ -138,8 +140,19 @@ But what does _"relevant information"_ really mean?
 
 
 === Synthesize
-What are the important elements of purpose statements?
-Why are purpose statements useful?
+@slidebreak{Synthesize}
+
+@QandA{
+@Q{What are the important elements of purpose statements?}
+@A{A description of what the function consumes}
+@A{A description of what the function produces}
+@A{All the relevant information about how to produce that output}
+
+@Q{Why are purpose statements useful?}
+@A{Articulating what we are trying to do helps us get clarity about our task}
+@A{Collaboration is impossible without a clearly articulate goal.}
+@A{We can look back at our purpose statement if we get stuck along the way.}
+}
 
 @strategy{The Design Recipe in your Classroom}{
 The three steps of the Design Recipe are designed to mirror best practices that you may _already be using in your classroom_. It's merely a collection of those practices, assembled in a structured way with great care taken to connecting each practice with the others.
@@ -203,6 +216,7 @@ Let's connect this back to the best practices in math that many of you probably 
 Students work in teams to collaboratively define multiple Table Functions. When these functions are composed in different ways, they can be used to do much more sophisticated analysis!
 
 === Launch
+@slidebreak{LaunchR}
 @right{@image{images/DR-Telephone.png, 200}}
 
 Why would it be challenging to make the following visualizations?
@@ -217,6 +231,7 @@ Most computer programs are written by huge teams! It is critical that each team 
 We're going to practice collaborative programming and try writing some other Table Functions using the Design Recipe, through an activity called Design Recipe Telephone.
 
 === Investigate
+@slidebreak{Investigate}
 @ifnotslide{
 @teacher{
 
@@ -253,7 +268,7 @@ Note that many of these word problems are the "function-version" of the expressi
 - HINT: All of the word problems here will use code that looks a _lot_ like the code you wrote in @lesson-link{functions-with-lookups/pages/lookup-expressions.adoc}! If you get stuck, refer back to your answers on that page!
 }
 
-@slidebreak
+@slidebreak{InvestigateR}
 @ifslide{@right{@image{images/DR-Telephone.png, 200}}}
 *Round 1:*
 @lesson-instruction{
@@ -275,7 +290,7 @@ Choose which set of word problems you are going to start with and give each stud
 }
 }
 
-@slidebreak
+@slidebreak{InvestigateR}
 @ifslide{
 @right{@image{images/DR-Telephone.png, 200}}
 _Make sure you’ve folded your paper over so that only the Contract and Purpose are visible._
@@ -292,7 +307,7 @@ You should have just received a new page, that has been folded to hide the Word 
 - Pass your paper to the person to your right.
 }
 
-@slidebreak
+@slidebreak{InvestigateR}
 
 @ifslide{
 @right{@image{images/DR-Telephone.png, 200}}
@@ -308,7 +323,7 @@ You should have just received a new page that has been folded so that the Exampl
 - When you're done, pass your paper to your right to return it to the person it started with.
 }
 
-@slidebreak
+@slidebreak{InvestigateR-DN}
 @ifslide{@right{@image{images/DR-Telephone.png, 200}}}
 
 *Round 4:*
@@ -322,9 +337,10 @@ You should now be holding the page you started with.
 }
 
 @teacher{
-This activity can be repeated several times, or done as a timed competition between teams. The goal is to emphasize that each step - if done correctly - makes the following step incredibly simple.}
+This activity can be repeated several times, or done as a timed competition between teams. The goal is to emphasize that each step -- if done correctly -- makes the following step incredibly simple.}
 
 === Synthesize
+@slidebreak{Synthesize}
 @QandA{
 The Design Recipe is a way of slowing down and thinking through each step of a problem.
 

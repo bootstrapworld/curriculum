@@ -1,6 +1,6 @@
-#!/bin/bash
+#! /usr/bin/env bash
 
-# last modified 2023-03-02
+# last modified 2025-07-11
 
 if grep -q input $PUPPETEER_INPUT; then
   if test -n "$DEBUGNOBOOK"; then

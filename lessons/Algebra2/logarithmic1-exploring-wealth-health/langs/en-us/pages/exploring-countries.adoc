@@ -4,7 +4,7 @@
 <style>
 /* Make autonums inside tables look consistent with those outside */
 td .autonum::after { content: ')' !important; }
-td li { margin-bottom: 10px; }
+td li+li { margin-top: 20px !important; }
 td { padding-top: 0 !important; padding-bottom: 0 !important; }
 </style>
 ++++
@@ -15,15 +15,15 @@ For this section, you'll need the  @starter-file{alg2-countries} open on your co
 
 @vspace{1ex}
 
-[cols="1a,2a", frame=none, stripes=none]
+[cols=".^1a,2a", frame=none, stripes=none]
 |===
 |
-- *country* - name of the country
-- *gdp* - total Gross Domestic Product of the country. GDP is often used to measure the economic health of a country.
-- *population* - number of people in the country
-- *pc-gdp* - the average GDP _per-person_, in US Dollars
-- *has-univ-healthcare* - indicates if the country has universal healthcare
-- *median-lifespan* - the median life expectancy of people in the country
+- *country* -- name of the country
+- *gdp* -- total Gross Domestic Product of the country. GDP is often used to measure the economic health of a country.
+- *population* -- number of people in the country
+- *pc-gdp* -- the average GDP _per-person_, in US Dollars
+- *has-univ-healthcare* -- indicates if the country has universal healthcare
+- *median-lifespan* -- the median life expectancy of people in the country
 
 | *In Pyret, make a scatter plot showing the relationship between `pc-gdp` and `median-lifespan`, and sketch it below.*
 
@@ -41,19 +41,19 @@ For this section, you'll need the  @starter-file{alg2-countries} open on your co
 @n What do you *Wonder* about the point cloud? @fitb{}{} +
 @fitb{}{} +
 
-@n Do you see a relationship? If so, describe it (e.g. - linear or nonlinear? Strong or weak?)
+@n Do you see a relationship? If so, describe it (e.g. linear or nonlinear? Strong or weak?)
 
 @fitb{}{@ifsoln{There seems to be a somewhat strong, nonlinear relationship}} +
 @fitb{}{}
 
-@n Find the point for Equatorial Guinea, an outlier with `pc-gdp` = $38,058 and `median-life-expectancy` = 65. Why might this point be so far from the rest?
+@n Find the point for Equatorial Guinea, an outlier with `pc-gdp` = $38,058 and `median-life-expectancy` = 65. Can you think of a reason why this point might be so far from the rest?
 
-@fitb{}{@ifsoln{Answers will vary - perhaps a war or disease is causing people to die young?}} +
+@fitb{}{@ifsoln{Answers will vary -- perhaps a war or disease is causing people to die young?}} +
 @fitb{}{}
 
-@n Find the point for Japan, another outlier with `pc-gdp` = $43,030 and `median-life-expectancy` = 85.5. Why might this point be so far from the rest?
+@n Find the point for Japan, another outlier with `pc-gdp` = $43,030 and `median-life-expectancy` = 85.5. Can you think of a reason why this point might be so far from the rest?
 
-@fitb{}{@ifsoln{Answers will vary - maybe Japanese people have healthier diets?}} +
+@fitb{}{@ifsoln{Answers will vary -- maybe Japanese people have healthier diets?}} +
 @fitb{}{}
 
 @n Are there any countries that stand out? Why or why not? @fitb{}{} +

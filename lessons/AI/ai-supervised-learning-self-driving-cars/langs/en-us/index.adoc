@@ -1,0 +1,279 @@
+[.beta]
+= Supervised Learning: Self-Driving Cars
+
+@description{Students learn about the world’s first self-driving car. They then apply and extend their prior knowledge of functions within the context of artificial intelligence.}
+
+@lesson-prereqs{ai-training-bags-of-words}
+
+@keywords{}
+
+[@lesson-intro-table]
+|===
+| Lesson Goals
+| Students will be able to...
+
+@objectives
+
+| Student-facing Lesson Goals
+|
+
+- Let's learn about the functioning of the very first self-driving car!
+
+
+| Materials
+|[.materials-links]
+@material-links
+
+| Preparation
+| - @opt{If you think your students will want the chance to actually see the first self-driving car in action, you can share @link{https://www.youtube.com/watch?v=ntIczNQKfjQ, "this two-minute video"} from the Carnegie Mellon University Robotics Institute.}
+
+|===
+
+== Supervised Learning @duration{15 minutes}
+
+@objective{ai-supervision}
+@objective{car-function}
+
+
+=== Overview
+Students learn about ALVINN (Autonomous Land Vehicle in a Neural Network) as an example of supervised machine learning.
+
+=== Launch
+@slidebreak{LaunchR}
+
+Meet ALVINN!
+
+@center{@image{images/navlab.png, 400}} 
+
+ALVINN (short for Autonomous Land Vehicle in a Neural Network) was developed in 1989 by a team of computer scientists at Carnegie Mellon University. ALVINN is the forebear of today's self-driving cars: a retrofitted Army ambulance equipped with sensors, computers, and actuators (the part of a machine that allows movement). ALVINN had about one-tenth of the processing power of an Apple Watch -- but was able to safely drive on a very limited course at 70 miles per hour by the early 1990s! How did it happen?  
+
+@slidebreak{Launch}
+
+As with all machine learning, ALVINN required @vocab{training}.
+
+The goal of that training? Learning how to steer.
+
+Here's what ALVINN's training entailed:
+
+(1) A person drove the vehicle while a front-facing video camera recorded the road.
+
+- In the context of @vocab{supervised learning}, the human driver is often referred to as the supervisor. 
+- The supervisor demonstrates the learning process.
+- The input-output pairs form the @vocab{training corpus}.
+
+(2) Every two seconds, ALVINN...
+
+- digitized an image of the road ahead
+- recorded the steering direction chosen by the driver
+
+@slidebreak{Launch}
+
+(3) ALVINN's training data can be represented as an input-output table, with training images (reduced in resolution to 30x32 pixels) as inputs  and their associated corresponding "correct" steering angles as outputs.
+
+@indented{
+[cols="^.^1,^.^1", stripes="none", options="header"]
+|===
+| input data                      | output data
+| @image{images/road1.png, 100} 	| 0.02º
+| @image{images/road2.png, 100} 	| -95.2º
+| @image{images/road3.png, 100} 	| 135.43º
+|===
+
+@teacher{
+Note: These images were selected for illustrative purposes. The 30x32 pixel images produced by ALVINN were of much lower quality!
+}
+}
+
+@slidebreak{Launch}
+
+(4) Using the set of inputs and outputs, ALVINN generates a @vocab{function} for predicting steering angles from Images, which we can summarize using contract notation. 
+
+@indented{
+@show{(contract 'steer '((road-image Image)) "Number")}
+}
+
+@lesson-point{
+In the `steer` function, the Image is the @vocab{explanatory variable} and the steering angle is the @vocab{response variable}.
+}
+
+_How does one generate a function? Techniques from statistics do that. We aren't going to focus on the statistics here. Note that the actual contract for `steer` would be more complex, including a second `Number` for the measure of confidence._
+
+The function that we get from statistics is what scientists call a @vocab{model}: a summary of data that captures relationships between variables. Typically, models are @vocab{lossy}, meaning that some of the original information in the dataset was lost through the process of summarizing and compressing the data to build the model. In machine learning, we use algorithms to learn models, which are generally functions.
+
+- In @vocab{supervised learning}, the abstraction of the function -- the act of shrinking the @vocab{training} -- takes place after (or sometimes in tandem with) demonstration.
+- In this example, the learned function is so complex that we're representing it in shorthand, with contract notation.
+
+@slidebreak{Launch}
+
+(5) After training is complete, a human can push ALVINN's run switch and the vehicle will begin driving.  As ALVINN drives, it produces steering angles it learned from the human driver (who demonstrated the steering angle at each segment of the road), along with a numeric of "confidence score" in the angle provided.
+
+@teacher{
+If you want your students to see ALVINN in action, now is a good time to view @link{https://www.youtube.com/watch?v=ntIczNQKfjQ, "this brief two-minute video"}.
+}
+
+@slidebreak{Launch}
+
+@QandA{
+@Q{What information does ALVINN process before producing a steering angle?}
+@A{ALVINN instantaneously processes the image of the road in front of it in order to produce a steering angle.}
+
+@Q{When humans make decisions about which way to steer, we are working with a lot of other information besides the image of the road in the moment. What examples can you come up with?}
+
+@A{We can use maps to give us a sense of what the road might do before we can see it.}
+@A{If a road is curving, we can predict that it will continue to curve.}
+@A{We know that roads don't curve beyond a certain degree--and if they do, we can expect to see a warning sign ahead of time.}
+@A{We can look at the cars in front of us to better understand how we should steer.}
+@A{If we know that we're going to be taking a left turn, we might switch lanes and slow down ahead of time.}
+}
+
+@strategy{Computers aren't people!}{
+
+In conversations about AI, computers often get anthropomorphized (given human-like traits) when they are not in fact human. This anthropomorphization of AI is a slippery slope that can block students from understanding the mechanics of machine learning.
+
+We urge you to avoid referring to ALVINN as "him" or "he".
+
+Many students will suspect that ALVINN has thoughts and feelings of its own, a misconception that is important to correct.
+
+A machine's "confidence" is very different from a human's confidence. When you discuss ALVINN's "confidence", highlight that this score is a numeric value, which is the result of *mathematical computation*. All machine learning relies on data, functions, and computation.
+}
+
+@slidebreak{Launch}
+
+In discovering the details of ALVINN's @vocab{supervised learning}, you may have noticed three big events:
+
+- Demonstration of the learning process
+- Function abstraction -- the machine learning algorithm finds a function that generalizes (hopefully well!) to new, unseen data
+- Use the function! Apply it on new data.
+
+As you explore other examples of @vocab{supervised learning} in this curriculum, you will notice that -- regardless of the context -- all three phases occur. 
+
+=== Investigate
+@slidebreak{Investigate}
+
+Let's apply what we know about machine learning to ALVINN and its training.
+
+@lesson-instruction{
+With a partner, complete @printable-exercise{training-a-self-driving-car.adoc}.
+}
+
+@teacher{Review students' responses, allowing time for discussion, questions, and disagreement.}
+
+@slidebreak{Investigate}
+
+While responding to the questions on the worksheet, you hopefully arrived at a few conclusions about ALVINN:
+
+- At the beginning of training, ALVINN's guesses about the best steering direction are not good.
+- As ALVINN receives more examples, it becomes better at predicting and can imitate the steering reactions of a human driver.
+- Training on one surface does not help ALVINN on any other surface! Failure to repeat the same training for a variety of road types (two-lane, four-lane, intersections, covered with leaves, covered with snow, etc.) would lead to bad outcomes.
+
+@slidebreak{Investigate}
+
+
+@lesson-point{
+In supervised machine learning, the computer trains on example input-output pairs tagged by a human and learns a function that maps from input to output.
+}
+
+
+The case of ALVINN is just one example of supervised learning. There are countless others!
+
+- *Spam detection.* When email users indicate that an email they have received is spam (_demonstration_), they are contributing to a massive, labeled dataset that can be used to train a model to classify emails as _spam_ and everything else, implicitly, as _not spam_. (Although Gmail sometimes asks users if something is “not spam” -- see the image, below.) The "supervision" comes from the fact that the training data includes examples of both spam and legitimate emails.
+
+@center{@image{images/report-not-spam.png, 500}}
+
+@slidebreak{Investigate}
+
+-  *Image classification.* When you do an image search for "apple", how does the computer know which images are of apples? In 2006, AI researcher Fei-Fei Li began working on the idea for a large visual database (ImageNet) to develop and improve visual object recognition software. ImageNet collects millions of images that have been hand-annotated (_demonstration_) with object categories. This collection is used for training, to produce a function that can label new images. This labeling is used by image search engines.
+
+@slidebreak{Investigate}
+
+- *Handwriting Recognition.* The United States Postal Services uses handwritten address interpretation systems to read handwritten addresses on envelopes. The MNIST database (Modified National Institute of Standards and Technology database) is one example of an early database used for the training of such systems; it includes thousands of labelled images of handwritten digits.  
+  
+
+=== Synthesize
+@slidebreak{Synthesize}
+
+@QandA{
+
+@Q{What is supervised machine learning, and how is ALVINN an example it?}
+@A{In supervised machine learning, the computer trains on example input-output pairs tagged by a human, and learns a function that maps from input to output. ALVINN is an example of supervised machine learning because a human provided the correct steering angles (_demonstration_), allowing ALVINN to produce a predictor function (_function abstraction_).}
+
+@Q{How is the problem of Spotify trying to improve its recommendations similar to the problem of ALVINN trying to drive on new surfaces? +
+_Hint: Think back to the case study from @lesson-link{ai-data-driven-algorithms-spell-checkers} on Michelle's Spotify use. Recall that, at first, Michelle did not like Spotify's "Discover Weekly" playlist because the songs did not match her tastes._
+}
+
+@A{Giving Spotify more data is one possible way that Michelle could get better song recommendations. Similarly, ALVINN will produce safer, more accurate steering instructions when exposed to more training: training on snowy roads, on icy roads, on three-lane highways, etc. With data-driven algorithms, more data produces better results even when the same algorithm is being used!}
+
+@A{Another option, though, is to use a different algorithm! Just as an improvement to Spotify's algorithm might result in Michelle enjoying its output more, a change in ALVINN's contract could produce safer driving. For instance, ALVINN's programmers could update the contract for it's function so that the program takes into consideration some history, rather than making all decisions instantaneously. This way, the program could respond appropriately to road signs and other data.}
+
+
+
+}
+
+
+@scrub{
+== Multiple Regression in Pyret @duration{25 minutes}
+
+=== Overview
+
+=== Launch
+@slidebreak{Launch}
+
+Did you know that every driver on the road is required to have car insurance?
+
+Although car insurance is required for all drivers, how much each driver pays for that insurance can vary widely.
+
+@QandA{
+
+@Q{A wide variety of factors influence the cost of car insurance. What variables to you think affect the price of car insurance?}
+
+@A{If students are unable to make any guesses about variables that influence car insurance, you can offer a few from this list to get them started: driving record, driver age, credit history, car make and model, occupation, where you live, mileage, car age, zip code, gender, marital status, etc.}
+}
+
+@lesson-instruction{
+- Let's look at a dataset inspired by real-world factors influencing premiums.
+- Open PREMIUMS starter file. Click "Run" and then type `premiums-table` into the Interactions area. Press "Enter".}
+
+@lesson-link{linear-regression} can help us understand the relationship between the cost of car insurance and any *one* of the variables in this dataset. In Pyret, the `lr-plot` function is designed for this.
+
+With linear regression, a relationship between two variables is strong if knowing the x-coordinate of a data point gives us a very good idea of what its y-coordinate will be.
+
+@QandA{
+@Q{Which do you think correlates the *most* strongly with the cost of insurance: driver's age, number of accidents, annual mileage, or the car's age? Why?}
+
+@Q{Which of those variables do you think correlates the *least* strongly with the cost of insurance? Why?}
+}
+
+@lesson-instruction{
+- Record the predictions you just made in the first section of @printable-exercise{lr-predict.adoc}.
+- Complete the next section of the page, Assessing Correlations.
+}
+
+Based on the scatter plots we produced, each explanatory variable correlates differently with the cost of insurance. Let's consider one model, where we use the driver's age to determine the cost of insurance.
+
+@lesson-instruction{
+Complete the next section of @printable-exercise{lr-predict.adoc}, Driver's Age vs. Insurance Premium.}
+
+If we really want to predict insurance premiums accurately, we would need to use all of the variables at once.
+
+@hspace{4ex} driver's age = @math{x_1} +
+@hspace{4ex} experience = @math{x_2} +
+@hspace{4ex} number of accidents = @math{x_3} +
+@hspace{4ex} annual mileage = @math{x_4} +
+@hspace{4ex} car's age = @math{x_5}
+
+A @vocab{regression} equation that puts them together would look like this:
+
+@hspace{4ex}  @math{y = a + b_1 x_1 + b_2 x_2 + b_3 x_3 + b_4 x_4 + b_5 x_5}
+
+
+A scatter plot allows us to easily visualize linear regression.
+
+With *two* explanatory variables (X1 and X2), things get more complicated, but we can still visualize what is going on. The x-axis represents the first explanatory variable, the y-axis represents the second explanatory variable, and the z-axis represents the response variable. Rather than computing a line of best fit, we compute a plane of best fit. The model is the equation of a plane.
+
+When there are three or more explanatory variables, it becomes impossible to visualize the @vocab{model}, but the computer is still able to do the computations.
+
+
+=== Synthesize
+@slidebreak{Synthesize}
+
+}

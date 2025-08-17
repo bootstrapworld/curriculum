@@ -52,13 +52,41 @@
 Students explore the historical data, discovering that there's a stronger pattern at work than seasonal periodicity: a seemingly-linear pattern of rising @math{\text{CO}_2} over time. After considering why we ended up with a periodic model initially and how it connects to the larger trend in the data, they practice comparing @vocab{S-values} for the different models they've fit.
 
 === Launch
+@slidebreak{Launch}
+
+Sally sells lemonade for $1.25/cup. Each cup costs her $0.30 in ice, lemons, sugar, and cups. Describe her `revenue`, `cost`, and `profit` as functions of glasses-sold.
+
+@indented{
+@math{\text{revenue}(g) = $1.25 \times g} +
+@math{\text{cost}(g) = $0.30 \times g} +
+@math{\text{profit}(g) = …?}
+}
+
+How many different ways can we write the `profit` function?
+
+@slidebreak{Launch}
+
+There are lots of correct solutions! Which one uses function composition?
+
+@indented{
+@math{\text{profitA}(g) = ($1.25 \times g) - ($0.30 \times g)} +
+@math{\text{profitB}(g) = \text{revenue}(g) - \text{cost}(g)} +
+@math{\text{profitC}(g) = ($1.25 - $0.30) \times g} +
+@math{\text{profitD}(g) = $0.95 \times g}
+}
+
+@teacher{
+If your students need some extra practice with function composition, you may find useful activities in our @lesson-link{function-composition} lesson.
+}
+
+@slidebreak{Launch-DN}
 
 @lesson-instruction{
-- Let's consider two periodic models built from the `recent-table` using cosine.
+- Let's consider two periodic models built from the `recent-table` using cosine -- one with function composition, and the other without it.
 - Complete the first section of @printable-exercise{choosing-the-best-model.adoc}, looking at functions defined in the @starter-file{alg2-hybrid}.
 }
 
-@slidebreak
+@slidebreak{Launch}
 
 @indented{
 ```
@@ -72,11 +100,11 @@ fun periodic-cos2(x):     wave-cos(x)      +      midline-cos(x) end
 @QandA{
 @Q{What is going on in `periodic-cos2` and why does it produce the same graph as `periodic-cos`?}
 @A{`periodic-cos2` is composed of two functions called `midline-cos` and `wave-cos`:
-  - `midline-cos` is just the vertical shift of the `periodic-cos` function.
-  - `wave-cos` is all of the parts of the `periodic-cos` function except for that vertical shift.
+  * `midline-cos` is just the vertical shift of the `periodic-cos` function.
+  * `wave-cos` is all of the parts of the `periodic-cos` function except for that vertical shift.
 }
 }
-@slidebreak
+@slidebreak{Launch}
 
 
 @QandA{
@@ -84,30 +112,30 @@ fun periodic-cos2(x):     wave-cos(x)      +      midline-cos(x) end
 @A{horizontal}
 
 @Q{How did that line get defined in our function definition?}
-@A{Horizontal lines are defined by a single number - the vertical shift.}
+@A{Horizontal lines are defined by a single number -- the vertical shift.}
 @A{The final term of our `periodic-cos` function definition is the number that defines the position of the horizontal line.}
 }
 
-@slidebreak
+@slidebreak{Launch}
 
 Our `periodic-cos` model has two terms:
 
-- The periodic term @math{4.13 \times cos(2\pi(x - 2023.35))}, which described the wave that wrapped around the horizontal midline
-- The vertical shift @math{419.87}, which described the (fixed) y-coordinate of the midline
+- The *periodic term* (@math{4.13 \times cos(2\pi(x - 2023.35))}), which described the wave that wrapped around the horizontal midline
+- The *vertical shift* (@math{419.87}), which described the (fixed) y-coordinate of the midline
 
 `periodic-cos2` splits these terms into _separate functions_, and then composes them:
 
 [cols="^.^15a,^.^1a,^.^10a", frame="none", grid="none"]
 |===
 | [.hybridCOE.first]
-@show{(coe '(+ (* 4.13 (sin (* (* 2 PI) (- x 2023.1)))) 419.87))}
+@show{(coe '(+ (* 4.13 (cos (* (* 2 PI) (- x 2023.1)))) 419.87))}
 
 | &rarr;
 
 | [.hybridCOE.second]
 @show{(coe '(+ (wave-cos x) (midline-cos x)))}
 |===
-@slidebreak
+@slidebreak{Launch}
 
 @lesson-instruction{
 - Let's take a moment to refresh ourselves on the models we've seen so far and what their key characteristics are.
@@ -120,10 +148,11 @@ Our `periodic-cos` model has two terms:
 }
 
 === Investigate
+@slidebreak{Investigate}
 
 We built our `periodic-sin` model using data from a small window: _just one year_. The scatter plot we just looked at on @printable-exercise{choosing-the-best-model.adoc} was also generated from @math{\text{CO}_2} data and had a very different shape!
 
-@slidebreak
+@slidebreak{Investigate-DN}
 
 @lesson-instruction{
 - Open the @starter-file{alg2-hybrid} and click "Run".
@@ -133,7 +162,7 @@ We built our `periodic-sin` model using data from a small window: _just one year
 
 @ifslide{@teacher{Proceed to the next slide, which includes the scatter plot, before discussing Notices and Wonders.}}
 
-@slidebreak
+@slidebreak{InvestigateC}
 
 @center{@image{images/modern-co2-scatter.png, 500}}
 
@@ -144,19 +173,26 @@ We built our `periodic-sin` model using data from a small window: _just one year
 @A{Because there is a consistent wave that goes up and down in regular intervals.}
 }
 
-@slidebreak
+@slidebreak{Investigate-DN}
 
 @lesson-instruction{
 - Turn to @printable-exercise{modeling-modern-co2.adoc}.
-- Start by finding the section of the @starter-file{alg2-hybrid} where you're asked to "Define your periodic-sin functions..."
-  * Define `periodic-sin` to be the periodic model you found using Desmos.
-  *** You should already have defined it in @opt-starter-file{alg2-co2} and on @lesson-link{periodic3-fitting-models/pages/modeling-recent-co2-2.adoc}.
-  * Using the deconstruction of `periodic-cos` as your model, change the other three functions in this section to show how to separate the wave and midline of your `periodic-sin` model and define `periodic-sin2` using function composition.
+- In the @starter-file{alg2-hybrid}, find the code where you're asked to "Define your periodic-sin functions..."
+  * Define `periodic-sin` to be the model *you* found using Desmos (which you already defined in @opt-starter-file{alg2-co2} and on @lesson-link{periodic3-fitting-models/pages/modeling-recent-co2-2.adoc}).
+  * Define the wave and midline of your `periodic-sin` model as separate functions, and recombine them in `periodic-sin2` using function composition (you can refer to the example of `periodic-cosine` above).
+}
+
+@slidebreak{Investigate-DN}
+
+@lesson-instruction{
+- Test out your rewritten `periodic-sin2` model with `recent-table` to confirm that it still fits as well as the original model!
+** If anything has changed, check your code carefully!
+
 - Work with your partner to fit linear and periodic models to the `modern-table`. This @math{\text{CO}_2} data is from 2010 to 2023.
 }
 
 
-@slidebreak
+@slidebreak{Investigate}
 
 [cols="^1a,^1a", options="header"]
 |===
@@ -170,26 +206,26 @@ We built our `periodic-sin` model using data from a small window: _just one year
 
 @Q{How would you describe how our `periodic-sin` model fits the shape of the data from the `modern-table`?}
 @A{Answers will vary. Make sure discussion addresses residuals. Sample responses may include:
- - While they both have a wave, they look pretty different!
- - The model undulates around a horizontal line and the data undulates around a diagonal line.
- - The y-intercepts are in completely different places.
- - When we fit the `periodic-sin` model to the data we see the model as a horizontal wave at the top, eventually lining up with the points on the right hand side of the graph. 
- - We also see vertical residuals showing the distance between each data point and the model.
+ * While they both have a wave, they look pretty different!
+ * The model undulates around a horizontal line and the data undulates around a diagonal line.
+ * The y-intercepts are in completely different places.
+ * When we fit the `periodic-sin` model to the data we see the model as a horizontal wave at the top, eventually lining up with the points on the right hand side of the graph.
+ * We also see vertical residuals showing the distance between each data point and the model.
 }
 }
 
-@slidebreak
+@slidebreak{InvestigateC}
 
 @ifslide{@image{images/modern-co2-model-soln.png,350}}
 
 @QandA{
-@Q{Where does the `periodic-sin` model fit the `modern-table` data best?}
+@Q{Where does the `periodic-sin` model fit the `modern-table` data *best*?}
 @A{Within the range of the dataset that it was built on.}
-@Q{Where does the `periodic-sin` model fit the `modern-table` data worst?}
+@Q{Where does the `periodic-sin` model fit the `modern-table` data *worst*?}
 @A{The farther we get from the date range it was built on.}
 }
 
-@slidebreak
+@slidebreak{Investigate}
 
 @QandA{
 @Q{How would you describe the shape of the model you drew that would be optimal?}
@@ -197,6 +233,7 @@ We built our `periodic-sin` model using data from a small window: _just one year
 }
 
 === Synthesize
+@slidebreak{Synthesize}
 
 @QandA{
 @Q{We built the `periodic-sin` model to fit the data in the `recent-table`. Why doesn't it do a good job of predicting @math{CO_2} levels for a larger time frame?}
@@ -214,6 +251,7 @@ We've chosen to describe these models as hybrid in order to make it accessible t
 }
 
 === Launch
+@slidebreak{LaunchR}
 
 @ifslide{@right{@image{images/historical-scatter-plot.png}}} 
 When we zoom out to see the historical @math{\text{CO}_2} data, we see that there are two different things going on:
@@ -223,14 +261,14 @@ When we zoom out to see the historical @math{\text{CO}_2} data, we see that ther
 
 The wave is following a diagonal line... {nbsp}so the midline for our model shouldn't be horizontal at all!  
 
-@slidebreak
+@slidebreak{Launch}
 
 @lesson-instruction{
 - *Is it possible for a model to be both linear _and_ periodic?*
 - With your partner, complete @printable-exercise{hybrid.adoc}.
 }
 
-@slidebreak
+@slidebreak{Launch}
 
 @QandA{
 @Q{What line should our model wrap around?}
@@ -243,9 +281,9 @@ The wave is following a diagonal line... {nbsp}so the midline for our model shou
 @A{38%}
 }
 
-@slidebreak
+@slidebreak{Launch}
 
-By replacing the vertical shift term in our periodic model with the linear model from `lr-plot`, we get the best of both worlds:
+By replacing the @vocab{midline} term (vertical shift) in our periodic model with the linear model from `lr-plot`, we get the best of both worlds:
 
 - Linear behavior for the midline representing the long-term trend...
 - Periodic behavior for the seasonal variation in @math{\text{CO}_2}
@@ -260,7 +298,7 @@ By replacing the vertical shift term in our periodic model with the linear model
 @show{(coe '(+ (wave-sin x) (linear-modern x)))}
 |===
 
-@slidebreak
+@slidebreak{Launch}
 
 We can visualize the body of the function using the Circles of Evaluation.
 
@@ -270,6 +308,7 @@ We can visualize the body of the function using the Circles of Evaluation.
 }
 
 === Synthesize
+@slidebreak{Synthesize}
 
 @QandA{
 @Q{Why did our hybrid model fit better than the periodic or linear models alone?}
@@ -277,13 +316,10 @@ We can visualize the body of the function using the Circles of Evaluation.
 
 @Q{Why doesn't it make sense to compare the following @vocab{S-values}?
  
-- the error we expect for predictions made from our `periodic-sin` model with the data in the `modern-table` 
-- the error we expect for predictions made from our `periodic-sin` model with the data in the `recent-table`
+* the error we expect for predictions made from our `periodic-sin` model with the data in the `modern-table`
+* the error we expect for predictions made from our `periodic-sin` model with the data in the `recent-table`
 }
 @A{The datasets have completely different ranges!}
-
-@Q{Internet memes start out being shared from friend to friend, growing slowly until they "go viral". What would a hybrid model for meme growth look like, and what kinds of models would need to be combined?}
-@A{Before it goes viral, the growth of a meme probably looks linear (growing faster in the beginning than an exponential model), but eventually the steep part of the curve takes over, and the model looks exponential.}
 }
 
 @ifnotslide{

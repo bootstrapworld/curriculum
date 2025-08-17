@@ -1,4 +1,4 @@
-#!/bin/bash
+#! /usr/bin/env bash
 
 BROKEN_EXTERNAL_LINKS=
 

@@ -1,5 +1,5 @@
-#!/bin/bash
-# last modified 2023-04-27
+#! /usr/bin/env bash
+# last modified 2025-07-11
 
 function updateLangTimestamp() {
   local d=$1

@@ -1,4 +1,4 @@
-#!/bin/bash
+#! /usr/bin/env bash
 
 # echo doing double-check-distribution-lesson.sh in $(pwd)
 

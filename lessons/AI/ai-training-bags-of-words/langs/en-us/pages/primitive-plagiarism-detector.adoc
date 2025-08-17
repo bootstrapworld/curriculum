@@ -1,0 +1,76 @@
+= A Primitive Plagiarism Detector
+
+== Review the Documents
+
+[cols="1,1", options="header"]
+|===
+| Wikipedia article on "Elephants in Thailand"
+| Student-submitted essay on "Elephants in Thailand"
+
+| The elephant has been a contributor to Thai society and its icon for many centuries. The elephant has had a considerable impact on Thai culture. The Thai elephant is the official national animal of Thailand. The elephant found in Thailand is the Indian elephant, a subspecies of the Asian elephant.
+
+| The elephant is a contributor to Thai society. It has been an icon of Thai life for many centuries. The elephant, which it is possible to see found in every part of Thailand, is the Indian elephant, which is a subspecies of the Asian elephant. The Thai elephant has a considerable impact on culture. The elephant is the official national animal of Thailand.
+
+|===
+
+@n Do *you* think the student who submitted this essay on Elephants in Thailand committed plagiarism? Circle one: @hspace{1em} Yes @hspace{2em} No
+
+
+== Detect Identicality
+Open the @starter-file{plagiarism} and click "Run".
+
+- The two paragraphs above are defined in the starter file as `wiki-article` and `student-essay`, respectively.
+- The file also defines a function `simple-equality`, which takes in two Strings and produces a Boolean: `true` indicates that there is a match; `false` indicates that there is not a match.
+
+
+@n Record if the output is `true` or `false` for each line of code:
+
+
+@indented{
+`simple-equality("hello", "goodbye")` @fitb{5em}{@ifsoln{`false`}} @hspace{2em}
+`simple-equality("hello", "HELLO")` @fitb{5em}{@ifsoln{`true`}} @hspace{2em} 
+`simple-equality("hello", "helo")` @fitb{5em}{@ifsoln{`false`}} @hspace{3em}
+`simple-equality("hello,", " Hello.")` @fitb{5em}{@ifsoln{`false`}}
+}
+
+@n How does `simple-equality` deal with punctuation, capitalization, and spaces? @fitb{}{@ifsoln{It looks for a perfect match, but disregards punctuation, }}
+
+@fitb{}{@ifsoln{capitalization, and spaces.}}
+
+@n Compare the essays using `simple-equality(student-essay, wiki-article)`. What does the program return? @fitb{}{@ifsoln{`false`}}
+
+
+== Building a Better Plagiarism Detector
+
+Yara and Xola agree that there has to be a way to measure the _similarity_ of the essays. They each propose a different solution. 
+
+@vspace{1ex}
+
+@indented{
+Yara: I made a list of the four most unusual and unique words in each essay. Then I compared the lists. Because the two lists of unusual words are identical (elephant, Thai, Indian, and Asian), I decided that the student plagiarized!
+
+@vspace{1ex}
+
+Xola: I figured out the four most common words in each essay. In the wiki-article, they are: "the" (7), "elephant" (6), "Thai" (3), and "a" (3). In the student essay, they are: "the" (7), "elephant" (6), "is" (5), and "of" (4). Because the most common words are not the same, I don't think the student plagiarized.
+}
+
+@n What do you like about Yara's method? What are its shortcomings?
+
+@blanklines{2}{
+ @ifsoln{*Strength:* Yara's method considers that some words are more important than others. *Weakness:* If a student replaced important words with synonyms, Yara's method would fail.
+}
+}
+
+@n What do you like about Xola's method? What are its shortcomings?
+
+@blanklines{2}{
+ @ifsoln{*Strength:* Xola's strategy of counting and cataloging words could be useful in detecting minor differences between essays. *Weakness*: Xola is counting common words only, meaning that she ends up counting lots of unimportant words, like "the", "of", etc. 
+}
+}
+
+@n Come up with your own method! What is a *different* way to measure the similarity between the two essays?
+
+@blanklines{2}{
+ @ifsoln{ Responses will vary. Students' responses may take into consideration many different factors including (but not limited to): total word count; number of instances of each individual word; number of instances of important words; sentence length; number of sentences; first / last words in sentences, etc.
+}
+}

@@ -6,6 +6,10 @@ file_extensions:
 scope: text.asciidoc.asciidoctor++
 contexts:
   main:
+    # proglang is matched as a directive, but nothing is pushed
+    - match: '@proglang'
+      scope: directive
+
     # mathjax gets its own context
     - match: '@math{'
       scope: directive.muted
@@ -19,6 +23,10 @@ contexts:
     # So @Q and @A shouldn't show up inside main
     - match: '@Q|@A'
       scope: error
+
+    # Use our own matching for code snippets, since Sublime's default gets tripped up
+    - match: '`[^`]+`'
+      scope: code
 
     # match "muted" directives WITH arguments
     #- match: '@([^\{\s]+)(\{[^\}]*\}){0,1}\{'

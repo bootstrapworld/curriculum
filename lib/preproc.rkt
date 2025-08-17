@@ -1,6 +1,7 @@
 #lang racket
 
 (require json)
+(require racket/hash)
 ; (require file/sha1)
 (require "readers.rkt")
 (require "utils.rkt")
@@ -44,6 +45,8 @@
 (define *solutions-mode?* #f)
 
 (define *possibly-invalid-page?* #f)
+
+(define *inside-preparation?* #f)
 
 (define *pathway* "BOGUSPATHWAY")
 
@@ -127,6 +130,10 @@
 
 (define *enclosing-directive* #f)
 
+(define *self-guided-counter* 0)
+(define *self-guided-text?* #f)
+(define *self-guided-context* "")
+
 (define *external-url-index*
   (let ([f (string-append *pathway-root-dir* "external-index.rkt")])
     (if (file-exists? f)
@@ -170,7 +177,7 @@
     read-json))
 
 (define *starter-files*
-  (let ([starter-files-file (format "distribution/~a/starterFiles.js" *natlang*)])
+  (let ([starter-files-file (format "distribution/~a/lib/starterFiles.js" *natlang*)])
     (if (file-exists? starter-files-file)
         (call-with-input-file starter-files-file
           (lambda (i)
@@ -179,7 +186,7 @@
         '())))
 
 (define *assessments*
-  (let ([assessments-file (format "distribution/~a/assessments.js" *natlang*)])
+  (let ([assessments-file (format "distribution/~a/lib/assessments.js" *natlang*)])
     (if (file-exists? assessments-file)
         (call-with-input-file assessments-file
           (lambda (i)
@@ -188,7 +195,7 @@
         '())))
 
 (define *learning-objectives*
-  (let ([learning-objectives-file (format "distribution/~a/learningObjectives.js" *natlang*)])
+  (let ([learning-objectives-file (format "distribution/~a/lib/learningObjectives.js" *natlang*)])
     (if (file-exists? learning-objectives-file)
         (call-with-input-file learning-objectives-file
           (lambda (i)
@@ -197,7 +204,7 @@
         '())))
 
 (define *citations*
-  (let ([citations-file (format "distribution/~a/citations.js" *natlang*)])
+  (let ([citations-file (format "distribution/~a/lib/citations.js" *natlang*)])
     (if (file-exists? citations-file)
         (call-with-input-file citations-file
           (lambda (i)
@@ -210,6 +217,8 @@
 
 (define *starter-files-used* '())
 (define *opt-starter-files-used* '())
+(define *starter-files-used-in-preparation* '())
+(define *starter-files-used-outside-preparation* '())
 
 (define *online-exercise-links* '())
 (define *opt-online-exercise-links* '())
@@ -236,6 +245,9 @@
   ;(format "~a/~a" (current-directory) *in-file*)
   (format "~a" *in-file*)
   )
+
+(define (authoring-resource?)
+  (regexp-match "/authoring" *containing-directory*))
 
 (define read-group (*make-read-group #:code (lambda z (apply code z))
                                      #:errmessage-file-context errmessage-file-context))
@@ -678,40 +690,56 @@
   ; (printf "doing clean-up-url-in-image-text ~s\n" text)
   (regexp-replace* #rx"https://" text ""))
 
-(define (read-image-json-file-in image-dir)
-  (let ([json-file (build-path image-dir "lesson-images.json")]
+(define (combine-json-files json-files)
+  (let ([h-obj #f])
+    (for ([json-file json-files])
+      (let ([new-hash (call-with-input-file json-file read-json)])
+        (unless h-obj (set! h-obj (make-hash)))
+        (hash-union! h-obj new-hash #:combine/key (lambda (k v1 v2) v1))
+        ))
+    (unless h-obj (set! h-obj #t))
+    h-obj))
+
+(define (read-image-json-files-in image-dir)
+  (let ([json-list-file (build-path image-dir ".cached" ".image-list.txt.kp")]
+        [json-files '()]
         [images-hash #f]
         [missing-image-log-file #f]
         [missing-images '()])
+
+    (when (file-exists? json-list-file)
+      (set! json-files
+        (map (lambda (x) (build-path image-dir x))
+             (read-data-file json-list-file))))
+
+    (when (and (null? json-files) (or *lesson-plan* *lesson*))
+        (printf "!! WARNING: ~a: Image json files not found\n" (errmessage-context)))
 
     (when *lesson*
       (set! missing-image-log-file
         (format "distribution/~a/lessons/~a/.cached/.missing-image-files.txt"
                 *natlang* *lesson*)))
 
-    (cond [(file-exists? json-file)
-           (set! images-hash (call-with-input-file json-file read-json))
-           ; (printf "images-hash is ~s\n" images-hash)
-           (set! *images-hash-list*
-             (cons (cons *containing-directory* images-hash) *images-hash-list*))
-           (unless (or *narrative* *target-pathway* *teacher-resources*)
-             (hash-for-each images-hash
-               (lambda (key val)
-                 (let* ([image-file (build-path image-dir (symbol->string key))]
-                        [anon-image-file (anonymize-filename image-file)])
-                   (unless (file-exists? anon-image-file)
-                     (cond [(file-exists? image-file)
-                            (rename-file-or-directory image-file anon-image-file #t)]
-                           [else
-                             (unless (member key missing-images)
-                               (set! missing-images (cons key missing-images)))
-                             #;(printf "WARNING: ~a: Image file ~a not found\n" (errmessage-context) image-file)
-                             ]))))))]
-          [else
-            (when (or *lesson-plan* *lesson*)
-              (unless (member json-file *missing-image-json-files*)
-                (set! *missing-image-json-files* (cons json-file *missing-image-json-files*))
-                (printf "!! WARNING: Image json file ~a not found\n" json-file)))])
+    (unless images-hash
+      (set! images-hash (combine-json-files json-files)))
+
+    (when (hash? images-hash)
+      ; (printf "images-hash is ~s\n" images-hash)
+      (set! *images-hash-list*
+        (cons (cons *containing-directory* images-hash) *images-hash-list*))
+      (unless (or *narrative* *target-pathway* *teacher-resources*)
+        (hash-for-each images-hash
+          (lambda (key val)
+            (let* ([image-file (build-path image-dir (symbol->string key))]
+                   [anon-image-file (anonymize-filename image-file)])
+              (unless (file-exists? anon-image-file)
+                (cond [(file-exists? image-file)
+                       (rename-file-or-directory image-file anon-image-file #t)]
+                      [else
+                        (unless (member key missing-images)
+                          (set! missing-images (cons key missing-images)))
+                        #;(printf "WARNING: ~a: Image file ~a not found\n" (errmessage-context) image-file)
+                        ])))))))
 
     (when missing-image-log-file
       (call-with-output-file missing-image-log-file
@@ -731,7 +759,7 @@
     (let-values ([(image-dir image-file ign) (split-path img-qn)])
 
       (unless images-hash
-        (set! images-hash (read-image-json-file-in image-dir)))
+        (set! images-hash (read-image-json-files-in image-dir)))
 
       (unless (or *narrative* *target-pathway* *teacher-resources*)
         (let* ([img-anonymized (anonymize-filename img)]
@@ -740,6 +768,7 @@
           (unless (file-exists? img-anonymized-qn)
             (cond [(file-exists? img-qn)
                    (rename-file-or-directory img-qn img-anonymized-qn #t)]
+                  [(authoring-resource?) #f]
                   [else (printf "WARNING: ~a: Image file ~a not found\n\n"
                                 (errmessage-context) img-qn)]))))
 
@@ -758,7 +787,8 @@
           (set! image-license (hash-ref image-attribs 'license ""))
           (set! image-source (hash-ref image-attribs 'source "")))
 
-        (unless (or *narrative* *target-pathway* *teacher-resources*)
+        (unless (or *narrative* *target-pathway* *teacher-resources*
+                    (authoring-resource?))
           (when (hash? images-hash)
             (cond [(not image-attribs)
                    (printf "WARNING**: Image ~a missing from dictionary ~a/lesson-images.json\n"
@@ -1126,8 +1156,11 @@
 
 (define (store-title title-txt)
   (unless *other-dir*
-    (let ([title-file (path-replace-extension *out-file* ".titletxt")]
-          [title-txt (regexp-replace* #rx"," (regexp-replace* #rx"\\[.*?\\]##(.*?)##" title-txt "\\1") "\\&#x2c;")])
+    (let ([title-file (path-replace-extension *out-file* ".titletxt")])
+      (set! title-txt (regexp-replace* #rx"\\[.*?\\]##(.*?)##" title-txt "\\1"))
+      (set! title-txt (regexp-replace* #rx"," title-txt "\\&#x2c;"))
+      (set! title-txt (regexp-replace* #rx"{nbsp}" title-txt " "))
+      (set! title-txt (regexp-replace* #rx"@proglang" title-txt (nicer-case *proglang*)))
       (call-with-output-file title-file
         (lambda (o)
           (display title-txt o) (newline o))
@@ -1140,9 +1173,9 @@
       (set! *first-level-section-titles* '()))
     (set! *page-title* title-txt)
     (store-title title-txt)
-    (fprintf o "[.~a]\n" *proglang*)
+    ; (fprintf o "[.~a]\n" *proglang*)
     (display #\= o)
-    (display title o)
+    (expand-directives:string->port title o)
     (newline o)
     (newline o)
 
@@ -1274,11 +1307,13 @@
     (link-to-project-lessons-short-form "Lesson" project-lessons o)))
 
 (define (link-to-project-lessons-in-pathway o)
-  ; (printf "doing link-to-project-lessons-in-pathway\n")
-  (let ([lessons (read-data-file
-                   (format "distribution/~a/courses/~a/.cached/.workbook-lessons.txt.kp"
-                           *natlang* *target-pathway*))]
+  ; (printf "doing link-to-project-lessons-in-pathway ~s\n" *target-pathway*)
+  (let ([lesson-units (read-data-file
+                   (format "distribution/~a/courses/~a/.cached/.workbook-lessons.rkt.kp"
+                           *natlang* *target-pathway*) #:mode 'form)]
+        [lessons #f]
         [project-lessons '()])
+    (set! lessons (apply append (map rest lesson-units)))
     (for ([lesson lessons])
       (let ([lesson-pl-file
               (format "distribution/~a/lessons/~a/.cached/.index-projectlessons.rkt.kp" *natlang* lesson)])
@@ -1296,57 +1331,73 @@
 (define (link-to-lessons-in-pathway o)
   ; (printf "link-to-lessons-in-pathway\n")
   ;
-  (let ([lessons (read-data-file
-                   (format "distribution/~a/courses/~a/.cached/.workbook-lessons.txt.kp"
-                           *natlang* *target-pathway*))])
+  (let* ([lesson-units
+           (read-data-file
+             (format "distribution/~a/courses/~a/.cached/.workbook-lessons.rkt.kp"
+                     *natlang* *target-pathway*) #:mode 'form)]
+         [num-lunits (length lesson-units)]
+         [lessons #f])
+    (set! lessons (apply append (map rest lesson-units)))
+    ; (printf "*** num-lunits = ~s\n" num-lunits)
+    ; (printf "*** lesson-units = ~s\n" lesson-units)
     ;(printf "lessons = ~s\n" lessons)
     ;
     ;(fprintf o "~n.Lessons Used in This Pathway\n")
     (print-lessons-intro o)
-    (fprintf o "[#lesson-list]\n")
-    (for ([lesson lessons])
-      ;(printf "tackling lesson ~s\n" lesson)
-      (let* ([lesson-index-file (format "lessons/~a/index.shtml" lesson)]
-             [lesson-directory (format "distribution/~a/lessons/~a" *natlang* lesson)]
-             [lesson-title-file (format "~a/.cached/.index.titletxt"
-                                        lesson-directory)]
-             [lesson-desc-file (format "~a/.cached/.index-desc.txt.kp"
-                                       lesson-directory)]
-             [lesson-title lesson]
-             [lesson-description #f])
-        (unless (directory-exists? lesson-directory)
-          (printf "WARNING: Course ~a referring to nonexistent lesson ~a\n\n"
-                  *target-pathway* lesson))
-        (when (file-exists? lesson-title-file)
-          ;(printf "~a exists\n" lesson-title-file)
-          (set! lesson-title (call-with-input-file lesson-title-file read-line)))
-        ;(printf "lesson-title is ~s\n" lesson-title)
-        (when (file-exists? lesson-desc-file)
-          ;(printf "~a exists\n" lesson-desc-file)
-          (set! lesson-description
-            (call-with-input-file lesson-desc-file
-              (lambda (i)
-                (let ([r ""])
-                  (let loop ()
-                    (let ([x (read-line i)])
-                      (unless (eof-object? x)
-                        (set! r (string-append r "\n" x))
-                        (loop))))
-                  r)))))
-        ;(printf "lesson-description is ~s\n" lesson-description)
-        ;lesson-index-file (shtml) doesn't exist yet, but shd we at least check for index.adoc?
-        (if (string-prefix? lesson "project-")
-          (fprintf o "link:pass:[~a~a?pathway=~a][~a, role=project] ::" *dist-root-dir* lesson-index-file *target-pathway* lesson-title)
-          (fprintf o "link:pass:[~a~a?pathway=~a][~a] ::" *dist-root-dir* lesson-index-file *target-pathway* lesson-title)
-          )
 
-        (if lesson-description
-            (display lesson-description o)
-            (display " {nbsp}" o))
-        ;(when lesson-description
-        ;(display lesson-description o)
-        ;(newline o))
-        (newline o)))
+    (for ([lunit lesson-units])
+      ; (printf "lunit = ~s\n" lunit)
+      (let ([lunit-name (first lunit)] [lessons (rest lunit)])
+        ; (printf "lunit-name = ~s\n" lunit-name)
+        (when (or (> num-lunits 1) (not (string=? lunit-name "")))
+          (fprintf o "\n[.lesson-unit]\n=== ~a\n" lunit-name))
+
+        (fprintf o "[.lesson-list]\n")
+        (for ([lesson lessons])
+          ;(printf "tackling lesson ~s\n" lesson)
+          (let* ([lesson-index-file (format "lessons/~a/index.shtml" lesson)]
+                 [lesson-directory (format "distribution/~a/lessons/~a" *natlang* lesson)]
+                 [lesson-title-file (format "~a/.cached/.index.titletxt"
+                                            lesson-directory)]
+                 [lesson-desc-file (format "~a/.cached/.index-desc.txt.kp"
+                                           lesson-directory)]
+                 [lesson-title lesson]
+                 [lesson-description #f])
+            (unless (directory-exists? lesson-directory)
+              (printf "WARNING: Course ~a referring to nonexistent lesson ~a\n\n"
+                      *target-pathway* lesson))
+            (when (file-exists? lesson-title-file)
+              ;(printf "~a exists\n" lesson-title-file)
+              (set! lesson-title (call-with-input-file lesson-title-file read-line)))
+            ;(printf "lesson-title is ~s\n" lesson-title)
+            (when (file-exists? lesson-desc-file)
+              ;(printf "~a exists\n" lesson-desc-file)
+              (set! lesson-description
+                (call-with-input-file lesson-desc-file
+                  (lambda (i)
+                    (let ([r ""])
+                      (let loop ()
+                        (let ([x (read-line i)])
+                          (unless (eof-object? x)
+                            (set! r (string-append r "\n" x))
+                            (loop))))
+                      r)))))
+            ;(printf "lesson-description is ~s\n" lesson-description)
+            ;lesson-index-file (shtml) doesn't exist yet, but shd we at least check for index.adoc?
+            (if (string-prefix? lesson "project-")
+                (fprintf o "link:pass:[~a~a?pathway=~a][~a, role=project] ::" *dist-root-dir* lesson-index-file *target-pathway* lesson-title)
+                (fprintf o "link:pass:[~a~a?pathway=~a][~a] ::" *dist-root-dir* lesson-index-file *target-pathway* lesson-title)
+                )
+
+            (if lesson-description
+                (display lesson-description o)
+                (display " {nbsp}" o))
+            ;(when lesson-description
+            ;(display lesson-description o)
+            ;(newline o))
+            (newline o)))))
+
+
       (for ([lesson lessons])
         ;(printf "tackling lesson i ~s\n" lesson)
         (let ([lesson-asc-file
@@ -1435,6 +1486,9 @@
   (set! *objectives-met* '())
   (set! *assessments-met* '())
   (set! *starter-files-used* '())
+  (set! *starter-files-used-in-preparation* '())
+  (set! *starter-files-used-outside-preparation* '(editor program-list))
+  (set! *inside-preparation?* #f)
   (set! *opt-starter-files-used* '())
   (set! *workbook-pages* '())
   (set! *natlang-glossary-list* '())
@@ -1445,6 +1499,9 @@
   (set! *definitions* '())
   (set! *local-scheme-definitions* '())
   (set! *enclosing-directive* #f)
+  (set! *self-guided-counter* 0)
+  (set! *self-guided-text?* #f)
+  (set! *self-guided-context* "editorCode: {}")
 
   (set! *pyret?* (string=? *proglang* "pyret"))
 
@@ -1528,6 +1585,27 @@
 (define *needs-objectives?* #f)
 (define *uses-objectives?* #f)
 
+(define (start-self-guided-break o)
+  (stop-self-guided-break o)
+  (set! *self-guided-counter* (+ *self-guided-counter* 1))
+  (set! *self-guided-text?* #t)
+  (display (html-comment "start_self_guided_piece") o)
+  ; (newline o)
+  )
+
+(define (stop-self-guided-break o)
+  (when *self-guided-text?*
+    (set! *self-guided-text?* #f)
+    (let ([json-sub-file
+            (build-path *containing-directory* ".cached"
+                        (format ".index-sg-~a.json" *self-guided-counter*))])
+      (call-with-output-file json-sub-file
+        (lambda (o)
+          (fprintf o "~a\n" *self-guided-context*))
+        #:exists 'replace)
+      (display (html-comment "stop_self_guided_piece") o)
+      (newline o))))
+
 (define (expand-directives i o)
         ;(printf "doing expand-directives\n")
         (let ([beginning-of-line? #t]
@@ -1572,7 +1650,7 @@
                                   #f
                                   (display-header-comment prose o)
                                   ))]
-                           [(member directive '("scrub" "slidestyle"))
+                           [(string=? directive "scrub")
                             (read-group i directive)]
                            [(member directive '("ifslide" "pd-slide" "ifpdslide"))
                             (let ([text (read-group i directive #:multiline? #t)])
@@ -1583,14 +1661,19 @@
                                 (display "\n[.actually-openblock.hiddenblock]\n====\n" o)
                                 (expand-directives:string->port text o #:enclosing-directive directive)
                                 (display "\n====\n" o)))]
-                           [(member directive '("ifnotslide" "preparation"))
+                           [(string=? directive "ifnotslide")
                             (let ([text (read-group i directive #:multiline? #t)])
                               (expand-directives:string->port text o #:enclosing-directive directive))]
+                           [(string=? directive "preparation")
+                            (let ([text (read-group i directive #:multiline? #t)])
+                              (set! *inside-preparation?* #t)
+                              (expand-directives:string->port text o #:enclosing-directive directive)
+                              (set! *inside-preparation?* #f))]
                            [(string=? directive "blanklines")
                             (let ([n (string->number (read-group i directive))]
                                   [text (read-group i directive)])
                               ; (printf "doing @blanklines ~s\n" n)
-                              (display-begin-span ".blanklines" o #:attribs (format "style=\"height: ~arem\"" n))
+                              (display-begin-span ".blanklines" o #:attribs (format "style=\"height: ~arem\"" (* 2.2 n)))
                               (display (expand-directives:string->string text #:enclosing-directive directive) o)
                               (display-end-span o))]
                            [(string=? directive "duration")
@@ -1599,12 +1682,31 @@
                                          (create-begin-tag "span" ".duration")
                                          txt
                                          (create-end-tag "span")) o))]
+                           [(string=? directive "glossary-entry")
+                            (let* ([arg (read-group i directive)]
+                                   [arg1 (regexp-replace* #rx" " arg "_")])
+                              (display (enclose-tag "a" "" arg
+                                         #:attribs
+                                         (format "name=\"glossary_~a\"" arg1)) o))]
+                           [(string=? directive "vocab-link")
+                            (let* ([arg-as-given (read-group i directive)]
+                                   [arg (assoc-glossary arg-as-given)]
+                                   [arg (if arg (car arg) "missing")]
+                                   [arg-link-form (regexp-replace* #rx" " arg "_")])
+                              (display (enclose-span ".vocab"
+                                         (format "link:#glossary_~a[~a]"
+                                                 arg-link-form arg-as-given)) o))]
                            [(string=? directive "vocab")
                             (let* ([arg (read-group i directive)]
-                                   [s (assoc-glossary arg)])
+                                   [s (assoc-glossary arg)]
+                                   [def (if s (second s) "missing")])
+                              (when (string=? def "missing")
+                                (printf "Warning: Not found in glossary: ~s\n" arg))
                               (when (string=? arg "")
                                 (printf "WARNING: Directive @vocab has ill-formed argument\n\n"))
-                              (display (enclose-span ".vocab" arg) o)
+                              (display (enclose-span
+                                          ".vocab" arg
+                                          #:attribs (string-append "title=\"" def "\"")) o)
                               (cond [s (unless (member s *glossary-items*)
                                          (set! *glossary-items* (cons s *glossary-items*)))]
                                     [else
@@ -1717,9 +1819,6 @@
                                      "WARNING: @material-links (~a, ~a) valid only in lesson plan"
                                      *lesson-subdir* *in-file*))
                             (fprintf o "\n[#material-links]\n&nbsp;\n")
-                            ; The line below can be deleted, once langTable links are generated via their own directive
-                            #;(when (member *proglang* '("pyret" "wescheme"))
-                              (fprintf o "* *Classroom visual:* link:javascript:showLangTable()[Language Table]"))
                             ]
                            [(string=? directive "opt-material-links")
                             (unless *lesson-plan*
@@ -1931,6 +2030,19 @@
                                          o))]
                                     [else (set! possible-beginning-of-line?
                                             (skip-1-newline-if-possible i o))]))]
+                           [(member directive '("ifselfguided" "ifnotselfguided"))
+                            (let* ([text (read-group i directive #:multiline? #t)]
+                                   [contains-nl? (regexp-match "^ *\n" text)]
+                                   [converted-text (expand-directives:string->string
+                                                text #:enclosing-directive directive)]
+                                   [class-name (substring directive 2)])
+                              (display
+                                (cond [contains-nl?
+                                        (format "\n\n[.actually-openblock.~a]\n====\n~a\n====\n"
+                                          class-name converted-text)]
+                                      [else
+                                        (enclose-span (format ".~a" class-name)
+                                          converted-text)]) o))]
                            [(or (string=? directive "ifpathway")
                                 (string=? directive "ifnotpathway"))
                             (let ([pathways (read-commaed-group i directive read-group)]
@@ -1942,11 +2054,36 @@
                                        pathways)) o))]
                            [(string=? directive "funname")
                             (fprintf o "`~a`" (get-function-name))]
-                           [(string=? directive "slidebreak")
-                            (display (enclose-span ".slidebreak" "") o)
-                            (let ([c (peek-char i)])
-                              (when (and (char? c) (char=? c #\{))
-                                (read-group i directive)))]
+                           [(member directive '("slidebreak" "slideonlybreak" "selfguidedbreak"))
+                            (unless *lesson-plan*
+                              (error 'ERROR "~a (~a) valid only in lesson plan"
+                                     directive (errmessage-file-context)))
+                            (when (member directive '("slidebreak" "selfguidedbreak"))
+                              (start-self-guided-break o))
+                            ; (display (html-comment (format "slidenum ~a" *self-guided-counter*)) o)
+                            (when (member directive '("slidebreak" "slideonlybreak"))
+                              (display (enclose-span ".slidebreak" "") o)
+                              (newline o))
+                            (unless (string=? directive "selfguidedbreak")
+                              (let ([c (peek-char i)])
+                                (cond [(and (char? c) (char=? c #\{))
+                                       (read-group i directive)]
+                                      [else (printf "WARNING: ~a: Invalid ~a\n" directive
+                                              (errmessage-context))])))]
+                           [(member directive '("editorconfig" "imageconfig" "videoconfig"))
+                            (unless *lesson-plan*
+                              (error 'ERROR
+                                     "~a (~a) valid only in lesson plan"
+                                     directive (errmessage-file-context)))
+                            (let ([text (read-group i directive #:multiline? #t)])
+                              ; (printf "xconfig = ~a\n" text)
+                              (set! *self-guided-context*
+                                (format "~a: ~a\n"
+                                  (case directive
+                                    [("editorconfig") "editorCode"] ;maybe make uniform
+                                    [("imageconfig") "imageConfig"]
+                                    [("videoconfig") "videoConfig"])
+                                  text)))]
                            [(string=? directive "Bootstrap")
                             (fprintf o "https://www.bootstrapworld.org/[Bootstrap]")]
                            [(hash-ref *simple-directives* (string->symbol directive) #f)
@@ -1989,10 +2126,11 @@
                               (display-openblock ".optpara" text  directive o)
                               (set! *optional-flag?* old-optional-flag?))]
                           [(or (string=? directive "starter-file")
-                                (string=? directive "opt-starter-file"))
+                               (string=? directive "opt-starter-file"))
                             (let* ([lbl+text (read-commaed-group i directive read-group)]
                                    [lbl (string->symbol (first lbl+text))]
-                                   [c (hash-ref *starter-files* lbl #f)])
+                                   [c (hash-ref *starter-files* lbl #f)]
+                                   [autoinclude? (hash-ref c 'autoinclude #t)])
                               (cond [(not c)
                                      (printf "WARNING: ~a: Ill-named @~a ~a\n\n"
                                              (errmessage-context) directive lbl)]
@@ -2007,7 +2145,7 @@
                                                (printf "WARNING: ~a: @~a ~a missing for ~a\n\n"
                                                        (errmessage-context) directive lbl *proglang*))]
                                               [else
-                                                (let* ([newly-added? (add-starter-file lbl #:opt? opt?)]
+                                                (let* ([newly-added? (add-starter-file lbl autoinclude? #:opt? opt?)]
                                                        [starter-file-title
                                                          (regexp-replace* #rx","
                                                            (or (and p (hash-ref p 'title #f))
@@ -2029,8 +2167,7 @@
                                                            title
                                                            ", window=\"&#x5f;blank\""
                                                            )])
-                                                  (when (and newly-added?
-                                                             (hash-ref c 'autoinclude #t))
+                                                  (when (and newly-added? autoinclude?)
                                                     (let* ([materials-link-output
                                                              (format
                                                                "link:pass:[~a][~a~a]"
@@ -2059,37 +2196,37 @@
                           [(string=? directive "assessments")
                            (fprintf o "\ninclude::~a/{cachedir}.index-assessments.asc[]\n" *containing-directory*)]
                           [(string=? directive "assessment")
-                           (let* ([lbl (string->symbol (read-group i directive))]
-                                  [c (hash-ref *assessments* lbl #f)]
-                                  [title (and c (hash-ref c 'title #f))]
-                                  [url (and c (hash-ref c 'url #f))]
-                                  [pl-specific (and c (hash-ref c *proglang-sym* #f))])
-                             (when pl-specific
-                               (let ([x (hash-ref pl-specific 'title #f)])
-                                 (when x (set! title x)))
-                               (let ([x (hash-ref pl-specific 'url #f)])
-                                 (when x (set! url x))))
-                             (unless title (set! title url))
-                             (cond [(not c)
-                                    (printf "WARNING: ~a: Ill-named @~a ~a\n\n" (errmessage-context) directive lbl)]
-                                   [(not url)
-                                    (printf "WARNING: ~a: @~a ~a missing for ~a\n\n"
-                                            (errmessage-context) directive
-                                            lbl *proglang*)]
-                                   [else
-                                     (unless (assoc url *assessments-met*)
-                                       (set! *assessments-met*
-                                         (cons (cons url title)
-                                               *assessments-met*)))
-                                     (fprintf o "link:pass:[~a][~a]" url title)]))]
+                           (let* ([args (read-commaed-group i directive read-group)]
+                                  [lbl (first args)]
+                                  [text (string-join (rest args) ", ")]
+                                  [dir (build-path *containing-directory* "assessments" lbl)])
+                             (when (string=? text "")
+                               (printf "WARNING: ~a: assessment ~a missing second argument\n"
+                                       (errmessage-context) lbl))
+                             (unless (directory-exists?
+                                       (build-path *containing-directory* "assessments" lbl))
+                               (printf "WARNING: ~a uses ~a with nonexistent directory ~a\n"
+                                       (errmessage-context) directive lbl))
+                             (unless (assoc lbl *assessments-met*)
+                                 (set! *assessments-met*
+                                   (cons (cons lbl text) *assessments-met*)))
+                             (fprintf o "link:pass:[assessments/~a/index.html][~a, role=quiz]" lbl text))]
                           [(string=? directive "citation")
                            (let* ([args (read-commaed-group i directive read-group)]
                                   [args-len (length args)]
                                   [lbl (string->symbol (first args))]
                                   [c (hash-ref *citations* lbl #f)]
-                                  [in-text (and c (hash-ref c 'in-text #f))]
-                                  [link (string-append "link:" (hash-ref c 'public-url) "[" in-text "]")]
-                                  [apa (and c (hash-ref c 'apa #f))])
+                                  [in-text (and (> args-len 1) (second args))]
+                                  [link ""]
+                                  [apa #f])
+                             (when c
+                               (unless in-text
+                                 (set! in-text (hash-ref c 'in-text "")))
+                               (set! apa (hash-ref c 'apa #f)))
+                             (unless in-text (set! in-text ""))
+                             (set! link (string-append "link:"
+                                          (if c (hash-ref c 'public-url "") "")
+                                          "[" in-text "]"))
                              (cond [(> (length args) 1)
                                     (set! in-text
                                       (expand-directives:string->string
@@ -2147,14 +2284,13 @@
                                 (format ".q-and-a~a"
                                         (if *optional-flag?* ".Optional" ""))
                                 text directive o))]
-                           [(string=? directive "Q")
+                           [(member directive '("Q" "A"))
                             (let ([text (read-group i directive #:multiline? #t)])
-                              (display "\n* " o)
-                              (expand-directives:string->port text o #:enclosing-directive directive))]
-                           [(string=? directive "A")
-                            (let ([text (read-group i directive #:multiline? #t)])
-                              (display "\n** " o)
-                              (expand-directives:string->port text o #:enclosing-directive directive))]
+                              (set! text (regexp-replace* "(\n[ \t]*)-([ \t])" text "\\1**\\2"))
+                              (set! text (regexp-replace* "(\n[ \t]*[*]+)([ \t])" text "\\1*\\2"))
+                              (fprintf o "\n* %BEGIN~aBLOCKITEM%" directive)
+                              (expand-directives:string->port text o #:enclosing-directive directive)
+                              (fprintf o "%END~aBLOCKITEM%" directive))]
                            [(member directive '("strategy" "strategy-basic"))
                             (let* ([title (read-group i directive)]
                                    [text (read-group i directive #:multiline? #t)])
@@ -2201,6 +2337,8 @@
                    (when (span-stack-present?)
                      (printf "WARNING: ~a: Header can't be inside span\n\n"
                              (errmessage-context)))
+                   (when *lesson-plan*
+                     (stop-self-guided-break o))
                    (cond [*title-reached?*
                            (cond [*first-subsection-reached?* #f]
                                  [(check-first-subsection i o)
@@ -2218,7 +2356,6 @@
                              (fprintf o "\nlink:../index.shtml[Click here to return to lessons]\n\n")
                              ; (link-to-opt-projects o)
                              ; (link-to-notes-pages o)
-                             ;(display-exercise-collation o)
                              )])]
                   [(char=? c #\newline)
                    (newline o)
@@ -2325,7 +2462,7 @@
           (call-with-output-file *out-file*
             (lambda (o)
 
-              (cond [*lesson-plan* (display "[.LessonPlan]\n" o)]
+              (cond ;[*lesson-plan* (display "[.LessonPlan]\n" o)]
                     [*narrative* (display "[.narrative]\n" o)]
                     [*solutions-mode?* (display "[.solution-page]\n" o)]
                     )
@@ -2346,6 +2483,11 @@
 
               (unless *other-dir*
                 (fprintf o "\n\n"))
+
+              (when *lesson-plan*
+                (stop-self-guided-break o)
+                (display (html-comment "end_self_guided") o)
+                (newline o))
 
               (unless (or *other-dir* (truthy-getenv "NOCOLOPHON"))
                 ;(fprintf o "\n\n")
@@ -2419,31 +2561,8 @@
 
         (call-with-output-file (path-replace-extension *out-file* "-extra-mat.asc")
           (lambda (o)
-            ; REQUIRED PRINTABLE PAGES
-            #;(unless (and (empty? *handout-exercise-links*) (empty? *printable-exercise-links*))
-              (fprintf o "\n* link:javascript:downloadLessonPDFs(false)[PDF of all Handouts and Pages]")
-              (fprintf o " [.showPageLinks]#link:javascript:showPageLinks(false)[ ]#")
-              (for ([x (reverse *handout-exercise-links*)])
-                (fprintf o "\n** ~a\n\n" x))
-              (let ([xx (sort *printable-exercise-links*
-                              (lambda (x y)
-                                (let ([x-i (index-of *workbook-pages* (first x))]
-                                      [y-i (index-of *workbook-pages* (first y))])
-                                  (unless x-i (set! x-i -1))
-                                  (unless y-i (set! y-i -1))
-                                  (cond [(and (= x-i -1) (= y-i -1)) #t]
-                                        [else (< x-i y-i)]))))])
-
-                (for ([x xx])
-                  (fprintf o "\n** ~a\n\n" (second x)))
-                )
-              )
             ; STARTER FILES
             (for ([x (reverse *starter-file-links*)])
-              (fprintf o "\n* ~a\n\n" x))
-            ; ONLINE EXERCISES --- to be removed onces all required online exercises
-            ; have been turned into starter files
-            #;(for ([x (map cdr (reverse *online-exercise-links*))])
               (fprintf o "\n* ~a\n\n" x))
             ; SLIDES
             (display-lesson-slides o)
@@ -2544,6 +2663,12 @@
                    (not *supplemental-materials-needed?*))
           (printf "WARNING: ~a: @opt-material-links missing\n\n" (errmessage-context)))
 
+        (for-each (lambda (sf)
+                    (unless (member sf *starter-files-used-outside-preparation*)
+                      (printf "WARNING: ~a: starter file ~s mentioned in @preparation but not used\n\n"
+                              (errmessage-context) sf)))
+                  *starter-files-used-in-preparation*)
+
         )
 
       (when (or *lesson-plan* *lesson*)
@@ -2603,72 +2728,7 @@
             #;(printf "WARNING: ~a: File ~a not found\n\n" (errmessage-context) id-file)
             #f])))
 
-#;(define (display-exercise-collation o)
-  ; (printf "doing display-exercise-collation\n" )
-  ; (printf "pwrd = ~s\n" *pathway-root-dir*)
-  ; (printf "cwd is ~s\n" (current-directory))
-  (let* ([pathway-lesson-order
-           (format "distribution/~a/courses/~a/.cached/.workbook-lessons.txt.kp"
-                   *natlang* *target-pathway*)]
-         [all-lessons (read-data-file pathway-lesson-order #:mode 'files)]
-         ;fixme -- why following?
-         ; [all-lessons (map (lambda (s) (regexp-replace "^\\.\\./\\.\\./" s "")) all-lessons)]
-         [lessons-with-exx
-           (filter (lambda (f)
-                      (file-exists?
-                        (format "distribution/~a/lessons/~a/.cached/.lesson-exercises.rkt.kp"
-                                *natlang* f)))
-                   all-lessons)]
-         [exx (map (lambda (lsn)
-                     (list lsn
-                           (read-data-file
-                             (format "distribution/~a/lessons/~a/.cached/.lesson-exercises.rkt.kp"
-                                     *natlang* lsn)
-                             #:mode 'forms)))
-                   lessons-with-exx)])
-    ; (printf "pathway-lesson-order is ~s (~s)\n" pathway-lesson-order (file-exists? pathway-lesson-order))
-    ; (printf "lessons-with-exx is ~s\n" lessons-with-exx)
-    ; (printf "exx is ~s\n" exx)
-    ; (printf "lessons= ~s\n\nexercises= ~s\n" all-lessons exx)
 
-    ; (link-to-opt-projects o)
-
-    (unless (null? exx)
-      (display "\n\n" o)
-      (display (hash-ref *common-text* 'workbook-links) o)
-      (display "\n\n" o)
-      (display (create-vspace "1ex") o)
-      (for ([lsn-exx exx])
-        ; (printf "lsn-exx is ~s\n" lsn-exx)
-        (let ([lsn (first lsn-exx)]
-              [exx (second lsn-exx)])
-          (fprintf o "\n\n**link:~alessons/~a/index.shtml[~a]**\n"
-                   *dist-root-dir*
-                   lsn
-                   (call-with-input-file
-                     (format "distribution/~a/lessons/~a/.cached/.index.titletxt"
-                             *natlang* lsn)
-                     port->string))
-          (for ([ex exx])
-            (let* ([ti (list-ref ex 1)]
-                   [exer (list-ref ex 0)]
-                   ; [exer (regexp-replace "\\.adoc" exer ".html")]
-                   [soln (regexp-replace "/pages/" exer "/solution-pages/")])
-
-              (when (string=? ti "")
-                (let ([exer.titletxt
-                        (build-path
-                          (format "distribution/~a/lessons" *natlang*)
-                          (path-replace-extension
-                            (regexp-replace "/pages/" exer "\\0.cached/.")
-                            ".titletxt"))])
-                  (when (file-exists? exer.titletxt)
-                    (set! ti (call-with-input-file exer.titletxt read-line)))))
-
-              (fprintf o "\n- ~a [ link:~alessons/~a[exercise] : link:~alessons/~a[solution] ]\n"
-                       ti *dist-root-dir* exer *dist-root-dir* soln)))
-          ))
-      )))
 
 (define (add-exercises)
   ; (printf "doing add-exercises ~s\n" *exercises-done*)
@@ -2709,7 +2769,7 @@
     (lambda (o)
       (unless (null? *assessments-met*)
         (for ([asst (reverse *assessments-met*)])
-          (fprintf o "- link:pass:[~a][~a]\n"
+          (fprintf o "- link:pass:[assessments/~a/index.html][~a, role=quiz]\n"
                    (car asst) (cdr asst)))))
     #:exists 'replace))
 
@@ -3005,12 +3065,25 @@
   ; (printf "doing add-prereq/check ~s\n\n" sym)
   (add-prereq sym #:check? check-in-langtable?))
 
-(define (add-starter-file sf #:opt? [opt? #f])
+(define (add-starter-file sf autoinclude? #:opt? [opt? #f])
   (when (or *lesson-plan*
             (and *lesson*
-                 (or
-                   (regexp-match "/pages$" *containing-directory*)
-                   (regexp-match "/solution-pages$" *containing-directory*))))
+                 (or (regexp-match "/pages$" *containing-directory*)
+                     (regexp-match "/solution-pages$" *containing-directory*))))
+    (when *lesson-plan*
+      (cond [*inside-preparation?*
+              (unless (member sf *starter-files-used-in-preparation*)
+                (set! *starter-files-used-in-preparation*
+                  (cons sf *starter-files-used-in-preparation*)))
+              (unless autoinclude?
+                (unless (member sf *starter-files-used-outside-preparation*)
+                  (set! *starter-files-used-outside-preparation*
+                    (cons sf *starter-files-used-outside-preparation*))))]
+            [else
+              (unless (member sf *starter-files-used-outside-preparation*)
+                (set! *starter-files-used-outside-preparation*
+                  (cons sf *starter-files-used-outside-preparation*)))]))
+    ;
     ((if opt? add-opt-starter-file add-reqd-starter-file) sf)))
 
 (define (add-reqd-starter-file sf)
@@ -3180,6 +3253,7 @@
         [else (error 'ERROR "sexp->block: unknown s-exp")]))
 
 (define (sexp exp #:form [form "circofeval"])
+  (printf "DEAD CODE\n")
   (when (string? exp)
     (set! exp (with-input-from-string exp read)))
   (cond [(string=? form "circofeval")

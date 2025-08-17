@@ -1,0 +1,80 @@
+= Applying Functions
+
+++++
+<style>
+.fitbruby { min-width: 6em; }
+.indentedpara { width: 6in; }
+</style>
+++++
+
+@link-instructions{
+Open @starter-file{editor} and click “Run”. We will be working in the Interactions Area on the right.
+}
+
+@vspace{1ex}
+
+Test out these two expressions and record what you learn below:
+@vspace{1ex}
+
+* @show{(code '(regular-polygon 40 6 "solid" "green"))}
+* @show{(code '(regular-polygon 80 5  "outline" "dark-green"))}
+
+@n You've seen data types like Numbers, Strings, and Booleans. What data type did the `regular-polygon` function produce? @fitb{}{@ifsoln{an Image!}}
+
+@n How would you describe what a regular polygon is? @fitb{}{}
+
+@fitb{}{@ifsoln{Answers will vary. Regular polygons are shapes made of straight sides (_aka a polygon_), whose sides (and angles) are congruent (_aka regular_).}}
+
+@n The `regular-polygon` function takes in four pieces of information (called arguments). Record what you know about them below.
+
+[cols="1a,1a,4a", options="header"]
+|===
+|  					^| Data Type 		^| Information it Contains
+| *Argument 1*	| @ifsoln{Number}	| @ifsoln{Side Length / Size}
+| *Argument 2*	| @ifsoln{Number}	| @ifsoln{Number of Sides}
+| *Argument 3*	| @ifsoln{String} 	| @ifsoln{Fill Style}
+| *Argument 4*	| @ifsoln{String}	| @ifsoln{Color}
+|=== 
+
+@hspace{1em}There are many other functions available to us in Pyret. We can describe them using @vocab{contracts}. The Contract for `regular-polygon` is:
+
+@hspace{2em}@show{(contract 'regular-polygon '(Number Number String String) "Image")}
+
+[.indentedpara]
+--
+- Each Contract begins with the function name: @fitb{}{_in this case_ `regular-polygon`}
+- Lists the data types required to satisfy its Domain: @fitb{}{_in this case_ Number, Number, String, String}
+- And then declares the data type of the Range it will return: @fitb{}{_in this case_ Image}
+
+--
+
+@vspace{1ex}
+
+@hspace{1em}Contracts can also be written with more detail, by annotating the Domain with _variable names_:
+
+@hspace{2em}@show{(contract 'regular-polygon '((size Number) (number-of-sides Number) (fill-style String) (color String)) "Image")}
+
+@n We know that a square is a regular polygon because @fitb{}{@ifsoln{Regular polygons are shapes made of straight sides (_aka a polygon_)}}
+
+@fitb{}{@ifsoln{whose sides (and angles) are congruent (_aka regular_)! Squares have 4 equal straight sides and 4 right angles.}}
+
+@n What code would you write to make a big, blue square using the `regular-polygon` function?  +
+@hspace{2em}@fitbruby{16em}{@ifsoln{regular-polygon}}{function-name} ( @fitbruby{7em}{@ifsoln{100}}{size {two-colons} Number},  
+@fitbruby{10em}{@ifsoln{4}}{number-of-sides {two-colons} Number},
+@fitbruby{10em}{@ifsoln{"solid"}}{fill-style {two-colons} String}, 
+@fitbruby{10em}{@ifsoln{"blue"}}{color {two-colons} String})
+
+@vspace{1ex}
+ 
+@n Pyret also has a `square` function whose contract is: @hspace{2em}@show{(contract 'square '((size Number) (fill-style String) (color String)) "Image")}
+
+@hspace{2em}What code would you write to make a big blue square using the `square` function? +
+@hspace{2em}@fitbruby{10em}{@ifsoln{square}}{function-name} ( @fitbruby{10em}{@ifsoln{100}}{size {two-colons} Number},  
+@fitbruby{10em}{@ifsoln{"solid"}}{fill-style {two-colons} String}, 
+@fitbruby{10em}{@ifsoln{"blue"}}{color {two-colons} String})
+
+@n Why does `square` need fewer arguments to make a square than `regular-polygon`? @fitb{}{}
+
+@fitb{}{@ifsoln{Since the number of sides is the same for all squares, the function definition for `square` includes that piece of information.}}
+
+@star Where else have you heard the word @vocab{contract} used before? 

@@ -133,3 +133,27 @@ function read_json_file(f)
     error(result .. ' in ' .. f)
   end
 end
+
+function json_hash_stringify(j)
+  local j_type = type(j)
+  if j_type == 'table' then
+    local kees = j.__json_keys
+    if kees then
+      local result = '{\n'
+      local last_index = #kees
+      for i,k in ipairs(kees) do
+        local v = j[k]
+        result = result .. '"' .. k .. '": ' .. json_hash_stringify(v) .. ((i == last_index) and '\n' or ',\n')
+      end
+      local result = result .. '}'
+      return result
+    else
+      return 'ERROR'
+    end
+  elseif j_type == 'string' then
+    return '"' .. j .. '"'
+  else
+    return 'ERROR'
+  end
+end
+

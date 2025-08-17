@@ -1,0 +1,218 @@
+[.beta]
+= Training Artificial Intelligence: Language in Practice
+
+@description{Students explore plotting points to represent documents, data normalization, the dimensionality of language, and training the model.
+}
+
+@lesson-prereqs{ai-training-bags-of-words}
+
+@keywords{}
+
+[@lesson-intro-table]
+|===
+| Lesson Goals
+| Students will be able to...
+
+@objectives
+
+| Student-facing Lesson Goals
+|
+
+- Let's think about training, the act of transforming data into a model.
+
+| Materials
+|[.materials-links]
+@material-links
+
+|===
+
+== The Dimensionality of Natural Language
+
+@objective{dimensionality}
+
+=== Overview
+
+We made bags of words with jazz vocalization in order to make meaningful "sentences" with very few different words. Obviously, most student essays will contain many more words than these jazz vocalizations do. What happens when we try to handle something closer to ordinary “language”?
+
+
+=== Launch
+@slidebreak{Launch}
+
+So far, we've looked at four documents.
+
+- Document a: "doo be doo be doo"
+- Document b: "doo doo be doo be"
+- Document c: "doo be doo be doo doo doo"
+- Document d: "be bop bop bop be bop bop"
+
+Although the documents contain 24 words in total, there are just *_three_* unique words: doo, be, and bop... so we can plot each of these documents as points in a *_three_*-dimensional space.
+
+@slidebreak{Launch}
+
+Obviously, most texts will contain more than three unique words!
+
+@lesson-instruction{
+Take a minute to consider what it would like to plot a point for  "doo be bop ski bop bop" in _four-dimensional_ space.
+}
+
+Having trouble visualizing a four-dimensional space? You're not alone!
+
+Fortunately, computers--unlike humans--have no issue working with multi-dimensional spaces, even when they have hundreds of thousands of dimensions.
+
+
+=== Investigate
+@slidebreak{Investigate}
+
+A @vocab{training corpus} is a collection of data used to train AI/ML @vocab{models}, enabling them to learn patterns and make predictions. 
+
+For a plagiarism checker, the corpus is the set of documents previously fed into the checker.
+
+@QandA{
+@Q{What sorts of documents make up the training corpus of an _effective_ plagiarism detector? List as many as you can.}
+@A{The corpus would likely include:
+  * essays written and submitted by students currently in the class
+  * essays written and submitted by students previously in the class
+  * Wikipedia articles
+  * articles on relevant topics that are available on the internet, etc.}
+}
+
+@slidebreak{Investigate}
+
+A teacher who wants to catch plagiarism will likely opt for a plagiarism detector that has trained on an _extremely_ large collection of documents.
+Processing a large training corpus will produce a complex, multi-dimensional @vocab{model}. Every single additional word will add another dimension to the space.
+
+@QandA{
+@Q{Let's say your teacher asks all 20 students in her class to write a 500-word essay. She plans to feed those 20 essays into a plagiarism detector to use as the training corpus, allowing her to detect if two students submitted essays that were a little too similar. *About* how many dimensions will there be in the model?}
+
+@A{Students should provide a wide range of estimates.}
+@A{The largest possible estimate would be 10,000 dimensions (20 essays multiplied by 500 words) --but it is not a good estimate, because we commonly repeat and reuse words like "the", "and", "a", and so on.}
+
+@A{Before making an estimate, students might have clarifying questions, like:
+  * Did all of the students write about the same topic?
+  * How sophisticated is the student writing?
+  * Did all students actually write 500 words?
+}
+
+@A{A reasonable prediction would probably be that there would be at least a few thousand dimensions in the model.}
+}
+
+@slidebreak{Investigate}
+
+@lesson-instruction{
+Complete @printable-exercise{matching-human-judgment.adoc}.}
+
+
+@QandA{
+
+@Q{What strategies did you use to complete the matching activity? Were any of the scenarios especially challenging to match?}
+}
+
+=== Synthesize
+@slidebreak{Synthesize}
+
+
+@QandA{
+Although we can't visualize the multi-dimensional spaces for `wiki-article` and `student-essay`, we _can_ apply what we have learned to consider angle differences.
+
+```
+wiki-article = "The elephant has been a contributor to Thai society and its icon for many centuries. The elephant has had a considerable impact on Thai culture. The Thai elephant is the official national animal of Thailand. The elephant found in Thailand is the Indian elephant, a subspecies of the Asian elephant."
+
+student-essay = "The elephant is a contributor to Thai society. It has been an icon of Thai life for many centuries. The elephant, which it is possible to see found in every part of Thailand, is the Indian elephant, which is a subspecies of the Asian elephant. The Thai elephant has a considerable impact on culture. The elephant is the official national animal of Thailand."
+```
+
+@Q{Do you predict that the angle difference for the `wiki-article` and `student-essay` will be closer to 0° or closer to 90°?}
+
+@A{Since the student essay is nearly identical to the wikipedia article, we would expect a difference closer to zero. (It's actually ~23.706°.)}
+}
+
+
+== Training a Model
+@objective{ai-model}
+
+=== Overview
+
+Now that we've seen how to create a compressed representation of one piece of text, how can we handle many pieces of text?
+
+=== Launch
+@slidebreak{Launch}
+
+The problem with a corpus:
+
+Imagine running `angle-difference` on the same documents, over and over. That would take very long!
+
+To avoid repetition, we need the next step of the process: @vocab{training}.
+
+This generates a bag-of-words for each document and stores that; this is the model. When a new document comes, it is compared against the @vocab{model}, without referring back to the initial documents.
+
+=== Investigate
+@slidebreak{Investigate}
+
+Specifically, let's suppose the teacher wants a plagiarism detector for (short) animal essays. In addition to the paragraph we've already seen about the elephant, she gathers up paragraphs describing nine other animals. Each one is turned into a bag of words and added to our model. All this work is only done _once_; it can then be used on many different student submissions.
+
+@lesson-point{Once a @vocab{model} is @vocab{trained}, the corpus can be queried as many times as we want without having to repeat any of the work done during training!}
+
+@slidebreak{Investigate-DN}
+
+@lesson-instruction{
+Let's return to the @starter-file{plagiarism}.
+
+- We've seen that `angle-difference` takes in any two articles we give it, builds their bag of words, and computes the difference.
+- The @starter-file{plagiarism} actually contains a hidden training corpus! Try typing `chimpanzee-article` to take a peek. Now try `snail-article`. What do you observe?
+- The `distance-to` function is much more powerful than `angle-difference`, allowing us to compare any article to _all_ of the articles that we trained our model on without recomputing the bags for each of those documents every time.
+
+Turn to the first section of @printable-exercise{explore-model.adoc} and complete the questions to explore how `distance-to` works.
+}
+
+@slidebreak{Investigate}
+
+@QandA{
+@Q{What are some advantages of working with `distance-to` instead of `angle-difference`?}
+@A{It's nice to be able to see many angle differences, rather than just the one that we have specified. `distance-to` does many times the work of `angle-difference`!}
+
+@Q{Is `distance-to` sophisticated enough to be able to determine with certainty whether or not plagiarism occurred?}
+@A{No. If two essays have an unusually small angle difference, that is a signal for a human to investigate further. A plagiarism detector cannot conclusively decide if plagiarism occurred.}
+
+@Q{Imagine that there's an actual teacher out there who _desperately_ wants to catch the student who handed in `student-essay`. He really wants the plagiarism detector to declare without a shade of doubt that the student is guilty. What ideas do you have for how he might be able to improve the model to get more conclusive results?}
+@A{Solicit student answers before exploring the next iteration.}
+}
+
+@slidebreak{Investigate}
+
+Removing common words can simplify text processing and increase focus on more meaningful words. 
+
+@lesson-instruction{
+- Let's take a look at another function in the @starter-file{plagiarism}: `string-to-bag-cleaned`.
+- Complete the second section of @printable-exercise{explore-model.adoc} to explore what it does.
+}
+
+@slidebreak{Investigate}
+
+@QandA{
+@Q{What did "cleaning" our bags of words entail? What did we remove from the bags when we used this function?}
+@A{We removed words that are commonly used in the English language.}
+
+@Q{Can you think of any reasons or scenarios when it might be useful to "clean" text of commonly used words?}
+@A{Invite student discussion before sharing the explanation provided in the lesson.}
+}
+
+@slidebreak{Investigate-DN}
+
+The common words that are often filtered out in text analysis are called @vocab{stopwords}.
+@lesson-instruction{
+- Let's consider how removing stopwords alters the results produced.
+- Use the @starter-file{plagiarism} to complete @printable-exercise{distance-to-cleaned.adoc}.
+}
+
+@QandA{
+@Q{Did removing stopwords from the corpus improve the model? Why or why not?}
+@A{Removing the stopwords, words that contribute little to the meaning of the text, allowed an increase in the focus on the more meaningful content. Removing stopwords from the corpus dramatically reduced the angle difference between `student-essay` and `elephant-essay` to zero!}
+}
+
+=== Synthesize
+@slidebreak{Synthesize}
+
+@QandA{
+@Q{Now that you understand a little bit more about how plagiarism detection programs work: Can you explain to your teacher how a plagiarism detector could have mistakenly flagged your friend? Or do you agree with your teacher, that the plagiarism detector can be trusted with certainty?}
+@A{Students' responses will vary.}
+}
+

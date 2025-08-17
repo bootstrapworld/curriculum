@@ -1,6 +1,6 @@
 include $(MAKE_DIR)utils.mk
 
-phase1: initialization .git/hooks/pre-commit node_modules courses-and-lessons page-not-found glossary bootstraplessonjs starterFiles assessments learningObjectives dictionaries citations
+phase1: initialization .git/hooks/pre-commit node_modules distribution/$(NATLANG)/lib/self-guided/node_modules courses-and-lessons page-not-found glossary bootstraplessonjs starterFiles learningObjectives dictionaries citations
 
 ###############################################################################
 
@@ -11,11 +11,13 @@ initialization:
 	@$(MAKE_DIR)dir-hoist-timestamp.sh pathways lessons
 	@$(CP) -upr shared/langs/en-us/* $(PROGDIR)
 	@$(CP) -upr lib/codemirror.css distribution/$(NATLANG)/lib
-	@node_modules/less/bin/lessc shared/langs/$(NATLANG)/curriculum.less > distribution/$(NATLANG)/lib/curriculum.css	
+	@node_modules/less/bin/lessc shared/langs/$(NATLANG)/curriculum.less > distribution/$(NATLANG)/lib/curriculum.css
+	@node_modules/less/bin/lessc shared/langs/$(NATLANG)/curriculum-wp.less > distribution/$(NATLANG)/lib/curriculum-wp.css
 	@if test $(NATLANG) != en-us -a -d shared/langs/$(NATLANG); then \
 		$(CP) -upr shared/langs/$(NATLANG)/* $(PROGDIR); fi
 	@mkdir -p distribution/$(NATLANG)/lib/Badges
 	@mkdir -p distribution/$(NATLANG)/lib/images
+	@mkdir -p distribution/$(NATLANG)/lib/self-guided
 	@mkdir -p distribution/$(NATLANG)/lib/fonts
 	@mkdir -p distribution/$(NATLANG)/lib/.cached
 	@$(CP) -upr $(PROGDIR)/Badges/* distribution/$(NATLANG)/lib/Badges
@@ -32,6 +34,7 @@ initialization:
 	@$(CP) -p lib/*.css distribution/$(NATLANG)/lib
 	@$(CP) -p lib/[!b]*.js distribution/$(NATLANG)/lib
 	@$(CP) -p lib/images/*.png distribution/$(NATLANG)/lib/images
+	@$(CP) -p lib/self-guided/*.{css,html,js,json,jsx,png} distribution/$(NATLANG)/lib/self-guided
 	@$(CP) -pr lib/fonts/* distribution/$(NATLANG)/lib/fonts
 	@rm -f $(MAKE_ERR_LOG) $(ADOC_INPUT) $(PUPPETEER_INPUT)
 	@echo 'return {' > $(SETUP_PATHWAYINDEPENDENT)
@@ -52,6 +55,9 @@ initialization:
 node_modules:
 	npm explore npm/node_modules/@npmcli/run-script -g -- npm_config_global=false npm install node-gyp@latest
 	npm install
+
+distribution/$(NATLANG)/lib/self-guided/node_modules:
+	@(cd distribution/$(NATLANG)/lib/self-guided; npm install)
 
 .git/hooks/pre-commit: lib/maker/git-pre-commit-hook.sh
 	@echo ➤ Install Git pre-commit hook
@@ -133,17 +139,9 @@ distribution/$(NATLANG)/lib/bootstraplesson.js: lib/bootstraplesson.js
 
 ###############################################################################
 
-starterFiles: distribution/$(NATLANG)/starterFiles.js
+starterFiles: distribution/$(NATLANG)/lib/starterFiles.js
 
-distribution/$(NATLANG)/starterFiles.js: $(PROGDIR)/combine-dicts.js $(PROGDIR)/starterFiles
-	@echo ➤ Build $@
-	@node $+ $@
-
-###############################################################################
-
-assessments: distribution/$(NATLANG)/assessments.js
-
-distribution/$(NATLANG)/assessments.js: $(PROGDIR)/combine-dicts.js $(PROGDIR)/assessments
+distribution/$(NATLANG)/lib/starterFiles.js: $(PROGDIR)/combine-dicts.js $(PROGDIR)/starterFiles
 	@echo ➤ Build $@
 	@node $+ $@
 
@@ -162,18 +160,18 @@ distribution/$(NATLANG)/lib/dictionaries.js: $(alignment-dictionaries)
 
 ###############################################################################
 
-learningObjectives: distribution/$(NATLANG)/learningObjectives.js
+learningObjectives: distribution/$(NATLANG)/lib/learningObjectives.js
 
-distribution/$(NATLANG)/learningObjectives.js: $(PROGDIR)/combine-dicts.js $(PROGDIR)/learningObjectives
+distribution/$(NATLANG)/lib/learningObjectives.js: $(PROGDIR)/combine-dicts.js $(PROGDIR)/learningObjectives
 	@echo ➤ Build $@
 	@node $+ $@
 
 
 ###############################################################################
 
-citations: distribution/$(NATLANG)/citations.js
+citations: distribution/$(NATLANG)/lib/citations.js
 
-distribution/$(NATLANG)/citations.js: $(PROGDIR)/combine-dicts.js $(PROGDIR)/citations
+distribution/$(NATLANG)/lib/citations.js: $(PROGDIR)/combine-dicts.js $(PROGDIR)/citations
 	@echo ➤ Build $@
 	@node $+ $@
 

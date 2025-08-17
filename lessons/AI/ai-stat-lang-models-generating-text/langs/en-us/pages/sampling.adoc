@@ -1,0 +1,84 @@
+= Sampling from the Language Model
+
+@link-instructions{Use @handout{old-lady-lyrics.adoc} to answer the questions, below. *Note that the title of the song is a part of the corpus!*}
+
+
+== Text Generation Exercise #1
+
+@n Let's start our text generation with the phrase "She ".
+
+@indented{*Text Generation 1*:
+@fitbruby{10em}{She}{first word} @hspace{1em}
+@fitbruby{10em}{@ifsoln{swallowed}}{second word} @hspace{1em}
+@fitbruby{10em}{@ifsoln{a}}{third word} @hspace{1em}
+@fitbruby{10em}{@ifsoln{fly}}{fourth word}
+}
+
+@n Determine which word is most likely to follow "She " and record it on the line for second word above.
+
+@n Determine which word is most likely to follow the word you just wrote down and record it on the line for third word above.
+
+@n Use statistical language modeling to determine the fourth word.
+
+@n Everyone in your class should have generated the *same* text. Why do you think that was the outcome?
+
+@fitb{}{@ifsoln{The corpus included a lot of repetition. Every single time we saw the word "She", it was followed by "swallowed".}}
+
+@fitb{}{@ifsoln{There were no instances when two different words had the same likelihood of following a given word.}}
+
+@fitb{}{}
+
+
+== Text Generation Exercise #2
+
+@vspace{1ex}
+
+Here is a list of the most common unigrams in the corpus: @hspace{2em} "the": 12 times @hspace{2em} "she": 11 times @hspace{2em} "a": 11 times  
+
+@n Let's start by choosing the *most* common word: @fitb{8em}{@ifsoln{the}}
+
+@n Determine which word is most likely to follow that word: @fitb{8em}{@ifsoln{spider}}
+
+@n There are two words that have an equal probability of appearing in the third spot! What are they? @fitb{7em}{@ifsoln{that}} and @fitb{}{@ifsoln{to}}
+
+@n Flip a coin to determine which one you will use to complete *Text Generation 2a* and use statistical language modeling to determine the fourth word. Then repeat the process for *Text Generation 2b* using the other word that tied for the third spot.
+
+@vspace{1ex}
+
+@teacher{
+Some students will have the 2a response in the 2b blanks, and vice versa — which is fine!
+
+@vspace{1ex}
+}
+
+@indented{*Text Generation 2a*:
+@fitbruby{10em}{the}{first word} @hspace{1em}
+@fitbruby{10em}{@ifsoln{spider}}{second word} @hspace{1em}
+@fitbruby{10em}{@ifsoln{that}}{third word} @hspace{1em}
+@fitbruby{10em}{@ifsoln{wriggled}}{fourth word}
+}
+
+@vspace{1ex}
+
+@indented{*Text Generation 2b*:
+@fitbruby{10em}{the}{first word} @hspace{1em}
+@fitbruby{10em}{@ifsoln{spider}}{second word} @hspace{1em}
+@fitbruby{10em}{@ifsoln{to}}{third word} @hspace{1em}
+@fitbruby{10em}{@ifsoln{catch}}{fourth word}
+}
+
+@n Why was there only one result for *Text Generation Exercise 1*, while *Text Generation Exercise 2* had two possible results?
+
+@fitb{}{@ifsoln{In *Text Generation Exercise 2*, there was a "tie" for the most likely next word after "spider", }}
+
+@fitb{}{@ifsoln{whereas there was always a most likely word for *Text Generation Exercise 1*}}
+
+
+@star What is another starting word that would result in only one possible four-word phrase? @fitb{}{@ifsoln{was, an, old, lady, who}}
+
+@star @star What is another starting word that would result in at least two possible outcomes? @fitb{}{@ifsoln{and, cat}}
+
+
+
+
+

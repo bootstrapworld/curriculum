@@ -23,9 +23,11 @@
 Students are introduced to Pyret's `if-then-else` construct.
 
 === Launch
+@slidebreak{Launch}
 Sometimes we want our functions to behave one way for a certain input or condition, but _a totally different way_ for a different input or condition. Piecewise functions in mathematics also have this property (think about absolute value!). So how do we write conditionals in Pyret?
 
 === Investigate
+@slidebreak{Investigate-DN}
 
 @lesson-instruction{
 Open the @starter-file{what-to-wear}. After reading through the definition for the `wear` function:
@@ -39,6 +41,7 @@ Open the @starter-file{what-to-wear}. After reading through the definition for t
 }
 
 === Synthesize
+@slidebreak{Synthesize}
 An `if` expression has four parts:
 
 1. An `if` clause
@@ -46,22 +49,22 @@ An `if` expression has four parts:
 3. An optional `else` clause
 4. An `end` keyword
 
-@slidebreak
+@slidebreak{Synthesize}
 
 The `if` clause has a question, followed by a `:` (a colon), followed by an answer for if the question evaluates to `true`. Each `else if` clause also has a question, followed by a colon, followed by an answer for if the question evaluates to `true`. The `else:` clause runs if none of the questions in the other clauses evaluated to `true`. It catches all the cases that aren’t covered by a specific question in one of the `if` or `else if` clauses.
 
-@slidebreak
+@slidebreak{Synthesize}
 
 The `else:` clause at the end of an if expression is optional. Typically, it is important to make sure your code will account for all possible conditions, and ending with else: is a useful catchall condition if all of the other conditions return false. However, this is optional in the case that every single possible condition is covered by else if statements.
 
-@slidebreak
+@slidebreak{Synthesize}
 
 At this point, we need to introduce an _extension to the Design Recipe_, to allow it to handle conditionals. If we look at the examples for `wear`, and circle everything that changes, both the input (the temperature) and the output (the image) change.
 
 However, `wear` only has a single variable according to the domain in its contract. Also, the image is _completely dependent_ on the temperature -- it isn’t a separate independent variable, so it wouldn’t make sense for it to be another element in the domain of `wear`.
 
 
-@slidebreak
+@slidebreak{Synthesize}
 
 The fact that we have _more changing things than elements in the domain_ tells us that `wear` must be a @vocab{piecewise function}. This is the same rule as in Bootstrap:Algebra, and just as we could in Racket, we can tell that a function must be piecewise just by looking at its contract and the examples. This helps us identify when a function we are writing in our games needs to use `if`, as long as we follow the Design Recipe when building it.
 
@@ -75,9 +78,11 @@ Another way to recognize a piecewise function when looking at your examples is t
 Students connect conditional functions with behaviors in games, and write one from scratch.
 
 === Launch
+@slidebreak{Launch-DN}
 Let’s revisit the @starter-file{package-delivery} drone from earlier. We’re going to write a function that tells us where the package is for a given `DeliveryState`. This is the kind of function you might need to write later on in your game. For example, you may need to know whether a character has reached a portal at a certain part of the screen to advance to the next level, or if they’ve fallen into dangerous lava!
 
 === Investigate
+@slidebreak{InvestigateR}
 @lesson-instruction{
 @right{@image{images/bgimage.png, 400}}Open your workbook to @printable-exercise{location.adoc}. Use the design recipe to write a function to tell you where the falling box is (either "`road`", "`house`", "`delivery zone`", or "`air`"), based on the `DeliveryState`.
 }
@@ -93,7 +98,7 @@ Once you’ve completed the problem on paper, open the Where's my Order? file. W
 
 Copy the work you have in your workbook to implement `location` on the computer.
 
-@slidebreak
+@slidebreak{Investigate}
 
 In addition to writing your examples, you can also check that the `location` function’s behavior matches what a drawing of a `DeliveryState` instance shows. For example, if `location` returns `"road"` on some input, when we draw that same input, it ought to look like the package has landed in the road!
 
@@ -109,6 +114,7 @@ Experiment with this function!
 Turn to @printable-exercise{bug-hunting.adoc}. In the left column, we’ve given you broken or buggy Pyret code. On the right, we’ve given you space to either write out the correct code, or write an explanation of the problems with the provided code. Work through this page, then check with your partner to confirm you’ve found all the bugs!
 
 === Synthesize
+@slidebreak{Synthesize}
 These experiments show an important connection between functions that work with instances of a data structure, and the way we draw those instances. In our design for the animation, we have an understanding of what different regions of the screen mean. Here, we see that the draw-state and location functions both share this understanding to give consistent information about the animation.
 
 == Colorful Sun
@@ -117,20 +123,22 @@ These experiments show an important connection between functions that work with 
 Students return to an animation they've created before, and enhance it by using conditionals.
 
 === Launch
+@slidebreak{Launch}
 Let’s return to your @link{https://code.pyret.org/editor#share=0B9rKDmABYlJVSm94cFA4T3R2NTA, sunset animation} from the previous unit. Currently, the sun’s x and y-coordinate change to make it move across the screen and disappear behind the horizon. In this unit, we’ll make the animation a bit more realistic, by changing the color of the sun as it gets lower in the sky. At the top of the screen, the sun should be yellow, then change to orange as it gets to the middle of the screen, and then become red as it reaches the bottom, close to the horizon.
 
-@slidebreak
+@slidebreak{Launch}
 
 In programming, it is fairly common that you will change a program that you’ve already written to do something new or different. Modifying existing code is a valuable skill, and one that we want to practice with this exercise. It is so useful, in fact, that we’ve created a worksheet to help you map out what needs to change in an existing animation to support new behavior.
 
 === Investigate
+@slidebreak{Investigate}
 @lesson-instruction{
 Turn to @printable-exercise{animation-worksheet.adoc} and @printable-exercise{animation-worksheet-samples.adoc}. Fill in the description of the animation change and three sample images at the top of the first page. If you don’t have colored pencils, just make an annotation near each sketch as to what color the sun should be in that sketch.
 }
 
 Once you know what new behavior you want, the next task is to build it into your code. The next two tables in the worksheet ask you to think about the NEW features that are changing in your game and how you might capture them.
 
-@slidebreak
+@slidebreak{Investigate}
 
 @lesson-instruction{
 Talk with your partner about what new information is changing and how you might build that into your program. Does the color change in a predictable way? Is the color a new field that is independent of the fields you already have? Based on your answer, do you think you will need to add something new to your `SunsetState` data structure, or can you change the look of your animation based on what is already there?
@@ -138,7 +146,7 @@ Talk with your partner about what new information is changing and how you might 
 
 There are a number of ways students can solve this problem. Once students have brainstormed with their partners, have a classroom discussion to have pairs share their ideas.
 
-@slidebreak
+@slidebreak{Investigate}
 
 Since the color of the sun will be changing, we _could_ add a field to the `SunsetState` data structure, such as a String with the current color name. However, the color will not change independently: we want the color to change based on the position of the sun in the sky, and get darker as it gets lower. Let’s figure out how to make the sun color change based only on the fields we already have.
 
@@ -146,13 +154,13 @@ Since the color of the sun will be changing, we _could_ add a field to the `Suns
 Fill in the table at the bottom of the worksheet assuming we are not changing the data structure: which components (including existing functions) need to change?
 }
 
-@slidebreak
+@slidebreak{Investigate}
 
 If we have decided not to add fields, you should have marked that the `draw-state` method changes, but nothing else needs to. We only change `next-state-tick` and `next-state-key` if there has been a change to the data structure.
 
 @teacher{You may need to guide students to realizing that a change in the appearance of the animation can be done entirely through draw-state. This is another point for emphasizing the separation between maintaining instances and drawing instances.}
 
-@slidebreak
+@slidebreak{Investigate}
 
 How do we change `draw-state`? We can turn it into a piecewise function, and draw something different when the `SunsetState`’s y-coordinate gets below 225 or 150:
 
@@ -173,11 +181,11 @@ fun draw-state(a-sunset):
 end
 ```
 
-@slidebreak
+@slidebreak{Investigate}
 
 Notice that this version contains three very similar calls to `translate`. The _only_ thing that is different about these three calls is the color we use to draw the sun. Whenever you find yourself writing nearly-identical expressions multiple times, you should create another function that computes the piece that is different. You can then write the overall expression just once, calling the new function to handle the different part. Functions that handle one part of an overall computation are called @vocab{helper functions}.
 
-@slidebreak
+@slidebreak{Investigate}
 
 Assume for the moment that we had written a helper function called `draw-sun` that takes a `SunsetState` and returns the image to use for the sun. If we had such a function, then our `draw-state` function would look as follows:
 
@@ -192,7 +200,7 @@ fun draw-state(a-sunset):
 end
 ```
 
-@slidebreak
+@slidebreak{Investigate}
 
 @lesson-instruction{
 - Open your workbook to @printable-exercise{draw-sun.adoc}.
@@ -202,7 +210,7 @@ end
 
 @teacher{The word problem assumes a background scene size of 400x300 pixels. Once students use their draw-sun function in their animation, they may need to change the specific conditions if they have a much larger or smaller scene.}
 
-@slidebreak
+@slidebreak{Investigate}
 
 Now let’s think about having the sunset animation "`start again`"after the sun sets, with the sun reappearing in the upper-left corner.
 
@@ -216,7 +224,7 @@ To figure this out, think about what controls the color of the sun in your curre
 Edit the sunset animation so that the animation restarts. 
 }
 
-@slidebreak
+@slidebreak{Investigate}
 
 @lesson-instruction{
 - Which of your functions has to be modified to include this change?
@@ -224,6 +232,7 @@ Edit the sunset animation so that the animation restarts.
 - Use that question to help yourself figure out which function to modify. You could use the space for examples of functions at the end of your worksheet on extending the animation to write a new example before you modify your code.
 }
 === Synthesize
+@slidebreak{Synthesize}
 This question about the color of the sun is an especially good question-and it likely to come up-from students who may have experience programming with variables and updates in other languages, such as Scratch (where the color would have changed to red). In our approach, where we simply determine the sun color from the y-coordinate, the sun should naturally restart as yellow. Of course, if students had maintained the sun color as a separate field in their data structure, they would have to consider this issue, and manually reset the sun color as well as the y-coordinate when restarting the animation.
 
 @opt{In addition to changing the color of the sun, have the background color change as well: it should be light blue when the sun is high in the sky, and get darker as the sun sets.}

@@ -14,9 +14,8 @@ do
     end
     local prims = {}
     --
-    local ls_output = io.popen('ls ' .. lesson_cache .. '.*.primtxt 2>/dev/null')
     local seen = {}
-    for prim_file in ls_output:lines() do
+    for _,prim_file in ipairs(shell_output('ls ' .. lesson_cache .. '.*.primtxt 2>/dev/null')) do
       local i = io.open(prim_file)
       for prim in i:lines() do
         if not seen[prim] then
@@ -26,7 +25,6 @@ do
       end
       i:close()
     end
-    ls_output:close()
     --
     table.sort(prims)
     --

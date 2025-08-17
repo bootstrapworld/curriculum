@@ -11,16 +11,41 @@
   /* Make autonums inside tables look consistent with those outside */
   table .autonum::after { content: ')' !important;}
 
+/*
+- Make arrows 50px tall
+- Make them relative, so we can position answers around them
+*/
+tr span.arrow {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 50px;
+  height: 50px;
+}
+/*
+- position the label just below the top of the arrow box
+- in TD #2, the label is 'CP'
+- in TD #4, the label is 'AI'
+*/
+tr span.arrow::before {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
+td:nth-child(3) span.arrow::before { content: 'DP'; }
 </style>
 ++++
 
-Fill in the blanks for each pair of Circles of Evaluation below to make them equivalent. On the lines below each Circle, compute the answer and show your work.
+Fill in the blanks for each pair of Circles of Evaluation below to make them equivalent via the Distributive Property ("DP"). On the lines below each Circle, compute the answer and show your work.
 
 [cols="^.^1,^.^6,^.^2,^.^6", grid="none", frame="none", stripes="none"]
 |===
 | @n
 | @show{(coe '(+ (* 1/5 5) (* 1/5 50)))}
-| &rarr;
+| @span{.arrow}{⟶}
 | @show{(coe '((?ANS *) (?ANS 1/5) (+ (?ANS 5) (?ANS 50))))}
 ||  @fitb{10em}{@ifsoln{@math{1 + 10 = 11}}} | |  @fitb{10em}{@ifsoln{@math{\frac{1}{5} \times 55 = 11}}}
 
@@ -33,7 +58,7 @@ Fill in the blanks for each pair of Circles of Evaluation below to make them equ
 
 | @n
 | @show{(coe '(- (* 4 100) (* 4 1.25)))}
-| &rarr;
+| @span{.arrow}{⟶}
 | @show{(coe '((?ANS *) (?ANS 4) ((?ANS -) (?ANS 100) (?ANS 1.25))))}
 || @fitb{10em}{@ifsoln{@math{400 - 5 = 395}}} | |  @fitb{10em}{@ifsoln{@math{4 \times 98.75 = 395}}}
 
@@ -47,13 +72,13 @@ Fill in the blanks for each pair of Circles of Evaluation below to make them equ
 
 | @n
 | @show{(coe '( - (* 1/5 200) (* 0.2 20)))}
-| &rarr;
+| @span{.arrow}{⟶}
 | @show{(coe '((?ANS *) (?ANS 1/5) ((?ANS -) (?ANS 200) (?ANS 20))))}
 || @fitb{10em}{@ifsoln{@math{40 - 4 = 36}}} | | @fitb{10em}{@ifsoln{@math{\frac{1}{5} \times 180}}}
 
 |===
 
-@star For each pair of Circles above, put a check next the one you think is easier to answer.
+@star For each pair of Circles above, put a check next to the one you think is easier to answer.
 
 
 

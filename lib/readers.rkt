@@ -407,6 +407,7 @@
           (set! text (regexp-replace* "\\( +" text "("))
           (set! text (regexp-replace* " +\\)" text ")"))
           (set! text (regexp-replace* "\\\\pi" text "π"))
+          (set! text (regexp-replace* "-" text "−"))
           (call-with-output-string
             (lambda (o)
               (call-with-input-string text

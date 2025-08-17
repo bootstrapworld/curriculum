@@ -3,6 +3,7 @@
 #lang racket
 
 (require json)
+(require racket/hash)
 (require "readers.rkt")
 (require "utils.rkt")
 (require "function-directives.rkt")
@@ -32,8 +33,17 @@
 
 (define *pd?* (getenv "PD"))
 
+(define *citations*
+  (let ([citations-file (format "~a/distribution/~a/lib/citations.js" *topdir* *natlang*)])
+    (if (file-exists? citations-file)
+        (call-with-input-file citations-file
+          (lambda (i)
+            (read i) (read i) (read i)
+            (read-json i)))
+        '())))
+
 (define *starter-files*
-  (let ([starter-files-file (format "~a/distribution/~a/starterFiles.js"
+  (let ([starter-files-file (format "~a/distribution/~a/lib/starterFiles.js"
                                     *topdir* *natlang*)])
     (if (file-exists? starter-files-file)
         (call-with-input-file starter-files-file
@@ -71,16 +81,30 @@
 (define (errmessage-file-context)
   (format "~a/~a" *lesson* *in-file*))
 
+(define (combine-json-files json-files)
+  (let ([h-obj #f])
+    (for ([json-file json-files])
+      (let ([new-hash (call-with-input-file json-file read-json)])
+        (unless h-obj (set! h-obj (make-hash)))
+        (hash-union! h-obj new-hash #:combine/key (lambda (k v1 v2) v1))
+        ))
+    (unless h-obj (set! h-obj #t))
+    h-obj))
+
 (define (make-image img width)
   ; (printf "make-image ~s (w ~s) in ~s\n" img width (current-directory))
   (set! *num-images-processed* (+ *num-images-processed* 1))
 
   (unless *images-hash*
-    (let ([json-file "images/lesson-images.json"])
-      (cond [(file-exists? json-file)
-             (set! *images-hash* (call-with-input-file json-file read-json))]
-            [else
-              (set! *images-hash* #t)])))
+    (let ([json-list-file "images/.cached/.image-list.txt.kp"]
+          [json-files '()])
+
+      (when (file-exists? json-list-file)
+        (set! json-files (map (lambda (f) (build-path "images" f))
+                              (read-data-file json-list-file))))
+
+      (set! *images-hash* (combine-json-files json-files))))
+
 
   ; (printf "*images-hash* = ~s\n" *images-hash*)
 
@@ -257,6 +281,10 @@
   (let ([x (coe-spans exp)])
     (if *outputting-table?* x
         (iii-dollar-html x))))
+
+(define (enclose-span class s)
+  (string-append "<span class=\""
+    (substring class 1) "\">" s "</span>"))
 
 (define (coe-spans exp)
   (cond [(list? exp)
@@ -553,7 +581,7 @@
          [external-link? #f]
          [domain-name #f])
     (when (regexp-match #rx"://" link) (set! external-link? #t))
-    (when external-link?
+    (when (and (not (string=? directive "link")) external-link?)
       (set! domain-name (extract-domain-name link)))
     (when domain-name
       (set! link-text (string-append link-text " (" domain-name ")")))
@@ -697,8 +725,8 @@
                             (let* ([title (begin0 (read-group i directive) (ignorespaces i))]
                                    [text (read-group i directive #:multiline? #t)]
                                    [o o])
-                              (unless *pd?* (ensure-teacher-notes)
-                                (set! o *teacher-notes*))
+                              (ensure-teacher-notes)
+                              (set! o *teacher-notes*)
                               (newline o)
                               (newline o)
                               (display "**" o)
@@ -706,14 +734,10 @@
                               (display "**\n" o)
                               (expand-directives:string->port text o)
                               (newline o)
-                              (unless *pd?* (exit-teacher-notes)))]
+                              (exit-teacher-notes))]
                            [(string=? directive "opt-block")
                             (let ([text (read-group i directive #:multiline? #t)])
-                              (ensure-teacher-notes)
-                              (fprintf *teacher-notes* "\nThis material is optional.\n")
-                              (expand-directives:string->port text o)
-                              (newline *teacher-notes*)
-                              (exit-teacher-notes))]
+                              (expand-directives:string->port text o))]
                            [(member directive '("opt" "teacher"))
                             (let ([text (read-group i directive #:multiline? #t)])
                               (when (member directive '("opt" "opt-block"))
@@ -793,20 +817,53 @@
                             (let ([text (read-group i directive #:multiline? #t)])
                               (display "\n" o)
                               (unless *single-question?*
-                                (display "* &#8203;" o))
+                                (display "* " o))
+                              (when *output-answers?*
+                                (display "<b>" *teacher-notes*))
                               (expand-directives:string->port text o)
-                              (display "\n" o))]
+                              (when *output-answers?*
+                                (display "</b>\n" *teacher-notes*)))]
                            [(string=? directive "A")
                             (let ([text (read-group i directive #:multiline? #t)])
                               (when *output-answers?*
-                                (display "\n  -  &#8203;" o)
+                                (display "\n* <i>" o)
                                 (expand-directives:string->port text o)
-                                (display "\n" o)))]
+                                (display "</i>\n" o)))]
+                           [(string=? directive "ifproglang")
+                            (let* ([proglang (read-group i directive)]
+                                   [text (read-group i directive #:multiline? #t)])
+                              (when (string-ci=? proglang *proglang*)
+                                (expand-directives:string->port text o)))]
                            [(string=? directive "ifslide")
                             (let ([text (read-group i directive #:multiline? #t)])
                               (expand-directives:string->port text o))]
                            [(string=? directive "ifnotslide")
                             (read-group i directive)]
+                           [(string=? directive "citation")
+                            (let* ([args (read-commaed-group i directive read-group)]
+                                   [lbl (string->symbol (first args))]
+                                   [c (hash-ref *citations* lbl #f)]
+                                   [in-text (and c (hash-ref c 'in-text #f))]
+                                   [url (hash-ref c 'public-url)]
+                                   [link #f])
+                              (cond [(> (length args) 1)
+                                     (set! in-text
+                                       (expand-directives:string->string
+                                         (second args)))]
+                                    [in-text
+                                      (set! in-text
+                                        (expand-directives:string->string in-text))]
+                                    [else lbl])
+                              (cond [(not c)
+                                     (printf "WARNING: ~a: Undefined @~a ~a\n\n"
+                                             (errmessage-file-context) directive lbl)]
+                                    [(not in-text)
+                                     (printf "WARNING: ~a: @~a ~a missing\n\n"
+                                             (errmessage-file-context) directive lbl)]
+                                    [(string=? url "")
+                                     (printf "WARNING: ~a: @~a ~a missing URL\n\n"
+                                             (errmessage-file-context) directive lbl)]
+                                    [else (fprintf o "[~a](~a)" in-text url)]))]
                            [(assoc directive *definitions*)
                             => (lambda (c)
                                  (expand-directives:string->port (cdr c) o))]
