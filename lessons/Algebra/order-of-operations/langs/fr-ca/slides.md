@@ -41,7 +41,7 @@ For now, we will only be writing programs in the *Interactions Area*.{style="fon
 {layout="Investigate"}
 # Strings & Numbers
 
-Math and programming are languages. **Instead of nouns, they have _values_**, like the numbers 1, 2 and 3. **Instead of verbs, they have _functions_**, which are actions we can perform on values (e.g. - “I can square a number”).{style="font-size:16pt"} 
+Math and programming are languages. **Instead of nouns, they have _values_**, like the numbers 1, 2 and 3. **Instead of verbs, they have _functions_**, which are actions we can perform on values (e.g. “I can square a number”).{style="font-size:16pt"}
 
 Languages also have rules for *syntax*. In English, for example, words don’t have `!` and `?` in the middle. In math and programming numbers don’t have `&` in them.{style="font-size:16pt"} 
 

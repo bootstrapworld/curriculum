@@ -581,7 +581,7 @@
          [external-link? #f]
          [domain-name #f])
     (when (regexp-match #rx"://" link) (set! external-link? #t))
-    (when external-link?
+    (when (and (not (string=? directive "link")) external-link?)
       (set! domain-name (extract-domain-name link)))
     (when domain-name
       (set! link-text (string-append link-text " (" domain-name ")")))
@@ -725,8 +725,8 @@
                             (let* ([title (begin0 (read-group i directive) (ignorespaces i))]
                                    [text (read-group i directive #:multiline? #t)]
                                    [o o])
-                              (unless *pd?* (ensure-teacher-notes)
-                                (set! o *teacher-notes*))
+                              (ensure-teacher-notes)
+                              (set! o *teacher-notes*)
                               (newline o)
                               (newline o)
                               (display "**" o)
@@ -734,7 +734,7 @@
                               (display "**\n" o)
                               (expand-directives:string->port text o)
                               (newline o)
-                              (unless *pd?* (exit-teacher-notes)))]
+                              (exit-teacher-notes))]
                            [(string=? directive "opt-block")
                             (let ([text (read-group i directive #:multiline? #t)])
                               (expand-directives:string->port text o))]

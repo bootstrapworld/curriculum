@@ -6,6 +6,10 @@ file_extensions:
 scope: text.asciidoc.asciidoctor++
 contexts:
   main:
+    # proglang is matched as a directive, but nothing is pushed
+    - match: '@proglang'
+      scope: directive
+
     # mathjax gets its own context
     - match: '@math{'
       scope: directive.muted

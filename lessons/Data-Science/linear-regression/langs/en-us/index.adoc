@@ -52,9 +52,6 @@
 }
 }
 
-| Assessments
-| [.assessment-links]
-
 |===
 
 == Intro to Linear Regression
@@ -92,8 +89,27 @@ Make sure you've already...
 @slidebreak{Launch}
 }
 
-@strategy{Vocabulary Note}{
 
+@pd-slide{
+Vocabulary Note
+
+
+We prefer the words “explanatory” and “response” in our curriculum, because in other contexts the words “dependent” and “independent” refer to whether or not the variables are related at all, as opposed to what role each plays in the relationship.
+
+The straight line that best fits the points on a scatter plot has several names. All of the following terms refer to the same concept:
+
+- Regression Line
+- Line of Best Fit
+- Least Squares Line
+- Predictor
+- Trendline
+
+The line itself is computed through a process called _linear regression_, which also goes by the name _least squares regression_.
+}
+
+
+
+@strategy{Vocabulary Note}{
 
 We prefer the words “explanatory” and “response” in our curriculum, because in other contexts the words “dependent” and “independent” refer to whether or not the variables are related at all, as opposed to what role each plays in the relationship.
 
@@ -178,13 +194,6 @@ This line can be graphed on top of the scatter plot as a function, called the @v
 @slidebreak{Synthesize}
 
 What did you observe as you experimented?
-
-@teacher{
-Want to check student mastery of the content you've just taught? Administer @assessment{checkpoint-1, Linear Regression: Formative Assessment 1} to get a snapshot of your students' current level of mastery.  Make sure you have created a link or code for your class to the assessment.
-
-If you'd prefer to wait until your students have completed the __entire__ lesson to check mastery, we also offer a cumulative assessment at the end of @link{https://www.bootstrapworld.org/materials/latest/en-us/lessons/linear-regression/index.shtml?pathway=data-science#_interpreting_linear_regression_lines_duration20_minutes, "Interpreting Linear Regression Lines"}.
-}
-
 
 == Performing Linear Regression
 @objective{predict-values}
@@ -342,20 +351,16 @@ Statistical models are just proxies for the real world, drawn from a limited sam
 === Synthesize
 @slidebreak{Synthesize}
 
-- Why does it only make sense to use predictor functions for values that fall within the range of the dataset?
-
+@QandA{
+@Q{Why does it only make sense to use predictor functions for values that fall within the range of the dataset?}
+@A{Because our function describes a pattern observed within that particular range. Lots of observable patterns do not continue outside of a certain range... for example, babies are supposed to triple in weight in their first year... but grownups definitely shouldn't!
+}
+}
 
 @ifproglang{pyret}{
 @strategy{Simpson's Paradox}{
 A common misconception is that "more data is always better", and the age-v-height worksheet challenges that assumption. Two sub-groups (girls and boys) can each have a strong correlation between age and height, but when they are combined the correlation is weaker. This phenomenon is called @link{https://en.wikipedia.org/wiki/Simpson's_paradox, Simpson's Paradox}. Statistics (especially AP!) teachers will want to dive deeper on this topic.
 }}
-
-@teacher{
-Want to check student mastery of the content you've just taught? Administer @assessment{checkpoint-2, Linear Regression: Formative Assessment 2} to get a snapshot of your students' current level of mastery.  Make sure you have created a link or code for your class to the assessment.
-
-If you'd prefer to wait until your students have completed the __entire__ lesson to check mastery, we also offer a cumulative assessment at the end of @link{https://www.bootstrapworld.org/materials/latest/en-us/lessons/linear-regression/index.shtml?pathway=data-science#_interpreting_linear_regression_lines_duration20_minutes, "Interpreting Linear Regression Lines"}.
-}
-
 
 == Interpreting Linear Regression Lines
 
@@ -423,12 +428,6 @@ Have students read their data stories aloud, to get comfortable with the phrasin
 The word “linear” in “linear regression” is important here. In the image on the right, there’s clearly a pattern, but it doesn’t look like a straight line!
 
 There are many other kinds of statistical models out there, but all of them work the same way: use a particular kind of mathematical function (linear or otherwise), to figure out how to get the “best fit” for a cloud of data.
-
-@teacher{
-Want to check student mastery of the content you've just taught? Administer @assessment{checkpoint-3, Linear Regression: Formative Assessment 3} to get a snapshot of your students' current level of mastery. Make sure you have created a link or code for your class to the assessment.
-
-Alternatively, we offer a compilation of all three Checkpoints in @assessment{cumulative, Linear Regression: Cumulative Assessment}.
-}
 
 
 == Data Exploration Project (Linear Regression)

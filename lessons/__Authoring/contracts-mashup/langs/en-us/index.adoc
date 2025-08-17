@@ -1,0 +1,643 @@
+= Mashup Lesson
+
+@description{This lesson is composed of the first and fourth sections of contracts for strings and images (uses a pyret editor, requires Dorai to figure out how to open a workbook page, includes a QandA section that should probably be converted to mdquiz, uses COE). It also includes a snippet of the logo project, for the purpose of incorporating a specialized starter file and }
+
+@lesson-prereqs{simple-data-types}
+
+@keywords{}
+
+@add-to-lang{sqrt, sqr, string-length, string-contains?, triangle, star, circle, square, rectangle, ellipse, text, radial-star, isosceles-triangle, right-triangle, star-polygon, triangle/sas, triangle/asa}
+
+[@lesson-intro-table]
+|===
+| Lesson Goals
+| Students will be able to:
+@objectives
+@objective{contract-parts}
+
+| Student-facing Lesson Goals
+|
+
+- Let's learn to identify the Domain and Range of a function.
+
+| Materials
+|[.materials-links]
+
+@material-links
+
+- @dist-link{Contracts.shtml, Contracts Pages} (a complete list of all the contracts)
+
+| Supplemental Materials
+|[.materials-links]
+@opt-material-links
+
+| Preparation
+| 
+@preparation{
+- There is an optional interactive Desmos activity in the lesson. If you would like to use it, decide how you will share it with students and, if you are using our Google Slides, add the appropriate link to the slide deck. _If you're a first-time Desmos user, fear not!_ @dist-link{pages/desmos-instructions.adoc, _Here's what you need to do._}
+}
+
+| Key Points For The Facilitator
+|
+- Check frequently for understanding of @vocab{data types} and @vocab{contracts} during this lesson and throughout subsequent lessons.
+
+|===
+
+== Applying Functions - Reading Contracts
+
+=== Overview
+Students learn how to apply functions in @proglang, and are introduced to the notion of @vocab{Contracts}: a simple notation for keeping track of all possible input and output sets for a function.
+
+=== Launch
+@slidebreak{Launch}
+In human languages, verbs _do things to nouns_. For example, I can "_throw_ a ball", or "_eat_ a sandwich". "Throw" and "Eat" are verbs, and "ball" and "sandwich" are nouns.
+
+In programming languages, values are like nouns. You've learned about different data types in our programming language, like Number values (`42`, `-8.3`, etc), String values (`"hello!"`), and Boolean values (`true` and `false`). @ifproglang{pyret}{We already know _some_ verbs, like `+`, and `-` ... each of which _does something_ to Number values.}
+
+@scrub{IN A SELF-GUIDED VERSION OF THIS LESSON, I'D WANT TO HAVE STUDENTS INTERACT WITH THE TWO PARAGRAPHS ABOVE.}
+
+@slidebreak{Launch}
+
+In programming, most verbs are called @vocab{functions}. A function is like a machine at a factory:
+
+1. It takes in some values (called @vocab{arguments})
+
+2. It _does something_ to those values
+
+3. It produces a new value
+
+@slidebreak{Launch-DN}
+@editorconfig{{definitionsAtLastRun: 'use context starter2024' }}
+
+Let's play with a function to get the hang of it. 
+
+@ifselfguided{<input type="button" value="Click here" onclick='addToEditor(\`
+string-length("rainbow")
+\`, 0)' /> to add @show{(code '(string-length "rainbow"))} to the editor.}
+
+@lesson-instruction{
+@ifnotselfguided{
+- Log into @starter-file{editor} and click "Run".
+- Then type @show{(code '(string-length "rainbow"))} into the Interactions Area and hit Enter.
+}
+- What do you think the `string-length` function does? Come up with a theory and test it out by using the function with other inputs.
+}
+
+Be sure to read any error messages you get back carefully! They might have clues to help you understand what's going on.
+
+@slidebreak{Launch}
+
+@scrub{ES - I WOULD EXPECT QANDA TO BECOME MDQuiz FIELDS}
+
+@QandA{
+@Q{What does the expression @show{(code '(string-length "rainbow"))} evaluate to?}
+@A{7}
+
+@Q{What does the function `string-length` do?}
+@A{It counts the number of characters in a string and returns the value.}
+
+@Q{How many arguments does `string-length` expect? How do you know?}
+@A{One. Giving it more than one produces an error.}
+
+@Q{What type of argument does the function expect? How do you know?}
+@A{String. Giving it a different type of data produces an error.}
+
+@Q{What type of data did `string-length` produce?}
+@A{Number}
+}
+
+@ifproglang{pyret}{
+@strategy{Connecting to Function Notation}{
+
+If your students are already familiar with function notation, Pyret mirrors it precisely, so this is a terrific opportunity to make the connection!
+
+_If your students are not yet familiar with function notation, no need to introduce it now... it will make more sense to introduce once they are fluent in how Pyret works, and we have an entire @lesson-link{function-notation} lesson devoted to making the connection._
+}
+}
+
+=== Investigate
+@slidebreak{Investigate}
+@editorconfig{{
+    definitionsAtLastRun: '
+      use context starter2024
+    ',
+    editorContents: '
+      regular-polygon(40, 6, "solid", "green")
+      regular-polygon(80, 5, "outline", "dark-green")
+    '
+  }}
+
+@lesson-instruction{
+With your partner, complete @printable-exercise{applying-functions.adoc}.
+}
+@scrub{DORAI - WE WANT TO OPEN THIS PAGE - NOTE: The page has both questions, which should probably be QandA/MD Quiz, and directions. We'll need to figure out how to indicate that as authors.}
+
+@slidebreak{Investigate}
+The expressions using the `regular-polygon` function produced a value that wasn't a Number, a String, or a Boolean. In the @proglang programming language, these values are called _Images_.
+
+@QandA{
+@Q{What are the three parts of a contract?}
+@A{*Name* -- the name of the function, which we type in whenever we want to use it}
+@A{*Domain* -- the type(s) of data we give to the function}
+@A{*Range* -- the type of data the function produces}
+
+@Q{Why is it helpful to know the *Name* of a function?}
+@A{The Name tells us what to write/type, to start using the function}
+
+@Q{Why is it helpful to know the *Domain* of a function?}
+@A{The Domain tells us _how many_ arguments the function needs, what data type each one has to be, and in what order.}
+
+@Q{Why is it helpful to know the *Range* of a function?}
+@A{The Range tells us what we should expect to _get back_ from a function.}
+
+@Q{Where else have you heard the word "contract" used in the real world? How can you connect that meaning to contracts in programming?}
+@A{_Answers will vary!_}
+}
+
+@slidebreak{Investigate}
+
+@ifnotselfguided{
+Contracts are _binding_ agreements! For example, we might sign a contract with a plumber to install a sink for $200. As long as they install the sink, we are obligated to pay them $200. If a parent promises to order pizza if their child does their chores, they'd better order that pizza if the child does those chores!
+
+If one party breaks the contract, bad things can happen.} @scrub{DORAI- I WANT TO END THE @IFNOTSELFGUIDED IN THE MIDDLE OF THIS LINE AND MAKE IT VISIBLE TO AUTHORS IN THE FILE WITHOUT DISRUPTING THE LINE ON THE HTML VERSION} In some programming languages, breaking a function's contract can cause the whole computer to crash, or it can result in a security hole that lets the program be hacked! In @proglang, the contracts are checked every time we use a function, so the result of a contract error is a helpful error message.
+
+@lesson-point{
+A Contract is an agreement between us and a function: if it gets what it expects, it'll give us what we expect.
+}
+
+=== Synthesize
+@slidebreak{Synthesize}
+
+- How would you explain Domain and Range to someone who missed today's class?
+- What questions do you have about Contracts?
+
+@pd-slide{
+*Connect to the Classroom: Contracts are a major pedagogical technique.*
+
+Contracts are the second major pedagogical technique in Bootstrap. Circles of Evaluation are the first one, and contracts are the second.
+
+Contracts are really important because just about every single mistake kids make can be solved by looking at their contracts. The answer is always, “Check your contract.”
+
+And that is important, because it reminds students the value of writing stuff down.
+}
+
+== Composing with Circles of Evaluation
+
+=== Overview
+
+Students learn to work with more than one function at once, by way of Circles of Evaluation, a visual representation of the underlying structure.
+
+=== Launch
+@slidebreak{Launch}
+@editorconfig{{
+    definitionsAtLastRun: 'use context starter2024'
+  }}
+
+What if we wanted to see your name written on a diagonal?
+
+- We know that we can use the `text` function to make an Image of your name.
+
+@hspace{2em} @show{(contract 'text '((message String) (size Number) (color String)) "Image")}
+
+-  @proglang also has a function called `rotate` that will rotate any Image a specified number of degrees.
+
+@hspace{2em} @show{(contract 'rotate '(Number Image) "Image")}
+
+_But how could the `rotate` and `text` functions work together?_
+
+@scrub{@ifselfguided{WE WANT AN EMPTY FIELD FOR THEM TO WRITE IN HERE.}}
+
+
+=== Investigate
+@slidebreak{Investigate}
+@scrub{DORAI how do I use @imageconfig{} here to tell it to show the COE described below on the right?}
+
+One way to organize our thoughts is to diagram what we want to do, using the Circles of Evaluation. Circles of Evaluation @ifnotselfguided{help us think about what we want to do, without worrying about syntax like quotation marks, parentheses, etc. They} let us use all our brains for _thinking_, before we use them for _coding_.
+
+The rules are simple:
+
+(1) Every Circle of Evaluation must have one - and only one! - function, written at the top.
+
+(2) The arguments of the function are written left-to-right, in the middle of the Circle.
+
+ * Values like Numbers, Strings, and Booleans are still written by themselves. It’s only when we want to _use a function_ that we need to draw a nested Circle.
+
+(3) Circles can contain other Circles!
+
+@slideonlybreak{Investigate}
+
+@lesson-instruction{
+- Suppose we want to see the `text` "Diego" written in diagonal yellow letters of size 150.
+@ifnotselfguided{
+- Turn to @printable-exercise{composing-coe.adoc} and complete the Notice and Wonder section.
+}
+}
+
+@do{
+(define expd '(text "Diego" 150 "yellow"))
+(define exprd '(rotate 90 (text "Diego" 150 "yellow")))
+}
+
+++++
+<style>
+.circle2 .expression { background: aquamarine !important; }
+.circle2 .expression .expression { background: white !important; }
+</style>
+++++
+
+@slidebreak{Investigate}
+@imageconfig{}
+_Circles of Evaluation let us see the structure._
+
+[cols="^4a, ^.^1a, ^5a", grid="none", stripes="none", frame="none"]
+|===
+
+|We can start by generating the Diego image.
+|
+|And then use the `rotate` function to rotate it 90 degrees.
+
+| @show{(coe expd)}
+| &rarr;
+| [.circle2]
+@show{(coe exprd)}
+
+| @show{(code expd)}
+|
+| @show{(code exprd)}
+
+|===
+
+@lesson-instruction{
+What do you Notice? What do you Wonder?
+}
+
+@slidebreak{Investigate}
+
+@scrub{I'm noticing that we might need another directive that allows us to specify something isn't lesson plan facing but should appear on both slides and book pages}
+
+@ifslide{
+[cols="^4, ^.^1,^5", grid="none", stripes="none", frame="none"]
+|===
+
+| @show{(coe expd)}  | &rarr; 	| @show{(coe exprd)}
+
+| @show{(code expd)} | 			| @show{(code exprd)}
+
+|===
+}
+
+To convert a Circle of Evaluation into code, we start at the outside and work our way in. After each function, we write a pair of parentheses, and then convert each argument inside the Circle.
+
+@slidebreak{Investigate}
+
+@lesson-instruction{
+- Complete @printable-exercise{coe-to-code-scaffolded.adoc}.
+@selfguidedbreak
+@scrub{NOTING THAT WE WANT TO BE ABLE TO JUMP TO THE SPECIFIED SECTION OF THIS WORKBOOK PAGE. AND IT INCLUDES A SECTION FOR DRAWING - CAN WE ADD A DRAWING CONFIG?}
+- Then turn to the *Let's Rotate an image of your name!* section of @printable-exercise{composing-coe.adoc} and practice converting the Circle of Evaluation you draw into code.
+}
+
+=== Synthesize
+@slidebreak{Synthesize}
+
+- There were a lot of options for how many degrees to rotate your name in order to make it diagonal! What did you choose? Why?
+- What Numbers wouldn't have made your name diagonal? Why?
+- What did you Notice?
+- What did you wonder?
+- Why might it be useful to separate the _thinking_ and _coding_ steps? Why not just do them at the same time, all the time?
+
+@ifselfguided{
+@selfguidedbreak
+@scrub{DORAI - how do I tell @editorconfig{} to use the definitions area of @starter-file{logos}?}
+@lesson-instruction{
+- We're going to look at three logos made by Bootstrap students in San Diego. Open the @starter-file{logos} and click "Run". Type `sample-logo-1` in the Interactions Area (right side) and hit enter, then repeat for the other sample logos.
+}
+- Which logo's *picture* looks the most complex to you? 
+- Which logo's *code* looks the most complex to you? 
+- Which logo is your favorite? 
+- Look at the code for the logo you chose in the previous question. List all of the _colors_ that the programmer used to create this logo.
+- List all of the _image-producing functions_ (`triangle`, `rectangle`, etc.) that the programmer used to create this logo.
+- List all of the _image-transforming functions_ (`above`, `rotate`, etc.) that the programmer used to create this logo.
+- How many layers does this logo have? (_Note: When 2 images sit beside each other, they are in the same layer._) 
+- How would you describe to a friend how the function `overlay` works?
+- How can you use `overlay` to stack _more_ than two images?
+
+@selfguidedbreak
+@lesson-instruction{
+It's your turn to design a logo! 
+- Complete @printable-exercise{design-your-logo.adoc}.
+- Then complete @printable-exercise{code-your-logo.adoc}
+}
+}
+
+== Functions for Tables @duration{20 minutes}
+
+=== Overview
+
+Building on their understanding of @lesson-link{contracts-strings-images, Contracts}, students will be introduced to functions for working with _tables_, including: @show{(code 'sort)},  @show{(code 'count)}, @show{(code 'first-n-rows)} and @show{(code 'row-n)}.
+
+=== Launch
+@slidebreak{Launch-DN}
+@scrub{DORAI - we want the `@editor-config{}` to open the animals starter file here.}
+
+@ifselfguided{
+<input type="button" value="Click here" onclick='addToEditor(\`animals-table\`)' /> to load the `animals-table`!
+}
+
+@QandA{
+@ifnotselfguided{
+- Open the @starter-file{animals} and click "Run".
+- In the Interactions Window on the right type `animals-table` and hit "Enter" to see the the table.
+}
+@Q{What do you Notice?}
+@A{Sample response: We only see the first 10 rows of the table and would have to click to see the remaining 22 rows.}
+@A{The animals aren't listed in any particular order.}
+
+@Q{What do you Wonder?}
+@A{Sample response: Is it possible to alphabetize the list, or sort it in other ways?}
+}
+
+@teacher{If this is the first time your students are seeing a table in @starter-file{editor}, you may also want to acknowledge lines 7-10 of the Definitions Area, where `animals-table` is defined along with the names of the 8 columns.}
+
+
+=== Investigate
+@slidebreak{Investigate}
+@scrub{DORAI - we want the `@editor-config{}` to open the animals starter file here.}
+
+@lesson-instruction{
+Turn to @printable-exercise{functions-for-tables.adoc} and complete the first section: *Ordering a Table with `sort`*.
+}
+
+@slidebreak{Investigate}
+
+@QandA{
+@Q{What did these `sort` expressions do?}
+@A{They took in the `animals-table`, the `name` column, and true or false... producing a new table, sorted alphabetically +
+@hspace{1em}(A-Z for `true` and Z-A for `false`)
+}
+
+@Q{What does it mean that the Range of `sort` is Table?}
+@A{The function produces a new table.}
+
+@Q{Type `animals-table` and hit "Enter". Did sorting our animals change the value of the table?}
+@A{No. It made a new one.}
+}
+
+@slideonlybreak{Investigate}
+
+@ifnotselfguided{
+Let's review what we know about Contracts. Every Contract has three parts:
+
+1. *Name* -- the name of the function, which we type in whenever we want to use it
+2. *Domain* -- the type(s) of data we give to the function
+3. *Range* -- the type of data the function produces
+
+@lesson-point{
+Contracts are the _instruction manual_ for functions.
+}
+}
+
+@slidebreak{Investigate}
+@scrub{DORAI - we want the `@editor-config{}` to open the animals starter file here.}
+
+Let's explore the Contract for another function that works with Tables: `count`
+
+@lesson-instruction{
+Complete the second section of @printable-exercise{functions-for-tables.adoc}: *Summarizing a Column with `count`*.
+}
+
+@slidebreak{Investigate}
+@scrub{I'm not sure WHAT CONFIG we want - ES - should we ever just have a book page?}
+
+@QandA{
+@Q{How did the `count` function summarize a column?}
+@A{It made a new table, with rows for all the unique values in that column and a count of how many times each value appeared.}
+
+@Q{Is the summary produced by the `count` function useful when summarizing the `pounds` column? Why or why not?}
+@A{Since almost every animal has a unique weight, the summary is almost as long as the original table!}
+}
+
+@slidebreak{InvestigateR}
+
+@scrub{DORAI - Does it really make sense for us to write @imageconfig{images/freqency-table.png} here? Or should the image also be implicit from the lesson plan?}
+
+@right{@image{images/frequency-table.png, 110}}The `count` function produces a @vocab{frequency table}, which summarizes the data by showing how often - how _frequently_ - specific values appear in a dataset.
+
+@vocab{Frequency tables} are a commonly used tool in statistics because they give us a quick sense of the distribution and can help us to identify patterns.
+
+@slidebreak{Investigate}
+@scrub{DORAI - we want the `@editor-config{}` to open the animals starter file here.}
+
+@lesson-instruction{
+Complete the first two sections of @printable-exercise{functions-for-tables-cont.adoc} to explore some new table functions: `row-n` and `first-n-rows`.
+}
+
+@slidebreak{Investigate}
+@scrub{DORAI - we want the `@editor-config{}` to open the animals starter file here.}
+
+The second input to `row-n` is a Number, called the _index_ of the Row. The index tells Pyret how many data Rows to count from the first one in the table.
+
+If we want the _second_ Row in the table, Pyret needs to count one Row down from the beginning of the table. That's why the index for the second Row is `1`.
+
+@QandA{
+@Q{What index number do we need to give `row-n` for Pyret to return the first row of the Table?}
+@A{0. Because Pyret is already at the beginning of the table and doesn't need to count down any rows!}
+
+@Q{What is the index of the _fifth_ Row in the table?}
+@A{The index of the fifth row is `4`}
+}
+
+@slidebreak{Investigate}
+@scrub{DORAI - we want the `@editor-config{}` to open the animals starter file here.}
+
+@lesson-instruction{
+- Complete the last section of @printable-exercise{functions-for-tables-cont.adoc}.
+- If time allows see if you can put everything we've learned today together to solve the challenge problems!
+}
+
+@slidebreak{Investigate}
+
+Sometimes we have a value that we want to use again and again, and it makes sense to define a name for it. Every definition includes a _name_ and a _value_. In the code below, we have definitions for a String, a Number, an Image and a Row.
+
+```
+name = "Denny"
+age = 16
+logo = star(50, "solid", "red")
+pet = row-n(animals-table, 3)
+```
+
+@QandA{
+@Q{What are the names given in each of these definitions?}
+@A{name, age, logo and pet}
+@Q{What are the values given to each of these names?}
+@A{The String "Denny", the Number 16, an Image of a solid red star, and the 4th Row of the Animals Table.}
+@Q{Take a moment to look at the first challenge problem and think. How you would describe the table that `first-n-rows` is taking in?}
+@A{It's taking in a table of the animals that has been sorted from lightest to heaviest.}
+}
+
+
+=== Common Misconceptions
+
+Students are likely to think that `sort` _changes the table_, when instead it _produces a new, sorted table._ Encourage students to say out loud what they think they will get if they type `animals-table` after evaluating @show{(code '(sort animals-table "name" true))}. By testing their hypothesis, students who are surprised at the outcome are much more likely to remember the difference later on.
+
+Students often struggle to remember that Row indices start at _zero!_ You'll want to practice this a few times.
+
+=== Synthesize
+@slidebreak{Synthesize}
+
+@QandA{
+@Q{How is the function of `count` different from `sort`?}
+@A{`sort` made a new table that was reordered.}
+@A{`count` made a new table that summarized the data from a column of the original table!}
+
+@Q{How does the function `first-n-rows` work?}
+@A{It makes a new smaller table with the number of rows you type into the expression.}
+
+@Q{What is important to remember when using the `row-n` function?}
+@A{We need to give the function a number that is one less than the row we want.}
+
+@Q{Do you have any questions about the functions or expressions you've worked with today?}
+
+@Q{Where have you seen tables summarizing counts in the real world?}
+
+@Q{How else do journalists and newscasters visualize summaries of data besides in tables?}
+@A{Ideally someone will say bar charts!}
+}
+
+== Functions for Making Data Visualizations @duration{20 minutes}
+
+=== Overview
+
+Students will be introduced to functions for making one-variable visualizations in Pyret, including: @show{(code 'pie-chart)}, @show{(code 'bar-chart)}, @show{(code 'box-plot)} and @show{(code 'histogram)}.
+
+The goal here is for students to become familiar with using @dist-link{Contracts.shtml, Contracts} to write expressions that will produce visualizations. But knowing how to __make__ a histogram doesn't mean a student really __understands__ histograms, and that's OK!
+
+@teacher{Once students know how to use Contracts to write expressions to make these visualizations, we have dedicated, in-depth lessons focused on understanding @lesson-link{bar-and-pie-charts}, @lesson-link{histograms-visualize}, @lesson-link{histograms-interpret}, @lesson-link{box-plots}, @lesson-link{scatter-plots}, @lesson-link{linear-regression}, @lesson-link{advanced-visualizations}, etc.}
+
+=== Launch
+@slidebreak{Launch}
+@scrub{DORAI - we want the `@editor-config{}` to open the animals starter file here.}
+
+The `count` function summarized the data for a single variable in a new table. 
+
+The same information could be communicated as a picture! This is called data visualization, and Pyret has functions that can make visualizations for us!
+
+@scrub{DORAI - If I wanted the book page to continue to the QandA below - is there a way to indicate the third level header should not to break the book page? It's my understanding that @slideonlybreak can't override the header structure...}
+
+=== Investigate
+@slidebreak{Investigate}
+@scrub{DORAI - we want the `@editor-config{}` to open the animals starter file here.}
+
+@ifnotselfguided{
+@QandA{
+Turn to @printable-exercise{exploring-visualizations.adoc}. Let's look at the first function together.
+@Q{What is the name of the function?}
+@A{bar-chart}
+
+@Q{What is the Domain of the function?}
+@A{Table, String}
+
+@Q{What is the Range of the function?}
+@A{Image}
+
+@Q{Take a minute and see if you @ifnotselfguided{and your partner} can write an expression that will generate a `bar-chart`.}
+
+@Q{Did `bar-chart` consume a categorical or quantitative column of data?}
+@A{categorical}
+
+@Q{What does the resulting visualization tell us?}
+}
+
+@slideonlybreak{Investigate}
+
+@lesson-instruction{
+- Make a sketch of the visualization you just built in Pyret.
+- Then work to complete @printable-exercise{exploring-visualizations.adoc}, generating each of the other 3 visualizations. Some of them may be new to you - you are not expected to be an expert in them yet, but you should be able to figure out how to use the Contract to get them building!
+}
+}
+
+@ifselfguided{
+Use the contracts provided to make each type of display.
+
+- @show{(contract "bar-chart" '("Table" "String") "Image")}
+- @show{(contract "pie-chart" '("Table" "String") "Image")}
+- @show{(contract "dot-plot" '("Table" "String" "String") "Image")}
+- @show{(contract "histogram" '("Table" "String" "String" "Number") "Image")}
+
+@QandA{
+@Q{Which displays were for categorical data?}
+@Q{Which displays were for quantitative data?}
+@Q{How are bar charts and histograms different?}
+}
+}
+
+@scrub{DORAI - In case it's not already obvious, @teacher should not be included in selfguided materials}
+
+@teacher{
+If your students are already familiar with scatter plots, linear regression plots, and line graphs, you may also want to have them complete @opt-printable-exercise{exploring-visualizations-2.adoc}.
+}
+
+@slidebreak{InvestigateC}
+
+Just as we can use Circles of Evaluation to help us combine `sort`, `count`, and `first-n-rows`, we can put Circles of Evaluation to work to help us write code to build more specific visualizations. Consider this:
+
+[.circle3]
+@show{(coe '(pie-chart(first-n-rows(sort animals-table "age" true) 10) "species"))}
+
+@QandA{
+@Q{What expression would this Circle of Evaluation generate?}
+@A{@ifnotslide{@image{images/pie-code.png, 600}}@ifslide{<span style="font-family: Roboto Mono; font-size: 12pt;"><span style="color:mediumseagreen;">pie-chart(</span>first-n-rows(<span style="color:dodgerblue;">sort(animals-table, "age", true,)</span> 10), "species" <span style="color:mediumseagreen;">)</span> </span>}}
+
+@Q{What would be the resulting visualization?}
+@A{a pie chart showing the species of the 10 youngest animals}
+}
+
+@slidebreak{Investigate}
+
+@scrub{ES - HOW COULD WE MAKE MATCHING PAGES WORK IN SELFGUIDED?}
+
+@lesson-instruction{
+- Practice what you've learned on @printable-exercise{matching-coe-to-descriptions.adoc}.
+@ifnotselfguided{
+- Be ready to discuss your answers with the class!
+}
+}
+
+@slidebreak{Investigate}
+
+@lesson-instruction{
+- Complete @printable-exercise{coe-visualizations.adoc}.
+- Then consider what visualization it might be interesting to compare each of the visualizations on this page with.
+  * _Visualizations are often most informative when compared with other visualizations._
+  * For example, we may want to see how the age range of the animals adopted quickly compares to the age range of all the animals or of the animals that were adopted slowly.
+} 
+
+@scrub{DORAI - in case it's not obvious, opt stuff should be left out of selfguided.}
+
+@opt{For more practice making tables and visualizations by composing functions, have students complete @opt-printable-exercise{coe-visualizations-2.adoc}}
+
+=== Synthesize
+@slideonlybreak{Synthesize}
+
+@ifnotselfguided{
+@QandA{
+@Q{Which visualizations worked with categorical data?}
+@A{`pie-chart` _and_ `bar-chart`}
+
+@Q{Why might you choose a bar chart over a pie chart or vice versa?}
+@A{`pie-chart` only makes sense when you have the full picture, since it's representing the _proportion of the whole_}
+@A{`bar-chart` shows the absolute amount in each bar, but it's harder to see any one bar as a _proportion of the whole_.}
+
+@Q{How are bar charts and histograms different?}
+@A{`bar-chart` summarizes @vocab{categorical} data. Each bar represents the count of a specific category.}
+@A{`histogram` displays the distribution of @vocab{quantitative} data across the range.}
+}
+}
+
+@scrub{THE DEFAULT SHOULD PROBABLY BE NOT TO INCLUDE ADDITIONAL EXERCISES IN THE BOOK}
+
+== Additional Exercises
+@slidebreak{Supplemental}
+
+@opt-starter-file{images-code}
+

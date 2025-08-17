@@ -2,7 +2,7 @@
 ++++
 <style>
 #content td {padding: 0.5rem 5px !important}
-#content table .autonum::after { content: ')'; }
+#content table .autonum::after { content: ')' !important; }
 #content th { text-align: center !important; }
 
 /* Make autonums inside tables look consistent with those outside */
@@ -10,7 +10,8 @@ table .autonum::after { content: ')' !important;}
 
 /* Hack Code Display to force each example to one line */
 .editbox br { display: none; }
-.cm-keyword:last-child { margin-left: 5px; }
+td:first-child .editbox { width: 95% !important; }
+.cm-keyword:last-child { float: right; }
 </style>
 ++++
 

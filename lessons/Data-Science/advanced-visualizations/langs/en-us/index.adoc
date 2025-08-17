@@ -47,7 +47,7 @@
 
 | Optional Project
 |
-- @lesson-link{project-beautiful-data}: Data Visualization is a growing and fascinating field. It's about more than making charts look cool - it's about connecting artistic expression to data in ways that are relevant and meaningful.  This project gives students a chance to advance their programming skills by using code to add their own flair and style to data that matters to them.
+- @lesson-link{project-beautiful-data}: Data Visualization is a growing and fascinating field. It's about more than making charts look cool -- it's about connecting artistic expression to data in ways that are relevant and meaningful.  This project gives students a chance to advance their programming skills by using code to add their own flair and style to data that matters to them.
 
 |===
 
@@ -76,7 +76,7 @@ This is a scatter plot of the animals dataset, showing the age on the x-axis and
 }
 
 @QandA{
-This scatter plot isn't just _prettier_ - it's also more useful! Scatter plots typically only show two variables from each Row in the Table (the x and y), but this visualization is showing us _three_.
+This scatter plot isn't just _prettier_ -- it's also more useful! Scatter plots typically only show two variables from each Row in the Table (the x and y), but this visualization is showing us _three_.
 @Q{What is the third column being visualized here?}
 @A{`species`}
 }
@@ -120,7 +120,7 @@ Review student answers. Every student should have the same code for this part!
 
 @lesson-instruction{
 - Turn to @printable-exercise{species-tag.adoc}, and complete the top half of the page (questions 1 and 2).
-- When you are confident with the code you have written - check with your teacher or a partner - complete the rest of the page to define a function `species-tag`.
+- When you are confident with the code you have written -- check with your teacher or a partner -- complete the rest of the page to define a function `species-tag`.
 - In your Animals Starter File, type the Contract, Examples, and Definition for `species-tag` into the Definitions Area.
 - Click "Run", and make sure your examples pass. Then try using your new function on some of the other Rows defined there, like `dog-row` and `cat-row`.
 }
@@ -133,7 +133,7 @@ Note that the code for `species-tag` is just the function-version of the code st
 @slidebreak{Synthesize}
 @QandA{
 @Q{One of the functions we wrote used the `age` column, and the other used the `species` column. One is a Number and the other is a String, so why did both functions consume _Rows?_}
-@A{What a function consumes is not the same as the _work the function does_. Both functions consumed Rows, but one function looked up the `age` column - a Number - and the other looked up the `species` column - a String.}
+@A{What a function consumes is not the same as the _work the function does_. Both functions consumed Rows, but one function looked up the `age` column -- a Number -- and the other looked up the `species` column -- a String.}
 @Q{How is this similar to the other functions you've defined, like `gt` and `bc`? How is it different?}
 @A{It's similar in that it makes images based on numeric data, from the one argument in its Domain. But instead of that argument _being a Number_, it's a _Row that contains a Number_. So instead of using that input verbatim, the function needs to use a lookup to get that Number out of the Row.}
 }
@@ -172,7 +172,7 @@ There seems to be a positive relationship, but it's not very strong.
 
 @slidebreak{Launch}
 
-Let's say we want to consider the influence of *age* on how how quickly an animal is adopted - while simultaneously considering the relationship between pounds and weeks to adoption. Fortunately, there's a way to do this... _custom scatter plots!_
+Let's say we want to consider the influence of *age* on how how quickly an animal is adopted -- while simultaneously considering the relationship between pounds and weeks to adoption. Fortunately, there's a way to do this... _custom scatter plots!_
 
 === Investigate
 @slidebreak{Investigate-DN}
@@ -217,6 +217,35 @@ Complete questions 8, 9, and 10 on @printable-exercise{image-scatter-explore.ado
 
 @center{@image{images/species-tag.png, 450}}
 
+
+
+@pd-slide{
+Custom Colors!
+
+We've created a special function called `make-color`, which allows students to mix their own colors!
+
+@show{(contract 'make-color '(("red" "Number") ("green" "Number") ("blue" "Number") ("opacity" "Number")) "Color")} 
+
+* Use Numbers between 0 and 255 to specify how much red, green, and blue to mix  
+* Use Numbers between 0-1 to specify percent opacity (0 for invisible, 1 for full color)
+
+For example, `star(50, "solid", make-color(100, 200, 0, 0.5))` +
+will generate a pale green star that's 50% transparent.
+}
+
+@pd-slide{
+Custom Colors!
+
+By using row accessors to extract these values from their dataset, students can make custom scatter plots where each data point is represented by a shape whose color indicates something about the data!
+
+We could, for example, represent the Animals using the following code:
+`star(50, "solid", make-color(100, 0, r["pounds"], 0.5))` +
+
+
+- Which representation would be used for the heaviest animal: a red star, a purple star or a blue star?
+  * _Lightest would be red and heaviest would be blue, with purple landing in between!_
+}
+
 @strategy{Custom Colors!}{
 
 
@@ -255,7 +284,7 @@ We could, for example, represent the Animals using the following code:
 
 === Overview
 
-Students discover how to use @vocab{conditionals} - @vocab{piecewise functions} in math - to create more complex scatter plots, and also custom bar charts, pie charts, and histograms. Experimentation becomes the motivation for more practice with Row-consuming functions.
+Students discover how to use @vocab{conditionals} -- @vocab{piecewise functions} in math -- to create more complex scatter plots, and also custom bar charts, pie charts, and histograms. Experimentation becomes the motivation for more practice with Row-consuming functions.
 
 *NOTE:* Math teachers may want their students to confront piecewise functions more deeply, and CS teachers may want to spend more time on conditionals. While not specifically a Data Science lesson, the @lesson-link{piecewise-functions-conditionals/} lesson includes a lot of supporting material and practice pages for these topics, with greater emphasis on the math connections.
 
@@ -298,6 +327,39 @@ Piecewise functions are extremely powerful, allowing us to specify different rul
 CS/Programming teachers may find this to be a useful place to teach about `else:`, which is a catch-all rule for "any input that we don't already have a condition for". But beware! _Teaching kids to use `else:` without considering the input is a really bad programming habit!_
 
 Error messages tell us when something goes wrong. In the case of the animals starter file, we have a fixed, predefined number of species. Adding an `else` clause will prevent us from seeing any errors if there's a typo in one of the conditions, if an unexpected animal gets added to the dataset, etc. In situations like this, good programming practice demands a condition for each species, and no `else` clause.
+}
+
+
+@pd-slide{
+Optional: When your conditional is _already_ a Boolean
+
+You can also have students make a scatter plot with dots distinguishing whether the animal is fixed or not using @opt-printable-exercise{fixed-dot-dr.adoc}. Students will discover that this is a little different from the other two functions they've seen because `fixed` is already a Boolean column! The following two functions _do the same thing_. Notice how much cleaner the second example is!
+
+[.comparison, cols="<1a", options="header"]
+|===
+| Checking the Boolean
+|
+
+```
+fun fixed-dot(r):
+  if      (r["fixed"] == true) : circle(5, "solid", "green")
+  else if (r["fixed"] == false): circle(5, "solid", "black")
+  end
+end
+```
+|===
+[.comparison, cols="<1a", options="header"]
+|===
+| Using the Boolean Directly
+|
+```
+fun fixed-dot(r):
+  if r["fixed"]: circle(5, "solid", "green")
+  else:          circle(5, "solid", "black")
+  end
+end
+```
+|===
 }
 
 @strategy{Optional: When your conditional is _already_ a Boolean }{
@@ -364,5 +426,8 @@ above(chart, legend)
 
 === Synthesize
 @slidebreak{Synthesize}
-- How do piecewise functions expand what is possible for displaying data?
-- How could you see this power being used to help express complex relationships?
+
+@QandA{
+@Q{How do piecewise functions expand what is possible for displaying data? How could you see this power being used to help express complex relationships?}
+@A{They let us visually distinguish variables that would otherwise be treated uniformly.}
+}

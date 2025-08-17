@@ -59,7 +59,7 @@
 |
 - Make sure students understand what a scatter plot with _no_ relationship looks like.
 - Point out that randomly sampling a few points from a population with a pattern may not expose that pattern! _Sample size matters!_
-- Emphasize the importance of students using their eyes - it's not just about the numbers.
+- Emphasize the importance of students using their eyes -- it's not just about the numbers.
 |===
 
 == Introducing Scatter Plots
@@ -144,6 +144,16 @@ It's customary to put the @vocab{explanatory variable} on the horizontal axis an
 If there's a relationship between the columns, we'll see clumps and clouds of points in the graph.
 }
 
+@pd-slide{
+Why not Independent/Dependent?
+
+- When modeling with functions, we typically use terms like @vocab{dependent variable} and @vocab{independent variable}. 
+- Even in the presence of a strong correlation, the y-values in a scatter plot are never fully dependent on the x-values!
+
+Statisticians commonly use the words @vocab{explanatory variable} and @vocab{response variable}, to more accurately describe the role one column of data plays in explaining another when searching for a relationship.
+
+}
+
 @strategy{Why not Independent/Dependent?}{
 
 When modeling with functions, we typically use terms like @vocab{dependent variable} and @vocab{independent variable}. But even in the presence of a strong correlation, the y-values in a scatter plot are _never_ fully dependent on the x-values. Plenty of scatter plots have no correlation: the y-coordinates do not depend on the x-coordinates at all!
@@ -216,7 +226,7 @@ Pyret has a `scatter-plot` function that works exactly the same way: it starts w
 
 [cols="^1a", frame="none", stripes="none"]
 |===
-|@show{(contract `scatter-plot `((table-name Table) (labels String) (xs String) (ys String)) "Image")}
+|@show{(contract 'scatter-plot '((table-name Table) (labels String) (xs String) (ys String)) "Image")}
 |===
 }
 
@@ -277,7 +287,7 @@ Many apartment buildings do not allow large breeds of dogs, and have a limit on 
 _Perhaps the *weight* of an animal influences the adoption time!_
 
 @lesson-instruction{
-- Take a look at the Animals Dataset on @link{https://docs.google.com/spreadsheets/d/1VeR2_bhpLvnRUZslmCAcSRKfZWs_5RNVujtZgEl6umA/edit, the spreadsheet} or on @dist-link{courses/data-science/back-matter/pages/animals-dataset.adoc, this page} (for those using a printed workbook, you'll find it at the front) and consider whether there's any evidence of a relationship between `pounds` and `weeks`.
+- Take a look at the Animals Dataset on @link{https://docs.google.com/spreadsheets/d/1VeR2_bhpLvnRUZslmCAcSRKfZWs_5RNVujtZgEl6umA/edit, the spreadsheet} or on @dist-link{courses/data-science/back-matter/pages/animals-dataset.adoc, this page} (for those using a printed workbook, you'll find it at the back) and consider whether there's any evidence of a relationship between `pounds` and `weeks`.
 - Then complete the first Data Cycle on @printable-exercise{data-cycle-scatter-plot-animals.adoc}, making a scatter plot to get a better visual sense of a possible relationship between `pounds` and `weeks`.
 }
 
@@ -360,7 +370,7 @@ With differences like this, plotting `weeks` to adoption and `age` for all of th
 
 @QandA{
 @Q{For what other variables in the Animals Dataset might it make more sense to zoom in on species-level data when looking for relationships between columns? Why?}
-@A{Animal weights also vary widely by species - a snail is a lot lighter than a dog!}
+@A{Animal weights also vary widely by species -- a snail is a lot lighter than a dog!}
 }
 
 @teacher{

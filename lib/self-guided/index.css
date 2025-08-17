@@ -1,0 +1,106 @@
+body {
+  padding: 0px;
+  margin: 0px;
+  background: rgba(214, 255, 169, 0.34);
+  font-family: Lato, Century Gothic, Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 22px;
+}
+
+#root, main {
+  display:        flex;
+  flex-direction: column;
+  height:         100%;
+}
+
+main {
+  margin: 0 20px;
+  position: relative;
+  flex-grow: 1;
+  padding-bottom: 30px;
+}
+
+#pages { display: flex; column-gap: 40px; flex-grow: 1; }
+
+#pages>div {
+  box-shadow:   inset 0px 0px 5px black;
+  border-radius:20px;
+  border:       solid 1px black;
+  background:   white;
+  overflow:     hidden;
+  min-width:    300px;
+}
+
+#leftPane { padding: 5px 20px; max-width: 500px; }
+#rightPane { flex-grow: 1; }
+
+#banner, #footer{
+  border-bottom: solid 2px black;
+  text-align: left;
+  background: black;
+  color: white;
+  padding: 5px;
+}
+#banner { font-size: 30px; font-weight: 600; }
+#footer { bottom: 0px; font-size: 10px; }
+#footer a { color: aaaaff; }
+#banner * { vertical-align: middle; }
+
+#buttons button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.5em 1em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+  background: white;
+  border-radius: 5px;
+  border: solid 1px gray;
+  text-decoration: none;
+  line-height: 2.2;
+  box-shadow: 2px 2px 5px #888888;
+}
+#buttons button[disabled] { cursor: unset; }
+#buttons button:not([disabled]):hover {
+  border-color: #646cff;
+  background: lightblue;
+}
+
+#buttons {
+  position: absolute;
+  top: 50%;
+  left: calc(max(320px, min(49%, 525px)));
+  text-align: center;
+  z-index: 9;
+}
+
+#progressbar{
+  height:       2px;
+  background:   cornflowerblue;
+  width:        0px;
+  transition:   all 1s;
+}
+
+/* correct what I'm pretty sure is a bug in Parley's CSS */
+.code-container .prompt { width: 90%; }
+
+.ablockitem {
+  display: none;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}

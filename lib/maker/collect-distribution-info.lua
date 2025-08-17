@@ -3,6 +3,8 @@
 local make_dir = os.getenv'MAKE_DIR'
 
 dofile(make_dir .. 'utils.lua')
+dofile(make_dir .. 'readers.lua')
+dofile(make_dir .. 'sread.lua')
 
 local natlang = os.getenv 'NATLANG'
 
@@ -19,13 +21,15 @@ local courses_dir = 'distribution/' .. natlang .. '/courses'
 local lessons_dir = 'distribution/' .. natlang .. '/lessons'
 
 function record_course_lessons(course, lo)
-  local course_lessons_file = courses_dir .. '/' .. course .. '/.cached/.workbook-lessons.txt.kp'
+  local course_lessons_file = courses_dir .. '/' .. course .. '/.cached/.workbook-lessons.rkt.kp'
   if not file_exists_p(course_lessons_file) then
     return
   end
-  local i = io.open(course_lessons_file, 'r')
-  for L in i:lines() do
-    lo:write(L, '\n')
+  local lesson_units = sread_file(course_lessons_file)
+  for _,lunit in ipairs(lesson_units) do
+    for i=2,#lunit do
+      lo:write(lunit[i], '\n')
+    end
   end
 end
 
@@ -43,11 +47,9 @@ do
     end
 
   else
-    local ls_output = io.popen('ls ' .. courses_dir)
-    for course in ls_output:lines() do
+    for _,course in ipairs(shell_output('ls ' .. courses_dir)) do
       o:write(' \"' .. course .. '\",\n')
     end
-    ls_output:close()
   end
 
   o:write('}\n')
@@ -215,9 +217,8 @@ do
   -- if select_courses then
   --   goto exit_do_block
   -- end
-  local ls_output = io.popen('ls ' .. lessons_dir)
   local o = io.open(os.getenv 'LESSONS_LIST_FILE', 'w+')
-  for lesson in ls_output:lines() do
+  for _,lesson in ipairs(shell_output('ls ' .. lessons_dir)) do
     local lesson_dir = lessons_dir .. '/' .. lesson
     if file_exists_p(lesson_dir .. '/.proglang-ignore') then
       goto continue
@@ -235,7 +236,6 @@ do
     o:write(lesson, '\n')
     ::continue::
   end
-  ls_output:close()
   o:close()
   -- ::exit_do_block::
 end

@@ -1,7 +1,5 @@
 #! /usr/bin/env lua
 
--- last modified 2023-10-11
-
 local glossary_terms_file, glossary_adoc_file = ...
 
 local make_dir = os.getenv'MAKE_DIR'
@@ -28,7 +26,9 @@ local function display_lang_entry(lang_entry)
   local keyword_list
   if lang_entry then
     keyword_list = extract_keywords(lang_entry.keywords)
-    o:write(keyword_list .. ' :: ' .. lang_entry.description .. '\n\n')
+    local mod_entry = '@glossary-entry{' .. keyword_list .. '}'
+    local mod_desc = lang_entry.description:gsub('@vocab', '@vocab-link')
+    o:write(mod_entry .. ' :: ' .. mod_desc .. '\n\n')
   else
     o:write '[.missing]#missing entry# :: ...\n\n'
   end

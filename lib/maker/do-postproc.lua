@@ -2,6 +2,9 @@
 
 dofile(os.getenv'MAKE_DIR' .. 'utils.lua')
 
+local website_branch_p = (shell_output('git branch --show-current')[1] == 'website')
+website_branch_p = true
+
 local pathwayindependent_batchf =  os.getenv'ADOC_POSTPROC_PATHWAYINDEPENDENT_INPUT'
 local workbookpage_batchf =  os.getenv'ADOC_POSTPROC_WORKBOOKPAGE_INPUT'
 local lessonplan_batchf =  os.getenv'ADOC_POSTPROC_LESSONPLAN_INPUT'
@@ -20,7 +23,22 @@ local function calculate_dist_root_dir(fhtml_cached)
   return f
 end
 
+local function get_proglang(fhtml_cached)
+  local f = false
+  if fhtml_cached:match('/courses/') then
+    f = fhtml_cached:gsub('(distribution/[^/]+/courses/[^/]+)/.*', '%1/.cached/.record-proglang')
+  elseif fhtml_cached:match('/lessons/') then
+    f = fhtml_cached:gsub('(distribution/[^/]+/lessons/[^/]+)/.*', '%1/.cached/.record-proglang')
+  else
+    -- noop
+  end
+  if f and file_exists_p(f) then return first_line(f)
+  else return 'pyret'
+  end
+end
+
 local function postproc(fhtml_cached, tipe)
+  local page_title = ''
   -- print('doing postproc', fhtml_cached, tipe)
   if not file_exists_p(fhtml_cached) then return end
   local local_dist_root_dir = calculate_dist_root_dir(fhtml_cached)
@@ -35,8 +53,9 @@ local function postproc(fhtml_cached, tipe)
   local fhtml = fdir .. '/' .. fbase
   -- print('fhtml is', fhtml)
   local code_lang = 'pyret'
-  if fhtml_cached:find('^[^/]*/[^/]*-wescheme') then
-    code_lang = 'wescheme'
+  local proglang = get_proglang(fhtml_cached)
+  if proglang == 'wescheme' then
+    code_lang = 'racket'
   end
   local f_comment_file = fhtml_cached:gsub('%.html$', '') .. '-comment.txt'
   local f_mathjax_file = fhtml_cached:gsub('%.html$', '.asc.uses-mathjax')
@@ -52,6 +71,7 @@ local function postproc(fhtml_cached, tipe)
   local add_mathjax_p = false
   local add_codemirror_p = false
   local add_body_id_p = false
+  local add_landscape_p = false
   local add_end_body_id_p = false
   local delete_line_p = false
   local read_end_sidebar_p = false
@@ -77,40 +97,19 @@ local function postproc(fhtml_cached, tipe)
       if file_exists_p(f_comment_file) then
         add_comment_p = true
       end
-      --
-      if memberp(tipe, {'lessonplan', 'pathwaynarrative', 'pathwayresource'}) then
-        add_body_id_p = true
-        add_end_body_id_p = true
+      if x:find('landscape') then
+        x = x:gsub('landscape', '')
+        add_landscape_p = true
       end
+      --
+      add_body_id_p = true
+      add_end_body_id_p = true
       --
       if memberp(tipe, {'lessonplan', 'pathwaynarrative'}) then
         add_analytics_p = true
       end
       --
-      if tipe == 'pathwayresource' then -- TEACHERRESOURCEPAGE
-        x = x:gsub('^<body class="', '%0TeacherResources ')
-      end
-      --
       --fixme datasheetpage?
-      if tipe == 'workbookpage' then
-        x = x:gsub('<body class="', '%0workbookpage ')
-      elseif tipe == 'pathwayindependent' then
-        if fhtml_cached:match('/pages/') or fhtml_cached:match('/textbooks/') then
-          x = x:gsub('<body class="', '%0workbookpage ')
-        else
-          x = x:gsub('<body class="', '%0narrativepage ')
-        end
-      elseif not memberp(tipe, {'workbookpage', 'lessonplan', 'datasheetpage'}) then
-        x = x:gsub('^<body class="', '%0narrativepage ')
-      end
-      if tipe == 'workbookpage' then
-        if fhtml_cached:find('/courses/[^/]-/back%-matter/') then
-          x = x:gsub('<body class="', '%0back-matter ')
-        end
-        if fbase:find('^notes%-') then
-          x = x:gsub('<body class="', '%0LessonNotes ')
-        end
-      end
       --
     end
     --
@@ -145,22 +144,24 @@ local function postproc(fhtml_cached, tipe)
     --
     if x:find('<p>%%BEGINQBLOCKITEM%%') then
       x = x:gsub('<p>%%BEGINQBLOCKITEM%%', '<p class="qblock">')
-      --item_attrib = 'qblock'
     end
     --
     if x:find('<p>%%BEGINABLOCKITEM%%') then
       x = x:gsub('<p>%%BEGINABLOCKITEM%%', '<p class="ablock">')
-      --item_attrib = 'ablock'
     end
     --
-    if item_attrib and (x:find('<li>') or x:find('<p>')) then
+    if item_attrib and (x:find('<li>')) then
       x = x:gsub('<li>', '<li class="' .. item_attrib .. '">')
-      x = x:gsub('<p>', '<p class="' .. item_attrib .. '">')
+      item_attrib = false
     end
     --
     if x:find('%%END[QA]BLOCKITEM%%') then
+      if x:find('%%ENDQBLOCKITEM%%') then
+        item_attrib = 'ablockitem'
+      else
+        item_attrib = false
+      end
       x = x:gsub('%%END[QA]BLOCKITEM%%', '')
-      item_attrib = false
     end
     --
     if x:find('class="exampleblock .-actually%-openblock ') and openblock_attribs then
@@ -172,6 +173,9 @@ local function postproc(fhtml_cached, tipe)
     x = x:gsub('<div class="sidebar">', '</div>\n</div>\n</div>\n%0<div id="toggle"></div>')
     --
     x = x:gsub('%%CURRICULUMMATHJAXMARKER%%', '$$')
+    --
+    x = x:gsub('%%CURRICULUMCOMMENTSTART%%', '<!--')
+    x = x:gsub('%%CURRICULUMCOMMENTSTOP%%', '-->')
     --
     x = x:gsub('%%CURRICULUM([^%%]*)%%', '<%1')
     x = x:gsub('%%BEGINCURRICULUM([^%%]*)%%', '>')
@@ -190,7 +194,6 @@ local function postproc(fhtml_cached, tipe)
     end
     --
     if x:find('</head>') then
-      local page_title = ''
       local adoc_file = fhtml:gsub('%.s?html', '.adoc')
       -- print('adoc_file is', adoc_file)
       if file_exists_p(adoc_file) then
@@ -262,7 +265,43 @@ local function postproc(fhtml_cached, tipe)
     --
     if add_body_id_p then
       add_body_id_p = false
-      o:write('<div id="body">\n')
+      if website_branch_p then
+        local klass = proglang
+        if tipe == 'workbookpage' then
+          klass = klass .. ' workbookpage'
+          if fbase:find('^notes%-') then
+            klass = klass .. ' LessonNotes'
+          end
+        elseif tipe == 'pathwayindependent' then
+          if fhtml_cached:match('/pages/') or fhtml_cached:match('/textbooks/') then
+            klass = klass .. ' workbookpage'
+          else
+            klass = klass .. ' narrativepage'
+          end
+          if fhtml_cached:find('/courses/[^/]-/back%-matter/') then
+            klass = klass .. ' back-matter'
+          elseif fbase:find('^notes%-') then
+            klass = klass .. ' LessonNotes'
+          end
+        elseif tipe == 'lessonplan' then
+          klass = klass .. ' LessonPlan'
+        elseif not memberp(tipe, {'datasheetpage'}) then
+          if tipe == 'pathwayresource' then
+            klass = klass .. ' TeacherResources'
+          end
+          klass = klass .. ' narrativepage'
+        else
+          -- noop
+        end
+        if add_landscape_p then
+          add_landscape_p = false
+          klass = klass .. ' landscape'
+        end
+        --
+        o:write('<div id="body" class="' .. klass .. '">\n')
+      else
+        o:write('<div id="body">\n')
+      end
     end
     --
     if add_codemirror_p then
@@ -304,14 +343,64 @@ local function postproc(fhtml_cached, tipe)
   --
   i:close()
   o:close()
+  if tipe == 'lessonplan' then
+    return page_title
+  end
+end
 
+local function extract_self_guided(fhtml_cached, lesson_title)
+  if not file_exists_p(fhtml_cached) then return end
+  local fdir = fhtml_cached:gsub('/%.cached/%.index%.html$', '')
+  local fhtml = fdir .. '/index.shtml'
+  local fjson = fdir .. '/selfGuidedBits.jsx'
+  local i = io.open(fhtml, 'r')
+  local o = io.open(fjson, 'w')
+  local writing_p = false
+  local skip_one_more_line_p = false
+  local counter = 0
+  local page_header = ''
+  o:write('export const selfGuidedTitle = "' .. lesson_title .. '"\n\n')
+  o:write('export const selfGuidedBits = [\n')
+  for x in i:lines() do
+    if writing_p then
+      if skip_one_more_line_p then
+        skip_one_more_line_p = false
+        o:write(page_header, '\n')
+      elseif x:match('stop_self_guided_piece') then
+        o:write('</div>`\n},\n')
+        writing_p = false
+      else
+        o:write(x, '\n')
+      end
+    elseif x:match('^<h2') then
+      page_header = x
+    elseif x:match('end_self_guided') then break -- needed?
+    elseif x:match('start_self_guided_piece') then
+      writing_p = true
+      skip_one_more_line_p = true
+      counter = counter + 1
+      -- print('counter=', counter)
+      local editorconfig_file = fdir .. '/.cached/.index-sg-' .. counter .. '.json'
+      local editorconfig = '""'
+      if file_exists_p(editorconfig_file) then
+        editorconfig = table.concat(read_file_lines(editorconfig_file), '\n')
+      end
+      o:write('{\n', editorconfig, ',\nlessonText: `\n')
+    else
+      --noop
+    end
+  end
+  o:write(']\n')
+  i:close()
+  o:close()
 end
 
 local function run_postproc(batchf, tipe)
   -- print('doing run_postproc', batchf, tipe)
   local files = dofile(batchf)
   for _,f in ipairs(files) do
-    postproc(f, tipe)
+    local title = postproc(f, tipe)
+    if tipe == 'lessonplan' then extract_self_guided(f, title) end
   end
 end
 

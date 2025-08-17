@@ -8,14 +8,14 @@ local buffered_input_port_metatable = {
 
 function io.open_buffered(file, str)
   -- creates a buffered input port
-  local o = {
+  local i = {
     port = false,
     buffer = {}
   }
-  if file then o.port = io.open(file) end
-  if str then o.buffer = string_to_table(str) end
-  setmetatable(o, buffered_input_port_metatable)
-  return o
+  if file then i.port = io.open(file) end
+  if str then i.buffer = string_to_table(str) end
+  setmetatable(i, buffered_input_port_metatable)
+  return i
 end
 
 function buffered_input_port_metatable.__index:close()
@@ -261,12 +261,4 @@ function read_commaed_group(ip, directive, read_group)
     r[i] = string_trim_quotes(string_trim(s))
   end
   return r
-end
-
-function first_line(f)
-  local i = io.open(f)
-  if not i then return false end
-  local x = i:read()
-  i:close()
-  return x
 end

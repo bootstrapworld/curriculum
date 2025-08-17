@@ -9,7 +9,7 @@ local make_dir = os.getenv'MAKE_DIR'
 dofile(make_dir .. 'utils.lua')
 dofile(make_dir .. 'readers.lua')
 
--- dofile('lib/maker/utils.lua')
+dofile(make_dir .. 'sread.lua')
 
 local natlang = os.getenv('NATLANG')
 
@@ -76,19 +76,20 @@ do
     end
 
     o:write('  "lessons": [\n')
-    local workbook_lessons_file = course_cache .. '.workbook-lessons.txt.kp'
-    local w = io.open(workbook_lessons_file)
+    local workbook_lessons_file = course_cache .. '.workbook-lessons.rkt.kp'
+    local lesson_units = sread_file(workbook_lessons_file)
     local first_p = true
-    for lsn in w:lines() do
-      if first_p then
-        first_p = false
-        o:write('    ')
-      else
-        o:write('  , ')
+    for _,lunit in ipairs(lesson_units) do
+      for i=2,#lunit do
+        if first_p then
+          first_p = false
+          o:write('    ')
+        else
+          o:write('  , ')
+        end
+        o:write(' "', lunit[i], '"\n')
       end
-      o:write(' "', lsn, '"\n')
     end
-    w:close()
     o:write('  ],\n')
 
     local back_matter_workbook_pages_file = course_dir .. '/back-matter/pages/.cached/.workbook-pages.txt.kp'
@@ -124,5 +125,3 @@ do
     o:close()
   end
 end
-
--- print('done make-workbook-jsons-2.lua')

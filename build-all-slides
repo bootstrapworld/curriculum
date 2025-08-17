@@ -1,4 +1,4 @@
-#!/bin/bash
+#! /usr/bin/env bash
 
 course=
 nomake=
@@ -9,7 +9,9 @@ while test $# -ne 0; do
   opt="$1"
   if test "$opt" = --nomake; then
     nomake=1; shift
-  elif test "$opt" == --rebuild -o "$opt" == -f; then
+  elif test "$opt" = --skipnode; then
+    otheropts="$otheropts $opt"; shift
+  elif test "$opt" = --rebuild -o "$opt" = -f; then
     otheropts="$otheropts $opt"; shift
   else
     course="$opt"; shift
@@ -33,9 +35,11 @@ if test -z "$course"; then
     build_slide $lesson
   done
 else
-  courselessonlist=distribution/en-us/courses/$course/.cached/.workbook-lessons.txt.kp
+  courselessonlist=distribution/en-us/courses/$course/.cached/.workbook-lessons.rkt.kp
   for lesson in $(cat $courselessonlist); do
-    build_slide $lesson
+    if ! echo $lesson | grep -q "[()]"; then
+      build_slide $lesson
+    fi
   done
 fi
 
