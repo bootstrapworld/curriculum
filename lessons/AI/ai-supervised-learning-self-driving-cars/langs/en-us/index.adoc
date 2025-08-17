@@ -24,6 +24,9 @@
 |[.materials-links]
 @material-links
 
+| Preparation
+| - @opt{If you think your students will want the chance to actually see the first self-driving car in action, you can share @link{https://www.youtube.com/watch?v=ntIczNQKfjQ, "this two-minute video"} from the Carnegie Mellon University Robotics Institute.}
+
 |===
 
 == Supervised Learning @duration{15 minutes}
@@ -42,7 +45,7 @@ Meet ALVINN!
 
 @center{@image{images/navlab.png, 400}} 
 
-ALVINN (short for Autonomous Land Vehicle in a Neural Network) was developed in 1989 by a team of computer scientists at Carnegie Mellon University. ALVINN is the forebear of today's self-driving cars: a retrofitted Army ambulance equipped with sensors, computers, and actuators (the part of a machine that allows movement). ALVINN had about one-tenth of the processing power of an Apple Watch - but was able to safely drive on a very limited course at 70 miles per hour by the early 1990s! How did it happen?  
+ALVINN (short for Autonomous Land Vehicle in a Neural Network) was developed in 1989 by a team of computer scientists at Carnegie Mellon University. ALVINN is the forebear of today's self-driving cars: a retrofitted Army ambulance equipped with sensors, computers, and actuators (the part of a machine that allows movement). ALVINN had about one-tenth of the processing power of an Apple Watch -- but was able to safely drive on a very limited course at 70 miles per hour by the early 1990s! How did it happen?  
 
 @slidebreak{Launch}
 
@@ -97,12 +100,16 @@ _How does one generate a function? Techniques from statistics do that. We aren't
 
 The function that we get from statistics is what scientists call a @vocab{model}: a summary of data that captures relationships between variables. Typically, models are @vocab{lossy}, meaning that some of the original information in the dataset was lost through the process of summarizing and compressing the data to build the model. In machine learning, we use algorithms to learn models, which are generally functions.
 
-- In @vocab{supervised learning}, the abstraction of the function - the act of shrinking the @vocab{training} - takes place after (or sometimes in tandem with) demonstration.
+- In @vocab{supervised learning}, the abstraction of the function -- the act of shrinking the @vocab{training} -- takes place after (or sometimes in tandem with) demonstration.
 - In this example, the learned function is so complex that we're representing it in shorthand, with contract notation.
 
 @slidebreak{Launch}
 
 (5) After training is complete, a human can push ALVINN's run switch and the vehicle will begin driving.  As ALVINN drives, it produces steering angles it learned from the human driver (who demonstrated the steering angle at each segment of the road), along with a numeric of "confidence score" in the angle provided.
+
+@teacher{
+If you want your students to see ALVINN in action, now is a good time to view @link{https://www.youtube.com/watch?v=ntIczNQKfjQ, "this brief two-minute video"}.
+}
 
 @slidebreak{Launch}
 
@@ -135,10 +142,10 @@ A machine's "confidence" is very different from a human's confidence. When you d
 In discovering the details of ALVINN's @vocab{supervised learning}, you may have noticed three big events:
 
 - Demonstration of the learning process
-- Function abstraction - the machine learning algorithm finds a function that generalizes (hopefully well!) to new, unseen data
+- Function abstraction -- the machine learning algorithm finds a function that generalizes (hopefully well!) to new, unseen data
 - Use the function! Apply it on new data.
 
-As you explore other examples of @vocab{supervised learning} in this curriculum, you will notice that - regardless of the context - all three phases occur. 
+As you explore other examples of @vocab{supervised learning} in this curriculum, you will notice that -- regardless of the context -- all three phases occur. 
 
 === Investigate
 @slidebreak{Investigate}
@@ -146,7 +153,7 @@ As you explore other examples of @vocab{supervised learning} in this curriculum,
 Let's apply what we know about machine learning to ALVINN and its training.
 
 @lesson-instruction{
-With a partner, complete @printable-exercise{alvinn-training.adoc}.
+With a partner, complete @printable-exercise{training-a-self-driving-car.adoc}.
 }
 
 @teacher{Review students' responses, allowing time for discussion, questions, and disagreement.}
@@ -169,7 +176,7 @@ In supervised machine learning, the computer trains on example input-output pair
 
 The case of ALVINN is just one example of supervised learning. There are countless others!
 
-- *Spam detection.* When email users indicate that an email they have received is spam (_demonstration_), they are contributing to a massive, labeled dataset that can be used to train a model to classify emails as _spam_ and everything else, implicitly, as _not spam_. (Although Gmail sometimes asks users if something is “not spam” - see the image, below.) The "supervision" comes from the fact that the training data includes examples of both spam and legitimate emails.
+- *Spam detection.* When email users indicate that an email they have received is spam (_demonstration_), they are contributing to a massive, labeled dataset that can be used to train a model to classify emails as _spam_ and everything else, implicitly, as _not spam_. (Although Gmail sometimes asks users if something is “not spam” -- see the image, below.) The "supervision" comes from the fact that the training data includes examples of both spam and legitimate emails.
 
 @center{@image{images/report-not-spam.png, 500}}
 

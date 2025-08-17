@@ -1,0 +1,74 @@
+= Triangle Contracts (SAS & ASA)
+
+++++
+<style>
+#content div.circleevalsexp, .editbox, .cm-s-scheme {font-size: .75rem;}
+#content img { width: 55%; }
+#content .listingblock .highlight { padding: 0; }
+#content .forceShading { background-color: #f7f7f8; }
+td.tableblock:nth-of-type(2) p.tableblock { text-align: left; }
+.fitbruby { min-width: 7em; }
+</style>
+++++
+
+Type each expression (left) below into the @starter-file{editor} and match it to the image it creates (right).
+
+[.FillVerticalSpace, cols="^.^18a,^.^2,3,^.^2,^.^8a",stripes="none",grid="none",frame="none", options="header"]
+|===
+| Expression
+|||
+| Image
+
+| @show{(code '(triangle-sas 120 45 70 "solid" "black"))}
+| *@n* @ifsoln{-D} || *A*
+| @centered-image{../images/sas-120-90-70.png, 55}
+
+| @show{(code '(triangle-sas 120 90 70 "solid" "black"))}
+| *@n* @ifsoln{-A} || *B*
+| @centered-image{../images/sas-120-135-70.png}
+
+| @show{(code '(triangle-sas 120 135 70 "solid" "black"))}
+| *@n*@ifsoln{-B} || *C*
+| @centered-image{../images/sas-70-135-120.png}
+
+| @show{(code '(triangle-sas 70 135 120 "solid" "black"))}
+| *@n*@ifsoln{-C} || *D*
+| @centered-image{../images/sas-120-45-70.png}
+|===
+
+== Contracts
+
+Think about how you would describe each @show{(code 'triangle-sas)} argument to someone who'd never used the function before.
+
+@n Annotate the Contract below using descriptive variable names.
+
+@vspace{1ex}
+
+[.forceShading]
+--
+@show{(code 'triangle-sas)} {two-colons} `(`
+@fitbruby{7em}{Number}{@ifsoln{bottom-right-side}},  
+@fitbruby{7em}{Number}{@ifsoln{top-right-angle}}, 
+@fitbruby{7em}{Number}{@ifsoln{top-side}},
+@fitbruby{7em}{String}{@ifsoln{fill-style}},
+@fitbruby{7em}{String}{@ifsoln{color}}
+`) -> Image`
+
+@vspace{3ex}
+
+--
+
+@vspace{1ex}
+
+_If you have a printed workbook, add examples of each of the triangle functions we've explored to your contracts pages._
+
+@vspace{1ex}
+
+@star If you have time, experiment with the @show{(code 'triangle-asa)} function.
+
+@show{(contract 'triangle-asa  `((top-left-angle Number) (left-side Number) (bottom-angle Number) (fill-style String) (color String)) "Image")}
+
+
+@star Why did these two functions need to take in one more Number than `right-triangle` did?
+
+@fitb{}{@ifsoln{Because right triangles have one fixed angle and that means that the ratio of base to height can be used to determine the other two angles!}}

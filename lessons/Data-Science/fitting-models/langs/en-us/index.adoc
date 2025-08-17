@@ -61,20 +61,30 @@ Here's the Contract:
 @show{(contract 'scatter-plot '((table-name Table) (labels String) (xs String) (ys String)) "Image")}
 }
 
+Let's look at some data on lizards from an animal shelter...
+
 @slidebreak{Launch-DN}
 
-Let's see if there's a correlation between an animal's `age` in the shelter, and the `weeks` it takes to be adopted.
-
 @lesson-instruction{
-- Open the @starter-file{fitting-animals}.
-- Make a scatter plot, using the animals' `name` as the labels, their weight in `pounds` as the @vocab{explanatory variable} on the x-axis, and the `weeks` it took to be adopted as the @vocab{response variable} on the y-axis.
+
+- Open the @starter-file{fitting-animals} and click "Run".
+- Type `lizard-sample` into the Interactions Area. What columns are in this table?
+- Make a scatter plot, using the following columns:
+  ** labels - the lizard's `name`
+  ** @vocab{explanatory variable} (x-axis) - weight in `pounds`
+  ** @vocab{response variable} (y-axis) - `weeks` to be adoption.
 }
 
 @ifslide{@show{(contract 'scatter-plot '((table-name Table) (labels String) (xs String) (ys String)) "Image")}}
 
 @slidebreak{LaunchC}
 
-@center{@image{images/sp2.png, 400}}
+[cols="^.^1a, ^2a, ^.^1a", frame="none", grid="none"]
+|===
+| @image{images/lizard-small.png, 200}
+| @image{images/sp2.png, 400}
+| @image{images/lizard-large.png, 200}
+|===
 
 @QandA{
 @Q{Do you see a pattern here, that relates `weeks` to `pounds`? If so, how would you describe it?}
@@ -127,6 +137,18 @@ While most of us might have pictured similar lines (models!), it's likely that d
 @lesson-instruction{
 - Turn to the second section of @printable-exercise{how-could-we-measure-good-fit-lizard.adoc}. 
 - With your partner, discuss Cy and Jo's models and complete the questions on the page.
+}
+
+@teacher{
+Students might come up with all kinds of ways to measure fitness! For example...
+
+- Count the number of points that the line touches
+- Measure the _horizontal_ distance between each point and the line, and _add_ those distances
+- Measure the _vertical_ distance between each point and the line, and take the _mean_ of those distances
+- Measure the _perpendicular_ distance between each point and the line, and take the _median_ of those distances
+- Some combination of the above, or something else completely different!
+
+Encourage them to share these ideas aloud.
 }
 
 === Synthesize
@@ -214,33 +236,10 @@ fit-model(
 |===
 }
 
-@ifnotslide{
-[cols="^1a,^1a", frame="none", grid="none"]
-|===
-| @image{images/fit-cy-crop.png}
-| @image{images/fit-jo-crop.png}
-|===
-}
-
-@ifslide{
-@QandA{
-@Q{What do you Notice and Wonder about the Displays?}
-@Q{Compare the `fit-model` display for `cy` to the `fit-model` display for `jo`. How are they similar? How are they different?}
-@A{Both models have a blue line and red dots.}
-@A{The x-axis goes from 0 to 8 for both of them.}
-@A{The y-axis for `cy` is numbered 0 to 20. It goes from 3 to 9 for `jo`.}
-@A{`jo` has more red dots below the blue line than above it.}
-@A{The data points for `jo` more or less fill the vertical space of the display, whereas for `cy` there are only data points in the bottom half of the display.}
-}
-}
-
-@ifnotslide{
 @QandA{
 @Q{What do you Notice?}
 @Q{What do you Wonder?}
-@Q{Compare the `fit-model` display for `cy` to the `fit-model` display for `jo`. 
-  * How are they similar? 
-  * How are they different?
+@Q{Compare the `fit-model` display for `cy` to the `fit-model` display for `jo`. How are they _similar?_ How are they _different?_
 }
 @A{Both models have a blue line and red dots.}
 @A{The x-axis goes from 0 to 8 for both of them.}
@@ -248,7 +247,7 @@ fit-model(
 @A{`jo` has more red dots below the blue line than above it.}
 @A{The data points for `jo` more or less fill the vertical space of the display, whereas for `cy` there are only data points in the bottom half of the display.}
 }
-}
+
 
 @slidebreak{LaunchR}
 
@@ -285,7 +284,7 @@ Just as there are different tools for finding the center or spread of a dataset,
 Statisticians and Data Scientists are careful to use the right tool for the job!
 
 - We want a measure that takes the values from _every_ data point into account.
-- We want a measure of _error_, so the measure should be zero for a perfect model fits every point (i.e. - has no residuals).
+- We want a measure of _error_, so the measure should be zero for a perfect model fits every point (i.e. has no residuals).
 - We want a measure that's concrete, and easy to understand.
 
 @slidebreak{LaunchR}
@@ -294,9 +293,18 @@ Statisticians and Data Scientists are careful to use the right tool for the job!
 @vocab{S} is a measure of fitness, which refers to the @vocab{Standard Deviation of the Residuals}.
 
 - The closer the data points are to the model, the smaller the residuals are.
-- If a model fits the data perfectly, the @vocab{S} value would be 0.
+- In a _perfect fit_ to the data, @vocab{S} would be 0.
 - @vocab{S} is expressed in terms of _units of the response variable_ (the y-axis), which makes it easy to understand.
-  * e.g. When fitting a model to this dataset, an @vocab{S} of `5` would mean _the standard deviation of the residuals is "5 weeks to adoption."_
+  * When fitting a model to this dataset, an @vocab{S} of 5 means "the standard deviation of the residuals is *5 weeks to adoption*."
+
+@pd-slide{
+If this is a standard Algebra 2 class, it's not as important that students understand the details of @vocab{S}! The key points are:
+
+- The smaller the @vocab{S}, the better the fit (@vocab{S} of zero means a _perfect fit_).
+- @vocab{S} always has units, based on the y-axis
+
+If you are in a dedicated Data Science class -- or have the time to spend in your Algebra class -- you can absolutely go deeper!
+}
 
 @slidebreak{Launch}
 
@@ -346,13 +354,13 @@ Now that we have a basic sense of what `fit-model` does, let's see it work live 
 @Q{How do we know that the first Interactive Chart that pops up is fitting Cy's model to the data?}
 @A{Because the first expression in the Definitions Area takes in `cy`.}
 
-@Q{When you hover your mouse over the blue line, a box should pop up that says "Model". Move your mouse along the line. What information can we learn from the "Model" pop up windows?}
+@Q{Move your mouse along the line. What information can we learn from the "Model" pop up windows?}
 @A{The coordinates of any point in the model.}
 
-@Q{When you hover your mouse over a data point, a box should pop up that says "Data". Move your mouse to a few different points and read the information contained in these pop ups. What can we learn from the "Data" pop up windows?}
+@Q{Move your mouse to a few different points and read the information contained in these pop ups. What can we learn from the "Data" pop up windows?}
 @A{The x and y coordinates of each point in the data set, and the animals they are associated with.}
 
-@Q{There is one more kind of pop up window that will appear on this chart that says "Residuals". You can find them by hovering your mouse near any of the data points. Move your mouse to find and read a few of these. What can we learn from the "Residuals" pop up windows?}
+@Q{Find the "Residuals" pop up window by hovering your mouse near any of the data points. Find and read a few of these. What can we learn from the "Residuals" pop up windows?}
 @A{The x and y coordinates of a data point}
 @A{The predicted y-value (`ŷ`) for that x-value}
 @A{The "Residual": the difference between `y` and `ŷ`}
@@ -398,7 +406,7 @@ _Heads up: You will be using percent change to make sense of how the expected er
 @strategy{How can @math{r^2} be less than zero?}{
 Sharp-eyed students might wonder how it's possible for an @math{r^2} to be less than zero. That's supposed to be impossible, right?
 
-It turn out that the @math{R^2} of a model @link{https://stats.stackexchange.com/questions/627589/definition-of-text-r2-text, is NOT computed by squaring *R*}, and only actually equals @math{R \times R} when the model is produced through linear regression. Remember: linear regression can only find the line of _best_ fit, so it will never produce something crazy like a negatively-sloping line for a dataset with a positive correlation!
+It turns out that the @math{R^2} of a model @link{https://stats.stackexchange.com/questions/627589/definition-of-text-r2-text, is NOT computed by squaring *R*}, and only actually equals @math{R \times R} when the model is produced through linear regression. Remember: linear regression can only find the line of _best_ fit, so it will never produce something crazy like a negatively-sloping line for a dataset with a positive correlation!
 
 When students are coming up with models on their own, they aren't bound by the algorithm for linear regression and can come up with lines whose fit is worse than `lr-plot` could ever be!
 }
@@ -429,7 +437,7 @@ When students are coming up with models on their own, they aren't bound by the a
 [.algebra-2]
 === What about Non-linear Models and Algebra 2?
 
-There's no reason things have to stop at line of best fit! Algebra 2 and Integrated 3 teachers - or Data Science teachers looking to count their course as an alternative to Algebra 2 - can extend this modeling work using our @dist-link{courses/algebra-2/, Algebra 2} materials, which covers quadratic, exponential, logarithmic, and periodic models!
+There's no reason things have to stop at line of best fit! Algebra 2 and Integrated 3 teachers -- or Data Science teachers looking to count their course as an alternative to Algebra 2 -- can extend this modeling work using our @dist-link{courses/algebra-2/, Algebra 2} materials, which covers quadratic, exponential, logarithmic, and periodic models!
 }
 
 == Additional Practice

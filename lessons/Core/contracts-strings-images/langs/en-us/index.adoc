@@ -47,7 +47,7 @@
 
 |===
 
-== Applying Functions - Reading Contracts
+== Applying Functions -- Reading Contracts
 
 === Overview
 Students learn how to apply functions in @proglang, and are introduced to the notion of @vocab{Contracts}: a simple notation for keeping track of all possible input and output sets for a function.
@@ -105,7 +105,9 @@ Be sure to read any error messages you get back carefully! They might have clues
 
 If your students are already familiar with function notation, Pyret mirrors it precisely, so this is a terrific opportunity to make the connection!
 
-_If your students are not yet familiar with function notation, no need to introduce it now... it will make more sense to introduce once they are fluent in how Pyret works, and we have an entire @lesson-link{function-notation} lesson devoted to making the connection._
+@teacher{
+If your students are not yet familiar with function notation, no need to introduce it now... it will make more sense to introduce once they are fluent in how Pyret works, and we have an entire @lesson-link{function-notation} lesson devoted to making the connection.
+}
 }
 }
 
@@ -140,9 +142,10 @@ The expressions using the `regular-polygon` function produced a value that wasn'
 
 @slidebreak{Investigate}
 
-Contracts are _binding_ agreements! For example, we might sign a contract with a plumber to install a sink for $200. As long as they install the sink, we are obligated to pay them $200. If a parent promises to order pizza if their child does their chores, they'd better order that pizza if the child does those chores!
+Contracts are _binding_ agreements!
 
-If one party breaks the contract, bad things can happen. In some programming languages, breaking a function's contract can cause the whole computer to crash, or it can result in a security hole that lets the program be hacked! In @proglang, the contracts are checked every time to use a function, so the only result is a helpful error message.
+If one party breaks the contract, bad things can happen.
+In some programming languages, breaking a function's contract can cause the whole computer to crash, or it can result in a security hole that lets the program be hacked! In @proglang, the contracts are checked every time to use a function, so the only result is a helpful error message.
 
 @lesson-point{
 A Contract is an agreement between us and a function: if it gets what it expects, it'll give us what we expect.
@@ -161,7 +164,7 @@ A Contract is an agreement between us and a function: if it gets what it expects
 
 @strategy{Strategies for English Language Learners}{
 
-MLR 2 - Collect and Display: As students explore, walk the room and record student language relating to functions, domain, range, contracts, or what they perceive from error messages.  This output can be used for a concept map, which can be updated and built upon, bridging student language with disciplinary language while increasing sense-making.
+MLR 2 -- Collect and Display: As students explore, walk the room and record student language relating to functions, domain, range, contracts, or what they perceive from error messages.  This output can be used for a concept map, which can be updated and built upon, bridging student language with disciplinary language while increasing sense-making.
 }
 
 === Common Misconception
@@ -183,31 +186,29 @@ It would be silly for a function to only work on a single, specific input! For e
 - What questions do you have about Contracts?
 
 @pd-slide{
-*Connect to the Classroom: Contracts are a major pedagogical technique.*
+*Connect to the Classroom: Contracts*
 
+- Contracts are a major pedagogical technique that is USEFUL to students as they learn to code
+- Contracts help students understand domain and range, a neglected algebra topic 
+- Contracts help build toward three representations of a function.
+
+@teacher{
 Contracts are the second major pedagogical technique in Bootstrap. Circles of Evaluation are the first one, and contracts are the second.
 
 Contracts are really important because just about every single mistake kids make can be solved by looking at their contracts. The answer is always, “Check your contract.”
 
 And that is important, because it reminds students the value of writing stuff down.
-}
-
-@pd-slide{
-*Connect to the Classroom: Contracts help students understand domain and range.*
 
 Contracts give students a concrete understanding of a math concept that is pretty abstract.
 
 When everything is a number, it's hard to understand domain and range. Kids wonder why they need to learn them, why they matter.
 
-Domain and range is topic that we often squeeze in the week before finals. But once we have rich data types - like strings, Booleans, and images - domain and range become more concrete.
-}
+Domain and range is topic that we often squeeze in the week before finals. But once we have rich data types -- like strings, Booleans, and images -- domain and range become more concrete.
 
-@pd-slide{
-*Connect to the Classroom: Three Representations of a Function.*
-
-We're building toward an understanding of three different representations for functions and we've already encountered the first one - contracts.
+We're building toward an understanding of three different representations for functions and we've already encountered the first one -- contracts.
 
 The goal is to get fluent in each representation. Eventually, we're going to talk about how each representation is essentially a tool you can use for solving word problems. If you know how to fit them together, you get a nice road map for attacking virtually any word problem you'll encounter.
+}
 }
 
 == Bug Hunting
@@ -281,7 +282,7 @@ Turn to the second section of @printable-exercise{catching-bugs.adoc} with your 
 @QandA{
 @Q{What is the difference between a _contract_ error and a _syntax_ error?}
 @A{@vocab{syntax errors} are  typos (including missing @ifproglang{pyret}{commas,} quotation marks, parentheses, etc.) that prevent the computer from reading our code.}
-@A{@vocab{contract errors} are when we don't give the function the arguments it needs - either because we give it the wrong number or type of arguments.}
+@A{@vocab{contract errors} are when we don't give the function the arguments it needs -- either because we give it the wrong number or type of arguments.}
 }
 
 @slidebreak{Investigate}
@@ -294,8 +295,14 @@ Turn to the second section of @printable-exercise{catching-bugs.adoc} with your 
 === Synthesize
 @slidebreak{Synthesize}
 
-- What kinds of @vocab{syntax errors} did you find?
-- What kinds of @vocab{contract errors} did you find?
+@QandA{
+@Q{What kinds of @vocab{syntax errors} did you find?}
+@A{missing commas}
+@A{a space between the function name and the open parentheses}
+
+@Q{What kinds of @vocab{contract errors} did you find?}
+@A{wrong number of arguments given}
+}
 
 == Exploring Image Functions
 
@@ -315,15 +322,20 @@ Students explore image functions to take ownership of the concept and create an 
 
 @strategy{Supporting Diverse Learners}{
 
+- Image exploration is a low threshold / high-ceiling activity that should be engaging to all students. 
+- Some students may find ALL of the contracts, but most will not! 
+- When the first student in your class has successfully used the text function, give directions about which functions to prioritize with the remaining time.
 
-Image exploration is a low threshold / high-ceiling activity that should be engaging to all students. Do not try to keep your students in lock-step. Some students may find the contracts for all of these functions, but most students will not! What is important here is for _everyone to have the opportunity to explore._
+@teacher{
+Do not try to keep your students in lock-step. What is important here is for _everyone to have the opportunity to explore._
 
 Later in this lesson students will be guided through more scaffolded and in-depth reflection on `isosceles-triangle`, `right-triangle`, `ellipse`, `rhombus`, `regular-polygon` and more. There are also optional pages for digging deeper into `radial-star`, `star-polygon`, `triangle-asa` and `triangle-sas`.
 
 Students do *not* need to find all of the contracts on this page in order to complete the lesson or the following pages.
-}
 
 In order to make sure that all students both remain engaged and are prepared to engage in productive class discussion, when you become aware that the first student in your class has successfully used the `text` function, give your class directions about which functions to prioritize with the remaining time.
+}
+}
 
 @teacher{
 Make sure students at least find the contracts for `star`, `rectangle` and `text` before moving ahead.
@@ -342,9 +354,15 @@ Make sure students at least find the contracts for `star`, `rectangle` and `text
 @A{Reading the error message and thinking about what the computer is trying to tell us can inform next steps.}
 }
 
-@strategy{Students as Teachers}{
+@strategy{An Option: Empowering Students as Teachers}{
 
+This section of the lesson could be re-framed as an opportunity for students to become experts in an image-producing function and teach their classmates.
+
+How would you orchestrate this activity?
+
+@teacher{
 It can be empowering for students to develop expertise on a topic and get to share it with their peers! This section of the lesson could be re-framed as an opportunity for students to become experts in an image-producing function and teach their classmates about it. For example, Pair 1 and pair 4 might focus on `radial-star`, pair 2 and pair 5 might focus on `polygon-star`, pair 3 and pair 6 might focus on `regular-polygon`, etc. First, each pair would explore their function. Perhaps each pair could make a poster, starter-file or slide deck about their function including: the Contract, an explanation of how it works in their own words, a few images that it can generate illustrating the range of possibilities with the expressions that generate them. Next, they might compare their thinking with another pair that focused on the same Contract. Finally, pairs could be grouped with other pairs who focused on different functions and teach each other about what they learned.
+}
 }
 
 @slidebreak{Investigate}
@@ -372,9 +390,16 @@ It can be empowering for students to develop expertise on a topic and get to sha
 === Synthesize
 @slidebreak{Synthesize}
 
-- A lot of the Domains for shape functions are the same, but some are different. Why did some shape functions need more inputs than others?
-- Was it harder to find contracts for some of the functions than others? Why?
-- How was it different to code expressions for the shape functions when you started with a Contract?
+@QandA{
+@Q{A lot of the Domains for shape functions are the same, but some are different. Why did some shape functions need more inputs than others?}
+@A{Regular polygons only need one Number to define their size, but more inputs are required for:
+  * shapes whose side length ratios can vary
+  * shapes whose angles are not all the same
+}
+
+@Q{Was it harder to find contracts for some of the functions than others? Why?}
+@Q{How was it different to code expressions for the shape functions when you started with a Contract?}
+}
 
 == Composing with Circles of Evaluation
 
@@ -404,7 +429,7 @@ One way to organize our thoughts is to diagram what we want to do, using the Cir
 
 The rules are simple:
 
-(1) Every Circle of Evaluation must have one - and only one! - function, written at the top.
+(1) Every Circle of Evaluation must have one -- and only one! -- function, written at the top.
 
 (2) The arguments of the function are written left-to-right, in the middle of the Circle.
 
@@ -482,11 +507,14 @@ To convert a Circle of Evaluation into code, we start at the outside and work ou
 === Synthesize
 @slidebreak{Synthesize}
 
-- There were a lot of options for how many degrees to rotate your name in order to make it diagonal! What did you choose? Why?
-- What Numbers wouldn't have made your name diagonal? Why?
-- What did you Notice?
-- What did you wonder?
-- Why might it be useful to separate the _thinking_ and _coding_ steps? Why not just do them at the same time, all the time?
+@QandA{
+@Q{What did you Notice? What did you wonder?}
+@Q{There were a lot of options for how many degrees to rotate your name in order to make it diagonal! What did you choose? Why?}
+@Q{What Numbers wouldn't have made your name diagonal? Why?}
+@A{0, 180, 360 and other multiples of 180 would make it horizontal}
+@A{90, 270 and other multiples of 90 that aren't also mulitples of 180 would make it vertical}
+@Q{Why might it be useful to separate the _thinking_ and _coding_ steps? Why not just do them at the same time, all the time?}
+}
 
 == Additional Exercises
 @slidebreak{Supplemental}

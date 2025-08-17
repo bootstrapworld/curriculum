@@ -1,0 +1,105 @@
+= Catching Bugs when Sorting Tables
+++++
+<style>
+.error { font-family: Hack, "Courier New", monospace; background: #efefef; }
+.autonum, .fitb { padding-top: 1rem !important; }
+</style>
+++++
+== Learning about a Function through Error Messages
+ 
+@n Type `sort` into the Interactions Area of the @starter-file{animals} and hit "Enter". What do you learn? @fitb{}{@ifsoln{sort is a function}}
+
+@n We know that all functions need an open parenthesis and at least one input! Type @show{(code '(sort animals-table))} in the Interactions Area and hit Enter. Read the error message. What hint does it give us about how to use this function?
+
+@fitb{}{@ifsoln{The Domain of the sort function is Table, String, Boolean.}}
+
+@n Read the explanations below. Then explain the difference in your own words.
+
+@indented{
+*syntax errors* -  when the computer cannot make sense of the code because of unclosed strings, missing commas or parentheses,  etc.
+*contract errors* - when the function isn't given what it needs (the wrong type or number of arguments are used)
+}
+
+ The difference between @vocab{syntax errors} and @vocab{contract errors} is: @fitb{}{}
+
+@fitb{}{}
+
+== Finding Mistakes with Error Messages
+
+_The code below is BUGGY! Read the code and the error messages, and see if you can catch the mistake WITHOUT typing the code into @proglang._
+
+@n `sort(animals-table, "name", true`
+
+[.indentedpara.error]
+--
+Pyret didn't expect your program to @span{.underline}{end} as soon as it did:
+
+sort(animals-table, "name", true
+
+You may be missing an "end", or closing punctuation like ")" or "]" somewhere in your program.
+
+--
+
+@hspace{2em} This is a @fitbruby{10em}{@ifsoln{syntax}}{contract / syntax} error. The problem is that @fitb{}{@ifsoln{the closing parenthesis is missing.}}
+
+
+@n `sort(animals-table "name" true)`
+
+[.indentedpara.error]
+--
+Pyret didn't understand your program around:
+
+sort(animals-table *"name"* true)
+
+You may need to add or remove some text to fix your program. Look carefully before @span{.underline}{*the highlighted text*}. Is there a missing colon (:), comma (,), string marker ("), or keyword? Is there something there that shouldn’t be?
+--
+
+@hspace{2em} This is a @fitbruby{10em}{@ifsoln{syntax}}{contract / syntax} error. The problem is that @fitb{}{ @ifsoln{the commas that should be separating the arguments are missing.}}
+
+
+
+@n `sort(animals-table, "name" , "true")`
+
+[.indentedpara.error]
+--
+The @span{.underline}{*Boolean annotation*}: +
+fun sort(t :: Table, col :: String, asc :: *Boolean*) +
+was not satisfied by the value +
+@indented{"true"}
+
+--
+
+@hspace{2em} This is a @fitbruby{10em}{@ifsoln{contract}}{contract / syntax} error. The problem is that @fitb{}{@ifsoln{true should not be a String.}}
+
+
+
+@n `sort(animals-table, name , true)`
+
+[.indentedpara.error]
+--
+The name @span{.underline}{*name*} is unbound:
+
+sort(animals-table, *name* , true)
+
+It is @span{.underline}{*used*} but not previously defined.
+
+--
+
+@hspace{2em} This is a @fitbruby{10em}{@ifsoln{syntax}}{contract / syntax} error. The problem is that @fitb{}{ @ifsoln{the string is missing quotes.}}
+
+
+
+@n `sort (animals-table, "name", true)`
+
+[.indentedpara.error]
+--
+Pyret thinks this code is probably a function call:
+
+*sort* _(animals-table, "name", true)_
+
+Function calls must not have space between the @span{.underline}{*function expression*} and the @span{.underline}{_arguments_}.
+--
+
+@hspace{2em} This is a @fitbruby{10em}{@ifsoln{syntax}}{contract / syntax} error. The problem is that @fitb{}{@ifsoln{there shouldn't be a space between sort and the parentheses.}}
+
+

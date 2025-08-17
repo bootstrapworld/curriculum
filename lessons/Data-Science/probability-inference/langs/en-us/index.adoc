@@ -44,7 +44,7 @@
 
 | Optional Project
 |
-- @lesson-link{project-snack-habits} / @lesson-link{project-time-use}: In both of these projects, students gather data about their own lives and use what they've learned in the class so far to analyze it. Both projects require that students break down tasks and follow a timeline - either individually or in groups - and can be used as a mid-term or formative assessment, or as a capstone for a limited implementation of Bootstrap:Data Science. _(Based on the projects of the same name from @link{https://www.introdatascience.org/, IDS at UCLA})_
+- @lesson-link{project-snack-habits} / @lesson-link{project-time-use}: In both of these projects, students gather data about their own lives and use what they've learned in the class so far to analyze it. Both projects require that students break down tasks and follow a timeline -- either individually or in groups -- and can be used as a mid-term or formative assessment, or as a capstone for a limited implementation of Bootstrap:Data Science. _(Based on the projects of the same name from @link{https://www.introdatascience.org/, IDS at UCLA})_
 
 |===
 
@@ -181,48 +181,62 @@ In other words, we looked at sample results and used them to decide what to beli
 
 @slidebreak{Launch}
 
+@lesson-point{
 @vocab{Statistical inference} uses information from a sample to draw conclusions about the larger population from which the sample was taken. It is used in practically every field of study you can imagine: medicine, business, politics, history... even art!
+}
 
 @slidebreak{Launch}
+
 Suppose we want to estimate what percentage of all Americans plan to vote for a certain candidate.  We don't have time to ask every single person who they’re voting for, so pollsters instead take a _sample_ of Americans, and _infer_ how all Americans feel based on the sample.
 
 @slidebreak{Launch}
+
 Just like our coin-flip, we can start out with the null hypothesis: assuming that the vote is split equally. Flipping a coin 10 times isn't enough to infer whether it's weighted, and polling 10 people isn't enough to convince us that one candidate is in the lead. _But if we survey enough people_ we can be fairly confident in inferring something about the whole population.
 
 @slidebreak{Launch}
 
 @lesson-point{Sample size matters!}
 
-Suppose we were able to make a million phone calls to use voters...
+
 @QandA{
-@Q{Would it be problematic to only call voters who are registered Democrats? }
-@Q{To only call voters under 25?}
-@Q{To only call regular churchgoers?}
-@Q{Why or why not?}
+@Q{Suppose we were able to make a million phone calls to U.S. voters...
+  * Would it be problematic to only call voters who are registered Democrats? 
+  * Would it be problematic to only call voters under 25?
+  * Would it be problematic to only call regular churchgoers?
+  * Why or why not?
+}
 @A{Calling only certain segments of the population will not reveal the way an entire population will vote.}
 }
 
 @slidebreak{Launch}
 
-@QandA{
-@Q{We're taking a survey of religions in our neighborhood.}
-@Q{There's a Baptist church right down the street.}
-@Q{Would it be problematic to get a nice big sample by asking everyone there?}
-@A{Collecting our sample at the church would bias the data. Everyone at the church is Baptist, but the entire neighborhood might not be! }
-@A{Taking a sample of whoever is nearby is called a @vocab{convenience sample}.}
+@lesson-point{
+When designing a survey or collecting data, Data Scientists need to make sure they are working hard to get a good, random sample that reflects the population. 
 }
 
-*Bad samples can be an accident - or malice!*
+Lazy surveys can result in some really bad data!
 
-When designing a survey or collecting data, Data Scientists need to make sure they are working hard to get a good, random sample that reflects the population. Lazy surveys can result in some really bad data! _But poor sampling can also happen when someone is trying to hide something, or to oppress or erase a group of people._
+@QandA{
+@Q{We're taking a survey of religions in our neighborhood.  There's a Baptist church right down the street. Would it be problematic to get a nice big sample by asking everyone there?}
+@A{Collecting our sample at the church would bias the data. Everyone at the church is Baptist, but the entire neighborhood might not be! }
+}
 
 @slidebreak{Launch}
 
-- A teacher who wants the class to vote for a trip to the dinosaur museum might only call on the students who they know love dinosaurs, and then say "well, everyone I asked wanted that one!"
-- A mayor who wants to claim that they ended homelessness could order census-takers to only talk to people in verified home addresses. Since homeless people don't typically have an address, the census would show no homeless people in the city!
-- A city that is worried about childhood depression could survey children to ask about their mood...but only conduct the survey at an amusement park!
+@lesson-point{
+Taking a sample of whoever is nearby is called a @vocab{convenience sample}. 
+}
 
-Can you think of other examples where biased sampling could result in intentionally or unintentionally misleading results?
+@slidebreak{Launch}
+
+Poor sampling can also sometimes be malicious. When people in power want to hide something or to oppress or erase a group of people they might intentionally only sample the population that will support their claims.
+
+@QandA{
+@Q{A mayor who wants to claim that they ended homelessness could order census-takers to only talk to people in verified home addresses. Since homeless people don't typically have an address, the census would show no homeless people in the city!}
+@Q{A city that is worried about childhood depression could survey children to ask about their mood...but only conduct the survey at an amusement park!}
+@Q{A teacher who wants the class to vote for a trip to the dinosaur museum might only call on the students who they know love dinosaurs, and then say "Everyone I asked wanted to go to the dinosaur museum!"}
+@Q{*Can you think of other examples where biased sampling could result in intentionally or unintentionally misleading results?*}
+}
 
 === Investigate
 @slidebreak{Investigate-DN}
@@ -249,7 +263,7 @@ Let’s see what happens if we switch from smaller to larger sample sizes.
 
 @ifproglang{codap}{
 @slidebreak{Investigate}
-We're going to analyze which is better at guessing the truth about an entire population - a small sample of 10 randomly selected animals, or a large sample of 40 randomly selected animals.
+We're going to analyze which is better at guessing the truth about an entire population -- a small sample of 10 randomly selected animals, or a large sample of 40 randomly selected animals.
 
 @lesson-instruction{
 Select `Sampler` from the Plugins drop-down menu.
@@ -327,5 +341,10 @@ In a statistics-focused class, or if appropriate for your learning goals, this i
 === Synthesize
 @slidebreak{Synthesize}
 
-- Were larger samples always better for guessing the truth about the whole population? If so, how much better?
-- Why is taking a @vocab{random sample} important for avoiding bias in our analyses?
+@QandA{
+@Q{Were larger samples always better for guessing the truth about the whole population? If so, how much better?}
+@A{No, but usually! Sometimes smaller samples left out entire species!}
+
+@Q{Why is taking a @vocab{random sample} important for avoiding bias in our analyses?}
+@A{They are more likely to reflect the broader population than a @vocab{grouped sample} or a @vocab{convenience sample}.}
+}

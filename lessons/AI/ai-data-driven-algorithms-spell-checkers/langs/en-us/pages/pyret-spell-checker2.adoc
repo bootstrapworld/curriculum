@@ -30,7 +30,9 @@ The player of the partially-completed Wordle game wants some Pyret "assistance".
 
 @fitb{}{@ifsoln{because it returned the most suggestions.}}
 
-@n The solution to the partially-completed game is in fact "camel". Look back at the suggestions in your Interactions Area. Did any of the lists include it? @fitb{}{@ifsoln{Yes. It's on the list from `WORDS-ALL`.}}
+@n The solution to the game above is "camel". Look back at the suggestions in your Interactions Area. Did any of the lists include it? 
+
+@fitb{}{@ifsoln{Yes. It's on the list from `WORDS-ALL`.}}
 
 @n We used the very same function (`alt-words`) for each entry. Why didn't we receive the same results from all 3 expressions? @fitb{}{} +
 @fitb{}{}
@@ -53,13 +55,13 @@ The player of the partially-completed Wordle game wants some Pyret "assistance".
 
 @indented{
 
-- @math{W1} and @math{W2} represent two different five-letter words
-- `alt-words("W1", WORDS-ALL)` produces a list that includes @math{W2}
+- `this-word` and `that-word` represent two different five-letter words
+- `alt-words(this-word, WORDS-ALL)` produces a list that includes `that-word`
 }
 
 @vspace{1ex}
 
-Would you expect `alt-words("W2", WORDS-ALL)` to produce a list that includes @math{W1}? Why or why not?
+Would you expect `alt-words(that-word, WORDS-ALL)` to produce a list that includes `this-word`? Why or why not?
 
 @fitb{}{@ifsoln{If and only if both words are in the WORDS-ALL dataset!}} +
 @fitb{}{} 

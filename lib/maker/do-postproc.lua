@@ -38,6 +38,7 @@ local function get_proglang(fhtml_cached)
 end
 
 local function postproc(fhtml_cached, tipe)
+  local page_title = ''
   -- print('doing postproc', fhtml_cached, tipe)
   if not file_exists_p(fhtml_cached) then return end
   local local_dist_root_dir = calculate_dist_root_dir(fhtml_cached)
@@ -143,22 +144,24 @@ local function postproc(fhtml_cached, tipe)
     --
     if x:find('<p>%%BEGINQBLOCKITEM%%') then
       x = x:gsub('<p>%%BEGINQBLOCKITEM%%', '<p class="qblock">')
-      --item_attrib = 'qblock'
     end
     --
     if x:find('<p>%%BEGINABLOCKITEM%%') then
       x = x:gsub('<p>%%BEGINABLOCKITEM%%', '<p class="ablock">')
-      --item_attrib = 'ablock'
     end
     --
-    if item_attrib and (x:find('<li>') or x:find('<p>')) then
+    if item_attrib and (x:find('<li>')) then
       x = x:gsub('<li>', '<li class="' .. item_attrib .. '">')
-      x = x:gsub('<p>', '<p class="' .. item_attrib .. '">')
+      item_attrib = false
     end
     --
     if x:find('%%END[QA]BLOCKITEM%%') then
+      if x:find('%%ENDQBLOCKITEM%%') then
+        item_attrib = 'ablockitem'
+      else
+        item_attrib = false
+      end
       x = x:gsub('%%END[QA]BLOCKITEM%%', '')
-      item_attrib = false
     end
     --
     if x:find('class="exampleblock .-actually%-openblock ') and openblock_attribs then
@@ -170,6 +173,9 @@ local function postproc(fhtml_cached, tipe)
     x = x:gsub('<div class="sidebar">', '</div>\n</div>\n</div>\n%0<div id="toggle"></div>')
     --
     x = x:gsub('%%CURRICULUMMATHJAXMARKER%%', '$$')
+    --
+    x = x:gsub('%%CURRICULUMCOMMENTSTART%%', '<!--')
+    x = x:gsub('%%CURRICULUMCOMMENTSTOP%%', '-->')
     --
     x = x:gsub('%%CURRICULUM([^%%]*)%%', '<%1')
     x = x:gsub('%%BEGINCURRICULUM([^%%]*)%%', '>')
@@ -188,7 +194,6 @@ local function postproc(fhtml_cached, tipe)
     end
     --
     if x:find('</head>') then
-      local page_title = ''
       local adoc_file = fhtml:gsub('%.s?html', '.adoc')
       -- print('adoc_file is', adoc_file)
       if file_exists_p(adoc_file) then
@@ -338,14 +343,64 @@ local function postproc(fhtml_cached, tipe)
   --
   i:close()
   o:close()
+  if tipe == 'lessonplan' then
+    return page_title
+  end
+end
 
+local function extract_self_guided(fhtml_cached, lesson_title)
+  if not file_exists_p(fhtml_cached) then return end
+  local fdir = fhtml_cached:gsub('/%.cached/%.index%.html$', '')
+  local fhtml = fdir .. '/index.shtml'
+  local fjson = fdir .. '/selfGuidedBits.jsx'
+  local i = io.open(fhtml, 'r')
+  local o = io.open(fjson, 'w')
+  local writing_p = false
+  local skip_one_more_line_p = false
+  local counter = 0
+  local page_header = ''
+  o:write('export const selfGuidedTitle = "' .. lesson_title .. '"\n\n')
+  o:write('export const selfGuidedBits = [\n')
+  for x in i:lines() do
+    if writing_p then
+      if skip_one_more_line_p then
+        skip_one_more_line_p = false
+        o:write(page_header, '\n')
+      elseif x:match('stop_self_guided_piece') then
+        o:write('</div>`\n},\n')
+        writing_p = false
+      else
+        o:write(x, '\n')
+      end
+    elseif x:match('^<h2') then
+      page_header = x
+    elseif x:match('end_self_guided') then break -- needed?
+    elseif x:match('start_self_guided_piece') then
+      writing_p = true
+      skip_one_more_line_p = true
+      counter = counter + 1
+      -- print('counter=', counter)
+      local editorconfig_file = fdir .. '/.cached/.index-sg-' .. counter .. '.json'
+      local editorconfig = '""'
+      if file_exists_p(editorconfig_file) then
+        editorconfig = table.concat(read_file_lines(editorconfig_file), '\n')
+      end
+      o:write('{\n', editorconfig, ',\nlessonText: `\n')
+    else
+      --noop
+    end
+  end
+  o:write(']\n')
+  i:close()
+  o:close()
 end
 
 local function run_postproc(batchf, tipe)
   -- print('doing run_postproc', batchf, tipe)
   local files = dofile(batchf)
   for _,f in ipairs(files) do
-    postproc(f, tipe)
+    local title = postproc(f, tipe)
+    if tipe == 'lessonplan' then extract_self_guided(f, title) end
   end
 end
 

@@ -112,11 +112,12 @@ div#body {
     font-family: MJXZERO, 'MJXTEX';
     font-size: inherit !important;
     line-height: 0;
+    i+sup { margin-left: 2px; }
   }
-  em .mathunicode, em .MathJax * { font-family: 'MJXTEX-I'; margin-right: 1px;}
-  strong .mathunicode, strong .MathJax * { font-family: 'MJXTEX-B'; margin-right: 1px;}
+  em .mathunicode { font-family: 'MJXTEX-I';}
+  strong .mathunicode { font-family: 'MJXTEX-B'; }
   em strong .mathunicode, strong em .mathunicode, strong .MathJax .TEX-I, em .MathJax .TEX-B {
-    font-family: 'MJXTEX-BI'; margin-right: 1px;
+    font-family: 'MJXTEX-BI';
   }
 
   table, td.tableblock>.content { margin-bottom: 0px; }
@@ -168,6 +169,9 @@ div#body {
 
   /* Hide anything that we only want seen on Google drive */
   .gdrive-only { display: none; visibility: hidden; }
+
+  /* Hide anything that's only for the self-guided book */
+  .selfguided { display: none; visibility: hidden; }
 
   /* Warn the user the Save-to-Drive is broken on Safari */
   #safariWarning { display: none; }
@@ -374,9 +378,11 @@ div#body:not(.LessonPlan, .narrativepage) p {
 div#body.narrativepage {
   font-size: 12pt;
   p {line-height:1.6;}
+  h2 { margin-top: 20px; }
   .logo     { float: right; }
   .logo img { max-width: 375px; }
-  #lesson-list {
+  #_no_unit { display: none; }
+  .lesson-list { /* was #lesson-list */
     *         { display:inline; margin-bottom: 0px; margin-left: 0px; }
     dt        { margin-top: 15px; display: inline-block; font-size: 17px;}
     dt a.project {
@@ -393,6 +399,13 @@ div#body.narrativepage {
     padding: 5px;
     margin-bottom: 2rem;
     a { color: black; text-decoration: underline; }
+  }
+
+  .lesson-unit h3 {
+    margin-top: 30px;
+    font-size: 18px;
+    padding-left: 5px !important;
+    background: rgb(184 154 196 / 40%);
   }
 }
 
@@ -502,7 +515,7 @@ div#body.LessonPlan {
   }
 
   code { line-height: 1.5 !important; }
-  .codesexp, .circleevalsexp, .editbox, .cm-s-scheme { font-size: 0.8em; }
+  .codesexp, .circleevalsexp { font-size: 0.8em; }
 
   .lesson-instruction, .lesson-roleplay, .q-and-a {
     min-height: 50px;

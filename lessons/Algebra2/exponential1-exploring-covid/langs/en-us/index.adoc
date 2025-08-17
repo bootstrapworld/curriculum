@@ -2,7 +2,7 @@
 
 @description{Students investigate relationships in data about the spread of Covid in 2020, discovering that the shape of the relationship is neither linear nor quadratic!}
 
-@lesson-prereqs{fitting-models, functions-with-lookups}
+@lesson-prereqs{fitting-models}
 
 @keywords{exponential, quadratic, square}
 
@@ -110,13 +110,13 @@ Let's start out by looking at _just one state_. We'll use Massachusetts for this
 
 @lesson-instruction{
 - Turn to @printable-exercise{linear-models.adoc}, and complete the first two questions.
-- With your partner, come up with an explanation of what you think is happening on lines 27-24 of the starter file.
-- Don't be afraid to experiment by changing the code in the Definitions Area!
+- In the Definitions Area, find the definition of `is-MA` underneath the comment `# Define some helper functions`
+- With your partner, come up with an explanation of what you think this function does
+- A few lines farther down, find the definitions of `MA-table`. What do you think is happening here?
+- Don't be afraid to experiment by changing the code!
 }
 
 @slidebreak{Investigate}
-
-*This is code you've never seen before!*
 
 - The first part of this code defines a _new function_ called `is-MA`, which tests a single Row to see if `state == "MA"`.
 
@@ -142,7 +142,7 @@ fun is-MA(r): r["state"] == "MA" end
 |===
 }
 
-- The second part uses Pyret's `filter` function. This function consumes a table (in out example, `covid-table`) and a _function_ (`is-MA`), and produces a new table containing only _rows for which that function returns `true`._ This new table - containing only rows in Massachusetts - is given the name `MA-table`. 
+- The second part uses Pyret's `filter` function. This function consumes a table (in out example, `covid-table`) and a _function_ (`is-MA`), and produces a new table containing only _rows for which that function returns `true`._ This new table -- containing only rows in Massachusetts -- is given the name `MA-table`. 
 
 @ifnotslide{
 @indented{
@@ -202,6 +202,7 @@ But ultimately, straight-line, linear models just don't behave like this curve, 
 
 === Synthesize
 @slidebreak{Synthesize}
+
 - Would a linear model fit just the first few months of the data?
 - If we _only_ knew about first few weeks, would it be ok to use a linear model? Why or why not?
 
@@ -245,7 +246,7 @@ In @vocab{quadratic models}, one quantity varies based on the _square_ of anothe
 
 @right{@image{images/MA-covid-quadratic.png, 300}}Quadratic models change their rate of growth over time, which definitely makes them a better fit for this data than linear ones. It's very likely we could find a quadratic model with a lower @vocab{S-value} than our linear model! +
 @vspace{1ex} +
-But this data starts out almost flat and then suddenly takes off like a rocket - quadratic models just don't have that kind of explosive growth, so our model will never be as good as it _could_ be.
+But this data starts out almost flat and then suddenly takes off like a rocket -- quadratic models just don't have that kind of explosive growth, so our model will never be as good as it _could_ be.
 
 === Synthesize
 @slidebreak{Synthesize}

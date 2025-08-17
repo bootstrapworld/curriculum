@@ -1,0 +1,78 @@
+= Sorting and Summarizing Tables
+++++
+<style>
+/* Push content to the top (instead of the default vertical distribution), which was leaving empty space at the top. */
+#content { display: block !important; }
+</style>
+++++
+
+@link-instructions{
+Open the @starter-file{animals} and click "Run". In the Interactions Area (right), type `animals-table`. Hit "Enter" to see the default view of the table.
+}
+
+== Ordering a Table with `sort`
+
+@n Mabel Lee wants to sort this table by `age` (youngest-to-oldest). Juan Carlos wants to sort the table by `pounds`(heaviest-to-lightest). What are some other ways we could sort the table?
+
+@hspace{4em} a. @fitb{}{}
+
+@hspace{4em} b. @fitb{}{}
+
+@center{*Pyret has a function called `sort` that will produce sorted Tables!*}
+
+@n Test out @show{(code '(sort animals-table "age" true))} in the Interactions Area. Try using `false` instead of `true`. +
+Complete the sentences below by *circling* the behavior you observed for each Boolean.
+
+[cols="2a, ^3a, ^3a", frame="none", grid="none", stripes="none"]
+|===
+|(a) `true` sorts the table...
+| in *ascending order* _(from least to greatest)_
+| in *descending order* _(from largest to smallest)_
+
+|(b) `false` sorts the table...
+| in *ascending order* _(from least to greatest)_
+| in *descending order* _(from largest to smallest)_
+|===
+
+@n The Domain of `sort` has three inputs. One of them is the table itself. Can you identify the data types of the other two?
+
+@indented{
+@ifnotsoln{@show{(contract 'sort '((table-name Table) (column-name "                   ") (order "                   ")) "Table")}}
+@ifsoln{@show{(contract 'sort '((table-name Table) (column-name "String") (order "Boolean")) "Table")}}
+}
+
+@vspace{1ex}
+
+@n What code will sort the animals by alphabetical order of their _names_? @fitb{}{@ifsoln{@show{(code '(sort animals-table "name" true))}}}
+
+@n Did you use `true` or `false`? Explain why. @fitb{}{}
+
+== Summarizing a Column with `count`
+Let's explore another table function, beginning with its contract:
+
+@show{(contract "count" '("Table" "String") "Table")}
+
+@n What do you expect the code  @show{(code '(count animals-table "legs"))} to produce? @fitb{}{}
+
+@fitb{}{@ifsoln{answers will vary, but students should be able to predict that they will get a new table!}}
+
+ Type the code into the Interactions Area and click "Enter" to test it out.
+
+@n How many animals had 4 legs? @fitb{}{@ifsoln{29}}
+
+@n Think of another question you might be able to answer by making a different table using the `count` function.
+
+@fitb{}{@ifsoln{Possible response: How many animals are cats?}}
+
+@n Fill in the blanks with the code to make the table: @fitbruby{8em}{@ifsoln{count}}{function-name} (@fitbruby{15em}{@ifsoln{animals-table}}{table-name {two-colons} Table}, @fitbruby{13em}{@ifsoln{Answers will vary!}}{column-name {two-colons} String})
+
+@n Try using the `count` function to summarize the `pounds` column. Is the resulting summary useful? Why or why not? @fitb{}{} +
+@fitb{}{@ifsoln{No - nearly every animal has a unique weight, so the resulting table is almost as long as the original!}}
+
+@n Tables that summarize data with a count are commonly used in the real world. Write an example of where you've seen them before: +
+@fitb{}{@ifsoln{Answers will vary! Election Results, Survey Results, Fundraiser Results, etc. }}
+
+@n Newspapers often incorporate data into their reporting. How else might they display this information, besides using a table?
+
+@fitb{}{@ifsoln{bar charts, pictographs, infographics}}
+

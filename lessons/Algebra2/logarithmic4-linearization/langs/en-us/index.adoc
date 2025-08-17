@@ -57,7 +57,7 @@ Note: This also opens the door for teaching inverse functions!
 === Launch
 @slidebreak{Launch}
 
-We've seen that changing the scale on the x-axis from linear to logarithmic cancels out the logarithmic behavior by _shrinking the x-axis_ to have intervals that grow exponentially and squishing the points to appear linear.
+We've seen that changing the scale on the x-axis from linear to logarithmic cancels out the logarithmic behavior by _shrinking the x-axis_ to have intervals that grow exponentially and squishing the points so we *perceive* them as linear.
 
 @slidebreak{Launch}
 
@@ -147,9 +147,8 @@ Our @math{S} has dropped to 4.49, showing a much better correlation than before.
 
 @right{@image{images/logarithmic-model.png, 350}}From @printable-exercise{transforming-data.adoc}, we know that the model settings used in the transformed, linear model are the same ones used in the logarithmic, untransformed model:
 
-@ifslide{@indented{@math{y = 11.9012x + ~24.2636}}}
-
-@indented{@math{logarithmic3(x) = 11.9012 \log_{10}(x) + 24.2636}}
+@center{@math{linear(x) = 11.9012x + 24.2636}}
+@center{@math{logarithmic3(x) = 11.9012 \log_{10}(x) + 24.2636}}
 
 The resulting logarithmic model can be fit to our original scatter plot, showing a much better fit than our 2-point-derived estimates.
 
@@ -174,7 +173,7 @@ The resulting logarithmic model can be fit to our original scatter plot, showing
 @Q{According to our model, is there a `pc-gdp` that would allow someone to live to 6000 years old?}
 @A{YES! It's logarithmic so we're talking an unimaginable `pc-gdp`, but a logarithm will keep rising forever.}
 @Q{If so, should we throw away the model?}
-@A{NO! When building a model from data, a Data Scientist's job is to find the model that _best fits the data_. In this case, the best-fit model happens to be logarithmic - even if it's biologically impossible!}
+@A{NO! When building a model from data, a Data Scientist's job is to find the model that _best fits the data_. In this case, the best-fit model happens to be logarithmic -- even if it's biologically impossible!}
 }
 
 == Additional Exercises
@@ -182,9 +181,11 @@ The resulting logarithmic model can be fit to our original scatter plot, showing
 
 For more practice transforming data and programming with filters: 
 
-@indented{
-@opt-printable-exercise{transforming-wealth-practice.adoc} is a guided activity that repeats the Data Science and @vocab{Linearization} techniques used here, but with the idea of exploring the relationship of universal healthcare with respect to wealth and median lifespan.
-}
+- @opt-printable-exercise{transforming-wealth-practice.adoc} is a guided activity that repeats the Data Science and @vocab{Linearization} techniques used here, but with the idea of exploring the relationship of universal healthcare with respect to wealth and median lifespan.
+
+- Rather than log-scaling the `pc-gdp`, students can transform the `median-lifespan` column using an exponential scale. _Note: Since this relationship has a nonzero y-intercept, the graph will need to be translated to properly take the inverse!_
+
+- Students can also return to the dataset from @lesson-link{exponential1-exploring-covid} and log-scale the `positive` column to linearize that dataset and apply linear regression. _Note: Since that relationship has a nonzero y-intercept, the graph will need to be translated down!_ Students can also transform the `days` column using an exponential scale.
 
 @teacher{
 We are working on collecting more datasets that can be modeled with logarithmic functions so that we can offer students more practice with using linear regression to build logarithmic models.
@@ -196,7 +197,7 @@ We are working on collecting more datasets that can be modeled with logarithmic 
 @strategy{Optional Activity: Guess the Model!}{
 
 1. Divide students into small groups (2-4), and have each team come up with a logarithmic, real-world scenario, then have them write down a logarithmic function that fits this scenario on a sticky note. Make sure no one else can see the function!
-2. On the board or some flip-chart paper, have each team draw a _scatter plot_ for which their logarithmic function is best fit. They should only draw the point cloud - _not the function itself!_ Finally, students title their scatter plot to describe their real-world scenario (e.g. - "Age of a Person from Birth to 16 vs. Number of Cells in their Body").
+2. On the board or some flip-chart paper, have each team draw a _scatter plot_ for which their logarithmic function is best fit. They should only draw the point cloud -- _not the function itself!_ Finally, students title their scatter plot to describe their real-world scenario (e.g. "Age of a Person from Birth to 16 vs. Number of Cells in their Body").
 3. Have teams rotate, so that each team is in front of another team's scatter plot. Have them figure out the original function, write their best guess on a sticky note, and stick it next to the plot.
 4. Have teams return to their original scatter plot, and look at the model their colleagues guessed. How close were they? What strategies did the class use to figure out the model?
 

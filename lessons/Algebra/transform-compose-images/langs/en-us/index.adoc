@@ -88,7 +88,7 @@ The numbers in `translate` specify the point on the paper where the center of th
 @slidebreak{Investigate-DN}
 Let's apply what we just learned about `translate` to getting the Japanese flag building correctly.
 
-We're about to look at some code in the @starter-file{flags}. The programmer included a series of special lines in this file - called @vocab{comments} - that will never be read by the computer.  Comments are a way for programmers to leave notes for one another, and even for a single programmer to keep track of _their own thinking_ for when they come back to their code another day.
+We're about to look at some code in the @starter-file{flags}. The programmer included a series of special lines in this file -- called @vocab{comments} -- that will never be read by the computer.  Comments are a way for programmers to leave notes for one another, and even for a single programmer to keep track of _their own thinking_ for when they come back to their code another day.
 
 @lesson-point{
 Professional programmers use comments _all the time!_
@@ -110,7 +110,12 @@ For students who finish early, there is an optional extension activity in this s
 === Synthesize
 @slidebreak{Synthesize}
 
-Could we completely replace `overlay` with `translate`? Why or why not?
+@QandA{
+@Q{Could we completely replace `overlay` with `translate`? Why or why not?}
+@A{It is possible to compose every image pair we can make using `overlay` with `translate` instead.}
+@A{For all image pairs using `translate` instead of `overlay` requires two additional inputs.}
+@A{For some image pairs it would take a lot more work to use `translate` because it is not always easy to determine where the horizontal and vertical midpoints are.}
+}
 
 == Transforming Shapes for Composition
 
@@ -148,7 +153,12 @@ Now that we've mastered the most basic flag forms, we're ready to tackle a more 
 === Synthesize
 @slidebreak{Synthesize}
 
-Why is it useful to define each part of the flag first, before stitching the images together?
+@QandA{
+@Q{Why is it useful to define each part of the flag first, before stitching the images together?}
+@A{The code is cleaner.}
+@A{Focusing on defining one piece at a time is less error-prone.}
+@A{Most importantly, when an element gets used more than once (like the red stripes in the PuertoRican flag} we only need to define it once!}
+}
 
 == Decomposing Flags
 
@@ -205,8 +215,17 @@ For this activity, you will want to project the color version of @printable-exer
 === Synthesize
 @slidebreak{Synthesize}
 
-- What strategies did you use for finding the length and width of the flag components?
-- What strategies did we use for determining the x and y coordinates where flag components should be placed?
+@QandA{
+@Q{What strategies did you use for finding the width and height of the flag components?}
+@A{Start by finding the width and height of the whole flag}
+@A{Think about what fraction of the total width and height of the flag each component's dimensions should be.}
+
+@Q{What strategies did we use for determining the x and y coordinates where flag components should be placed?}
+@A{Start by finding the width and height of the whole flag}
+@A{For the x-coordinate, think about where the center of the top shape is in relation to the full width of the flag (what fraction of the distance from left to right)}
+@A{For the y-coordinate, think about where the center of the top shape is in relation to the full height of the flag (what fraction of the distance from bottom to top)}
+}
+
 
 @pd-slide{
 *Connect to the Classroom: Rich Tasks*
@@ -221,17 +240,17 @@ Kids can instantly see if their ratios and proportions were correct... but actua
 == Additional Exercises
 @slidebreak{Supplemental}
 
-- @opt-starter-file{flags-desmos} - Match official flag ratios to code defining background rectangles with corresponding proportions. Then match images to code using `overlay` and `translate`.
+- @opt-starter-file{flags-desmos} -- Match official flag ratios to code defining background rectangles with corresponding proportions. Then match images to code using `overlay` and `translate`.
 
-- @opt-printable-exercise{alaska-flag.adoc} - This page engages students with the @opt-starter-file{flags-ak} for a quick dive into why it’s more efficient to @vocab{define} shapes before building the image.
+- @opt-printable-exercise{alaska-flag.adoc} -- This page engages students with the @opt-starter-file{flags-ak} for a quick dive into why it’s more efficient to @vocab{define} shapes before building the image.
 
-- @opt-starter-file{flags-lebanon} - For practice @vocab{scaling} imported graphics
+- @opt-starter-file{flags-lebanon} -- For practice @vocab{scaling} imported graphics
 
-- @opt-starter-file{flags-mx} - Similar to the Puerto Rico Flag Starter File, but this one involves an imported image
+- @opt-starter-file{flags-mx} -- Similar to the Puerto Rico Flag Starter File, but this one involves an imported image
 
-- @opt-starter-file{flags-turkey} - For a fun function-composition puzzle
+- @opt-starter-file{flags-turkey} -- For a fun function-composition puzzle
 
-- @opt-starter-file{flags-trinidad} - If you’ve already studied Pythagorean Theorem and are ready to apply it
+- @opt-starter-file{flags-trinidad} -- If you’ve already studied Pythagorean Theorem and are ready to apply it
 
 
 @ifproglang{wescheme}{

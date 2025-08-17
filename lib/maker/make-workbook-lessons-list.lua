@@ -1,17 +1,19 @@
 #! /usr/bin/env lua
 
+-- last modified 2025-04-28
+
 local inf, outf, pl = ...
 
 local i = io.open(inf, 'r')
 local o = io.open(outf, 'w')
 
-local current_category = ''
-local current_category_lessons = {}
+local current_unit = 'NO_UNIT'
+local current_unit_lessons = {}
 
-local function write_category()
-  if #current_category_lessons > 0 then
-    o:write('( "' .. current_category .. '"\n')
-    for _,y in ipairs(current_category_lessons) do
+local function write_unit()
+  if #current_unit_lessons > 0 then
+    o:write('( "' .. current_unit .. '"\n')
+    for _,y in ipairs(current_unit_lessons) do
       o:write('    "' .. y .. '"\n')
     end
     o:write(')\n')
@@ -33,16 +35,16 @@ for x in i:lines() do
   if x == '' then goto continue end
   if x:find('^%[') then
     x = x:gsub('%[%s*(.-)%s*%]', '%1')
-    write_category()
-    current_category = x
-    current_category_lessons = {}
+    write_unit()
+    current_unit = x
+    current_unit_lessons = {}
   else
     x = x .. proglang
-    table.insert(current_category_lessons, x)
+    table.insert(current_unit_lessons, x)
   end
   ::continue::
 end
-write_category()
+write_unit()
 
 o:write(')\n')
 
