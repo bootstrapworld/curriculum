@@ -4,6 +4,7 @@
 ++++
 <style>
 div.circleevalsexp { width: auto; }
+
 div.circleevalsexp .expression { padding-top: 4px; }
 td .autonum::after { content: ')' !important; }
 /* for table cells with immediate .content children, which have immediate
@@ -15,18 +16,6 @@ td > .content > .paragraph {
   justify-content: space-around;
 }
 
-
-/*
-- Make the arrows relative, so we can position answers around them
-- Make the answers 20px above the top of the arrow, centered
-*/
-tr span.arrow { position: relative; }
-tr span.arrow::before {
-  position: absolute;
-  top: -20px;
-  left: 50%;
-  transform: translate(-50%, 0);
-}
 
 /* Make autonums inside tables look consistent with those outside */
 table .autonum::after { content: ')' !important;}
@@ -41,33 +30,33 @@ Each arrow represents a transformation from an expression to an equivalent expre
 | 	 | Circles of Evaluation
 
 | @n
-| @show{(coe '(* 2 (- (* 3 9) 0) ))} @span{.arrow}{⟶}
-@show{(coe '(* 2 (* 3 9)))} @span{.arrow}{⟶}
-@show{(coe '(* (* 2 3) 9))} @span{.arrow}{⟶}
+| @show{(coe '(* 2 (- (* 3 9) 0) ))} @arrow
+@show{(coe '(* 2 (* 3 9)))} @arrow
+@show{(coe '(* (* 2 3) 9))} @arrow
 @show{(coe '(* 6 9))}
 
 | @n
-| @show{(coe '(* (* 5 g) (+ 5 -4)))} @span{.arrow}{⟶}
-@show{(coe '(* (* 5 g) 1))} @span{.arrow}{⟶}
-@show{(coe '(* 5 g))} @span{.arrow}{⟶}
+| @show{(coe '(* (* 5 g) (+ 5 -4)))} @arrow
+@show{(coe '(* (* 5 g) 1))} @arrow
+@show{(coe '(* 5 g))} @arrow
 @show{(coe '(* g 5))}
 
 | @n
-| @show{(coe '(+ (+ (+ 3 w) 0) 16))} @span{.arrow}{⟶}
-@show{(coe '(+ (+ (+ w 3) 0) 16))} @span{.arrow}{⟶}
-@show{(coe '(+ (+ w 3) 16))} @span{.arrow}{⟶}
+| @show{(coe '(+ (+ (+ 3 w) 0) 16))} @arrow
+@show{(coe '(+ (+ (+ w 3) 0) 16))} @arrow
+@show{(coe '(+ (+ w 3) 16))} @arrow
 @show{(coe '(+ w 19))}
 
 | @n
-| @show{(coe '(* (* (* 8 g) h) 1))} @span{.arrow}{⟶}
-@show{(coe '(* (* 8 g) h))} @span{.arrow}{⟶}
-@show{(coe '(* 8 (* g h)))} @span{.arrow}{⟶}
+| @show{(coe '(* (* (* 8 g) h) 1))} @arrow
+@show{(coe '(* (* 8 g) h))} @arrow
+@show{(coe '(* 8 (* g h)))} @arrow
 @show{(coe '(* 8 (* h g)))}
 
 | @n
-| @show{(coe '(/ (+ 14 (+ 6 7)) 1))} @span{.arrow}{⟶}
-@show{(coe '(+ 14 (+ 6 7)))} @span{.arrow}{⟶}
-@show{(coe '(+ (+ 14 6) 7))} @span{.arrow}{⟶}
+| @show{(coe '(/ (+ 14 (+ 6 7)) 1))} @arrow
+@show{(coe '(+ 14 (+ 6 7)))} @arrow
+@show{(coe '(+ (+ 14 6) 7))} @arrow
 @show{(coe '(+ 20 7))}
 
 

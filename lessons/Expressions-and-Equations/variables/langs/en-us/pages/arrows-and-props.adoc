@@ -14,18 +14,6 @@ td > .content > .paragraph {
   justify-content: space-around;
 }
 
-
-/*
-- Make the arrows relative, so we can position answers around them
-- Make the answers 20px above the top of the arrow, centered
-*/
-tr span.arrow { position: relative; }
-tr span.arrow::before {
-  position: absolute;
-  top: -20px;
-  left: 50%;
-  transform: translate(-50%, 0);
-
 /* Make autonums inside tables look consistent with those outside */
 table .autonum::after { content: ')' !important;}
 
@@ -40,33 +28,33 @@ Each arrow represents a transformation from an expression to an equivalent expre
 | 	 | Circles of Evaluation
 
 | @n
-| @show{(coe '(* (+ 12 3) 4))} @span{.arrow}{⟶}
-@show{(coe '(* 4 (+ 12 3)))} @span{.arrow}{⟶}
-@show{(coe '(* 4 (+ 3 12)))} @span{.arrow}{⟶}
+| @show{(coe '(* (+ 12 3) 4))} @arrow
+@show{(coe '(* 4 (+ 12 3)))} @arrow
+@show{(coe '(* 4 (+ 3 12)))} @arrow
 @show{(coe '(* 4 15))}
 
 | @n
-| @show{(coe '(* (+ (+ n 5) 3) 8))} @span{.arrow}{⟶}
-@show{(coe '(* (+ n (+ 5 3)) 8))} @span{.arrow}{⟶}
-@show{(coe '(* 8 (+ n (+ 5 3))))} @span{.arrow}{⟶}
+| @show{(coe '(* (+ (+ n 5) 3) 8))} @arrow
+@show{(coe '(* (+ n (+ 5 3)) 8))} @arrow
+@show{(coe '(* 8 (+ n (+ 5 3))))} @arrow
 @show{(coe '(* 8 (+ n 8)))}
 
 | @n
-| @show{(coe '(+ (- 20 2) (+ 6 p)))} @span{.arrow}{⟶}
-@show{(coe '(+ 18 (+ 6 p)))} @span{.arrow}{⟶}
-@show{(coe '(+ (+ 18 6) p))} @span{.arrow}{⟶}
+| @show{(coe '(+ (- 20 2) (+ 6 p)))} @arrow
+@show{(coe '(+ 18 (+ 6 p)))} @arrow
+@show{(coe '(+ (+ 18 6) p))} @arrow
 @show{(coe '(+ 24 p))}
 
 | @n
-| @show{(coe '(+ (+ g h) m))} @span{.arrow}{⟶}
-@show{(coe '(+ (+ h g) m))} @span{.arrow}{⟶}
-@show{(coe '(+  h (+ g m)))} @span{.arrow}{⟶}
+| @show{(coe '(+ (+ g h) m))} @arrow
+@show{(coe '(+ (+ h g) m))} @arrow
+@show{(coe '(+  h (+ g m)))} @arrow
 @show{(coe '(+ (+ g m) h))}
 
 | @n
-| @show{(coe '(* (+ w (+ 6 5)) 8))} @span{.arrow}{⟶}
-@show{(coe '(* (+ w 11) 8))} @span{.arrow}{⟶}
-@show{(coe '(* 8 (+ w 11)))} @span{.arrow}{⟶}
+| @show{(coe '(* (+ w (+ 6 5)) 8))} @arrow
+@show{(coe '(* (+ w 11) 8))} @arrow
+@show{(coe '(* 8 (+ w 11)))} @arrow
 @show{(coe '(* 8 (+ 11 w)))}
 
 

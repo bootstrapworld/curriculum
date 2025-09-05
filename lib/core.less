@@ -861,6 +861,26 @@ div#body.workbookpage {
     }
     td:first-child p { font-weight: bold; }
   }
+
+  /*
+  - Make arrows 50px tall and 50x wide
+  - Make them relative, so we can position answers around them
+  - position the label just below the top of the arrow box
+  */
+  span.arrow {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 50px;
+    height: 50px;
+    &::before {
+      position: absolute;
+      top: 5px;
+      left: 50%;
+      transform: translate(-50%, 0);
+    }
+  }
 }
 
 .studentAnswerShort  { min-width: 20pt;  }

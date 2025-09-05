@@ -1,39 +1,15 @@
 = Distribution Challenge
 ++++
 <style>
-  table {grid-template-rows: 3fr 1fr !important;}
-  div.circleevalsexp .value,
-  div.circleevalsexp .studentBlockAnswerFilled { min-width:unset; }
-  .autonum { font-weight: bold; }
-  div.circleevalsexp { width: unset; }
-  p.tableblock { display: inline-block; }
+table {grid-template-rows: 3fr 1fr !important;}
+div.circleevalsexp .value,
+div.circleevalsexp .studentBlockAnswerFilled { min-width:unset; }
+.autonum { font-weight: bold; }
+div.circleevalsexp { width: unset; }
+p.tableblock { display: inline-block; }
 
-  /* Make autonums inside tables look consistent with those outside */
-  table .autonum::after { content: ')' !important;}
-
-/*
-- Make arrows 50px tall
-- Make them relative, so we can position answers around them
-*/
-tr span.arrow {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  width: 50px;
-  height: 50px;
-}
-/*
-- position the label just below the top of the arrow box
-- in TD #2, the label is 'CP'
-- in TD #4, the label is 'AI'
-*/
-tr span.arrow::before {
-  position: absolute;
-  top: 10px;
-  left: 50%;
-  transform: translate(-50%, 0);
-}
+/* Make autonums inside tables look consistent with those outside */
+table .autonum::after { content: ')' !important;}
 
 td:nth-child(3) span.arrow::before { content: 'DP'; }
 </style>
@@ -45,34 +21,34 @@ Fill in the blanks for each pair of Circles of Evaluation below to make them equ
 |===
 | @n
 | @show{(coe '(+ (* 1/5 5) (* 1/5 50)))}
-| @span{.arrow}{⟶}
+| @arrow
 | @show{(coe '((?ANS *) (?ANS 1/5) (+ (?ANS 5) (?ANS 50))))}
 ||  @fitb{10em}{@ifsoln{@math{1 + 10 = 11}}} | |  @fitb{10em}{@ifsoln{@math{\frac{1}{5} \times 55 = 11}}}
 
 | @n
 | @show{(coe '((?ANS +) ((?ANS *) (?ANS 1/2) (?ANS 1/3)) ((?ANS *) (?ANS 1/4) (?ANS 1/3))))}
-| &larr;
+| @arrow
 | @show{(coe '(* (+ 1/2 1/4) 1/3 ))}
 || @fitb{10em}{@ifsoln{@math{\frac{1}{6} + \frac{1}{12} = \frac{1}{4}}}} | | @fitb{10em}{@ifsoln{@math{\frac{3}{4} \times \frac{1}{3} = \frac{1}{4}}}}
 
 
 | @n
 | @show{(coe '(- (* 4 100) (* 4 1.25)))}
-| @span{.arrow}{⟶}
+| @arrow
 | @show{(coe '((?ANS *) (?ANS 4) ((?ANS -) (?ANS 100) (?ANS 1.25))))}
 || @fitb{10em}{@ifsoln{@math{400 - 5 = 395}}} | |  @fitb{10em}{@ifsoln{@math{4 \times 98.75 = 395}}}
 
 
 | @n
 | @show{(coe '((?ANS +) ((?ANS *) (?ANS 2.25) (?ANS 8)) ((?ANS *) (?ANS 2.25) (?ANS 12))))}
-| &larr;
+| @arrow
 | @show{(coe '(* 2.25 (+ 8 12)))}
 || @fitb{10em}{@ifsoln{@math{18 + 27 = 45}}} | | @fitb{10em}{@ifsoln{@math{2.25 \times 20 = 45}}}
 
 
 | @n
 | @show{(coe '( - (* 1/5 200) (* 0.2 20)))}
-| @span{.arrow}{⟶}
+| @arrow
 | @show{(coe '((?ANS *) (?ANS 1/5) ((?ANS -) (?ANS 200) (?ANS 20))))}
 || @fitb{10em}{@ifsoln{@math{40 - 4 = 36}}} | | @fitb{10em}{@ifsoln{@math{\frac{1}{5} \times 180}}}
 
