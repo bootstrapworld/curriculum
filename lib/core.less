@@ -794,17 +794,14 @@ div#body.workbookpage {
   .teacherNote { display: none; }
   &.solution-page .teacherNote { display: unset; }
 
-  /* Auto-numbering - Add space and a right-paren, unless it's inside a table. */
+  /* Auto-nums - Add a right-paren, and top-padding unless it's inside a table. */
   .autonum {
     display: inline-block;
     padding-top: @top-padding-for-writing;
     &::after { content: ')'; }
     &.star::after { content: unset !important; }
   }
-  th .autonum, td .autonum {
-    padding-top: 0;
-    &::after { content: none;}
-  }
+  th .autonum, td .autonum { padding-top: 0; }
 
   .blanklines {
     display: block;
