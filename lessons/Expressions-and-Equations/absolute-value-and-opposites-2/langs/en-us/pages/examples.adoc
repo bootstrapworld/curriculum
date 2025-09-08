@@ -17,21 +17,21 @@ td:first-child .editbox { width: 95% !important; }
 
 Which equations in the table below will be _true_ when @math{m=6}? What about when @math{m=12}? @math{m=o}? With your partner, put a check ✓ in the boxes when you predict the equations will be true. Note: an equation might be true for some values and false for others!
 
-[.table1, cols="16,^.^4,^.^4,^.^4", stripes="none"]
+[.table1, cols="22,^.^4,^.^4,^.^4", stripes="none"]
 |===
 | Example | `m = 6` | `m = -12` | `m = 0`
 
-| @n @show{(code '(EXAMPLE (negate m) (abs m)))} ||@ifsoln{✓}|
-| @n @show{(code '(EXAMPLE (negate m) (negate(abs m))))} |@ifsoln{✓}||
-| @n @show{(code '(EXAMPLE (negate m) (abs(negate m))))} ||@ifsoln{✓}|
-| @n @show{(code '(EXAMPLE (abs(negate m)) (negate(negate m))))}  |@ifsoln{✓}||
-| @n @show{(code '(EXAMPLE (abs(negate m)) (negate(abs m))))} |||
+| @n @show{(code '(EXAMPLE (= (negate m) (abs m)) true))} ||@ifsoln{✓}|
+| @n @show{(code '(EXAMPLE (= (negate m) (negate(abs m))) true))} |@ifsoln{✓}||
+| @n @show{(code '(EXAMPLE (= (negate m) (abs(negate m))) true))} ||@ifsoln{✓}|
+| @n @show{(code '(EXAMPLE (= (abs(negate m)) (negate(negate m))) true))}  |@ifsoln{✓}||
+| @n @show{(code '(EXAMPLE (= (abs(negate m)) (negate(abs m))) true))} |||
 |===
 
 
 == Test
 
-@n Open the @starter-file{negation-2} and click "Run". @ifproglang{pyret}{Select "Show Details" to the right of `examples-block-1`.} Using the information provided, fill in as many of the blanks as needed below to describe the examples that failed.
+@n Open the @starter-file{negation} and click "Run". @ifproglang{pyret}{Select "Show Details" to the right of `examples-block-1`.} Using the information provided, fill in as many of the blanks as needed below to describe the examples that failed.
 
 @hspace{2em} Test # @fitb{3em}{@ifsoln{1}} failed because the left side was @fitb{2ex}{@ifsoln{-6}} and the right side was @fitb{2ex}{@ifsoln{6}}.
 
