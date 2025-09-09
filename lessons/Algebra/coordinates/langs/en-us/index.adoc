@@ -25,8 +25,9 @@
 |[.materials-links]
 @material-links
 
+
 | Preparation
-| 
+|
 @preparation{
 - Decide whether you'd prefer to draw or project a number-line from 0 to 1000 on the board.
 - Open our @starter-file{ninja-cat-desmos, Ninja Cat slider activity} in Desmos and make a code or link to share with students.
@@ -34,7 +35,6 @@
   * @link{https://my.amplify.com/help/en/articles/6684337-getting-started-desmos-classroom-activities, Getting Started with Desmos Classroom Activities}
   * @link{https://my.amplify.com/help/en/articles/6684323-using-the-teacher-dashboard, Using the Teacher Dashboard}
   * @link{https://my.amplify.com/help/en/articles/6763511-classroom-conversations, Classroom Conversations}
-- Print and cutout @handout{dog-cat-ruby.adoc, the image of the dog}. _Use of the included cat and ruby images is optional_.
 }
 
 | Key Points for the Facilitator
@@ -43,95 +43,14 @@
 - Continue to use the same "Estimating Coordinates" page so students can track their pattern of estimation over time.
 |===
 
-== Navigating a Grid
+
+
+== Bridging to Video Games
 
 === Overview
-Students are asked to come up with a way of identifying location on a grid, which provides the justification for coordinates.
+Students gradually break down the NinjaCat game into parts, revealing how @vocab{coordinates} play a crucial role in video games, and how animation is created via equations that govern the changing values of those coordinates.
 
-=== Launch
-@slidebreak{LaunchC}
-@ifnotslide{@right{image{images/1dPosition.png}}}
-@ifslide{@center{@image{images/1dPosition.png}}}
-Computers use numbers to represent a character’s position onscreen, using number lines as rulers to measure the distance from the bottom-left corner of the screen. 
-
-If we placed the image of a dog on a screen and drew a number line running from 0 (on the left) to 1000 (on the right), it would look like this.
-
-We could then measure the distance back to the left-hand edge. If we shared that number with anyone else who knows about our number line, they would be able to duplicate the exact position of the Dog.
-
-@slidebreak{LaunchC}
-
-@ifslide{@center{@image{images/1dPosition.png}}}
-
-@QandA{
-@Q{What is the coordinate of the Dog, if it's on the left-hand edge of the screen?}
-@A{The Dog's coordinate would be zero.}
-@Q{What is the coordinate of the Dog, if it's on the right-hand edge of the screen?}
-@A{The Dog's coordinate would be 1000.}
-@Q{What is the coordinate of the Dog, if it's in the center of the screen?}
-@A{The Dog's coordinate would be 500.}
-@Q{What coordinate would place the Dog beyond the left-hand edge of the screen?}
-@A{The Dog's coordinate would be less than zero (negative).}
-@Q{What coordinate would place the Dog beyond the right-hand edge of the screen?}
-@A{The Dog's coordinate would be greater than 1000.}
-}
-
-@opt{Select a volunteer to leave the room for a moment. Place the printed Dog image somewhere on the number line you've drawn on the board, and have the class quietly choose the number that represents the Dog's location. Remove the Dog and invite the student back into the room. Can they position the Dog at the right place, based on the number chosen by the class?}
-
-@slidebreak{LaunchC}
-
-@ifslide{@center{@image{images/1dPosition.png}}}
-
-This number line lets us communicate the position of the Dog using a single number! Unfortunately, it only represents the distance from the left-hand edge of the screen. That means the dog could be at any _height_ in the center of the screen, and it would always have the same number to represent its position.
-
-=== Investigate
-@slidebreak{InvestigateR}
-
-@ifslide{@right{@image{images/2dPosition.png}}}
-By adding a second number line, we can locate a character _anywhere_ on the screen in either direction.
-
-- The first line we drew runs from left to right and is called the @vocab{x-axis}.  
-- The second line, which runs up and down, is called the @vocab{y-axis}. 
-
-A 2-dimensional @vocab{coordinate} consists of both the x- and y-locations on the axes.
-
-@slidebreak{InvestigateR}
-
-@right{@image{images/2dPosition.png}}
-Suppose we wanted to locate NinjaCat’s position on the screen. We can find the x-coordinate by dropping a line down from NinjaCat and read the position on the number line, then find the y-coordinate by running a line to the y-axis.
-
-A coordinate pair is always written in the form of (x, y) with the x before the y (just like in the alphabet!). 
-
-@slidebreak{InvestigateR}
-
-@ifslide{@right{@image{images/2dPosition.png}}}
-The coordinate pair @math{(200, 50)}, for example, indicates that the x-coordinate is 200 and the y-coordinate is 50.
-
-@slidebreak{Investigate}
-
-@lesson-instruction{
-To develop an intuition for coordinates, complete @printable-exercise{Estimation.adoc}.
-}
-
-=== Common Misconceptions
-
-Math-phobic students often fail to realize that _common sense_ and _intuition_ can be helpful in exercises where the answer is a number! The first two prompts in the "Synthesize" section directly get at this misconception, but you may want to pay special attention to those students while they are working.
-
-=== Synthesize
-@slidebreak{Synthesize}
-
-@QandA{
-@Q{Should any of the characters have x-coordinates that are very similar? How come?}
-@A{Ninja Cat and the cloud have similar x-coordinates. They have the same horizontal position.}
-@Q{Should any of the characters have y-coordinates that are very similar? How come?}
-@A{The Ruby and the Dog have similar y-coordinates. They have the same vertical position.}
-@Q{How do you think this concept relates to a video game?}
-@A{Answers vary: we need to know where characters are on the screen, we need a way for players to interact with certain parts of the screen, etc.}
-}
-
-== Bridging to video games
-
-=== Overview
-Students explore a coordinate activity in which a Cartesian point is used to compute the position of a character in a game. From there, they brainstorm a game of their own.
+From there, they brainstorm a game of their own.
 
 === Launch
 @slidebreak{Launch-DN}
@@ -146,6 +65,35 @@ Students explore a coordinate activity in which a Cartesian point is used to com
 
 === Investigate
 @slidebreak{Investigate}
+@lesson-instruction{
+Work with your partner to complete @printable-exercise{ReverseEngineerGame.adoc}.
+}
+
+@teacher{
+Debrief what changed, what changed about them, and how the changes are modeled mathematically!
+}
+
+@slidebreak{Investigate}
+
+@QandA{
+@Q{How many numbers does it take to represent a single frame of the video game? +
+_Hint: Each character is represented by both an x-coordinate and a y-coordinate (some of which are fixed and some of which are randomly generated)._}
+@A{Nine: 2 for the cat (moves left and right), 2 each for the cloud and ruby (move left at random y-positions), 2 for the dog (moves left at a fixed y-position) and 1 for the score}
+@Q{How are those numbers changing -- or _varying_ -- as the game plays? When do they increase? Decrease?}
+@A{The cat's y-coordinate increases when they jump and decreases when they fall.}
+@A{x-coordinates increase when a character moves right, and decrease when they move left.}
+@A{The score increases by 1 when the cat gets a ruby and by 10 when the cat jumps on the dog.}
+@Q{How many variables would we need to have a two-player game with two cats?}
+@A{(Sample answer) Eleven: we'd need to add another set of x-y coordinates.}
+@Q{How many variables would we need if the entire game was in 3D?}
+@A{(Sample answer) Fifteen: we'd need to add z-coordinates to each character.}
+}
+
+@teacher{
+The main idea here is to understand that while we see images on a screen, the computer only sees a small set of variables, which uniquely model the state of the game. The way those numbers change determines how the game behaves, and we can add features to the game if we're willing to keep track of more variables.
+}
+
+@slidebreak{Investigate}
 
 @lesson-instruction{
 - Complete @printable-exercise{BrainstormGame.adoc} and decide on a Player, Target, Danger, and Background for your game!
@@ -155,6 +103,10 @@ Students explore a coordinate activity in which a Cartesian point is used to com
   * 2 characters that have the same x-coordinate.
   * 2 different characters that have the same y-coordinate.
 }
+
+=== Common Misconceptions
+- Students are likely to describe what the character is _doing_, as opposed to _what changes_. For example: "The dog is moving to the left" is not actually describing the property being changed (position, place, location, etc).
+- Students may write down what they _hope_ is changeable, as opposed to what actually changes. It's common for students to say the cat's costume is changing, because they assume the cat will somehow "level up" if they get enough points.
 
 === Synthesize
 @slidebreak{Synthesize}
@@ -168,4 +120,90 @@ Students explore a coordinate activity in which a Cartesian point is used to com
 @A{A good estimate is a rough guess that makes sense given the limited information available to us.}
 @Q{How can we improve our estimation skills?}
 @A{Practice! Estimation skills will improve as we get more comfortable with numbers and with making guesses.}
+}
+
+@slidebreak{Synthesize}
+
+@QandA{
+@Q{How many variables do you think are being kept track of in a modern video game?}
+@A{A whole lot -- Thousands. Millions!}
+}
+
+
+== Connecting to Real Games
+
+=== Overview
+Students apply this way of thinking to more complex, real-world games. They also get a sense for how much work is involved in creating games like that.
+
+=== Launch
+@slidebreak{Launch}
+
+@lesson-instruction{
+What are your favorite video games?
+}
+
+@teacher{Make a list of the names of the video games on the board.}
+
+=== Investigate
+@slidebreak{Investigate}
+@lesson-instruction{
+Let's choose one current, popular game to discuss.
+
+- How long do you think it took to create that game?
+- How _many people_ do you think it takes to create a game like that?
+- How _much money_ does it take to create a game like that?
+}
+
+@teacher{
+Collect students estimates for each of the questions above.
+}
+
+@opt{Once students have made their estimates, have students use the Internet to research these questions and compare the actual numbers to their estimates.}
+
+@slidebreak{Investigate}
+
+@ifnotslide{*Answers:*} There's a lot of variability, especially between game consoles and cell phone games! But here are a few sample numbers:
+
+[cols="3,^1,^1,^1", options="header"]
+|===
+| Title
+| Time
+| Team Size
+| Budget
+
+| Call of Duty: Modern Warfare 2
+| 2 years
+| 500+
+| 50m+
+
+| Final Fantasy VII
+| 3 years
+| 100+
+| 40-45m
+
+| Shadow of the Tomb Raider
+| 3+ years
+| 100+
+| 75m+
+
+|===
+
+@slidebreak{Investigate}
+
+The 3D, two-player version of NinjaCat needed a lot more numbers than the simple one we played with today, _but the actual concepts at work are the same_.
+
+We don't have time in this course to make games that are as complex as your favorite games, but you'll be learning the same concepts just by making a simpler one.
+
+@teacher{
+The goal here is not to discourage students from the possibility of eventually creating a game like their favorite game, but to manage expectations given our limited resources (time, money, and people).  By starting with this game project, students are learning transferable skills that can help them later on in learning new programming languages and creating bigger projects.
+}
+
+=== Synthesize
+@slidebreak{Synthesize}
+
+@QandA{
+@Q{Why won't we be making video games that are as complex as games like Call of Duty in this course?}
+@A{They take years to build, even with a huge professional team!}
+@Q{What kind of video games are we likely make in this course?}
+@A{Fairly basic games with a player, target and danger, like the Ninjacat Game we played at the beginning of today's class.}
 }
