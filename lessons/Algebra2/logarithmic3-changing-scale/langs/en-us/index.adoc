@@ -46,9 +46,45 @@
 @objective{logarithms-exponents}
 
 === Overview
-Students deepen their understanding of functions as a "ratio of growth", by experimenting with Desmos's `Linear` and `Logarithmic` settings for x- and y-axes. These settings change the way the axis intervals grow, resulting in @vocab{inverse} behavior in the graph. The logarithmic setting results in _exponentially-increasing_ intervals, which warp the graph of functions in interesting ways! Students explore these changes on a variety of functions.
+Students start by fitting the logarithmic curve in Desmos, returning to the question of "how can we find the _optimal_ curve?"
+
+To explore this question, they first deepen their understanding of functions as a "ratio of growth", by experimenting with Desmos's `Linear` and `Logarithmic` settings for x- and y-axes. These settings change the way the axis intervals grow, resulting in @vocab{inverse} behavior in the graph. The logarithmic setting results in _exponentially-increasing_ intervals, which warp the graph of functions in interesting ways! Students explore these changes on a variety of functions.
 
 === Launch
+@slidebreak{Launch}
+
+@teacher{Sync or pace students to *Slide 5: Wealth-v-Health (Logarithmic)* of @starter-file{alg2-log-desmos}.}
+
+Let's try finding the best logarithmic model we can, starting by eyeballing it in Desmos and then fitting it in Pyret.
+
+@lesson-instruction{
+- Return to the *Fitting Wealth-v-Health and Exploring Logarithmic Models Desmos file*.
+- You should now be on *Slide 5: Wealth-v-Health (Logarithmic)*. Use the sliders to fit the best logarithmic model you can.
+- Open the @starter-file{alg2-countries}, and find the function template for `logarithmic`. Fill in the model settings and use `fit-model` to complete the first section of @printable-exercise{fitting-logarithmic-models.adoc}.
+}
+
+@slidebreak{Launch}
+
+@QandA{
+@Q{What values did you come up with for @math{a} and @math{k} in your best-guess logarithmic model?}
+@A{Record different students' responses for @math{a} and @math{k} on the board.}
+
+@Q{How do your @math{a} and @math{k} values compare with those of other students'? Are they very similar or very different?}
+
+@Q{What were the @math{S} values for these models?}
+}
+
+@slidebreak{Launch}
+
+Trial-and-error only gets us so far, and it's not clear that we would ever stumble upon the optimal model. We need something like Pyret's `lr-plot`, which uses computational methods to find the optimal model.
+
+@lesson-point{
+Data Scientists often use transformations to stretch their data into shapes that are easier to work with, and then reverse the transformation when they are done.
+}
+
+If only we could _transform_ this curve to make it appear linear... Then we could use `lr-plot` to fit the optimal model, and reverse the transformation to get the optimal @vocab{logarithmic model}! But how can we transform a curve like this?
+
+
 @slidebreak{Launch}
 
 You've probably heard people talk about the slope of a line as "rise over run", or "rate of change". Both of these terms have to do with _comparing one variable to another_. On a graph where one variable is on the y-axis and the other is on the x-axis, that means _comparing the growth in one axis to growth in another_. 
@@ -94,13 +130,13 @@ You've graphed all of these lines and curves on axes that grow *linearly*: the t
 
 But...who says the _axes have to grow linearly?_
 
-@teacher{Sync or pace students to *Slide 5: Balancing Growth (Linear)* of @starter-file{alg2-log-desmos}.}
+@teacher{Sync or pace students to *Slide 6: Balancing Growth (Linear)* of @starter-file{alg2-log-desmos}.}
 
 @slidebreak{Launch}
 
 @lesson-instruction{
 - Return to the *Fitting Wealth-v-Health and Exploring Logarithmic Models Desmos file*.
-- You should now be on *Slide 5: Balancing Growth (Linear)*.
+- You should now be on *Slide 6: Balancing Growth (Linear)*.
 - Use it to complete the _first two sections_ of @printable-exercise{balancing-growth-linear.adoc}.
 }
 
@@ -155,9 +191,11 @@ The key here is to think in terms of *relative growth*: the scale of one axis _r
 
 @slidebreak{Investigate-DN}
 
-@teacher{Sync or pace students to *Slide 6: Balancing Growth (Logs and Exponents)* of @starter-file{alg2-log-desmos}.}
+@teacher{Sync or pace students to *Slide 7: Balancing Growth (Logs and Exponents)* of @starter-file{alg2-log-desmos}.}
 
 @lesson-instruction{
+- Return to the *Fitting Wealth-v-Health and Exploring Logarithmic Models Desmos file*.
+- You should now be on *Slide 7: Balancing Growth (Logs and Exponents)*.
 - Turn to @printable-exercise{balancing-growth-log-and-exp.adoc}, and complete the _first section_.
 }
 
@@ -234,46 +272,38 @@ Students take what they've learned about changing the scale, and apply it to the
 === Launch
 @slidebreak{Launch-DN}
 
-@teacher{Sync or pace students to *Slide 7: Wealth-v-Health (Logarithmic)* of @starter-file{alg2-log-desmos}.}
+@teacher{Sync or pace students to *Slide 8: Wealth-v-Health (Logarithmic, with scaled axes)* of @starter-file{alg2-log-desmos}.}
 
 @lesson-instruction{
 - Let's apply what we've learned about changing scale to our data!
-- In order to complete the first section of @printable-exercise{fitting-logarithmic-models.adoc}, you'll need to:
-  * Return to the *Fitting Wealth-v-Health and Exploring Logarithmic Models Desmos file*. You should now be on Slide 7: "Wealth-v-Health (Logarithmic)".
-  * Open the @starter-file{alg2-countries}.
+- In order to complete the second section of @printable-exercise{fitting-logarithmic-models.adoc}, you'll need to return to the *Fitting Wealth-v-Health and Exploring Logarithmic Models Desmos file*. You should now be on Slide 8: "Wealth-v-Health (Logarithmic, with scaled axes)".
 }
 
-@slidebreak{Launch}
-
-@QandA{
-@Q{What values did you come up with for @math{a} and @math{k} in your best-guess logarithmic model?}
-@A{Record different students' responses for @math{a} and @math{k} on the board.}
-
-@Q{How do your @math{a} and @math{k} values compare with those of other students'? Are they very similar or very different?}
-
-@Q{What were the @math{S} values for these models?}
-}
-
-@slidebreak{Launch}
-
-Trial-and-error only gets us so far, and it's not clear that we would ever stumble upon the optimal model. We need something like Pyret's `lr-plot`, which uses computational methods to find the optimal model.
-
-@lesson-point{
-Data Scientists often use transformations to stretch their data into shapes that are easier to work with, and then reverse the transformation when they are done. 
-}
-
-If only we could _transform_ this data to make it appear linear... Then we could use `lr-plot` to fit the optimal model, and reverse the transformation to get the optimal @vocab{logarithmic model}!
 
 === Investigate
 @slidebreak{Investigate}
 
 @lesson-instruction{
+- Return to the @starter-file{alg2-countries}, and use your scaled-axis model to complete and fit `logarithmic2`.
 - Complete the last section of @printable-exercise{fitting-logarithmic-models.adoc}.
 - Be ready to share your logarithmic model, and your answer to the last question!
 }
 
 @teacher{
 Students will be switching the x-axis of their graph from linear to logarithmic in this section. Make sure they are toggling back and forth between the two views as they look for the best-fitting model.
+}
+
+@@slidebreak{Investigate}
+
+@QandA{
+@Q{What values did you come up with for @math{a} and @math{k} in your scaled-axis logarithmic model?}
+@A{Record different students' responses for @math{a} and @math{k} on the board.}
+
+@Q{How do your @math{a} and @math{k} values compare with those of other students'? Are they very similar or very different?}
+
+@Q{What were the @math{S} values for these models?}
+
+@Q{Did scaling the x-axis change the distribution of our model settings? If so, did the class's values for @math{a} and @math{k} become _more_ or _less_ similar?}
 }
 
 @slidebreak{Investigate}
