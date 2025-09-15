@@ -1,4 +1,4 @@
-= Programming with Exponents
+= Programming with Exponents and Negatives
 
 ++++
 <style>
@@ -38,37 +38,38 @@ td .fitb{ padding-top: 0.2rem !important; min-width: 1em; }
 |
 @ifproglang{pyret}{`examples:`}
 
-@fitb{2em}{@ifsoln{✔}} @show{(code '(EXAMPLE (= (expt 5 2) (* 2 (* 2 (* 2 (* 2 2))))) true))}
+@fitb{2em}{@ifsoln{✔}} @show{(code '(EXAMPLE (= (expt 5 -2) (* -2 (* -2 (* -2 (* -2 -2))))) true))}
+
+@fitb{2em}{@ifsoln{❌}}
+@show{(code '(EXAMPLE (= (expt -4 6) (* -4 (* -4 (* -4 (* -4 (* -4 -4)))))) true))}
+
+@fitb{2em}{@ifsoln{❌}}
+@show{(code '(EXAMPLE (= (expt 2 -3) (* -3 -3)) true))}
 
 @fitb{2em}{@ifsoln{✔}}
-@show{(code '(EXAMPLE (= (expt 8 3) (* 8 (* 8 8))) true))}
+@show{(code '(EXAMPLE (= (negate (expt 8 3)) (expt (negate 8) 3)) true))}
 
 @fitb{2em}{@ifsoln{❌}}
-@show{(code '(EXAMPLE (= (expt 4 6) (* 4 (* 4 (* 4 (* 4 (* 4 4)))))) true))}
-
-@fitb{2em}{@ifsoln{❌}}
-@show{(code '(EXAMPLE (= (expt 2 3) (* 3 3)) true))}
+@show{(code '(EXAMPLE (= (negate (expt 2 -2)) (expt 2 negate(-2))) true))}
 
 @fitb{2em}{@ifsoln{✔}}
-@show{(code '(EXAMPLE (= (expt 1 4) (* 1 (* 1 (* 1 1)))) true))}
-
-@fitb{2em}{@ifsoln{❌}}
-@show{(code '(EXAMPLE (= (expt 3 5) (+ 3 (+ 3 (+ 3 (+ 3 3))))) true))}
+@show{(code '(EXAMPLE (= (expt (negate 1) 4) (* -1 (* -1 (* -1 -1)))) true))}
 
 @ifproglang{pyret}{`end`}
 |===
 
-@n Open the @starter-file{exponents} and click "Run." @ifproglang{pyret}{Select "Show Details" to the right of `examples-block-1`.} Using the information provided, fill in as many of the blanks as needed below to describe the examples that failed.
+@n Open the @starter-file{negative-exponents} and click "Run." @ifproglang{pyret}{Select "Show Details" to the right of `examples-block-1`.} Using the information provided, fill in as many of the blanks as needed below to describe the examples that failed.
 
-@hspace{2em} Test # @fitb{5em}{@ifsoln{1}} failed because the first expression evaluated to @fitb{5em}{@ifsoln{25}} and the second expression evaluated to @fitb{5em}{@ifsoln{32}}.
+@hspace{2em} Test # @fitb{5em}{@ifsoln{1}} failed because the first expression evaluated to @fitb{5em}{@ifsoln{0.04}} and the second expression evaluated to @fitb{5em}{@ifsoln{-32}}.
 
-@hspace{2em} Test # @fitb{5em}{@ifsoln{3}} failed because the first expression evaluated to @fitb{5em}{@ifsoln{8}} and the second expression evaluated to @fitb{5em}{@ifsoln{9}}.
+@hspace{2em} Test # @fitb{5em}{@ifsoln{3}} failed because the first expression evaluated to @fitb{5em}{@ifsoln{0.125}} and the second expression evaluated to @fitb{5em}{@ifsoln{9}}.
 
-@hspace{2em} Test # @fitb{5em}{@ifsoln{5}} failed because the first expression evaluated to @fitb{5em}{@ifsoln{243}} and the second expression evaluated to @fitb{5em}{@ifsoln{15}}.
+@hspace{2em} Test # @fitb{5em}{@ifsoln{5}} failed because the first expression evaluated to @fitb{5em}{@ifsoln{-0.25}} and the second expression evaluated to @fitb{5em}{@ifsoln{4}}.
 
 @n Changing *only* the expression after the @show{(code '=)} sign, fix the *failing* examples so that _all of them pass_.  Describe one of the changes.
 
 @blanklines{4}{}
+
 
 == Does it equal 16?
 
@@ -81,27 +82,28 @@ td .fitb{ padding-top: 0.2rem !important; min-width: 1em; }
 | @ifproglang{pyret}{`examples:`}
 
 |
-| @fitb{2em}{@ifsoln{✔}}  @show{(code '(EXAMPLE (= (expt 2 4) 16) true))}
-| @fitb{2em}{@ifsoln{❌}} @show{(code '(EXAMPLE (= (* 2 (* 2 (expt 2 2))) 16) true))}
+| @fitb{2em}{@ifsoln{✔}}  @show{(code '(EXAMPLE (= (expt -2 4) 16) true))}
+| @fitb{2em}{@ifsoln{❌}} @show{(code '(EXAMPLE (= (negate (* 2 (* 2 (expt 2 2)))) 16) true))}
 
 |
-| @fitb{2em}{@ifsoln{❌}} @show{(code '(EXAMPLE (= (+ (expt 2 3) 10) 16) true))}
-| @fitb{2em}{@ifsoln{✔}}  @show{(code '(EXAMPLE (= (* (expt 4 2) 2) 16) true))}
+| @fitb{2em}{@ifsoln{❌}} @show{(code '(EXAMPLE (= (+ (expt -2 3) 8) 16) true))}
+| @fitb{2em}{@ifsoln{❌}}  @show{(code '(EXAMPLE (= (* (expt -4 2) (negate 2)) 16) true))}
 
 |
-| @fitb{2em}{@ifsoln{✔}}  @show{(code '(EXAMPLE (= (* 4 (expt 1 4)) 16) true))}
-| @fitb{2em}{@ifsoln{✔}}  @show{(code '(EXAMPLE (= (/ (/ (expt 4 3) 2) 2) 16) true))}
+| @fitb{2em}{@ifsoln{✔}}  @show{(code '(EXAMPLE (= (* 1 (expt (negate 2) 4)) 16) true))}
+| @fitb{2em}{@ifsoln{✔}}  @show{(code '(EXAMPLE (= (/ (/ (expt -4 3) 2) -2) 16) true))}
 
 |
-| @fitb{2em}{@ifsoln{✔}}  @show{(code '(EXAMPLE (= (* 2 (expt 2 3)) 16) true))}
-| @fitb{2em}{@ifsoln{❌}} @show{(code '(EXAMPLE (= (/ (/ (expt 4 3) 2) 2) 16) true))}
+| @fitb{2em}{@ifsoln{✔}}  @show{(code '(EXAMPLE (= (* -2 (expt -2 3)) 16) true))}
+| @fitb{2em}{@ifsoln{✔}} @show{(code '(EXAMPLE (= (/ (/ (expt -4 3) -2) 2) 16) true))}
 
 |
 | @ifproglang{pyret}{`end`}
 | @ifproglang{pyret}{`end`}
 |===
 
-@n Open the @starter-file{is-it-16} and click "Run". @ifproglang{pyret}{Select "Show Details" to the right of `examples-block-1`.} Which tests failed? @fitb{}{@ifsoln{2, 3, and 6.}}
+
+@n Open the @starter-file{is-it-16-negative} and click "Run". @ifproglang{pyret}{Select "Show Details" to the right of `examples-block-1`.} Which tests failed? @fitb{}{@ifsoln{2, 3, and 4.}}
 
 @n The three failing examples are all wrong for the same reason. That's because the students who wrote them don't understand something about how exponents work! What do they not understand?? @fitb{}{@ifsoln{Rather than multiplying the base times itself as many times as the exponent indicates,}}
 
