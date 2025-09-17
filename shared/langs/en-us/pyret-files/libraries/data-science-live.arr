@@ -600,19 +600,19 @@ end
 
 #################################################################################
 # Live Survey Functions
-fun live-display(gsheetID :: String, sheet-name :: String, columns :: List<String>, f)  -> Image block:
+fun live-display(gsheetID :: String, sheet-name :: String, columns :: List<String>, visualize)  -> Image block:
   fun get-table(t):
     sheet = load-spreadsheet(gsheetID).sheet-by-name(sheet-name, true)
     builtins.open-table(sheet.load(raw-array-from-list(columns), [raw-array: ]))
   end
   r = reactor:
     init: get-table(nothing),
-    to-draw: f,
+    to-draw: visualize,
     seconds-per-tick: 2,
     on-tick: get-table
   end
   r.interact()
-  f(get-table(nothing))
+  visualize(get-table(nothing))
 end
 
 
