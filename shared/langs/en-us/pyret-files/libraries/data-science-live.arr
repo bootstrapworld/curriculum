@@ -8,7 +8,7 @@ import starter2024 as Starter
 import constants as Consts
 provide from Consts: PI, E end
 provide from Starter: expt, sqrt, sqr, abs, random end
-include chart
+include charts
 include image
 import math as Math
 provide from Math:
