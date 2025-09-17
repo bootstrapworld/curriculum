@@ -1,4 +1,4 @@
-use context shared-gdrive("Bootstrap-DataScience-v2.2-live.arr", "1IwjAv0wrEaJUqQQhZvTMZ-3mhaDXhyEy")
+use context url("https://raw.githubusercontent.com/bootstrapworld/curriculum/refs/heads/git-libraries/shared/langs/en-us/pyret-files/libraries/data-science-live.arr")
 
 
 # Students: If your teacher shared a copy of this file with you, just click "Run"

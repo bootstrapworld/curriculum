@@ -1,4 +1,4 @@
-use context url("https://raw.githubusercontent.com/bootstrapworld/curriculum/refs/heads/git-libraries/lib/libraries/data-science.arr")
+use context url("https://raw.githubusercontent.com/bootstrapworld/curriculum/refs/heads/git-libraries/shared/langs/en-us/pyret-files/libraries/data-science.arr")
 #########################################################
 # Load your spreadsheet and define your table
 MY-SHEET = load-spreadsheet("ADDRESS-OF-YOUR-GOOGLE-SHEET")
