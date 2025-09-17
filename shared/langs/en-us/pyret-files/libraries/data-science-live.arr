@@ -1,14 +1,14 @@
 use context starter2024
 ################################################################
 # Bootstrap: DataScience 
-# Support files, as of Fall 2026
+# Support files, as of Fall 2024
 
 provide *
 import starter2024 as Starter 
 import constants as Consts
 provide from Consts: PI, E end
 provide from Starter: expt, sqrt, sqr, abs, random end
-include charts
+include chart
 include image
 import math as Math
 provide from Math:
@@ -27,7 +27,6 @@ import color as C
 provide from C:
   type *,
 end
-import global as Global
 import gdrive-sheets as G
 provide from G: 
     * hiding(load-spreadsheet),
@@ -76,7 +75,7 @@ shadow render-chart = render-chart
 
 num-round-to :: (n :: Number, digits :: Number) -> Roughnum
 fun num-round-to(n, digits) block:
-  num-to-roughnum(num-round(n * num-expt(10, digits)) / num-expt(10, digits))
+  num-to-roughnum(num-round(n * expt(10, digits)) / expt(10, digits))
 end
 
 #################################################
@@ -84,7 +83,7 @@ end
 
 # round digits to something reasonable
 fun round-digits(val, digits):
-  num-round(val * num-expt(10, digits)) / num-expt(10, digits)
+  num-round(val * expt(10, digits)) / expt(10, digits)
 where:
   round-digits(1.24, 1) is 1.2
   round-digits(num-sqrt(2), 3) is 1.414
@@ -94,7 +93,7 @@ end
 fun log-base(base, val):
   lg = num-log(val) / num-log(base)
   lg-round = round-digits(lg, 4)
-  if roughly-equal(lg-round, lg) and roughly-equal(num-expt(base, lg-round), val):
+  if roughly-equal(lg-round, lg) and roughly-equal(expt(base, lg-round), val):
     lg-round
   else:
     lg
@@ -106,16 +105,30 @@ where:
   log-base(4, 32) is 2.5
 end
 
-
 # shortcut alias for log and ln
 fun log(n): log-base(10, n) end
 ln = num-log
 
 # utility functions
-fun fake-num-to-fixnum(n):
+fun fake-num-to-fixnum(n) block:
   var s = num-to-string(num-to-roughnum(n))
-  string-substring(s, 1, string-length(s))
+  var len = string-length(s)
+  s := string-substring(s, 1, len)
+  len := len - 1
+  expt-position = string-index-of(s, 'e')
+  if expt-position == -1: s
+  else:
+    if string-substring(s, expt-position + 1, expt-position + 2) == '+':
+      string-substring(s, 0, expt-position) + string-substring(s, expt-position + 2, len)
+    else: s
+    end
+  end
 end
+
+fun fake-num-to-fixnum-no-exp(n):
+  make-unsci(fake-num-to-fixnum(n))
+end
+
 fun string-to-number-i(s):
   cases(Option) string-to-number(s):
   | some(n) => n
@@ -123,165 +136,433 @@ fun string-to-number-i(s):
   end
 end
 
-fun make-sci(prefix, underlying-num, underlying-num-str, max-chars):
-  # spy "make-sci": prefix, underlying-num, underlying-num-str end
-  u-len = string-length(underlying-num-str)
+fun get-girth(n):
+  if n == 0: 0
+  else: num-floor(log-base(10, num-abs(n)))
+  end
+end
+
+fun make-sci(underlying-num, underlying-num-str, max-chars) block:
+  # spy "make-sci": underlying-num, underlying-num-str, max-chars end
+  underlying-num-str-len = string-length(underlying-num-str)
   girth = num-floor(log-base(10, num-abs(underlying-num)))
-  # spy 'girth': girth end
   neg-girth = 0 - girth
+  # spy 'girth': girth, neg-girth end
   decimal-point-position = string-index-of(underlying-num-str, '.')
   int-str = if decimal-point-position > -1:
     string-substring(underlying-num-str, 0, decimal-point-position)
     else: underlying-num-str
     end
   dec-str = if decimal-point-position > -1:
-    string-substring(underlying-num-str, decimal-point-position + 1, u-len)
+    string-substring(underlying-num-str, decimal-point-position + 1, underlying-num-str-len)
     else: ''
     end
+  # spy: int-str, dec-str end
   dec-str-len = string-length(dec-str)
-  int-part = if girth >= 0:
+  int-part = if (girth > 0) and (girth < max-chars): int-str + '.'
+    else if girth >= 0:
     string-substring(int-str, 0, 1) + '.'
     else: string-substring(dec-str, neg-girth - 1, neg-girth) + '.'
     end
-  dec-part = if girth >= 0:
+  dec-part = if (girth > 0) and (girth < max-chars): dec-str
+    else if girth >= 0:
     string-substring(int-str, 1, string-length(int-str)) +
                 dec-str
     else if neg-girth == dec-str-len: '0'
     else: string-substring(dec-str, neg-girth, dec-str-len)
     end
-  expt-part = if girth == 0: ''
+  expt-part = if (girth > 0) and (girth < max-chars): ''
+              else if girth == 0: ''
               else if girth > 0: 'e' + num-to-string(girth)
               else: 'e-' + num-to-string(neg-girth)
               end
-    
-  if (string-length(prefix) + string-length(int-part) + 
-     string-length(dec-part) + string-length(expt-part)) <= max-chars:
-     prefix + int-part  + dec-part   + expt-part
+  # spy: int-part, dec-part, expt-part end
+
+  output = int-part + dec-part + expt-part
+
+  if string-length(output) <= max-chars:
+    # spy: fixme: 100 end
+    output
   else:
-     shrink-dec(prefix + int-part + dec-part,
-       max-chars - (string-length(expt-part))) + expt-part
+    # spy: fixme: 101 end
+    shrink-dec(output, max-chars)
   end
 end
-fun make-unsci(prefix, underlying-num-str, u-len):
-  # spy 'make-unsci of': prefix, underlying-num-str end
+
+fun make-unsci(underlying-num-str):
+  # spy 'make-unsci of': underlying-num-str end
   e-position = string-index-of(underlying-num-str, 'e')
-  mantissa-str = string-substring(underlying-num-str, 0, e-position)
-  exponent = string-to-number-i(string-substring(
-    underlying-num-str, e-position + 1, u-len))
-  mantissa-len = string-length(mantissa-str)
-  mantissa-decimal-point-position = string-index-of(mantissa-str, '.')
-  mantissa-int-str = if mantissa-decimal-point-position > -1:
+  if e-position < 0: underlying-num-str
+  else:
+    underlying-num-str-len = string-length(underlying-num-str)
+    mantissa-str = string-substring(underlying-num-str, 0, e-position)
+    exponent = string-to-number-i(string-substring(
+    underlying-num-str, e-position + 1, underlying-num-str-len))
+    mantissa-len = string-length(mantissa-str)
+    mantissa-decimal-point-position = string-index-of(mantissa-str, '.')
+    mantissa-int-str =
+    if mantissa-decimal-point-position > -1:
       string-substring(mantissa-str, 0, mantissa-decimal-point-position)
     else: mantissa-str
     end
-  mantissa-frac-str = if mantissa-decimal-point-position > -1:
-    string-substring(mantissa-str,
+    mantissa-frac-str =
+    if mantissa-decimal-point-position > -1:
+      string-substring(mantissa-str,
       mantissa-decimal-point-position + 1, mantissa-len)
     else: ''
     end
-  if exponent == 0:
-    prefix + underlying-num-str
-  else if exponent > 0:
-    mantissa-frac-len = string-length(mantissa-frac-str)
-    if mantissa-frac-len == exponent:
-      prefix + mantissa-int-str + mantissa-frac-str
-    else if mantissa-frac-len < exponent:
-      prefix + mantissa-int-str + mantissa-frac-str +
+    if exponent == 0:
+      underlying-num-str
+    else if exponent > 0:
+      mantissa-frac-len = string-length(mantissa-frac-str)
+      if mantissa-frac-len == exponent:
+        mantissa-int-str + mantissa-frac-str
+      else if mantissa-frac-len < exponent:
+        mantissa-int-str + mantissa-frac-str +
         string-repeat('0', exponent - mantissa-frac-len)
-    else:
-      prefix + mantissa-int-str +
+      else:
+        mantissa-int-str +
         string-substring(mantissa-frac-str, 0, exponent) + '.' +
         string-substring(mantissa-frac-str, exponent, mantissa-frac-len)
+      end
+    else: # ie, exponent < 0
+      shadow exponent = 0 - exponent
+      mantissa-int-len = string-length(mantissa-int-str)
+      if mantissa-int-len == exponent:
+        "0." + mantissa-int-str + mantissa-frac-str
+      else if mantissa-int-len < exponent:
+        "0." + string-repeat('0', (exponent - mantissa-int-len) - 1) +
+        mantissa-int-str + mantissa-frac-str
+      else:
+        string-substring(mantissa-int-str, 0, mantissa-int-len - exponent) +
+        "." +
+        string-substring(mantissa-int-str, mantissa-int-len - exponent,
+        mantissa-int-len)
+      end
     end
+  end
+end
+
+fun shrink-dec-part(dec-part, max-chars) block:
+  # spy 'shrink-dec-part of': dec-part, max-chars end
+  dec-part-len = string-length(dec-part)
+  if max-chars < 0 block:
+    'cantfit'
+  else if dec-part-len == 0:
+    ''
   else:
-    shadow exponent = 0 - exponent
-    mantissa-int-len = string-length(mantissa-int-str)
-    if mantissa-int-len == exponent:
-      prefix + "0." + mantissa-int-str + mantissa-frac-str
-    else if mantissa-int-len < exponent: 
-      prefix + "0." + string-repeat('0', (exponent - mantissa-int-len) - 1) +
-      mantissa-int-str + mantissa-frac-str
+    girth = get-girth(string-to-number-i(dec-part))
+    var left-0-padding-len = dec-part-len - (girth + 1)
+    ss1n-str = string-substring(dec-part, 0, max-chars)
+    var ss1n = 0
+    var ss1n-girth = -1
+    if ss1n-str <> '' block:
+      ss1n := string-to-number-i(ss1n-str)
+      ss1n-girth := get-girth(ss1n)
+    else: false
+    end
+    orig-ss1n-girth = ss1n-girth
+    ss2n = string-to-number-i(string-substring(dec-part, max-chars, max-chars + 1))
+    # spy: fixme: 177 end
+    # spy: dec-part, max-chars, ss1n, ss2n end
+    if ss2n >= 5 block:
+      ss1n := ss1n + 1
+      ss1n-girth := get-girth(ss1n)
+    else: false
+    end
+    if ss1n-girth > orig-ss1n-girth:
+      left-0-padding-len := left-0-padding-len - 1
+    else: false
+    end
+    if left-0-padding-len < 0:
+      'overflow'
     else:
-      prefix +
-      string-substring(mantissa-int-str, 0, mantissa-int-len - exponent) +
-      "." + 
-      string-substring(mantissa-int-str, mantissa-int-len - exponent,
-      mantissa-int-len)
+      left-0-padding = string-repeat('0', left-0-padding-len)
+      left-0-padding + num-to-string(ss1n)
     end
   end
 end
+
 fun shrink-dec(num-str, max-chars):
-  # spy 'shrink-dec of':  num-str end
-  decimal-position = string-index-of(num-str, '.')
   len = string-length(num-str)
-  if decimal-position <= max-chars: string-substring(num-str, 0, max-chars)
-  else: num-str
+  # spy 'shrink-dec of': num-str, max-chars, len end
+  if len <= max-chars block: num-str
+  else:
+    dot-position = string-index-of(num-str, '.')
+    var int-part = '0'
+    var frac-expt-part = ''
+    var frac-part = ''
+    var expt-part = ''
+    if dot-position < 0 block:
+      e-position = string-index-of(num-str, 'e')
+      if e-position < 0 block:
+        int-part := num-str
+      else:
+        int-part := string-substring(num-str, 0, e-position)
+        expt-part := string-substring(e-position, len)
+      end
+    else:
+      int-part := string-substring(num-str, 0, dot-position)
+      frac-expt-part := string-substring(num-str, dot-position + 1, len)
+      e-position = string-index-of(frac-expt-part, 'e')
+      if e-position < 0 block:
+        frac-part := frac-expt-part
+      else:
+        frac-expt-part-len = string-length(frac-expt-part)
+        frac-part := string-substring(frac-expt-part, 0, e-position)
+        expt-part := string-substring(frac-expt-part, e-position, frac-expt-part-len)
+      end
+    end
+    # spy: int-part, frac-part, expt-part end
+    int-part-len = string-length(int-part)
+    frac-part-len = string-length(frac-part)
+    expt-part-len = string-length(expt-part)
+    int-part-num = string-to-number-i(int-part)
+    if int-part-len <= max-chars block:
+      # spy: fixme: 302 end
+      frac-part-mod = shrink-dec-part(frac-part,
+      max-chars - (int-part-len + expt-part-len + 1))
+      # spy: frac-part-mod end
+      if frac-part-mod == 'cantfit':
+        'cantfit'
+      else if frac-part-mod == 'overflow':
+        # when incoming frac-part is .9999x where x >= 5,
+        # it overflows past the decimal point, i.e.,
+        # should be rounded to 1
+         num-to-string(int-part-num + 1) + expt-part
+      else if frac-part-mod == '':
+        # no need to add decimal point in this case
+         int-part + expt-part
+      else:
+         int-part + '.' + frac-part-mod + expt-part
+      end
+    else:
+      'cantfit'
+    end
   end
 end
+
 fun num-to-sci(n, max-chars) block:
-  # spy: n end
+  # spy 'num-to-sci of': n, max-chars end
   negativep = (n < 0)
   roughp = num-is-roughnum(n)
-  underlying-num = if negativep: 0 - n else: n end
+  var underlying-num = if negativep: 0 - n else: n end
   # spy: underlying-num end
   underlying-num-str = fake-num-to-fixnum(underlying-num)
+  if roughp:
+    underlying-num := string-to-number-i(underlying-num-str)
+  else: false
+  end
   # spy: underlying-num-str end
-  u-len = string-length(underlying-num-str)
-  g-len = (if negativep: 1 else: 0 end) + (if roughp: 1 else: 0 end) + u-len
+  underlying-num-str-len = string-length(underlying-num-str)
   prefix = (if roughp: '~' else: '' end) + (if negativep: '-' else: '' end)
-  if not(string-contains(underlying-num-str, 'e')): 
-    # spy: fixme: 1, g-len, max-chars end
-    if g-len <= max-chars: 
-      if not(string-contains(underlying-num-str, '/') or
-             string-contains(underlying-num-str, '.')):
-        num-to-string(n)
-      else: prefix + underlying-num-str
+  prefix-len = string-length(prefix)
+  max-chars-mod = max-chars - prefix-len
+  var output = ''
+  if not(string-contains(underlying-num-str, 'e')):
+    # spy: fixme: 1, max-chars-mod end
+    if underlying-num-str-len <= max-chars-mod:
+      if not(string-contains(underlying-num-str, '/') or string-contains(underlying-num-str, '.')):
+        # this weird special case bc of bigints
+        # spy: fixme: 1 end
+        output := num-to-string(n)
+      else:
+        # spy: fixme: 1.1 end
+        output := prefix + underlying-num-str
       end
-    else if num-to-fixnum(underlying-num) == 0: prefix + '0'
+    else if underlying-num == 0:
+      output := prefix + '0'
     else:
       girth = num-floor(log-base(10, num-abs(underlying-num)))
-      # spy: fixme: 2, girth, underlying-num-str end
-      sci-num-str = make-sci(prefix, underlying-num, underlying-num-str, 
-         max-chars)
+      sci-num-str = make-sci(underlying-num, underlying-num-str,
+      max-chars-mod)
+      # spy: fixme: 2, girth, underlying-num-str, sci-num-str, max-chars-mod end
       # spy: sci-num-str end
-      if (girth < 0) and (girth > -3):
+      if sci-num-str == 'cantfit':
+        output := 'cantfit'
+      else if (girth < 0) and (girth > -3):
         # spy: fixme: 2.4 end
-        shrink-dec(prefix + underlying-num-str, max-chars)
-      else if string-length(sci-num-str) <= max-chars: sci-num-str
-      else if not(string-contains(underlying-num-str, '/')): 
-        shrink-dec(prefix + underlying-num-str, max-chars)
+        num-mod = shrink-dec(underlying-num-str, max-chars-mod)
+        if num-mod == 'cantfit':
+          output := 'cantfit'
+        else:
+          output := prefix + num-mod
+        end
+      else if string-length(sci-num-str) <= max-chars-mod:
+        # spy: fixme: 2.5 end
+        output := prefix + sci-num-str
+      else if not(string-contains(underlying-num-str, '/')):
+        # spy: fixme: 2.6 end
+        num-mod = shrink-dec(underlying-num-str, max-chars-mod)
+        if num-mod == 'cantfit':
+          output := 'cantfit'
+        else:
+          output := prefix + num-mod
+        end
       else:
         # spy: fixme: 3 end
-        sci-num-str
+        output := prefix + sci-num-str
       end
     end
   else:
-    unsci-num-str = make-unsci(prefix, underlying-num-str, u-len)
-    # spy "unsci": prefix, underlying-num-str, unsci-num-str end
-    if string-length(unsci-num-str) <= max-chars: unsci-num-str
-    else if g-len <= max-chars: prefix + underlying-num-str
-    # else: shrink-num(prefix, underlying-num, max-chars)
-    else: shrink-dec(prefix + underlying-num-str, max-chars)
+    unsci-underlying-num-str = make-unsci(underlying-num-str)
+    # spy "unsci": prefix, underlying-num-str, unsci-underlying-num-str,  max-chars-mod end
+    # spy: unsci-num-str-len: string-length(unsci-underlying-num-str) end
+    if string-length(unsci-underlying-num-str) <= max-chars-mod:
+      output := prefix + unsci-underlying-num-str
+    else if underlying-num-str-len <= max-chars-mod:
+      output := prefix + underlying-num-str
+    else:
+      # spy: fixme: 4 end
+      num-mod = shrink-dec(underlying-num-str, max-chars-mod)
+      if num-mod == 'cantfit':
+        output := 'cantfit'
+      else:
+        output := prefix + num-mod
+      end
     end
   end
+  if output == 'cantfit':
+    raise('Could not fit ' + prefix + underlying-num-str + ' into ' + tostring(max-chars) + ' chars')
+  else:
+    output
+  end
 where:
+
   num-to-sci(0.00000343, 10) is "0.00000343" # max fixnum size (small)
   num-to-sci(0.000000343, 11) is "0.00000343"
   num-to-sci(0.00000343, 8) is "3.43e-6"
   num-to-sci(0.00000343, 9) is "3.43e-6"
   num-to-sci(4564634745675734, 16) is "4564634745675734" # max fixnum size (big)
   num-to-sci(45646347456757342, 17) is "45646347456757342"
-  num-to-sci(45646347456757342, 16) is "4.56463474567e16"
-  num-to-sci(4564634745675734, 15) is "4.5646347456e15" 
-  num-to-sci(-45646347456757342.000343, 16) is "-4.5646347456e16"
+  num-to-sci(45646347456757342, 16) is "4.56463474568e16"
+  num-to-sci(4564634745675734, 15) is "4.5646347457e15"
+  num-to-sci(-45646347456757342.000343, 16) is "-4.5646347457e16"
   num-to-sci(0.000001, 8) is "0.000001"
   num-to-sci(-0.000001, 8) is "-1.0e-6"
   num-to-sci(1/3, 18) is "0.3333333333333333"
   num-to-sci(1/3, 19) is "0.3333333333333333" # extra char is unused due to fixnum precision
   num-to-sci(1/3, 8) is "0.333333"
   num-to-sci(1 + 1/3, 8) is "1.333333"
+  num-to-sci(2.712828, 7) is "2.71283" # rounding
+  num-to-sci(3.1415962, 8) is "3.141596" # rounding
+  num-to-sci(0.011238, 7) is "0.01124" # not 0.01123
+  num-to-sci(12387691745124903567102, 7) is "1.24e22" # not 1.23876
+  num-to-sci(0.0000000000456, 7) is "4.6e-11" # not 4.56e-1
+  num-to-sci(203.680147, 9) is "203.68015" # not 2.0368e2
+  num-to-sci(103.40123123,9) is "103.40123" # not 1.0340e2
+  num-to-sci(20368014712358, 9) is "2.0368e13"
+
+  num-to-sci(20368.0147, 9) is "20368.015"
+  num-to-sci(203680.147, 9) is "203680.15"
+  num-to-sci(2036801.47, 9) is "2036801.5"
+  num-to-sci(20368014.7, 9) is "20368015" # "2.03680e7"
+
+  num-to-sci(0.00001284567, 8) is "1.285e-5" # "0.00001"
+  num-to-sci(0.00001284567, 9) is "1.2846e-5" # "0.000013"
+  num-to-sci(0.00001234567, 7) is "1.23e-5" # "1.2e-5"
+  num-to-sci(0.000001239567, 8) is "1.240e-6"
+
+  num-to-sci(0.0999999, 5) is "0.100"
+  num-to-sci(0.9999999, 5) is "1"
+
+  num-to-sci(9999.99, 3) raises "Could not fit"
 end
 # print(num-to-sci(23e3, 18))
+
+
+fun easy-num-repr(n, max-chars) block:
+  # spy 'easy-num-repr of': n, max-chars end
+  negativep = (n < 0)
+  roughp = num-is-roughnum(n)
+  prefix = (if roughp: '~' else: '' end) + (if negativep: '-' else: '' end)
+  prefix-len = string-length(prefix)
+  max-chars-mod = max-chars - prefix-len
+  var underlying-num = if negativep: 0 - n else: n end
+  underlying-num-str = fake-num-to-fixnum-no-exp(underlying-num)
+  if roughp:
+    underlying-num := string-to-number-i(underlying-num-str)
+  else: false
+  end
+  decimal-point-position = string-index-of(underlying-num-str, '.')
+  underlying-num-str-len = string-length(underlying-num-str)
+  # spy: underlying-num, underlying-num-str, underlying-num-str-len, max-chars-mod end
+  var int-str = underlying-num-str
+  var dec-str = ''
+  if decimal-point-position > -1 block:
+    int-str := string-substring(underlying-num-str, 0, decimal-point-position)
+    dec-str := '0' + string-substring(underlying-num-str, decimal-point-position, underlying-num-str-len)
+  else: false
+  end
+  # spy: int-str, dec-str end
+  var output = ''
+  if underlying-num == 1 block:
+    output := prefix + '1'
+  else:
+    var min-len-needed = 0
+    if underlying-num > 1:
+      min-len-needed := string-length(int-str)
+    else:
+      min-len-needed := (0 - get-girth(underlying-num)) + 2
+    end
+    # spy: min-len-needed, underlying-num-str-len, max-chars-mod end
+    if (min-len-needed <= underlying-num-str-len) and (min-len-needed <= max-chars-mod) and (max-chars-mod <= underlying-num-str-len) block:
+      # spy: fixme: 'ez' end
+      var rounding-check-p = false
+      if max-chars-mod == underlying-num-str-len:
+        output := prefix + string-substring(underlying-num-str, 0, max-chars-mod)
+      else:
+        var num-2 = string-substring(underlying-num-str, 0, max-chars-mod + 1)
+        if underlying-num > 1:
+          output := prefix + num-to-sci(string-to-number-i(num-2), max-chars-mod)
+        else:
+          dec-part-mod = shrink-dec-part(string-substring(num-2, 2, string-length(num-2)), max-chars-mod - 2)
+          if dec-part-mod == 'cantfit':
+            output := 'cantfit'
+          else if dec-part-mod == 'overflow':
+            output := prefix + '1'
+          else:
+            output := prefix + '0.' + dec-part-mod
+          end
+        end
+      end
+    else:
+      output := prefix + num-to-sci(underlying-num, max-chars)
+    end
+  end
+  if output == 'cantfit':
+    raise('Could not fit ' + prefix + underlying-num-str + ' into ' + tostring(max-chars) + ' chars')
+  else:
+    output
+  end
+where:
+  easy-num-repr(0.0001234, 6) is "0.0001"
+  easy-num-repr(2343.234, 6) is "2343.2"
+  easy-num-repr(0.000000001234, 6) is "1.2e-9"
+  easy-num-repr(2343243432.234, 6) is "2.34e9"
+  easy-num-repr(~0.082805, 9) is "~0.082805"
+  easy-num-repr(0.0999999, 5) is "0.100"
+  easy-num-repr(0.9999999, 5) is "1"
+  easy-num-repr(9999.99, 3) raises "Could not fit"
+end
+
+# fun t():
+#   # easy-num-repr(0.0001234, 6)
+#   # [list: easy-num-repr(2343.234, 6), "2343.2"]
+#   # [list: easy-num-repr(0.000000001234, 6) , 0.000000001234, 6, "1.2e-9"]
+#   # [list: easy-num-repr(0.0001234, 6) , "0.0001"]
+#   num-to-sci(20368014.7, 9) # "20368015"
+#   # num-to-sci(100000, 2)
+#   # easy-num-repr(~0.082805, 9)
+#   # [list: shrink-dec("0.9999999", 5), shrink-dec-part("99999999", 3)]
+#   # num-to-sci(0.099999, 5)
+#   # easy-num-repr(0.099999,5)
+#   # [list: easy-num-repr(0.0001234, 6), "0.0001"]
+#   # [list: num-to-sci(20368014.7, 9), "20368014"]
+#   # [list: num-to-sci(0.00001234567, 7), "1.2e-5"]
+# end
+
+# num-to-sci(203.680147,9) should evaluate to ~203.6801 instead of ~2.0368e2
 
 #################################################################################
 # Trig functions
@@ -289,7 +570,7 @@ end
 TRIG_ROUND_DIGITS = 10
 
 fun rough-round-digits(val, digits):
-  num-to-roughnum(num-round(val * num-expt(10, digits)) / num-expt(10, digits))
+  num-to-roughnum(num-round(val * expt(10, digits)) / expt(10, digits))
 where:
   rough-round-digits(1.24, 1) is-roughly ~1.2
   rough-round-digits(num-sqrt(2), 3) is-roughly ~1.414
@@ -315,6 +596,29 @@ check:
   sin((3 * PI) / 2) is-roughly -1
   cos(PI / 3) is-roughly 0.5
   sin(PI / 6) is-roughly 0.5
+end
+
+#################################################################################
+# Live Survey Functions
+fun live-display(gsheetID :: String, sheet-name :: String, columns :: List<String>, f)  -> Image block:
+  fun get-table(t):
+    sheet = load-spreadsheet(gsheetID).sheet-by-name(sheet-name, true)
+    builtins.open-table(sheet.load(raw-array-from-list(columns), [raw-array: ]))
+  end
+  r = reactor:
+    init: get-table(nothing),
+    to-draw: f,
+    seconds-per-tick: 2,
+    on-tick: get-table
+  end
+  r.interact()
+  f(get-table(nothing))
+end
+
+
+# live-survey :: (String, String, List<String> :: (Any -> Image)
+fun live-survey(gsheetID, sheet-name, columns, visualize) block:
+  live-display(gsheetID, sheet-name, columns, visualize)
 end
 
 
@@ -356,29 +660,6 @@ fun load-spreadsheet(url :: String) block:
     rest = string-substring(url, 39, string-length(url))
     G.load-spreadsheet(string-split(rest,"/").get(0))
   end
-end
-
-
-fun live-display(gsheetID :: String, sheet-name :: String, columns :: List<String>, f)  -> Image block:
-  fun get-table(t):
-    sheet = load-spreadsheet(gsheetID).sheet-by-name(sheet-name, true)
-    Global.builtins.open-table(sheet.load(raw-array-from-list(columns), [raw-array: ]))
-  end
-  r = reactor:
-    init: get-table(nothing),
-    to-draw: visualize,
-    seconds-per-tick: 2,
-    on-tick: get-table
-  end
-  r.interact()
-  f(get-table(nothing))
-end
-
-
-
-# live-survey :: (String, String, List<String> :: (Any -> Image)
-fun live-survey(gsheetID, sheet-name, columns, visualize) block:
-  live-display(gsheetID, sheet-name, columns, visualize)
 end
 
 # Strings, Integers and numbers with 2 decimals are displayed exactly
@@ -455,7 +736,7 @@ end
 # no color is assigned, grab a new one from the colors list and assign it
 distinct-colors :: (t :: Table, col :: String) -> Table
 fun distinct-colors(t, col):
-  t.build-column("color", lam(r) block: 
+  t.build-column("_color", lam(r) block: 
       key = to-repr(r.get-value(col))
       when not(string-colors.has-key-now(key)): 
         string-colors.set-now(key, nextColor())
@@ -567,7 +848,7 @@ end
 
 ## PIE AND BAR CHARTS ###########################################
 
-# given a summary table with columns <col> and "count",
+# given a summary table with columns <col> and "frequency",
 # apply a function <f> to each row and produce the 
 # resulting image-list, or a helpful error
 fun make-images-from-grouped-rows(summary, col, f):
@@ -582,7 +863,7 @@ end
 fun pie-chart-raw(t, ls, vs, column-name) block:
   labels = get-labels(t, ls)
   series = from-list.pie-chart(labels, ensure-numbers(t.column(vs)))
-    .colors(t.column("color"))
+    .colors(t.column("_color"))
   img = render-chart(series).get-image()
   title = make-title([list:"Distribution of", column-name])
   above(title, img)
@@ -592,8 +873,9 @@ end
 fun bar-chart-raw(t, ls, vs, column-name) block:
   labels = get-labels(t, ls)
   series = from-list.bar-chart(labels, ensure-numbers(t.column(vs)))
-    .colors(t.column("color"))
+    .colors(t.column("_color"))
   img = render-chart(series)
+    .x-axis(column-name)
     .y-axis(vs)
     .y-min(0)
     .get-image()
@@ -608,19 +890,19 @@ fun pie-chart(t, col) block:
   check-integrity(t, [list: col])
   title = "Cases for column: '" + col + "'"
   summary = count(t, col)
-  color-table = distinct-colors(summary, "value")
-  pie-chart-raw(color-table, "value", "count", col)
+  color-table = distinct-colors(summary, col)
+  pie-chart-raw(color-table, col, "frequency", col)
 end
 
 image-pie-chart :: (t :: Table, col :: String, f :: (Row -> Image)) -> Image
 fun image-pie-chart(t, col, f) block:
   check-integrity(t, [list: col])
-  summary = count(t, col).rename-column("value", col)
+  summary = count(t, col)
   images = make-images-from-grouped-rows(summary, col, f)
   series = from-list.image-pie-chart(
     images,
     get-labels(summary, col), 
-    ensure-numbers(summary.column("count")))
+    ensure-numbers(summary.column("frequency")))
   img = render-chart(series)
     .get-image()
   title = make-title([list:"Distribution of", col])
@@ -631,19 +913,19 @@ bar-chart :: (t :: Table, col :: String) -> Image
 fun bar-chart(t, col) block:
   check-integrity(t, [list: col])
   summary = count(t, col)
-  color-table = distinct-colors(summary, "value")
-  bar-chart-raw(color-table, "value", "count", col)
+  color-table = distinct-colors(summary, col)
+  bar-chart-raw(color-table, col, "frequency", col)
 end
 
 image-bar-chart :: (t :: Table, col :: String, f :: (Row -> Image)) -> Image
 fun image-bar-chart(t, col, f) block:
   check-integrity(t, [list: col])
-  summary = count(t, col).rename-column("value", col)
+  summary = count(t, col)
   images = make-images-from-grouped-rows(summary, col, f)
   series = from-list.image-bar-chart(
     images,
     get-labels(summary, col), 
-    ensure-numbers(summary.column("count")))
+    ensure-numbers(summary.column("frequency")))
   img = render-chart(series)
     .y-min(0)
     .get-image()
@@ -686,10 +968,30 @@ fun stacked-bar-chart(t, col, subcol) block:
       segments)
     .stacking-type(percent)
     .colors(color-list)
-  img = render-chart(series).get-image()
+  img = render-chart(series)
+    .x-axis(col)
+    .y-axis(subcol)
+    .get-image()
   title = make-title([list:"Distribution of", subcol, "by", col])
   above(title, img)
 end
+
+fun stacked-bar-chart-summarized(t, categories, column-list) block:
+  check-integrity(t, [list: categories].append(column-list))
+  color-list = column-list.map(lam(_): nextColor() end)
+  groups = t.get-column(categories).map(to-repr)
+  raw_data = map(lam(col): t.get-column(col) end, column-list)
+  zipped_data = map_n(lam(n, _):
+      map_n(lam(m,_): raw_data.get(m).get(n) end, 0, raw_data)
+    end, 0, raw_data.get(0))
+  series = from-list.stacked-bar-chart(
+    groups, 
+    zipped_data, 
+    column-list)
+    .colors(color-list)
+  render-chart(series).get-image()
+end
+
 
 multi-bar-chart :: (t :: Table, col :: String, subcol :: String) -> Image
 fun multi-bar-chart(t, col, subcol) block:
@@ -703,43 +1005,69 @@ fun multi-bar-chart(t, col, subcol) block:
       tab.get-column("data"), 
       segments)
     .colors(color-list)
-  img = render-chart(series).get-image()
+  img = render-chart(series)
+    .x-axis(col + " ⋲ " + subcol)
+    .y-axis("frequency")
+    .get-image()
   title = make-title([list:"Distribution of", subcol, "by", col])
   above(title, img)
+end
+
+fun multi-bar-chart-summarized(t, categories, column-list) block:
+  check-integrity(t, [list: categories].append(column-list))
+  color-list = column-list.map(lam(_): nextColor() end)
+  groups = t.get-column(categories).map(to-repr)
+  raw_data = map(lam(col): t.get-column(col) end, column-list)
+  zipped_data = map_n(lam(n, _):
+      map_n(lam(m,_): raw_data.get(m).get(n) end, 0, raw_data)
+    end, 0, raw_data.get(0))
+  series = from-list.grouped-bar-chart(
+    groups, 
+    zipped_data, 
+    column-list)
+    .colors(color-list)
+  render-chart(series).get-image()
 end
 
 
 
 ## DOT PLOTS #############################################
 
-
-dot-plot :: (t :: Table, col :: String) -> Image
-fun dot-plot(t, col) block:
-  check-integrity(t, [list: col])
-  summary = count(t, col).rename-column("value", col)
-  categoryCount = ensure-numbers(summary.column("count"))
-  
-  # 
-  fun height(width): (width * Math.max(categoryCount)) / categoryCount.length() end
-  
-  SIZE = 400
-  DOT = overlay(
-    ellipse(SIZE, height(SIZE), "solid", C.color(51,102,204, 1)),
-    rectangle(SIZE, height(SIZE) + 5, "solid", "transparent"))
-
-  images = categoryCount.map(lam(n): 
-      above-list(L.range(0,n).map(lam(x): DOT end))
-    end)
-  series = from-list.image-bar-chart(
-    images,
-    get-labels(summary, col), 
-    ensure-numbers(summary.column("count")))
-  img = render-chart(series)
-    .y-min(0)
+simple-dot-plot :: (t :: Table, vals :: String) -> Image
+fun simple-dot-plot(t, vals) block:
+  check-integrity(t, [list: vals])
+  vs = t.column(vals)
+  series = if is-number(vs.get(0)):
+    from-list.num-dot-chart()
+  else: 
+    from-list.dot-chart(vs)
+  end
+  img = render-chart(series.point-size(8))
+    .x-axis(vals)
+    .y-axis("frequency")
     .get-image()
-  title = make-title([list:"Distribution of", col])
+  title = make-title([list:"Dot Plot of", vals])
   above(title, img)
 end
+
+dot-plot :: (t :: Table, labels :: String, vals :: String) -> Image
+fun dot-plot(t, labels, vals) block:
+  check-integrity(t, [list: labels, vals])
+  ls = t.column(labels).map(to-repr)
+  series = if is-number(t.column(vals).get(0)):
+    from-list.labeled-num-dot-chart(ls, t.column(vals)).point-size(8)
+  else: 
+    from-list.dot-chart(t.column(vals))
+  end
+  img = render-chart(series)
+    .x-axis(vals)
+    .y-axis("frequency")
+    .get-image()
+  title = make-title([list:"Dot Plot of", vals])
+  above(title, img)
+end
+
+
 
 ## HISTOGRAMS #############################################
 simple-histogram :: (t :: Table, vals :: String, bin-width :: Number) -> Image
@@ -751,7 +1079,7 @@ fun simple-histogram(t, vals, bin-width) block:
   else:
     img = render-chart(from-list.histogram(ensure-numbers(t.column(vals))).bin-width(bin-width))
       .x-axis(vals)
-      .y-axis("count")
+      .y-axis("frequency")
       .get-image()
     title = make-title([list:"Distribution of", vals])
     above(title, img)
@@ -769,7 +1097,7 @@ fun histogram(t, labels, vals, bin-width) block:
         t.column(labels).map(to-repr),
         ensure-numbers(t.column(vals))).bin-width(bin-width))
       .x-axis(vals)
-      .y-axis("count")
+      .y-axis("frequency")
       .get-image()
     title = make-title([list:"Distribution of", vals])
     above(title, img)
@@ -785,7 +1113,7 @@ fun image-histogram(t, vals, bin-width, f) block:
   else:
     img = render-chart(from-list.image-histogram(images, ensure-numbers(t.column(vals))).bin-width(bin-width))
       .x-axis(vals)
-      .y-axis("count")
+      .y-axis("frequency")
       .get-image()
     title = make-title([list:"Distribution of", vals])
     above(title, img)
@@ -801,7 +1129,7 @@ fun scaled-histogram(t, vals, bin-width, low, high) block:
   else:
     img = render-chart(from-list.histogram(ensure-numbers(t.column(vals))).bin-width(bin-width))
       .x-axis(vals)
-      .y-axis("count")
+      .y-axis("frequency")
       .min(low).max(high)
       .get-image()
     title = make-title([list:"Distribution of", vals])
@@ -1010,6 +1338,17 @@ fun multiple-regression(t, explanations, response):
   #"The Statistics module does not currently provide a multiple-regression function"
 end
 
+
+fun make-lr-title(fn, r-sqr-num, s-num) :
+  r-num = (if  (fn(1) - fn(0)) < 0: -1 else: 1 end) * num-sqrt(r-sqr-num)
+  alpha-str = easy-num-repr(fn(2) - fn(1), 8)
+  beta-str =  easy-num-repr(fn(0), 8)
+  r-str = easy-num-repr(r-num, 6)
+  r-sqr-str = easy-num-repr(r-sqr-num, 6)
+  S-str     = easy-num-repr(s-num, 9)
+  "y=" + alpha-str + "x +" + " " + beta-str + "   r: " + r-str + "  r²: " + r-sqr-str + "  S: " + S-str
+end
+
 lr-plot :: (t :: Table, ls :: String, xs :: String, ys :: String) -> Image
 fun lr-plot(t, ls, xs, ys) block:
   check-integrity(t, [list: ls, xs, ys])
@@ -1022,14 +1361,10 @@ fun lr-plot(t, ls, xs, ys) block:
     fn = Stats.linear-regression(t.column(xs), t.column(ys))
     fn-plot = from-list.function-plot(fn)
       .legend("Model")
-    slope = if ((fn(1) - fn(0)) < 0): "-" else: "+" end
-    r-sqr-str = num-to-sci(num-round-to(Stats.r-squared(t.column(xs), t.column(ys), fn), 3), 6)
-    r-str = num-to-sci(num-round-to(num-sqrt(Stats.r-squared(t.column(xs), t.column(ys), fn)), 3), 6)
-    alpha-str = num-to-sci(fn(2) - fn(1), 9)
-    beta-str = (if (fn(0) >= 0): " + " else: "" end) + num-to-sci(fn(0), 9)
-    S-str     = num-to-sci(S(t, xs, ys, fn), 9)
-    title-str = "y = " + alpha-str + "x" + beta-str + ";    " + "r: " + slope + r-str + ";    r²: " + r-sqr-str + "; S: " + S-str
-    img = render-charts([list: scatter, fn-plot]).title(title-str)
+    s-num = S(t, xs, ys, fn)
+    r-sqr-num = Stats.r-squared(t.column(xs), t.column(ys), fn)
+    img = render-charts([list: scatter, fn-plot])
+      .title(make-lr-title(fn, r-sqr-num, s-num))
       .x-axis(xs)
       .y-axis(ys)
       .get-image()
@@ -1049,17 +1384,13 @@ fun simple-lr-plot(t, xs, ys) block:
       ensure-numbers(t.column(ys)))
     fn = Stats.linear-regression(t.column(xs), t.column(ys))
     fn-plot = from-list.function-plot(fn)
-    slope = if ((fn(1) - fn(0)) < 0): "-" else: "+" end
-    r-sqr-str = num-to-sci(Stats.r-squared(t.column(xs), t.column(ys), fn), 7)
-    r-str = num-to-sci(num-sqrt(Stats.r-squared(t.column(xs), t.column(ys), fn)), 7)
-    alpha-str = num-to-sci(fn(2) - fn(1), 7)
-    beta-str = (if (fn(0) >= 0): "+" else: "" end) + num-to-sci(fn(0), 7)
-    S-str     = num-to-sci(S(t, xs, ys, fn), 7)
-    title-str = "y=" + alpha-str + "x" + beta-str + ";    " + "r: " + slope + r-str + ";    r-sqr: " + r-sqr-str + "; S: " + S-str
-    img = render-charts([list: scatter, fn-plot]).title(title-str)
+    s-num = S(t, xs, ys, fn)
+    r-sqr-num = Stats.r-squared(t.column(xs), t.column(ys), fn)
+    img = render-charts([list: scatter, fn-plot])
+      .title(make-lr-title(fn, r-sqr-num, s-num))
       .x-axis(xs)
       .y-axis(ys)
-      .get-image()
+      .get-image()    
     title = make-title([list:"", ys, "vs.", xs])
     above(title, img)
   end
@@ -1080,17 +1411,13 @@ fun image-lr-plot(t, xs, ys, f) block:
     fn = Stats.linear-regression(t.column(xs), t.column(ys))
     fn-plot = from-list.function-plot(fn)
       .legend("Model")
-    slope = if ((fn(1) - fn(0)) < 0): "-" else: "+" end
-    r-sqr-str = num-to-sci(Stats.r-squared(t.column(xs), t.column(ys), fn), 7)
-    r-str = num-to-sci(num-sqrt(Stats.r-squared(t.column(xs), t.column(ys), fn)), 7)
-    alpha-str = num-to-sci(fn(2) - fn(1), 7)
-    beta-str = (if (fn(0) >= 0): "+" else: "" end) + num-to-sci(fn(0), 7)
-    S-str     = num-to-sci(S(t, xs, ys, fn), 7)
-    title-str = "y=" + alpha-str + "x" + beta-str + ";    " + "r: "  + r-str + ";    r-sqr: " + r-sqr-str + "; S: " + S-str
-    img = render-charts([list: scatter, fn-plot]).title(title-str)
+    s-num = S(t, xs, ys, fn)
+    r-sqr-num = Stats.r-squared(t.column(xs), t.column(ys), fn)
+    img = render-charts([list: scatter, fn-plot])
+      .title(make-lr-title(fn, r-sqr-num, s-num))
       .x-axis(xs)
       .y-axis(ys)
-      .get-image()
+      .get-image()       
     title = make-title([list:"", ys, "vs.", xs])
     above(title, img)
   end
@@ -1130,9 +1457,9 @@ fun fit-model(t, ls, xs, ys, fn) block:
   # the line below calls S, which does our error-checking
   S-value     = S(t, xs, ys, fn)
   R-sqr-value = Stats.r-squared(t.column(xs), t.column(ys), fn)
-  S-str       = num-to-sci(S-value, 10)
-  #r-str       = if (R-sqr-value > 0): num-to-sci(num-sqrt(R-sqr-value)) else: "N/A" end
-  r-sqr-str   = num-to-sci(R-sqr-value, 8)
+  S-str       = easy-num-repr(S-value, 10)
+  #r-str       = if (R-sqr-value > 0): easy-num-repr(num-sqrt(R-sqr-value)) else: "N/A" end
+  r-sqr-str   = easy-num-repr(R-sqr-value, 10)
 
   scatter = from-list.labeled-scatter-plot(
     labels, 
@@ -1152,7 +1479,7 @@ fun fit-model(t, ls, xs, ys, fn) block:
     .color(C.black)
     .style("sticks")
     .legend("Residuals")
-  title-str = "S: " + S-str + ", R-sqr: " + r-sqr-str
+  title-str = "S: " + S-str + "   R-sqr: " + r-sqr-str
   img = render-charts([list: fn-plot, scatter, intervals])
     .title(title-str)
     .x-axis(xs)
@@ -1331,6 +1658,12 @@ fun first-n-rows(t, n):
   T.table-from-rows.make(raw-array-from-list(t.all-rows().take(n)))
 end
 
+last-n-rows :: (t :: Table, n :: Number) -> Table
+fun last-n-rows(t, n):
+  T.table-from-rows.make(raw-array-from-list(t.all-rows().reverse().take(n).reverse()))
+end
+
+
 fun group(tab, col):
   values = Sets.list-to-list-set(tab.get-column(col)).to-list()
   for fold(shadow grouped from table: value, subtable end, v from values):
@@ -1341,12 +1674,14 @@ fun group(tab, col):
 end
 
 fun count(tab, col):
-  g = group(tab, col).build-column("count", {(r): r["subtable"].length()}).drop("subtable")
+  g = group(tab, col).build-column("frequency", {(r): r["subtable"].length()}).drop("subtable")
   if is-boolean(g.column("value").get(0)): g
   else: order g: value ascending end
   end
+    .rename-column("value", col)
 end
 
+#|
 fun count-many(tab, cols):
   for fold(shadow grouped from table: col, subtable end, c from cols):
     grouped.stack(table: col, subtable
@@ -1354,6 +1689,7 @@ fun count-many(tab, cols):
       end)
   end
 end
+|#
 
 fun group-and-subgroup(t :: Table, col :: String, subcol :: String) block:
   subgroups = Sets.list-to-set(t.get-column(subcol))
@@ -1366,15 +1702,15 @@ fun group-and-subgroup(t :: Table, col :: String, subcol :: String) block:
     # and extract the count as a list
     lam(r) block: 
       segments = count(r["subtable"], subcol)
-      missing = subgroups.difference(Sets.list-to-set(segments.get-column("value")))
+      missing = subgroups.difference(Sets.list-to-set(segments.get-column(subcol)))
       missing.fold(
         lam(table, subgroup): 
-          table.add-row([T.raw-row: {"value"; subgroup}, {"count"; 0}])
+          table.add-row([T.raw-row: {subcol; subgroup}, {"frequency"; 0}])
         end,
         segments)
-        .build-column("sortable", lam(shadow r): to-repr(r["value"]) end)
+        .build-column("sortable", lam(shadow r): to-repr(r[subcol]) end)
         .order-by("sortable", true)
-        .get-column("count")
+        .get-column("frequency")
     end)
   # sort groups alphabetically
   sort(tab, "group", true)
@@ -1441,6 +1777,26 @@ fun filter-n(tabl, pred):
     end)
 end
 
+fun transpose(t :: Table) block:
+  cols = t.column-names()
+  row-names = cols.drop(1)
+  first-col = cols.get(0)
+  # use the old header row as the first column in the new table
+  var new_t = T.table-from-column(first-col, row-names)
+  
+  split = split-at(1, t.all-columns())
+  new-cols = split.prefix.get(0)
+  old-rows = split.suffix
+  
+  # for each column in our new table, mine the old rows for their values
+  map_n(lam(n, col) block:
+      new_t := new_t.add-column(col, map_n(lam(m, v): old-rows.get(m).get(n) end, 0, row-names))
+    end,
+    0,
+    new-cols)
+  new_t
+end
+
 fun random-rows(t, n):
   doc: ```
        if n <<< t.length(), it would be good to sample the rows with row-n and
@@ -1469,87 +1825,4 @@ end
 
 fun row-to-list(r):
   r.get-column-names().map(r[_])
-end
-
-###########################################################################
-# GRAPHING AND TABLE FUNCTIONS
-
-function-plot :: (f :: (Number -> Number)) -> Image
-fun function-plot(f):
-  render-chart(from-list.function-plot(f))
-    .x-axis("x")
-    .y-axis("y")
-    .get-image()
-end
-
-def-to-table :: (start :: Number, stop :: Number, f :: (Number -> Number)) -> Table
-# Consumes x1, x2, step-size, and the name of a function, and produces an x/y table
-fun def-to-table(start, stop, f):
-  xs = L.range-by(start, stop + 1, ((stop + 1) - start) / 50)
-  ys = xs.map(f)
-  [T.table-from-columns: {"x"; xs}, {"y"; ys}]
-end
-
-def-to-graph :: (f :: (Number -> Number)) -> Image
-# Same as make-table, but makes a line-plot of the resulting table
-fun def-to-graph(f) block:
-  render-chart(from-list.function-plot(f))
-    .x-axis("x")
-    .y-axis("y")
-    .x-min(-10)
-    .x-max(10)
-    .y-min(-10)
-    .y-max(10)
-    .get-image()
-end
-
-table-to-graph :: (t :: Table) -> Image
-# Consumes a table, and makes a line-plot from the first 2 columns
-fun table-to-graph(t) block:
-  check-integrity(t, [list: "x", "y"])
-  cols = t.column-names()
-  if (cols.length() < 2): raise(message-exception("The table must have at least two columns"))
-  else: 
-    xs = t.column(cols.get(0))
-    ys = t.column(cols.get(1))
-    chart = render-chart(from-list.line-plot(xs, ys))
-      .x-axis(cols.get(0))
-      .y-axis(cols.get(1))
-      .x-min(num-round(Math.min(xs)))
-      .x-max(num-round(Math.max(xs)))
-    if num-round(Math.min(ys)) == num-round(Math.max(ys)):
-      chart.get-image()
-    else:
-      chart
-        .y-min(num-round(Math.min(ys)))
-        .y-max(num-round(Math.max(ys)))
-        .get-image()
-    end
-  end
-end
-
-
-# Given a size, produce a normal distribution of that size 
-# between 0-1 using  Box Muller transform described at
-# https://en.wikipedia.org/wiki/Box%E2%80%93Muller_transform
-random-normal-distribution :: (size :: Number) -> List<Number>
-fun random-normal-distribution(size) block:
-  fun box-muller() block:
-    u = (random(100) + 1) / 101
-    v = (random(100) + 1) / 101
-    num = num-sqrt(-2 * num-log(u)) * num-cos( 2.0 * PI * v )
-    (num / 10) + 0.5 # divide and shift to cover (0,1)
-  end
-  L.range(1, size).map(lam(_): box-muller() end)
-end
-
-
-#####################################################################
-# used by shapes starter file
-draw-shape :: Row -> Image
-fun draw-shape(r): 
-  if r["name"] == "ellipse": ellipse(50, 100, "solid", r["color"])
-  else if r["name"] == "circle": circle(50, "solid", r["color"])
-  else: regular-polygon(30, r["corners"], "solid", r["color"])
-  end
 end
