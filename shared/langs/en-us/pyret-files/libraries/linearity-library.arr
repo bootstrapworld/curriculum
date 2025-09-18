@@ -2,7 +2,7 @@ use context shared-gdrive("Bootstrap-Algebra-v1.9.arr", "1xQhIC4dJfVlsNY_DlHW3Xd
 provide *
 
 include tables
-include chart
+include charts
 
 import lists as L
 provide from L: 

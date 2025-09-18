@@ -21,7 +21,7 @@ provide from Const:
 end
 import sets as S
 include tables
-include chart
+include charts
 import lists as L
 provide from L: 
   *,
