@@ -1,4 +1,4 @@
-use context shared-gdrive("pr teachpak v1.8.arr", "1J0ibRJYslMDGIitFyAyI9DQoCXDuRP22")
+use context url("https://raw.githubusercontent.com/bootstrapworld/curriculum/refs/heads/git-libraries/shared/langs/en-us/pyret-files/libraries/algebra.arr")
 
 # Define Parts
 

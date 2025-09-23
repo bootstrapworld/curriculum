@@ -1,7 +1,5 @@
 use context url("https://raw.githubusercontent.com/bootstrapworld/curriculum/refs/heads/git-libraries/shared/langs/en-us/pyret-files/libraries/algebra.arr")
 
-mexico-flag = image-url("https://code.pyret.org/shared-image-contents?sharedImageId=1r8cMIUpDenXngJAd7JpEruzRpVyxW9S6")
-
 # Do Now: Click run and type "mexico-flag into the interactions window to see an image of the flag you are trying to create.
 
 ##################################################
@@ -13,7 +11,7 @@ background = rectangle(300, 200, "outline", "black")
 red-stripe = rectangle(300, 80, "solid", "red")
 green-stripe = rectangle(300/3, 50, "solid", "dark green")
 crest = scale(0.5, 
-  image-url("https://code.pyret.org/shared-image-contents?sharedImageId=18EcgvwPhb_okYyfwIPA_bodVVyPRxzcE")
+  image-url("https://raw.githubusercontent.com/bootstrapworld/curriculum/refs/heads/git-libraries/shared/langs/en-us/pyret-files/algebra/flags/mexico-crest-image.png")
 )
 
 mexico = 

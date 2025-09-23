@@ -1,8 +1,6 @@
 use context url("https://raw.githubusercontent.com/bootstrapworld/curriculum/refs/heads/git-libraries/shared/langs/en-us/pyret-files/libraries/algebra.arr")
 
-turkish-flag = image-url("https://code.pyret.org/shared-image-contents?sharedImageId=1mSynkVwcZvuiJ4Y2MNsrj0_oKXLJHJws")
-
-# Do Now: Click run and type "turkish-flag" into the interactions window to see a version of the flag of Turkey
+# Do Now: Click run and type "turkey-flag" into the interactions window to see a version of the flag of Turkey
 
 #################################################
 

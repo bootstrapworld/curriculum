@@ -1,6 +1,6 @@
 use context url("https://raw.githubusercontent.com/bootstrapworld/curriculum/refs/heads/git-libraries/shared/langs/en-us/pyret-files/libraries/algebra.arr")
 
-japan-flag =  image-url("https://code.pyret.org/shared-image-contents?sharedImageId=1RwzIn5GQmctrO6weX8kmu6sxxFLW8TQq")
+
 ####################################################
 
 #DO NOW: Click run and type "japan-flag" into the interactions window to see what the flag of Japan should look like.

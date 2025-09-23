@@ -1,7 +1,5 @@
 use context url("https://raw.githubusercontent.com/bootstrapworld/curriculum/refs/heads/git-libraries/shared/langs/en-us/pyret-files/libraries/algebra.arr")
 
-puerto-rico-flag = image-url("https://code.pyret.org/shared-image-contents?sharedImageId=1AsOnOPfAJjIX9ilWEmZ5Gz5XFnfokjTg")
-
 # DO NOW: Click Run and type "puerto-rico-flag" into the interactions window to see an image of the flag of Puerto Rico. 
 
 ##################################################
