@@ -1,4 +1,5 @@
-use context shared-gdrive("Bootstrap-Algebra-v1.9.arr", "1xQhIC4dJfVlsNY_DlHW3XdK-n_Zr2-lg")
+use context url("https://raw.githubusercontent.com/bootstrapworld/curriculum/refs/heads/git-libraries/shared/langs/en-us/pyret-files/libraries/algebra.arr")
+
 provide *
 
 include tables

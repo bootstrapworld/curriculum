@@ -1,4 +1,5 @@
-use context shared-gdrive("Bootstrap-DataScience-v2.2.arr", "1cuqucVgUe7_HmtVWez1qkkdPH16mgy7P")
+use context url("https://raw.githubusercontent.com/bootstrapworld/curriculum/refs/heads/git-libraries/shared/langs/en-us/pyret-files/libraries/data-science.arr")
+
 #########################################################
 # Load your spreadsheet and define your table
 states-sheet = load-spreadsheet("https://docs.google.com/spreadsheets/d/1D8FI9DeR-hGCZzCkjN3Ry7_moOfFSZTDN4QsOKpcTOI")
