@@ -1,0 +1,12 @@
+#! /usr/bin/env bash
+
+test ! -d distribution && 
+  echo ERROR: distribution/ dir not found && 
+  exit
+
+while IFS= read -r authoring_dir; do
+  pyret_file=$authoring_dir/pyret-chart-image-gen.arr
+  if test -f $pyret_file; then
+    pyret $pyret_file
+  fi
+done < <(find distribution/en-us/lessons -type d -name authoring)
