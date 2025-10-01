@@ -9,4 +9,4 @@ while IFS= read -r authoring_dir; do
   if test -f $pyret_file; then
     (cd $authoring_dir; pyret generate-pyret-images.arr >/dev/null)
   fi
-done < <(find distribution/en-us/lessons -type d -name authoring)
+done < <(find lessons -type d -name authoring)

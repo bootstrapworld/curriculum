@@ -8,7 +8,7 @@ import csv as csv
 import charts as VC
 import image-typed as I
 
-lib-dir = '../../../../../lib/'
+lib-dir = '../../../../../../lib/'
 
 animals-table =
   load-table: name, species, sex, age, fixed, legs, pounds, weeks
