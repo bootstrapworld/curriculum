@@ -7,6 +7,6 @@ test ! -d distribution &&
 while IFS= read -r authoring_dir; do
   pyret_file=$authoring_dir/generate-pyret-images.arr
   if test -f $pyret_file; then
-    pyret $pyret_file
+    (cd $authoring_dir; pyret generate-pyret-images.arr >/dev/null)
   fi
 done < <(find distribution/en-us/lessons -type d -name authoring)

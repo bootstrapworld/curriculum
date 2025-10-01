@@ -8,9 +8,11 @@ import csv as csv
 import charts as VC
 import image-typed as I
 
+lib-dir = '../../../../../lib/'
+
 animals-table =
   load-table: name, species, sex, age, fixed, legs, pounds, weeks
-  source: csv.csv-table-file("Animals-Dataset-1.5.1.csv", {
+  source: csv.csv-table-file(lib-dir + "Animals-Dataset-1.5.1.csv", {
     header-row: true,
     infer-content: true
   })
