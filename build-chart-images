@@ -7,6 +7,7 @@ test ! -d distribution &&
 while IFS= read -r authoring_dir; do
   pyret_file=$authoring_dir/generate-pyret-images.arr
   if test -f $pyret_file; then
-    (cd $authoring_dir; pyret generate-pyret-images.arr >/dev/null)
+    echo Generating images from $pyret_file
+    (cd $authoring_dir; npx pyret --builtin-js-dir lib/pyret-support/js-extras/ -p generate-pyret-images.arr >/dev/null)
   fi
 done < <(find lessons -type d -name authoring)
