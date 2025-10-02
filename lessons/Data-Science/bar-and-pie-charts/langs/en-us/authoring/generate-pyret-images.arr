@@ -49,7 +49,7 @@ stacked-bar-species-sex2 = stacked-bar-chart(subset-table2, "species", "sex")
 
 
 ###################### Save the images ##########################
-I.save-image(bar-species, '../images/bar-more-species.png')
+I.save-image(bar-species, '../images/bar-more-species.png-AUTOGEN.png')
 I.save-image(multi-bar-species-sex, '../images/multi-bar-species-sex-AUTOGEN.png')
 I.save-image(multi-bar-species-sex, '../images/multi-bar-species-sex-AUTOGEN.png')
 I.save-image(multi-bar-species-sex2, '../images/multi-species-sex2-AUTOGEN.png')
