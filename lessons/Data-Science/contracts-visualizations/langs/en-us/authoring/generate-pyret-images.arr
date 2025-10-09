@@ -1,6 +1,7 @@
 use context url-file("https://raw.githubusercontent.com/bootstrapworld/starter-files/fall2026/data-science", "../libraries/core.arr")
 import image-typed as I
 import csv as csv
+include charts
 
 # just return the image, instead of displaying it as a modal
 display-chart := lam(c): c.get-image() end

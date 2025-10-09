@@ -1,6 +1,7 @@
 use context url-file("https://raw.githubusercontent.com/bootstrapworld/starter-files/fall2026/data-science", "../libraries/core.arr")
 import image-typed as I
 import csv as csv
+include charts
 
 # just return the image, instead of displaying it as a modal
 display-chart := lam(c): c.get-image() end
@@ -41,16 +42,52 @@ dogs      = filter(more-animals, is-dog)
 lizards   = filter(more-animals, is-lizard)
 tarantulas= filter(more-animals, is-tarantula)
 
+###################### Make some series ##########################
+cat-pounds-series = from-list.num-dot-chart(cats.column("pounds")).point-size(8)
+dog-pounds-series = from-list.num-dot-chart(dogs.column("pounds")).point-size(8)
+rabbit-pounds-series = from-list.num-dot-chart(rabbits.column("pounds")).point-size(8)
+tarantula-pounds-series = from-list.num-dot-chart(tarantulas.column("pounds")).point-size(8)
+animals-weeks-series = from-list.num-dot-chart(animals-table.column("weeks")).point-size(8)
+
 ###################### Make some charts ##########################
-cat-pounds    = dot-plot(cats, "name", "pounds")
-dog-pounds  = dot-plot(dogs, "name", "pounds")
-weeks       = dot-plot(animals-table, "name", "weeks")
-rabbit-pounds = dot-plot(rabbits, "name", "pounds")
-tarantula-pounds = dot-plot(tarantulas, "name", "pounds")
+cat-pounds = render-chart(cat-pounds-series)
+  .x-axis("pounds")
+  .y-axis("frequency")
+  .width(500)
+  .height(200)
+  .get-image()
+
+dog-pounds = render-chart(cat-pounds-series)
+  .x-axis("pounds")
+  .y-axis("frequency")
+  .width(500)
+  .height(200)
+  .get-image()
+
+rabbit-pounds = render-chart(rabbit-pounds-series)
+  .x-axis("pounds")
+  .y-axis("frequency")
+  .width(500)
+  .height(75)
+  .get-image()
+
+tarantula-pounds = render-chart(tarantula-pounds-series)
+  .x-axis("pounds")
+  .y-axis("frequency")
+  .width(500)
+  .height(75)
+  .get-image()
+
+animals-weeks = render-chart(animals-weeks-series)
+  .x-axis("weeks")
+  .y-axis("frequency")
+  .width(290)
+  .height(160)
+  .get-image()
 
 ###################### Save the images ##########################
 I.save-image(cat-pounds, '../images/cat-dot-plot-AUTOGEN.png')
 I.save-image(dog-pounds, '../images/dog-dot-plot-AUTOGEN.png')
-I.save-image(weeks, '../images/dot-plot-weeks-AUTOGEN.png')
 I.save-image(rabbit-pounds, '../images/rabbit-dot-plot-AUTOGEN.png')
 I.save-image(tarantula-pounds, '../images/tarantula-dot-plot-AUTOGEN.png')
+I.save-image(animals-weeks, '../images/dot-plot-weeks-AUTOGEN.png')
