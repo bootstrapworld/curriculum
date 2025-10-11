@@ -6,15 +6,13 @@ include charts
 # just return the image, instead of displaying it as a modal
 display-chart := lam(c): c.get-image() end
 
+animals-url = "https://docs.google.com/spreadsheets/d/1VeR2_bhpLvnRUZslmCAcSRKfZWs_5RNVujtZgEl6umA/export?format=csv"
 
-# the location of the lib directory, relative to the authoring folder of this lesson
-# for most lessons, this will be 6 ancestors up. For CODAP lessons it'll be 7.
-lib-dir = '../../../../../../lib/pyret-support/'
 
 ###################### Load the data ##########################
 animals-table =
   load-table: name, species, sex, age, fixed, legs, pounds, weeks
-  source: csv.csv-table-file(lib-dir + "Animals-Dataset-1.5.1.csv", {
+  source: csv.csv-table-url(animals-url, {
     header-row: true,
     infer-content: true
   })
