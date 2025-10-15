@@ -71,6 +71,15 @@ fun add-padding(img):
     square(padding, "solid", "transparent"))
 end
 
+############## "AI" Charts #########################
+vertex-15-100-img = make-noisy-scatter(lam(x): (-1 * sqr(x - 15)) + 100 end, 0, 30, 200)
+
+factored-10-20-img = make-noisy-scatter(lam(x): (x - 10) * (x - 20) end, 0, 30, 200)
+
+vertex-0-35-img = make-noisy-scatter(lam(x): sqr(x) + 35 end, -10, 10, 100)
+
+factored-50-70-img = make-noisy-scatter(lam(x): -1 * (x - 50) * (x - 70) end, 45, 80, 200)
+
 ###################### Make some charts ##########################
 
 curve-angle-distance-chart = render-chart(from-list.scatter-plot(
@@ -95,3 +104,7 @@ fuel-efficiency-quadratic-chart = render-chart(from-list.scatter-plot(
 ###################### Save the images ##########################
 I.save-image(add-padding(curve-angle-distance-chart.get-image()), '../images/curve-angle-distance-AUTOGEN.png')
 I.save-image(add-padding(fuel-efficiency-quadratic-chart.get-image()), '../images/fuel-efficiency-quadratic-AUTOGEN.png')
+I.save-image(vertex-15-100-img,  '../images/vertex-15-100-AUTOGEN.png')
+I.save-image(factored-10-20-img, '../images/factored-10-20-AUTOGEN.png')
+I.save-image(vertex-0-35-img,    '../images/vertex-0-35-AUTOGEN.png')
+I.save-image(factored-50-70-img, '../images/factored-50-70-AUTOGEN.png')

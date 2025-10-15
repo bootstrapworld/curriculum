@@ -1,0 +1,52 @@
+= Using AI to Fit Quadratic Models
+++++
+<style>
+	.image-figure { text-align: center; }
+	img { max-width: 75%; }
+	.autonum { padding-top: 2em !important; }
+</style>
+++++
+An AI was asked to fit a quadratic model to each of the scatter plots below. For each one, the AI produced its model in either a factored form or vertex form. Did the AI do a good job? (_HINT: try drawing the curve-of-best-fit for these plots!_)
+
+[.FillVerticalSpace, cols="1a,1a", frame="none", options="noheader", stripes="none"]
+|===
+| @image{../images/factored-10-20.png}
+@center{*AI's Suggested Model: @math{f(x) = (x - 30)(x - 40)}*}
+
+@n What did the AI get right? What did it get wrong, and why?
+
+@blanklines{5}{
+Factored form shows us the roots of a quadratic equation (where it passes through the x-axis), but the roots are clearly closer to 10 and 20 than 30 and 40!
+}
+
+
+| @image{../images/vertex-0-35.png}
+@center{*AI's Suggested Model: @math{f(x) = -x^2 + 35}*}
+
+@n What did the AI get right? What did it get wrong?
+
+@blanklines{5}{
+When the quadratic coefficient is negative, a parabola opens down. This one opens up. The vertex (0, 35) does look correct, however.
+}
+
+
+| @image{../images/factored-50-70.png}
+@center{*AI's Suggested Model: @math{f(x) = (x + 50)(x + 70)}*}
+
+@n What did the AI get right? What did it get wrong?
+
+@blanklines{5}{
+Factored form is @math{f(x) = a(x - r_1)(x - r_2)}. For those subtraction signs to turn to addition, it means the AI is getting the sign of the roots wrong!
+}
+
+
+| @image{../images/vertex-15-100.png}
+@center{*AI's Suggested Model: @math{f(x) = -1(x + 15)^2 + 100}*}
+
+@n What did the AI get right? What did it get wrong?
+
+@blanklines{5}{
+The AI got the sign right (opens down) and the y-coordinate of the vertex (100), but it got the sign of the vertex's x-coordinate wrong! The parent function is @math{f(x) = a(x - h)^2 + k}, not @math{f(x) = a(x + h)^2 + k}. That means the AI thinks the vertex is at -15, when it's actually +15.
+}
+
+|===

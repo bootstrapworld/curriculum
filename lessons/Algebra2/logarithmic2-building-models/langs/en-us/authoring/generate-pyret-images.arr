@@ -54,6 +54,12 @@ fun add-padding(img):
     square(padding, "solid", "transparent"))
 end
 
+############## "AI" Charts #########################
+fn_5logXplus10-img  = make-noisy-scatter(lam(x): (  5 * log(x)) + 10 end, 0.1,    10.1, 10)
+fn_-50logX-20-img   = make-noisy-scatter(lam(x): (-50 * log(x)) - 20 end, 0.001,   0.101, 60)
+fn_10log_x-10_-img  = make-noisy-scatter(lam(x): ( 10 * log(x - 10)) end, 10.001, 20.001, 30)
+fn_-10logX-img      = make-noisy-scatter(lam(x): (-10 * log(x)) - 0  end, 0.001,  12.001, 10)
+
 ###################### Make some charts ##########################
 chart = render-chart(from-list.scatter-plot(
         countries-table.column("pc-gdp"),
@@ -80,3 +86,9 @@ MA-covid-flipped-chart = render-chart(from-list.scatter-plot(
 I.save-image(add-padding(chart.get-image()), '../images/wealth-health-AUTOGEN.png')
 I.save-image(add-padding(MA-covid-chart.get-image()), '../images/MA-covid-AUTOGEN.png')
 I.save-image(add-padding(MA-covid-flipped-chart.get-image()), '../images/MA-covid-flipped-AUTOGEN.png')
+
+
+I.save-image(fn_5logXplus10-img, '../images/5log(x)+10.png')
+I.save-image(fn_-50logX-20-img, '../images/-50log(x)-20.png')
+I.save-image(fn_10log_x-10_-img, '../images/10log(x-10).png')
+I.save-image(fn_-10logX-img, '../images/-10log(x).png')
