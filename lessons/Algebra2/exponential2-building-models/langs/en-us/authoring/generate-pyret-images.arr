@@ -36,6 +36,12 @@ fun add-padding(img):
     square(padding, "solid", "transparent"))
 end
 
+############## "AI" Charts #########################
+fn_2expt_plus_5000-img=make-noisy-scatter(lam(x): expt(~2, x) + 5000 end, 0, 15, 20000)
+fn_-1expt-5000-img   = make-noisy-scatter(lam(x): (-1 * expt(~1.6, x)) - 5000 end, 0, 20, 2000)
+fn_25expt-img        = make-noisy-scatter(lam(x): (25 * expt(~2, x)) end, 0, 4, 200)
+fn_25expt-100-img    = make-noisy-scatter(lam(x): (25 * expt(~2, x - 100)) end, 100, 104, 200)
+
 ###################### Make some charts ##########################
 MA-covid-chart = render-chart(from-list.scatter-plot(
         MA-table.column("day"),
@@ -54,3 +60,8 @@ multiple-models-chart = render-chart(from-list.scatter-plot(
 I.save-image(add-padding(MA-covid-chart.get-image()), '../images/MA-covid-AUTOGEN.png')
 
 I.save-image(add-padding(multiple-models-chart.get-image()), '../images/multiple-models-AUTOGEN.png')
+
+I.save-image(fn_2expt_plus_5000-img, '../images/fn_2expt_plus_5000.png')
+I.save-image(fn_-1expt-5000-img,     '../images/fn_-1expt-5000.png')
+I.save-image(fn_25expt-img,          '../images/fn_25expt.png')
+I.save-image(fn_25expt-100-img,        '../images/fn_25expt-100.png')

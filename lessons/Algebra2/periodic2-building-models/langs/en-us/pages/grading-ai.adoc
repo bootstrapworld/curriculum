@@ -1,0 +1,52 @@
+= Using AI to Fit Periodic Models
+++++
+<style>
+	.image-figure { text-align: center; }
+	img { max-width: 80%; }
+	.autonum { padding-top: 2em !important; }
+</style>
+++++
+An AI was asked to fit a periodic model to each of the scatter plots below. Did the AI do a good job? (_HINT: try drawing the curve-of-best-fit for these plots!_)
+
+[.FillVerticalSpace, cols="1a,1a", frame="none", options="noheader", stripes="none"]
+|===
+| @image{../images/fn_sin-1-8th-pi.png}
+@center{*AI's Suggested Model: @math{f(x) = 1.5\sin(\frac{1}{8}\pi \times x)}*}
+
+@n What did the AI get right? What did it get wrong, and why?
+
+@blanklines{5}{
+The period and midline look right, but the AI seems to have used only the most extreme (highest and lowest) points on the scatter plot rather than sticking to the middle of the cloud. As a result, it computed an amplitude of 1.5 rather than what looks like 1.
+}
+
+
+| @image{../images/fn_sin-10-half-pi.png}
+@center{*AI's Suggested Model: @math{f(x) = 10 \sin(\frac{1}{2}\pi \times x) + 3}*}
+
+@n What did the AI get right? What did it get wrong?
+
+@blanklines{5}{
+The period and amplitude look right, but the AI returned a very strange vertical shift when the midline is _clearly_ at @math{y=0}
+}
+
+
+| @image{../images/fn_sin-1-8th-pi-plus-5.png}
+@center{*AI's Suggested Model: @math{f(x) = \sin(\frac{1}{4}\pi \times x) + 5}*}
+
+@n What did the AI get right? What did it get wrong?
+
+@blanklines{5}{
+The amplitude and midline (vertical shift) look right, but the period is all wrong. The curve crosses the x-axis at intervals of 8, so the frequency should be one-eighth instead of one-half.
+}
+
+
+| @image{../images/fn_sin-1-half-pi.png}
+@center{*AI's Suggested Model: @math{f(x) = \sin(\frac{1}{2}\pi \times x - \frac{\pi}{2})}*}
+
+@n What did the AI get right? What did it get wrong?
+
+@blanklines{5}{
+The AI got the amplitude, period, and vertical shift (midline) right. But it looks like the AI added a horizontal shift, which would have made the model cross the x-axis at odd numbers instead of even ones. (If the shift had been any integer multiple @math{\pi}, it would have been right!)
+}
+
+|===
