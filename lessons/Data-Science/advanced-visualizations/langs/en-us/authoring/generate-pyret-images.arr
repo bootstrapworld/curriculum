@@ -54,10 +54,10 @@ age-bc = image-scatter-plot(animals-table , "pounds", "weeks", age-dot)
 age-v-weeks-species-dot = image-scatter-plot(animals-table, "age", "weeks", animal-img)
 age-v-weeks = scatter-plot(animals-table, "name", "age", "weeks")
 pounds-v-weeks = scatter-plot(animals-table, "name", "pounds", "weeks")
-#species-tag = image-scatter-plot(animals-table, "pounds", "weeks", tag)
+species-tag = image-scatter-plot(animals-table, "pounds", "weeks", tag)
 
 ###################### Save the images ##########################
 I.save-image(age-bc, '../images/age-bc-AUTOGEN.png')
 I.save-image(age-v-weeks-species-dot, '../images/age-v-weeks-species-dot-AUTOGEN.png')
 I.save-image(age-bc, '../images/pounds-v-weeks-AUTOGEN.png')
-#I.save-image(species-tag, '../images/species-tag-AUTOGEN.png')
+I.save-image(species-tag, '../images/species-tag-AUTOGEN.png')
