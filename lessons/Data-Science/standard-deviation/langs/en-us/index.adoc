@@ -68,18 +68,18 @@ Turn to @printable-exercise{computing-stdev.adoc}, and complete numbers 1-3.
 
 @slidebreak{Launch}
 
-Without a measure of @vocab{spread}, just knowing the mean doesn't tell us enough about the shape of the data.
+Without a measure of @vocab{spread}, just knowing the mean doesn't tell us _anything_ about the shape of the data.
 
-When summarizing a column, we'd like to use a measure that gathers data from every value. We already have one method of measuring spread: calculating the Five Number Summary and using it to generate a box-plot.
+When summarizing a column, we'd like to use a measure that gathers data from every value. We already have two methods of measuring spread: computing the Range (@math{max - min}) and the Interquartile Range (@math{Q3 - Q1}).
 
-Unfortunately, that measure comes from only a small number of data points! If possible, we'd like to have a measure that summarizes the spread across _all_ the points.
+But even using both measure together, we're only incorporating information from just four data points! We want to have a measure that summarizes the spread across _all_ the points.
 
 @slidebreak{Launch}
 
 Instead of focusing on the handful of data points used in our Five Number Summary, another way to measure spread is to focus on _the "typical" distance from the mean_. In other words, we want to know what kind of deviation is "standard" for all the points.
 
 @lesson-point{
-@vocab{Standard deviation} is the most useful way to summarize @vocab{spread} of a quantitative column.
+@vocab{Standard deviation} is the most common way to summarize @vocab{spread} of a quantitative column.
 }
 
 === Investigate
@@ -108,10 +108,10 @@ Students are likely to hone in on the _Mean Average Deviation_, or MAD. Both SD 
 @slidebreak{Investigate}
 
 @lesson-point{
-To compute the standard deviation we add the squares of all _N_ distances, divide by _N-1_, then take the square root of the result.
+To compute the standard deviation we add the squares of all _n_ distances, divide by _n-1_, then take the square root of the result.
 }
 
-@teacher{The process of finding standard deviation manually is a bit laborious. Keeping organized is crucial; a partially-completed table is provided on the bottom half of worksheet to support students in doing so.}
+@teacher{Computing the standard deviation manually is really labor-intensive! Keeping organized is crucial; a partially-completed table is provided on the bottom half of worksheet to support students in doing so. This is a great example for why we computers are so important in thinking about data!}
 
 @lesson-instruction{
 Complete numbers 7-10 of @printable-exercise{computing-stdev.adoc}, where you will utilize the algorithm for computing standard deviation.
@@ -119,6 +119,11 @@ Complete numbers 7-10 of @printable-exercise{computing-stdev.adoc}, where you wi
 
 @ifproglang{pyret}{@slidebreak{Investigate}}
 @ifproglang{codap}{@slidebreak{InvestigateC}}
+
+*The units for Standard Deviation (S.D.) of a dataset are the units of the data!*
+
+The S.D. from the cat-age dataset refers to number of years!
+
 
 @ifproglang{pyret}{
 Now that you know how to compute standard deviation on your own, here is the Contract for `stdev`, along with an example that will calculate the standard deviation for the `pounds` column in the animals-table:
@@ -139,8 +144,10 @@ To compute standard deviation in CODAP, create a graph with only one quantitativ
 @slidebreak{Investigate}
 
 @QandA{
-@Q{What is the standard deviation for the weights of _all_ the animals at our dataset?}
+@Q{What is the standard deviation for the weights of _all_ the animals in our dataset?}
 @A{Approximately 48.5}
+@Q{What are the _units_ for this standard deviation?}
+@A{The units are pounds, so the standard deviation is 48.5 *pounds*}
 }
 
 @opt{For additional practice, have students complete @opt-printable-exercise{computing-stdev-2.adoc}.}
@@ -170,7 +177,7 @@ Take a look at the histogram below. It is the same histogram we saw in the previ
 @Q{What is the shape of this histogram?}
 @A{The histogram has high outliers, therefore it is skewed right.}
 @Q{How does it differ from the one we just looked at?}
-@Q{The previous histogram -- with the 16-year-old cat omitted -- was roughly symmetric.}
+@Q{The previous histogram -- with the 16-year-old cat omitted -- was less skewed than this one.}
 }
 
 @slidebreak{Launch}
@@ -217,13 +224,13 @@ MAD and SD are both measures of "how far from the mean all the points in the dat
 
 - Mean Absolute Deviation (MAD) flattens each points' deviation into a single "dimension", taking the vertical (@math{y}) distance from each point to the mean of all the y-values.
 
-- Computing the Standard Deviation (SD) involves finding the _square root of a sum of squares_. That should sound suspiciously like the distance formula! Indeed, computing the SD for a dataset with two points is basically finding the (normalized) length of the hypotenuse of an n-dimensional right pyramid!
-
+- Computing the Standard Deviation (SD) involves finding the _square root of a sum of squares_. If we do not square our distances, the negative and positive values can cancel each other out, artificially shrinking a spread where some values are positive and others are negative. In order for all the deviations/distances to be included in the sum, we square them to ensure they are all counted
+-
 Why use one measure of spread instead of the other? 
 
 The answer is closely related to the difference between two measures of _center_! `Mean` incorporates data from every point, while `median` does not. However, `mean` is sensitive to the effect of extreme outliers or @vocab{skew}. In those cases, `median` is considered to be the better measure of center.  Treating each point independently allows each deviation to contribute to the measure of spread, just as `mean` computes the measure of center. 
 
-Standard Deviation is used most often, but like `mean` it is sensitive to extreme outliers or skew. When there are extreme outliers, the Mean Absolute Deviation is considered a better measure of spread.
+Standard Deviation is used most often, but like `mean` it is sensitive to extreme outliers or skew. When there are extreme outliers, the Mean Absolute Deviation is another measure of spread to consider.
 }
 
 @slidebreak{Investigate}
@@ -232,6 +239,9 @@ Extreme values affect both the mean and standard deviation of a dataset.
 
  - Unusually low values _decrease_ the mean, while unusually high values _increase_ it.
  - Unusually low or high values increase the standard deviation, because it summarizes distance from the mean in either direction.
+
+=== Common Misconceptions
+Students are likely to assume that standard deviation is _always_ the best method of computing spread. After completing @printable-exercise{effect-of-an-outlier.adoc}, some might realize that - as with mean - standard deviation is highly sensitive to outliers! Be sure to make this explicit, pointing out that in this situation it might be better to rely on the Range or IQR (not coincidentally, IQR involves the use of the @vocab{median}!).
 
 === Synthesize
 @slidebreak{Synthesize}
