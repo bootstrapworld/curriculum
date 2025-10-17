@@ -224,6 +224,7 @@
 (define *opt-online-exercise-links* '())
 (define *printable-exercise-links* '())
 (define *opt-printable-exercise-links* '())
+(define *additional-exercises* '())
 (define *handout-exercise-links* '())
 (define *starter-file-links* '())
 (define *opt-starter-file-links* '())
@@ -358,6 +359,8 @@
                     [(char=? c #\=) (read-char i) (loop (+ section-level 1))]
                     [else section-level])))]
         [title (string-trim (read-line i))])
+    (when (regexp-match #rx"Additional Exercises" title)
+      (set! *additional-exercises-explicit?* #t))
     (when (and *lesson-plan* (= section-level 1))
       (let ([section-title (string-trim (regexp-replace "@duration{(.*)}" title "(\\1)"))])
         (set! *first-level-section-titles* (cons section-title *first-level-section-titles*))))
@@ -563,6 +566,13 @@
 (define (make-workbook-link lesson-dir pages-dir snippet link-text #:link-type [link-type #f])
   ; (printf "make-workbook-link ~s ~s ~s ~s ~s\n" lesson-dir pages-dir snippet link-text link-type)
   ; (printf "lesson-dir= ~s\n*lesson*= ~s\n*pwydir= ~s\n" lesson-dir *lesson* *pathway-root-dir*)
+  (when (or (string=? link-type "opt-online-exercise")
+            (string=? link-type "opt-printable-exercise"))
+    (let ([addl-exercise (if (string=? link-text "")
+                             (format "@~a{~a}" link-type snippet)
+                             (format "@~a{~a, ~a}" link-type snippet link-text))])
+      (unless (member addl-exercise *additional-exercises*)
+        (set! *additional-exercises* (cons addl-exercise *additional-exercises*)))))
   (let* ([lesson (cond [(equal? lesson-dir *lesson*) (set! lesson-dir #f) *lesson*]
                        [lesson-dir (qualify-lesson-dir lesson-dir)]
                        [else *lesson*])]
@@ -1477,6 +1487,7 @@
   (set! *opt-online-exercise-links* '())
   (set! *printable-exercise-links* '())
   (set! *opt-printable-exercise-links* '())
+  (set! *additional-exercises* '())
   (set! *handout-exercise-links* '())
   (set! *starter-file-links* '())
   (set! *opt-starter-file-links* '())
@@ -1578,6 +1589,7 @@
 (define *first-subsection-reached?* #f)
 (define *out-file* #f)
 (define *supplemental-materials-needed?* #f)
+(define *additional-exercises-explicit?* #f)
 
 (define *uses-codemirror?* #f)
 (define *uses-mathjax?* #f)
@@ -2438,6 +2450,7 @@
       (set! *first-subsection-reached?* #f)
       (set! *title-reached?* #f)
       (set! *supplemental-materials-needed?* #f)
+      (set! *additional-exercises-explicit?* #f)
       (set! *uses-codemirror?* #f)
       (set! *uses-mathjax?* #f)
       (set! *needs-objectives?* #f)
@@ -2469,6 +2482,27 @@
               (fprintf o "ifndef::fromlangroot[:fromlangroot: ~a]\n\n" *dist-root-dir*)
 
               (expand-directives i o)
+
+              (when (and *lesson-plan* (not *additional-exercises-explicit?*)
+                         (or (pair? *opt-printable-exercise-links*) (pair? *opt-online-exercise-links*)))
+                (fprintf o "== Additional Exercises\n\n")
+                (let ([addl-ex-file (build-path *containing-directory*
+                                                ".cached" ".index.additional-exercises")])
+                  (call-with-output-file addl-ex-file
+                    (lambda (lo)
+                      (display "return {\n" lo)
+                      (for ([f (reverse *additional-exercises*)])
+                        (fprintf lo "~s,\n" f))
+                      (display "}\n" lo))
+                    #:exists 'replace)
+                  (for ([f (reverse *opt-printable-exercise-links*)])
+                    (display "- " o)
+                    (expand-directives:string->port f o)
+                    (newline o))
+                  (for ([f (reverse *opt-online-exercise-links*)])
+                    (display "- " o)
+                    (expand-directives:string->port f o)
+                    (newline o))))
 
               (when (and *narrative* (not *title-reached?*))
                 (print-course-title-and-logo *target-pathway* make-image store-title o)
