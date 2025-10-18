@@ -2485,7 +2485,7 @@
 
               (when (and *lesson-plan* (not *additional-exercises-explicit?*)
                          (or (pair? *opt-printable-exercise-links*) (pair? *opt-online-exercise-links*)))
-                (fprintf o "== Additional Exercises\n\n")
+                (fprintf o "\n== Additional Exercises\n\n")
                 (let ([addl-ex-file (build-path *containing-directory*
                                                 ".cached" ".index.additional-exercises")])
                   (call-with-output-file addl-ex-file
