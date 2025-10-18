@@ -1,6 +1,8 @@
 #! /usr/bin/env lua
 
-dofile(os.getenv'MAKE_DIR' .. 'utils.lua')
+local make_dir = os.getenv'MAKE_DIR'
+
+dofile(make_dir .. 'utils.lua')
 
 local website_branch_p = (shell_output('git branch --show-current')[1] == 'website')
 website_branch_p = true
@@ -409,3 +411,14 @@ run_postproc(workbookpage_batchf, 'workbookpage')
 run_postproc(lessonplan_batchf, 'lessonplan')
 run_postproc(pathwaynarrative_batchf, 'pathwaynarrative')
 run_postproc(pathwayresource_batchf, 'pathwayresource')
+
+dofile(make_dir .. 'make-slides.lua')
+
+do
+  local cached_html_files = dofile(lessonplan_batchf)
+  -- e.g., "distribution/en-us/lessons/quadratic3-fitting-models/.cached/.index.html"
+  for _,cached_html_file in ipairs(cached_html_files) do
+    local lesson_dir = cached_html_file:gsub('/%.cached/%.index.html', '')
+    make_slides_file(lesson_dir)
+  end
+end
