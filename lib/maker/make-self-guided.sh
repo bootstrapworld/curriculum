@@ -3,6 +3,10 @@
 lib_dir=$TOPDIR/distribution/$NATLANG/lib
 self_guided_dir=$lib_dir/self-guided
 
+if test ! -d $self_guided_dir/node_modules; then
+  ln -sf $TOPDIR/node_modules $self_guided_dir/node_modules
+fi
+
 function create_local_self_guided() {
   local g=$1
   test -f $g/selfGuidedBits.jsx || return
