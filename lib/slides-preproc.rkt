@@ -153,31 +153,33 @@
 
 (define (make-math text)
   ; (printf "doing make-math ~s\n" text)
-  (or (math-unicode-if-possible text #:asciidoc? #f)
-      (let ([use-mathjax?
-              (cond [(regexp-match "\\\\frac" text)
-                     (cond [(regexp-match "\\\\div" text) #t]
-                           [(regexp-match "\\^" text) #t]
-                           [(>= (string-length text) 40) #t]
-                           [(regexp-match* "\\\\frac{(.+?)}" text)
-                            => (lambda (mm)
-                                 (cond [(null? mm) #f]
-                                       [else (let ([use-mathjax? #f])
-                                               (for ([m mm])
-                                                 (let ([frac-arg (regexp-replace "\\\\frac{(.+?)}" m "\\1")])
-                                                   (unless (variable-or-number? frac-arg)
-                                                     (set! use-mathjax? #t))))
-                                               use-mathjax?)]))])]
-                    [(regexp-match "\\\\sqrt" text) #t]
-                    [(regexp-match "\\\\\\\\" text) #t]
-                    [(regexp-match "\\\\text" text) #t]
-                    [(regexp-match "\\\\mbox" text) #t]
-                    [(regexp-match "\\\\over" text) #t]
-                    [else #f])])
-        ;
-        ((if use-mathjax?
-             make-mathjax-math
-             make-ascii-math) text))))
+  (let ([mathunicode (math-unicode-if-possible text #:asciidoc? #f)])
+    ; we have to hardcode the font family, because md2googleslides cannot handle multiple font families
+    (or (and mathunicode (string-append "<span style=\"font-family: JetBrains Mono\">" mathunicode "</span>"))
+        (let ([use-mathjax?
+                (cond [(regexp-match "\\\\frac" text)
+                       (cond [(regexp-match "\\\\div" text) #t]
+                             [(regexp-match "\\^" text) #t]
+                             [(>= (string-length text) 40) #t]
+                             [(regexp-match* "\\\\frac{(.+?)}" text)
+                              => (lambda (mm)
+                                   (cond [(null? mm) #f]
+                                         [else (let ([use-mathjax? #f])
+                                                 (for ([m mm])
+                                                   (let ([frac-arg (regexp-replace "\\\\frac{(.+?)}" m "\\1")])
+                                                     (unless (variable-or-number? frac-arg)
+                                                       (set! use-mathjax? #t))))
+                                                 use-mathjax?)]))])]
+                      [(regexp-match "\\\\sqrt" text) #t]
+                      [(regexp-match "\\\\\\\\" text) #t]
+                      [(regexp-match "\\\\text" text) #t]
+                      [(regexp-match "\\\\mbox" text) #t]
+                      [(regexp-match "\\\\over" text) #t]
+                      [else #f])])
+          ;
+          ((if use-mathjax?
+               make-mathjax-math
+               make-ascii-math) text)))))
 
 (define (make-mathjax-math text)
   (string-append
@@ -230,7 +232,7 @@
                                      (loop s-rest (append '(#\> #\b #\u #\s #\/ #\<) w '(#\> #\b #\u #\s #\<) r)))]
                             [else (loop s (cons a r))]))]))])
     ; (printf "returning ~s\n" ans)
-    (string-append "<code>" (list->string ans) "</code>")))
+    (string-append "<code class=\"asiimath\">" (list->string ans) "</code>")))
 
 (define (cm-code x #:multiline? [multiline? #t] #:parens [parens #f])
   (let ([pyret? (string=? *proglang* "pyret")])

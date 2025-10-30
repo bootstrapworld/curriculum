@@ -1,0 +1,116 @@
+= Programming with Exponents and Negatives
+
+++++
+<style>
+#content td {padding: 0rem 0px !important}
+#content th { text-align: center !important; }
+
+/* Allow fitb's to get shorter than usual */
+.fitb{ min-width: 1em !important; }
+td .fitb{
+	padding-top: 0.2rem !important;
+	min-width: 1em;
+	border-bottom-color: lightgray;
+}
+
+/* Codeblocks in tables: remove vertical padding */
+td { padding: 0rem 0px !important }
+td .fitb{ padding-top: 0.2rem !important; min-width: 1em; }
+
+
+/* In Pyret contained in tables, force each example to one
+ * line, hide the 'examples', the ':' that follows, and 'end'
+ */
+.pyret .obeyspaces .editbox br { display: none; }
+.pyret .obeyspaces .cm-keyword:first-child,
+.pyret .obeyspaces .cm-keyword:first-child+.cm-builtin,
+.pyret .obeyspaces .cm-keyword:last-child { display: none; }
+</style>
+++++
+
+== Examples and Exponents
+
+@n Below, place a checkmark next to each of the equations that you *predict* will pass when you click "Run".
+
+[cols="1,24", frame="none", grid="none", stripes="none"]
+|===
+|
+|
+@ifproglang{pyret}{`examples:`}
+
+@fitb{2em}{@ifsoln{✔}} @show{(code '(EXAMPLE (= (expt 5 -2) (* -2 (* -2 (* -2 (* -2 -2))))) true))}
+
+@fitb{2em}{@ifsoln{❌}}
+@show{(code '(EXAMPLE (= (expt -4 6) (* -4 (* -4 (* -4 (* -4 (* -4 -4)))))) true))}
+
+@fitb{2em}{@ifsoln{❌}}
+@show{(code '(EXAMPLE (= (expt 2 -3) (* -3 -3)) true))}
+
+@fitb{2em}{@ifsoln{✔}}
+@show{(code '(EXAMPLE (= (negate (expt 8 3)) (expt (negate 8) 3)) true))}
+
+@fitb{2em}{@ifsoln{❌}}
+@show{(code '(EXAMPLE (= (negate (expt 2 -2)) (expt 2 negate(-2))) true))}
+
+@fitb{2em}{@ifsoln{✔}}
+@show{(code '(EXAMPLE (= (expt (negate 1) 4) (* -1 (* -1 (* -1 -1)))) true))}
+
+@ifproglang{pyret}{`end`}
+|===
+
+@n Open the @starter-file{negative-exponents} and click "Run." @ifproglang{pyret}{Select "Show Details" to the right of `examples-block-1`.} Using the information provided, fill in as many of the blanks as needed below to describe the examples that failed.
+
+@hspace{2em} Test # @fitb{5em}{@ifsoln{1}} failed because the first expression evaluated to @fitb{5em}{@ifsoln{0.04}} and the second expression evaluated to @fitb{5em}{@ifsoln{-32}}.
+
+@hspace{2em} Test # @fitb{5em}{@ifsoln{3}} failed because the first expression evaluated to @fitb{5em}{@ifsoln{0.125}} and the second expression evaluated to @fitb{5em}{@ifsoln{9}}.
+
+@hspace{2em} Test # @fitb{5em}{@ifsoln{5}} failed because the first expression evaluated to @fitb{5em}{@ifsoln{-0.25}} and the second expression evaluated to @fitb{5em}{@ifsoln{4}}.
+
+@n Changing *only* the expression after the @show{(code '=)} sign, fix the *failing* examples so that _all of them pass_.  Describe one of the changes.
+
+@blanklines{3}{}
+
+
+== Does it equal 16?
+
+@n A teacher asked her students to make up expressions with exponents that evaluate to 16. She typed their expressions into @proglang as examples to test if they evaluate to 16. Below, place a checkmark next to each of the examples that you *predict* will pass.
+
+[cols="1,12,12", frame="none", grid="none", stripes="none"]
+|===
+|
+| @ifproglang{pyret}{`examples:`}
+| @ifproglang{pyret}{`examples:`}
+
+|
+| @fitb{2em}{@ifsoln{✔}}  @show{(code '(EXAMPLE (= (expt -2 4) 16) true))}
+| @fitb{2em}{@ifsoln{❌}} @show{(code '(EXAMPLE (= (negate (* 2 (* 2 (expt 2 2)))) 16) true))}
+
+|
+| @fitb{2em}{@ifsoln{❌}} @show{(code '(EXAMPLE (= (+ (expt -2 3) 8) 16) true))}
+| @fitb{2em}{@ifsoln{❌}}  @show{(code '(EXAMPLE (= (* (expt -4 2) (negate 2)) 16) true))}
+
+|
+| @fitb{2em}{@ifsoln{✔}}  @show{(code '(EXAMPLE (= (* 1 (expt (negate 2) 4)) 16) true))}
+| @fitb{2em}{@ifsoln{✔}}  @show{(code '(EXAMPLE (= (/ (/ (expt -4 3) 2) -2) 16) true))}
+
+|
+| @fitb{2em}{@ifsoln{✔}}  @show{(code '(EXAMPLE (= (* -2 (expt -2 3)) 16) true))}
+| @fitb{2em}{@ifsoln{✔}} @show{(code '(EXAMPLE (= (/ (/ (expt -4 3) -2) 2) 16) true))}
+
+|
+| @ifproglang{pyret}{`end`}
+| @ifproglang{pyret}{`end`}
+|===
+
+
+@n Open the @starter-file{is-it-16-negative} and click "Run". @ifproglang{pyret}{Select "Show Details" to the right of `examples-block-1`.} Which tests failed? @fitb{}{@ifsoln{2, 3, and 4.}}
+
+@n The three failing examples are all wrong for the same reason. That's because the students who wrote them don't understand something about how exponents work! What do they not understand?? @fitb{}{@ifsoln{Rather than multiplying the base times itself as many times as the exponent indicates,}}
+
+@fitb{}{@ifsoln{they multiplied the base times the exponent.}}
+
+@fitb{}{}
+
+@n Come up with a unique exponent expression of your own that evaluates to 25, using any numbers and operators. (We've included one example for you in Section 2 of the starter file.) Write it in mathematical notation (not code) on the line: @fitb{}{}
+
+@n Translate your expression to code and add it to the second examples block. Does your example pass? If not, revise it until it does.

@@ -1,0 +1,21 @@
+#! /usr/bin/env bash
+
+function process_authoring() {
+  local diry=$1
+  while IFS= read -r authoring_dir; do
+    pyret_file=$authoring_dir/generate-pyret-images.arr
+    if test -f $pyret_file; then
+      echo Generating images from $pyret_file
+      (cd $authoring_dir; npx pyret --builtin-js-dir lib/pyret-support/js-extras/ -p generate-pyret-images.arr >/dev/null)
+    fi
+  done < <(find $diry -type d -name authoring)
+}
+
+if test $# -eq 0; then
+  process_authoring lessons
+else
+  lesson_name=$(basename $1)
+  while IFS= read -r lesson_dir; do
+    process_authoring $lesson_dir
+  done < <(find lessons -type d -name $lesson_name)
+fi

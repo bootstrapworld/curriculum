@@ -1,32 +1,9 @@
 = Discover Inverse Operations: Addition & Subtraction (2)
 ++++
 <style>
-  table {grid-template-rows: 3fr 1fr !important;}
-  div.circleevalsexp .value,
-  div.circleevalsexp .studentBlockAnswerFilled { min-width:unset; }
-
-/*
-- Make arrows 50px tall
-- Make them relative, so we can position answers around them
-*/
-tr span.arrow {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  height: 50px;
-}
-/*
-- position the label just below the top of the arrow box
-- in TD #2, the label is 'CP'
-- in TD #4, the label is 'AI'
-*/
-tr span.arrow::before {
-  position: absolute;
-  top: 10px;
-  left: 50%;
-  transform: translate(-50%, 0);
-}
+table {grid-template-rows: 3fr 1fr !important;}
+div.circleevalsexp .value,
+div.circleevalsexp .studentBlockAnswerFilled { min-width:unset; }
 
 td:nth-child(2) span.arrow::before { content: 'CP'; }
 td:nth-child(4) span.arrow::before { content: 'AI'; }
@@ -40,7 +17,7 @@ td:nth-child(4) span.arrow::before { content: 'AI'; }
 [cols="^.^4,^.^1,^.^4,^.^1,^.^4", stripes="none"]
 |===
 | Start here:   | | Apply the Commutative Property: | | Apply the Additive Inverse Property:
-|@show{(coe '(+ -4 7))}  | @span{.arrow}{⟶} | @show{(coe  '(+ 7 -4))} | @span{.arrow}{⟶} | @show{(coe  '(- 7 4))}
+|@show{(coe '(+ -4 7))}  | @arrow | @show{(coe  '(+ 7 -4))} | @arrow | @show{(coe  '(- 7 4))}
 | @math{-4 + 7}|  | @math{7 + -4} | | @math{7 - 4}
 |===
 
@@ -64,7 +41,7 @@ td:nth-child(4) span.arrow::before { content: 'AI'; }
 [cols="^.^4,^.^1,^.^4,^.^1,^.^4", stripes="none"]
 |===
 | Start here:   | | Apply the Commutative Property: | | Apply the Additive Inverse Property:
-|@show{(coe '(+ (?ANS -8) (?ANS 5)))}  | @span{.arrow}{⟶} | @show{(coe  '((?ANS +) (?ANS 5) (?ANS -8)))} | @span{.arrow}{⟶} | @show{(coe  '((?ANS -) (?ANS 5) (?ANS 8)))}
+|@show{(coe '(+ (?ANS -8) (?ANS 5)))}  | @arrow | @show{(coe  '((?ANS +) (?ANS 5) (?ANS -8)))} | @arrow | @show{(coe  '((?ANS -) (?ANS 5) (?ANS 8)))}
 | @math{+}|  | @ifsoln{@math{5 + -8}} | | @ifsoln{@math{5 - 8}}
 |===
 

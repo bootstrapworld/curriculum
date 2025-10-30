@@ -258,10 +258,31 @@ The Circles of Evaluation are extended to functions that do more than compute va
 The functions available to us in @proglang can be composed just like the Function Cards from the activity. Our job as programmers is to figure out how to compose functions to achieve our goals in the most clever or elegant way possible.
 
 === Investigate
+@slidebreak{Investigate}
+
+Consider the contracts for these three functions:
+
+@show{(contract "rotate" '(Number Image) "Image")} +
+@show{(contract "scale" '(Number Image) "Image")} +
+@show{(contract "scale/xy" '(Number Number Image) "Image")}
+
+@QandA{
+@Q{Thinking back, what does `rotate` do?}
+@A{It consumes a number of degrees and an image, then rotates that image counter-clockwise by that number of degrees}
+@Q{What would the Circle of Evaluation be, if we wanted use `rotate` to show a solid blue triangle turned on it's side?}
+@A{Start with a Circle of Evaluation for a solid blue `triangle`, then draw an *outer* circle for `rotate`, with 90 (or 270!) as the angle.}
+@Q{What do you think `scale` does?}
+@A{Make an image bigger or smaller}
+@Q{What would the Circle of Evaluation be, if we wanted use `scale` to make a solid blue triangle 2x as big?}
+@A{Start with a Circle of Evaluation for a solid blue `triangle`, then draw an *outer* circle for `scale`, with 2 as the angle.}
+@Q{What do you think @show{(code 'scale/xy)} does?}
+}
+
 @slidebreak{Investigate-DN}
+Let's get some practice composing these functions with some of our image functions...
 
 @lesson-instruction{
-- Have students open @starter-file{program-list} in their browser, and @ifproglang{wescheme}{"Log In"} @ifproglang{pyret}{"Sign In"} using a valid Google account (Gmail, Google Classroom, YouTube, etc.) and their password for that account.
+- Open @starter-file{program-list} in their browser, and @ifproglang{wescheme}{"Log In"} @ifproglang{pyret}{"Sign In"} using a valid Google account (Gmail, Google Classroom, YouTube, etc.) and their password for that account.
 - This will take them to the "Programs" page. This page is empty -- they don’t have any programs yet!
 - Have them open a new program by clicking @ifproglang{WeScheme}{"Start a new program"} @ifproglang{Pyret}{"File" -> "New"} and save it as "Function Composition"
 - Complete @printable-exercise{function-composition-green-star.adoc}, in which you will draw circles of evaluation to help you write expressions to compose a series of images.

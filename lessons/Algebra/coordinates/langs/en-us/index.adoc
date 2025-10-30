@@ -1,60 +1,94 @@
-= Coordinates and Game Design
+= Coordinates
 
-@description{Students learn that characters' positions in video games can be described using coordinates, then brainstorm the context and characters for the games they will design.}
+@description{Students play a simple video game, identifying which components are constant, which are variables, and how they change. They discuss their favorite games and think about the work involved in making them.}
 
 @lesson-prereqs{}
 
 @keywords{}
 
+@add-to-lang{}
+
 [@lesson-intro-table]
 |===
-
 | Lesson Goals
 | Students will be able to:
 @objectives
 
-@objective{coord-estimate}
-@objective{coord-explain}
+@objective{Identify the objects in a video game that are changing.}
+@objective{Use math language to describe what is changing about each object.}
+@objective{Understand the time, money, and resources it takes to create a popular video game.}
 
 | Student-Facing Lesson Goals
 |
-- Let's estimate the positions of objects using coordinates.
-- Let's collaborate to brainstorm a video game and create a sample mock-up (proof of concept) of our game.
+- Let's identify the objects in a video game.
+- Let's use math vocabulary to describe what is changing about each game object.
+- Let's think about the time, money, and resources it takes to create a popular video game.
 
 | Materials
 |[.materials-links]
 @material-links
 
 | Preparation
-| 
+|
 @preparation{
+- Print and cutout @handout{dog-cat-ruby.adoc, the image of the dog}. _Use of the included cat and ruby images is optional_.
 - Decide whether you'd prefer to draw or project a number-line from 0 to 1000 on the board.
 - Open our @starter-file{ninja-cat-desmos, Ninja Cat slider activity} in Desmos and make a code or link to share with students.
 - If you're new to teaching with Desmos, we encourage you to check out these three short guides to familiarize yourself with how to make the most of its potential in both this and future Bootstrap lessons.
   * @link{https://my.amplify.com/help/en/articles/6684337-getting-started-desmos-classroom-activities, Getting Started with Desmos Classroom Activities}
   * @link{https://my.amplify.com/help/en/articles/6684323-using-the-teacher-dashboard, Using the Teacher Dashboard}
   * @link{https://my.amplify.com/help/en/articles/6763511-classroom-conversations, Classroom Conversations}
-- Print and cutout @handout{dog-cat-ruby.adoc, the image of the dog}. _Use of the included cat and ruby images is optional_.
 }
 
 | Key Points for the Facilitator
 |
-- The launch activity should create and reinforce the need for coordinates and the importance of attending to precision.
-- Continue to use the same "Estimating Coordinates" page so students can track their pattern of estimation over time.
+- Students will need their own Google accounts.
+- Take care to manage student expectations about what their game will be like.  Modern games are very complex!
+
 |===
 
 == Navigating a Grid
 
 === Overview
-Students are asked to come up with a way of identifying location on a grid, which provides the justification for coordinates.
+Students play a simple video game, are asked to come up with a way of identifying location on a grid, which provides the justification for coordinates.
 
 === Launch
-@slidebreak{LaunchC}
-@ifnotslide{@right{image{images/1dPosition.png}}}
-@ifslide{@center{@image{images/1dPosition.png}}}
-Computers use numbers to represent a character’s position onscreen, using number lines as rulers to measure the distance from the bottom-left corner of the screen. 
+@slidebreak{Launch-DN}
+@teacher{
+Play the @starter-file{ninja-cat} onscreen while students watch. Purposely make mistakes while playing the game, which should elicit responses/direction from students.
+}
 
-If we placed the image of a dog on a screen and drew a number line running from 0 (on the left) to 1000 (on the right), it would look like this.
+@lesson-instruction{
+- Take turns playing @starter-file{ninja-cat} in pairs.
+- After you've both had a chance to play, write down what you _notice_ about the game on @printable-exercise{NoticeAndWonder.adoc}.
+- "Notice"s should be statements, not questions. What stood out to you? What do you remember?
+}
+
+@teacher{
+Crowdsource students' Notices.
+}
+
+@slidebreak{Launch}
+
+@lesson-instruction{
+What do you _wonder_ about the game? What questions do you have about how it works? Write these down on @printable-exercise{NoticeAndWonder.adoc}.
+}
+
+@teacher{
+Crowdsource students' Wonders.
+}
+
+@strategy{Pedagogy Note: Notice & Wonder}{
+
+This pedagogy is a @link{https://sadlerscience.com/notice-and-wonder/, widely-used best practice in Math-Ed}, and is used throughout this course. In the "Notice" phase, students are asked to crowd-source their observations. No observation is too small or too silly! By listening to other students' observations, students may find themselves taking a closer look at the game. The "Wonder" phase involves students raising questions, but they must also explain the context for those questions. Sharon Hessney (moderator for the NYTimes excellent @link{https://www.NYtimes.com/column/whats-going-on-in-this-graph, What's Going On in This Graph?} activity) sometimes calls this "what do you wonder...and *why*?". Sharon recommends the sentence starter "I wonder if ... because ..." This pushes students toward developing new ideas. Wonderings are conditional ideas, which empower students to investigate rather than receive rote knowledge. Both of these phases should be done in groups or as a whole class, with adequate time given to each.
+}
+
+@slidebreak{LaunchC}
+Computers use numbers to represent a character's position onscreen, using number lines as rulers to measure the distance from the bottom-left corner of the screen.
+
+If we placed the image of a dog on a screen and drew a number line running from 0 (on the left) to 1000 (on the right), it would look like this:
+
+@center{@image{images/1dPosition.png}}
 
 We could then measure the distance back to the left-hand edge. If we shared that number with anyone else who knows about our number line, they would be able to duplicate the exact position of the Dog.
 
@@ -86,30 +120,38 @@ This number line lets us communicate the position of the Dog using a single numb
 === Investigate
 @slidebreak{InvestigateR}
 
-@ifslide{@right{@image{images/2dPosition.png}}}
+@right{@image{images/2dPosition.png}}
 By adding a second number line, we can locate a character _anywhere_ on the screen in either direction.
 
-- The first line we drew runs from left to right and is called the @vocab{x-axis}.  
-- The second line, which runs up and down, is called the @vocab{y-axis}. 
+- The first line we drew runs from left to right and is called the @vocab{x-axis}.
+- The second line, which runs up and down, is called the @vocab{y-axis}.
 
 A 2-dimensional @vocab{coordinate} consists of both the x- and y-locations on the axes.
 
 @slidebreak{InvestigateR}
 
-@right{@image{images/2dPosition.png}}
+@ifslide{@right{@image{images/2dPosition.png}}}
 Suppose we wanted to locate NinjaCat’s position on the screen. We can find the x-coordinate by dropping a line down from NinjaCat and read the position on the number line, then find the y-coordinate by running a line to the y-axis.
 
-A coordinate pair is always written in the form of (x, y) with the x before the y (just like in the alphabet!). 
+A coordinate pair is always written in the form of (x, y) with the x before the y (just like in the alphabet!).
 
 @slidebreak{InvestigateR}
 
 @ifslide{@right{@image{images/2dPosition.png}}}
-The coordinate pair @math{(200, 50)}, for example, indicates that the x-coordinate is 200 and the y-coordinate is 50.
+The coordinate pair @math{(200, 50)}, for example, indicates that the x-coordinate is @math{200} and the y-coordinate is @math{50}.
 
 @slidebreak{Investigate}
 
+@QandA{
+@Q{In pairs, explore @starter-file{ninja-cat-desmos}.}
+@Q{What happens when you adjust the first slider in the side panel?}
+@A{Adjusting the first slider changes the horizontal position (x-coordinate) of Ninja Cat.}
+@Q{What happens when you adjust the second slider in the side panel?}
+@A{Adjusting the second slider changes the vertical position (y-coordinate) of Ninja Cat.}
+}
+
 @lesson-instruction{
-To develop an intuition for coordinates, complete @printable-exercise{Estimation.adoc}.
+Complete @printable-exercise{Estimation.adoc}.
 }
 
 === Common Misconceptions
@@ -128,41 +170,10 @@ Math-phobic students often fail to realize that _common sense_ and _intuition_ c
 @A{Answers vary: we need to know where characters are on the screen, we need a way for players to interact with certain parts of the screen, etc.}
 }
 
-== Bridging to video games
-
-=== Overview
-Students explore a coordinate activity in which a Cartesian point is used to compute the position of a character in a game. From there, they brainstorm a game of their own.
-
-=== Launch
-@slidebreak{Launch-DN}
-
-@QandA{
-@Q{In pairs, explore @starter-file{ninja-cat-desmos}.}
-@Q{What happens when you adjust the first slider in the side panel?}
-@A{Adjusting the first slider changes the horizontal position (x-coordinate) of Ninja Cat.}
-@Q{What happens when you adjust the second slider in the side panel?}
-@A{Adjusting the second slider changes the vertical position (y-coordinate) of Ninja Cat.}
-}
-
-=== Investigate
-@slidebreak{Investigate}
-
-@lesson-instruction{
-- Complete @printable-exercise{BrainstormGame.adoc} and decide on a Player, Target, Danger, and Background for your game!
-- Then, use a @online-exercise{https://docs.google.com/drawings/d/1xXNWcbJ7KOgTClFQeHq-tIy0xmeZds9N3OktvEBaO4c/copy, Google Draw template} (click "Make a copy" when prompted) to create a sample "screenshot" of your game by inserting images via Google Search.
-- Make sure your Screenshot includes:
-  * Labeled estimates of coordinates for each character.
-  * 2 characters that have the same x-coordinate.
-  * 2 different characters that have the same y-coordinate.
-}
-
-=== Synthesize
 @slidebreak{Synthesize}
+
 @QandA{
-@Q{When the "Game Over" screen is supposed to be off screen, what coordinates might hide it?}
-@Q{What would be the coordinate of the dog _before it gets onscreen?_}
-@A{The dog would have a negative x-coordinate before getting on screen.}
-@Q{Why do we estimate?}
+@Q{Why people need to make estimates, instead of computing the exact answer?}
 @A{We estimate to practice number sense and make approximations that we can later refine.}
 @Q{What constitutes a good estimate?}
 @A{A good estimate is a rough guess that makes sense given the limited information available to us.}

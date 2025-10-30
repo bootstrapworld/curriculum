@@ -25,7 +25,7 @@ td .fitb{
 
 == Examples and the Multiplicative Inverse
 
-@n Below, place a checkmark next to each of the examples that you *predict* will pass when you click "Run".
+@n Below, place a checkmark next to each of the examples that you *predict* will pass (`true` statements) when you click "Run".
 
 [cols="1,12,12", frame="none", grid="none", stripes="none"]
 |===
@@ -35,28 +35,28 @@ td .fitb{
 
 |
 | @fitb{2em}{} @hspace{1em}
-  @show{(code '(EXAMPLE (* 30 1/3) 10))}
+  @show{(code '(EXAMPLE (= (* 30 1/3) 10) true))}
 | @fitb{2em}{@ifsoln{x}} @hspace{1em}
-  @show{(code '(EXAMPLE (* 1/9 (* 2 4)) 8/9))}
+  @show{(code '(EXAMPLE (= (* 1/9 (* 2 4)) 8/9) true))}
 
 
 |
 | @fitb{2em}{@ifsoln{x}} @hspace{1em}
-  @show{(code '(EXAMPLE (/ 25 1/5) 5))}
+  @show{(code '(EXAMPLE (= (/ 25 1/5) 5) true))}
 | @fitb{2em}{} @hspace{1em}
-  @show{(code '(EXAMPLE (/ 9 10) 10/9))}
+  @show{(code '(EXAMPLE (= (/ 9 10) 10/9) true))}
 
 |
 | @fitb{2em}{@ifsoln{x}} @hspace{1em}
-  @show{(code '(EXAMPLE (* 1/3 2) 2))}
+  @show{(code '(EXAMPLE (= (* 1/3 2) 2) true))}
 | @fitb{2em}{} @hspace{1em}
-  @show{(code '(EXAMPLE (/ 2 5) (/ 2 1/5)))}
+  @show{(code '(EXAMPLE (= (/ 2 5) (/ 2 1/5)) true))}
 
 |
 | @fitb{2em}{@ifsoln{x}} @hspace{1em}
-  @show{(code '(EXAMPLE (* (* 2 2) 1/7) 4/7))}
+  @show{(code '(EXAMPLE (= (* (* 2 2) 1/7) 4/7) true))}
 | @fitb{2em}{} @hspace{1em}
-  @show{(code '(EXAMPLE (* 27/20 20/27) (/ 20 20)))}
+  @show{(code '(EXAMPLE (= (* 27/20 20/27) (/ 20 20)) true))}
 
 |
 | @ifproglang{pyret}{`end`}
@@ -80,7 +80,7 @@ td .fitb{
 
 == Revisiting "Is the Order of Operations Universal?"
 
-@n Below, place a checkmark next to each of the examples that you *predict* will pass when you click "Run".
+@n Below, place a checkmark next to each of the examples that you *predict* will pass (`true` statements) when you click "Run".
 
 [cols="1,24", frame="none", grid="none", stripes="none"]
 |===
@@ -89,19 +89,19 @@ td .fitb{
 @ifproglang{pyret}{`examples:`}
 
 @fitb{2em}{} @hspace{1em}
-@show{(code '(EXAMPLE (/ (* 40 12) 2) (* 40 (/ 12 2))))}
+@show{(code '(EXAMPLE (= (/ (* 40 12) 2) (* 40 (/ 12 2))) true))}
 
 @fitb{2em}{@ifsoln{x}} @hspace{1em}
-@show{(code '(EXAMPLE (* (/ 6 12) 3) (/ 6 (* 12 3))))}
+@show{(code '(EXAMPLE (= (* (/ 6 12) 3) (/ 6 (* 12 3))) true))}
 
 @fitb{2em}{} @hspace{1em}
-@show{(code '(EXAMPLE (/ (* 5 9) 15) (* 5 (/ 9 15))))}
+@show{(code '(EXAMPLE (= (/ (* 5 9) 15) (* 5 (/ 9 15))) true))}
 
 @fitb{2em}{} @hspace{1em}
-@show{(code '(EXAMPLE (* (/ 8 4) 25) (/ 8 (* 4 25))))}
+@show{(code '(EXAMPLE (= (* (/ 8 4) 25) (/ 8 (* 4 25))) true))}
 
 @fitb{2em}{@ifsoln{x}} @hspace{1em}
-@show{(code '(EXAMPLE (/ (* 90 1) 2) (* 90 (/ 1 2))))}
+@show{(code '(EXAMPLE (= (/ (* 90 1) 2) (* 90 (/ 1 2))) true))}
 
 @ifproglang{pyret}{`end`}
 |===
@@ -117,6 +117,6 @@ td .fitb{
 
 @n Notice that all of the examples appear to follow the same pattern in terms of groupings. Why do you think *some* of the examples passed, but others did not?  @fitb{}{}
 
-@fitb{}{@ifsoln{We need to look at the operators, not just the parentheses!}}
-
-@fitb{}{}
+@blanklines{2}{
+@ifsoln{We need to look at the operators, not just the parentheses!}
+}

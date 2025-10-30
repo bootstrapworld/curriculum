@@ -1,6 +1,6 @@
 include $(MAKE_DIR)utils.mk
 
-phase1: initialization .git/hooks/pre-commit node_modules distribution/$(NATLANG)/lib/self-guided/node_modules courses-and-lessons page-not-found glossary bootstraplessonjs starterFiles learningObjectives dictionaries citations
+phase1: node_modules initialization .git/hooks/pre-commit courses-and-lessons page-not-found glossary bootstraplessonjs starterFiles learningObjectives dictionaries citations
 
 ###############################################################################
 
@@ -53,11 +53,9 @@ initialization:
 # but I don't think it buys us much
 
 node_modules:
+	@. ${HOME}/.nvm/nvm.sh && nvm use 22.5
 	npm explore npm/node_modules/@npmcli/run-script -g -- npm_config_global=false npm install node-gyp@latest
 	npm install
-
-distribution/$(NATLANG)/lib/self-guided/node_modules:
-	@(cd distribution/$(NATLANG)/lib/self-guided; npm install)
 
 .git/hooks/pre-commit: lib/maker/git-pre-commit-hook.sh
 	@echo ➤ Install Git pre-commit hook

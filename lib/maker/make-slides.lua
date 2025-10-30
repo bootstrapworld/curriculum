@@ -1,6 +1,4 @@
-#! /usr/bin/env lua
-
--- print('doing make-slides.lua in ' .. os.getenv'PWD')
+-- print('doing make-slides.lua')
 
 local make_dir = os.getenv'TOPDIR' .. '/' .. os.getenv'MAKE_DIR'
 
@@ -10,8 +8,10 @@ dofile(make_dir .. 'adoc-to-md.lua')
 
 local file_being_read = 'noneyet'
 
+local course_string, proglang
+
 local function errmsg_file_context()
-  return os.getenv('PWD') .. '/' .. file_being_read
+  return file_being_read
 end
 
 local read_group = make_read_group(identity, errmsg_file_context)
@@ -19,10 +19,6 @@ local read_group = make_read_group(identity, errmsg_file_context)
 -- terror == Terminate with ERROR
 local terror = make_error_function(errmsg_file_context)
 
-local lplan_file = 'index.adoc'
-
--- make it zlides.md for now, when completely debugged rename to slides.md
-local slides_file = 'zlides.md'
 
 local function nicer_case(s)
   if s == '' then return s
@@ -31,26 +27,6 @@ local function nicer_case(s)
   else
     return string.upper(s:sub(1,1)) .. s:sub(2)
   end
-end
-
-local proglang = first_line('.cached/.record-proglang') or 'pyret'
-
-local slides_id_file = 'slides-' .. proglang .. '.id'
-
-if not file_exists_p(slides_id_file) then
-  print('WARNING: Lesson ' .. os.getenv('PWD') .. ' missing ' .. slides_id_file)
-end
-
-local lesson_superdir = first_line('.cached/.record-superdir') or 'Core'
-
-local course_string = 'Core'
-
-if lesson_superdir == 'Data-Science' then
-  course_string = 'DS'
-elseif lesson_superdir == 'Algebra' or lesson_superdir == 'Algebra2' or lesson_superdir == 'Expressions-and-Equations' then
-  course_string = 'Math'
-elseif lesson_superdir == 'Reactive' then
-  course_string = 'R'
 end
 
 local function read_if_poss(i, xxx)
@@ -111,7 +87,7 @@ end
 
 -- Note: we're counting levels using the AsciiDoc convention. It's -1+ the number of ='s
 
-local function get_slides(lsn_plan_adoc_file)
+local function get_slides(lsn_plan_adoc_file, addl_exercises_list_file)
   if not file_exists_p(lsn_plan_adoc_file) then return end
   file_being_read = lsn_plan_adoc_file
   local slides = {}
@@ -130,6 +106,7 @@ local function get_slides(lsn_plan_adoc_file)
   local curr_slide_style = ''
   local curr_slide_preparation = false
   local writing_curr_slide_text_p = true
+  local additional_exercises_explicit_p = false
 
   local function set_current_slide()
     -- add curr_slide, if valid, to list of slides
@@ -139,6 +116,9 @@ local function get_slides(lsn_plan_adoc_file)
     if txt == '' or (n == 0 and curr_slide_header == '') or not txt:match('%S') then
       -- print('discarding empty slide in ' .. errmsg_file_context())
       return false
+    end
+    if curr_slide_header == "Additional Exercises" then
+      additional_exercises_explicit_p = true
     end
     curr_slide.header = curr_slide_header
     curr_slide.level = curr_slide_level
@@ -152,13 +132,16 @@ local function get_slides(lsn_plan_adoc_file)
     return true
   end
 
-  local function insert_slide_break()
-    set_current_slide()
+  local function start_new_slide()
     curr_slide = newslide()
     curr_slide_level = 2
     curr_slide_section = 'Repeat'
     writing_curr_slide_text_p = true
-    return curr_slide
+  end
+
+  local function insert_slide_break()
+    set_current_slide()
+    start_new_slide()
   end
 
   local function update_curr_slide_text(str)
@@ -411,6 +394,20 @@ local function get_slides(lsn_plan_adoc_file)
 
   scan_directives(io.open_buffered(lsn_plan_adoc_file))
 
+  if (not additional_exercises_explicit_p) and file_exists_p(addl_exercises_list_file) then
+    start_new_slide()
+    -- print('adding additional exercises')
+    local addl_exercises_files = dofile(addl_exercises_list_file)
+    curr_slide_header = 'Additional Exercises'
+    curr_slide_style = 'Supplemental'
+    for _,opt_ex in ipairs(addl_exercises_files) do
+      update_curr_slide_text('- ')
+      update_curr_slide_text(opt_ex)
+      update_curr_slide_text('\n')
+    end
+    set_current_slide()
+  end
+
   local n = #slides
   if n > 1 then
     local last_slide = slides[n]
@@ -422,14 +419,44 @@ local function get_slides(lsn_plan_adoc_file)
   return slides
 end
 
-local function make_slides_file(lplan_file, slides_file)
-  if not file_exists_p(lplan_file) then return end
-  local slides = get_slides(lplan_file)
+function make_slides_file(lesson_dir)
+  local lesson_superdir = first_line(lesson_dir .. '/.cached/.record-superdir') or 'Core'
+
+  if lesson_superdir == 'Projects' then return end
+
+  local adoc_file = lesson_dir .. '/index.adoc'
+  local addl_exercises_list_file = lesson_dir .. '/.cached/.index.additional-exercises'
+
+  -- make it zlides.md for now, when completely debugged rename to slides.md
+  local slides_file = lesson_dir .. '/zlides.md'
+
+  proglang = first_line(lesson_dir .. '/.cached/.record-proglang') or 'pyret'
+
+  local slides_id_file = lesson_dir .. '/slides-' .. proglang .. '.id'
+
+  if not file_exists_p(slides_id_file) then
+    print('WARNING: Missing ' .. slides_id_file)
+  end
+
+  if lesson_superdir == 'Data-Science' then
+    course_string = 'DS'
+  elseif lesson_superdir == 'Algebra' or lesson_superdir == 'Algebra2' or lesson_superdir == 'Expressions-and-Equations' then
+    course_string = 'Math'
+  elseif lesson_superdir == 'Reactive' then
+    course_string = 'R'
+  else
+    course_string = 'Core'
+  end
+
+  if not file_exists_p(adoc_file) then return end
+  local slides = get_slides(adoc_file, addl_exercises_list_file)
   --print('got ' .. #slides .. ' slides')
   local slides_last_idx = #slides
   local curr_header = 'notsetyet'
   local curr_section = 'notsetyetI'
   local o = io.open(slides_file, 'w')
+
+  local additional_exercises_explicit_p = false
 
   for k,slide in ipairs(slides) do
     --print('doing slide ' .. k .. ' of level ' .. slide.level)
@@ -453,14 +480,18 @@ local function make_slides_file(lplan_file, slides_file)
       if slide.section == 'Repeat' then slide.section = curr_section end
       if slide.section then curr_section = slide.section end
       curr_header = slide.header
+      if curr_header == 'Additional Exercises' then
+        additional_exercises_explicit_p = true
+        -- print('additional exercises explicitly given')
+      end
       if slide.containsoptblock then
         curr_header = 'Optional: ' .. curr_header
       end
       if (slide.level == 2 and slide.section) then
         local curr_layout = slide.style
         if not memberp(curr_layout, allowed_slide_layouts) then
-          print('WARNING: Probably empty slide or template in wrong case! Unknown slide template ' .. curr_layout .. ' in '
-            .. os.getenv('PWD'))
+          print('WARNING: Probably empty slide or template in wrong case! Unknown slide template ' ..
+                curr_layout .. ' in ' .. adoc_file)
           curr_layout = "Bogus-layout"
         end
         o:write('@slidebreak\n')
@@ -472,5 +503,3 @@ local function make_slides_file(lplan_file, slides_file)
   end
   o:close()
 end
-
-make_slides_file(lplan_file, slides_file)
