@@ -2130,7 +2130,7 @@
                             (let* ([lbl+text (read-commaed-group i directive read-group)]
                                    [lbl (string->symbol (first lbl+text))]
                                    [c (hash-ref *starter-files* lbl #f)]
-                                   [autoinclude? (hash-ref c 'autoinclude #t)])
+                                   [autoinclude? (if c (hash-ref c 'autoinclude #t) #t)])
                               (cond [(not c)
                                      (printf "WARNING: ~a: Ill-named @~a ~a\n\n"
                                              (errmessage-context) directive lbl)]
