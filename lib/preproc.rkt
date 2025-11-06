@@ -371,6 +371,11 @@
     (expand-directives:string->port title o)
     (newline o)))
 
+(define (display-error-output s o)
+  (display (enclose-tag "span" ""
+             (format "[missing: ~a]" s)
+             #:attribs "style=\"color: red\"") o))
+
 (define (massage-arg arg)
   ;(printf "doing massage-arg ~s\n" arg)
   (eval arg *adoc-namespace*))
@@ -2142,9 +2147,9 @@
                                (string=? directive "opt-starter-file"))
                             (let* ([lbl+text (read-commaed-group i directive read-group)]
                                    [lbl (string->symbol (first lbl+text))]
-                                   [c (hash-ref *starter-files* lbl #f)]
-                                   [autoinclude? (if c (hash-ref c 'autoinclude #t) #t)])
+                                   [c (hash-ref *starter-files* lbl #f)])
                               (cond [(not c)
+                                     (display-error-output lbl o)
                                      (printf "WARNING: ~a: Ill-named @~a ~a\n\n"
                                              (errmessage-context) directive lbl)]
                                     [else
@@ -2152,8 +2157,10 @@
                                                              (string-join (rest lbl+text) "&#x2c; "))]
                                              ; [opt? (or (string=? directive "opt-starter-file") *optional-flag?*)]
                                              [opt? (string=? directive "opt-starter-file")]
+                                             [autoinclude? (hash-ref c 'autoinclude #t)]
                                              [p (hash-ref c *proglang-sym* #f)])
                                         (cond [(not p)
+                                               (display-error-output lbl o)
                                                (unless *possibly-invalid-page?*
                                                (printf "WARNING: ~a: @~a ~a missing for ~a\n\n"
                                                        (errmessage-context) directive lbl *proglang*))]
