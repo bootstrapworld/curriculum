@@ -15,10 +15,10 @@ body {
 }
 
 main {
-  margin: 0 20px;
-  position: relative;
-  flex-grow: 1;
-  padding-bottom: 30px;
+  margin:     0 20px;
+  position:   relative;
+  flex-grow:  1;
+  padding:    20px;
 }
 
 #pages { display: flex; column-gap: 40px; flex-grow: 1; }
@@ -35,7 +35,7 @@ main {
 #leftPane { padding: 5px 20px; max-width: 500px; }
 #rightPane { flex-grow: 1; }
 
-#banner, #footer{
+#banner {
   border-bottom: solid 2px black;
   text-align: left;
   background: black;
@@ -43,9 +43,17 @@ main {
   padding: 5px;
 }
 #banner { font-size: 30px; font-weight: 600; }
-#footer { bottom: 0px; font-size: 10px; }
+#banner * { vertical-align: middle; margin: auto 10px; }
+#banner .count { color: #666; }
+#banner .icon { width: 50px; }
+
+#footer {
+  bottom:     0px;
+  font-size:  10px;
+  border-top: 1px solid black;
+  text-align: center;
+}
 #footer a { color: aaaaff; }
-#banner * { vertical-align: middle; }
 
 #buttons button {
   border-radius: 8px;
@@ -73,7 +81,7 @@ main {
 #buttons {
   position: absolute;
   top: 50%;
-  left: calc(max(320px, min(49%, 525px)));
+  left: calc(max(320px, min(49%, 500px)));
   text-align: center;
   z-index: 9;
 }
@@ -85,8 +93,8 @@ main {
   transition:   all 1s;
 }
 
-/* correct what I'm pretty sure is a bug in Parley's CSS */
-.code-container .prompt { width: 90%; }
+/* Hide lesson elements that don't belong in self-guided mode */
+.section-link, .duration { display: none; }
 
 .ablockitem {
   display: none;
