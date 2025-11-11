@@ -18,7 +18,7 @@ judge-table = load-table:
   other-team,    # abbreviated name of other team (e.g. NYY, TOR, etc)
   pitch-type,    # type of pitch (e.g. - fastball, cutter, etc)
   pitch-speed,   # speed of the pitch
-  bat-angle,     # angle of Aaron's bat
+  hit-angle,     # angle of the hit from Aaron's bat
   hit-distance,  # how many feet the hit traveled
   hit-speed,     # speed of the ball, off the bat
   bb-type        # ball type (e.g. - line drive, ground ball, etc)
@@ -73,30 +73,30 @@ end
 
 ###################### Make some charts ##########################
 
-curve-angle-distance-image = scatter-plot(curve-table, "other-team", "bat-angle", "hit-distance")
+curve-angle-distance-image = scatter-plot(curve-table, "other-team", "hit-angle", "hit-distance")
 
 all-angle-distance-chart = render-chart(from-list.scatter-plot(
-        judge-table.column("bat-angle"),
+        judge-table.column("hit-angle"),
         judge-table.column("hit-distance")))
-      .x-axis("bat-angle")
+      .x-axis("hit-angle")
       .y-axis("hit-distance")
 
 all-angle-speed-chart = render-chart(from-list.scatter-plot(
-        judge-table.column("bat-angle"),
+        judge-table.column("hit-angle"),
         judge-table.column("hit-speed")))
-      .x-axis("bat-angle")
+      .x-axis("hit-angle")
       .y-axis("hit-speed")
 
 all-pitchspeed-distance-chart = render-chart(from-list.scatter-plot(
         judge-table.column("pitch-speed"),
         judge-table.column("hit-distance")))
-      .x-axis("bat-angle")
+      .x-axis("hit-angle")
       .y-axis("hit-distance")
 
 all-pitchspeed-speed-chart = render-chart(from-list.scatter-plot(
         judge-table.column("pitch-speed"),
         judge-table.column("hit-speed")))
-      .x-axis("bat-angle")
+      .x-axis("hit-angle")
       .y-axis("hit-speed")
 
 fuel-efficiency-quadratic-chart = render-chart(from-list.scatter-plot(

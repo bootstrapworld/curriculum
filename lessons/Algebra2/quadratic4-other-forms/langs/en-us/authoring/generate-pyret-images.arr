@@ -18,7 +18,7 @@ judge-table = load-table:
   other-team,    # abbreviated name of other team (e.g. NYY, TOR, etc)
   pitch-type,    # type of pitch (e.g. - fastball, cutter, etc)
   pitch-speed,   # speed of the pitch
-  bat-angle,     # angle of Aaron's bat
+  hit-angle,     # angle of the hit off of Aaron's bat
   hit-distance,  # how many feet the hit traveled
   hit-speed,     # speed of the ball, off the bat
   bb-type        # ball type (e.g. - line drive, ground ball, etc)
@@ -83,10 +83,10 @@ factored-50-70-img = make-noisy-scatter(lam(x): -1 * (x - 50) * (x - 70) end, 45
 ###################### Make some charts ##########################
 
 curve-angle-distance-chart = render-chart(from-list.scatter-plot(
-        curve-table.column("bat-angle"),
+        curve-table.column("hit-angle"),
         curve-table.column("hit-distance"))
         .point-size(10))
-      .x-axis("bat-angle")
+      .x-axis("hit-angle")
       .y-axis("hit-distance")
       .y-min(50)
 
