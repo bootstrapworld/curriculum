@@ -11,8 +11,8 @@ function create_local_self_guided() {
   local g=$1
   test -f $g/selfGuidedBits.jsx || return
   (cd $g
-  mkdir -p self-guided
-  cd self-guided
+  mkdir -p .cached/self-guided
+  cd .cached/self-guided
   ln -sf $lib_dir/curriculum.css
   for sgf in $(ls $self_guided_dir); do
     # soft link to node_modules subdir from the generic dir;
@@ -23,9 +23,9 @@ function create_local_self_guided() {
       cp -p $self_guided_dir/$sgf .
     fi
   done
-  ln -sf ../selfGuidedBits.jsx
-  test -d ../images && ln -sf ../images
-  test -d ../videos && ln -sf ../videos
+  ln -sf ../../selfGuidedBits.jsx
+  test -d ../../images && ln -sf ../../images
+  test -d ../../videos && ln -sf ../../videos
   )
 }
 

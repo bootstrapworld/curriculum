@@ -428,7 +428,7 @@ function make_slides_file(lesson_dir)
   local addl_exercises_list_file = lesson_dir .. '/.cached/.index.additional-exercises'
 
   -- make it zlides.md for now, when completely debugged rename to slides.md
-  local slides_file = lesson_dir .. '/zlides.md'
+  local slides_file = lesson_dir .. '/.cached/zlides.md'
 
   proglang = first_line(lesson_dir .. '/.cached/.record-proglang') or 'pyret'
 
