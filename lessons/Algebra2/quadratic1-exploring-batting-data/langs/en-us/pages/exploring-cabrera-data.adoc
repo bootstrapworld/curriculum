@@ -1,0 +1,90 @@
+= Exploring the Miguel Cabrera Dataset
+
+++++
+<style>
+/* This page has an unusual configuration, where there's only one
+   2nd level section but it doesn't start at the beginning.
+   Stop that section from auto-growing, thereby freeing up vertical
+   space for the first section in order to maximize the table height
+ */
+#preamble_disabled 
+</style>
+++++
+
+@link-instructions{
+For this page, you'll need to open the @starter-file{alg2-miguel-cabrera} on your computer. If you haven't already, select *Save a Copy* from the "File" menu to make a copy of the file that's just for you. *Read the comments at the top of the file*, which describe what each column in the dataset means.
+}
+
+@n What is the name of the table being loaded in this file? @fitb{}{@ifsoln{`hit-table`}}
+
+== Looking for Possible Relationships
+
+We can look for potential relationships between quantitative columns by building scatter plots. Let's see what they reveal.
+
+
+@n Make a scatter plot comparing
+@fitbruby{15em}{pitch speed}{explanatory variable} and
+@fitbruby{15em}{hit speed}{response variable}.
+
+@indented{
+- Does there appear to be a relationship between `pitch-speed` and `hit-speed`? If so, describe it. @fitb{}{@ifsoln{No.}}
+
+@fitb{}{}
+
+- Based on the scatter plot, what hit speed would you predict for a ball pitched at 95mph? @fitb{7em}{@ifsoln{60–110 mph}}
+  * Why? @fitb{}{@ifsoln{most of Cabrera's hits are between 60 and 110 mph}}
+- How confident are you in your prediction? @hspace{3em} _not at all_ @hspace{1em} 1 @hspace{3em} 2 @hspace{3em} 3 @hspace{3em} 4 @hspace{3em} 5 @hspace{1em} _very_
+}
+
+@vspace{1ex}
+
+@n Make a scatter plot comparing
+@fitbruby{15em}{pitch speed}{explanatory variable} and
+@fitbruby{15em}{hit distance}{response variable}.
+
+@indented{
+- Does there appear to be a relationship between `pitch-speed` and `hit-distance`? If so, describe it. @fitb{}{@ifsoln{No.}}
+
+@fitb{}{}
+
+- Based on the scatter plot, what hit distance would you predict for a ball pitched at 95mph? @fitb{7em}{@ifsoln{100-450 feet}}
+  * Why? @fitb{}{@ifsoln{Most of Judge's hits are between 100 and 450 feet.}}
+- How confident are you in your prediction? @hspace{3em} _not at all_ @hspace{1em} 1 @hspace{3em} 2 @hspace{3em} 3 @hspace{3em} 4 @hspace{3em} 5 @hspace{1em} _very_
+}
+
+@vspace{1ex}
+
+@n Make a scatter plot comparing
+@fitbruby{15em}{bat angle}{explanatory variable} and
+@fitbruby{15em}{hit distance}{response variable}.
+
+@indented{
+- Does there appear to be a relationship between `hit-angle` and `hit-distance`? If so, describe it. @fitb{}{@ifsoln{Yes. There seems to be}}
+
+@fitb{}{@ifsoln{an optimum bat angle. The hit distances increase as the angle increases up to a point. Above about 30 degrees the hit distances decrease.}}
+
+- Based on the scatter plot, what distance would you predict for a ball hit at an angle of 60 degrees? @fitb{7em}{@ifsoln{about 225 feet}}
+
+  * Why? @fitb{}{@ifsoln{as the bat angle increases to 60 degrees, the hit distance drops to between 200 and 250 ft.}}
+- How confident are you in your prediction? @hspace{3em} _not at all_ @hspace{1em} 1 @hspace{3em} 2 @hspace{3em} 3 @hspace{3em} 4 @hspace{3em} 5 @hspace{1em} _very_
+}
+
+@vspace{1ex}
+
+@n Make a scatter plot comparing
+@fitbruby{15em}{bat angle}{explanatory variable} and
+@fitbruby{15em}{hit speed}{response variable}.
+
+@indented{
+- Does there appear to be a relationship between `hit-angle` and `hit-speed`? If so, describe it. @fitb{}{@ifsoln{No.}}
+
+@fitb{}{@ifsoln{}}
+
+- Based on the scatter plot, what speed would you predict for a ball hit at an angle of 20 degrees? @fitb{7em}{@ifsoln{60–110mph}}
+  * Why? @fitb{}{@ifsoln{Cabrera's hit speed seems to be fairly evenly distributed in that range.}}
+- How confident are you in your prediction? @hspace{3em} _not at all_ @hspace{1em} 1 @hspace{3em} 2 @hspace{3em} 3 @hspace{3em} 4 @hspace{3em} 5 @hspace{1em} _very_
+}
+
+@n What is happening on lines 23–32 of the starter file? @fitb{}{}
+
+@fitb{}{@ifsoln{different filtered tables are being defined, focused on data from specific pitch types.}}
