@@ -185,6 +185,8 @@
             (read-json i)))
         '())))
 
+(define *pyret-starter-file-prefix* "https://code.pyret.org/editor#shareurl=")
+
 (define *assessments*
   (let ([assessments-file (format "distribution/~a/lib/assessments.js" *natlang*)])
     (if (file-exists? assessments-file)
@@ -2158,7 +2160,10 @@
                                              ; [opt? (or (string=? directive "opt-starter-file") *optional-flag?*)]
                                              [opt? (string=? directive "opt-starter-file")]
                                              [autoinclude? (hash-ref c 'autoinclude #t)]
-                                             [p (hash-ref c *proglang-sym* #f)])
+                                             [p (hash-ref c *proglang-sym* #f)]
+                                             [use-pyret-prefix?
+                                               (and p (eq? *proglang-sym* 'pyret)
+                                                    (hash-ref p 'prefix #t))])
                                         (cond [(not p)
                                                (display-error-output lbl o)
                                                (unless *possibly-invalid-page?*
@@ -2179,6 +2184,10 @@
                                                                      (printf "WARNING: ~a: @~a ~a missing URL\n\n"
                                                                              (errmessage-context) directive lbl)
                                                                      "starter-file-missing-URL.html"]
+                                                                    [use-pyret-prefix?
+                                                                      (string-append
+                                                                        *pyret-starter-file-prefix*
+                                                                        url)]
                                                                     [else url]))]
                                                        [link-output
                                                          (format
