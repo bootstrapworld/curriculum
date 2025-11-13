@@ -97,6 +97,7 @@ end
 judge-curve-angle-distance-image = scatter-plot(judge-curve-table, "other-team", "hit-angle", "hit-distance")
 cabrera-sliders-angle-distance-image = scatter-plot(cabrera-sliders-table, "other-team", "hit-angle", "hit-distance")
 
+# all hit-angle v. hit-distance
 judge-all-angle-distance-chart = render-chart(from-list.scatter-plot(
         judge-table.column("hit-angle"),
         judge-table.column("hit-distance")))
@@ -108,6 +109,7 @@ cabrera-all-angle-distance-chart = render-chart(from-list.scatter-plot(
       .x-axis("hit-angle")
       .y-axis("hit-distance")
 
+# all hit-angle v. hit-speed
 judge-all-angle-speed-chart = render-chart(from-list.scatter-plot(
         judge-table.column("hit-angle"),
         judge-table.column("hit-speed")))
@@ -119,12 +121,7 @@ cabrera-all-angle-speed-chart = render-chart(from-list.scatter-plot(
       .x-axis("hit-angle")
       .y-axis("hit-speed")
 
-cabrera-all-pitchspeed-distance-chart = render-chart(from-list.scatter-plot(
-        cabrera-table.column("pitch-speed"),
-        cabrera-table.column("hit-distance")))
-      .x-axis("hit-angle")
-      .y-axis("hit-distance")
-
+# all pitch-speed v. hit-distance
 judge-all-pitchspeed-distance-chart = render-chart(from-list.scatter-plot(
         judge-table.column("pitch-speed"),
         judge-table.column("hit-distance")))
@@ -136,6 +133,7 @@ cabrera-all-pitchspeed-distance-chart = render-chart(from-list.scatter-plot(
       .x-axis("hit-angle")
       .y-axis("hit-distance")
 
+# all pitch-speed v. hit-speed
 judge-all-pitchspeed-speed-chart = render-chart(from-list.scatter-plot(
         judge-table.column("pitch-speed"),
         judge-table.column("hit-speed")))
