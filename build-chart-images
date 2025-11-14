@@ -2,11 +2,12 @@
 
 function process_authoring() {
   local diry=$1
+  local extras_path=../../../../../../lib/pyret-support/js-extras/
   while IFS= read -r authoring_dir; do
     pyret_file=$authoring_dir/generate-pyret-images.arr
     if test -f $pyret_file; then
       echo Generating images from $pyret_file
-      (cd $authoring_dir; npx pyret --builtin-js-dir lib/pyret-support/js-extras/ -p generate-pyret-images.arr >/dev/null)
+      (cd $authoring_dir; npx pyret --builtin-js-dir $extras_path -p generate-pyret-images.arr >/dev/null)
     fi
   done < <(find $diry -type d -name authoring)
 }

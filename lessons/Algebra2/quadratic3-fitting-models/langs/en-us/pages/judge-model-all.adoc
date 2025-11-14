@@ -1,4 +1,4 @@
-= Modeling Bat Angle v. Hit Distance (Two-seam Fastballs)
+= Modeling Bat Angle v. Hit Distance (Full Data)
 ++++
 <style>
 /* Shrink fill in the blanks */
@@ -23,7 +23,7 @@ td { padding: 0 0.5em !important; }
 
 == Fitting the Model Visually in Desmos
 @link-instructions{
-For this section, open *Exploring Quadratic Functions(Desmos)* to *Slide 4: Fitting a Model: Bat Angle v Hit Distance (2-seam fast balls)*.
+For this section, open *Exploring Quadratic Functions (Desmos)* to *Slide 8: Fitting a Model: Bat Angle v Hit Distance (Full Data)*. +
 }
 
 @n Using what you know about the values of @math{a}, @math{h}, and @math{k}, adjust the sliders to fit a quadratic model to the data.  Continue adjusting the sliders until you've landed on the best model you can. Record your values for @math{a}, @math{h}, and @math{k} below.
@@ -34,16 +34,21 @@ For this section, open *Exploring Quadratic Functions(Desmos)* to *Slide 4: Fitt
 
 @n Using the values of @math{a}, @math{h}, and @math{k} you decided on in the Desmos file, define your quadratic function below in Pyret notation.
 
-@indented{`fun fast2seam(x) :` @fitb{40em}{} `end` }
+@indented{`fun judge(x) :` @fitb{40em}{} `end` }
 
+@n Which subset of the data appears to be visually the most similar to the full dataset? @fitb{}{@ifsoln{4 seam fastballs}}
+
+@n What does that mean @fitb{}{@ifsoln{the majority of the data points in the full dataset are four seam fastballs}}
+
+@teacher{You could have students make `count(judge-table, "pitch-type")` to have something more concrete to discuss.}
 
 == Testing how Good the Model is in Pyret
 @link-instructions{
-Open your copy of the @starter-file{alg2-aaron-judge}.
-Adjust the definition for `fast2seam(x)` on line 45 and click "Run".
+Open your copy of the @opt-starter-file{alg2-aaron-judge}.
+Adjust the definition for `judge(x)` on line 54 and click "Run".
 }
 
-@n Use `fit-model` to fit your function to the data in the `fast2seam-table`. What @math{S}-value did you get? @fitb{}{}
+@n Use `fit-model` to fit your function to the data in the `judge-table`. What @math{S}-value did you get? @fitb{}{}
  
 == What does this model actually mean?
 
@@ -52,7 +57,7 @@ After experimenting, I came up with a quadratic model for this dataset showing t
 @vspace{1ex}
 
 The error in the model is described by an @vocab{S-value} of about @fitbruby{5em}{}{S}@fitbruby{8em}{@ifsoln{feet}}{units}. @hspace{1em} I
-@fitbruby{18em}{}{strongly agree, agree, disagree, strongly disagree} that this model is a good fit considering that @fitbruby{10em}{@ifsoln{hit distances}}{y-variable} in this dataset range from @fitbruby{10em}{@ifsoln{85}}{lowest y-value} to @fitbruby{10em}{@ifsoln{484}}{highest y-value}.
+@fitbruby{18em}{}{strongly agree, agree, disagree, strongly disagree} that this model is a good fit considering that @fitbruby{10em}{@ifsoln{hit distances}}{y-variable} in this dataset range from @fitbruby{10em}{@ifsoln{27}}{lowest y-value} to @fitbruby{10em}{@ifsoln{495}}{highest y-value}.
 
 @vspace{1ex}
 

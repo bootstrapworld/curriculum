@@ -41,10 +41,9 @@
  *** Make a link or code to share with your students.
 
 - _If you're a first-time Desmos user, fear not!_ @dist-link{pages/desmos-instructions-alg2.adoc, _Here's what you need to do._}
-- Decide whether you want students to model and interpret all of the datasets in the Desmos file. If it's a priority for you, you may want to print the optional page for each dataset (@opt-printable-exercise{model-2seam.adoc, 2-seam},
-@opt-printable-exercise{model-sliders.adoc, sliders},
-@opt-printable-exercise{model-4seam.adoc, 4-seam},
-@opt-printable-exercise{model-judge.adoc, full}) to scaffold that work.
+- Decide whether you want students to model and interpret all of the datasets in the Desmos file. If it's a priority for you, you may want to print the optional page for each dataset (
+@opt-printable-exercise{cabrera-model-4seam.adoc, 4-seam},
+@opt-printable-exercise{cabrera-model-all.adoc, full}) to scaffold that work.
 }
 
 |===
@@ -53,7 +52,7 @@
 @objective{model-fit-function}
 
 === Overview
-Students work with the vertex form to fit a quadratic model for Aaron Judge's batting angle and hit distance data. They extend the model-fitting techniques from the @lesson-link{linear3-fitting-models} lesson into quadratic relationships and explore the vertex form ( @math{f(x) = a(x − h)^2 + k}) of quadratic models using a custom Desmos slider activity.
+Students work with the vertex form to fit a quadratic model to the data relating Miguel Cabrera's `hit-angle` and `hit-distance`. They extend the model-fitting techniques from the @lesson-link{linear3-fitting-models} lesson into quadratic relationships and explore the vertex form ( @math{f(x) = a(x − h)^2 + k}) of quadratic models using a custom Desmos slider activity.
 
 === Launch
 @slidebreak{Launch-DN}
@@ -65,7 +64,7 @@ Let's return to our dataset to dig into that messiness.
 }
 
 @lesson-instruction{
-- Open the @starter-file{alg2-aaron-judge} and click "Run".
+- Open the @starter-file{alg2-miguel-cabrera} and click "Run".
 - Before we try to build a quadratic model for our data, we need to learn a new Pyret function!
 - Stop and think: {nbsp} What to do you predict will be the output of these two expressions?
   * @show{(code '(sqr 4))}  
@@ -107,10 +106,10 @@ Let's return to our dataset to dig into that messiness.
 === Investigate
 @slidebreak{Investigate}
 
-*Let's try to build the best possible quadratic model we can for our Aaron Judge Batting Data*, using what we know about how @math{a}, @math{h}, and @math{k} influence the shape of a parabola.
+*Let's try to build the best possible quadratic model we can for `hit-angle` v. `hit-distance`*, using what we know about how @math{a}, @math{h}, and @math{k} influence the shape of a parabola.
 
 @lesson-instruction{
-- Complete the first section of @printable-exercise{model-batangle-v-hitdistance.adoc}, using the scatter plot you just made in Pyret and what we know about the model settings in the Vertex form of a Quadratic Model.
+- Complete the first section of @printable-exercise{cabrera-model-batangle-v-hitdistance.adoc}, using the scatter plot you just made in Pyret and what we know about the model settings in the Vertex form of a Quadratic Model.
 }
 
 @slidebreak{Investigate-DN}
@@ -132,18 +131,17 @@ Make sure you have shared the link or code you made for your class to @starter-f
 
 @lesson-instruction{
 - Open *Exploring Quadratic Functions (Desmos)*. You should be on  *Slide 3: Fitting Models* .
-- Turn to the *Fitting the Model Visually in Desmos* section of @printable-exercise{model-batangle-v-hitdistance.adoc} and define your best-guess model for the relationship between `hit-angle` and `hit-distance` in the curve ball data.
-- Return to the @starter-file{alg2-aaron-judge} and modify the `curve` function on line 47 using the model settings from the model you fit in Desmos.
+- Turn to the *Fitting the Model Visually in Desmos* section of @printable-exercise{cabrera-model-batangle-v-hitdistance.adoc} and define your best-guess model for the relationship between `hit-angle` and `hit-distance` in the curve ball data.
+- Return to the @starter-file{alg2-miguel-cabrera} and modify the `curve` function on line 47 using the model settings from the model you fit in Desmos.
 - Use `fit-model` to determine how well your model predicts hit distance from bat angle.
-- Record and interpret the results by completing @printable-exercise{model-batangle-v-hitdistance.adoc}.
-- @opt{Slides 4-7 of the Desmos file each focus on other subsets of Aaron Judge's batting data.
+- Record and interpret the results by completing @printable-exercise{cabrera-model-batangle-v-hitdistance.adoc}.
+- @opt{Slides 4-7 of the Desmos file each focus on other subsets of Miguel Cabrera's batting data.
  * Visually fit models for these datasets in Desmos.
  * Update the last four functions defined in the Pyret file.
  * Write `fit-model` expressions to test them out and interpret the @vocab{S-value}.
- * Your teacher may have printed pages to support you with modeling and interpreting these other datasets (@opt-printable-exercise{model-2seam.adoc, 2-seam},
-@opt-printable-exercise{model-sliders.adoc, sliders},
-@opt-printable-exercise{model-4seam.adoc, 4-seam},
-@opt-printable-exercise{model-judge.adoc, full}).}
+ * Your teacher may have printed pages to support you with modeling and interpreting these other datasets (
+@opt-printable-exercise{cabrera-model-4seam.adoc, 4-seam},
+@opt-printable-exercise{cabrera-model-all.adoc, full}).}
 }
 
 @slidebreak{Investigate}
@@ -156,7 +154,7 @@ Make sure you have shared the link or code you made for your class to @starter-f
 @A{This fitting process was purely about adjusting sliders and seeing if @math{S} goes down. It was all trial-and-error, with no guarantee that there's no better model out there.}
 @Q{Slides 3-6 in the Desmos file display data for specific pitch types. Slide 7 shows the full dataset. Which of the subsets is most visually similar to the full dataset and what does that tell us?}
 @A{The four-seam fastball dataset looks very similar to the full dataset. That is an indicator that four-seam fastballs likely represent a significant portion of the dataset.}
-@A{`count(judge-table, "pitch-type")` reveals that 93 of the 262 pitches are four-seam fastballs.}
+@A{`count(hit-table, "pitch-type")` reveals that 93 of the 262 pitches are four-seam fastballs.}
 }
 
 @slidebreak{Investigate}
@@ -188,7 +186,12 @@ Quadratic models written in Vertex Form make it incredibly easy to find the @voc
 
 == Additional Exercises
 
-- @opt-printable-exercise{model-speed-v-mpg.adoc} engages students with visually fitting a quadratic model for @opt-starter-file{alg2-fuel-efficiency, fuel efficiency data} using Slide 8 of the Desmos file and what they know about the model settings in the vertex form from the shape of the data. As with the activity they just completed, students will then define and fit their model in Pyret, and interpret the results.
+- If your students are more into the Yankees, you can find parallel versions of each of these worksheets that deal with data from Aaron Judge, which rely on @opt-starter-file{alg2-exploring-quadratics-desmos-judge}:
+  ** @opt-printable-exercise{judge-model-4seam.adoc}
+  ** @opt-printable-exercise{judge-model-2seam.adoc}
+  ** @opt-printable-exercise{judge-model-all.adoc}
+
+- If baseball isn't their fpcus, @opt-printable-exercise{model-speed-v-mpg.adoc} engages students with visually fitting a quadratic model for @opt-starter-file{alg2-fuel-efficiency, fuel efficiency data} using Slide 8 of the Desmos file and what they know about the model settings in the vertex form from the shape of the data. As with the activity they just completed, students will then define and fit their model in Pyret, and interpret the results.
 
 @vspace{1ex}
 
