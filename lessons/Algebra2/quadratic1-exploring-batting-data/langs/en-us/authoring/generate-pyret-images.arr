@@ -92,65 +92,37 @@ fun add-padding(img):
     square(padding, "solid", "transparent"))
 end
 
+fun make-raw-chart(t, xCol, yCol):
+  render-chart(from-list.scatter-plot(
+      t.column(xCol),
+      t.column(yCol)))
+    .x-axis(xCol)
+    .y-axis(yCol)
+end
+
 ###################### Make some charts ##########################
 
 judge-curve-angle-distance-image = scatter-plot(judge-curve-table, "other-team", "hit-angle", "hit-distance")
 cabrera-sliders-angle-distance-image = scatter-plot(cabrera-sliders-table, "other-team", "hit-angle", "hit-distance")
 
 # all hit-angle v. hit-distance
-judge-all-angle-distance-chart = render-chart(from-list.scatter-plot(
-        judge-table.column("hit-angle"),
-        judge-table.column("hit-distance")))
-      .x-axis("hit-angle")
-      .y-axis("hit-distance")
-cabrera-all-angle-distance-chart = render-chart(from-list.scatter-plot(
-        cabrera-table.column("hit-angle"),
-        cabrera-table.column("hit-distance")))
-      .x-axis("hit-angle")
-      .y-axis("hit-distance")
+judge-all-angle-distance-chart = make-raw-chart(judge-table, "hit-angle", "hit-distance")
+cabrera-all-angle-distance-chart = make-raw-chart(cabrera-table, "hit-angle", "hit-distance")
 
 # all hit-angle v. hit-speed
-judge-all-angle-speed-chart = render-chart(from-list.scatter-plot(
-        judge-table.column("hit-angle"),
-        judge-table.column("hit-speed")))
-      .x-axis("hit-angle")
-      .y-axis("hit-speed")
-cabrera-all-angle-speed-chart = render-chart(from-list.scatter-plot(
-        cabrera-table.column("hit-angle"),
-        cabrera-table.column("hit-speed")))
-      .x-axis("hit-angle")
-      .y-axis("hit-speed")
+judge-all-angle-speed-chart = make-raw-chart(judge-table, "hit-angle", "hit-speed")
+cabrera-all-angle-speed-chart = make-raw-chart(cabrera-table, "hit-angle", "hit-speed")
 
 # all pitch-speed v. hit-distance
-judge-all-pitchspeed-distance-chart = render-chart(from-list.scatter-plot(
-        judge-table.column("pitch-speed"),
-        judge-table.column("hit-distance")))
-      .x-axis("hit-angle")
-      .y-axis("hit-distance")
-cabrera-all-pitchspeed-distance-chart = render-chart(from-list.scatter-plot(
-        cabrera-table.column("pitch-speed"),
-        cabrera-table.column("hit-distance")))
-      .x-axis("hit-angle")
-      .y-axis("hit-distance")
+judge-all-pitchspeed-distance-chart = make-raw-chart(judge-table, "pitch-speed", "hit-distance")
+cabrera-all-pitchspeed-distance-chart = make-raw-chart(cabrera-table, "pitch-speed", "hit-distance")
 
 # all pitch-speed v. hit-speed
-judge-all-pitchspeed-speed-chart = render-chart(from-list.scatter-plot(
-        judge-table.column("pitch-speed"),
-        judge-table.column("hit-speed")))
-      .x-axis("hit-angle")
-      .y-axis("hit-speed")
-cabrera-all-pitchspeed-speed-chart = render-chart(from-list.scatter-plot(
-        cabrera-table.column("pitch-speed"),
-        cabrera-table.column("hit-speed")))
-      .x-axis("hit-angle")
-      .y-axis("hit-speed")
+judge-all-pitchspeed-speed-chart = make-raw-chart(judge-table, "pitch-speed", "hit-speed")
+cabrera-all-pitchspeed-speed-chart = make-raw-chart(cabrera-table, "pitch-speed", "hit-speed")
 
 
-fuel-efficiency-quadratic-chart = render-chart(from-list.scatter-plot(
-        mpg-table.column("speed"),
-        mpg-table.column("mpg")))
-      .x-axis("speed")
-      .y-axis("mpg")
+fuel-efficiency-quadratic-chart = make-raw-chart(mpg-table, "speed", "mpg")
 
 
 ###################### Save the images ##########################
@@ -159,10 +131,10 @@ I.save-image(add-padding(judge-curve-angle-distance-image),
 I.save-image(add-padding(judge-all-angle-distance-chart.get-image()),
   '../images/judge-angle-distance-AUTOGEN.png')
 I.save-image(add-padding(judge-all-angle-speed-chart.get-image()),
-  '../images/judge-angle-distance-AUTOGEN.png')
+  '../images/judge-angle-speed-AUTOGEN.png')
 I.save-image(add-padding(judge-all-pitchspeed-distance-chart.get-image()),
   '../images/judge-pitchspeed-distance-AUTOGEN.png')
-I.save-image(add-padding(judge-all-pitchspeed-distance-chart.get-image()),
+I.save-image(add-padding(judge-all-pitchspeed-speed-chart.get-image()),
   '../images/judge-pitchspeed-speed-AUTOGEN.png')
 
 I.save-image(add-padding(cabrera-sliders-angle-distance-image),
@@ -170,7 +142,7 @@ I.save-image(add-padding(cabrera-sliders-angle-distance-image),
 I.save-image(add-padding(cabrera-all-angle-distance-chart.get-image()),
   '../images/cabrera-angle-distance-AUTOGEN.png')
 I.save-image(add-padding(cabrera-all-angle-speed-chart.get-image()),
-  '../images/judge-angle-distance-AUTOGEN.png')
+  '../images/cabrera-angle-speed-AUTOGEN.png')
 I.save-image(add-padding(cabrera-all-pitchspeed-distance-chart.get-image()),
   '../images/cabrera-pitchspeed-distance-AUTOGEN.png')
 I.save-image(add-padding(cabrera-all-pitchspeed-distance-chart.get-image()),
