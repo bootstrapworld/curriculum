@@ -1,0 +1,99 @@
+#! /usr/bin/env bash
+
+SED=sed
+
+if which gsed|grep -q .; then
+  SED=gsed
+fi
+
+export PROGLANG
+nomake=
+lsn=
+
+if test $# -eq 0; then
+  echo $0 needs a lesson argument
+  exit
+fi
+
+while test $# -ne 0; do
+  if test "$1" = --proglang; then
+    shift; PROGLANG="$1"; shift
+  elif test "$1" = --nomake; then
+    nomake=1; shift
+  else
+    lsn="$1"; shift
+  fi
+done
+
+# get at the lesson basename
+lsn=${lsn%/}
+lsn=${lsn##*/}
+
+if test "$PROGLANG" = wescheme; then
+  lsn=$(echo $lsn|$SED -e 's/-wescheme$//')
+  lsn=$lsn-wescheme
+elif test "$PROGLANG" = codap; then
+  lsn=$(echo $lsn|$SED -e 's/-codap$//')
+  lsn=$lsn-codap
+fi
+
+if echo $lsn|grep -q "\-wescheme$"; then
+  PROGLANG=wescheme
+elif echo $lsn|grep -q "\-codap$"; then
+  PROGLANG=codap
+fi
+
+if test -z "$PROGLANG"; then
+  PROGLANG=pyret
+fi
+
+export TOPDIR=$(pwd)
+
+if test -z "$nomake"; then
+  make
+fi
+
+if test ! -d distribution; then
+  echo WARNING: Did not find any built pathways
+  exit
+fi
+
+cd distribution
+
+if test -s .make.error.log; then
+  echo make failed\; $0 aborted
+  exit
+fi
+
+export NATLANG
+
+for NATLANG in *; do
+  test -d $NATLANG || continue
+
+  export PROGDIR=$TOPDIR/distribution/.prog-$NATLANG
+
+  if test ! -d $NATLANG/lessons; then
+    echo Missing lessons directory in distribution/$NATLANG -- did you call make\?
+    continue
+  fi
+
+  if test ! -d $NATLANG/lessons/$lsn; then
+    echo Lesson $NATLANG/lessons/$lsn not found in distribution
+    continue
+  fi
+
+  if test ! -d $NATLANG/lessons/$lsn/.cached/self-guided; then
+    echo Lesson $NATLANG/lessons/$lsn/.cached/self-guided not found in distribution
+    continue
+  fi
+
+  cd $NATLANG/lessons/$lsn/.cached/self-guided
+  npm run build
+
+  rm -fr ../../self-guided
+  if test -d dist; then
+    mv dist ../../self-guided
+  fi
+
+  cd $TOPDIR/distribution
+done
