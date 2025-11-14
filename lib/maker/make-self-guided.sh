@@ -23,7 +23,7 @@ function create_local_self_guided() {
       cp -p $self_guided_dir/$sgf .
     fi
   done
-  ln -sf ../../selfGuidedBits.jsx
+  mv ../../selfGuidedBits.jsx .
   test -d ../../images && ln -sf ../../images
   test -d ../../videos && ln -sf ../../videos
   )
