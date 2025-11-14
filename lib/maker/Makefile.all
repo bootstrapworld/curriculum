@@ -162,6 +162,13 @@ mdquiz:
 
 ###############################################################################
 
+.PHONY: self-guided
+
+self-guided:
+	$(TOPDIR)/build-all-self-guideds
+
+###############################################################################
+
 
 help:
 	@echo "  make              -- updates distribution/, HTML only"
@@ -190,4 +197,5 @@ help:
 	@echo "  make deploy       -- deploys existing distribution/ to webhost"
 	@echo "  make help         -- displays (this) help"
 	@echo "  make csv          -- make CSV files for WordPress"
-	@echo "  make mdquiz       -- make mdquiz (WIP)"
+	@echo "  make mdquiz       -- call build-mdquiz (WIP)"
+	@echo "  make self-guided  -- call build-all-self-guideds"
