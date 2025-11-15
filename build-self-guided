@@ -88,7 +88,7 @@ for NATLANG in *; do
   fi
 
   cd $NATLANG/lessons/$lsn/.cached/self-guided
-  npm run build
+  npm run build &> /dev/null
 
   rm -fr ../../self-guided
   if test -d dist; then
