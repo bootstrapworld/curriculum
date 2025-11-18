@@ -43,7 +43,7 @@ You will want to:
 
 === Overview
 
-Students explore the Covid dataset, focusing on the growth in positive test cases for the state of Massachusetts (they will eventually explore other states later on).
+Students explore the Covid dataset, focusing on the growth in positive test cases for the state of Michigan (they can explore other states later on, as well).
 
 === Launch
 @slidebreak{Launch}
@@ -56,24 +56,24 @@ Even in the Spring of 2020, very few people understood the impact Covid would ha
 @slidebreak{Investigate-DN}
 
 @lesson-instruction{
-- We're going to look at the daily total of confirmed, positive cases for New England (Rhode Island, Maine, Vermont, New Hampshire, Massachusetts, and Connecticut) from summer 2020 until the end of the year.
+- We're going to look at the daily total of confirmed, positive cases for a handful states – California, Michigan, Illinois, Wisconsin, and Minnesota - during 2020 (January 1st, 2020 through January 1st, 2021).
 - Open the @starter-file{alg2-covid}, select "Save a Copy", and click "Run."
 - Working in pairs or small groups, complete @printable-exercise{exploring-covid.adoc}.
 }
 
-@strategy{Why just New England, starting from June 9th?!?}{
+@strategy{Why just 2020?!?}{
 
-This dataset is @link{https://docs.google.com/spreadsheets/d/1T73KS2IUU1kkG1SY4Ac7EU9Lj-ev1U9vzM_txSYcUhE/, available for all 50 states (and Washington, D.C!)}, but for pedagogical purposes we've written the starter file to pull only data from New England.
+This dataset is @link{https://docs.google.com/spreadsheets/d/1GFWesAyYshYXDDSTxoHYmFrPVDTQd12rEVR-ZGn11hg/, available for all 50 states (and Washington, D.C!)}, but for pedagogical purposes we've pulled out just a handful of states for the 365 days of January 1st, 2020 to January 1st, 2021.
 
-And even within New England, we've _artificially constrained this dataset_, showing only the data from June 9th to December 26th, 2020. We've made this choice in order to showcase the most purely-exponential behavior of the infection curve, for the sake of this lessons' math learning goals.
+We've made this choice in order to showcase the most purely-exponential behavior of the infection curve, for the sake of this lessons' math learning goals.
 
-For students who are farther along in mathematics, we recommend showing them _all_ the data through 2020, starting in January rather than June. The first portion of the infection curve shows a gradual, linear growth pattern before exploding in the Fall of 2020. A purely exponential function will under-predict the growth during this time period, adding significant friction to the exponential modeling goal of this unit!
+For students who are comfortable with polynomial functions involving a mix of exponential, quadratic/cubic/etc, and linear terms, we recommend showing them _all_ the data and letting them choose a state to explore. The first portion of the infection curve shows a gradual, linear growth pattern at the start of 2020, before exploding a few months later. A purely exponential function will under-predict the growth during this time period, adding significant friction to the exponential modeling goal of this unit!
 
 (The functions necessary to model this kind of growth have multiple terms showing different kinds of growth, and are just out of reach for students right now. Students can _return_ to this unit once they've learned about @lesson-link{periodic4-hybrid-models, hybrid models} in later lessons.)
 
 Based on the strength of your students, we encourage you to choose the data that best fits your learning goals.
 
-To use all available data, open the @starter-file{alg2-covid} and change the source sheet on line 7 from `"New England"` to `"All"`.
+To use all available data, open the @starter-file{alg2-covid} and change the source sheet on line 12 from `"CA, MN, MI, WI, IL, and OH in 2020"` to `"All"`.
 }
 
 === Synthesize
@@ -99,33 +99,33 @@ Review student answers to confirm that students have made a number of observatio
 @objective{model-fit-function}
 
 === Overview
-Students use Pyret to perform linear regression on the data from Massachusetts and discuss whether or not the optimal linear model is a good fit for the data.
+Students use Pyret to perform linear regression on the data from Michigan and discuss whether or not the optimal linear model is a good fit for the data.
 
 === Launch
 @slidebreak{Launch}
-Let's start out by looking at _just one state_. We'll use Massachusetts for this investigation, but you can do your own investigation about any state you like after finishing this one!
+Let's start out by looking at _just one state_. We'll use Michigan for this investigation, but you can do your own investigation about any of the other states after finishing this one!
 
 === Investigate
 @slidebreak{Investigate}
 
 @lesson-instruction{
-- Turn to @printable-exercise{linear-models.adoc}, and complete the first two questions.
-- In the Definitions Area, find the definition of `is-MA` underneath the comment `# Define some helper functions`
+- Turn to @printable-exercise{linear-models-MI.adoc}, and complete the first two questions.
+- In the Definitions Area, find the definition of `is-MI` underneath the comment `# Define some helper functions`
 - With your partner, come up with an explanation of what you think this function does
-- A few lines farther down, find the definitions of `MA-table`. What do you think is happening here?
+- A few lines farther down, find the definitions of `MI-table`. What do you think is happening here?
 - Don't be afraid to experiment by changing the code!
 }
 
 @slidebreak{Investigate}
 
-- The first part of this code defines a _new function_ called `is-MA`, which tests a single Row to see if `state == "MA"`.
+- The first part of this code defines a _new function_ called `is-MI`, which tests a single Row to see if `state == "MI"`.
 
 @ifnotslide{
 @indented{
 ```
-# is-MA :: Row -> Boolean
-# consumes a Row, and checks if state == "MA"
-fun is-MA(r): r["state"] == "MA" end
+# is-MI :: Row -> Boolean
+# consumes a Row, and checks if state == "MI"
+fun is-MI(r): r["state"] == "MI" end
 ```
 }
 }
@@ -135,19 +135,19 @@ fun is-MA(r): r["state"] == "MA" end
 |===
 |
 ```
-# is-MA :: Row -> Boolean
-# consumes a Row, and checks if state == "MA" is equal to "MA":
-fun is-MA(r): r["state"] == "MA" end
+# is-MI :: Row -> Boolean
+# consumes a Row, and checks if state == "MI"
+fun is-MI(r): r["state"] == "MI" end
 ```
 |===
 }
 
-- The second part uses Pyret's `filter` function. This function consumes a table (in out example, `covid-table`) and a _function_ (`is-MA`), and produces a new table containing only _rows for which that function returns `true`._ This new table -- containing only rows in Massachusetts -- is given the name `MA-table`. 
+- The second part uses Pyret's `filter` function. This function consumes a table (in out example, `covid-table`) and a _function_ (`is-MI`), and produces a new table containing only _rows for which that function returns `true`._ This new table -- containing only rows in Michigan -- is given the name `MI-table`.
 
 @ifnotslide{
 @indented{
 ```
-MA-table = filter(covid-table, is-MA)
+MI-table = filter(covid-table, is-MI)
 ```
 }	
 }
@@ -157,7 +157,7 @@ MA-table = filter(covid-table, is-MA)
 |===
 |
 ```
-MA-table = filter(covid-table, is-MA)
+MI-table = filter(covid-table, is-MI)
 ```
 |===
 }
@@ -165,10 +165,10 @@ MA-table = filter(covid-table, is-MA)
 @slidebreak{Investigate}
 
 @lesson-instruction{
-- Complete @printable-exercise{linear-models.adoc}.
+- Complete @printable-exercise{linear-models-MI.adoc}.
 }
 
-The definition @show{(code '(define MA-table (filter covid-table is-MA)))} _filters_ our dataset, keeping only the rows for which `state = "MA"`. We could create other helper functions like `is-MA`, and use them with the `filter` function to get datasets for any state we want!
+The definition @show{(code '(define MI-table (filter covid-table is-MA)))} _filters_ our dataset, keeping only the rows for which `state = "MI"`. We could create other helper functions like `is-MI`, and use them with the `filter` function to get datasets for any state we want!
 
 @slidebreak{Investigate}
 
@@ -191,12 +191,12 @@ The definition @show{(code '(define MA-table (filter covid-table is-MA)))} _filt
 
 @slidebreak{InvestigateR}
 
-@right{@image{images/MA-covid-linear.png, 300}}If we make the line go from the start to the peak of the curve (top line), almost all of the points bulge out below our @vocab{line of best fit}. +
+@right{@image{images/MI-covid-linear.png, 300}}If we make the line go from the start to the peak of the curve (top line), almost all of the points bulge out below our @vocab{line of best fit}. +
 If we make the line hit the _bottom_ of the curve, all the points fall above it (bottom line).
 
 @slidebreak{InvestigateR}
 
-@ifslide{@right{@image{images/MA-covid-linear.png, 300}}}Splitting the difference (orange line) is better than both of those options, and we might even get a halfway decent @math{S}! +
+@ifslide{@right{@image{images/MI-covid-linear.png, 300}}}Splitting the difference (orange line) is better than both of those options, and we might even get a halfway decent @math{S}! +
 But ultimately, straight-line, linear models just don't behave like this curve, and we'll never get the _best-possible fit_ with them. +
 *The number of positive cases is growing too fast to be fit with a linear model that grows at a constant rate!*
 
@@ -228,7 +228,7 @@ Make sure you've:
 @lesson-instruction{
 - Open the *Desmos* link I shared with you to the *Modeling Covid Spread* file. 
 - You should be on Slide 1 (Quadratic Models).
-- Using the file, complete @printable-exercise{quadratic-models.adoc}
+- Using the file, complete @printable-exercise{quadratic-models-MI.adoc}
 }
 
 @teacher{Have students share their resulting models. Which one fits best?}
@@ -253,3 +253,7 @@ But this data starts out almost flat and then suddenly takes off like a rocket -
 
 - This data grows very slowly in the beginning and then grows very quickly. Can you think of any other situations in real life that act like this?
 - Can you think of any graphs that might act like this?
+
+== Additional Exercises
+
+Earlier versions of this lesson provided scaffolded materials for Massachusetts. You can still access the @opt-printable-exercise{linear-models-MA.adoc, linear} and @opt-printable-exercise{quadratic-models-MA.adoc, quadratic} pages.

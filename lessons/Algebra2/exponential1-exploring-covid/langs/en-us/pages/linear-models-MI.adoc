@@ -1,0 +1,44 @@
+= Linear Models for Covid in Michigan
+++++
+<style>
+.autonum { font-weight: bold; }
+.noPadding .autonum { padding-top: 0 !important; }
+</style>
+++++
+
+@link-instructions{
+For this page, you'll need to have the @starter-file{alg2-covid} open on your computer. If you haven't already, select *Save a Copy* from the "File" menu to make a copy of the file that's just for you.
+}
+
+@n Evaluate `covid-table` and `MI-table` in the Interactions Area. How are these tables different? @fitb{}{@ifsoln{`MI-table` only has rows from Michigan}} +
+@fitb{}{}
+
+@n In the Definitions Area, find the definition of `is-MI` and `MI-table`. What are these things? @fitb{}{} +
+@fitb{}{@ifsoln{A new function is being defined, which is used to filter `covid-table` and produce a new table with only MI rows}}
+
+@n Make a scatter plot from the `MI-table`, using `state` as the labels, and `days` and `positive` as the x- and y-axis. Sketch the plot below.
+
+@center{
+@ifnotsoln{@image{../images/MI-covid-blank.png, 450}}
+@ifsoln{   @image{../images/MI-covid.png,       450}}
+}
+
+[.noPadding]
+@n Use `lr-plot` to obtain the _best-possible linear model_ for the MI Covid data, *graph it* on the plot above, and *define it* below:
+
+@indented{
+y = @fitb{25em}{@ifsoln{@math{1264.92x + 107984}}} @hspace{3em} @math{S =} @fitb{20em}{@ifsoln{77,135}}
+}
+
+@n The optimized linear model for this dataset predicts an @fitbruby{8em}{@ifsoln{increase}}{increase / decrease} of about @fitbruby{5em}{@ifsoln{1265}}{slope} @fitbruby{9em}{@ifsoln{positive cases}}{y-variable} per @fitbruby{7em}{@ifsoln{day}}{x-variable}. +
+@indented{The error in the model is described by an @vocab{S-value} of about @fitbruby{1em}{@ifsoln{77,135}}{S}@fitbruby{8em}{@ifsoln{positive cases}}{units}, which is a @fitbruby{6em}{@ifsoln{so-so}}{poor, so-so, good} fit considering that @fitbruby{8em}{@ifsoln{positive cases}}{y-variable} in this dataset range from @fitbruby{8em}{@ifsoln{0}}{lowest y-value} to @fitbruby{8em}{@ifsoln{551,498}}{highest y-value}.}
+
+@n Change the definition of the `linear` function in the @starter-file{alg2-covid} to match the model produced by `lr-plot` and "Save".
+
+@n Do you think a linear function is a good fit for this dataset? Why or why not? @fitb{}{} +
+
+@blanklines{3}{}
+
+@star What do you think the code that defines `MI-table` is actually doing? @fitb{}{}
+
+@blanklines{2}{}

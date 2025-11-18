@@ -1,4 +1,4 @@
-= Models for Vermont
+= Models for CA
 ++++
 <style>
 .listingblock { width: 75%; margin: 0 auto; }
@@ -11,27 +11,27 @@ For this page, you'll need to have the @starter-file{alg2-covid} open on your co
 
 @vspace{1ex}
 
-*Find the definition of `is-MA` in your starter file.* The code is shown here:
+*Find the definition of `is-MI` in your starter file.* The code is shown here:
 ```
-# is-MA :: Row -> Boolean
-# consumes a Row, and checks if state == "MA"
-fun is-MA(r): r["state"] == "MA" end
+# is-MI :: Row -> Boolean
+# consumes a Row, and checks if state == "MI"
+fun is-MI(r): r["state"] == "MI" end
 ```
 
 @n Under the definition of `is-MA`, define a _new_ function called `is-VT`, which tests to see if the `state` value is equal to "VT." Click run and try it out!
 
 @vspace{1ex}
 
-*Find the definition of `MA-table` in your starter file.* The code is shown here:
+*Find the definition of `MI-table` in your starter file.* The code is shown here:
 ```
 ######################################################### 
 # Define some grouped and/or random samples
-MA-table = filter(covid-table, is-MA)
+MI-table = filter(covid-table, is-MI)
 ```
 
-@n Under the definition of `MA-table`, define a _new_ grouped sample called `VT-table` containing all the rows for the state of Vermont.` Click run and try it out!
+@n Under the definition of `MI-table`, define a _new_ grouped sample called `CA-table` containing all the rows for the state of California. Click run and try it out!
 
-@n Use `lr-plot` to obtain the best-possible linear model for the relationship between `day` and `positive` in the `VT-table`, then fill in the blanks below:
+@n Use `lr-plot` to obtain the best-possible linear model for the relationship between `day` and `positive` in the `CA-table`, then fill in the blanks below:
 
 @indented{
 The optimized linear model for this dataset predicts an @fitbruby{8em}{@ifsoln{increase}}{increase / decrease} of about @fitbruby{3em}{@ifsoln{21}}{slope} @fitbruby{8em}{@ifsoln{positive cases}}{y-variable} per @fitbruby{7em}{@ifsoln{day}}{x-variable}. +
@@ -39,34 +39,34 @@ The error in the model is described by an @vocab{S-value} of about @fitbruby{1em
 @fitbruby{18em}{@ifsoln{disagree}}{strongly agree, agree, disagree, strongly disagree} that this model is a good fit considering that @fitbruby{8em}{@ifsoln{positive cases}}{y-variable} in this dataset range from
 @fitbruby{8em}{@ifsoln{1092}}{lowest y-value} to @fitbruby{8em}{@ifsoln{6781}}{highest y-value}.}
 
-== Exponential Model for Vermont (VT)
+== Exponential Model for California (CA)
 @link-instructions{
-For this section, in addition to Pyret, open *Slide 5: Exponential Model for VT* of *Modeling Covid Spread (Desmos)*.
+For this section, in addition to Pyret, open *Slide 5: Exponential Model for CA* of *Modeling Covid Spread (Desmos)*.
 }
 
 
-@n Turn to *Slide 5: Exponential Model for VT* of *Modeling Covid Spread (Desmos)* and adjust the sliders until you've come up with the best exponential model you can for the Vermont dataset. Record your model below: +
-@fitb{}{@ifsoln{*Answers will vary.* Here's one for reference: `fun exponential-VT(x):  (0.08 * expt(1.06, (~1 * x))) + 1400 end`
+@n Turn to *Slide 5: Exponential Model for CA* of *Modeling Covid Spread (Desmos)* and adjust the sliders until you've come up with the best exponential model you can for the California dataset. Record your model below: +
+@fitb{}{@ifsoln{*Answers will vary.*
 }}
 
-@n Return to @starter-file{alg2-covid}. At the bottom of the Definitions Area, define `exponential-VT` to be the model you just found.
+@n Return to @starter-file{alg2-covid}. At the bottom of the Definitions Area, define `exponential-CA` to be the model you just found.
 
 @vspace{1ex}
 
-Click "Run" to load your definition, then fit the model using `VT-table`.
+Click "Run" to load your definition, then fit the model using `CA-table`.
 
 @indented{
-According to this model, on @fitbruby{6em}{June 9, 2020}{day zero} there were about
-@fitbruby{1em}{@ifsoln{0.08}}{a} + @fitbruby{2em}{@ifsoln{1400}}{k} @fitbruby{10em}{@ifsoln{positive COVID cases}}{y-units} in VT, for a total of about 
-@fitbruby{7em}{@ifsoln{1400}}{a + k}. This number grew exponentially, increasing by a factor of 
-@fitbruby{8em}{@ifsoln{1.06}}{Growth Factor: b}, or @fitbruby{10em}{@ifsoln{6}}{Growth Rate: (b − 1) &times; 100}% every day. +
+According to this model, on January 15th, 2020 there were about
+@fitbruby{1em}{@ifsoln{   }}{a}@fitbruby{1em}{@ifsoln{   }}{b}@math{^x} + @fitbruby{2em}{@ifsoln{    }}{k} @fitbruby{10em}{@ifsoln{positive COVID cases}}{y-units} in CA, for a total of about
+@fitbruby{7em}{@ifsoln{   }}{a + k}. This number grew exponentially, increasing by a factor of
+@fitbruby{8em}{@ifsoln{   }}{Growth Factor: b}, or @fitbruby{10em}{@ifsoln{   }}{Growth Rate: (b − 1) &times; 100}% every day. +
 The error in the model is described by an @vocab{S-value} of about
-@fitbruby{2em}{@ifsoln{547}}{S}@fitbruby{11em}{@ifsoln{positive COVID cases}}{units}. +
+@fitbruby{2em}{@ifsoln{   }}{S}@fitbruby{11em}{@ifsoln{positive COVID cases}}{units}. +
 I
-@fitbruby{18em}{@ifsoln{strongly disagree}}{strongly agree, agree, disagree, strongly disagree} that this model is a good fit considering that
+@fitbruby{18em}{@ifsoln{   }}{strongly agree, agree, disagree, strongly disagree} that this model is a good fit considering that
 @fitbruby{6em}{@ifsoln{positive cases}}{y-units} in this dataset range from 
-@fitbruby{6em}{@ifsoln{1092}}{lowest y-value} to 
-@fitbruby{6em}{@ifsoln{6781}}{highest y-value}. 
+@fitbruby{6em}{@ifsoln{   }}{lowest y-value} to
+@fitbruby{6em}{@ifsoln{   }}{highest y-value}.
 }
 
 

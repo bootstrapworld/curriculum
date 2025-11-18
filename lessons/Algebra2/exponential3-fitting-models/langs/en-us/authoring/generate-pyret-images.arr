@@ -6,16 +6,17 @@ include charts
 # just return the image, instead of displaying it as a modal
 display-chart := lam(c): c.get-image() end
 
-covid-url = "https://docs.google.com/spreadsheets/d/1T73KS2IUU1kkG1SY4Ac7EU9Lj-ev1U9vzM_txSYcUhE/export?format=csv"
+covid-url = "https://docs.google.com/spreadsheets/d/1GFWesAyYshYXDDSTxoHYmFrPVDTQd12rEVR-ZGn11hg/export?format=csv?gid=811606505"
 
 
 ###################### Load the data ##########################
 
 # Define your table
 covid-table = load-table: # NOTES ON COLUMNS:
-  state,   # the state reporting the data
-  day,     # the number of days after June 9th, 2020
-  positive # the number of cumulative, positive COVID cases reported by a given day for that state
+  state,             # the state reporting the data
+  days,              # number of days since 1/1/2020
+  positive,          # TOTAL number of positive covid cases
+  deaths             # TOTAL number of deaths due to covid
   source: csv.csv-table-url(covid-url, {
     header-row: true,
     infer-content: true
@@ -23,9 +24,9 @@ covid-table = load-table: # NOTES ON COLUMNS:
 end
 
 ###################### Helper Functions ##########################
-fun is-MA(r): r["state"] == "MA" end
-
-MA-table = filter(covid-table, is-MA)
+# is-MI :: Row -> Boolean
+# consumes a Row, and checks if state == "MI"
+fun is-MI(r): r["state"] == "MI" end
 
 padding = 10
 fun add-padding(img):
@@ -37,11 +38,12 @@ fun add-padding(img):
 end
 
 ###################### Make some charts ##########################
-MA-covid-chart = render-chart(from-list.scatter-plot(
-        MA-table.column("day"),
-        MA-table.column("positive")))
-      .width(200)
-      .height(200)
+MI-covid-chart = render-chart(from-list.scatter-plot(
+        MI-table.column("day"),
+        MI-table.column("positive")))
+      .x-axis("day")
+      .y-axis("positive")
+      .y-min(100000)
 
 ###################### Save the images ##########################
-I.save-image(MA-covid-chart.get-image(), '../images/covid-scatterplot-AUTOGEN.png')
+I.save-image(add-padding(MI-covid-chart.get-image()), '../images/MI-covid-AUTOGEN.png')
