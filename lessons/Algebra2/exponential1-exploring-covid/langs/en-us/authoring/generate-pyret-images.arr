@@ -6,7 +6,7 @@ include charts
 # just return the image, instead of displaying it as a modal
 display-chart := lam(c): c.get-image() end
 
-covid-url = "https://docs.google.com/spreadsheets/d/1GFWesAyYshYXDDSTxoHYmFrPVDTQd12rEVR-ZGn11hg/export?format=csv?gid=811606505"
+covid-url = "https://docs.google.com/spreadsheets/d/1GFWesAyYshYXDDSTxoHYmFrPVDTQd12rEVR-ZGn11hg/export?format=csv&gid=811606505"
 
 
 ###################### Load the data ##########################
@@ -28,6 +28,8 @@ end
 # consumes a Row, and checks if state == "MI"
 fun is-MI(r): r["state"] == "MI" end
 
+MI-table = filter(covid-table, is-MI)
+
 padding = 10
 fun add-padding(img):
   w = image-width(img) + padding
@@ -39,19 +41,27 @@ end
 
 ###################### Make some charts ##########################
 MI-covid-chart = render-chart(from-list.scatter-plot(
-        MI-table.column("day"),
+        MI-table.column("days"),
         MI-table.column("positive")))
-      .x-axis("day")
+      .x-axis("days")
       .y-axis("positive")
       .y-min(100000)
 
-MA-covid-flipped-chart = render-chart(from-list.scatter-plot(
+covid-chart = render-chart(from-list.scatter-plot(
+        covid-table.column("days"),
+        covid-table.column("positive")))
+      .x-axis("days")
+      .y-axis("positive")
+      .y-min(100000)
+
+MI-covid-flipped-chart = render-chart(from-list.scatter-plot(
         MI-table.column("positive"),
-        MI-table.column("day")))
+        MI-table.column("days")))
       .x-axis("positive")
-      .y-axis("day")
+      .y-axis("days")
       .x-min(100000)
 
 ###################### Save the images ##########################
+I.save-image(add-padding(covid-chart.get-image()), '../images/multiple-models-AUTOGEN.png')
 I.save-image(add-padding(MI-covid-chart.get-image()), '../images/MI-covid-AUTOGEN.png')
 I.save-image(add-padding(MI-covid-flipped-chart.get-image()), '../images/MI-covid-flipped-AUTOGEN.png')

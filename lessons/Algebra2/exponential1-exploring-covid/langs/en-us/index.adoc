@@ -109,7 +109,7 @@ Let's start out by looking at _just one state_. We'll use Michigan for this inve
 @slidebreak{Investigate}
 
 @lesson-instruction{
-- Turn to @printable-exercise{linear-models.adoc}, and complete the first two questions.
+- Turn to @printable-exercise{linear-models-MI.adoc}, and complete the first two questions.
 - In the Definitions Area, find the definition of `is-MI` underneath the comment `# Define some helper functions`
 - With your partner, come up with an explanation of what you think this function does
 - A few lines farther down, find the definitions of `MI-table`. What do you think is happening here?
@@ -165,7 +165,7 @@ MI-table = filter(covid-table, is-MI)
 @slidebreak{Investigate}
 
 @lesson-instruction{
-- Complete @printable-exercise{linear-models.adoc}.
+- Complete @printable-exercise{linear-models-MI.adoc}.
 }
 
 The definition @show{(code '(define MI-table (filter covid-table is-MA)))} _filters_ our dataset, keeping only the rows for which `state = "MI"`. We could create other helper functions like `is-MI`, and use them with the `filter` function to get datasets for any state we want!
@@ -191,12 +191,12 @@ The definition @show{(code '(define MI-table (filter covid-table is-MA)))} _filt
 
 @slidebreak{InvestigateR}
 
-@right{@image{images/MA-covid-linear.png, 300}}If we make the line go from the start to the peak of the curve (top line), almost all of the points bulge out below our @vocab{line of best fit}. +
+@right{@image{images/MI-covid-linear.png, 300}}If we make the line go from the start to the peak of the curve (top line), almost all of the points bulge out below our @vocab{line of best fit}. +
 If we make the line hit the _bottom_ of the curve, all the points fall above it (bottom line).
 
 @slidebreak{InvestigateR}
 
-@ifslide{@right{@image{images/MA-covid-linear.png, 300}}}Splitting the difference (orange line) is better than both of those options, and we might even get a halfway decent @math{S}! +
+@ifslide{@right{@image{images/MI-covid-linear.png, 300}}}Splitting the difference (orange line) is better than both of those options, and we might even get a halfway decent @math{S}! +
 But ultimately, straight-line, linear models just don't behave like this curve, and we'll never get the _best-possible fit_ with them. +
 *The number of positive cases is growing too fast to be fit with a linear model that grows at a constant rate!*
 
@@ -253,3 +253,7 @@ But this data starts out almost flat and then suddenly takes off like a rocket -
 
 - This data grows very slowly in the beginning and then grows very quickly. Can you think of any other situations in real life that act like this?
 - Can you think of any graphs that might act like this?
+
+== Additional Exercises
+
+Earlier versions of this lesson provided scaffolded materials for Massachusetts. You can still access the @opt-printable-exercise{linear-models-MA.adoc, linear} and @opt-printable-exercise{quadratic-models-MA.adoc, quadratic} pages.
