@@ -112,9 +112,10 @@ export function SelfGuided() {
       document.title = selfGuidedTitle;
     }, []); // Empty array makes the effect run only once
 
-  // console.log('making SelfGuided');
   const [index, setIndex] = useState(0);
   let twinPane = selfGuidedBits[index];
+
+  const [nextAllowed, allowNext] = useState(true);
 
   function handleClickNext() {
     // console.log('doing clicknext');
@@ -139,11 +140,6 @@ export function SelfGuided() {
     throw "Invalid configuration provided: "+JSON.stringify(twinPane, null, 2);
   }
 
-
-  // console.log('hc index is', index);
-  // console.log('lessonText is', twinPane.lessonText);
-  // console.log('editorCode is', twinPane.editorCode);
-
   return (
     <>
     <div id="banner">
@@ -156,12 +152,12 @@ export function SelfGuided() {
       <div id="buttons">
         <button id="prev"
                 onClick={handleClickPrev}
-                disabled={index>0? '' : 'yes'}>
+                disabled={(index>0)? '' : 'yes' }>
           «
         </button>
         <button id="next"
                 onClick={handleClickNext}
-                disabled={index < selfGuidedBits.length - 1? '' : 'yes'}>
+                disabled={(index < selfGuidedBits.length - 1) && nextAllowed? '' : 'yes'}>
           »
         </button>
       </div>
