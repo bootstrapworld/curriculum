@@ -8,7 +8,7 @@ display-chart := lam(c): c.get-image() end
 
 countries-url = "https://docs.google.com/spreadsheets/d/1QBLIQhhVfbOVJHqzmaebuP8Kc2VCIW-hFd0wV05a2MQ/export?format=csv"
 
-covid-url = "https://docs.google.com/spreadsheets/d/1T73KS2IUU1kkG1SY4Ac7EU9Lj-ev1U9vzM_txSYcUhE/export?format=csv"
+covid-url = "https://docs.google.com/spreadsheets/d/1GFWesAyYshYXDDSTxoHYmFrPVDTQd12rEVR-ZGn11hg/export?format=csv&gid=811606505"
 
 
 ###################### Load the data ##########################
@@ -33,7 +33,8 @@ end
 covid-table = load-table: # NOTES ON COLUMNS:
   state,   # the state reporting the data
   day,     # the number of days after June 9th, 2020
-  positive # the number of cumulative, positive COVID cases reported by a given day for that state
+  positive, # the number of cumulative, positive COVID cases reported by a given day for that state
+  deaths             # TOTAL number of deaths due to covid
   source: csv.csv-table-url(covid-url, {
     header-row: true,
     infer-content: true
@@ -41,9 +42,11 @@ covid-table = load-table: # NOTES ON COLUMNS:
 end
 
 ###################### Helper Functions ##########################
-fun is-MA(r): r["state"] == "MA" end
+# is-MI :: Row -> Boolean
+# consumes a Row, and checks if state == "MI"
+fun is-MI(r): r["state"] == "MI" end
 
-MA-table = filter(covid-table, is-MA)
+MI-table = filter(covid-table, is-MI)
 
 padding = 10
 fun add-padding(img):
@@ -68,27 +71,27 @@ chart = render-chart(from-list.scatter-plot(
       .y-axis("median-lifespan")
       .y-min(50)
 
-MA-covid-chart = render-chart(from-list.scatter-plot(
-        MA-table.column("day"),
-        MA-table.column("positive")))
+MI-covid-chart = render-chart(from-list.scatter-plot(
+        MI-table.column("day"),
+        MI-table.column("positive")))
       .x-axis("day")
       .y-axis("positive")
       .y-min(100000)
 
-MA-covid-flipped-chart = render-chart(from-list.scatter-plot(
-        MA-table.column("positive"),
-        MA-table.column("day")))
+MI-covid-flipped-chart = render-chart(from-list.scatter-plot(
+        MI-table.column("positive"),
+        MI-table.column("day")))
       .x-axis("positive")
       .y-axis("day")
       .x-min(100000)
 
 ###################### Save the images ##########################
 I.save-image(add-padding(chart.get-image()), '../images/wealth-health-AUTOGEN.png')
-I.save-image(add-padding(MA-covid-chart.get-image()), '../images/MA-covid-AUTOGEN.png')
-I.save-image(add-padding(MA-covid-flipped-chart.get-image()), '../images/MA-covid-flipped-AUTOGEN.png')
+I.save-image(add-padding(MI-covid-chart.get-image()), '../images/MI-covid-AUTOGEN.png')
+I.save-image(add-padding(MI-covid-flipped-chart.get-image()), '../images/MI-covid-flipped-AUTOGEN.png')
 
 
-I.save-image(fn_5logXplus10-img, '../images/5log(x)+10.png')
-I.save-image(fn_-50logX-20-img, '../images/-50log(x)-20.png')
-I.save-image(fn_10log_x-10_-img, '../images/10log(x-10).png')
-I.save-image(fn_-10logX-img, '../images/-10log(x).png')
+I.save-image(fn_5logXplus10-img, '../images/5log(x)+10-AUTOGEN.png')
+I.save-image(fn_-50logX-20-img, '../images/-50log(x)-20-AUTOGEN.png')
+I.save-image(fn_10log_x-10_-img, '../images/10log(x-10)-AUTOGEN.png')
+I.save-image(fn_-10logX-img, '../images/-10log(x)-AUTOGEN.png')
