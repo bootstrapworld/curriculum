@@ -2344,6 +2344,8 @@
                               (display "\n--\n" o)
                               )
                             ]
+                           [(string=? directive "endsection")
+                            (stop-self-guided-break o)]
                            [(assoc directive *definitions*)
                             => (lambda (c)
                                  (expand-directives:string->port (cdr c) o #:enclosing-directive directive))]
