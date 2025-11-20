@@ -143,8 +143,8 @@ export function SelfGuided() {
   return (
     <>
     <div id="banner">
-      <img class="icon" src="./icon.png" />
-      <span class="title">Bootstrap :: {selfGuidedTitle}</span>
+      <img class="icon" src="https://www.BootstrapWorld.org/images/icon.png" />
+      <span class="title">{selfGuidedTitle}</span>
       <span class="count">({index+1} of {numSelfGuidedPages})</span>
     </div>
     <div id="progressbar" style={{width: (index + 1) * (100 / numSelfGuidedPages) + "%"}}></div>
