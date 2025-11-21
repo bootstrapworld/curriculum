@@ -15,7 +15,7 @@ covid-url = "https://docs.google.com/spreadsheets/d/1GFWesAyYshYXDDSTxoHYmFrPVDT
 # Define your table
 covid-table = load-table: # NOTES ON COLUMNS:
   state,             # the state reporting the data
-  days,              # number of days since 1/1/2020
+  day,               # number of days since 1/1/2020
   positive,          # TOTAL number of positive covid cases
   deaths             # TOTAL number of deaths due to covid
   source: csv.csv-table-url(covid-url, {
@@ -54,14 +54,14 @@ end
 
 ###################### Make some charts ##########################
 MI-covid-chart = render-chart(from-list.scatter-plot(
-        MI-table.column("days"),
+        MI-table.column("day"),
         MI-table.column("positive")))
-      .x-axis("days")
+      .x-axis("day")
       .y-axis("positive")
       .y-min(100000)
 
 covid-chart = render-chart(from-list.scatter-plot(
-        covid-table.column("days"),
+        covid-table.column("day"),
         covid-table.column("positive")))
       .x-axis("days")
       .y-axis("positive")
@@ -69,9 +69,9 @@ covid-chart = render-chart(from-list.scatter-plot(
 
 MI-covid-flipped-chart = render-chart(from-list.scatter-plot(
         MI-table.column("positive"),
-        MI-table.column("days")))
+        MI-table.column("day")))
       .x-axis("positive")
-      .y-axis("days")
+      .y-axis("day")
       .x-min(100000)
 
 ###################### Save the images ##########################

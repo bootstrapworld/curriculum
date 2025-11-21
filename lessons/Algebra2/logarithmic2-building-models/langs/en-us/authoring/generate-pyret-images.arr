@@ -2,6 +2,7 @@ use context url-file("https://raw.githubusercontent.com/bootstrapworld/starter-f
 import image-typed as I
 import csv as csv
 include charts
+import data-source as DS
 
 # just return the image, instead of displaying it as a modal
 display-chart := lam(c): c.get-image() end
@@ -28,18 +29,29 @@ countries-table = load-table: # List all of the columns in your table
   })
 end
 
-
 # Define your table
 covid-table = load-table: # NOTES ON COLUMNS:
-  state,   # the state reporting the data
-  day,     # the number of days after June 9th, 2020
-  positive, # the number of cumulative, positive COVID cases reported by a given day for that state
+  state,             # the state reporting the data
+  day,              # number of days since 1/1/2020
+  positive,          # TOTAL number of positive covid cases
   deaths             # TOTAL number of deaths due to covid
   source: csv.csv-table-url(covid-url, {
     header-row: true,
     infer-content: true
   })
+  sanitize positive using DS.string-sanitizer
+  sanitize deaths using DS.string-sanitizer
 end
+
+fun clean-commas(s :: String) -> Number:
+  string-to-number(string-replace(s, ",", "")).or-else(-1)
+end
+
+shadow covid-table = transform covid-table using positive, deaths:
+  positive: clean-commas(positive),
+  deaths: clean-commas(deaths),
+end
+
 
 ###################### Helper Functions ##########################
 # is-MI :: Row -> Boolean
@@ -58,10 +70,10 @@ fun add-padding(img):
 end
 
 ############## "AI" Charts #########################
-fn_5logXplus10-img  = make-noisy-scatter(lam(x): (  5 * log(x)) + 10 end, 0.1,    10.1, 10)
-fn_-50logX-20-img   = make-noisy-scatter(lam(x): (-50 * log(x)) - 20 end, 0.001,   0.101, 60)
-fn_10log_x-10_-img  = make-noisy-scatter(lam(x): ( 10 * log(x - 10)) end, 10.001, 20.001, 30)
-fn_-10logX-img      = make-noisy-scatter(lam(x): (-10 * log(x)) - 0  end, 0.001,  12.001, 10)
+fn_5logXplus10  = make-noisy-scatter-chart(lam(x): (  5 * log(x)) + 10 end, 0.1,    10.1, 10)
+fn_-50logX-20   = make-noisy-scatter-chart(lam(x): (-50 * log(x)) - 20 end, 0.001,   0.101, 60)
+fn_10log_x-10_  = make-noisy-scatter-chart(lam(x): ( 10 * log(x - 10)) end, 10.001, 20.001, 30)
+fn_-10logX      = make-noisy-scatter-chart(lam(x): (-10 * log(x)) - 0  end, 0.001,  12.001, 10)
 
 ###################### Make some charts ##########################
 chart = render-chart(from-list.scatter-plot(
@@ -91,7 +103,7 @@ I.save-image(add-padding(MI-covid-chart.get-image()), '../images/MI-covid-AUTOGE
 I.save-image(add-padding(MI-covid-flipped-chart.get-image()), '../images/MI-covid-flipped-AUTOGEN.png')
 
 
-I.save-image(fn_5logXplus10-img, '../images/5log(x)+10-AUTOGEN.png')
-I.save-image(fn_-50logX-20-img, '../images/-50log(x)-20-AUTOGEN.png')
-I.save-image(fn_10log_x-10_-img, '../images/10log(x-10)-AUTOGEN.png')
-I.save-image(fn_-10logX-img, '../images/-10log(x)-AUTOGEN.png')
+I.save-image(fn_5logXplus10.get-image(), '../images/5log(x)+10-AUTOGEN.png')
+I.save-image(fn_-50logX-20.get-image(),  '../images/-50log(x)-20-AUTOGEN.png')
+I.save-image(fn_10log_x-10_.get-image(), '../images/10log(x-10)-AUTOGEN.png')
+I.save-image(fn_-10logX.get-image(),     '../images/-10log(x)-AUTOGEN.png')
