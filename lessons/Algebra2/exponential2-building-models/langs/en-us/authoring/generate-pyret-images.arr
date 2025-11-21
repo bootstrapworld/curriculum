@@ -53,29 +53,13 @@ end
 ############## "AI" Charts #########################
 fn_2expt_plus_5000 = make-noisy-scatter-chart(lam(x): expt(~2, x) + 5000 end, 0, 15, 20000)
 fn_-1expt-5000     = make-noisy-scatter-chart(lam(x): (-1 * expt(~1.6, x)) - 5000 end, 0, 20, 2000)
+  .y-max(0)
 fn_25expt          = make-noisy-scatter-chart(lam(x): (25 * expt(~2, x)) end, 0, 4, 200)
 fn_25expt-100      = make-noisy-scatter-chart(lam(x): (25 * expt(~2, x - 100)) end, 100, 104, 200)
 
-###################### Make some charts ##########################
-MI-covid-chart = render-chart(from-list.scatter-plot(
-        MI-table.column("day"),
-        MI-table.column("positive")))
-      .x-axis("day")
-      .y-axis("positive")
-      .y-min(100000)
-
-multiple-models-chart = render-chart(from-list.scatter-plot(
-        covid-table.column("day"),
-        covid-table.column("positive")))
-      .x-axis("day")
-      .y-axis("positive")
 
 ###################### Save the images ##########################
-I.save-image(add-padding(MI-covid-chart.get-image()), '../images/MI-covid-AUTOGEN.png')
-
-I.save-image(add-padding(multiple-models-chart.get-image()), '../images/multiple-models-AUTOGEN.png')
-
-I.save-image(fn_2expt_plus_5000.get-image(), '../images/fn_2expt_plus_5000.png')
-I.save-image(fn_-1expt-5000.get-image(),     '../images/fn_-1expt-5000.png')
-I.save-image(fn_25expt.get-image(),          '../images/fn_25expt.png')
-I.save-image(fn_25expt-100.get-image(),      '../images/fn_25expt-100.png')
+I.save-image(fn_2expt_plus_5000.get-image(), '../images/fn_2expt_plus_5000-AUTOGEN.png')
+I.save-image(fn_-1expt-5000.get-image(),     '../images/fn_-1expt-5000-AUTOGEN.png')
+I.save-image(fn_25expt.get-image(),          '../images/fn_25expt-AUTOGEN.png')
+I.save-image(fn_25expt-100.get-image(),      '../images/fn_25expt-100-AUTOGEN.png')
