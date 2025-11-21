@@ -2,6 +2,7 @@ use context url-file("https://raw.githubusercontent.com/bootstrapworld/starter-f
 import image-typed as I
 import csv as csv
 include charts
+import data-source as DS
 
 # just return the image, instead of displaying it as a modal
 display-chart := lam(c): c.get-image() end
@@ -14,14 +15,26 @@ covid-url = "https://docs.google.com/spreadsheets/d/1GFWesAyYshYXDDSTxoHYmFrPVDT
 # Define your table
 covid-table = load-table: # NOTES ON COLUMNS:
   state,             # the state reporting the data
-  days,              # number of days since 1/1/2020
+  day,               # number of days since 1/1/2020
   positive,          # TOTAL number of positive covid cases
   deaths             # TOTAL number of deaths due to covid
   source: csv.csv-table-url(covid-url, {
     header-row: true,
     infer-content: true
   })
+  sanitize positive using DS.string-sanitizer
+  sanitize deaths using DS.string-sanitizer
 end
+
+fun clean-commas(s :: String) -> Number:
+  string-to-number(string-replace(s, ",", "")).or-else(-1)
+end
+
+shadow covid-table = transform covid-table using positive, deaths:
+  positive: clean-commas(positive),
+  deaths: clean-commas(deaths),
+end
+
 
 ###################### Helper Functions ##########################
 # is-MI :: Row -> Boolean
@@ -41,27 +54,19 @@ end
 
 ###################### Make some charts ##########################
 MI-covid-chart = render-chart(from-list.scatter-plot(
-        MI-table.column("days"),
+        MI-table.column("day"),
         MI-table.column("positive")))
-      .x-axis("days")
+      .x-axis("day")
       .y-axis("positive")
       .y-min(100000)
 
 covid-chart = render-chart(from-list.scatter-plot(
-        covid-table.column("days"),
+        covid-table.column("day"),
         covid-table.column("positive")))
       .x-axis("days")
       .y-axis("positive")
       .y-min(100000)
 
-MI-covid-flipped-chart = render-chart(from-list.scatter-plot(
-        MI-table.column("positive"),
-        MI-table.column("days")))
-      .x-axis("positive")
-      .y-axis("days")
-      .x-min(100000)
-
 ###################### Save the images ##########################
 I.save-image(add-padding(covid-chart.get-image()), '../images/multiple-models-AUTOGEN.png')
 I.save-image(add-padding(MI-covid-chart.get-image()), '../images/MI-covid-AUTOGEN.png')
-I.save-image(add-padding(MI-covid-flipped-chart.get-image()), '../images/MI-covid-flipped-AUTOGEN.png')

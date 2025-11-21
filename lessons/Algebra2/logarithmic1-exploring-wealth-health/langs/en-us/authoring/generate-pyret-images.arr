@@ -8,6 +8,7 @@ display-chart := lam(c): c.get-image() end
 
 countries-url = "https://docs.google.com/spreadsheets/d/1QBLIQhhVfbOVJHqzmaebuP8Kc2VCIW-hFd0wV05a2MQ/export?format=csv"
 
+covid-url = "https://docs.google.com/spreadsheets/d/1GFWesAyYshYXDDSTxoHYmFrPVDTQd12rEVR-ZGn11hg/export?format=csv&gid=811606505"
 
 ###################### Load the data ##########################
 
@@ -25,6 +26,7 @@ countries-table = load-table: # List all of the columns in your table
     infer-content: true
   })
 end
+
 
 ###################### Helper Functions ##########################
 padding = 10
