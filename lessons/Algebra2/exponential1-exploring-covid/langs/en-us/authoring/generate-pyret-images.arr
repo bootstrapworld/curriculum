@@ -67,14 +67,6 @@ covid-chart = render-chart(from-list.scatter-plot(
       .y-axis("positive")
       .y-min(100000)
 
-MI-covid-flipped-chart = render-chart(from-list.scatter-plot(
-        MI-table.column("positive"),
-        MI-table.column("day")))
-      .x-axis("positive")
-      .y-axis("day")
-      .x-min(100000)
-
 ###################### Save the images ##########################
 I.save-image(add-padding(covid-chart.get-image()), '../images/multiple-models-AUTOGEN.png')
 I.save-image(add-padding(MI-covid-chart.get-image()), '../images/MI-covid-AUTOGEN.png')
-I.save-image(add-padding(MI-covid-flipped-chart.get-image()), '../images/MI-covid-flipped-AUTOGEN.png')

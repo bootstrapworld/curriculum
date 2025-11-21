@@ -60,4 +60,4 @@ MI-covid-chart = render-chart(from-list.scatter-plot(
       .y-min(100000)
 
 ###################### Save the images ##########################
-I.save-image(add-padding(MI-covid-chart.get-image()), '../images/MI-covid-AUTOGEN.png')
+#I.save-image(add-padding(MI-covid-chart.get-image()), '../images/MI-covid-AUTOGEN.png')
