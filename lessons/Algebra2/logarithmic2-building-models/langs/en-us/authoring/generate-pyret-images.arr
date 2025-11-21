@@ -32,7 +32,7 @@ end
 # Define your table
 covid-table = load-table: # NOTES ON COLUMNS:
   state,             # the state reporting the data
-  day,              # number of days since 1/1/2020
+  day,               # number of days since 1/1/2020
   positive,          # TOTAL number of positive covid cases
   deaths             # TOTAL number of deaths due to covid
   source: csv.csv-table-url(covid-url, {
