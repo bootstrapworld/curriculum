@@ -66,7 +66,7 @@ fun add-padding(img):
   h = image-height(img) + padding
   above(
     beside(square(padding, "solid", "transparent"), img),
-    square(padding, "solid", "transparent"))
+    square(padding, "solid", "white"))
 end
 
 ############## "AI" Charts #########################
@@ -88,22 +88,24 @@ MI-covid-chart = render-chart(from-list.scatter-plot(
         MI-table.column("positive")))
       .x-axis("day")
       .y-axis("positive")
-      .y-min(100000)
+      .y-min(0)
 
 MI-covid-flipped-chart = render-chart(from-list.scatter-plot(
         MI-table.column("positive"),
         MI-table.column("day")))
       .x-axis("positive")
       .y-axis("day")
-      .x-min(100000)
+      .x-min(-40000)
+      .y-min(0)
 
 ###################### Save the images ##########################
 I.save-image(add-padding(chart.get-image()), '../images/wealth-health-AUTOGEN.png')
 I.save-image(add-padding(MI-covid-chart.get-image()), '../images/MI-covid-AUTOGEN.png')
 I.save-image(add-padding(MI-covid-flipped-chart.get-image()), '../images/MI-covid-flipped-AUTOGEN.png')
 
-
+#|
 I.save-image(fn_5logXplus10.get-image(), '../images/5log(x)+10-AUTOGEN.png')
 I.save-image(fn_-50logX-20.get-image(),  '../images/-50log(x)-20-AUTOGEN.png')
 I.save-image(fn_10log_x-10_.get-image(), '../images/10log(x-10)-AUTOGEN.png')
 I.save-image(fn_-10logX.get-image(),     '../images/-10log(x)-AUTOGEN.png')
+|#
