@@ -2,6 +2,7 @@ use context url-file("https://raw.githubusercontent.com/bootstrapworld/starter-f
 import image-typed as I
 import csv as csv
 include charts
+import data-source as DS
 
 # just return the image, instead of displaying it as a modal
 display-chart := lam(c): c.get-image() end
@@ -21,7 +22,19 @@ covid-table = load-table: # NOTES ON COLUMNS:
     header-row: true,
     infer-content: true
   })
+  sanitize positive using DS.string-sanitizer
+  sanitize deaths using DS.string-sanitizer
 end
+
+fun clean-commas(s :: String) -> Number:
+  string-to-number(string-replace(s, ",", "")).or-else(-1)
+end
+
+shadow covid-table = transform covid-table using positive, deaths:
+  positive: clean-commas(positive),
+  deaths: clean-commas(deaths),
+end
+
 
 ###################### Helper Functions ##########################
 # is-MI :: Row -> Boolean
