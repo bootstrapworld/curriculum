@@ -32,7 +32,7 @@ table tr td { padding: .3em .625em; }
 
 == Modeling with @math{sin}
 
-@link-instructions{For this section, use *Slide 1: "Modeling the Ferris Wheel Dataset (sine)"* of the *Exploring Periodic Functions* Desmos File.} You'll find *the data from the Ferris wheel plotted in blue*, along with a basic periodic model of the form @math{f(x) = a \sin(b(x - h)) + k}.
+@link-instructions{For this section, use *Slide 1: "Modeling the Ferris Wheel Dataset (sine)"* of the *Exploring Periodic Functions* Desmos File.} You'll find *the data from the Ferris wheel plotted in blue*, along with a basic periodic model of the form @math{f(x) = a \sin(\frac{2\pi}{P}(x - h)) + k}.
 
 @n Use the sliders to estimate the best periodic fit.
 
@@ -48,25 +48,25 @@ table tr td { padding: .3em .625em; }
 |
 @hspace{2em}
 @math{f(x) =} @fitbruby{70pt}{@ifsoln{100}}{amplitude} @math{\times}
-@math{sin}(
- @fitbruby{70pt}{@ifsoln{0.209}}{frequency} (x - @fitbruby{70pt}{@ifsoln{@math{2.375\pi}}}{horizontal shift})
+@math{cos(2\pi \div}
+ @fitbruby{70pt}{@ifsoln{30}}{period} (x - @fitbruby{70pt}{@ifsoln{@math{2.375\pi}}}{horizontal shift})
 ) + @fitbruby{70pt}{@ifsoln{105}}{vertical shift}
 
 | @vspace{1ex} +
 *Pyret Notation*
 |
-@show{(code '(define (f x) (+ (* (?ANS 100) (sin (* (?ANS 0.21) (- x (?ANS (* 2.375 PI)))))) (?ANS 105))))}
+@show{(code '(define (f x) (+ (* (?ANS 100) (sin (* (/ 6.28 (?ANS 30)) (- x (?ANS (* 2.375 PI)))))) (?ANS 105))))}
 |===
 
 == Translating from @math{sin} to @math{cos}
 
 @link-instructions{For this section, advance to *Slide 2: "Translating from sine to cosine"* of the *Exploring Periodic Functions* Desmos File.} You'll see a function f(x) defined here graphed in blue, which uses @math{cos} instead of @math{sin}.
 
-@n Adjust the sliders so that the function @math{q} perfectly overlaps the function @math{p}. What is the value of @math{a}? @fitb{5em}{@ifsoln{10}} @math{b}? @fitb{5em}{@ifsoln{1}} @math{k}? @fitb{}{@ifsoln{2}}
+@n Adjust the sliders so that the function @math{g} perfectly overlaps the function @math{f}. What is the value of @math{a}? @fitb{5em}{@ifsoln{10}} @math{b}? @fitb{5em}{@ifsoln{1}} @math{k}? @fitb{}{@ifsoln{2}}
 
 @n What was the value of @math{h}, expressed as a decimal? @fitb{10em}{@ifsoln{~1.570796...}} What was the value of @math{h}, expressed a fraction of @math{pi}? @fitb{}{@ifsoln{@math{pi/2}}}
 
-@n In row 1 below, write the definition of @math{q} using the values of @math{a}, @math{b}, and @math{k} that you found earlier. Then *change some of @math{p}'s model settings* and write it in the second row, then show how @math{q} would need to change to overlap it.
+@n In row 1 below, write the definition of @math{g} using the values of @math{a}, @math{b}, and @math{k} that you found earlier. Then *change some of @math{f}'s model settings* and write it in the second row, then show how @math{q} would need to change to overlap it.
 
 [cols="10a,10a,5a", options="header", stripes="none"]
 |===
@@ -74,12 +74,12 @@ table tr td { padding: .3em .625em; }
 | *Function using @math{cos}*
 | *Horizontal Shift @math{h}*
 
-| @math{p(x) = 10 sin(1\times(x-0)) + 2}
-| @math{q(x) =} @ifsoln{@math{10 cos(1\times(x-\frac{\pi}{2})) + 2}}
+| @math{f(x) = 10 sin(\frac{2\pi}{2\pi}\times(x-0)) + 2}
+| @math{g(x) =} @ifsoln{@math{10 cos(\frac{2\pi}{2\pi}\times(x-\frac{\pi}{2})) + 2}}
 | @ifsoln{@math{\frac{\pi}{2}}}
 
-| @math{p(x) =}
-| @math{q(x) =}
+| @math{f(x) =}
+| @math{g(x) =}
 | @ifsoln{@math{\frac{\pi}{2}}}
 |===
 
@@ -97,12 +97,12 @@ table tr td { padding: .3em .625em; }
 |
 @hspace{2em}
 @math{g(x) =} @fitbruby{70pt}{@ifsoln{100}}{amplitude} @math{\times}
-@math{cos}(
- @fitbruby{70pt}{@ifsoln{0.21}}{frequency} (x - @fitbruby{70pt}{@ifsoln{@math{4.75pi}}}{horizontal shift})
+@math{cos(2\pi \div}
+ @fitbruby{70pt}{@ifsoln{0.21}}{period} (x - @fitbruby{70pt}{@ifsoln{@math{4.75pi}}}{horizontal shift})
 ) + @fitbruby{70pt}{@ifsoln{105}}{vertical shift}
 
 | @vspace{1ex} +
 *Pyret Notation*
 |
-@show{(code '(define (g x) (+ (* (?ANS 100) (cos (* (?ANS 0.209) (- x (?ANS (* 4.75 PI)))))) (?ANS 105))))}
+@show{(code '(define (g x) (+ (* (?ANS 100) (cos (* (/ 6.28 (?ANS 30)) (- x (?ANS (* 4.75 PI)))))) (?ANS 105))))}
 |===

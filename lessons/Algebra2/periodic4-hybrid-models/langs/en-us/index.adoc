@@ -120,7 +120,7 @@ fun periodic-cos2(x):     wave-cos(x)      +      midline-cos(x) end
 
 Our `periodic-cos` model has two terms:
 
-- The *periodic term* (@math{4.13 \times cos(2\pi(x - 2023.35))}), which described the wave that wrapped around the horizontal midline
+- The *periodic term* (@math{4.13 \times cos(\frac{6.28}{1}(x - 2023.35))}), which described the wave that wrapped around the horizontal midline
 - The *vertical shift* (@math{419.87}), which described the (fixed) y-coordinate of the midline
 
 `periodic-cos2` splits these terms into _separate functions_, and then composes them:
@@ -128,7 +128,7 @@ Our `periodic-cos` model has two terms:
 [cols="^.^15a,^.^1a,^.^10a", frame="none", grid="none"]
 |===
 | [.hybridCOE.first]
-@show{(coe '(+ (* 4.13 (cos (* (* 2 PI) (- x 2023.1)))) 419.87))}
+@show{(coe '(+ (* 4.13 (cos (* 6.28 (- x 2023.1)))) 419.87))}
 
 | &rarr;
 
@@ -291,7 +291,7 @@ By replacing the @vocab{midline} term (vertical shift) in our periodic model wit
 [cols="^1a" grid="none", frame="none", stripes="none"]
 |===
 | [.hybridmath]
-@big{*@math{f(x) = 4.13 \times sin(2\pi(x - 2023.1)) + (1.8345x + -3296)}*}
+@big{*@math{f(x) = 4.13 \times sin(\frac{6.28}{1}(x - 2023.1)) + (1.8345x + -3296)}*}
 
 |
 [.hybridCOE]
