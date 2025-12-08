@@ -27,10 +27,13 @@
 /* "Altitude" is such a long label that we need to 
    override the normal top positioning rule */
 table.graph td::before { top: 4% !important; }
+
+/* force .fitbs to the left, to align the "roughly equal" signs at the bottom*/
+.fitb { text-align: left; }
 </style>
 ++++
 
-The standard form of a periodic model is @math{f(x) = a \sin(\frac{2\pi}{P}(x - h)) + k}. On this page, we'll explore the role of @vocab{period} @math{P} in periodic functions. @link-instructions{Open the Desmos File *Exploring Periodic Functions*. You should be on *Slide 1: Modeling the Ferris Wheel Dataset (sine)* and see four sliders for @math{a}, @math{P}, @math{h}, and @math{k}.}
+The standard form of a periodic model is @math{f(x) = a \sin(\frac{2\pi}{P}(x - h)) + k}. On this page, we'll explore the role of @vocab{period} @math{P} in periodic functions. @link-instructions{Open the Desmos File *Exploring Periodic Functions*. You should be on *Slide 1: Modeling the Ferris Wheel Dataset (sine)* and see four sliders for @math{a}, @math{P}, @math{h}, and @math{k}. Adjusting @math{P} also changes @math{b}, which is always @math{2\pi \div P}.}
 
 @n Adjust the sliders to fit the data as best you can, then record your model settings: @fitbruby{5em}{@ifsoln{100}}{@math{a}}, @fitbruby{5em}{@ifsoln{0.209}}{@math{P}}, @fitbruby{5em}{@ifsoln{-22.77}}{@math{h}} and @fitbruby{5em}{@ifsoln{105}}{@math{k}}.
 
@@ -48,12 +51,11 @@ The standard form of a periodic model is @math{f(x) = a \sin(\frac{2\pi}{P}(x - 
 | @math{P=15}  | @math{P=0}
 |===
 
-*TODO(Emmanuel) - The distance between two adjacent @vocab{peaks} or @vocab{valleys} is called the @vocab{period}: the interval over which the pattern repeats itself.*
+*The number of complete cycles (from one @vocab{peak} or @vocab{valley} to another) over a fixed length of time is called the @vocab{frequency}.*
 
-@n What is the @vocab{frequency}
-             when *@math{P=0.2}*?       @fitb{5em}{@ifsoln{@math{10\pi}}}
-@hspace{1em} when *@math{P=0.1}*?       @fitb{5em}{@ifsoln{@math{20\pi}}}
-@hspace{1em} When *@math{P=0.5}*?       @fitb{5em}{@ifsoln{@math{40\pi}}}
-@hspace{1em} @star When *@math{P=0}*?   @fitb{}{@ifsoln{No period!}}
+@n What is the @vocab{frequency} if the @vocab{period} is
+             *@math{P=60}*?   @hspace{1em}   @fitb{7em}{~ @ifsoln{0.104}}
+@hspace{2em} *@math{P=30}*?   @hspace{1em}   @fitb{7em}{~ @ifsoln{0.209}}
+@hspace{2em} *@math{P=15}*?   @hspace{1em}   @fitb{7em}{~ @ifsoln{0.418}}
 
 @n As the @vocab{period} (@math{P}) doubles, the @vocab{frequency} @fitb{11em}{@ifsoln{gets cut in half}}. @hspace{1em} As the @vocab{period} (@math{b}) gets cut in half, the @vocab{frequency} @fitb{}{@ifsoln{doubles}}
