@@ -12,7 +12,7 @@ table+.paragraph .autonum {padding-top: 0; }
 /* Shorten fill in the blanks, and give fitbrubies more vertical space */
 .fitb, .fitbruby { min-width: 2em; }
 .indentedpara .fitbruby { padding-top: 0.8rem; }
-.studentAnswerMedium { min-width: 65pt !important; }
+.studentAnswerMedium { min-width: 58pt !important; }
 .fitbruby{ margin-bottom: 1rem; }
 .ruby { bottom: -13px !important; }
 </style>
@@ -22,7 +22,7 @@ table+.paragraph .autonum {padding-top: 0; }
 @define{COtwo}{@math{\text{CO}_2}}
 @do{
 (define-values (hi lo lo-dateA lo-dateB) (values 424 415.74 2022.708 2023.708))
-(define p (abs (- lo-dateA lo-dateB)))
+(define p (round (abs (- lo-dateA lo-dateB))))
 (define a 4.13)
 (define b 6.28)
 (define k 419.87)
@@ -34,9 +34,9 @@ table+.paragraph .autonum {padding-top: 0; }
 @define{lo}{@show{lo}}
 @define{lo-dateA}{@show{lo-dateA}}
 @define{lo-dateB}{@show{lo-dateB}}
-@define{p}{@show{(round p)}}
+@define{p}{@show{p}}
 @define{a}{@show{a}}
-@define{b}{@show{b}}
+@define{b}{@show{(/ 6.28 p)}}
 @define{k}{@show{k}}
 @define{h}{@show{h}}
 @define{h-cos}{@show{h-cos}}
@@ -61,14 +61,14 @@ This page relies on the @starter-file{alg2-co2}. Make sure you have it open on y
 
 @math{periodic-sin(x) =}
 (@fitbruby{70pt}{@ifsoln{@a}}{amplitude (@math{a})} @math{\times} @math{sin}(
-@fitbruby{70pt}{@ifsoln{@b}}{frequency (@math{b})} @math{(x -}
+@fitbruby{70pt}{@math{2\pi \div} @ifnotsoln{@hspace{2em}} @ifsoln{@p}}{frequency (@math{b})} @math{(x -}
 @fitbruby{70pt}{@ifsoln{@h}}{horizontal shift (@math{h})} ))) @math{+} 
 @fitbruby{70pt}{@ifsoln{@k}}{vertical shift (@math{k})}
 
 | @vspace{1ex} +
 *Pyret Notation*
 |
-@show{(code `(define (periodic-sin x) (+ (* (?ANS ,a) (sin (* (?ANS ,b) (- x (?ANS ,h))))) (?ANS ,k))))}
+@show{(code `(define (periodic-sin x) (+ (* (?ANS ,a) (sin (* (/ 6.28 (?ANS ,b)) (- x (?ANS ,h))))) (?ANS ,k))))}
 |===
 
 @vspace{1ex}
@@ -88,14 +88,14 @@ This page relies on the @starter-file{alg2-co2}. Make sure you have it open on y
 
 @math{periodic-cos(x) =}
 (@fitbruby{70pt}{@ifsoln{@a}}{amplitude (@math{a})} @math{\times} @math{cos}(
-@fitbruby{70pt}{@ifsoln{@b}}{frequency (@math{b})} @math{(x -}
+@fitbruby{70pt}{@math{2\pi \div} @ifnotsoln{@hspace{2em}} @ifsoln{@p}}{frequency (@math{b})} @math{(x -}
 @fitbruby{70pt}{@ifsoln{@h-cos}}{horizontal shift (@math{h})}))) @math{+}
 @fitbruby{70pt}{@ifsoln{@k}}{vertical shift (@math{k})}
 
 | @vspace{1ex} +
 *Pyret Notation*
 |
-@show{(code `(define (periodic-cos x) (+ (* (?ANS ,a) (cos (* (?ANS ,b) (- x (?ANS ,h-cos))))) (?ANS ,k))))}
+@show{(code `(define (periodic-cos x) (+ (* (?ANS ,a) (cos (* (/ 6.28 (?ANS ,b)) (- x (?ANS ,h-cos))))) (?ANS ,k))))}
 |===
 
 @vspace{1ex}

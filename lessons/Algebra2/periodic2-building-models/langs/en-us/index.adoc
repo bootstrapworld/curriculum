@@ -1,5 +1,9 @@
 = Building Periodic Models
-
+++++
+<style>
+  .data-table tr { height: 25px; }
+</style>
+++++
 @description{Students investigate periodic relationships, by deciphering the patterns in a dataset with perfect periodic (sinusoidal) behavior using an inquiry-based model involving hypothesizing, experimental and computational modeling, and sense-making. }
 
 @lesson-prereqs{periodic1-exploring-rides}
@@ -115,7 +119,7 @@ Note: The desmos slider activity in this lesson sections uses *Sine* as the mode
 }
 
 @lesson-instruction{
-- We are about to explore the model settings in the @vocab{sine} model for periodic relationships: @hspace{1em} @math{f(x) = a \sin(b(x - h)) + k}
+- We are about to explore the model settings in the @vocab{sine} model for periodic relationships: @hspace{1em} @math{f(x) = a \sin(\frac{2\pi}{P}(x - h)) + k}
 - Take a moment to think back to other models we've seen and predict what effect each of the model settings will have on the shape of this model.
 }
 
@@ -126,20 +130,23 @@ Some students may recognize @math{k} as the vertical shift, @math{h} as the hori
 @slidebreak{Investigate}
 
 @lesson-instruction{
-- Open the *Desmos* link I've shared with you. (The file should be called *Exploring Periodic Models Desmos file*.)
+- Open the *Desmos* link I've shared with you. (The file should be called *Exploring Periodic Models*.)
 - You should now be on *Slide 1: Modeling the Ferris Wheel Dataset (sine)*.
 - Adjust the sliders to fit this data. How close can you get?
 - With your partner or group, experiment with the model settings of periodic models to complete these three pages:
   * @printable-exercise{graphing-models-a.adoc}
-  * @printable-exercise{graphing-models-b.adoc}
   * @printable-exercise{graphing-models-h.adoc}
+  * @printable-exercise{graphing-models-p.adoc}
+
+- Rather than focusing on _how long it takes_ for the ride to complete one cycle, we can think about _how many cycles the ride completes_ in 30 minutes. Click the red circle to "hide" the function @math{f}, and the empty circle to "show" the function @math{g}.
+  * @printable-exercise{graphing-models-b.adoc}
 }
 
 @teacher{As you debrief, give plenty of time for students to hear each other's thinking! Concepts like amplitude and frequency can be difficult to describe, and having students reach a consensus on their definition in their own words will help deepen their understanding.}
 
 @slidebreak{Investigate}
 
-@ifslide{Periodic Model: @hspace{1em} @math{f(x) = a \sin(b(x - h)) + k}
+@ifslide{Periodic Model: @hspace{1em} @math{f(x) = a \sin(\frac{2\pi}{P}(x - h)) + k}
 @vspace{2ex}
 }
 
@@ -149,26 +156,34 @@ Determines how much the curve rises and falls above the midline.
 
 @slidebreak{Investigate}
 
-@ifslide{Periodic Model: @hspace{1em} @math{f(x) = a \sin(b(x - h)) + k}
+@ifslide{Periodic Model: @hspace{1em} @math{f(x) = a \sin(\frac{2\pi}{P}(x - h)) + k}
 @vspace{2ex}
 }
 
 ==== Period
 
-The distance over which the curve travels before it begins to repeat itself (one complete wave). It can be measured from peak to peak, from valley to valley, or from any start point to an identical end point that follows both a peak and a valley.
+The distance over which the curve travels before it begins to repeat itself (one complete wave). It can be measured from peak to peak, from valley to valley, or from any start point to an identical end point after passing through both a peak and a valley.
 
+<<<<<<< freq-to-period
+@slidebreak{Investigate}
+
+@ifslide{Periodic Model: @math{f(x) = a \sin(b(x - h)) + k}
+@vspace{2ex}
+}
+=======
 @QandA{
 @Q{Why did the graph of our function *disappear* when the @vocab{period} was zero?}
 @A{Mathematically, a fraction with a denominator of zero is undefined, which means a periodic function with @math{P = 0} is also undefined.}
 @A{Periodic functions involving time -- by definition -- are cycled over some number of minutes, hours, days, etc. A @vocab{period} of zero means the function never repeats at all, which would make it *not a periodic function.*}
 }
 
+>>>>>>> master
 ==== Frequency (@math{b})
 
-The number of @vocab{periods} that occur over a @math{2\pi} interval. @hspace{1em} @big{@math{\text{Period} = {2\pi \over \text{frequency}}}}
+The number of @vocab{periods} that occur over a @math{2\pi} interval. @hspace{1em} @big{@math{\text{Frequency} = {2\pi \over \text{Period}}}}
 
 @indented{
-[.data-table, cols="^4a,^1a, ^1a", options="header", stripes="none"]
+[.data-table, cols="^.^4a,^.^1a, ^.^1a", options="header", stripes="none"]
 |===
 |
 | Period
@@ -190,7 +205,7 @@ The number of @vocab{periods} that occur over a @math{2\pi} interval. @hspace{1e
 
 @slidebreak{Investigate}
 
-@ifslide{Periodic Model: @hspace{1em} @math{f(x) = a \sin(b(x - h)) + k}
+@ifslide{Periodic Model: @math{f(x) = a \sin(\frac{2\pi}{P}(x - h)) + k} -- or @hspace{1em} @math{f(x) = a \sin(b(x - h)) + k}!
 @vspace{2ex}
 }
 
@@ -201,13 +216,7 @@ In periodic functions, the @vocab{Horizontal Shift} is sometimes called the @voc
 - When @math{h} < 0, the graph shifts to the left.
 - When @math{h} > 0, the graph shifts to the right.
 
-_Note: In the function definition @math{f(x) = a \sin(b(x - h)) + k}, when h is positive it looks like it's being subtracted._
-
-@slidebreak{Investigate}
-
-@ifslide{Periodic Model: @hspace{1em} @math{f(x) = a \sin(b(x - h)) + k}
-@vspace{2ex}
-}
+_Note: In the function definition @math{f(x) = a \sin(\frac{2\pi}{P}(x - h)) + k}, when h is positive it looks like it's being subtracted._
 
 ==== Vertical shift (@math{k})
 
@@ -215,6 +224,13 @@ The @vocab{vertical shift} is the amount the function is shifted up or down.
 
 - When @math{k} < 0, the graph shifts down.
 - When @math{k} > 0, the graph shifts up.
+
+@strategy{Why start with Period instead of Frequency?}{
+
+While most math textbooks introduce the parent sine and cosine functions using @math{b} instead of @math{P}, we've consciously chosen to do the opposite for pedagogical reasons. Frequency is a much more abstract concept, and the calculation with @math{\pi} also makes for "messy" numbers with long decimals that are more difficult to work with. Even strong students who are comfortable calculating with numbers like these may lean on their calculation skill to get answers, without being challenged to connect the math back to common sense.
+
+In the Ferris Wheel example, it's easy for students to see where the 30m period fit into the equation. By building the concrete connections with @math{P} first and then transitioning to the more abstract @math{b}, the parent function becomes more accessible to struggling learners while deepening the advanced students' understanding.
+}
 
 
 === Synthesize
@@ -232,13 +248,13 @@ Students dig deeper into the _vocabulary_ for periodic functions, starting with 
 [cols="2a,1a", frame="none", grid="none", stripes="none"]
 |===
 | We've been working with @vocab{sine} models for @vocab{periodic relationships}: 
-| @big{@math{f(x) = a \sin(b(x - h)) + k}}
+| @big{@math{f(x) = a \sin(\frac{2\pi}{P}(x - h)) + k}}
 
 | Another commonly used periodic model is the @vocab{cosine} relationship: 
-| @big{@math{g(x) = a \cos(b(x - h)) + k}}
+| @big{@math{f(x) = a \cos(\frac{2\pi}{P}(x - h)) + k}}
 |===
 
-@math{\text{Sine}} and @math{\text{Cosine}} relationships are closely related to one another, and each one can be expressed in terms of the other.
+Sine and Cosine relationships are closely related to one another, and each one can be expressed in terms of the other.
 
 === Investigate
 @slidebreak{Launch-DN}
