@@ -41,14 +41,14 @@ end
 |#
 
 ############## "AI" Charts #########################
-fn_sin-1-8th-pi-img  = make-noisy-scatter(lam(x): ( 1 * sin(1/8 * PI * x)) end, -2 * 3.14, 6 * 3.14, 2)
-fn_sin-10-half-pi-img= make-noisy-scatter(lam(x): (10 * sin(1/2 * PI * x)) end, -4 * 3.14, 0 * 3.14, 2)
-fn_sin-1-8th-pi-plus-5-img= make-noisy-scatter(lam(x): ( 1 * sin(1/8 * PI * x)) + 5 end, -2 * 3.14, 6 * 3.14, 2)
-fn_sin-1-half-pi-img = make-noisy-scatter(lam(x): ( 1 * sin(1/2 * PI * x)) end, -2 * 3.14, 6 * 3.14, 2)
+fn_sin-1-8th-pi  = make-noisy-scatter-chart(lam(x): ( 1 * sin(1/8 * PI * x)) end, -2 * 3.14, 6 * 3.14, 2)
+fn_sin-10-half-pi= make-noisy-scatter-chart(lam(x): (10 * sin(1/2 * PI * x)) end, -4 * 3.14, 0 * 3.14, 2)
+fn_sin-1-8th-pi-plus-5= make-noisy-scatter-chart(lam(x): ( 1 * sin(1/8 * PI * x)) + 5 end, -2 * 3.14, 6 * 3.14, 2)
+fn_sin-1-half-pi = make-noisy-scatter-chart(lam(x): ( 1 * sin(1/2 * PI * x)) end, -2 * 3.14, 6 * 3.14, 2)
 
 
 ###################### Save the images ##########################
-I.save-image(fn_sin-1-8th-pi-img,        '../images/fn_sin-1-8th-pi-AUTOGEN.png')
-I.save-image(fn_sin-10-half-pi-img,      '../images/fn_sin-10-half-pi-AUTOGEN.png')
-I.save-image(fn_sin-1-8th-pi-plus-5-img, '../images/fn_sin-1-8th-pi-plus-5-AUTOGEN.png')
-I.save-image(fn_sin-1-half-pi-img,       '../images/fn_sin-1-half-pi-AUTOGEN.png')
+I.save-image(display-chart(fn_sin-1-8th-pi),        '../images/fn_sin-1-8th-pi-AUTOGEN.png')
+I.save-image(display-chart(fn_sin-10-half-pi),      '../images/fn_sin-10-half-pi-AUTOGEN.png')
+I.save-image(display-chart(fn_sin-1-8th-pi-plus-5), '../images/fn_sin-1-8th-pi-plus-5-AUTOGEN.png')
+I.save-image(display-chart(fn_sin-1-half-pi),       '../images/fn_sin-1-half-pi-AUTOGEN.png')
