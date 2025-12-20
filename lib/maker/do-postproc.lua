@@ -225,6 +225,14 @@ local function postproc(fhtml_cached, tipe)
       <script src="https://apis.google.com/js/platform.js" async defer></script>
       ]])
       o:write(z, '\n')
+      -- added for DesignHammer
+      o:write('<link rel="stylesheet" type="text/css" href="' .. local_dist_root_dir .. 'lib/wp-adaptors/style-overrides.css">\n')
+      o:write('<link rel="stylesheet" type="text/css" href="' .. local_dist_root_dir .. 'lib/wp-adaptors/style-bsw.css">\n')
+      o:write('<link rel="preconnect" href="https://fonts.googleapis.com">\n')
+      o:write('<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n')
+      o:write('<link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">\n')
+      o:write('<script src="' .. local_dist_root_dir .. 'lib/wp-adaptors/script.js"></script>\n')
+      --
       delete_line_p = true
     end
     if x:find('</h1>') then
@@ -263,6 +271,10 @@ local function postproc(fhtml_cached, tipe)
     if add_analytics_p then
       add_analytics_p = false
       copy_file_to_port(analytics_file, o)
+      o:write('<!-- Google Tag Manager (noscript) -->\n')
+      o:write('<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TS6D6H9T"\n')
+      o:write('height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>\n')
+      o:write('<!-- End Google Tag Manager (noscript) -->\n')
     end
     --
     if add_body_id_p then

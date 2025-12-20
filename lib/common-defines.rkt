@@ -76,5 +76,10 @@
   ;(printf "print-menubar ~s\n" f)
   (call-with-output-file f
     (lambda (o)
-      (display "<!--#include virtual=\"/menubar.ssi\"-->\n" o))
+      ; removed for DesignHammer
+      ; (display "<!--#include virtual=\"/menubar.ssi\"-->\n" o))
+      ; added for DesignHammer
+      (display "<!--#include virtual=\"_deliverables/header.ssi\" -->\n" o)
+      (display "<!--#include virtual=\"../../_deliverables/footer.ssi\" -->\n" o))
+
     #:exists 'replace))
