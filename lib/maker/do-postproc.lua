@@ -115,9 +115,19 @@ local function postproc(fhtml_cached, tipe)
       --
     end
     --
-    if add_end_body_id_p and x:find('</body>') then
-      add_end_body_id_p = false
-      x = x:gsub('</body>', '</div>\n%0')
+    if x:find('</body>') then
+      if add_end_body_id_p then
+        add_end_body_id_p = false
+        x = x:gsub('</body>', '</div>\n%0')
+      end
+      x = x:gsub('</body>', string.format([[
+</div>
+<!--#include virtual="%slib/wp-adaptors/sidebar/curricula.ssi" -->
+</div>
+</div>
+<!--#include virtual="%slib/wp-adaptors/footer.ssi" -->
+</body>
+]], local_dist_root_dir, local_dist_root_dir))
     end
     --
     if x:find('^<link.*curriculum%.css') then
@@ -279,6 +289,12 @@ local function postproc(fhtml_cached, tipe)
     --
     if add_body_id_p then
       add_body_id_p = false
+      o:write(string.format([[
+<!--#include virtual="%slib/wp-adaptors/header.ssi" -->
+<div class="x-row x-container max width e4468439224895391-e2 m17zxgn2tjtr-8 m17zxgn2tjtr-9 m17zxgn2tjtr-b">
+<div class="x-row-inner">
+<div class="x-col e4468439224895391-e3 m17zxgn2tjtr-d m17zxgn2tjtr-e m17zxgn2tjtr-f lesson-content">
+]], local_dist_root_dir))
       if website_branch_p then
         local klass = proglang
         if tipe == 'workbookpage' then
@@ -316,6 +332,7 @@ local function postproc(fhtml_cached, tipe)
       else
         o:write('<div id="body">\n')
       end
+    --
     end
     --
     if add_codemirror_p then

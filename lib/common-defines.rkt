@@ -72,14 +72,14 @@
       "</script>\n"
       "++++\n\n") o))
 
-(define (print-menubar f)
-  ;(printf "print-menubar ~s\n" f)
+(define (print-menubar f dist-root-dir)
+  ; (printf "print-menubar ~s ~s\n" f dist-root-dir)
   (call-with-output-file f
     (lambda (o)
       ; removed for DesignHammer
       ; (display "<!--#include virtual=\"/menubar.ssi\"-->\n" o))
       ; added for DesignHammer
-      (display "<!--#include virtual=\"_deliverables/header.ssi\" -->\n" o)
-      (display "<!--#include virtual=\"../../_deliverables/footer.ssi\" -->\n" o))
+      (fprintf o "<!--#include virtual=\"~alib/wp-adaptors/header.ssi\" -->\n" dist-root-dir)
+      (fprintf o "<!--#include virtual=\"~alib/wp-adaptors/footer.ssi\" -->\n" dist-root-dir))
 
     #:exists 'replace))
