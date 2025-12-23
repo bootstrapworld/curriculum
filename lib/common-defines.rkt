@@ -79,7 +79,6 @@
       ; removed for DesignHammer
       ; (display "<!--#include virtual=\"/menubar.ssi\"-->\n" o))
       ; added for DesignHammer
-      (fprintf o "<!--#include virtual=\"~alib/wp-adaptors/header.ssi\" -->\n" dist-root-dir)
-      (fprintf o "<!--#include virtual=\"~alib/wp-adaptors/footer.ssi\" -->\n" dist-root-dir))
+      (fprintf o "<!--#include virtual=\"~alib/wp-adaptors/header.ssi\" -->\n" dist-root-dir))
 
     #:exists 'replace))
