@@ -2483,8 +2483,7 @@
       (when (or *lesson-plan*
                 *narrative*
                 *teacher-resources*)
-        (print-menubar (build-path *containing-directory* ".cached" ".index-comment.txt")
-                       *dist-root-dir*))
+        (print-menubar (build-path *containing-directory* ".cached" ".index-comment.txt")))
       ;
 
       ;

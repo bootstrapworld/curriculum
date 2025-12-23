@@ -14,6 +14,8 @@ local pathwaynarrative_batchf =  os.getenv'ADOC_POSTPROC_PATHWAYNARRATIVE_INPUT'
 local pathwayresource_batchf =  os.getenv'ADOC_POSTPROC_PATHWAYRESOURCE_INPUT'
 
 local analytics_file = os.getenv'TOPDIR' .. '/lib/analytics.txt'
+local gtm_file = os.getenv'TOPDIR' .. '/lib/gtm.txt'
+local gtm_noscript_file = os.getenv'TOPDIR' .. '/lib/gtm-noscript.txt'
 
 local function calculate_dist_root_dir(fhtml_cached)
   local f = fhtml_cached:gsub('^%./', '')
@@ -96,7 +98,7 @@ local function postproc(fhtml_cached, tipe)
     end
     --
     if x:find('^<body') then
-      if file_exists_p(f_comment_file) then
+      if file_exists_p(f_comment_file) and not website_branch_p then
         add_comment_p = true
       end
       if x:find('landscape') then
@@ -280,21 +282,23 @@ local function postproc(fhtml_cached, tipe)
     --
     if add_analytics_p then
       add_analytics_p = false
-      copy_file_to_port(analytics_file, o)
-      o:write('<!-- Google Tag Manager (noscript) -->\n')
-      o:write('<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TS6D6H9T"\n')
-      o:write('height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>\n')
-      o:write('<!-- End Google Tag Manager (noscript) -->\n')
+      if not website_branch_p then
+        copy_file_to_port(analytics_file, o)
+      end
+      if website_branch_p then
+        copy_file_to_port(gtm_noscript_file, o)
+      end
     end
     --
     if add_body_id_p then
       add_body_id_p = false
       o:write(string.format([[
-<!--#include virtual="%slib/wp-adaptors/header.ssi" -->
+<!-- #include virtual="%slib/wp-adaptors/header.ssi" -->
+<!-- #include virtual="%slib/wp-adaptors/footer.ssi" -->
 <div class="x-row x-container max width e4468439224895391-e2 m17zxgn2tjtr-8 m17zxgn2tjtr-9 m17zxgn2tjtr-b">
 <div class="x-row-inner">
 <div class="x-col e4468439224895391-e3 m17zxgn2tjtr-d m17zxgn2tjtr-e m17zxgn2tjtr-f lesson-content">
-]], local_dist_root_dir))
+]], local_dist_root_dir, local_dist_root_dir))
       if website_branch_p then
         local klass = proglang
         if tipe == 'workbookpage' then
@@ -338,6 +342,9 @@ local function postproc(fhtml_cached, tipe)
     if add_codemirror_p then
       add_codemirror_p = false
       o:write('<link rel="stylesheet" href="' .. local_dist_root_dir .. 'lib/codemirror.css" />\n')
+      if website_branch_p then
+        copy_file_to_port(analytics_file, o)
+      end
       o:write('<script src="' .. local_dist_root_dir .. 'lib/codemirror.js"></script>\n')
       o:write('<script src="' .. local_dist_root_dir .. 'lib/runmode.js"></script>\n')
       o:write('<script src="' .. local_dist_root_dir .. 'lib/scheme2.js"></script>\n')
