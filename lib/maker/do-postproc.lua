@@ -293,8 +293,7 @@ local function postproc(fhtml_cached, tipe)
     if add_body_id_p then
       add_body_id_p = false
       o:write(string.format([[
-<!-- #include virtual="%slib/wp-adaptors/header.ssi" -->
-<!-- #include virtual="%slib/wp-adaptors/footer.ssi" -->
+<!--#include virtual="%slib/wp-adaptors/header.ssi" -->
 <div class="x-row x-container max width e4468439224895391-e2 m17zxgn2tjtr-8 m17zxgn2tjtr-9 m17zxgn2tjtr-b">
 <div class="x-row-inner">
 <div class="x-col e4468439224895391-e3 m17zxgn2tjtr-d m17zxgn2tjtr-e m17zxgn2tjtr-f lesson-content">
