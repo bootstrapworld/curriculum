@@ -13,7 +13,8 @@ local lessonplan_batchf =  os.getenv'ADOC_POSTPROC_LESSONPLAN_INPUT'
 local pathwaynarrative_batchf =  os.getenv'ADOC_POSTPROC_PATHWAYNARRATIVE_INPUT'
 local pathwayresource_batchf =  os.getenv'ADOC_POSTPROC_PATHWAYRESOURCE_INPUT'
 
-local analytics_file = os.getenv'TOPDIR' .. '/lib/analytics.txt'
+local old_analytics_file = os.getenv'TOPDIR' .. '/lib/old-analytics.txt'
+local new_analytics_file = os.getenv'TOPDIR' .. '/lib/new-analytics.txt'
 local gtm_file = os.getenv'TOPDIR' .. '/lib/gtm.txt'
 local gtm_noscript_file = os.getenv'TOPDIR' .. '/lib/gtm-noscript.txt'
 
@@ -283,7 +284,7 @@ local function postproc(fhtml_cached, tipe)
     if add_analytics_p then
       add_analytics_p = false
       if not website_branch_p then
-        copy_file_to_port(analytics_file, o)
+        copy_file_to_port(old_analytics_file, o)
       end
       if website_branch_p then
         copy_file_to_port(gtm_noscript_file, o)
@@ -292,13 +293,13 @@ local function postproc(fhtml_cached, tipe)
     --
     if add_body_id_p then
       add_body_id_p = false
-      o:write(string.format([[
+      if website_branch_p then
+        o:write(string.format([[
 <!--#include virtual="%slib/wp-adaptors/header.ssi" -->
 <div class="x-row x-container max width e4468439224895391-e2 m17zxgn2tjtr-8 m17zxgn2tjtr-9 m17zxgn2tjtr-b">
 <div class="x-row-inner">
 <div class="x-col e4468439224895391-e3 m17zxgn2tjtr-d m17zxgn2tjtr-e m17zxgn2tjtr-f lesson-content">
 ]], local_dist_root_dir, local_dist_root_dir))
-      if website_branch_p then
         local klass = proglang
         if tipe == 'workbookpage' then
           klass = klass .. ' workbookpage'
@@ -342,7 +343,7 @@ local function postproc(fhtml_cached, tipe)
       add_codemirror_p = false
       o:write('<link rel="stylesheet" href="' .. local_dist_root_dir .. 'lib/codemirror.css" />\n')
       if website_branch_p then
-        copy_file_to_port(analytics_file, o)
+        copy_file_to_port(new_analytics_file, o)
       end
       o:write('<script src="' .. local_dist_root_dir .. 'lib/codemirror.js"></script>\n')
       o:write('<script src="' .. local_dist_root_dir .. 'lib/runmode.js"></script>\n')
