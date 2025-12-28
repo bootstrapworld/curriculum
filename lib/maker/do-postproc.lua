@@ -62,7 +62,6 @@ local function postproc(fhtml_cached, tipe)
   if proglang == 'wescheme' then
     code_lang = 'racket'
   end
-  local f_comment_file = fhtml_cached:gsub('%.html$', '') .. '-comment.txt'
   local f_mathjax_file = fhtml_cached:gsub('%.html$', '.asc.uses-mathjax')
   local f_codemirror_file = fhtml_cached:gsub('%.html$', '.asc.uses-codemirror')
   --
@@ -72,7 +71,7 @@ local function postproc(fhtml_cached, tipe)
   --
   local add_analytics_p = false
   local add_bootstrap_lesson_p = false
-  local add_comment_p = false
+  local add_menubar_p = false
   local add_mathjax_p = false
   local add_codemirror_p = false
   local add_body_id_p = false
@@ -99,8 +98,8 @@ local function postproc(fhtml_cached, tipe)
     end
     --
     if x:find('^<body') then
-      if file_exists_p(f_comment_file) and not website_branch_p then
-        add_comment_p = true
+      if memberp(tipe, {'lessonplan', 'pathwaynarrative', 'pathwayresource'}) and not website_branch_p then
+        add_menubar_p = true
       end
       if x:find('landscape') then
         x = x:gsub('landscape', '')
@@ -276,9 +275,9 @@ local function postproc(fhtml_cached, tipe)
     else o:write(x, '\n')
     end
     --
-    if add_comment_p then
-      add_comment_p = false
-      copy_file_to_port(f_comment_file, o)
+    if add_menubar_p then
+      add_menubar_p = false
+      o:write('<!--#include virtual="/menubar.ssi"-->\n')
     end
     --
     if add_analytics_p then

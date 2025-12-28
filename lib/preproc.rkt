@@ -2480,13 +2480,6 @@
         (set! *internal-links-port* (open-output-file internal-links-file #:exists 'replace))
         (set! *external-links-port* (open-output-file external-links-file #:exists 'replace)))
       ;
-      (when (or *lesson-plan*
-                *narrative*
-                *teacher-resources*)
-        (print-menubar (build-path *containing-directory* ".cached" ".index-comment.txt")))
-      ;
-
-      ;
       (call-with-input-file *in-file*
         (lambda (i)
           (call-with-output-file *out-file*
@@ -2797,7 +2790,6 @@
 
 (define (create-glossary-subfile file)
   ; (printf "doing create-glossary-subfile ~s ~s\n" file *narrative*)
-  ; (print-menubar (string-append file "-comment.txt"))
   (unless (empty? *glossary-items*)
     (set! *glossary-items*
       (sort *glossary-items* #:key first string-ci<=?))
