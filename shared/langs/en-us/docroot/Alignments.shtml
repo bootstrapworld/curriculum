@@ -8,207 +8,207 @@
 <title>Alignments</title>
 
   <link rel="stylesheet" href="lib/curriculum.css" />
-    <script src="lib/bootstraplesson.js"></script>
-    <script src="lib/dictionaries.js"></script>
-    <script src="lib/dependency-graph.js"></script>
-    <script src="lib/pathway-tocs.js"></script>
-    <style>
-      select { width: unset; }
-      .standard-menu-container, #search {display: inline-block; }
-      #byLesson { display: none; }
-      #criteria { 
-        display: flex;
-        background: black; 
-        color: white; 
-        padding: 0 10px; 
-        width: 100%; 
-        align-items: baseline;
-        white-space: nowrap;
-        min-width: 500px;
+  <script src="lib/bootstraplesson.js"></script>
+  <script src="lib/dictionaries.js"></script>
+  <script src="lib/dependency-graph.js"></script>
+  <script src="lib/pathway-tocs.js"></script>
+  <style>
+    select { width: unset; }
+    .standard-menu-container, #search {display: inline-block; }
+    #byLesson { display: none; }
+    #criteria {
+      display: flex;
+      background: black;
+      color: white;
+      padding: 0 10px;
+      width: 100%;
+      align-items: baseline;
+      white-space: nowrap;
+      min-width: 500px;
+    }
+    #criteria input { width: 100%; min-width: 100px; font-size: 14px; }
+    #searchBox { margin-left: 1ex; margin: 10px; }
+    @media print {
+      #criteria { display: none; }
+      tbody {
+        break-inside: avoid !important;
+        page-break-inside: avoid !important;
       }
-      #criteria input { width: 100%; min-width: 100px; font-size: 14px; }
-      #searchBox { margin-left: 1ex; margin: 10px; }
-      @media print {
-        #criteria { display: none; }
-        tbody { 
-          break-inside: avoid !important; 
-          page-break-inside: avoid !important; 
-        }
-      }
-    </style>
-    <script>
+    }
+  </style>
+  <script>
 
-      let groupBy = "Alignment";
+    let groupBy = "Alignment";
 
-      // this function walks the dictionary structure largely in-order,
-      // drawing the dom for a by-alignment page. In doing so, it also
-      // populates a reverse dictionary called lessonMap
-      function populateAlignments() {
-        const { pathway, lessons } = getParams();
+    // this function walks the dictionary structure largely in-order,
+    // drawing the dom for a by-alignment page. In doing so, it also
+    // populates a reverse dictionary called lessonMap
+    function populateAlignments() {
+      const { pathway, lessons } = getParams();
 
-        const alignedLessons = lessons || pathwayTocs[pathway] || Object.keys(graph)
-          .sort((a,b) => a.title < b.title? -1 : 1);
-        const normalizedAlignedLessons = alignedLessons.map(removeProglangSuffix);
+      const alignedLessons = lessons || pathwayTocs[pathway] || Object.keys(graph)
+        .sort((a,b) => a.title < b.title? -1 : 1);
+      const normalizedAlignedLessons = alignedLessons.map(removeProglangSuffix);
 
-        let lessonMap = {};
-        Object.values(graph).forEach(lesson => lessonMap[lesson.title] = {});
+      let lessonMap = {};
+      Object.values(graph).forEach(lesson => lessonMap[lesson.title] = {});
 
 
-        // get DOM for alignment parent and alignment dropdown menu
-        let dictParent = document.querySelector('#byAlignment');
-        const dropdown = document.getElementsByClassName('alignmentSelect')[0];
-        const url = new URL(location);
+      // get DOM for alignment parent and alignment dropdown menu
+      let dictParent = document.querySelector('#byAlignment');
+      const dropdown = document.getElementsByClassName('alignmentSelect')[0];
+      const url = new URL(location);
 
-        // add a group of standards to the page
-        function addGroup(keyName, groupLabel) {
-          // add the dropdown optgroup
-          const group = document.createElement('optgroup');
-          group.label = groupLabel;
+      // add a group of standards to the page
+      function addGroup(keyName, groupLabel) {
+        // add the dropdown optgroup
+        const group = document.createElement('optgroup');
+        group.label = groupLabel;
 
-          // Walk over dictionaries, adding an alignment div for each
-          for( const [dict, entries] of Object.entries(dictionaries[keyName]) ) {
-            let {fullname, url:stdUrl} = entries['__metadata'];
-            // build the alignment div, and add a dictionary list to it
-            const div = document.createElement('div');
-            div.classList.add('dlist', 'alignedStandards', keyName+'-'+dict);
-            div.innerHTML = `<div class="title">
-              <h2><a href="${stdUrl}">${fullname}</a></h2>
-            </div><dl></dl>`;
-            const list = div.querySelector('dl')
+        // Walk over dictionaries, adding an alignment div for each
+        for( const [dict, entries] of Object.entries(dictionaries[keyName]) ) {
+          let {fullname, url:stdUrl} = entries['__metadata'];
+          // build the alignment div, and add a dictionary list to it
+          const div = document.createElement('div');
+          div.classList.add('dlist', 'alignedStandards', keyName+'-'+dict);
+          div.innerHTML = `<div class="title">
+            <h2><a href="${stdUrl}">${fullname}</a></h2>
+          </div><dl></dl>`;
+          const list = div.querySelector('dl')
 
-            // Walk over entries, adding each to the list if it aligns with the current lesson
-            // OR if there's a lesson in the current pathway or graph that aligns to it
-            // SKIP __metadata, which does not contain a 'lessons' field
-            for( const [id, entry] of Object.entries(entries) ) {
+          // Walk over entries, adding each to the list if it aligns with the current lesson
+          // OR if there's a lesson in the current pathway or graph that aligns to it
+          // SKIP __metadata, which does not contain a 'lessons' field
+          for( const [id, entry] of Object.entries(entries) ) {
 
-              if(entry.lessons && entry.lessons.filter(l => normalizedAlignedLessons.includes(l)).length) {
-                list.innerHTML += `<dt>${id}</dt>`;
-                // if there are aligned standards,
-                // add all lessons (and links!) to the description
-                var relevantLessons = alignedLessons.filter(l => entry.lessons.includes(removeProglangSuffix(l)));
-                
-                // if we're not aligned to any specific pathway or lesson, remove suffixed duplicates
-                if(!pathway && !lessons) {
-                  relevantLessons = relevantLessons.filter(lesson => {
-                    normalizedLesson = removeProglangSuffix(lesson);
-                    return (lesson == normalizedLesson) || !relevantLessons.includes(normalizedLesson);
-                  });
-                }
+            if(entry.lessons && entry.lessons.filter(l => normalizedAlignedLessons.includes(l)).length) {
+              list.innerHTML += `<dt>${id}</dt>`;
+              // if there are aligned standards,
+              // add all lessons (and links!) to the description
+              var relevantLessons = alignedLessons.filter(l => entry.lessons.includes(removeProglangSuffix(l)));
 
-                entry.description += " <br/><i>";
-                entry.description += relevantLessons.map(l => 
-                    `<a href="lessons/${l}/index.shtml${url.search}">${graph[l].title}</a>`)
-                  .join(", ");
-                entry.description += "</i>";
-                list.innerHTML += `<dd><p>${entry.description}</p></dd>`;
-                // build the lessonMap, adding every standard to every dictionary-array
-                relevantLessons.forEach(l => {
-                  let map = lessonMap[graph[l].title];
-                  if(!map[fullname]) { map[fullname] = []; } // first time we've seen this dict!
-                  map[fullname].push(id);
-                })
+              // if we're not aligned to any specific pathway or lesson, remove suffixed duplicates
+              if(!pathway && !lessons) {
+                relevantLessons = relevantLessons.filter(lesson => {
+                  normalizedLesson = removeProglangSuffix(lesson);
+                  return (lesson == normalizedLesson) || !relevantLessons.includes(normalizedLesson);
+                });
               }
-            }
-            div.appendChild(list);
-            dictParent.append(div);
 
-            // if we actually have alignments and they aren't state-specific, 
-            // add them to the page and optgroup
-            if (list.children.length > 0 && !stateMap.get(dict)) {
-              const opt = document.createElement('option');
-              opt.value = keyName + '-' + dict;
-              opt.appendChild(document.createTextNode(fullname));
-              group.append(opt);
+              entry.description += " <br/><i>";
+              entry.description += relevantLessons.map(l =>
+                  `<a href="lessons/${l}/index.shtml${url.search}">${graph[l].title}</a>`)
+                .join(", ");
+              entry.description += "</i>";
+              list.innerHTML += `<dd><p>${entry.description}</p></dd>`;
+              // build the lessonMap, adding every standard to every dictionary-array
+              relevantLessons.forEach(l => {
+                let map = lessonMap[graph[l].title];
+                if(!map[fullname]) { map[fullname] = []; } // first time we've seen this dict!
+                map[fullname].push(id);
+              })
             }
           }
-          
-          // add non-empty groups to the dropdown
-          if (group.children.length > 0) {
-            dropdown.appendChild(group);
-          }
+          div.appendChild(list);
+          dictParent.append(div);
 
+          // if we actually have alignments and they aren't state-specific,
+          // add them to the page and optgroup
+          if (list.children.length > 0 && !stateMap.get(dict)) {
+            const opt = document.createElement('option');
+            opt.value = keyName + '-' + dict;
+            opt.appendChild(document.createTextNode(fullname));
+            group.append(opt);
+          }
         }
-        // Add Menu Groups for all the built-in alignment dictionaries
-        addGroup("standards", "By Standard");
-        addGroup("practices", "By Practice");
-        addGroup("textbooks", "By Textbook");
 
-        // Add Menu Group for states
-        const stateGroup = document.createElement('optgroup');
-        stateGroup.label = "By State";
-        [...stateMap.entries()].forEach(entry => {
-          const opt = document.createElement('option');
-          opt.value = 'standards-'+entry[0]; 
-          opt.appendChild(document.createTextNode(entry[1]));
-          stateGroup.appendChild(opt);
-        });
-        dropdown.appendChild(stateGroup);
+        // add non-empty groups to the dropdown
+        if (group.children.length > 0) {
+          dropdown.appendChild(group);
+        }
 
-        // now that our inverse data structure has been filled, draw the byLesson div
-        dictParent = document.querySelector('#byLesson');
-        
-        let html = '<div class="dlist"><dl>';
-        
-        alignedLessons.forEach(l => {
-          const {title, description} = graph[l];
-          const alignedStandards = lessonMap[title];
-          html += `<dt><a href="lessons/${l}/index.shtml${url.search}">${graph[l].title}</a></dt>`
-          if([...Object.keys(alignedStandards)].length == 0) {
-            html += `<dd>No Alignments for this Lesson</dd>`; 
+      }
+      // Add Menu Groups for all the built-in alignment dictionaries
+      addGroup("standards", "By Standard");
+      addGroup("practices", "By Practice");
+      addGroup("textbooks", "By Textbook");
+
+      // Add Menu Group for states
+      const stateGroup = document.createElement('optgroup');
+      stateGroup.label = "By State";
+      [...stateMap.entries()].forEach(entry => {
+        const opt = document.createElement('option');
+        opt.value = 'standards-'+entry[0];
+        opt.appendChild(document.createTextNode(entry[1]));
+        stateGroup.appendChild(opt);
+      });
+      dropdown.appendChild(stateGroup);
+
+      // now that our inverse data structure has been filled, draw the byLesson div
+      dictParent = document.querySelector('#byLesson');
+
+      let html = '<div class="dlist"><dl>';
+
+      alignedLessons.forEach(l => {
+        const {title, description} = graph[l];
+        const alignedStandards = lessonMap[title];
+        html += `<dt><a href="lessons/${l}/index.shtml${url.search}">${graph[l].title}</a></dt>`
+        if([...Object.keys(alignedStandards)].length == 0) {
+          html += `<dd>No Alignments for this Lesson</dd>`;
+        } else {
+          const list = [...Object.keys(alignedStandards)].sort().map(k =>
+            `<li>${k}: ${alignedStandards[k].join(", ")}</li>`);
+          html+=`<dd><ul>${list.join('')}</ul></dd>`;
+        }
+      })
+      html += '</dl></div>';
+      dictParent.innerHTML = html;
+    }
+
+    function switchGrouping(by) {
+      groupBy = by;
+      const standardMenu = document.querySelector('.alignmentSelect');
+      if(groupBy == "Alignment") {
+        standardMenu.style.display = 'inline-block';
+        document.getElementById('byAlignment').style.display = 'block';
+        document.getElementById('byLesson').style.display = 'none';
+      } else if(groupBy == "Lesson") {
+        document.getElementById('byAlignment').style.display = 'none';
+        document.getElementById('byLesson').style.display = 'block';
+        standardMenu.style.display = 'none';
+      }
+    }
+
+    var searchTimeout;
+    function search(needle) {
+      clearTimeout(searchTimeout);
+      searchTimeout = setTimeout( () => {
+        console.time('time to filter');
+        let query;
+        if (groupBy == "Alignment") {
+          const active = document.querySelector('.alignmentSelect').value;
+          query = `div.${active} dl`;
+        } else {
+          query = `#byLesson dl`;
+        }
+
+        const list = document.querySelector(query);
+        const terms = list.querySelectorAll('dt');
+        list.style.display = "none";
+        // if it's a match, make this tbody visible. Otherwise, invisible
+        terms.forEach((dt, idx) => {
+          const haystack = (dt.textContent + dt.nextSibling.textContent).toLowerCase();
+          if(haystack.includes(needle.toLowerCase())) {
+            dt.style.display = dt.nextSibling.style.display = 'block';
           } else {
-            const list = [...Object.keys(alignedStandards)].sort().map(k => 
-              `<li>${k}: ${alignedStandards[k].join(", ")}</li>`);
-            html+=`<dd><ul>${list.join('')}</ul></dd>`;  
+            dt.style.display = dt.nextSibling.style.display = 'none';
           }
         })
-        html += '</dl></div>';
-        dictParent.innerHTML = html;
-      }
-      
-      function switchGrouping(by) {
-        groupBy = by;
-        const standardMenu = document.querySelector('.alignmentSelect');
-        if(groupBy == "Alignment") {
-          standardMenu.style.display = 'inline-block';
-          document.getElementById('byAlignment').style.display = 'block';
-          document.getElementById('byLesson').style.display = 'none';
-        } else if(groupBy == "Lesson") {
-          document.getElementById('byAlignment').style.display = 'none';
-          document.getElementById('byLesson').style.display = 'block';
-          standardMenu.style.display = 'none';
-        }
-      }
-
-      var searchTimeout;
-      function search(needle) {
-        clearTimeout(searchTimeout);
-        searchTimeout = setTimeout( () => {
-          console.time('time to filter');
-          let query;
-          if (groupBy == "Alignment") {
-            const active = document.querySelector('.alignmentSelect').value;
-            query = `div.${active} dl`;
-          } else {
-            query = `#byLesson dl`;
-          }
-
-          const list = document.querySelector(query);
-          const terms = list.querySelectorAll('dt');
-          list.style.display = "none";
-          // if it's a match, make this tbody visible. Otherwise, invisible
-          terms.forEach((dt, idx) => {
-            const haystack = (dt.textContent + dt.nextSibling.textContent).toLowerCase();
-            if(haystack.includes(needle.toLowerCase())) {
-              dt.style.display = dt.nextSibling.style.display = 'block';
-            } else {
-              dt.style.display = dt.nextSibling.style.display = 'none';
-            }
-          })
-          list.style.display = "block";
-          console.timeEnd('time to filter');
-        }, 250);
-      }
-    </script>
+        list.style.display = "block";
+        console.timeEnd('time to filter');
+      }, 250);
+    }
+  </script>
 </head>
 <body class="narrativepage article" onLoad="populateAlignments(); showAlignment('standards-CCSS-Math');">
   <!--#include virtual="/menubar.ssi"-->
