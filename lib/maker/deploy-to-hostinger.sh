@@ -25,6 +25,10 @@ cd distribution
 
 DEPLOYABLES_DIR=deployables-$USER
 
+# hostinger allows for multiple domains, so make sure we're
+# deploying to the right one!
+DOMAIN=beta.bootstrapworld.org
+
 test -d $DEPLOYABLES_DIR && rm -fr $DEPLOYABLES_DIR
 
 mkdir $DEPLOYABLES_DIR
@@ -66,11 +70,11 @@ for f in $(find $DEPLOYABLES_DIR -name images -type d); do
 done
 
 cat > $DEPLOYABLES_DIR/deploy-to-public_html.sh <<EOF
-DEPLOY_DIR=\$HOME/public_html/materials/$SEMESTER_YEAR
+DEPLOY_DIR=\$HOME/domains/$DOMAIN/public_html/materials/$SEMESTER_YEAR
 rm -fr \$DEPLOY_DIR
 mv \$HOME/tmp/$DEPLOYABLES_DIR \$DEPLOY_DIR
 rm \$DEPLOY_DIR/deploy-to-public_html.sh
-#chmod 755 \$HOME/public_html/materials/$SEMESTER_YEAR/\*/lessons/hoc-winter-parley/repartee
+#chmod 755 \$HOME/domains/$DOMAIN/public_html/materials/$SEMESTER_YEAR/\*/lessons/hoc-winter-parley/repartee
 EOF
 
 # exit
@@ -96,7 +100,7 @@ exitstatus=$?
 
 test $exitstatus -ne 0 && echo rsync failed! 😢  && exit 0
 
-echo Copying files to public_html/materials/$SEMESTER$YEAR...
+echo Copying files to domains/$DOMAIN/public_html/materials/$SEMESTER$YEAR...
 
 if test -n "$CONVENIENT_PASSWORD"; then
   sshpass -e ssh -p $HOSTINGER_PORT $HOSTINGER_USER@$HOSTINGER_IPADDR "bash \$HOME/tmp/$DEPLOYABLES_DIR/deploy-to-public_html.sh"
