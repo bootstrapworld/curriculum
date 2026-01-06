@@ -6,6 +6,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="generator" content="Asciidoctor 2.0.17">
   <title>Contracts</title>
+
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-TS6D6H9T');</script>
+  <!-- End Google Tag Manager -->
+
   <link rel="stylesheet" href="lib/curriculum.css" />
   <script src="lib/dependency-graph.js"></script>
   <script src="lib/pathway-tocs.js"></script>
@@ -16,22 +25,22 @@
     /* override some asciidoctor and shared.less defaults */
     *:not(pre)>code { background-color: transparent !important; }
     .contracts-table tbody tr:nth-child(odd) .ruby { color: darkgray !important; }
-    .fitb, .fitbruby { 
-      border-bottom-color: gray !important; 
-      padding: 0 !important; 
-      min-width: 7em !important; 
+    .fitb, .fitbruby {
+      border-bottom-color: gray !important;
+      padding: 0 !important;
+      min-width: 7em !important;
     }
     .contracts-table tr:nth-child(odd) { border: 0; }
     .contracts-table tbody tr:nth-child(even) td { padding-left: 2em !important; }
     tbody tr:first-child td:nth-child(3) code { display: flex; }
-    tbody tr:first-child td:nth-child(3) code .fitbruby { 
+    tbody tr:first-child td:nth-child(3) code .fitbruby {
       flex-grow: 0.1;
-      max-width: 10em; 
+      max-width: 10em;
       min-width: 4.5em !important;
     }
     td code.pyret-comment { background-color: transparent !important; }
 
-    html, body, div#body {
+    div#body {
       height: 9.7in !important;
       max-height: 9.8in !important;
       width: 7.5in !important;
@@ -45,7 +54,7 @@
     tbody tr:last-child { font-style: italic; }
 
     @media print {
-      /* 
+      /*
         We add "extra rows" to the bottom of the last printed page by
         (1) adding a repeating background image that _looks_ like rows
         (2) positioning it to line up precisely with the real table
@@ -64,9 +73,9 @@
 
       #body { padding: 0 !important; color: black !important; }
       #search { display: none; }
-      tbody { 
-        break-inside: avoid !important; 
-        page-break-inside: avoid !important; 
+      tbody {
+        break-inside: avoid !important;
+        page-break-inside: avoid !important;
       }
     }
   </style>
@@ -83,14 +92,14 @@
 
     // Swap in pyret names if we're in pyret
     function processName(contract) {
-      return (proglang=="pyret" && contract["name-pyret"])? 
+      return (proglang=="pyret" && contract["name-pyret"])?
         contract["name-pyret"] : contract["name"];
     }
 
     function elideProgLangSpecificPrimitives(c) {
       if(proglang == "wescheme") {
-        return c.name !== '<>' 
-      } else { 
+        return c.name !== '<>'
+      } else {
         return c.name.match(/[a-z]/i) && !["or", "and"].includes(c.name);
       }
     }
@@ -121,14 +130,14 @@
 
       // add the appropriate example (pyret or wescheme)
       let example = document.getElementById('exampleCode');
-      example.innerHTML = (pathway && pathway.includes("wescheme"))? 
+      example.innerHTML = (pathway && pathway.includes("wescheme"))?
         `(triangle 20 "solid" "green")` : `triangle(20, "solid", "green")`
 
       // the domain is an array of {name, type} pairs
       function processDomain(contract) {
         const code = document.createElement('code');
         code.className = "pyret-comment";
-        code.innerHTML = '(' + 
+        code.innerHTML = '(' +
           [...contract.domain.map(i => {
             if(i.name && i.name.length) {
               return `<span class="fitbruby">${i.type}<span class="ruby">${i.name}</span></span>`
@@ -145,7 +154,7 @@
         return (proglang == "wescheme")?
          contract["example-wescheme"] : contract["example-pyret"];
       }
-      
+
       const table = document.getElementById('contracts');
       const prefix = (proglang == "wescheme")? "; " : "# ";
 
@@ -159,11 +168,11 @@
           const tbody = document.createElement('tbody');
           // make the row
           const row1 = document.createElement('tr');
-          row1.innerHTML  = 
+          row1.innerHTML  =
             '<td><code>' + prefix + name + '</code></td>' +
             '<td> :: </td>' +
-            '<td>' + domain + '</td>' + 
-            '<td> -> </td>' + 
+            '<td>' + domain + '</td>' +
+            '<td> -> </td>' +
             '<td><code>' + c.range + '</code></td>';
           const row2 = document.createElement('tr');
           row2.innerHTML  = '<td colspan="7">' + example +
@@ -172,7 +181,7 @@
           tbody.appendChild(row2);
 
           // by default, hide primitives that aren't in this pathway
-          if(primitives && !primitives.includes(c.name)) { 
+          if(primitives && !primitives.includes(c.name)) {
             tbody.style.display = 'none';
           }
 
@@ -201,9 +210,24 @@
       }, 250);
     }
   </script>
+
+  <link rel="stylesheet" type="text/css" href="lib/wp-adaptors/style-overrides.css">
+  <link rel="stylesheet" type="text/css" href="lib/wp-adaptors/style-bsw.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+  <script src="lib/wp-adaptors/script.js"></script>
+
 </head>
 <body onload="buildTable()">
-  <!--#include virtual="/menubar.ssi"-->
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TS6D6H9T"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  <!--#include virtual="lib/wp-adaptors/header.ssi" -->
+  <div class="x-row x-container max width e4468439224895391-e2 m17zxgn2tjtr-8 m17zxgn2tjtr-9 m17zxgn2tjtr-b">
+  <div class="x-row-inner">
+  <div class="x-col e4468439224895391-e3 m17zxgn2tjtr-d m17zxgn2tjtr-e m17zxgn2tjtr-f lesson-content">
   <div id="body" class="narrativepage article canBeLongerThanAPage">
     <div id="header">
       <h1>Contracts</h1>
@@ -219,7 +243,7 @@
           </ol>
         </p>
         <p>
-          For example: The contract <tt>triangle :: (Number, String, String) -> Image</tt> tells us that the name of the function is  <tt>triangle</tt>, it needs three inputs (a Number and two Strings), and it produces an Image. 
+          For example: The contract <tt>triangle :: (Number, String, String) -> Image</tt> tells us that the name of the function is  <tt>triangle</tt>, it needs three inputs (a Number and two Strings), and it produces an Image.
         </p>
         <p>
           With these three pieces of information, we know that typing <tt id="exampleCode"></tt>  will evaluate to an Image.
@@ -240,5 +264,10 @@
       </div>
     </div>
   </div>
+</div>
+<!--#include virtual="lib/wp-adaptors/sidebar/curricula.ssi" -->
+</div>
+</div>
+<!--#include virtual="lib/wp-adaptors/footer.ssi" -->
 </body>
 </html>

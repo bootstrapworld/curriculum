@@ -4,6 +4,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <meta charset="UTF-8">
     <title>Bootstrap: Materials</title>
+
+      <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-TS6D6H9T');</script>
+  <!-- End Google Tag Manager -->
+
     <link rel="stylesheet" href="lib/curriculum.css">
     <link rel="stylesheet" type="text/css" href="https://www.BootstrapWorld.org/styles.css"/>
     <style>
@@ -11,32 +20,32 @@
         .logo img { width: 300px; }
         .drag-handle img { width: 15px; user-select: none; }
         dl { counter-reset: term; min-height: 3in; padding-top: 25px; }
-        dl .list-group-item { 
-            display:        flex !important; 
-            padding:        0; 
+        dl .list-group-item {
+            display:        flex !important;
+            padding:        0;
             margin-bottom:  15px;
             border:         none;
         }
         dl#accessible-lesson-list .list-group-item { align-items:    center; }
         dl#accessible-lesson-list .day { display: none; }
-        dl .list-group-item span.drag-handle { 
-            width: 15px; 
-            flex: 0 0 15px; 
-            margin: 0 10px; 
-            text-align: center; 
-            opacity: 0.5; 
+        dl .list-group-item span.drag-handle {
+            width: 15px;
+            flex: 0 0 15px;
+            margin: 0 10px;
+            text-align: center;
+            opacity: 0.5;
         }
         dl#lesson-list .list-group-item span.drag-handle { margin-top: 30px; }
 
         /* styling of day input boxes */
         .day { margin-right: 50px; float: right; white-space: pre; font-style: italic; font-weight: 100; }
-        .day input { 
-            max-width: 25px; 
+        .day input {
+            max-width: 25px;
             display: inline;
-            margin: 0; 
-            padding: 0; 
-            border: none; 
-            text-align: left; 
+            margin: 0;
+            padding: 0;
+            border: none;
+            text-align: left;
             font: inherit;
             color: inherit;
             background: transparent;
@@ -46,12 +55,12 @@
         span.drag-handle:hover { cursor: grab; }
 
         dl#lesson-list:empty { display: flex; justify-content: center; }
-        dl#lesson-list:empty:after { 
+        dl#lesson-list:empty:after {
             display: flex;
             align-items: center;
             font-style: italic;
             width: 75%;
-            content: "You haven't selected any Bootstrap lessons...yet! Fortunately, the lessons on the right can be taught without ANY prerequisites at all! Drag one of them over here to start your list, and see what other lessons get unlocked as your list of Bootstrap lessons grows!" 
+            content: "You haven't selected any Bootstrap lessons...yet! Fortunately, the lessons on the right can be taught without ANY prerequisites at all! Drag one of them over here to start your list, and see what other lessons get unlocked as your list of Bootstrap lessons grows!"
         }
         dl#lesson-list > dt:not(.sortable-drag) a:before {
             counter-increment: term;
@@ -67,9 +76,9 @@
         #accessible h2 { font-size:16px; font-weight:bold; }
         #accessible button {display: none; }
         #accessible-lesson-list dd { display: none; }
-        
+
         #status { display: none; }
-        #status, label, progress { width: 100%; }        
+        #status, label, progress { width: 100%; }
         .pathway_external_links li { margin-top: 25px !important; }
     </style>
 
@@ -89,7 +98,7 @@
 
     <script>
     let url = new URL(location);
-    
+
     // Default to all pyret lessons
     let proglang = "pyret";
 
@@ -120,15 +129,15 @@
       }
       lessonNames.forEach((l, idx) => {
         const lesson = graph[l];
-        const sectionsHTML = graph[l].sections.map(sec => 
+        const sectionsHTML = graph[l].sections.map(sec =>
             `<li>${sec}</li>`).join('\n');
         const numDays = (useDays && days && days[idx])? days[idx] : 2;
         const dayHTML = `<span class="day"><input type="number" min="1" value="${numDays}" onchange="updateHistory()"> ${numDays == 1? 'day ':'days'}</span>`
         const html = `
           <div class="list-group-item" data-lesson-title=${l}>
             <span class="drag-handle">
-              <button 
-                onMouseover="maybeDeleteLesson('${l}')" 
+              <button
+                onMouseover="maybeDeleteLesson('${l}')"
                 onMouseout="resetDeletionIndicators()"
                 onClick="deleteLesson('${l}')">
                 &times;
@@ -187,7 +196,7 @@
         .filter(l => graph[l].proglang == proglang)
         .filter(l => !lessons.includes(l))
         .filter(onlyUnique)
-        .sort((a,b) => 
+        .sort((a,b) =>
         graph[a].prerequisites.length > graph[b].prerequisites.length? 1 : -1);
       //console.log('selected lessons are', lessons, 'accessible lessons are', accessible);
 
@@ -207,10 +216,10 @@
 
       function updateList(evt) {
         lessons = selectedSort.toArray();
-        updateHistory()               
+        updateHistory()
       }
 
-      function safeToDrop(evt, originalEvt) { 
+      function safeToDrop(evt, originalEvt) {
        // Extract the title of the lesson being dragged, and which lesson it's being inserted relative to
        const draggingLesson = evt.dragged.getAttribute('data-lesson-title');
        const relatedLesson = evt.related.getAttribute('data-lesson-title');
@@ -225,7 +234,7 @@
        const before = otherLessons.splice(0, evt.willInsertAfter? relatedIndex + 1 : relatedIndex );
        const after = otherLessons.filter(l => !before.includes(l))
        //console.log('before', before, 'after', after)
-       
+
        // Invalid Case 1: dragging lesson is a prereq of a prior one
        const tooLate = before.find(l => graph[l].prerequisites.includes(draggingLesson))
        if(tooLate) {
@@ -243,7 +252,7 @@
 
       accessibleSort.option('onMove', safeToDrop);
       selectedSort.option('onMove', safeToDrop);
-      
+
       // revise search params for content links
       document.querySelectorAll('#content a').forEach(link => {
         newLink = new URL(link.href);
@@ -251,7 +260,7 @@
         link.href = newLink.href;
       });
     }
-    
+
     function makeEditable(node) {
         node.contentEditable = true;
         node.onkeydown = e => { if(e.key == 'Enter') save(node); }
@@ -275,10 +284,25 @@
         init();
     }
     </script>
+
+      <link rel="stylesheet" type="text/css" href="lib/wp-adaptors/style-overrides.css">
+  <link rel="stylesheet" type="text/css" href="lib/wp-adaptors/style-bsw.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+  <script src="lib/wp-adaptors/script.js"></script>
+
 </head>
 
 <body class="article narrative pyret" onload="init();">
-    <!--#include virtual="/menubar.ssi" -->
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TS6D6H9T"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+  <!--#include virtual="lib/wp-adaptors/header.ssi" -->
+  <div class="x-row x-container max width e4468439224895391-e2 m17zxgn2tjtr-8 m17zxgn2tjtr-9 m17zxgn2tjtr-b">
+  <div class="x-row-inner">
+  <div class="x-col e4468439224895391-e3 m17zxgn2tjtr-d m17zxgn2tjtr-e m17zxgn2tjtr-f lesson-content">
     <div id="body">
         <div id="header">
             <h1 id="pathwayTitle" style="border-bottom: none;" onClick="makeEditable(this)" onBlur="save(this)"></h1>
@@ -299,7 +323,7 @@
                 <dl id="lesson-list" ></dl>
             </div>
         </div>
-        
+
         <div id="accessible" class="clearfix item one-third">
             <h2>What's within reach?</h2>
             <p/>
@@ -310,7 +334,7 @@
 
         <div class="clearfix item top-border bottom-border">
             <h2>Student Workbooks</h2>
-            <p>Every page can be accessed individually from the lesson plans, in both Web and PDF format. You can print only what you need for each day, or get every page combined as a complete <a href="javascript:void(0)" onclick="makeCustomBook(pathway, lessons, { reqPages: true, optPages: false, solns: false, addTOC: true })">Student Workbook</a>. 
+            <p>Every page can be accessed individually from the lesson plans, in both Web and PDF format. You can print only what you need for each day, or get every page combined as a complete <a href="javascript:void(0)" onclick="makeCustomBook(pathway, lessons, { reqPages: true, optPages: false, solns: false, addTOC: true })">Student Workbook</a>.
             <p/>
             <span id="status">
                 <label for="file">Assembling Workbook:</label>
@@ -364,5 +388,10 @@
         </div>
 
     </div>
+</div>
+<!--#include virtual="lib/wp-adaptors/sidebar/curricula.ssi" -->
+</div>
+</div>
+<!--#include virtual="lib/wp-adaptors/footer.ssi" -->
 </body>
 </html>
