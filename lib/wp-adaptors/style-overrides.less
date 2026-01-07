@@ -29,3 +29,53 @@ div.item {
   width: 100%;
   max-width: 1400px;
 }
+/************************************************************************************
+* SIDEBAR STYLES
+* NOTE: In WordPress, the sidebar lives outside of the normal container!
+*/
+
+.sidebar {
+  position:   unset;
+  animation:  none;
+  width:      unset !important;
+  height:     unset !important;
+  display:    block;
+  height:     100%;
+  padding:    20px;
+  background: #e9e9e9;
+  color:      black;
+  box-shadow: 1px 2px 5px 2px rgba(0,0,0,0.33);
+  border-radius: 20px;
+  overflow:   scroll;
+  user-select: none;
+  #toggle { display: none;}
+  .title a, .sidebarlessons strong a { font-size: 18pt !important; color: #232930; }
+  .sidebar .title a:hover { color: inherit; }
+
+  /* remove opacity */
+  > *, > * > * { opacity: unset; }
+
+  .paragraph { width: unset; }
+
+  .sidebarlessons {
+    margin-top:  30px;
+    input[type="checkbox"] { margin-right: 5px; }
+    ul {
+      background: white;
+      margin:     0px;
+      box-shadow: inset -1px 0px 2px gray;
+      max-height: 200px;
+      overflow:   scroll;
+      padding:    10px;
+      font-size:  10pt !important;
+      li { list-style-type: none; }
+      li * { color: black; }
+      li:nth-child(odd) { background: @translucent-bg-color; }
+    }
+  }
+  .sidebarstandards tr { background: transparent; }
+  .sidebarpractices ul { font-size:  0.75rem !important; margin: 0; }
+
+  dl { line-height: unset !important; }
+  dl * { font-size: unset !important; }
+}
