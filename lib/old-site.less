@@ -7,75 +7,40 @@ body { width: 100%; }
 *
 */
 
-@keyframes slideInFromLeft {
-    0% { transform: translateX(-100%); }
-  100% { transform: translateX(0);     }
-}
-
 .sidebar {
-  animation:  0.5s ease-out 0s 1 slideInFromLeft;
-  display:    block;
-  position:   fixed;
-  top:        0px;
-  left:       0px;
-  width:      225px;
-  height:     100%;
-  background: #e8f3dd;
-  transition: all 0.5s;
+  background: #e9e9e9;
   color:      black;
-  box-shadow: -1px 2px 4px black;
-  z-index:    9999;
   overflow:   scroll;
   user-select: none;
-  &.closed {
-    left:  -225px;
-    width: 265px;
-    height: 30px;
-  }
-  .paragraph { width: 205px; }
-  #toggle {
-    top:    0;
-    right:  0;
-    position: absolute;
-    width:  40px;
-    height: 30px;
-    text-align:  center;
-    border: 0;
-    margin: 0 !important;
-    background: @translucent-bg-color;
-    &:after { content: '≫'; font-size: 20px;}
-  }
+  /* TODO(Emmanuel): remove the toggle entirely */
+  #toggle { display: none; }
 
-  &:not(.closed) #toggle:after { content: '«'; }
-  &:hover * { opacity: 1; }
   > * { margin: 0px 10px !important; }
-  > *, .sidebar > * > * { opacity: 0.4; transition: opacity 0.5s; }
   label { display: inline; font-size: 0.8rem; }
   select { border:  none; width: 100%; }
   strong { color: black; margin: 0; }
   li { list-style-type: none; margin-bottom: 5px !important; }
+  li * { color: black; }
   table { background: none !important; border: 0 !important; width: auto; }
   table td, table tr { padding: 0 !important; background: none !important; border: 0 !important; }
   table .title { display: none; }
-  dl * { font-size:  9pt !important; margin: 0; display: inline; }
-  dl { line-height: 1.4rem !important; }
+  dl * { margin: 0; display: inline; }
   dd { margin-left: 0 !important; }
   dd::after { content: '\A'; white-space: pre; }
   dt::after { content: ' ·'; white-space: pre; font-size: 0.7rem; }
   table dt { margin-top: 10px; }
   .sidebarlessons {
     margin-top:  30px !important;
-    input[type="checkbox"] { margin-right: 5px; }
     ul {
       background: white;
       margin:     0px !important;
       box-shadow: inset -1px 0px 2px gray;
-      max-height: 250px;
+      max-height: 200px;
       overflow:   scroll;
       padding:    10px !important;
       font-size:  10pt !important;
     }
-    li:nth-child(odd) { background: @translucent-bg-color2; }
+    li:nth-child(odd) { background: @translucent-bg-color; }
   }
   .sidebarpractices ul { font-size:  0.75rem !important; margin: 0; }
 }

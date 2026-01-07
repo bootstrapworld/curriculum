@@ -1,7 +1,7 @@
 /************************************************************************************
 * SYSTEMWIDE STYLES
 */
-@font-color: #013a63;
+@font-color: rgba(1, 58, 99, 1) !important;
 @translucent-bg-color: #468fafAA;
 @translucent-bg-color2: #f26b45AA;
 @text-font: 'Lato', Arial, Helvetica, sans-serif;
@@ -19,8 +19,13 @@ div#body {
   color:          @font-color;
   width:          100%; /* needed to undo effect of html{display:flex} */
   display:        block;
-  position:       relative;
+  position:       unset !important;
+  margin:         0;
+  padding:        48px 0 !important;
+  width:          88% !important;
+  max-width:      1400px !important;
   -webkit-font-smoothing: antialiased;
+
   &.beta::after {
     position: absolute;
     top: 40%;
@@ -139,7 +144,7 @@ div#body {
 
   /* The footer at the bottom of every page */
   .acknowledgmentsect {
-    position: absolute;
+    position: relative;
     bottom: -2in;
   }
   .acknowledgment {
@@ -377,6 +382,7 @@ div#body:not(.LessonPlan, .narrativepage) p {
 */
 div#body.narrativepage {
   font-size: 12pt;
+  font-family: "Rubik", sans-serif;
   p {line-height:1.6;}
   h2 { margin-top: 20px; }
   .logo     { float: right; }
@@ -414,6 +420,7 @@ div#body.narrativepage {
 */
 div#body.LessonPlan {
   font-size: 12pt;
+  font-family: "Rubik", sans-serif;
 
   .other-proglang::before { font-style: italic; }
 
