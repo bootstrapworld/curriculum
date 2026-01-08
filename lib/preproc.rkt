@@ -488,7 +488,7 @@
     (display (create-begin-tag "div" ".sidebarlessons") o)
     (display "*Lessons*\n" o)
 
-    (display (create-begin-tag "ul" "") o)
+    (display (create-begin-tag "ul" ".17zxgn2tjtr-m x-text") o)
 
     (display (create-end-tag "ul") o)
     (display (create-end-tag "div") o)
@@ -497,7 +497,7 @@
 
 (define (display-standards-bar o)
   ;(printf "doing display-standards-bar\n")
-  (display "\n[.sidebarstandards,cols=\"a\"]" o)
+  (display "\n[.sidebarstandards.m17zxgn2tjtr-m.x-text,cols=\"a\"]" o)
   (display "\n|===\n" o)
   (display "| " o)
   (display "*Aligns to:*\n" o)
