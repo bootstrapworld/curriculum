@@ -5,7 +5,7 @@
 
 export SEMESTER := fall
 
-export YEAR := 2025
+export YEAR := 2026
 
 # default NATLANG is en-us. To override: make NATLANG=es-mx
 
