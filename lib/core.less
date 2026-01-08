@@ -679,7 +679,7 @@ div#body.solution-page {
   .fitbruby, .fitb { font-style: italic; }
 }
 
-div#body.workbookpage {
+html div#body.workbookpage {
   font-size: 9pt; /* Use a tiny font for print, but then zoom in @screen */
   color: black !important;
   top: 0;
@@ -692,7 +692,7 @@ div#body.workbookpage {
   h2 .editbox, h2 .editbox *, h2 .pyret { color: black; background: none; margin: 0 5px; }
 
   /* set page dimensions */
-  &:not(.landscape) { width: 7.5in; height: 9.8in; }
+  &:not(.landscape) { width: 7.5in !important; height: 9.8in; }
   &.landscape { width: 9.8in; height:  7.5in; page: landscape; } /* define 'landscape' page type */
 
   /* Make content of page as tall as possible */
@@ -1409,6 +1409,11 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
 @page landscape { size: letter landscape; margin: 0.5in; }
 
 @media print {
+
+  /* make WP containers impotent */
+  *:has(div#body) { display: contents; }
+  html .x-row-inner > .x-col > div#body { padding: 0 !important; }
+
   color: black;
 
   /* Elements we don't want printed */
@@ -1426,7 +1431,7 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
   #content { margin: auto; }
 
   /* Change coloring of body text, lesson summary table, and code */
-  html { -webkit-print-color-adjust: exact; }
+  html { -webkit-print-color-adjust: exact; font-size: 9pt; }
 
   .listingblock pre:not(.highlight) { background: none !important; }
 
@@ -1435,7 +1440,7 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
 
   div#body.LessonPlan {
 
-    width: 7.5in;
+    width: 7.5in !important;
     .preamble tr td:last-child > * { background: white !important; }
 
     .lessonSummary {
