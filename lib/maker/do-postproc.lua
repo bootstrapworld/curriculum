@@ -238,7 +238,7 @@ local function postproc(fhtml_cached, tipe)
       ]])
       o:write(z, '\n')
       -- added for DesignHammer
-      o:write('<link rel="stylesheet" type="text/css" href="' .. local_dist_root_dir .. 'lib/wp-adaptors/style-overrides.css">\n')
+      --o:write('<link rel="stylesheet" type="text/css" href="' .. local_dist_root_dir .. 'lib/wp-adaptors/style-overrides.css">\n')
       o:write('<link rel="stylesheet" type="text/css" href="' .. local_dist_root_dir .. 'lib/wp-adaptors/style-bsw.css">\n')
       o:write('<link rel="preconnect" href="https://fonts.googleapis.com">\n')
       o:write('<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n')
