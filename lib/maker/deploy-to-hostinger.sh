@@ -24,6 +24,7 @@ test -z "$YEAR" && YEAR=$(date +%Y)-BETA
 cd distribution
 
 DEPLOYABLES_DIR=deployables-$USER
+SEMESTER_YEAR=$SEMESTER$YEAR
 
 CURR_GIT_BRANCH=$(git branch --show-current)
 
@@ -48,8 +49,6 @@ ALL_THE_LANGS="en-us es-mx"
 for lang in $ALL_THE_LANGS; do
   mkdir -p $DEPLOYABLES_DIR/$lang
 done
-
-SEMESTER_YEAR=$SEMESTER$YEAR
 
 SED=sed
 
