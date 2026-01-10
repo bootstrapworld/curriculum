@@ -10,6 +10,9 @@ td .autonum { padding-top: 0.7rem !important; }
 
 .blanklines { line-height: 2rem !important; }
 
+/* Don't eat up available vertical space with tables */
+div#body.workbookpage table.FillVerticalSpace { height: unset; }
+
 /*
   "Graph" tables provide a pure-CSS solution for all coordinate planes.
 
@@ -76,10 +79,11 @@ td { padding: 0 5px 0 0 !important; color: black !important; }
 @include{fragments/desmos.adoc}
 
 @link-instructions{
-Make sure you're on *Slide 5: Changing the Scale (Linear)* of *Fitting Wealth-v-Health and Exploring Logarithmic Models*.
+Make sure you're on *Slide 6: Balancing Growth (Linear)* of *Fitting Wealth-v-Health and Exploring Logarithmic Models*.
 }
 
-@n Both axes are marked at (0, 2, 4...). What kind of growth is this? (circle one) @hspace{4em}
+@n Both axes are labeled (0, 2, 4...). What kind of growth is this? (circle one) 
+@hspace{3em}
 @ifsoln-choice{Linear} 		@hspace{1em}
 Quadratic 					@hspace{1em}
 Exponential 				@hspace{1em}
@@ -109,13 +113,13 @@ Quadratic 					@hspace{1em}
 Exponential 				@hspace{1em}
 Logarithmic
 
-@n Did our two points on the line change? @fitb{2em}{@ifsoln{No}} @hspace{1em} Did the slope of @math{f} change? @fitb{2em}{@ifsoln{No}} @hspace{1em} How did the graph change, and why?
+@n Did our two points on the line change? @fitb{2em}{@ifsoln{No}} @hspace{1em} Did the slope of @math{f} change? @fitb{2em}{@ifsoln{No}} @hspace{1em} How did the graph change, and why? @fitb{}{}
 
-@blanklines{2}{
-The line looks steeper. The graph *looks* like it changed because we changed the scale, but all we did was "stretch" the y-axis
+@blanklines{1}{
+@ifsoln{The line looks steeper. The graph *looks* like it changed because we changed the scale, but all we did was "stretch" the y-axis}
 }
 
-@n *Without changing the y-axis*, we can make @math{f} look like it does in the original graph by *changing scale on the x-axis* to @hspace{1em} @fitb{2em}{@ifsoln{~ -4}} ≤ @math{x} ≤ @fitb{2em}{@ifsoln{~ 4}}
+@n *Without changing the y-axis*, change the scale on the x-axis to make @math{f} look like the original graph. Record your domain: @hspace{1em} @fitb{2em}{@ifsoln{~ -4}} ≤ @math{x} ≤ @fitb{2em}{@ifsoln{~ 4}}
 
 == Faking a Change to Logarithmic
 
@@ -126,7 +130,8 @@ The line looks steeper. The graph *looks* like it changed because we changed the
 - *Change the y-axis* scale from `Linear` to `Logarithmic`. _(The y-axis labels should change to something like 0.1, 1, 10, 100...)_
 - *Drag the graph* to make sure you can see both labeled points
 
-@n The growth of the *y-axis* intervals is: @hspace{3em}
+@n What kind of growth does the sequence of numbers on the *y-axis* show _now?_ +
+@hspace{3em}
 Linear 						@hspace{1em}
 Quadratic 					@hspace{1em}
 @ifsoln-choice{Exponential} @hspace{1em}
@@ -143,7 +148,7 @@ Logarithmic
 
 |===
 
-@blanklines{2}{
+@blanklines{1}{
 @ifsoln{We "squished" the y-axis exponentially, which made the linear growth of @math{f} appear logarithmic}
 }
 
@@ -155,7 +160,8 @@ Logarithmic
 - Change the y-axis scale back to `Linear`, and the `x-axis` scale to `Logarithmic`.
 - *Drag the graph* to make sure you can see both labeled points
 
-@n The growth of the *x-axis* intervals is: @hspace{3em}
+@n What kind of growth does the sequence of numbers on the *x-axis* show _now?_ +
+@hspace{3em}
 Linear 						@hspace{1em}
 Quadratic 					@hspace{1em}
 @ifsoln-choice{Exponential} @hspace{1em}
@@ -163,8 +169,12 @@ Logarithmic
 
 @n Did our two points on the line change? @fitb{2em}{@ifsoln{No}} @hspace{1em} Did the slope of @math{f} change? @fitb{2em}{@ifsoln{No}}.
 
-@n How did the graph change? Can you explain why? @fitb{}{} +
-@fitb{}{}
+@n How did the graph change? Can you explain why? @fitb{}{@ifsoln{It looks exponential!}}
+
+@blanklines{1}{
+@ifsoln{We "squished" the x-axis exponentially, which made the linear growth of @math{f} appear exponential}
+}
+
 |
 [.graph, cols="1a", frame="none"]
 !===
@@ -172,8 +182,6 @@ Logarithmic
 !===
 
 |===
-
-@fitb{}{@ifsoln{It looks exponential! We "squished" the x-axis exponentially, which made the linear growth of @math{f} appear exponential}}
 
 @n *Make a prediction:* What do you think will happen if _both axes_ are switched to `Logarithmic`? @fitb{}{@ifsoln{answers will vary...}} +
 @fitb{}{}
