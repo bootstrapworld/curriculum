@@ -274,6 +274,9 @@ local function postproc(fhtml_cached, tipe)
           if fbase:find('^notes%-') then
             klass = klass .. ' LessonNotes'
           end
+          if fhtml_cached:match('/solution%-pages/') then
+            klass = klass .. ' solution-page'
+          end
         elseif tipe == 'pathwayindependent' then
           if fhtml_cached:match('/pages/') or fhtml_cached:match('/textbooks/') then
             klass = klass .. ' workbookpage'
