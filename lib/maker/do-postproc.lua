@@ -18,6 +18,9 @@ local new_analytics_file = os.getenv'TOPDIR' .. '/lib/new-analytics.txt'
 local gtm_file = os.getenv'TOPDIR' .. '/lib/gtm.txt'
 local gtm_noscript_file = os.getenv'TOPDIR' .. '/lib/gtm-noscript.txt'
 
+local wp_prologue_file = os.getenv'TOPDIR' .. '/lib/wp-adaptors/prologue.txt'
+local wp_epilogue_file = os.getenv'TOPDIR' .. '/lib/wp-adaptors/epilogue.txt'
+
 local function calculate_dist_root_dir(fhtml_cached)
   local f = fhtml_cached:gsub('^%./', '')
   f = f:gsub('/%./', '/')
@@ -122,14 +125,9 @@ local function postproc(fhtml_cached, tipe)
         add_end_body_id_p = false
         x = x:gsub('</body>', '</div>\n%0')
       end
-      x = x:gsub('</body>', string.format([[
-</div>
-<!--#include virtual="%slib/wp-adaptors/sidebar/curricula.ssi" -->
-</div>
-</div>
-<!--#include virtual="%slib/wp-adaptors/footer.ssi" -->
-</body>
-]], local_dist_root_dir, local_dist_root_dir))
+      local y = read_file_string(wp_epilogue_file)
+      y = y:gsub('SEMESTER_YEAR', os.getenv'SEMESTER' .. ' ' .. os.getenv'YEAR')
+      x = x:gsub('</body>', y)
     end
     --
     if x:find('^<link.*curriculum%.css') then
@@ -293,12 +291,8 @@ local function postproc(fhtml_cached, tipe)
     if add_body_id_p then
       add_body_id_p = false
       if website_branch_p then
-        o:write(string.format([[
-<!--#include virtual="%slib/wp-adaptors/header.ssi" -->
-<div class="x-row x-container max width e4468439224895391-e2 m17zxgn2tjtr-8 m17zxgn2tjtr-9 m17zxgn2tjtr-b">
-<div class="x-row-inner">
-<div class="x-col e4468439224895391-e3 m17zxgn2tjtr-d m17zxgn2tjtr-e m17zxgn2tjtr-f lesson-content">
-]], local_dist_root_dir, local_dist_root_dir))
+        local y = read_file_string(wp_prologue_file)
+        o:write(y)
         local klass = proglang
         if tipe == 'workbookpage' then
           klass = klass .. ' workbookpage'

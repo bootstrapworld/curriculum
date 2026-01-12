@@ -2550,8 +2550,8 @@
                 (store-assessments)
                 (store-objectives)
 
-                (fprintf o "include::~a/{cachedir}.index-sidebar.asc[]\n\n" *containing-directory*)
-                (call-with-output-file (build-path *containing-directory* ".cached" ".index-sidebar.asc")
+                #;(fprintf o "include::~a/{cachedir}.index-sidebar.asc[]\n\n" *containing-directory*)
+                #;(call-with-output-file (build-path *containing-directory* ".cached" ".index-sidebar.asc")
                   (lambda (o)
                     (display
                       (enclose-openblock
