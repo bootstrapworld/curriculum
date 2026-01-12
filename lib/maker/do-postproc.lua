@@ -181,8 +181,6 @@ local function postproc(fhtml_cached, tipe)
       openblock_attribs = false
     end
     x = x:gsub('class="exampleblock (.-)actually%-openblock ', 'class="openblock %1')
-    x = x:gsub('class="openblock sidebar', 'class="sidebar')
-    x = x:gsub('<div class="sidebar">', '</div>\n</div>\n</div>\n%0<div id="toggle"></div>')
     --
     x = x:gsub('%%CURRICULUMMATHJAXMARKER%%', '$$')
     --
