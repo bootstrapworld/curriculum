@@ -79,67 +79,55 @@ td { padding: 0 5px 0 0 !important; color: black !important; }
 @include{fragments/desmos.adoc}
 
 @link-instructions{
-Make sure you're on *Slide 6: Balancing Growth (Linear)* of *Fitting Wealth-v-Health and Exploring Logarithmic Models*.
+Make sure you're on *Slide 6: Balancing Growth (Linear)* of *Fitting Wealth-v-Health and Exploring Logarithmic Models*. +
+Notice that both the x- and y-axis are be labeled with a sequence of numbers _(e.g. 0, 2, 4, 6 ...)_ 
 }
 
-@n Both axes are labeled (0, 2, 4...). What kind of growth is this? (circle one) 
-@hspace{3em}
-@ifsoln-choice{Linear} 		@hspace{1em}
-Quadratic 					@hspace{1em}
-Exponential 				@hspace{1em}
-Logarithmic
+@n The function @math{f} is @fitbruby{16em}{@ifsoln{Linear}}{Linear, Quadratic, Exponential, or Logarithmic}, and its slope is @fitb{2em}{@ifsoln{2}}. Which two points are plotted on @math{f}? @fitb{}{@ifsoln{@math{(1, 2)} and @math{(2, 4)}}}
 
-@n The function @math{f} is @fitbruby{16em}{@ifsoln{Linear}}{Linear, Quadratic, Exponential, or Logarithmic}, and its slope is @fitb{2em}{@ifsoln{2}}. @hspace{1em} Which two points are plotted on @math{f}? @fitb{}{@ifsoln{@math{(0, 0)} and @math{(1, 2)}}}
+@n What kind of growth do the sequences on these axes show? 
+@hspace{3em}
+@ifsoln-choice{Linear}    @hspace{1em}
+Quadratic           @hspace{1em}
+Exponential         @hspace{1em}
+Logarithmic
 
 == Faking a Change in Slope
 
-[.FillVerticalSpace.graph, cols="3a,4a,3a", frame="none", options="noheader"]
-|===
-| *scale*: @fitb{2em}{-10} @math{< y <} @fitb{2em}{10}
+What happens when we change the range of the y-values? Compare the two graphs.
 
+[.FillVerticalSpace, cols="8a,1,8a", grid="none", frame="none"]
+|===
+| @center{@fitb{2em}{0} @math{< x <} @fitb{2em}{10} @hspace{3em} @fitb{2em}{0} @math{< y <} @fitb{2em}{10}}
+@center{@image{../images/1.png, 65%}}
 |
-- Draw @math{f} in the graph on the left.
-- Click on the wrench button ([.desmosbutton]#{wrench}#) in the top-right corner of the Desmos graph to *open the "Graph Settings" window.*
-- *Change the scale of the y-axis* so that @math{-5 ≤ y ≤ 5}.
-- Draw @math{f} in the graph on the right.
-
-| *scale*: @fitb{2em}{-5} @math{< y <} @fitb{2em}{5}
+| @center{@fitb{2em}{0} @math{< x <} @fitb{2em}{10} @hspace{3em} @fitb{2em}{0} @math{< y <} @fitb{2em}{5}}
+@center{@image{../images/2.png, 65%}}
 |===
 
+@n Is the sequence used to label the y-axis still linear? @fitb{2em}{@ifsoln{Yes}} Are the two points on the line the same? @fitb{2em}{@ifsoln{Yes}} @hspace{1em} Is the slope of @math{f} the same? @fitb{2em}{@ifsoln{Yes}} How did the graph change, and why? @fitb{}{@ifsoln{The line *looks* steeper because we changed the scale, but all we did was "stretch" the y-axis}}
 
-@n What kind of growth does the sequence of numbers on the *y-axis* show _now?_ @hspace{3em}
-@ifsoln-choice{Linear} 		@hspace{1em}
-Quadratic 					@hspace{1em}
-Exponential 				@hspace{1em}
-Logarithmic
+@n Could we have change the range of y-values on the visible graph AND still have it *look* like the original graph? Explain. @fitb{}{@ifsoln{We'd also have to change the range of the x-values.}}
 
-@n Did our two points on the line change? @fitb{2em}{@ifsoln{No}} @hspace{1em} Did the slope of @math{f} change? @fitb{2em}{@ifsoln{No}} @hspace{1em} How did the graph change, and why? @fitb{}{}
-
-@blanklines{1}{
-@ifsoln{The line looks steeper. The graph *looks* like it changed because we changed the scale, but all we did was "stretch" the y-axis}
-}
-
-@n *Without changing the y-axis*, change the scale on the x-axis to make @math{f} look like the original graph. Record your domain: @hspace{1em} @fitb{2em}{@ifsoln{~ -4}} ≤ @math{x} ≤ @fitb{2em}{@ifsoln{~ 4}}
 
 == Faking a Change to Logarithmic
 
 [.FillVerticalSpace, cols="3a,1a", frame="none", grid="none", options="noheader"]
 |===
 |
-- Open "Graph Settings" again, and *open the "More Options" section* by clicking the triangle ([.desmosbutton]#{caret}#).
+- Open "Graph Settings", then *open the "More Options" section* by clicking the triangle ([.desmosbutton]#{caret}#).
 - *Change the y-axis* scale from `Linear` to `Logarithmic`. _(The y-axis labels should change to something like 0.1, 1, 10, 100...)_
-- *Drag the graph* to make sure you can see both labeled points
 
-@n What kind of growth does the sequence of numbers on the *y-axis* show _now?_ +
+@n What kind of growth does the sequence of numbers on the *y-axis* show _now?_  (circle one) +
 @hspace{3em}
 Linear 						@hspace{1em}
 Quadratic 					@hspace{1em}
 @ifsoln-choice{Exponential} @hspace{1em}
 Logarithmic
 
-@n Did our two points on the line change? @fitb{2em}{@ifsoln{No}} @hspace{1em} Did the slope of @math{f} change? @fitb{2em}{@ifsoln{No}}.
+@n Did our two points on the line change? @fitb{2em}{@ifsoln{No}} @hspace{1em} Did the slope of @math{f} change? @fitb{}{@ifsoln{No}}
 
-@n How did the graph change, and why? @fitb{}{@ifsoln{It looks logarithmic!}}
+@n Sketch the graph. How did it change, and why? @fitb{}{@ifsoln{It looks logarithmic!}}
 |
 [.graph, cols="1a", frame="none"]
 !===
@@ -158,7 +146,6 @@ Logarithmic
 |===
 |
 - Change the y-axis scale back to `Linear`, and the `x-axis` scale to `Logarithmic`.
-- *Drag the graph* to make sure you can see both labeled points
 
 @n What kind of growth does the sequence of numbers on the *x-axis* show _now?_ +
 @hspace{3em}
@@ -167,9 +154,9 @@ Quadratic 					@hspace{1em}
 @ifsoln-choice{Exponential} @hspace{1em}
 Logarithmic
 
-@n Did our two points on the line change? @fitb{2em}{@ifsoln{No}} @hspace{1em} Did the slope of @math{f} change? @fitb{2em}{@ifsoln{No}}.
+@n Did our two points on the line change? @fitb{2em}{@ifsoln{No}} @hspace{1em} Did the slope of @math{f} change? @fitb{}{@ifsoln{No}}
 
-@n How did the graph change? Can you explain why? @fitb{}{@ifsoln{It looks exponential!}}
+@n Sketch the graph. How did it change, and why? @fitb{}{@ifsoln{It looks exponential!}}
 
 @blanklines{1}{
 @ifsoln{We "squished" the x-axis exponentially, which made the linear growth of @math{f} appear exponential}
