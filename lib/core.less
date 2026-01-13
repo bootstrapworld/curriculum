@@ -450,14 +450,7 @@ div#body:not(.LessonPlan, .narrativepage) p {
 *
 */
 
-.sidebar {
-  background: #e9e9e9;
-  color:      black;
-  overflow:   scroll;
-  user-select: none;
-  /* TODO(Emmanuel): remove the toggle entirely */
-  #toggle { display: none; }
-
+#sidebar {
   > * { margin: 0px 10px !important; }
   label { display: inline; font-size: 0.8rem; }
   select { border:  none; width: 100%; }
@@ -467,12 +460,13 @@ div#body:not(.LessonPlan, .narrativepage) p {
   table { background: none !important; border: 0 !important; width: auto; }
   table td, table tr { padding: 0 !important; background: none !important; border: 0 !important; }
   table .title { display: none; }
-  dl * { margin: 0; display: inline; }
+  dl * { margin: 0; display: inline; font-size: smaller; }
   dd { margin-left: 0 !important; }
-  dd::after { content: '\A'; white-space: pre; }
+  dt { font-weight: bold; }
+  dd::after { content: '\A'; white-space: pre;}
   dt::after { content: ' ·'; white-space: pre; font-size: 0.7rem; }
   table dt { margin-top: 10px; }
-  .sidebarlessons {
+  #sidebarlessons {
     ul {
       background: white;
       margin:     0px !important;
@@ -484,7 +478,10 @@ div#body:not(.LessonPlan, .narrativepage) p {
     }
     li:nth-child(odd) { background: @translucent-bg-color; }
   }
-  .sidebarpractices ul { font-size:  0.75rem !important; margin: 0; }
+  #sidebarstandards {
+    select { margin-top: 10px; }
+    a { display: none; }
+  }
 }
 
 /************************************************************************************
