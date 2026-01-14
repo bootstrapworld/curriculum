@@ -42,6 +42,8 @@
 
 (define *pyret?* #f)
 
+(define *github-prefix* "https://raw.githubusercontent.com/bootstrapworld/starter-files")
+
 (define *solutions-mode?* #f)
 
 (define *possibly-invalid-page?* #f)
@@ -2160,10 +2162,7 @@
                                              ; [opt? (or (string=? directive "opt-starter-file") *optional-flag?*)]
                                              [opt? (string=? directive "opt-starter-file")]
                                              [autoinclude? (hash-ref c 'autoinclude #t)]
-                                             [p (hash-ref c *proglang-sym* #f)]
-                                             [use-pyret-prefix?
-                                               (and p (eq? *proglang-sym* 'pyret)
-                                                    (hash-ref p 'prefix #t))])
+                                             [p (hash-ref c *proglang-sym* #f)])
                                         (cond [(not p)
                                                (display-error-output lbl o)
                                                (unless *possibly-invalid-page?*
@@ -2179,7 +2178,11 @@
                                                            "\\&#x2c;")]
                                                        [title (or link-text
                                                                   starter-file-title)]
-                                                       [url (let ([url (hash-ref p 'url "")])
+                                                       [url (let* ([url (hash-ref p 'url "")]
+                                                                  [use-pyret-prefix?
+                                                                    (and p (eq? *proglang-sym* 'pyret)
+                                                                         (string-prefix? url *github-prefix*)
+                                                                         (hash-ref p 'prefix #t))])
                                                               (cond [(string=? url "")
                                                                      (printf "WARNING: ~a: @~a ~a missing URL\n\n"
                                                                              (errmessage-context) directive lbl)
