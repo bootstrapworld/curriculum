@@ -1,0 +1,86 @@
+= Data Cycle: Regression Analysis (Global Food Supply)
+
+Tell two data stories from *lr-plots* made from columns of the @opt-starter-file{food} dataset. +
+The first question is provided. You'll need to come up with the second question on your own!
+
+++++
+<style>
+/* hide the Interpret rows, as well as the sub-questions for Analyze */
+.data-cycle tr:nth-of-type(4),
+.data-cycle tr:nth-of-type(3) td:nth-of-type(2) p:nth-of-type(1),
+.data-cycle tr:nth-of-type(3) td:nth-of-type(2) p:nth-of-type(2) { display: none; }
+table.template { border-top: 0; }
+table.template td:first-of-type { background: #ccc; }
+table { flex-grow: 1; }
+</style>
+++++
+
+@data-cycle{ ""
+  #:question "How big of a factor is the daily per capita caloric supply in determining the percent of adults who are overweight?"
+  #:show-question? #t
+  #:question-type "statistical"
+  #:show-question-type? #f 
+  #:rows "all countries"
+  #:show-rows? #f
+  #:cols "country, cal-pc, pct-ow"
+  #:show-cols? #f
+  #:filter-fn ""
+  #:show-filter? #f
+  #:build-fn ""
+  #:show-build? #f
+  #:expression (if (string=? *proglang* "pyret") '(lr-plot food-table "country" "cal-pc" "pct-ow") "Set y-axis to calories per capita, set x-axis to percent of adults who are overweight. Select least squares line from the Measure menu.")
+  #:show-expression? #f
+  #:finding "The slope is slightly positive (0.0244) and R=0.644, so there is a moderate, positive relationship"
+  #:show-finding? #f
+  #:new-question "Is gross domestic product per capita a bigger factor?"
+  #:show-new-question? #f
+}
+
+[.template, cols="^.^2a,13a"]
+|===
+|@centered-image{../images/InterpretData.png}
+| I performed a linear regression on a sample of @fitbruby{40ex}{@ifsoln{countries}}{[dataset or subset]} and found a
+
+@fitbruby{40ex}{@ifsoln{moderate (R=.448), positive}}{weak / strong / moderate (R=...), positive / negative} correlation between @fitbruby{30ex}{@ifsoln{daily per capita caloric supply}}{[x-axis]} and
+
+@fitbruby{20ex}{@ifsoln{percent of adults who are overweight}}{[y-axis]}. I would predict that a 1000 @fitbruby{20ex}{@ifsoln{calorie}}{[x-axis units]} increase in @fitbruby{20ex}{@ifsoln{daily per capita calories}}{[x-axis]} is
+
+associated with a @fitbruby{20ex}{@ifsoln{22 percent}}{[slope, y-units]} @fitbruby{20ex}{@ifsoln{increase}}{increase / decrease} in @fitbruby{20ex}{@ifsoln{percent of adults who are overweight}}{[y-axis]}.
+
+|===
+
+@span{.sectionbreak}{}
+
+@data-cycle{ ""
+  #:question ""
+  #:show-question? #f
+  #:question-type "statistical"
+  #:show-question-type? #t
+  #:rows ""
+  #:show-rows? #f
+  #:cols ""
+  #:show-cols? #f
+  #:filter-fn ""
+  #:show-filter? #f
+  #:build-fn ""
+  #:show-build? #f
+  #:expression ""
+  #:show-expression? #f
+  #:finding ""
+  #:show-finding? #f
+  #:new-question ""
+  #:show-new-question? #f
+}
+
+[.template, cols="^.^2a,13a"]
+|===
+|@centered-image{../images/InterpretData.png}
+| I performed a linear regression on a sample of @fitbruby{40ex}{}{[dataset or subset]} and found a
+
+@fitbruby{40ex}{}{weak / strong / moderate (R=...), positive / negative} correlation between @fitbruby{20ex}{}{[x-axis]} and
+
+@fitbruby{20ex}{}{[y-axis]}. I would predict that a 1 @fitbruby{20ex}{}{[x-axis units]} increase in @fitbruby{20ex}{}{[x-axis]} is
+
+associated with a @fitbruby{20ex}{}{[slope, y-units]} @fitbruby{20ex}{}{increase / decrease} in @fitbruby{20ex}{}{[y-axis]}.
+
+|===

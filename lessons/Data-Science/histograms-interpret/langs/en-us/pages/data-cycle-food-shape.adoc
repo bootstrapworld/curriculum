@@ -1,0 +1,92 @@
+= Data Cycle: Quantitative Distributions (Global Food Supply) -- Histograms
+
+++++
+<style>
+/* hide the Interpret rows, as well as the sub-questions for Analyze */
+.data-cycle tr:nth-of-type(4),
+.data-cycle tr:nth-of-type(3) td:nth-of-type(2) p:nth-of-type(1),
+.data-cycle tr:nth-of-type(3) td:nth-of-type(2) p:nth-of-type(2) { display: none; }
+table.template { border-top: 0; }
+table.template td:first-of-type { background: #ccc; }
+table { flex-grow: 1; }
+/* shrink the vertical padding a little, to make room for tall stems */
+.fitb { padding-top: 1.1rem; }
+</style>
+++++
+
+Describe two *histograms* made from columns of the @opt-starter-file{food} dataset. +
+The first question is provided. You'll need to come up with the second question on your own!
+
+@data-cycle{ ""
+  #:question "How much variability is there in percent of land used for agriculture?"
+  #:show-question? #t
+  #:question-type "statistical"
+  #:rows "all the rows"
+  #:show-rows? #f
+  #:cols "pct-land-ag"
+  #:show-cols? #f
+  #:filter-fn ""
+  #:show-filter? #f
+  #:build-fn ""
+  #:show-build? #f
+  #:expression (if (string=? *proglang* "pyret") '(histogram food-table "country" "pct-land-ag" 15) "Histogram. Set y-axis to pct-land-ag. Select Group into Bins from Configuration menu. Fuse dots into bars, enter bin width")
+  #:show-expression? #f
+  #:finding ""
+  #:show-finding? #f
+  #:new-question ""
+  #:show-new-question? #f
+}
+
+
+[.template, cols="^.^2a,13a"]
+|===
+|@centered-image{../images/InterpretData.png}
+| The histogram I created is for @fitbruby{16em}{@ifsoln{pct-land-ag}}{x-variable in context} from @fitbruby{16em}{@ifsoln{the Global food Supply dataset}}{dataset or subset}.
+
+The shape of this histogram is @fitbruby{13em}{@ifsoln{nearly symmetric}}{skewed left, skewed right, symmetric}. There are peaks at @fitb{5em}{@ifsoln{~30-45}} and gaps at @fitb{5em}{@ifsoln{there aren't any}}.
+
+I notice that @fitbruby{}{@ifsoln{This histogram is almost like a bell curve.}}{Consider statements like:  Most of the histogram's area is... / A small amount of the histograms area trails out... / etc}
+
+@fitb{}{}
+
+I wonder @fitb{}{}
+
+|===
+
+@span{.sectionbreak}{}
+
+@data-cycle{ ""
+  #:question ""
+  #:show-question? #f
+  #:question-type "arithmetic"
+  #:rows ""
+  #:show-rows? #f
+  #:cols ""
+  #:show-cols? #f
+  #:filter-fn ""
+  #:show-filter? #f
+  #:build-fn ""
+  #:show-build? #f
+  #:expression ""
+  #:show-expression? #f
+  #:finding ""
+  #:show-finding? #f
+  #:new-question ""
+  #:show-new-question? #f
+}
+
+
+[.template, cols="^.^2a,13a"]
+|===
+|@centered-image{../images/InterpretData.png}
+| The histogram I created is for @fitbruby{16em}{}{x-variable in context} from @fitbruby{16em}{}{dataset or subset}.
+
+The shape of this histogram is @fitbruby{15em}{}{skewed left, skewed right, symmetric}. There are peaks at @fitb{2em}{} and gaps at @fitb{2em}{}.
+
+I notice that @fitbruby{}{}{Consider statements like:  Most of the histogram's area is... / A small amount of the histograms area trails out... / etc}
+
+@fitb{}{}
+
+I wonder @fitb{}{}
+
+|===
