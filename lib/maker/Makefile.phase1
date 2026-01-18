@@ -35,8 +35,13 @@ initialization:
 	@$(CP) -p lib/*.css distribution/$(NATLANG)/lib
 	@$(CP) -p lib/[!b]*.js distribution/$(NATLANG)/lib
 	@$(CP) -p lib/images/*.png distribution/$(NATLANG)/lib/images
-	@$(CP) -p lib/self-guided/*.{css,html,js,json,jsx,png} distribution/$(NATLANG)/lib/self-guided
-	@$(CP) -pr lib/wp-adaptors/* distribution/$(NATLANG)/lib/wp-adaptors
+	@$(CP) -p lib/self-guided/*.css distribution/$(NATLANG)/lib/self-guided
+	@$(CP) -p lib/self-guided/*.html distribution/$(NATLANG)/lib/self-guided
+	@$(CP) -p lib/self-guided/*.js distribution/$(NATLANG)/lib/self-guided
+	@$(CP) -p lib/self-guided/*.json distribution/$(NATLANG)/lib/self-guided
+	@$(CP) -p lib/self-guided/*.jsx distribution/$(NATLANG)/lib/self-guided
+	@$(CP) -p lib/self-guided/*.png distribution/$(NATLANG)/lib/self-guided
+	@$(CP) -p lib/wp-adaptors/* distribution/$(NATLANG)/lib/wp-adaptors
 	@$(CP) -pr lib/fonts/* distribution/$(NATLANG)/lib/fonts
 	@rm -f $(MAKE_ERR_LOG) $(ADOC_INPUT) $(PUPPETEER_INPUT)
 	@echo 'return {' > $(SETUP_PATHWAYINDEPENDENT)

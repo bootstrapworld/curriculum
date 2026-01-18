@@ -78,8 +78,8 @@
 @text-font: 'Lato', Arial, Helvetica, sans-serif;
 @code-font: Hack, "Courier New", monospace;
 @code-comment-color: #cd7054;
-@top-padding-for-writing: 1.2rem;
-@top-padding-for-dr: 1rem;
+@top-padding-for-writing: 1.2em;
+@top-padding-for-dr: 1em;
 @print-section-heading: lightgray;
 @table-header: #eee;
 @lesson-block-vertical-space: 1em;
@@ -202,7 +202,7 @@ div#body {
   tr th.tableblock {
     background:       @table-header !important;
     padding:          .2em .5em;
-    font-size:        1rem;
+    font-size:        1em;
   }
 
   #content { margin: 0; }
@@ -215,7 +215,6 @@ div#body {
 
   /* The footer at the bottom of every page */
   .acknowledgment {
-    margin-top:       1in;
     padding-bottom:   5px !important;
     font-size:        11px !important;
     font-style:       italic !important;
@@ -256,7 +255,7 @@ div#body {
     margin-top:       75px;
     border-radius:    5px;
     font-size:        10pt;
-    line-height:      1rem;
+    line-height:      1em;
   }
 
   /* outOfDate warning */
@@ -340,7 +339,7 @@ div#body {
       display:            block;
       text-align:         center;
       font-weight:        bold;
-      font-size:          1.5rem;
+      font-size:          1.5em;
     }
   }
 
@@ -375,7 +374,7 @@ div#body {
     content: '\00200b';
   }
   .fitbruby {
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.75em;
   }
   .fitbruby .ruby, .recipe .ruby:after, .data-cycle .ruby:after {
     position:           absolute;
@@ -434,7 +433,7 @@ lines on some browsers */
   display:            inline-block;
   min-width:          4em;
   text-align:         center;
-  line-height:        1rem;
+  line-height:        1em;
   border-bottom:      solid thin black;
   vertical-align:     baseline;
 }
@@ -452,7 +451,7 @@ div#body:not(.LessonPlan, .narrativepage) p {
 
 #sidebar {
   > * { margin: 0px 10px !important; }
-  label { display: inline; font-size: 0.8rem; }
+  label { display: inline; font-size: 0.8em; }
   select { border:  none; width: 100%; }
   strong { color: black; margin: 0; }
   li { list-style-type: none; margin-bottom: 5px !important; }
@@ -464,7 +463,7 @@ div#body:not(.LessonPlan, .narrativepage) p {
   dd { margin-left: 0 !important; }
   dt { font-weight: bold; }
   dd::after { content: '\A'; white-space: pre;}
-  dt::after { content: ' ·'; white-space: pre; font-size: 0.7rem; }
+  dt::after { content: ' ·'; white-space: pre; font-size: 0.7em; }
   table dt { margin-top: 10px; }
   #sidebarlessons {
     ul {
@@ -510,7 +509,7 @@ div#body.narrativepage {
     background: #B6D990aa;
     border: @font-color 1px dashed;
     padding: 5px;
-    margin-bottom: 2rem;
+    margin-bottom: 2em;
     a { color: black; text-decoration: underline; }
   }
 
@@ -591,7 +590,7 @@ div#body.LessonPlan {
     padding-right:      0.5em;
     vertical-align:     middle;
     text-decoration:    none !important;
-    font-size:          .9rem;
+    font-size:          .9em;
     position:           relative;
     left:               -2em;
   }
@@ -756,8 +755,8 @@ html div#body.workbookpage {
   h2 .editbox, h2 .editbox *, h2 .pyret { color: black; background: none; margin: 0 5px; }
 
   /* set page dimensions */
-  &:not(.landscape) { width: 7.5in !important; height: 9.8in !important; }
-  &.landscape { width: 9.8in !important; height:  7.5in !important; page: landscape; } /* define 'landscape' page type */
+  &:not(.landscape) { width: 7.5in !important; height: calc(9.8in + 1in) !important; }
+  &.landscape { width: 9.8in !important; height:  calc(7.5in + 1in) !important; page: landscape; } /* define 'landscape' page type */
 
   /* Make content of page as tall as possible */
   #content, #preamble_disabled, #preamble_disabled .sectionbody,
@@ -900,7 +899,7 @@ html div#body.workbookpage {
   }
 
   /* Make code match text size/layout */
-  p .editbox, pre .editbox { font-size: 9pt !important; margin: 0; line-height: 1rem; }
+  p .editbox, pre .editbox { font-size: 9pt !important; margin: 0; line-height: 1em; }
 
   /* Some elements show either solution mode or a blank */
   .solution, .solution code, .solution .MJX-TEX { font-style: italic !important; }
@@ -921,14 +920,14 @@ html div#body.workbookpage {
   .blanklines {
     display: block;
     position: relative;
-    background-image: url('images/2.2rem-ruled lines.png');
+    background-image: url('images/2.2em-ruled lines.png');
     margin-left: 5px;
-    line-height: 2.2rem;
-    margin-top: 0.6rem;
+    line-height: 2.2em;
+    margin-top: 0.6em;
     .solution { position: absolute; }
     /* artificially shrink codeblocks to avoid stepping on the line */
     .editbox, code.pyret {
-      line-height: 0.5rem !important;
+      line-height: 0.5em !important;
     }
   }
 
@@ -1036,15 +1035,15 @@ div#body{
     border-collapse: collapse;
     width: 100%;
     td:first-of-type { background: @print-section-heading; border: solid white; min-width: 1in; }
-    td { padding: 0.2rem 0.325rem; }
-    td p.tableblock { font-size: 1rem; }
+    td { padding: 0.2em 0.325em; }
+    td p.tableblock { font-size: 1em; }
 
     .fitbruby { text-align: left !important; }
     .fitbruby.stretch { margin-left: 0 !important; }
 
     /* Ruby text in the Data Cycle needs to be slightly larger than normal */
     .fitbruby .ruby {
-      font-size:  0.75rem !important;
+      font-size:  0.75em !important;
       user-select: none;
       &::after { bottom: 0 !important; color: black; text-align: left !important; }
     }
@@ -1094,7 +1093,7 @@ div#body{
   .recipe {
 
     /* Under a heading come the instructions */
-    .recipe_instructions * { font-style: italic; font-size: .85rem; }
+    .recipe_instructions * { font-style: italic; font-size: .85em; }
 
     /* all paragraph tags are full-width, with no margin. If pushed to a new line, they wrap */
     p { display: flex; flex-wrap: wrap; align-items: baseline;}
@@ -1218,7 +1217,7 @@ div#body{
         left: 100%;
         bottom: 0;
         line-height: 18px;
-        margin-bottom: 0.9rem;
+        margin-bottom: 0.9em;
       }
     }
     .wrapper p > *:nth-last-child(2) { flex-grow:  1; }
@@ -1234,8 +1233,8 @@ div#body{
     .recipe_title .paragraph, .codap .recipe_title p { display: inline; }
     .recipe_name { display: flex !important; }
     .transformer_type p::before {
-      width: 1.1rem;
-      height: 1.1rem;
+      width: 1.1em;
+      height: 1.1em;
       background: white;
       display: inline-block;
       margin:  0 2px 2px 0;
@@ -1253,7 +1252,7 @@ div#body{
     .recipe_formula, .codap_transformer { display:  flex !important; }
     .codap_transformer p { width:  100%; }
     .codap_example_tables+table table * { margin: 0; padding: 0; }
-    .codap_example_tables+table table * { text-align: center; height: 2rem; }
+    .codap_example_tables+table table * { text-align: center; height: 2em; }
     .recipe_domain, .recipe_range { width:  40%; }
   }
 }
@@ -1305,18 +1304,18 @@ td.halign-center .circleevalsexp { text-align: center; }
   }
   .value {
     display:            inline-block;
-    margin:             0.5rem 0.4rem;
+    margin:             0.5em 0.4em;
     vertical-align:     top;
   }
   .operator {
     display:            block;
-    height:             1.1rem;
+    height:             1.1em;
     text-align:         center;
-    line-height:        0.5rem;
+    line-height:        0.5em;
     width:              100%;
     border-bottom:      solid 2px black;
     border-radius:      15px 15px 0px 0px;
-    .value { margin: 0 0.5rem; } /* When in operator position, drop the margins */
+    .value { margin: 0 0.5em; } /* When in operator position, drop the margins */
   }
   /* Display ONLY 5px hspaces that are after the first one (keeps args centered) */
   .hspace { display: none; }
@@ -1372,7 +1371,7 @@ div.leftColumn .obeyspaces, div.rightColumn .obeyspaces {
 
 .codetwo {
   font-family: @code-font;
-  font-size: 0.85rem;
+  font-size: 0.85em;
   background-color: #f7f7f8;
   color: #666;
   word-break: break-word;
@@ -1386,12 +1385,12 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
 */
 
 @media screen {
-  html { height: 100%; display: flex; }
+  html { height: 100%; }
 
   .web-page-only {
     font-weight:      bold;
     font-style:       italic;
-    line-height:      2.5rem;
+    line-height:      2.5em;
   }
 
   #savetodrive-div { display: none; height: 30px !important; }
@@ -1491,11 +1490,11 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
   div#body{ position: static; } /* page-break fails on absolute positioning */
 
   /* Override AsciiDoc print default */
-  p {margin: 0px; font-size: 1rem; font-weight: normal;}
+  p {margin: 0px; font-size: 1em; font-weight: normal;}
   #content { margin: auto; }
 
   /* Change coloring of body text, lesson summary table, and code */
-  html { -webkit-print-color-adjust: exact; font-size: 9pt; }
+  html { -webkit-print-color-adjust: exact; font-size: 9pt; display: flex; }
 
   .listingblock pre:not(.highlight) { background: none !important; }
 
@@ -1524,7 +1523,11 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
     .preamble tr td > * { max-height: 1000px; }
   }
 
-  div#body.workbookpage {
+  html div#body.workbookpage {
+    /* set page dimensions to ignore acknowledgement padding */
+    &:not(.landscape) { height: 9.8in !important; }
+    &.landscape       { height:  7.5in !important; page: landscape; }
+
     /* Use B&W colors for headers */
     #header> h1:first-child, .sect1 > h1:first-child {
       color: black;

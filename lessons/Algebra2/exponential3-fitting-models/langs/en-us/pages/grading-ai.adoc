@@ -11,42 +11,46 @@ An AI was asked to fit an exponential model to each of the scatter plots below. 
 [.FillVerticalSpace, cols="1a,1a", frame="none", options="noheader", stripes="none"]
 |===
 | @image{../images/fn_25expt.png}
-@center{*AI's Suggested Model: @math{f(x) = 2^x + 25}*}
+@center{*AI's Suggested Model:* @math{f(x) = 2^x + 25}}
 
 @n What did the AI get right? What did it get wrong, and why?
 
 @blanklines{5}{
-The value at @math{x=0} is definitely close to 25, but the AI arrived at that answer via a vertical shift rather than using the initial value @math{a}. And while that might work for @math{x=0}, the growth of the function is much too slow for @math{a=1}. It's more likely @math{f(x) = 25 \times 2^x + 25}
+@ifsoln{The value at @math{x=0} is definitely close to 25, but the AI arrived at that answer via a vertical shift rather than using the initial value @math{a}. And while that might work for @math{x=0}, the growth of the function is much too slow for @math{a=1}. It's more likely @math{f(x) = 25 (2^x)}
+}
 }
 
 
 | @image{../images/fn_25expt-100.png}
-@center{*AI's Suggested Model: @math{f(x) = 25 \times 2^{x + 100}}*}
+@center{*AI's Suggested Model:* @math{f(x) = 25 (2^{x + 100})}}
 
 @n What did the AI get right? What did it get wrong?
 
 @blanklines{5}{
-The AI got the initial value right, with @math{a=25}. But the horizontal shift is backwards! Instead of being shifted right by 100, the AI added @math{h} instead of subtracting it.
+@ifsoln{The AI got the initial value right, with @math{a=25}. But the horizontal shift is backwards! Instead of being shifted right by 100, the AI added @math{h} instead of subtracting it.
+}
 }
 
 
 | @image{../images/fn_-1expt-5000.png}
-@center{*AI's Suggested Model: @math{f(x) = 1.6^x - 5000}*}
+@center{*AI's Suggested Model:* @math{f(x) = 1.6^x - 5000}}
 
 @n What did the AI get right? What did it get wrong?
 
 @blanklines{5}{
-The value at @math{x=0} is definitely close to @math{-5000}, so the vertical shift @math{k} looks right. But the AI thought this was exponential _growth_, when it's definitely _decay_.
+@ifsoln{The value at @math{x=0} is definitely close to @math{-5000}, so the vertical shift @math{k} looks right. But the AI thought this was exponential _growth_, when it's definitely _decay_, so it's more likely @math{f(x) = -1.6^x - 5000}
+}
 }
 
 
 | @image{../images/fn_2expt_plus_5000.png}
-@center{*AI's Suggested Model: @math{f(x) = 5000 \times 2^x}*}
+@center{*AI's Suggested Model:* @math{f(x) = 5000 (2^x)}}
 
 @n What did the AI get right? What did it get wrong?
 
 @blanklines{5}{
-The value at @math{x=0} _is_ 5000, which could have come from the initial value @math{a}, as the AI thought. But it could also have come from the vertical shift! And with an @math{a} of 5000, we would expect insanely fast growth instead of the leisurely growth seen in this graph. It's more likely @math{f(x) = 2^x + 5000}
+@ifsoln{The value at @math{x=0} _is_ 5000, which could have come from the initial value @math{a}, as the AI thought. But it could also have come from the vertical shift! And with an @math{a} of 5000, we would expect insanely fast growth instead of the leisurely growth seen in this graph. It's more likely @math{f(x) = 2^x + 5000}
+}
 }
 
 |===
