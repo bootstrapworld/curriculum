@@ -72,14 +72,13 @@ for _,lesson in ipairs(lessons) do
     file_being_read = lesson_image_file
     local j_obj = read_json_file(lesson_image_file)
     local j_keys = j_obj.__json_keys
-    local last_index = #j_keys
     for i,k in ipairs(j_keys) do
       o:write('"' .. k .. '": ')
       local v = j_obj[k]
       local bi = io.open_buffered(false, json_hash_stringify(v))
       expand_some_directives(bi, o)
       bi:close()
-      o:write((i == last_index) and '\n' or ',\n')
+      o:write(',\n')
     end
   end
   fi:close()
