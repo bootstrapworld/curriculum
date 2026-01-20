@@ -44,7 +44,6 @@ export SETUP_PATHWAYRESOURCE := $(TOPDIR)/distribution/$(NATLANG)/.cached/.setup
 
 export SETUP_PATHWAYNARRATIVE := $(TOPDIR)/distribution/$(NATLANG)/.cached/.setup-pathwaynarrative.lua
 
-
 #
 
 export SETUP_PATHWAYINDEPENDENT_PDF := $(TOPDIR)/distribution/$(NATLANG)/.cached/.setup-pathwayindependent-pdf.lua
@@ -142,12 +141,6 @@ quick-deploy:
 
 ###############################################################################
 
-csv:
-	$(MAKE)
-	$(TOPDIR)/lib/make-wp-csv.rkt
-
-###############################################################################
-
 coverage: coverage-report.html
 
 coverage-report.html: $(alignment-dictionaries)
@@ -168,7 +161,6 @@ self-guided:
 	$(TOPDIR)/build-all-self-guideds
 
 ###############################################################################
-
 
 help:
 	@echo "  make              -- updates distribution/, HTML only"
@@ -196,6 +188,5 @@ help:
 	@echo "  make clean        -- removes distribution/ so next make builds from scratch"
 	@echo "  make deploy       -- deploys existing distribution/ to webhost"
 	@echo "  make help         -- displays (this) help"
-	@echo "  make csv          -- make CSV files for WordPress"
 	@echo "  make mdquiz       -- call build-mdquiz (WIP)"
 	@echo "  make self-guided  -- call build-all-self-guideds"
