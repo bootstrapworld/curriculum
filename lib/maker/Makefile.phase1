@@ -160,6 +160,7 @@ alignment-dictionaries := $(wildcard \
 distribution/$(NATLANG)/lib/dictionaries.js: $(alignment-dictionaries)
 	@echo ➤ Build $@
 	@$(MAKE_DIR)make-json-dict.lua $@
+	@$(MAKE_DIR)check-dictionaries.sh
 
 ###############################################################################
 
