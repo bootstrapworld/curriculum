@@ -1416,7 +1416,6 @@
             ;(newline o))
             (newline o)))))
 
-
       (for ([lesson lessons])
         ;(printf "tackling lesson i ~s\n" lesson)
         (let ([lesson-asc-file
@@ -1483,7 +1482,6 @@
         (for ([p *lesson-prereqs*])
           (display p o) (newline o)))
       #:exists 'replace)))
-
 
 (define (init-flags in-file)
   ;(printf "doing init-flags\n")
@@ -2552,21 +2550,6 @@
               (when *lesson-plan*
                 (store-assessments)
                 (store-objectives)
-
-                #;(fprintf o "include::~a/{cachedir}.index-sidebar.asc[]\n\n" *containing-directory*)
-                #;(call-with-output-file (build-path *containing-directory* ".cached" ".index-sidebar.asc")
-                  (lambda (o)
-                    (display
-                      (enclose-openblock
-                        ".sidebar"
-                        (lambda ()
-                          (call-with-output-string
-                            (lambda (o)
-                            (display-prereqs-bar o)
-                            (display-standards-bar o)
-                            (display "%ENDSIDEBARCONTENT%" o))))) o))
-                  #:exists 'replace)
-
                 )
 
               )
@@ -2774,8 +2757,6 @@
           [else
             #;(printf "WARNING: ~a: File ~a not found\n\n" (errmessage-context) id-file)
             #f])))
-
-
 
 (define (add-exercises)
   ; (printf "doing add-exercises ~s\n" *exercises-done*)
