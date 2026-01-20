@@ -13,9 +13,7 @@ local lessonplan_batchf =  os.getenv'ADOC_POSTPROC_LESSONPLAN_INPUT'
 local pathwaynarrative_batchf =  os.getenv'ADOC_POSTPROC_PATHWAYNARRATIVE_INPUT'
 local pathwayresource_batchf =  os.getenv'ADOC_POSTPROC_PATHWAYRESOURCE_INPUT'
 
-local old_analytics_file = os.getenv'TOPDIR' .. '/lib/old-analytics.txt'
-local new_analytics_file = os.getenv'TOPDIR' .. '/lib/new-analytics.txt'
-local gtm_file = os.getenv'TOPDIR' .. '/lib/gtm.txt'
+local analytics_file = os.getenv'TOPDIR' .. '/lib/analytics.txt'
 local gtm_noscript_file = os.getenv'TOPDIR' .. '/lib/gtm-noscript.txt'
 
 local wp_prologue_file = os.getenv'TOPDIR' .. '/lib/wp-adaptors/prologue.txt'
@@ -278,7 +276,7 @@ local function postproc(fhtml_cached, tipe)
     if add_analytics_p then
       add_analytics_p = false
       if not website_branch_p then
-        copy_file_to_port(old_analytics_file, o)
+        copy_file_to_port(analytics_file, o)
       end
       if website_branch_p then
         copy_file_to_port(gtm_noscript_file, o)
@@ -336,7 +334,7 @@ local function postproc(fhtml_cached, tipe)
       add_codemirror_p = false
       o:write('<link rel="stylesheet" href="' .. local_dist_root_dir .. 'lib/codemirror.css" />\n')
       if website_branch_p then
-        copy_file_to_port(new_analytics_file, o)
+        copy_file_to_port(analytics_file, o)
       end
       o:write('<script src="' .. local_dist_root_dir .. 'lib/codemirror.js"></script>\n')
       o:write('<script src="' .. local_dist_root_dir .. 'lib/runmode.js"></script>\n')
