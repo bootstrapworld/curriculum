@@ -46,9 +46,6 @@ for lang in $ALL_THE_LANGS; do
     if test -f $d; then
       cp -p $d $DEPLOYABLES_DIR/$lang
     elif test -d $d; then
-      if test "$d" = $lang/extlib; then
-        test -n "$SKIPLIB" && continue
-      fi
       mkdir -p $DEPLOYABLES_DIR/$d
       cp -pr $d $DEPLOYABLES_DIR/$lang
     fi
