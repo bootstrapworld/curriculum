@@ -12,8 +12,7 @@ pathway-independent-adoc-files-1 := $(wildcard \
 
 pathway-independent-adoc-files := $(filter-out \
 	distribution/$(NATLANG)/courses/% \
-	distribution/$(NATLANG)/lessons/% \
-	distribution/$(NATLANG)/extlib/%,$(pathway-independent-adoc-files-1))
+	distribution/$(NATLANG)/lessons/%,$(pathway-independent-adoc-files-1))
 
 pathway-independent-asc-files := $(foreach adocf,$(pathway-independent-adoc-files),$(call asc-file,$(adocf)))
 
