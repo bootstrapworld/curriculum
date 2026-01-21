@@ -34,31 +34,13 @@ table.nomargin td { 0 0.5em !important }
 </style>
 ++++
 
-@n The Desmos file we are about to work with contains two tables. Let's take a moment to compare them.
-
-[cols="1a,1a,3a", options="header", frame="none", grid="none", stripes="none"]
-|===
-| Wealth vs. Health
-| Log(Wealth) vs. Health
-| What do you Notice or Wonder?
-
-| @image{../images/cropped-wealth-v-health-table.png, 110}
-| @image{../images/cropped-log-wealth-v-health-table.png, 110}
-| 
-@blanklines{5}{
-@ifsoln{The 2nd columns are the same, but the 1st columns are really different. The header for the x-column of the 2nd table is a _function_ that takes in the @math{x_1}-value from the first table. The first table is the same one we've seen before.}
-}
-
-|===
-
-== Fitting a Model
-
 @link-instructions{
 Open *Slide 8: Scaling the axes from pc-gdp to log(pc-gdp)* of *Fitting Wealth-v-Health and Exploring Logarithmic Models (Desmos)*.
+}
 
 This slide contains two folders. (You can look inside either of them by clicking ([.desmosbutton]#{caret}#).) You should find: 
 
-[.nomargin, cols="2a,5a,3a", frame="none"]
+[.nomargin, cols="1a, 2a, 1a", frame="none"]
 |===
 | 
 `Wealth vs. Health` 
@@ -68,25 +50,41 @@ This slide contains two folders. (You can look inside either of them by clicking
 |
 `Log(Wealth) vs. Health` 
 
--  **@math{g(x)}** -- a function that takes in a number @math{x}, and produces @math{log_{10}(x)}
+-  **@math{g(x)}** -- a function! +
+takes in a number @math{x} and produces @math{log_{10}(x)}
 -  a new table!
   * _@math{x_2} uses @math{g(x)} on the @math{x_1} column in the first table._
   * _@math{y_2} is our copy of the @math{y_1} column in the first table._
 
 |
 
-Notice: When you first open the slide, you'll see that the red dots from the original `Wealth vs. Health` table are dispersed on the graph exactly as they were on Slide 5!
+*Notice:* When the slide first loads the red dots from the `Wealth vs. Health` table are dispersed on the graph exactly as they were on Slide 5!
 
 |===
 
+@n Each of the folders contains a table. Let's take a moment to compare them.
+
+[cols="4a,5a,10a", frame="none", grid="none", stripes="none"]
+|===
+| `Wealth vs. Health`
+| `Log(Wealth) vs. Health`
+| What do you Notice or Wonder?
+
+| @image{../images/cropped-wealth-v-health-table.png, 110}
+| @image{../images/cropped-log-wealth-v-health-table.png, 110}
+| 
+
+@blanklines{6}{@ifsoln{The 2nd columns are the same, but the 1st columns are really different. The header for the x-column of the 2nd table is a _function_ that takes in the @math{x_1}-value from the first table. The first table is the same one we've seen before.}
 }
 
-@n Let's take a look at our new data.
+|===
+
+Let's take a look at the transformed data.
 
 - Click on the ([.desmosbutton]#{folder}#) in front of the `Wealth vs. Health` folder to hide the red data points.
-- Click on the circle in front of the `Log(Wealth) vs. Health` folder to turn ON the points from its table.
+- Click on the corresponding circle in front of the `Log(Wealth) vs. Health` folder to turn ON the points from its table.
 
-How does the new point cloud look different from the original? @fitb{}{@ifsoln{All the black datapoints are smashed against the y-axis!}}
+@n How does the new point cloud look different from the original? @fitb{}{@ifsoln{All the black datapoints are smashed against the y-axis!}}
 
 @fitb{}{@ifsoln{Our log transformation is *really* drastic!}}
 
@@ -95,13 +93,15 @@ How does the new point cloud look different from the original? @fitb{}{@ifsoln{A
 - Click on the  ([.desmosbutton]#{caret}#) to open the `Log(Wealth) vs. Health` and scroll to the bottom of the  table. 
 - At the bottom left of the table you'll see a ([.desmosbutton]#{magnifying}#). Click on it to "zoom fit" the graph.
 
-@n Transforming the *x-values* makes our data look @fitbruby{12em}{@ifsoln{linear}}{linear / quadratic / exponential}. Why? @fitb{}{@ifsoln{The amount of extra income needed to create an extra year of}}
+@n Transforming the *x-values* makes our data look @fitbruby{12em}{@ifsoln{linear}}{linear / quadratic / exponential}. Why? @fitb{}{@ifsoln{The amount of extra income needed to create an extra year }}
 
-@fitb{}{@ifsoln{predicted lifespan increased exponentially. By taking the log of that income we are "canceling out" that exponential growth and making it linear.}}
+@fitb{}{@ifsoln{of predicted lifespan increased exponentially. By taking the log of that income we are "canceling out" that exponential growth and making it linear.}}
+
+== Fitting a Model
 
 @n Scroll to the bottom. Use the sliders for @math{m} and @math{b} to find the best linear model you can: @hspace{1em} @math{f(x) = }@fitbruby{5em}{}{slope (m)}@math{x + }@fitbruby{11em}{}{y-intercept / vertical shift}
 
-[.data-table, cols=".>2a,^1a,^1a", options="header", grid="none", frame="none", stripes="none"]
+[cols=".>2a,^1a,^1a", options="header", grid="none", frame="none", stripes="none"]
 |===
 3+^| Let's compare the model settings from your linear and logarithmic models.
 
