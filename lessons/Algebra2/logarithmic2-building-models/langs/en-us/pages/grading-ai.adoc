@@ -6,7 +6,8 @@
 	.autonum { padding-top: 2em !important; }
 </style>
 ++++
-An AI was asked to fit a logarithmic model to each of the scatter plots below. Did the AI do a good job? (_HINT: try drawing the curve-of-best-fit for these plots!_)
+An AI was asked to fit a logarithmic model to each of the scatter plots below. Did the AI do a good job? +
+(_HINT: try drawing the curve-of-best-fit for these plots!_)
 
 [.FillVerticalSpace, cols="1a,1a", frame="none", options="noheader", stripes="none"]
 |===
@@ -16,19 +17,21 @@ An AI was asked to fit a logarithmic model to each of the scatter plots below. D
 @n What did the AI get right? What did it get wrong, and why?
 
 @blanklines{5}{
-@ifsoln{The AI seems to have gotten the magnitude of the logarithmic coefficient right, but not the sign. This is logarithmic _decay_, not growth! It should be @math{-10 log(x)}.
+@ifsoln{The AI seems to have gotten the magnitude of the logarithmic coefficient right, but not the sign. The data should be modeled by logarithmic _decay_, not growth! So the model should be @math{-10 log(x)}.
 }
 }
 
-| @image{../images/10log(x-10).png}
-@center{*AI's Suggested Model:* @math{f(x) = 10 log(x + 10)}}
+| @image{../images/5log(x)+10.png}
+@center{*AI's Suggested Model:* @math{f(x) =  5log(x - 10)}}
 
 @n What did the AI get right? What did it get wrong?
 
 @blanklines{5}{
-@ifsoln{The logarithmic coefficient is right, but the horizontal shift is definitely wrong. With 10 being added to @math{x} in the model, the curve should be shifted left. But in the scatter plot, the curve of best fit crosses the x-axis to right of where it would be with no shift.
+@ifsoln{The AI correctly determined a shift of 10, but the correct model should have been @math{f(x) =  5logx + 10} because the data is best modeled by a vertical shift of 10 not a horizontal shift. 
 }
 }
+
+
 
 | @image{../images/-50log(x)-20.png}
 @center{*AI's Suggested Model:* @math{f(x) = -50 log(x) - 70}}
@@ -40,13 +43,14 @@ An AI was asked to fit a logarithmic model to each of the scatter plots below. D
 }
 }
 
-| @image{../images/5log(x)+10.png}
-@center{*AI's Suggested Model:* @math{f(x) =  5log(x - 10)}}
+| @image{../images/10log(x-10).png}
+@center{*AI's Suggested Model:* @math{f(x) = 10 log(x + 10)}}
 
-@n What did the AI get right? What did it get wrong?
+@star What did the AI get right? What did it get wrong?
 
 @blanklines{5}{
-@ifsoln{The AI came up with a horizontal shift of 10, but the scatter plot shows a _vertical_ shift of 10.
+@ifsoln{The logarithmic coefficient is right, but the horizontal shift is definitely wrong. With 10 being added to @math{x} in the model, the curve should be shifted left. But in the scatter plot, the curve of best fit is shifted 10 to the right.
 }
 }
+
 |===

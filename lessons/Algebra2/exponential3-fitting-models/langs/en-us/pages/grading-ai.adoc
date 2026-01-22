@@ -21,17 +21,6 @@ An AI was asked to fit an exponential model to each of the scatter plots below. 
 }
 
 
-| @image{../images/fn_25expt-100.png}
-@center{*AI's Suggested Model:* @math{f(x) = 25 (2^{x + 100})}}
-
-@n What did the AI get right? What did it get wrong?
-
-@blanklines{5}{
-@ifsoln{The AI got the initial value right, with @math{a=25}. But the horizontal shift is backwards! Instead of being shifted right by 100, the AI added @math{h} instead of subtracting it.
-}
-}
-
-
 | @image{../images/fn_-1expt-5000.png}
 @center{*AI's Suggested Model:* @math{f(x) = 1.6^x - 5000}}
 
@@ -50,6 +39,16 @@ An AI was asked to fit an exponential model to each of the scatter plots below. 
 
 @blanklines{5}{
 @ifsoln{The value at @math{x=0} _is_ 5000, which could have come from the initial value @math{a}, as the AI thought. But it could also have come from the vertical shift! And with an @math{a} of 5000, we would expect insanely fast growth instead of the leisurely growth seen in this graph. It's more likely @math{f(x) = 2^x + 5000}
+}
+}
+
+| @image{../images/fn_25expt-100.png}
+@center{*AI's Suggested Model:* @math{f(x) = 25 (2^{x + 100})}}
+
+@star What did the AI get right? What did it get wrong?
+
+@blanklines{5}{
+@ifsoln{The AI got the initial value right, with @math{a=25}. But the horizontal shift is backwards! The parent function is @math{f(x) = a(b)^{(x-h)} + k}.  So, to shift the graph right by 100, the AI should have subtracted @math{h} instead of adding it.
 }
 }
 
