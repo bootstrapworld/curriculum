@@ -71,8 +71,8 @@ end
 
 ############## "AI" Charts #########################
 fn_5logXplus10  = make-noisy-scatter-chart(lam(x): (  5 * log(x)) + 10 end, 0.1,    10.1, 10)
-fn_-50logX-20   = make-noisy-scatter-chart(lam(x): (-50 * log(x)) - 20 end, 0,   5, 60)
-fn_10log_x-10_  = make-noisy-scatter-chart(lam(x): ( 10 * log(x - 10)) end, 0, 20.001, 30)
+fn_-50logX-20   = make-noisy-scatter-chart(lam(x): (-50 * log(x)) - 20 end, 0.001,   5, 60)
+fn_10log_x-10_  = make-noisy-scatter-chart(lam(x): ( 10 * log(x - 10)) end, 0.001, 20.001, 30)
 fn_-10logX      = make-noisy-scatter-chart(lam(x): (-10 * log(x)) - 0  end, 0.001,  12.001, 10)
 
 ###################### Make some charts ##########################
