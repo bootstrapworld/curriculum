@@ -54,7 +54,9 @@ Students explore the historical data, discovering that there's a stronger patter
 === Launch
 @slidebreak{Launch}
 
-Sally sells lemonade for $1.25/cup. Each cup costs her $0.30 in ice, lemons, sugar, and cups. Describe her `revenue`, `cost`, and `profit` as functions of glasses-sold.
+Sally sells lemonade for $1.25/cup. Each cup costs her $0.30 in ice, lemons, sugar, and cups. 
+
+We can describe her `revenue`, `cost`, and `profit` as functions of glasses-sold.
 
 @indented{
 @math{\text{revenue}(g) = $1.25 \times g} +
@@ -62,17 +64,31 @@ Sally sells lemonade for $1.25/cup. Each cup costs her $0.30 in ice, lemons, sug
 @math{\text{profit}(g) = …?}
 }
 
-How many different ways can we write the `profit` function?
+@ifslide{@teacher{Advance to the next slide to dicuss the profit function.}}
 
 @slidebreak{Launch}
 
-There are lots of correct solutions! Which one uses function composition?
+The `profit` function can be defined many ways that will return the correct answer! Here are a few.
 
 @indented{
 @math{\text{profitA}(g) = ($1.25 \times g) - ($0.30 \times g)} +
 @math{\text{profitB}(g) = \text{revenue}(g) - \text{cost}(g)} +
 @math{\text{profitC}(g) = ($1.25 - $0.30) \times g} +
 @math{\text{profitD}(g) = $0.95 \times g}
+}
+
+@QandA{
+@Q{Which of the `profit` definitions shown uses function composition? How do you know?}
+@A{B. Because it makes use of the `revenue` and `cost` functions we already defined!}
+
+@Q{Why would programmers prefer to define `profit` using function composition?}
+@A{Smaller pieces are _easier to think about_, and to test!}
+@A{Pieces can be _reused_!
+* Like Lego pieces, smaller functions can be used to build all kinds of things.}
+@A{Reusing code means _less code_ overall.
+* Less code means fewer places to make (and fix) mistakes.}
+@A{Reusing code means _less duplicate code_.
+* When code needs to be changed, that change only needs to be made in one place, instead of in multiple places.}
 }
 
 @teacher{
@@ -123,7 +139,7 @@ Our `periodic-cos` model has two terms:
 - The *periodic term* (@math{4.13 \times cos(\frac{6.28}{1}(x - 2023.35))}), which described the wave that wrapped around the horizontal midline
 - The *vertical shift* (@math{419.87}), which described the (fixed) y-coordinate of the midline
 
-`periodic-cos2` splits these terms into _separate functions_, and then composes them:
+Our `periodic-cos2` model splits these terms into _separate functions_, and then composes them:
 
 [cols="^.^15a,^.^1a,^.^10a", frame="none", grid="none"]
 |===
@@ -138,24 +154,23 @@ Our `periodic-cos` model has two terms:
 @slidebreak{Launch}
 
 @lesson-instruction{
-- Let's take a moment to refresh ourselves on the models we've seen so far and what their key characteristics are.
-- Complete the rest of @printable-exercise{choosing-the-best-model.adoc} with your partner.}
-
-@QandA{
-@Q{Of the models you sketched and described, which makes the most sense to try fitting to this scatter plot? Why?}
-@A{Linear, because the point cloud is rising steadily.}
-@Q{Any other Notices or Wonders you would like to share?}
+- Let's take a moment to refresh ourselves on the models we've seen so far.
+- Turn to the second section of @printable-exercise{choosing-the-best-model.adoc} with your partner. To complete the table:
+  * make a sketch of each model type
+  * list the key characteristics of each model type
+- Then complete the last two questions on the page.
 }
 
 === Investigate
 @slidebreak{Investigate}
 
-We built our `periodic-sin` model using data from a small window: _just one year_. The scatter plot we just looked at on @printable-exercise{choosing-the-best-model.adoc} was also generated from @math{\text{CO}_2} data and had a very different shape!
+The scatter plot we just looked at on @printable-exercise{choosing-the-best-model.adoc} was generated from @math{\text{CO}_2} data, but had a very different shape from our `periodic-sin` model! That's because we built our `periodic-sin` model using @math{\text{CO}_2} data from the `recent-table`, which focuses on a small window: _just one year_. And the scatter plot was made from the `modern-table`, which includes historical @math{\text{CO}_2} levels from the thirteen-year span from 2010 to 2023. Let's take a closer look!
+
 
 @slidebreak{Investigate-DN}
 
 @lesson-instruction{
-- Open the @starter-file{alg2-hybrid} and click "Run".
+- Return to the @starter-file{alg2-hybrid}.
 - Make a scatter plot of @math{\text{CO}_2} over time for the `modern-table`, which includes historical @math{\text{CO}_2} levels from 2010 to 2023.
 - What do you Notice? What do you Wonder?
 }
@@ -176,21 +191,13 @@ We built our `periodic-sin` model using data from a small window: _just one year
 @slidebreak{Investigate-DN}
 
 @lesson-instruction{
-- Turn to @printable-exercise{modeling-modern-co2.adoc}.
 - In the @starter-file{alg2-hybrid}, find the code where you're asked to "Define your periodic-sin functions..."
   * Define `periodic-sin` to be the model *you* found using Desmos (which you already defined in @opt-starter-file{alg2-co2} and on @lesson-link{periodic3-fitting-models/pages/modeling-recent-co2-2.adoc}).
-  * Define the wave and midline of your `periodic-sin` model as separate functions, and recombine them in `periodic-sin2` using function composition (you can refer to the example of `periodic-cosine` above).
+- Work with your partner to complete @printable-exercise{modeling-modern-co2.adoc} by:
+  * fitting an optimal linear model to the `modern-table`
+  * fitting `periodic-sin` to the `modern-table`
+  * imagining the best possible model for the `modern-table`
 }
-
-@slidebreak{Investigate-DN}
-
-@lesson-instruction{
-- Test out your rewritten `periodic-sin2` model with `recent-table` to confirm that it still fits as well as the original model!
-** If anything has changed, check your code carefully!
-
-- Work with your partner to fit linear and periodic models to the `modern-table`. This @math{\text{CO}_2} data is from 2010 to 2023.
-}
-
 
 @slidebreak{Investigate}
 
@@ -265,7 +272,13 @@ The wave is following a diagonal line... {nbsp}so the midline for our model shou
 
 @lesson-instruction{
 - *Is it possible for a model to be both linear _and_ periodic?*
-- With your partner, complete @printable-exercise{hybrid.adoc}.
+- Return to the @starter-file{alg2-hybrid}. 
+- Make sure that you and your partner have:
+  * defined the wave and midline of your `periodic-sin` model as separate functions
+  * recombined them in `periodic-sin2` using function composition (you can refer to the example of `periodic-cosine` if necessary)
+- Test out your `periodic-sin2` model with `recent-table` to confirm that it still fits as well as the original model!
+  * If it doesn't look exactly like the `periodic-sin` model, check your code carefully!
+- Then, complete @printable-exercise{hybrid.adoc}.
 }
 
 @slidebreak{Launch}
