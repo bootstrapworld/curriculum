@@ -193,14 +193,14 @@ _"We wanted to know if more animals at the shelter were fixed or unfixed. To ans
 
 @QandA{
 @Q{What information did they include in the data story? Did they leave anything out?}
+
 @Q{What steps from the Data Cycle do you see in this story?}
 @A{The story included...
-
-* The question ("We wanted to know if more animals at the shelter were fixed or unfixed.")
-* The data considered ("...the `"fixed"` column of all the animals in the shelter.")
-* The analysis ("...we made a @ifproglang{pyret}{`pie-chart`}@ifproglang{codap}{bar chart}...")
-* The interpretation ("..more animals were fixed (18) than unfixed (14)")
-* The Wonders those findings generated ("if that percentage is the same for all species and all ages -- and whether fixed animals got adopted faster...")
+   *** The question ("We wanted to know if more animals at the shelter were fixed or unfixed.")
+   *** The data considered ("...the `"fixed"` column of all the animals in the shelter.")
+   *** The analysis ("...we made a @ifproglang{pyret}{`pie-chart`}@ifproglang{codap}{bar chart}...")
+   *** The interpretation ("..more animals were fixed (18) than unfixed (14)")
+   *** The Wonders those findings generated ("if that percentage is the same for all species and all ages -- and whether fixed animals got adopted faster...")
 }
 }
 
@@ -252,10 +252,13 @@ Most questions can be broken down into one of four categories:
 @QandA{
 @Q{What kind of question is "Are more animals fixed or unfixed?"? How do you know?}
 @A{It's an _arithmetic question_ because answering it requires comparing two simple calculations.}
+
 @Q{What kind of question is "Are snails or tarantulas taller?"? How do you know?}
 @A{It's a _question we can't answer_ because there isn't any information in this dataset about the heights of the animals.}
+
 @Q{What kind of question is "How old is Toggle?" How do you know?}
 @A{It's a _lookup question_ because it can be answered by just looking at the table.}
+
 @Q{What kind of question is "Are older animals adopted more quickly than younger animals?" How do you know?}
 @A{It's a _statistical question_ because we expect some variability in the data and are wondering what is happening in general.}
 }
@@ -270,7 +273,7 @@ Find the table at the bottom of @printable-exercise{which-question-type.adoc}. +
 
 @teacher{
 @opt{
-@scrub{LEAVE THIS SPACE so that bullets work}
+@scrub{LEAVE THIS BLANK LINE or bullets won't work}
 
 - Have students return to the Wonders they wrote on @lesson-link{ds-intro/pages/questions-and-column-descriptions.adoc} in the @lesson-link{ds-intro} lesson. Decide whether they are Lookup, Arithmetic, Statistical or Can't Answer questions?
 - For more practice, have students complete @opt-printable-exercise{question-types-animals.adoc}, by coming up with examples of each type of question for the Animals Dataset.
@@ -353,15 +356,8 @@ While we haven't learned how to @ifproglang{codap}{@lesson-link{codap-filtering,
 === Investigate
 @slidebreak{Investigate}
 
-
 @lesson-instruction{
 - Return to @printable-exercise{which-question-type.adoc} For each question, determine:
-
-@ifnotslide{
-
-}
-
-@ifslide{
   * Which rows would you need to answer them? _(Sometimes we need all rows, and sometimes we only need a subset.)_ }
   * Which columns would you look at? 
   * Write your answers in the last two columns of the table at the bottom.
@@ -392,10 +388,8 @@ If you'd like to start your students with a mini version of the Data Cycle, have
 
 Throughout the remainder of Bootstrap:Data Science we will be using Data Cycle pages to help us answer our questions and tell our data stories.
 
-
-
 @lesson-instruction{
-- Let's take a moment to Notice and Wonder about how @printable-exercise{data-cycle-fixed.adoc} is formatted.
+- Let's take a moment to Notice and Wonder about how @printable-exercise{data-cycle-categorical-animals1.adoc} is formatted.
 }
 
 @slidebreak{Launch-DN}
@@ -403,6 +397,7 @@ Throughout the remainder of Bootstrap:Data Science we will be using Data Cycle p
 @QandA{
 So far we have always worked with the Animals Starter File, which is a sample taken from a larger dataset. +
 To complete this page we will be working with the @starter-file{expanded-animals}.
+
 @Q{What else do you Notice?}
 @A{*Be sure to surface the following:*}
 @A{the directions at the top tell you what kind of visualization you are going to make.}
@@ -418,13 +413,11 @@ To complete this page we will be working with the @starter-file{expanded-animals
 @slidebreak{Investigate}
 
 @lesson-instruction{
-- Complete @printable-exercise{data-cycle-fixed.adoc}.
-- When you're done, work on @printable-exercise{data-cycle-categorical.adoc}.
+- Complete @printable-exercise{data-cycle-categorical-animals1.adoc}.
+- When you're done, work on @printable-exercise{data-cycle-categorical-animals2.adoc}.
   * For this page you will need to come up with your own questions.
   * You might be able to use a question from your first data cycle!
 }
-
-
 
 === Synthesize
 @slidebreak{Synthesize}
@@ -435,52 +428,4 @@ How do Contracts and the Data Cycle work together to help us figure out what cod
 
 @ifproglang{codap}{
 How does the Data Cycle help you to answer (and ask) questions?
-}
-
-@scrub{
-== Using the Data Cycle to Write Code
-
-
-=== Overview
-Students are introduced to the Data Cycle Pages they will be working with for the remainder of Bootstrap:Data Science.
-
-=== Launch
-@slidebreak{Launch}
-
-Once we know what data we need, we can turn our attention to what we want the computer to do for us!
-
-- Do we want a frequency table?
-- Do we want a bar chart? @ifproglang{pyret}{A pie chart?} A scatter plot?
-- Do we want to filter out certain rows to make a new table?
-
-=== Investigate
-@slidebreak{Investigate}
-
-@ifproglang{pyret}{
-Let's get some practice going from questions to code.}
-
-@lesson-instruction{
-- Let's get some practice with the first three steps of the Data Cycle by completing @printable-exercise{analyzing-with-count.adoc}.@ifproglang{pyret}{
-- When you're finished, test your code in @proglang.}
-}
-
-@QandA{
-@Q{What questions do you have about the mini Data Cycles you just used?}
-@Q{In what ways was it helpful to work with these Data Cycle?}
-@Q{What did you learn?}
-}
-
-Let's give a full data cycle a try with some of the visualization we've already learned about!
-@ifproglang{pyret}{
-@lesson-instruction{Complete @printable-exercise{data-cycle-fixed.adoc}, following the steps to make a visualization that will answer the questions.
-}
-@opt{For more practice, have students complete @opt-printable-exercise{data-cycle-categorical.adoc}.}
-}
-
-=== Synthesize
-@slidebreak{Synthesize}
-
-@ifproglang{pyret}{
-How do Contracts and the Data Cycle work together to help us figure out what code to write to answer our questions
-}
 }

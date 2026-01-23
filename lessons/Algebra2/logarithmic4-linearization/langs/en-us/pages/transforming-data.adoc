@@ -35,69 +35,71 @@ table.nomargin td { 0 0.5em !important }
 ++++
 
 @link-instructions{
-For this page, you'll need *Slide 8: Wealth-v-Health (Transformed)* of *Fitting Wealth-v-Health and Exploring Logarithmic Models (Desmos)*.
+Open *Slide 8: Scaling the axes from pc-gdp to log(pc-gdp)* of *Fitting Wealth-v-Health and Exploring Logarithmic Models (Desmos)*.
 }
 
-@n Compare the two tables below from the Desmos file we are about to work with.
+This slide contains two folders. (You can look inside either of them by clicking ([.desmosbutton]#{caret}#).) You should find: 
 
-[cols="1a,1a,3a", options="header", frame="none", grid="none", stripes="none"]
+[.nomargin, cols="1a, 2a, 1a", frame="none"]
 |===
-| Wealth vs. Health
-| Log(Wealth) vs. Health
+| 
+`Wealth vs. Health` 
+
+- the same table we've seen before
+
+|
+`Log(Wealth) vs. Health` 
+
+-  **@math{g(x)}** -- a function! +
+takes in a number @math{x} and produces @math{log_{10}(x)}
+-  a new table!
+  * _@math{x_2} uses @math{g(x)} on the @math{x_1} column in the first table._
+  * _@math{y_2} is our copy of the @math{y_1} column in the first table._
+
+|
+
+*Notice:* When the slide first loads the red dots from the `Wealth vs. Health` table are dispersed on the graph exactly as they were on Slide 5!
+
+|===
+
+@n Each of the folders contains a table. Let's take a moment to compare them.
+
+[cols="4a,5a,10a", frame="none", grid="none", stripes="none"]
+|===
+| `Wealth vs. Health`
+| `Log(Wealth) vs. Health`
 | What do you Notice or Wonder?
 
 | @image{../images/cropped-wealth-v-health-table.png, 110}
 | @image{../images/cropped-log-wealth-v-health-table.png, 110}
 | 
-@blanklines{6}{
-@ifsoln{The 2nd columns are the same, but the 1st columns are really different. The header for the x-column of the 2nd table is a _function_ that takes in the @math{x_1}-value from the first table. The first table is the same one we've seen before.}
+
+@blanklines{6}{@ifsoln{The 2nd columns are the same, but the 1st columns are really different. The header for the x-column of the 2nd table is a _function_ that takes in the @math{x_1}-value from the first table. The first table is the same one we've seen before.}
 }
 
 |===
 
-== Fitting a Model
+Let's take a look at the transformed data.
 
-@link-instructions{
-This slide contains two tables, a list and a function:
+- Click on the ([.desmosbutton]#{folder}#) in front of the `Wealth vs. Health` folder to hide the red data points.
+- Click on the corresponding circle in front of the `Log(Wealth) vs. Health` folder to turn ON the points from its table.
 
-[.nomargin, cols="3a,2a", frame="none"]
-|===
-| 
-- `Wealth vs. Health` -- the same table we've seen before.
-- @math{y_2} -- a copy of the table's @math{y_1} column
-- @math{g(x)} -- a function that takes in a number @math{x}, and produces @math{log_{10}(x)}
-
-|
-- `Log(Wealth) vs. Health` -- a new table!
-  * _@math{x_2} uses @math{g(x)} on the @math{x_1} column in the first table._
-  * _@math{y_2} is our copy of the @math{y_1} column in the first table._
-|===
-
-}
-@n Notice how the red dots (representing the data points from the original table) are dispersed on the graph.
-
-- Hide these data points from the graph by clicking on the "points" circle ([.desmosbutton]#{points}#) at the top of the y&#8321; column.
-- Then click on the triangle ([.desmosbutton]#{caret}#) in front of the folder name to hide the table.
-- Turn ON the points for the `Log(Wealth) vs. Health` table by clicking on the "points" circle ([.desmosbutton]#{points}#) at the top of the y&#8322; column
-
-How does the new graph look different from the original graph? @fitb{}{@ifsoln{All the black datapoints are smashed against the y-axis!}}
+@n How does the new point cloud look different from the original? @fitb{}{@ifsoln{All the black datapoints are smashed against the y-axis!}}
 
 @fitb{}{@ifsoln{Our log transformation is *really* drastic!}}
 
-@n Scroll to the bottom of the `Log(Wealth) vs. Health` table and click the [.desmosbutton]#{magnifying}# to rescale the graph.
+@n The x-axis is scaled to include data as large as 150000. Let's rescale it to optimally display this new dataset.
 
-@n Looking at the point cloud, the best model for this dataset would be (circle one): @hspace{3em} @ifsoln-choice{linear} @hspace{3em} quadratic @hspace{3em} exponential
+- Click on the  ([.desmosbutton]#{caret}#) to open the `Log(Wealth) vs. Health` and scroll to the bottom of the  table. 
+- At the bottom left of the table you'll see a ([.desmosbutton]#{magnifying}#). Click on it to "zoom fit" the graph.
 
-@n Why do you think transforming the *x-values* makes our data look linear? @fitb{}{@ifsoln{The amount of extra income needed to create an extra year of}}
+@n Transforming the *x-values* makes our data look @fitbruby{12em}{@ifsoln{linear}}{linear / quadratic / exponential}. Why? @fitb{}{@ifsoln{The amount of extra income needed to create an extra year }}
 
-@fitb{}{@ifsoln{predicted lifespan increased exponentially. By taking the log of that income we are "canceling out" that exponential growth and making it linear.}}
+@fitb{}{@ifsoln{of predicted lifespan increased exponentially. By taking the log of that income we are "canceling out" that exponential growth and making it linear.}}
 
-@n Move the sliders for @math{m} and @math{b} at the bottom left to find the best-fitting linear model you can:
+== Fitting a Model
 
-[cols="^1a", grid="none", frame="none", stripes="none"]
-|===
-|@math{f(x) = }@fitbruby{10em}{}{slope (m)}@math{x + }@fitbruby{11em}{}{y-intercept / vertical shift}
-|===
+@n Scroll to the bottom. Use the sliders for @math{m} and @math{b} to find the best linear model you can: @hspace{1em} @math{f(x) = }@fitbruby{5em}{}{slope (m)}@math{x + }@fitbruby{11em}{}{y-intercept / vertical shift}
 
 [cols=".>2a,^1a,^1a", options="header", grid="none", frame="none", stripes="none"]
 |===
@@ -111,7 +113,6 @@ How does the new graph look different from the original graph? @fitb{}{@ifsoln{A
 | @fitbruby{10em}{@ifsoln{~12 to ~16}}{log coefficient (a)}
 | @fitbruby{10em}{@ifsoln{~8 to ~25}}{vertical shift (k)}
 |===
-
 
 @n How are they similar? @fitb{}{@ifsoln{The slope and log coefficients are similar... and the vertical shifts are similar. We changed the _kind_ of growth from}} +
 @fitb{}{@ifsoln{logarithmic to linear, but not the _amount_.  Instead of increasing logarithmically by @math{a}, our new function increases _linearly_ by the slope.   }}
