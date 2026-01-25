@@ -126,14 +126,24 @@ Describing what the number 0.001 is talking about in the example above is a mout
 
 Statisticians use formal language to express the probability of obtaining sample results at least as extreme as the ones observed, under the assumption that the null hypothesis is true for the population. They call this probability a "p-value", and typically report it as a decimal.
 
-[options="header"]
+[options="header", cols="1a,1a"]
 |===
-| Most of us say...						| Statisticians say...
-| "There's a 1-in-10 chance of this"	| "The p-value is 0.1"
-| "There's a 1-in-100 chance of this"   | "The p-value is 0.01"
-| "There's a 2-in-100 chance of this"   | "The p-value is 0.02"
-| "There's a one-in-a million chance"	| "The p-value is 0.000001"
+| Most of us say...
+| Statisticians say...
+
+| "*If the coin is fair*, the likelihood of getting heads 3x in a row is a little unusual, but not _that_ unusual. I'm going to assume the coin is still fair."
+| "*Assuming the null hypothesis holds*, the p-value for getting heads 3x in a row is @math{(1 \over 2)^3 = 0.125}. That's not strong enough to reject the null hypothesis, so I'm going to assume the coin is still fair."
+
+| "*If the coin is fair*, the likelihood of getting heads 20x in a row is wildly unusual. I don't the coin is fair at all!"
+| "*Assuming the null hypothesis holds*, the p-value for getting heads 15x in a row is @math{(1 \over 2)^{15} = ~0.0000305}. That's strong evidence that we should reject the null hypothesis, which means the coin could very likely be biased."
 |===
+
+What do we notice about the differences in languages here?
+
+- Most of us talk in vague terms about what's likely or unlikely.
+- Statisticians are focused on _assuming the coin is fair to begin with!_ That assumption gives them a probabilistic distribution, which allows them to precisely calculate the chances of a particular outcome.
+- Most of us, given a particular outcome, make statements about whether the coin is fair or not.
+- Statisticians are all about _building evidence_ to reject the null hypothesis. They never state that the coin is biased or not! Instead, they think in terms of evidence: "How surprising is this data, if my hypothesis is correct?"
 }
 
 === Common Misconceptions
