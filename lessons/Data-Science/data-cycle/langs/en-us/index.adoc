@@ -289,9 +289,40 @@ Students generally struggle to make the leap into asking statistical questions. 
 === Synthesize
 @slidebreak{Synthesize}
 
-- How would you explain the difference between Lookup, Arithmetic, and Statistical questions?
-- When you looked back at your Wonders from the Animals Dataset, were they mostly Lookup questions? Arithmetic? Statistical?
-- What are some examples of statistical questions the owner of a sports team might ask? Or a researcher who is trying to see if a cancer drug is effective? Or a principal who wants to know what will help their students the most?
+@QandA{
+@Q{Describe each question type (Lookup, Arithmetic, Statistical) in your own words.}
+@A{Lookup questions are questions whose answers are contained in a single cell of the table.}
+@A{Arithmetic questions are answered by doing calculations with a single column of the table:
+  * How much does the heaviest animal weigh?
+  * What is the average age of animals from the shelter?
+  * Are more animals fixed or unfixed?
+  * What is the total number of weeks the animals have spent at the shelter?
+}
+@A{Statistical questions anticipate variability so the answers to them are likely to start with, "In general..." }
+
+@Q{Think about the experts you look up to (coaches, principals, tour managers, astronauts, activists, etc.) What statistical questions might they ask in their line of work?}
+@A{Coaches: Are athletes more likely to graduate?}
+@A{Principals: Do students with access to art classes skip school less than students who don't?}
+@A{Tour Managers: Do younger or older audiences spend more on merch?}
+@A{Activists: Do the books in the library reflect the true diversity of the people who live in the city?}
+
+@Q{Which kinds of questions are AI most likely to be able to answer reliably?}
+@A{Lookup and Arithmetic}
+
+@Q{Which kinds of questions would we want to make sure a thoughtful person provided the answer for?}
+@A{Statistical}
+
+@Q{For which kinds of questions should we be most suspicious of the potential for bias in the answers?}
+@A{Statistical}
+
+@Q{What might a data scientist do when they have a question that can’t be answered by the dataset?}
+@A{Advocate for improved data collection! Some examples might include:
+  * wording changes to the census 
+  * requiring businesses applying for permits to use river water to test the quality of that water regularly
+  * requiring police departments to keep records that include the demographics of the people they engage with
+  * installing equipment to measure carbon dioxide in the air around the globe
+  }
+}
 
 == What Data Do We Need?
 
@@ -371,7 +402,17 @@ Have students share their answers and discuss any questions they have about thes
 === Synthesize
 @slidebreak{Synthesize}
 
-How does asking "Which rows? Which columns?" help us figure out @ifproglang{pyret}{what code to write}@ifproglang{codap}{which configurations to use}?
+@QandA{
+@Q{What does each row of the animals dataset represent?}
+@A{One member of our population}
+
+@Q{What does each column of the dataset represent?}
+@A{Information about each row}
+
+@Q{How do we decide whether to use all of the rows or just some of the rows to answer our question?}
+@A{When we are curious about all of the animals, we use all of the rows.}
+@A{When we are curious about a subset of the animals, we use some of the rows.}
+}
 
 
 == Data Cycle Practice
@@ -422,10 +463,23 @@ To complete this page we will be working with the @starter-file{expanded-animals
 === Synthesize
 @slidebreak{Synthesize}
 
+@ifproglang{CODAP}{How does the Data Cycle help you to answer (and ask) questions?}
+
 @ifproglang{pyret}{
-How do Contracts and the Data Cycle work together to help us figure out what code to write to answer our questions?
+@QandA{
+@Q{What role does the data cycle play in helping us to determine which function to use?}
+@A{The function name is usually in our question!}
+
+@Q{What role do contracts play in helping us to write the code?}
+@A{The contract tells us which columns we need!}
+
+@Q{You just used the data cycle to generate a question that you answered using a new data cycle. How did it deepen your thinking and understanding?}
+@A{Answers will vary, but students might mention that:
+  * Seeing the first display led to more interesting questions
+  * The second display revealed information that wasn't visible in the inital display
 }
 
-@ifproglang{codap}{
-How does the Data Cycle help you to answer (and ask) questions?
+@Q{Could any of the new questions you came up with on @printable-exercise{data-cycle-categorical-animals2.adoc} inspire sentence stems that we could reuse with other datasets?}
+@A{If so, the Bootstrap team would love to hear about them at @link{mailto:contact@bootstrapworld.org}!}
+}
 }
