@@ -48,14 +48,14 @@ table tr td { padding: .3em .625em; }
 |
 @hspace{2em}
 @math{f(x) =} @fitbruby{70pt}{@ifsoln{100}}{amplitude} @math{\times}
-@math{cos(2\pi \div}
+@math{sin(2\pi \div}
  @fitbruby{70pt}{@ifsoln{30}}{period} (x - @fitbruby{70pt}{@ifsoln{@math{2.375\pi}}}{horizontal shift})
 ) + @fitbruby{70pt}{@ifsoln{105}}{vertical shift}
 
 | @vspace{1ex} +
 *Pyret Notation*
 |
-@show{(code '(define (f x) (+ (* (?ANS 100) (sin (* (/ 6.28 (?ANS 30)) (- x (?ANS (* 2.375 PI)))))) (?ANS 105))))}
+@show{(code '(define (f x) (+ (* (?ANS 100) (sin (* (/ (* 2 PI) (?ANS 30)) (- x (?ANS (* 2.375 PI)))))) (?ANS 105))))}
 |===
 
 == Translating from @math{sin} to @math{cos}
@@ -104,5 +104,5 @@ table tr td { padding: .3em .625em; }
 | @vspace{1ex} +
 *Pyret Notation*
 |
-@show{(code '(define (g x) (+ (* (?ANS 100) (cos (* (/ 6.28 (?ANS 30)) (- x (?ANS (* 4.75 PI)))))) (?ANS 105))))}
+@show{(code '(define (g x) (+ (* (?ANS 100) (cos (* (/ (* 2 PI) (?ANS 30)) (- x (?ANS (* 4.75 PI)))))) (?ANS 105))))}
 |===

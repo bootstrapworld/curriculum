@@ -295,9 +295,6 @@ In our clock animation we have 12 "slices", with 12 evenly-spaced labels around 
   * Check to see whether this changes the shape of the curves.
 }
 
-=== Synthesize
-@slidebreak{Synthesize}
-
 @QandA{
 @Q{Does changing the number of slices effect the way the curves are drawn? Why or why not?}
 @A{Let students discuss.}
@@ -307,6 +304,33 @@ In our clock animation we have 12 "slices", with 12 evenly-spaced labels around 
 @A{The blue curve for the y-values should look the same.}
 @A{The green curve for the x-values should start curving down instead of up when the direction is reversed.}
 }
+
+@lesson-point{
+These curves are so important that Mathematicians use special names (@vocab{sine} and @vocab{cosine}) for the functions that describe them.
+}
+
+We will be learning more about these functions later in this lesson.
+
+=== Synthesize
+@slidebreak{Synthesize}
+
+@QandA{
+@Q{Did the hand of our unit clock ever change size as the point (A,B) traveled around the circle?}
+@A{No. It was always 1 unit long.}
+
+@Q{What was the range of values for A?}
+@A{-1 to 1}
+
+@Q{What was the range of values for B?}
+@A{-1 to 1}
+
+@Q{How would you describe the shape of the @vocab{sine} and @vocab{cosine} curves you saw in the @starter-file{alg2-unit-clock}?}
+@A{They went up and down between 1 and -1.}
+@A{The wave repeated over and over again.}
+@A{The curves were identical, just shifted over horizontally.}
+@A{When one curve was at its maximum or minimum the other curve was crossing the x-axis and vice versa.}
+}
+
 
 == From Hours to Radians
 
@@ -366,30 +390,16 @@ Suppose the hand of our clock was made of rubber, and we could take it off and b
 @lesson-point{Radian: the measure of the angle formed by carving out a radius's worth of the circumference}
 
 If @math{θ} of each "radian" slice is _slightly less_ than 60°, we can fit _slightly more_ than 6 of these slices in our pie. +
-In fact, *we can fit exactly 6.28 (@math{2pi}) of these "radius slices" into a circle*!
+In fact, *we can fit exactly* @math{2\pi} (@math{~6.28}) of these "radius slices" into a circle!
 
 @lesson-point{@math{360° = 2\pi} radians}
-
-@slidebreak{Investigate}
-
-@QandA{
-@Q{Where else have you seen @math{pi} before?}
-@A{In all of the geometric formulas for circles and other shapes with circular bases and/or cross sections.}
-@Q{If there are @math{2\pi} radians in the whole circle, how many radians are in the _semi-circle_ between 3pm and 9pm on our clock?}
-@A{@math{1\pi}}
-@Q{How many radians are there in the _quarter-circle_ between 12pm and 3pm?}
-@A{@math{\pi \over 2}}
-@Q{How many radians are there in a single "hour" of the clock?}
-@A{@math{\pi \over 6}}
-}
 
 @slidebreak{Investigate}
 
 Pyret knows about @math{\pi}, too!
 
 @lesson-instruction{
-- Return to the @starter-file{alg2-unit-clock}.
-- In the Interactions Area try evaluating `PI` (all caps!). What do you get back?
+- In the Interactions Area, try evaluating `PI` (all caps!). What do you get back?
 - Try computing the value of @math{3\pi}.
 - Try computing the value of @math{\pi / 2}.
 }
@@ -398,10 +408,28 @@ Pyret knows about @math{\pi}, too!
 
 @slidebreak{Investigate}
 
+@QandA{
+@Q{Where else have you seen @math{\pi} before?}
+@A{In all of the geometric formulas for circles and other shapes with circular bases and/or cross sections.}
+
+@Q{If there are @math{2\pi} radians in the whole circle, how many radians are in the _semi-circle_ between 3pm and 9pm on our clock?}
+@A{@math{1\pi}}
+
+@Q{How many radians are there in the _quarter-circle_ between 12pm and 3pm?}
+@A{@math{\pi \over 2}}
+
+@Q{How many radians are there in a single "hour" of the clock?}
+@A{@math{\pi \over 6}}
+
+@Q{For the purposes of our work today, we will be approximating @math{\pi} as @math{3.14}. What approximation will we be using for @math{2\pi}?}
+@A{@math{6.28}}
+}
+
+@slidebreak{Investigate}
+
 As with hours, degrees, and compass directions, switching our unit-clock graph from hours to radians wouldn't change the curve of our graph _at all_. It would only change the tick marks on the x-axis.
 
-@teacher{This last thought is for thinking about, not for testing in the starter file, which isn't set up to run in radians, so can't handle @math{\pi}.}
-
+@slidebreak{Investigate}
 
 @indented{
 [cols="^5a,^1a,^5a", options="header", grid="none", stripes="none"]
@@ -425,29 +453,6 @@ As with hours, degrees, and compass directions, switching our unit-clock graph f
 |===
 }
 
-@slidebreak{Investigate}
-
-@ifslide{
-[cols="^5a,^1a,^5a", options="header", grid="none", stripes="none"]
-|===
-
-| hours on a clock
-| vs
-| radians and degrees on a unit circle
-
-| start from the top +
- (where 12 o'clock is)
-|
-| start from zero on the right +
-(where 3 o'clock would be)
-
-| increase clockwise
-|
-| increase counter-clockwise
-|===
-}
-
-@indented{
 These are merely conventions that people have agreed upon over time to make it easy to collaborate. It's like driving on the right side of the road v. the left: it doesn't matter what we choose, as long as everyone makes the same choice!
 
 @slidebreak{Investigate}
@@ -455,7 +460,6 @@ These are merely conventions that people have agreed upon over time to make it e
 We could make a clock with the numbers written _backwards_ and have the hands move the other way! And as long as everyone uses the same clock, we can still tell time.
 
 Regardless of the direction the "hands" turn, or whether we're dividing the circle into hours, minutes, radians, or anything else, the plotted curves will always be the same.
-}
 
 @slidebreak{Investigate}
 
@@ -465,32 +469,38 @@ Regardless of the direction the "hands" turn, or whether we're dividing the circ
 
 @slidebreak{Investigate}
 
-Mathematicians use special names for these functions. They call them @vocab{sine} and @vocab{cosine}, rather than "A" and "B"!
+We can use the special @vocab{sine} and @vocab{cosine} functions that describe the curves we saw earlier to calculate "A" and "B"!  
 
-In Pyret (and on most calculators) these functions consume @vocab{radians} and their names are abbreviated as `sin` and `cos`.
+Most calculators abbreviate these functions as `sin` and `cos` and bury the distinction between whether or not they consume @vocab{radians} or @vocab{degrees} somewhere in the settings.
 
-The contracts for these functions are: +
+In Pyret, we make visible the reality that a function can only do one thing, so use different function names depending on what our functions consume. 
+
+In Pyret, the contracts for the @vocab{radian}-consuming versions of these functions are: +
 @hspace{4em}
 @show{(contracts
-'("sin" ("Number") "Number")
-'("cos" ("Number") "Number")
+'("sin" (Radians Number) "Number")
+'("cos" (Radians Number) "Number")
 )}
 
-@teacher{
-We've also exposed `sin-deg` and `cos-deg`, which consume degrees instead of radians.
-}
+And the contracts for the @vocab{degree}-consuming versions of these functions are: +
+@hspace{4em}
+@show{(contracts
+'("sin-deg" (Degrees Number) "Number")
+'("cos-deg" (Degrees Number) "Number")
+)}
 
+If we wanted to, we could define other functions to calculate sine and cosine from hours, minutes, or pizza slices!
 
 @slidebreak{Investigate}
 
 @lesson-instruction{
 - Use these functions in Pyret to complete @printable-exercise{converting-angles.adoc}.
-- Remember: `sin` and `cos` consume @vocab{radians}... not hours, minutes, pizza slices or degrees!
+- Note that to find the @vocab{sine} of @math{0.25\pi} in Pyret you would need to know use `sin(0.25 * PI)`
 }
 
 @slidebreak{Investigate}
 
-- @vocab{sine} -- the height of the right-triangle at a given angle ("time" in our example)
+- @vocab{sine} -- the height of the right-triangle at a given angle 
 - @vocab{cosine} -- the width of the right-triangle at a given angle
  
 @strategy{Where did these Names Come From?}{
