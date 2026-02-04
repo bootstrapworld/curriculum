@@ -4,9 +4,6 @@ local make_dir = os.getenv'MAKE_DIR'
 
 dofile(make_dir .. 'utils.lua')
 
-local website_branch_p = (shell_output('git branch --show-current')[1] == 'website')
-website_branch_p = true
-
 local pathwayindependent_batchf =  os.getenv'ADOC_POSTPROC_PATHWAYINDEPENDENT_INPUT'
 local workbookpage_batchf =  os.getenv'ADOC_POSTPROC_WORKBOOKPAGE_INPUT'
 local lessonplan_batchf =  os.getenv'ADOC_POSTPROC_LESSONPLAN_INPUT'
@@ -259,17 +256,11 @@ local function postproc(fhtml_cached, tipe)
     --
     if add_analytics_p then
       add_analytics_p = false
-      if not website_branch_p then
-        copy_file_to_port(analytics_file, o)
-      end
-      if website_branch_p then
         copy_file_to_port(gtm_noscript_file, o)
-      end
     end
     --
     if add_body_id_p then
       add_body_id_p = false
-      if website_branch_p then
         local y = read_file_string(wp_prologue_file)
         o:write(y)
         local klass = proglang
@@ -308,9 +299,6 @@ local function postproc(fhtml_cached, tipe)
         end
         --
         o:write('<div id="body" class="' .. klass .. '">\n')
-      else
-        o:write('<div id="body">\n')
-      end
     --
     end
     --
