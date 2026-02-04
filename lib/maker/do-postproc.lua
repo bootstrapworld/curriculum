@@ -72,7 +72,6 @@ local function postproc(fhtml_cached, tipe)
   --
   local add_analytics_p = false
   local add_bootstrap_lesson_p = false
-  local add_menubar_p = false
   local add_mathjax_p = false
   local add_codemirror_p = false
   local add_body_id_p = false
@@ -84,9 +83,6 @@ local function postproc(fhtml_cached, tipe)
   --
   for x in i:lines() do
     if x:find('^<body') then
-      if memberp(tipe, {'lessonplan', 'pathwaynarrative', 'pathwayresource'}) and not website_branch_p then
-        add_menubar_p = true
-      end
       if x:find('landscape') then
         x = x:gsub('landscape', '')
         add_landscape_p = true
@@ -259,11 +255,6 @@ local function postproc(fhtml_cached, tipe)
 
     if delete_line_p then delete_line_p = false
     else o:write(x, '\n')
-    end
-    --
-    if add_menubar_p then
-      add_menubar_p = false
-      o:write('<!--#include virtual="/menubar.ssi"-->\n')
     end
     --
     if add_analytics_p then
