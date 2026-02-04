@@ -79,25 +79,10 @@ local function postproc(fhtml_cached, tipe)
   local add_landscape_p = false
   local add_end_body_id_p = false
   local delete_line_p = false
-  -- local read_end_sidebar_p = false
-  -- local num_of_lines_past_end_sidebar = 0
   local openblock_attribs = false
   local item_attrib = false
   --
   for x in i:lines() do
-    -- if read_end_sidebar_p then
-    --   if num_of_lines_past_end_sidebar == 3 then
-    --     read_end_sidebar_p = false
-    --   else
-    --     num_of_lines_past_end_sidebar = num_of_lines_past_end_sidebar + 1
-    --     goto continue
-    --   end
-    -- elseif x:find('%%ENDSIDEBARCONTENT%%') then
-    --   read_end_sidebar_p = true
-    --   num_of_lines_past_end_sidebar = 0
-    --   goto continue
-    -- end
-    --
     if x:find('^<body') then
       if memberp(tipe, {'lessonplan', 'pathwaynarrative', 'pathwayresource'}) and not website_branch_p then
         add_menubar_p = true
