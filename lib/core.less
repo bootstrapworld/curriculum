@@ -794,17 +794,14 @@ div#body.workbookpage {
   .teacherNote { display: none; }
   &.solution-page .teacherNote { display: unset; }
 
-  /* Auto-numbering - Add space and a right-paren, unless it's inside a table. */
+  /* Auto-nums - Add a right-paren, and top-padding unless it's inside a table. */
   .autonum {
     display: inline-block;
     padding-top: @top-padding-for-writing;
     &::after { content: ')'; }
     &.star::after { content: unset !important; }
   }
-  th .autonum, td .autonum {
-    padding-top: 0;
-    &::after { content: none;}
-  }
+  th .autonum, td .autonum { padding-top: 0; }
 
   .blanklines {
     display: block;
@@ -813,7 +810,11 @@ div#body.workbookpage {
     margin-left: 5px;
     line-height: 2.2rem;
     margin-top: 0.6rem;
-    .solution { position: fixed; }
+    .solution { position: absolute; }
+    /* artificially shrink codeblocks to avoid stepping on the line */
+    .editbox, code.pyret {
+      line-height: 0.5rem !important;
+    }
   }
 
   .sect1 > h2:first-child, .sect1 > h3:first-child, .sect2 > h3:first-child {
@@ -856,6 +857,26 @@ div#body.workbookpage {
       width: 50px;
     }
     td:first-child p { font-weight: bold; }
+  }
+
+  /*
+  - Make arrows 50px tall and 50x wide
+  - Make them relative, so we can position answers around them
+  - position the label just below the top of the arrow box
+  */
+  span.arrow {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 50px;
+    height: 50px;
+    &::before {
+      position: absolute;
+      top: 5px;
+      left: 50%;
+      transform: translate(-50%, 0);
+    }
   }
 }
 

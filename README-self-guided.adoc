@@ -1,21 +1,25 @@
-= Generating JSON object for self-guided book
+= Self-Guided Materials
 
-The build process automatically generates the files containing the
-JSON required for the self-guided book. The content of these files
-are extracted from their corresponding lesson-plan files. We do
-something similar for generating the slides pages too.
+The build process automatically generates the files containing the JSON required for the self-guided book. The content of these files are extracted from their corresponding lesson-plan files (we do something similar for generating the slides pages, too!).
 
-Each page in the book typically corresponds to a slide. Note that each slide
-starts with a `@slidebreak` (mandatory) and ends with either a
-following `@slidebreak` or an AsciiDoc section, whichever comes
-earlier. This content becomes the `lessonText` field for that
-page.
+== Trying out the Self-Guided Lessons
+
+The self-guided materials *must be run from a webserver*, as they use advanced JS that cannot be loaded from a file. Fortunately, it's easy to run a webserver on your own computer.
+
+The normal `make` command creates the raw files needed for self-guided lessons, in the directory `/lessonName/.cached/self-guided/`. Running `npm run dev` from this directory will launch a web browser that allows you to see the lesson in self-guided form.
+
+== Building Self-Guided Lessons for Deployment
+
+Before deployment, the raw files need to be bundled into a finished package. This is a processor intensive task, and requires `make self-guided` (much in the same way `make book` is used for the workbook). This will create a folder inside each lesson in the distribution, called `self-guided`, which contains the package.
+
+
+== Internals: How the Self-Guided System Works
+
+Each page in the book typically corresponds to a slide. Note that each slide starts with a `@slidebreak` (mandatory) and ends with either a following `@slidebreak` or an AsciiDoc section, whichever comes earlier. This content becomes the `lessonText` field for that page.
 
 == Making the book pages different from the slides
 
-In some situations, we don't want an exact 1-to-1 correspondence
-between slides and book pages: In such cases, we replace
-`@slidebreak` with one of the following:
+In some situations, we don't want an exact 1-to-1 correspondence between slides and book pages: In such cases, we replace `@slidebreak` with one of the following:
 
 1. `@slideonlybreak` — the following piece of text is used to
    construct a slide but is ignored in the book
@@ -23,22 +27,17 @@ between slides and book pages: In such cases, we replace
 2. `@selfguidedbreak` — the following piece of text will be
    used in the book but ignored for slides
 
-The older directive `@slidebreak`, of course, ensures the following piece of text is
-included in both book and slides. (We may need to change these
-names later to be more uniform.)
+The older directive `@slidebreak`, of course, ensures the following piece of text is included in both book and slides. (We may need to change these names later to be more uniform.)
 
 == {editor,image,video}config
 
-A book page also has one of the fields: `editorCode`,
-`imageConfig`, or `videoConfig`. To insert these in the
-lesson-plan file, use the directives
+A book page also has one of the fields: `editorCode`, `imageConfig`, or `videoConfig`. To insert these in the lesson-plan file, use the directives
 
   @editorconfig{...}
   @imageconfig{...}
   @videoconfig{...}
 
-Note: The directive names are uniform and in lower case. Here are
-some example uses:
+Note: The directive names are uniform and in lower case. Here are some example uses:
 
   @editorconfig{{
     definitionsAtLastRun: `
@@ -64,8 +63,7 @@ The starting default used is
 
 == Conditional text
 
-Two conditional directives are available to exclusively enable or
-disable content from the book pages:
+Two conditional directives are available to exclusively enable or disable content from the book pages:
 
   @ifselfguided{...}
 
@@ -75,7 +73,4 @@ uses the enclosed context for the book but nothing else, whereas
 
 uses the enclosed context for everything but the book.
 
-Note these can only be used for texts within slides, and cannot be
-used to enclose `@slidebreak`. To conditionally allow or disallow
-entire slide texts in the book, use `@selfguidedbreak` and
-`@slideonlybreak`, described above.
+Note these can only be used for texts within slides, and cannot be used to enclose `@slidebreak`. To conditionally allow or disallow entire slide texts in the book, use `@selfguidedbreak` and `@slideonlybreak`, described above.

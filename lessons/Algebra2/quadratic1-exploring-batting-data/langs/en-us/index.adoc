@@ -4,7 +4,7 @@
 .lesson-instruction table .autonum { font-weight: bold; }
 </style>
 ++++
-@description{Students investigate quadratic relationships in Major League Baseball data from Aaron Judge's hits in 2016 and 2017.}
+@description{Students investigate quadratic relationships in Major League Baseball data from Miguel Cabrera's hits between 2020 and 2023.}
 
 @lesson-prereqs{fitting-models}
 
@@ -36,7 +36,7 @@
 @objective{model-explore}
 
 === Overview
-Students explore the @starter-file{alg2-aaron-judge}, and create scatter plots to search for relationships between columns. They share and discuss their findings with the class, discovering the limitations of linear models.
+Students explore the @starter-file{alg2-miguel-cabrera}, and create scatter plots to search for relationships between columns. They share and discuss their findings with the class, discovering the limitations of linear models.
 
 === Launch
 @slidebreak{LaunchR}
@@ -44,9 +44,7 @@ Students explore the @starter-file{alg2-aaron-judge}, and create scatter plots t
 @teacher{These questions are intended to spark student interest in the dataset they are about to explore.}
 
 @QandA{
-@right{@image{images/aaron-judge.jpeg, 200}}Aaron Judge is an American professional baseball outfielder for the New York Yankees. In 2022 he hit 62 home runs, setting the  American League record for most home runs in a season.
-@Q{What is a home run?}
-@A{When a batter makes it around all of the bases and back to home plate before the other team is able to gain control of the ball and stop them.}
+@right{@image{images/miguel-cabrera.jpg, 200}}Among Detroit Tigers fans, Miguel Carbera is considered one of the greatest hitters in franchise history. He won the Hank Aaron award in 2012, and was the American League MVP in 2012 and 2013.
 @Q{What factors might influence how many home runs a player hits in a season?}
 @A{Possible responses:}
 @A{How fast the batter runs.}
@@ -60,39 +58,43 @@ Students explore the @starter-file{alg2-aaron-judge}, and create scatter plots t
 
 @slidebreak{Launch-DN}
 
-In this lesson, we'll explore possible relationships between pitch (type and speed), bat angle, and hit (distance, speed and ball type) in a dataset of Aaron Judge's hits in 2016 and 2017.
+In this lesson, we'll explore possible relationships between pitch (type and speed) and hit (angle, distance, speed and ball type) in a dataset of Miguel Cabrera's hits between 2020 and 2023.
 
 @lesson-instruction{
-- Open the @starter-file{alg2-aaron-judge}.
+- Open the @starter-file{alg2-miguel-cabrera}.
 - From the File menu, select "Save a Copy", and click "Run".
-- Working in pairs or small groups, complete @printable-exercise{exploring-judge-data.adoc}.
+- Working in pairs or small groups, complete @printable-exercise{exploring-cabrera-data.adoc}.
 }
 
 @slidebreak{LaunchR}
 
 @QandA{
 @Q{Which quantitative columns appear to have the strongest relationship?}
-@A{bat-angle and hit-distance}
+@A{hit-angle and hit-distance}
 @Q{Would you describe the relationship as linear? Why?}
 @A{No. Because it's u-shaped, rather than a straight line.}
 }
 
 @teacher{
-@image{images/judge-pitchspeed-v-distance.png, 150}
-@image{images/judge-pitchspeed-v-speed.png, 150}
-@image{images/judge-angle-v-distance.png, 150}
-@image{images/judge-angle-v-speed.png, 150}
+The resulting scatter plots for `distance v. pitch-speed`, `hit-speed v. pitch-speed`, `hit-angle v. hit-distance` and `hit-angle v. hit-speed` are...
+[cols="1,1,1,1"]
+|===
+| @image{images/cabrera-pitchspeed-distance.png, 200}
+| @image{images/cabrera-pitchspeed-speed.png, 200}
+| @image{images/cabrera-angle-distance.png, 200}
+| @image{images/cabrera-angle-speed.png, 200}
+|===
 }
 
 @slidebreak{Launch}
 
 @QandA{
-@Q{What is happening on lines 21-36 of the Definitions Area?}
+@Q{What is happening on lines 23-32 of the Definitions Area?}
 @A{Four filtered tables are being defined, focused on subsets of the data for specific hit types}
-@Q{How would we make a scatter plot comparing `bat-angle` and `hit-distance` for just the curve balls?}
+@Q{How would we make a scatter plot comparing `hit-angle` and `hit-distance` for just the curve balls?}
 @A{Exactly like the scatter plots we just made, except we'd use `curve-table` instead of `judge-table`}
-@A{`scatter-plot(curve-table, "id", "bat-angle", "hist-distance")`}
-@Q{Take a moment to make scatter plots comparing `bat-angle` and `hit-distance` for each of the filtered tables defined in the starter file. How do they compare?
+@A{`scatter-plot(curve-table, "id", "hit-angle", "hist-distance")`}
+@Q{Take a moment to make scatter plots comparing `hit-angle` and `hit-distance` for each of the filtered tables defined in the starter file. How do they compare?
 }
 @A{They all more or less make an upside down U shape, but they look slightly different and have a different numbers of points.}
 }
@@ -100,13 +102,13 @@ In this lesson, we'll explore possible relationships between pitch (type and spe
 === Investigate
 @slidebreak{InvestigateC}
 
-Let's focus on just the curve balls for now.  There definitely appears to be a relationship here...
-@center{@image{images/curve-angle-distance.png,400}}
+Let's focus on just the sliders for now.  There definitely appears to be a relationship here...
+@center{@image{images/cabrera-sliders-angle-distance.png, 400}}
 
 @slidebreak{Investigate}
 
 @lesson-instruction{
-- Turn to @printable-exercise{curve-data.adoc}.
+- Turn to @printable-exercise{cabrera-slider-data.adoc}.
 - Complete the first section to find the optimal linear model and see how well it predicts hit distances from bat angles.
 }
 
@@ -114,7 +116,7 @@ Let's focus on just the curve balls for now.  There definitely appears to be a r
 @Q{Is the best-possible linear model a good fit? Why or why not?}
 @A{No. The model does not follow the shape of the data!}
 @Q{Use the @math{S}-value to describe the fit of the model.}
-@A{The @math{S}-value predicts an error of almost 104 feet for hit distances that only range between 50 and 400 feet!}
+@A{The @math{S}-value predicts an error of almost 77 feet, for hit distances with a range of about 350 feet.}
 }
 
 @pd-slide{
@@ -129,8 +131,8 @@ Linear models don't seem to fit very well! No matter which direction we draw the
 
 [cols="^.^1a,^.^1a,^.^1a", frame="none", stripes="none"]
 |===
-| When we build a linear model to fit the increasing half of the data, it doesn't do the decreasing half justice...
-| When we build a linear model to fit the decreasing half of the data, it doesn't do the decreasing half justice...
+| When we build a linear model to fit the increasing half of the data, it doesn't fit the decreasing half...
+| When we build a linear model to fit the decreasing half of the data, it doesn't fit the decreasing half...
 | And trying to split the difference, is even worse...
 
 | @image{images/curve-angle-distance-linear1.png}
@@ -141,7 +143,7 @@ Linear models don't seem to fit very well! No matter which direction we draw the
 @slidebreak{Investigate}
 
 @lesson-instruction{
-- Turn to the *Fitting Curves* section of @printable-exercise{curve-data.adoc}.
+- Turn to the *Fitting Curves* section of @printable-exercise{cabrera-slider-data.adoc}.
 - Drawing and describe the pattern you actually see. Then use it to make some predictions.
 - Discuss your thinking with your partner.
 }
@@ -149,7 +151,7 @@ Linear models don't seem to fit very well! No matter which direction we draw the
 @slidebreak{Investigate}
 @QandA{
 @Q{How would you describe the pattern you see here?}
-@A{Aaron Judge's hit distance generally increases as his bat angle increases from 0 to 30 degrees. As the angle increases after that, his hit distance generally _decreases!_}
+@A{Miguel Cabrera's hit distance generally increases as his bat angle increases from 0 to 30 degrees. As the angle increases after that, his hit distance generally _decreases!_}
 }
 
 @teacher{Review student answers to confirm that students see a _nonlinear_ relationship in the dataset that is fairly strong. Students should generally agree that the relationship is better fit by a curve, with hit distance peaking at a bat angle of _roughly_ 30 degrees.  *Make sure students have agreed on this vertex*, as its location is important for the next activity!
@@ -226,10 +228,15 @@ Turn to @printable-exercise{classifying-descriptions.adoc} and practice identify
 }
 
 
-== Additional Practice
+== Additional Exercises
+
+- For Yankees fans, @opt-printable-exercise{exploring-judge-data.adoc} and @opt-printable-exercise{judge-curve-data.adoc} engage students in exploring the @opt-starter-file{alg2-aaron-judge}.
+  * Thinking for this page parallels @printable-exercise{exploring-cabrera-data.adoc} and @printable-exercise{cabrera-slider-data.adoc}.
+
+@vspace{1ex}
 
 - The @opt-printable-exercise{exploring-mpg.adoc} engages students in exploring the @opt-starter-file{alg2-fuel-efficiency}. 
-  * Thinking for this page parallels @printable-exercise{curve-data.adoc}
+  * Thinking for this page parallels @printable-exercise{cabrera-slider-data.adoc}
   * For students who aren't baseball fans, a chance to practice what they've learned in another context may be welcome. 
 
 @vspace{1ex}

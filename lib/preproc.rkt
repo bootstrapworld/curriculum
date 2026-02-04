@@ -42,6 +42,8 @@
 
 (define *pyret?* #f)
 
+(define *github-prefix* "https://raw.githubusercontent.com/bootstrapworld/starter-files")
+
 (define *solutions-mode?* #f)
 
 (define *possibly-invalid-page?* #f)
@@ -185,6 +187,8 @@
             (read-json i)))
         '())))
 
+(define *pyret-starter-file-prefix* "https://code.pyret.org/editor#shareurl=")
+
 (define *assessments*
   (let ([assessments-file (format "distribution/~a/lib/assessments.js" *natlang*)])
     (if (file-exists? assessments-file)
@@ -224,6 +228,7 @@
 (define *opt-online-exercise-links* '())
 (define *printable-exercise-links* '())
 (define *opt-printable-exercise-links* '())
+(define *additional-exercises* '())
 (define *handout-exercise-links* '())
 (define *starter-file-links* '())
 (define *opt-starter-file-links* '())
@@ -358,6 +363,8 @@
                     [(char=? c #\=) (read-char i) (loop (+ section-level 1))]
                     [else section-level])))]
         [title (string-trim (read-line i))])
+    (when (regexp-match #rx"Additional Exercises" title)
+      (set! *additional-exercises-explicit?* #t))
     (when (and *lesson-plan* (= section-level 1))
       (let ([section-title (string-trim (regexp-replace "@duration{(.*)}" title "(\\1)"))])
         (set! *first-level-section-titles* (cons section-title *first-level-section-titles*))))
@@ -367,6 +374,11 @@
     (display "= " o)
     (expand-directives:string->port title o)
     (newline o)))
+
+(define (display-error-output s o)
+  (display (enclose-tag "span" ""
+             (format "[missing: ~a]" s)
+             #:attribs "style=\"color: red\"") o))
 
 (define (massage-arg arg)
   ;(printf "doing massage-arg ~s\n" arg)
@@ -563,6 +575,13 @@
 (define (make-workbook-link lesson-dir pages-dir snippet link-text #:link-type [link-type #f])
   ; (printf "make-workbook-link ~s ~s ~s ~s ~s\n" lesson-dir pages-dir snippet link-text link-type)
   ; (printf "lesson-dir= ~s\n*lesson*= ~s\n*pwydir= ~s\n" lesson-dir *lesson* *pathway-root-dir*)
+  (when (or (string=? link-type "opt-online-exercise")
+            (string=? link-type "opt-printable-exercise"))
+    (let ([addl-exercise (if (string=? link-text "")
+                             (format "@~a{~a}" link-type snippet)
+                             (format "@~a{~a, ~a}" link-type snippet link-text))])
+      (unless (member addl-exercise *additional-exercises*)
+        (set! *additional-exercises* (cons addl-exercise *additional-exercises*)))))
   (let* ([lesson (cond [(equal? lesson-dir *lesson*) (set! lesson-dir #f) *lesson*]
                        [lesson-dir (qualify-lesson-dir lesson-dir)]
                        [else *lesson*])]
@@ -1477,6 +1496,7 @@
   (set! *opt-online-exercise-links* '())
   (set! *printable-exercise-links* '())
   (set! *opt-printable-exercise-links* '())
+  (set! *additional-exercises* '())
   (set! *handout-exercise-links* '())
   (set! *starter-file-links* '())
   (set! *opt-starter-file-links* '())
@@ -1578,6 +1598,7 @@
 (define *first-subsection-reached?* #f)
 (define *out-file* #f)
 (define *supplemental-materials-needed?* #f)
+(define *additional-exercises-explicit?* #f)
 
 (define *uses-codemirror?* #f)
 (define *uses-mathjax?* #f)
@@ -1670,8 +1691,9 @@
                               (expand-directives:string->port text o #:enclosing-directive directive)
                               (set! *inside-preparation?* #f))]
                            [(string=? directive "blanklines")
-                            (let ([n (string->number (read-group i directive))]
-                                  [text (read-group i directive)])
+                            (let* ([n (string->number (read-group i directive))]
+                                   [height (* n 2.2)] ; each line is 2.2rem tall (see shared.less)
+                                   [text (read-group i directive #:multiline? #t)])
                               ; (printf "doing @blanklines ~s\n" n)
                               (display-begin-span ".blanklines" o #:attribs (format "style=\"height: ~arem\"" (* 2.2 n)))
                               (display (expand-directives:string->string text #:enclosing-directive directive) o)
@@ -2129,9 +2151,9 @@
                                (string=? directive "opt-starter-file"))
                             (let* ([lbl+text (read-commaed-group i directive read-group)]
                                    [lbl (string->symbol (first lbl+text))]
-                                   [c (hash-ref *starter-files* lbl #f)]
-                                   [autoinclude? (hash-ref c 'autoinclude #t)])
+                                   [c (hash-ref *starter-files* lbl #f)])
                               (cond [(not c)
+                                     (display-error-output lbl o)
                                      (printf "WARNING: ~a: Ill-named @~a ~a\n\n"
                                              (errmessage-context) directive lbl)]
                                     [else
@@ -2139,8 +2161,10 @@
                                                              (string-join (rest lbl+text) "&#x2c; "))]
                                              ; [opt? (or (string=? directive "opt-starter-file") *optional-flag?*)]
                                              [opt? (string=? directive "opt-starter-file")]
+                                             [autoinclude? (hash-ref c 'autoinclude #t)]
                                              [p (hash-ref c *proglang-sym* #f)])
                                         (cond [(not p)
+                                               (display-error-output lbl o)
                                                (unless *possibly-invalid-page?*
                                                (printf "WARNING: ~a: @~a ~a missing for ~a\n\n"
                                                        (errmessage-context) directive lbl *proglang*))]
@@ -2154,11 +2178,19 @@
                                                            "\\&#x2c;")]
                                                        [title (or link-text
                                                                   starter-file-title)]
-                                                       [url (let ([url (hash-ref p 'url "")])
+                                                       [url (let* ([url (hash-ref p 'url "")]
+                                                                  [use-pyret-prefix?
+                                                                    (and p (eq? *proglang-sym* 'pyret)
+                                                                         (string-prefix? url *github-prefix*)
+                                                                         (hash-ref p 'prefix #t))])
                                                               (cond [(string=? url "")
                                                                      (printf "WARNING: ~a: @~a ~a missing URL\n\n"
                                                                              (errmessage-context) directive lbl)
                                                                      "starter-file-missing-URL.html"]
+                                                                    [use-pyret-prefix?
+                                                                      (string-append
+                                                                        *pyret-starter-file-prefix*
+                                                                        url)]
                                                                     [else url]))]
                                                        [link-output
                                                          (format
@@ -2438,6 +2470,7 @@
       (set! *first-subsection-reached?* #f)
       (set! *title-reached?* #f)
       (set! *supplemental-materials-needed?* #f)
+      (set! *additional-exercises-explicit?* #f)
       (set! *uses-codemirror?* #f)
       (set! *uses-mathjax?* #f)
       (set! *needs-objectives?* #f)
@@ -2469,6 +2502,27 @@
               (fprintf o "ifndef::fromlangroot[:fromlangroot: ~a]\n\n" *dist-root-dir*)
 
               (expand-directives i o)
+
+              (when (and *lesson-plan* (not *additional-exercises-explicit?*)
+                         (or (pair? *opt-printable-exercise-links*) (pair? *opt-online-exercise-links*)))
+                (fprintf o "\n== Additional Exercises\n\n")
+                (let ([addl-ex-file (build-path *containing-directory*
+                                                ".cached" ".index.additional-exercises")])
+                  (call-with-output-file addl-ex-file
+                    (lambda (lo)
+                      (display "return {\n" lo)
+                      (for ([f (reverse *additional-exercises*)])
+                        (fprintf lo "~s,\n" f))
+                      (display "}\n" lo))
+                    #:exists 'replace)
+                  (for ([f (reverse *opt-printable-exercise-links*)])
+                    (display "- " o)
+                    (expand-directives:string->port f o)
+                    (newline o))
+                  (for ([f (reverse *opt-online-exercise-links*)])
+                    (display "- " o)
+                    (expand-directives:string->port f o)
+                    (newline o))))
 
               (when (and *narrative* (not *title-reached?*))
                 (print-course-title-and-logo *target-pathway* make-image store-title o)

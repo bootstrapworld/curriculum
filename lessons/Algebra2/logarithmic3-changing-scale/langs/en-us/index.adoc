@@ -46,40 +46,76 @@
 @objective{logarithms-exponents}
 
 === Overview
-Students deepen their understanding of functions as a "ratio of growth", by experimenting with Desmos's `Linear` and `Logarithmic` settings for x- and y-axes. These settings change the way the axis intervals grow, resulting in @vocab{inverse} behavior in the graph. The logarithmic setting results in _exponentially-increasing_ intervals, which warp the graph of functions in interesting ways! Students explore these changes on a variety of functions.
+Students start by fitting the logarithmic curve in Desmos, returning to the question of "how can we find the _optimal_ curve?"
+
+To explore this question, they first deepen their understanding of functions as a "ratio of growth", by experimenting with Desmos's `Linear` and `Logarithmic` settings for x- and y-axes. These settings change the way the axis intervals grow, resulting in @vocab{inverse} behavior in the graph. The logarithmic setting results in _exponentially-increasing_ intervals, which warp the graph of functions in interesting ways! Students explore these changes on a variety of functions.
 
 === Launch
+@slidebreak{Launch}
+
+@teacher{Sync or pace students to *Slide 5: Wealth-v-Health (Logarithmic)* of @starter-file{alg2-log-desmos}.}
+
+Let's try to find the best logarithmic model we can, starting by eyeballing it in Desmos and then fitting it in Pyret.
+
+@lesson-instruction{
+- Return to the *Fitting Wealth-v-Health and Exploring Logarithmic Models Desmos file*. You should now be on *Slide 5: Wealth-v-Health (Logarithmic)*. 
+- Use the sliders to fit the best logarithmic model you can and complete the first two questions on @printable-exercise{fitting-logarithmic-models.adoc}.
+- Then open the @starter-file{alg2-countries}, scroll down to the section titled "Define some models", and find the function template for `logarithmic` on line 45. Enter the Pyret code you wrote on question 2 of @printable-exercise{fitting-logarithmic-models.adoc} and click "Run" to load your definition.
+- Use `fit-model` to find the @math{S} value and complete the rest of the first section of @printable-exercise{fitting-logarithmic-models.adoc}.
+}
+
+@slidebreak{Launch}
+
+@QandA{
+@Q{What values did you come up with for @math{a} and @math{k} in your best-guess logarithmic model?}
+@A{Record different students' responses for @math{a} and @math{k} on the board.}
+
+@Q{How do your @math{a} and @math{k} values compare with those of other students'? Are they very similar or very different?}
+
+@Q{What were the @math{S} values for these models? And what do they tell us?}
+}
+
+@slidebreak{Launch}
+
+Trial-and-error only gets us so far, and it's not clear that we would ever stumble upon the optimal model. We need something like Pyret's `lr-plot`, which uses computational methods to find the optimal model.
+
+@lesson-point{
+Data Scientists often use transformations to stretch their data into shapes that are easier to work with, learn what they can, and then reverse the transformations and apply what they learned when they're done.
+}
+
+If only we could _transform_ this curve to make it appear linear... Then we could use `lr-plot` to fit the optimal model, and reverse the transformation to get the optimal @vocab{logarithmic model}! But how can we transform a curve like this?
+
+
 @slidebreak{Launch}
 
 You've probably heard people talk about the slope of a line as "rise over run", or "rate of change". Both of these terms have to do with _comparing one variable to another_. On a graph where one variable is on the y-axis and the other is on the x-axis, that means _comparing the growth in one axis to growth in another_. 
 
 @slidebreak{Launch}
 
-In a linear function, the growth of the function is @vocab{proportional} to the growth of the input. For example, in the line @math{f(x) = x}, the growth of @math{f(x)} is _exactly the same_ as the growth of @math{x}. 
+In a linear function, the growth of the function is @vocab{proportional} to the growth of the input. 
 
 @QandA{
-@Q{What is the slope of the function @math{f(x) = x}?}
+@Q{In the line @math{f(x) = x}, the growth of @math{f(x)} is _exactly the same_ as the growth of @math{x}. What does that mean the slope is?}
 @A{The slope is 1.}
 
 @Q{If the growth of @math{f(x)} is _twice_ the growth of @math{x}, what is the slope of that line?}
 @A{The slope is 2.}
 
-
-@Q{If the growth of @math{f(x)} is _one-third_ the growth of @math{x}, what is the slope of that line?}
-@A{The slope is @math{\frac{1}{3}}}.
+@Q{If the the slope of a line is 1/3, what does that tell us about the relationship between the growth of @math{f(x)} and @math{x}?}
+@A{The growth of @math{f(x)} is _one-third_ the growth of @math{x}}.
 }
 
 @slidebreak{Launch}
 
-A function of slope 2 is growing _twice as fast_ on the y-axis, compared to the growth in the x-axis. Can you describe the _inverse_ of that relationship?
+A function of slope 2 has a y-variable that grows _twice as fast_ as its x-variable. Can you describe the _inverse_ of that relationship?
 
 @QandA{
-@Q{How fast is a function with a slope of 2 growing on the *x-axis*, compared to the y-axis?}
+@Q{How fast is the *x-variable* growing compared to the y-variable for a function with a slope of 2?}
 
-@A{A function with a slope of 2 is growing _half as fast_ on the x-axis, relative to the y-axis.}
+@A{The x-variable of a function with a slope of 2 grows _half as fast_, relative to its y-variable.}
 
-@Q{How fast is a function with a slope of @math{\frac{1}{3}} growing on the *x-axis*, compared to the y-axis?}
-@A{A function with a slope of @math{\frac{1}{3}} is growing _three times as fast_ on the x-axis, relative to the y-axis.}
+@Q{How fast is the *x-variable* growing compared to the y-variable for a function with a slope of @math{\frac{1}{3}}?}
+@A{The x-variable of a function with a slope of @math{\frac{1}{3}} grows _three times as fast_, relative to its y-variable.}
 }
 
 @slidebreak{Launch}
@@ -90,17 +126,17 @@ When we think about quadratic, exponential, or logarithmic growth, that just mea
 
 @slidebreak{LaunchR}
 @ifslide{@right{@image{images/empty-axes.png, 250}}}
-You've graphed all of these lines and curves on axes that grow *linearly*: the tick marks along the x- and y-axis always grow in equal intervals.
+You've graphed all of these lines and curves on axes with *linear* scales where the interval between any tick mark on the axis and the next one represents the same amount. And the numbers labeling the tick marks along the x- and y-axes are a linear sequence, increasing at a constant rate.
 
-But...who says the _axes have to grow linearly?_
+But...who says the scale _has to be linear_?
 
-@teacher{Sync or pace students to *Slide 5: Balancing Growth (Linear)* of @starter-file{alg2-log-desmos}.}
+@teacher{Sync or pace students to *Slide 6: Balancing Growth (Linear)* of @starter-file{alg2-log-desmos}.}
 
 @slidebreak{Launch}
 
 @lesson-instruction{
 - Return to the *Fitting Wealth-v-Health and Exploring Logarithmic Models Desmos file*.
-- You should now be on *Slide 5: Balancing Growth (Linear)*.
+- You should now be on *Slide 6: Balancing Growth (Linear)*.
 - Use it to complete the _first two sections_ of @printable-exercise{balancing-growth-linear.adoc}.
 }
 
@@ -109,15 +145,23 @@ Make sure to give students time to explore and discuss this with their peers! Th
 }
 
 === Investigate
-@slidebreak{InvestigateR}
-
-@right{@image{images/linear-to-logarithmic.png, 250}}
-When we changed the scale of the y-axis from `Linear` to `Logarithmic`, our y-intervals went from growing linearly to growing exponentially: _each interval on the y-axis represents 10x the length of the interval before it._
 
 @slidebreak{Investigate}
-Our x-intervals are still growing linearly, so this has the effect of grabbing the top and bottom sides of the graph and "squishing" it. For our function to appear to increase by one inch on the y-axis, it actually needs to increase 10x as much as the inch before it!
+@QandA{
+@Q{What happened to our linear function when we changed the scale of our y-axis from @math{0 < x < 10} to @math{0 < x < 5}?}
+@A{It looked like the line got steeper.}
+@Q{What happened when we changed the scale of the y-axis from `Linear` to `Logarithmic`?}
+@ifslide{@teacher{Advance to the next slide for a discussion of the change from linear to logarithmic.}}
+}
 
-With the y-axis appearing to grow more slowly than the x, we *perceive* our linear function "bending" up and looking exponential!
+@slidebreak{InvestigateR}
+@right{@image{images/linear-to-logarithmic.png, 250}}
+When we changed the scale of the y-axis from `Linear` to `Logarithmic`, we *perceive* our linear function to be "bending" downward and looking logarithmic!
+
+The numbers labeling our y-axis went from increasing at a constant rate to increasing exponentially. +
+_The interval between each tick mark on the y-axis and the next is now 10x as large as the interval before it_, so for the y-variable of our function to appear to increase by one inch on the y-axis, it actually needs to increase 10x as much as it did in the inch before it!
+
+With our x-axis still using a `Linear` scale,  the y-variable appears to grow more slowly than the x-variable.
 
 @slidebreak{Investigate}
 
@@ -127,26 +171,29 @@ With the y-axis appearing to grow more slowly than the x, we *perceive* our line
 }
 
 @slidebreak{Investigate}
-When we changed the scale of the x-axis from `Linear` to `Logarithmic`, our x-intervals went from growing linearly to growing exponentially.
-
-Our y-intervals are still growing linearly, so this has the effect of grabbing the left and right sides of the graph and "squishing" it. For our function to appear to increase by one inch on the x-axis, it actually needs to increase 10x as much as the inch before it!
-
-@slidebreak{InvestigateR}
 
 @QandA{
+@Q{When we change the scale of the x-axis from `Linear` to `Logarithmic` we *perceive* our linear function to be "bending" upward and looking exponential! Why?}
+} 
+
+@ifslide{@teacher{Advance to the next slide for a discussion of the change from linear to logarithmic.}}
+
+@slidebreak{InvestigateR}
 @right{@image{images/linear-to-exponential.png, 250}}
-@Q{Why did changing the *x*-axis to `Logarithmic` make our linear curve look exponential?}
-@A{With the x-axis appearing to grow more slowly than the y, our linear function "bends" up and looks exponential!}
+When we change the scale of the x-axis from `Linear` to `Logarithmic`, the numbers labeling our x-axis went from increasing at a constant rate to growing exponentially. For the x-variable in this function to appear to increase by one inch on the x-axis, it actually needs to increase 10x as much as it did in the inch before it!
+
+With our y-axis still using a `Linear` scale,  the x-variable appears to grow more slowly than the y-variable.
+
+@slidebreak{Investigate}
+
+@lesson-point{
+The key here is to think in terms of *relative growth*: what is the scale of one axis _relative to the other_? Does the growth of @math{f(x)} balance out _relative to_ @math{x}?
 }
 
 @slidebreak{Investigate}
 
-The key here is to think in terms of *relative growth*: the scale of one axis _relative to the other_  balances out the growth of @math{f(x)} _relative to_ @math{x}.
-
-@slidebreak{Investigate}
-
 @QandA{
-@Q{Why did changing both axes to `Logarithmic` make the line look normal again?}
+@Q{Why did changing both axes scales to `Logarithmic` make the line look normal again?}
 @A{Since both axes were growing proportionally to each other (linearly!), the growth on each axis is balanced and we can see the original shape of the line.}
 
 @Q{What do you think these transformations would to do to a _logarithmic_ function? An _exponential_ function? }
@@ -155,12 +202,13 @@ The key here is to think in terms of *relative growth*: the scale of one axis _r
 
 @slidebreak{Investigate-DN}
 
-@teacher{Sync or pace students to *Slide 6: Balancing Growth (Logs and Exponents)* of @starter-file{alg2-log-desmos}.}
+@teacher{Sync or pace students to *Slide 7: Balancing Growth (Logs and Exponents)* of @starter-file{alg2-log-desmos}.}
 
 @lesson-instruction{
+- Return to the *Fitting Wealth-v-Health and Exploring Logarithmic Models Desmos file*.
+- You should now be on *Slide 7: Balancing Growth (Logs and Exponents)*.
 - Turn to @printable-exercise{balancing-growth-log-and-exp.adoc}, and complete the _first section_.
 }
-
 
 @teacher{
 Make sure to give students time to explore and discuss this with their peers!
@@ -168,11 +216,11 @@ Make sure to give students time to explore and discuss this with their peers!
 
 @slidebreak{Investigate}
 @QandA{
-@Q{Why did changing the x-axis to `Logarithmic` make our logarithmic curve look linear?}
+@Q{Why did changing the x-axis scale to `Logarithmic` make our logarithmic curve look linear?}
 @A{We know that @math{g} is growing logarithmically relative to @math{x}, which is the same thing as saying that @math{x} is growing _exponentially_ relative to @math{g}.}
 @A{By log-scaling the x-axis, we are canceling out that exponential growth and making @math{x} _appear_ to grow linearly relative to @math{g}.}
 
-@Q{Why did changing the y-axis to `Logarithmic` make our logarithmic curve look sharper?}
+@Q{Why did changing the y-axis scale to `Logarithmic` make our logarithmic curve look sharper?}
 @A{Instead of canceling out the logarithmic growth of the function, we took the "log of the log" -- making the effect even sharper.}
 }
 
@@ -186,14 +234,14 @@ Make sure to give students time to explore and discuss this with their peers!
 @slidebreak{Synthesize}
 
 @QandA{
-The last question on @printable-exercise{balancing-growth-log-and-exp.adoc} asks us how we might make the function @math{h} appear linear, by re-scaling _only_ the x-axis. 
+The challenge question on @printable-exercise{balancing-growth-log-and-exp.adoc} asks us how we might make the function @math{h} appear linear, by re-scaling _only_ the x-axis. 
 
 @Q{Desmos gives us two choices for how our intervals grow on the x-axis. What are they?}
 @A{Linear (each interval is the same size as the last)}
 @A{Logarithmic (each interval is 10x larger than the last)}
 
 @Q{If we wanted to make our exponential function @math{h} appear linear, how would we want the intervals on the x-axis to grow?}
-@A{We would need it to "undo" or "cancel out" the logarithmic growth of @math{g}, so we want each interval on the x-axis to be 10x smaller than the one before it.}
+@A{We would need it to "undo" or "cancel out" the logarithmic growth of @math{h}, so we want each interval on the x-axis to be 10x smaller than the one before it.}
 @A{Desmos would probably call this "Exponential" scale}
 }
 
@@ -203,7 +251,7 @@ The last question on @printable-exercise{balancing-growth-log-and-exp.adoc} asks
 
 One of our other lessons, @lesson-link{functions-dr}, introduces students to @starter-file{rocket-height, a simple rocket animation}. This starter file includes an optional extension, in which the flight of the rocket is shown on a _logarithmically-scaled_ image of the whole universe: `(space rocket-height)`.
 
-With that scale, the linearly-moving rocket appears to take off quickly at first, but then slow to a crawl. This is intentionally frustrating for students: they want to see what else is in the image!
+With that scale, the linearly-moving rocket appears to take off quickly at first, but then slows to a crawl. This is intentionally frustrating for students: they want to see what else is in the image!
 
 The challenge is to make the rocket fly faster, to balance out the logarithmic growth of the image. Making the rate of the distance function steeper has almost no impact, and making it quadratic only improves matters a little. Only by making the distance function _exponential_ is the logarithmic growth cancelled out, providing a pretty concrete demonstration of this relationship.
 }
@@ -234,46 +282,38 @@ Students take what they've learned about changing the scale, and apply it to the
 === Launch
 @slidebreak{Launch-DN}
 
-@teacher{Sync or pace students to *Slide 7: Wealth-v-Health (Logarithmic)* of @starter-file{alg2-log-desmos}.}
+@teacher{Sync or pace students to *Slide 5: Wealth-v-Health (Logarithmic)* of @starter-file{alg2-log-desmos}.}
 
 @lesson-instruction{
 - Let's apply what we've learned about changing scale to our data!
-- In order to complete the first section of @printable-exercise{fitting-logarithmic-models.adoc}, you'll need to:
-  * Return to the *Fitting Wealth-v-Health and Exploring Logarithmic Models Desmos file*. You should now be on Slide 7: "Wealth-v-Health (Logarithmic)".
-  * Open the @starter-file{alg2-countries}.
+- Return to @printable-exercise{fitting-logarithmic-models.adoc} and the *Fitting Wealth-v-Health and Exploring Logarithmic Models Desmos file*. You should now be back on *Slide 5: Wealth-v-Health (Logarithmic)*.
+- Complete the second section of @printable-exercise{fitting-logarithmic-models.adoc}
 }
 
-@slidebreak{Launch}
-
-@QandA{
-@Q{What values did you come up with for @math{a} and @math{k} in your best-guess logarithmic model?}
-@A{Record different students' responses for @math{a} and @math{k} on the board.}
-
-@Q{How do your @math{a} and @math{k} values compare with those of other students'? Are they very similar or very different?}
-
-@Q{What were the @math{S} values for these models?}
+@teacher{
+Students will be switching the x-axis of their graph from linear to logarithmic in this section. Make sure they are toggling back and forth between the two views as they look for the best-fitting model.
 }
-
-@slidebreak{Launch}
-
-Trial-and-error only gets us so far, and it's not clear that we would ever stumble upon the optimal model. We need something like Pyret's `lr-plot`, which uses computational methods to find the optimal model.
-
-@lesson-point{
-Data Scientists often use transformations to stretch their data into shapes that are easier to work with, and then reverse the transformation when they are done. 
-}
-
-If only we could _transform_ this data to make it appear linear... Then we could use `lr-plot` to fit the optimal model, and reverse the transformation to get the optimal @vocab{logarithmic model}!
 
 === Investigate
 @slidebreak{Investigate}
 
 @lesson-instruction{
+- Return to the @starter-file{alg2-countries}, and use your scaled-axis model to complete and fit `logarithmic2`.
 - Complete the last section of @printable-exercise{fitting-logarithmic-models.adoc}.
 - Be ready to share your logarithmic model, and your answer to the last question!
 }
 
-@teacher{
-Students will be switching the x-axis of their graph from linear to logarithmic in this section. Make sure they are toggling back and forth between the two views as they look for the best-fitting model.
+@slidebreak{Investigate}
+
+@QandA{
+@Q{What values did you come up with for @math{a} and @math{k} in your scaled-axis logarithmic model?}
+@A{Record different students' responses for @math{a} and @math{k} on the board.}
+
+@Q{How do your @math{a} and @math{k} values compare with those of other students'? Are they very similar or very different?}
+
+@Q{What were the @math{S} values for these models?}
+
+@Q{Did scaling the x-axis change the distribution of our model settings? If so, did the class's values for @math{a} and @math{k} become _more_ or _less_ similar?}
 }
 
 @slidebreak{Investigate}

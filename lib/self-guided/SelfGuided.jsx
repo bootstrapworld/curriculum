@@ -106,9 +106,16 @@ export async function addToEditor(x) {
 window.addToEditor = addToEditor
 
 export function SelfGuided() {
-  // console.log('making SelfGuided');
+
+  // Set window title
+  useEffect(() => {
+      document.title = selfGuidedTitle;
+    }, []); // Empty array makes the effect run only once
+
   const [index, setIndex] = useState(0);
   let twinPane = selfGuidedBits[index];
+
+  const [nextAllowed, allowNext] = useState(true);
 
   function handleClickNext() {
     // console.log('doing clicknext');
@@ -133,33 +140,27 @@ export function SelfGuided() {
     throw "Invalid configuration provided: "+JSON.stringify(twinPane, null, 2);
   }
 
-
-  // console.log('hc index is', index);
-  // console.log('lessonText is', twinPane.lessonText);
-  // console.log('editorCode is', twinPane.editorCode);
-
   return (
     <>
     <div id="banner">
-      <img src="./icon.png" height="50" />
-      <span>Bootstrap :: {selfGuidedTitle}</span>
+      <img class="icon" src="https://www.BootstrapWorld.org/images/icon.png" />
+      <span class="title">{selfGuidedTitle}</span>
+      <span class="count">({index+1} of {numSelfGuidedPages})</span>
     </div>
     <div id="progressbar" style={{width: (index + 1) * (100 / numSelfGuidedPages) + "%"}}></div>
-    <h1>{selfGuidedTitle}</h1>
     <main>
       <div id="buttons">
         <button id="prev"
                 onClick={handleClickPrev}
-                disabled={index>0? '' : 'yes'}>
+                disabled={(index>0)? '' : 'yes' }>
           «
         </button>
         <button id="next"
                 onClick={handleClickNext}
-                disabled={index < selfGuidedBits.length - 1? '' : 'yes'}>
+                disabled={(index < selfGuidedBits.length - 1) && nextAllowed? '' : 'yes'}>
           »
         </button>
       </div>
-      <h2>({index+1} of {numSelfGuidedPages})</h2>
       <div id="pages">
         <div id="leftPane">
           {leftPane}
@@ -170,7 +171,7 @@ export function SelfGuided() {
       </div>
     </main>
     <div id="footer">
-      <a href="https://www.BootstrapWorld.org">Bootstrap</a> is brought to you by the <a href="https://www.BootstrapWorld.org/community">Bootstrap Team</a>. Special thanks to <a href="http://www.ProgramByDesign.org">Program by Design</a> and <a href="https://www.Brown.edu">Brown University</a>.
+       Bootstrap is a fiscally sponsored project of <a href="https://www.communityinitiatives.org">Community Initiatives</a>. We collaborate with faculty at several of the leading universities in computer science, including Brown University, and the University of California San Diego, as well as other institutions.
     </div>
     </>
   );

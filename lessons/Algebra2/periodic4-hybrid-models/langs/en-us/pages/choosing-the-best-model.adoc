@@ -1,6 +1,12 @@
 [.landscape]
 = Choosing the Best Model for the Data
 
+++++
+<style>
+td { padding: 0 !important; }
+</style>
+++++
+
 [.no-flex-section]
 == Deconstructing a Model
 
@@ -8,24 +14,32 @@
 
 
 @indented{
+
+[cols="2a,1a", grid="none", frame="none"]
+|===
+|
+
 ```
 fun periodic-cos(x): (4.13 * cos(6.28 * (x - 2023.35))) + 419.87 end 
 fun wave-cos(x):     (4.13 * cos(6.28 * (x - 2023.35)))          end 
 fun midline-cos(x):                                       419.87 end 
 fun periodic-cos2(x):     wave-cos(x)      +      midline-cos(x) end
 ```
+|
 
+@vocab{S-value} for `periodic-cos`: @fitb{8em}{@ifsoln{~1.1561476}}
+
+@vocab{S-value} for `periodic-cos2`: @fitb{8em}{@ifsoln{~1.1561476}}
+
+|===
 }
 
-@n Read these 4 functions carefully, and explain why `periodic-cos2` will produce the _same graph_ as `periodic-cos`. @fitb{}{} +
-@fitb{}{} +
-@fitb{}{}
+@n Read these 4 functions carefully, and explain why `periodic-cos2` will produce the _same graph_ as `periodic-cos`. @fitb{}{} 
+
+@blanklines{2}{@ifsoln{`periodic-cos2` is composed of two functions called `midline-cos` and `wave-cos`. `midline-cos` is just the vertical shift of the `periodic-cos` function. `wave-cos` is all of the parts of the `periodic-cos` function except for that vertical shift.}}
 
 ++++
 <style>
-/* Format autonumbering inside the table correctly */
-table .autonum::after { content: ')' !important; }
-
 /* Remove default table padding */
 .graph { table-layout: 	fixed; }
 .listingblock, .listingblock pre { 
@@ -117,7 +131,7 @@ div#body.workbookpage table.FillVerticalSpace > tbody > tr:nth-of-type(even) > t
 
 
 @n Which of the other models you described above would make the most sense to fit to this scatter plot? Why?
-@fitb{}{} +
-@fitb{}{} +
+@fitb{}{@ifsoln{Linear. Because the points rise.}} +
+@fitb{}{}  +
 @fitb{}{}
 |===

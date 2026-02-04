@@ -1,0 +1,183 @@
+= 🎮 Game Design
+
+@description{Students learn that characters' positions in video games can be described using coordinates, then brainstorm the context and characters for the games they will design.}
+
+@lesson-prereqs{}
+
+@keywords{}
+
+[@lesson-intro-table]
+|===
+
+| Lesson Goals
+| Students will be able to:
+@objectives
+
+@objective{coord-estimate}
+@objective{coord-explain}
+
+| Student-Facing Lesson Goals
+|
+- Let's estimate the positions of objects using coordinates.
+- Let's collaborate to brainstorm a video game and create a sample mock-up (proof of concept) of our game.
+
+| Materials
+|[.materials-links]
+@material-links
+
+| Key Points for the Facilitator
+|
+- The launch activity should create and reinforce the need for coordinates and the importance of attending to precision.
+- Continue to use the same "Estimating Coordinates" page so students can track their pattern of estimation over time.
+|===
+
+
+
+== Bridging to Video Games
+
+=== Overview
+Students gradually break down the NinjaCat game into parts, revealing how @vocab{coordinates} play a crucial role in video games, and how animation is created via equations that govern the changing values of those coordinates.
+
+From there, they brainstorm a game of their own.
+
+=== Launch
+@slidebreak{Launch-DN}
+
+@lesson-instruction{
+- With your partner, open the @starter-file{ninja-cat}, and play for a minute using the arrows keys to move left, right, and jump.
+- Complete @printable-exercise{ReverseEngineerGame.adoc}.
+}
+
+@teacher{
+Debrief what changed, what changed about them, and how the changes are modeled mathematically!
+}
+
+@slidebreak{Launch}
+
+@QandA{
+@Q{How many numbers does it take to represent a single frame of the video game? +
+_Hint: Each character is represented by both an x-coordinate and a y-coordinate (some of which are fixed and some of which are randomly generated)._}
+@A{Nine: 2 for the cat (moves left and right), 2 each for the cloud and ruby (move left at random y-positions), 2 for the dog (moves left at a fixed y-position) and 1 for the score}
+@Q{How are those numbers changing -- or _varying_ -- as the game plays? When do they increase? Decrease?}
+@A{The cat's y-coordinate increases when they jump and decreases when they fall.}
+@A{x-coordinates increase when a character moves right, and decrease when they move left.}
+@A{The score increases by 1 when the cat gets a ruby and by 10 when the cat jumps on the dog.}
+@Q{How many variables would we need to have a two-player game with two cats?}
+@A{(Sample answer) Eleven: we'd need to add another set of x-y coordinates.}
+@Q{How many variables would we need if the entire game was in 3D?}
+@A{(Sample answer) Fifteen: we'd need to add z-coordinates to each character.}
+}
+
+@teacher{
+The main idea here is to understand that while we see images on a screen, the computer only sees a small set of variables, which uniquely model the state of the game. The way those numbers change determines how the game behaves, and we can add features to the game if we're willing to keep track of more variables.
+}
+
+
+=== Investigate
+@slidebreak{Investigate}
+
+@lesson-instruction{
+- Complete @printable-exercise{BrainstormGame.adoc} and decide on a Player, Target, Danger, and Background for your game!
+- Then, use a @online-exercise{https://docs.google.com/drawings/d/1xXNWcbJ7KOgTClFQeHq-tIy0xmeZds9N3OktvEBaO4c/copy, Google Draw template} (click "Make a copy" when prompted) to create a sample "screenshot" of your game by inserting images via Google Search.
+- Make sure your Screenshot includes:
+  * Labeled estimates of coordinates for each character.
+  * 2 characters that have the same x-coordinate.
+  * 2 different characters that have the same y-coordinate.
+}
+
+=== Common Misconceptions
+- Students are likely to describe what the character is _doing_, as opposed to _what changes_. For example: "The dog is moving to the left" is not actually describing the property being changed (position, place, location, etc).
+- Students may write down what they _hope_ is changeable, as opposed to what actually changes. It's common for students to say the cat's costume is changing, because they assume the cat will somehow "level up" if they get enough points.
+
+=== Synthesize
+@slidebreak{Synthesize}
+@QandA{
+@Q{When the "Game Over" screen is supposed to be off screen, what coordinates might hide it?}
+@Q{What would be the coordinate of the dog _before it gets onscreen?_}
+@A{The dog would have a negative x-coordinate before getting on screen.}
+}
+
+@slidebreak{Synthesize}
+
+@QandA{
+@Q{How many variables do you think are being kept track of in a modern video game?}
+@A{A whole lot -- Thousands. Millions!}
+}
+
+== Connecting to Real Games
+
+=== Overview
+Students apply this way of thinking to more complex, real-world games. They also get a sense for how much work is involved in creating games like that.
+
+=== Launch
+@slidebreak{Launch}
+
+@lesson-instruction{
+What are your favorite video games?
+}
+
+@teacher{Make a list of the names of the video games on the board.}
+
+=== Investigate
+@slidebreak{Investigate}
+@lesson-instruction{
+Let's choose one current, popular game to discuss.
+
+- How long do you think it took to create that game?
+- How _many people_ do you think it takes to create a game like that?
+- How _much money_ does it take to create a game like that?
+}
+
+@teacher{
+Collect students estimates for each of the questions above.
+}
+
+@opt{Once students have made their estimates, have students use the Internet to research these questions and compare the actual numbers to their estimates.}
+
+@slidebreak{Investigate}
+
+@ifnotslide{*Answers:*} There's a lot of variability, especially between game consoles and cell phone games! But here are a few sample numbers:
+
+[cols="3,^1,^1,^1", options="header"]
+|===
+| Title
+| Time
+| Team Size
+| Budget
+
+| Call of Duty: Modern Warfare 2
+| 2 years
+| 500+
+| 50m+
+
+| Final Fantasy VII
+| 3 years
+| 100+
+| 40-45m
+
+| Shadow of the Tomb Raider
+| 3+ years
+| 100+
+| 75m+
+
+|===
+
+@slidebreak{Investigate}
+
+The 3D, two-player version of NinjaCat needed a lot more numbers than the simple one we played with today, _but the actual concepts at work are the same_.
+
+We don't have time in this course to make games that are as complex as your favorite games, but you'll be learning the same concepts just by making a simpler one.
+
+@teacher{
+The goal here is not to discourage students from the possibility of eventually creating a game like their favorite game, but to manage expectations given our limited resources (time, money, and people).  By starting with this game project, students are learning transferable skills that can help them later on in learning new programming languages and creating bigger projects.
+}
+
+=== Synthesize
+@slidebreak{Synthesize}
+
+@QandA{
+@Q{Why won't we be making video games that are as complex as games like Call of Duty in this course?}
+@A{They take years to build, even with a huge professional team!}
+@Q{What kind of video games are we likely make in this course?}
+@A{Fairly basic games with a player, target and danger, like the Ninjacat Game we played at the beginning of today's class.}
+}

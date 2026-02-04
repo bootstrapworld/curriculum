@@ -1,6 +1,6 @@
 include $(MAKE_DIR)utils.mk
 
-phase1: initialization .git/hooks/pre-commit node_modules distribution/$(NATLANG)/lib/self-guided/node_modules courses-and-lessons page-not-found glossary bootstraplessonjs starterFiles learningObjectives dictionaries citations
+phase1: node_modules initialization .git/hooks/pre-commit courses-and-lessons page-not-found glossary bootstraplessonjs starterFiles learningObjectives dictionaries citations
 
 ###############################################################################
 
@@ -12,7 +12,6 @@ initialization:
 	@$(CP) -upr shared/langs/en-us/* $(PROGDIR)
 	@$(CP) -upr lib/codemirror.css distribution/$(NATLANG)/lib
 	@node_modules/less/bin/lessc shared/langs/$(NATLANG)/curriculum.less > distribution/$(NATLANG)/lib/curriculum.css
-	@node_modules/less/bin/lessc shared/langs/$(NATLANG)/curriculum-wp.less > distribution/$(NATLANG)/lib/curriculum-wp.css
 	@if test $(NATLANG) != en-us -a -d shared/langs/$(NATLANG); then \
 		$(CP) -upr shared/langs/$(NATLANG)/* $(PROGDIR); fi
 	@mkdir -p distribution/$(NATLANG)/lib/Badges
@@ -34,7 +33,12 @@ initialization:
 	@$(CP) -p lib/*.css distribution/$(NATLANG)/lib
 	@$(CP) -p lib/[!b]*.js distribution/$(NATLANG)/lib
 	@$(CP) -p lib/images/*.png distribution/$(NATLANG)/lib/images
-	@$(CP) -p lib/self-guided/*.{css,html,js,json,jsx,png} distribution/$(NATLANG)/lib/self-guided
+	@$(CP) -p lib/self-guided/*.css distribution/$(NATLANG)/lib/self-guided
+	@$(CP) -p lib/self-guided/*.html distribution/$(NATLANG)/lib/self-guided
+	@$(CP) -p lib/self-guided/*.js distribution/$(NATLANG)/lib/self-guided
+	@$(CP) -p lib/self-guided/*.json distribution/$(NATLANG)/lib/self-guided
+	@$(CP) -p lib/self-guided/*.jsx distribution/$(NATLANG)/lib/self-guided
+	@$(CP) -p lib/self-guided/*.png distribution/$(NATLANG)/lib/self-guided
 	@$(CP) -pr lib/fonts/* distribution/$(NATLANG)/lib/fonts
 	@rm -f $(MAKE_ERR_LOG) $(ADOC_INPUT) $(PUPPETEER_INPUT)
 	@echo 'return {' > $(SETUP_PATHWAYINDEPENDENT)
@@ -53,11 +57,9 @@ initialization:
 # but I don't think it buys us much
 
 node_modules:
+	@. ${HOME}/.nvm/nvm.sh && nvm use 22.5
 	npm explore npm/node_modules/@npmcli/run-script -g -- npm_config_global=false npm install node-gyp@latest
 	npm install
-
-distribution/$(NATLANG)/lib/self-guided/node_modules:
-	@(cd distribution/$(NATLANG)/lib/self-guided; npm install)
 
 .git/hooks/pre-commit: lib/maker/git-pre-commit-hook.sh
 	@echo ➤ Install Git pre-commit hook
@@ -157,6 +159,7 @@ alignment-dictionaries := $(wildcard \
 distribution/$(NATLANG)/lib/dictionaries.js: $(alignment-dictionaries)
 	@echo ➤ Build $@
 	@$(MAKE_DIR)make-json-dict.lua $@
+	@$(MAKE_DIR)check-dictionaries.sh
 
 ###############################################################################
 

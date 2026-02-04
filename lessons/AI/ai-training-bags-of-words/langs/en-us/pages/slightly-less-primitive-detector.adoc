@@ -5,15 +5,14 @@ Open @starter-file{plagiarism}. Click "Run".}
 
 == Reviewing `simple-similarity`
 
-@n Type `doc-a` into the Interactions Area, then hit "Enter". What appears? @fitb{}{@ifsoln{"doo doo be doo be"}}
-
+@n Type `doc-a` into the Interactions Area, then hit "Enter". What appears? @fitb{}{@ifsoln{"doo doo be doo be"}} +
 @n Type `doc-b` into the Interactions Area, then hit "Enter". What appears? @fitb{}{@ifsoln{"doo be doo be doo"}}
 
-@n If we compare these two documents using our `simple-equality` function, what do you predict the outcome will be... and why?
-
-@fitb{}{@ifsoln{Students should predict that the output will be `false` because the documents are not identical.}}
-
-@fitb{}{}
+@n If we compare these two documents using our `simple-equality` function, what do you predict the outcome will be... and why? +
+@blanklines{2}{
+@ifsoln{Students should predict that the output will be `false` because the documents are not identical.
+}
+}
 
 @n Type `simple-equality(doc-a, doc-b)`. What is the output? @fitb{}{@ifsoln{false}}
 
@@ -33,21 +32,20 @@ Open @starter-file{plagiarism}. Click "Run".}
 
 == Assessing the model on our elephants texts
 
-@n Use `string-to-bag` to build one bag of words for the `wiki-article`, and another for the `student-essay`. Do the bags of words appear to be identical to you, or not? @fitb{}{@ifsoln{They are close but not identical. In the `student-essay`, "which" appears twice but it never appears,}}
-
+@n Use `string-to-bag` to build one bag of words for the `wiki-article`, and another for the `student-essay`. Do the bags of words appear to be identical to you, or not? @fitb{}{@ifsoln{They are close but not identical. In the `student-essay`, "which" appears twice but it never appears,}} +
 @fitb{}{@ifsoln{in the `wiki-article`.}}
 
-@n Our `simple-equality` function returned `false` when we compared `wiki-article` with `student-essay`, because the two documents are not identical. What do you predict that `bag-equality` will produce, when we compare `wiki-article` with `student-essay`? Why? @fitb{}{}
-
+@n Our `simple-equality` function returned `false` when we compared `wiki-article` with `student-essay`, because the two documents are not identical. What do you predict that `bag-equality` will produce, when we compare `wiki-article` with `student-essay`? Why? @fitb{}{} +
 @fitb{}{}
 
 @n Use `bag-equality` to compare `wiki-article` and `student-essay`. Was your prediction correct? @fitb{}{}
 
 == Reflect
 
-@n How is the `bag-equality` plagiarism detector different from our primitive `simple-equality` plagiarism detector? How is it similar?
-
-@fitb{}{@ifsoln{Different: The bag-equality plagiarism detector compares two bag-of-words summaries, rather than simply comparing two texts.}}
-
-@fitb{}{@ifsoln{Similar: Like our primitive plagiarism detector, it checks for identicality. It determines if the two bags of words are identical or not.}}
+@n How is the `bag-equality` plagiarism detector different from our primitive `simple-equality` plagiarism detector? How is it similar? +
+@blanklines{2}{
+@ifsoln{Different: The bag-equality plagiarism detector compares two bag-of-words summaries, rather than simply comparing two texts. +
+Similar: Like our primitive plagiarism detector, it checks for identicality. It determines if the two bags of words are identical or not.
+}
+}
 

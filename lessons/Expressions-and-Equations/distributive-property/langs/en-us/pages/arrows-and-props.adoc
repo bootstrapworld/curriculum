@@ -4,7 +4,6 @@
 ++++
 <style>
 div.circleevalsexp { width: auto; }
-td .autonum::after { content: ')' !important; }
 /* for table cells with immediate .content children, which have immediate
  * .paragraph children: use flex to space them evenly and center vertically
 */
@@ -17,17 +16,6 @@ td > .content > .paragraph {
 /* The table is intended to take up the whole page, so no margin needed*/
 table { margin: 0 !important; }
 
-/*
-- Make the arrows relative, so we can position answers around them
-- Make the answers 20px above the top of the arrow, centered
-*/
-tr span.arrow { position: relative; }
-tr span.arrow::before {
-  position: absolute;
-  top: -20px;
-  left: 50%;
-  transform: translate(-50%, 0);
-}
 </style>
 ++++
 
@@ -39,35 +27,35 @@ Each arrow represents a transformation from an expression to an equivalent expre
 
 
 | @n
-| @show{(coe '(+ (* 50 50) (* 50 8)))} @span{.arrow}{⟶}
-@show{(coe '(+ 250 (* 50 (* 2 4))))} @span{.arrow}{⟶}
-@show{(coe '(+ 250 (* (* 50 2) 4)))} @span{.arrow}{⟶}
+| @show{(coe '(+ (* 50 50) (* 50 8)))} @arrow
+@show{(coe '(+ 250 (* 50 (* 2 4))))} @arrow
+@show{(coe '(+ 250 (* (* 50 2) 4)))} @arrow
 @show{(coe '(+ 250 (* (* 2 50) 4)))}
 
 | @n
-| @show{(coe '(- (* 70 40) (* 70 1)))} @span{.arrow}{⟶}
-@show{(coe '(* 70 (- 40 1)))} @span{.arrow}{⟶}
-@show{(coe '(* 70 39))} @span{.arrow}{⟶}
-@show{(coe '(* 70 (* 3 13)))} @span{.arrow}{⟶}
+| @show{(coe '(- (* 70 40) (* 70 1)))} @arrow
+@show{(coe '(* 70 (- 40 1)))} @arrow
+@show{(coe '(* 70 39))} @arrow
+@show{(coe '(* 70 (* 3 13)))} @arrow
 @show{(coe '(* (* 70 3) 13))}
 
 
 | @n
-| @show{(coe '(+ (* (+ 9 3) (- h g)) k))} @span{.arrow}{⟶}
-@show{(coe '(+ (* 12 (- h g)) k))} @span{.arrow}{⟶}
-@show{(coe '(+ (- 12h 12g) k))} @span{.arrow}{⟶}
+| @show{(coe '(+ (* (+ 9 3) (- h g)) k))} @arrow
+@show{(coe '(+ (* 12 (- h g)) k))} @arrow
+@show{(coe '(+ (- 12h 12g) k))} @arrow
 @show{(coe '(+ k (- 12h 12g)))} @span{.arrow}
 
 | @n
-| @show{(coe '(/ (+ (* 22 9) (* 22 1)) 1))} @span{.arrow}{⟶}
-@show{(coe '(+ (* 22 9) (* 22 1)))} @span{.arrow}{⟶}
-@show{(coe '(+ (* 22 1) (* 22 9)))} @span{.arrow}{⟶}
+| @show{(coe '(/ (+ (* 22 9) (* 22 1)) 1))} @arrow
+@show{(coe '(+ (* 22 9) (* 22 1)))} @arrow
+@show{(coe '(+ (* 22 1) (* 22 9)))} @arrow
 @show{(coe '(* 22 (+ 9 1)))}
 
 | @n
-| @show{(coe '(* (+ (* b 15) (* b 8)) 1))} @span{.arrow}{⟶}
-@show{(coe '(+ (* b 15) (* b 8)))} @span{.arrow}{⟶}
-@show{(coe '(+ (* 15 b) (* 8 b)))} @span{.arrow}{⟶}
+| @show{(coe '(* (+ (* b 15) (* b 8)) 1))} @arrow
+@show{(coe '(+ (* b 15) (* b 8)))} @arrow
+@show{(coe '(+ (* 15 b) (* 8 b)))} @arrow
 @show{(coe '(* 15 (+ b b)))}
 
 |===

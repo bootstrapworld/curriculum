@@ -7,10 +7,6 @@ Are the images produced by the two lines of code identical -- or will they look 
 <style>
 div.circleevalsexp { width: auto; }
 td > .content > .paragraph > * { vertical-align: middle; }
-
-/* Make autonums inside tables look consistent with those outside */
-table .autonum::after { content: ')' !important;}
-
 </style>
 ++++
 
@@ -20,35 +16,35 @@ table .autonum::after { content: ')' !important;}
 
 | @n
 | @show{(coe '(circle (+ 90 -30) "outline" "purple"))}
-@math{=}
+@show{(code '=)}
 @show{(coe '(circle (+ -30 90) "outline" "purple"))}
 || @ifsoln{yes}
 
 
 | @n
 | @show{(coe '(text "Rasula" (+ 100 -45) "dark-orange"))}
-@math{=}
+@show{(code '=)}
 @show{(coe '(text "Rasula" (- 100 45) "dark-orange"))}
 || @ifsoln{yes}
 
 
 | @n
 | @show{(coe '(rotate (+ -20 100) (text "hi" (+ -20 30) "red")))}
-@math{=}
+@show{(code '=)}
 @show{(coe '(rotate (- 100 -20) (text "hi" (- 30 20) "red")))}
 || @ifsoln{no}
 
 
 | @n
 | @show{(coe '(scale (- 2 -1) (circle(+ 50 5) "outline" "blue")))}
-@math{=}
+@show{(code '=)}
 @show{(coe '(scale (+ 2 1) (circle(+ 50 -5) "outline" "blue")))}
 || @ifsoln{no}
 
 
 | @n
 | @show{(coe '(rectangle (- 62 2) (+ 32 8) "solid" "aqua"))}
-@math{=}
+@show{(code '=)}
 @show{(coe '(rectangle(+ -2 62) (- 32 -8) "solid" "aqua"))}
 || @ifsoln{yes}
 

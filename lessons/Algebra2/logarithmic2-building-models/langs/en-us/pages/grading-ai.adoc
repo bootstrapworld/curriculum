@@ -1,0 +1,56 @@
+= Using AI to Fit Logarithmic Models
+++++
+<style>
+	.image-figure { text-align: center; }
+	img { max-width: 80%; }
+	.autonum { padding-top: 2em !important; }
+</style>
+++++
+An AI was asked to fit a logarithmic model to each of the scatter plots below. Did the AI do a good job? +
+(_HINT: try drawing the curve-of-best-fit for these plots!_)
+
+[.FillVerticalSpace, cols="1a,1a", frame="none", options="noheader", stripes="none"]
+|===
+| @image{../images/-10log(x).png}
+@center{*AI's Suggested Model:* @math{f(x) = 10 log(x)}}
+
+@n What did the AI get right? What did it get wrong, and why?
+
+@blanklines{5}{
+@ifsoln{The AI seems to have gotten the magnitude of the logarithmic coefficient right, but not the sign. The data should be modeled by logarithmic _decay_, not growth! So the model should be @math{-10 log(x)}.
+}
+}
+
+| @image{../images/5log(x)+10.png}
+@center{*AI's Suggested Model:* @math{f(x) =  5log(x - 10)}}
+
+@n What did the AI get right? What did it get wrong?
+
+@blanklines{5}{
+@ifsoln{The AI correctly determined a shift of 10, but the correct model should have been @math{f(x) =  5logx + 10} because the data is best modeled by a vertical shift of 10 not a horizontal shift. 
+}
+}
+
+
+
+| @image{../images/-50log(x)-20.png}
+@center{*AI's Suggested Model:* @math{f(x) = -50 log(x) - 70}}
+
+@n What did the AI get right? What did it get wrong?
+
+@blanklines{5}{
+@ifsoln{AI got the coefficient of -50 and the asymptote at x=0 correct, but is incorrect with the vertical shift in that it said -70 while it is only -20. Using AI's function, as x approaches zero, y approaches -20. We need to add 50 to the k value in order to raise y to the approximate 30 in our graph.
+}
+}
+
+| @image{../images/10log(x-10).png}
+@center{*AI's Suggested Model:* @math{f(x) = 10 log(x + 10)}}
+
+@star What did the AI get right? What did it get wrong?
+
+@blanklines{5}{
+@ifsoln{The logarithmic coefficient is right, but the horizontal shift is definitely wrong. In the scatter plot the curve of best fit is shifted 10 to the right. But in the model, 10 is being added to @math{x}, which would shift the curve left.
+}
+}
+
+|===

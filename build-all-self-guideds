@@ -1,0 +1,40 @@
+#! /usr/bin/env bash
+
+course=
+nomake=
+
+otheropts="--nomake"
+
+while test $# -ne 0; do
+  opt="$1"
+  if test "$opt" = --nomake; then
+    nomake=1; shift
+  else
+    course="$opt"; shift
+    course=${course%/}
+    course=${course##*/}
+  fi
+done
+
+if test -z "nomake"; then
+  make
+fi
+
+function build_self_guided() {
+  local lesson=$1
+  echo calling build-self-guided $otheropts $lesson
+  ./build-self-guided $otheropts $lesson
+}
+
+if test -z "$course"; then
+  for lesson in distribution/en-us/lessons/*; do
+    build_self_guided $lesson
+  done
+else
+  courselessonlist=distribution/en-us/courses/$course/.cached/.workbook-lessons.rkt.kp
+  for lesson in $(cat $courselessonlist); do
+    if ! echo $lesson | grep -q "[()]"; then
+      build_self_guided $lesson
+    fi
+  done
+fi

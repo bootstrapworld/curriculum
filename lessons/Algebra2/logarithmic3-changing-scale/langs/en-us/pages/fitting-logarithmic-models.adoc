@@ -26,6 +26,7 @@ div#body.workbookpage .studentAnswerShort { min-width: 30pt; } .studentAnswerMed
 - {caret}
 - {magnifying}
 - {wrench}
+- {folder}
 -
 - Here's an example of using these:
 - This is a wrench icon in desmos: [.desmosbutton]#{wrench}#
@@ -40,9 +41,9 @@ div#body.workbookpage .studentAnswerShort { min-width: 30pt; } .studentAnswerMed
 @ifsoln{@vspace{1ex}}
 
 == Fitting a Logarithmic Model @hspace{2em} __f(x) = a log~b~ x + k__
-@link-instructions{You should be on *Slide 7: Wealth-v-Health (Logarithmic)* of *Fitting Wealth-v-Health and Exploring Logarithmic Models (Desmos)*.}
+@link-instructions{You should be on *Slide 5: Wealth-v-Health (Logarithmic, w Scaled Axes)* of *Fitting Wealth-v-Health and Exploring Logarithmic Models (Desmos)*.}
 
-- The x-axis should labeled with a sequence of numbers that looks something like this: @hspace{1em} _20000, 40000, 60000, 80000, 10000, 120000..._ 
+- The x-axis should labeled with a sequence of numbers that looks something like this: @hspace{1em} _20000, 40000, 60000, 80000, 100000, 120000..._ 
 
 
 @n What kind of growth does the sequence on the x-axis show? (circle one) @ifnotsoln{@hspace{6em}} @ifsoln{@hspace{5em}}
@@ -54,15 +55,15 @@ Logarithmic
 @n Use the sliders for @math{a} and @math{k} to make the best-fitting logarithmic model you can find. Write it below. _(Note: Pyret's `log` always uses @math{b = 10})_
 
 @indented{
-@ifsoln{*NOTE:* The answers to question 2 and 3 are just a sample -- many other (similar) answers are valid!}
+@teacher{The answers to question 2 and 3 are just a sample -- many other (similar) answers are valid!}
 }
 
 [cols="^1a", grid="none", frame="none", stripes="none"]
 |===
 |
 @math{\text{logarithmic}(x) = }
-@fitbruby{7em}{@ifsoln{7.2}}{log coefficient (a)}@math{\log_{10}(x) + }
-@fitbruby{7em}{@ifsoln{45}}{vertical shift (k)}
+@fitbruby{7em}{@ifsoln{~7.2}}{log coefficient (a)}@math{\log_{10}(x) + }
+@fitbruby{7em}{@ifsoln{~45}}{vertical shift (k)}
 @hspace{3em}
 @show{(code '(define (logarithmic x) (+ (* (?ANS 7.2) (log x)) (?ANS 45))))}
 |===
@@ -70,7 +71,7 @@ Logarithmic
 
 
 
-@n Define `logarithmic(x)` in the @starter-file{alg2-countries} to be this model, and fit it using `fit-model`.
+@n Add your definition of `logarithmic(x)` to line 45 of the @starter-file{alg2-countries}, click "Run", and fit it using `fit-model`.
 
 @vspace{1ex}
 
@@ -78,7 +79,7 @@ Logarithmic
 The error in the model is described by an @math{\text{S-value}} of about
 @fitbruby{1em}{@ifsoln{5.79}}{S}
 @fitbruby{4em}{@ifsoln{years}}{units}. @hspace{1em} I
-@fitbruby{18em}{agree or disagree -- not strong}{strongly agree, agree, disagree, strongly disagree} that this model is a good fit considering that
+@fitbruby{18em}{@ifsoln{agree or disagree -- not strong}}{strongly agree, agree, disagree, strongly disagree} that this model is a good fit considering that
 @fitbruby{14em}{@ifsoln{median life-expectancy}}{y-variable} in this dataset ranges from 
 @fitbruby{6em}{@ifsoln{52.1}}{lowest y-value} to 
 @fitbruby{6em}{@ifsoln{85.5}}{highest y-value}.
@@ -120,11 +121,13 @@ Logarithmic
 @show{(code '(define (logarithmic2 x) (+ (* (?ANS 13 ) (log x)) (?ANS 18))))}
 |===
 
+== Fitting Our Model in Pyret
+
 @n In Pyret, define `logarithmic2(x)` to match this model.  Then use the `fit-model` function to find its @vocab{S-value}: @fitb{}{@ifsoln{less than 5 }}
 
 @n How much
 @fitbruby{5em}{@ifsoln{less}}{more / less }
-error do we expect in predictions made using `logarithmic2` than with the `logarithmic` model?
+error do we expect in predictions made using your `logarithmic2` than with your `logarithmic` model?
 
 @vspace{1ex}
 
@@ -153,6 +156,6 @@ error from predictions made with `logarithmic2` than with the `logarithmic` mode
 
 @fitb{}{}
 
-@n Why does transforming the *x-axis* makes our data look linear? @fitb{}{@ifsoln{Answers will vary: The data is growing logarithmically}} +
-@fitb{}{@ifsoln{and by transforming the x-axis exponentially, it can keep up with the growth. We're inverting the data. }} +
-@fitb{}{@ifsoln{We're warping the scatter plot so the dots looks straight.}}
+@n Why does transforming the *x-axis* make our data look linear? @fitb{}{@ifsoln{Answers will vary: The data is growing logarithmically and by transforming}} +
+@blanklines{1}{
+@ifsoln{the x-axis exponentially, it can keep up with the growth. We're inverting the data. We're warping the scatter plot so the dots looks straight.}}

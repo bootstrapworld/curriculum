@@ -1,0 +1,52 @@
+= Using AI to Fit Quadratic Models
+++++
+<style>
+	.image-figure { text-align: center; }
+	img { max-width: 80%; }
+	.autonum { padding-top: 2em !important; }
+</style>
+++++
+An AI was asked to fit a quadratic model to each of the scatter plots below. For each one, the AI produced its model in either a factored form or vertex form. Did the AI do a good job? (_HINT: try drawing the curve-of-best-fit for these plots!_)
+
+[.FillVerticalSpace, cols="1a,1a", frame="none", options="noheader", stripes="none"]
+|===
+| @image{../images/factored-10-20.png}
+@center{*AI's Suggested Model:* @math{f(x) = (x - 30)(x - 40)}}
+
+@n What did the AI get right? What did it get wrong, and why?
+
+@blanklines{5}{
+@ifsoln{Factored form @math{f(x) = a(x - r_1)(x - r_2)} shows us the direction the parabola opens and the roots (where it passes through the x-axis). The AI-generated model correctly uses a positive a, indicating that the parabola opens up, but the roots are clearly closer to 10 and 20 than the AI's model with roots of 30 and 40!
+}
+}
+
+| @image{../images/vertex-0-35.png}
+@center{*AI's Suggested Model:* @math{f(x) = -x^2 + 35}}
+
+@n What did the AI get right? What did it get wrong?
+
+@blanklines{5}{
+@ifsoln{The AI correctly identified the vertex at (0, 35). It incorrectly used a negative quadratic coefficient, which indicates that parabola opens down. This one opens up.
+}
+}
+
+| @image{../images/factored-50-70.png}
+@center{*AI's Suggested Model:* @math{f(x) = (x + 50)(x + 70)}}
+
+@n What did the AI get right? What did it get wrong?
+
+@blanklines{5}{
+@ifsoln{The AI seems to have identified the roots as 50 and 70, but with the parent function being @math{f(x) = a(x − r1)(x − r2)}, positive roots should have minuses in front of them, not pluses, which would incorrectly locate them at -50 and -70. The AI also got the sign of @math{a} wrong. This parabola opens down so @math{a} should be negative.
+}
+}
+
+| @image{../images/vertex-15-100.png}
+@center{*AI's Suggested Model:* @math{f(x) = -1(x + 15)^2 + 100}}
+
+@n What did the AI get right? What did it get wrong?
+
+@blanklines{5}{
+@ifsoln{The AI got the correct sign (opens down) and the correct y-coordinate of the vertex (100), but it got the sign of the vertex's x-coordinate wrong! With the parent function being @math{f(x) = a(x - h)^2 + k}, a plus in front of the 15 would locate the vertex at -15, when it's actually at +15.
+}
+}
+|===

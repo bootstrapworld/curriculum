@@ -100,7 +100,7 @@ During training:
 
 @hspace{1em}It offers the words that had the highest probability of following "Close the" in the training dataset.
 
-Consider this screenshot from a text messaging app. +  
+Consider this screenshot from a text messaging app. +
 In the @vocab{training corpus} it was built on, "door", "doors", and "house"  most commonly appeared after "Close the". +
 As a result, those words are suggested. +
 But are all users recommended the _same_ completions?
@@ -113,7 +113,7 @@ But are all users recommended the _same_ completions?
 @slidebreak{InvestigateR}
 
 @image{images/texting-app.png, 200}
-Consider this screenshot from a text messaging app. +  
+Consider this screenshot from a text messaging app. +
 In the @vocab{training corpus} it was built on, "door", "doors", and "house"  most commonly appeared after "Close the". +
 As a result, those words are suggested. +
 But are all users recommended the _same_ completions?
@@ -131,10 +131,10 @@ But are all users recommended the _same_ completions?
 
 For a variety of reasons, not all phones will propose the same completions:
 
-- There might be multiple words with equal probability, in which case the system must use some method of random selection. As a result, even the same phone won't necessarily propose the same word every time.
-- Not all phones use the same system. Systems are generally built with at least a little bit of randomness; the amount of randomness varies from system to system.
-- A messaging app also includes a @vocab{model} of the text that _the actual user_ composes. The app therefore offers a degree of personalization based on what the user has chosen in the past. Similarly, the app can take into account the word suggestions that you have previously accepted.
-- Some predictive text features even take into account the specific message that you are composing! For instance, typing first letter of an unusual word that you used in the same message triggers the app to propose that unusual word.
+- If there are multiple words with equal probability, the system will select the word at random. As a result, even the same phone won't necessarily propose the same word every time.
+- Not all phones use the same system, or the same amount of randomness.
+- A messaging app also includes a @vocab{model} of _the words that the owner user_, to personalize suggestions to the way the user writes. The app can also account for previously-accepted word suggestions.
+- Some predictive text features even account for the specific message being written! For instance, typing first letter of an unusual word that you used in the same message triggers the app to propose that unusual word.
 
 @scrub{
 @slidebreak{Investigate}
@@ -254,8 +254,7 @@ In the example you just worked through, you computed the probability that "was" 
 We can represent this computation with a special notation:
 
 @indented{
-@math{p(was | there) =}
-@math{\frac
+@math{p(was | there) = \frac
 	{\textit{count(there was)}}
 	{\textit{count(there...)}} = {\frac{5}{5}}}
 }

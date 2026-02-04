@@ -151,7 +151,8 @@ function json_hash_stringify(j)
       return 'ERROR'
     end
   elseif j_type == 'string' then
-    return '"' .. j .. '"'
+    local j2 = j:gsub('"', '\\"')
+    return '"' .. j2 .. '"'
   else
     return 'ERROR'
   end

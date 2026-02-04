@@ -1,0 +1,89 @@
+= Data Cycle: Categorical Distributions (Animals)
+++++
+<style>
+/* hide the Interpret rows, as well as the sub-questions for Analyze */
+.data-cycle tr:nth-of-type(4),
+.data-cycle tr:nth-of-type(3) td:nth-of-type(2) p:nth-of-type(1),
+.data-cycle tr:nth-of-type(3) td:nth-of-type(2) p:nth-of-type(2) { display: none; }
+table.template { border-top: 0; }
+table.template td:first-of-type { background: #ccc; }
+table { flex-grow: 1; }
+</style>
+++++
+
+Using the @starter-file{expanded-animals}, let's make a @ifproglang{pyret}{*pie-chart*}@ifproglang{codap}{*bar chart*} to see what we can learn about the distribution of fixed animals and what new questions it may lead us to.
+
+@data-cycle{ ""
+  #:question "Are more animals fixed or unfixed?"
+  #:show-question? #t
+  #:question-type "arithmetic"
+  #:rows "All the rows"
+  #:show-rows? #t
+  #:cols "fixed"
+  #:show-cols? #t
+  #:filter-fn ""
+  #:show-filter? #f
+  #:build-fn ""
+  #:show-build? #f
+  #:expression (if (string=? *proglang* "pyret") '(pie-chart more-animals "fixed") "Set x-axis to `fixed`. Select `Fuse Dots into Bars` from the Measure menu.")
+  #:show-expression? #f
+  #:finding "The number of unfixed animals at the shelter (213) is slightly higher than the number of fixed animals (194)."
+  #:show-finding? #f
+  #:new-question "How does the ratio of fixed to unfixed animals differ by species?"
+  #:show-new-question? #t
+}
+
+[.template, cols="^.^2a,13a"]
+|===
+|@centered-image{../images/InterpretData.png}
+|
+The chart shows that there are @fitbruby{18em}{@ifsoln{less}}{more / less / about the same number of} fixed animals @fitbruby{3em}{@ifsoln{than}}{as / than} unfixed animals.
+
+@vspace{1ex}
+
+Some new questions this raises include:
+
+@blanklines{3}{
+@ifsoln{How does the ratio of fixed to unfixed animals differ by species? How does the ratio of fixed to unfixed animals differ by age? Do fixed animals get adopted faster?}
+}
+|===
+
+@span{.sectionbreak}{}
+
+Let's make a *stacked-bar-chart* to see if the ratio of fixed to unfixed animals differs by species.
+
+@data-cycle{ ""
+  #:question "How does the ratio of fixed to unfixed animals differ by species?"
+  #:show-question? #t
+  #:question-type "arithmetic"
+  #:rows "All the rows"
+  #:show-rows? #f
+  #:cols "species, fixed"
+  #:show-cols? #f
+  #:filter-fn ""
+  #:show-filter? #f
+  #:build-fn ""
+  #:show-build? #f
+  #:expression (if (string=? *proglang* "pyret") '(stacked-bar-chart more-animals "species" "fixed") "Set x-axis to `species`, and `Fuse Dots into Bars`. Drag `fixed` to the center of the display.")
+  #:show-expression? #f
+  #:finding ""
+  #:show-finding? #f
+  #:new-question ""
+  #:show-new-question? #f
+}
+
+[.template, cols="^.^2a,13a"]
+|===
+|@centered-image{../images/InterpretData.png}
+|
+The stacked bar chart shows that @fitbruby{7em}{@ifsoln{most}}{most / some / a few} species have @fitbruby{12em}{@ifsoln{fewer}}{more / the same number of / fewer} fixed animals @fitbruby{3em}{@ifsoln{than}}{as / than} unfixed animals. I also notice @fitb{}{@ifsoln{Snails and clownfish are not fixed at all.}}
+
+@vspace{1ex}
+
+Some new questions this raises include:
+
+@blanklines{2}{
+@ifsoln{Do mammals get fixed more often than other animals?}
+}
+
+|===
