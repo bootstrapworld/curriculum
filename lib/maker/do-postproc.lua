@@ -4,9 +4,6 @@ local make_dir = os.getenv'MAKE_DIR'
 
 dofile(make_dir .. 'utils.lua')
 
-local website_branch_p = (shell_output('git branch --show-current')[1] == 'website')
-website_branch_p = true
-
 local pathwayindependent_batchf =  os.getenv'ADOC_POSTPROC_PATHWAYINDEPENDENT_INPUT'
 local workbookpage_batchf =  os.getenv'ADOC_POSTPROC_WORKBOOKPAGE_INPUT'
 local lessonplan_batchf =  os.getenv'ADOC_POSTPROC_LESSONPLAN_INPUT'
@@ -72,36 +69,17 @@ local function postproc(fhtml_cached, tipe)
   --
   local add_analytics_p = false
   local add_bootstrap_lesson_p = false
-  local add_menubar_p = false
   local add_mathjax_p = false
   local add_codemirror_p = false
   local add_body_id_p = false
   local add_landscape_p = false
   local add_end_body_id_p = false
   local delete_line_p = false
-  local read_end_sidebar_p = false
-  local num_of_lines_past_end_sidebar = 0
   local openblock_attribs = false
   local item_attrib = false
   --
   for x in i:lines() do
-    if read_end_sidebar_p then
-      if num_of_lines_past_end_sidebar == 3 then
-        read_end_sidebar_p = false
-      else
-        num_of_lines_past_end_sidebar = num_of_lines_past_end_sidebar + 1
-        goto continue
-      end
-    elseif x:find('%%ENDSIDEBARCONTENT%%') then
-      read_end_sidebar_p = true
-      num_of_lines_past_end_sidebar = 0
-      goto continue
-    end
-    --
     if x:find('^<body') then
-      if memberp(tipe, {'lessonplan', 'pathwaynarrative', 'pathwayresource'}) and not website_branch_p then
-        add_menubar_p = true
-      end
       if x:find('landscape') then
         x = x:gsub('landscape', '')
         add_landscape_p = true
@@ -254,12 +232,19 @@ local function postproc(fhtml_cached, tipe)
       end
     end
     --
-    if tipe == 'lessonplan' then
-      if x:find('^<h2 id') then
-        x = x:gsub('begincurriculumspan', '')
-        x = x:gsub('endcurriculumspan', '')
-        x = x:gsub('curriculumspan_class', '')
-        x = x:gsub('^<h2 id="([^>]*)>(.*)</h2>', '<h2 id="%1><span class="section-link"><a href="#%1 title="Direct link to this part of the lesson"><span class="section-link-symbol">&#128279;</span></a></span>%2</h2>')
+    if memberp(tipe, {'lessonplan', 'workbookpage'}) then
+      if x:find('^<h[1-6] id') then
+        -- tags to ignore inside section titles when making id=
+        for _,tag in ipairs{'span', 'code', 'i', 'sup', 'sub'} do
+          x = x:gsub('begincurriculum' .. tag, '$ZZ$')
+          x = x:gsub('endcurriculum' .. tag, '$ZZ$')
+          x = x:gsub('curriculum' .. tag, '$ZZ$')
+        end
+        x = x:gsub('_class[a-z]+', '$ZZ$')
+        x = x:gsub('%$ZZ%$', '')
+        if x:find('^h2') and tipe == 'lessonplan' then
+          x = x:gsub('^<h2 id="([^>]*)>(.*)</h2>', '<h2 id="%1><span class="section-link"><a href="#%1 title="Direct link to this part of the lesson"><span class="section-link-symbol">&#128279;</span></a></span>%2</h2>')
+        end
       end
     end
 
@@ -269,24 +254,13 @@ local function postproc(fhtml_cached, tipe)
     else o:write(x, '\n')
     end
     --
-    if add_menubar_p then
-      add_menubar_p = false
-      o:write('<!--#include virtual="/menubar.ssi"-->\n')
-    end
-    --
     if add_analytics_p then
       add_analytics_p = false
-      if not website_branch_p then
-        copy_file_to_port(analytics_file, o)
-      end
-      if website_branch_p then
         copy_file_to_port(gtm_noscript_file, o)
-      end
     end
     --
     if add_body_id_p then
       add_body_id_p = false
-      if website_branch_p then
         local y = read_file_string(wp_prologue_file)
         o:write(y)
         local klass = proglang
@@ -325,9 +299,6 @@ local function postproc(fhtml_cached, tipe)
         end
         --
         o:write('<div id="body" class="' .. klass .. '">\n')
-      else
-        o:write('<div id="body">\n')
-      end
     --
     end
     --
