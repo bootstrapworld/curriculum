@@ -254,12 +254,19 @@ local function postproc(fhtml_cached, tipe)
       end
     end
     --
-    if tipe == 'lessonplan' then
-      if x:find('^<h2 id') then
-        x = x:gsub('begincurriculumspan', '')
-        x = x:gsub('endcurriculumspan', '')
-        x = x:gsub('curriculumspan_class', '')
-        x = x:gsub('^<h2 id="([^>]*)>(.*)</h2>', '<h2 id="%1><span class="section-link"><a href="#%1 title="Direct link to this part of the lesson"><span class="section-link-symbol">&#128279;</span></a></span>%2</h2>')
+    if memberp(tipe, {'lessonplan', 'workbookpage'}) then
+      if x:find('^<h[1-6] id') then
+        -- tags to ignore inside section titles when making id=
+        for _,tag in ipairs{'span', 'code', 'i', 'sup', 'sub'} do
+          x = x:gsub('begincurriculum' .. tag, '$ZZ$')
+          x = x:gsub('endcurriculum' .. tag, '$ZZ$')
+          x = x:gsub('curriculum' .. tag, '$ZZ$')
+        end
+        x = x:gsub('_class[a-z]+', '$ZZ$')
+        x = x:gsub('%$ZZ%$', '')
+        if x:find('^h2') and tipe == 'lessonplan' then
+          x = x:gsub('^<h2 id="([^>]*)>(.*)</h2>', '<h2 id="%1><span class="section-link"><a href="#%1 title="Direct link to this part of the lesson"><span class="section-link-symbol">&#128279;</span></a></span>%2</h2>')
+        end
       end
     end
 
