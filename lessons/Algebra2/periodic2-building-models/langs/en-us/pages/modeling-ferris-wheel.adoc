@@ -32,15 +32,25 @@ table tr td { padding: .3em .625em; }
 
 == Modeling with @math{sin}
 
-@link-instructions{For this section, use *Slide 1: "Modeling the Ferris Wheel Dataset (sine)"* of the *Exploring Periodic Functions* Desmos File.} You'll find *the data from the Ferris wheel plotted in blue*, along with a basic periodic model of the form @math{f(x) = a \sin(\frac{2\pi}{P}(x - h)) + k}.
+@link-instructions{Open the Desmos File *Exploring Periodic Functions* to Slide 2: *Modeling the Ferris Wheel Dataset (sine)*.} +
+_The Periodic Model used on this slide focuses on the @vocab{frequency} instead of the @vocab{Period}!_ 
 
-@n Use the sliders to estimate the best periodic fit.
+@n Because the @vocab{peaks} are at @fitbruby{4em}{@ifsoln{205}}{feet} and the @vocab{valleys} are at @fitbruby{4em}{@ifsoln{5}}{feet}, 
+@hspace{2em} we know 
+@hspace{2em} @vocab{midline}(@math{k}): @fitbruby{4em}{@ifsoln{105}}{feet} 
+@hspace{2em} @vocab{amplitude}(@math{a}): @fitbruby{4em}{@ifsoln{100}}{feet}
 
-@n The @vocab{peaks} are at @fitbruby{8em}{@ifsoln{205}}{feet}, @vocab{valleys} are at @fitbruby{8em}{@ifsoln{5}}{feet}, @vocab{midline} is at @fitbruby{8em}{@ifsoln{105}}{feet} and the @vocab{amplitude} is @fitbruby{7em}{@ifsoln{100}}{feet}
+@vspace{1ex}
 
-@n The @vocab{period} of the data is @fitbruby{10em}{@ifsoln{30}}{minutes}. @hspace{3em} If @math{\text{period} = {2\pi \over \text{frequency}}}, what is the @vocab{frequency}? @fitbruby{10em}{@ifsoln{0.209}}{cycles per minute}
+@hspace{1em}_Adjust the sliders for @math{a} and @math{k} accordingly._ 
 
-@n Adjust the slider for horizontal shift to find the best fit, then write the model below in Function and Pyret notation. *Write @math{h} in terms of @math{pi}.*
+@n Using the sliders to find the @vocab{frequency}(@math{b}) to the nearest thousandth: @fitbruby{5em}{@ifsoln{~ 0.209}}{cycles per minute} @hspace{2em} and the @vocab{horizontal shift} (@math{h}): @fitb{5em}{@ifsoln{~7.46}}.
+
+@n We know that the @vocab{period}(@math{P}) of the data is 30 minutes and @math{b = \frac{2\pi}{P}}. Does the frequency you found make sense? How do you know? 
+
+@blanklines{1}{@ifsoln{yes. we can estimate that @math{b = \frac{2\pi}{P}} &#8776; @math{\frac{2 * 3}{30}} &#8776; @math{0.2}}}
+
+@n Define the model you found in Function and Pyret notation.
 
 [cols="1a, .>10a", frame="none", stripes="none"]
 |===
@@ -48,48 +58,42 @@ table tr td { padding: .3em .625em; }
 |
 @hspace{2em}
 @math{f(x) =} @fitbruby{70pt}{@ifsoln{100}}{amplitude} @math{\times}
-@math{sin(2\pi \div}
- @fitbruby{70pt}{@ifsoln{30}}{period} (x - @fitbruby{70pt}{@ifsoln{@math{2.375\pi}}}{horizontal shift})
+@math{sin}(
+ @fitbruby{70pt}{@ifsoln{0.209}}{frequency} (x - @fitbruby{70pt}{@ifsoln{@math{7.46}}}{horizontal shift})
 ) + @fitbruby{70pt}{@ifsoln{105}}{vertical shift}
 
-| @vspace{1ex} +
-*Pyret Notation*
+|*Pyret Notation*
 |
-@show{(code '(define (f x) (+ (* (?ANS 100) (sin (* (/ (* 2 PI) (?ANS 30)) (- x (?ANS (* 2.375 PI)))))) (?ANS 105))))}
+@show{(code '(define (f x) (+ (* (?ANS 100) (sin (* (?ANS 0.21) (- x (?ANS 7.46))))) (?ANS 105))))}
 |===
+
 
 == Translating from @math{sin} to @math{cos}
 
-@link-instructions{For this section, advance to *Slide 2: "Translating from sine to cosine"* of the *Exploring Periodic Functions* Desmos File.} You'll see a function f(x) defined here graphed in blue, which uses @math{cos} instead of @math{sin}.
+@link-instructions{For this section, advance to *Slide 3: "Translating from sine to cosine"* of the *Exploring Periodic Functions* Desmos File.} 
 
-@n Adjust the sliders so that the function @math{g} perfectly overlaps the function @math{f}. What is the value of @math{a}? @fitb{5em}{@ifsoln{10}} @math{b}? @fitb{5em}{@ifsoln{1}} @math{k}? @fitb{}{@ifsoln{2}}
+@n Use the definition of @math{p} to complete row 1 below. Then adjust the sliders so that @math{q} perfectly overlaps @math{p}. Record its model settings in row 2.
 
-@n What was the value of @math{h}, expressed as a decimal? @fitb{10em}{@ifsoln{~1.570796...}} What was the value of @math{h}, expressed a fraction of @math{pi}? @fitb{}{@ifsoln{@math{pi/2}}}
 
-@n In row 1 below, write the definition of @math{g} using the values of @math{a}, @math{b}, and @math{k} that you found earlier. Then *change some of @math{f}'s model settings* and write it in the second row, then show how @math{q} would need to change to overlap it.
-
-[cols="10a,10a,5a", options="header", stripes="none"]
+[cols="1a,5a, 1a,1a,1a,1a", options="header", stripes="none"]
 |===
-| *Function using @math{sin}*
-| *Function using @math{cos}*
-| *Horizontal Shift @math{h}*
-
-| @math{f(x) = 10 sin(\frac{2\pi}{2\pi}\times(x-0)) + 2}
-| @math{g(x) =} @ifsoln{@math{10 cos(\frac{2\pi}{2\pi}\times(x-\frac{\pi}{2})) + 2}}
-| @ifsoln{@math{\frac{\pi}{2}}}
-
-| @math{f(x) =}
-| @math{g(x) =}
-| @ifsoln{@math{\frac{\pi}{2}}}
+|function 	|definition 							|a 				|b 				|k 				|h 				
+|p 			|@math{p(x) = 10(sin(1(x-0)) + 2} 		|@ifsoln{10} 	|@ifsoln{1}  	|@ifsoln{2}  	|@ifsoln{0} 	
+|q 			|@math{q(x) = 10(cos(1(x-~1.571)) + 2}  |@ifsoln{10} 	|@ifsoln{1}  	|@ifsoln{2}  	|@ifsoln{~1.571}
 |===
 
-@n Do you think that all basic cosine functions can be expressed as sine functions? Why or why not? @fitb{}{} +
-@fitb{}{}
+
+@n How are the @vocab{sine} and @vocab{cosine} definitions similar? @fitb{}{@ifsoln{@math{a}, @math{b}, and @math{k} are the same.}}
+
+@n How are the @vocab{sine} and @vocab{cosine} definitions different? @fitb{}{@ifsoln{There was a horizontal shift of @math{\frac{\pi}{2}}}}
+
+@n What is the period of `p`? @fitb{3em}{@ifsoln{@math{2\pi}}} What is the horizontal shift of `q` in terms of @math{\pi}? @fitb{3em}{@ifsoln{@math{\frac{\pi}{2}}}} How does it relate to the period? @fitb{}{It's 1/4 of the period.}
+
 
 == Modeling with @math{cos}
-@link-instructions{For this section, advance to *Slide 3: "Modeling the Ferris Wheel Dataset (cosine)"* of the *Exploring Periodic Functions* Desmos File.}
+@link-instructions{For this section, advance to *Slide 4: "Modeling the Ferris Wheel Dataset (cosine)"* of the *Exploring Periodic Functions* Desmos File.}
 
-@n Translate your @math{sin}-based model to a @math{cos}-based one. Express the horizontal shift in terms of @math{pi}.
+@n Translate your @math{sin}-based model to a @math{cos}-based one and confirm that it visually fits the data by adjusting the sliders.
 
 [cols="1a, .>10a", frame="none", stripes="none"]
 |===
@@ -101,8 +105,9 @@ table tr td { padding: .3em .625em; }
  @fitbruby{70pt}{@ifsoln{0.21}}{period} (x - @fitbruby{70pt}{@ifsoln{@math{4.75pi}}}{horizontal shift})
 ) + @fitbruby{70pt}{@ifsoln{105}}{vertical shift}
 
-| @vspace{1ex} +
-*Pyret Notation*
+| *Pyret Notation*
 |
 @show{(code '(define (g x) (+ (* (?ANS 100) (cos (* (/ (* 2 PI) (?ANS 30)) (- x (?ANS (* 4.75 PI)))))) (?ANS 105))))}
 |===
+
+@n Update the sine and cosine models in the @starter-file{alg2-ferris-wheel}. Click "Run" and test their fit using `fit-model`.
