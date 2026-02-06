@@ -10,7 +10,7 @@ local lessonplan_batchf =  os.getenv'ADOC_POSTPROC_LESSONPLAN_INPUT'
 local pathwaynarrative_batchf =  os.getenv'ADOC_POSTPROC_PATHWAYNARRATIVE_INPUT'
 local pathwayresource_batchf =  os.getenv'ADOC_POSTPROC_PATHWAYRESOURCE_INPUT'
 
-local analytics_file = os.getenv'TOPDIR' .. '/lib/analytics.txt'
+local gtm_file = os.getenv'TOPDIR' .. '/lib/gtm.txt'
 local gtm_noscript_file = os.getenv'TOPDIR' .. '/lib/gtm-noscript.txt'
 
 local wp_prologue_file = os.getenv'TOPDIR' .. '/lib/wp-adaptors/prologue.txt'
@@ -299,9 +299,7 @@ local function postproc(fhtml_cached, tipe)
     if add_codemirror_p then
       add_codemirror_p = false
       o:write('<link rel="stylesheet" href="' .. local_dist_root_dir .. 'lib/codemirror.css" />\n')
-      if website_branch_p then
-        copy_file_to_port(analytics_file, o)
-      end
+      copy_file_to_port(gtm_file, o)
       o:write('<script src="' .. local_dist_root_dir .. 'lib/codemirror.js"></script>\n')
       o:write('<script src="' .. local_dist_root_dir .. 'lib/runmode.js"></script>\n')
       o:write('<script src="' .. local_dist_root_dir .. 'lib/scheme2.js"></script>\n')
