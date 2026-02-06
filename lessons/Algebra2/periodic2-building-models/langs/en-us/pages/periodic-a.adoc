@@ -1,8 +1,16 @@
 = Graphing Periodic Models: Amplitude (𝑎)
+++++
+<style>
+/* Maximize the image size, and position the overlays at the top left of the TD */
+td { position: relative; }
+td img { width: 92%; }
+td .overlay { position: absolute; bottom: 90%; left: 75%; font-weight: bold; }
+</style>
+++++
 
 @center{The standard form of periodic models is @big{@math{f(x) = a \sin(\frac{2\pi}{P}(x - h)) + k}}}
 
-Let's explore the role of @vocab{amplitude} @math{a} in periodic functions! 
+Let's explore the role of @vocab{amplitude} (@math{a}) in periodic functions!
 
 @link-instructions{Open the Desmos File *Exploring Periodic Functions* to Slide 1: *Modeling the Ferris Wheel Dataset (sine)*. You should see four sliders: @math{k}, @math{h}, @math{P}, and @math{a}.}
 
@@ -10,20 +18,21 @@ Let's explore the role of @vocab{amplitude} @math{a} in periodic functions!
 
 @n Label the coordinates for time=@math{15}, @math{30}, and @math{45} on the first graph below and fill in the @math{a =} blank using the amplitude you just found.
 
-@n Then, leaving the other sliders where they best fit the data, change *ONLY* the slider for @math{a}. Graph the curves for amplitudes of   -50,   0, and   50 on the blank scatter plots below. *For each curve, label the coordinates at time=@math{15}, @math{30}, and @math{45}.*
+@n Then, leaving the other sliders where they best fit the data, change *ONLY* the slider for @math{a}. Graph the curves for amplitudes of   -50,   0,   50, and your own experiment on the scatter plots below. *For each curve, label the coordinates at time=@math{15}, @math{30}, and @math{45}.*
 
-[.FillVerticalSpace, cols="1,1", frame="none"]
+[.FillVerticalSpace, cols="^1,^1", frame="none", stripes="none"]
 |===
-| @image{../images/points-w-curve.png, 80%}  
-@hspace{2em}a = @fitb{3em}{@ifsoln{100}}
 | @ifnotsoln{@image{../images/points.png, 80%}} @ifsoln{@image{../images/a50.png, 80%}}
-@hspace{2em}a = 50
+@span{.overlay}{a = @fitb{3em}{50}}
+
 | @ifnotsoln{@image{../images/points.png, 80%}} @ifsoln{@image{../images/a-50.png, 80%}}
-@hspace{2em}a = -50
-| @ifnotsoln{@image{../images/points.png, 80%}} @ifsoln{@image{../images/a0.png, 80%}}       
-@hspace{2em}a = 0
+@span{.overlay}{a = @fitb{3em}{-50}}
 
+| @ifnotsoln{@image{../images/points.png, 80%}} @ifsoln{@image{../images/a0.png, 80%}}
+@span{.overlay}{a = @fitb{3em}{0}}
 
+| @image{../images/points-w-curve.png, 80%}
+@span{.overlay}{a = @fitb{3em}{@ifsoln{varies}}}
 |===
 
 @n As @vocab{amplitude}(@math{a}) gets larger, @fitb{}{@ifsoln{the height of the distance the curve travel above and below the midline increases}}
