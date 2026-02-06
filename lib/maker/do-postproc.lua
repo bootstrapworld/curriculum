@@ -219,12 +219,6 @@ local function postproc(fhtml_cached, tipe)
       --
       delete_line_p = true
     end
-    if x:find('</h1>') then
-      x = x:gsub('</h1>.*', '%0\n<div id="savetodrive-div"></div>')
-    end
-    if x:find('^<div id="body"') then
-      x = x:gsub('id="body"', '%0 onload="renderSaveToDrive()"')
-    end
     --
     if memberp(tipe, {'lessonplan', 'pathwayresource'}) then
       if x:find('^<title>') then
