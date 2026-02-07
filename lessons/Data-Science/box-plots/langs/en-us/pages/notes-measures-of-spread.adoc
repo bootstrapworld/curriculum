@@ -17,7 +17,7 @@ div#body.LessonNotes li {
 
 - @vocab{Minimum}: the smallest value in a dataset -- it starts the first quarter
 - @vocab{Q1 (lower quartile)}: the number that separates the first quarter of the data from the second quarter of the data
-- *_Q2 (@vocab{Median})_*: the middle value (median) in a dataset
+- *_Q2 (@vocab{Median})_*: the middle value (or average of the 2 middles values) in a dataset
 - @vocab{Q3 (upper quartile)}: the value that separates the third quarter of the data from the last
 - @vocab{Maximum}: the largest value in a dataset -- it ends the fourth quarter of the data
 
@@ -25,32 +25,54 @@ div#body.LessonNotes li {
 
 The *five-number summary* can be used to draw a *box plot*.
 
-@center{@image{../images/box-n-whisker-plot-labeled.png, 350}}
-
-@vspace{1ex}
-
-- Each of the four sections of the box plot contains 25% of the data.
-  * If the values are distributed evenly across the range, the four sections of the box plot will be equal in width.
-  * Uneven distributions will show up as differently-sized sections of a box plot.
 - The left *whisker* extends from the minimum to Q1.
 - The *box*, or *interquartile range*, extends from Q1 to Q3. It is divided into 2 parts by the *median*. Each of those parts contains 25% of the data, so the whole box contains the central 50% of the data.
 - The right *whisker* extends from Q3 to the maximum.
 
+In the box plot above, the *minimum* weight is ~165 pounds, the *median* weight is ~220 pounds, and the *maximum* weight is ~310 pounds.
+
+@center{@image{../images/box-n-whisker-plot-labeled.png, 350}}
+
 @vspace{1ex}
 
-*The box plot above, for example, tells us that:*
+- Each of the four sections of the box plot contains 25% of the data. In the box plot above, for example:
 
-- The minimum weight is about 165 pounds. The median weight is about 220 pounds. The maximum weight is about 310 pounds.
-- The data is not evenly distributed across the range:
-  * 1/4 of the players weigh roughly between 165 and 195 pounds
-  * 1/4 of the players weigh roughly between 195 and 220 pounds
-  * 1/4 of the players weigh roughly between 220 and 235 pounds
-  * 1/4 of the players weigh roughly between 235 and 310 pounds
-  * 50% of the players weigh roughly between 165 and 220 pounds
-  * 50% of the players weigh roughly between 195 and 235 pounds
-  * 50% of the players weigh roughly between 220 and 310 pounds
-- The densest concentration of players' weights is between 220 and 235 pounds.
-- Because the widest section of the box plot is between 235 and 310 pounds, we understand that the weights of the heaviest 25% fall across a wider span than the others.
-  * 310 may be an outlier
-  * the weights of the players weighing between 235 pounds 310 pounds could be evenly distributed across the range
-  * or all of the players weighing over 235 pounds may weigh around 310 pounds.
+@indented{[cols="1a, 1a", grid="none", frame="none", stripes="none"]
+|===
+| 
+1/4 of the players weigh roughly between 165 and 195 pounds
+
+1/4 of the players weigh roughly between 195 and 220 pounds
+
+1/4 of the players weigh roughly between 220 and 235 pounds
+
+1/4 of the players weigh roughly between 235 and 310 pounds
+|
+Therefore... +
+50% of the players weigh roughly between 165 and 220 pounds
+50% of the players weigh roughly between 195 and 235 pounds
+50% of the players weigh roughly between 220 and 310 pounds
+|===
+}
+- If the values are distributed evenly across the range, the four sections of the box plot will be equal in width.
+- Uneven distributions will show up as differently-sized sections of a box plot, as with the box plot above.
+ * The densest concentration of players' weights is between 220 and 235 pounds.
+ * The widest section of the box plot is between 235 and 310 pounds, so the heaviest 25% of the players weights are spread across a wider span. We don't know anything about how the weights fall within that span, however. For example, it might mean:
+
+@indented{[cols="1a, 1a", grid="none", frame="none", stripes="none"]
+|===
+.^| 
+ * the weights of the players weighing between 235 pounds 310 pounds could be evenly distributed across the range
+|@image{../images/even.png}
+
+.^| 
+ * 310 is an outlier
+|@image{../images/outlier.png}
+
+.^|
+ * most of the players weighing over 235 pounds may weigh around 310 pounds
+|@image{../images/high.png}
+|===
+}
+
+
