@@ -20,7 +20,7 @@ end
 
 
 ###################### Build and filter ##########################
-fun age-dot(r): circle(10 * r["age"], "solid", "blue") end
+fun age-dot(r): circle(r["age"], "solid", "blue") end
 
 
 #########################################################
