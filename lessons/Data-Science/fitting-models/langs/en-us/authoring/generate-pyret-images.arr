@@ -7,7 +7,7 @@ include charts
 display-chart := lam(c): c.get-image() end
 
 
-lizard-url = "https://docs.google.com/spreadsheets/d/1CsTAFDzOMXbhVznQcuekbyrPsH9CibReU0DYD71rv4M/export?format=csv"
+lizard-url = "https://docs.google.com/spreadsheets/d/1CsTAFDzOMXbhVznQcuekbyrPsH9CibReU0DYD71rv4M/export?format=csv&gid=722151103"
 
 ###################### Load the data ##########################
 # Define your table
