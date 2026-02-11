@@ -58,7 +58,7 @@ MI-covid-chart = render-chart(from-list.scatter-plot(
         MI-table.column("positive")))
       .x-axis("day")
       .y-axis("positive")
-      .y-min(100000)
+      .y-min(0)
 
 covid-chart = render-chart(from-list.scatter-plot(
         covid-table.column("day"),
