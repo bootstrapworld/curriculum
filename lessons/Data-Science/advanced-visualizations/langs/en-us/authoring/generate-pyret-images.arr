@@ -47,17 +47,17 @@ fun animal-img(r):
 end
 
 
-fun tag(r): text(r["species"], 15, "red") end
+fun tag(r): text(r["species"], 17, "red") end
 
 ###################### Make some charts ##########################
 age-bc = image-scatter-plot(animals-table , "pounds", "weeks", age-dot)
-age-v-weeks-species-dot = image-scatter-plot(animals-table, "age", "weeks", animal-img)
+age-v-weeks-species-image = image-scatter-plot(animals-table, "age", "weeks", animal-img)
 age-v-weeks = scatter-plot(animals-table, "name", "age", "weeks")
 pounds-v-weeks = scatter-plot(animals-table, "name", "pounds", "weeks")
 species-tag = image-scatter-plot(animals-table, "pounds", "weeks", tag)
 
 ###################### Save the images ##########################
 I.save-image(age-bc, '../images/age-bc-AUTOGEN.png')
-I.save-image(age-v-weeks-species-dot, '../images/age-v-weeks-species-dot-AUTOGEN.png')
-I.save-image(age-bc, '../images/pounds-v-weeks-AUTOGEN.png')
+I.save-image(age-v-weeks-species-image, '../images/age-v-weeks-species-image-AUTOGEN.png')
+I.save-image(pounds-v-weeks, '../images/pounds-v-weeks-AUTOGEN.png')
 I.save-image(species-tag, '../images/species-tag-AUTOGEN.png')
