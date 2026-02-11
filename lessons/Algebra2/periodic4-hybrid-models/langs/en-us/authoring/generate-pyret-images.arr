@@ -32,14 +32,16 @@ fun add-padding(img):
     square(padding, "solid", "transparent"))
 end
 
+fun is-recent(r): (r["date"] > 2022.708) and (r["date"] < 2023.7917) end
+recent-table = filter(co2-table, is-recent)
+
 fun is-modern(r): r["date"] > 2010 end
 modern-table = filter(co2-table, is-modern)
-
 
 fun periodic-sin(x): (4.13 * sin(6.28 * (x - 2023.1))) + 419.87 end
 
 ###################### Make some charts ##########################
-modern-bad-fit = fit-model(modern-table, "year", "date", "co2", periodic-sin)
+historical-bad-fit = fit-model(co2-table, "year", "date", "co2", periodic-sin)
 
 modern-co2-scatter-chart = render-chart(
   from-list.scatter-plot(
@@ -52,8 +54,7 @@ modern-co2-scatter-chart = render-chart(
 
 modern-lr-chart = lr-plot(modern-table, "year", "date", "co2")
 ###################### Save the images ##########################
-I.save-image(modern-bad-fit, '../images/modern-bad-fit-AUTOGEN.png')
+I.save-image(historical-bad-fit, '../images/historical-bad-fit-AUTOGEN.png')
 I.save-image(modern-lr-chart, '../images/modern-lr-AUTOGEN.png')
 I.save-image(modern-co2-scatter-chart.get-image(), '../images/modern-co2-scatter-AUTOGEN.png')
-I.save-image(modern-lr-chart, '../images/modern-lr-chart-AUTOGEN.png')
 
