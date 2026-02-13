@@ -145,7 +145,7 @@ I.save-image(add-padding(cabrera-all-angle-speed-chart.get-image()),
   '../images/cabrera-angle-speed-AUTOGEN.png')
 I.save-image(add-padding(cabrera-all-pitchspeed-distance-chart.get-image()),
   '../images/cabrera-pitchspeed-distance-AUTOGEN.png')
-I.save-image(add-padding(cabrera-all-pitchspeed-distance-chart.get-image()),
+I.save-image(add-padding(cabrera-all-pitchspeed-speed-chart.get-image()),
   '../images/cabrera-pitchspeed-speed-AUTOGEN.png')
 
 

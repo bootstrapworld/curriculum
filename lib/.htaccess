@@ -1,6 +1,9 @@
-AuthUserFile /home/u804343808/web/cs/password/.bootstrap_passwd
-AuthName "Please Log In"
-AuthType Basic
-Require valid-user
+# This method is limited in that it only checks for the
+# existence of a cookie with a prefix of wordpress_logged_in_.
+# IT DOES NOT VERIFY THE VALIDITY OF THIS COOKIE IN ANY WAY!
 
-ErrorDocument 401 /401.shtml
+<IfModule mod_rewrite.c>
+    RewriteCond %{REQUEST_FILENAME} (.*)
+    RewriteCond %{HTTP_COOKIE} !wordpress_logged_in_([a-zA-Z0-9_]*) [NC]
+    RewriteRule .* - [F,L]
+</IfModule>`

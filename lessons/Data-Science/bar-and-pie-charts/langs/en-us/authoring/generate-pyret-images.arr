@@ -43,7 +43,7 @@ subset-table2 = filter(more-animals, lam(r): is-rabbit(r) or is-lizard(r) or is-
 ###################### Make some charts ##########################
 bar-species = bar-chart(more-animals , "species")
 multi-bar-species-sex = multi-bar-chart(more-animals, "species", "sex")
-multi-bar-species-sex2 = multi-bar-chart(subset-table, "species", "sex")
+multi-bar-species-sex2 = multi-bar-chart(subset-table2, "species", "sex")
 stacked-bar-species-sex = stacked-bar-chart(more-animals, "species", "sex")
 stacked-bar-species-sex2 = stacked-bar-chart(subset-table2, "species", "sex")
 

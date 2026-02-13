@@ -26,7 +26,7 @@ bar-chart-species = bar-chart(animals-table , "species")
 pie-chart-species = pie-chart(animals-table , "species")
 box-plot-age = box-plot(animals-table , "age")
 dot-plot-age = dot-plot(animals-table , "name", "age")
-histogram-pounds = histogram(animals-table , "name", "pounds", 5)
+histogram-pounds = histogram(animals-table , "name", "pounds", 30)
 lr-plot-pounds-age = lr-plot(animals-table , "name", "pounds", "age")
 scatter-plot-pounds-weeks = scatter-plot(animals-table , "name", "pounds", "weeks")
 

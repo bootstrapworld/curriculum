@@ -18,9 +18,9 @@ Using the @opt-starter-file{food}, let's make a @ifproglang{pyret}{*pie-chart*}@
   #:show-question? #t
   #:question-type "arithmetic"
   #:rows "All the rows"
-  #:show-rows? #t
+  #:show-rows? #f
   #:cols "landlocked"
-  #:show-cols? #t
+  #:show-cols? #f
   #:filter-fn ""
   #:show-filter? #f
   #:build-fn ""
@@ -30,45 +30,6 @@ Using the @opt-starter-file{food}, let's make a @ifproglang{pyret}{*pie-chart*}@
   #:finding "The number of land-locked countries (37) is about 1/3 the number of not land-locked countries (124)."
   #:show-finding? #f
   #:new-question "How does the ratio of land-locked to not land-locked countries differ by population density?"
-  #:show-new-question? #t
-}
-
-[.template, cols="^.^2a,13a"]
-|===
-|@centered-image{../images/InterpretData.png}
-|
-The chart shows that there are @fitbruby{18em}{@ifsoln{less}}{more / less / about the same number of} land-locked countries @fitbruby{3em}{@ifsoln{than}}{as / than} not land-locked countries.
-
-@vspace{1ex}
-
-Some new questions this raises include:
-
-@blanklines{3}{
-@ifsoln{How does the ratio of land-locked to not land-locked countries differ by population density?}
-}
-|===
-
-@span{.sectionbreak}{}
-
-Let's make a *stacked-bar-chart* to see the distribution of religions by region.
-
-@data-cycle{ ""
-  #:question "What is the distribution of religions across the regions?"
-  #:show-question? #t
-  #:question-type "arithmetic"
-  #:rows "All the rows"
-  #:show-rows? #f
-  #:cols "region, rel-maj"
-  #:show-cols? #f
-  #:filter-fn ""
-  #:show-filter? #f
-  #:build-fn ""
-  #:show-build? #f
-  #:expression (if (string=? *proglang* "pyret") '(stacked-bar-chart food-table "region" "rel-maj") "Set x-axis to `region`, and `Fuse Dots into Bars`. Drag `rel-maj` to the center of the display.")
-  #:show-expression? #f
-  #:finding ""
-  #:show-finding? #f
-  #:new-question ""
   #:show-new-question? #f
 }
 
@@ -76,14 +37,52 @@ Let's make a *stacked-bar-chart* to see the distribution of religions by region.
 |===
 |@centered-image{../images/InterpretData.png}
 |
-The stacked bar chart shows that @fitbruby{7em}{@ifsoln{most}}{most / some / a few} regions have a dominant religious majority. I also notice @fitb{}{@ifsoln{that regions colonized by Europe are predominantly Christian.}}
+The chart shows that there are @fitbruby{10em}{@ifsoln{less}}{less / as many / more} land-locked countries than not land-locked countries.
+
+Some new questions this raises include:
+
+@blanklines{3}{
+@ifsoln{How does the ratio of land-locked to not land-locked countries differ by population density?
+}}
+
+|===
+
+@span{.sectionbreak}{}
+
+Let's make a *bar chart* to see what we can learn about the distribution of countries across regions and what new questions it may lead us to.
+
+@data-cycle{ ""
+  #:question "How many more countries are in Europe than are in the Asia-Pacific region?"
+  #:show-question? #t
+  #:question-type "arithmetic"
+  #:rows "All the rows"
+  #:show-rows? #f
+  #:cols "region"
+  #:show-cols? #f
+  #:filter-fn ""
+  #:show-filter? #f
+  #:build-fn ""
+  #:show-build? #f
+  #:expression (if (string=? *proglang* "pyret") '(bar-chart food-table "region") "Set x-axis to `region`. Select `Fuse Dots into Bars` from the Measure menu.")
+  #:show-expression? #f
+  #:finding "There are 2 more countries in Europe (40) than in the Asia-Pacific region (38)."
+  #:show-finding? #f
+  #:new-question "Why are there so many more countries in Europe and the Asia-Pacific region than other regions?" 
+  #:show-new-question? #f
+}
+
+[.template, cols="^.^2a,13a"]
+|===
+|@centered-image{../images/InterpretData.png}
+|
+The chart shows that there are @fitb{3em}{@ifsoln{2}} more countries in Europe than there are in the Asia-Pacific Region.
 
 @vspace{1ex}
 
 Some new questions this raises include:
 
-@blanklines{2}{
-@ifsoln{I have friends who aren't Christians and focusing on religious majorities makes it look like all of North America is Christian. How good of a measure if the majority really? What percentage of North American citizens are not part of the religious majority?}
-}
-
+@blanklines{3}{
+@ifsoln{Why are there so many more countries in Europe and the Asia-Pacific Region than there are in North America?
+}}
 |===
+

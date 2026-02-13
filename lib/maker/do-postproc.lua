@@ -4,16 +4,17 @@ local make_dir = os.getenv'MAKE_DIR'
 
 dofile(make_dir .. 'utils.lua')
 
-local website_branch_p = (shell_output('git branch --show-current')[1] == 'website')
-website_branch_p = true
-
 local pathwayindependent_batchf =  os.getenv'ADOC_POSTPROC_PATHWAYINDEPENDENT_INPUT'
 local workbookpage_batchf =  os.getenv'ADOC_POSTPROC_WORKBOOKPAGE_INPUT'
 local lessonplan_batchf =  os.getenv'ADOC_POSTPROC_LESSONPLAN_INPUT'
 local pathwaynarrative_batchf =  os.getenv'ADOC_POSTPROC_PATHWAYNARRATIVE_INPUT'
 local pathwayresource_batchf =  os.getenv'ADOC_POSTPROC_PATHWAYRESOURCE_INPUT'
 
-local analytics_file = os.getenv'TOPDIR' .. '/lib/analytics.txt'
+local gtm_file = os.getenv'TOPDIR' .. '/lib/gtm.txt'
+local gtm_noscript_file = os.getenv'TOPDIR' .. '/lib/gtm-noscript.txt'
+
+local wp_prologue_file = os.getenv'TOPDIR' .. '/lib/wp-adaptors/prologue.txt'
+local wp_epilogue_file = os.getenv'TOPDIR' .. '/lib/wp-adaptors/epilogue.txt'
 
 local function calculate_dist_root_dir(fhtml_cached)
   local f = fhtml_cached:gsub('^%./', '')
@@ -59,7 +60,6 @@ local function postproc(fhtml_cached, tipe)
   if proglang == 'wescheme' then
     code_lang = 'racket'
   end
-  local f_comment_file = fhtml_cached:gsub('%.html$', '') .. '-comment.txt'
   local f_mathjax_file = fhtml_cached:gsub('%.html$', '.asc.uses-mathjax')
   local f_codemirror_file = fhtml_cached:gsub('%.html$', '.asc.uses-codemirror')
   --
@@ -69,36 +69,17 @@ local function postproc(fhtml_cached, tipe)
   --
   local add_analytics_p = false
   local add_bootstrap_lesson_p = false
-  local add_comment_p = false
   local add_mathjax_p = false
   local add_codemirror_p = false
   local add_body_id_p = false
   local add_landscape_p = false
   local add_end_body_id_p = false
   local delete_line_p = false
-  local read_end_sidebar_p = false
-  local num_of_lines_past_end_sidebar = 0
   local openblock_attribs = false
   local item_attrib = false
   --
   for x in i:lines() do
-    if read_end_sidebar_p then
-      if num_of_lines_past_end_sidebar == 3 then
-        read_end_sidebar_p = false
-      else
-        num_of_lines_past_end_sidebar = num_of_lines_past_end_sidebar + 1
-        goto continue
-      end
-    elseif x:find('%%ENDSIDEBARCONTENT%%') then
-      read_end_sidebar_p = true
-      num_of_lines_past_end_sidebar = 0
-      goto continue
-    end
-    --
     if x:find('^<body') then
-      if file_exists_p(f_comment_file) then
-        add_comment_p = true
-      end
       if x:find('landscape') then
         x = x:gsub('landscape', '')
         add_landscape_p = true
@@ -115,9 +96,14 @@ local function postproc(fhtml_cached, tipe)
       --
     end
     --
-    if add_end_body_id_p and x:find('</body>') then
-      add_end_body_id_p = false
-      x = x:gsub('</body>', '</div>\n%0')
+    if x:find('</body>') then
+      if add_end_body_id_p then
+        add_end_body_id_p = false
+        x = x:gsub('</body>', '</div>\n%0')
+      end
+      local y = read_file_string(wp_epilogue_file)
+      y = y:gsub('SEMESTER_YEAR', os.getenv'SEMESTER' .. ' ' .. os.getenv'YEAR')
+      x = x:gsub('</body>', y)
     end
     --
     if x:find('^<link.*curriculum%.css') then
@@ -171,8 +157,6 @@ local function postproc(fhtml_cached, tipe)
       openblock_attribs = false
     end
     x = x:gsub('class="exampleblock (.-)actually%-openblock ', 'class="openblock %1')
-    x = x:gsub('class="openblock sidebar', 'class="sidebar')
-    x = x:gsub('<div class="sidebar">', '</div>\n</div>\n</div>\n%0<div id="toggle"></div>')
     --
     x = x:gsub('%%CURRICULUMMATHJAXMARKER%%', '$$')
     --
@@ -224,14 +208,16 @@ local function postproc(fhtml_cached, tipe)
       </script>
       <script src="https://apis.google.com/js/platform.js" async defer></script>
       ]])
+      -- added for DesignHammer
+      o:write('<link rel="stylesheet" type="text/css" href="' .. local_dist_root_dir .. 'lib/wp-adaptors/style-bsw.css">\n')
+      o:write('<link rel="preconnect" href="https://fonts.googleapis.com">\n')
+      o:write('<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n')
+      o:write('<link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">\n')
+      o:write('<script src="' .. local_dist_root_dir .. 'lib/wp-adaptors/script.js"></script>\n')
+      --
       o:write(z, '\n')
+      --
       delete_line_p = true
-    end
-    if x:find('</h1>') then
-      x = x:gsub('</h1>.*', '%0\n<div id="savetodrive-div"></div>')
-    end
-    if x:find('^<div id="body"') then
-      x = x:gsub('id="body"', '%0 onload="renderSaveToDrive()"')
     end
     --
     if memberp(tipe, {'lessonplan', 'pathwayresource'}) then
@@ -240,12 +226,19 @@ local function postproc(fhtml_cached, tipe)
       end
     end
     --
-    if tipe == 'lessonplan' then
-      if x:find('^<h2 id') then
-        x = x:gsub('begincurriculumspan', '')
-        x = x:gsub('endcurriculumspan', '')
-        x = x:gsub('curriculumspan_class', '')
-        x = x:gsub('^<h2 id="([^>]*)>(.*)</h2>', '<h2 id="%1><span class="section-link"><a href="#%1 title="Direct link to this part of the lesson"><span class="section-link-symbol">&#128279;</span></a></span>%2</h2>')
+    if memberp(tipe, {'lessonplan', 'workbookpage'}) then
+      if x:find('^<h[1-6] id') then
+        -- tags to ignore inside section titles when making id=
+        for _,tag in ipairs{'span', 'code', 'i', 'sup', 'sub'} do
+          x = x:gsub('begincurriculum' .. tag, '$ZZ$')
+          x = x:gsub('endcurriculum' .. tag, '$ZZ$')
+          x = x:gsub('curriculum' .. tag, '$ZZ$')
+        end
+        x = x:gsub('_class[a-z]+', '$ZZ$')
+        x = x:gsub('%$ZZ%$', '')
+        if x:find('^h2') and tipe == 'lessonplan' then
+          x = x:gsub('^<h2 id="([^>]*)>(.*)</h2>', '<h2 id="%1><span class="section-link"><a href="#%1 title="Direct link to this part of the lesson"><span class="section-link-symbol">&#128279;</span></a></span>%2</h2>')
+        end
       end
     end
 
@@ -255,19 +248,15 @@ local function postproc(fhtml_cached, tipe)
     else o:write(x, '\n')
     end
     --
-    if add_comment_p then
-      add_comment_p = false
-      copy_file_to_port(f_comment_file, o)
-    end
-    --
     if add_analytics_p then
       add_analytics_p = false
-      copy_file_to_port(analytics_file, o)
+        copy_file_to_port(gtm_noscript_file, o)
     end
     --
     if add_body_id_p then
       add_body_id_p = false
-      if website_branch_p then
+        local y = read_file_string(wp_prologue_file)
+        o:write(y)
         local klass = proglang
         if tipe == 'workbookpage' then
           klass = klass .. ' workbookpage'
@@ -304,14 +293,13 @@ local function postproc(fhtml_cached, tipe)
         end
         --
         o:write('<div id="body" class="' .. klass .. '">\n')
-      else
-        o:write('<div id="body">\n')
-      end
+    --
     end
     --
     if add_codemirror_p then
       add_codemirror_p = false
       o:write('<link rel="stylesheet" href="' .. local_dist_root_dir .. 'lib/codemirror.css" />\n')
+      copy_file_to_port(gtm_file, o)
       o:write('<script src="' .. local_dist_root_dir .. 'lib/codemirror.js"></script>\n')
       o:write('<script src="' .. local_dist_root_dir .. 'lib/runmode.js"></script>\n')
       o:write('<script src="' .. local_dist_root_dir .. 'lib/scheme2.js"></script>\n')

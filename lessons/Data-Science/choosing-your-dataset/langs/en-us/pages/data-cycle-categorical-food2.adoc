@@ -1,0 +1,92 @@
+= Data Cycle: Categorical Distributions 2 (Global Food Supply)
+++++
+<style>
+/* hide the Interpret rows, as well as the sub-questions for Analyze */
+.data-cycle tr:nth-of-type(4),
+.data-cycle tr:nth-of-type(3) td:nth-of-type(2) p:nth-of-type(1),
+.data-cycle tr:nth-of-type(3) td:nth-of-type(2) p:nth-of-type(2) { display: none; }
+table.template { border-top: 0; }
+table.template td:first-of-type { background: #ccc; }
+table { flex-grow: 1; }
+</style>
+++++
+
+@link-instructions{Using the @opt-starter-file{food}, Let's make a *multi-bar-chart* to see the distribution of food independence across regions.}
+
+@data-cycle{ ""
+  #:question "Which regions produce as much food as they import?"
+  #:show-question? #t
+  #:question-type "arithmetic"
+  #:show-question-type? #f
+  #:rows "All the Rows"
+  #:show-rows? #f
+  #:cols "region food-ind"
+  #:show-cols? #f
+  #:filter-fn ""
+  #:show-filter? #f
+  #:build-fn ""
+  #:show-build? #f 
+  #:expression (if (string=? *proglang* "pyret") '(multi-bar-chart food-table "region" "food-ind") "Set x-axis to `region`, and `Fuse Dots into Bars`. Drag `food-ind` to the center of the display.")
+  #:show-expression? #f
+  #:finding ""
+  #:show-finding? #f
+  #:new-question ""
+  #:show-new-question? #f
+}
+
+[.template, cols="^.^2a,13a"]
+|===
+|@centered-image{../images/InterpretData.png}
+|
+The multi-bar chart shows that @fitbruby{7em}{@ifsoln{most}}{most / some / a few} regions have more food independent countries than not. I also notice @fitb{}{@ifsoln{This dataset only counts two countries as North American.}}
+
+@vspace{1ex}
+
+Some new questions this raises include:
+
+@blanklines{2}{
+@ifsoln{Who decides which region a country belongs to?}
+}
+
+|===
+
+
+@span{.sectionbreak}{}
+
+Let's make a *stacked-bar-chart* to see the distribution of religions by region.
+
+@data-cycle{ ""
+  #:question "What is the distribution of religions across the regions?"
+  #:show-question? #t
+  #:question-type "arithmetic"
+  #:rows "All the rows"
+  #:show-rows? #f
+  #:cols "region, rel-maj"
+  #:show-cols? #f
+  #:filter-fn ""
+  #:show-filter? #f
+  #:build-fn ""
+  #:show-build? #f
+  #:expression (if (string=? *proglang* "pyret") '(stacked-bar-chart food-table "region" "rel-maj") "Set x-axis to `region`, and `Fuse Dots into Bars`. Drag `rel-maj` to the center of the display.")
+  #:show-expression? #f
+  #:finding ""
+  #:show-finding? #f
+  #:new-question ""
+  #:show-new-question? #f
+}
+
+[.template, cols="^.^2a,13a"]
+|===
+|@centered-image{../images/InterpretData.png}
+|
+The stacked bar chart shows that @fitbruby{7em}{@ifsoln{most}}{most / some / a few} regions have a dominant religious majority. I also notice @fitb{}{@ifsoln{Regions colonized by Europe are predominantly Christian.}}
+
+@vspace{1ex}
+
+Some new questions this raises include:
+
+@blanklines{2}{
+@ifsoln{I have friends who aren't Christians and focusing on religious majorities makes it look like all of North America is Christian. How good of a measure if the majority really? What percentage of North American citizens are not part of the religious majority?
+}}
+
+|===
