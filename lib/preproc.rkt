@@ -187,7 +187,7 @@
             (read-json i)))
         '())))
 
-(define *pyret-starter-file-prefix* "https://code.pyret.org/editor#shareurl=")
+(define *pyret-starter-file-prefix* "https://pyret.BootstrapWorld.org/editor#shareurl=")
 
 (define *assessments*
   (let ([assessments-file (format "distribution/~a/lib/assessments.js" *natlang*)])
