@@ -29,16 +29,9 @@ SEMESTER_YEAR=$SEMESTER$YEAR
 CURR_GIT_BRANCH=$(git branch --show-current)
 
 # DEPLOY_DIR_SUBSTR is a part of the eventual DEPLOY_DIR path on the server.
-# It differs based on whether we're deploying from 'website' vs some other branch
 
-if test "$CURR_GIT_BRANCH" = website; then
-  # hostinger allows for multiple domains, so make sure we're
-  # deploying to the right one!
-  DOMAIN=beta.bootstrapworld.org
-  DEPLOY_DIR_SUBSTR=domains/beta.bootstrapworld.org/public_html/materials/$SEMESTER_YEAR
-else
-  DEPLOY_DIR_SUBSTR=public_html/materials/$SEMESTER_YEAR
-fi
+DOMAIN=beta.bootstrapworld.org
+DEPLOY_DIR_SUBSTR=domains/beta.bootstrapworld.org/public_html/materials/$SEMESTER_YEAR
 
 test -d $DEPLOYABLES_DIR && rm -fr $DEPLOYABLES_DIR
 
