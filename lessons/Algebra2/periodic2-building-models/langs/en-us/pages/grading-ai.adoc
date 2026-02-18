@@ -6,47 +6,76 @@
 	.autonum { padding-top: 2em !important; }
 </style>
 ++++
-An AI was asked to fit a periodic model to each of the scatter plots below. Did the AI do a good job? (_HINT: try drawing the curve-of-best-fit for these plots!_)
+An AI was asked to fit a periodic model to each of the scatter plots below. What did the AI get right? What did it get wrong?
 
-[.FillVerticalSpace, cols="1a,1a", frame="none", options="noheader", stripes="none"]
+[.FillVerticalSpace, cols="3a,4a", frame="none", options="noheader", stripes="none"]
 |===
 | @image{../images/fn_sin-1-8th-pi.png}
 @center{*AI's Suggested Model: @math{f(x) = 1.5\sin(\frac{\pi}{8} \times x)}*}
+| 
+[cols = "3a,2a,2a,2a,4a", options="header"]
+!===
+! 			    ! midline 		! amplitude 	! period 		! horizontal shift
+! scatter plot  ! @ifsoln{0}	!@ifsoln{1}		! @ifsoln{16}	! 				
+! AI-model		! @ifsoln{0}	!@ifsoln{1.5}   ! @ifsoln{16}	!				
+! got it right? ! @ifsoln{Y}	!@ifsoln{N} 	! @ifsoln{Y}	!				
+!===
 
-@n What did the AI get right? What did it get wrong, and why?
+What information was the AI missing? @fitb{}{}
 
-@blanklines{5}{
-@ifsoln{The period and midline look right, but the AI seems to have used only the most extreme (highest and lowest) points on the scatter plot rather than sticking to the middle of the cloud. As a result, it computed an amplitude of 1.5 rather than what looks like 1.}
+@blanklines{1}{
+@ifsoln{The AI seems to have used only the most extreme (highest and lowest) points on the scatter plot rather than sticking to the middle of the cloud. As a result, it computed the amplitude incorrectly.}
 }
 
 
 | @image{../images/fn_sin-10-half-pi.png}
 @center{*AI's Suggested Model: @math{f(x) = 10 \sin(\frac{\pi}{2} \times x) + 3}*}
+| 
+[cols = "3a, 2a,2a,2a,4a", options="header"]
+!===
+! 			    ! midline ! amplitude ! period ! horizontal shift
+! scatter plot  !  		  ! 		  !  	   ! 				
+! AI-model		! 		  !	    	  ! 	   !				
+! got it right? ! 		  ! 	      ! 	   !				
+!===
 
-@n What did the AI get right? What did it get wrong?
+What information was the AI missing? @fitb{}{}
 
-@blanklines{5}{
-@ifsoln{The period and amplitude look right, but the AI returned a very strange vertical shift when the midline is _clearly_ at @math{y=0}}
+@blanklines{1}{
+@ifsoln{The AI returned a very strange vertical shift when the midline is _clearly_ at @math{y=0}}
 }
-
 
 | @image{../images/fn_sin-1-8th-pi-plus-5.png}
 @center{*AI's Suggested Model: @math{f(x) = \sin(\frac{\pi}{4} \times x) + 5}*}
+| 
+[cols = "3a, 2a,2a,2a,4a", options="header"]
+!===
+! 			    ! midline ! amplitude ! period ! horizontal shift
+! scatter plot  !  		  ! 		  !  	   ! 				
+! AI-model		! 		  !	    	  ! 	   !				
+! got it right? ! 		  ! 	      ! 	   !				
+!===
 
-@n What did the AI get right? What did it get wrong?
+What information was the AI missing? @fitb{}{}
 
-@blanklines{5}{
-@ifsoln{The amplitude and midline (vertical shift) look right, but the period is all wrong. The curve crosses the x-axis at intervals of 8, so the frequency should be one-eighth instead of one-fourth.}
+@blanklines{1}{
+@ifsoln{The Period is wrong. The curve crosses the x-axis at intervals of 8, so the frequency should be one-eighth instead of one-fourth.}
 }
-
 
 | @image{../images/fn_sin-1-half-pi.png}
 @center{*AI's Suggested Model: @math{f(x) = \sin(\frac{\pi}{2} \times x - \frac{\pi}{2})}*}
+| 
+[cols = "3a, 2a,2a,2a,4a", options="header"]
+!===
+! 			    ! midline ! amplitude ! period ! horizontal shift
+! scatter plot  !  		  ! 		  !  	   ! 				
+! AI-model		! 		  !	    	  ! 	   !				
+! got it right? ! 		  ! 	      ! 	   !				
+!===
 
-@n What did the AI get right? What did it get wrong?
+What information was the AI missing? @fitb{}{}
 
-@blanklines{5}{
-@ifsoln{The AI got the amplitude, period, and vertical shift (midline) right, but the horizontal shift is wrong. This would cause the model to cross the x-axis at odd numbers instead of even ones. (If the shift had been any even integer multiple of @math{\pi} -- like 2@math{\pi}, 4@math{\pi}, 6@math{\pi}, etc -- it would have been right!)}
+@blanklines{1}{
+@ifsoln{If the horizontal shift had been any even integer multiple of @math{\pi} -- like 2@math{\pi}, 4@math{\pi}, 6@math{\pi}, etc -- it would have been right!}
 }
-
 |===
