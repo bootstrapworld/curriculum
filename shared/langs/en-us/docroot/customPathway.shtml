@@ -4,39 +4,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <meta charset="UTF-8">
     <title>Bootstrap: Materials</title>
+
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-TS6D6H9T');</script>
+    <!-- End Google Tag Manager -->
+
     <link rel="stylesheet" href="lib/curriculum.css">
-    <link rel="stylesheet" type="text/css" href="https://www.BootstrapWorld.org/styles.css"/>
     <style>
         #preamble_disabled { padding-bottom: 25px; }
         .logo img { width: 300px; }
         .drag-handle img { width: 15px; user-select: none; }
         dl { counter-reset: term; min-height: 3in; padding-top: 25px; }
-        dl .list-group-item { 
-            display:        flex !important; 
-            padding:        0; 
+        dl .list-group-item {
+            display:        flex !important;
+            padding:        0;
             margin-bottom:  15px;
             border:         none;
         }
         dl#accessible-lesson-list .list-group-item { align-items:    center; }
         dl#accessible-lesson-list .day { display: none; }
-        dl .list-group-item span.drag-handle { 
-            width: 15px; 
-            flex: 0 0 15px; 
-            margin: 0 10px; 
-            text-align: center; 
-            opacity: 0.5; 
+        dl .list-group-item span.drag-handle {
+            width: 15px;
+            flex: 0 0 15px;
+            margin: 0 10px;
+            text-align: center;
+            opacity: 0.5;
         }
         dl#lesson-list .list-group-item span.drag-handle { margin-top: 30px; }
 
         /* styling of day input boxes */
         .day { margin-right: 50px; float: right; white-space: pre; font-style: italic; font-weight: 100; }
-        .day input { 
-            max-width: 25px; 
+        .day input {
+            max-width: 25px;
             display: inline;
-            margin: 0; 
-            padding: 0; 
-            border: none; 
-            text-align: left; 
+            margin: 0;
+            padding: 0;
+            border: none;
+            text-align: left;
             font: inherit;
             color: inherit;
             background: transparent;
@@ -46,12 +54,12 @@
         span.drag-handle:hover { cursor: grab; }
 
         dl#lesson-list:empty { display: flex; justify-content: center; }
-        dl#lesson-list:empty:after { 
+        dl#lesson-list:empty:after {
             display: flex;
             align-items: center;
             font-style: italic;
             width: 75%;
-            content: "You haven't selected any Bootstrap lessons...yet! Fortunately, the lessons on the right can be taught without ANY prerequisites at all! Drag one of them over here to start your list, and see what other lessons get unlocked as your list of Bootstrap lessons grows!" 
+            content: "You haven't selected any Bootstrap lessons...yet! Fortunately, the lessons on the right can be taught without ANY prerequisites at all! Drag one of them over here to start your list, and see what other lessons get unlocked as your list of Bootstrap lessons grows!"
         }
         dl#lesson-list > dt:not(.sortable-drag) a:before {
             counter-increment: term;
@@ -67,9 +75,9 @@
         #accessible h2 { font-size:16px; font-weight:bold; }
         #accessible button {display: none; }
         #accessible-lesson-list dd { display: none; }
-        
+
         #status { display: none; }
-        #status, label, progress { width: 100%; }        
+        #status, label, progress { width: 100%; }
         .pathway_external_links li { margin-top: 25px !important; }
     </style>
 
@@ -89,7 +97,7 @@
 
     <script>
     let url = new URL(location);
-    
+
     // Default to all pyret lessons
     let proglang = "pyret";
 
@@ -120,15 +128,15 @@
       }
       lessonNames.forEach((l, idx) => {
         const lesson = graph[l];
-        const sectionsHTML = graph[l].sections.map(sec => 
+        const sectionsHTML = graph[l].sections.map(sec =>
             `<li>${sec}</li>`).join('\n');
         const numDays = (useDays && days && days[idx])? days[idx] : 2;
         const dayHTML = `<span class="day"><input type="number" min="1" value="${numDays}" onchange="updateHistory()"> ${numDays == 1? 'day ':'days'}</span>`
         const html = `
           <div class="list-group-item" data-lesson-title=${l}>
             <span class="drag-handle">
-              <button 
-                onMouseover="maybeDeleteLesson('${l}')" 
+              <button
+                onMouseover="maybeDeleteLesson('${l}')"
                 onMouseout="resetDeletionIndicators()"
                 onClick="deleteLesson('${l}')">
                 &times;
@@ -187,7 +195,7 @@
         .filter(l => graph[l].proglang == proglang)
         .filter(l => !lessons.includes(l))
         .filter(onlyUnique)
-        .sort((a,b) => 
+        .sort((a,b) =>
         graph[a].prerequisites.length > graph[b].prerequisites.length? 1 : -1);
       //console.log('selected lessons are', lessons, 'accessible lessons are', accessible);
 
@@ -207,10 +215,10 @@
 
       function updateList(evt) {
         lessons = selectedSort.toArray();
-        updateHistory()               
+        updateHistory()
       }
 
-      function safeToDrop(evt, originalEvt) { 
+      function safeToDrop(evt, originalEvt) {
        // Extract the title of the lesson being dragged, and which lesson it's being inserted relative to
        const draggingLesson = evt.dragged.getAttribute('data-lesson-title');
        const relatedLesson = evt.related.getAttribute('data-lesson-title');
@@ -225,7 +233,7 @@
        const before = otherLessons.splice(0, evt.willInsertAfter? relatedIndex + 1 : relatedIndex );
        const after = otherLessons.filter(l => !before.includes(l))
        //console.log('before', before, 'after', after)
-       
+
        // Invalid Case 1: dragging lesson is a prereq of a prior one
        const tooLate = before.find(l => graph[l].prerequisites.includes(draggingLesson))
        if(tooLate) {
@@ -243,7 +251,7 @@
 
       accessibleSort.option('onMove', safeToDrop);
       selectedSort.option('onMove', safeToDrop);
-      
+
       // revise search params for content links
       document.querySelectorAll('#content a').forEach(link => {
         newLink = new URL(link.href);
@@ -251,7 +259,7 @@
         link.href = newLink.href;
       });
     }
-    
+
     function makeEditable(node) {
         node.contentEditable = true;
         node.onkeydown = e => { if(e.key == 'Enter') save(node); }
@@ -275,10 +283,151 @@
         init();
     }
     </script>
+
+      <link rel="stylesheet" type="text/css" href="lib/wp-adaptors/style-overrides.css">
+  <link rel="stylesheet" type="text/css" href="lib/wp-adaptors/style-bsw.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+  <script src="lib/wp-adaptors/script.js"></script>
+
 </head>
 
 <body class="article narrative pyret" onload="init();">
-    <!--#include virtual="/menubar.ssi" -->
+<!-- start prologue.txt -->
+
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TS6D6H9T"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<header class="x-masthead" role="banner">
+  <div class="x-bar x-bar-top x-bar-h x-bar-relative e51-e1 m1f-0 m1f-1 m1f-2 m1f-3 m1f-4">
+    <div class="e51-e1 x-bar-content x-container max width">
+
+      <div class="x-bar-container e51-e2 m1f-d m1f-e m1f-f m1f-g m1f-h m1f-i m1f-j m1f-k">
+        <a class="x-image e51-e3 m1f-w m1f-a" data-x-effect="{&quot;durationBase&quot;:&quot;300ms&quot;}" href="https://beta.bootstrapworld.org"><img src="https://beta.bootstrapworld.org/wp-content/uploads/2025/05/bootstrap-logo-light.webp" width="576" height="109" alt="Logo" loading="lazy"></a>
+      </div>
+
+      <div class="x-bar-container x-hide-md x-hide-sm x-hide-xs e51-e4 m1f-d m1f-e m1f-f m1f-k m1f-l m1f-m">
+        <a class="x-anchor x-anchor-button e51-e5 m1f-x m1f-y m1f-z m1f-10 m1f-11 m1f-12 m1f-13 m1f-14 m1f-15 m1f-16 m1f-17 m1f-18 m1f-19 m1f-1a m1f-1b m1f-1c m1f-1d m1f-1e m1f-1f m1f-1g m1f-1h m1f-1i m1f-1j m1f-1k m1f-1l m1f-1m m1f-1n m1f-1o m1f-1p mainheaderlinks" tabindex="0" href="https://beta.bootstrapworld.org">
+          <div class="x-anchor-content">
+            <div class="x-anchor-text"><span class="x-anchor-text-primary">Teachers</span></div>
+          </div>
+        </a>
+        <a class="x-anchor x-anchor-button e51-e6 m1f-x m1f-y m1f-z m1f-10 m1f-11 m1f-12 m1f-13 m1f-14 m1f-15 m1f-16 m1f-17 m1f-18 m1f-19 m1f-1a m1f-1b m1f-1d m1f-1e m1f-1f m1f-1g m1f-1h m1f-1i m1f-1j m1f-1k m1f-1l m1f-1m m1f-1n m1f-1o m1f-1p mainheaderlinks" tabindex="0" href="/states-districts/">
+          <div class="x-anchor-content">
+            <div class="x-anchor-text"><span class="x-anchor-text-primary">States & Districts</span></div>
+          </div>
+        </a>
+        <a class="x-anchor x-anchor-button x-hide-md x-hide-sm x-hide-xs e51-e7 m1f-x m1f-y m1f-15 m1f-16 m1f-17 m1f-18 m1f-19 m1f-1a m1f-1b m1f-1d m1f-1e m1f-1f m1f-1g m1f-1h m1f-1i m1f-1j m1f-1k m1f-1l m1f-1m m1f-1n m1f-1o m1f-1p m1f-1q mainheaderlinks" tabindex="0" href="/more-partners/">
+          <div class="x-anchor-content">
+            <div class="x-anchor-text"><span class="x-anchor-text-primary">More Partners</span></div>
+          </div>
+        </a>
+      </div>
+
+      <div class="x-bar-container x-hide-xs e51-e8 m1f-d m1f-g m1f-h m1f-j m1f-k m1f-n m1f-o m1f-p m1f-q m1f-r">
+        <a class="x-anchor x-anchor-button x-hide-md x-hide-sm x-hide-xs e51-e12 m1f-x m1f-15 m1f-16 m1f-17 m1f-18 m1f-19 m1f-1a m1f-1b m1f-1d m1f-1e m1f-1f m1f-1g m1f-1h m1f-1i m1f-1j m1f-1k m1f-1l m1f-1m m1f-1n m1f-1o m1f-1p m1f-1q m1f-1y m1f-1z m1f-20 mainheaderlinks" tabindex="0" href="/why-bootstrap/">
+          <div class="x-anchor-content">
+            <div class="x-anchor-text"><span class="x-anchor-text-primary">Why Bootstrap?</span></div>
+          </div>
+        </a>
+        <div class="x-div e51-e13 m1f-3b m1f-3d m1f-3e m1f-3f m1f-3g m1f-3i m1f-3j m1f-3k m1f-3l m1f-3n m1f-3o m1f-3p m1f-3q">
+          <div class="x-div e51-e14 m1f-3f m1f-3g m1f-3h m1f-3n m1f-3r m1f-3s m1f-3t m1f-3u m1f-3v m1f-3w m1f-b"></div>
+          <a class="x-anchor x-anchor-button e51-e15 m1f-16 m1f-17 m1f-19 m1f-1g m1f-1h m1f-1i m1f-1k m1f-1m m1f-1q m1f-1y m1f-1z m1f-21 m1f-22 m1f-23 m1f-24 m1f-25 m1f-26 m1f-27 m1f-28 border-increase-on-hover" tabindex="0" href="/my-account/">
+            <div class="x-anchor-content">
+              <div class="x-anchor-text"><span class="x-anchor-text-primary">Login</span></div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="x-bar-container x-hide-lg x-hide-xl e51-e19 m1f-d m1f-e m1f-f m1f-h m1f-j m1f-k m1f-l m1f-q m1f-s">
+        <div class="x-anchor x-anchor-toggle has-graphic e51-e20 m1f-y m1f-15 m1f-17 m1f-18 m1f-19 m1f-1f m1f-1g m1f-1h m1f-1i m1f-1j m1f-1k m1f-1l m1f-1o m1f-1q m1f-1u m1f-2a m1f-2b m1f-2c m1f-2d m1f-c" tabindex="0" id="header-modal-anchor-toggle" role="button" data-x-toggle="1" data-x-toggleable="e51-e20" data-x-toggle-overlay="1" aria-controls="header-modal-off-canvas" aria-expanded="false" aria-haspopup="true" aria-label="Toggle Off Canvas Content">
+          <div class="x-anchor-content">
+            <span class="x-graphic" aria-hidden="true">
+              <span class="x-image x-graphic-child x-graphic-image x-graphic-primary"><img src="https://beta.bootstrapworld.org/wp-content/uploads/2024/07/hamburger-horizontal-blue-1.png" width="55" height="36" alt="Image" loading="lazy"></span>
+              <span class="x-image x-graphic-child x-graphic-image x-graphic-secondary"><img src="https://beta.bootstrapworld.org/wp-content/uploads/2024/07/light-blue-hamburger-1.png" width="55" height="36" alt="Image" loading="lazy"></span>
+            </span>
+            <div class="x-anchor-text">
+              <span class="x-anchor-text-primary">Menu</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="x-bar x-bar-top x-bar-h x-bar-relative x-hide-md x-hide-sm x-hide-xs e51-e117 m1f-1 m1f-4 m1f-5">
+    <div class="e51-e117 x-bar-content x-container max width">
+      <div class="x-bar-container x-hide-md x-hide-sm x-hide-xs e51-e118 m1f-d m1f-e m1f-f m1f-g m1f-h m1f-i m1f-j m1f-k m1f-t"></div>
+
+      <div class="x-bar-container x-hide-md x-hide-sm x-hide-xs e51-e119 m1f-d m1f-e m1f-f m1f-k m1f-l m1f-m">
+        <!--
+        <div class="cs-content x-global-block x-global-block-5946 e51-e120">
+          <a class="x-div e5946-e2 m4l6-0 m4l6-1 m4l6-2 m4l6-3 m4l6-4" href="/curricula/">
+            <span class="x-anchor x-anchor-toggle has-graphic e5946-e3 m4l6-u m4l6-v m4l6-w m4l6-x m4l6-y m4l6-z" tabindex="0" href="/curricula/" role="button" data-x-toggle="1" data-x-toggleable="e5946-e3" data-x-toggle-hover="1" aria-controls="e5946-e3-dropdown" aria-expanded="false" aria-haspopup="true" aria-label="Toggle Dropdown Content">
+              <div class="x-anchor-content">
+                <div class="x-anchor-text"><span class="x-anchor-text-primary">Curricula</span></div>
+                <span class="x-graphic x-graphic-icon" aria-hidden="true"></span>
+              </div>
+            </span>
+          </a>
+        </div>
+        -->
+        <ul class="x-menu-first-level x-menu x-menu-inline e51-e121 m1f-50 m1f-51 underline">
+          <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5851" id="menu-item-5851">
+            <a class="x-anchor x-anchor-menu-item m1f-y m1f-15 m1f-16 m1f-17 m1f-18 m1f-19 m1f-1b m1f-1e m1f-1f m1f-1g m1f-1h m1f-1i m1f-1k m1f-1m m1f-1q m1f-27 m1f-28 m1f-32 m1f-33" tabindex="0" href="https://beta.bootstrapworld.org/curricula/">
+              <div class="x-anchor-content">
+                <div class="x-anchor-text"><span class="x-anchor-text-primary">Curricula</span></div>
+              </div>
+            </a>
+          </li>
+          <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5851" id="menu-item-5851">
+            <a class="x-anchor x-anchor-menu-item m1f-y m1f-15 m1f-16 m1f-17 m1f-18 m1f-19 m1f-1b m1f-1e m1f-1f m1f-1g m1f-1h m1f-1i m1f-1k m1f-1m m1f-1q m1f-27 m1f-28 m1f-32 m1f-33" tabindex="0" href="https://beta.bootstrapworld.org/professional-learning/">
+              <div class="x-anchor-content">
+                <div class="x-anchor-text"><span class="x-anchor-text-primary">Professional Learning</span></div>
+              </div>
+            </a>
+          </li>
+          <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5620" id="menu-item-5620">
+            <a class="x-anchor x-anchor-menu-item m1f-y m1f-15 m1f-16 m1f-17 m1f-18 m1f-19 m1f-1b m1f-1e m1f-1f m1f-1g m1f-1h m1f-1i m1f-1k m1f-1m m1f-1q m1f-27 m1f-28 m1f-32 m1f-33" tabindex="0" href="https://beta.bootstrapworld.org/teachers/ask-a-question/">
+              <div class="x-anchor-content">
+                <div class="x-anchor-text"><span class="x-anchor-text-primary">Ask a Question</span></div>
+              </div>
+            </a>
+          </li>
+          <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5516" id="menu-item-5516">
+            <a class="x-anchor x-anchor-menu-item m1f-y m1f-15 m1f-16 m1f-17 m1f-18 m1f-19 m1f-1b m1f-1e m1f-1f m1f-1g m1f-1h m1f-1i m1f-1k m1f-1m m1f-1q m1f-27 m1f-28 m1f-32 m1f-33" tabindex="0" href="https://beta.bootstrapworld.org/research/">
+              <div class="x-anchor-content">
+                <div class="x-anchor-text"><span class="x-anchor-text-primary">Research</span></div>
+              </div>
+            </a>
+          </li>
+          <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-5942" id="menu-item-5942">
+            <a class="x-anchor x-anchor-menu-item m1f-y m1f-15 m1f-16 m1f-17 m1f-18 m1f-19 m1f-1b m1f-1e m1f-1f m1f-1g m1f-1h m1f-1i m1f-1k m1f-1m m1f-1q m1f-27 m1f-28 m1f-32 m1f-33" tabindex="0" href="https://beta.bootstrapworld.org/in-the-field/">
+              <div class="x-anchor-content">
+                <div class="x-anchor-text"><span class="x-anchor-text-primary">In the Field</span></div>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="x-bar-container x-hide-xs e51-e122 m1f-d m1f-e m1f-f m1f-h m1f-k m1f-l m1f-q m1f-r m1f-u"></div>
+
+    </div>
+  </div>
+</header>
+
+<div class="x-row x-container max width e4468439224895391-e2 m17zxgn2tjtr-8 m17zxgn2tjtr-9 m17zxgn2tjtr-b">
+<div class="x-row-inner">
+<div class="x-col e4468439224895391-e3 m17zxgn2tjtr-d m17zxgn2tjtr-e m17zxgn2tjtr-f lesson-content">
+
+<!-- end prologue.txt -->
+
     <div id="body">
         <div id="header">
             <h1 id="pathwayTitle" style="border-bottom: none;" onClick="makeEditable(this)" onBlur="save(this)"></h1>
@@ -299,7 +448,7 @@
                 <dl id="lesson-list" ></dl>
             </div>
         </div>
-        
+
         <div id="accessible" class="clearfix item one-third">
             <h2>What's within reach?</h2>
             <p/>
@@ -310,7 +459,7 @@
 
         <div class="clearfix item top-border bottom-border">
             <h2>Student Workbooks</h2>
-            <p>Every page can be accessed individually from the lesson plans, in both Web and PDF format. You can print only what you need for each day, or get every page combined as a complete <a href="javascript:void(0)" onclick="makeCustomBook(pathway, lessons, { reqPages: true, optPages: false, solns: false, addTOC: true })">Student Workbook</a>. 
+            <p>Every page can be accessed individually from the lesson plans, in both Web and PDF format. You can print only what you need for each day, or get every page combined as a complete <a href="javascript:void(0)" onclick="makeCustomBook(pathway, lessons, { reqPages: true, optPages: false, solns: false, addTOC: true })">Student Workbook</a>.
             <p/>
             <span id="status">
                 <label for="file">Assembling Workbook:</label>
@@ -364,5 +513,695 @@
         </div>
 
     </div>
+
+<!-- start epilogue.txt -->
+</div>
+<div id="sidebar" class="x-col e4468439224895391-e5 m17zxgn2tjtr-d m17zxgn2tjtr-f m17zxgn2tjtr-g" style="padding-bottom: 48px;">
+
+  <div class="x-div e4468439224895391-e6 m17zxgn2tjtr-r m17zxgn2tjtr-s m17zxgn2tjtr-t m17zxgn2tjtr-u m17zxgn2tjtr-v m17zxgn2tjtr-w m17zxgn2tjtr-x m17zxgn2tjtr-y m17zxgn2tjtr-z">
+    <div class="x-text x-content e4468439224895391-e7 m17zxgn2tjtr-j m17zxgn2tjtr-l m17zxgn2tjtr-m m17zxgn2tjtr-n">SEMESTER_YEAR</div>
+  </div>
+
+  <div class="x-div e4468439224895391-e8 m17zxgn2tjtr-v m17zxgn2tjtr-w m17zxgn2tjtr-x m17zxgn2tjtr-y m17zxgn2tjtr-10">
+
+    <div id="sidebarlessons" style="display: none;" class="x-text x-div m17zxgn2tjtr-1b m17zxgn2tjtr-1c e4468439224895391-e14 m17zxgn2tjtr-r m17zxgn2tjtr-s m17zxgn2tjtr-t m17zxgn2tjtr-v m17zxgn2tjtr-11 m17zxgn2tjtr-12 m17zxgn2tjtr-2 m17zxgn2tjtr-4">
+      <h4 class="x-text-content-text-primary">
+      </h4>
+      <ul>
+      </ul>
+    </div>
+
+    <div id="sidebarstandards" style="display: none;" class="x-text x-div m17zxgn2tjtr-1b m17zxgn2tjtr-1c e4468439224895391-e14 m17zxgn2tjtr-r m17zxgn2tjtr-s m17zxgn2tjtr-t m17zxgn2tjtr-v m17zxgn2tjtr-11 m17zxgn2tjtr-12 m17zxgn2tjtr-2 m17zxgn2tjtr-4">
+      <h4 class="x-text-content-text-primary">
+        Alignment
+      </h4>
+      <select class="alignmentSelect" onchange="showAlignment(this.value)"></select>
+      <div class="content"></div>
+    </div>
+
+    <div class="x-div e4468439224895391-e14 m17zxgn2tjtr-r m17zxgn2tjtr-s m17zxgn2tjtr-t m17zxgn2tjtr-v m17zxgn2tjtr-11 m17zxgn2tjtr-12 m17zxgn2tjtr-2 m17zxgn2tjtr-4">
+      <div class="x-text x-text-headline e4468439224895391-e15 m17zxgn2tjtr-1a m17zxgn2tjtr-1b m17zxgn2tjtr-1c m17zxgn2tjtr-1d m17zxgn2tjtr-2 m17zxgn2tjtr-3">
+        <div class="x-text-content">
+          <div class="x-text-content-text">
+            <h4 class="x-text-content-text-primary">Ask a Question</h4>
+          </div>
+        </div>
+      </div>
+      <div class="x-text x-content e4468439224895391-e16 m17zxgn2tjtr-j m17zxgn2tjtr-k m17zxgn2tjtr-m m17zxgn2tjtr-o m17zxgn2tjtr-q m17zxgn2tjtr-1 m17zxgn2tjtr-2">Join our community on Discourse, ask questions, and see an archive of answers from teachers and Bootstrap team members.</div>
+      <a class="x-anchor x-anchor-button e4468439224895391-e17 m17zxgn2tjtr-1g m17zxgn2tjtr-2 m17zxgn2tjtr-5 arrow-move" tabindex="0" href="/teachers/ask-a-question/">
+        <div class="x-anchor-content">
+          <div class="x-anchor-text"><span class="x-anchor-text-primary">Join the Community</span></div>
+        </div>
+      </a>
+    </div>
+
+    <div class="x-div e4468439224895391-e18 m17zxgn2tjtr-r m17zxgn2tjtr-s m17zxgn2tjtr-t m17zxgn2tjtr-v m17zxgn2tjtr-11 m17zxgn2tjtr-12 m17zxgn2tjtr-2 m17zxgn2tjtr-4">
+      <div class="x-text x-text-headline e4468439224895391-e19 m17zxgn2tjtr-1b m17zxgn2tjtr-1c m17zxgn2tjtr-1e m17zxgn2tjtr-2 m17zxgn2tjtr-3">
+        <div class="x-text-content">
+          <div class="x-text-content-text">
+            <h4 class="x-text-content-text-primary">Explore the Curricula</h4>
+          </div>
+        </div>
+      </div>
+      <div class="x-row e4468439224895391-e20 m17zxgn2tjtr-8 m17zxgn2tjtr-a m17zxgn2tjtr-c">
+        <div class="x-row-inner">
+          <div class="x-col e4468439224895391-e21 m17zxgn2tjtr-d m17zxgn2tjtr-h">
+            <a class="x-div e4468439224895391-e22 m17zxgn2tjtr-r m17zxgn2tjtr-t m17zxgn2tjtr-u m17zxgn2tjtr-v m17zxgn2tjtr-w m17zxgn2tjtr-x m17zxgn2tjtr-13 m17zxgn2tjtr-14" href="https://beta.bootstrapworld.org/curricula/algebra/">
+              <div class="x-div e4468439224895391-e23 m17zxgn2tjtr-r m17zxgn2tjtr-s m17zxgn2tjtr-u m17zxgn2tjtr-v m17zxgn2tjtr-w m17zxgn2tjtr-x m17zxgn2tjtr-15 m17zxgn2tjtr-16 m17zxgn2tjtr-6" style="position: relative;">
+                <div class="x-div e4468439224895391-e24 m17zxgn2tjtr-r m17zxgn2tjtr-v m17zxgn2tjtr-w m17zxgn2tjtr-x m17zxgn2tjtr-13 m17zxgn2tjtr-15 m17zxgn2tjtr-17 m17zxgn2tjtr-18 m17zxgn2tjtr-7">
+                  <span class="x-image e4468439224895391-e25 m17zxgn2tjtr-1h"><img src="https://beta.bootstrapworld.org/wp-content/uploads/2024/12/algebra-60.webp" width="30" height="30" alt="Image" loading="lazy"></span>
+                </div>
+                <div class="x-div e4468439224895391-e26 m17zxgn2tjtr-r m17zxgn2tjtr-s m17zxgn2tjtr-u m17zxgn2tjtr-v m17zxgn2tjtr-w m17zxgn2tjtr-x m17zxgn2tjtr-y m17zxgn2tjtr-15 m17zxgn2tjtr-18 m17zxgn2tjtr-19">
+                  <svg id="Layer_7" data-name="Layer 7" xmlns="https://www.w3.org/2000/svg" version="1.1" viewBox="0 0 43.3 38.2">
+                    <defs><style>.cls-2 { stroke-width: 0px; }</style></defs>
+                    <path class="cls-2" fill="var(--hover-bg-grey)" d="M42.9,20.2c0,10.4-12,17.7-22.3,17.7s-12.5-.6-16-4.3S.4,23.8.4,18.8C.4,8.4,10.2.3,20.6.3s12.6,1.6,16,5,6.4,9.7,6.4,14.9Z" />
+                  </svg>
+                </div>
+                <div class="x-div e4468439224895391-e28 m17zxgn2tjtr-r m17zxgn2tjtr-s m17zxgn2tjtr-u m17zxgn2tjtr-v m17zxgn2tjtr-w m17zxgn2tjtr-x m17zxgn2tjtr-y m17zxgn2tjtr-15 m17zxgn2tjtr-18 m17zxgn2tjtr-19">
+                  <svg id="Layer_7" data-name="Layer 7" xmlns="https://www.w3.org/2000/svg" version="1.1" viewBox="0 0 43.3 38.2">
+                    <defs><style>.cls-2 { stroke-width: 0px; }</style></defs>
+                    <path class="cls-2" fill="var(--bs-primary-light-blue)" d="M42.9,20.2c0,10.4-12,17.7-22.3,17.7s-12.5-.6-16-4.3S.4,23.8.4,18.8C.4,8.4,10.2.3,20.6.3s12.6,1.6,16,5,6.4,9.7,6.4,14.9Z" />
+                  </svg>
+                </div>
+              </div>
+              <div class="x-text x-text-headline e4468439224895391-e30 m17zxgn2tjtr-1a m17zxgn2tjtr-1b m17zxgn2tjtr-1f">
+                <div class="x-text-content">
+                  <div class="x-text-content-text">
+                    <h4 class="x-text-content-text-primary">Algebra</h4>
+                  </div>
+                </div>
+              </div>
+            </a>
+            <a class="x-div e4468439224895391-e22 m17zxgn2tjtr-r m17zxgn2tjtr-t m17zxgn2tjtr-u m17zxgn2tjtr-v m17zxgn2tjtr-w m17zxgn2tjtr-x m17zxgn2tjtr-13 m17zxgn2tjtr-14" href="https://beta.bootstrapworld.org/curricula/data-science/">
+              <div class="x-div e4468439224895391-e23 m17zxgn2tjtr-r m17zxgn2tjtr-s m17zxgn2tjtr-u m17zxgn2tjtr-v m17zxgn2tjtr-w m17zxgn2tjtr-x m17zxgn2tjtr-15 m17zxgn2tjtr-16 m17zxgn2tjtr-6" style="position: relative;">
+                <div class="x-div e4468439224895391-e24 m17zxgn2tjtr-r m17zxgn2tjtr-v m17zxgn2tjtr-w m17zxgn2tjtr-x m17zxgn2tjtr-13 m17zxgn2tjtr-15 m17zxgn2tjtr-17 m17zxgn2tjtr-18 m17zxgn2tjtr-7"><span class="x-image e4468439224895391-e25 m17zxgn2tjtr-1h"><img src="https://beta.bootstrapworld.org/wp-content/uploads/2024/07/data-science-icon-blk.webp" width="30" height="29" alt="Image" loading="lazy"></span></div>
+                <div class="x-div e4468439224895391-e26 m17zxgn2tjtr-r m17zxgn2tjtr-s m17zxgn2tjtr-u m17zxgn2tjtr-v m17zxgn2tjtr-w m17zxgn2tjtr-x m17zxgn2tjtr-y m17zxgn2tjtr-15 m17zxgn2tjtr-18 m17zxgn2tjtr-19">
+                  <svg id="Layer_7" data-name="Layer 7" xmlns="https://www.w3.org/2000/svg" version="1.1" viewBox="0 0 43.3 38.2">
+                    <defs><style>.cls-2 { stroke-width: 0px; }</style></defs>
+                    <path class="cls-2" fill="var(--bs-secondary-half-baked-teal)" d="M42.9,20.2c0,10.4-12,17.7-22.3,17.7s-12.5-.6-16-4.3S.4,23.8.4,18.8C.4,8.4,10.2.3,20.6.3s12.6,1.6,16,5,6.4,9.7,6.4,14.9Z" />
+                  </svg>
+                </div>
+                <div class="x-div e4468439224895391-e28 m17zxgn2tjtr-r m17zxgn2tjtr-s m17zxgn2tjtr-u m17zxgn2tjtr-v m17zxgn2tjtr-w m17zxgn2tjtr-x m17zxgn2tjtr-y m17zxgn2tjtr-15 m17zxgn2tjtr-18 m17zxgn2tjtr-19">
+                  <svg id="Layer_7" data-name="Layer 7" xmlns="https://www.w3.org/2000/svg" version="1.1" viewBox="0 0 43.3 38.2">
+                    <defs><style>.cls-2 { stroke-width: 0px; }</style></defs>
+                    <path class="cls-2" fill="var(--bs-secondary-green)" d="M42.9,20.2c0,10.4-12,17.7-22.3,17.7s-12.5-.6-16-4.3S.4,23.8.4,18.8C.4,8.4,10.2.3,20.6.3s12.6,1.6,16,5,6.4,9.7,6.4,14.9Z" />
+                  </svg>
+                </div>
+              </div>
+              <div class="x-text x-text-headline e4468439224895391-e30 m17zxgn2tjtr-1a m17zxgn2tjtr-1b m17zxgn2tjtr-1f">
+                <div class="x-text-content">
+                  <div class="x-text-content-text">
+                    <h4 class="x-text-content-text-primary">Data Science</h4>
+                  </div>
+                </div>
+              </div>
+            </a>
+            <a class="x-div e4468439224895391-e22 m17zxgn2tjtr-r m17zxgn2tjtr-t m17zxgn2tjtr-u m17zxgn2tjtr-v m17zxgn2tjtr-w m17zxgn2tjtr-x m17zxgn2tjtr-13 m17zxgn2tjtr-14" href="https://beta.bootstrapworld.org/curricula/algebra-2/">
+              <div class="x-div e4468439224895391-e23 m17zxgn2tjtr-r m17zxgn2tjtr-s m17zxgn2tjtr-u m17zxgn2tjtr-v m17zxgn2tjtr-w m17zxgn2tjtr-x m17zxgn2tjtr-15 m17zxgn2tjtr-16 m17zxgn2tjtr-6" style="position: relative;">
+                <div class="x-div e4468439224895391-e24 m17zxgn2tjtr-r m17zxgn2tjtr-v m17zxgn2tjtr-w m17zxgn2tjtr-x m17zxgn2tjtr-13 m17zxgn2tjtr-15 m17zxgn2tjtr-17 m17zxgn2tjtr-18 m17zxgn2tjtr-7"><span class="x-image e4468439224895391-e25 m17zxgn2tjtr-1h"><img src="https://beta.bootstrapworld.org/wp-content/uploads/2024/07/algebra-2-icon-blk.webp" width="30" height="29" alt="Image" loading="lazy"></span></div>
+                <div class="x-div e4468439224895391-e26 m17zxgn2tjtr-r m17zxgn2tjtr-s m17zxgn2tjtr-u m17zxgn2tjtr-v m17zxgn2tjtr-w m17zxgn2tjtr-x m17zxgn2tjtr-y m17zxgn2tjtr-15 m17zxgn2tjtr-18 m17zxgn2tjtr-19">
+                  <svg id="Layer_7" data-name="Layer 7" xmlns="https://www.w3.org/2000/svg" version="1.1" viewBox="0 0 43.3 38.2">
+                    <defs><style>.cls-2 { stroke-width: 0px; }</style></defs>
+                    <path class="cls-2" fill="var(--perwinkle)" d="M42.9,20.2c0,10.4-12,17.7-22.3,17.7s-12.5-.6-16-4.3S.4,23.8.4,18.8C.4,8.4,10.2.3,20.6.3s12.6,1.6,16,5,6.4,9.7,6.4,14.9Z" />
+                  </svg>
+                </div>
+              </div>
+              <div class="x-text x-text-headline e4468439224895391-e30 m17zxgn2tjtr-1a m17zxgn2tjtr-1b m17zxgn2tjtr-1f">
+                <div class="x-text-content">
+                  <div class="x-text-content-text">
+                    <h4 class="x-text-content-text-primary">Algebra 2</h4>
+                  </div>
+                </div>
+              </div>
+            </a>
+            <a class="x-div e4468439224895391-e22 m17zxgn2tjtr-r m17zxgn2tjtr-t m17zxgn2tjtr-u m17zxgn2tjtr-v m17zxgn2tjtr-w m17zxgn2tjtr-x m17zxgn2tjtr-13 m17zxgn2tjtr-14" href="https://beta.bootstrapworld.org/curricula/ai/">
+              <div class="x-div e4468439224895391-e23 m17zxgn2tjtr-r m17zxgn2tjtr-s m17zxgn2tjtr-u m17zxgn2tjtr-v m17zxgn2tjtr-w m17zxgn2tjtr-x m17zxgn2tjtr-15 m17zxgn2tjtr-16 m17zxgn2tjtr-6" style="position: relative;">
+                <div class="x-div e4468439224895391-e24 m17zxgn2tjtr-r m17zxgn2tjtr-v m17zxgn2tjtr-w m17zxgn2tjtr-x m17zxgn2tjtr-13 m17zxgn2tjtr-15 m17zxgn2tjtr-17 m17zxgn2tjtr-18 m17zxgn2tjtr-7"><span class="x-image e4468439224895391-e25 m17zxgn2tjtr-1h"><img src="https://beta.bootstrapworld.org/wp-content/uploads/2024/12/AI-ICON-60-feature.webp" width="30" height="30" alt="Image" loading="lazy"></span></div>
+                <div class="x-div e4468439224895391-e26 m17zxgn2tjtr-r m17zxgn2tjtr-s m17zxgn2tjtr-u m17zxgn2tjtr-v m17zxgn2tjtr-w m17zxgn2tjtr-x m17zxgn2tjtr-y m17zxgn2tjtr-15 m17zxgn2tjtr-18 m17zxgn2tjtr-19">
+                  <svg id="Layer_7" data-name="Layer 7" xmlns="https://www.w3.org/2000/svg" version="1.1" viewBox="0 0 43.3 38.2">
+                    <defs><style>.cls-2 { stroke-width: 0px; }</style></defs>
+                    <path class="cls-2" fill="var(--bs-secondary-half-baked-teal)" d="M42.9,20.2c0,10.4-12,17.7-22.3,17.7s-12.5-.6-16-4.3S.4,23.8.4,18.8C.4,8.4,10.2.3,20.6.3s12.6,1.6,16,5,6.4,9.7,6.4,14.9Z" />
+                  </svg>
+                </div>
+              </div>
+              <div class="x-text x-text-headline e4468439224895391-e30 m17zxgn2tjtr-1a m17zxgn2tjtr-1b m17zxgn2tjtr-1f">
+                <div class="x-text-content">
+                  <div class="x-text-content-text">
+                    <h4 class="x-text-content-text-primary">Artificial Intelligence (AI)</h4>
+                  </div>
+                </div>
+              </div>
+            </a>
+            <a class="x-div e4468439224895391-e22 m17zxgn2tjtr-r m17zxgn2tjtr-t m17zxgn2tjtr-u m17zxgn2tjtr-v m17zxgn2tjtr-w m17zxgn2tjtr-x m17zxgn2tjtr-13 m17zxgn2tjtr-14" href="https://beta.bootstrapworld.org/curricula/expressions-equations/">
+              <div class="x-div e4468439224895391-e23 m17zxgn2tjtr-r m17zxgn2tjtr-s m17zxgn2tjtr-u m17zxgn2tjtr-v m17zxgn2tjtr-w m17zxgn2tjtr-x m17zxgn2tjtr-15 m17zxgn2tjtr-16 m17zxgn2tjtr-6" style="position: relative;">
+                <div class="x-div e4468439224895391-e24 m17zxgn2tjtr-r m17zxgn2tjtr-v m17zxgn2tjtr-w m17zxgn2tjtr-x m17zxgn2tjtr-13 m17zxgn2tjtr-15 m17zxgn2tjtr-17 m17zxgn2tjtr-18 m17zxgn2tjtr-7"><span class="x-image e4468439224895391-e25 m17zxgn2tjtr-1h"><img src="https://beta.bootstrapworld.org/wp-content/uploads/2024/07/early-math-icon-blk.webp" width="30" height="29" alt="Image" loading="lazy"></span></div>
+                <div class="x-div e4468439224895391-e26 m17zxgn2tjtr-r m17zxgn2tjtr-s m17zxgn2tjtr-u m17zxgn2tjtr-v m17zxgn2tjtr-w m17zxgn2tjtr-x m17zxgn2tjtr-y m17zxgn2tjtr-15 m17zxgn2tjtr-18 m17zxgn2tjtr-19">
+                  <svg id="Layer_7" data-name="Layer 7" xmlns="https://www.w3.org/2000/svg" version="1.1" viewBox="0 0 43.3 38.2">
+                    <defs><style>.cls-2 { stroke-width: 0px; }</style></defs>
+                    <path class="cls-2" fill="var(--bs-primary-dark-blue)" d="M42.9,20.2c0,10.4-12,17.7-22.3,17.7s-12.5-.6-16-4.3S.4,23.8.4,18.8C.4,8.4,10.2.3,20.6.3s12.6,1.6,16,5,6.4,9.7,6.4,14.9Z" />
+                  </svg>
+                </div>
+              </div>
+              <div class="x-text x-text-headline e4468439224895391-e30 m17zxgn2tjtr-1a m17zxgn2tjtr-1b m17zxgn2tjtr-1f">
+                <div class="x-text-content">
+                  <div class="x-text-content-text">
+                    <h4 class="x-text-content-text-primary">Expressions + Equations</h4>
+                  </div>
+                </div>
+              </div>
+            </a>
+            <a class="x-div e4468439224895391-e22 m17zxgn2tjtr-r m17zxgn2tjtr-t m17zxgn2tjtr-u m17zxgn2tjtr-v m17zxgn2tjtr-w m17zxgn2tjtr-x m17zxgn2tjtr-13 m17zxgn2tjtr-14" href="https://beta.bootstrapworld.org/curricula/game-design/">
+              <div class="x-div e4468439224895391-e23 m17zxgn2tjtr-r m17zxgn2tjtr-s m17zxgn2tjtr-u m17zxgn2tjtr-v m17zxgn2tjtr-w m17zxgn2tjtr-x m17zxgn2tjtr-15 m17zxgn2tjtr-16 m17zxgn2tjtr-6" style="position: relative;">
+                <div class="x-div e4468439224895391-e24 m17zxgn2tjtr-r m17zxgn2tjtr-v m17zxgn2tjtr-w m17zxgn2tjtr-x m17zxgn2tjtr-13 m17zxgn2tjtr-15 m17zxgn2tjtr-17 m17zxgn2tjtr-18 m17zxgn2tjtr-7"><span class="x-image e4468439224895391-e25 m17zxgn2tjtr-1h"><img src="https://beta.bootstrapworld.org/wp-content/uploads/2024/07/reactive-icon-blk.webp" width="30" height="29" alt="Image" loading="lazy"></span></div>
+                <div class="x-div e4468439224895391-e26 m17zxgn2tjtr-r m17zxgn2tjtr-s m17zxgn2tjtr-u m17zxgn2tjtr-v m17zxgn2tjtr-w m17zxgn2tjtr-x m17zxgn2tjtr-y m17zxgn2tjtr-15 m17zxgn2tjtr-18 m17zxgn2tjtr-19">
+                  <svg id="Layer_7" data-name="Layer 7" xmlns="https://www.w3.org/2000/svg" version="1.1" viewBox="0 0 43.3 38.2">
+                    <defs><style>.cls-2 { stroke-width: 0px; }</style></defs>
+                    <path class="cls-2" fill="var(--bs-primary-dark-orange)" d="M42.9,20.2c0,10.4-12,17.7-22.3,17.7s-12.5-.6-16-4.3S.4,23.8.4,18.8C.4,8.4,10.2.3,20.6.3s12.6,1.6,16,5,6.4,9.7,6.4,14.9Z" />
+                  </svg>
+                </div>
+              </div>
+              <div class="x-text x-text-headline e4468439224895391-e30 m17zxgn2tjtr-1a m17zxgn2tjtr-1b m17zxgn2tjtr-1f">
+                <div class="x-text-content">
+                  <div class="x-text-content-text">
+                    <h4 class="x-text-content-text-primary">Game Design</h4>
+                  </div>
+                </div>
+              </div>
+            </a>
+            <a class="x-div e4468439224895391-e22 m17zxgn2tjtr-r m17zxgn2tjtr-t m17zxgn2tjtr-u m17zxgn2tjtr-v m17zxgn2tjtr-w m17zxgn2tjtr-x m17zxgn2tjtr-13 m17zxgn2tjtr-14" href="https://beta.bootstrapworld.org/curricula/physics/">
+              <div class="x-div e4468439224895391-e23 m17zxgn2tjtr-r m17zxgn2tjtr-s m17zxgn2tjtr-u m17zxgn2tjtr-v m17zxgn2tjtr-w m17zxgn2tjtr-x m17zxgn2tjtr-15 m17zxgn2tjtr-16 m17zxgn2tjtr-6" style="position: relative;">
+                <div class="x-div e4468439224895391-e24 m17zxgn2tjtr-r m17zxgn2tjtr-v m17zxgn2tjtr-w m17zxgn2tjtr-x m17zxgn2tjtr-13 m17zxgn2tjtr-15 m17zxgn2tjtr-17 m17zxgn2tjtr-18 m17zxgn2tjtr-7"><span class="x-image e4468439224895391-e25 m17zxgn2tjtr-1h"><img src="https://beta.bootstrapworld.org/wp-content/uploads/2024/12/physics-icon-60.webp" width="30" height="30" alt="Image" loading="lazy"></span></div>
+                <div class="x-div e4468439224895391-e26 m17zxgn2tjtr-r m17zxgn2tjtr-s m17zxgn2tjtr-u m17zxgn2tjtr-v m17zxgn2tjtr-w m17zxgn2tjtr-x m17zxgn2tjtr-y m17zxgn2tjtr-15 m17zxgn2tjtr-18 m17zxgn2tjtr-19">
+                  <svg id="Layer_7" data-name="Layer 7" xmlns="https://www.w3.org/2000/svg" version="1.1" viewBox="0 0 43.3 38.2">
+                    <defs><style>.cls-2 { stroke-width: 0px; }</style></defs>
+                    <path class="cls-2" fill="var(--bs-primary-light-orange)" d="M42.9,20.2c0,10.4-12,17.7-22.3,17.7s-12.5-.6-16-4.3S.4,23.8.4,18.8C.4,8.4,10.2.3,20.6.3s12.6,1.6,16,5,6.4,9.7,6.4,14.9Z" />
+                  </svg>
+                </div>
+              </div>
+              <div class="x-text x-text-headline e4468439224895391-e30 m17zxgn2tjtr-1a m17zxgn2tjtr-1b m17zxgn2tjtr-1f">
+                <div class="x-text-content">
+                  <div class="x-text-content-text">
+                    <h4 class="x-text-content-text-primary">Physics</h4>
+                  </div>
+                </div>
+              </div>
+            </a>
+            <a class="x-div e4468439224895391-e22 m17zxgn2tjtr-r m17zxgn2tjtr-t m17zxgn2tjtr-u m17zxgn2tjtr-v m17zxgn2tjtr-w m17zxgn2tjtr-x m17zxgn2tjtr-13 m17zxgn2tjtr-14" href="https://beta.bootstrapworld.org/curricula/build-your-own/">
+              <div class="x-div e4468439224895391-e23 m17zxgn2tjtr-r m17zxgn2tjtr-s m17zxgn2tjtr-u m17zxgn2tjtr-v m17zxgn2tjtr-w m17zxgn2tjtr-x m17zxgn2tjtr-15 m17zxgn2tjtr-16 m17zxgn2tjtr-6" style="position: relative;">
+                <div class="x-div e4468439224895391-e24 m17zxgn2tjtr-r m17zxgn2tjtr-v m17zxgn2tjtr-w m17zxgn2tjtr-x m17zxgn2tjtr-13 m17zxgn2tjtr-15 m17zxgn2tjtr-17 m17zxgn2tjtr-18 m17zxgn2tjtr-7"><span class="x-image e4468439224895391-e25 m17zxgn2tjtr-1h"><img src="https://beta.bootstrapworld.org/wp-content/uploads/2024/12/build-your-own-60.webp" width="30" height="30" alt="Image" loading="lazy"></span></div>
+                <div class="x-div e4468439224895391-e26 m17zxgn2tjtr-r m17zxgn2tjtr-s m17zxgn2tjtr-u m17zxgn2tjtr-v m17zxgn2tjtr-w m17zxgn2tjtr-x m17zxgn2tjtr-y m17zxgn2tjtr-15 m17zxgn2tjtr-18 m17zxgn2tjtr-19">
+                  <svg id="Layer_7" data-name="Layer 7" xmlns="https://www.w3.org/2000/svg" version="1.1" viewBox="0 0 43.3 38.2">
+                    <defs><style>.cls-2 { stroke-width: 0px; }</style></defs>
+                    <path class="cls-2" fill="var(--bs-secondary-supernova)" d="M42.9,20.2c0,10.4-12,17.7-22.3,17.7s-12.5-.6-16-4.3S.4,23.8.4,18.8C.4,8.4,10.2.3,20.6.3s12.6,1.6,16,5,6.4,9.7,6.4,14.9Z" />
+                  </svg>
+                </div>
+              </div>
+              <div class="x-text x-text-headline e4468439224895391-e30 m17zxgn2tjtr-1a m17zxgn2tjtr-1b m17zxgn2tjtr-1f">
+                <div class="x-text-content">
+                  <div class="x-text-content-text">
+                    <h4 class="x-text-content-text-primary">Build Your Own</h4>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+      <a class="x-anchor x-anchor-button e4468439224895391-e31 m17zxgn2tjtr-1g m17zxgn2tjtr-2 m17zxgn2tjtr-5 arrow-move" tabindex="0" href="/curricula/">
+        <div class="x-anchor-content">
+          <div class="x-anchor-text"><span class="x-anchor-text-primary">View All</span></div>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+<footer class="x-colophon" role="contentinfo">
+  <div class="x-bar x-bar-footer x-bar-h x-bar-relative e5403-e1 m463-0 m463-1 m463-2 m463-3">
+    <div class="e5403-e1 x-bar-content x-container max width">
+
+      <div class="x-bar-container e5403-e2 m463-i m463-j m463-k m463-l m463-m">
+        <div class="x-text x-text-headline e5403-e3 m463-w m463-x m463-y m463-z m463-7 m463-8 m463-9">
+          <div class="x-text-content">
+            <div class="x-text-content-text">
+              <h5 class="x-text-content-text-primary">Sign up to keep up with the latest at Bootstrap.</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="x-bar-container e5403-e4 m463-i m463-n m463-o m463-p m463-q m463-7 m463-8 m463-a">
+        <div id="mc_embed_shell">
+          <link href="//cdn-images.mailchimp.com/embedcode/classic-061523.css" rel="stylesheet" type="text/css">
+          <div id="mc_embed_signup">
+            <form action="https://BootstrapWorld.us12.list-manage.com/subscribe/post?u=f4e233bce9a87e3adda483e6b&amp;id=2696eb8efa&amp;f_id=00c16ee6f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank">
+              <div id="mc_embed_signup_scroll">
+                <h2></h2>
+                <div class="mc-field-group"><label for="mce-FNAME">Name <span class="asterisk">*</span></label><input type="text" name="FNAME" class="required text" id="mce-FNAME" required="" value="" aria-required="true"></div>
+                <div class="mc-field-group"><label for="mce-EMAIL">Email Address <span class="asterisk">*</span></label><input type="email" name="EMAIL" class="required email" id="mce-EMAIL" required="" value=""></div>
+                <div id="mce-responses" class="clear">
+                  <div class="response" id="mce-error-response" style="display: none;"></div>
+                  <div class="response" id="mce-success-response" style="display: none;"></div>
+                </div>
+                <div aria-hidden="true" style="position: absolute; left: -5000px;"><input type="text" name="b_f4e233bce9a87e3adda483e6b_2696eb8efa" tabindex="-1" value=""></div>
+                <div class="clear"><input type="submit" name="subscribe" id="mc-embedded-subscribe" class="button" value="Subscribe"></div>
+              </div>
+            </form>
+          </div>
+          <script type="text/javascript" src="//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js" defer data-deferred="1"></script>
+          <script type="text/javascript" src="data:text/javascript;base64,KGZ1bmN0aW9uKCQpe3dpbmRvdy5mbmFtZXM9bmV3IEFycmF5KCk7d2luZG93LmZ0eXBlcz1uZXcgQXJyYXkoKTtmbmFtZXNbMV09J0ZOQU1FJztmdHlwZXNbMV09J3RleHQnO2ZuYW1lc1swXT0nRU1BSUwnO2Z0eXBlc1swXT0nZW1haWwnO2ZuYW1lc1syXT0nTE5BTUUnO2Z0eXBlc1syXT0ndGV4dCc7Zm5hbWVzWzNdPSdBRERSRVNTJztmdHlwZXNbM109J2FkZHJlc3MnO2ZuYW1lc1s0XT0nUEhPTkUnO2Z0eXBlc1s0XT0ncGhvbmUnfShqUXVlcnkpKTt2YXIgJG1jaj1qUXVlcnkubm9Db25mbGljdCghMCk=" defer></script>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div id="footer" class="x-bar x-bar-footer x-bar-h x-bar-relative e5403-e6 m463-0 m463-3 m463-4 m463-5 dark-bg">
+    <div class="e5403-e6 x-bar-content x-container max width">
+
+      <div class="x-bar-container e5403-e7 m463-i m463-k m463-l m463-m m463-n m463-o m463-r m463-s m463-7 m463-8 m463-9">
+        <span class="x-image e5403-e8 m463-14 m463-15 m463-7 m463-8 m463-9"><img src="https://beta.bootstrapworld.org/wp-content/uploads/2024/07/bootstrap-stacked-logo.png" width="256" height="156" alt="Image" loading="lazy"></span>
+        <div class="x-text x-content e5403-e9 m463-17 m463-18 m463-19 m463-1a m463-8 m463-9 m463-b">
+          <p>Bootstrap is a fiscally sponsored project of <a style="text-decoration: underline;" href="https://www.communityinitiatives.org">Community Initiatives</a>.</p>
+          <p>If you have any questions or inquiries, please email us at</p>
+        </div>
+        <div class="x-div e5403-e10 m463-1k m463-1l m463-1m m463-1n m463-1o m463-1p m463-1q m463-1r m463-1s m463-1t m463-1u m463-8 m463-9 m463-c">
+          <div class="x-text x-content e5403-e11 m463-19 m463-1a m463-1b m463-1c m463-1d m463-1e org-link">
+            <a href="mailto:contact@bootstrapworld.org">contact@bootstrapworld.org</a>
+          </div>
+        </div>
+        <div class="x-div e5403-e12 m463-1k m463-1m m463-1q m463-1t m463-1v m463-1w m463-1x m463-1y m463-1z m463-20">
+          <div class="x-row e5403-e13 m463-2e m463-2f m463-2g m463-2h m463-2i m463-2j m463-2k m463-2s m463-2t">
+            <div class="x-row-inner">
+              <div class="x-col e5403-e14 m463-30">
+                <div class="x-div e5403-e15 m463-1k m463-1m m463-1n m463-1o m463-1p m463-1q m463-1r m463-1u m463-1v m463-21 m463-22 m463-23 m463-8 m463-9 m463-d">
+                  <div class="x-text x-text-headline e5403-e16 m463-x m463-y m463-10 m463-11 m463-12">
+                    <div class="x-text-content">
+                      <div class="x-text-content-text">
+                        <h4 class="x-text-content-text-primary">Follow Us</h4>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="x-div e5403-e17 m463-1q m463-1r m463-1t m463-1u m463-1z">
+                    <div class="x-row e5403-e18 m463-2e m463-2h m463-2i m463-2j m463-2l m463-2u">
+                      <div class="x-row-inner">
+                        <div class="x-col e5403-e19 m463-30 m463-31 m463-32"><a class="x-anchor x-anchor-button has-graphic e5403-e20 m463-34 m463-35 m463-36 m463-37" tabindex="0" href="https://www.instagram.com/bootstrapworld" target="_blank" rel="noopener noreferrer">
+                            <div class="x-anchor-content"><span class="x-graphic" aria-hidden="true"><span class="instagram" aria-hidden="true"></span></span></div>
+                          </a></div>
+                        <div class="x-col e5403-e21 m463-30 m463-31 m463-32"><a class="x-anchor x-anchor-button has-graphic e5403-e22 m463-34 m463-35 m463-36 m463-38" tabindex="0" href="https://www.facebook.com/BootstrapWorld/" target="_blank" rel="noopener noreferrer">
+                            <div class="x-anchor-content"><span class="x-graphic" aria-hidden="true"><span class="facebook" aria-hidden="true"></span></span></div>
+                          </a></div>
+                        <div class="x-col e5403-e23 m463-30 m463-31 m463-32"><a class="x-anchor x-anchor-button has-graphic e5403-e24 m463-34 m463-35 m463-36 m463-38" tabindex="0" href="https://www.linkedin.com/company/bootstrapworld" target="_blank" rel="noopener noreferrer">
+                            <div class="x-anchor-content"><span class="x-graphic" aria-hidden="true"><span class="linkedin" aria-hidden="true"></span></span></div>
+                          </a></div>
+                        <div class="x-col e5403-e25 m463-30 m463-31 m463-32"><a class="x-anchor x-anchor-button has-graphic e5403-e26 m463-34 m463-35 m463-36 m463-38" tabindex="0" href="https://x.com/bootstrapworld" target="_blank" rel="noopener noreferrer">
+                            <div class="x-anchor-content"><span class="x-graphic" aria-hidden="true"><span class="xtwitter" aria-hidden="true"></span></span></div>
+                          </a></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="x-bar-container e5403-e27 m463-i m463-m m463-n m463-q m463-s m463-t m463-u">
+        <div class="x-row e5403-e28 m463-2e m463-2f m463-2i m463-2j m463-2k m463-2m m463-2n m463-2s m463-2v">
+          <div class="x-row-inner">
+
+            <div class="x-col e5403-e29 m463-30 m463-31 m463-33 m463-8 m463-9 m463-e icon-list">
+              <a href="/curricula" class="x-text x-text-headline e5403-e30 m463-x m463-y m463-z m463-10 m463-11">
+                <div class="x-text-content">
+                  <div class="x-text-content-text">
+                    <h4 class="x-text-content-text-primary">Curricula</h4>
+                  </div>
+                </div>
+              </a>
+              <div class="x-row e5403-e31 m463-2e m463-2f m463-2m m463-2o m463-2p m463-2w m463-2x">
+                <div class="x-row-inner">
+                  <div class="x-col e5403-e32 m463-30">
+                    <a class="x-div e5403-e33 m463-1k m463-1l m463-1m m463-1n m463-1q m463-1r m463-23 m463-24 m463-25" href="https://beta.bootstrapworld.org/curricula/algebra/">
+                      <div class="x-div e5403-e34 m463-1k m463-1n m463-1o m463-1p m463-1q m463-1r m463-1v m463-20 m463-23 m463-26 m463-27 m463-f" style="position: relative;">
+                        <div class="x-div e5403-e35 m463-1k m463-1l m463-1o m463-1q m463-1r m463-1u m463-23 m463-26 m463-28 m463-29 m463-g">
+                          <span class="x-image e5403-e36 m463-14 m463-16"><img src="https://beta.bootstrapworld.org/wp-content/uploads/2024/12/algebra-60.webp" width="30" height="30" alt="Image" loading="lazy"></span>
+                        </div>
+                        <div class="x-div e5403-e37 m463-1k m463-1n m463-1o m463-1p m463-1q m463-1r m463-1u m463-1v m463-1y m463-23 m463-26 m463-29 m463-2a">
+                          <svg id="Layer_7" data-name="Layer 7" xmlns="https://www.w3.org/2000/svg" version="1.1" viewBox="0 0 43.3 38.2">
+                            <path class="" fill="var(--bs-primary-light-blue)" d="M42.9,20.2c0,10.4-12,17.7-22.3,17.7s-12.5-.6-16-4.3S.4,23.8.4,18.8C.4,8.4,10.2.3,20.6.3s12.6,1.6,16,5,6.4,9.7,6.4,14.9Z" />
+                          </svg>
+                        </div>
+                        <div class="x-div e5403-e39 m463-1k m463-1n m463-1o m463-1p m463-1q m463-1r m463-1u m463-1v m463-1y m463-23 m463-26 m463-29 m463-2a">
+                          <svg id="Layer_7" data-name="Layer 7" xmlns="https://www.w3.org/2000/svg" version="1.1" viewBox="0 0 43.3 38.2">
+                            <path class="" fill="var(--hover-bg-grey)" d="M42.9,20.2c0,10.4-12,17.7-22.3,17.7s-12.5-.6-16-4.3S.4,23.8.4,18.8C.4,8.4,10.2.3,20.6.3s12.6,1.6,16,5,6.4,9.7,6.4,14.9Z" />
+                          </svg>
+                        </div>
+                      </div>
+                      <div class="x-text x-text-headline e5403-e41 m463-x m463-z m463-10 m463-13">
+                        <div class="x-text-content">
+                          <div class="x-text-content-text">
+                            <h4 class="x-text-content-text-primary">Algebra</h4>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                    <a class="x-div e5403-e33 m463-1k m463-1l m463-1m m463-1n m463-1q m463-1r m463-23 m463-24 m463-25" href="https://beta.bootstrapworld.org/curricula/data-science/">
+                      <div class="x-div e5403-e34 m463-1k m463-1n m463-1o m463-1p m463-1q m463-1r m463-1v m463-20 m463-23 m463-26 m463-27 m463-f" style="position: relative;">
+                        <div class="x-div e5403-e35 m463-1k m463-1l m463-1o m463-1q m463-1r m463-1u m463-23 m463-26 m463-28 m463-29 m463-g">
+                          <span class="x-image e5403-e36 m463-14 m463-16"><img src="https://beta.bootstrapworld.org/wp-content/uploads/2024/07/data-science-icon-blk.webp" width="30" height="29" alt="Image" loading="lazy"></span>
+                        </div>
+                        <div class="x-div e5403-e37 m463-1k m463-1n m463-1o m463-1p m463-1q m463-1r m463-1u m463-1v m463-1y m463-23 m463-26 m463-29 m463-2a">
+                          <svg id="Layer_7" data-name="Layer 7" xmlns="https://www.w3.org/2000/svg" version="1.1" viewBox="0 0 43.3 38.2">
+                            <path class="" fill="var(--bs-secondary-green)" d="M42.9,20.2c0,10.4-12,17.7-22.3,17.7s-12.5-.6-16-4.3S.4,23.8.4,18.8C.4,8.4,10.2.3,20.6.3s12.6,1.6,16,5,6.4,9.7,6.4,14.9Z" />
+                          </svg>
+                        </div>
+                        <div class="x-div e5403-e39 m463-1k m463-1n m463-1o m463-1p m463-1q m463-1r m463-1u m463-1v m463-1y m463-23 m463-26 m463-29 m463-2a">
+                          <svg id="Layer_7" data-name="Layer 7" xmlns="https://www.w3.org/2000/svg" version="1.1" viewBox="0 0 43.3 38.2">
+                            <path class="" fill="var(--bs-secondary-half-baked-teal)" d="M42.9,20.2c0,10.4-12,17.7-22.3,17.7s-12.5-.6-16-4.3S.4,23.8.4,18.8C.4,8.4,10.2.3,20.6.3s12.6,1.6,16,5,6.4,9.7,6.4,14.9Z" />
+                          </svg>
+                        </div>
+                      </div>
+                      <div class="x-text x-text-headline e5403-e41 m463-x m463-z m463-10 m463-13">
+                        <div class="x-text-content">
+                          <div class="x-text-content-text">
+                            <h4 class="x-text-content-text-primary">Data Science</h4>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                    <a class="x-div e5403-e33 m463-1k m463-1l m463-1m m463-1n m463-1q m463-1r m463-23 m463-24 m463-25" href="https://beta.bootstrapworld.org/curricula/algebra-2/">
+                      <div class="x-div e5403-e34 m463-1k m463-1n m463-1o m463-1p m463-1q m463-1r m463-1v m463-20 m463-23 m463-26 m463-27 m463-f" style="position: relative;">
+                        <div class="x-div e5403-e35 m463-1k m463-1l m463-1o m463-1q m463-1r m463-1u m463-23 m463-26 m463-28 m463-29 m463-g"><span class="x-image e5403-e36 m463-14 m463-16"><img src="https://beta.bootstrapworld.org/wp-content/uploads/2024/07/algebra-2-icon-blk.webp" width="30" height="29" alt="Image" loading="lazy"></span></div>
+                        <div class="x-div e5403-e39 m463-1k m463-1n m463-1o m463-1p m463-1q m463-1r m463-1u m463-1v m463-1y m463-23 m463-26 m463-29 m463-2a">
+                          <svg id="Layer_7" data-name="Layer 7" xmlns="https://www.w3.org/2000/svg" version="1.1" viewBox="0 0 43.3 38.2">
+                            <path class="" fill="var(--perwinkle)" d="M42.9,20.2c0,10.4-12,17.7-22.3,17.7s-12.5-.6-16-4.3S.4,23.8.4,18.8C.4,8.4,10.2.3,20.6.3s12.6,1.6,16,5,6.4,9.7,6.4,14.9Z" />
+                          </svg>
+                        </div>
+                      </div>
+                      <div class="x-text x-text-headline e5403-e41 m463-x m463-z m463-10 m463-13">
+                        <div class="x-text-content">
+                          <div class="x-text-content-text">
+                            <h4 class="x-text-content-text-primary">Algebra 2</h4>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                    <a class="x-div e5403-e33 m463-1k m463-1l m463-1m m463-1n m463-1q m463-1r m463-23 m463-24 m463-25" href="https://beta.bootstrapworld.org/curricula/ai/">
+                      <div class="x-div e5403-e34 m463-1k m463-1n m463-1o m463-1p m463-1q m463-1r m463-1v m463-20 m463-23 m463-26 m463-27 m463-f" style="position: relative;">
+                        <div class="x-div e5403-e35 m463-1k m463-1l m463-1o m463-1q m463-1r m463-1u m463-23 m463-26 m463-28 m463-29 m463-g"><span class="x-image e5403-e36 m463-14 m463-16"><img src="https://beta.bootstrapworld.org/wp-content/uploads/2024/12/AI-ICON-60-feature.webp" width="30" height="30" alt="Image" loading="lazy"></span></div>
+                        <div class="x-div e5403-e39 m463-1k m463-1n m463-1o m463-1p m463-1q m463-1r m463-1u m463-1v m463-1y m463-23 m463-26 m463-29 m463-2a">
+                          <svg id="Layer_7" data-name="Layer 7" xmlns="https://www.w3.org/2000/svg" version="1.1" viewBox="0 0 43.3 38.2">
+                            <path class="" fill="var(--bs-secondary-half-baked-teal)" d="M42.9,20.2c0,10.4-12,17.7-22.3,17.7s-12.5-.6-16-4.3S.4,23.8.4,18.8C.4,8.4,10.2.3,20.6.3s12.6,1.6,16,5,6.4,9.7,6.4,14.9Z" />
+                          </svg>
+                        </div>
+                      </div>
+                      <div class="x-text x-text-headline e5403-e41 m463-x m463-z m463-10 m463-13">
+                        <div class="x-text-content">
+                          <div class="x-text-content-text">
+                            <h4 class="x-text-content-text-primary">Artificial Intelligence (AI)</h4>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                    <a class="x-div e5403-e33 m463-1k m463-1l m463-1m m463-1n m463-1q m463-1r m463-23 m463-24 m463-25" href="https://beta.bootstrapworld.org/curricula/expressions-equations/">
+                      <div class="x-div e5403-e34 m463-1k m463-1n m463-1o m463-1p m463-1q m463-1r m463-1v m463-20 m463-23 m463-26 m463-27 m463-f" style="position: relative;">
+                        <div class="x-div e5403-e35 m463-1k m463-1l m463-1o m463-1q m463-1r m463-1u m463-23 m463-26 m463-28 m463-29 m463-g"><span class="x-image e5403-e36 m463-14 m463-16"><img src="https://beta.bootstrapworld.org/wp-content/uploads/2024/07/early-math-icon-blk.webp" width="30" height="29" alt="Image" loading="lazy"></span></div>
+                        <div class="x-div e5403-e39 m463-1k m463-1n m463-1o m463-1p m463-1q m463-1r m463-1u m463-1v m463-1y m463-23 m463-26 m463-29 m463-2a">
+                          <svg id="Layer_7" data-name="Layer 7" xmlns="https://www.w3.org/2000/svg" version="1.1" viewBox="0 0 43.3 38.2">
+                            <path class="" fill="var(--bs-primary-dark-blue)" d="M42.9,20.2c0,10.4-12,17.7-22.3,17.7s-12.5-.6-16-4.3S.4,23.8.4,18.8C.4,8.4,10.2.3,20.6.3s12.6,1.6,16,5,6.4,9.7,6.4,14.9Z" />
+                          </svg>
+                        </div>
+                      </div>
+                      <div class="x-text x-text-headline e5403-e41 m463-x m463-z m463-10 m463-13">
+                        <div class="x-text-content">
+                          <div class="x-text-content-text">
+                            <h4 class="x-text-content-text-primary">Expressions + Equations</h4>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                    <a class="x-div e5403-e33 m463-1k m463-1l m463-1m m463-1n m463-1q m463-1r m463-23 m463-24 m463-25" href="https://beta.bootstrapworld.org/curricula/game-design/">
+                      <div class="x-div e5403-e34 m463-1k m463-1n m463-1o m463-1p m463-1q m463-1r m463-1v m463-20 m463-23 m463-26 m463-27 m463-f" style="position: relative;">
+                        <div class="x-div e5403-e35 m463-1k m463-1l m463-1o m463-1q m463-1r m463-1u m463-23 m463-26 m463-28 m463-29 m463-g"><span class="x-image e5403-e36 m463-14 m463-16"><img src="https://beta.bootstrapworld.org/wp-content/uploads/2024/07/reactive-icon-blk.webp" width="30" height="29" alt="Image" loading="lazy"></span></div>
+                        <div class="x-div e5403-e39 m463-1k m463-1n m463-1o m463-1p m463-1q m463-1r m463-1u m463-1v m463-1y m463-23 m463-26 m463-29 m463-2a">
+                          <svg id="Layer_7" data-name="Layer 7" xmlns="https://www.w3.org/2000/svg" version="1.1" viewBox="0 0 43.3 38.2">
+                            <path class="" fill="var(--bs-primary-dark-orange)" d="M42.9,20.2c0,10.4-12,17.7-22.3,17.7s-12.5-.6-16-4.3S.4,23.8.4,18.8C.4,8.4,10.2.3,20.6.3s12.6,1.6,16,5,6.4,9.7,6.4,14.9Z" />
+                          </svg>
+                        </div>
+                      </div>
+                      <div class="x-text x-text-headline e5403-e41 m463-x m463-z m463-10 m463-13">
+                        <div class="x-text-content">
+                          <div class="x-text-content-text">
+                            <h4 class="x-text-content-text-primary">Game Design</h4>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                    <a class="x-div e5403-e33 m463-1k m463-1l m463-1m m463-1n m463-1q m463-1r m463-23 m463-24 m463-25" href="https://beta.bootstrapworld.org/curricula/physics/">
+                      <div class="x-div e5403-e34 m463-1k m463-1n m463-1o m463-1p m463-1q m463-1r m463-1v m463-20 m463-23 m463-26 m463-27 m463-f" style="position: relative;">
+                        <div class="x-div e5403-e35 m463-1k m463-1l m463-1o m463-1q m463-1r m463-1u m463-23 m463-26 m463-28 m463-29 m463-g"><span class="x-image e5403-e36 m463-14 m463-16"><img src="https://beta.bootstrapworld.org/wp-content/uploads/2024/12/physics-icon-60.webp" width="30" height="30" alt="Image" loading="lazy"></span></div>
+                        <div class="x-div e5403-e39 m463-1k m463-1n m463-1o m463-1p m463-1q m463-1r m463-1u m463-1v m463-1y m463-23 m463-26 m463-29 m463-2a">
+                          <svg id="Layer_7" data-name="Layer 7" xmlns="https://www.w3.org/2000/svg" version="1.1" viewBox="0 0 43.3 38.2">
+                            <path class="" fill="var(--bs-primary-light-orange)" d="M42.9,20.2c0,10.4-12,17.7-22.3,17.7s-12.5-.6-16-4.3S.4,23.8.4,18.8C.4,8.4,10.2.3,20.6.3s12.6,1.6,16,5,6.4,9.7,6.4,14.9Z" />
+                          </svg>
+                        </div>
+                      </div>
+                      <div class="x-text x-text-headline e5403-e41 m463-x m463-z m463-10 m463-13">
+                        <div class="x-text-content">
+                          <div class="x-text-content-text">
+                            <h4 class="x-text-content-text-primary">Physics</h4>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                    <a class="x-div e5403-e33 m463-1k m463-1l m463-1m m463-1n m463-1q m463-1r m463-23 m463-24 m463-25" href="https://beta.bootstrapworld.org/curricula/build-your-own/">
+                      <div class="x-div e5403-e34 m463-1k m463-1n m463-1o m463-1p m463-1q m463-1r m463-1v m463-20 m463-23 m463-26 m463-27 m463-f" style="position: relative;">
+                        <div class="x-div e5403-e35 m463-1k m463-1l m463-1o m463-1q m463-1r m463-1u m463-23 m463-26 m463-28 m463-29 m463-g"><span class="x-image e5403-e36 m463-14 m463-16"><img src="https://beta.bootstrapworld.org/wp-content/uploads/2024/12/build-your-own-60.webp" width="30" height="30" alt="Image" loading="lazy"></span></div>
+                        <div class="x-div e5403-e39 m463-1k m463-1n m463-1o m463-1p m463-1q m463-1r m463-1u m463-1v m463-1y m463-23 m463-26 m463-29 m463-2a">
+                          <svg id="Layer_7" data-name="Layer 7" xmlns="https://www.w3.org/2000/svg" version="1.1" viewBox="0 0 43.3 38.2">
+                            <path class="" fill="var(--bs-secondary-supernova)" d="M42.9,20.2c0,10.4-12,17.7-22.3,17.7s-12.5-.6-16-4.3S.4,23.8.4,18.8C.4,8.4,10.2.3,20.6.3s12.6,1.6,16,5,6.4,9.7,6.4,14.9Z" />
+                          </svg>
+                        </div>
+                      </div>
+                      <div class="x-text x-text-headline e5403-e41 m463-x m463-z m463-10 m463-13">
+                        <div class="x-text-content">
+                          <div class="x-text-content-text">
+                            <h4 class="x-text-content-text-primary">Build Your Own</h4>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="x-col e5403-e42 m463-30">
+              <div class="x-div e5403-e43 m463-1k m463-1m m463-1o m463-1q m463-1r m463-1u m463-1v m463-1w m463-22 m463-23 m463-2b m463-2c m463-8 m463-9 m463-h">
+                <a href="/teachers" class="x-text x-text-headline e5403-e44 m463-x m463-y m463-z m463-10 m463-11">
+                  <div class="x-text-content">
+                    <div class="x-text-content-text">
+                      <h4 class="x-text-content-text-primary">Teachers</h4>
+                    </div>
+                  </div>
+                </a>
+                <ul class="x-menu-first-level x-menu x-menu-inline e5403-e45 m463-3c m463-3d m463-3e">
+                  <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4502303003843832" id="menu-item-4502303003843832">
+                    <a class="x-anchor x-anchor-menu-item m463-35 m463-36 m463-39 m463-3a" tabindex="0" href="https://beta.bootstrapworld.org/professional-learning/">
+                      <div class="x-anchor-content">
+                        <div class="x-anchor-text"><span class="x-anchor-text-primary">Professional Learning</span></div>
+                      </div>
+                    </a>
+                  </li>
+                  <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4502303003843833" id="menu-item-4502303003843833">
+                    <a class="x-anchor x-anchor-menu-item m463-35 m463-36 m463-39 m463-3a" tabindex="0" href="https://beta.bootstrapworld.org/teachers/ask-a-question/">
+                      <div class="x-anchor-content">
+                        <div class="x-anchor-text"><span class="x-anchor-text-primary">Ask a Question</span></div>
+                      </div>
+                    </a>
+                  </li>
+                  <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4502303003843834" id="menu-item-4502303003843834">
+                    <a class="x-anchor x-anchor-menu-item m463-35 m463-36 m463-39 m463-3a" tabindex="0" href="https://beta.bootstrapworld.org/research/">
+                      <div class="x-anchor-content">
+                        <div class="x-anchor-text"><span class="x-anchor-text-primary">Research</span></div>
+                      </div>
+                    </a>
+                  </li>
+                  <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4502303003843835" id="menu-item-4502303003843835">
+                    <a class="x-anchor x-anchor-menu-item m463-35 m463-36 m463-39 m463-3a" tabindex="0" href="https://beta.bootstrapworld.org/in-the-field/">
+                      <div class="x-anchor-content">
+                        <div class="x-anchor-text"><span class="x-anchor-text-primary">In the Field</span></div>
+                      </div>
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <div class="x-col e5403-e46 m463-30">
+              <div class="x-div e5403-e47 m463-1k m463-1m m463-1o m463-1q m463-1r m463-1u m463-1v m463-1w m463-22 m463-23 m463-2b m463-2c m463-8 m463-9 m463-b">
+                <a href="/states-districts/" class="x-text x-text-headline e5403-e48 m463-x m463-y m463-z m463-10 m463-11">
+                  <div class="x-text-content">
+                    <div class="x-text-content-text">
+                      <h4 class="x-text-content-text-primary">States &amp; Districts</h4>
+                    </div>
+                  </div>
+                </a>
+                <div class="x-row e5403-e49 m463-2e m463-2m m463-2p m463-2q m463-2w m463-2y">
+                  <div class="x-row-inner">
+                    <div class="x-col e5403-e50 m463-30">
+                      <ul class="x-menu-first-level x-menu x-menu-inline e5403-e51 m463-3c m463-3d m463-3e">
+                        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4502303003843836" id="menu-item-4502303003843836">
+                          <a class="x-anchor x-anchor-menu-item m463-35 m463-36 m463-39 m463-3a" tabindex="0" href="/professional-learning/?prev=states-districts">
+                            <div class="x-anchor-content">
+                              <div class="x-anchor-text"><span class="x-anchor-text-primary">Professional Learning</span></div>
+                            </div>
+                          </a>
+                        </li>
+                        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4502303003843837" id="menu-item-4502303003843837">
+                          <a class="x-anchor x-anchor-menu-item m463-35 m463-36 m463-39 m463-3a" tabindex="0" href="/consulting/?prev=states-districts">
+                            <div class="x-anchor-content">
+                              <div class="x-anchor-text"><span class="x-anchor-text-primary">Consulting</span></div>
+                            </div>
+                          </a>
+                        </li>
+                        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4502303003843838" id="menu-item-4502303003843838">
+                          <a class="x-anchor x-anchor-menu-item m463-35 m463-36 m463-39 m463-3a" tabindex="0" href="/research/?prev=states-districts">
+                            <div class="x-anchor-content">
+                              <div class="x-anchor-text"><span class="x-anchor-text-primary">Research</span></div>
+                            </div>
+                          </a>
+                        </li>
+                        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-4502303003843839" id="menu-item-4502303003843839">
+                          <a class="x-anchor x-anchor-menu-item m463-35 m463-36 m463-39 m463-3a" tabindex="0" href="/in-the-field/?prev=states-districts">
+                            <div class="x-anchor-content">
+                              <div class="x-anchor-text"><span class="x-anchor-text-primary">In the Field</span></div>
+                            </div>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="x-col e5403-e52 m463-30">
+              <div class="x-div e5403-e53 m463-1k m463-1m m463-1o m463-1q m463-1r m463-1u m463-1v m463-1w m463-22 m463-23 m463-25 m463-2b m463-2d m463-8 m463-9 m463-c">
+                <a href="/why-bootstrap/" class="x-text x-text-headline e5403-e54 m463-x m463-y m463-z m463-10 m463-11">
+                  <div class="x-text-content">
+                    <div class="x-text-content-text">
+                      <h4 class="x-text-content-text-primary">Why Bootstrap?</h4>
+                    </div>
+                  </div>
+                </a>
+                <div class="x-row e5403-e55 m463-2e m463-2f m463-2h m463-2i m463-2p m463-2r m463-2w m463-2z">
+                  <div class="x-row-inner">
+                    <div class="x-col e5403-e56 m463-30">
+                      <ul class="x-menu-first-level x-menu x-menu-inline e5403-e57 m463-3c m463-3e">
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4502303003843840" id="menu-item-4502303003843840">
+                          <a class="x-anchor x-anchor-menu-item m463-35 m463-36 m463-39 m463-3a" tabindex="0" href="https://beta.bootstrapworld.org/more-partners/">
+                            <div class="x-anchor-content">
+                              <div class="x-anchor-text"><span class="x-anchor-text-primary">More Partners</span></div>
+                            </div>
+                          </a>
+                        </li>
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page current_page_parent menu-item-4502303003843841" id="menu-item-4502303003843841">
+                          <a class="x-anchor x-anchor-menu-item m463-35 m463-36 m463-39 m463-3a" tabindex="0" href="https://beta.bootstrapworld.org/blog/">
+                            <div class="x-anchor-content">
+                              <div class="x-anchor-text"><span class="x-anchor-text-primary">Blog</span></div>
+                            </div>
+                          </a>
+                        </li>
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4502303003843842" id="menu-item-4502303003843842">
+                          <a class="x-anchor x-anchor-menu-item m463-35 m463-36 m463-39 m463-3a" tabindex="0" href="https://beta.bootstrapworld.org/why-bootstrap/team/">
+                            <div class="x-anchor-content">
+                              <div class="x-anchor-text"><span class="x-anchor-text-primary">Team</span></div>
+                            </div>
+                          </a>
+                        </li>
+                        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4502303003843843" id="menu-item-4502303003843843">
+                          <a class="x-anchor x-anchor-menu-item m463-35 m463-36 m463-39 m463-3a" tabindex="0" href="https://beta.bootstrapworld.org/why-bootstrap/partner-with-us/">
+                            <div class="x-anchor-content">
+                              <div class="x-anchor-text"><span class="x-anchor-text-primary">Partner with Us</span></div>
+                            </div>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="x-bar x-bar-footer x-bar-h x-bar-relative x-bar-outer-spacers e5403-e58 m463-0 m463-1 m463-5 m463-6">
+    <div class="e5403-e58 x-bar-content">
+      <div class="x-bar-container e5403-e59 m463-i m463-k m463-n m463-o m463-q m463-u m463-v">
+        <div class="x-text x-content e5403-e60 m463-18 m463-19 m463-1b m463-1d m463-1f m463-1g m463-1h">Copyright © 2025 Bootstrap. All Rights Reserved.</div>
+        <div class="x-div e5403-e61 m463-1k m463-1l m463-1m m463-1o m463-1q m463-1r m463-1u m463-1w m463-23 m463-2b">
+          <div class="x-text x-content e5403-e62 m463-18 m463-19 m463-1b m463-1e m463-1g m463-1h m463-1i org-link"><a href="/privacy-policy/">Privacy Policy</a></div>
+          <div class="x-text x-content e5403-e63 m463-18 m463-19 m463-1b m463-1d m463-1e m463-1h m463-1j org-link"><a href="/terms-of-service/">Terms of Service</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div id="header-modal-off-canvas" class="x-off-canvas x-off-canvas-left m1f-4s e51-e20" role="dialog" data-x-toggleable="e51-e20" aria-hidden="true" aria-label="Off Canvas" data-x-disable-body-scroll="1">
+  <span class="x-off-canvas-bg" data-x-toggle-direct-close=""></span>
+  <div class="x-off-canvas-content x-off-canvas-content-left" role="document" tabindex="-1" aria-label="Off Canvas Content">
+    <div class="x-div e51-e21 m1f-3f m1f-3g m1f-3i m1f-3j m1f-3k m1f-3l m1f-3n">
+      <a class="x-anchor x-anchor-button has-graphic e51-e22 m1f-y m1f-16 m1f-17 m1f-18 m1f-19 m1f-1b m1f-1f m1f-1g m1f-1h m1f-1i m1f-1j m1f-1k m1f-1m m1f-1q m1f-1t m1f-1u m1f-1w m1f-1x m1f-2b m1f-2c m1f-2e m1f-2f m1f-2g m1f-2h" tabindex="0" href="#" data-x-toggle-close="1">
+        <div class="x-anchor-content"><span class="x-graphic" aria-hidden="true"><i class="close-x" aria-hidden="true"></i></span>
+          <div class="x-anchor-text"><span class="x-anchor-text-primary">Close</span></div>
+        </div>
+      </a>
+    </div>
+    <div class="x-div e51-e23 m1f-3b m1f-3e m1f-3f m1f-3g m1f-3i m1f-3j m1f-3k m1f-3l m1f-3n m1f-3o m1f-3p m1f-3q m1f-3x">
+      <div class="x-acc e51-e24 m1f-4t m1f-4u" id="x-acc-e51-e24">
+        <div class="e51-e25 x-acc-item mobile-dropdown">
+          <button id="tab-e51-e25" class="x-acc-header" role="button" type="button" aria-expanded="false" aria-controls="panel-e51-e25" data-x-toggle="collapse" data-x-toggleable="e51-e25">
+            <span class="x-acc-header-content"><span class="x-acc-header-text"><a href="https://beta.bootstrapworld.org/teachers">Teachers</a></span></span>
+          </button>
+        </div>
+      </div>
+      <div class="x-acc e51-e90 m1f-4t m1f-4u" id="x-acc-e51-e90">
+        <div class="e51-e91 x-acc-item mobile-dropdown">
+          <button id="tab-e51-e91" class="x-acc-header" role="button" type="button" aria-expanded="false" aria-controls="panel-e51-e91" data-x-toggle="collapse" data-x-toggleable="e51-e91">
+            <span class="x-acc-header-content"><span class="x-acc-header-text"><a href="https://beta.bootstrapworld.org/states-districts/">States &amp; Districts</a></span></span>
+          </button>
+        </div>
+      </div>
+      <div class="x-acc e51-e97 m1f-4t m1f-4u" id="x-acc-e51-e97">
+        <div class="e51-e98 x-acc-item mobile-dropdown">
+          <button id="tab-e51-e98" class="x-acc-header" role="button" type="button" aria-expanded="false" aria-controls="panel-e51-e98" data-x-toggle="collapse" data-x-toggleable="e51-e98">
+            <span class="x-acc-header-content"><span class="x-acc-header-text"><a href="https://beta.bootstrapworld.org/why-bootstrap/">Why Bootstrap?</a></span></span>
+          </button>
+        </div>
+      </div>
+      <a class="x-anchor x-anchor-button has-graphic e51-e108 m1f-10 m1f-12 m1f-16 m1f-17 m1f-19 m1f-1g m1f-1h m1f-1i m1f-1k m1f-1m m1f-1u m1f-1v m1f-1w m1f-1x m1f-1z m1f-22 m1f-23 m1f-24 m1f-25 m1f-26 m1f-27 m1f-2h m1f-2i m1f-2k m1f-2v m1f-2w m1f-2x" tabindex="0" href="https://beta.bootstrapworld.org/partner-with-us/">
+        <div class="x-anchor-content"><span class="x-graphic" aria-hidden="true"><span class="x-image x-graphic-child x-graphic-image x-graphic-primary"><img decoding="async" src="https://beta.bootstrapworld.org/wp-content/uploads/2024/07/right-blue-arrow.png" width="40" height="18" alt="Image" loading="lazy"></span><span class="x-image x-graphic-child x-graphic-image x-graphic-secondary"><img decoding="async" src="https://beta.bootstrapworld.org/wp-content/uploads/2024/07/arrow-white-right-1.webp" width="40" height="18" alt="Image" loading="lazy"></span></span>
+          <div class="x-anchor-text"><span class="x-anchor-text-primary">Partner with Us</span></div>
+        </div>
+      </a>
+      <div class="x-div e51-e109 m1f-3b m1f-3d m1f-3e m1f-3f m1f-3g m1f-3h m1f-3i m1f-3j m1f-3k m1f-3l m1f-3n m1f-3o m1f-3p m1f-3q m1f-3s">
+        <div class="x-div e51-e110 m1f-3f m1f-3g m1f-3h m1f-3i m1f-3r m1f-3s m1f-3u m1f-3w m1f-4d"></div>
+        <a class="x-anchor x-anchor-button e51-e111 m1f-16 m1f-17 m1f-19 m1f-1g m1f-1h m1f-1i m1f-1k m1f-1m m1f-1q m1f-1y m1f-22 m1f-23 m1f-24 m1f-25 m1f-27 m1f-28 m1f-2f m1f-2i m1f-2p m1f-2y m1f-2z border-increase-on-hover" tabindex="0" href="https://beta.bootstrapworld.org/my-account/">
+          <div class="x-anchor-content">
+            <div class="x-anchor-text"><span class="x-anchor-text-primary">Login</span></div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
 </body>
+<!-- end epilogue.txt -->
+
+
 </html>
