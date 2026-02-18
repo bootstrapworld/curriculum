@@ -7,14 +7,18 @@ table.predictions th { text-align: center; vertical-align: middle; }
 /* In solutions mode, make the math larger */
 .fitbruby .solution .mathunicode { font-size: larger !important; }
 
-td { padding: 0.3em !important; }
+/* Shrink vertical spacing on fitbruby */
+.fitbruby{padding-top: 0.5rem !important;}
+.fitb.stretch::after{padding-top: 0.5rem !important;}
+
+td { padding: 0em !important; }
 
 /* Push content to the top (instead of the default vertical distribution), which was leaving empty space at the top. */
 #content { display: block !important; }
 </style>
 ++++
 
-== Doing Bad Things with Extrapolation
+== Being (ir)Responsible with Extrapolation
 
 @n In the space below, define `exponential` for the best model from @printable-exercise{exponential-models-MI.adoc}.
 
@@ -22,7 +26,7 @@ td { padding: 0.3em !important; }
 
 `fun exponential(x): (` @fitbruby{8em}{@ifsoln{31.6}}{a} `* expt(` @fitbruby{10em}{@ifsoln{1.047}}{b} `, (~1 * x))) +` @fitbruby{10em}{@ifsoln{119000}}{k} `end`
 
-*Good students know to _never_ use a model to make predictions far outside the original dataset. But to prove a point, today we're going to be BAD and extrapolate way, _way_ outside the data!*
+*Good students know to _never_ use a model to make predictions far outside the original dataset. But to prove a point, today we're going to extrapolate way, _way_ outside the data!*
 
 @n Fill in the table below, to show how many positive cases you *estimate* based on your model after X days. +
 *DO NOT* use a calculator, keyboard or mouse! Instead, use *only your eyes* to look at the formula above or the Desmos graph on your screen.
@@ -39,23 +43,32 @@ td { padding: 0.3em !important; }
 
 == Fitting Exponential Models in Pyret
 
-@n Define `exponential` in @starter-file{alg2-covid}. Click "Run" and use `fit-model` to determine how closely `exponential` fits the `MA-table`.  @ifnotsoln{@hspace{1em}}_Hint: If you forgot the contract for `fit-model`, look it up in the @dist-link{Contracts.shtml, Contracts Pages}!_
+@n Define `exponential` in @starter-file{alg2-covid}. Click "Run" and use `fit-model` to determine how closely `exponential` fits the `MI-table`. Then complete the sentences below. @ifnotsoln{@hspace{1em}}_Hint: If you forgot the contract for `fit-model`, look it up in the @dist-link{Contracts.shtml, Contracts Pages}!_
 
 @teacher{*Answers will vary. Numbers below are provided for reference only!*} 
 
-@indented{
-According to this exponential model, on @fitbruby{6em}{June 9, 2020}{day zero} there were a total of about 
-(@fitbruby{1em}{@ifsoln{32}}{a} + @fitbruby{3em}{@ifsoln{119,000}}{k} =) 
-@fitbruby{7em}{@ifsoln{119,032}}{a + k} @fitbruby{10em}{@ifsoln{positive covid cases}}{y-units} in MA. This number increased by a factor of @fitbruby{6em}{@ifsoln{1.047}}{Growth Factor: b} or 
-@fitbruby{9em}{@ifsoln{4.7}}{Growth Rate: (b - 1) &times; 100} % every day. 
+@n This model was built using data about 
+@fitbruby{6em}{@ifsoln{51}}{how many?}
+@fitbruby{33em}{@ifsoln{covid case counts in Michigan}}{what?} whose +
+@fitbruby{15em}{@ifsoln{day reported}}{x-variable} ranged from
+@fitbruby{7em}{@ifsoln{15}}{x-min} to
+@fitbruby{7em}{@ifsoln{365}}{x-max}
+@fitbruby{20em}{@ifsoln{days into 2020}}{x-variable units}. +
 
-The error in the model is described by an @vocab{S-value} of ~
+@n Possible limitations of this model include @fitbruby{}{@ifsoln{Data is all from one year. Not all cases were reported. }}{uneven distribution, high variability, small sample size, etc.}
+
+@n According to this exponential model, on @fitbruby{6em}{June 9, 2020}{day zero} there were a total of about 
+(@fitbruby{1em}{@ifsoln{32}}{a} + @fitbruby{8em}{@ifsoln{119,000}}{k} =) 
+@fitbruby{9em}{@ifsoln{119,032}}{a + k} @fitbruby{10em}{@ifsoln{positive covid cases}}{y-units} in MI. This number increased by a factor of 
+@fitbruby{8em}{@ifsoln{1.047}}{Growth Factor: b} or 
+@fitbruby{12em}{@ifsoln{4.7}}{Growth Rate: (b - 1) &times; 100} % every day. 
+
+@n The error in the model is described by an @vocab{S-value} of ~
 @fitbruby{3em}{@ifsoln{13,374}}{S}@fitbruby{11em}{@ifsoln{positive COVID cases}}{units}. I
-@fitbruby{17em}{agree}{strongly agree, agree, disagree, strongly disagree} that this model is a good fit considering that
+@fitbruby{20em}{agree}{strongly agree, agree, disagree, strongly disagree} that this model is a good fit considering that
 @fitbruby{10em}{@ifsoln{positive cases}}{y-units} in this dataset range from 
-@fitbruby{6em}{@ifsoln{104156}}{lowest y-value} to 
-@fitbruby{6em}{@ifsoln{341925}}{highest y-value}. 
-}
+@fitbruby{9em}{@ifsoln{104156}}{lowest y-value} to 
+@fitbruby{9em}{@ifsoln{341925}}{highest y-value}. 
 
 @n *Use Pyret* to compute your model's predictions after each number of days and fill in the table below.
 
