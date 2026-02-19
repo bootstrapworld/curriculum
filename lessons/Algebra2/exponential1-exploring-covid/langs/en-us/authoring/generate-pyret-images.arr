@@ -58,7 +58,7 @@ MI-covid-chart = render-chart(from-list.scatter-plot(
         MI-table.column("positive")))
       .x-axis("day")
       .y-axis("positive")
-      .y-min(100000)
+      .y-min(0)
 
 covid-chart = render-chart(from-list.scatter-plot(
         covid-table.column("day"),
@@ -68,5 +68,5 @@ covid-chart = render-chart(from-list.scatter-plot(
       .y-min(100000)
 
 ###################### Save the images ##########################
-I.save-image(add-padding(covid-chart.get-image()), '../images/multiple-models-AUTOGEN.png')
+# I.save-image(add-padding(covid-chart.get-image()), '../images/multiple-models-AUTOGEN.png')
 I.save-image(add-padding(MI-covid-chart.get-image()), '../images/MI-covid-AUTOGEN.png')

@@ -1,0 +1,88 @@
+= Data Cycle: Categorical Distributions (Global Food Supply)
+++++
+<style>
+/* hide the Interpret rows, as well as the sub-questions for Analyze */
+.data-cycle tr:nth-of-type(4),
+.data-cycle tr:nth-of-type(3) td:nth-of-type(2) p:nth-of-type(1),
+.data-cycle tr:nth-of-type(3) td:nth-of-type(2) p:nth-of-type(2) { display: none; }
+table.template { border-top: 0; }
+table.template td:first-of-type { background: #ccc; }
+table { flex-grow: 1; }
+</style>
+++++
+
+Using the @opt-starter-file{food}, let's make a @ifproglang{pyret}{*pie-chart*}@ifproglang{codap}{*bar chart*} to see what we can learn about the distribution of land-locked countries and what new questions it may lead us to.
+
+@data-cycle{ ""
+  #:question "Are more countries land-locked or not land-locked?"
+  #:show-question? #t
+  #:question-type "arithmetic"
+  #:rows "All the rows"
+  #:show-rows? #f
+  #:cols "landlocked"
+  #:show-cols? #f
+  #:filter-fn ""
+  #:show-filter? #f
+  #:build-fn ""
+  #:show-build? #f
+  #:expression (if (string=? *proglang* "pyret") '(pie-chart food-table "landlocked") "Set x-axis to `land-locked`. Select `Fuse Dots into Bars` from the Measure menu.")
+  #:show-expression? #f
+  #:finding "The number of land-locked countries (37) is about 1/3 the number of not land-locked countries (124)."
+  #:show-finding? #f
+  #:new-question "How does the ratio of land-locked to not land-locked countries differ by population density?"
+  #:show-new-question? #f
+}
+
+[.template, cols="^.^2a,13a"]
+|===
+|@centered-image{../images/InterpretData.png}
+|
+The chart shows that there are @fitbruby{10em}{@ifsoln{less}}{less / as many / more} land-locked countries than not land-locked countries.
+
+Some new questions this raises include:
+
+@blanklines{3}{
+@ifsoln{How does the ratio of land-locked to not land-locked countries differ by population density?
+}}
+
+|===
+
+@span{.sectionbreak}{}
+
+Let's make a *bar chart* to see what we can learn about the distribution of countries across regions and what new questions it may lead us to.
+
+@data-cycle{ ""
+  #:question "How many more countries are in Europe than are in the Asia-Pacific region?"
+  #:show-question? #t
+  #:question-type "arithmetic"
+  #:rows "All the rows"
+  #:show-rows? #f
+  #:cols "region"
+  #:show-cols? #f
+  #:filter-fn ""
+  #:show-filter? #f
+  #:build-fn ""
+  #:show-build? #f
+  #:expression (if (string=? *proglang* "pyret") '(bar-chart food-table "region") "Set x-axis to `region`. Select `Fuse Dots into Bars` from the Measure menu.")
+  #:show-expression? #f
+  #:finding "There are 2 more countries in Europe (40) than in the Asia-Pacific region (38)."
+  #:show-finding? #f
+  #:new-question "Why are there so many more countries in Europe and the Asia-Pacific region than other regions?" 
+  #:show-new-question? #f
+}
+
+[.template, cols="^.^2a,13a"]
+|===
+|@centered-image{../images/InterpretData.png}
+|
+The chart shows that there are @fitb{3em}{@ifsoln{2}} more countries in Europe than there are in the Asia-Pacific Region.
+
+@vspace{1ex}
+
+Some new questions this raises include:
+
+@blanklines{3}{
+@ifsoln{Why are there so many more countries in Europe and the Asia-Pacific Region than there are in North America?
+}}
+|===
+

@@ -131,12 +131,12 @@ Consider the dataset: 1, 2, 3, 5, 6, 7, 8, 9 (4 is missing!)
 @A{The median is always the "middle number". This dataset has 8 numbers, so there is no exact "middle". When this happens, we take the mean of the two middle numbers (5 and 6), which is 5.5}
 
 @Q{Which numbers are in the "lower half" of this dataset, and what is the median of that half (Q1)?}
-@A{All the numbers _less_ than 5.5: 1, 2, 3, 5}
-@A{The median is the middle number, but once again we need to take the mean of two middles (2 and 3): 2.5}
+@A{All the numbers _less_ than 5.5:    1, 2, 3, 5}
+@A{Q1 is the middle number, but once again we need to take the mean of two middles (2 and 3): 2.5}
 
 @Q{Which numbers are in the "upper half" of this dataset, and what is the median of that half (Q3)?}
-@A{All the numbers _more_ than 5.5: 6, 7, 8, 9}
-@A{The median is the middle number, but once again we need to take the mean of two middles (7 and 8): 7.5}
+@A{All the numbers _more_ than 5.5:   6, 7, 8, 9}
+@A{Q3 is the middle number, but once again we need to take the mean of two middles (7 and 8): 7.5}
 }
 
 
@@ -153,15 +153,17 @@ Consider the dataset: 1, 2, 3, 4, 5, 6, 7, 8, 9 (We let 4 back in!)
 @A{The median is always the "middle number". This dataset has _9_ numbers, so we can grab the one in the middle: 5}
 
 @Q{Which numbers are in the "lower half" of this dataset, and what is the median of that half (Q1)?}
-@A{All the numbers less than 5: 1, 2, 3, 4}
+@A{All the numbers less than 5:   1, 2, 3, 4}
+@A{Q1 is the middle number, but once again we need to take the mean of two middles (2 and 3): 2.5}
 
 @Q{Which numbers are in the "upper half" of this dataset, and what is the median of that half (Q3)?}
-@A{All the numbers more than 5: 6, 7, 8, 9}
+@A{All the numbers more than 5:   6, 7, 8, 9}
+@A{Q3 is the middle number, but once again we need to take the mean of two middles (7 and 8): 7.5}
 }
 
 @slidebreak{Launch}
 
-Our quartiles allow us to calculate the @vocab{Interquartile Range}(@vocab{IQR}) -- _the distance spanned by the middle half of the data_.  The @vocab{IQR} is a more robust measure of variation than the range because it is less susceptible to @vocab{outliers}.  Seeing the relative size of the middle quartiles can be more useful than looking at data "on the edge". Mathematically, @math{\text{IQR} = Q3 - Q1}.
+Our quartiles allow us to calculate the @vocab{Interquartile Range}(@vocab{IQR}) -- _the distance spanned by the middle half of the data_.  The @vocab{IQR} is a more robust measure of variation than the range because it is less susceptible to @vocab{outliers}.  Seeing the relative size of the middle quartiles can be more useful than looking at data "on the edge". Mathematically,    @big{@math{\text{IQR} = Q3 - Q1}}
 
 === Investigate 
 @slidebreak{Investigate}
@@ -436,14 +438,13 @@ Create a box plot in CODAP that visualizes the spread of `Pounds`.
 @slidebreak{Investigate}
 
 @QandA{
-
-@ifslide{
-@ifproglang{pyret}{@image{images/box-plot-pounds.png, 800}}
+@ifproglang{pyret}{@image{images/box-plot-pounds.png, 500}}
 @ifproglang{codap}{@image{images/codap-box-plot.png, 300}}
-}
+
 
 @Q{What conclusions can you draw about the distribution of values in this column?}
-@A{While the animals' weights range from 0.1 pounds to 172 pounds, 50% of the animals weigh 11.3 pounds or less. The animal that weighs 172 pounds may be an outlier.}
+@A{The animal that weighs 172 pounds may be an outlier.}
+@A{While the animals' weights range from 0.1 pounds to 172 pounds, 50% of the animals weigh 11.3 pounds or less.}
 }
 
 @QandA{
