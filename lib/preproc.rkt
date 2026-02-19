@@ -2224,6 +2224,7 @@
                                                                         *starter-file-links*)))])))
                                                   (display link-output o))]))]))]
                           [(string=? directive "assessments")
+                           (fprintf o "[.AssessmentDirections]\nClick the quiz button next to an assessment to generate a _unique link_ for each class or group of students\n")
                            (fprintf o "\ninclude::~a/{cachedir}.index-assessments.asc[]\n" *containing-directory*)]
                           [(string=? directive "assessment")
                            (let* ([args (read-commaed-group i directive read-group)]
