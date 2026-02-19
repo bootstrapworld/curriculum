@@ -2241,7 +2241,9 @@
                              (unless (assoc lbl *assessments-met*)
                                  (set! *assessments-met*
                                    (cons (cons lbl text) *assessments-met*)))
-                             (fprintf o "link:pass:[assessments/~a/index.html][~a, role=quiz]" lbl text))]
+                             #;(fprintf o "link:pass:[assessments/~a/index.html][~a, role=quiz]" lbl text)
+                             (fprintf o "~a" text)
+                             )]
                           [(string=? directive "citation")
                            (let* ([args (read-commaed-group i directive read-group)]
                                   [args-len (length args)]
