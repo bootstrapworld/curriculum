@@ -2224,7 +2224,7 @@
                                                                         *starter-file-links*)))])))
                                                   (display link-output o))]))]))]
                           [(string=? directive "assessments")
-                           (fprintf o "[.AssessmentDirections]\nClick the quiz button next to an assessment to generate a _unique link_ for each class or group of students\n")
+                           (fprintf o "[.AssessmentDirections]\nClick the button next to each assessment to generate a _unique link_ to share with a group of students (e.g. \"Period 3\")\n")
                            (fprintf o "\ninclude::~a/{cachedir}.index-assessments.asc[]\n" *containing-directory*)]
                           [(string=? directive "assessment")
                            (let* ([args (read-commaed-group i directive read-group)]
@@ -2242,7 +2242,7 @@
                                  (set! *assessments-met*
                                    (cons (cons lbl text) *assessments-met*)))
                              #;(fprintf o "link:pass:[assessments/~a/index.html][~a, role=quiz]" lbl text)
-                             (fprintf o "~a" text)
+                             (fprintf o "\"~a\", linked at the top of the lesson" text)
                              )]
                           [(string=? directive "citation")
                            (let* ([args (read-commaed-group i directive read-group)]
