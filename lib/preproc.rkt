@@ -2224,7 +2224,7 @@
                                                                         *starter-file-links*)))])))
                                                   (display link-output o))]))]))]
                           [(string=? directive "assessments")
-                           (fprintf o "[.AssessmentDirections]\nClick the button next to each assessment to generate a _unique link_ to share with a group of students (e.g. \"Period 3\")\n")
+                           (fprintf o "[.AssessmentDirections]\nGenerate a _unique link_ to share with each group of students (e.g. \"Period 3\"). link:../../pages/how-to-use-assessments.html[Click here] for more information.\n")
                            (fprintf o "\ninclude::~a/{cachedir}.index-assessments.asc[]\n" *containing-directory*)]
                           [(string=? directive "assessment")
                            (let* ([args (read-commaed-group i directive read-group)]
