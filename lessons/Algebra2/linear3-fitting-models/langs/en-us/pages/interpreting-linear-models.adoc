@@ -3,16 +3,22 @@
 <style>
 /* shorten fill in the blanks */
 .studentAnswerMedium { min-width: 8em !important; }
-td { padding: 1 !important; }
+td { padding: 0.5 !important; }
 .example { font-style: italic; }
 .example .fitbruby {
-	padding-top: 0.75rem !important;
+	padding-top: 0.2rem !important;
 	border-color: lightgray !important;
-fitbruby {
-  padding-top: 9rem !important;
+	}
+
+/* shrink padding on fitb */
+.fitb, .fitbruby, .fitb.stretch::after, .fitbruby.stretch::after {
+    padding-top: 0.6em !important;
+    line-height: 1em !important;
+    }
+
+div#body:not(.LessonPlan, .narrativepage) p {
+    line-height: 1em !important;
 }
-/* Push content to the top (instead of the default vertical distribution), which was leaving empty space at the top. */
-#content { display: block !important; }
 </style>
 ++++
 
@@ -35,13 +41,13 @@ Open your copy of the @starter-file{alg2-states} and click "Run".
 We started with a model based on Alabama and Alaska (@show{(code '(define (al-ak x) (+ (* 5613.67 x) -83616.02)))}), +
 and got an @math{\text{S-value}} of `~36164.68`. We can interpret this as follows:
 
-@ifnotsoln{@vspace{1ex}}
+@vspace{1ex}
 
 [.example]
 --
 The @fitbruby{15em}{Alabama-Alaska}{sensible name} model predicts that a 1
 @fitbruby{10em}{percent}{x-axis units} increase in
-@fitbruby{15em}{percent college degrees}{explanatory variable (x)} is associated with a
+@fitbruby{15em}{percent attended college}{explanatory variable (x)} is associated with a
 @fitbruby{15em}{~5614 dollar}{rate of change in y-units}
 @fitbruby{12em}{increase}{increase / decrease} in
 @fitbruby{22em}{median household income}{response variable (y)}. +
@@ -61,13 +67,24 @@ With @fitbruby{20em}{median household income}{response variable (y)} ranging fro
 
 == Interpreting the Optimal Model
 
-The @fitbruby{15em}{linear-regression}{sensible name} model predicts that a 1
+@n This model was built using data about 
+@fitbruby{8em}{@ifsoln{51}}{how many?}
+@fitbruby{8em}{@ifsoln{states}}{what?} whose +
+@fitbruby{30em}{@ifsoln{percent of the population who attended college}}{x-variable} ranged from
+@fitbruby{7em}{@ifsoln{18.3}}{x-min} to
+@fitbruby{7em}{@ifsoln{52.4}}{x-max}
+@fitbruby{8em}{@ifsoln{percent}}{x-variable units}. +
+
+@n Possible limitations of this model include @fitbruby{}{@ifsoln{Data is all from one year.}}{uneven distribution, high variability, small sample size, etc.}
+
+@n The @fitbruby{15em}{linear-regression}{sensible name} model predicts that a 1
 @fitbruby{10em}{@ifsoln{percent}}{x-axis units} increase in
 @fitbruby{15em}{@ifsoln{percent college degrees}}{explanatory variable (x)} is associated with a
 @fitbruby{15em}{@ifsoln{1142 dollar}}{rate of change in y-units}
 @fitbruby{12em}{@ifsoln{increase}}{increase / decrease} in
 @fitbruby{22em}{@ifsoln{median household income}}{response variable (y)}. +
-With @fitbruby{15em}{@ifsoln{median household income}}{response variable (y)} ranging from
+
+@n With @fitbruby{15em}{@ifsoln{median household income}}{response variable (y)} ranging from
 @fitbruby{12em}{@ifsoln{$39,031}}{lowest y-value} to
 @fitbruby{12em}{@ifsoln{$73,538}}{highest y-value} and an @math{S}-value of +
 @fitbruby{12em}{@ifsoln{~5717}}{@math{S}-value}
