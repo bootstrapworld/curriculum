@@ -71,11 +71,7 @@ This page relies on the @starter-file{alg2-co2}. Make sure you have it open on y
 @show{(code `(define (periodic-sin x) (+ (* (?ANS ,a) (sin (* (/ 6.28 (?ANS ,b)) (- x (?ANS ,h))))) (?ANS ,k))))}
 |===
 
-@vspace{1ex}
-
 @n Then update the `periodic-sin` function definition in your starter file to match what you've just written.
-
-@vspace{1ex}
 
 @star Try translating the definition you wrote for `periodic` so that it uses  @math{\text{cosine}}  instead of @math{\text{sine}}:
 
@@ -98,12 +94,9 @@ This page relies on the @starter-file{alg2-co2}. Make sure you have it open on y
 @show{(code `(define (periodic-cos x) (+ (* (?ANS ,a) (cos (* (/ 6.28 (?ANS ,b)) (- x (?ANS ,h-cos))))) (?ANS ,k))))}
 |===
 
-@vspace{1ex}
 == Fit Your Periodic Model to the Data
 
 @n Use `fit-model` to fit your `periodic` model to the data in the `recent-table`. What S-value do you get? @fitb{}{@ifsoln{Answers will vary slightly.  ~1.2 }}
-
-@vspace{1ex}
 
 [cols="9a,1,10a", grid="none",frame="none"]
 |===
@@ -113,12 +106,24 @@ This page relies on the @starter-file{alg2-co2}. Make sure you have it open on y
 
 @image{../images/recent-co2-scatter.png}
 |
-| @n Then fill in the blanks below to tell us what the model means. +
-@vspace{1ex} +
-_Between the end of 2022 and 2023, the amount of @math{CO_2} in the air fluctuated between @fitbruby{6em}{@ifsoln{415.74}}{lowest} and @fitbruby{6em}{@ifsoln{424}}{highest} parts-per-million. This pattern appears to be @vocab{periodic}, with an amplitude of @fitbruby{6em}{@ifsoln{4.13}}{amplitude} rising and falling around a @vocab{midline} of @fitbruby{6em}{@ifsoln{419.87}}{midline}. We expect this pattern to repeat every @fitbruby{4em}{@ifsoln{1}}{period} @fitbruby{5em}{@ifsoln{year}}{x-units}. The error in the model is described by an @vocab{S-value} of about @fitbruby{1em}{@ifsoln{1.2}}{S}@fitbruby{8em}{@ifsoln{ppm}}{y-units}. @hspace{1em} I
-@fitbruby{18em}{@ifsoln{agree}}{strongly agree, agree, disagree, strongly disagree}
-that this model is a good fit considering that
-@fitbruby{8em}{@ifsoln{altitude}}{y-variable} in this dataset ranges from about
-@fitbruby{8em}{@ifsoln{416 ppm}}{lowest y-value} to @fitbruby{8em}{@ifsoln{424 ppm}}{highest y-value}._
+| @n This model was built using data about 
+@fitbruby{8em}{@ifsoln{13}}{how many?}
+@fitbruby{8em}{@ifsoln{monthly readings}}{what?} whose 
+@fitbruby{15em}{@ifsoln{time stamps}}{x-variable} ranged from
+@fitbruby{}{@ifsoln{September 2022 (2022.72)}}{x-min} +
+to @fitbruby{}{@ifsoln{August of 2023 (2023.71)}}{x-max}
+
+@n Possible limitations of this model include @fitb{}{} +
+@blanklines{2}{@ifsoln{Small Sample size! And it's all from Mauna Loa Observatory in Hawaii.}}
+@fitbruby{}{}{uneven distribution, high variability, small sample size, etc.}
 |===
 
+@n Between the end of 2022 and 2023, the amount of @math{CO_2} in the air fluctuated between @fitbruby{6em}{@ifsoln{415.74}}{lowest} and @fitbruby{6em}{@ifsoln{424}}{highest} parts-per-million. 
+
+@n This pattern appears to be @vocab{periodic}, with an amplitude of @fitbruby{6em}{@ifsoln{4.13}}{amplitude} rising and falling around a @vocab{midline} of @fitbruby{6em}{@ifsoln{419.87}}{midline}. We expect this pattern to repeat every @fitbruby{4em}{@ifsoln{1}}{period} @fitbruby{5em}{@ifsoln{year}}{x-units}. 
+
+@n The error in the model is described by an @vocab{S-value} of about @fitbruby{1em}{@ifsoln{1.2}}{S}@fitbruby{8em}{@ifsoln{ppm}}{y-units}. @hspace{1em} I
+@fitbruby{18em}{@ifsoln{agree}}{strongly agree, agree, disagree, strongly disagree}
+that this model is a good fit considering that
+@fitbruby{8em}{@ifsoln{Carbon dioxide}}{y-variable} in this dataset ranges from about
+@fitbruby{10em}{@ifsoln{416 ppm}}{lowest y-value} to @fitbruby{8em}{@ifsoln{424 ppm}}{highest y-value}.

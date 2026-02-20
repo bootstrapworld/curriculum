@@ -6,8 +6,7 @@ Open your copy of the @starter-file{alg2-countries} and click "Run".
 
 == Transforming: From Logarithmic _Plots_ to Linear Ones
 
-@n Find the definition of `g(r)`. What does this function do? @fitb{}{} +
-@fitb{}{@ifsoln{`g` produces the log of the `pc-gdp` column, which it gets from the country it's given}}
+@n Find the definition of `g(r)`. What does this function do? @fitb{}{@ifsoln{`g` produces the log of the `pc-gdp` column, which it gets from the country it's given}}
 
 @n Find the Contract for `build-column` on the @dist-link{Contracts.shtml, Contracts Page}.
 
@@ -18,13 +17,10 @@ What is its *Range*? @fitb{10em}{@ifsoln{Table}} What is its *Domain*? @fitb{}{@
 
 [.indentedpara]
 --
-@vspace{1ex}
 
 @show{(code '(define countries-transformed (build-column countries-table "log(pc-gdp)" g)))}
 
-What do you think it does? @fitb{}{}
-
-@fitb{}{@ifsoln{It defines a new table called `countries-transformed` -- the result of building  "log(pc-gdp)".}}
+What do you think it does? @fitb{}{@ifsoln{It defines a new table called `countries-transformed` -- the result of building  "log(pc-gdp)".}}
 
 --
 
@@ -48,12 +44,19 @@ What do you think it does? @fitb{}{}
 @fitbruby{6em}{@ifsoln{11.901}}{log coefficient (a)} @math{	\text{log}_{10}(x) +} @fitbruby{6em}{@ifsoln{24.2636}}{vertical shift (k)} @hspace{1em}
 `fun logarithmic3(x): (` @fitb{3em}{@ifsoln{11.9012}} `* log(x)) +` @fitb{3em}{@ifsoln{24.2636}} `end`
 
-@n Let's interpret this model:
+@n This model was built using data about 
+@fitbruby{8em}{@ifsoln{192}}{how many?}
+@fitbruby{8em}{@ifsoln{countries}}{what?} whose 
+@fitbruby{15em}{@ifsoln{per-capita GDP}}{x-variable} ranged from
+@fitbruby{7em}{@ifsoln{587}}{x-min} to
+@fitbruby{7em}{@ifsoln{144104}}{x-max}
+@fitbruby{8em}{@ifsoln{dollars}}{x-variable units}. 
 
-@indented{
-__A country where the @fitbruby{25em}{@ifsoln{pc-gdp}}{explanatory variable (x)} is @fitbruby{3em}{@ifsoln{10}}{base (b)} times higher than another is also__ +
-@hspace{2em} __predicted to have a @fitbruby{20em}{@ifsoln{median-lifespan}}{response variable (y)} that is @fitbruby{8em}{@ifsoln{11.9}}{log coefficient (a)} @fitbruby{10em}{@ifsoln{years}}{y-axis units} longer.__
-}
+@n Possible limitations of this model include @fitbruby{}{@ifsoln{Data is from a single year and severely skewed to the right.}}{uneven distribution, high variability, small sample size, etc.}
+
+@blanklines{1}{}
+
+@n Let's interpret this model: __A country where the @fitbruby{25em}{@ifsoln{pc-gdp}}{explanatory variable (x)} is @fitbruby{3em}{@ifsoln{10}}{base (b)} times higher than another is also predicted to have a @fitbruby{20em}{@ifsoln{median-lifespan}}{response variable (y)} that is @fitbruby{8em}{@ifsoln{11.9}}{log coefficient (a)} @fitbruby{10em}{@ifsoln{years}}{y-axis units} longer.__
 
 @n Add the definition of `logarithmic3` to your starter file. Use `fit-model` to calculate the @vocab{S-value} and complete the table below:
 
@@ -75,9 +78,7 @@ A note for future authors:
 - \text{} is used to make the words in the fraction use normal font.
 }
 
-@vspace{1ex}
-
-Predictions made with the logarithmic model are expected to have
+@n Predictions made with the logarithmic model are expected to have
 @fitb{2em}{@ifsoln{}} percent
 @fitbruby{7em}{@ifsoln{less}}{ more / less }
 error than predictions made with the @fitb{10em}{} model!
