@@ -14,9 +14,19 @@ source ${MAKE_DIR}src-subdir-mgt.sh
 
 updatingexistinglesson=
 
+
 if test -d "$d"; then
-  echo Updating existing lesson $d
+  echo "  " • Updating existing lesson $d
   updatingexistinglesson=yes
+  srcdate=$(dir_timestamp $src)
+  tgtdate=$(dir_timestamp $d)
+  deletepdfs=
+  if test $srcdate -gt $tgtdate; then
+    deletepdfs=makeitso
+  fi
+  if test -n "$deletepdfs"; then
+    (cd $d; delete_all_pdfs $d)
+  fi
   (cd $d; save_previously_built_solution_pages)
 else
   mkdir -p $d
@@ -31,20 +41,12 @@ test -f $d/index.adoc ||
   test -f $d/index.shtml ||
   touch $d/index.adoc
 
-if test ! -d $d/images; then
-  mkdir -p $d/images
-fi
+test -d $d/images || mkdir -p $d/images
 
 if test -z "$updatingexistinglesson"; then
-  if test ! -d $d/pages; then
-    mkdir -p $d/pages
-  fi
-  if test ! -d $d/pages/.cached; then
-    mkdir -p $d/pages/.cached
-  fi
-  if test ! -f $d/pages/workbook-pages.txt; then
-    touch $d/pages/workbook-pages.txt
-  fi
+  test -d $d/pages || mkdir -p $d/pages
+  test -d $d/pages/.cached || mkdir -p $d/pages/.cached
+  test -f $d/pages/workbook-pages.txt || touch $d/pages/workbook-pages.txt
 fi
 
 lessonName=$(basename $d)
@@ -86,6 +88,7 @@ done
 scrubproglangsubdirs $lessonName
 
 if test ! -f $lessonName/.cached/.proglang-pyret -a ! -f $lessonName/.cached/.proglang-none; then
+  # is special treatment for Flannery still needed?
   if test "$USER" = flannery; then
     rm -r $lessonName
   else

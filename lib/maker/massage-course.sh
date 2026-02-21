@@ -7,7 +7,7 @@ src=$1
 d=$2
 
 if test -d "$d"; then
-  echo Updating existing course $d
+  echo "  " • Updating existing course $d
 else
   mkdir -p $d
 fi
