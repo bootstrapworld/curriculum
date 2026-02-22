@@ -66,9 +66,8 @@ function shadowcopydir() {
 function delete_all_pdfs() {
   echo "  " • Deleted possibly obsolete PDFs in $1
   test -f index.pdf && rm index.pdf
-  local wpt=pages/.cached/.workbook-pages.txt.kp
-  test -f $wpt || return
-  for f in $(cat $wpt); do
+  for f in pages/*.adoc; do
+    test ! -f $f && break # this happens when there are no .adoc files
     local pdff="$(basename $f .adoc).pdf"
     local pages_pdff="pages/$pdff"
     local solution_pages_pdff="solution-pages/$pdff"
