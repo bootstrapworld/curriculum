@@ -63,19 +63,6 @@ function shadowcopydir() {
   done
 }
 
-function delete_all_pdfs() {
-  echo "  " • Deleted possibly obsolete PDFs in $1
-  test -f index.pdf && rm index.pdf
-  for f in pages/*.adoc; do
-    test ! -f $f && break # this happens when there are no .adoc files
-    local pdff="$(basename $f .adoc).pdf"
-    local pages_pdff="pages/$pdff"
-    local solution_pages_pdff="solution-pages/$pdff"
-    test -f "$pages_pdff" && rm "$pages_pdff"
-    test -f "$solution_pages_pdff" && rm "$solution_pages_pdff"
-  done
-}
-
 function dir_timestamp() {
   local d=$1
   # find the timestamp of the newest file in $d

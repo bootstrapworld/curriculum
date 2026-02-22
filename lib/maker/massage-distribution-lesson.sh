@@ -14,7 +14,6 @@ source ${MAKE_DIR}src-subdir-mgt.sh
 
 updatingexistinglesson=
 
-
 if test -d "$d"; then
   echo "  " • Updating existing lesson $d
   updatingexistinglesson=yes
@@ -22,12 +21,12 @@ if test -d "$d"; then
   tgtdate=$(dir_timestamp $d)
   deletepdfs=
   if test $srcdate -gt $tgtdate; then
-    deletepdfs=makeitso
+    rm -fr $d
+    mkdir -p $d
+  else
+    updatingexistinglesson=yes
+    (cd $d; save_previously_built_solution_pages)
   fi
-  if test -n "$deletepdfs"; then
-    (cd $d; delete_all_pdfs $d)
-  fi
-  (cd $d; save_previously_built_solution_pages)
 else
   mkdir -p $d
 fi
