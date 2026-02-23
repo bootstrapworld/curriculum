@@ -4,54 +4,52 @@
   table {grid-template-rows: 3fr 1fr !important;}
   div.circleevalsexp .value,
   div.circleevalsexp .studentBlockAnswerFilled { min-width:unset; }
+  .fitb, .fitbruby, .fitb.stretch::after, .fitbruby.stretch::after {
+    padding-top: 0.6em !important;
 </style>
 ++++
 
+@n Evaluate the Circles of Evaluation below.
 [.FillVerticalSpace, cols="^.^3,^.^3"]
 |===
 | @show{(coe '(* 36 10))}
 | @show{(coe  '(* 10 36))}
-| @ifnotsoln{@math{36 \times 10 = ?}} @ifsoln{@math{36 \times 10 = 360}}
-| @ifnotsoln{@math{10 \times 36 = ?}} @ifsoln{@math{10 \times 36 = 360}}
+| @ifnotsoln{@math{36 \times 10 = }} @fitb{5em}{@ifsoln{@math{360}}
+| @ifnotsoln{@math{10 \times 36 = }} @fitb{5em}{@ifsoln{@math{360}}
 |===
 
-@n What do you notice about the Circles of Evaluation above? @fitb{}{@ifsoln{Both Circles evaluate to 360. The order of the numbers changes}}
+@n What do you notice? @fitb{}{@ifsoln{Both Circles evaluate to 360. The order of the numbers changes from one Circle to the next.}}
 
-@fitb{}{@ifsoln{from one Circle to the next.}
+@ifnotsoln{@blanklines{1}{}}
 
-@vspace{1ex}
+@n *The Commutative Property is true for any expression where all _orders_ of the numbers produce the same result.* Draw another example of the Commutative Property of Multiplication with any two numbers, below. Evaluate each Circle to confirm that they are equivalent.
 
-These Circles of Evaluation demonstrate the Commutative Property of Multiplication! *The Commutative Property is true for any expression where all _orders_ of the numbers produce the same result.* Draw another example of the Commutative Property of Multiplication with any two numbers, below. Evaluate each Circle to confirm that they are equivalent.
-
-
+@teacher{Student answers will vary! These are merely provided as a sample.}
 [.FillVerticalSpace, cols="^.^3,^.^3"]
 |===
 |@showsoln{(coe '(* 4 3))}
 | @showsoln{(coe  '(* 3 4))}
-| @ifsoln{@math{4 \times 3 = ?}}
-| @ifsoln{@math{3 \times 4 = ?}}
+| @ifsoln{@math{4 \times 3 = 12}}
+| @ifsoln{@math{3 \times 4 = 12}}
 |===
 
-@n Examine and evaluate the Circles of Evaluation below to decide if the Commutative Property holds for problems involving *division*.
-
+@n Examine and evaluate the Circles of Evaluation below. 
 
 [.FillVerticalSpace, cols="^.^3,^.^3"]
 |===
 | @show{(coe '(/ 200 10))}
 | @show{(coe  '(/ 10 200))}
-| @ifsoln{@math{200 \div 10 = 20}} @ifnotsoln{@math{200 \div 10 = ?}}
-| @ifnotsoln{@math{10 \div 200 = ?}} @ifsoln{@math{10 \div 200 = \frac{1}{20}}}
+| @math{200 \div 10 =} @fitb{5em}{@ifsoln{@math{20}}}
+| @math{10 \div 200 =} @fitb{5em}{@ifsoln{@math{\frac{1}{20}}}}
 |===
 
-
-Explain your response. @fitb{}{@ifsoln{No, the Commutative Property does not hold for division. I know because the first Circle evaluates to 20, }}
+@n Do you think the Commutative Property works for problems involving *division*? Explain.. @fitb{}{@ifsoln{No, the Commutative Property does not hold for division. I know because the first Circle evaluates to 20, }}
 
 @fitb{}{@ifsoln{while the second Circles evaluates to @math{\frac{1}{20}}. These Circles are not equivalent after I change the groupings.}}
 
-@vspace{1ex}
+@n Draw another example like the one above to confirm what you observed about the Commutative Property and division.
 
-Draw another example like the one above to confirm what you observed about the Commutative Property and division.
-
+@teacher{Student answers will vary! These are merely provided as a sample.}
 [.FillVerticalSpace, cols="^.^3,^.^3"]
 |===
 | @showsoln{(coe '(/ 30 5))}
