@@ -4,22 +4,24 @@
   table {grid-template-rows: 3fr 1fr !important;}
   div.circleevalsexp .value,
   div.circleevalsexp .studentBlockAnswerFilled { min-width:unset; }
+  .fitb, .fitbruby, .fitb.stretch::after, .fitbruby.stretch::after {
+    padding-top: 0.6em !important;
 </style>
 ++++
 
-@n Now look at two more Circles of Evaluation to decide if the Commutative Property holds for problems involving *addition*.
+@n Evaluate these Circles of Evaluation and consider whether the Commutative Property holds true for problems involving *addition*.
 
 [.FillVerticalSpace, cols="^.^3,^.^3"]
 |===
 | @show{(coe '(+ 20 5))}
 | @show{(coe  '(+ 5 20))}
-| @ifsoln{@math{20 + 5 = 25}} @ifnotsoln{@math{20 + 5 = ?}}
-| @ifnotsoln{@math{5 + 20 = ?}} @ifsoln{@math{5 + 20 = 25}}
+| @math{20 + 5 = } @fitb{5em}{@ifsoln{@math{25}}} 
+| @math{5 + 20 = } @fitb{5em}{@ifsoln{@math{25}}}
 |===
 
-What do you notice? @fitb{}{@ifsoln{Both Circles evaluate to 25. In the first Circle, we add 20 and 5 first, while in the second Circle,}}
+@n What do you notice? @fitb{}{@ifsoln{Both Circles evaluate to 25. In the first Circle, we add 20 and 5 first, while in the second Circle, we add 5 and 20.}}
 
-@fitb{}{@ifsoln{we add 5 and 20.}}
+@fitb{}{@ifsoln{}}
 
 @fitb{}{}
 
@@ -30,8 +32,8 @@ What do you notice? @fitb{}{@ifsoln{Both Circles evaluate to 25. In the first Ci
 | @show{(coe '(+ (+ 9 2) 8))}
 | @show{(coe  '(+ 8 (+ 9 2)))}
 | @show{(coe  '(+ (+ (?ANS 2) (?ANS 9)) 8))}
-| @ifnotsoln{@math{(9 + 2) + 8 = ?}} @ifsoln{@math{(9 + 2) + 8 = 19}}
-| @ifnotsoln{@math{8 + (2 + 9) = ?}} @ifsoln{@math{8 + (9 + 2) = 19}}
+| @math{(9 + 2) + 8 = } @fitb{5em}{@ifsoln{@math{ 19}}}
+| @math{8 + (2 + 9) = } @fitb{5em}{@ifsoln{@math{ 19}}}
 | @ifsoln{@math{(2 + 9) + 8 = 19}}
 |===
 
@@ -51,8 +53,8 @@ These Circles of Evaluation _all_ represent the Commutative Property of Addition
 |===
 | @show{(coe '(- 50 4))}
 | @show{(coe  '(- 4 50))}
-| @ifnotsoln{@math{50 - 4 = ?}} @ifsoln{@math{50 - 4 = 46}}
-| @ifnotsoln{@math{4 - 50 = ?}} @ifsoln{@math{4 - 50 = -46}}
+| @math{50 - 4 = } @fitb{5em}{@ifsoln{@math{46}}}
+| @math{4 - 50 = } @fitb{5em}{@ifsoln{@math{-46}}}
 |===
 
 Explain your response. @fitb{}{@ifsoln{No, the Commutative Property does not hold for subtraction. I know because the first Circle evaluates to 46, }}

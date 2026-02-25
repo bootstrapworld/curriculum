@@ -2,6 +2,7 @@
 
 Emmanuel suggests: “Google for CSS+Whatever+I+Am+Trying+To+Do”
 
+== Rules for Labeling Tables
 [.no-flex-section]
 
 * For autonumbering inside a table
@@ -21,10 +22,34 @@ table .autonum::after { content: '' !important; }
 </style>
 ++++
 
-* For making big work with numbers
+* To rotate column headers
 ++++
 <style>
-.big .mathunicode {font-size: 3em !important; color: black;}
+/* set all table headers to be vertical right-to-left text, flip them horizontally, and adjust spacing */
+thead tr th.tableblock { writing-mode: vertical-rl; scale: -1; line-height: 1.1; padding: 0.5em; }
+
+/* undo those rules, but only for the 2nd and 3rd header */
+thead th.tableblock:nth-child(2), th.tableblock:nth-child(3) { writing-mode: unset; scale: unset; }
+</style>
+++++
+
+== Rules for Spacing
+
+Every header on a page defines a "section", and these sections can be identifies as `no-flex` or not. 
+BUT if the first part of the page doesn't have a header, AsciiDoctor calls it a "preamble", and it needs to be styled separately. 
+
+* For pages with lots of empty space at the top, when no part of the page should use flexible fill vertical space
+++++
+<style>
+/* Push content to the top (instead of the default vertical distribution), which was leaving empty space at the top. */
+#content { display: block !important; }
+</style>
+++++
+
+* For pages with several sections where you don't want the top to grow
+++++
+<style>
+#preamble_disabled { flex-grow: 0 !important; }
 </style>
 ++++
 
@@ -37,14 +62,6 @@ table .autonum::after { content: '' !important; }
    space for the first section in order to maximize the table height
  */
 #preamble_disabled + .lesson-section-1 { flex-grow: 0 !important; }
-</style>
-++++
-
-* For pages with lots of empty space at the top.
-++++
-<style>
-/* Push content to the top (instead of the default vertical distribution), which was leaving empty space at the top. */
-#content { display: block !important; }
 </style>
 ++++
 
@@ -65,17 +82,6 @@ div#body.LessonNotes li {
 </style>
 ++++
 
-* To add a dotted box around text on a workbook page
-++++
-<style>
-/* add a dotted border around specialized directions */
-.myCustomClass { 
-  border: dotted 1px black; 
-  p {margin-left: .25em !important; }
-}
-</style>
-++++
-
 * To shorten fill in the blanks from ?ANS
 ++++
 <style>
@@ -84,16 +90,7 @@ div#body.LessonNotes li {
 </style>
 ++++
 
-* To rotate column headers
-++++
-<style>
-/* set all table headers to be vertical right-to-left text, flip them horizontally, and adjust spacing */
-thead tr th.tableblock { writing-mode: vertical-rl; scale: -1; line-height: 1.1; padding: 0.5em; }
-
-/* undo those rules, but only for the 2nd and 3rd header */
-thead th.tableblock:nth-child(2), th.tableblock:nth-child(3) { writing-mode: unset; scale: unset; }
-</style>
-++++
+== Other Less Common Issues
 
 * To make a lesson point less than the full width of the page
 ++++
@@ -107,6 +104,17 @@ thead th.tableblock:nth-child(2), th.tableblock:nth-child(3) { writing-mode: uns
 @lesson-point{
 Correlation does NOT imply causation.
 }
+
+* To add a dotted box around text on a workbook page
+++++
+<style>
+/* add a dotted border around specialized directions */
+.myCustomClass { 
+  border: dotted 1px black; 
+  p {margin-left: .25em !important; }
+}
+</style>
+++++
 
 * To define special formatting for a paragraph
 ++++
