@@ -13,7 +13,8 @@ local function print_coverage_script_n_style()
   o:write([[
   <style>
   .unused { background-color: #ffdddd; }
-  .via_objectives_only { background-color: #ddffdd; }
+  .via_standards_dict { background-color: #ffffdd; }
+  .via_objectives_dict_only { background-color: #ddffdd; }
   .coverageElement { display: none; }
   </style>
 
@@ -122,13 +123,19 @@ local function display_subreport(dictionaries, standard_to_lessons_map)
         o:write('| ' .. lbl .. ' ')
         o:write('| ')
         if #lessons > 0 then
+          if standard_to_lessons_map then
+            o:write('[.via_standards_dict]#')
+          end
           o:write(table.concat(lessons, ', '))
+          if standard_to_lessons_map then
+            o:write('#')
+          end
           if #lessons_via_objectives_only > 0 then
             o:write(', ')
           end
         end
         if #lessons_via_objectives_only > 0 then
-          o:write('[.via_objectives_only]#')
+          o:write('[.via_objectives_dict_only]#')
           o:write(table.concat(lessons_via_objectives, ', '))
           o:write('#')
         end
