@@ -150,7 +150,7 @@ end
 o:write('= Coverage Report\n\n')
 o:write('Each line shows the name of the standard/practice/textbook followed by the number of times it\'s used.\n')
 o:write('If a standard is not used at all, the line is highlighted in [.unused]#red#.\n')
-o:write('If a lesson is not explicity associated a standard, but is associated with a related objective, it is highlighted in [.via_objectives_only]#green#.\n')
+o:write('If a lesson is not explicity associated a standard, but is associated with a related objective, it is highlighted in [.via_objectives_dict_only]#green#.\n')
 o:write('\n')
 
 local objectives_list = read_json_file('distribution/en-us/lib/learningObjectives.js')
