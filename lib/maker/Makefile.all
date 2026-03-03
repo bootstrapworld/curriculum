@@ -91,7 +91,7 @@ export OTHERDIRS := /\(fragments\|xtra\|xtras\)/
 
 export NUMCORES := $(shell getconf _NPROCESSORS_ONLN)
 
-all: phases coverage
+all: phases
 
 phases:
 	@if test ! -d distribution; then mkdir -p distribution; touch $(SCRATCHFILE); fi
@@ -145,15 +145,6 @@ quick-deploy:
 csv:
 	$(MAKE)
 	$(TOPDIR)/lib/make-wp-csv.rkt
-
-###############################################################################
-
-coverage: coverage-report.html
-
-coverage-report.html: $(alignment-dictionaries)
-	$(MAKE_DIR)make-coverage-report.lua coverage-report.adoc
-	asciidoctor -a linkcss -a stylesheet=lib/asciidoctor.css coverage-report.adoc
-	@$(SED) -i -e 's/<p><span class="unused">/<p class="unused"><span>/g' $@
 
 ###############################################################################
 
