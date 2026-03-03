@@ -2804,21 +2804,26 @@
   (call-with-output-file
     (build-path *containing-directory* ".cached" ".index-objectives.asc")
     (lambda (o)
-      (unless (null? *objectives-met*)
-        (for ([lbl (reverse *objectives-met*)])
-          (let* ([c (hash-ref *learning-objectives* lbl #f)]
-                 [x #f])
-            (when c (set! x (hash-ref c 'text #f)))
-            (cond [(not c)
-                   (set! x lbl)
-                   (printf "WARNING: ~a: Undefined @objective ~a\n\n" (errmessage-context) lbl)]
-                  [(not x)
-                   (set! x lbl)
-                   (printf "WARNING: ~a: Ill-defined @objective ~a\n\n" (errmessage-context) lbl)]
-                  [else (set! x (expand-directives:string->string x))])
-            (display "- " o)
-            (display x o)
-            (newline o)))))
+      (call-with-output-file
+        (build-path *containing-directory* ".cached" ".index-objectives.txt.kp")
+        (lambda (o2)
+          (unless (null? *objectives-met*)
+            (for ([lbl (reverse *objectives-met*)])
+              (display lbl o2) (newline o2)
+              (let* ([c (hash-ref *learning-objectives* lbl #f)]
+                     [x #f])
+                (when c (set! x (hash-ref c 'text #f)))
+                (cond [(not c)
+                       (set! x lbl)
+                       (printf "WARNING: ~a: Undefined @objective ~a\n\n" (errmessage-context) lbl)]
+                      [(not x)
+                       (set! x lbl)
+                       (printf "WARNING: ~a: Ill-defined @objective ~a\n\n" (errmessage-context) lbl)]
+                      [else (set! x (expand-directives:string->string x))])
+                (display "- " o)
+                (display x o)
+                (newline o)))))
+        #:exists 'replace))
     #:exists 'replace))
 
 (define (display-standards-selection o *narrative*)
