@@ -1,0 +1,76 @@
+= Equivalent or Not? Exponents and Negatives
+
+++++
+<style>
+  /*
+    the grid-auto-rows rule here has a separate value for
+    each row. The first row is as small as is needed for
+    the content, and all the subsequent rows are an equal
+    fraction of the remaining space.
+
+    NOTE: if the number of rows is changed, this rule will
+    have to change, too!!
+  */
+  div#body.workbookpage table.FillVerticalSpace {
+    grid-template-rows: unset !important;
+    grid-auto-rows: min-content 1fr 1fr 1fr 1fr 1fr;
+  }
+div.circleevalsexp { width: auto; }
+td > .content > .paragraph > * { vertical-align: middle; }
+</style>
+++++
+
+Draw a Circle of Evaluation to represent each expression provided. Then, determine whether or not they are equivalent. The first one is done for you.
+
+[.FillVerticalSpace, cols="^.^1a,^.5a,^.5a,^.4a", stripes="none", options="header"]
+|===
+|	 | Expression 1 | Expression 2  | Equivalent or Not?
+
+| @n
+| @math{-2^2}   
+@show{(coe '(negate (expt 2 2)))}
+|@math{(-2)^2}
+@show{(coe '(expt (negate 2) 2))}
+| No: @math{-4 ≠ 4}
+
+| @n
+| @math{-2^3}
+@showsoln{(coe '(negate (expt 2 3)))}
+| @math{= (-2)^3}
+@showsoln{(coe '(expt (negate 2) 3))}
+| @ifsoln{Equivalent: @math{-8 = -8}}
+
+| @n
+| @math{-2^4}
+@showsoln{(coe '(negate (expt 2 4)))}
+| @math{ = (-2)^4}
+@showsoln{(coe '(expt (negate 2) 4))}
+| @ifsoln{No: @math{-16 ≠ 16}}
+
+| @n
+| @math{-2^5}
+@showsoln{(coe '(negate (expt 2 5)))}
+| @math{ = (-2)^5}
+@showsoln{(coe '(expt (negate 2) 5))}
+| @ifsoln{Equivalent: @math{-32 = -32}}
+
+| @n
+| @math{-2^6}
+@showsoln{(coe '(negate (expt 2 6)))}
+| @math{ = (-2)^6}
+@showsoln{(coe '(expt (negate 2) 6))}
+| @ifsoln{No: @math{-64 ≠ 64}}
+|===
+
+@n What do you notice about the Circles of Evaluation for _Expression 1_? @fitb{}{@ifsoln{The _outer_ circle is always negating an otherwise positive value -- so these expressions were always negative}}
+
+@fitb{}{@ifsoln{result.}}
+
+@n What do you notice about the Circles of Evaluation for _Expression 2_? @fitb{}{@ifsoln{The outcome was positive whenever the exponent was even, but negative}}
+
+@fitb{}{@ifsoln{when the exponent was odd.}}
+
+@n What do you notice about the _equivalent_ expressions? @fitb{}{@ifsoln{The expressions were true whenever both expressions were negative -- when the exponent was odd.}}
+
+@fitb{}{}
+
