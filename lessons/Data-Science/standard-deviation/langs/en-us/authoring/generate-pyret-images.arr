@@ -33,6 +33,7 @@ chart = render-chart(from-list.labeled-histogram(
       .y-axis("frequency")
       .height(378)
       .width(1000)
+      .x-min(0)
 
 ###################### Save the images ##########################
 I.save-image(chart.get-image(), '../images/stdev-cat-age-AUTOGEN.png')
