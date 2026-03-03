@@ -16,6 +16,14 @@ local function print_coverage_script_n_style()
   .via_standards_dict { background-color: #ffffdd; }
   .via_objectives_dict_only { background-color: #ddffdd; }
   .coverageElement { display: none; }
+  .coverageAlignmentSelect { width: 30%; display: inline-block; }
+  #showUncoveredStandards { display: inline-block; }
+
+  td:first-child { white-space: pre; }
+  </style>
+
+  <style id="unused-toggle">
+    tr:has(p.unused) { display: table-row; }
   </style>
 
   <script>
@@ -56,6 +64,13 @@ local function print_coverage_script_n_style()
         }
       }
     }
+
+    function toggleUncoveredLessonDisplay() {
+      const checked = document.querySelector("#showUncoveredStandards input").checked;
+      const styleBlock = document.getElementById('unused-toggle');
+      const rule = styleBlock.sheet.cssRules[0];
+      rule.style.display = checked? 'table-row' : 'none';
+    }
     </script>
     ]])
     o:write('\n++++\n')
@@ -63,6 +78,12 @@ end
 
 local function display_selection()
   o:write('++++\n')
+  o:write([[
+    <div id="showUncoveredStandards">
+      <input type="checkbox" name="showUncoveredStandards" checked onchange="toggleUncoveredLessonDisplay()" />
+      <label for="showUncoveredStandards">Show Un-Covered Standards for</label>
+    </div>
+    ]])
   o:write('<select class="coverageAlignmentSelect" onchange="showCoverageAlignment()">\n')
   --
   o:write('<optgroup label="Standards">\n')
@@ -95,7 +116,7 @@ local function display_subreport(dictionaries, standard_to_lessons_map)
     -- replace all dots & spaces in nickname by underscore so it's a valid css class name
     local nickname = dictionary[1]:gsub('[%.%s]', '_')
     o:write('[.coverageElement.' .. nickname .. ']\n')
-    o:write('[cols="2a,1a,7a"]\n')
+    o:write('[cols="1a,2a,7a"]\n')
     o:write('|===\n')
     local dict_obj = dictionary[3]
     for _,lbl in ipairs(dict_obj.__json_keys) do
