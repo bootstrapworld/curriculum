@@ -2098,14 +2098,12 @@
                                      "~a (~a) valid only in lesson plan"
                                      directive (errmessage-file-context)))
                             (let ([text (read-group i directive #:multiline? #t)])
-                              ; (printf "xconfig = ~a\n" text)
+                              ; (printf "dirve = ~a; xconfig = ~a\n" directive text)
                               (set! *self-guided-context*
-                                (format "~a: ~a\n"
-                                  (case directive
-                                    [("editorconfig") "editorCode"] ;maybe make uniform
-                                    [("imageconfig") "imageConfig"]
-                                    [("videoconfig") "videoConfig"])
-                                  text)))]
+                                (case directive
+                                  [("editorconfig") (format "editorCode: ~a\n" text)]
+                                  [("imageconfig") (format "imageConfig: ~s\n" text)]
+                                  [("videoconfig") (format "videoConfig: ~s\n" text)])))]
                            [(string=? directive "Bootstrap")
                             (fprintf o "https://www.bootstrapworld.org/[Bootstrap]")]
                            [(hash-ref *simple-directives* (string->symbol directive) #f)
