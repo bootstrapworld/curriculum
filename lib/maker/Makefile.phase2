@@ -1,6 +1,6 @@
 include $(MAKE_DIR)utils.mk
 
-phase2: specials verifylinks images tocs books
+phase2: specials verifylinks images tocs coverage books
 
 ##########################################################################
 
@@ -282,6 +282,14 @@ preproc: build-pathway-independent build-workbook-pages build-lesson-plans build
 	@if test -s "$(ADOC_INPUT)"; then echo ➤ Asciidoctor; $(MAKE_DIR)run-asciidoctor.sh; fi
 
 # specials = primitives + starterFiles
+
+coverage: coverage-report.html
+
+coverage-report.html: $(alignment-dictionaries) preproc
+	@echo ➤ Make coverage report
+	@$(MAKE_DIR)make-coverage-report.lua coverage-report.adoc
+	@asciidoctor coverage-report.adoc
+	@$(SED) -i -e 's/<p><span class="unused">/<p class="unused"><span>/g' $@
 
 specials: preproc
 	@echo ➤ Collect lesson info

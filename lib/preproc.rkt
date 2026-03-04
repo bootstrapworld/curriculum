@@ -2096,14 +2096,12 @@
                                      "~a (~a) valid only in lesson plan"
                                      directive (errmessage-file-context)))
                             (let ([text (read-group i directive #:multiline? #t)])
-                              ; (printf "xconfig = ~a\n" text)
+                              ; (printf "dirve = ~a; xconfig = ~a\n" directive text)
                               (set! *self-guided-context*
-                                (format "~a: ~a\n"
-                                  (case directive
-                                    [("editorconfig") "editorCode"] ;maybe make uniform
-                                    [("imageconfig") "imageConfig"]
-                                    [("videoconfig") "videoConfig"])
-                                  text)))]
+                                (case directive
+                                  [("editorconfig") (format "editorCode: ~a\n" text)]
+                                  [("imageconfig") (format "imageConfig: ~s\n" text)]
+                                  [("videoconfig") (format "videoConfig: ~s\n" text)])))]
                            [(string=? directive "Bootstrap")
                             (fprintf o "https://www.bootstrapworld.org/[Bootstrap]")]
                            [(hash-ref *simple-directives* (string->symbol directive) #f)
@@ -2807,21 +2805,26 @@
   (call-with-output-file
     (build-path *containing-directory* ".cached" ".index-objectives.asc")
     (lambda (o)
-      (unless (null? *objectives-met*)
-        (for ([lbl (reverse *objectives-met*)])
-          (let* ([c (hash-ref *learning-objectives* lbl #f)]
-                 [x #f])
-            (when c (set! x (hash-ref c 'text #f)))
-            (cond [(not c)
-                   (set! x lbl)
-                   (printf "WARNING: ~a: Undefined @objective ~a\n\n" (errmessage-context) lbl)]
-                  [(not x)
-                   (set! x lbl)
-                   (printf "WARNING: ~a: Ill-defined @objective ~a\n\n" (errmessage-context) lbl)]
-                  [else (set! x (expand-directives:string->string x))])
-            (display "- " o)
-            (display x o)
-            (newline o)))))
+      (call-with-output-file
+        (build-path *containing-directory* ".cached" ".index-objectives.txt.kp")
+        (lambda (o2)
+          (unless (null? *objectives-met*)
+            (for ([lbl (reverse *objectives-met*)])
+              (display lbl o2) (newline o2)
+              (let* ([c (hash-ref *learning-objectives* lbl #f)]
+                     [x #f])
+                (when c (set! x (hash-ref c 'text #f)))
+                (cond [(not c)
+                       (set! x lbl)
+                       (printf "WARNING: ~a: Undefined @objective ~a\n\n" (errmessage-context) lbl)]
+                      [(not x)
+                       (set! x lbl)
+                       (printf "WARNING: ~a: Ill-defined @objective ~a\n\n" (errmessage-context) lbl)]
+                      [else (set! x (expand-directives:string->string x))])
+                (display "- " o)
+                (display x o)
+                (newline o)))))
+        #:exists 'replace))
     #:exists 'replace))
 
 (define (display-standards-selection o *narrative*)

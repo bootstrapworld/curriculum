@@ -124,10 +124,23 @@ end
 function read_json_file(f)
   current_json_file = f
   local i = io.open_buffered(f)
-  local status, result = pcall(json_read, i)
+  local file_read_p = false
+  local table_read_p = false
+  local result = false
+  repeat
+    local status, intermediate_result = pcall(json_read, i)
+    result = intermediate_result
+    if status then
+      if type(result) == 'table' then
+        table_read_p = true
+        file_read_p = true
+      end
+    else
+      file_read_p = true
+    end
+  until file_read_p
   i:close()
-  if status then
-    -- print('read_json_file retd', result)
+  if table_read_p then
     return result
   else
     error(result .. ' in ' .. f)
