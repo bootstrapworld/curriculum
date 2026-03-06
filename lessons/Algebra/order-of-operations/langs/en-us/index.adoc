@@ -116,13 +116,7 @@ Order of operations is not a computational skill, it's a literacy skill!
 }
 
 @lesson-instruction{
-
-This math problem went viral on social media recently, with math teachers arguing about what the answer was!
-
-@center{@big{@math{6 \div 2(1 + 2)}}}
-
-- Take a minute to think about the answer before we learn a new strategy for _drawing the structure_ of this expression so that we can settle the debate!
-- Then turn to @printable-exercise{coe-notice.adoc} and take a minute to record what you Notice and Wonder about the @vocab{Circles of Evaluation} you see.
+- Turn to @printable-exercise{coe-notice.adoc} and take a minute to record what you Notice and Wonder about the @vocab{Circles of Evaluation} you see.
 - What did you Notice?
 - What did you Wonder?
 }
@@ -145,7 +139,7 @@ The Circle of Evaluation for @math{8 \times (7 - 3)} is: @show{(coe '(* 8 (- 7 3
 @QandA{
 @Q{Let's draw the Circle of Evaluation for the expression @math{10 - (5 + 3)}}
 @Q{What should we do first?}
-@A{It depends! We can either work
+@A{It depends! While the Order of Operations tells us to start by making groupings of whatever is in parentheses (or other Grouping symbols), we can still work 
 
 * outside in: @show{(coe '(- 10 ((?ANS +) (?ANS 5) (?ANS 3))))}
 * or inside out: @show{(coe '((?ANS -) (?ANS 10) (+ 5 3)))}
@@ -215,6 +209,28 @@ Either way, we'll end up with @show{(coe '(- 10 (+ 5 3)))}
 === Investigate
 @slidebreak{Investigate}
 
+Now that we've seen how Circles of Evaluation connect to expressions, it's time to apply what we know about the Order of Operations to diagram expressions using the Circles of Evaluation.
+
+Let's start with @big{@math{8^2 \div 4 - 5 \times (3 + 9) + 8}}
+
+First we would parse the groupings formed by parentheses and other grouping symbols.
+
+@big{@math{8^2 \div 4 - 5 \times}} @show{(coe '(+ 3 9))} @big{@math{+ 8}}
+
+Then we would parse groupings formed by exponents (and radicals like square roots).
+
+@show{(coe '(expt(8 2)))} @big{@math{ \div 4 - 5 \times}} @show{(coe '(+ 3 9))} @big{@math{+ 8}}
+
+Then we would parse groupings formed by multiplication and division, working our way from left to right.
+
+@show{(coe '(\ expt(8 2) 4))} @big{@math{ - }} @show{(coe '(* 5(+ 3 9)))} @big{@math{+ 8}}
+
+Then we would parse groupings formed by addition and subtraction, working our way from left to right.
+
+@show{(coe '(- (\ expt(8 2) 4) (* 5(+ 3 9)) ))} @big{@math{+ 8}}
+
+@show{(coe '(+ (- (\ expt(8 2) 4) (* 5(+ 3 9)) ) 8))}
+
 @lesson-instruction{
 Turn to  @printable-exercise{2-column-intro-w-parens.adoc} and draw Circles of Evaluation for each of the expressions.
 }
@@ -223,27 +239,17 @@ Turn to  @printable-exercise{2-column-intro-w-parens.adoc} and draw Circles of E
 Spend some time ensuring that students have drawn their circles correctly. You may want to have them compare their circles with their partner, others at their table, or against a provided answer key.
 }
 
-@lesson-instruction{
-Let's see if we can settle the internet debate about what @math{6 \div 2(1 + 2)} evaluates to. Take a minute to draw the Circles of Evaluation. Then evaluate the expression and see what you get.
-}
-
-@teacher{
-
-[.embedded, cols="^.^5,^.^1,^.^3, ^.^1,^.^3", grid="none", stripes="none" frame="none"]
-|===
-|@show{(coe '(* (/ 6 2) (+ 1 2)))} | &rarr; | @show{(coe '(* 3 3))} | &rarr; | @math{ 3 \times 3 = 9}
-|===
-}
-
 @pd-slide{
 - Because students want to code, Circles of Evaluation increase engagement!
-- Feel free to spend lots of tine on Circles of Evaluation.
+- Feel free to spend lots of time on Circles of Evaluation.
 - There are ~20 additional practice pages in the Additional Exercises section at the end of the lesson.
 }
 
 @strategy{Pedagogy Note}{
 Circles of Evaluation are a great way to get older students to re-engage with (and finally understand) the order of operations while their focus and motivation are on learning to code.  Because we recognize this work to be so foundational, and know that some teachers choose to spend a whole week on it, we have developed lots of additional materials to help scaffold and stretch. You will find about 20 additional pages linked in @link{#_additional_exercises, the Additional Exercises section} at the the end of this lesson.
 }
+
+@slidebreak{Investigate}
 
 === Synthesize
 @slidebreak{Synthesize}
