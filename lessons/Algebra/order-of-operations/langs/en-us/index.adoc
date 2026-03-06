@@ -223,13 +223,13 @@ Then we would parse groupings formed by exponents (and radicals like square root
 
 Then we would parse groupings formed by multiplication and division, working our way from left to right.
 
-@show{(coe '(\ expt(8 2) 4))} @big{@math{ - }} @show{(coe '(* 5(+ 3 9)))} @big{@math{+ 8}}
+@show{(coe '(/ expt(8 2) 4))} @big{@math{ - }} @show{(coe '(* 5(+ 3 9)))} @big{@math{+ 8}}
 
 Then we would parse groupings formed by addition and subtraction, working our way from left to right.
 
-@show{(coe '(- (\ expt(8 2) 4) (* 5(+ 3 9)) ))} @big{@math{+ 8}}
+@show{(coe '(- (/ expt(8 2) 4) (* 5(+ 3 9)) ))} @big{@math{+ 8}}
 
-@show{(coe '(+ (- (\ expt(8 2) 4) (* 5(+ 3 9)) ) 8))}
+@show{(coe '(+ (- (/ expt(8 2) 4) (* 5(+ 3 9)) ) 8))}
 
 @lesson-instruction{
 Turn to  @printable-exercise{2-column-intro-w-parens.adoc} and draw Circles of Evaluation for each of the expressions.
