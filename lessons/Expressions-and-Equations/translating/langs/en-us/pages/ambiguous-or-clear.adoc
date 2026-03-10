@@ -5,47 +5,59 @@ table {grid-auto-rows: 1fr;}
 </style>
 ++++
 
+Decide if the expression in words is ambiguous or clear.
 
-Decide if the expression in words is ambiguous or clear. 
+- *If it is clear*, just draw one Circle of Evaluation.
+- *If it is ambiguous*, draw both possible Circles of Evaluation and write two clearer expressions.
 
-- If it is ambiguous, rewrite it in words two times -- once with multiplication / division first, and once with addition / subtraction first.
-- If it is clear, draw the Circle of Evaluation.
-
-[.FillVerticalSpace, cols="^.^1a,^.^6a,^.^7a", stripes="none", options="header"]
+[.FillVerticalSpace, cols="^.^1a,^.^10a,^.^8a, ^.^8a", stripes="none", options="header"]
 |===
 |
 | *Verbal Expression*
-| *Rewrite if ambiguous. Draw a Circle of Evaluation if clear.*
+| *Circle of Evaluation*
+| *2nd Circle of Evaluation* +
+_(only for Ambiguous Expressions)_
 
 | @n
-| The product of 12 and 8 decreased by 5
-| @ifsoln{Five less than the product of 12 and 8.}
-
-@ifsoln{The product of 12 and the difference between 8 and 5.}
+.^| *The product of 12 and 8 decreased by 5* +
+@fitbruby{20em}{@ifsoln{Five less than the product of 12 and 8.}}{Ambiguous? Rewrite to clarify starting with × or ÷} +
+@fitbruby{20em}{@ifsoln{The product of 12 and the difference of 8 and 5.}}{Ambiguous? Rewrite to clarify starting with + or -}
+| @showsoln{(coe  '(- (* 12 8) 5))}
+| @showsoln{(coe  '(* 12 (- 8 5)))}
 
 | @n
-| The quotient of 36 and the sum of 10 and 8.
+.^| *The quotient of 36 and the sum of 10 and 8* +
+@fitbruby{20em}{}{Ambiguous? Rewrite to clarify starting with × or ÷} +
+@fitbruby{20em}{}{Ambiguous? Rewrite to clarify starting with + or -}
 | @showsoln{(coe  '(/ 36 (+ 10 8)))}
+| 
 
 | @n
-| Half of 20 decreased by 6.
-| @ifsoln{Decrease half of 20 by 6.}
-
-@ifsoln{Find half of the difference between 20 and 6.}
+.^| *Half of 20 decreased by 6* +
+@fitbruby{20em}{@ifsoln{Decrease half of 20 by 6.}}{Ambiguous? Rewrite to clarify starting with × or ÷} +
+@fitbruby{20em}{@ifsoln{Find half of the difference between 20 and 6.}}{Ambiguous? Rewrite to clarify starting with + or -}
+| @showsoln{(coe  '(- (/ 20 2) 6))}
+| @showsoln{(coe  '(* 1/2 (- 20 6)))}
 
 | @n
-| Increase the product of 10 and 2 by 7.
+.^| *Increase the product of 10 and 2 by 7* +
+@fitbruby{20em}{}{Ambiguous? Rewrite to clarify starting with × or ÷} +
+@fitbruby{20em}{}{Ambiguous? Rewrite to clarify starting with + or -}
 | @showsoln{(coe  '(+ (* 10 2) 7))}
+|
 
 | @n
-| The difference between 20 and 8 multiplied by 2.
-| @ifsoln{Twenty decreased by the product of 8 and 2.}
-
-@ifsoln{Multiply the difference between 20 and 8 by 2.}
-
+.^| *The difference of 20 and 8 multiplied by 2* +
+@fitbruby{20em}{@ifsoln{Twenty decreased by the product of 8 and 2.}}{Ambiguous? Rewrite to clarify starting with × or ÷} +
+@fitbruby{20em}{@ifsoln{Multiply the difference between 20 and 8 by 2.}}{Ambiguous? Rewrite to clarify starting with + or -}
+| @showsoln{(coe  '(- 20 (* 8 2)))}
+| @showsoln{(coe  '(* (- 20 8) 2))}
 
 | @n
-| Seven more than one-third of 90.
+.^| *Seven more than one-third of 90* +
+@fitbruby{20em}{}{Ambiguous? Rewrite to clarify starting with × or ÷} +
+@fitbruby{20em}{}{Ambiguous? Rewrite to clarify starting with + or -}
 | @showsoln{(coe '(+ 7 (* 1/3 90)))}
+|
 |===
 
