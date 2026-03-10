@@ -14,7 +14,8 @@ function make_titletxt_file(f)
   base = base:gsub('%..*', '')
   local titletxt_file = dir .. '.cached/.' .. base .. '.titletxt'
   local i = io.open(f)
-  for L in i:lines() do
+  for L0 in i:lines() do
+    local L = L0
     if L:find('^=%s') then
       local o = io.open(titletxt_file, 'w+')
       L = L:gsub('^=%s+', ''):gsub(',', '&#x2c;'):gsub('{nbsp}', ' ')
@@ -69,7 +70,8 @@ do
   local on = io.open(notes_pages_ls_file, 'w+')
   local pwd = os.getenv('PWD')
   --
-  for f in i:lines() do
+  for f0 in i:lines() do
+    local f = f0
     if f:find('^ *;') or f:find('^ *//') or f:find('^ *$') then
       goto continue
     end

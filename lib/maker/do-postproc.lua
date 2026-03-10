@@ -81,7 +81,8 @@ local function postproc(fhtml_cached, tipe)
   local openblock_attribs = false
   local item_attrib = false
   --
-  for x in i:lines() do
+  for x0 in i:lines() do
+    local x = x0
     if read_end_sidebar_p then
       if num_of_lines_past_end_sidebar == 3 then
         read_end_sidebar_p = false
