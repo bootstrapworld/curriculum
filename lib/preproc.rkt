@@ -694,6 +694,11 @@
       (newline o))
     #:exists 'append))
 
+(define (display-html-verb prose o)
+  (set! prose (regexp-replace* "<" prose "%CURRICULUMLT%"))
+  (set! prose (regexp-replace* ">" prose "%CURRICULUMGT%"))
+  (display prose o))
+
 (define (clean-up-image-text text)
   ; (printf "doing clean-up-image-text ~s\n" text)
   (let ([n (string-length text)])
@@ -1671,6 +1676,9 @@
                                   #f
                                   (display-header-comment prose o)
                                   ))]
+                           [(string=? directive "htmlverb")
+                            (let ([prose (read-group i directive)])
+                              (display-html-verb prose o))]
                            [(string=? directive "scrub")
                             (read-group i directive)]
                            [(member directive '("ifslide" "pd-slide" "ifpdslide"))

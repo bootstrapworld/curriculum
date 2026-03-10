@@ -180,6 +180,9 @@ local function postproc(fhtml_cached, tipe)
     x = x:gsub('%%CURRICULUMCOMMENTSTART%%', '<!--')
     x = x:gsub('%%CURRICULUMCOMMENTSTOP%%', '-->')
     --
+    x = x:gsub('%%CURRICULUMLT%%', '<')
+    x = x:gsub('%%CURRICULUMGT%%', '>')
+    --
     x = x:gsub('%%CURRICULUM([^%%]*)%%', '<%1')
     x = x:gsub('%%BEGINCURRICULUM([^%%]*)%%', '>')
     x = x:gsub('%%ENDCURRICULUM([^%%]*)%%', '</%1>')
