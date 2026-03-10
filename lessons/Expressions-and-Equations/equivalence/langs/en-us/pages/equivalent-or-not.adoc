@@ -1,4 +1,4 @@
-= Equivalent or Not?
+= True or False?
 
 ++++
 <style>
@@ -7,15 +7,15 @@ td > .content > .paragraph > * { vertical-align: middle; }
 </style>
 ++++
 
-Decide whether or not the two Circles of Evaluation are equivalent. Explain your response.
+Decide whether or not the two expressions are equivalent. Explain your response.
 
-[.FillVerticalSpace, cols="^.^1a, ^.^5a, ^.^5a, ^.^5a", stripes="none", options="header"]
+[.FillVerticalSpace, cols="^.^1a, ^.^5a, ^.^1a, ^.^5a, ^.^5a", grid="none", options="header", ]
 |===
-|	 | Circle 1 						| Circle 2							| Equivalent or Not? Explain.
-| @n | @show{(coe '(/ 55 11))} 			|@show{(coe '(/ 11 55))} 		 	| @ifsoln{No. The left is 5, but the right is 1/5.}
-| @n | @show{(coe '(+ (+ 799 43) 1))}   |@show{(coe '(+ (+ 798 43) 2))}		| @ifsoln{Yes. Both sides compute to 843.}
-| @n | @show{(coe '(* 26 3))} 			|@show{(coe '(+ (+ 26 26) 26))} 	| @ifsoln{Yes. Both sides compute to 78.}
-| @n | @show{(coe '(/ 500 50))} 		|@show{(coe '(/ 5000 5))} 			| @ifsoln{No. The left is 10, whereas the right is 1000.}
-| @n | @show{(coe '(* 3 10))} 			|@show{(coe '(* (* 10 10) 10))} 	| @ifsoln{No. The left side is 30 but the right side is 1000.}
-| @n | @show{(coe '(+ (+ 5 9) 4))} 		|@show{(coe '(+ 5 (+ 9 4)))} 		| @ifsoln{Yes. Both sides evaluate to 18.}
+|	 | Circle 1 						| 	| Circle 2							| Equivalent or Not? Explain.
+| @n | @show{(coe '(/ 55 11))} 			| =	|@show{(coe '(/ 11 55))} 		 	| @ifsoln{No. When you change the order of a division problem you don't get the same answer unless the numbers being divided are equal to each other.}
+| @n | @show{(math '(+ (+ 799 1) 43))}  | =	|@show{(math '(+ (+ 798 2) 43))}	| @ifsoln{Yes. Both inner groupings add to 800.}
+| @n | @show{(coe '(/ 500 5))} 			| =	|@show{(coe '(/ 5000 50))} 			| @ifsoln{Yes. Both numbers on the right are 10x as big as the numbers on the left, so they will have the same quotient.}
+| @n | @show{(math '(* 26 3))} 			| =	|@show{(math '(+ (+ 26 26) 26))} 	| @ifsoln{Yes. Multiplying any number times 3 is the same as adding it three times.}
+| @n | @show{(coe '(* 3 10))} 			| =	|@show{(coe '(* (* 10 10) 10))} 	| @ifsoln{No. The left side is 30 but the right side is 1000.}
+| @n | @show{(coe '(+ (+ 5 9) 4))} 		| =	|@show{(coe '(+ 5 (+ 9 4)))} 		| @ifsoln{Yes. Both sides evaluate to 18.}
 |===

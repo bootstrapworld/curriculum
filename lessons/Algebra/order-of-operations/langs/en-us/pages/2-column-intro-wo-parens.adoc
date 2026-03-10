@@ -1,0 +1,34 @@
+= Expressions -> Circles of Evaluation 2
+
+Translate each of the arithmetic expressions below into Circles of Evaluation. 
+
+_@proglang has a dedicated function for squaring a number `sqr`. And a function for exponents `expt`, which takes in both the base and the exponent._
+@do{
+  (define expr1 '(- (* 1/2 (+ 5 7)) (/ 8 (sqr 2))))
+  (define expr2 '(+ (- 19 (/ 8 4)) (* 6 2)))
+  (define expr3 '(- (\frac (- 19 4) (+ 3 2) ) 18))
+  (define expr4 '(- (* (/ 10 2) 5) (- 14 8)))
+}
+
+[.FillVerticalSpace, cols=".^1a,^.^7a,^.^18a",options="header",stripes="none",frame="none"]
+|===
+|
+| Arithmetic Expression
+| Circle of Evaluation
+
+|*@n*
+| @show{    (math expr1)} 
+| @showsoln{(coe  expr1)}
+
+|*@n*
+| @show{    (math expr2)} 
+| @showsoln{(coe  expr2)}
+
+|*@n*
+| @show{    (math expr3)} 
+| @showsoln{(coe  expr3)}
+
+|*@n*
+| @show{    (math expr4)} 
+| @showsoln{(coe  expr4)}
+|===
