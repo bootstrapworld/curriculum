@@ -78,7 +78,21 @@ local function postproc(fhtml_cached, tipe)
   local openblock_attribs = false
   local item_attrib = false
   --
-  for x in i:lines() do
+  for x0 in i:lines() do
+    local x = x0
+    if read_end_sidebar_p then
+      if num_of_lines_past_end_sidebar == 3 then
+        read_end_sidebar_p = false
+      else
+        num_of_lines_past_end_sidebar = num_of_lines_past_end_sidebar + 1
+        goto continue
+      end
+    elseif x:find('%%ENDSIDEBARCONTENT%%') then
+      read_end_sidebar_p = true
+      num_of_lines_past_end_sidebar = 0
+      goto continue
+    end
+    --
     if x:find('^<body') then
       if x:find('landscape') then
         x = x:gsub('landscape', '')
@@ -162,6 +176,9 @@ local function postproc(fhtml_cached, tipe)
     --
     x = x:gsub('%%CURRICULUMCOMMENTSTART%%', '<!--')
     x = x:gsub('%%CURRICULUMCOMMENTSTOP%%', '-->')
+    --
+    x = x:gsub('%%CURRICULUMLT%%', '<')
+    x = x:gsub('%%CURRICULUMGT%%', '>')
     --
     x = x:gsub('%%CURRICULUM([^%%]*)%%', '<%1')
     x = x:gsub('%%BEGINCURRICULUM([^%%]*)%%', '>')
