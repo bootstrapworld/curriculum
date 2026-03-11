@@ -24,6 +24,14 @@ test -z "$YEAR" && YEAR=$(date +%Y)-BETA
 cd distribution
 
 DEPLOYABLES_DIR=deployables-$USER
+SEMESTER_YEAR=$SEMESTER$YEAR
+
+CURR_GIT_BRANCH=$(git branch --show-current)
+
+# DEPLOY_DIR_SUBSTR is a part of the eventual DEPLOY_DIR path on the server.
+
+DOMAIN=beta.bootstrapworld.org
+DEPLOY_DIR_SUBSTR=domains/beta.bootstrapworld.org/public_html/materials/$SEMESTER_YEAR
 
 test -d $DEPLOYABLES_DIR && rm -fr $DEPLOYABLES_DIR
 
@@ -34,8 +42,6 @@ ALL_THE_LANGS="en-us es-mx"
 for lang in $ALL_THE_LANGS; do
   mkdir -p $DEPLOYABLES_DIR/$lang
 done
-
-SEMESTER_YEAR=$SEMESTER$YEAR
 
 SED=sed
 
@@ -63,11 +69,11 @@ for f in $(find $DEPLOYABLES_DIR -name images -type d); do
 done
 
 cat > $DEPLOYABLES_DIR/deploy-to-public_html.sh <<EOF
-DEPLOY_DIR=\$HOME/public_html/materials/$SEMESTER_YEAR
+DEPLOY_DIR=\$HOME/$DEPLOY_DIR_SUBSTR
 rm -fr \$DEPLOY_DIR
 mv \$HOME/tmp/$DEPLOYABLES_DIR \$DEPLOY_DIR
 rm \$DEPLOY_DIR/deploy-to-public_html.sh
-#chmod 755 \$HOME/public_html/materials/$SEMESTER_YEAR/\*/lessons/hoc-winter-parley/repartee
+#chmod 755 \$DEPLOY_DIR/\*/lessons/hoc-winter-parley/repartee
 EOF
 
 # exit
@@ -93,7 +99,7 @@ exitstatus=$?
 
 test $exitstatus -ne 0 && echo rsync failed! 😢  && exit 0
 
-echo Copying files to public_html/materials/$SEMESTER$YEAR...
+echo Copying files to $DEPLOY_DIR_SUBSTR...
 
 if test -n "$CONVENIENT_PASSWORD"; then
   sshpass -e ssh -p $HOSTINGER_PORT $HOSTINGER_USER@$HOSTINGER_IPADDR "bash \$HOME/tmp/$DEPLOYABLES_DIR/deploy-to-public_html.sh"

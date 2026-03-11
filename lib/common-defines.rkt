@@ -3,7 +3,6 @@
 (provide
   print-coverage-js
   print-standards-js
-  print-menubar
   )
 
 (define (print-coverage-js o)
@@ -71,10 +70,3 @@
       "}\n"
       "</script>\n"
       "++++\n\n") o))
-
-(define (print-menubar f)
-  ;(printf "print-menubar ~s\n" f)
-  (call-with-output-file f
-    (lambda (o)
-      (display "<!--#include virtual=\"/menubar.ssi\"-->\n" o))
-    #:exists 'replace))
