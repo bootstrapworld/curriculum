@@ -144,6 +144,8 @@ Order of operations is not a computational skill, it's a literacy skill!
 
 The Circle of Evaluation for @math{8 \times (7 - 3)} is: @show{(coe '(* 8 (- 7 3)))}
 
+It shows us that we will need to know the difference of 7 and 3 before we tackle the multiplication.
+
 @slidebreak{Launch}
 
 @ifnotslide{
@@ -258,8 +260,12 @@ Then we would parse groupings formed by addition and subtraction, working our wa
 [.oooCOE]
 @show{(coe '(- (/ (sqr 8) 4) (* 5(+ 3 9)) ))} 
 
-@teacher{
-This first page of practice is scaffolded with unnecessary parentheses to make circle placement extra obvious. In our experience this is an important bridge activity. It is important to note that those training wheels will be removed after this page so students may need support with drawing circles on subsequent exercises, even if all of your students complete this page successfully. 
+@QandA{
+@Q{What should a student do if they encounter an expression without parentheses or other grouping symbols?}
+@A{Regardless of whether or not there are any grouping symbols in an expression, after we check for them, the Order of Operations tell us to check for groupings formed by exponents, then check for groupings formed by multiplication and division, and then to check for groupings formed by addition and subtraction.}
+
+@Q{Do we need to apply the Order of Operations for every expression we evaluate? Or just some expressions?}
+@A{Any time there is more than one operation in an expression we should use the Order of Operations to determine the correct groupings.}
 }
 
 @lesson-instruction{
@@ -268,12 +274,16 @@ This first page of practice is scaffolded with unnecessary parentheses to make c
 }
 
 @teacher{
-Spend some time ensuring that students have drawn their circles correctly. You may want to have them compare their circles with their partner, others at their table, or against a provided answer key.
+FYI - This first page of practice is scaffolded with unnecessary parentheses to make circle placement extra obvious. In our experience this is an important bridge activity. Be aware that the extra support will be removed after this page. Even if all of your students complete this page successfully, they may need support with drawing circles on the next page.
 }
 
 @lesson-instruction{
 - Turn to @printable-exercise{2-column-intro-wo-parens.adoc}.
 - Think through the Order of Operations to draw Circles of Evaluation for each of the expressions.
+}
+
+@teacher{
+Spend some time ensuring that students have drawn their circles correctly. You may want to have them compare their circles with their partner, others at their table, or against a provided answer key.
 }
 
 @pd-slide{
@@ -295,11 +305,11 @@ Circles of Evaluation are a great way to get older students to re-engage with (a
 @Q{Consider our Circle of Evaluation. Looking at the structure, does it matter whether we square 8 first or add 3 and 9? Why or Why Not? +
 @show{(coe '(- (/ (sqr 8) 4) (* 5(+ 3 9)) ))} }
 @A{No. They can happen in parallel because they are inside of separate circles.}
-@A{But we can't do anything else until we've done at least one of those computations.}
+@A{But we do have to start with one of those computations, since all of the other operations consume their outputs.}
 
 @Q{A student started parsing the expression @math{ 0 \times (3 + 124 \div 3) } from the outside in. + 
 Why do you think they decided to stop at this point? +
-@show{(coe '(* 0 (+ (?ANS 3) (/ (?ANS 124) (?ANS 3)))))}
+@show{(coe '(* 0 ((?ANS +) (?ANS 3) (?ANS 3))))}
 }
 }
 
