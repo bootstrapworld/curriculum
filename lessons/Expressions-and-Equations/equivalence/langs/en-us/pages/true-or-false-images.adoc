@@ -1,0 +1,85 @@
+= True or False?
+
+++++
+<style>
+div.circleevalsexp { width: auto; }
+td > .content > .paragraph > * { vertical-align: middle; }
+
+div#body .literalblock pre, div#body .literalblock pre[class], div#body .listingblock pre, div#body .listingblock pre[class] {
+    padding: 0;
+}
+</style>
+++++
+
+1. Make a prediction: *Circle T* or *F* to indicate whether you expect each pair of expressions to be equivalent and produce identical images.
+2. Open @starter-file{equivalence} and test out each pair of expressions to see whether or not they produce identical images. 
+3. Explain why each pair of expressions is or isn't equivalent.
+
+
+[cols="^.^1a, ^.^8a, ^.^1a, ^.^9a, ^.^2a", options="header", ]
+|===
+|	 | Image 1						| 	| Image 2						| Prediction
+
+| @n 
+| Rotate an image 90 degrees: +
+@show{(code '(rotate 90 ImageA))}
+| =	
+| Flip the same image Horizontally: +
+@show{(code '(flip-horizontal ImageA))}
+| T @hspace{1em} @ifsoln-choice{F}
+5+| @fitbruby{11em}{@ifsoln{Not Equivalent}}{Equivalent / Not Equivalent} because @fitb{43em}{@ifsoln{there is no rotation that is equivalent to a horizontal flip}} 
+
+| @n 
+| Rotate an image 180 degrees: +
+@show{(code '(rotate 180 ImageA))}
+| =	
+| Flip the same image Horizontally and then Vertically:	
+@show{(code '(flip-vertical(flip-horizontal ImageA)))}
+| @ifsoln-choice{T} @hspace{1em} F
+5+| @fitbruby{11em}{@ifsoln{Equivalent}}{Equivalent / Not Equivalent} because @fitb{43em}{@ifsoln{they both end up with the text upside down and the letters of the name appearing in order from right to left}} 
+
+| @n 
+| A red circle with a radius of 60: +
+@show{(code '(circle 60 "outline" "tomato") )}
+| =	
+| A red ellipse whose width and height are 60: +
+@show{(code '(ellipse 60 60 "outline" "tomato"))}
+| T @hspace{1em} @ifsoln-choice{F}
+5+| @fitbruby{11em}{@ifsoln{Not Equivalent}}{Equivalent / Not Equivalent} because @fitb{43em}{@ifsoln{the height and width correspond to the diameter, not the radius}} 
+
+| @n 
+| A 200 x 50 blue rectangle +
+@show{(code '(rectangle 200 50 "solid" "blue"))}
+| =	
+| A 40 x 10 blue rectangle scaled up by a factor of 5 +
+@show{(code '(rectangle 40 10 "solid" "blue"))}
+| @ifsoln-choice{T} @hspace{1em} F
+5+| @fitbruby{11em}{@ifsoln{Equivalent}}{Equivalent / Not Equivalent} because @fitb{43em}{@ifsoln{40 x 5 = 200   and   10 x 5 = 50}} 
+
+| @n 
+| @show{(code '(rectangle 50 200 "solid" "blue"))}
+| =	
+| @show{(code '(rectangle 200 50 "solid" "blue"))}
+| T @hspace{1em} @ifsoln-choice{F}
+5+| @fitbruby{11em}{@ifsoln{Not Equivalent}}{Equivalent / Not Equivalent} because @fitb{43em}{@ifsoln{the first is a tall narrow rectangle and the second is a short wide rectangle}} 
+
+| @n 
+| @ifproglang{wescheme}{
+```
+(rotate 90 
+(rectangle 50 200 "solid" "blue"))
+```
+}
+@ifproglang{pyret}{
+```
+rotate(90,
+rectangle(50, 20, "solid", "blue")
+```
+}
+| =	
+| @show{(code '(rectangle 200 50 "solid" "blue"))}
+| T @hspace{1em} @ifsoln-choice{F}
+5+| @fitbruby{11em}{@ifsoln{Not Equivalent}}{Equivalent / Not Equivalent} because @fitb{43em}{@ifsoln{the first is a tall narrow rectangle and the second is a short wide rectangle}} 
+
+|===
+
