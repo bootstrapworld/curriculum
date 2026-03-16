@@ -1,9 +1,9 @@
-# This method is limited in that it only checks for the
-# existence of a cookie with a prefix of wordpress_logged_in_.
-# IT DOES NOT VERIFY THE VALIDITY OF THIS COOKIE IN ANY WAY!
+RewriteEngine On
 
-<IfModule mod_rewrite.c>
-    RewriteCond %{REQUEST_FILENAME} (.*)
-    RewriteCond %{HTTP_COOKIE} !wordpress_logged_in_([a-zA-Z0-9_]*) [NC]
-    RewriteRule .* - [F,L]
-</IfModule>`
+# 1. Capture the path relative to THIS .htaccess file
+# If the file is 'folder/sub/file.pdf', $1 will become 'sub/file.pdf'
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule ^(.*)$ /access-bridge.php?file=%{REQUEST_URI} [L,QSA]
+
+# 2. This path is sent to /access-bridge.php, a script that actively
+# checks to see if the user is logged into WP.

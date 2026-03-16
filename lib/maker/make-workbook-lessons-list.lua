@@ -1,6 +1,6 @@
 #! /usr/bin/env lua
 
--- last modified 2025-04-28
+-- last modified 2026-03-10
 
 local inf, outf, pl = ...
 
@@ -28,7 +28,8 @@ end
 
 o:write('(\n')
 
-for x in i:lines() do
+for x0 in i:lines() do
+  local x = x0
   x = x:gsub('^%s+', '')
   x = x:gsub(';.*', '')
   x = x:gsub('%s+$', '')
