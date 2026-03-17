@@ -368,7 +368,8 @@
     (when (and *lesson-plan* (= section-level 1))
       (let ([section-title (string-trim (regexp-replace "@duration{(.*)}" title "(\\1)"))])
         (set! *first-level-section-titles* (cons section-title *first-level-section-titles*))))
-    (fprintf o "[.lesson-section-~a]~n" section-level)
+    (fprintf o "[.lesson-section-~a~a]~n" section-level
+      (if *additional-exercises-explicit?* ".notselfguided" ""))
     (for ([i section-level])
       (display #\= o))
     (display "= " o)
@@ -2001,11 +2002,11 @@
                               (set! contains-blocks? #t) ; assume always block for now
                               (display
                                 (cond [(or contains-blocks? contains-nl?)
-                                        (string-append "\n\n[.teacherNote]\n--\n"
+                                        (string-append "\n\n[.teacherNote.notselfguided]\n--\n"
                                           converted-text
                                           "\n--\n\n")]
                                       [else (enclose-span
-                                             ".teacherNote" converted-text)]) o))]
+                                             ".teacherNote.notselfguided" converted-text)]) o))]
                            [(string=? directive "indented")
                             (let ([text (read-group i directive #:multiline? #t)])
                               (display-openblock ".indentedpara" text directive o))]
@@ -2142,7 +2143,7 @@
                                   [old-optional-flag? *optional-flag?*])
                               (set! *optional-flag?* #t)
                               (display
-                                (enclose-span ".optionaltag"
+                                (enclose-span ".optionaltag.notselfguided"
                                   (expand-directives:string->string
                                     text #:enclosing-directive directive)) o)
                               ;(display "\n" o)
@@ -2332,7 +2333,7 @@
                            [(member directive '("strategy" "strategy-basic"))
                             (let* ([title (read-group i directive)]
                                    [text (read-group i directive #:multiline? #t)])
-                              (display "\n[.strategy-box]\n--\n" o)
+                              (display "\n[.strategy-box.notselfguided]\n--\n" o)
                               (display "[.title]\n" o)
                               (expand-directives:string->port title o #:enclosing-directive directive)
                               (display "\n\n" o)
@@ -2511,6 +2512,7 @@
 
               (when (and *lesson-plan* (not *additional-exercises-explicit?*)
                          (or (pair? *opt-printable-exercise-links*) (pair? *opt-online-exercise-links*)))
+                (fprintf o "\n[.notselfguided]")
                 (fprintf o "\n== Additional Exercises\n\n")
                 (let ([addl-ex-file (build-path *containing-directory*
                                                 ".cached" ".index.additional-exercises")])
