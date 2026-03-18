@@ -1,0 +1,100 @@
+= Are They Equivalent?
+
+++++
+<style>
+div.circleevalsexp { width: auto; }
+td > .content > .paragraph > * { vertical-align: middle; }
+
+div#body .literalblock pre, div#body .literalblock pre[class], div#body .listingblock pre, div#body .listingblock pre[class] {
+    padding: 0;
+}
+
+div#body table tr th, div#body table tr td {
+    padding: 0.35em 0.35em;
+    }
+</style>
+++++
+
+1. Make a prediction: *Circle T* or *F* to indicate whether you expect each pair of expressions to be equivalent and produce identical images.
+2. Open @starter-file{equivalence} and test out each pair of expressions to see whether or not they produce identical images. 
+3. Explain why each pair of expressions is or isn't equivalent. 
+
+[cols="^.^1a, ^.^8a, ^.^1a, ^.^9a, ^.^2a", options="header", ]
+|===
+|	 | Image 1						| 	| Image 2						| Prediction 
+
+| @n 
+| Rotate an image 90 degrees: +
+@show{(code '(rotate 90 ImageA))}
+| =	
+| Flip the same image Horizontally: +
+@show{(code '(flip-horizontal ImageA))}
+| T @hspace{1em} @ifsoln-choice{F}
+5+| @fitbruby{11em}{@ifsoln{Not Equivalent}}{Equivalent / Not Equivalent} because @fitb{43em}{@ifsoln{there is no rotation that is equivalent to a horizontal flip}} 
+
+| @n 
+| Rotate an image 180 degrees: +
+@show{(code '(rotate 180 ImageA))}
+| =	
+| Flip the same image Horizontally and then Vertically:	
+@show{(code '(flip-vertical(flip-horizontal ImageA)))}
+| @ifsoln-choice{T} @hspace{1em} F
+5+| @fitbruby{11em}{@ifsoln{Equivalent}}{Equivalent / Not Equivalent} because @fitb{43em}{@ifsoln{they both end up with the text upside down and the letters of the name appearing in order from right to left}} 
+
+| @n 
+| A red circle with a radius of 60: +
+@show{(code '(circle 60 "outline" "tomato") )}
+| =	
+| A red ellipse whose width and height are 60: +
+@show{(code '(ellipse 60 60 "outline" "tomato"))}
+| T @hspace{1em} @ifsoln-choice{F}
+5+| @fitbruby{11em}{@ifsoln{Not Equivalent}}{Equivalent / Not Equivalent} because @fitb{43em}{@ifsoln{the height and width correspond to the diameter, not the radius}} 
+|===
+
+For each question below, review the collection of expressions. Place an *E* in front of each expression that forms the first equivalent grouping. If the collection includes a second set of equivalent expressions, mark them with a &#9733;. Then explain the equivalence.
+[cols="1a, 12a, 5a",stripes="none"]
+|===
+|| Which are equivalent? | Explain why they are equivalent.
+|@n 
+| 
+[cols="1a, 10a", stripes="none"]
+!===
+! @ifsoln{&#9733;}  ! @show{(code '(square 40 "solid" "deeppink"))} 
+! @ifsoln{&#9733;}  ! @show{(code '(rectangle 40 40 "solid" "deeppink"))}
+! @ifsoln{&#9733;}  ! @show{(code '(square (20 * 20) "solid" "deeppink"))}
+!===
+| 
+
+|@n 
+| 
+[cols="1a, 10a", stripes="none"]
+!===
+! @ifsoln{&#9733;}  ! @show{(code '(rectangle 48 72 "solid" "blue"))}
+! @ifsoln{E}        ! @show{(code '(rectangle 72 48 "solid" "blue"))}                           
+! @ifsoln{E}        ! @show{(code '(rotate 90 (rectangle 48 72 "solid" "blue")))}
+! @ifsoln{&#9733;}  ! @show{(code '(scale 8 (rectangle 6 9 "solid" "blue")))}
+!===
+| 
+
+|@n 
+| 
+[cols="1a, 10a",stripes="none"]
+!===
+! @ifsoln{E}  ! @show{(code '(radial-star 6 20 50 "solid" "red"))}
+! @ifsoln{}   ! @show{(code '(radial-star 20 6 50 "solid" "red"))}
+! @ifsoln{E}  ! @show{(code '(radial-star (3 + 3) (4 * 5) 50 "solid" "red"))}
+!===
+| 
+
+|@n 
+| 
+[cols="1a, 10a", stripes="none"]
+!===
+! @ifsoln{ }    ! @show{(code '(isosceles-triangle 100 90 "solid" "black"))}
+! @ifsoln{E}    ! @show{(code '(right-triangle 100 100 "solid" "black"))}
+! @ifsoln{E}    ! @show{(code '(rotate 135 (isosceles-triangle 100  90  "solid" "black")))}
+! @ifsoln{ }    ! @show{(code '(rotate 135 (right-triangle 100 100 "solid" "black")))}
+!===
+|
+|===
+

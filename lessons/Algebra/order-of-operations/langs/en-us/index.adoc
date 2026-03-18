@@ -64,12 +64,12 @@ div.paragraph>p:has(+.circleevalsexp) { display: inline; }
 == Order of Operations
 
 === Overview
-Students are given a challenging expression that exposes common misconceptions about order of operations. The goal is to demonstrate that a brittle, fixed notion of order of operations is insufficient, and lead students to a deeper understanding of order of operations as a _grammatical_ device, rather than a computational one. The Circles of Evaluation can be thought of as "sentence diagramming for arithmetic".
+Students are given a challenging expression that exposes common misconceptions about Order of Operations. The goal is to demonstrate that a brittle, fixed notion of Order of Operations is insufficient, and lead students to a deeper understanding of Order of Operations as a _grammatical_ device, rather than a computational one. The Circles of Evaluation can be thought of as "sentence diagramming for arithmetic".
 
 @ifnotslide{
 @strategy{Circles of Evaluation}{
 
-@right{@image{images/pemdas.png, 200}} Students are often introduced to the Order of Operations by way of this pyramid model, or mnemonics like @link{https://en.wikipedia.org/wiki/Order_of_operations#Mnemonics, "PEMDAS, GEMDAS, or BODMAS"} as a playbook for _sequencing computations_. This is a brittle and limited (mis)understanding of core concept: the Order of Operations is actually a playbook for sequencing _groupings_!
+@right{@image{images/pemdas.png, 200}} Students are often introduced to the Order of Operations by way of this pyramid model, or mnemonics like @link{https://en.wikipedia.org/wiki/Order_of_operations#Mnemonics, "PEMDAS, GEMDAS, or BODMAS"} as a playbook for _sequencing computations_. This is a brittle and limited (mis)understanding of the core concept: the Order of Operations is actually a playbook for sequencing _groupings_!
 
 Consider the expression @math{ 0 \times (3x^3 \div -4(\sqrt{14} - \frac{4}{3})) }:
 
@@ -107,7 +107,7 @@ I give my students a quiz with this problem:
 
 _They all get it right._
 
-Does this mean my students know the order of operations?
+Does this mean my students know the Order of Operations?
 }
 
 @pd-slide{
@@ -117,11 +117,11 @@ I give my students a new quiz!
 
 _They all get it wrong._
 
-Does this mean that they *don't* know the order of operations?
+Does this mean that they *don't* know the Order of Operations?
 }
 
 @pd-slide{
-If you assess the order of operations by giving kids arithmetic operations to solve, you are teaching them that *computation* is what the order of operations is all about.
+If you assess the Order of Operations by giving kids arithmetic operations to solve, you are teaching them that *computation* is what the Order of Operations is all about.
 
 Order of operations is not a computational skill, it's a literacy skill!
 }
@@ -144,6 +144,8 @@ Order of operations is not a computational skill, it's a literacy skill!
 
 The Circle of Evaluation for @math{8 \times (7 - 3)} is: @show{(coe '(* 8 (- 7 3)))}
 
+It shows us that we will need to know the difference of 7 and 3 before we tackle the multiplication.
+
 @slidebreak{Launch}
 
 @ifnotslide{
@@ -154,6 +156,8 @@ The Circle of Evaluation for @math{8 \times (7 - 3)} is: @show{(coe '(* 8 (- 7 3
 
 * Starting _outside_ the inner grouping: @show{(coe '(- 10 ((?ANS +) (?ANS 5) (?ANS 3))))}
 * Starting _inside_ the inner grouping: @show{(coe '((?ANS -) (?ANS 10) (+ 5 3)))}
+
+@A{Either way, we'll end up with @show{(coe '(- 10 (+ 5 3)))}}
 }
 }
 }
@@ -178,8 +182,9 @@ It depends! We can either work
 
 @slidebreak{LaunchR}
 
+@ifslide{
 Either way, we'll end up with @show{(coe '(- 10 (+ 5 3)))}
-
+}
 @teacher{
 @opt{If it works for you, use @handout{pages/cards-for-matching-coe-exp.adoc, this set of cards} to have students physically match expressions and Circles of Evaluations.}
 }
@@ -220,30 +225,61 @@ Either way, we'll end up with @show{(coe '(- 10 (+ 5 3)))}
 === Investigate
 @slidebreak{Investigate}
 
+++++
+<style>
+/* Add custom CSS to add coloring to nested circles */
+.oooCOE { display: inline-block !important; }
+.oooCOE .circleevalsexp { width: unset; vertical-align: middle; }
+
+.oooCOE .expression { background: rgb(231 231 231) !important; }
+.oooCOE .expression .expression { background: white !important; }
+</style>
+++++
+
 Now that we've seen how Circles of Evaluation connect to expressions, it's time to apply what we know about the Order of Operations to diagram expressions using the Circles of Evaluation.
 
-Let's start with @big{@math{8^2 \div 4 - 5 \times (3 + 9) + 8}}, using an "inside-out" strategy.
+Let's start with @big{@math{8^2 \div 4 - 5 \times (3 + 9)}}, using an "inside-out" strategy.
 
 First we would parse the groupings formed by parentheses and other grouping symbols.
 
-@big{@math{8^2 \div 4 - 5 \times}} @show{(coe '(+ 3 9))} @big{@math{+ 8}}
+@big{@math{8^2 \div 4 - 5 \times}} @show{(coe '(+ 3 9))} 
 
 Then we would parse groupings formed by exponents (and radicals like square roots).
 
-@show{(coe '(expt 8 2))} @big{@math{ \div 4 - 5 \times}} @show{(coe '(+ 3 9))} @big{@math{+ 8}}
+@show{(coe '(sqr 8))} @big{@math{ \div 4 - 5 \times}} @show{(coe '(+ 3 9))} 
+
+@teacher{We've used @proglang's dedicated squaring function here, but students could also use the `expt` function, which takes in two numbers.}
 
 Then we would parse groupings formed by multiplication and division, working our way from left to right.
 
-@show{(coe '(/ (expt 8 2) 4))} @big{@math{ - }} @show{(coe '(* 5(+ 3 9)))} @big{@math{+ 8}}
+[.oooCOE]
+@show{(coe '(/ (sqr 8) 4))} @big{@math{ - }} @show{(coe '(* 5(+ 3 9)))} 
 
 Then we would parse groupings formed by addition and subtraction, working our way from left to right.
 
-@show{(coe '(- (/ (expt 8 2) 4) (* 5(+ 3 9)) ))} @big{@math{+ 8}}
+[.oooCOE]
+@show{(coe '(- (/ (sqr 8) 4) (* 5(+ 3 9)) ))} 
 
-@show{(coe '(+ (- (/ (expt 8 2) 4) (* 5(+ 3 9)) ) 8))}
+@QandA{
+@Q{What should a student do if they encounter an expression without parentheses or other grouping symbols?}
+@A{Regardless of whether or not there are any grouping symbols in an expression, after we check for them, the Order of Operations tell us to check for groupings formed by exponents, then check for groupings formed by multiplication and division, and then to check for groupings formed by addition and subtraction.}
+
+@Q{Do we need to apply the Order of Operations for every expression we evaluate? Or just some expressions?}
+@A{Any time there is more than one operation in an expression we should use the Order of Operations to determine the correct groupings.}
+}
 
 @lesson-instruction{
-Turn to  @printable-exercise{2-column-intro-w-parens.adoc} and draw Circles of Evaluation for each of the expressions.
+- Turn to @printable-exercise{2-column-intro-w-parens.adoc} and draw Circles of Evaluation for each of the expressions.
+- Then rewrite each expression with one fewer pair of parentheses, _making sure not to change the groupings._
+}
+
+@teacher{
+FYI - This first page of practice is scaffolded with unnecessary parentheses to make circle placement extra obvious. In our experience this is an important bridge activity. Be aware that the extra support will be removed after this page. Even if all of your students complete this page successfully, they may need support with drawing circles on the next page.
+}
+
+@lesson-instruction{
+- Turn to @printable-exercise{2-column-intro-wo-parens.adoc}.
+- Think through the Order of Operations to draw Circles of Evaluation for each of the expressions.
 }
 
 @teacher{
@@ -257,7 +293,7 @@ Spend some time ensuring that students have drawn their circles correctly. You m
 }
 
 @strategy{Pedagogy Note}{
-Circles of Evaluation are a great way to get older students to re-engage with (and finally understand) the order of operations while their focus and motivation are on learning to code.  Because we recognize this work to be so foundational, and know that some teachers choose to spend a whole week on it, we have developed lots of additional materials to help scaffold and stretch. You will find about 20 additional pages linked in @link{#_additional_exercises, the Additional Exercises section} at the the end of this lesson.
+Circles of Evaluation are a great way to get older students to re-engage with (and finally understand) the Order of Operations while their focus and motivation are on learning to code.  Because we recognize this work to be so foundational, and know that some teachers choose to spend a whole week on it, we have developed lots of additional materials to help scaffold and stretch. You will find about 20 additional pages linked in @link{#_additional_exercises, the Additional Exercises section} at the the end of this lesson.
 }
 
 @slidebreak{Investigate}
@@ -265,9 +301,18 @@ Circles of Evaluation are a great way to get older students to re-engage with (a
 === Synthesize
 @slidebreak{Synthesize}
 
-- Did you always prefer working outside-in to inside-out? Or did different strategies work better for different _kinds_ of problems? Why?
-@teacher{Challenge students to try using the OTHER way to draw the Circle of Evaluation for the next one they draw!}
-- Up until now, we didn't have a visual spatial model for _reading_ arithmetic expressions... How do Circles of Evaluation compare to previous methods you've learned for _computing_ what arithmetic expressions evaluate to (PEMDAS, GEMDAS, etc)?
+@QandA{
+@Q{Consider our Circle of Evaluation. Looking at the structure, does it matter whether we square 8 first or add 3 and 9? Why or Why Not? +
+@show{(coe '(- (/ (sqr 8) 4) (* 5(+ 3 9)) ))} }
+@A{No. They can happen in parallel because they are inside of separate circles.}
+@A{But we do have to start with one of those computations, since all of the other operations consume their outputs.}
+
+@Q{A student started parsing the expression @math{ 0 \times (3 + 124 \div 3) } from the outside in. + 
+Why do you think they decided to stop at this point? +
+@show{(coe '(* 0 ((?ANS +) (?ANS 3) (?ANS 3))))}
+}
+@A{Once we understand that the final step is to multiply a quantity by zero, we know the answer will be zero, no matter what the quantity is!}
+}
 
 @pd-slide{
 *An Extension for High School Teachers:*
@@ -529,8 +574,7 @@ If you are digging into Order or Operations and are looking for more practice wi
 
 @ifslide{More practice connecting Circles of Evaluation and Arithmetic Expressions}
 
-- @opt-starter-file{coe-desmos}.
-- @printable-exercise{match-arith-coe.adoc}
+- @opt-starter-file{coe-desmos}
 - @opt-printable-exercise{arith-to-coe.adoc}
 - @opt-printable-exercise{arith-to-coe2.adoc}
 - @opt-printable-exercise{arith-to-coe3.adoc}
@@ -563,7 +607,6 @@ More 3-column practice with negatives:
 3-column challenge problems with square roots, brackets, and exponents: +
 @hspace{1ex} _Students must first complete_ @printable-exercise{beyond-operations-notice.adoc}!
 
-- @printable-exercise{3-column-challenge.adoc}
 - @opt-printable-exercise{3-column-w-sqrts.adoc}
 - @opt-printable-exercise{3-column-challenge-2.adoc}
 - @opt-printable-exercise{3-column-challenge-3.adoc}
