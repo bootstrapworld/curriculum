@@ -2002,11 +2002,11 @@
                               (set! contains-blocks? #t) ; assume always block for now
                               (display
                                 (cond [(or contains-blocks? contains-nl?)
-                                        (string-append "\n\n[.teacherNote.notselfguided]\n--\n"
+                                        (string-append "\n\n[.teacherNote]\n--\n"
                                           converted-text
                                           "\n--\n\n")]
                                       [else (enclose-span
-                                             ".teacherNote.notselfguided" converted-text)]) o))]
+                                             ".teacherNote" converted-text)]) o))]
                            [(string=? directive "indented")
                             (let ([text (read-group i directive #:multiline? #t)])
                               (display-openblock ".indentedpara" text directive o))]
@@ -2143,7 +2143,7 @@
                                   [old-optional-flag? *optional-flag?*])
                               (set! *optional-flag?* #t)
                               (display
-                                (enclose-span ".optionaltag.notselfguided"
+                                (enclose-span ".optionaltag"
                                   (expand-directives:string->string
                                     text #:enclosing-directive directive)) o)
                               ;(display "\n" o)
@@ -2333,7 +2333,7 @@
                            [(member directive '("strategy" "strategy-basic"))
                             (let* ([title (read-group i directive)]
                                    [text (read-group i directive #:multiline? #t)])
-                              (display "\n[.strategy-box.notselfguided]\n--\n" o)
+                              (display "\n[.strategy-box]\n--\n" o)
                               (display "[.title]\n" o)
                               (expand-directives:string->port title o #:enclosing-directive directive)
                               (display "\n\n" o)
