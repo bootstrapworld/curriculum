@@ -30,14 +30,49 @@
 |
 - The Associative Property -- like other laws of arithmetic -- is more meaningful and memorable when students view it as a powerful tool to help them to do math efficiently.
 - Students may need support in parsing expressions that include both an operation that _does_ support Associativity alongside an operation where Associativity does _not_ apply.
-
-| Preparation
-| 
-@preparation{
-- Decide whether or not the last section of this lesson (a programming exploration of associativity) is appropriate for your class. 
-- If you are using our Google Slides, adjust the slides based on which portions of the lesson you will be doing with your students.
-}
 |===
+
+== Programming Exploration: Associativity
+
+=== Overview
+Students consider whether various image-producing @proglang functions are associative and will produce the same output, regardless of how they're grouped.
+
+=== Launch
+@slidebreak{Launch}
+
+@lesson-instruction{
+- Turn to @printable-exercise{associativity-and-code.adoc} and open the @starter-file{expressions-equations}.
+- With your partner, make a prediction about whether the order in which the groupings are made will change the output for each function.
+}
+
+
+@teacher{Pose the above open-ended questions and invite students to discuss with a partner. Invite some students to share their thinking with the class.}
+
+=== Investigate
+@slidebreak{Investigate-DN}
+
+@lesson-instruction{
+- Complete any Circles of Evaluation and code, then test the code to determine if the images produced are identical or not.
+}
+
+@teacher{As students work, encourage them to _always_ make predictions before testing the code. Similarly, the activity will be more valuable if students discuss _why_ the code did or did not produce identical images. Debrief to ensure comprehension.
+
+When everyone is finished, check in with students. Did everyone discover that _all_ of the functions were associative? There is a good chance your students will wonder if _all_ @proglang functions are associative!
+}
+
+@slidebreak{Investigate}
+
+@QandA{
+@Q{On @printable-exercise{associativity-and-code.adoc}, we discovered that `overlay`, `beside`, and `above` were all associative. Can you think of any @proglang functions that are _not_ associative?}
+@A{Answers may vary: @show{(code 'string-contains)} is not associative. Other functions, such as `triangle`, `rectangle`, and others will produce errors if students attempt to apply the Associative Property.}
+}
+
+
+=== Synthesize
+@slidebreak{Synthesize}
+
+- What did you learn about the Associative Property in @proglang? Did anything surprise you?
+- 
 
 == The Associative Property
 
@@ -55,7 +90,8 @@ We've already learned about the @vocab{Commutative Property}, which tells us tha
 }
 
 @QandA{
-@Q{What do you Notice about the three Circles of Evaluation? How about the two expressions that accompany them? What do you Wonder?}
+@Q{What do you Notice about the three Circles of Evaluation? How about the two expressions that accompany them?}
+@Q{What do you Wonder?}
 }
 
 @slidebreak{Launch}
@@ -74,7 +110,6 @@ We've already learned about the @vocab{Commutative Property}, which tells us tha
 When adding three numbers, we can start by adding the first pair of numbers _or_ the last pair of numbers. Similarly, when multiplying three numbers, we can start by multiplying the first pair of numbers _or_ the last pair of numbers.
 
 The Associative Property holds for addition and multiplication, but not division or subtraction.
-
 
 @teacher{Students apply this understanding in the subsequent activities.}
 
@@ -98,6 +133,7 @@ Follow up with students, paying specific attention to expressions with multiple 
 - Can you ever apply the Associative Property on an expression that includes division or subtraction? Explain.
 - When applying the Associative Property, did you ever change the order of the numbers? Why or why not?
 - When applying the Associative Property, did you ever change the architecture of the circles? (For instance, did you ever change “three nested circles” to “two-circles-in-a-circle”?) When was that necessary? Why?
+
 
 == The Associative Property and Mental Math
 
@@ -125,7 +161,6 @@ Allow students to work, encouraging them to try different groupings and _structu
 @Q{Which Circle of Evaluation seemed like it would be the easiest to solve in your head? Why?}
 }
 
-
 === Investigate
 @slidebreak{Investigate}
 
@@ -137,8 +172,14 @@ Allow students to work, encouraging them to try different groupings and _structu
 === Synthesize
 @slidebreak{Synthesize}
 
-- How can the Associative Property help you do mental math more efficiently?
-- Did Circles help you to visualize associativity? Why or why not?
+@QandA{
+@Q{Summarize the Associative Property in your own words.}
+
+@Q{How might a strong understanding of the Associative Property be useful when you're doing computations in your head?}
+
+@Q{How were the programming activities at the beginning of this lesson similar to the math activities? How were they different?}
+}
+
 
 == Applying the Commutative and Associative Properties Together
 
@@ -159,6 +200,7 @@ The freedom to solve in a variety of ways rather than just moving left to right 
 @lesson-instruction{
 - Turn to @printable-exercise{restructuring-addition-expressions.adoc}, where you will reorder and regroup a given addition expression using a Circle of Evaluation.
 - Now, complete @printable-exercise{restructuring-multiplication-expressions.adoc}, where you will reorder and regroup a multiplication expression using a Circle of Evaluation.
+- Turn to @printable-exercise{categorize-functions.adoc}, where you will synthesize what you have learned about the Commutative Property and Associative Property in both math and @proglang. Complete the table then respond to the questions.
 - @opt{Ready for a challenge? Try @opt-printable-exercise{associativity-makes-comp-easier-challenge.adoc} to apply the evaluate expressions with fractions and decimals.}
 }
 
@@ -182,58 +224,14 @@ The freedom to solve in a variety of ways rather than just moving left to right 
 === Synthesize
 @slidebreak{Synthesize}
 
-- How would you describe the relationship between the Associative Property and the Commutative Property? Do you think one is more powerful than the other?
-- How are the Commutative and Associative Properties similar? How are they different?
-
-== Programming Exploration: Associativity
-
-=== Overview
-
-Students consider whether various functions that we use when coding are associative.
-
-=== Launch
-@slidebreak{Launch}
-
-In math, the Associative Property tells us that when adding or multiplying three or more numbers, it doesn't matter which way you group them. In other words, we can change the groupings and get the same result!
-
 @QandA{
-- Can you predict which functions in @proglang are associative and which ones are not?
-- Multiplication and addition are both commutative _and_ associative. Do you think @proglang functions that are associative are _also_ commutative?
+
+@Q{How are the Commutative and Associative Properties similar?}
+
+@Q{How are they different?}
+
+@Q{Do you think one is more powerful than the other?}
+
+@Q{Multiplication and addition are both commutative _and_ associative. Would you expect @proglang functions that are associative to _also_ be commutative? Why or why not?
 }
-
-@teacher{Pose the above open-ended questions and invite students to discuss with a partner. Invite some students to share their thinking with the class.}
-
-=== Investigate
-@slidebreak{Investigate-DN}
-
-@lesson-instruction{
-- Turn to @printable-exercise{associativity-and-code.adoc} and open the @starter-file{expressions-equations}.
-- With your partner, make a prediction about whether each function is associative.
-- Complete any Circles of Evaluation and code, then test the code to determine if the images produced are identical or not.
 }
-
-@teacher{As students work, encourage them to _always_ make predictions before testing the code. Similarly, the activity will be more valuable if students discuss _why_ the code did or did not produce identical images. Debrief to ensure comprehension.
-
-When everyone is finished, check in with students. Did everyone discover that _all_ of the functions were associative? There is a good chance your students will wonder if _all_ @proglang functions are associative!
-}
-
-@slidebreak{Investigate}
-
-@QandA{
-@Q{On @printable-exercise{associativity-and-code.adoc}, we discovered that `overlay`, `beside`, and `above` were all associative. Can you think of any @proglang functions that are _not_ associative?}
-@A{Answers may vary: @show{(code 'string-contains)} is not associative. Other functions, such as `triangle`, `rectangle`, and others will produce errors if students attempt to apply the Associative Property.}
-}
-
-@lesson-instruction{
-- Turn to @printable-exercise{categorize-functions.adoc}, where you will synthesize what you have learned about the Commutative Property and Associative Property in both math and @proglang.
-- Complete the table then respond to the questions.
-}
-
-=== Synthesize
-@slidebreak{Synthesize}
-
-- What did you learn about the Associative Property in @proglang? Did anything surprise you?
-- How were the programming activities in this lesson similar to the paper-and-pencil activities? How were they different?
-
-
-

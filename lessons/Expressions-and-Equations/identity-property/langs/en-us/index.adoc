@@ -38,9 +38,15 @@ Students explore @proglang functions that take in an image and produce an image 
 @QandA{
 @Q{@right{@image{images/dog.png, 125}}What functions do you know that can be used to transform an image?}
 @A{Sample responses: `scale`, `rotate`, `overlay`, etc...}
+}
 
+@teacher{
+Students will be working in @proglang soon -- but we recommend keeping things unplugged for now!
+}
+
+@QandA{
 @Q{Can you think of a way that we can transform this image of a dog that will result in the *exact same image*?}
-@A{Solicit student responses and record them on the board. If students do not volunteer answers, consider sharing one or two of the following possible responses: 
+@A{Solicit student responses and record them on the board. If students do not volunteer answers, consider sharing one or two of the following possible response (but don't give them all away!): 
   * flip it vertically twice
   * flip it horizontally twice
   * rotate it 360 degrees clockwise
@@ -50,20 +56,18 @@ Students explore @proglang functions that take in an image and produce an image 
   }
 }
 
-@teacher{
-Students will be working in @proglang soon -- but we recommend keeping things unplugged for now!
-}
-
 @slidebreak{Investigate-DN}
 
 @lesson-instruction{
-- Open @starter-file{expressions-equations} and click “Run.”
+- Open the @starter-file{expressions-equations} and click “Run.”
 - Type `dog` into the Interactions Area.
-- Spend a few minutes trying to see how many “do-nothing” transformations you can make that will generate an identical image.
+- Take a few minutes to explore. How many “do-nothing” transformations can you find for generating identical images?
 - Up for a challenge? Try applying multiple “do-nothing” functions to the `dog` image.
 }
 
 @slidebreak{Investigate-DN}
+
+Now that you've had a chance to experiment, let's explore whether a few specific @proglang functions can be applied to "do-nothing".
 
 @lesson-instruction{
 - Turn to @printable-exercise{scale-rotate-identity.adoc}.
@@ -77,11 +81,14 @@ What did you discover?
 @Q{For what values did `scale` produce identical images of the dog?}
 @A{Scaling by 1.}
 
-@Q{For what values did `rotate` produced identical images of the dog?}
+@Q{For what values did `rotate` produce identical images of the dog?}
 @A{Rotating by 360, -360, or any other multiple of 360}
 
-@Q{For what values did `rotate` produced identical images of the dog?}
+@Q{For what values did `rotate` produce identical images of the dog?}
 @A{Any transparent image that wasn't larger than the original image.}
+
+@Q{What can we `overlay` to produce identical images?}
+@A{Any transparent image that isn't bigger than dog.}
 
 @Q{Were you able to produce identical images using `flip-vertical` or `flip-horizontal`?}
 @A{If we use `flip-vertical` it ends up upside down, but if we `flip-vertical` a second time it puts it back where it started.}
@@ -105,7 +112,10 @@ What did you discover?
 }
 
 @Q{Why might it be useful to be able to expand an expression without changing it?}
-@A{}
+@A{There are lots of reasons that an expanded form can be easier to work with!
+  * It might make it easier for other people to see our thinking.
+  * It might allow us to connect two expressions by revealing what they have in common.
+}
 }
 
 == The Identity Property
@@ -128,14 +138,12 @@ Complete @printable-exercise{discover-identity.adoc}.
 @slidebreak{Launch}
 
 @QandA{
-@Q{What did you Notice about the three Circles of Evaluation in Question 1? What do you Wonder?}
-@A{Possible responses: All three Circles include @math{12 + 4}. All three Circles evaluate to @math{16}.}
 @Q{What did you observe about the Identity Property for division? Subtraction?}
-@A{Possible responses: I can multiply or divide by @math{1} and get an equivalent result. I can add or subtract @math{0} and get an equivalent result. I need to remember that Commutativity does not apply for division and subtraction!}
+@A{Possible responses: I can multiply or divide by @math{1} and get an equivalent result. I can add or subtract @math{0} and get an equivalent result.}
 }
 
 @lesson-point{
-Multiplying or dividing an expression by 1 does not change its value; similarly, adding or subtracting 0 results in the original value.
+It will not change the value of an expression to multiply by 1, divide by 1, add 0 or subtract 0.
 }
 
 @teacher{Confirm that students understand the main idea about the Identity Property! They will apply this knowledge throughout the lesson.}
@@ -145,26 +153,32 @@ Multiplying or dividing an expression by 1 does not change its value; similarly,
 
 Sometimes, we will encounter the Identity Property in sneakier forms!
 
-@show{(coe '(+ 27 (- 8 8)))}
+@indented{@show{(coe '(+ 27 (- 8 8)))}}
 
 @QandA{
 @Q{How does the Circle of Evaluation above illustrate the Identity Property?}
-@A{In the Circle, _zero_ (or @math{8 - 8}) is being added to @math{27}!}
+@A{The inner circle, (@math{8 - 8}) is equal to zero. So the final value will just be @math{27}!}
 }
 
 @slidebreak{InvestigateC}
 
-Now, consider this equation, which is really a pair of equivalent fractions:
+@indented{@big{@math{\frac{3}{4} \times \frac{5}{5} = \frac{15}{20}}}}
 
-@center{@big{@math{\frac{3}{4} = \frac{15}{20}}}}
+@QandA{
+@Q{How does this equation illustrate the Identity Property?}
+@A{@math{\frac{5}{5} = 1} (As does any fraction whose numerator and denominator are the same)}
+@A{We can find an infinite number of equivalent fractions by multiplying by 1 in the form a fraction.}
+}
 
-When we find equivalent fractions, we _multiply by one_! In the example above, @math{\frac{3}{4}} was multiplied by @math{\frac{5}{5}} to get @math{\frac{15}{20}}.
+@slidebreak{Investigate}
+
+@lesson-point{When we find equivalent fractions, we are applying the Identity property.}
 
 @slidebreak{Investigate}
 
 @lesson-instruction{
 - Complete @printable-exercise{identity-prop-table.adoc}, filling in the blanks so that all of the Circles of Evaluation are equivalent.
-- Then, complete @printable-exercise{which-one-doesnt-belong.adoc}. Be sure to explain why each Circle of Evaluation you select does not belong with the others!
+- Then, complete @printable-exercise{which-not-equivalent.adoc}. Be sure to explain why each Circle of Evaluation you select does not belong with the others!
 }
 
 @teacher{
@@ -174,61 +188,52 @@ As students explain why various Circles of Evaluation do not belong with the oth
 === Synthesize
 @slidebreak{Synthesize}
 
-- For which operations does the Identity Property hold? Why?
-- Did you encounter any instances where the Identity Property was used in combination with another property?
+@QandA{
+@Q{What new understanding do you have about the Identity Property?} 
+@A{Sample Answers about operations:
+  * We can multiply by 1 in any order
+  * With division we have to make sure we're dividing by one and not dividing one by a quantity.
+  * We can add zero in any order
+  * When subtracting we have to make sure we're subtracting zero and not subtracting from zero
+  }
+@A{It's a good idea to look for expressions that evaluate to zero or one, because they might simplify our work.}
+}
 
 
 == The Identity Property and Variables
 
 === Overview
-Students use their knowledge of the Identity Property to determine if @vocab{expressions} with variables are equivalent or not.
+Students use their knowledge of the Identity Property to determine whether or not expressions with variables are equivalent.
 
 === Launch
 @slidebreak{Launch}
 
-We can represent the Identity Property with @vocab{variables}, in the same way that we could represent the @vocab{Associative Property} and the @vocab{Commutative Property} with variables. Here's an example:
+The Identity Property _also applies to expressions with @vocab{variables}_. Consider these expressions.
 
-[.embedded, cols=">.^3,^.^1,<.^3", grid="none", stripes="none" frame="none"]
+[.embedded, cols="^.^3,^.^1,^.^3, ^.^1,^.^3", grid="none", stripes="none" frame="none"]
 |===
-| @show{(coe  '(+ 3 q))}	| @math{=} | @show{(coe  '(* (+ 3 q) 1))}
-| @show{(math '(+ 3 q))}	| @math{=} | @show{(math '(* (+ 3 q) 1))}
-|===
-
-
-@slidebreak{Launch}
-
-Or like this:
-
-[.embedded, cols=">.^3,^.^1,<.^3", grid="none", stripes="none" frame="none"]
-|===
-| @show{(coe  '(+ 3 q))}	| @math{=} | @show{(coe  '(+ 0 (+ 3 q)))}
-| @show{(math '(+ 3 q))}	| @math{=} | @show{(math '(+ 0 (+ 3 q)))}
+| @show{(coe  '(+ 3 q))}	| @math{=} | @show{(coe  '(* (+ 3 q) 1))} | @math{=} | @show{(coe  '(+ (+ 3 q) 0))}
 |===
 
-
-The Identity Property will hold no matter what values we substitute in for @math{q} or for @math{t}. Although computation can help us test equivalence, there's no way to test every possible value. The Identity Property lets us prove that these expressions are equivalent _even with variables_.
+These expressions are equivalent for every value we substitute in for @math{q}... but there's no way to test every possible value! The Identity Property guarantees that any expression will be equivalent to itself multiplied by 1 and also to itself with zero added, no matter whether or not we do the computation.
 
 === Investigate
 @slidebreak{Investigate}
 
 @teacher{
-As they did with the Commutative Property and the Associative Property, students now make the transition from numeric values to variables.
+Students will now make the transition from numeric values to variables.
 
 If students would like, they may choose values to represent the variables. Early finishers can substitute in numbers of their choosing to confirm that their analyses of the Circles of Evaluation are correct.
 }
 
 @lesson-instruction{
 - Complete @printable-exercise{true-or-false-variables.adoc} using your knowledge of the Identity Property to determine if the equation represented by the Circles of Evaluation is true or false.
-- Decide @printable-exercise{which-one-doesnt-belong-variables.adoc}. Be sure to explain your thinking.
-- @opt{Try @opt-printable-exercise{true-or-false-variables-challenge.adoc}. Here, you will again decide if the equation represented by the Circles of Evaluation is true or false -- but you will see more nested Circles...and you will need to apply your knowledge of the Associative Property and the Commutative Property as well!}
+- Decide @printable-exercise{which-not-equivalent-variables.adoc}. Be sure to explain your thinking.
 }
 
 === Synthesize
 @slidebreak{Synthesize}
 
 @QandA{
-@Q{Did you use Computation to check your work? Or do you prefer thinking about properties and equivalence?}
-
-@Q{There is a version of the Identity Property for each of the four basic operations -- addition, subtraction, multiplication, and division. But the Commutative and Associative Properties _only apply for addition and multiplication_. Why is the Identity Property different from these other properties?}
-@A{}
+@Q{What strategies did you use?}
 }
