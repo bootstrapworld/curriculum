@@ -1,14 +1,85 @@
 /************************************************************************************
+* FONTS
+*/
+/* lato-regular - latin_latin-ext */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 400;
+  src: url('https://www.bootstrapworld.org/fonts/lato/lato-v24-latin_latin-ext-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* lato-italic - latin_latin-ext */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Lato';
+  font-style: italic;
+  font-weight: 400;
+  src: url('https://www.bootstrapworld.org/fonts/lato/lato-v24-latin_latin-ext-italic.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* lato-700 - latin_latin-ext */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 700;
+  src: url('https://www.bootstrapworld.org/fonts/lato/lato-v24-latin_latin-ext-700.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* lato-900 - latin_latin-ext */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 900;
+  src: url('https://www.bootstrapworld.org/fonts/lato/lato-v24-latin_latin-ext-900.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* lato-900italic - latin_latin-ext */
+@font-face {
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Lato';
+  font-style: italic;
+  font-weight: 900;
+  src: url('https://www.bootstrapworld.org/fonts/lato/lato-v24-latin_latin-ext-900italic.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+@font-face {
+  font-family: 'Hack';
+  src: url('https://www.bootstrapworld.org/fonts/hack/hack-regular.woff2') format('woff2'), url('fonts/hack/hack-regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Hack';
+  src: url('https://www.bootstrapworld.org/fonts/hack/hack-bold.woff2') format('woff2'), url('fonts/hack/hack-bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Hack';
+  src: url('https://www.bootstrapworld.org/fonts/hack/hack-italic.woff2') format('woff2'), url('fonts/hack/hack-italic.woff') format('woff');
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Hack';
+  src: url('https://www.bootstrapworld.org/fonts/hack/hack-bolditalic.woff2') format('woff2'), url('fonts/hack/hack-bolditalic.woff') format('woff');
+  font-weight: 700;
+  font-style: italic;
+}
+
+/************************************************************************************
 * SYSTEMWIDE STYLES
 */
-@font-color: #75328A;
-@translucent-bg-color: #75328AAA;
-@translucent-bg-color2: #b7d893;
+@font-color: rgba(1, 58, 99, 1) !important;
+@translucent-bg-color: #468fafAA;
+@translucent-bg-color2: #f26b45AA;
 @text-font: 'Lato', Arial, Helvetica, sans-serif;
 @code-font: Hack, "Courier New", monospace;
 @code-comment-color: #cd7054;
-@top-padding-for-writing: 1.2rem;
-@top-padding-for-dr: 1rem;
+@top-padding-for-writing: 1.2em;
+@top-padding-for-dr: 1em;
 @print-section-heading: lightgray;
 @table-header: #eee;
 @lesson-block-vertical-space: 1em;
@@ -19,8 +90,13 @@ div#body {
   color:          @font-color;
   width:          100%; /* needed to undo effect of html{display:flex} */
   display:        block;
-  position:       relative;
+  position:       unset !important;
+  margin:         0;
+  padding:        48px 0 !important;
+  width:          88% !important;
+  max-width:      1400px !important;
   -webkit-font-smoothing: antialiased;
+
   &.beta::after {
     position: absolute;
     top: 40%;
@@ -126,7 +202,7 @@ div#body {
   tr th.tableblock {
     background:       @table-header !important;
     padding:          .2em .5em;
-    font-size:        1rem;
+    font-size:        1em;
   }
 
   #content { margin: 0; }
@@ -138,13 +214,9 @@ div#body {
   #header sup { font-size: medium; }
 
   /* The footer at the bottom of every page */
-  .acknowledgmentsect {
-    position: absolute;
-    bottom: -2in;
-  }
   .acknowledgment {
-    padding-bottom:   5px !important;
-    font-size:        12px !important;
+    padding:          12px !important;
+    font-size:        11px !important;
     font-style:       italic !important;
     line-height:      inherit !important;
     * { line-height: inherit !important; }
@@ -183,7 +255,7 @@ div#body {
     margin-top:       75px;
     border-radius:    5px;
     font-size:        10pt;
-    line-height:      1rem;
+    line-height:      1em;
   }
 
   /* outOfDate warning */
@@ -267,7 +339,7 @@ div#body {
       display:            block;
       text-align:         center;
       font-weight:        bold;
-      font-size:          1.5rem;
+      font-size:          1.1em;
     }
   }
 
@@ -302,7 +374,7 @@ div#body {
     content: '\00200b';
   }
   .fitbruby {
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.75em;
   }
   .fitbruby .ruby, .recipe .ruby:after, .data-cycle .ruby:after {
     position:           absolute;
@@ -361,7 +433,7 @@ lines on some browsers */
   display:            inline-block;
   min-width:          4em;
   text-align:         center;
-  line-height:        1rem;
+  line-height:        1em;
   border-bottom:      solid thin black;
   vertical-align:     baseline;
 }
@@ -373,10 +445,52 @@ div#body:not(.LessonPlan, .narrativepage) p {
 }
 
 /************************************************************************************
+* SIDEBAR STYLES
+*
+*/
+
+#sidebar {
+  > * { margin: 0px 10px !important; }
+  label { display: inline; font-size: 0.8em; }
+  select { border:  none; width: 100%; }
+  strong { color: black; margin: 0; }
+  li { list-style-type: none; margin-bottom: 5px !important; }
+  li * { color: black; }
+  table { background: none !important; border: 0 !important; width: auto; }
+  table td, table tr { padding: 0 !important; background: none !important; border: 0 !important; }
+  table .title { display: none; }
+  dl * { margin: 0; display: inline; font-size: smaller; }
+  dd { margin-left: 0 !important; }
+  dt { font-weight: bold; }
+  dd::after { content: '\A'; white-space: pre;}
+  dt::after { content: ' ·'; white-space: pre; font-size: 0.7em; }
+  table dt { margin-top: 10px; }
+  #sidebarlessons {
+    ul {
+      background: white;
+      margin:     0px !important;
+      box-shadow: inset -1px 0px 2px gray;
+      max-height: 200px;
+      overflow:   scroll;
+      padding:    10px !important;
+      font-size:  10pt !important;
+    }
+    li:nth-child(odd) { background: @translucent-bg-color; }
+  }
+  #sidebarstandards {
+    select { margin-top: 10px; }
+    a { display: none; }
+    dl { line-height: 1; }
+    dt { margin-bottom: 5px; }
+  }
+}
+
+/************************************************************************************
 * NARRATIVE PAGE STYLES
 */
 div#body.narrativepage {
   font-size: 12pt;
+  font-family: "Rubik", sans-serif;
   p {line-height:1.6;}
   h2 { margin-top: 20px; }
   .logo     { float: right; }
@@ -397,7 +511,7 @@ div#body.narrativepage {
     background: #B6D990aa;
     border: @font-color 1px dashed;
     padding: 5px;
-    margin-bottom: 2rem;
+    margin-bottom: 2em;
     a { color: black; text-decoration: underline; }
   }
 
@@ -414,6 +528,8 @@ div#body.narrativepage {
 */
 div#body.LessonPlan {
   font-size: 12pt;
+  font-family: "Rubik", sans-serif;
+  line-height: 1.7;
 
   .other-proglang::before { font-style: italic; }
 
@@ -476,7 +592,7 @@ div#body.LessonPlan {
     padding-right:      0.5em;
     vertical-align:     middle;
     text-decoration:    none !important;
-    font-size:          .9rem;
+    font-size:          .9em;
     position:           relative;
     left:               -2em;
   }
@@ -628,7 +744,7 @@ div#body.solution-page {
   .fitbruby, .fitb { font-style: italic; }
 }
 
-div#body.workbookpage {
+html div#body.workbookpage {
   font-size: 9pt; /* Use a tiny font for print, but then zoom in @screen */
   color: black !important;
   top: 0;
@@ -641,8 +757,8 @@ div#body.workbookpage {
   h2 .editbox, h2 .editbox *, h2 .pyret { color: black; background: none; margin: 0 5px; }
 
   /* set page dimensions */
-  &:not(.landscape) { width: 7.5in; height: 9.8in; }
-  &.landscape { width: 9.8in; height:  7.5in; page: landscape; } /* define 'landscape' page type */
+  &:not(.landscape) { width: 7.5in !important; height: calc(9.8in + 1.5in) !important; }
+  &.landscape { width: 9.8in !important; height:  calc(7.5in + 1.5in) !important; page: landscape; } /* define 'landscape' page type */
 
   /* Make content of page as tall as possible */
   #content, #preamble_disabled, #preamble_disabled .sectionbody,
@@ -769,7 +885,7 @@ div#body.workbookpage {
     }
 
     /* Location and style of the coefficient value */
-    td p > .mathunicode:first-child {
+    td p > .mathunicode:first-child, td p:has(.MathJax) {
       top:        6px;
       right:      3px;
       position:   absolute;
@@ -785,7 +901,7 @@ div#body.workbookpage {
   }
 
   /* Make code match text size/layout */
-  p .editbox, pre .editbox { font-size: 9pt !important; margin: 0; line-height: 1rem; }
+  p .editbox, pre .editbox { font-size: 9pt !important; margin: 0; line-height: 1em; }
 
   /* Some elements show either solution mode or a blank */
   .solution, .solution code, .solution .MJX-TEX { font-style: italic !important; }
@@ -806,14 +922,14 @@ div#body.workbookpage {
   .blanklines {
     display: block;
     position: relative;
-    background-image: url('images/2.2rem-ruled lines.png');
+    background-image: url('images/2.2em-ruled lines.png');
     margin-left: 5px;
-    line-height: 2.2rem;
-    margin-top: 0.6rem;
+    line-height: 2.2em;
+    margin-top: 0.6em;
     .solution { position: absolute; }
     /* artificially shrink codeblocks to avoid stepping on the line */
     .editbox, code.pyret {
-      line-height: 0.5rem !important;
+      line-height: 0.5em !important;
     }
   }
 
@@ -921,15 +1037,15 @@ div#body{
     border-collapse: collapse;
     width: 100%;
     td:first-of-type { background: @print-section-heading; border: solid white; min-width: 1in; }
-    td { padding: 0.2rem 0.325rem; }
-    td p.tableblock { font-size: 1rem; }
+    td { padding: 0.2em 0.325em; }
+    td p.tableblock { font-size: 1em; }
 
     .fitbruby { text-align: left !important; }
     .fitbruby.stretch { margin-left: 0 !important; }
 
     /* Ruby text in the Data Cycle needs to be slightly larger than normal */
     .fitbruby .ruby {
-      font-size:  0.75rem !important;
+      font-size:  0.75em !important;
       user-select: none;
       &::after { bottom: 0 !important; color: black; text-align: left !important; }
     }
@@ -979,7 +1095,7 @@ div#body{
   .recipe {
 
     /* Under a heading come the instructions */
-    .recipe_instructions * { font-style: italic; font-size: .85rem; }
+    .recipe_instructions * { font-style: italic; font-size: .85em; }
 
     /* all paragraph tags are full-width, with no margin. If pushed to a new line, they wrap */
     p { display: flex; flex-wrap: wrap; align-items: baseline;}
@@ -1103,7 +1219,7 @@ div#body{
         left: 100%;
         bottom: 0;
         line-height: 18px;
-        margin-bottom: 0.9rem;
+        margin-bottom: 0.9em;
       }
     }
     .wrapper p > *:nth-last-child(2) { flex-grow:  1; }
@@ -1119,8 +1235,8 @@ div#body{
     .recipe_title .paragraph, .codap .recipe_title p { display: inline; }
     .recipe_name { display: flex !important; }
     .transformer_type p::before {
-      width: 1.1rem;
-      height: 1.1rem;
+      width: 1.1em;
+      height: 1.1em;
       background: white;
       display: inline-block;
       margin:  0 2px 2px 0;
@@ -1138,7 +1254,7 @@ div#body{
     .recipe_formula, .codap_transformer { display:  flex !important; }
     .codap_transformer p { width:  100%; }
     .codap_example_tables+table table * { margin: 0; padding: 0; }
-    .codap_example_tables+table table * { text-align: center; height: 2rem; }
+    .codap_example_tables+table table * { text-align: center; height: 2em; }
     .recipe_domain, .recipe_range { width:  40%; }
   }
 }
@@ -1190,18 +1306,18 @@ td.halign-center .circleevalsexp { text-align: center; }
   }
   .value {
     display:            inline-block;
-    margin:             0.5rem 0.4rem;
+    margin:             0.5em 0.4em;
     vertical-align:     top;
   }
   .operator {
     display:            block;
-    height:             1.1rem;
+    height:             1.1em;
     text-align:         center;
-    line-height:        0.5rem;
+    line-height:        0.5em;
     width:              100%;
     border-bottom:      solid 2px black;
     border-radius:      15px 15px 0px 0px;
-    .value { margin: 0 0.5rem; } /* When in operator position, drop the margins */
+    .value { margin: 0 0.5em; } /* When in operator position, drop the margins */
   }
   /* Display ONLY 5px hspaces that are after the first one (keeps args centered) */
   .hspace { display: none; }
@@ -1257,7 +1373,7 @@ div.leftColumn .obeyspaces, div.rightColumn .obeyspaces {
 
 .codetwo {
   font-family: @code-font;
-  font-size: 0.85rem;
+  font-size: 0.85em;
   background-color: #f7f7f8;
   color: #666;
   word-break: break-word;
@@ -1271,22 +1387,15 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
 */
 
 @media screen {
-  html { height: 100%; display: flex; }
+  html { height: 100%; }
 
   .web-page-only {
     font-weight:      bold;
     font-style:       italic;
-    line-height:      2.5rem;
+    line-height:      2.5em;
   }
 
   #savetodrive-div { display: none; height: 30px !important; }
-
-  /* on WB pages zoom the page 1.25x for a big screen */
-  div#body.workbookpage, div#body.LessonPlan #content {
-    transform-origin: left top;
-    transform: scale(calc(12 / 9));
-    #savetodrive-div { transform: scale(0.8); }
-  }
 
   div#body.workbookpage { margin-left: 3em; }
   /********************************************************************
@@ -1365,6 +1474,11 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
 @page landscape { size: letter landscape; margin: 0.5in; }
 
 @media print {
+
+  /* make WP containers impotent */
+  *:has(div#body) { display: contents; }
+  html .x-row-inner > .x-col > div#body { padding: 0 !important; }
+
   color: black;
 
   /* Elements we don't want printed */
@@ -1378,11 +1492,11 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
   div#body{ position: static; } /* page-break fails on absolute positioning */
 
   /* Override AsciiDoc print default */
-  p {margin: 0px; font-size: 1rem; font-weight: normal;}
+  p {margin: 0px; font-size: 1em; font-weight: normal;}
   #content { margin: auto; }
 
   /* Change coloring of body text, lesson summary table, and code */
-  html { -webkit-print-color-adjust: exact; }
+  html { -webkit-print-color-adjust: exact; font-size: 9pt; display: flex; }
 
   .listingblock pre:not(.highlight) { background: none !important; }
 
@@ -1391,7 +1505,7 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
 
   div#body.LessonPlan {
 
-    width: 7.5in;
+    width: 7.5in !important;
     .preamble tr td:last-child > * { background: white !important; }
 
     .lessonSummary {
@@ -1411,7 +1525,11 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
     .preamble tr td > * { max-height: 1000px; }
   }
 
-  div#body.workbookpage {
+  html div#body.workbookpage {
+    /* set page dimensions to ignore acknowledgement padding */
+    &:not(.landscape) { height: 9.8in !important; }
+    &.landscape       { height:  7.5in !important; page: landscape; }
+
     /* Use B&W colors for headers */
     #header> h1:first-child, .sect1 > h1:first-child {
       color: black;
@@ -1428,93 +1546,4 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
 
     .recipe_condition *::before, *::after { color: black !important; }
   }
-}
-
-
-/* Additional base rules */
-html { font-size: 9pt; }
-body { width: 100%; }
-
-/************************************************************************************
-* SIDEBAR STYLES
-*
-*/
-
-@keyframes slideInFromLeft {
-    0% { transform: translateX(-100%); }
-  100% { transform: translateX(0);     }
-}
-
-.sidebar {
-  animation:  0.5s ease-out 0s 1 slideInFromLeft;
-  display:    block;
-  position:   fixed;
-  top:        0px;
-  left:       0px;
-  width:      225px;
-  height:     100%;
-  background: #e8f3dd;
-  transition: all 0.5s;
-  color:      black;
-  box-shadow: -1px 2px 4px black;
-  z-index:    9999;
-  overflow:   scroll;
-  user-select: none;
-  &.closed {
-    left:  -225px;
-    width: 265px;
-    height: 30px;
-  }
-  .paragraph { width: 205px; }
-  #toggle {
-    top:    0;
-    right:  0;
-    position: absolute;
-    width:  40px;
-    height: 30px;
-    text-align:  center;
-    border: 0;
-    margin: 0 !important;
-    background: @translucent-bg-color;
-    &:after { content: '≫'; font-size: 20px;}
-  }
-
-  &:not(.closed) #toggle:after { content: '«'; }
-  &:hover * { opacity: 1; }
-  > * { margin: 0px 10px !important; }
-  > *, .sidebar > * > * { opacity: 0.4; transition: opacity 0.5s; }
-  label { display: inline; font-size: 0.8rem; }
-  select { border:  none; width: 100%; }
-  strong { color: black; margin: 0; }
-  li { list-style-type: none; margin-bottom: 5px !important; }
-  table { background: none !important; border: 0 !important; width: auto; }
-  table td, table tr { padding: 0 !important; background: none !important; border: 0 !important; }
-  table .title { display: none; }
-  dl * { font-size:  9pt !important; margin: 0; display: inline; }
-  dl { line-height: 1.4rem !important; }
-  dd { margin-left: 0 !important; }
-  dd::after { content: '\A'; white-space: pre; }
-  dt::after { content: ' ·'; white-space: pre; font-size: 0.7rem; }
-  table dt { margin-top: 10px; }
-  .sidebarlessons {
-    margin-top:  30px !important;
-    input[type="checkbox"] { margin-right: 5px; }
-    ul {
-      background: white;
-      margin:     0px !important;
-      box-shadow: inset -1px 0px 2px gray;
-      max-height: 250px;
-      overflow:   scroll;
-      padding:    10px !important;
-      font-size:  10pt !important;
-    }
-    li:nth-child(odd) { background: @translucent-bg-color2; }
-  }
-  .sidebarpractices ul { font-size:  0.75rem !important; margin: 0; }
-}
-
-
-div#body.LessonPlan {
-  left: 240px;
-  #content { font-size: 9pt; }
 }

@@ -29,7 +29,7 @@ function adjustproglangsubdirs() {
     fi
   fi
 
-  if test -n "$create_cached"; then mkdir -p $d/.cached; fi
+  test -n "$create_cached" && mkdir -p $d/.cached
 
 }
 
@@ -63,6 +63,12 @@ function shadowcopydir() {
   done
 }
 
+function dir_timestamp() {
+  local d=$1
+  # find the timestamp of the newest file in $d
+  echo $(find $d -type f -printf '%T@ %p\n' | sort -n | tail -1 | cut -f1 -d" " | sed -e 's/\..*//')
+}
+
 function save_previously_built_solution_pages() {
   # echo doing save_previously_built_solution_pages
   test -d solution-pages || return
@@ -73,7 +79,7 @@ function save_previously_built_solution_pages() {
 function make_image_list() {
   test -d images || return
   local image_list_file='images/.cached/.image-list.txt.kp'
-  if test -f $image_list_file; then rm $image_list_file; fi
+  test -f $image_list_file && rm $image_list_file
   for f in images/*.json; do
     if test -f $f; then
       echo ${f#*/} >> $image_list_file
