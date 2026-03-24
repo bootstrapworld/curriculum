@@ -368,7 +368,8 @@
     (when (and *lesson-plan* (= section-level 1))
       (let ([section-title (string-trim (regexp-replace "@duration{(.*)}" title "(\\1)"))])
         (set! *first-level-section-titles* (cons section-title *first-level-section-titles*))))
-    (fprintf o "[.lesson-section-~a]~n" section-level)
+    (fprintf o "[.lesson-section-~a~a]~n" section-level
+      (if *additional-exercises-explicit?* ".notselfguided" ""))
     (for ([i section-level])
       (display #\= o))
     (display "= " o)
@@ -2502,6 +2503,7 @@
 
               (when (and *lesson-plan* (not *additional-exercises-explicit?*)
                          (or (pair? *opt-printable-exercise-links*) (pair? *opt-online-exercise-links*)))
+                (fprintf o "\n[.notselfguided]")
                 (fprintf o "\n== Additional Exercises\n\n")
                 (let ([addl-ex-file (build-path *containing-directory*
                                                 ".cached" ".index.additional-exercises")])
