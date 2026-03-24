@@ -86,6 +86,14 @@ function string_titlecase(s)
   return s:gsub('(%w)(%w+)', function(a, b) return string.upper(a) .. b end)
 end
 
+function read_file_string(f)
+  -- return contents of file f as string
+  local i = io.open(f)
+  local str = i:read('*all')
+  i:close()
+  return str
+end
+
 function read_file_lines(f)
   -- return a table whose elements are the lines in the file
   local i = io.open(f)

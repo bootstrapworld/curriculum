@@ -6,8 +6,16 @@ src=$1
 
 d=$2
 
+source ${MAKE_DIR}src-subdir-mgt.sh
+
 if test -d "$d"; then
-  echo Updating existing course $d
+  echo "  " • Updating existing course $d
+  srcDate=$(dir_timestamp $src)
+  tgtDate=$(dir_timestamp $d)
+  if test $srcDate -gt $tgtDate; then
+    rm -fr $d
+    mkdir -p $d
+  fi
 else
   mkdir -p $d
 fi
@@ -16,8 +24,6 @@ fi
 
 # ensure pathway narrative adoc always present, even if present
 test ! -f $d/index.adoc && touch $d/index.adoc
-
-source ${MAKE_DIR}src-subdir-mgt.sh
 
 pathwayName=$(basename $d)
 
@@ -69,19 +75,8 @@ for pl in $proglangs; do
     echo WARNING: No lesson-order.txt in pathway $targetpathway
     touch lesson-order.txt
     touch .cached/.workbook-lessons.rkt.kp
-    # touch .cached/.workbook-lessons.txt.kp
   else
     $TOPDIR/${MAKE_DIR}make-workbook-lessons-list.lua lesson-order.txt .cached/.workbook-lessons.rkt.kp $pl
-    # grep -v '^ *;' lesson-order.txt |
-    #   $SED -e 's/\t/ /g' |
-    #   $SED -e 's/;.*//' |
-    #   $SED -e 's/ *$//' |
-    #   grep -v '^*$' |
-    #   grep -v '\[' |
-    #   $SED -e 's/^ *\(.*\)/\1/' > .cached/.workbook-lessons.txt.kp
-    # if test "$pl" != pyret -a "$pl" != none; then
-    #   $SED -i -e 's/.*/\0-'$pl'/' .cached/.workbook-lessons.txt.kp
-    # fi
   fi
 
   cd ..
