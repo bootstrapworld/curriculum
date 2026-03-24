@@ -1,0 +1,22 @@
+= True or False? Commutative and Associative Properties
+
+++++
+<style>
+div.circleevalsexp { width: auto; }
+td > .content > .paragraph > * { vertical-align: middle; }
+</style>
+++++
+
+Is the equation represented by the two Circles of Evaluation true or false? Explain your response.
+
+[.FillVerticalSpace,cols="^.^1a,^.^10a,^.^5a", stripes="none", options="header"]
+|===
+|	 | Circles of Evaluation														   |
+True or False? Explain
+| @n |@show{(coe '(* (* 3 2) 10))}	@math{=} @show{(coe '(* (* 2 3) 10))}  | @ifsoln{True. The Associative Property holds when multiplying.}
+| @n |@show{(coe '(+ 6 (* 7 8)))}	@math{=} @show{(coe '(+ (* 6 7) 8))}   | @ifsoln{False. The Associative Property holds for multiplication and addition. When we use both operations in one expression, we cannot change groupings.}
+| @n |@show{(coe '(* (* 4 5) 2))}	@math{=} @show{(coe '(* 4 (* 2 5)))}   | @ifsoln{True. The order and the groupings have changed, but the result remains the same due to the Commutative and Associative Properties.}
+| @n |@show{(coe '(* 21 (* 22 23)))}@math{=} @show{(coe '(* (* 21 22) 23))}| @ifsoln{True. The Associative Property allows changing the groupings in a multiplication expression.}
+| @n |@show{(coe '(/ (+ 16 17) 5))}	@math{=} @show{(coe '(/ (+ 17 16) 5))} | @ifsoln{True. The Commutative Property allows us to change the order of the addends.}
+| @n |@show{(coe '(/ (+ 24 6) 10))}	@math{=} @show{(coe '(/ 10 (+ 24 6)))} | @ifsoln{False. The Commutative Property does not hold for division.}
+|===
