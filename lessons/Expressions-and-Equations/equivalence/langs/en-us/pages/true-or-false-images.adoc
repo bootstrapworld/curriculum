@@ -11,7 +11,9 @@ div#body .literalblock pre, div#body .literalblock pre[class], div#body .listing
 
 div#body table tr th, div#body table tr td {
     padding: 0.35em 0.35em;
-    }
+}
+
+td p { display: inline-block; }
 </style>
 ++++
 
@@ -19,7 +21,7 @@ div#body table tr th, div#body table tr td {
 2. Open @starter-file{equivalence} and test out each pair of expressions to see whether or not they produce identical images. 
 3. Explain why each pair of expressions is or isn't equivalent. 
 
-[cols="^.^1a, ^.^8a, ^.^1a, ^.^9a, ^.^2a", options="header", ]
+[cols="^.^1a, ^.^8a, ^.^1a, ^.^9a, ^.^3a", options="header", ]
 |===
 |	 | Image 1						| 	| Image 2						| Prediction 
 
@@ -52,22 +54,22 @@ div#body table tr th, div#body table tr td {
 |===
 
 For each question below, review the collection of expressions. Place an *E* in front of each expression that forms the first equivalent grouping. If the collection includes a second set of equivalent expressions, mark them with a &#9733;. Then explain the equivalence.
-[cols="1a, 12a, 5a",stripes="none"]
+[cols=".^1a, ^12a, ^5a",stripes="none", frame="none"]
 |===
-|| Which are equivalent? | Explain why they are equivalent.
+|| *Which are equivalent?* | *Explain why*
 |@n 
 | 
-[cols="1a, 10a", stripes="none"]
+[cols="1a, 10a", stripes="none", frame="none"]
 !===
 ! @ifsoln{&#9733;}  ! @show{(code '(square 40 "solid" "deeppink"))} 
 ! @ifsoln{&#9733;}  ! @show{(code '(rectangle 40 40 "solid" "deeppink"))}
-! @ifsoln{&#9733;}  ! @show{(code '(square (20 * 20) "solid" "deeppink"))}
+! @ifsoln{&#9733;}  ! @show{(code '(square (* 20 20) "solid" "deeppink"))}
 !===
 | 
 
 |@n 
 | 
-[cols="1a, 10a", stripes="none"]
+[cols="1a, 10a", stripes="none", frame="none"]
 !===
 ! @ifsoln{&#9733;}  ! @show{(code '(rectangle 48 72 "solid" "blue"))}
 ! @ifsoln{E}        ! @show{(code '(rectangle 72 48 "solid" "blue"))}                           
@@ -78,17 +80,17 @@ For each question below, review the collection of expressions. Place an *E* in f
 
 |@n 
 | 
-[cols="1a, 10a",stripes="none"]
+[cols="1a, 10a",stripes="none", frame="none"]
 !===
 ! @ifsoln{E}  ! @show{(code '(radial-star 6 20 50 "solid" "red"))}
 ! @ifsoln{}   ! @show{(code '(radial-star 20 6 50 "solid" "red"))}
-! @ifsoln{E}  ! @show{(code '(radial-star (3 + 3) (4 * 5) 50 "solid" "red"))}
+! @ifsoln{E}  ! @show{(code '(radial-star (+ 3 3) (* 4 5) 50 "solid" "red"))}
 !===
 | 
 
 |@n 
 | 
-[cols="1a, 10a", stripes="none"]
+[cols="1a, 10a", stripes="none", frame="none"]
 !===
 ! @ifsoln{ }    ! @show{(code '(isosceles-triangle 100 90 "solid" "black"))}
 ! @ifsoln{E}    ! @show{(code '(right-triangle 100 100 "solid" "black"))}

@@ -152,12 +152,13 @@ It shows us that we will need to know the difference of 7 and 3 before we tackle
 @QandA{
 @Q{Let's draw the Circle of Evaluation for the expression @math{10 - (5 + 3)}}
 @Q{What should we do first?}
-@A{The Order of Operations tells us to start by making groupings of whatever is in parentheses (or other Grouping symbols), giving us two options for how we fill in our circles:
+@A{The Order of Operations tells us to start by making groupings of whatever is in parentheses (or other Grouping symbols), giving us _two options_ for how we fill in our circles:
 
 * Starting _outside_ the inner grouping: @show{(coe '(- 10 ((?ANS +) (?ANS 5) (?ANS 3))))}
 * Starting _inside_ the inner grouping: @show{(coe '((?ANS -) (?ANS 10) (+ 5 3)))}
 
 @A{Either way, we'll end up with @show{(coe '(- 10 (+ 5 3)))}}
+@A{Knowing the ordering of the grouping is powerful, because it lets us _choose_ how we think about expressions, knowing that different paths will still lead to the same result.}
 }
 }
 }
@@ -184,6 +185,8 @@ It depends! We can either work
 
 @ifslide{
 Either way, we'll end up with @show{(coe '(- 10 (+ 5 3)))}
+
+Knowing the ordering of the grouping is powerful, because it lets us _choose_ how we think about expressions, knowing that different paths will still lead to the same result.
 }
 @teacher{
 @opt{If it works for you, use @handout{pages/cards-for-matching-coe-exp.adoc, this set of cards} to have students physically match expressions and Circles of Evaluations.}
@@ -304,8 +307,9 @@ Circles of Evaluation are a great way to get older students to re-engage with (a
 @QandA{
 @Q{Consider our Circle of Evaluation. Looking at the structure, does it matter whether we square 8 first or add 3 and 9? Why or Why Not? +
 @show{(coe '(- (/ (sqr 8) 4) (* 5(+ 3 9)) ))} }
-@A{No. They can happen in parallel because they are inside of separate circles.}
-@A{But we do have to start with one of those computations, since all of the other operations consume their outputs.}
+@A{*No!* They can happen in any order we want, because they are inside of separate circles.}
+@Q{Can we start anywhere else? Do we _have_ to begin with those two?}
+@A{*Yes!* We must start with one of those two computations, because all of the other operations consume - depend on - their outputs.}
 
 @Q{A student started parsing the expression @math{ 0 \times (3 + 124 \div 3) } from the outside in. + 
 Why do you think they decided to stop at this point? +
@@ -407,7 +411,7 @@ Arithmetic expressions involving more than one operation, will end up with more 
 
 @QandA{
 @Q{Why does the code for @show{(coe exprA)} end up with two closing parentheses in a row at the end?}
-@A{Because there are two circles that need to be closed! }
+@A{Because there are two circles that need to be closed! If the spider in our analogy is sitting on the `2`, she would have to cross through two more circles to finish her task.}
 }
 
 @slidebreak{Launch}
