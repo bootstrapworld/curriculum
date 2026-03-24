@@ -24,7 +24,7 @@ td { padding: 0 0.5em !important; }
 - @math{k}: @vocab{vertical shift} (also the y-coordinate of the vertex!)
 |===
 
-@n We've determined that the optimum bat angle is around 30 degrees. What variable in the equation should we replace with 30? @fitb{}{@ifsoln{h}}
+@n We've determined that the optimum hit angle is around 30 degrees. What variable in the equation should we replace with 30? @fitb{}{@ifsoln{h}}
 
 @n What y-coordinate of the vertex (_vertical shift_) would best match the shape of the curve? @fitb{}{@ifsoln{~450}}
 
@@ -32,7 +32,7 @@ td { padding: 0 0.5em !important; }
 
 == Fitting the Model Visually in Desmos
 @link-instructions{
-For this section, you'll need to have *Exploring Quadratic Functions (Desmos)* open to *Slide 3: Fitting a Model: Bat Angle v Hit Distance (Sliders)*. +
+For this section, you'll need to have *Exploring Quadratic Functions (Desmos)* open to *Slide 1: Fitting a Model: Hit Angle v Hit Distance (Sliders)*. +
 }
 
 @n Using your thinking about the values of @math{a}, @math{h}, and @math{k} from above, adjust the sliders to fit a quadratic model to the data.  Continue adjusting the sliders until you've landed on the best model you can. Record your values for @math{a}, @math{h}, and @math{k} below.
@@ -43,32 +43,32 @@ For this section, you'll need to have *Exploring Quadratic Functions (Desmos)* o
 
 @n Using the values of @math{a}, @math{h}, and @math{k} you decided on in the Desmos file, define your quadratic function below in Pyret notation.
 
-@indented{@show{(code `(define (curve x) (+ (* (?ANS , -0.54) (sqr (- x (?ANS ,31)))) (?ANS ,430))))}}
+@indented{@show{(code `(define (sliders x) (+ (* (?ANS , -0.54) (sqr (- x (?ANS ,31)))) (?ANS ,390))))}}
 
 == Testing how Good the Model is in Pyret
 @link-instructions{
 Return to your copy of the @starter-file{alg2-miguel-cabrera}, adjust the definition for our `curve` function on line 42, and click "Run".
 }
 
-@n Use `fit-model` to fit our `curve` model to the `curve-table` data. What @math{S}-value did you get? @fitb{}{@ifsoln{~71 feet}}
+@n Use `fit-model` to fit our `sliders` model to the `sliders-table` data. What @math{S}-value did you get? @fitb{}{@ifsoln{~67.5 feet}}
 
 [.indentedpara]
 _Hint: If you forgot the contract for `fit-model`, look it up in the @dist-link{Contracts.shtml, Contracts Pages}!_
 
-@n The @math{S}-value for the optimal linear model was about 104 feet. +
+@n The @math{S}-value for the optimal linear model was about 76.99 feet. +
 @indented{My quadratic model should do @fitbruby{25em}{@ifsoln{much better}}{a little better, much better, worse, much worse, an equally good job} at predicting hit distances from bat angles.}
 
 == What does this model actually mean?
 
 @n After experimenting, I came up with a quadratic model for this dataset showing that @fitbruby{7em}{@ifsoln{hit-angle}}{x-variable} is correlated to @fitbruby{8em}{@ifsoln{hit-distance}}{y-variable}.
 
-@n The vertex of the parabola drawn by this model is a @fitbruby{9em}{@ifsoln{maxima}}{minima or maxima?} at about @fitbruby{6em}{@ifsoln{(31, 430)}}{(x, y)}, which means that +
-@fitb{}{@ifsoln{the optimal hitting the ball is about 31 degrees, yielding hits upwards of 430 feet.}}
+@n The vertex of the parabola drawn by this model is a @fitbruby{9em}{@ifsoln{maxima}}{minima or maxima?} at about @fitbruby{6em}{@ifsoln{(31, 390)}}{(x, y)}, which means that +
+@fitb{}{@ifsoln{the optimal hitting the ball is about 31 degrees, yielding hits upwards of 390 feet.}}
 
 @n Before this point, as the hit angle increases, hit distance @fitb{8em}{@ifsoln{increases}}. +
 @hspace{2em}After this point, as the hit angle increases hit distance @fitb{8em}{@ifsoln{decreases}}.
 
-@n The error in the model is described by an @vocab{S-value} of about @fitbruby{5em}{@ifsoln{71}}{S}@fitbruby{8em}{@ifsoln{feet}}{units}. @hspace{1em} I
+@n The error in the model is described by an @vocab{S-value} of about @fitbruby{5em}{@ifsoln{67.5}}{S}@fitbruby{8em}{@ifsoln{feet}}{units}. @hspace{1em} I
 @fitbruby{18em}{@ifsoln{disagree}}{strongly agree, agree, disagree, strongly disagree} that this model is a good fit considering that @fitbruby{12em}{@ifsoln{hit distances}}{y-variable} in this dataset range from @fitbruby{8em}{@ifsoln{53}}{lowest y-value} to @fitbruby{8em}{@ifsoln{448}}{highest y-value}.
 
 @n This model was built using data about 
