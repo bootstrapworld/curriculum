@@ -2908,7 +2908,7 @@
   ;(printf "coe ~s\n" e)
   ; (create-zero-file (format "~a.uses-codemirror" *out-file*))
   (set! *uses-codemirror?* #t)
-  (enclose-div ".circleevalsexp"
+  (enclose-span ".circleevalsexp"
     (sexp->block e #:pyret (string=? *proglang* "pyret"))))
 
 (define *hole-symbol* '++_______++)
