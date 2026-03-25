@@ -91,7 +91,7 @@ Common Misconceptions: In Pyret, writing decimals as `.5` (without the leading z
 
 - @vocab{Operators} like `+`, `-`, `*`, and `/` need spaces around them.{style="font-size:17pt"} 
 - In Pyret, the @vocab{operators} work just like they do in math.{style="font-size:17pt"} 
-- When there is more than one operator being used, Pyret requires that you use parentheses to define the order of operations.{style="font-size:17pt"} 
+- When there is more than one operator being used, Pyret requires that you use parentheses to define the Order of Operations.{style="font-size:17pt"} 
 - Types matter! We can add two Numbers or two Strings to one another, but we can’t add the Number `4` to the String `"hello"`.{style="font-size:17pt"} 
 
 

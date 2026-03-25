@@ -38,18 +38,22 @@ Open the @starter-file{expressions-equations}, which you will use to investigate
 
 |===
 
-What image operations can be distributed? *Follow the example in the table below.*
+What image operations can be distributed? 
 
 == Example: Does @show{(code 'scale)} distribute over @show{(code 'beside)}?
 
 [.example-table,cols="^.^1,^.^4,^.^4", stripes="none"]
 |===
 
-| Circle of Evaluation |@show{(coe '(scale 0.5 (beside aqua-star orange-dot)))} | @show{(coe  '(beside (scale 0.5 aqua-star) (scale 0.5 orange-dot)))}
+| Circle of Evaluation 
+|@show{(coe '(scale 0.5 (beside aqua-star orange-dot)))} 
+| @show{(coe  '(beside (scale 0.5 aqua-star) (scale 0.5 orange-dot)))}
 
-| Sketch | @image{../images/aqua-orange.png, 50} | @image{../images/aqua-orange.png, 50}
+| Sketch 
+| @ifsoln{@image{../images/aqua-orange.png, 50}} 
+| @ifsoln{@image{../images/aqua-orange.png, 50}}
 
-3+| Did both expressions produce _identical_ images in @proglang? @fitb{5em}{Yes.} @hspace{2em} Is `scale` distributive over `beside`? @fitb{}{It is.}
+3+| Did both expressions produce _identical_ images in @proglang? @fitb{5em}{@ifsoln{Yes}} @hspace{2em} Is `scale` distributive over `beside`? @fitb{}{@ifsoln{It is}}
 |===
 
 
@@ -62,7 +66,7 @@ What image operations can be distributed? *Follow the example in the table below
 | @ifsoln{@show{(coe  '(above (scale 2 orange-dot) (scale 2 purple-square)))}}
 
 | Sketch
-| @image{../images/orange-purple.png, 20}
+| @ifsoln{@image{../images/orange-purple.png, 20}}
 | @ifsoln{@image{../images/orange-purple.png, 20}}
 
 3+| Did both expressions produce _identical_ images in @proglang? @fitb{5em}{@ifsoln{Yes.}} @hspace{2em} Is `scale` distributive over `above`? @fitb{}{@ifsoln{It is.}}
@@ -78,7 +82,7 @@ What image operations can be distributed? *Follow the example in the table below
 | @ifsoln{@show{(coe  '(beside (rotate 30 blue-ellipse) (rotate 30 yellow-rect)))}}
 
 | Sketch
-| @image{../images/blue-yellow.png, 50}
+| @ifsoln{@image{../images/blue-yellow.png, 50}}
 | @ifsoln{@image{../images/blue-yellow-2.png, 50}}
 
 3+| Did both expressions produce _identical_ images in @proglang? @fitb{5em}{@ifsoln{No.}} @hspace{2em} Is `rotate` distributive over `beside`? @fitb{}{@ifsoln{It is not.}}
@@ -95,7 +99,7 @@ What image operations can be distributed? *Follow the example in the table below
 
 | Sketch
 | @ifsoln{@image{../images/green-yellow-2.png, 30}}
-| @image{../images/green-yellow.png, 30}
+| @ifsoln{@image{../images/green-yellow.png, 30}}
 
 3+| Did both expressions produce _identical_ images in @proglang? @fitb{5em}{@ifsoln{No.}} @hspace{2em} Is `rotate` distributive over `above`? @fitb{}{@ifsoln{It is not.}}
 |===

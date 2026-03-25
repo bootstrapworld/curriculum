@@ -2037,7 +2037,7 @@
                             (let ([text (read-group i directive #:multiline? #t)])
                               (let* ([contains-nl? (regexp-match "^ *\n" text)]
                                      [converted-text (expand-directives:string->string text #:enclosing-directive directive)])
-                                (display (enclose-span
+                                (display (enclose-div
                                            (string-append ".choice"
                                              (if *solutions-mode?* ".chosen" ""))
                                            converted-text)

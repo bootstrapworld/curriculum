@@ -1,0 +1,21 @@
+= True or False?
+
+++++
+<style>
+div.circleevalsexp { width: auto; }
+td > .content > .paragraph > * { vertical-align: middle; }
+</style>
+++++
+
+Decide whether or not the two expressions are equivalent. Explain your reasoning.
+
+[.FillVerticalSpace, cols="^.^1a, ^.^5a, ^.^1a, ^.^5a, ^.^10a", grid="none", options="header", ]
+|===
+|	 | Circle 1 						| 	| Circle 2								| True or False? Justify.
+| @n | @show{(coe '(/ 55 11))} 			| =	|@show{(coe '(/ 11 55))} 		 		| @ifsoln{False. When you change the order of a division problem you don't get the same answer unless the numbers being divided are equal to each other.}
+| @n | @show{(math '(+ (+ 799 1) 43))}  | =	|@show{(math '(+ (+ 798 2) 43))}		| @ifsoln{True. Both inner groupings add to 800.}
+| @n | @show{(coe '(/ 500 5))} 			| =	|@show{(coe '(/ 5000 50))} 				| @ifsoln{True. Both numbers on the right are 10x as big as the numbers on the left, so they will have the same quotient.}
+| @n | @show{(math '(* 26 4))} 			| =	|@math{26 + 26 + 26 + 26}				| @ifsoln{True. Multiplying any number times 4 is the same as adding it four times.}
+| @n | @show{(coe '(+ (+ 5 9) 4))} 		| =	|@show{(coe '(+ 5 (+ 9 4)))} 			| @ifsoln{True. You can add 3 numbers in any order and will always get the same thing.}
+| @n | @show{(math '(* 3 10))} 			| =	|@show{(math '(* (* 10 10) 10))} 		| @ifsoln{False. Multiplying by 3 is not the same as multiplying something by itself 3 times.}
+|===

@@ -1,0 +1,102 @@
+= Are They Equivalent?
+
+++++
+<style>
+div.circleevalsexp { width: auto; }
+td > .content > .paragraph > * { vertical-align: middle; }
+
+div#body .literalblock pre, div#body .literalblock pre[class], div#body .listingblock pre, div#body .listingblock pre[class] {
+    padding: 0;
+}
+
+div#body table tr th, div#body table tr td {
+    padding: 0.35em 0.35em;
+}
+
+td p { display: inline-block; }
+</style>
+++++
+
+1. Make a prediction: *Circle T* or *F* to indicate whether you expect each pair of expressions to be equivalent and produce identical images.
+2. Open @starter-file{equivalence} and test out each pair of expressions to see whether or not they produce identical images. 
+3. Explain why each pair of expressions is or isn't equivalent. 
+
+[cols="^.^1a, ^.^8a, ^.^1a, ^.^9a, ^.^3a", options="header", ]
+|===
+|	 | Image 1						| 	| Image 2						| Prediction 
+
+| @n 
+| Rotate an image 90 degrees: +
+@show{(code '(rotate 90 ImageA))}
+| =	
+| Flip the same image Horizontally: +
+@show{(code '(flip-horizontal ImageA))}
+| T @hspace{1em} @ifsoln-choice{F}
+5+| @fitbruby{11em}{@ifsoln{Not Equivalent}}{Equivalent / Not Equivalent} because @fitb{43em}{@ifsoln{there is no rotation that is equivalent to a horizontal flip}} 
+
+| @n 
+| Rotate an image 180 degrees: +
+@show{(code '(rotate 180 ImageA))}
+| =	
+| Flip the same image Horizontally and then Vertically:	
+@show{(code '(flip-vertical(flip-horizontal ImageA)))}
+| @ifsoln-choice{T} @hspace{1em} F
+5+| @fitbruby{11em}{@ifsoln{Equivalent}}{Equivalent / Not Equivalent} because @fitb{43em}{@ifsoln{they both end up with the text upside down and the letters of the name appearing in order from right to left}} 
+
+| @n 
+| A red circle with a radius of 60: +
+@show{(code '(circle 60 "outline" "tomato") )}
+| =	
+| A red ellipse whose width and height are 60: +
+@show{(code '(ellipse 60 60 "outline" "tomato"))}
+| T @hspace{1em} @ifsoln-choice{F}
+5+| @fitbruby{11em}{@ifsoln{Not Equivalent}}{Equivalent / Not Equivalent} because @fitb{43em}{@ifsoln{the height and width correspond to the diameter, not the radius}} 
+|===
+
+For each question below, review the collection of expressions. Place an *E* in front of each expression that forms a grouping of equivalent expressions. Then explain why the expressions will produce identical images.
+[cols=".^1a, ^12a, ^5a",stripes="none", frame="none"]
+|===
+|| *Which are equivalent?* | *Explain why*
+|@n 
+| 
+[cols="1a, 10a", stripes="none", frame="none"]
+!===
+! @ifsoln{E}  ! @show{(code '(square 40 "solid" "deeppink"))} 
+! @ifsoln{E}  ! @show{(code '(rectangle 40 40 "solid" "deeppink"))}
+!             ! @show{(code '(square (* 20 20) "solid" "deeppink"))}
+!===
+| @ifsoln{A rectangle whose base and height are both 40 will be a square of side length 40.}
+
+|@n 
+| 
+[cols="1a, 10a", stripes="none", frame="none"]
+!===
+!             ! @show{(code '(rectangle 48 72 "solid" "blue"))}
+! @ifsoln{E}  ! @show{(code '(rectangle 72 48 "solid" "blue"))}                           
+! @ifsoln{E}  ! @show{(code '(rotate 90 (rectangle 48 72 "solid" "blue")))}
+! @ifsoln{E}  ! @show{(code '(scale 8 (rectangle 9 6 "solid" "blue")))}
+!===
+| @ifsoln{When we rotate a rectangle 90 degrees it places the long side where the short side was, so a 48 x 72 rectangle becomes a 72 x 48 rectangle. `scale` tell use to multiply the base and height times the scale factor: @math{8 \times 9 = 72} and @math{8 \times 6 = 48}.}
+
+|@n 
+| 
+[cols="1a, 10a",stripes="none", frame="none"]
+!===
+! @ifsoln{E}  ! @show{(code '(radial-star 6 20 50 "solid" "red"))}
+! @ifsoln{}   ! @show{(code '(radial-star 20 6 50 "solid" "red"))}
+! @ifsoln{E}  ! @show{(code '(radial-star (+ 3 3) (* 4 5) 50 "solid" "red"))}
+!===
+| @ifsoln{@math{3 + 3 = 6} and @math{4 \times 5 = 20}}
+
+|@n 
+| 
+[cols="1a, 10a", stripes="none", frame="none"]
+!===
+! @ifsoln{ }    ! @show{(code '(isosceles-triangle 100 90 "solid" "black"))}
+! @ifsoln{E}    ! @show{(code '(right-triangle 100 100 "solid" "black"))}
+! @ifsoln{E}    ! @show{(code '(rotate 135 (isosceles-triangle 100  90  "solid" "black")))}
+! @ifsoln{ }    ! @show{(code '(rotate 135 (right-triangle 100 100 "solid" "black")))}
+!===
+| @ifsoln{A right isosceles triangle can be defined as an isosceles triangle with a 90 degree angle or a right triangle with legs of equal lengths. The functions orient them differently so will need to be rotated in order to be equivalent.}
+|===
+
