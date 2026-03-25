@@ -53,7 +53,7 @@ td p { display: inline-block; }
 5+| @fitbruby{11em}{@ifsoln{Not Equivalent}}{Equivalent / Not Equivalent} because @fitb{43em}{@ifsoln{the height and width correspond to the diameter, not the radius}} 
 |===
 
-For each question below, review the collection of expressions. Place an *E* in front of each expression that forms the first equivalent grouping. If the collection includes a second set of equivalent expressions, mark them with a &#9733;. Then explain the equivalence.
+For each question below, review the collection of expressions. Place an *E* in front of each expression that forms a grouping of equivalent expressions. Then explain why the expressions will produce identical images.
 [cols=".^1a, ^12a, ^5a",stripes="none", frame="none"]
 |===
 || *Which are equivalent?* | *Explain why*
@@ -61,22 +61,22 @@ For each question below, review the collection of expressions. Place an *E* in f
 | 
 [cols="1a, 10a", stripes="none", frame="none"]
 !===
-! @ifsoln{&#9733;}  ! @show{(code '(square 40 "solid" "deeppink"))} 
-! @ifsoln{&#9733;}  ! @show{(code '(rectangle 40 40 "solid" "deeppink"))}
-! @ifsoln{&#9733;}  ! @show{(code '(square (* 20 20) "solid" "deeppink"))}
+! @ifsoln{E}  ! @show{(code '(square 40 "solid" "deeppink"))} 
+! @ifsoln{E}  ! @show{(code '(rectangle 40 40 "solid" "deeppink"))}
+!             ! @show{(code '(square (* 20 20) "solid" "deeppink"))}
 !===
-| 
+| @ifsoln{A rectangle whose base and height are both 40 will be a square of side length 40.}
 
 |@n 
 | 
 [cols="1a, 10a", stripes="none", frame="none"]
 !===
-! @ifsoln{&#9733;}  ! @show{(code '(rectangle 48 72 "solid" "blue"))}
-! @ifsoln{E}        ! @show{(code '(rectangle 72 48 "solid" "blue"))}                           
-! @ifsoln{E}        ! @show{(code '(rotate 90 (rectangle 48 72 "solid" "blue")))}
-! @ifsoln{&#9733;}  ! @show{(code '(scale 8 (rectangle 6 9 "solid" "blue")))}
+!             ! @show{(code '(rectangle 48 72 "solid" "blue"))}
+! @ifsoln{E}  ! @show{(code '(rectangle 72 48 "solid" "blue"))}                           
+! @ifsoln{E}  ! @show{(code '(rotate 90 (rectangle 48 72 "solid" "blue")))}
+! @ifsoln{E}  ! @show{(code '(scale 8 (rectangle 9 6 "solid" "blue")))}
 !===
-| 
+| @ifsoln{When we rotate a rectangle 90 degrees it places the long side where the short side was, so a 48 x 72 rectangle becomes a 72 x 48 rectangle. `scale` tell use to multiply the base and height times the scale factor: @math{8 \times 9 = 72} and @math{8 \ times 6 = 48}.}
 
 |@n 
 | 
@@ -86,7 +86,7 @@ For each question below, review the collection of expressions. Place an *E* in f
 ! @ifsoln{}   ! @show{(code '(radial-star 20 6 50 "solid" "red"))}
 ! @ifsoln{E}  ! @show{(code '(radial-star (+ 3 3) (* 4 5) 50 "solid" "red"))}
 !===
-| 
+| @ifsoln{@math{3 + 3 = 6} and @math{4 \times 5 = 20}}
 
 |@n 
 | 
@@ -97,6 +97,6 @@ For each question below, review the collection of expressions. Place an *E* in f
 ! @ifsoln{E}    ! @show{(code '(rotate 135 (isosceles-triangle 100  90  "solid" "black")))}
 ! @ifsoln{ }    ! @show{(code '(rotate 135 (right-triangle 100 100 "solid" "black")))}
 !===
-|
+| @ifsoln{}
 |===
 
