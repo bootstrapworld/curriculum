@@ -254,6 +254,12 @@
 (define (authoring-resource?)
   (regexp-match "/authoring" *containing-directory*))
 
+(define (warnmsg fmt . args)
+  (unless (authoring-resource?)
+    (display "WARNING: ")
+    (apply printf fmt args)
+    (display "\n\n")))
+
 (define read-group (*make-read-group #:code (lambda z (apply code z))
                                      #:errmessage-file-context errmessage-file-context))
 
@@ -440,7 +446,7 @@
               (when (member this-lesson-with-our-proglang *all-lessons*)
                 (set! result this-lesson-with-our-proglang)))])
     (unless result
-      (printf "WARNING: Referring to nonexistent lesson ~s\n\n" this-lesson)
+      (warnmsg "Referring to nonexistent lesson ~s" this-lesson)
       (set! result this-lesson))
     result))
 
@@ -533,7 +539,7 @@
                  link-text
                  #:link-type directive)]
              [else
-               (printf "WARNING: Incorrect¹ @~a ~a\n\n"
+               (warnmsg "Incorrect¹ @~a ~a"
                        directive page-compts)
                ""])]
       [(2)
@@ -550,7 +556,7 @@
                  ;TODO should these just be warnings
                  ;with the @workbook-link converted to plain @link ?
                  ;(printf "*lesson* is ~s\n" *lesson*)
-                 (printf "WARNING: Incorrect² @~a ~a\n\n"
+                 (warnmsg "WARNING: Incorrect² @~a ~a"
                          directive page-compts)
                  ""]))]
       [(3)
@@ -565,11 +571,11 @@
                   third-compt link-text
                   #:link-type directive)]
                [else
-                 (printf "WARNING: Incorrect³ @~a ~a\n\n"
+                 (warnmsg "Incorrect³ @~a ~a"
                          directive page-compts)
                  ""]))]
       [else
-        (printf "WARNING: Incorrect⁴ @~a ~a\n\n"
+        (warnmsg "Incorrect⁴ @~a ~a"
                 directive page-compts)
         ""])))
 
@@ -631,7 +637,7 @@
     (unless existent-file?
       (set! error-cascade? #t)
       (check-link f)
-      (printf "WARNING: Lesson ~a: ~a refers to ~a file ~a\n\n" lesson link-type
+      (warnmsg "Lesson ~a: ~a refers to ~a file ~a" lesson link-type
               (if non-workbook-page? "non-workbook" "nonexistent")
               f))
     (when (member link-type '("printable-exercise" "opt-printable-exercise" "handout"))
@@ -763,7 +769,7 @@
                       [else
                         (unless (member key missing-images)
                           (set! missing-images (cons key missing-images)))
-                        #;(printf "WARNING: ~a: Image file ~a not found\n" (errmessage-context) image-file)
+                        #;(warnmsg "~a: Image file ~a not found" (errmessage-context) image-file)
                         ])))))))
 
     (when missing-image-log-file
@@ -794,7 +800,7 @@
             (cond [(file-exists? img-qn)
                    (rename-file-or-directory img-qn img-anonymized-qn #t)]
                   [(authoring-resource?) #f]
-                  [else (printf "WARNING: ~a: Image file ~a not found\n\n"
+                  [else (warnmsg "~a: Image file ~a not found"
                                 (errmessage-context) img-qn)]))))
 
       (let ([image-attribs (and (hash? images-hash)
@@ -821,7 +827,7 @@
                   [(or (string=? image-description "")
                        (string=? image-license "")
                        (string=? image-source ""))
-                   (printf "WARNING: Image ~a missing metadata in ~a/lesson-images.json\n"
+                   (warnmsg "Image ~a missing metadata in ~a/lesson-images.json"
                            img-qn image-dir)])))
 
         (when author-supplied-text (set! image-description author-supplied-text))
@@ -924,7 +930,7 @@
       (unless existent-file?
         (check-link f) ;move inside next unless?
         (unless (and *only-some-courses* (regexp-match "courses/" f))
-          (printf "WARNING: ~a: @dist-link: Missing file ~a\n\n" (errmessage-context) f)))
+          (warnmsg "~a: @dist-link: Missing file ~a" (errmessage-context) f)))
       (when (and (or (not link-text) (string=? link-text "")) page-title)
         (set! link-text page-title))
       (let ([link-output (format "link:~apass:[~a][~a~a]"
@@ -1010,7 +1016,7 @@
                (set! existent-file? #t))])
       (unless existent-file?
         (check-link f)
-        (printf "WARNING: ~a: @lesson-link: Missing file ~a\n\n" (errmessage-context) f))
+        (warnmsg "~a: @lesson-link: Missing file ~a" (errmessage-context) f))
       (when (and (or (not link-text) (string=? link-text "")) page-title)
         (set! link-text page-title))
       (when (path? f) (set! f (path->string f)))
@@ -1044,7 +1050,7 @@
     ; (printf "ext link = ~s\n" external-link?)
     (cond [(not include?)
            (cond [(string=? f "")
-                  (printf "WARNING: ~a: @link with no file argument\n\n"
+                  (warnmsg "~a: @link with no file argument"
                           (errmessage-context))]
                  [(regexp-match #rx"://" f)
                   (check-link f #:external? #t)]
@@ -1079,7 +1085,7 @@
                                    short-ref?)
                          (check-link f)
                          ; This warning is too eager. Leave it to --lint
-                         ; (printf "WARNING: ~a: @link refers to nonexistent file ~a\n\n"
+                         ; (warnmsg "~a: @link refers to nonexistent file ~a"
                          ;         (errmessage-context)
                          ;         f)
                          )
@@ -1389,7 +1395,7 @@
                  [lesson-title lesson]
                  [lesson-description #f])
             (unless (directory-exists? lesson-directory)
-              (printf "WARNING: Course ~a referring to nonexistent lesson ~a\n\n"
+              (warnmsg "Course ~a referring to nonexistent lesson ~a"
                       *target-pathway* lesson))
             (when (file-exists? lesson-title-file)
               ;(printf "~a exists\n" lesson-title-file)
@@ -1732,7 +1738,7 @@
                               (when (string=? def "missing")
                                 (printf "Warning: Not found in glossary: ~s\n" arg))
                               (when (string=? arg "")
-                                (printf "WARNING: Directive @vocab has ill-formed argument\n\n"))
+                                (warnmsg "Directive @vocab has ill-formed argument"))
                               (display (enclose-span
                                           ".vocab" arg
                                           #:attribs (string-append "title=\"" def "\"")) o)
@@ -1741,7 +1747,7 @@
                                     [else
                                       (unless (member arg *missing-glossary-items*)
                                         (set! *missing-glossary-items* (cons arg *missing-glossary-items*)))
-                                      (printf "WARNING: Item ~s not found in glossary\n\n"
+                                      (warnmsg "Item ~s not found in glossary"
                                               arg)]))]
                            [(string=? directive "lesson-prereqs")
                             (add-lesson-prereqs (read-commaed-group i directive read-group))]
@@ -1762,7 +1768,7 @@
                             (let* ([arg (read-group i directive)]
                                    [n (string->number arg)])
                               (unless n
-                                (printf "WARNING: @nfrom given non-number ~s\n\n" arg))
+                                (warnmsg "@nfrom given non-number ~s" arg))
                               (set! *autonumber-index* n))]
                            [(string=? directive "image")
                             (let ([args (read-commaed-group i directive read-group)])
@@ -1967,7 +1973,7 @@
                            [(string=? directive "fitb")
                             (let ([width (read-group i directive)])
                               (unless (char=? (ignorespaces-peek-char i) #\{)
-                                (printf "WARNING: ~a: @fitb{~a} requires second arg\n\n"
+                                (warnmsg "~a: @fitb{~a} requires second arg"
                                        (errmessage-context) width))
                               (if (string=? width "")
                                 (display-begin-span
@@ -2097,7 +2103,7 @@
                               (let ([c (peek-char i)])
                                 (cond [(and (char? c) (char=? c #\{))
                                        (read-group i directive)]
-                                      [else (printf "WARNING: ~a: Invalid ~a\n" directive
+                                      [else (warnmsg "~a: Invalid ~a" directive
                                               (errmessage-context))])))]
                            [(member directive '("editorconfig" "imageconfig" "videoconfig"))
                             (unless *lesson-plan*
@@ -2159,7 +2165,7 @@
                                    [c (hash-ref *starter-files* lbl #f)])
                               (cond [(not c)
                                      (display-error-output lbl o)
-                                     (printf "WARNING: ~a: Ill-named @~a ~a\n\n"
+                                     (warnmsg "~a: Ill-named @~a ~a"
                                              (errmessage-context) directive lbl)]
                                     [else
                                       (let* ([link-text (and (>= (length lbl+text) 2)
@@ -2171,7 +2177,7 @@
                                         (cond [(not p)
                                                (display-error-output lbl o)
                                                (unless *possibly-invalid-page?*
-                                               (printf "WARNING: ~a: @~a ~a missing for ~a\n\n"
+                                               (warnmsg "~a: @~a ~a missing for ~a"
                                                        (errmessage-context) directive lbl *proglang*))]
                                               [else
                                                 (let* ([newly-added? (add-starter-file lbl autoinclude? #:opt? opt?)]
@@ -2189,7 +2195,7 @@
                                                                          (string-prefix? url *github-prefix*)
                                                                          (hash-ref p 'prefix #t))])
                                                               (cond [(string=? url "")
-                                                                     (printf "WARNING: ~a: @~a ~a missing URL\n\n"
+                                                                     (warnmsg "~a: @~a ~a missing URL"
                                                                              (errmessage-context) directive lbl)
                                                                      "starter-file-missing-URL.html"]
                                                                     [use-pyret-prefix?
@@ -2238,11 +2244,11 @@
                                   [text (string-join (rest args) ", ")]
                                   [dir (build-path *containing-directory* "assessments" lbl)])
                              (when (string=? text "")
-                               (printf "WARNING: ~a: assessment ~a missing second argument\n"
+                               (warnmsg "~a: assessment ~a missing second argument"
                                        (errmessage-context) lbl))
                              (unless (directory-exists?
                                        (build-path *containing-directory* "assessments" lbl))
-                               (printf "WARNING: ~a uses ~a with nonexistent directory ~a\n"
+                               (warnmsg "~a uses ~a with nonexistent directory ~a"
                                        (errmessage-context) directive lbl))
                              (unless (assoc lbl *assessments-met*)
                                  (set! *assessments-met*
@@ -2274,10 +2280,10 @@
                                    [else lbl])
                              (unless apa (set! apa lbl))
                              (cond [(not c)
-                                    (printf "WARNING: ~a: Undefined @~a ~a\n\n"
+                                    (warnmsg "~a: Undefined @~a ~a"
                                             (errmessage-context) directive lbl)]
                                    [(not in-text)
-                                    (printf "WARNING: ~a: @~a ~a missing\n\n"
+                                    (warnmsg "~a: @~a ~a missing"
                                             (errmessage-context) directive lbl)]
                                    [else (display
                                            (enclose-span ".citation"
@@ -2299,7 +2305,7 @@
                                    [rubric-file-compts (regexp-split #rx"/" rubric-file)]
                                    [rubric-link-output
                                      (cond [(string=? rubric-file "")
-                                            (printf "WARNING: ~a: rubric file empty for @~a{~a}\n\n"
+                                            (warnmsg "~a: rubric file empty for @~a{~a}"
                                                     (errmessage-context) directive project-file)
                                             ""]
                                            [else
@@ -2356,7 +2362,7 @@
                             => (lambda (c)
                                  (expand-directives:string->port (cdr c) o #:enclosing-directive directive))]
                            [else
-                             ; (printf "WARNING: Unrecognized directive @~a\n\n" directive)
+                             ; (warnmsg "Unrecognized directive @~a" directive)
                              (display c o) (display directive o)
                              #f]))]
                   [(and possible-beginning-of-line? (member c '(#\| #\! #\-)))
@@ -2372,7 +2378,7 @@
                    ; (set! beginning-of-line? #f)
                    ; (set! possible-beginning-of-line? #f)
                    (when (span-stack-present?)
-                     (printf "WARNING: ~a: Header can't be inside span\n\n"
+                     (warnmsg "~a: Header can't be inside span"
                              (errmessage-context)))
                    (when *lesson-plan*
                      (stop-self-guided-break o))
@@ -2649,7 +2655,7 @@
                        (empty? *opt-printable-exercise-links*)
                        (empty? *opt-starter-file-links*)
                        (empty? *opt-online-exercise-links*))
-              (printf "WARNING: ~a has no supplemental materials yet!\n" (errmessage-context))
+              (warnmsg "~a has no supplemental materials yet!" (errmessage-context))
               ; (fprintf o "_This lesson has no supplemental materials (yet!)_")
               )
 
@@ -2691,19 +2697,19 @@
 
         (when *needs-objectives?*
           (cond [(not *uses-objectives?*)
-                 (printf "WARNING: ~a: Table missing @objectives\n\n" (errmessage-context))]
+                 (warnmsg "~a: Table missing @objectives" (errmessage-context))]
                 [(null? *objectives-met*)
-                 (printf "WARNING: ~a: No @objective provided\n\n" (errmessage-context))]
+                 (warnmsg "~a: No @objective provided" (errmessage-context))]
                 [else #f]))
 
         (when (and (or (pair? *opt-starter-files-used*)
                        (pair? *opt-online-exercise-links*))
                    (not *supplemental-materials-needed?*))
-          (printf "WARNING: ~a: @opt-material-links missing\n\n" (errmessage-context)))
+          (warnmsg "~a: @opt-material-links missing" (errmessage-context)))
 
         (for-each (lambda (sf)
                     (unless (member sf *starter-files-used-outside-preparation*)
-                      (printf "WARNING: ~a: starter file ~s mentioned in @preparation but not used\n\n"
+                      (warnmsg "~a: starter file ~s mentioned in @preparation but not used"
                               (errmessage-context) sf)))
                   *starter-files-used-in-preparation*)
 
@@ -2763,7 +2769,7 @@
              (check-link pres-uri #:external? #t)
              (fprintf o "\n* link:pass:[~a][Lesson Slides, window=\"&#x5f;blank\"]\n\n" pres-uri))]
           [else
-            #;(printf "WARNING: ~a: File ~a not found\n\n" (errmessage-context) id-file)
+            #;(warnmsg "~a: File ~a not found" (errmessage-context) id-file)
             #f])))
 
 (define (add-exercises)
@@ -2823,10 +2829,10 @@
                 (when c (set! x (hash-ref c 'text #f)))
                 (cond [(not c)
                        (set! x lbl)
-                       (printf "WARNING: ~a: Undefined @objective ~a\n\n" (errmessage-context) lbl)]
+                       (warnmsg "~a: Undefined @objective ~a" (errmessage-context) lbl)]
                       [(not x)
                        (set! x lbl)
-                       (printf "WARNING: ~a: Ill-defined @objective ~a\n\n" (errmessage-context) lbl)]
+                       (warnmsg "~a: Ill-defined @objective ~a" (errmessage-context) lbl)]
                       [else (set! x (expand-directives:string->string x))])
                 (display "- " o)
                 (display x o)
@@ -3098,7 +3104,7 @@
       (cond [(check? sym)
              (set! *prereqs-used* (cons sym *prereqs-used*))]
             [else
-              (printf "WARNING: ~a in ~a not mentioned in langtable.js (are you sure you're using the WeScheme name?)\n\n"
+              (warnmsg "~a in ~a not mentioned in langtable.js (are you sure you're using the WeScheme name?)"
                       sym (errmessage-file-context))]))))
 
 (define (add-prereq/check sym)
