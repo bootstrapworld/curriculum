@@ -8,10 +8,8 @@
 
 [@lesson-intro-table]
 |===
-
 | Lesson Goals
 | Students will be able to...
-
 @objectives
 @objective{Recognize that the order of two or more numbers being multiplied or added does not affect the value of the expression.}
 @objective{Demonstrate their understanding of the Commutative Property via Circles of Evaluation, numeric expressions, and words.}
@@ -31,20 +29,61 @@
 | Key Points For The Facilitator
 |
 - Pay attention to students' Circles of Evaluation to ensure that they are in fact applying the Commutative Property.
+|===
 
-| Preparation
-| 
-@preparation{
-- Decide whether or not the last section of this lesson (a programming exploration of commutativity) is appropriate for your class. 
-- If you are using our Google Slides, adjust the slides based on which portions of the lesson you will be doing with your students.
+== Programming Exploration: Does Order Matter?
+
+=== Overview
+
+Students explore whether various image-producing @proglang functions are commutative.
+
+=== Launch
+@slidebreak{Launch}
+
+As a programmer, you will definitely want (and need!) to know whether or not you can change around the order of a function's arguments... or if you need to always use one "correct" order.
+
+=== Investigate
+@slidebreak{Investigate-DN}
+
+@scrub{FLANNERY use darker and lighter to the starter file. get rid of min and max}
+
+@lesson-instruction{
+- Turn to @printable-exercise{commutativity-and-code.adoc} and open the @starter-file{expressions-equations}.
+- For each function, draw a second Circle of Evaluation that changes the order of the arguments. Translate the Circles of Evaluation to code, then take a minute to predict what image it will return. Finally, test your code in @proglang and sketch the results.
 }
 
-|===
+@teacher{As students work, encourage them to _always_ make predictions before testing the code. Similarly, the activity will be more valuable if students discuss _why_ the code did or did not produce identical images. Debrief to ensure comprehension.
+
+When everyone is finished, check in with students. Did everyone discover that _none_ of the functions were commutative? There is a good chance your students will wonder if _any_ @proglang functions are commutative!
+}
+
+@slidebreak{Investigate}
+
+In the last activity, we discovered that _none_ of the image-producing functions on the page were commutative! Are any @proglang functions commutative? Let's continue exploring!
+
+@lesson-instruction{
+- Turn to @printable-exercise{commutativity-and-code2.adoc}.
+- With your partner, test these four additional functions for commutativity.
+}
+
+@teacher{
+There is a good chance your students will want to play with and explore @show{(code 'blend-images)}. Please note that color blending in @proglang does not behave exactly as it would in the real world, because computers typically use "RGB" (red, blue, green) to express color. Try blending yellow and blue: on a normal primary color wheel, these two would blend to be green. In RGB...the results might surprise you.
+}
+
+=== Synthesize
+@slidebreak{Synthesize}
+
+@QandA{
+@Q{What did you learn about the Commutative Property in @proglang?}
+@A{Order usually matters, but sometimes, like with `blend-images`, it doesn't.} 
+
+@Q{Did anything surprise you?}
+}
+
 
 == The Commutative Property
 
 === Overview
-
 Students examine pairs of Circles of Evaluation to see whether they represent equivalent expressions. The Circles of Evaluation reveal the structural changes that occur when we apply the Commutative Property.
 
 === Launch
@@ -119,6 +158,7 @@ Students may attempt to apply other properties when developing equivalent Circle
 - Which Circles were equivalent most often?
 - Which Circles were equivalent least often? (Or maybe even not at all!)
 
+
 == Tying it All Together
 
 === Overview
@@ -173,55 +213,10 @@ Walker, Claire and Soraya's Circles are _different_ but still _equivalent_. Comp
 === Synthesize
 @slidebreak{Synthesize}
 
-- Summarize the Commutative Property in your own words.
-- How might a strong understanding of the Commutative Property be useful when you're doing computations in your head?
+@QandA{
+@Q{Summarize the Commutative Property in your own words.}
 
+@Q{How might a strong understanding of the Commutative Property be useful when you're doing computations in your head?}
 
-== Programming Exploration: Commutativity
-
-=== Overview
-
-Extending concepts explored earlier in the lesson, students consider whether various functions that we use when coding are commutative.
-
-=== Launch
-@slidebreak{Launch}
-
-You already know that in math, the Commutative Property allows us to rewrite arithmetic expressions in a variety of different ways. We learned that for any expression involving only addition or only multiplication, changing the order of the numbers will not change the result.
-
-But how about functions in @proglang?!
-
-@slidebreak{Launch}
-
-As a programmer, you will definitely want (and need!) to know if you can change around the order of a function's arguments... or if you need to always use one "correct" order.
-
-=== Investigate
-@slidebreak{Investigate-DN}
-
-@lesson-instruction{
-- Turn to @printable-exercise{commutativity-and-code.adoc} and open the @starter-file{expressions-equations}.
-- For each function, draw a second Circle of Evaluation that changes the order of the arguments. Translate the Circles of Evaluation to code, then sketch the image that you think your Circle will return. Finally, test your code in @proglang.
+@Q{How were the programming activities in this lesson similar to the math activities? How were they different?}
 }
-
-@teacher{As students work, encourage them to _always_ make predictions before testing the code. Similarly, the activity will be more valuable if students discuss _why_ the code did or did not produce identical images. Debrief to ensure comprehension.
-
-When everyone is finished, check in with students. Did everyone discover that _none_ of the functions were commutative? There is a good chance your students will wonder if _any_ @proglang functions are commutative!
-}
-
-@slidebreak{Investigate}
-
-In the last activity, we discovered that _none_ of the image-producing functions on the page were commutative! Do you think there are any functions in @proglang that are commutative? Let's answer that question.
-
-@lesson-instruction{
-- Turn to @printable-exercise{commutativity-and-code2.adoc}.
-- With your partner, test the four additional functions for commutativity.
-}
-
-@teacher{
-There is a good chance your students will want to play with and explore @show{(code 'blend-images)}. Please note that color blending in @proglang does not behave exactly as it would in the real world, because computers typically use "RGB" (red, blue, green) to express color. Try blending yellow and blue: on a normal primary color wheel, these two would blend to be green. In RGB...the results might surprise you.
-}
-
-=== Synthesize
-@slidebreak{Synthesize}
-
-- What did you learn about the Commutative Property in @proglang? Did anything surprise you?
-- How were the programming activities in this lesson similar to the paper-and-pencil activities? How were they different?
