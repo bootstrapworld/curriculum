@@ -1,6 +1,9 @@
-AuthUserFile /home/u804343808/web/cs/password/.bootstrap_passwd
-AuthName "Please Log In"
-AuthType Basic
-Require valid-user
+RewriteEngine On
 
-ErrorDocument 401 /401.shtml
+# 1. Capture the path relative to THIS .htaccess file
+# If the file is 'folder/sub/file.pdf', $1 will become 'sub/file.pdf'
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule ^(.*)$ /access-bridge.php?file=%{REQUEST_URI} [L,QSA]
+
+# 2. This path is sent to /access-bridge.php, a script that actively
+# checks to see if the user is logged into WP.
