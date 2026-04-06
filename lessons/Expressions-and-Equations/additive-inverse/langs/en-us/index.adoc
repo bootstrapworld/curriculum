@@ -32,16 +32,111 @@
 == Programming Exploration: Blending Images
 
 === Overview
+Students explore the `invert` function and the `blend-images` function to develop an intuition for what it means for inverses to cancel each other out.
 
 === Launch
 @slidebreak{Launch-DN}
+@QandA{
+@Q{Today we are going to explore a @proglang function called `invert`. Where have you heard the words invert or inverse before?}
+@A{Sample responses may include:
+  * Gymnastics or yoga - Inverted positions are upside down.
+  * @link{https://en.wikipedia.org/wiki/Solar_inverter, Solar Inverters} - convert DC solar output to AC frequency compatible with the U.S. power grid
+  * Inverted images - a photograph and its negative
+}
+}
 
+@teacher{
+Did your students have brilliant suggestions? Please share your ideas with us at @link{mailto:contact@bootstrapworld.org}!
+}
+
+@lesson-instruction{
+- Open the @starter-file{additive-inverse} and click "Run".
+- Then turn to @printable-exercise{invert.adoc} and complete the first part with your partner.
+}
+
+@QandA{
+@Q{What does it mean for @proglang to `invert` a black and white image?}
+@A{Black is replaced with white.}
+@A{White is replaced with black.}
+@A{Grays are replaced with grays.}
+
+@Q{What ideas do you have about how @proglang decised which gray gets used when we invert a gray image?}
+@A{This is a great thought experiment! We don't need your students to land on a definitive answer yet.}
+@A{Hopefully students will have a notion that there's a spectrum ranging from white to black. +
+Some students might even articulate that: 
+  	* Grays get replaced with a gray that is about the same distance from white as the original was from black.
+  	* The original gray and the new gray should blend to make the same color as black and white do.
+}
+}
 
 === Investigate
 @slidebreak{Investigate}
 
+@lesson-instruction{
+We're going to explore a new @proglang function called `blend-images` that takes in two images and averages each pixel.	
+
+- Return to @printable-exercise{invert.adoc} and complete it with your partner.
+}
+
+@QandA{
+@Q{What happens when we blend an image with its inverse?}
+@A{We get a gray shape that shares the same outline as the original image?}
+
+@Q{How can you tell whether or not two black and white images are inverses of each other?}
+@A{They should be the same shape and size with the blacks and whites swapped and greys inverted.}
+@A{When we use `blend-images` they should yield a grey shape that shares the same outline.}
+}
+
+@lesson-instruction{
+- Let's apply what we've learned about inverses.
+- Turn to @printable-exercise{invert-2.adoc} and complete it with your partner.
+}
+
+@QandA{
+@Q{Did `invert` return what you expected for the blue square?}
+@A{Sample responses may include:
+  * It returned a yellow square. I was expecting an orange square.
+  * I thought colors are replaced with the color opposite them on the color wheel.}
+
+@Q{What happens when we use `blend-images` with color images that are inverses of each other?}
+@A{We still get grey shapes.}
+}
+
+@lesson-point{
+Images that are inverses of each other will "cancel each other out", making a grey shape when we `blend-images`.
+}
+
+@strategy{The Red Green Blue Color Model}{
+Your students have probably learned about the primary color wheel in art class, where the color across from blue is orange. Computers use a different color logic, creating colors by adding red, green and blue pixels in specified ratios.
+
+[cols="1,^.^10a,2,^.^9a,2", grid="none", frame="none", options="header"]
+|===
+|| Red Yellow Blue Color Star 	 || Red Green Blue Color Model  |
+|| @image{images/color-star.png} || @image{images/rgb-venn-diagram.png} |
+|===
+
+}
+
+@ifslide{
+You have probably learned about the primary color wheel in art class, where the color across from blue is orange. Computers use a different color logic. They generate colors by adding red, green and blue pixels in specified ratios. As a result the @vocab{inverse} of a color is not the color that is located across the primary color wheel.
+
+[cols="1,^.^10a,2,^.^9a,2", grid="none", frame="none", options="header"]
+|===
+|| Red Yellow Blue Color Star 	 || Red Green Blue Color Model  |
+|| @image{images/color-star.png} || @image{images/rgb-venn-diagram.png} |
+|===
+
+RGB codes represent the intensity of each primary color using integer values ranging from 0 to 255. For example, royal blue is 25.5% red, 41.2% green, and 88.2% blue and is represented by RGB(65, 105, 225).
+}
+
 === Synthesize
 @slidebreak{Synthesize}
+
+@QandA{
+@Q{What does it mean for images to be inverses of each other?}
+@A{Each pixel has the opposite RGB value}
+@A{They cancel each other out.}
+}
 Have ES write a synthesize question about masking in Video Games.
 
 == The Additive Inverse Property

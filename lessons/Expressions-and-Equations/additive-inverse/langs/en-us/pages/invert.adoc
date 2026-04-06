@@ -1,0 +1,54 @@
+= Inverted Images
+
+@link-instructions{Open the @starter-file{additive-inverse} and click "Run".}
+
+== What does it mean to `invert` a black and white image?
+
+@n Type `flower` into the Interactions Area. Then type @show{(code '(invert flower))} into the Interactions Area. What happened? @fitb{}{}
+
+@blanklines{2}{@ifsoln{`flower` returned a black circle with a white radial star overlayed on it. @show{(code '(invert flower))} returned a white circle with a black radial-star overlayed on it.}}
+
+@n The image below is defined as `flag`.  Draw what you would expect @show{(code '(invert flag))} to produce.
+[cols="1,^.^6a,2,6, 8", grid="none", frame="none"]
+|===
+|| @image{../images/flag.png} || @ifsoln{@image{../images/flag2.png}} |
+|===
+
+@n Type `cat` into the Interactions Area. Stop and think. What would you expect to happen when you type @show{(code '(invert cat))}? Test it out.
+
+@n Explain what you think `invert` does when it's given a black and white image? @fitb{}{}
+
+@blanklines{1}{}
+
+@ifnotsoln{@blanklines{1}{}}
+
+[.no-flex-section]
+== A thought experiment in blending images
+
+@n What do you predict will happen when you type   @show{(code '(blend-images flower (invert flower)))}   into the Interactions Area? 
+
+@blanklines{1}{}
+
+@n Test it out. Then make a prediction. What will happen when you   @show{(code '(blend-images flag (invert flag)))}?  @fitb{}{}
+
+@blanklines{1}{}
+
+@n Explain what happens when we `blend-images` that are inverses of each other in @proglang. @fitb{}{}
+
+@blanklines{2}{@ifsoln{They make a grey shape that shares the same outline as the original shape.}}
+
+@n Take a look at the two images below. Do you think they are inverses of each other? @fitb{5em}{@ifsoln{No.}} Why or why not? @fitb{}{}
+
+@blanklines{1}{@ifsoln{The colors are inverted, but the circles woulnd't land on top of each other.}}
+
+[cols="1,^.^6a,2,^.^6a, 2, 6a, 2", grid="none", frame="none"]
+|===
+|| @image{../images/imageA.png} || @image{../images/imageB.png} || @ifsoln{@image{../images/blend-A-B.png}} |
+|===
+
+@star What do you imagine these images would look like if we blended them together? Make a sketch or describe the image in words?
+
+@ifnotsoln{@blanklines{2}{}}
+
+@ifsoln{@vspace{1ex}}
+@teacher{The third image above is the blended image.}
