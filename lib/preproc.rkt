@@ -2109,7 +2109,7 @@
                               (set! *self-guided-context*
                                 (case directive
                                   [("editorconfig") (format "editorCode: ~a\n" text)]
-                                  [("imageconfig") (format "imageConfig: ~s\n" text)]
+                                  [("imageconfig") (format "imageConfig: ~s\n" (path->string (anonymize-filename text)))]
                                   [("videoconfig") (format "videoConfig: ~s\n" text)])))]
                            [(string=? directive "Bootstrap")
                             (fprintf o "https://www.bootstrapworld.org/[Bootstrap]")]
