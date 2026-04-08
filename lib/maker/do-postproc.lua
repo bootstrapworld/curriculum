@@ -371,7 +371,11 @@ local function extract_self_guided(fhtml_cached, lesson_title)
   local page_header = ''
   o:write('export const selfGuidedTitle = "' .. lesson_title .. '"\n\n')
   o:write('export const selfGuidedBits = [\n')
-  for x in i:lines() do
+  for x0 in i:lines() do
+    local x = x0
+    if x:match('href="%.%./%.%./lessons/') then
+      x = x:gsub('href="%.%./%.%./lessons/', 'href="../../../../lessons/')
+    end
     if writing_p then
       if skip_one_more_line_p then
         skip_one_more_line_p = false
