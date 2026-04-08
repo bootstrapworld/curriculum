@@ -31,7 +31,12 @@ Use the @starter-file{identity} to respond to the questions below.
 
 @n Test each line of code in the starter-file and circle the ones that are equivalent to `dog`.
 
-@n What do all of the equivalent expressions have in common. @fitb{}{@ifsoln{a scale factor of 1... making images 100% of the size of the original.}}
+@n What do all of the equivalent expressions have in common. @fitb{}{@ifsoln{a scale factor of 1... making images 100% of the size of the original.}} +
+@blanklines{1}{}
+
+@n Write an expression using `scale` and `cat` that will produce an image identical to `cat`. @fitb{}{@ifsoln{@show{(code '(scale 1 cat))}}}
+
+@teacher{There are multiple correct solutions.}
 
 == Rotate
 
@@ -56,9 +61,14 @@ Use the @starter-file{identity} to respond to the questions below.
 
 @n Test each line of code in the starter-file and circle the ones that are equivalent to `dog`.
 
-@n What did you discover? For what degrees did `rotate` produce an identical image? @fitb{}{@ifsoln{360°,   -360°,   360 multiplied by any integer.}}
+@n What did you discover? For what degrees did `rotate` produce an identical image? @fitb{}{@ifsoln{360°,   -360°,   360 multiplied by any integer.}} +
+@blanklines{1}{}
 
 @n How do these degree numbers relate to "one whole"? @fitb{}{@ifsoln{360° is equivalent to one complete revolution.}}
+
+@n Write an expression using `rotate` and `cat` that will produce an image identical to `cat`. @fitb{}{@ifsoln{@show{(code '(rotate 360 cat))}}}
+
+@teacher{There are multiple correct solutions.}
 
 == Flip
 
@@ -82,24 +92,8 @@ Use the @starter-file{identity} to respond to the questions below.
 @n What did you discover about which flips produce an identical image? @fitb{}{@ifsoln{A pair of either flip type will complete the flip}} +
 @fitb{}{@ifsoln{so that the dog goes all the way around back to where it started.}} 
 
-== Overlay
+@n Write an expression using one or more "flip functions" and `cat` that will produce an image identical to `cat`. +
+@fitb{}{@ifsoln{@show{(code '(flip-horizontal (flip-horizontal cat)))}}}
 
-@n In the Interactions Area (right), type `clear-circle`. What happened? Why? @fitb{}{} +
-@fitb{}{@ifsoln{the cursor jumped halfway down the screen because a an invisible shape was drawn.}}
+@teacher{There are multiple correct solutions.}
 
-@n With your partner, predict what each of the following expressions will return.
-
-[.table1, cols="1,15,15", grid="none", frame="none", stripes="none"]
-|===
-| 
-| @fitb{1em}{}@show{(code '(overlay red-star dog))}
-| @fitb{}{@ifsoln{We see a red star on the dog's chest.}}
-
-| 
-| @fitb{1em}{@ifsoln{&#x2705;}} @show{(code '(overlay clear-circle dog))}
-| @fitb{}{@ifsoln{We see the dog, just as it was before.}}
-|===
-
-@n Test each line of code and put a check in front of any that are equivalent to `dog`. Experiment to answer any questions you may have.
-
-@n What did you discover? @fitb{}{@ifsoln{As long as a transparent shape isn't larger than the original shape, it won't change the image when overlayed.}}

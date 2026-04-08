@@ -1,47 +1,35 @@
-= Commutativity and Code (String, Number, Color Blending)
+= Does Order Matter in the Code? (Continued)
 
 ++++
 <style>
-  table {grid-template-rows: 3fr 1fr !important;}
-  .circleevalsexp .value,
-  .circleevalsexp .studentBlockAnswerFilled { min-width:unset; }
-  .sect1 > h2:first-child { padding: 0 5px !important; }
-  td { padding: 0 !important; }
-
-  /* The first section on this page has no header, so it's a "preamble" */
-  #preamble_disabled { flex-grow: 0 !important; }
+#preamble_disabled { flex-grow: 0 !important; }
 </style>
 ++++
 
 [.no-flex-section]
 ---
-Open the @starter-file{expressions-equations}, which you will use to investigate four functions:
+This page is designed for use with the @starter-file{expressions-equations}. You will be investigating four functions:
 
 [.contracts, cols="1,1", frame="none", grid="none"]
 |===
 | @show{ (contracts
 '("string-contains" ("String" "String") "Boolean")
-'("min" ("Number" "Number") "Number")
+'("blend-images" ("Image" "Image") "Image")
 )}
 | @show{ (contracts
-'("max" ("Number" "Number") "Number")
-'("blend-images" ("Image" "Image") "Image")
+'("darker" ("Image" "Image") "Image")
+'("lighter" ("Image" "Image") "Image")
 )}
 |===
 
-For each function, draw a second Circle of Evaluation that changes the order of the arguments. Translate the Circles of Evaluation to code and take a moment to predict what the code will return. Finally, test your code in Pyret and record the result.
+For each function, write two expressions such that the order of the inputs changes. Take a moment to predict what @proglang will return for each. Then test your code and record the result.
 
 ---
 
-== Is @show{(code 'string-contains)} Commutative?   Does the order of the arguments matter?
+== Does the order of the arguments matter for @show{(code 'string-contains)}?
 
 [.FillVerticalSpace, cols="^.^1,^.^4,^.^4"]
 |===
-
-| Circle of Evaluation
-| @show{(coe '(string-contains "rainbow" "bow"))}
-| @ifsoln{@show{(coe '(string-contains "bow" "rainbow"))}}
-
 | Code
 | @show{(code '(string-contains "rainbow" "bow"))}
 | @ifsoln{@show{(code '(string-contains "bow" "rainbow"))}}
@@ -51,40 +39,17 @@ For each function, draw a second Circle of Evaluation that changes the order of 
 | @ifsoln{`false`}
 
 |===
-@n Did both expressions produce _identical_ results? @fitb{7em}{@ifsoln{No.}} @hspace{2em} Is the @show{(code 'string-contains)} function commutative? @fitb{7em}{@ifsoln{No.}}
 
-== Are @show{(code 'min)} and @show{(code 'max)} Commutative?   Does the order of the arguments matter?
+@n What does `string-contains` do? @fitb{}{@ifsoln{checks to see whether the first string contains the second string}}
 
-[.FillVerticalSpace, cols="^.^1,^.^4,^.^4"]
-|===
+@n Did both expressions produce _identical_ results? @fitb{7em}{@ifsoln{No.}} @hspace{2em} 
 
-| Circle of Evaluation
-| @show{(coe '(min  200 23))}
-| @ifsoln{@show{(coe  '(min 23 200))}}
+== Does the order of the arguments matter for @show{(code 'blend-images)}?
 
-| Code
-| @show{(code '(min  200 23))}
-| @ifsoln{@show{(code  '(min 23 200))}}
-
-| Result
-| `23`
-| @ifsoln{`23`}
-
-|===
-
-@n Did both expressions produce the same result? @fitb{7em}{@ifsoln{Yes.}} @hspace{2em} Is the @show{(code 'min)} function commutative? @fitb{7em}{@ifsoln{Yes!}}
-
-@n Make a prediction. Do you think @show{(code 'max)} is commutative?  @fitb{8em}{} @hspace{2em} Test your prediction. Were you right? @fitb{}{}
-
-== Is @show{(code 'blend-images)} Commutative?   Does the order of the arguments matter?
+Start by testing out `purple-square` and `white-dot` in the Interactions Area.
 
 [.FillVerticalSpace, cols="^.^1,^.^4,^.^4"]
 |===
-
-| Circle of Evaluation
-| @show{(coe '(blend-images purple-square white-dot))}
-| @show{(coe  '(blend-images white-dot purple-square))}
-
 | Code
 | @show{(code '(blend-images purple-square white-dot))}
 | @ifsoln{@show{(code  '(blend-images white-dot purple-square))}}
@@ -92,7 +57,36 @@ For each function, draw a second Circle of Evaluation that changes the order of 
 | Sketch
 | @image{../images/blended.png, 60}
 | @ifsoln{@image{../images/blended.png, 60}}
+|===
+
+@n What does `blend-images` do? @fitb{}{@ifsoln{blends the two images together, averaging the pixels that overlap}}
+
+@n Did both expressions produce _identical_ images? @fitb{7em}{@ifsoln{Yes.}} 
+
+== Does the order of the arguments matter for @show{(code 'darker)} and @show{(code 'lighter)}?
+
+Start by testing out `imageA` and `imageB` in the Interactions Area.
+
+[.FillVerticalSpace, cols="^.^1,^.^4,^.^4"]
+|===
+| Code
+| @show{(code '(darker imageA imageB))}
+| @showsoln{(code '(darker imageB imageA))}
+
+| Result
+| @image{../images/darker-a-b.png, 50%}
+| @ifsoln{@image{../images/darker-a-b.png, 50%}}
 
 |===
 
-@n Did both expressions produce _identical_ images? @fitb{7em}{@ifsoln{Yes.}} @hspace{2em} Is @show{(code 'blend-images)} commutative? @fitb{7em}{@ifsoln{Yes!}}
+@n Did both expressions produce the same result? @fitb{7em}{@ifsoln{Yes.}} 
+
+@n Test `cat` and `dog` in the Interactions Area. Then, before testing @show{(code '(darker cat dog))}, imagine what it will produce.
+
+@n What does `darker` do? @fitb{}{combine two images into one such that each pixel of the new image comes from}
+@fitb{}{@ifsoln{looking at the two pixels in that position and choosing the darker.}}
+
+@n Make a prediction. What do you think `lighter` does? @fitb{}{}
+
+@n Do you think order matters for @show{(code 'lighter)}?  @fitb{8em}{} @hspace{2em} Test your prediction. Were you right? @fitb{}{}
+

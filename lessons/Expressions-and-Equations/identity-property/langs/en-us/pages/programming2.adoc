@@ -1,0 +1,57 @@
+= Identical Images from different Expressions? (continued)
+
+++++
+<style>
+#content td {padding: 0rem 0px !important}
+#content th { text-align: center !important; }
+.fitb { padding-top: 0.5rem !important; }
+</style>
+++++
+
+Use the @starter-file{identity} to respond to the questions below.
+
+== Warm-up 
+
+@n In the Interactions Area (right), type @show{(code '(circle 60 "solid" "red"))}. Then type @show{(code '(circle 1000 "solid" "red"))}.
+
+[.FillVerticalSpace,cols="<1a,<1a", options="header"]
+|===
+| @center{What do you Notice?}
+| @center{What do you Wonder?}
+|
+|
+|===
+
+@n Test `S1` and `S2` in the Interactions Area. Then, before testing the two lines of code below, make predictions about what they will produce.
+
+- @show{(code '(overlay S1 S2))} @fitb{}{@ifsoln{an aqua square}}
+- @show{(code '(overlay S2 S1))} @fitb{}{@ifosln{an aqua square with a yellow radial star on top}}
+
+Test your predictions.
+
+@n Type `S3` in the Interactions Area.  What happened? Why? @fitb{}{} +
+@fitb{}{@ifsoln{the cursor jumped halfway down the screen because a transparent square was drawn.}}
+
+
+== Are there "Do Nothing" transformations we can write with `overlay` ?
+
+@n With your partner, predict what each of the following expressions will return.
+
+[.table1, cols="1,15,15", grid="none", frame="none", stripes="none"]
+|===
+| 
+| @fitb{1em}{}@show{(code '(overlay S1 dog))}
+| @fitb{}{@ifsoln{an aqua square}}
+
+| 
+| @fitb{1em}{@ifsoln{&#x2705;}} @show{(code '(overlay S2 dog))}
+| @fitb{}{@ifsoln{a yellow radial star on top of a dog}}
+
+| 
+| @fitb{1em}{@ifsoln{&#x2705;}} @show{(code '(overlay S3 dog))}
+| @fitb{}{@ifsoln{a dog}}
+|===
+
+@n Test each line of code and put a check in front of any that are equivalent to `dog`. Experiment to answer any questions you may have.
+
+@n What did you discover? @fitb{}{@ifsoln{As long as a transparent shape isn't larger than the original shape, it won't change the image when overlayed.}}
