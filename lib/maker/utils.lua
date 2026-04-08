@@ -129,3 +129,19 @@ function shell_output(cmd)
   o:close()
   return result
 end
+
+function anonymize_filename(f0)
+  local f = f0
+  local dir = ''
+  local ext = ''
+  if f:match('/') then
+    dir = f:gsub('(.*/).*', '%1')
+    f = f:gsub('.*/(.*)', '%1')
+  end
+  if f:match('%.') then
+    ext = f:gsub('.*(%..*)', '%1')
+    f = f:gsub('(.*)%..*', '%1')
+  end
+  local fa = shell_output('printf "%s" ' .. f .. '|sha1sum|sed -e "s/^\\(.\\{16\\}\\).*/\\1/"')[1]
+  return dir .. fa .. ext
+end
