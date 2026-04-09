@@ -5,7 +5,7 @@ For each row, cross out any Circles of Evaluation that do NOT meet the condition
 ++++
 <style>
 .chosen::after { content: '❌' !important; }
-div.circleevalsexp { width: auto; }
+.circleevalsexp { width: auto; }
 
 /* for table cells with immediate .content children, which have immediate
  * .paragraph children: use flex to space them evenly and center vertically
@@ -15,6 +15,8 @@ td > .content > .paragraph {
   align-items: center;
   justify-content: space-around;
 }
+/* Allow the parent (.paragraph) to control the display of the child elements */
+td > .content > .paragraph > p { display: contents; }
 </style>
 ++++
 
