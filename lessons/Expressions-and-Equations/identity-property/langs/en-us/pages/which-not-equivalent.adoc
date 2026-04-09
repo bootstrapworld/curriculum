@@ -1,0 +1,69 @@
+[.landscape]
+= Which One Isn't Equivalent? Identity Property
+
+Cross out the Circle of Evaluation that is NOT equivalent to the others, and then explain your choice.
+
+++++
+<style>
+.chosen::after { content: '❌' !important; }
+.circleevalsexp { width: auto; }
+
+/* for table cells with immediate .content children, which have immediate
+ * .paragraph children: use flex to space them evenly and center vertically
+*/
+td > .content > .paragraph {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+/* Allow the parent (.paragraph) to control the display of the child elements */
+td > .content > .paragraph > p { display: contents; }
+</style>
+++++
+
+[.FillVerticalSpace, cols="<.^1a,^.^15a,^.^9a",stripes="none", options="header"]
+|===
+| 	 
+| Cross out the expression that is NOT equivalent to the others 
+| Justify your choice.
+
+| @n
+|
+@show{(coe '(* (+ 5 6) 1))}
+@show{(coe '(+ 0 (+ 5 6)))}
+@ifsoln-choice{@show{(coe '(- (+ 5 6) 1))}}
+@show{(coe '(/ (+ 5 6) 1))}
+| @ifsoln{The 3rd Circle of Evaluation subtracts one, which results in a value that is one less.}
+
+| @n
+|
+@show{(coe '(/ (* 13 4) 1))}
+@ifsoln-choice{@show{(coe '(/ 1 (* 13 4)))}}
+@show{(coe '(* 1 (* 13 4)))}
+@show{(coe '(* (* 13 4 ) 1))}
+| @ifsoln{The 2nd Circle of Evaluation starts with 1 and divides, resulting in @math{\frac{1}{(13 \times 4)}}, rather than @math{13 \times 4}.}
+
+| @n
+|
+@show{(coe '(* 45 (+ 1/2 1/2)))}
+@ifsoln-choice{@show{(coe '(* 45 0))}}
+@show{(coe '(/ 45 (+ 1/2 1/2) ))}
+@show{(coe '(+ 45 0))}
+| @ifsoln{The 2nd Circle of Evaluation multiplies by 0, so will result in zero.}
+
+| @n
+|
+@show{(coe '(+ (* 4 (+ 8 9)) 0))}
+@show{(coe '(+ 0 (* 4 (+ 8 9))))}
+@ifsoln-choice{@show{(coe '(- 0 (* 4(+ 8 9))))}}
+@show{(coe '(- (* 4( + 8 9)) 0))}
+| @ifsoln{The 3rd Circle of Evaluation subtracts from zero, resulting in @math{-(4 \times (8 + 9))}, rather than @math{(4 \times (8 + 9))}.}
+
+| @n
+|
+@show{(coe '(/ (/ 60 10) 1))}
+@show{(coe '(* 6 (/ 16 16)))}
+@show{(coe '(* (* 1.5 4) (- 33 32)))}
+@ifsoln-choice{@show{(coe '(/ 6 (- 13 (+ 9 4))))}}
+| @ifsoln{The 4th Circle of Evaluation divides by 0, which is undefined.}
+|===

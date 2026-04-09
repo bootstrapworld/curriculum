@@ -3,15 +3,17 @@
 ++++
 <style>
 /* Shrink vertical spacing on fitbs, and allow them to be smaller than normal */
-.fitb, .fitbruby{padding-top: 1rem; min-width: unset !important; }
+.fitb, .fitbruby{ padding-top: 1rem; min-width: unset !important; }
 
 table { margin: 0 !important; }
-td .autonum { padding-top: 0.7rem !important; }
+.autonum { padding-top: 0.7rem !important; }
 
 .blanklines { line-height: 2rem !important; }
 
 /* Don't eat up available vertical space with tables */
 div#body.workbookpage table.FillVerticalSpace { height: unset; }
+
+.shortFitB .fitb { padding-top: 0; }
 
 /*
   "Graph" tables provide a pure-CSS solution for all coordinate planes.
@@ -35,22 +37,20 @@ div#body.workbookpage table.FillVerticalSpace { height: unset; }
   --height:   1.3in;
   --left_pct: 0.08;
   --top_pct:  0.92;
-  --x_label: 'x';
-  --y_label: 'y';
+  --x_label: '';
+  --y_label: '';
 }
-table.graph td p:first-child { position: relative; text-align: right; }
+table.graph td p:first-child { position: relative; text-align: center; }
 .graph .fitb { border-color: gray; padding-top: 0; }
-.graph td:nth-child(2) {
+
+/* For the 1st row's 1st cell and the 2nd row's cell: make them have no background */
+.graph td:nth-child(2), .graph tr:last-child td  {
 	background: none !important;
 	width: unset !important;
 }
-.graph td:nth-child(2)::before, .graph td:nth-child(2)::after {
-	content: unset !important;
-}
-.graph td:nth-child(2) * {
-	position: unset !important;
-	text-align: left !important;
-}
+.graph tr:last-child td { height: 1em !important; background: white !important; }
+.graph td:last-child .paragraph { margin-top: 10px !important; }
+
 .graph td li { margin-bottom: 7px !important; }
 
 td { padding: 0 5px 0 0 !important; color: black !important; }
@@ -97,7 +97,7 @@ Logarithmic
 
 What happens when we change the range of the y-values? Compare the two graphs.
 
-[.FillVerticalSpace, cols="8a,1,8a", grid="none", frame="none"]
+[.FillVerticalSpace.shortFitB, cols="8a,1,8a", grid="none", frame="none"]
 |===
 | @center{@fitb{2em}{0} @math{< x <} @fitb{2em}{10} @hspace{3em} @fitb{2em}{0} @math{< y <} @fitb{2em}{10}}
 @center{@image{../images/linear.png, 65%}}
@@ -130,9 +130,10 @@ Logarithmic
 
 @n Sketch the graph. How did it change, and why? @fitb{}{@ifsoln{It looks logarithmic!}}
 |
-[.graph, cols="1a", frame="none"]
+[.graph, cols="^1a", frame="none"]
 !===
-! *y-axis*: @fitb{auto}{Logarithmic}
+!
+! *y-axis* set to Logarithmic
 !===
 
 |===
@@ -166,7 +167,8 @@ Logarithmic
 |
 [.graph, cols="1a", frame="none"]
 !===
-! *x-axis*: @fitb{auto}{Logarithmic}
+!
+! *x-axis* set to Logarithmic
 !===
 
 |===

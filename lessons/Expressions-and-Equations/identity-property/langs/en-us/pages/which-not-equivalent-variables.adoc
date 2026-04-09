@@ -1,0 +1,80 @@
+[.landscape]
+= Which One Isn't Equivalent? Identity Property with Variables
+
+++++
+<style>
+.chosen::after { content: '❌' !important; }
+.circleevalsexp { width: auto; }
+
+/* for table cells with immediate .content children, which have immediate
+ * .paragraph children: use flex to space them evenly and center vertically
+*/
+td > .content > .paragraph {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+/* Allow the parent (.paragraph) to control the display of the child elements */
+td > .content > .paragraph > p { display: contents; }
+
+table { margin: 0 !important; }
+</style>
+++++
+
+[.FillVerticalSpace, cols="<.^1a,^.^20a,^.^14a",stripes="none", options="header"]
+|===
+| 	 
+| Cross out the expression that is NOT equivalent to the others.
+| Justify your choice.
+
+| @n
+|
+@show{(coe '(* (+ b c) 1))}
+@show{(coe '(/ (+ b c) 1))}
+@ifsoln-choice{@show{(coe '(* (+ b c) 0))}}
+@show{(coe '(+ (+ b c) 0))}
+| @ifsoln{The 3rd Circle of Evaluation multiplies the quantity by zero, which is not an identity.}
+
+| @n
+|
+@show{(coe '(* f (/ 5 5)))}
+@show{(coe '(* f 1))}
+@ifsoln-choice{@show{(coe '(* f (/ b c)))}}
+@show{(coe '(* f (/ c c)))}
+| @ifsoln{Unless @math{b} and @math{c} turn out to be equal, the third Circle of Evaluation will not evaluate to @math{f}.}
+
+| @n
+|
+@show{(coe '(- x (- 10 10)))}
+@ifsoln-choice{@show{(coe '(+ x 1))}}
+@show{(coe '(+ x (- h h)))}
+@show{(coe '(* x (- k k)))}
+| @ifsoln{The 2nd Circle of Evaluation adds 1 to @math{x}, which is not an identity.}
+
+| @n
+|
+@show{(coe '(* (+ a m) 1))}
+@show{(coe '(/ (+ a m) (/ t t)))}
+@show{(coe '(* (+ a m) (/ t t)))}
+@ifsoln-choice{@show{(coe '(+ (+ a m) (/ t t)))}}
+| @ifsoln{The 4th Circle of Evaluation adds one to the sum of @math{a} and @math{m}, which is not an identity.}
+
+
+| @n
+|
+@ifsoln-choice{@show{(coe '(/ (/ h h) (+ m 2)))}}
+@show{(coe '(/ (+ 2 m) (/ p p)))}
+@show{(coe '(/ (+ m 2) (/ g g)))}
+@show{(coe '(* (/ c c) (+ 2 m)))}
+| @ifsoln{The 1st Circle of Evaluation divides 1 by the sum of @math{m + 2}, instead of vice versa.}
+
+| @star
+|
+@show{(coe '(+ (* 3 v)(- 5 5) ))}
+@show{(coe '(+ (+ v (+ v v)) 0))}
+@show{(coe '(* (* 3 v) (/ 5 5)))}
+@ifsoln-choice{@show{(coe '(* (* 3 v) (- 5 5)))}}
+| @ifsoln{The 4th Circle of Evaluation multiplies by zero, which is not an identity.}
+|===
+
+
