@@ -1,4 +1,13 @@
 = Inverted Images
+++++
+<style>
+/* This is a little bit of a hack: I'm abusing the fact that
+ * there's only one table with three cells, in order to squish
+ * the placeholder
+ */
+td:nth-child(3) img { height: 88px; }
+</style>
+++++
 
 @link-instructions{Open the @starter-file{additive-inverse} and click "Run".}
 
@@ -9,9 +18,11 @@
 @blanklines{2}{@ifsoln{`flower` returned a black circle with a white radial star overlayed on it. @show{(code '(invert flower))} returned a white circle with a black radial-star overlayed on it.}}
 
 @n The image below is defined as `flag`.  Draw what you would expect @show{(code '(invert flag))} to produce.
-[cols="1,^.^6a,2,6, 8", grid="none", frame="none"]
+[cols="^1a,^1a", grid="none", frame="none"]
 |===
-|| @image{../images/flag.png} || @ifsoln{@image{../images/flag2.png}} |
+| @image{../images/flag.png, 250}
+| @ifnotsoln{@image{../images/placeholder.png, 250}}
+  @ifsoln{@image{../images/flag2.png, 250}}
 |===
 
 @n Type `cat` into the Interactions Area. Stop and think. What would you expect to happen when you type @show{(code '(invert cat))}? Test it out.
@@ -41,9 +52,12 @@
 
 @blanklines{1}{@ifsoln{The colors are inverted, but the circles woulnd't land on top of each other.}}
 
-[cols="1,^.^6a,2,^.^6a, 2, 6a, 2", grid="none", frame="none"]
+[cols="^1a,^1a,^1a", grid="none", frame="none"]
 |===
-|| @image{../images/imageA.png} || @image{../images/imageB.png} || @ifsoln{@image{../images/blend-A-B.png}} |
+| @image{../images/imageA.png, 175}
+| @image{../images/imageB.png, 175}
+| @ifnotsoln{@image{../images/placeholder.png, 175}}
+  @ifsoln{@image{../images/blend-A-B.png, 175}}
 |===
 
 @star What do you imagine these images would look like if we blended them together? Make a sketch or describe the image in words?
