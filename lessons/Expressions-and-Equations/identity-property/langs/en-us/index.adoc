@@ -29,18 +29,15 @@
 === Overview
 Students explore @proglang expression that transform an image to produce an image identical to the original.
 
-@scrub{FLANNERY - A programmer did all this stuff. Can you find a more efficient way?}
-
 === Launch
 @slidebreak{Launch}
+
 @QandA{
 @Q{@right{@image{images/dog.png, 125}}What functions do you know that can be used to transform an image?}
 @A{Sample responses: `scale`, `rotate`, `overlay`, etc...}
 }
 
-@teacher{
-Students will be working in @proglang soon -- but we recommend keeping things unplugged for now!
-}
+@teacher{Students will be working in @proglang soon -- but we recommend keeping things unplugged for now!}
 
 @slidebreak{Launch}
 
@@ -59,10 +56,6 @@ Students will be working in @proglang soon -- but we recommend keeping things un
 
 === Investigate
 @slidebreak{Investigate-DN}
-
-@scrub{FLANNERY - New starter file 0- all images are the same size - state that in the lesson plan - include transparent and dog. And make sure to scale by 1.
-Threshold for images is movable. Wouldn't hurt to have kids make a gigantic circle. What happens? Discuss thumbnail and clicking on it.
-}
 
 @lesson-instruction{
 - Open the @starter-file{identity} and click “Run.”
@@ -105,15 +98,37 @@ What did you discover?
 @slidebreak{Investigate}
 
 @lesson-instruction{
-- At the bottom of the Definitions Area you will find S1-S6, which define a number of shapes that are all the same height.
-- Let's use them to explore the `overlay` function. 
-- Turn to @printable-exercise{programming2.adoc} and complete it with your partner.
+- At the bottom of the Definitions Area you will find S1-S6, which define a number of shapes that are all the same height. We'll be using them to explore the `overlay` function. 
+- Turn to @printable-exercise{programming2.adoc} and complete just the first section with your partner.
+}
+
+@slidebreak{Investigate}
+
+@teacher{Best practice for discussing this first question would be to discuss it while displaying the starter file.}
+
+@QandA{
+@Q{I would expect @show{(code '(circle 60 "solid" "red"))} to be smaller than @show{(code '(circle 1000 "solid" "red"))} but when I type them into my Interactions Area, the second one is smaller. Can anyone explain why?}
+@A{When an image is too large for @proglang, the default is to display a thumbnail of the image. We can click on it to see it rendered in full size.}
+@A{The clue that this is just a thumbnail is the outline of the square surrounding the image.}
+
+@Q{What does `overlay` do?}
+@A{It places the first image in the expression on top of the second image.}
+
+@Q{What happened when you typed `S3` into the Interactions Area? Why?}
+@A{The cursor jumped halfway down the screen because it made a transparent image. Even if we can't see it, @proglang knows it's there.}
+}
+
+@slidebreak{Investigate}
+
+@lesson-instruction{
+- Complete @printable-exercise{programming2.adoc} with your partner.
+- Be sure to make predictions before testing expressions in the Interactions Area.
 }
 
 @slidebreak{Investigate}
 
 @QandA{
-@Q{What can we `overlay` to produce an identical image?}
+@Q{What kind of image can we `overlay` to produce an identical image?}
 @A{Any transparent image.}
 }
 

@@ -1,0 +1,54 @@
+= Do Groupings Matter in Code? (2)
+
+++++
+<style>
+  table {grid-template-rows: 3fr 1fr !important;}
+  .circleevalsexp .value,
+  .circleevalsexp .studentBlockAnswerFilled {
+    min-width: unset;
+    font-size: 8pt;
+  }
+  table { margin: 0 !important; }
+</style>
+++++
+
+This pages is designed for use with the @starter-file{expressions-equations}. 
+
+== Make a Prediction
+
+We're going to work with two functions: 
+
+- `darker`: Combines two images by comparing the pixels from the two images at each position and selecting the darker pixel
+- `blend-images`: Combines two images by averaging the pixel color codes from the two images at each position.
+
+@vspace{1ex}
+
+@n Groupings matter for one of them. Which one would you predict? Why? @fitb{}{} +
+@blanklines{1}{}
+
+== *Do groupings matter for @show{(code 'darker)}?* 
+
+@n Translate the Circle of Evaluation below into code. Then draw a second Circle of Evaluation with different groupings and translate it into code. 
+
+[.FillVerticalSpace, cols="^.^1,^.^1"]
+|===
+|@show{(coe '(darker dog (darker cat hello)))} | @ifsoln{@show{(coe  '(darker (darker dog cat) hello))}}
+| @ifsoln{@show{(code '(darker dog (darker cat hello)))}} | @ifsoln{@show{(code '(darker (darker dog cat) hello))}}
+|===
+
+@n Test them out in @proglang. Did both expressions produce _identical_ images? @fitb{8em}{@ifsoln{Yes.}} 
+== *Do groupings matter for @show{(code 'blend-images)}?* 
+
+@n Translate the Circle of Evaluation below into code. Then draw a second Circle of Evaluation with different groupings and translate it into code. 
+
+[.FillVerticalSpace, cols="^.^1,^.^1"]
+|===
+|@show{(coe '(blend-images purple-square (blend-images aqua-star red-rectangle)))} | @ifsoln{@show{(coe  '(blend-images (blend-images purple-square aqua-star) red-rectangle))}}
+| @ifsoln{@show{(code '(blend-images purple-square (blend-images aqua-star red-rectangle)))}} | @ifsoln{@show{(code '(blend-images (blend-images purple-square aqua-star) red-rectangle))}}
+|===
+
+@n Test them out in @proglang. Did both expressions produce _identical_ images? @fitb{8em}{@ifsoln{Yes.}} 
+@n Let's try to generalize our understanding. What do you think makes the @proglang function where the order of the groupins mattered different from the other functions we've considered today? @fitb{}{} +
+@blanklines{4}{@ifsoln{`blend-images` is different because the output isn't data from the original images. Instead it's the average of data from 2 of the original images... so when we average it with data from the third image the third image's data gets counted as twice as important. All of the functions on the first page combined two images so that we could still see the original images. `darker` made a new image by choosing a pixel to keep from one of the original images, so when we combined it with a third image it still just chose the darkest of the three original pixels.}}
+
+@star Can you identify other @proglang functions or operations for which groupings don't matter? @fitb{}{@ifsoln{`blend-images`, `+`, `*`}}

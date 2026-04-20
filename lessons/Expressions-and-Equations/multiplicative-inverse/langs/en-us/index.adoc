@@ -34,19 +34,51 @@
 == Programming Exploration: Scaling Up and Back
 
 === Overview
-Students apply their knowledge of examples in @proglang to think about multiplication and division as inverse operations.
+Students explore the `scale` function, identifying what happens when we scale an image and what we would have to do scaled image in order to get back to the original image.
 
 === Launch
 @slidebreak{Launch}
 
+@lesson-instruction{
+- Open the @starter-file{multiplicative-inverse} and click "Run".
+- Use it to complete the first section of @printable-exercise{scaling-up-and-back.adoc}.
+}
+
+@slidebreak{Launch}
+
+@QandA{
+@Q{What did  @show{(code '(scale 0.5 (scale 2 pyret)))}   return? Why?}
+@A{The original image.}
+@A{Because doubling and then halving canceled each other out.}
+
+@Q{What scale factor do you think we would apply to get an image the size of an original after it's been scaled down using   @show{(code '(scale 1/5 ...))}? Explain your thinking.}
+@A{@show{(code '(scale 5 ...))}}
+@A{Possible response might include:
+	* the new image will be little so we need to make it bigger again
+	* @math{1/5} is the same as dividing by 5, so we need to multiply by 5 to undo it
+	* 5 is the reciprocal of 1/5
+	* @math{1/5 \times 5 = 1} (No need to give this one away if it doesn't surface!)
+  }
+}
 
 === Investigate
 @slidebreak{Investigate-DN}
 
+@lesson-instruction{
+- Complete @printable-exercise{scaling-up-and-back.adoc} with you partner.
+- Make sure you are thinking logically about what scale will undo the previous one rather than just guessing and checking.
+}
 
 === Synthesize
 @slidebreak{Synthesize}
 
+@QandA{
+@Q{If we want to undo a `scale` transformation, how do we figure out which scale factor to use to cancel out the other?}
+@A{Solicit student responses. 
+  * If it's an integer, use the fraction that's equivalent to dividing by that number.
+  * If it's a fraction, use the reciprocal (flip it upside down).
+  * If it's a decimal, think about it as a fraction.}
+}
 
 == The Multiplicative Inverse Property
 
