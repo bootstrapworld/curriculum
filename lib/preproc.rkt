@@ -134,7 +134,8 @@
 
 (define *self-guided-counter* 0)
 (define *self-guided-text?* #f)
-(define *self-guided-context* "")
+(define *default-self-guided-context* "editorCode: {}")
+(define *self-guided-context* *default-self-guided-context*)
 
 (define *external-url-index*
   (let ([f (string-append *pathway-root-dir* "external-index.rkt")])
@@ -1531,7 +1532,7 @@
   (set! *enclosing-directive* #f)
   (set! *self-guided-counter* 0)
   (set! *self-guided-text?* #f)
-  (set! *self-guided-context* "editorCode: {}")
+  (set! *self-guided-context* *default-self-guided-context*)
 
   (set! *pyret?* (string=? *proglang* "pyret"))
 
@@ -1634,6 +1635,7 @@
         (lambda (o)
           (fprintf o "~a\n" *self-guided-context*))
         #:exists 'replace)
+      (set! *self-guided-context* *default-self-guided-context*)
       (display (html-comment "stop_self_guided_piece") o)
       (newline o))))
 
@@ -2115,7 +2117,7 @@
                               (set! *self-guided-context*
                                 (case directive
                                   [("editorconfig") (format "editorCode: ~a\n" text)]
-                                  [("imageconfig") (format "imageConfig: ~s\n" text)]
+                                  [("imageconfig") (format "imageConfig: ~s\n" (path->string (anonymize-filename text)))]
                                   [("videoconfig") (format "videoConfig: ~s\n" text)])))]
                            [(string=? directive "Bootstrap")
                             (fprintf o "https://www.bootstrapworld.org/[Bootstrap]")]

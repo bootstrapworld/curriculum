@@ -9,17 +9,41 @@
 
 h2 .MathJax { float: right;  padding-right: 1em; }
 
+/*
+  "Graph" tables provide a pure-CSS solution for all coordinate planes.
+
+  They rely on a set up CSS variables, with reasonable defaults:
+    --width and --height determine the size of plane. Defaults to 3in x 3x.
+    --min-gap determines the minimum space between graphs. Defaults to 20px.
+
+    --top_pct and --left_pct determine the origin's position (btw 0 and 1). Defaults to (0.5, 0.5).
+    --minors determines how many "minor axes" (incl the one behind major). Defaults to 7.
+
+    --x_label defaults to 'x'
+    --y_label defaults to 'y'
+*/
+.graph {
+  --width:    2.0in;
+  --height:   1.5in;
+  --left_pct: 0.10;
+  --top_pct:  0.85;
+  --minors:   0;
+}
+
 /* Use table cells to host scatter plot image */
-td {
+html div#body.workbookpage table.graph td {
     padding: 0 !important;
-    background-image: url(../images/f99f615fabddc961.png);
+    background-image: url(../images/ca28c918eb67dcc3.png);
     background-size: 2in 1.75in;
-    max-height: 1.75in;
-    min-height: 1.75in;
-    background-position-x: 0.2in;
+    max-height: 1.5in;
+    min-height: 1.5in;
+    background-position-x: -0.3in;
+    background-position-y: 0;
     background-repeat: no-repeat;
 }
 
+.graph td::before, .graph td::after { content: '' !important; }
+html div#body.workbookpage table.graph td p > .mathunicode:first-child { position: unset; }
 td .fitb { padding-top: 0 !important; }
 td .MathJax { min-width: 30px !important; display: inline-block; }
 </style>
@@ -33,7 +57,7 @@ For this section, you'll need to have *Slide 1: Quadratic Model for MI of *Model
 
 @n Try changing the values of @math{a}, @math{h} and @math{k} to find three promising quadratic models, graphing each one and labeling your values on the grids below.
 
-[.FillVerticalSpace, cols="1,1,1", frame="none"]
+[.FillVerticalSpace.graph, cols="1,1,1", frame="none"]
 |===
 | @math{a=}@fitb{1em}{} +
   @math{h=}@fitb{1em}{} +
@@ -49,7 +73,7 @@ For this section, you'll need to have *Slide 1: Quadratic Model for MI of *Model
 
 |===
 
-@n Do your quadratic models open up or down? @fitb{5em}{@ifsoln{Up}}. What does that tell us about @math{a}? @fitb{}{@ifsoln{It's positive}}.
+@n Do your quadratic models open up or down? @fitb{5em}{@ifsoln{Up}}. What does that tell us about @math{a}? @fitb{}{@ifsoln{It's positive.}}
 
 @n Describe one of your models: Where is the vertex? (@fitbruby{2em}{}{x}, @fitbruby{2em}{}{y}) What is the horizontal shift? @fitbruby{3em}{}{@math{h}} The vertical shift? @fitbruby{3em}{}{@math{k}}
 
@@ -76,10 +100,7 @@ _Hint: If you forgot the contract for `fit-model`, look it up in the @dist-link{
 
 @hspace{1em} @math{S} for `quadratic1`: @fitb{9em}{@ifsoln{varies}} @hspace{2em} @math{S} for `quadratic2`: @fitb{9em}{@ifsoln{varies}} @hspace{2em} @math{S} for `quadratic3`: @fitb{}{@ifsoln{varies}}
 
-@vspace{1ex}
-
 == What does this model actually mean?
-
 @teacher{Numerical values below will vary!}
 
 After experimenting, the best quadratic model I came up with for this dataset shows that @fitbruby{5em}{@ifsoln{days}}{x-variable} are correlated to @fitbruby{}{@ifsoln{positive COVID cases}}{y-variable} +
