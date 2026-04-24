@@ -1,0 +1,72 @@
+= Is there another way?
+
+++++
+<style>
+.circleevalsexp { width: auto; }
+
+/* Shrink vertical spacing on fitbruby */
+.fitbruby{padding-top: 0.3rem;}
+</style>
+++++
+
+For each expression, we've drawn two unique Circles of Evaluation.
+
+- Adding and subtracting from left to right always works. Sometimes computing in other orders work, too! Can you find a pattern?
+- Evaluate each pair of Circles of Evaluation below. Determine whether or not they are equivalent.
+
+[cols="^.^1a,^.^3a,^.^6a,^.^5a, 2a", stripes="none", options="header"]
+|===
+|	 
+| Expression 
+| Adding & Subtracting from Left-to-Right +
+ALWAYS Gives us the Correct Answer 
+| How about Right-to-Left?
+| Equivalent?
+
+| @n
+| @math{20 + 8 - 5}
+| @show{(coe '(- (+ 20 8) 5))} = @fitb{2em}{@ifsoln{@math{23}}}
+| @show{(coe '(+ 20 (- 8 5)))} = @fitb{2em}{@ifsoln{@math{23}}}
+| @ifsoln{Yes}
+
+| @n
+| @math{4 + 3 - 2}
+| @show{(coe '(- (+ 4 3) 2))} = @fitb{2em}{@ifsoln{@math{5}}}
+| @show{(coe '(+ 4 (- 3 2)))} = @fitb{2em}{@ifsoln{@math{5}}}
+| @ifsoln{Yes}
+
+| @n
+| @math{12 - 9 + 8}
+| @show{(coe '(+ (- 12 9) 8))} = @fitb{2em}{@ifsoln{@math{11}}}
+| @show{(coe '(- 12 (+ 9 8)))} = @fitb{2em}{@ifsoln{@math{5}}}
+| @ifsoln{No}
+
+| @n
+| @math{64 + 92 - 91}
+| @show{(coe '(- (+ 64 92) 91))} = @fitb{2em}{@ifsoln{@math{65}}}
+| @show{(coe '(+ 64 (- 92 91)))} = @fitb{2em}{@ifsoln{@math{65}}}
+| @ifsoln{Yes}
+
+| @n
+| @math{120 - 13 + 7}
+| @show{(coe '(+ (- 120 13) 7))} = @fitb{2em}{@ifsoln{@math{114}}}
+| @show{(coe '(- 120 (+ 13 7)))} = @fitb{2em}{@ifsoln{@math{100}}}
+| @ifsoln{No}
+
+| @n
+| @math{100 - 80 + 2}
+| @show{(coe '(+ (- 100 80) 2))} = @fitb{2em}{@ifsoln{@math{22}}}
+| @show{(coe '(- 100 (+ 80 2)))} = @fitb{2em}{@ifsoln{@math{18}}}
+| @ifsoln{No}
+|===
+
+@n Describe the pattern you discovered for when grouping could be flexible:
+
+- We have to work left to right when @fitb{}{@ifsoln{the expression starts with subtraction.}}
+- We can compute in either order when @fitb{}{@ifsoln{the expression started with addition and then we subtracted.}}
+
+@n _For each row that was equivalent, put a star next to the Circle of Evaluation that would be easier to compute in your head._ Why might teachers to decide to teach that we always have to compute addition and subtraction expressions from left to right? +
+@fitb{}{@ifsoln{students only have to learn one rule and will always compute the answer correctly!}}
+
+@n What might be an advantage of learning more nuanced rules so that you can sometimes compute in another order? @fitb{}{} +
+@fitb{}{@ifsoln{it allows us to work with smaller numbers, thereby simplifying computations we're doing in our head}}

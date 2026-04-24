@@ -22,10 +22,6 @@
 |[.materials-links]
 @material-links
 
-| Supplemental Materials
-|[.materials-links]
-@opt-material-links
-
 | Key Points For The Facilitator
 |
 - Pay attention to students' Circles of Evaluation to ensure that they are in fact applying the Commutative Property.
@@ -34,16 +30,10 @@
 == Programming Exploration: Does Order Matter?
 
 === Overview
-
 Students explore whether various image-producing @proglang functions are commutative.
 
 === Launch
 @slidebreak{Launch}
-
-As a programmer, you will definitely want (and need!) to know whether or not you can change around the order of a function's arguments... or if you need to always use one "correct" order.
-
-=== Investigate
-@slidebreak{Investigate-DN}
 
 @lesson-instruction{
 - Turn to @printable-exercise{commutativity-and-code.adoc} and open the @starter-file{expressions-equations}.
@@ -52,16 +42,17 @@ As a programmer, you will definitely want (and need!) to know whether or not you
 
 @teacher{As students work, encourage them to _always_ make predictions before testing the code. Similarly, the activity will be more valuable if students discuss _why_ the code did or did not produce identical images. Debrief to ensure comprehension.
 
-When everyone is finished, check in with students. Did everyone discover that _none_ of the functions were commutative? There is a good chance your students will wonder if _any_ @proglang functions are commutative!
+When everyone is finished, check in with students. Did everyone discover that _none_ of these functions were commutative? There is a good chance your students will wonder if _any_ @proglang functions are commutative!
 }
 
-@slidebreak{Investigate}
+=== Investigate
+@slidebreak{Investigate-DN}
 
-In the last activity, we discovered that _none_ of the image-producing functions on the page were commutative! Are any @proglang functions commutative? Let's continue exploring!
+In the last activity, we discovered that we couldn't change the order of the arguments for any of the image-producing functions on the page! If order matters for @show{(code 'beside)}, @show{(code 'above)} and @show{(code 'overlay)} does that mean it will matter for all @proglang functions? Let's continue exploring!
 
 @lesson-instruction{
 - Turn to @printable-exercise{commutativity-and-code2.adoc}.
-- With your partner, test these four additional functions for commutativity.
+- With your partner, test @show{(code 'string-contains)}, @show{(code 'blend-images)}, @show{(code 'lighter)} and @show{(code 'darker)} to see whether the order of the arguments matters.
 }
 
 @teacher{
@@ -70,20 +61,18 @@ Reminder: Color blending in @proglang does not behave exactly as it would in the
 
 @slidebreak{Investigate}
 
-@ifslide{
-[cols="1a,1a,1a,1a", options="header"]
+[cols="^1a,^1a,^1a,^1a", options="header"]
 |===
 | `imageA` 
 | `imageB`
 | @show{(code '(darker imageA imageB))}
 | @show{(code '(lighter imageA imageB))}
 
-| @image{images/imageA.png}
-| @image{images/imageB.png}
+| @image{images/imageA.png,75%}
+| @image{images/imageB.png, 75%}
 | @image{images/darker-a-b.png}
 | @image{images/lighter-a-b.png}
 |===
-}
 
 @QandA{
 @Q{What do you think `darker` and `lighter` do?}
@@ -105,13 +94,14 @@ Reminder: Color blending in @proglang does not behave exactly as it would in the
 
 === Overview
 Students begin by trying to come up with counterexamples to characters' arguments that each of the operations is commutative. Then we will use the Circles of Evaluation to reveal the structure of expressions containing three numbers and consider how commutativity works for them.
+
 === Launch
 @slidebreak{Launch}
 
 When order doesn't matter to the outcome of a mathematical expression, we call an operation @vocab{commutative}.
 
 @lesson-instruction{
-- Let's take a moment to think about which operations are commutative.
+- Does order matter when we add? subtract? multiply? divide? Let's take a moment to think about which operations are commutative. 
 - Complete @printable-exercise{discover-comm.adoc}. 
 }
 
@@ -123,7 +113,7 @@ When order doesn't matter to the outcome of a mathematical expression, we call a
 
 @Q{If any of the operations weren't commutative, was there a pattern to what happened when you changed the order of the arguments?}
 @A{For subtraction changing the order changes the sign of the answer! (unless both numbers are the same).}
-@A{For division changing the order changes the answer from a whole number to a fraction or vice versa! (unless both numbers are the same).}
+@A{If we're dividing counting numbers (and the numbers aren't the same), changing the order changes the answer from a whole number to a fraction or vice versa!}
 }
 
 === Investigate
@@ -157,8 +147,7 @@ Ensure comprehension of this key idea, as students will apply their understandin
 - Paying careful attention to which operations in each problem are commutative, use the Commmutative Property to draw as many different equivalent Circles of Evaluation as you can for each expression. 
 }
 
-@teacher{This activity is similar to one students’ completed during the previous lesson. In both activities, students develop equivalent expressions. That said, in this lesson, students cannot write down _any_ equivalent Circle of Evaluation; they must develop @vocab{equivalent} @vocab{arithmetic expressions} that illustrate _commutativity_.
-
+@teacher{
 As students work, draw their attention to the operation as they rearrange the values inside the Circles of Evaluation, helping to reinforce that the Commutative Property does not apply for division and subtraction.
 }
 
@@ -176,7 +165,6 @@ As students work, draw their attention to the operation as they rearrange the va
 }
 
 === Common Misconception
-
 Students may attempt to apply other properties when developing equivalent Circles. In such instances, help students to see that their Circle of Evaluation is indeed equivalent, but is not an example of the Commutative Property at work.
 
 === Synthesize
@@ -191,61 +179,8 @@ Students may attempt to apply other properties when developing equivalent Circle
 
 @Q{How can we apply the commutative property to expressions that include both operations that are commutative and others that are not commutative?}
 @A{Regardless of how  many things are happening in an expression, as long as we identify the groupings before we begin and don't change them, we can change the order in which terms that are being added are added and we can change the order in which terms that are being multiplied are multiplied.}
-}
 
-
-== Tying it All Together
-
-=== Overview
-
-Students connect and apply what they have learned so far about translation, computation, and the Commutative Property.
-
-=== Launch
-@slidebreak{Launch}
-
-Claire, Walker, and Soraya translate   "one half the product of five and six"   into Circles of Evaluation. 
-@ifnotslide{
-[.embedded, cols="^.^1,^.^1,^.^1", grid="none", stripes="none" frame="none"]
-|===
-
-| Claire draws this:				| Walker draws this:				| Soraya draws this:
-|@show{(coe  '(* 1/2 (* 5 6)))}		| @show{(coe  '(* (* 5 6) 1/2))}	| @show{(coe '(/ (* 5 6) 2))}
-|===
-}
-
-All three students compute that this expression evaluates to 15.
-
-@slidebreak{Launch}
-
-@QandA{
-@Q{Whose Circle of Evaluation is the most direct translation?}
-@A{Claire's}
-
-@Q{Are the other two Circles of Evaluation equivalent?}
-@A{Yes. 
-  * Walker's applies the commutative property of multiplication.
-  * Soraya's applies the multiplicatve inverse.
-  }
-}
-
-=== Investigate
-@slidebreak{Investigate}
-
-@lesson-instruction{
-- Look at @printable-exercise{which-coe-is-correct.adoc} with some additional work by Claire and Walker. Their teacher awards credit when her students translate the expression precisely _or_ when they show a deep understanding of commutativity.
-- In the column on the right, record if Claire, Walker, or both students correctly translated the words into a Circle.
-- @opt{Complete @opt-printable-exercise{which-coe-is-correct-2.adoc} to analyze Circles of Evaluation and commutativity for a more complex expression in words.}
-}
-
-@teacher{Discuss and debrief with students. Invite students to verbally share their responses to reinforce important vocabulary and concepts that students will use again and again in future lessons.}
-
-=== Synthesize
-@slidebreak{Synthesize}
-
-@QandA{
 @Q{Summarize the Commutative Property in your own words.}
 
 @Q{How might a strong understanding of the Commutative Property be useful when you're doing computations in your head?}
-
-@Q{How were the programming activities in this lesson similar to the math activities? How were they different?}
 }
