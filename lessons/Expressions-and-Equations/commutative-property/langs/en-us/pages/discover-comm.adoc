@@ -3,6 +3,13 @@
 <style>
   .fitb, .fitbruby, .fitb.stretch::after, .fitbruby.stretch::after {
     padding-top: 1em !important;
+    }
+
+/* allow more than one circle to exist on the same line */
+  .circleevalsexp { width: unset; }
+
+/* when a paragraph tag is followed by a circle, allow them both to exist on the same line */
+  div.paragraph>p:has(+.circleevalsexp) { display: inline; }
 </style>
 ++++
 
@@ -10,9 +17,7 @@
 
 == Does Order matter for Addition? (or "Is Addition Commutative?")
 
-@n Everett thinks that order doesn't matter for addition. They write the following equations as proof. : @hspace{2em} @big{@math{2 + -3 = -1} @hspace{1em} @math{-3 + 2 = -1}}
-
-@vspace{1ex}
+@n Everett thinks that order doesn't matter for addition. They write the following equations as proof: @hspace{1em} @show{(coe '(+ 2 -3))} = -1 @hspace{1em} @show{(coe '(+ -3 2))} = -1
 
 Can you think of any addition problems where order matters? Write at least three more examples in both orders and see if they evaluate to the same thing. _(We've provided the start of one example.)_
 
@@ -65,5 +70,3 @@ Can you think of any division problems where order matters? Write at least three
 @blanklines{1}{}
 
 @star Can you identify a pattern for the operations that aren't commutative? What happens when the order of their arguments gets reversed. @fitb{}{}
-
-@fitb{}{}
