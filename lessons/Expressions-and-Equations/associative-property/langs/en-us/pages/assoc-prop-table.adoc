@@ -14,25 +14,30 @@ div#body.workbookpage .autonum {
 
 Complete each row of the table by generating equivalent Circles of Evaluation using the Associative Property. Fill as many or as few of the boxes in a row as is appropriate. Make sure you leave the order of the numbers the same and only change the _groupings_. 
 
-[.FillVerticalSpace,cols="^.^1a,^.^6a,^.^6a,^.^6a,^.^6a", stripes="none", options="header"]
+[.FillVerticalSpace,cols="^.^1a,^.^6a,^.^6a,^.^6a,^.^6a, ^.^6a", stripes="none", options="header"]
 |===
-|	 | Circle of Evaluation | Equivalent Circle 1 | Equivalent Circle 2 | Equivalent Circle 3
+|	 | Circle of Evaluation | Equivalent Circle 1 | Equivalent Circle 2 | Equivalent Circle 3 | Equivalent Circle 4
 
 | @n
 | @show{(coe '(+ (+ 5 6) 11))}
 | @showsoln{(coe '(+ 5 (+ 6 11)))}
 |
 |
+|
+
 
 | @n
 | @show{(coe '(* (* 36 5) (* 2 8)))}
 | @showsoln{(coe '(* (* 36 (* 5 2)) 8))}
 | @showsoln{(coe '(* (* (* 36 5) 2) 8))}
 | @showsoln{(coe '(* 36 (* (* 5 2) 8)))}
+| @showsoln{(coe '(* 36 (* 5 (* 2 8))))}
+
 
 | @n
 | @show{(coe '(- (+ (+ 10 3) 2) 5))}
 | @showsoln{(coe '(- (+ 10 (+ 3 2)) 5))}
+|
 |
 |
 
@@ -41,10 +46,20 @@ Complete each row of the table by generating equivalent Circles of Evaluation us
 | @showsoln{(coe '(+ (+ 3 (+ 4 5)) 6))}
 | @showsoln{(coe '(+ (+ 3 4) (+ 5 6)))}
 | @showsoln{(coe '(+ 3 (+ (+ 4 5) 6)))}
+|
 
 | @n
 | @show{(coe '(+ (+ (+ 3 4) 5) (* 6 7)))}
 | @showsoln{(coe '(+ (+ 3 (+ 4 5)) (* 6 7)))}
 | @showsoln{(coe '(+ 3 (+ (+ 4 5) (* 6 7))))}
 | @showsoln{(coe '(+ 3 (+ 4 (+ 5 (* 6 7)))))}
+|
+
+| @n
+| @show{(coe '(* (* 36 5) (* 2 8)))}
+| @showsoln{(coe '(* (* 36 (* 5 2)) 8))}
+| @showsoln{(coe '(* (* (* 36 5) 2) 8))}
+| @showsoln{(coe '(* 36 (* (* 5 2) 8)))}
+| @showsoln{(coe '(* 36 (* 5 (* 2 8))))}
+
 |===

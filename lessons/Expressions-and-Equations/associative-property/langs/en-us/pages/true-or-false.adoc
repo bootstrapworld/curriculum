@@ -20,15 +20,15 @@ Decide whether or not the two expressions are equivalent. Explain your reasoning
 | @n |@show{(coe '(- 5 (- 7 8)))}			| = | @show{(coe '(- (- 5 7) 8))}
 |@ifsoln{False. The Associative Property does not apply for subtraction.}
 
-| @n |@show{(coe '(* (* (* 78 15) 10) 6))}	| = | @show{(coe '(* (* 78 15) (* 10 6)))}
-| @ifsoln{True. The groupings have changed in an expression with only multiplication.}
+| @n |@show{(coe '(+ (+ (+ 78 15) 10) 6))}	| = | @show{(coe '(+ (+ 78 15) (+ 10 6)))}
+| @ifsoln{True. The groupings have changed in an expression with only addition.}
 
 | @n |@show{(coe '(- 41 (* 32 63)))} 		| = |  @show{(coe '(- (* 41 32) 63))}
-| @ifsoln{False. The expression includes subtraction and multiplication, so the Associative Property does not apply.}
+| @ifsoln{False. Other than subtraction (which is not Associative) this expression only includes one set of numbers being mutliplied, so there isn't anything that can be regrouped.}
 
 | @n |@show{(coe '(/ (* (* 8 9) 10) 6))}	| = |  @show{(coe '(/ (* 8 (* 9 10)) 6 ))}
-| @ifsoln{True. Both expressions are being divided by 6. The Associative Property holds for expressions involving only multiplication.}
+| @ifsoln{True. Both expressions divide the produce of 3 numbers by 6. The Associative Property allows us to multiply those 3 numbers using any groupings we'd like.}
 
 | @n |@show{(coe '(- (+ (+ 4 19) 30) 2))}	| = |  @show{(coe '(+ (+ 4 19) (- 30 2)))}
-| @ifsoln{False. The Associative Property does not apply to expressions with subtraction.}
+| @ifsoln{False. The original expression adds 3 numbers before subtracting. We could have used the Associative Property to regroup the addition portion of the expression, but it does not allow us to change which quantities are being subtracted.}
 |===
