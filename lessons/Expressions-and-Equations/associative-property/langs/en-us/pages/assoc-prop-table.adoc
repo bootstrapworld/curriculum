@@ -8,13 +8,25 @@
 div#body.workbookpage .autonum {
     padding-top: 0.1em !important;
 }
+div#body.workbookpage .autonum::after { content: unset !important; }
+div#body table tr th, div#body table tr td { padding: 0.5625em 0.1em; }
+
+/* Be really stingy about horizontal space in COEs */
+.circleevalsexp { margin: 0 2px; }
+p .circleevalsexp { margin: 0; }
+.circleevalsexp .value { margin: 0.3em 0.3em; font-size: 11px; }
+.circleevalsexp .value+.hspace+.value { margin-left: 0.4em; }
+.circleevalsexp .operator { height: 0.9em; }
+.circleevalsexp .expression { margin: 2px 3px; padding-top: 3px; }
+.circleevalsexp .hspace ~ .hspace { width: 2px; }
+.circleevalsexp { white-space: nowrap !important; }
 </style>
 ++++
 
 
 Complete each row of the table by generating equivalent Circles of Evaluation using the Associative Property. Fill as many or as few of the boxes in a row as is appropriate. Make sure you leave the order of the numbers the same and only change the _groupings_. 
 
-[.FillVerticalSpace,cols="^.^1a,^.^6a,^.^6a,^.^6a,^.^6a, ^.^6a", stripes="none", options="header"]
+[.FillVerticalSpace,cols="^.^1a,^.^5a,^.^8a,^.^8a,^.^8a, ^.^8a", stripes="none", options="header"]
 |===
 |	 | Circle of Evaluation | Equivalent Circle 1 | Equivalent Circle 2 | Equivalent Circle 3 | Equivalent Circle 4
 
