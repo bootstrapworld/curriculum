@@ -1,70 +1,82 @@
 = Discover Inverse Operations: Addition & Subtraction
+
 ++++
 <style>
-  table {grid-template-rows: 3fr 1fr !important;}
-  .circleevalsexp .value,
-  .circleevalsexp .studentBlockAnswerFilled { min-width:unset; }
-
-  .autonum { padding-top: 1rem !important; }
-  .center{ padding: 0; }
+/* Force fractional row heights on the 6 body rows, making them 4x the height of the header */
+  .FillVerticalSpace { grid-template-rows: 2fr 3fr 3fr 3fr 3fr 3fr !important; }
 </style>
 ++++
 
+[.no-flex-section]
 == From Adding to Subtracting
 
-@n Under each Circle of Evaluation, write the equivalent arithmetic expression.
+@n Kelli claims that *adding a negative is the same as subtracting a positive* and and draws the Circles of Evaluation below as proof. Translate the Circles of Evaluation into expressions and compute their values. 
 
-[cols="^.^5,^.^1,^.^5", stripes="none"]
+[cols="5,1,5", stripes="none"]
 |===
-|@show{(coe  '(+ 10 -3))}       | @math{=}  | @show{(coe '(- 10 3))}
-|@math{+}                       |@math{=}   | @ifsoln{@math{-}}
-|===
+^.^|@show{(coe  '(+ 10 -3))}             
+| @arrow  
+^.^| @show{(coe '(- 10 3))}
 
-@n What will the first Circle evaluate to? @fitb{5em}{@ifsoln{@math{7}}} @hspace{12em} The second Circle? @fitb{5em}{@ifsoln{@math{7}}}
-
-@n What do you Notice? What do you Wonder? @fitb{}{@ifsoln{Both expressions produce 7. One has addition and one has subtraction. One has @math{3} and one has @math{-3}}}
-
-@fitb{}{}
-
-@center{*Did you know that adding @math{-3} is the same as subtracting @math{3}?*}
-
-@n In the table below, fill in the blanks to demonstrate how _adding a negative_ produces the same result as _subtracting a positive._ Then write the equivalent arithmetic expression for each of your Circles.
-
-[cols="^.^5,^.^1,^.^5", stripes="none"]
-|===
-| @show{(coe  '(+ 30 -5))} 
-| @math{=} 
-| @show{(coe '(- (?ANS 30) (?ANS 5)))}
-
-| @ifnotsoln{@math{+}}     @ifsoln{@math{30 + -5}}       
-| @math{=}
-| @ifnotsoln{@math{-}}     @ifsoln{@math{30 - 5}}  
+| @ifsoln{@math{10 + -3 = 7}}
+| @arrow  
+| @ifsoln{@math{10 - 3 = 7}}
 |===
 
-@n This time, we've completed the _subtraction_ Circle of Evaluation. You fill in the equivalent addition Circle of Evaluation.
+@n Are these expressions equivalent?    @ifsoln-choice{Yes}    No
 
-[cols="^.^5,^.^1,^.^5", stripes="none"]
+@n Can you think of any problems where adding a negative can't be rewritten as subtracting a positive? We've provided the start of two examples for you to complete. Then write at least three more examples and see if they evaluate to the same thing. 
+
+[.FillVerticalSpace,cols="^1a,^1a", options="header",stripes="none"]
 |===
-| @show{(coe  '(+ (?ANS 2) (?ANS -10)))} 
-| @math{=} 
-| @show{(coe  '(- 2 10))}
+| Adding a Negative
+| Subtracting a Positive
 
-| @ifnotsoln{@math{+}}     @ifsoln{@math{2 + -10}}       
-| @math{=}
-| @ifnotsoln{@math{-}}     @ifsoln{@math{2 - 10}}  
+|@math{30 + -5 =}@fitb{3em}{@ifsoln{25}}  
+|@ifsoln{@math{30 - 5 = 25}}
+
+|@ifsoln{@math{12 + -10 = 2}}
+|@math{12 - 10 =}@fitb{3em}{@ifsoln{22}}
+
+|| @vspace{1ex}
+
+|| @vspace{1ex}
+
+|| @vspace{1ex}
 |===
 
+@n Then decide:  *Is adding a negative equivalent to subtracting a positive*?    @ifsoln-choice{Yes}    No
 
-== Try it out
+== Match each expression on the left to an equivalent expression on the right
 
-Complete the table by rewriting each addition expression as subtraction, and each subtraction expression as addition.
-
-[cols="^.^10,^1,^.^10", stripes="none"]
+[.FillVerticalSpace,cols="^5a,1a,5,1a,^5a", stripes="none", grid="none", frame="none", options="header"]
 |===
-| @math{30 - 12}              | = | @ifsoln{@math{30 + -12}}
-| @math{24 + -4}              | = | @ifsoln{@math{24 - 4}}
-| @math{100 - 101}            | = | @ifsoln{@math{100 + -101}}
-| @ifsoln{@math{6 + -18}}     | = | @math{= 6 - 18}
-| @ifsoln{@math{0 - 12}}      | = | @math{= 0 + -12}
-| @ifsoln{@math{6 + -36}}     | = | @math{= 6 - 36}
+| Addition
+| || 
+| Subtraction
+
+| @math{13 + -8}
+| *@n* @ifsoln{B}
+||
+| 
+
+| @math{8 + -13}
+| *@n* @ifsoln{A}
+|| *A*
+| @math{8 - 13}
+
+| @math{ 13 + 8}
+| *@n* @ifsoln{C}
+|| *B*
+| @math{13 - 8}
+
+| @math{-13 + 8}
+| *@n* @ifsoln{A}
+|| *C*
+| @math{13 - -8}
+
+| @math{-8 + 13}
+| *@n* @ifsoln{B}
+|| 
+|
 |===
