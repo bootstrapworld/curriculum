@@ -33,7 +33,7 @@
 
 === Overview
 
-Students explore different examples of how people use AI every day, including a mix of recommendation systems and classifiers. Students discover the challenges of defining AI.
+Students explore different examples of how people use AI every day, including a mix of recommendation systems and classifiers. Students discover the challenges of defining AI, and think about whether AI is just an algorithm, or something more.
 
 === Launch
 @slidebreak{Launch}
@@ -48,34 +48,49 @@ Who here has ever used AI? Raise your hand if you've used an AI tool, or know so
 @A{Facial recognition}
 }
 
+@slidebreak{LaunchR}
+@lesson-point{Is it _thinking_, or is it _following an algorithm_?}
+--
+@right{@image{images/flow-chart.gif, 400}}
+The first spell-checker was written in 1961. It had a 10,000 word dictionary, and it would check every word you typed to see if it was in the dictionary. All it could do was tell you if a word _was_ or _wasn't_ spelled right.
+
+But it wasn't really _thinking:_ it was just mechanically comparing strings of letters against a long list. It was just following an following an @vocab{algorithm} -- a series of steps that tell a computer how to perform a task.
+--
+
 @slidebreak{Launch}
 
-This feature is called "predictive text". You can type the letter "b, and the phone will recommend words that start with "b". When predictive text first came out, people swore that AI had truly arrived. The phone seemed to know what they were thinking!
+In 1971, however, a new spell-checker arrived from the Stanford Artificial Intelligence Laboratory called SPELL. SPELL wouldn't just tell you if a word was misspelled - it would _suggest alternative words_ that you might have intended! People were *floored*, and swore that AI had arrived. After all, "how did the computer know what we intended to write?"
 
-But was it really AI?
+Was SPELL _thinking_, or was it, too, just _following an algorithm_?
 
 @lesson-instruction{
 - Form groups of 2-3.
-- How does my phone come up with suggestions when I type the letter "b"? How do you think it might work?
+- How did SPELL know what words to suggest?
 - Be ready to share your ideas with the class!
 }
 
-@teacher{Give time for productive discussion}
+@teacher{Give time for productive discussion about possible algorithms.}
 
 @slidebreak{Launch}
-@lesson-point{Is it _thinking_, or is it _following an algorithm_?}
 
-Predictive text works by following an @vocab{algorithm} -- a series of steps that tell a computer how to perform a task.
+Here's SPELL's algorithm for checking a word:
 
-In our example, it takes a dictionary and finds all the words that start with the letter "b". To make suggestions more helpful, it might even sort that list to show you the top-3 most common words in English, or the top-3 most common words that YOU have typed in the past. The phone has no idea what these words mean, or even what a word _is!_ And it definitely doesn't know what you're thinking when you type. *It's just an algorithm.*
+@indented{
+(1) If the word is in the dictionary, we're done!
+
+(2) If it's _not_ in the dictionary, find words that are "near" the misspelled word (one letter off, two letters swapped by accident, etc.)
+
+(3) See if any of _those_ words are in the dictionary, and suggest them as alternatives
+}
+SPELL had no idea what those alternative words meant. It didn't even know what a word _was!_ And it definitely didn't know what people were thinking when they typed. *It's just an algorithm.*
 
 @slidebreak{Launch}
+--
 @right{@image{images/mccarthy.png, 200}}
-The question of "what counts as AI" isn't so black and white. In fact, people have used the term for well over 50 years! +
-{empty} +
-When the first spell-checker came out, people swore that AI had arrived. After all, _how did the computer know what we intended to write?_ They couldn't imagine how a machine could check their spelling! But after a while, most people stopped calling it that. +
-{empty}
+After a while, most people stopped calling spell checkers AI. But in the early 2000s, cell phones introduced a feature called "predictive text": when you start typing a sentence, the phone makes suggestions about what the next word should be. People were *floored*, and swore that AI had arrived...but eventually they stopped calling predictive text AI, too.
+
 Computer scientist @link{https://en.wikipedia.org/wiki/John_McCarthy_(computer_scientist), John McCarthy} coined the phrase "AI effect" to describe this phenomenon: humans keep _moving the goalposts_ for what counts as "Artificial Intelligence" and what counts as "Human Intelligence"! In his words, "As soon as it works, no one calls it AI anymore."
+--
 
 === Investigate
 @slidebreak{Investigate}
@@ -113,6 +128,7 @@ Which of these technologies falls into which category?
 @Q{What did the class mostly agree were examples of *thinking*?}
 @Q{What did the class mostly agree were examples of *following an algorithm*?}
 @Q{What kinds of criteria did you come up with, to tell them apart}
+@Q{Are you starting to wonder if AI does any thinking at all?}
 }
 
 
@@ -126,7 +142,7 @@ Students learn that AI is actually a collection of technologies involving Machin
 
 Modern AI is largely driven by a set of techniques called @vocab{Machine Learning} (ML for short). AI relies so deeply on Machine Learning that many computer scientists just call it "AI/ML".
 
-Here are some kinds of Machine Learning systems you've already mentioned:
+There are many kinds of Machine Learning algorithms out there, and nearly every example we've come up with falls into one of three categories:
 
 [cols="^1a,^1a,^1a"]
 |===
@@ -134,22 +150,24 @@ Here are some kinds of Machine Learning systems you've already mentioned:
 | @image{images/recommendation-bot.png, 200}
 | @image{images/chat-bot.png, 250}
 
-| *Predictive Models* +
+| *Prediction* +
 "Given an input, predict an output" +
 Facial recognition, Credit Scores, etc. +
 
-| *Similarity Models* +
+| *Similarity* +
 "Given an input, find likely matches" +
 Spotify, dating apps, etc.
 
-| *Language Models* +
+| *Language* +
 "Given a phrase or sentence, should the next word(s) be?" +
 Homework solvers, ChatGPT, Gemini, etc.
 |===
 
 
 @slidebreak{Launch}
-In Machine Learning, the computer analyzes lots of @vocab{data}, and then identifies patterns in that data using statistics. Machine Learning can be applied to an incredibly diverse set of data (data from fairy tales, pictures, movies, songs, etc). While AI is often spoken about like something "magical", Machine Learning is actually very concrete: it is just a collection of @vocab{algorithms}!
+In Machine Learning, the computer analyzes lots of @vocab{data}, and then identifies patterns in that data using statistics. Machine Learning can be applied to an incredibly diverse set of data (text, maps, pictures, movies, songs, etc), to make predictions, find similarity, and describe a language and generate examples.
+
+While AI is often spoken about as if it's something "magical", Machine Learning is actually very concrete: it is just a collection of @vocab{algorithms}!
 
 Let's play with some real tools that use AI, and see if we can make sense of how they might be working...
 
@@ -165,15 +183,20 @@ There are several kinds of *predictive models* you probably interact with every 
 - Is this junk mail or not?
 - Is this person a kid, a teenager, or an adult?
 - Is this customer likely to buy a video game or not?
+- Which Harry Potter house would I be in?
 
-Let's try an example. (TODO: link to an image classifier on the web)
+@lesson-instruction{
+@link{https://www.nyckel.com/pretrained-classifiers/flowers-identifier/, Here's an example of an ML tool} that consumes an image of a flower, and tries to predict what *category* of flower it really is.
+- Find an image of a flower, and drag it into the box
+- What part(s) of the image do you think it's looking at, to make its prediction?
+}
 --
 
 
 
 @slidebreak{InvestigateR}
 @lesson-instruction{
-- Let's think a little about how classification models might work!
+- Let's think a little about how classifiers might work!
 - With a partner, complete the first section on @printable-exercise{predictive-models-classifiers.adoc}
 - Be ready to share back!
 }
@@ -195,7 +218,8 @@ Let's try an example. (TODO: link to an image classifier on the web)
 }
 
 @lesson-instruction{
-- With a partner, complete the last section on @printable-exercise{predictive-models-classifiers.adoc}
+- You just looked at a classification problem with only two outputs: "teenager" or "adult". But classifiers can have any number of possible outputs - including every species of flower!
+- Let's explore a classifier with more than two outputs, by completing the last section on @printable-exercise{predictive-models-classifiers.adoc}
 - Be ready to share back!
 }
 
@@ -216,14 +240,14 @@ Let's try an example. (TODO: link to an image classifier on the web)
 --
 @right{@image{images/prediction-bots.webp, 250}}
 
-But Classifiers aren't the only kind of predictive model out there!
+But Classifiers aren't the only kind of prediction system out there!
 
-@vocab{Regression Models} are all about *predicting values*:
+@vocab{Regression} is all about *predicting values*:
 - How much does each inch of height determine how many 3-pointers will they make?
 - How much does the amount a person earns determine how long they will live?
 - With a Credit Score of 632, how likely is this person to be able to pay back a car loan?
 
-@link{https://www.blueprintincome.com/tools/life-expectancy-calculator-how-long-will-i-live/, Let's try an example!}
+@link{https://www.marriage.com/quizzes/how-many-kids-will-i-have/, Here's an example of an ML tool} that uses input data to predict the *number* of children you will have.
 --
 
 @slidebreak{InvestigateR}
@@ -318,7 +342,7 @@ How similar were Spotify's recommendations to the original song?
 - LMs trained on _Drawings_ can be "Tic Tac Toe bots", and generate the next move!
 - LMs trained on _Tic Tac Toe_ can be "Tic Tac Toe bots", and generate the next move!
 
-@link{https://duck.ai/, Let's try an example!}
+@link{https://duck.ai/, Here's an example of an ML tool} that uses language you type to predict the *language* that should come back as a reply.
 
 @teacher{Give students 1-2m to try chatting}
 --
