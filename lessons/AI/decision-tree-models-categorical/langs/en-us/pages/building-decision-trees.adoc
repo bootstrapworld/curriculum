@@ -7,52 +7,70 @@
 </style>
 ++++
 
+[cols="3a, 2a", frame="none", border="none", grid="none"]
+|===
+|
 [.data-table, cols="1,^1,^1,^1,^1,^1", stripes="none", options="header"]
+!===
+! name      ! species   ! sex         ! tail    ! mammal ! swims
+! Firepaw   ! cat       ! male        ! TRUE    ! TRUE   ! FALSE
+! Frisky    ! dog       ! female      ! TRUE    ! TRUE   ! TRUE
+! Socks     ! dog       ! female      ! TRUE    ! TRUE   ! TRUE
+! Stripe    ! dog       ! male        ! TRUE    ! TRUE   ! TRUE
+! Snickers  ! dog       ! male        ! TRUE    ! TRUE   ! TRUE
+! Leafpool  ! cat       ! female      ! TRUE    ! TRUE   ! FALSE
+! Shadestar ! cat       ! female      ! TRUE    ! TRUE   ! TRUE
+! Bramble   ! cat       ! female      ! TRUE    ! TRUE   ! FALSE
+! Brick     ! cat       ! male        ! TRUE    ! TRUE   ! FALSE
+! Bruni     ! lizard    ! female      ! TRUE    ! FALSE  ! TRUE
+! Jesús     ! lizard    ! male        ! TRUE    ! FALSE  ! TRUE
+! Gary      ! snail     !hermaphrodite! FALSE   ! FALSE  ! FALSE
+! Turbo     ! snail     !hermaphrodite! FALSE   ! FALSE  ! FALSE
+! Charlotte ! tarantula ! male        ! FALSE   ! FALSE  ! FALSE
+! Webs      ! tarantula ! female      ! FALSE   ! FALSE  ! FALSE
+!===
+
+|
+@image{../images/empty-tree.png}
 |===
-| name      | species   | sex         | tail    | mammal | swims
-| Firepaw   | cat       | male        | TRUE    | TRUE   | FALSE
-| Frisky    | dog       | female      | TRUE    | TRUE   | TRUE
-| Socks     | dog       | female      | TRUE    | TRUE   | TRUE
-| Stripe    | dog       | male        | TRUE    | TRUE   | TRUE
-| Snickers  | dog       | male        | TRUE    | TRUE   | TRUE
-| Leafpool  | cat       | female      | TRUE    | TRUE   | FALSE
-| Shadestar | cat       | female      | TRUE    | TRUE   | TRUE
-| Bramble   | cat       | female      | TRUE    | TRUE   | FALSE
-| Brick     | cat       | male        | TRUE    | TRUE   | FALSE
-| Bruni     | lizard    | female      | TRUE    | FALSE  | TRUE
-| Jesús     | lizard    | male        | TRUE    | FALSE  | TRUE
-| Gary      | snail     |hermaphrodite| FALSE   | FALSE  | FALSE
-| Turbo     | snail     |hermaphrodite| FALSE   | FALSE  | FALSE
-| Charlotte | tarantula | male        | FALSE   | FALSE  | FALSE
-| Webs      | tarantula | female      | FALSE   | FALSE  | FALSE
-|===
 
+== 1-Level Trees
+The @vocab{root node} of our dreams splits the table evenly into two groups, with every species having rows on only one side of the split.
 
-The @vocab{root node} of our dreams splits the dataset into two groups, with no species that have animals on both sides of the split.
+@n Suppose we split on `r["sex"] == "male"`. Circle all the species that have rows on only one side of the split: +
+@hspace{5em} Dogs @hspace{1em} Cats @hspace{1em} Lizards @hspace{1em} @ifsoln-choice{Snails} @hspace{1em} Tarantulas
 
-@n Why is splitting based on `r["sex"] == "male"` a bad idea? @fitb{}{almost every species has a mix of males and females!} +
-@fitb{}{}
+@n Pick a split that *you* think is better, and write the code for it: @fitb{}{@ifsoln{correct answers will include `r["tail]"`, `r["mammal"]`, or `r["swims"]`}}
 
-@n Pick a split that *you* think is better, and write the code for it: @fitb{}{@ifsoln{responses will vary, but any of the last 3 columns will work!}}
+@n Using your split, all the species that have rows on only one side of the split: @hspace{1em} Dogs @hspace{1em} Cats @hspace{1em} Lizards @hspace{1em} Snails @hspace{1em} Tarantulas
 
-@n Which species are grouped into your "yes" split? @fitb{10em}{} Your "no" split? @fitb{}{}
+@n In the root at the top of this page, write the code for your split. Label the number of rows that will go to each side of the split.
 
-@n How many rows in the table will get a "yes" for your split? @hspace{1em} @fitb{3em}{} / 15. @hspace{4em} How many will get a "no"? @hspace{1em} @fitb{3em}{} / 15
+@n Which species has the most rows in your "yes" branch? @fitb{12em}{} @hspace{1em} The "no" branch? @fitb{}{}
 
-@n Draw your root at the bottom of this page, including (1) your splitting code and (2) the number of animals that falling into each side of the split.
+*In @starter-file{decision-tree}, change the `my-classifier1` function in Pyret to match your 1-level @vocab{decision tree}.*
 
-[.no-flex-section]
+@n Click "Run", and evaluate `classify(simple-animals, "species", my-classifier1)`. For each species, how many did your 1-level classifier get right?
+
+@hspace{5em} Dogs: @fitb{2em}{} / 4 @hspace{1em} Cats: @fitb{2em}{} / 5 @hspace{1em} Lizards: @fitb{2em}{} / 2 @hspace{1em} Snails: @fitb{2em}{} / 2 @hspace{1em} Tarantulas: @fitb{2em}{} / 2
+
 == Adding a 2^nd^ Level
-@n Add a new node for your "no" split. Which species are left in this node? @fitb{}{@ifsoln{should be the same as the earlier answer for "no"!}}
+@n Add a new node for your "no" split. Circle the species in this node: @hspace{1em} Dogs @hspace{1em} Cats @hspace{1em} Lizards @hspace{1em} Snails @hspace{1em} Tarantulas
 
 @n Pick a split for _this_ node, and write the code for it: @fitb{}{}
 
-@n Add a new node for your "yes" split. Which species are left in this node? @fitb{}{@ifsoln{should be the same as the earlier answer for "yes"!}}
+@n Add the best-guess labels for the most-common species in the two leaves under this node.
+
+@n Add a new node for your "yes" split. Circle the species in this node: @hspace{1em} Dogs @hspace{1em} Cats @hspace{1em} Lizards @hspace{1em} Snails @hspace{1em} Tarantulas
 
 @n Pick a split for _this_ node, and write the code for it: @fitb{}{}
 
-[.no-flex-section]
-== Make Your Prediction!
-@n Label the _most common_ species falling into the "yes" and "no" splits for each of your 2^nd^-level nodes.
+@n Add the best-guess labels for the most-common species in the two leaves under this node. _(You should have four leaf nodes in total!)_
 
-@ifsoln{@centered-image{../images/optimal-animals-tree.png}}
+*In @starter-file{decision-tree}, change the `my-classifier2` function in Pyret to match your 2-level @vocab{decision tree}.*
+
+@n Click "Run", and evaluate `classify(simple-animals, "species", my-classifier2)`. For each species, how many did your 2-level classifier get right?
+
+@hspace{5em} Dogs: @fitb{2em}{} / 4 @hspace{1em} Cats: @fitb{2em}{} / 5 @hspace{1em} Lizards: @fitb{2em}{} / 2 @hspace{1em} Snails: @fitb{2em}{} / 2 @hspace{1em} Tarantulas: @fitb{2em}{} / 2
+
+@star Experiment with different 1st and 2nd-level nodes. How accurate can you make your 2-level tree?
