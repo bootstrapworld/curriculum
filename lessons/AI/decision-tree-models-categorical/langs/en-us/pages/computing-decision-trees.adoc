@@ -2,64 +2,74 @@
 ++++
 <style>
 #preamble_disabled { flex-grow: 0 !important; }
-.fitb { min-width: 2em !important; }
+#body table { margin: 0 !important; }
+#body table td:last-child img {
+    height: 180px; /* we have a limit to vertical space */
+	width: 250px;  /* stretch the image outm slightly breaking proportion*/
+}
 </style>
 ++++
 
-[cols="3a, 2a", frame="none", border="none", grid="none"]
+[cols=".^12a, ^8a", frame="none"]
 |===
 |
-[.data-table, cols="1,^1,^1,^1,^1,^1", stripes="none", options="header"]
-!===
-! name      ! species   ! sex         ! tail    ! mammal ! swims
-! Firepaw   ! cat       ! male        ! TRUE    ! TRUE   ! FALSE
-! Frisky    ! dog       ! female      ! TRUE    ! TRUE   ! TRUE
-! Socks     ! dog       ! female      ! TRUE    ! TRUE   ! TRUE
-! Stripe    ! dog       ! male        ! TRUE    ! TRUE   ! TRUE
-! Snickers  ! dog       ! male        ! TRUE    ! TRUE   ! TRUE
-! Leafpool  ! cat       ! female      ! TRUE    ! TRUE   ! FALSE
-! Shadestar ! cat       ! female      ! TRUE    ! TRUE   ! TRUE
-! Bramble   ! cat       ! female      ! TRUE    ! TRUE   ! FALSE
-! Brick     ! cat       ! male        ! TRUE    ! TRUE   ! FALSE
-! Bruni     ! lizard    ! female      ! TRUE    ! FALSE  ! TRUE
-! Jesús     ! lizard    ! male        ! TRUE    ! FALSE  ! TRUE
-! Gary      ! snail     !hermaphrodite! FALSE   ! FALSE  ! FALSE
-! Turbo     ! snail     !hermaphrodite! FALSE   ! FALSE  ! FALSE
-! Charlotte ! tarantula ! male        ! FALSE   ! FALSE  ! FALSE
-! Webs      ! tarantula ! female      ! FALSE   ! FALSE  ! FALSE
-!===
+We've provided a function that will use this algorithm to build the optimal decision tree of _any length_, using _any columns_! Here's the contract:
+
+@vspace{1ex}
+
+@show{(contract "build-tree" '("Table" "List" "String" "Number") "DecisionTree")}
+
+@vspace{1ex}
+
+The `build-tree` function takes *four arguments* in its Domain:
+
+- The _training dataset_ from which to fit the tree
+- A list of all the column names to split on
+- The name of the _label_ column containing all the "answers" for the various categories
+- The _maximum depth_ the tree is allowed to be
 
 |
-@image{../images/animal-tree-1.png}
+@image{../images/empty-tree.png}
 |===
 
-[.no-flex-section]
-== The Data
-@n Circle all the datatypes you see in this dataset of different animals: @hspace{2em} Numbers @hspace{2em} @ifsoln-choice{Strings} @hspace{2em} @ifsoln-choice{Booleans} @hspace{2em} Images
 
-@n Write least *two things you notice* about the data @fitb{}{}
+== The Optimal 1-Level Tree for this Training Data
+Which column makes a better root for predicting `species` in this training dataset: @fitb{5em}{`"mammal"`}, or @fitb{5em}{`"tail"`}? Ask Pyret to build a 1-level tree while considering only those two columns: `c1 = build-tree(simple-animals, [list: "mammal", "tail"], "species", 1)`
+
+@n *Evaluate `c1` to see what the tree looks like*. Which column did Pyret choose? @fitb{5em}{@ifsoln{`"tail"`}} @hspace{1em} Evaluate `dt-code(c1)` to *see the function* for this decision tree. Where have you seen this code before? @fitb{}{@ifsoln{it's the code for `tail-classifier`!}}
+
+@n Now add adding the `sex` column to the list, and define your tree as `c2`. Which column did the algorithm choose for the root? @fitb{5em}{@ifsoln{`swim`}}
+
+@vspace{1ex}
+
+*Use `dt-code` to turn `c2` into a function, then copy-and-paste that function into the Definitions Area.*
+
+@n Change the function's name from `classifier` to `swim-classifier`. Use `classify` to see how many rows it got right @fitb{}{8 rows}
+
+== The Optimal 2-Level Tree for this Training Data
+By changing the last argument to `build-tree`, you can have Pyret build trees with 2 levels (or more)!
+
+@n Evaluate `c3 = build-tree(simple-animals, [list: "mammal", "tail", "swim"], "species", 2)`, then use `c3` to *fill in the decision tree* in the top left-hand corner of this page.
+
+@vspace{1ex}
+
+*Use `dt-code` to turn `c3` into a function, then copy-and-paste that function into the Definitions Area. Name it `next-classifier`.*
+
+@n Why did Charlotte and Webs get classified as snails? @fitb{}{@ifsoln{Their values for "mammal", "tail", and "swim" were identical to the snails'}}
+
+@n Why did Shadestar get classified as a dog? @fitb{}{@ifsoln{Since she swims, all three column values "looks" the same as the dogs}}
+
+@n Compare the confusion-matrix of `swim-classifier` and `next-classifier`. What do you *Notice*? @fitb{}{} +
+@fitb{}{}
+
+== The Optimal Tree for this Training Data
+@n Will a deeper tree built from *the same columns* do a better job? Circle your prediction before you try it out: @hspace{1em} Yes @hspace{1em} No
+
+@n Try it out. Were you right? @fitb{2em}{@ifsoln{No}} @hspace{1em} Why or why not? @fitb{}{} +
 @blanklines{2}{
-@ifsoln{All the snails are hermaphrodites, the last three columns are Booleans, all the dogs swim, one of the cats swims...}
+@ifsoln{Looking only at these columns, Shadestar will *always* look like a dog, and Charlotte and Webs will *always* look like snails!}
 }
 
-== The Tree
-@n The tree on the right tries to classify the *species* of an animal based on the other data. Write are least *two things you notice* about the tree.
-@blanklines{3}{
-@ifsoln{It will never classify anything as a tarantula! All of the nodes compare values to a Boolean (true/false), except for the nodes where `sex` is compared to a String. It never uses the `mammal` column}
-}
+@n What other column(s) should we consider, to improve our accuracy on this training dataset? @fitb{}{@ifsoln{sex - definitely not `species!`}}
 
-@n What is the shortest possible path? @fitb{3em}{@ifsoln{2}} The longest? @fitb{3em}{@ifsoln{3}} How would this tree classify Charlotte? @fitb{4em}{@ifsoln{dog}} Shadestar? @fitb{}{@ifsoln{dog}}
-
-== The Results
-
-@n This tree will _correctly_ classify 4 out of 4 dogs in this dataset! It does well with cats, too: 4 out of 5 of the cats will be classified correctly, with 1 classified as a "dog". We've added this information to the first two rows of the table below. Can you complete the rest?
-
-[cols="1a,^1a,^1a,^1a,^1a,^1a", options="header"]
-|===
-|_actual_ species| predicted cat   | predicted dog   | predicted lizard | predicted snail | predicted tarantula
-|"dog"           |0 / 4@hspace{2ex}|4 / 4@hspace{2ex}|0 / 4@hspace{2ex} |0 / 4@hspace{2ex}| 0 / 4@hspace{2ex}
-|"cat"           |4 / 4@hspace{2ex}|1 / 5@hspace{2ex}|0 / 5@hspace{2ex} |0 / 5@hspace{2ex}| 0 / 5@hspace{2ex}
-|"lizard"        | @ifsoln{0} / 2  | @ifsoln{2} / 2  | @ifsoln{0} / 2   | @ifsoln{0} / 2  | @ifsoln{0} / 2
-|"snail"         | @ifsoln{0} / 2  | @ifsoln{2} / 2  | @ifsoln{0} / 2   | @ifsoln{0} / 2  | @ifsoln{0} / 2
-|"tarantula"     | @ifsoln{2} / 2  | @ifsoln{0} / 2  | @ifsoln{0} / 2   | @ifsoln{0} / 2  | @ifsoln{0} / 2
-|===
+@n Build your tree, this time adding the column(s) you listed above. How many levels deep will Pyret's optimal tree go? @fitb{}{3}

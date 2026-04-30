@@ -418,7 +418,7 @@ By now, you know that not all @vocab{decision trees} are created equal! You also
 
 For example, you could help a store figure out which customers are most likely to buy a particular video game:
 
-[.data-table, cols="2,2,3,2,2", stripes="none", options="header"]
+[.data-table, cols="^2,^2,^3,^2,^2", stripes="none", options="header"]
 |===
 | name 		| age      	 | shopping history 	| interest in game  | buys game
 | Jan 		| "teens"    | "previous customer" 	| false				| false
@@ -454,18 +454,25 @@ If you've ever wondered how a spam filter works...now you have an idea!
 @slidebreak{Investigate}
 But computing a decision tree by hand takes a long time, especially if you're dealing with thousands of rows and dozens of columns! Fortunately, computers are _really good_ at following algorithms.
 
-We've provided a function that will build a decision tree for you! Here's the contract:
+We've provided a function that will use this algorithm to build the _optimal_ decision tree for you! Here's the contract:
 
-@show{(contract "build-tree" '("Table" "String" "Number") "DecisionTree")}
+@show{(contract "build-tree" '("Table" "List" "String" "Number") "DecisionTree")}
 
-The `build-tree` function takes three things in its Domain:
+The `build-tree` function takes *four arguments* in its Domain:
 
 - The _training dataset_ from which to fit the tree
-- The _label_ column containing all the "answers" for the various categories
+- A list of all the column names to split on
+- The name of the _label_ column containing all the "answers" for the various categories
 - The _maximum depth_ the tree is allowed to be
 
 @lesson-instruction{
 - Complete @printable-exercise{computing-decision-trees.adoc}
+}
+
+@slidebreak{Investigate}
+
+@lesson-instruction{
+- Complete @printable-exercise{testing-decision-trees.adoc}
 }
 
 === Synthesize
