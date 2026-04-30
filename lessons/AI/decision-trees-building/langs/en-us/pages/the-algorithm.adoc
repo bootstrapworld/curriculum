@@ -1,0 +1,87 @@
+= Building a Decision Tree: The Algorithm
+++++
+<style>
+#preamble_disabled { flex-grow: 0 !important; }
+.fitb { min-width: 2em !important; }
+.autonum { padding-top: 1em !important; }
+</style>
+++++
+
+[cols="3a, 2a", frame="none", border="none", grid="none"]
+|===
+|
+[.data-table, cols="1,^1,^1,^1,^1,^1,^1", stripes="none", options="header"]
+!===
+! name 			! species	 ! sex			! pounds! tail	! mammal! swims
+! "Firepaw"		! "cat" 	 ! "female"		! 9.5	! TRUE	! TRUE	! FALSE
+! "Frisky"		! "dog" 	 ! "female"		! 9.6	! TRUE	! TRUE	! TRUE
+! "Socks"		! "dog" 	 ! "female"		! 11.1 	! TRUE	! TRUE	! TRUE
+! "stripes"		! "dog" 	 ! "male" 		! 10.0 	! TRUE	! TRUE	! TRUE
+! "Snickers"	! "dog" 	 ! "male" 		! 10.3 	! TRUE	! TRUE	! TRUE
+! "Leafpool"	! "cat" 	 ! "female"		! 10.6 	! TRUE	! TRUE	! FALSE
+! "Shadestar"	! "cat" 	 ! "female"		! 9.0 	! TRUE	! TRUE	! TRUE
+! "Bramble"		! "cat" 	 ! "female"		! 4.1 	! TRUE	! TRUE	! FALSE
+! "Brick"		! "cat" 	 ! "male" 		! 8.5 	! TRUE	! TRUE	! FALSE
+! "Bruni"		! "lizard" 	 ! "female" 	! 8.2 	! TRUE	! FALSE	! TRUE
+! "Jesús"		! "lizard"	 ! "male" 		! 3.5 	! TRUE	! FALSE	! FALSE
+! "Gary"		! "snail"	 !"hermaphrodite"! 0.1 	! FALSE	! FALSE	! FALSE
+! "Turbo"		! "snail"	 !"hermaphrodite"! 0.1 	! FALSE	! FALSE	! FALSE
+! "Charlotte"	! "tarantula"! "male" 		! 0.4 	! FALSE	! FALSE	! FALSE
+! "Webs"		! "tarantula"! "female" 	! 0.4 	! FALSE	! FALSE	! FALSE
+!===
+
+|
+@image{../images/empty-tree.png}
+|===
+
+== Choosing the Best Root
+*Suppose we split on `r["sex"] == "male"` for the root node of our decision tree*
+
+@n Circle all the species that have rows on only one side of the split: @hspace{5em} Dogs @hspace{2em} Cats @hspace{2em} Lizards @hspace{2em} @ifsoln-choice{Snails} @hspace{2em} Tarantulas
+
+@n Pick a split that *you* think is better, and write the code for it: @fitb{}{@ifsoln{correct answers will include `r["tail]"`, `r["mammal"]`, or `r["swims"]`}}
+
+@n Using your split, circle the species that have rows on only one side: @hspace{4em} Dogs @hspace{2em} Cats @hspace{2em} Lizards @hspace{2em} Snails @hspace{2em} Tarantulas
+
+@n In the root at the top of this page, write the code for your split. Label the number of rows that will go to each side of the split.
+
+@n Which species has the most rows in your "yes" branch? @fitb{12em}{} @hspace{1em} The "no" branch? @fitb{}{}
+
+@vspace{1ex}
+
+*In @starter-file{decision-tree}, change the `my-classifier1` function in Pyret to use your root*
+
+@n Click "Run", and evaluate `classify(simple-animals, "species", my-classifier1)`. For each species, how many did your 1-level classifier get right?
+
+@hspace{5em}
+*Dogs*: @fitb{2em}{} out of 4 @hspace{1em}
+*Cats*: @fitb{2em}{} out of 5 @hspace{1em}
+*Lizards*: @fitb{2em}{} out of 2 @hspace{1em}
+*Snails*: @fitb{2em}{} out of 2 @hspace{1em}
+*Tarantulas*: @fitb{2em}{} out of 2
+
+== Adding a 2^nd^ Level
+@n Add a new node for your "no" split. Circle the species in this node: @hspace{1em} Dogs @hspace{1em} Cats @hspace{1em} Lizards @hspace{1em} Snails @hspace{1em} Tarantulas
+
+@n Pick a split for _this_ node, and write the code for it: @fitb{}{}
+
+@n Add the best-guess labels for the most-common species in the two leaves under this node.
+
+@n Add a new node for your "yes" split. Circle the species in this node: @hspace{1em} Dogs @hspace{1em} Cats @hspace{1em} Lizards @hspace{1em} Snails @hspace{1em} Tarantulas
+
+@n Pick a split for _this_ node, and write the code for it: @fitb{}{}
+
+@n Add the best-guess labels for the most-common species in the two leaves under this node. _(You should have four leaf nodes in total!)_
+
+*In @starter-file{decision-tree}, change the `my-classifier2` function in Pyret to match your 2-level @vocab{decision tree}.*
+
+@n Click "Run", and evaluate `classify(simple-animals, "species", my-classifier2)`. For each species, how many did your 2-level classifier get right?
+
+@hspace{5em}
+*Dogs*: @fitb{2em}{} out of 4 @hspace{1em}
+*Cats*: @fitb{2em}{} out of 5 @hspace{1em}
+*Lizards*: @fitb{2em}{} out of 2 @hspace{1em}
+*Snails*: @fitb{2em}{} out of 2 @hspace{1em}
+*Tarantulas*: @fitb{2em}{} out of 2
+
+@star Experiment with different 1st and 2nd-level nodes. How accurate can you make your 2-level tree?

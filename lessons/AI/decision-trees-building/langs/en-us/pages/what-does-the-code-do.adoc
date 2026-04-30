@@ -1,0 +1,55 @@
+= What Does the Code Do?
+
+For this page, you'll need @starter-file{decision-tree} open on your computer.
+
+== Loading and Defining the Table
+*Read lines 2-6 in the Definitions Area*
+
+@n What is the name of the table being defined here? @fitb{}{@ifsoln{`simple-animals`}}
+
+@n *Click "Run"* to have Pyret read this code. What do you need to type into the Interactions Area to see the table? @fitb{}{@ifsoln{`simple-animals`}}
+
+@n Circle the types of data that you see in this table: @hspace{5em} @ifsoln-choice{Strings} @hspace{2em} @ifsoln-choice{Numbers} @hspace{2em} @ifsoln-choice{Booleans} @hspace{2em} @ifsoln-choice{Images}
+
+@n Take a moment to read through the table, and write at least one thing that you *Notice* about this dataset.
+@blanklines{2}{
+@ifsoln{Shadestar is a cat who swims! Charlotte is a male tarantula!}
+}
+
+@n Make a dot plot showing the distribution of `species` in this dataset. Which species is most common? @fitb{}{@ifsoln{cats}}
+
+@n Make a dot plot showing the distribution of `pounds` in this dataset. Which animal is most heaviest? @fitb{}{@ifsoln{Stripe}}
+
+== Defining Images and Rows
+*Read lines 10-17 in the Definitions Area*
+
+@n Evaluate `dog-img` in the Interactions Area. What did you get? @fitb{}{@ifsoln{a picture of a dog}}
+
+@n What do you think `dog-img = text("🐶", 20, "black")` does? @fitb{}{@ifsoln{defines `dog` as an image of a dog}}
+
+@n What do you think `firepaw = row-n(simple-animals, 0)` does?  @fitb{}{@ifsoln{defines `firepaw` as the first row in the table}
+
+@n Evaluate `firepaw` in the Interactions Area. What did you get? @fitb{}{@ifsoln{the row for firepaw}}
+
+@n Now evaluate `firepaw["swims"]`. What did you get? @fitb{2em}{@ifsoln{false}} Where did that come from? @fitb{}{@ifsoln{It got it from the row in the table}}
+
+@n What code would tell me `firepaw` is a mammal? @fitb{}{@ifsoln{`firepaw["mammal"] == true`}
+
+@n *At the bottom of the Definitions Area, define a new row called `frisky`, to be the _second_ row in the table.*
+
+== Defining Functions
+*Read lines 23-30 in the Definitions Area*
+
+@n This code defines a function called @fitbruby{15em}{@ifsoln{`animal-img`}}{Name}. It consumes a @fitbruby{7em}{Domain}{@ifsoln{`Row`}}, and produces @fitbruby{}{Range}{@ifsoln{`Image`}}
+
+@n What does `animal-img(firepaw)` evaluate to? @fitb{10em}{@ifsoln{a picture of a cat}} `animal-img(frisky)`? @fitb{}{@ifsoln{a picture of a dog}}
+
+@n The `animal-img` function uses a lot of code you've never seen before, like `if`, `else` and `end`. What do you think these mean, and what do they do? @fitb{}{} +
+@blanklines{2}{
+@ifsoln{It's like a branch: if something is true, execute *this* code. if it's false, execute *that* code.}
+}
+
+@n In the Interactions Area, evaluate `image-dot-plot(simple-animals, "pounds", animal-img)`. What happens?
+@blanklines{3}{
+@ifsoln{A dot plot appeared - just like the one before - but now I can see which dots are dogs, cats, lizards, etc}
+}

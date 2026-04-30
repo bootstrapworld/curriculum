@@ -1,0 +1,59 @@
+= Classifiers for Music
+++++
+<style>
+table.compare tr:last-child td { background: #eee !important; }
+</style>
+++++
+You'll need @starter-file{decision-tree-music} open on your computer.
+
+== Exploring the Song Dataset
+
+@n This file contains _two_ datasets. What are they named? @fitb{}{@ifsoln{`training` and `testing`}}
+
+@n Are there any columns that are hard to understand? @fitb{}{}
+
+@n Which column is going to be our *target* column? @fitb{}{genre}
+
+@n Take a look at the training dataset, and write at least two things you *Notice*:
+@blanklines{2}{}
+
+@n There's a function defined here, which takes in a song and produces an image representing the genre. What is its name? @fitb{}{@ifsoln{genre-img}}
+
+*To look at the distribution of genres across a particular column, use `image-dot-plot`. For example: `image-dot-plot(training-table, "liveness", genre-img)`*
+
+@n Make an image dot plot for the other columns, looking for two columns where the genres are mostly clustered together within a particular interval. These are great columns to split on! Fill in the table below with the column, and the interval that you think would be good to split on for each column.
+
+[.FillVerticalSpace, cols="<.^1,^.^1,^.^1,^.^1", stripes="none", options="header"]
+|===
+| Column 		| 	Rock Interval	 | 	R&B Interval 	|	 Country Interval
+|				|					 | 					|
+| 				| 					 | 					|
+|===
+
+== Deep Trees with One Column
+*How good do you think a classifier can get, using a single column?*
+
+@n *Define a classifier for `liveness`*. Since we're only letting Pyret use one column, let's allow it to build deeper trees (5, 10, or 15 levels deep). For example:
+
+@show{(code '(define liveness (build-tree music-training (list "liveness" 5))))}
+
+@n Build a `confusion-matrix` to see the performance of the `liveness` classifier on both the *training* and *testing* data, then fill in the table below. _(Round your percentages - we don't need decimals for this)_
+
+[.FillVerticalSpace.compare, cols="<.^1,^.^1,^.^1,^.^1", stripes="none", options="header"]
+|===
+| Data 			| % Correct (Country)	| % Correct (R&B)	| % Correct (Rock)
+| Training  	|	51%					|	33%				|	72%
+| Testing		|	46%					|	28%				|	52%
+| Change (+/-)	|	-5%					|	-5%				|	-20%
+|===
+
+@n Did the `liveness` classifier correctly identify `k-pop` and `reggae` songs? @fitb{2em}{@ifsoln{No}} Why or why not? @fitb{}{} +
+@fitb{}{@ifsoln{Neither genre was in our training dataset, so the classifier didn't know anything about them!}}
+
+@n Write one possible reason the classifier did worse on every genre, when given the testing dataset.
+@blanklines{2}{@ifsoln{Natural variation between the training and testing data}}
+
+@n Write one possible reason the classifier did _so much worse_ with Country songs than it did with other genres.
+@blanklines{2}{
+@ifsoln{Maybe Country songs in the testing data are just *really* different from country songs in the training data}
+}

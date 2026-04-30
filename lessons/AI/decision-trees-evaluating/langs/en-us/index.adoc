@@ -1,0 +1,288 @@
+[.beta]
+= Evaluating Decision Trees
+
+@description{Students explore an approach to recommending videos and predicting election outcomes. They develop and analyze decision trees to predict individuals’ purchasing decisions.}
+
+@lesson-prereqs{decision-trees-building}
+
+
+@keywords{}
+
+[@lesson-intro-table]
+|===
+| Lesson Goals
+| Students will be able to...
+@objectives
+
+| Student-facing Lesson Goals
+|
+
+- Let's learn about how to evaluate the _accuracy_ of a classifier
+- Let's learn how the distribution in the training dataset influences the trees we build
+
+| Materials
+|[.materials-links]
+@material-links
+
+
+|===
+
+== Report Cards for Classifiers
+
+@objective{}
+
+=== Overview
+Students learn how to generate decision trees in Pyret, and turn them into functions.
+
+=== Launch
+
+@slidebreak{LaunchR}
+@right{[.white-bg]#@image{images/tree-3.png}#}
+@lesson-point{A @vocab{decision tree} is one way to model the structure hidden in the data.}
+
+@QandA{
+@Q{What do we call the nodes in a decision tree?}
+@A{Decision Nodes}
+
+@Q{What do we call the _top_ node (the "first decision")?}
+@A{Root Node}
+
+@Q{What do we call the different targets (or "endpoints") of a decision tree?}
+@A{Leaf Nodes}
+
+@Q{How do decision trees help us _classify_ things?}
+@A{When given a row from a table, narrow down the possible targets it could belong to}
+
+@Q{When building a decision tree, how do we select a good decision node?}
+@A{We want to pick a node that sorts the data into the neatest, most organized piles possible.}
+}
+
+@slidebreak{Launch}
+
+@slidebreak{Launch-DN}
+[cols="^.^1a,^3a", frame="none", grid="none"]
+|===
+| @image{images/tail-classifier-tree.png}
+|
+```
+# tail-classifier :: Row -> String
+# consumes an animal, and predicts the species
+fun tail-classifier(r):
+  if r["tail"] == true:
+    "cat"
+  else:
+    "snail"
+  end
+end
+```
+|===
+
+We also know that classifiers are just functions, and we can convert any decision tree into a Pyret function.
+
+@slidebreak{Launch-DN}
+@indented{@show{(contract "classify" '("Table" "String" "(Row -> String)") "Table")}}
+
+And of course, there's the `classify` function, which consumes a Table of rows to be classified, the name of the column being predicted, and a *classifier function* that maps Rows to Strings.
+
+@indented{`classify(simple-animals, "species", tail-classifier)`}
+
+@lesson-instruction{
+- Try this out using your 1-level classifier
+- Then try it using your 2-level classifier
+}
+
+
+@slidebreak{Investigate}
+How do we know if a @vocab{decision tree} makes a good @vocab{classifier} or not? Using the `classify` function only tells us how many we got right, and how many we got wrong.
+
+It's not enough to know that a classifier messed up 6 times! Data Scientists and Machine Language Engineers want a full, detailed "classifier report card" showing _which mistake_ it made! This report card a @vocab{Confusion Matrix}.
+
+@QandA{
+@Q{Out of the 5 cats in this dataset, how many did your best classifier classify _correctly_?}
+@Q{Roughly what *percentage* of the cats is that?}
+@Q{Out of the 2 snails in this dataset, how many did your best classifier classify _correctly_?}
+@Q{Roughly what *percentage* of the snails is that?}
+}
+
+@slidebreak{Investigate}
+A @vocab{confusion matrix} typically shows _percentages:_ 4-out-of-5 cats becomes 80%, 2-out-of-2 lizards becomes 100%, and so on.
+
+We've created a function that does just that! Here's the contract:
+
+@show{(contract "confusion-matrix" '("Table" "String" "(Row -> String)") "Table")}
+
+Try it out with the original `tail-classifier`:
+
+@indented{`confusion-matrix(simple-animals, "species", tail-classifier)`}
+
+@slidebreak{Investigate}
+
+[.pyret-table, cols="1a,^1a,^1a,^1a,^1a,^1a", options="header"]
+|===
+|actual-species|predicted-cat|predicted-dog|predicted-lizard|predicted-snail|predicted-tarantula
+|"cat"         |      1      |      0      |       0        |       0       |       0
+|"dog"         |      1      |      0      |       0        |       0       |       0
+|"lizard"      |      1      |      0      |       0        |       0       |       0
+|"snail"       |      0      |      0      |       0        |       1       |       0
+|"tarantula"   |      0      |      0      |       0        |       1       |       0
+|===
+
+The *best possible report card* has a diagonal line of `1`s, running from the top-left to the bottom right of the confusion matrix. That would mean that 100% of the cats were classified as cats, 100% of the dogs were classified as dogs, and so on....
+
+How did your 2-level classifier do? Compare your confusion matrices with the people around you.
+
+=== Synthesize
+@slidebreak{Synthesize}
+@QandA{
+@Q{Will a decision tree always have the same number of leaf nodes as there were rows in the training dataset? Why or why not?}
+@A{No. Generally multiple rows of a training dataset will have the same prediction. The training dataset we saw in this lesson section contained multiple knives, for example.}
+
+@Q{Can a decision tree have the _fewer_ leaf nodes than there are unique categories in the training dataset? Why or why not?}
+@A{Yes. A decision tree may not be deep enough to correctly classify every category - and in some cases, there may not *be* a way to correctly classify every category!}
+
+@Q{Explain what the decision tree and table for the training dataset have to do with one another.}
+@A{The column headers from the table are the questions that will get asked in the decision nodes of the decision tree.}
+@A{The data in each column are the answers to those questions which become the arrow labels of the decision tree ("yes" and "no", for this dataset).}
+@A{The output categories from the table are the leaf nodes in the decision tree.}
+}
+
+== Building Decision Trees in Pyret
+
+=== Overview
+Now that they know the algorithm, students explore Pyret's ability to build decision trees automatically! They explore the impact that different depths or columns have on the quality of a classifier.
+
+=== Launch
+@slidebreak{Launch}
+By now, you know that not all @vocab{decision trees} are created equal! You also know the algorithm to compute an _optimal tree_, so you could generate a @vocab{decision tree} for any dataset.
+
+For example, you could help a store figure out which customers are most likely to buy a particular video game:
+
+[.data-table, cols="^2,^2,^3,^2,^2", stripes="none", options="header"]
+|===
+| name    | age        | shopping history     | interest in game  | buys game
+| Jan     | "teens"    | "previous customer"  | false             | false
+| Noah    | "thirties" | "previous customer"  | false             | true
+| Sydney  | "thirties" | "previous customer"  | true              | true
+| Mariana | "thirties" | "new customer"       | true              | false
+| Rasula  | "twenties" | "new customer"       | true              | true
+| Jillian | "teens"    | "previous customer"  | false             | false
+| Ariella | "teens"    | "new customer"       | true              | true
+| Isabela | "thirties" | "previous customer"  | true              | true
+|===
+
+If you've ever wondered how a company knows which coupons or promotions to send you, or which ads to show you on the web...now you have an idea!
+
+@slidebreak{Launch}
+
+You could write a simple spam filter, to get rid of unwanted email:
+
+[.data-table, cols="^1,^1,^1", stripes="none", options="header"]
+|===
+| sender in address book  | seen sender before      | mass email
+| true                    | true                    | true
+| true                    | false                   | false
+| false                   | true                    | true
+| false                   | false                   | false
+| true                    | true                    | true
+| true                    | false                   | false
+| false                   | false                   | true
+|===
+
+If you've ever wondered how a spam filter works...now you have an idea!
+
+@slidebreak{Investigate}
+But computing a decision tree by hand takes a long time, especially if you're dealing with thousands of rows and dozens of columns! Fortunately, computers are _really good_ at following algorithms.
+
+We've provided a function that will use this algorithm to build the _optimal_ decision tree for you! Here's the contract:
+
+@show{(contract "build-tree" '("Table" "List" "String" "Number") "DecisionTree")}
+
+The `build-tree` function takes *four arguments* in its Domain:
+
+- The _training dataset_ from which to fit the tree
+- A list of all the column names to split on
+- The name of the _label_ column containing all the "answers" for the various categories
+- The _maximum depth_ the tree is allowed to be
+
+@lesson-instruction{
+- Complete @printable-exercise{computing-decision-trees.adoc}
+}
+
+@slidebreak{Investigate}
+
+@lesson-instruction{
+- Complete @printable-exercise{testing-decision-trees.adoc}
+}
+
+=== Synthesize
+@slidebreak{Synthesize}
+
+TODO: harvest from the excellent (legacy) questions at the bottom
+
+
+== Using our Trained Classifiers
+
+=== Overview
+Students are given a training dataset and a testing dataset, both drawn from the Spotify database. After train classifiers on the first data, they'll see how well they work on the second. Students will explore the problem of _over-fitting_, and return to dot-plots to explore natural variation between distributions in the training dataset v. the testing one.
+
+=== Launch
+@slidebreak{Launch}
+
+How can you tell the difference between an R-and-B, Rock-and-Roll, or Country song?
+
+@teacher{Let kids offer up a lot of suggestions!}
+
+Can we teach a _computer_ how to tell the difference?
+
+
+=== Launch
+@slidebreak{Launch}
+
+Let's build a classifier that can tell the difference between these three genres.
+
+@lesson-instruction{
+- Open @starter-file{decision-tree-music}, and click "Run".
+- Complete @printable-exercise{music-classifier.adoc}.
+}
+
+=== Investigate
+@slidebreak{Investigate}
+
+
+=== Synthesize
+@slidebreak{Synthesize}
+
+
+
+@scrub{
+
+=== Synthesize
+@slidebreak{Synthesize}
+
+@QandA{
+@Q{What are some reasons that a decision tree might produce an inaccurate prediction or recommendation?}
+@A{The prediction might represent closer to 50% of the training population rather than 100% of the population.}
+@A{The training dataset might not completely represent the broader population, either in not having enough variables (columns) or enough samples (rows).}
+@A{The training dataset could be inconsistent, in that the labeled outcomes for two rows are different while the rest of the columns have the same values.}
+
+@Q{After testing our tree, we discovered that it was not as accurate as we had expected or hoped. Can you think of concrete, real-world examples of how a training dataset might under represent a population?}
+@A{Responses will vary.}
+@A{Medical systems being trained on only adults, but not children.}
+@A{Tutoring systems trained on only native speakers of a language.}
+@A{Music recommendation systems being trained on a narrow set of genres.}
+
+@Q{We collapsed specific ages into categories (teenager, etc) to align the specificity of our data with the specificity of recommendations that we wanted from the decision tree. What if we had not done that, and instead created a branch for each individual age? How would individual branches have affected the decision tree and its recommendations?}
+@A{The tree would have had many more branches and decision nodes.}
+@A{We would likely have needed more training data with more samples at each age to get to acceptable accuracy.}
+
+@Q{You have learned that @vocab{supervised learning} includes three steps: (1) demonstration of the learning process, (2) function abstraction, and (3) using the function. Describe what each step includes for the @vocab{supervised learning} of a @vocab{decision tree}.}
+@A{Demonstration: For decision trees, the demonstration is the labeling of the data so that the computer learns the desired outcome (or "correct answer") for each data point. During the lesson, we knew whether the individuals in our training set would buy the video game.}
+@A{Function abstraction: Creating the decision tree yields a model of how variables affect outcomes.}
+@A{Use: Follow the decision tree to find the predicted outcome for a new input (set of values for the question variables).}
+
+}
+
+
+
+Creating a decision tree is a form of @vocab{supervised learning}, because the training data already contains the desired outcomes (as one column), and the algorithm just learns a function that maps from input to outcomes.
+}
