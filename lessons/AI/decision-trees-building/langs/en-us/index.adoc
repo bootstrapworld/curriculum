@@ -400,44 +400,47 @@ We've provided a `classify` function, which consumes a Table of rows to be class
 
 When choosing a split for our root node, our goal is to ask a question that sorts the data into the _neatest, most organized piles that we can_. For example, it would be ideal to get all the cats on one side, and all the dogs on the other. We can't always get a perfect split like this, but we want to get as close as possible.
 
-But how do we know what root will make the best possible split?
+But how do we know what root will make the best possible split? To know where to split the data, we need to know how the data is _shaped_ for different species. Let's use visualizations to help us explore this, and compare splits based on `pounds` vs. a split based on `tail`...
 
 @slidebreak{InvestigateR}
+We can use the `image-dot-plot` from @printable-exercise{what-does-the-code-do.adoc}, which made a dot-plot showing the distribution of animals' `pounds`. Where does it make sense to split?
 
-To know where to split the data, we need to know how the data is _shaped_ for different species. Let's use visualizations to help us explore this. Let's look back at our `image-dot-plot` from @printable-exercise{what-does-the-code-do.adoc}.
-
-@center-image{images/dot-plot-pounds.png}
+@centered-image{images/dot-plot-pounds.png}
 
 - Splitting on `r["pounds"] < 9` gives us two groups, cats and dogs on both sides
+- Splitting on `r["pounds"] < 6` is tempting, because there's a nice gap in the data! But it leaves cats and lizards on both sides of the split.
 - Splitting on `r["pounds"] < 3` is much better, with _all tarantulas and snails_ are on one side
+
 
 @slidebreak{InvestigateR}
 
-To know where to split the data, we need to know how the data is _shaped_ for different species. Let's use visualizations to help us explore this. Let's look back at our `image-dot-plot` from @printable-exercise{what-does-the-code-do.adoc}.
+@centered-image{images/dot-plot-tail.png}
 
-@center-image{images/dot-plot-tail.png}
+To know where to split the data, we need to know how the data is _shaped_ for different species. Let's use visualizations to help us explore this. Let's look back at our `image-dot-plot` from @printable-exercise{what-does-the-code-do.adoc}.
 
 - Splitting on `r["tail"] == true` gives us two clean groups: lizards, cats and dogs on one side, snails and tarantulas on the other
 
 @slidebreak{Investigate-DN}
 @lesson-instruction{
 - Turn to @printable-exercise{the-algorithm.adoc}, and use `image-dot-plot` to help you complete *the first section*.
-- When you're done, fill in the blanks (`...`) in `my-classifier1` function in Pyret to match your 1-level @vocab{decision tree}.
+- When you're done, fill in the blanks (`...`) in `my-classifier1` function in Pyret with your best _categorical split_.
 - Try using it with the `classify` function. How did it do?
 }
 
 @teacher{Have students share what their root node was, and why they chose it. Make sure to emphasize the use of the dot-chart as the justification for why they chose the split they did!}
 
 @slidebreak{Investigate-DN}
-When we split on `r["tail"] == true`, we got all the snails and tarantulas are on one side, and all the dogs, cats, and lizards on the other. Now we need to split the snails and tarantulas. What @vocab{decision node} should we use to tell snails and tarantulas apart?
-
-This is the _exact same_ problem we solved for the root node: our goal is to ask a question that sorts the data into the _neatest, most organized piles that we can_.
-
 @lesson-instruction{
 - Complete *the second section* on @printable-exercise{the-algorithm.adoc}.
 - When you're done, change the `my-classifier2` function in Pyret to match your 2-level @vocab{decision tree}.
 - Try using it with the `classify` function. How did it do?
 }
+
+@slidebreak{Investigate-DN}
+If we split on `r["swims"] == true`, we'll get all the snails and tarantulas are on one side, and a mix of dogs, cats, and lizards on the other. Now we need to split the snails and tarantulas. What @vocab{decision node} could we use to tell snails and tarantulas apart?
+
+This is the _exact same_ problem we solved for the root node: our goal is to ask a question that sorts the data into the _neatest, most organized piles that we can_.
+
 
 === Synthesize
 @slidebreak{Synthesize}

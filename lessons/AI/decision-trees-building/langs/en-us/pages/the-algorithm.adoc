@@ -3,7 +3,8 @@
 <style>
 #preamble_disabled { flex-grow: 0 !important; }
 .fitb { min-width: 2em !important; }
-.autonum { padding-top: 1em !important; }
+.autonum, .fitb.stretch::after { padding-top: 1em !important; }
+table.fit-content tr td { padding: 0.3em 0.625em !important; }
 </style>
 ++++
 
@@ -34,22 +35,77 @@
 @image{../images/empty-tree.png}
 |===
 
-== Choosing the Best Root
-*Suppose we split on `r["sex"] == "male"` for the root node of our decision tree*
+== Categorical Splits
+@n Use `image-dot-plot` to make three visualizations of this dataset, showing the distribution of `sex`, `mammal`, `tail`, and `swims`. If we split on each of them, what will the "yes" and "no" leaves be? How many animals will be predicted correctly? We've done the first row for you.
 
-@n Circle all the species that have rows on only one side of the split: @hspace{5em} Dogs @hspace{2em} Cats @hspace{2em} Lizards @hspace{2em} @ifsoln-choice{Snails} @hspace{2em} Tarantulas
+[%autowidth, cols="^,^,^,^", frame="none", stripes="none", options="header"]
+|===
+| Split on
+| "yes" leaf (most common in this group)
+| "no" leaf (most common in this group)
+| # Correct
 
-@n Pick a split that *you* think is better, and write the code for it: @fitb{}{@ifsoln{correct answers will include `r["tail]"`, `r["mammal"]`, or `r["swims"]`}}
+| `r["sex"] == "hermaphrodite"`
+| "snail" (2 of 2)
+| "cat" (5 of 13) - a tie with "snail"
+| 6
 
-@n Using your split, circle the species that have rows on only one side: @hspace{4em} Dogs @hspace{2em} Cats @hspace{2em} Lizards @hspace{2em} Snails @hspace{2em} Tarantulas
+| `r["sex"] == "female"`
+| @ifsoln{"cat" (4 of 8)}
+| @ifsoln{"dog" (2 of 11) - a tie with "snail"}
+| @ifsoln{6}
 
-@n In the root at the top of this page, write the code for your split. Label the number of rows that will go to each side of the split.
+| `r["mammal"] == true`
+| @ifsoln{"cat" (5 of 9)}
+| @ifsoln{"snail" (2 of 4) - a tie with "tarantula"}
+| @ifsoln{7}
 
-@n Which species has the most rows in your "yes" branch? @fitb{12em}{} @hspace{1em} The "no" branch? @fitb{}{}
+| `r["tail"] == true`
+| @ifsoln{"cat" (5 of 11)}
+| @ifsoln{"snail" (2 of 4) - a tie with "tarantula"}
+| @ifsoln{7}
+
+| `r["swims"] == true`
+| @ifsoln{"dog" (4 of 6)}
+| @ifsoln{"cat" (4 of 9)}
+| @ifsoln{8}
+
+|===
+
+== Quantitative Splits
+
+@n Use `image-dot-plot` to look at the distribution of `pounds`. Where would you split, to predict `species`? @fitb{}{}
+
+@n What will happen for each of the `pounds` splits below? We've done the first row for you.
+
+[%autowidth, cols="^,^,^,^", frame="none", stripes="none", options="header"]
+|===
+| Split on
+| "yes" leaf
+| "no" leaf
+| # Correct
+
+| `r["pounds"] > 2`
+| "cat" (5 of 11)}
+| "snail" or "tarantula" (2 of 4)}
+| 7
+
+| `r["pounds"] > 6`
+| @ifsoln{"cat" (4 of 9) - a tie with "dog" }
+| @ifsoln{"snail" (2 of 4) - a tie with "tarantula"}
+| @ifsoln{6}
+
+| `r["pounds"] > 9.5`
+| @ifsoln{"dog" (4 of 5)}
+| @ifsoln{"cat" (4 of 10)}
+| @ifsoln{8}
+|===
+
+@n Choose your split. filling in the root at the top of the page and labeling the edges with the number of animals in each sub-group. Explain your thinking: @fitb{}{@ifsoln{`r["swims"] == true` or `r["pounds"] > 9.5` both lead to the most successful categorization}}
 
 @vspace{1ex}
 
-*In @starter-file{decision-tree}, change the `my-classifier1` function in Pyret to use your root*
+*In the @starter-file{decision-tree}, change the `my-classifier1` function in Pyret to use your root*
 
 @n Click "Run", and evaluate `classify(simple-animals, "species", my-classifier1)`. For each species, how many did your 1-level classifier get right?
 
@@ -60,28 +116,4 @@
 *Snails*: @fitb{2em}{} out of 2 @hspace{1em}
 *Tarantulas*: @fitb{2em}{} out of 2
 
-== Adding a 2^nd^ Level
-@n Add a new node for your "no" split. Circle the species in this node: @hspace{1em} Dogs @hspace{1em} Cats @hspace{1em} Lizards @hspace{1em} Snails @hspace{1em} Tarantulas
-
-@n Pick a split for _this_ node, and write the code for it: @fitb{}{}
-
-@n Add the best-guess labels for the most-common species in the two leaves under this node.
-
-@n Add a new node for your "yes" split. Circle the species in this node: @hspace{1em} Dogs @hspace{1em} Cats @hspace{1em} Lizards @hspace{1em} Snails @hspace{1em} Tarantulas
-
-@n Pick a split for _this_ node, and write the code for it: @fitb{}{}
-
-@n Add the best-guess labels for the most-common species in the two leaves under this node. _(You should have four leaf nodes in total!)_
-
-*In @starter-file{decision-tree}, change the `my-classifier2` function in Pyret to match your 2-level @vocab{decision tree}.*
-
-@n Click "Run", and evaluate `classify(simple-animals, "species", my-classifier2)`. For each species, how many did your 2-level classifier get right?
-
-@hspace{5em}
-*Dogs*: @fitb{2em}{} out of 4 @hspace{1em}
-*Cats*: @fitb{2em}{} out of 5 @hspace{1em}
-*Lizards*: @fitb{2em}{} out of 2 @hspace{1em}
-*Snails*: @fitb{2em}{} out of 2 @hspace{1em}
-*Tarantulas*: @fitb{2em}{} out of 2
-
-@star Experiment with different 1st and 2nd-level nodes. How accurate can you make your 2-level tree?
+@star Repeat this exercise for your "yes" and "no" sub-groups, and complete the decision three at the top of the page!
