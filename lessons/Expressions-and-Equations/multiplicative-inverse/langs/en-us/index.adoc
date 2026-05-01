@@ -25,9 +25,9 @@
 | Key Points For The Facilitator
 |
 - This lesson is all about _mathematical flexibility_, and may challenge preexisting ideas about arithmetic. For students who've had a mostly procedural introduction to mathematics -- or who have high math anxiety -- the flexibility introduced by this lesson can be intimidating!
-- Embrace an open mind and expect the same of your students, and be attentive to their emotional response as the lesson progresses. If students are getting anxious, they will not be able to concentrate and focus on the content.
+- Embrace an open mind, expect the same of your students, and be attentive to their emotional response as the lesson progresses. 
 - This lesson digs into multiplication and division of unit fractions and whole numbers, emphasizing _structure_ over computation.
-- This lesson has a similar structure as @lesson-link{additive-inverse}. Students may benefit from looking back at the pages they completed during that lesson.
+- This lesson has a structure similar to the @lesson-link{additive-inverse} lesson. Students may benefit from looking back at the pages they completed during that lesson.
 |===
 
 
@@ -88,44 +88,48 @@ Students discover the Multiplicative Inverse Property, which tells us that multi
 === Launch
 @slidebreak{Launch}
 
-The Commutative and Associative Properties help us re-order expression to make them easier to think about and solve. We also know that these properties apply to multiplication, but _not_ division.
+The thinking we just did about scaling images up and back involved "undoing" multiplication with @vocab{multiplicative inverses}.
 
-... but what if there was a way to _rewrite_ division as multiplication? Then we could apply the Commutative and Associative Properties to division expressions, too! Let’s explore this idea with a game.
-
-@teacher{Draw the following table on the board.}
+@lesson-point{Any number multiplied by its multiplicative inverse will equal 1 _(the multiplicative identity)_.}
 
 @slidebreak{Launch}
 
+@teacher{Draw or project the following table on the board.}
+
 [cols="^1,^1", options="header"]
 |===
-| Starting Value		| Reciprocal
-| @vspace{3ex}			|
+| Starting Value					| Reciprocal
+| @math{\frac{1}{2}}			|
+| @math{\frac{1}{3}}			|
+| @math{\frac{1}{100}}		|
+|	@math{10}								|
+| @vspace{3ex}						|
 |===
 
-I'm going to write a number in the left-hand column. Your job is to tell me the @vocab{reciprocal}: the value I should _multiply_ my starting number by to get a product of 1. I'll record your response in the right-hand column.
+@lesson-instruction{
+For each number in the left-hand column of this table, your job is to tell me the @vocab{multiplicative inverse}: the value I should _multiply_ my starting number by to get a product of 1. I'll record your responses in the right-hand column.
+}
 
 @QandA{
-@Q{The first number is @math{\frac{1}{2}}. What can I use to multiply that and get 1?}
+@Q{The first number is @math{\frac{1}{2}}. What can I multiply that by to get 1?}
 @A{2}
 
-@Q{The next number is @math{\frac{1}{3}}. What can I use to multiply that and get 1?}
-@A{3}
-
-@Q{How about @math{\frac{1}{100}}?}
-@A{100}
-
-@Q{How about @math{10}?}
-@A{\frac{1}{10}}
+@Q{The second number is @math{\frac{1}{3}}. What can I multiply that be to get 1?...}
 
 @Q{What's another pair of numbers -- a fraction and a whole number -- that multiply together to produce 1?}
 @A{Answers will vary}
+
+@Q{@opt{What could we multiply @math{\frac{2}{3}} by to get 1?}}
 }
 
 @teacher{Allow a variety of students to share. Record responses on the table.}
 
 @slidebreak{Launch}
 
-These number pairs all represent @vocab{reciprocals}. The reciprocal of a real number @math{n} is @math{\frac{1}{n}}. These number pairs are also illustrative of the @vocab{Multiplicative Inverse Property}: when we multiply them together, we always end up with a product of @math{1}.
+The number pairs we just looked at are all multiplicative inverses, which can also be called @vocab{reciprocals}. 
+
+- The reciprocal of any integer @math{n} is @math{\frac{1}{n}}. 
+- The reciprocal of any fraction @math{\frac{a}{b}} is @math{\frac{b}{a}}.
 
 @lesson-point{
 The @vocab{Multiplicative Inverse Property} tells us that multiplying a number by its @vocab{reciprocal} always produces one.
@@ -133,9 +137,10 @@ The @vocab{Multiplicative Inverse Property} tells us that multiplying a number b
 
 Every number -- except zero -- has a reciprocal.
 
-@teacher{A fun challenge question: why doesn't zero have a reciprocal?
-
-Since no number, when multiplied by zero, can produce 1 (any product with zero is always zero), there is no reciprocal for zero, and therefore, division by zero is undefined.}
+@strategy{Why doesn't zero have a reciprocal?}{
+No number can by multiplied by zero to produce 1. (Zero times anything is always zero!) +
+Since there is no reciprocal for zero, division by zero is undefined.
+}
 
 === Investigate
 @slidebreak{Investigate}
@@ -149,8 +154,8 @@ Since no number, when multiplied by zero, can produce 1 (any product with zero i
 === Synthesize
 @slidebreak{Synthesize}
 
-- Can you think of a way to visually represent that a number multiplied by its reciprocal produces one?
 - How would you explain the Multiplicative Inverse Property to another student?
+- Can you think of a way to visually represent that a number multiplied by its reciprocal produces one?
 
 == Multiplication and Division: Inverse Operations
 
@@ -161,27 +166,133 @@ Students rewrite multiplication expressions as division, and division expression
 === Launch
 @slidebreak{Launch}
 
-Now that we understand what a reciprocal is, we are ready to think about how we can put it to use. Perhaps it can make some computations simpler?
+At some point we learned that we should always multiply and divide from left to right. 
 
-@lesson-instruction{
-- Complete @printable-exercise{discover-inverse.adoc}.
-- When you're finished, complete @printable-exercise{discover-inverse-cont.adoc}.
+Let's consider the expression @big{@math{100 \times 20 \div 5}}. What would happen if we didn't work from left to right?
+
+++++
+<style>
+/* allow more than one circle to exist on the same line */
+.circleevalsexp { width: unset; }
+/* when a paragraph tag is followed by a circle, allow them both to exist on the same line */
+div.paragraph>p:has(+.circleevalsexp) { display: inline; }
+</style>
+++++
+
+@indented{
+[cols="^1a,^1a"]
+|===
+|@show{(coe '(/ (* 100 20) 5))} = @show{(coe '(/ 2000 5))} = @show{(coe '(400))}
+|@show{(coe '(* 100 (/ 20 5)))} = @show{(coe '(* 100 4))} = @show{(coe '(400))}
+|===
 }
 
 @QandA{
-@Q{What did you notice about the multiplicative inverse and its value when doing mental computation?}
+@Q{Is it essential to evaluate this expression from left to right?}
+@A{No. They both returned the same answer!}
+
+@Q{If you knew that you'd get the correct answer by dividing first, why might you rather compute in that order?}
+@A{The second order involves smaller numbers, making it easier to do the computations in our head!}
 }
 
 @slidebreak{Launch}
 
-Hopefully, you discovered two big ideas:
+The tricky thing is that order _sometimes_ matters. 
 
-- Dividing by @math{x} produces the same result as multiplying by its reciprocal, @math{\frac{1}{x}}.
-- Dividing by @math{\frac{1}{x}} produces the same result as multiplying by its reciprocal, @math{x}.
+- We can evaluate as if order _always_ matters. We will _always get the correct answer_ this way, but we might end up working harder.
+- We can try to learn a more nuanced pattern...
 
-In other words, when you see multiplication or division by a unit fraction (a fraction with a numerator of @math{1}), there is likely a path forward using *mental computation only*. Understanding how the reciprocal can help us to write equivalent expressions can often make computation much simpler!
+@lesson-instruction{
+- Complete @printable-exercise{is-there-another-way.adoc}.
+- Be prepared to share what you Notice and Wonder.
+}
+
+@slidebreak{Launch}
+
+@QandA{
+@Q{What pattern did you find?}
+@A{In an expression with 3 numbers that involves multiplication and division
+    * if it starts with multiplication, the order we compute in doesn't matter
+    * if it starts with division, we have to compute from left to right
+}
+}
+
+@slidebreak{Launch}
+
+@right{@image{images/kenya-flag.png, 150}} In Kenya, students are taught that in expressions with two operators, the first being multiplication and the second being division, they must divide first... and then multiply! 
+
+@QandA{
+@Q{What is an advantage to learning to recognize @big{@math{1234 \times 880 \div 88}} as an expression where we can divide first?}
+@A{Most people can't multiply @math{1234 \times 880} in their heads.}
+@A{If we start with @math{880 \div 88 = 10}, it's easy to multiply @math{1234 \times 10 = 12340}}
+}
+
+@teacher{
+Learn more about the "Kenya algorithm" in @citation{bay-williams-martinie-2015, "this article"} by Bay-Williams and Martinie (2015). The authors explore the idea that when we teach Order of Operations in a rigid way, "students miss out on opportunities to look for efficient approaches, a critical component of procedural fluency."
+}
+
+@slidebreak{Launch}
+
+@QandA{
+Let's put our new knowledge to use! Scan each expression to determine the simplest solving strategy, then compute mentally.
+
+@Q{ @math{114 \times 17 \div 17}}
+@A{@math{114}}
+
+@Q{@math{15 \times 45 \div 15}}
+@A{@math{45}}
+
+@Q{@math{2 \times 16 \times \frac{1}{27} \times 27}}
+@A{@math{32}}
+}
+
+@slidebreak{Launch}
+
+@QandA{
+@Q{Could we apply the "Kenya algorithm" to an expression with 4 numbers? 5 numbers? 8 numbers?}
+@A{No. The pattern we just described is for expressions with 3 Numbers and we'd have to build a more complex set of rules if we wanted to apply it to longer expressions.}
+
+@Q{Why do you think students often learn that they have to multiply and divide from left to right, even though another order is _sometimes_ possible?}
+@A{It's easier to keep track of a single rule that always work than to remember a long list of rules.}
+}
 
 === Investigate
+@slidebreak{Investigate}
+
+We've seen more than once that the order in which we multiply is more flexible than the order in which we divide. What if we could write divisiion problems as multiplication?
+
+@lesson-instruction{
+- Scooter claims that we can rewrite division by an integer as multiplying by a unit fraction. To support her claim she asserts that _twelve divided by four_ is the same as _one fourth of twelve_.
+- Complete @printable-exercise{discover-inverse.adoc} to explore her claim.
+- What did you observe about the multiplicative inverse?
+}
+
+@slidebreak{Investigate}
+
+During this exploration, you should have discovered that:
+
+@lesson-point{Any expression involving division can be rewritten as multiplication by the @vocab{reciprocal}.}
+
+- The reciprocal of any unit fraction (@math{\frac{1}{a}}) is an integer (it's denominator (@math{a}).
+- Multiplying by a unit fraction (@math{\frac{1}{a}}) produces the same result as _dividing by its denominator_ (@math{a}).
+- Dividing by a unit fraction (@math{\frac{1}{a}}) produces the same result as _multiplying by its denominator_ (@math{a}).
+
+@lesson-point{Expressions involving multiplication or division by a unit fraction (a fraction with a numerator of @math{1}) can be rewritten without fractions!}
+
+@slidebreak{Investigate}
+
+@QandA{
+@Q{How could using the Multiplicative Inverse to rewrite expressions increase the flexibility of the order in which we do computations?}
+@A{We know that we can mulitply in any order! So if we can rewrite division as multiplication, we can compute in any order, without having to remember lots of special rules!}
+
+@Q{Knowing what you know now, what would be the simplest way to compute the value of @math{30 \times 41 \div 6} in your head?}
+@A{If we think about it all as multiplication, we can 
+  * reorder it as @math{30 \times \frac{1}{6} \times 41}
+  * divide @math{30 \div 6} to get @math{5}
+  * then multiply @math{5 \times 41} to get @math{205}
+}
+}
+
 @slidebreak{Investigate}
 
 @teacher{Now, students are ready to continue their exploration of multiplication as the inverse of division.}
@@ -190,99 +301,28 @@ In other words, when you see multiplication or division by a unit fraction (a fr
 Complete @printable-exercise{which-not-equivalent.adoc}.
 }
 
+@slidebreak{Investigate}
+
+@QandA{
+@Q{Claire and Soraya want to write an equivalent expression for @math{45 \div 9}. Soraya grabs a pencil and writes the following: @math{45 \times \frac{1}{9}}. Does that make sense?}
+@A{Sample response: Instead of dividing by 9, Soraya is multiplying by the reciprocal.}
+@A{Yes, Soraya has written an equivalent expression.}
+@A{What's the point? The computation will not be any simpler.}
+}
+
 @teacher{Invite students to share which problems were most challenging, and which ones felt simple. Have students share strategies for determining equivalence.}
 
 === Synthesize
 @slidebreak{Synthesize}
 
 @QandA{
-@Q{Claire and Soraya want to write an equivalent expression for @math{45 \div 9}. Soraya grabs a pencil and writes the following: @math{45 \times \frac{1}{9}}. Does that make sense?}
-@A{Sample response: Instead of dividing by 9, Soraya is multiplying by the reciprocal. Yes, Soraya has written an equivalent expression -- but the computation will not be any simpler.}
+@Q{What are some important things we know about multiplicative inverses?}
+@A{Another word for the @vocab{multiplicative inverse} is @vocab{reciprocal}.}
+@A{When we multiply a number by its @vocab{multiplicative inverse} we get one.}
+@A{Since any quantity multiplied by one is itself, any value multiplied by amy pair of mulitplicative inverses will just equal the value.}
+@A{Multiplicative inverses allow us to rewrite any division problem as multiplication so that we can compute the expression in any order.}
+
+@Q{Knowledge of inverse operations creates _more_ opportunities to apply the @vocab{Commutative Property} and the @vocab{Associative Property}? Explain why this is the case.}
+
+@Q{Can you think of any other examples -- they can be math-related or not! -- of when you thought there was just one way to do something... and then learned that there was more than one way?}
 }
-
-== Is the Order of Operations Universal?
-
-=== Overview
-Students learn an algorithm taught in Kenya, which is used for solving certain types of problems. They then compare and contrast it with an algorithm they have likely seen before. They discover that the @vocab{Commutative Property} and @vocab{Associative Property} are more powerful than they initially thought!
-
-=== Launch
-@slidebreak{Launch}
-
-@lesson-instruction{
-- Consider this expression: @math{100 \times 20 \div 5}
-- Rewrite the expression -- either by adding parentheses or drawing a Circle of Evaluation -- to show your process for solving.
-}
-
-@QandA{
-@Q{What do we get when we simplify the expression to a single value?}
-@A{400}
-
-@Q{How did you arrive at your answer?}
-}
-
-@teacher{Invite students to share their responses. If your students have spent any time at all studying the Order of Operations, they will notice both multiplication and division in the expression. From there, they will likely conclude that they must work from left to right to arrive at a correct result.}
-
-@slidebreak{LaunchR}
-
-@QandA{
-The solving strategy most commonly used can be represented by this Circle of Evaluation:
-@show{(coe '(/ (* 100 20) 5))}
-
-@Q{Did anyone use a different method?}
-}
-
-=== Investigate
-@slidebreak{Investigate}
-
-In Kenya, students are taught that in expressions with two operators, the first being multiplication and the second being division, like @math{100 \times 20 \div 5}, they must divide first... and then multiply! But does it actually work, _every_ time? Let’s investigate.
-
-@slidebreak{InvestigateR}
-
-@lesson-instruction{
-@right{@image{images/kenya-flag.png, 150}}
-
-- Turn to @printable-exercise{divide-first-or-left-to-right.adoc}.
-- There, you will test out the "Kenya algorithm" on several different expressions to see if dividing and then multiplying produces the correct result every time.}
-
-@teacher{
-Learn more about the "Kenya algorithm" in @citation{bay-williams-martinie-2015, "this article"} by Bay-Williams and Martinie (2015). The authors explore the idea that when we teach Order of Operations in a rigid way, "students miss out on opportunities to look for efficient approaches, a critical component of procedural fluency."
-}
-
-@QandA{
-@Q{What do you Notice? What do you Wonder?}
-
-@Q{Why are we able to change the groupings for an expression like @math{100 \times 20 \div 5} ... but _not_ for an expression like @math{100 \div 20 \div 5}?}
-
-@Q{Why does the "Kenya algorithm" work? (Hint: Think about the @vocab{Multiplicative Inverse Property}!)}
-@A{We can rewrite any division expression as multiplication by the reciprocal. Once we transform a division expression into a multiplication expression, we can apply the Commutative and Associative Properties freely!}
-
-@Q{What is an advantage to learning to recognize @math{1234 \times 880 \div 88} as an expression where we can divide first?}
-@A{Most people can't multiply @math{1234 \times 880} in their heads.}
-@A{If we start with @math{880 \div 88 = 10}, it's easy to multiply @math{1234 \times 10 = 12340}}
-}
-
-@teacher{If you'd like, invite your students to consider and discuss why students all across the country are typically taught just one algorithm when, typically, there are an abundance to choose from!}
-
-@slidebreak{Investigate}
-
-@QandA{
-Let's put our new knowledge to use! Scan each expression to determine the simplest solving strategy, then compute mentally.
-
-@Q{ @math{114 \times 17 \div 17}}
-@A{Solution: @math{114}}
-
-@Q{@math{15 \times 45 \div 15}}
-@A{Solution: @math{45}}
-
-@Q{@math{2 \times 16 \times \frac{1}{27} \times 27}}
-@A{Solution: @math{105}}
-}
-
-=== Synthesize
-@slidebreak{Synthesize}
-
-- How did it feel to scan the problem, choose your strategy, and then solve mentally?
-- Did you like this new approach -- or do you prefer solving from left to right?
-- Knowledge of inverse operations creates _more_ opportunities to apply the @vocab{Commutative Property} and the @vocab{Associative Property}? Explain why this is the case.
-- Do you think the Order of Operations is universal? Why or why not?
-- Can you think of any other examples -- they can be math-related or not! -- of when you thought there was just one way to do something... and then learned that you were wrong?
