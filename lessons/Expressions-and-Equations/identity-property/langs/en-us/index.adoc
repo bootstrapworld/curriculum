@@ -24,23 +24,20 @@
 @material-links
 |===
 
-== Programming Exploration: Looking for Shortcuts (Optimization)
+== Programming Exploration: When does code _do nothing?_
 
 === Overview
-Students explore @proglang functions that take in an image and produce an image identical to the original.
-
-@scrub{FLANNERY - A programmer did all this stuff. Can you find a more efficient way?}
+Students explore @proglang expression that transform an image to produce an image identical to the original.
 
 === Launch
 @slidebreak{Launch}
+
 @QandA{
 @Q{@right{@image{images/dog.png, 125}}What functions do you know that can be used to transform an image?}
 @A{Sample responses: `scale`, `rotate`, `overlay`, etc...}
 }
 
-@teacher{
-Students will be working in @proglang soon -- but we recommend keeping things unplugged for now!
-}
+@teacher{Students will be working in @proglang soon -- but we recommend keeping things unplugged for now!}
 
 @slidebreak{Launch}
 
@@ -60,23 +57,19 @@ Students will be working in @proglang soon -- but we recommend keeping things un
 === Investigate
 @slidebreak{Investigate-DN}
 
-@scrub{FLANNERY - New starter file 0- all images are the same size - state that in the lesson plan - include transparent and dog. And make sure to scale by 1.
-Threshold for images is movable. Wouldn't hurt to have kids make a gigantic circle. What happens? Discuss thumbnail and clicking on it.
-}
-
 @lesson-instruction{
-- Open the @starter-file{expressions-equations} and click “Run.”
+- Open the @starter-file{identity} and click “Run.”
 - Type `dog` into the Interactions Area.
-- Take a few minutes to explore. How many “do-nothing” transformations can you find for generating identical images?
-- Up for a challenge? Try applying multiple “do-nothing” functions to the `dog` image.
+- Take a few minutes to explore how many expressions you can find that apply “do-nothing” transformations to generate identical dog images.
+- Up for a challenge? Try applying multiple “do-nothing” transformations to the `dog` image.
 }
 
 @slidebreak{Investigate-DN}
 
-Now that you've had a chance to experiment, let's explore whether a few specific @proglang functions can be applied to "do-nothing".
+Now that you've had a chance to experiment, let's explore a few specific @proglang functions and whether they can be applied to "do-nothing".
 
 @lesson-instruction{
-- Turn to @printable-exercise{scale-rotate-identity.adoc}.
+- Turn to @printable-exercise{programming.adoc}.
 - As you work through this activity, be sure to make predictions about the code before testing it out!
 }
 
@@ -93,9 +86,6 @@ What did you discover?
 @Q{For what values did `rotate` produce identical images of the dog?}
 @A{Any transparent image that wasn't larger than the original image.}
 
-@Q{What can we `overlay` to produce identical images?}
-@A{Any transparent image that isn't bigger than dog.}
-
 @Q{Were you able to produce identical images using `flip-vertical` or `flip-horizontal`?}
 @A{If we use `flip-vertical` it ends up upside down, but if we `flip-vertical` a second time it puts it back where it started.}
 @A{Applying `flip-horizontal` twice also puts the image back where it started.}
@@ -103,6 +93,43 @@ What did you discover?
   * each pair of `flip-vertical` undo each other
   * each pair of `flip-horizontal` undo each other
 }
+}
+
+@slidebreak{Investigate}
+
+@lesson-instruction{
+- At the bottom of the Definitions Area you will find S1-S6, which define a number of shapes that are all the same height. We'll be using them to explore the `overlay` function. 
+- Turn to @printable-exercise{programming2.adoc} and complete just the first section with your partner.
+}
+
+@slidebreak{Investigate}
+
+@teacher{Best practice for discussing this first question would be to discuss it while displaying the starter file.}
+
+@QandA{
+@Q{I would expect @show{(code '(circle 60 "solid" "red"))} to be smaller than @show{(code '(circle 1000 "solid" "red"))} but when I type them into my Interactions Area, the second one is smaller. Can anyone explain why?}
+@A{When an image is too large for @proglang, the default is to display a thumbnail of the image. We can click on it to see it rendered in full size.}
+@A{The clue that this is just a thumbnail is the outline of the square surrounding the image.}
+
+@Q{What does `overlay` do?}
+@A{It places the first image in the expression on top of the second image.}
+
+@Q{What happened when you typed `S3` into the Interactions Area? Why?}
+@A{The cursor jumped halfway down the screen because it made a transparent image. Even if we can't see it, @proglang knows it's there.}
+}
+
+@slidebreak{Investigate}
+
+@lesson-instruction{
+- Complete @printable-exercise{programming2.adoc} with your partner.
+- Be sure to make predictions before testing expressions in the Interactions Area.
+}
+
+@slidebreak{Investigate}
+
+@QandA{
+@Q{What kind of image can we `overlay` to produce an identical image?}
+@A{Any transparent image.}
 }
 
 === Synthesize
@@ -214,32 +241,64 @@ Students use their knowledge of the Identity Property to determine whether or no
 === Launch
 @slidebreak{Launch}
 
-The Identity Property _also applies to expressions with @vocab{variables}_. Consider these expressions.
+@QandA{
+@Q{What rule would you write to describe the identity property of multiplication?}
+@A{No matter what number we start with, it will equal itself when multiplied by 1.}
+}
 
-[.embedded, cols="^.^3,^.^1,^.^3, ^.^1,^.^3", grid="none", stripes="none" frame="none"]
-|===
-| @show{(coe  '(+ 3 q))}	| @math{=} | @show{(coe  '(* (+ 3 q) 1))} | @math{=} | @show{(coe  '(+ (+ 3 q) 0))}
-|===
+@slidebreak{Launch}
 
-These expressions are equivalent for every value we substitute in for @math{q}... but there's no way to test every possible value! The Identity Property guarantees that any expression will be equivalent to itself multiplied by 1 and also to itself with zero added, no matter whether or not we do the computation.
+Rather than writing a list of examples using all of the possible numbers that we could mutliply times 1, mathematicians tend to describe rules using a variable. 
+
+@lesson-point{
+Mathematicians might describe the Identity Property of Multiplication using the rule: @big{@math{a \times 1 = a}}
+}
+
+The choice to use @math{a} was arbitrary. We could have used @math{x} or @math{z} or any other letter. +
+_Computer programmers sometimes use whole words as variables, for example `width` or `height`._
+
+@slidebreak{Launch}
+
+@QandA{
+@Q{What rule would you write to describe the identity property of addition?}
+@A{No matter what number we start with, adding zero to it will result in the same number we stared with.}
+
+@Q{How could we write that rule using the variable @math{a}?}
+@A{@math{a + 0 = a}}
+}
+
+@slidebreak{Launch}
+
+@lesson-point{
+Mathematicians might describe the Identity Property of Addition using the rule: @big{@math{a + 0 = a}} 
+}
 
 === Investigate
 @slidebreak{Investigate}
 
-@teacher{
-Students will now make the transition from numeric values to variables.
+Variables can be used any time we want to communicate about something that will apply to all numbers.
 
-If students would like, they may choose values to represent the variables. Early finishers can substitute in numbers of their choosing to confirm that their analyses of the Circles of Evaluation are correct.
-}
+Consider these expressions.
+
+[.embedded, cols="^.^3,^.^1,^.^3, ^.^1,^.^3", grid="none", stripes="none" frame="none"]
+|===
+| @show{(coe  '(+ 3 q))}  | @math{=} | @show{(coe  '(* (+ 3 q) 1))} | @math{=} | @show{(coe  '(+ (+ 3 q) 0))}
+|===
+
+Even though we can't substitute all of the possible numbers in for @math{q}, we know that these expressions are equivalent because the Identity Property guarantees that any expression will be equivalent to itself when we multiply it by 1 or add zero to it.
 
 @lesson-instruction{
-- Complete @printable-exercise{true-or-false-variables.adoc} using your knowledge of the Identity Property to determine if the equation represented by the Circles of Evaluation is true or false.
-- Decide @printable-exercise{which-not-equivalent-variables.adoc}. Be sure to explain your thinking.
+- Turn to @printable-exercise{true-or-false-variables.adoc} and use your knowledge of the Identity Property to determine if each equation represented by the Circles of Evaluation is true or false.
+- Then complete @printable-exercise{which-not-equivalent-variables.adoc}. Be sure to explain your thinking.
 }
 
 === Synthesize
 @slidebreak{Synthesize}
 
 @QandA{
+@Q{How confident did you feel making decisions about expressions that involved variables?}
+
 @Q{What strategies did you use?}
 }
+
+@teacher{If students don't bring up substitution as a strategy on their own, be sure to make sure they know that they can always replace variables with numbers and compute. Since variables can stand for all numbers, when testing rules using substitution and computation, rather than relying on their knowledge of properties, it's wise to test positive numbers, negative numbers, zero, and decimal values.}

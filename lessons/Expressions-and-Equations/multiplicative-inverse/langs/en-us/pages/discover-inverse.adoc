@@ -2,75 +2,116 @@
 
 ++++
 <style>
-  table {grid-template-rows: 3fr 1fr !important;}
-  .circleevalsexp .value,
-  .circleevalsexp .studentBlockAnswerFilled { min-width:unset; }
+/* Shrink table padding */
+div#body table tr th, div#body table tr td {
+    padding: 0.3em 0.5em;
 
-  /* Trim padding from TD and CENTER elements */
-  table tr th, table tr td { padding: .25em .625em !important; }
-  .center { padding: 0; }
+/* Shrink vertical spacing on fitbruby */
+.fitbruby{padding-top: 0.3rem;}
 </style>
 ++++
 
-== From Multiplying by Fractions to Dividing by Whole Numbers
+[.no-flex-section]
+== From Division to Multiplying by Fractions
 
-@n Under each Circle of Evaluation, write the equivalent arithmetic expression.
+@n Scooter claims that *dividing by an integer is equivalent to multiplying by the reciprocal unit fraction* and and draws the Circles of Evaluation below as proof. Translate the Circles of Evaluation into expressions and compute their values. 
 
-[cols="^.^5,^.^1,^.^5", stripes="none"]
+[cols="5,1,5", stripes="none"]
 |===
-|@show{(coe  '(* 12 1/4))}         | @math{=}       | @show{(coe '(/ 12 4))}
-|@math{\times}   | @math{=} | @math{\div}
-|===
-
-@n What will the first Circle evaluate to? @fitb{5em}{@ifsoln{@math{3}}} @hspace{12em} The second Circle? @fitb{5em}{@ifsoln{@math{3}}}
-
-@n Under each Circle of Evaluation, write the equivalent arithmetic expression.
-
-[cols="^.^5,^.^1,^.^5", stripes="none"]
-|===
-|@show{(coe  '(* 35 1/5))}         | @math{=}       | @show{(coe '(/ 35 5))}
-|@math{\times}   | @math{=} | @math{\div}
+^.^| @show{(coe '(/ 12 4))}
+| @arrow  
+^.^|@show{(coe  '(* 12 1/4))}           
 |===
 
-@n What will the first Circle evaluate to? @fitb{5em}{@ifsoln{@math{7}}} @hspace{12em} The second Circle? @fitb{5em}{@ifsoln{@math{7}}}
+@hspace{10em}@math{12 \div 4 =} @fitb{5em}{@ifsoln{3}}
+@hspace{20em}
+one quarter of 12 is@fitb{5em}{@ifsoln{3}}  
 
+@n Are these expressions equivalent?    @ifsoln-choice{Yes}    No
 
-@n What do you Notice? What do you Wonder? @fitb{}{@ifsoln{Both expressions evaluate to @math{3}. One has multiplication and one has addition. One has @math{3} and one has @math{-3}}}
+@n Will it always work? Test the examples we've started. Can you think of another example that won't be equivalent? 
 
-@fitb{}{}
-
-@center{*Did you know that multiplying by @math{\frac{1}{4}} is the same as dividing by @math{4}?*}
-
-@n In the table below, fill in the blanks to demonstrate how _multiplying by a fraction_ produces the same result as _dividing by the fraction's reciprocal._ Then write the equivalent arithmetic expression for each of the Circles.
-
-[cols="^.^5,^.^1,^.^5", stripes="none"]
+[cols="^1a,^1a", options="header",stripes="none"]
 |===
-| @show{(coe  '(* 30 1/5))}| @math{=} | @show{(coe '(/ (?ANS 30) (?ANS 5)))}
-| @math{\times} | @math{=} | @math{\div}
-|===
+| Dividing by an Integer
+| Multiplying by a Unit Fraction
 
+|@math{99 \div 3 =}@fitb{3em}{@ifsoln{33}}
+|@ifsoln{@math{\frac{1}{3} \times 99 = 33}}
 
-@n This time, we've completed the division Circle of Evaluation. You fill in the multiplication Circle of Evaluation.
+|@ifsoln{@math{200 \div 5 = 40}}
+|@math{\frac{1}{5} \times 200 =}@fitb{3em}{@ifsoln{40}}  
 
-[cols="^.^5,^.^1,^.^5", stripes="none"]
-|===
-| @show{(coe  '(* (?ANS 18) (?ANS 1/3)))} | @math{=}| @show{(coe  '(/ 18 3))}
-| @math{\times} | @math{=} | @math{\div}
+|| @vspace{2ex}
 |===
 
-== Practice
+[.no-flex-section]
+== Let's revisit two expressions from @printable-exercise{is-there-another-way.adoc}
 
-Rewrite multiplication as division, and division as multiplication.
+[cols="^1a,^1a", options="header", stripes="none"]
+|===
+| Kenyan Algorithm Worked    | Order Mattered
+| @math{3 \times 8 \div 2}  | @math{30 \div 5 \times 2}
 
-[cols="^.^3,^.^3,^.^3", stripes="none"]
+|
+[cols="^.^1a,^.^1a",frame="none", grid="none"]
+!===
+! @show{(coe '(/ (* 3 8) 2))} 
+! @show{(coe '(* 3 (/ 8 2)))} 
+!===
+
+|
+[cols="^.^1a,^.^1a",frame="none", grid="none"]
+!===
+! @show{(coe '(* (/ 30 5) 2))} 
+! @show{(coe '(/ 30 (* 5 2)))}
+!===
+
+| @math{3 \times 8 \times \frac{1}{2}}
+| @math{30 \times \frac{1}{5} \times 2}
+
+|
+[cols="^.^1a,^.^1a", frame="none", grid="none"]
+!===
+! @show{(coe '(* (* 3 8) 1/2))}  
+! @show{(coe '(* 3 (* 8 1/2)))} 
+!===
+
+|
+[cols="^.^1a,^.^1a", frame="none", grid="none"]
+!===
+! @show{(coe '(* (* 30 1/5) 2))} 
+! @show{(coe '(* 30 (* 1/5 2)))} 
+!===
 |===
 
-| @math{20 \times \frac{1}{4} =} @fitb{10em}{@ifsoln{@math{20 \div 4}}}
-| @math{100 \div 25 =} @fitb{10em}{@ifsoln{@math{100 \times \frac{1}{25}}}}
-| @math{27 \times \frac{1}{9} =} @fitb{10em}{@ifsoln{@math{27 \div 9}}}
+@n What do you Notice? What do you Wonder? @fitb{}{}
 
-| @fitb{10em}{@ifsoln{@math{6 \div 18}}} @math{= 6 \times \frac{1}{18}}
-| @fitb{10em}{@ifsoln{@math{35 \times \frac{1}{7}}}} @math{= 35 \div 7}
-| @fitb{10em}{@ifsoln{@math{5 \div 6}}} @math{= 5 \times \frac{1}{6}}
+@blanklines{1}{}
 
+[.no-flex-section]
+== Match each expression on the left to an equivalent expression on the right
+
+[.data-table,cols="^5a,1a,5,1a,^5a", stripes="none", grid="none", frame="none", options="header"]
+|===
+| Fraction version of expression
+| || 
+| Integer version of expression
+
+| 
+@math{\frac{1}{9} \times 27}
+| *@n* @ifsoln{A}
+||| 
+
+||||*A*|@math{27 \div 9}
+
+| @math{\frac{1}{27} \times 9}
+| *@n* @ifsoln{B}
+||| 
+
+||||*B*| @math{9 \div 27}
+
+| @math{27 \times \frac{1}{9}}
+| *@n* @ifsoln{A}
+|||
 |===
