@@ -5,7 +5,7 @@
 #body table { margin: 0 !important; }
 #body table td:last-child img {
     height: 180px; /* we have a limit to vertical space */
-	width: 250px;  /* stretch the image outm slightly breaking proportion*/
+	width:  250px; /* stretch the image outm slightly breaking proportion*/
 }
 </style>
 ++++
@@ -13,7 +13,7 @@
 [cols=".^12a, ^8a", frame="none"]
 |===
 |
-We've provided a function that will use this algorithm to build the optimal decision tree of _any length_, using _any columns_! Here's the contract:
+We've provided a function that will build the optimal decision tree of _any length_, using _any columns_ you choose! Here's the contract:
 
 @vspace{1ex}
 
@@ -33,18 +33,62 @@ The `build-tree` function takes *four arguments* in its Domain:
 |===
 
 
-== The Optimal 1-Level Tree for this Training Data
-Which column makes a better root for predicting `species` in this training dataset: @fitb{5em}{`"mammal"`}, or @fitb{5em}{`"tail"`}? Ask Pyret to build a 1-level tree while considering only those two columns: `c1 = build-tree(simple-animals, [list: "mammal", "tail"], "species", 1)`
+== Choosing the Right Split
 
-@n *Evaluate `c1` to see what the tree looks like*. Which column did Pyret choose? @fitb{5em}{@ifsoln{`"tail"`}} @hspace{1em} Evaluate `dt-code(c1)` to *see the function* for this decision tree. Where have you seen this code before? @fitb{}{@ifsoln{it's the code for `tail-classifier`!}}
+@scrub{Then add pounds and see what it does. Then write their explanation. Maybe assess by asking them to predict one of the 2nd level splits?}
 
-@n Now add adding the `sex` column to the list, and define your tree as `c2`. Which column did the algorithm choose for the root? @fitb{5em}{@ifsoln{`swim`}}
+@n Build a simple, 1-level tree in the Definitions Area using only the `"tail"` column, defining it as `c1`:
+
+@indented{`c1 = build-tree(simple-animals, [list: "tail"], "species", 1)`}
+
+@n Click "Run", and evaluate `c1`. What species will this classifier predict for an animal without tails?  @fitb{}{@ifsoln{snail}}
+
+@n Evaluate `dt-code(c1)` to *see the function* for this decision tree. Where have you seen this code before? @fitb{}{@ifsoln{it's the code for `tail-classifier`!}}
+
+@n Which column makes a better @vocab{root node} for predicting `species` in this training dataset? Circle your prediction:
+
+@ifsoln-choice{`tail`} vs. `mammal` @hspace{3em} `tail` vs. @ifsoln-choice{`swims`} @hspace{3em} @ifsoln-choice{`swims`} vs. `mammal`
+
+@n Try splitting the dataset by each one, choosing the most-common species as the label for each split. Then calculate the number of animals that would be calculated correctly in each case. We've done the first row for you.
+
+[cols="2a,4a,4a,1a", frame="none", stripes="none"]
+|===
+| Column
+| "yes" label
+| "no" label
+| # Correct
+
+| `mammal`
+| "cat" (5 of 9)
+| "snail" (random choice!)
+| 7
+
+| `tail`
+| @ifsoln{"cat" (5 of 11)}
+| @ifsoln{"snail" (random choice!)}
+| @ifsoln{7}
+
+| `swims`
+| @ifsoln{"dog" (4 of 6)}
+| @ifsoln{"cat" (4 of 9)}
+| @ifsoln{8}
+|===
+
+@n Which one do you think Pyret will choose, and why? @fitb{}{} +
+@fitb{}{@ifsoln{`swims`, because it leads to the most successful categorization}}
+
+*Define this as `c2` in the Definitions Area (e.g. `c2 = build-tree(simple-animals, [list: "mammal", "swims", "tail"], "species", 1)`.*
+
+@n Evaluate `dt-code(c2)`, then copy-and-paste the code into the Definitions Area, changing its name to `c2-fun`.
+
+
+@n Now add adding the `sex` column to the list, and define your tree as `c2`. Which column did the algorithm choose for the root? @fitb{5em}{@ifsoln{`swims`}}
 
 @vspace{1ex}
 
 *Use `dt-code` to turn `c2` into a function, then copy-and-paste that function into the Definitions Area.*
 
-@n Change the function's name from `classifier` to `swim-classifier`. Use `classify` to see how many rows it got right @fitb{}{8 rows}
+@n Change the function's name from `classifier` to `swims-classifier`. Use `classify` to see how many rows it got right @fitb{}{8 rows}
 
 == The Optimal 2-Level Tree for this Training Data
 By changing the last argument to `build-tree`, you can have Pyret build trees with 2 levels (or more)!
@@ -62,8 +106,17 @@ By changing the last argument to `build-tree`, you can have Pyret build trees wi
 @n Compare the confusion-matrix of `swim-classifier` and `next-classifier`. What do you *Notice*? @fitb{}{} +
 @fitb{}{}
 
-== The Optimal Tree for this Training Data
-@n Will a deeper tree built from *the same columns* do a better job? Circle your prediction before you try it out: @hspace{1em} Yes @hspace{1em} No
+== Choosing the Right Depth
+@scrub{Have them start with their original classifiers, and make `-deep` variants. See how booleans don't actually go deep, but pounds will. Ask why. Ask for prediction abvout which will be the best in the training dataset}
+
+Can Pyret make a classifier that works perfectly on the training data, if we let the trees have as many layers as possible?
+
+@n For each row in the table below, build and test the specified classifier. Then fill in the row with your results.
+
+|===
+| Classifier 					| Depth 		| # Correct 	| 	Names of mis-classified animals
+| `[list: "swims"]` 			| @ifsoln{1} 	| 8 			| @ifsoln{Lots!}
+| `list: "mammal", "tail", "swim"]` 			| @ifsoln{1} 	| 8 			| @ifsoln{Lots!}
 
 @n Try it out. Were you right? @fitb{2em}{@ifsoln{No}} @hspace{1em} Why or why not? @fitb{}{} +
 @blanklines{2}{
@@ -72,4 +125,4 @@ By changing the last argument to `build-tree`, you can have Pyret build trees wi
 
 @n What other column(s) should we consider, to improve our accuracy on this training dataset? @fitb{}{@ifsoln{sex - definitely not `species!`}}
 
-@n Build your tree, this time adding the column(s) you listed above. How many levels deep will Pyret's optimal tree go? @fitb{}{3}
+@n Build your tree, this time using every (non- `target`) column. How many levels deep will Pyret's optimal tree go? @fitb{}{3}

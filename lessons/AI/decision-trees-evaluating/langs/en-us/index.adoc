@@ -1,5 +1,24 @@
 [.beta]
 = Evaluating Decision Trees
+++++
+<style>
+/* allow lesson-points to co-exist with images */
+.lesson-point{ clear: unset !important; }
+
+/* force some images to have a white background */
+.white-bg { background-color: white; display: block; }
+
+.highlight-diagonal tr:nth-child(1) td:nth-child(2),
+.highlight-diagonal tr:nth-child(2) td:nth-child(3),
+.highlight-diagonal tr:nth-child(3) td:nth-child(4),
+.highlight-diagonal tr:nth-child(4) td:nth-child(5),
+.highlight-diagonal tr:nth-child(5) td:nth-child(6) {
+  background: var(--bs-secondary-lighter-supernova) !important;
+  color: white !important;
+  font-weight: bold;
+}
+</style>
+++++
 
 @description{Students explore an approach to recommending videos and predicting election outcomes. They develop and analyze decision trees to predict individuals’ purchasing decisions.}
 
@@ -37,10 +56,11 @@ Students learn how to generate decision trees in Pyret, and turn them into funct
 === Launch
 
 @slidebreak{LaunchR}
-@right{[.white-bg]#@image{images/tree-3.png}#}
+--
 @lesson-point{A @vocab{decision tree} is one way to model the structure hidden in the data.}
 
 @QandA{
+@right{@image{images/tree-3.png}}
 @Q{What do we call the nodes in a decision tree?}
 @A{Decision Nodes}
 
@@ -56,7 +76,7 @@ Students learn how to generate decision trees in Pyret, and turn them into funct
 @Q{When building a decision tree, how do we select a good decision node?}
 @A{We want to pick a node that sorts the data into the neatest, most organized piles possible.}
 }
-
+--
 @slidebreak{Launch}
 
 @slidebreak{Launch-DN}
@@ -117,7 +137,7 @@ Try it out with the original `tail-classifier`:
 
 @slidebreak{Investigate}
 
-[.pyret-table, cols="1a,^1a,^1a,^1a,^1a,^1a", options="header"]
+[.data-table.highlight-diagonal, cols="6a,^7a,^7a,^7a,^7a,^7a", options="header"]
 |===
 |actual-species|predicted-cat|predicted-dog|predicted-lizard|predicted-snail|predicted-tarantula
 |"cat"         |      1      |      0      |       0        |       0       |       0
@@ -127,9 +147,22 @@ Try it out with the original `tail-classifier`:
 |"tarantula"   |      0      |      0      |       0        |       1       |       0
 |===
 
-The *best possible report card* has a diagonal line of `1`s, running from the top-left to the bottom right of the confusion matrix. That would mean that 100% of the cats were classified as cats, 100% of the dogs were classified as dogs, and so on....
+The "correct scores" are shown in the diagonal, running from top-left to bottom-right.
 
-How did your 2-level classifier do? Compare your confusion matrices with the people around you.
+@QandA{
+@Q{What are some things we can infer from this confusion matrix?}
+@A{Our classifier got 100% of the cats and snails right}
+@A{It mis-classified all of our dogs as cats}
+@A{It mis-classified all of our lizards as cats}
+@A{It mis-classified all of our tarantulas as snails}
+@Q{What would the matrix for the *best possible classifier* look like?}
+@A{1s along the diagonal, showing 100% of each category was classified correctly. 0s everywhere else, showing no mis-classifications.}
+}
+
+@lesson-instruction{
+- Compare your confusion matrices with the people around you.
+- How did your 2-level classifier do?
+}
 
 === Synthesize
 @slidebreak{Synthesize}
@@ -155,8 +188,6 @@ Now that they know the algorithm, students explore Pyret's ability to build deci
 @slidebreak{Launch}
 By now, you know that not all @vocab{decision trees} are created equal! You also know the algorithm to compute an _optimal tree_, so you could generate a @vocab{decision tree} for any dataset.
 
-For example, you could help a store figure out which customers are most likely to buy a particular video game:
-
 [.data-table, cols="^2,^2,^3,^2,^2", stripes="none", options="header"]
 |===
 | name    | age        | shopping history     | interest in game  | buys game
@@ -170,7 +201,7 @@ For example, you could help a store figure out which customers are most likely t
 | Isabela | "thirties" | "previous customer"  | true              | true
 |===
 
-If you've ever wondered how a company knows which coupons or promotions to send you, or which ads to show you on the web...now you have an idea!
+Based on a dataset like this, could you write a classifier that predicts which customers are most likely to buy a game, and mail them a targeted advertisement?
 
 @slidebreak{Launch}
 
@@ -188,24 +219,34 @@ You could write a simple spam filter, to get rid of unwanted email:
 | false                   | false                   | true
 |===
 
-If you've ever wondered how a spam filter works...now you have an idea!
+Based on a dataset like this, could you write a simple classifier that predicts whether an email is spam or not?
 
 @slidebreak{Investigate}
-But computing a decision tree by hand takes a long time, especially if you're dealing with thousands of rows and dozens of columns! Fortunately, computers are _really good_ at following algorithms.
+Of course, computing a decision tree by hand takes a long time, especially if you're dealing with tens of thousands of rows and hundreds of columns! Fortunately, computers are really, _really_ good at following algorithms.
 
-We've provided a function that will use this algorithm to build the _optimal_ decision tree for you! Here's the contract:
+We've provided a function that will use a splitting algorithm similar to the one you know, to build the _optimal_ decision tree based on a set of training data! Here's the contract:
 
 @show{(contract "build-tree" '("Table" "List" "String" "Number") "DecisionTree")}
 
 The `build-tree` function takes *four arguments* in its Domain:
 
-- The _training dataset_ from which to fit the tree
-- A list of all the column names to split on
-- The name of the _label_ column containing all the "answers" for the various categories
+- The _training dataset_ on which to fit the tree
+- A list of all the column names for the nodes to split on
+- The name of the _target_ column containing all the "answers" for the various categories
 - The _maximum depth_ the tree is allowed to be
 
 @lesson-instruction{
 - Complete @printable-exercise{computing-decision-trees.adoc}
+- When you're finished, share your answer to the last question ("how deep will it go?") with your neighbors. Why do you think you got the answer your did?
+}
+
+@slidebreak{Investigate}
+
+@QandA{
+@Q{Was anyone surprised by Pyret's choice for the root?}
+@Q{How did Pyret's choices for the rest of the tree compare to yours?}
+@Q{Why do you think the optimal tree using all columns only needed 3 levels of depth?}
+@A{Most of the variation in the dataset can be explained with splits on our Boolean columns. For a few animals (like `Shadestar`), we need to look at the `pounds` column. }
 }
 
 @slidebreak{Investigate}

@@ -47,22 +47,22 @@ table.fit-content tr td { padding: 0.3em 0.625em !important; }
 
 | `r["sex"] == "hermaphrodite"`
 | "snail" (2 of 2)
-| "cat" (5 of 13) - a tie with "snail"
+| "cat" (5 of 13)
 | 6
 
 | `r["sex"] == "female"`
 | @ifsoln{"cat" (4 of 8)}
-| @ifsoln{"dog" (2 of 11) - a tie with "snail"}
+| @ifsoln{"dog" or "snail" (2 of 11)}
 | @ifsoln{6}
 
 | `r["mammal"] == true`
 | @ifsoln{"cat" (5 of 9)}
-| @ifsoln{"snail" (2 of 4) - a tie with "tarantula"}
+| @ifsoln{"snail" or "tarantula" (2 of 4)}
 | @ifsoln{7}
 
 | `r["tail"] == true`
 | @ifsoln{"cat" (5 of 11)}
-| @ifsoln{"snail" (2 of 4) - a tie with "tarantula"}
+| @ifsoln{"snail" or "tarantula" (2 of 4)}
 | @ifsoln{7}
 
 | `r["swims"] == true`
@@ -86,13 +86,13 @@ table.fit-content tr td { padding: 0.3em 0.625em !important; }
 | # Correct
 
 | `r["pounds"] > 2`
-| "cat" (5 of 11)}
-| "snail" or "tarantula" (2 of 4)}
+| "cat" (5 of 11)
+| "snail" or "tarantula" (2 of 4)
 | 7
 
 | `r["pounds"] > 6`
-| @ifsoln{"cat" (4 of 9) - a tie with "dog" }
-| @ifsoln{"snail" (2 of 4) - a tie with "tarantula"}
+| @ifsoln{"cat" or "dog" (4 of 9)}
+| @ifsoln{"snail" or "tarantula" (2 of 4)}
 | @ifsoln{6}
 
 | `r["pounds"] > 9.5`
@@ -101,7 +101,7 @@ table.fit-content tr td { padding: 0.3em 0.625em !important; }
 | @ifsoln{8}
 |===
 
-@n Choose your split. filling in the root at the top of the page and labeling the edges with the number of animals in each sub-group. Explain your thinking: @fitb{}{@ifsoln{`r["swims"] == true` or `r["pounds"] > 9.5` both lead to the most successful categorization}}
+@n Choose your split! *Fill in the root at the top of the page, labeling the edges with the number of animals in each sub-group*. Explain your choice: @fitb{}{@ifsoln{`r["swims"] == true` or `r["pounds"] > 9.5` both lead to the most correct classifications}}
 
 @vspace{1ex}
 
@@ -109,11 +109,12 @@ table.fit-content tr td { padding: 0.3em 0.625em !important; }
 
 @n Click "Run", and evaluate `classify(simple-animals, "species", my-classifier1)`. For each species, how many did your 1-level classifier get right?
 
-@hspace{5em}
-*Dogs*: @fitb{2em}{} out of 4 @hspace{1em}
-*Cats*: @fitb{2em}{} out of 5 @hspace{1em}
-*Lizards*: @fitb{2em}{} out of 2 @hspace{1em}
-*Snails*: @fitb{2em}{} out of 2 @hspace{1em}
-*Tarantulas*: @fitb{2em}{} out of 2
-
+@center{
+*Dogs*: 	 @fitb{2em}{} of 4 @hspace{1em}
+*Cats*: 	 @fitb{2em}{} of 5 @hspace{1em}
+*Lizards*: 	 @fitb{2em}{} of 2 @hspace{1em}
+*Snails*: 	 @fitb{2em}{} of 2 @hspace{1em}
+*Tarantulas*:@fitb{2em}{} of 2 @hspace{1em}
+*TOTAL:* 	 @fitb{2em}{} of 15
+}
 @star Repeat this exercise for your "yes" and "no" sub-groups, and complete the decision three at the top of the page!
