@@ -1,10 +1,10 @@
 = The Additive Inverse Property
 
-@description{Students develop a more nuanced interpretation of the Commutative and Associative Properties as a result of their exploration of the inverse relationship between addition and subtraction.}
+@description{Students explore inverted images as a springboard for thinking about the inverse relationship between addition and subtraction.}
 
 @lesson-prereqs{associative-property}
 
-@keywords{Associative Property, Commutative Property}
+@keywords{inverse}
 
 [@lesson-intro-table]
 |===
@@ -22,6 +22,10 @@
 |[.materials-links]
 @material-links
 
+| Relevant Resources
+|
+- This lesson introduces the RGB Color Model. While RGB codes are not a learning goal for the lesson, students might be curious to experiment with @link{https://www.cknuckles.com/rgbsliders.html, this slider} to see how red, green and blue combine to make other colors.
+
 | Key Points For The Facilitator
 |
 - This lesson is all about _mathematical flexibility_, and may challenge preexisting ideas about arithmetic. For students who've had a mostly procedural introduction to mathematics -- or who have high math anxiety -- the flexibility introduced by this lesson can be intimidating!
@@ -32,52 +36,200 @@
 == Programming Exploration: Blending Images
 
 === Overview
+Students explore the @show{(code 'invert)} function and the @show{(code 'blend-images)} function to develop an intuition for what it means for inverses to cancel each other out.
 
 === Launch
 @slidebreak{Launch-DN}
+@QandA{
+@Q{Today we are going to explore a @proglang function called `invert`. Where have you heard the words invert or inverse before?}
+@A{Sample responses may include:
+  * Gymnastics or yoga - Inverted positions are upside down.
+  * @link{https://en.wikipedia.org/wiki/Solar_inverter, Solar Inverters} - convert DC solar output to AC frequency compatible with the U.S. power grid
+  * Inverted images - a photograph and its negative
+}
+}
 
+@teacher{
+Did your students have brilliant suggestions? Please share your ideas with us at @link{mailto:contact@bootstrapworld.org, contact@bootstrapworld.org}!
+}
+
+@slidebreak{Investigate}
+
+@lesson-instruction{
+- Open the @starter-file{additive-inverse} and click "Run".
+- Then turn to @printable-exercise{invert.adoc} and complete the first part with your partner.
+}
+
+@slidebreak{Investigate}
+
+@QandA{
+@Q{What does it mean for @proglang to `invert` a black and white image?}
+@A{Black is replaced with white.}
+@A{White is replaced with black.}
+@A{Grays are replaced with grays.}
+
+@Q{What ideas do you have about how @proglang decides which gray gets used when we invert a gray image?}
+@A{This is a great thought experiment! We don't need your students to land on a definitive answer yet.}
+@A{Hopefully students will have a notion that there's a spectrum ranging from white to black. +
+Some students might even articulate that: 
+  	* Grays get replaced with a gray that is about the same distance from white as the original was from black.
+  	* The original gray and the new gray should blend to make the same color as black and white do.
+}
+}
 
 === Investigate
 @slidebreak{Investigate}
 
+@QandA{
+@Q{We're going to explore a new @proglang function called `blend-images` that takes in two images and averages each pixel.}
+@Q{What do you think would happen if we blended a black square with a white square of the same size?}
+@A{We'd get a grey square.}	
+}
+
+@lesson-instruction{
+- Return to @printable-exercise{invert.adoc} and complete it with your partner.
+}
+
+@slidebreak{Investigate}
+@QandA{
+@Q{What happens when we blend an image with its inverse?}
+@A{We get a gray shape that shares the same outline as the original image?}
+
+@Q{How can you tell whether or not two black and white images are inverses of each other?}
+@A{They should be the same shape and size with the blacks and whites swapped and greys inverted.}
+@A{When we use `blend-images` they should yield a grey shape that shares the same outline.}
+}
+
+@slidebreak{Investigate}
+
+@lesson-instruction{
+- Let's apply what we've learned about inverses.
+- Turn to @printable-exercise{invert-2.adoc} and complete it with your partner.
+}
+
+@slidebreak{Investigate}
+
+@QandA{
+@Q{Did `invert` return what you expected for the blue square?}
+@A{Sample responses may include:
+  * It returned a yellow square. I was expecting an orange square.
+  * I thought colors are replaced with the color opposite them on the color wheel.}
+
+@Q{What happens when we use `blend-images` with color images that are inverses of each other?}
+@A{We still get grey shapes.}
+}
+
+@lesson-point{
+Images that are inverses of each other will "cancel each other out", making a grey shape when we `blend-images`.
+}
+
+==== The Red Green Blue Color Model
+@slidebreak{Investigate}
+
+You have probably learned about the primary color wheel in art class, where the color across from blue is orange. Computers use a different color logic. As a result, the @vocab{inverse} of a color in @proglang is not the color that is located across the primary color wheel, but the color that is across from it on the Red Green Blue Color Model.
+
+@indented{
+[cols="1,^.^10a,2,^.^9a,2", grid="none", frame="none", options="header"]
+|===
+|| Red Yellow Blue Color Star 	        || Red Green Blue Color Model  |
+|| @image{images/color-star.png, 80%}   || @image{images/rgb-venn-diagram.png, 80%} |
+|===
+}
+
+@lesson-point{@proglang generates colors by adding red, green and blue pixels in specified ratios.} 
+
+Those ratios are represented in RGB codes as integer values ranging from 0 to 255. The @vocab{inverse} of any color can be found by finding the ratio that complements the original color's RGB ratio such that all 255 parts of red, green and blue are accounted for. For example: 
+
+@indented{
+[.data-table, cols="3a,1a,11a", options="header"]
+|===
+|Color                         |Code            |
+|Red                           |RGB(255,0,0)    |uses all of the possible red and no blue or green
+|Inverse of red: +
+cyan/aqua                      |RGB(0,255,255)  |doesn't use any red, and uses all of the possible blue and green. It is the color across from red on the RGB model
+|Royal blue                    |RGB(65,105,225) |uses 25.5% of the possible red, 41.2% of the possible green, and 88.2% of the possible blue
+|Inverse of royal blue: +  
+tannish                        |RGB(190,150,30) |uses the other 74.5% of possible red, the other 58.8% of the possible green and the other 11.8% of the possible blue
+|===
+}
+
+@slidebreak{Investigate}
+
+But we don't need the RGB code to think about inverses! Referring to the RGB Color Model pictured, let's use our imaginations to describe the inverses of the images listed below. Tell me what image I should blend with each image to get a gray image. I'll record your response in the right-hand column.
+
+@ifnotslide{
+@indented{
+[.data-table, cols="1a,1a", options="header"]
+|===
+| Starting Value                | Inverted Image
+| black square                  | _white square (same size)_
+| yellow circle                 | 
+| fuchsia triangle              | 
+| black dog with white spots    | 
+|===
+}
+}
+
+@ifslide{
+[cols="^1a,^2a", grid="none", frame="none"]
+|===
+|
+@image{images/rgb-venn-diagram.png, 75%}
+|
+[cols="1a,1a", options="header"]
+!===
+! Starting Value                ! Additive Inverse
+! black square                  ! _white square (same size)_
+! yellow circle                 ! 
+! fuchsia triangle              ! 
+! black dog with white spots    ! 
+!===
+|===
+}
+
 === Synthesize
 @slidebreak{Synthesize}
-Have ES write a synthesize question about masking in Video Games.
+
+@QandA{
+@Q{What does it mean for images to be inverses of each other?}
+@A{Each pixel has the opposite RGB value:
+  * e.g. If color A = @math{(5, 100, 125)} color B = (@math{(255-5), (255-100), (255-125)}) = @math{(250, 155, 130)}}
+@A{They cancel each other out to a gray image.}
+}
 
 == The Additive Inverse Property
 
 === Overview
-
 Students discover the Additive Inverse Property, which tells us that adding a number and its opposite always produces zero.
 
 === Launch
-@slidebreak{Launch}
-
-We’ve learned that the @vocab{Commutative Property} and @vocab{Associative Property} apply to addition... but not division. What if there was a way to rewrite subtraction as addition? Then we could apply the Commutative and Associative Properties to subtraction expressions, too! Let’s explore this idea.
 
 @slidebreak{Launch}
 
+Just as inverted images will cancel each other out to make gray shapes, when computing expresssions, additive inverses will combine to make a sum of zero.
+
+@lesson-instruction{
 I'm going to draw a two-column table on the board. I'm labeling the left-hand side "Starting Value," and I'm labeling the right-hand side "Additive Inverse".
 
 I'm going to write a number in the left-hand column. You are going to tell me what value I should add to that number, to get a sum of zero. I'll record your response in the right-hand column.
+}
 
 [cols="^1,^1", options="header"]
 |===
-| Starting Value		| Additive Inverse
-| @vspace{3ex}			|
+| Starting Value	  |  Additive Inverse
+| 5           		  |
+| 20                |
+|@math{\frac{1}{2}} |
+|@math{-45}         |
 |===
 
 @slidebreak{Launch}
 
 @QandA{
 @Q{The first number is @math{5}. What do I need to add to @math{5} to get @math{0}?}
-@A{@math{-5}. If this is students' first exposure to negative numbers, consider modeling a few examples.}
+@A{@math{-5}.} 
 
-@Q{The next number is @math{20}. What do I need to add to @math{20} to get @math{0}?}
-
-@Q{How about @math{\frac{1}{2}}?}
-
-@Q{How about @math{-45}?}
+@Q{The next number is @math{20}. What do I need to add to @math{20} to get @math{0}? ...}
 
 @Q{Can someone offer me another pair of numbers that add up to @math{0}?}
 }
@@ -104,7 +256,15 @@ Ensure that students are comfortable with this concept before moving onto the ne
 @lesson-instruction{
 - Turn to @printable-exercise{additive-inverse.adoc}.
 - In the first section, determine the additive inverses and write them in the spaces provided.
-- Then, fill in the missing number to complete the equations. Some equations use mathematical notation and some use Circles of Evaluation.
+- In the second section, identify additive inverses to simplify the expressions before evaluating them.
+}
+
+@slidebreak{Investigate}
+
+@QandA{
+@Q{How did it feel to scan the problem for additive inverses before doing any computations?}
+
+@Q{Did you like this new approach, or do you prefer solving left to right?}
 }
 
 === Synthesize
@@ -114,17 +274,83 @@ Ensure that students are comfortable with this concept before moving onto the ne
 - How would you explain the concept of the Additive Inverse Property to another student?
 - Looking forward: Can you predict what effect the Multiplicative Inverse Property might have?
 
+
 == Addition and Subtraction: Inverse Operations
 
 === Overview
-
 Students rewrite addition expressions as subtraction, and subtraction expressions as addition by applying their knowledge of the @vocab{Additive Inverse Property}.
-
 
 === Launch
 @slidebreak{Launch}
 
-Now that we understand what the additive inverse is, we are ready to think about how we can put it to use... perhaps it can make some computations simpler?
+At some point we learned that we should always add and subtract from left to right. 
+
+Let's consider the expression @big{@math{16 
++ 973 - 972}}. What would happen if we didn't work from left to right?
+
+++++
+<style>
+/* allow more than one circle to exist on the same line */
+.circleevalsexp { width: unset; }
+/* when a paragraph tag is followed by a circle, allow them both to exist on the same line */
+div.paragraph>p:has(+.circleevalsexp) { display: inline; }
+</style>
+++++
+
+@indented{
+[cols="^1a,^1a"]
+|===
+|@show{(coe '(- (+ 16 973) 972))} = @show{(coe '(- 989 972))} = @show{(coe '(17))}
+|@show{(coe '(+ 16 (- 973 972)))} = @show{(coe '(+ 16 1))} = @show{(coe '(17))}
+|===
+}
+
+@QandA{
+@Q{Is it essential to evaluate this expression from left to right?}
+@A{No. They both returned the same answer!}
+
+@Q{If you knew that you'd get the correct answer by subtracting first, why might you rather compute in that order?}
+@A{The second order makes it much easier to do the computations in our head!}
+}
+
+@slidebreak{Launch}
+
+The tricky thing is that order _sometimes_ matters. 
+
+- We can evaluate as if order _always_ matters. We will _always get the correct answer_ this way, but we might end up working harder.
+- We can try to learn a more nuanced pattern...
+
+@lesson-instruction{
+- Complete @printable-exercise{is-there-another-way.adoc}.
+- Be prepared to share what you Notice and Wonder.
+}
+
+@slidebreak{Launch}
+
+@QandA{
+@Q{What pattern did you find?}
+@A{In an expression with 3 numbers that involves addition and subtraction
+    * if it starts with addition, the order we compute in doesn't matter
+    * if it starts with subtraction, we have to compute from left to right
+}
+
+@Q{Would it be easy to apply this pattern to an expression with 4 numbers? 5 numbers? 8 numbers?}
+@A{No. The pattern we just described is for expressions with 3 Numbers and we'd have to build a more complex set of rules if we wanted to apply it to longer expressions.}
+
+@Q{Why do you think students often learn that they have to add and subtract from left to right, even though another order is _sometimes_ possible?}
+@A{It's easier to keep track of a single rule that always work than to remember a long list of rules.}
+}
+
+@slidebreak{Launch}
+
+@lesson-point{
+Subtraction is less flexible than addition.
+}
+
+=== Investigate
+@slidebreak{Investigate}
+
+We've seen more than once that the order in which we add is more flexible than the order in which we subtract. What if we could write subtraction problems as addition?
 
 @lesson-instruction{
 - Complete @printable-exercise{discover-inverse.adoc}.
@@ -136,13 +362,19 @@ Now that we understand what the additive inverse is, we are ready to think about
 
 During this exploration, you should have discovered that:
 
-- Subtraction is equivalent to adding the @vocab{opposite}.
 - We can rewrite any subtraction expression as addition, and any addition expression as subtraction!
+- Subtraction is equivalent to adding the @vocab{opposite}:
+   * Add a Negative -> Subtract a Positive -> Add a Negative ...
+   * Add a Positive -> Subtract a Negative -> Add a Positive ...
 
-One powerful advantage emerges when we write subtraction as addition: we now can apply the Commutative and Associative Properties to a much broader set of expressions!
+@QandA{
+@Q{How could using the Additive Inverse to rewrite expressions increase the flexibility of the order in which we do computations?}
+@A{We know that we can add in any order! So if we can rewrite subtraction as addition, we can compute in any order, without having to remember lots of special rules!}
 
-=== Investigate
-@slidebreak{Investigate}
+@Q{Knowing what you know now, what would be the simplest way to compute @math{40 - 86 + 56}?}
+@A{If we think about it all as addition, we can reorder it as @math{40 + 56 + -86} and after we add the first two terms we can subtract @math{96 - 86} to get @math{10}}
+}
+
 
 @teacher{
 Now, students are ready to continue their exploration of subtraction as the inverse of addition. Note: To complete this worksheet, students do not need to be fluent at integer addition and subtraction. We just want students thinking about when expressions are @vocab{equivalent} based on what they have learned about the additive inverse.
@@ -156,88 +388,26 @@ Complete @printable-exercise{wodb.adoc}.
 Have students share strategies for determining equivalence. What are the different ways that they thought about the Additive Inverse Property?
 }
 
-=== Synthesize
-@slidebreak{Synthesize}
-
-- Claire and Soraya want to write an equivalent expression for @math{22 - 30}. Claire studies the expression and announces that, because it involves subtraction, the Commutative Property cannot be applied. Is she correct?
-- Soraya grabs a pencil and writes the following: @math{22 + -30}. She says, "There! I fixed it. Now we can apply the Commutative Property." Explain what Soraya did. Is she correct?
-- Use the Additive Inverse Property to simplify this expression using mental computation: @math{3 + 96.8 - 42.74 - 96.8 + 7 - 3 + 42.74}
-
-== The "Left-to-Right" Rule
-
-=== Overview
-
-Students examine whether rigid adherence to the "left-to-right" rule is needed when adding and subtracting.
-
-=== Launch
-@slidebreak{LaunchR}
-
 @QandA{
-@Q{Consider this expression: @math{10 + 9 - 4}. What do we get when we simplify it to a single value?}
-@A{15}
-@Q{How did you arrive at your answer?}
-}
+@Q{Claire and Soraya want to write an equivalent expression for @math{22 - 30}. 
+  * Soraya grabs a pencil and writes the following: @math{22 + -30}. 
+  * Claire writes: @math{30 - 22}. Are they both correct? Explain.}
+@A{Soraya correctly applied the additive inverse.}
+@A{Claire's expression would evaluate to the opposite of the original expression, because the pull toward the negative side has shifted from 30 to 22.}
 
-Did you work from left to right to arrive your result? This solving strategy can be represented by the Circle of Evaluation, below.
-
-@show{(coe '(- (+ 10 9) 4))}
-
-@slidebreak{LaunchR}
-
-*Is it essential to solve from left to right?*
-
-@teacher{Ask if anyone opted to subtract _before_ adding. If so, invite them to share their method and then invite other students to weigh in.}
-
-Evaluate the Circle of Evaluation below. Is it equivalent to the previous Circle of Evaluation?
-
-@show{(coe '(+ 10 (- 9 4)))}
-
-@slidebreak{Launch}
-
-We’ve learned that the Associative Property applies for expressions with only addition... not addition _and_ subtraction. Many of us have also learned that when an expression includes addition and subtraction, we must work from left to right. *So… what’s going on!?* It appears that we get the same result regardless of how we simplify this expression.
-
-=== Investigate
-@slidebreak{Investigate}
-
-Does subtracting _first_ work every time? Can we rearrange the groupings of any expression with both addition and subtraction? Let's investigate.
-
-@slidebreak{Investigate}
-
-@lesson-instruction{
-- Turn to @printable-exercise{subtract-first-or-left-to-right.adoc}.
-- There, you will test out the this algorithm on several different expressions to see if subtracting and then adding produces the correct result every time.
-- What do you Notice? What do you Wonder?
-- Why are we able to change the groupings for an expression like @math{10 + 9 - 4} ... but _not_ for an expression like @math{10 - 9 - 4}?
-- Describe why the this "subtraction first" algorithm works. (Hint: Think about the @vocab{Additive Inverse Property}!)
-}
-
-@slidebreak{Investigate}
-
-@teacher{
-Encourage students to think deeply about why this algorithm works – and if you’d like, invite them to consider and discuss why students all across the country are typically taught just one algorithm when, typically, there are an abundance to choose from!}
-
-Let's put our new knowledge to use!
-
-@teacher{Project the problems below one at a time, and invite students to solve using mental math.}
-
-@QandA{
-
-Scan each problem to identify any additive inverses, then solve using mental computation.
-
-@Q{@math{4 + 5 + 97 - 4 + 3}}
-@A{@math{105}}
-
-@Q{@math{9 + 17 + 41 - 17}}
-@A{@math{50}}
-
-@Q{@math{67 - 104 + 937 - 67 + 104}}
-@A{@math{937}}
+@Q{How could we use the Additive Inverse Property to simplify this expression using mental computation: @math{3 + 96.8 - 42.74 - 96.8 + 7 - 3 + 42.74}}
+@A{Nearly all of the numbers' inverses are present so we can cancel out a lot of number pairs! What would be left?}
 }
 
 === Synthesize
 @slidebreak{Synthesize}
 
-- How did it feel to scan the problem, find any additive inverses, and then solve mentally?
-- Did you like this new approach, or do you prefer solving left to right?
-- How would you explain to another student why they do _not_ always need to solve from left to right when evaluating expressions with addition and subtraction.
-- What are some advantages of solving left to right? What are some disadvantages?
+@QandA{
+@Q{What are some important things we know about additive inverses?}
+@A{Another word for the @vocab{additive inverse} is @vocab{opposite}.}
+@A{When we add a number and its @vocab{additive inverse} we get zero.}
+@A{Additive inverses allow us to rewrite any subtraction problem as addition.}
+}
+
+}
+

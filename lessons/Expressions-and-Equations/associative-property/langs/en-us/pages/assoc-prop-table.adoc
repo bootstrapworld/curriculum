@@ -1,49 +1,67 @@
+[.landscape]
 = Associative Property Table
 
 ++++
 <style>
 .circleevalsexp { width: auto; }
+.circleevalsexp .value { margin: 0.3em 0.4em; }
+div#body.workbookpage .autonum {
+    padding-top: 0.1em !important;
+}
+div#body.workbookpage .autonum::after { content: unset !important; }
+div#body table tr th, div#body table tr td { padding: 0.5625em 0.1em; }
+
+/* Be really stingy about horizontal space in COEs */
+.circleevalsexp { margin: 0 2px; }
+p .circleevalsexp { margin: 0; }
+.circleevalsexp .value { margin: 0.3em 0.3em; font-size: 11px; }
+.circleevalsexp .value+.hspace+.value { margin-left: 0.4em; }
+.circleevalsexp .operator { height: 0.9em; }
+.circleevalsexp .expression { margin: 2px 3px; padding-top: 3px; }
+.circleevalsexp .hspace ~ .hspace { width: 2px; }
+.circleevalsexp { white-space: nowrap !important; }
 </style>
 ++++
 
 
-Complete each row of the table by generating equivalent Circles of Evaluation using the Commutative Property. Fill as many or as few of the boxes in a row as is appropriate. Make sure you leave the order of the numbers the same and only change the _groupings_. Note: There are multiple possible responses here! @ifsoln{Some possible responses are shown below. Your students will likely come up with others.}
+Complete each row of the table by generating equivalent Circles of Evaluation using the Associative Property. Fill as many or as few of the boxes in a row as is appropriate. Make sure you leave the order of the numbers the same and only change the _groupings_. 
 
-[.FillVerticalSpace,cols="^.^1a,^.^6a,^.^6a,^.^6a", stripes="none", options="header"]
+[.FillVerticalSpace,cols="^.^1a,^.^5a,^.^8a,^.^8a,^.^8a, ^.^8a", stripes="none", options="header"]
 |===
-|	 | Original Circle of Evaluation | Equivalent Circle of Evaluation 1 | Equivalent Circle of Evaluation 2
+|	 | Circle of Evaluation | Equivalent Circle 1 | Equivalent Circle 2 | Equivalent Circle 3 | Equivalent Circle 4
 
 | @n
 | @show{(coe '(+ (+ 5 6) 11))}
 | @showsoln{(coe '(+ 5 (+ 6 11)))}
 |
-
+|
+|
 
 | @n
 | @show{(coe '(* (* 36 5) (* 2 8)))}
 | @showsoln{(coe '(* (* 36 (* 5 2)) 8))}
 | @showsoln{(coe '(* (* (* 36 5) 2) 8))}
-
+| @showsoln{(coe '(* 36 (* (* 5 2) 8)))}
+| @showsoln{(coe '(* 36 (* 5 (* 2 8))))}
 
 | @n
 | @show{(coe '(- (+ (+ 10 3) 2) 5))}
 | @showsoln{(coe '(- (+ 10 (+ 3 2)) 5))}
 |
-
+|
+|
 
 | @n
 | @show{(coe '(+ (+ (+ 3 4) 5) 6))}
 | @showsoln{(coe '(+ (+ 3 (+ 4 5)) 6))}
 | @showsoln{(coe '(+ (+ 3 4) (+ 5 6)))}
+| @showsoln{(coe '(+ 3 (+ (+ 4 5) 6)))}
+| @showsoln{(coe '(+ 3 (+ 4 (+ 5 6))))}
 
 | @n
-| @show{(coe '(* (* 10 6) (* 9 4)))}
-| @showsoln{(coe '(* (* 10 (* 6 9)) 4))}
-| @showsoln{(coe '(* (* (* 10 6) 9) 4))}
-
-| @n
-| @show{(coe '(- (+ (+ 3 4) 5) (* 6 4)))}
-| @showsoln{(coe '(- (+ 3 (+ 4 5)) (* 6 4)))}
-|
-
+| @show{(coe '(+ (+ (+ 3 4) 5) (* 6 7)))}
+| @showsoln{(coe '(+ (+ 3 (+ 4 5)) (* 6 7)))}
+| @showsoln{(coe '(+ 3 (+ (+ 4 5) (* 6 7))))}
+| @showsoln{(coe '(+ 3 (+ 4 (+ 5 (* 6 7)))))}
+| @showsoln{(coe '(+ (+ 3 4) (+ 5 (* 6 7))))}
 |===

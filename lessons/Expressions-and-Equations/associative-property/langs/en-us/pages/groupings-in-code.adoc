@@ -1,0 +1,70 @@
+= Do Groupings Matter in Code?
+
+++++
+<style>
+  table {grid-template-rows: 3fr 1fr !important;}
+  .circleevalsexp .value,
+  .circleevalsexp .studentBlockAnswerFilled {
+    min-width: unset;
+    font-size: 8pt;
+  }
+  table { margin: 0 !important; }
+
+  div#body.workbookpage .autonum {
+    padding-top: 0.5em !important;
+  }
+</style>
+++++
+
+Open the @starter-file{expressions-equations}. Complete the exploration to determine if @show{(code 'beside)}, @show{(code 'above)}, and @show{(code 'overlay)} are associative.
+
+== *Do groupings matter for @show{(code 'beside)}?* 
+
+@n Make a prediction, will the two sets of instructions below produce the same image? @fitb{}{}
+
+- Place an orange dot to the right of an aqua star, then place a red star to the right of them.
+- Make an image that places a red star to to the right of an orange dot. Place them to the right of an aqua star.
+
+@vspace{1ex}
+
+Let's find out. Translate the two Circles of Evaluation into code, test your code in @proglang and make a sketch of what @proglang returns.
+
+[.FillVerticalSpace, cols="^.^1,^.^1"]
+|===
+| @show{(coe '(beside(beside aqua-star orange-dot) red-star))}
+| @show{(coe '(beside aqua-star(beside orange-dot red-star)))}
+
+| @show{(code '(beside aqua-star(beside orange-dot red-star)))}
+| @ifsoln{@show{(code '(beside aqua-star(beside orange-dot red-star)))}}
+
+| @image{../images/as-od-rs.png}
+| @ifsoln{@image{../images/as-od-rs.png}}
+|===
+
+@n Did both expressions produce _identical_ images? @fitb{8em}{@ifsoln{Yes.}} 
+
+== *Do groupings matter for @show{(code 'above)}?* 
+
+@n Translate the Circle of Evaluation below into code. Then draw a second Circle of Evaluation with different groupings and translate it into code. 
+
+[.FillVerticalSpace, cols="^.^1,^.^1"]
+|===
+|@show{(coe '(above yellow-rect (above purple-square orange-dot)))} | @ifsoln{@show{(coe  '(above (above yellow-rect purple-square) orange-dot))}}
+| @ifsoln{@show{(code '(above yellow-rect (above purple-square orange-dot)))}} | @ifsoln{@show{(code '(above (above yellow-rect purple-square) orange-dot))}}
+|===
+
+@n Stop and think, what are these two coded expressions trying to do? Discuss with your partner and make a prediction. Do you expect them to make the same image? @fitb{}{}
+
+@n Test them out in @proglang. Did both expressions produce _identical_ images? @fitb{8em}{@ifsoln{Yes.}} 
+
+== *Do groupings matter for @show{(code 'overlay)}?* 
+
+@n Draw two Circles of Evaluation that will help you decide. Then translate the Circles of Evaluation into code and test your code in @proglang.
+
+[.FillVerticalSpace, cols="^.^1,^.^4,^.^4"]
+|===
+| Circle of Evaluation |  |
+| Code                 |  |
+|===
+
+@n Did both expressions produce _identical_ images? @fitb{8em}{@ifsoln{Yes.}} 
