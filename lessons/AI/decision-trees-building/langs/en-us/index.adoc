@@ -44,7 +44,7 @@ Students consider technologies that make predictions and recommendations, and th
 
 - What a decision tree is
 - That more than one tree can be constructed for a given dataset
-- That decision trees can be "good" or "not good" depending on their shape
+- That the quality of a decision tree for a single dataset depends on the shape of the tree (note - this is different from the quality of the tree having to do with the shape of the _data_, which is addressed in @lesson-link{decision-trees-evaluating})
 
 === Launch
 @slidebreak{Launch}
@@ -52,9 +52,9 @@ Students consider technologies that make predictions and recommendations, and th
 Consider each of the three situations described below:
 
 - You take an online quiz, which guesses your hairstyle.
-- Two individuals who work for the same company and earn the same salary apply for a loan by filling out the same online form at the local bank. One of them is granted a loan, but the other is not.
+- Two people who work for the _same company_ and earn the _same salary_ apply for a loan by filling out the _same online form_ at the local bank. One of them is granted a loan, but the other is not.
 - A news anchor displays a map with some states colored blue and others colored red. She explains that the map's predictions for the upcoming election were developed using historical census data.
-- A camera at the bank captures a picture of your face, immediately identifying who you are.
+- A camera at the bank captures a picture of your face, in an attempt to match the picture to your identity.
 
 What do all of these examples have in common?
 
@@ -63,9 +63,9 @@ What do all of these examples have in common?
 On the surface, these situations may not seem to have a lot in common. But all of these are examples of @vocab{classifiers}, a kind of function that:
 
 @indented{
-(1) Consumes some data
+(1) Receives input
 
-(2) Asks questions about that data
+(2) Asks questions about that input
 
 (2) Use the answers to produce a predicted outcome from a list of categories
 }
@@ -107,7 +107,7 @@ If you've ever played the game "I spy", you've already got some practice buildin
 
 The rules are pretty simple:
 
-- A player comes up with something they is visible to everyone playing
+- A player thinks of something they can see, that the other plays can also see
 - They come up with a hint, to help narrow the possible answers. For example: "I spy with my little eye...something blue!"
 - The other players ask yes-or-no questions to help them guess what it is
 
@@ -142,7 +142,7 @@ We're going to play a version of "I Spy", called "I Spy - *Classify*!"...
 
 @vspace{1ex}
 
-For now, most of the tree will be empty: your students won't need to ask questions about those who already sat down!
+For now, most of the tree will be empty (your students won't need to ask questions about those who already sat down!).
 }
 
 @slidebreak{Investigate-RP}
@@ -167,6 +167,8 @@ Play a few more rounds. Try to pick students that will force the class to *add t
 
 Encourage them to ask a mix of categorical vs. quantitative questions.
 
+If students start to complain that they're "stuck" with earlier questions, that's a good sign! Ask them what they would change, and why. This is a great way to draw out students' intuition for what makes a good decision tree.
+
 | @image{images/tree-2.png}
 | @image{images/arrow.png, 50}
 | @image{images/tree-3.png}
@@ -189,14 +191,14 @@ Encourage them to ask a mix of categorical vs. quantitative questions.
 @Q{How do you know if a question is a good one to start with or not?}
 @A{Good questions help us eliminate many of the remaining categories whether the answer is yes _or_ no}
 
-@Q{Suppose our first question was "has glasses?", and all but one student in the class wore glasses. How many questions would it take if I was thinking of the student who wears glasses?}
-@A{Just one! If the answer is "yes", we know exactly who it is!}
+@Q{Suppose our first question was "has glasses?", and only one student wears glasses. If that student happens to be my target, how many more questions will it take to find them?}
+@A{No! If the answer is "yes", we immediately know who it is!}
 
 @Q{Would that be the best question to start with, if we were going to play the game many times?}
-@A{No, because if the answer is "no" we're basically still starting at the beginning}
+@A{No, because if the answer is "no" we haven't really narrowed it down at all}
 
 @Q{Suppose almost all of the students in the class were 5'9" or above. Would "taller than 5f 7in?" make a good first question? Why or why not?}
-@A{No, because it's not splitting the equally enough}
+@A{No, because it's not splitting the group in a way that reflects the actual variation of the data}
 
 @Q{When _would_ "taller than 5f 7in"? make a good first question?}
 @A{If it divides the class as close to "in half" as possible}
@@ -229,7 +231,7 @@ Students refine their intuition for building decision trees, discovering how the
 @right{[.white-bg]#@image{images/tree-3.png}#}
 @lesson-point{A @vocab{decision tree} is one way to model the structure hidden in the data.}
 
-We can visualize them as "upside-down trees" that show decisions and their predicted outcomes. The diagram of our "Classify" game is a decision tree. The examples we talked about at the beginning (Guess-the-haircut, Loan approvals, Election predictions, and facial recognition) all use decision trees.
+We can visualize these models as "upside-down trees" that show decisions and their predicted outcomes. _The diagram of our "Classify" game is a decision tree._ The examples we talked about at the beginning (Guess-the-haircut, Loan approvals, Election predictions, and facial recognition) all make use of decision trees.
 
 You've learned that some @vocab{decision trees} are better than others. For example, the _frequency of each category_ affects the "best node" ("if everyone has glasses...").
 
@@ -276,7 +278,7 @@ Let's play a round of "I Spy - Classify" with _this_ dataset.
 
 - Once again, I'll pick one animal in this dataset.
 - This time, however, I'm targeting the _species_ of the animal instead of the name.
-- Your job is to predict the species of my animal, based only on the columns in the table
+- Your job is to predict the species of my animal, based only on the columns in the table. Your prediction will be cat, dog, lizard, snail, or tarantula.
 
 @teacher{
 Encourage students to come up with both categorical and quantitative splits, and keep asking them to explain why they chose the split they did!
@@ -297,7 +299,7 @@ Encourage students to come up with both categorical and quantitative splits, and
 Remember, a @vocab{classifier} is _just a function!_
 
 - It consumes some input and produces some output
-- Each input will only ever have one output (no matter how many times we classify `firepaw`, it will always guess the same species!).
+- Each input will only ever have one output. If our classifier is good, it will _always_ predict that `firepaw` is a cat. If it accidentally classifies it him as a snail, it will _always_ predict that he's a snail.).
 
 @QandA{
 Suppose I want my first splitting question to be "does the animal have a tail?"
@@ -308,7 +310,7 @@ Suppose I want my first splitting question to be "does the animal have a tail?"
 @Q{How many animals fall in the "no" side of the tree?}
 @A{4}
 
-@Q{What does `firepaw["tail"] == true` do?}
+@Q{What does the code `firepaw["tail"] == true` do?}
 @A{It gets the `tail` value from that row, and checks to see if it's `true`}
 
 @Q{What code would I write to check `frisky`?}
@@ -336,7 +338,7 @@ end
 |===
 
 @lesson-instruction{
-- Take a moment to read the code for `tail-classifier` carefully. Use the @vocab{decision tree} to guide you.
+- Take a moment to read the code for `tail-classifier` carefully. Use the @vocab{decision tree} diagram to guide you.
 - What do you *Notice* about this code?
 - What do you *Wonder* about this code?
 - Talk with your partner or group about what it might be doing.
@@ -387,7 +389,7 @@ If our tree ended here, we could still make a "best guess" about the species of 
 
 We've provided a `classify` function, which consumes a Table of rows to be classified, the name of the column being predicted, and a *classifier function* that maps Rows to Strings. Try it out:
 
-@indented{`classify(simple-animals, "species", tail-classifier)`}
+@indented{`classify(training, "species", tail-classifier)`}
 
 @lesson-instruction{
 - Try it out in Pyret!
@@ -430,16 +432,21 @@ To know where to split the data, we need to know how the data is _shaped_ for di
 @teacher{Have students share what their root node was, and why they chose it. Make sure to emphasize the use of the dot-chart as the justification for why they chose the split they did!}
 
 @slidebreak{Investigate-DN}
+If we split on `r["swims"] == true`, we'll get all the snails and tarantulas are on one side, and a mix of dogs, cats, and lizards on the other. Now we need to split the snails and tarantulas. What @vocab{decision node} could we use to tell snails and tarantulas apart?
+
+This is the _exact same_ problem we solved for the root node: our goal is to ask a question that sorts the data into the _neatest, most organized piles that we can_.
+
+@slidebreak{Investigate-DN}
 @lesson-instruction{
 - Complete *the second section* on @printable-exercise{the-algorithm.adoc}.
 - When you're done, change the `my-classifier2` function in Pyret to match your 2-level @vocab{decision tree}.
 - Try using it with the `classify` function. How did it do?
 }
 
-@slidebreak{Investigate-DN}
-If we split on `r["swims"] == true`, we'll get all the snails and tarantulas are on one side, and a mix of dogs, cats, and lizards on the other. Now we need to split the snails and tarantulas. What @vocab{decision node} could we use to tell snails and tarantulas apart?
+@slidebreak{Investigate}
+In fact, the relationship between @vocab{decision trees} and functions is so direct that _we can convert any decision tree into a function **automatically**_:
 
-This is the _exact same_ problem we solved for the root node: our goal is to ask a question that sorts the data into the _neatest, most organized piles that we can_.
+
 
 
 === Synthesize

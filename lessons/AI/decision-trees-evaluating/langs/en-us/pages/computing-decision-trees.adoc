@@ -2,127 +2,92 @@
 ++++
 <style>
 #preamble_disabled { flex-grow: 0 !important; }
-#body table { margin: 0 !important; }
+.fitb { min-width: 2em !important; }
+.autonum, .fitb.stretch::after { padding-top: 1em !important; }
+table.fit-content tr td { padding: 0.3em 0.625em !important; }
 #body table td:last-child img {
     height: 180px; /* we have a limit to vertical space */
 	width:  250px; /* stretch the image outm slightly breaking proportion*/
 }
+
+.listingblock pre { padding: 0 !important; }
 </style>
 ++++
 
-[cols=".^12a, ^8a", frame="none"]
-|===
-|
-We've provided a function that will build the optimal decision tree of _any length_, using _any columns_ you choose! Here's the contract:
-
-@vspace{1ex}
-
-@show{(contract "build-tree" '("Table" "List" "String" "Number") "DecisionTree")}
-
-@vspace{1ex}
+@center{@show{(contract "build-tree" '("Table" "List" "String" "Number") "DecisionTree")}}
 
 The `build-tree` function takes *four arguments* in its Domain:
 
-- The _training dataset_ from which to fit the tree
-- A list of all the column names to split on
-- The name of the _label_ column containing all the "answers" for the various categories
-- The _maximum depth_ the tree is allowed to be
+[cols="1a,2a", frame="none", grid="none"]
+|===
+|
+(a) The _training data_ on which to fit the tree +
+(b) A list of all the column names to split on
 
 |
-@image{../images/empty-tree.png}
+(c) The name of the _target_ column, containing all the "answers" for the various categories +
+(d) The _maximum depth_ the tree is allowed to be
 |===
-
 
 == Choosing the Right Split
 
-@scrub{Then add pounds and see what it does. Then write their explanation. Maybe assess by asking them to predict one of the 2nd level splits?}
+@n In the *Definitions Area*, define a simple, 1-level tree using only the `"tail"` column, defining it as `c1`:
 
-@n Build a simple, 1-level tree in the Definitions Area using only the `"tail"` column, defining it as `c1`:
+@indented{`tree1 = build-tree(training, [list: "tail"], "species", 1)`}
 
-@indented{`c1 = build-tree(simple-animals, [list: "tail"], "species", 1)`}
+@n Click "Run", and evaluate `tree1`. What species will this classifier predict for animals *without* tails?  @fitb{}{@ifsoln{snail}}
 
-@n Click "Run", and evaluate `c1`. What species will this classifier predict for an animal without tails?  @fitb{}{@ifsoln{snail}}
+@n Evaluate `dt-code(tree1)`. Have you seen code like this before? @fitb{}{@ifsoln{it's the code for `tail-classifier`!}}
 
-@n Evaluate `dt-code(c1)` to *see the function* for this decision tree. Where have you seen this code before? @fitb{}{@ifsoln{it's the code for `tail-classifier`!}}
+@n Which column will make the best @vocab{root node} for predicting `species` in the `training` dataset? @fitb{}{@ifsoln{`swims`}}
 
-@n Which column makes a better @vocab{root node} for predicting `species` in this training dataset? Circle your prediction:
+@n Let's see if Pyret agrees, by letting _it_ choose from all the columns. Add this definition to your program:
 
-@ifsoln-choice{`tail`} vs. `mammal` @hspace{3em} `tail` vs. @ifsoln-choice{`swims`} @hspace{3em} @ifsoln-choice{`swims`} vs. `mammal`
-
-@n Try splitting the dataset by each one, choosing the most-common species as the label for each split. Then calculate the number of animals that would be calculated correctly in each case. We've done the first row for you.
-
-[cols="2a,4a,4a,1a", frame="none", stripes="none"]
-|===
-| Column
-| "yes" label
-| "no" label
-| # Correct
-
-| `mammal`
-| "cat" (5 of 9)
-| "snail" (random choice!)
-| 7
-
-| `tail`
-| @ifsoln{"cat" (5 of 11)}
-| @ifsoln{"snail" (random choice!)}
-| @ifsoln{7}
-
-| `swims`
-| @ifsoln{"dog" (4 of 6)}
-| @ifsoln{"cat" (4 of 9)}
-| @ifsoln{8}
-|===
-
-@n Which one do you think Pyret will choose, and why? @fitb{}{} +
-@fitb{}{@ifsoln{`swims`, because it leads to the most successful categorization}}
-
-*Define this as `c2` in the Definitions Area (e.g. `c2 = build-tree(simple-animals, [list: "mammal", "swims", "tail"], "species", 1)`.*
-
-@n Evaluate `dt-code(c2)`, then copy-and-paste the code into the Definitions Area, changing its name to `c2-fun`.
-
-
-@n Now add adding the `sex` column to the list, and define your tree as `c2`. Which column did the algorithm choose for the root? @fitb{5em}{@ifsoln{`swims`}}
+@indented{`tree2 = build-tree(training, [list: "tail", "mammal", "swims"], "species", 1)`}
 
 @vspace{1ex}
 
-*Use `dt-code` to turn `c2` into a function, then copy-and-paste that function into the Definitions Area.*
+*Use the `classify` function on `tail-classifier` and `tree2`:*
 
-@n Change the function's name from `classifier` to `swims-classifier`. Use `classify` to see how many rows it got right @fitb{}{8 rows}
-
-== The Optimal 2-Level Tree for this Training Data
-By changing the last argument to `build-tree`, you can have Pyret build trees with 2 levels (or more)!
-
-@n Evaluate `c3 = build-tree(simple-animals, [list: "mammal", "tail", "swim"], "species", 2)`, then use `c3` to *fill in the decision tree* in the top left-hand corner of this page.
-
-@vspace{1ex}
-
-*Use `dt-code` to turn `c3` into a function, then copy-and-paste that function into the Definitions Area. Name it `next-classifier`.*
-
-@n Why did Charlotte and Webs get classified as snails? @fitb{}{@ifsoln{Their values for "mammal", "tail", and "swim" were identical to the snails'}}
-
-@n Why did Shadestar get classified as a dog? @fitb{}{@ifsoln{Since she swims, all three column values "looks" the same as the dogs}}
-
-@n Compare the confusion-matrix of `swim-classifier` and `next-classifier`. What do you *Notice*? @fitb{}{} +
-@fitb{}{}
-
-== Choosing the Right Depth
-@scrub{Have them start with their original classifiers, and make `-deep` variants. See how booleans don't actually go deep, but pounds will. Ask why. Ask for prediction abvout which will be the best in the training dataset}
-
-Can Pyret make a classifier that works perfectly on the training data, if we let the trees have as many layers as possible?
-
-@n For each row in the table below, build and test the specified classifier. Then fill in the row with your results.
-
-|===
-| Classifier 					| Depth 		| # Correct 	| 	Names of mis-classified animals
-| `[list: "swims"]` 			| @ifsoln{1} 	| 8 			| @ifsoln{Lots!}
-| `list: "mammal", "tail", "swim"]` 			| @ifsoln{1} 	| 8 			| @ifsoln{Lots!}
-
-@n Try it out. Were you right? @fitb{2em}{@ifsoln{No}} @hspace{1em} Why or why not? @fitb{}{} +
-@blanklines{2}{
-@ifsoln{Looking only at these columns, Shadestar will *always* look like a dog, and Charlotte and Webs will *always* look like snails!}
+@indented{
+```
+classify(training, "species", tail-classifier)
+classify(training, "species", tree1)
+classify(training, "species", tree2)
+```
 }
 
-@n What other column(s) should we consider, to improve our accuracy on this training dataset? @fitb{}{@ifsoln{sex - definitely not `species!`}}
+@n How many did `tail-classifer` classifier get right? @fitb{7em}{@ifsoln{7}} @hspace{2em} `tree1`? @fitb{7em}{@ifsoln{7}} @hspace{2em} `tree2`? @fitb{7em}{@ifsoln{8}}
 
-@n Build your tree, this time using every (non- `target`) column. How many levels deep will Pyret's optimal tree go? @fitb{}{3}
+== Deeper Trees vs. More Columns
+
+@n Let's allow Pyret to split on use more columns, and go a lot deeper!
+
+@indented{`tree3 = build-tree(training, [list: "tail", "mammal", "swims"], "species", 3)`}
+
+@n How many animals does `tree3` get right? @fitb{3em}{@ifsoln{12}} Why did Shadestar get classified as a dog? @fitb{}{} +
+@fitb{}{@ifsoln{Since she swims, all three column values "looks" the same as the dogs}}
+
+@n Why did Charlotte and Webs get classified as snails? @fitb{}{} +
+@fitb{}{@ifsoln{Their values for those three columns are all the same as snails, so there's no way to tell the difference!}}
+
+@n Define `tree4` to use the *same columns* as `tree3`, but raise the max-depth to 10. Why do `tree3` and `tree4` look identical? @fitb{}{@ifsoln{There's no more information to be used, so there's no point in splitting further}}
+
+@n Build `tree5`, this time adding the `pounds` column. How many levels deep will Pyret's tree go? @fitb{}{3}
+
+@n Build `tree6`, using _only_ the `pounds` column and letting it go as deep as possible. How many does `tree6` get right? @fitb{}{@ifsoln{15}}
+
+== Using our Classifiers with a Testing Dataset
+
+@n Use the `classify` function to compare trees 4-6, this time using the `testing` dataset:
+
+@indented{
+```
+classify(testing, "species", tree4)
+classify(testing, "species", tree5)
+classify(testing, "species", tree6)
+```
+}
+
+@n Write your observations, and an explanation what you saw. @fitb{}{} +
+@blanklines{2}{@ifsoln{`tree6` did horribly! It's fit specifically to the `pounds` column of the `training` dataset, which has a really different distribution in the testing dataset}}
