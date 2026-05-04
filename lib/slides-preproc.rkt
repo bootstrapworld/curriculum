@@ -827,6 +827,7 @@
                                 (display "</b>\n" *teacher-notes*)))]
                            [(string=? directive "A")
                             (let ([text (read-group i directive #:multiline? #t)])
+                              (set! text (string-trim text))
                               (when *output-answers?*
                                 (display "\n* <i>" o)
                                 (expand-directives:string->port text o)

@@ -7,7 +7,7 @@
 ++++
 
 @link-instructions{
-For questions 1,2,4,5,8 & 9, use the contracts provided to find expressions that will generate images similar to the ones pictured.  +
+Use the contracts provided to find expressions that will generate images similar to the ones pictured and described.  +
 Test your code in @starter-file{editor} before recording it.
 }
 
@@ -31,6 +31,26 @@ Test your code in @starter-file{editor} before recording it.
 | @showsoln{(code '(ellipse 50 50 "solid" "black")) }
 |===
 
+
+@center{@show{(contract 'rhombus '((size Number) (top-angle Number) (fill-style String) (color String)) "Image")}}
+
+[.FillVerticalSpace, cols="1a, 7a,^.^14a",stripes="none"]
+|===
+| @n
+| @centered-image{../images/rhombus-100-140-solid.png, 60}
+| @showsoln{(code '(rhombus 100 140 "solid" "black")) }
+
+| @n
+| @centered-image{../images/rhombus-100-40-outline.png, 30}
+| @showsoln{(code '(rhombus 100 40 "outline" "black")) }
+
+| @n
+| Write an expression to generate a @show{(code 'rhombus)} that is a square!
+| @showsoln{(code '(rhombus 100 90 "solid" "black")) }
+
+|===
+
+
 @center{@show{(contract 'regular-polygon '((side-length Number) (number-of-sides Number) (fill-style String) (color String)) "Image")}}
 
 [.FillVerticalSpace, cols="1a, 7a,^.^14a",stripes="none"]
@@ -52,21 +72,3 @@ Test your code in @starter-file{editor} before recording it.
 | @ifsoln{a closed shape made of equal-length straight lines, all joined at the same angle}
 |===
 
-
-@center{@show{(contract 'rhombus '((size Number) (top-angle Number) (fill-style String) (color String)) "Image")}}
-
-[.FillVerticalSpace, cols="1a, 7a,^.^14a",stripes="none"]
-|===
-| @n
-| @centered-image{../images/rhombus-100-140-solid.png, 60}
-| @showsoln{(code '(rhombus 100 140 "solid" "black")) }
-
-| @n
-| @centered-image{../images/rhombus-100-40-outline.png, 30}
-| @showsoln{(code '(rhombus 100 40 "outline" "black")) }
-
-| @n
-| Write an expression to generate a @show{(code 'rhombus)} that is a square!
-| @showsoln{(code '(rhombus 100 90 "solid" "black")) }
-
-|===

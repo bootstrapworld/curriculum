@@ -1,0 +1,58 @@
+= Scaling Up and Back
+
+++++
+<style>
+#preamble_disabled { flex-grow: 0 !important; }
+</style>
+++++
+
+This page is designed for use with the @starter-file{multiplicative-inverse}.
+
+== `Scale`
+
+Test out the following 3 expressions in the Interactions Area:
+
+[cols="1, <2a,^2a,>2a,1", grid="none", frame="none"]
+|===
+||`pirate`  | @show{(code '(scale 2 pirate))}  | @show{(code '(scale 0.5 pirate))} |
+|===
+
+
+@n What did @show{(code '(scale 2 ...))} do to our original image? @fitb{}{@ifsoln{Made it twice as big.}} +
+@fitb{}{}
+
+@n What did @show{(code '(scale 0.5 ...))} do to our original image? @fitb{}{@ifsoln{Made it half as big.}} +
+@fitb{}{}
+
+@n Make a prediction: What do you think  @show{(code '(scale 0.5 (scale 2 pirate)))}  will produce? @fitb{}{} +
+@blanklines{1}{}
+
+@n Test it out. What happens? Why? +
+@blanklines{2}{@ifsoln{@proglang returns the original image, because an image that's half the size of an image that's twice as big as the original is the same size as the original. In other words, @show{(code '(scale 2 ...))} and @show{(code '(scale 0.5 pyret))} are inverse operations... the undo each other.}}
+
+== Scale transformations that "undo" each other
+
+There are a number of images defined in the starter file. Think through what `scale` factor to apply to return each image to its source image.
+
+[.FillVerticalSpace, cols="1a,1a", options="header"]
+|===
+|Scaled Image
+|Getting back to where we started
+|`pigeon2` = @show{(code '(scale 3 pigeon))} 
+|`pigeon` =  @show{(code '(scale (?ANS 1/3) pigeon2))} 
+
+|`pigeon3` = @show{(code '(scale 1/4 pigeon))}
+|`pigeon` =  @show{(code '(scale (?ANS 4) pigeon3))} 
+
+|`dog2` = @show{(code '(scale 3/2 dog))}  
+|`dog` =  @show{(code '(scale (?ANS 2/3) dog2))} 
+
+|`dog3` = @show{(code '(scale 0.5 dog))} 
+|`dog` =  @show{(code '(scale (?ANS 2) dog3))}  
+
+|`cat2` = @show{(code '(scale 0.1 cat))} 
+|`cat` =  @show{(code '(scale (?ANS 10) cat2))} 
+
+|`cat3` = @show{(code '(scale 1.2 cat))} 
+|`cat` =  @show{(code '(scale (?ANS 6/5) cat3))} 
+|===

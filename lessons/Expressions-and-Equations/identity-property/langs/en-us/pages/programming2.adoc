@@ -1,0 +1,68 @@
+= Identical Images from different Expressions? (continued)
+
+++++
+<style>
+/* Shrink vertical spacing on fitbruby */
+.fitbruby{padding-top: 0.3rem;}
+</style>
+++++
+
+This page is designed for use the @starter-file{identity}.
+
+== Warm-up
+
+In the Interactions Area (right), type @show{(code '(circle 60 "solid" "red"))}. Then type @show{(code '(circle 1000 "solid" "red"))}.
+
+@n What do you Notice? @fitb{}{}
+
+@n What do you Wonder? @fitb{}{}
+
+@n Test `S1` and `S2` in the Interactions Area. Make predictions about what the two lines of code below will produce. Then test your predictions.
+
+- @show{(code '(overlay S1 S2))} @fitb{}{@ifsoln{an aqua square}}
+- @show{(code '(overlay S2 S1))} @fitb{}{@ifsoln{an aqua square with a yellow radial star on top}}
+
+@n Type `S3` in the Interactions Area.  What happened? Why? @fitb{}{} +
+@fitb{}{@ifsoln{the cursor jumped halfway down the screen because a transparent square was drawn.}}
+
+== Are there "Do Nothing" transformations we can write with `overlay` ?
+
+@n With your partner, predict what each of the following expressions will return, and write your prediction in the *middle* column.
+
+[cols="^.^1,^.^2,^.^1", grid="none", frame="none", stripes="none", options="header"]
+|===
+| Expression
+| Prediction
+| Equivalent to `dog`?
+
+| @show{(code '(overlay S1 dog))}
+| @fitb{30em}{@ifsoln{an aqua square}}
+| Yes @hspace{3em} @ifsoln-choice{No}
+
+| @show{(code '(overlay S2 dog))}
+| @fitb{30em}{@ifsoln{a yellow radial star on top of a dog}}
+| Yes @hspace{3em} @ifsoln-choice{No}
+
+| @show{(code '(overlay S3 dog))}
+| @fitb{30em}{@ifsoln{a dog}}
+| @ifsoln-choice{Yes} @hspace{3em} No
+|===
+
+@n Test each line of code. Record whether or not the result was the same as `dog`. Experiment to confirm your understanding is solid. Then look at the other shapes defined in the code. *Which shapes do you predict we could overlay on `dog` to get an equivalent image?* @fitb{}{@ifsoln{`S5` and `S6`}} +
+Why? @fitb{40em}{@ifsoln{They're transparent shapes.}} Confirm your predictions are correct.
+
+@n Predict what each expression below will produce. +
+@hspace{2em} @show{(code '(overlay S1 cat))}@hspace{2em} @fitb{}{@ifsoln{an aqua square}} +
+@hspace{2em} @show{(code '(overlay S2 cat))}@hspace{2em} @fitb{}{@ifsoln{a yellow radial star on a cat}} +
+@hspace{2em} @show{(code '(overlay S3 cat))}@hspace{2em} @fitb{}{@ifsoln{a cat}} +
+@hspace{2em} @show{(code '(overlay cat S1))}@hspace{2em} @fitb{}{@ifsoln{a cat on an aqua square}} +
+@hspace{2em} @show{(code '(overlay S5 cat))}@hspace{2em} @fitb{}{@ifsoln{a cat}} +
+@hspace{2em} @show{(code '(overlay S4 cat))}@hspace{2em} @fitb{}{@ifsoln{a green circle with part of a cat sticking out}} +
+@hspace{2em} @show{(code '(overlay cat S6))}@hspace{2em} @fitb{}{@ifsoln{a cat}} 
+
+@n Type each expression into the Interactions Area to confirm your predictions. Record anything that surprises you. @fitb{}{}
+@blanklines{1}{}
+
+@star Can you think of any numbers that we can combine with another number that will "do nothing" to the other number? @fitb{}{}
+
+@blanklines{1}{@ifsoln{we can add zero to any number without changing the other number's value.}}

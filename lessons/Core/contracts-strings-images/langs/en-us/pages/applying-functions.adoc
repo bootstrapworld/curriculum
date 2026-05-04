@@ -4,6 +4,12 @@
 <style>
 .fitbruby { min-width: 6em; }
 .indentedpara { width: 6in; }
+
+/* add a dotted border around specialized directions */
+.myCustomClass { 
+  border: dotted 1px black; 
+  p {margin-left: .25em !important; }
+}
 </style>
 ++++
 
@@ -35,23 +41,25 @@ Test out these two expressions and record what you learn below:
 | *Argument 4*	| @ifsoln{String}	| @ifsoln{Color}
 |=== 
 
+[.myCustomClass]
+--
 @hspace{1em}There are many other functions available to us in Pyret. We can describe them using @vocab{contracts}. The Contract for `regular-polygon` is:
 
 @hspace{2em}@show{(contract 'regular-polygon '(Number Number String String) "Image")}
 
-[.indentedpara]
---
+@indented{
 - Each Contract begins with the function name: @fitb{}{_in this case_ `regular-polygon`}
 - Lists the data types required to satisfy its Domain: @fitb{}{_in this case_ `Number, Number, String, String`}
 - And then declares the data type of the Range it will return: @fitb{}{_in this case_ Image}
-
---
+}
 
 @vspace{1ex}
 
 @hspace{1em}Contracts can also be written with more detail, by annotating the Domain with _variable names_:
 
 @hspace{2em}@show{(contract 'regular-polygon '((size Number) (number-of-sides Number) (fill-style String) (color String)) "Image")}
+
+--
 
 @n We know that a square is a regular polygon because @fitb{}{@ifsoln{Regular polygons are shapes made of straight sides (_aka a polygon_)}}
 
