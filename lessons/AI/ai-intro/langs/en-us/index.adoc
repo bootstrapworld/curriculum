@@ -26,6 +26,159 @@
 
 |===
 
+
+== What is (and isn't) AI?
+
+=== Overview
+
+Given a number of examples from the real world (image search, self driving cars, etc), students consider which ones are "thinking" vs. "just following steps". The goal of this section is for students to question what "thinking" is -- _not_ to learn about algorithms. However, teachers who want to go deeper into algorithms can do so here.
+
+=== Launch
+
+@QandA{
+@Q{Raise your hand if you've ever used some kind of Artificial Intelligence?}
+@A{Lots of students raise their hands. ("oh good, we have some experts here!")}
+@Q{What are some examples of AI?}
+@A{Chatbot LLMs: ChatGPT, Gemini, etc. (Wave these away and dig for more examples!)}
+@A{YouTube recommending my next video!}
+@A{Self-driving cars!}
+@A{Playing a video game against the computer!}
+@Q{Is a calculator an example of AI, when it "figures out" how to graph a line? Why or why not?}
+@A{No! It's just following instructions or steps.}
+}
+
+@slidebreak{Launch}
+
+A calculator is definitely not thinking! It's just blindly _following steps_ to plot each point, add numbers, etc. But it's not always easy to tell whether something is blindly following steps, or is truly "thinking!"
+
+@teacher{Cut and pass out a packet of @handout{ai-cards.adoc} to each group.}
+
+@lesson-instructions{
+Your group's job is to sort each of these cards into "thinking" and "just following steps".
+}
+
+@slidebreak{Launch}
+
+[cols="^2a, ^1a"]
+|===
+| Technology 					|	 🧐 or 👣?
+| spell-checking				|		？
+| plagiarism detectors			|		？
+| self-driving cars 			|		？
+| playing against a computer 	|		？
+| song/video recommendations 	|		？
+| language translators			|		？
+| ChatGPT, Gemini, etc... 		|		？
+|===
+
+@QandA{
+@Q{What did you choose, and why?}
+@Q{What criteria did your group look for when deciding if something is AI or not?}
+@A{Responses will vary.}
+@A{If students asked themselves whether human intelligence was needed to complete each task, highlight the inherent messiness of this approach.}
+}
+
+
+@slidebreak{LaunchR}
+
+@QandA{
+@Q{Is a spell-checker an example of AI?}
+@Q{Why or why not?}
+}
+
+When the first calculator came out, people were amazed! They couldn't believe that it could "do math", and were convinced that machines had started thinking for themselves.
+
+@slidebreak{Launch}
+
+Modern AI is largely driven by a set of techniques called @vocab{Machine Learning} (ML for short). In fact, modern AI relies _so deeply_ on Machine Learning that many people use the terms interchangeably!
+
+In @vocab{Machine Learning}, the computer analyzes lots of @vocab{data}, and looks for patterns. But how can something like a _song_ or an _image_ be turned into data?
+
+@slidebreak{Investigate}
+
+Tools like Spotify are often considered AI because they "understand music": we can pick any song, and it finds other songs that _it knows are similar_.
+
+@QandA{
+@Q{What's a popular song that most of us know?}
+@A{You'll get lots of answers - try to pick a song that is most distinct}
+}
+
+@teacher{Open @link{https://open.spotify.com/, Spotify}, search for the song, and play a few seconds of it}
+
+Turn to @printable-exercise{matching-songs-and-images.adoc}
+
+=== Investigate
+@slidebreak{Investigate}
+
+*I want more songs like this one!* But a computer can't really _hear_ the song the way we do. Computers like to work in terms of _numbers_. In our example, we can compute numbers about how many seconds long it is, or the average _beats per minute_ ("speed").
+
+Each of these numbers represents an @vocab{attribute} of the song, like length or speed.
+
+@QandA{
+@Q{How many other @vocab{attributes} could we compute from a song?}
+@A{Average volume!}
+@A{% of song that has high pitched noises}
+@A{Number of words in the lyrics}
+@A{Etc...}
+}
+
+@slidebreak{Investigate}
+
+@teacher{Click the three dots (`...`) on the song result, and select "Go to song radio". Let students see the other songs it recommended.}
+
+@lesson-instruction{
+In your groups, discuss:
+- Were these good matches or not?
+- In what ways are the matches _similar_ to our original song?
+- In what ways are the matches _different_?
+- What @vocab{attributes} do you think the computer was looking at, when it found these matches?
+}
+
+@slidebreak{InvestigateR}
+
+Tools like Google Image Search allow us to _search-by-image_: we pick an image, and it finds other images that _it knows are similar_.
+
+*I want more pictures like this one!* But a computer can't really _see_ a picture the way we do. Computers work in terms of _numbers_. In our example, we can compute numbers about how many pixels tall it is, or the average _luminescence_ ("brightness").
+
+@QandA{
+@Q{How many other @vocab{attributes} could we compute from an image?}
+@A{Average RGB value!}
+@A{% vertical or horizontal symmetry}
+@A{Etc...}
+}
+
+@slidebreak{InvestigateR}
+
+@teacher{Open @link{https://images.google.com/, Google Images}, and drag this puppy picture into the search box. Google will return matching images.}
+
+@lesson-instruction{
+In your groups, discuss:
+- Were these good matches or not?
+- In what ways are the matches _similar_ to our original image?
+- In what ways are the matches _different_?
+- What @vocab{attributes} do you think the computer was looking at, when it found these matches?
+}
+
+*TODO: turn this into a workbook page, so students can do the spotify and/or google image activities themselves in small groups. They should write down their ideas for attributes, rate the recommendations, and write down which attributes they think were used.*
+
+@slidebreak{Synthesize}
+
+@QandA{
+Suppose Spotify only had Country music in its library.
+@Q{Would it still be good at making a radio station if you gave it a Country song?}
+@A{Probably}
+@Q{Would it still be good at making a radio station if you gave it a Reggae song?}
+@A{No}
+@Q{If you gave it a Reggae song, would it "give up" and choose _random_ Country songs?}
+@A{No - it would still try to match the Country songs to the Reggae song, but the matches would be bad.}
+}
+
+@slidebreak{Synthesize}
+
+Machine Learning can be applied to virtually any kind of document: songs, images, stories, movies, you name it! People like to talk about AI as if it's "magic"; Machine Learning is actually surprisingly simple.
+
+Machine Learning relies on @vocab{data-driven algorithms}. A calculator follows a series of steps to graph a line, and Google Images and Spotify follow a series of steps to suggest images or songs. But with @vocab{data-driven algorithms}, the suggestions are only good once there's a LOT of data in the system.
+
 == Measuring Similarity
 
 @objective{ai-effect}
@@ -33,226 +186,45 @@
 
 === Overview
 
-Students discover the challenges of defining AI, and then consider what it means to measure similarity.
+Students learn that one of the most critical concepts in modern AI is "measuring similarity", and that this concept shows up in virtually every example they're familiar with. They discover that the choice of which attributes to measure -- and which measures to prioritize -- can have a large impact on the quality of the AI.
 
 === Launch
-@slidebreak{Launch}
-
-You've probably heard some buzz about @vocab{Artificial Intelligence}, or AI. The goal of AI is to enable a computer to perform tasks that typically require human intelligence. 
-
-@QandA{
-@Q{What are some books, movies, TV shows, or video games you know of that feature AI?}
-@A{Some possible responses include 2001: A Space Odyssey, The Wild Robot, Afraid, Star Trek, The Matrix, Star Wars, Terminator, Wall-E, Iron Man, Big Hero 6, The Mitchells versus the Machines, Blade Runner, I Robot, Mission Impossible, Upload, Person of Interest, The Good Place, The Hitchhiker's Guide to the Galaxy}
-}
-
-AI is what makes ChatGPT (and many other things!) work. 
-
-But what *counts* as AI?
 
 @slidebreak{Launch}
+
+Suppose you're running an animal shelter: you've got dogs, cats, rabbits, etc. You make a spreadsheet to keep track of them, with every animal in a row and columns for their attributes:
+
+[.pyret-table,cols="5a,5a,5a,5a,5a,5a,5a,5a",options="header"]
+|===
+
+| name 		| species | sex 	 | age 	| fixed | legs 	| pounds| weeks
+| "Sasha" 	| "cat"	  | "female" | 1 	| false | 4 	| 6.5 	| 3
+| "Mittens" | "cat"   | "female" | 2 	| true 	| 4 	| 7.4 	| 1
+|===
 
 @lesson-instruction{
-- In groups of 3-4 students, decide whether the different types of technology (listed below) are examples of AI or not. 
-** spelling and grammar checking technology
-** plagiarism detection technology
-** self-driving cars
-** chess playing technology
-** song and video recommendation technology
-** Google Translate
-** Google Maps
+Discuss with your group:
+- Do you know what each of these attributes measures about an animal?
+- How many other @vocab{attributes} could we compute from an animal?
 
-- After you have sorted the items above into AI / Not AI, come up with an answer to the question, "What counts as AI?" Put another way: What criteria did you look for when deciding if something is AI or not? 
+Turn to @printable-exercise{animals-dataset.adoc}. What do you Notice? What do you Wonder?
 }
-
-
-@teacher{
-The purpose of this activity is to invite students to share what they think AI is: to surface both prior knowledge and misconceptions. 
-
-For students who want or need to know: All of the technologies above utilize @vocab{Machine Learning}, the set of techniques that drives modern AI. Whether we refer to each of these seven technologies as AI or not is up for debate, as the lesson will explain.
-}
-
-@slidebreak{Launch}
-
-@QandA{
-@Q{What criteria did your group look for when deciding if something is AI or not?}
-@A{Responses will vary.}
-@A{If students asked themselves whether human intelligence was needed to complete each task, highlight the inherent messiness of this approach.}
-}
-
-@slidebreak{Launch}
-
-@right{@image{images/mccarthy.png, 100}}
-As different technological innovations become more familiar and more accessible... we stop thinking about them as AI. Computer scientist John McCarthy developed the term @vocab{AI effect} to describe this phenomenon. According to McCarthy, humans often adjust either the definition of AI or the concept of intelligence to *exclude* capabilities that AI systems have mastered. In his words, "As soon as it works, no one calls it AI anymore."
-
-@slidebreak{Launch}
-
-@QandA{
-@Q{Have you witnessed "the AI effect"? If so, what were the circumstances?}
-@A{Responses will vary; invite students to share.}
-@A{Virtual assistants like Siri and Alexa have become commonplace.}
-@A{The idea of a self-driving car no longer seems as radical and futuristic as it did 5 years ago.}
-@A{When Deep Blue beat reigning world chess champion Garry Kasparov in 1996, it was amazing. But the chess-playing expert system run on a unique purpose-built IBM supercomputer couldn't do anything else besides play chess!}
-}
-
-@slidebreak{Launch}
-
-Modern AI is largely driven by a set of techniques called @vocab{Machine Learning} (ML for short). AI relies so deeply on Machine Learning that many computer scientists prefer to use the phrase "AI/ML" when discussing a certain sort of technology that increasingly pervades our world.
-
-@slidebreak{Launch}
-
-In Machine Learning, the computer analyzes lots of @vocab{data}, and then identifies patterns in that data using statistics. Machine Learning can be applied to an incredibly diverse set of data (data from fairy tales, pictures, movies, songs, etc). While AI is often spoken about like something "magical", Machine Learning is actually very concrete: it is a collection of @vocab{algorithms} -- the instructions that tell a computer how to perform a task. In Machine Learning, those algorithms, however, have a special quality: They are @vocab{data-driven algorithms}, meaning that they produce better results when given more representative data.
-
 
 === Investigate
-
 @slidebreak{Investigate}
 
-So: What criteria can we use in deciding if a particular technology is AI?
-
-Many machine learning technologies use some method for measuring similarity! 
-
-@QandA{
-@Q{Are two pictures similar if they're the same size?}
-@Q{Are two pictures similar if they have the same amount of red in them?}
-@Q{Are two songs similar if they're the same number of minutes long?}
-@Q{Are two stories similar if they're both about ghosts?}
-@Q{What does it mean for two things to be "similar"?}
-@Q{Can two pictures, songs, or stories be "more similar" or "less similar" than two other things?}
-}
-
-If two things can be "more similar" than two other things, that means similarity must be something we can measure!
-
-@slidebreak{Investigate}
-
-
-But what does it mean to measure similarity?
-
-To begin to answer this question, let's look at some pictures!
+Instead of finding similar _songs_ or similar _images_, suppose we wanted to find similar _animals_.
 
 @lesson-instruction{
-Refer to the mountain landscapes as you complete the *first section* of @printable-exercise{measuring-similarity.adoc}
+Tara saw a movie about an animal she loves, and now she wants to adopt a similar animal. Can you help recommend some possible matches?
 
-[cols="1a,1a,1a", grid="none", frame="none"]
-|===
-|1 @image{images/adirondacks.png}
-|2 @image{images/sunset-mountains.png}
-|3 @image{images/snowy-mountains.png}
-|4 @image{images/grassy-mountains.png}
-|5 @image{images/nz-mountains.png}
-|6 @image{images/sunny-grass-mountains.png}
-|7 @image{images/bear-lake.png}
-|8 @image{images/sunrise-mountains.png}
-|9 @image{images/arizona-mountains.png}
-|===
+Turn to @printable-exercise{matching-animals.adoc}
 }
 
-@slidebreak{Investigate}
-
-@QandA{
-@Q{What similarities do the 9 photos have?}
-@A{Responses will vary.}
-@A{They all show mountains and sky.}
-@A{The photos are all rectangular in shape, and the rectangles are all the same size.}
-@A{The photos all make me want to visit the mountains.}
-
-@Q{What differences do the 9 photos have?}
-@A{Some photos show a body of water, others do not.} @A{Some photos include the sun, others do not.}
-@A{Some photos show mountains with snow, others show mountains with grass.} 
-@A{The color palettes differ from photo to photo (blues, greens, whites).}
-@A{Some mountains appear round while others appear pointy.}
-@A{In some photos, the mountains occupy most of the photograph, while in others, the mountains are just a small fraction of what is represented.}
-
-}
-
-@ifslide{
-[cols="1a,1a,1a", grid="none", frame="none"]
-|===
-|1 @image{images/adirondacks.png}
-|2 @image{images/sunset-mountains.png}
-|3 @image{images/snowy-mountains.png}
-|4 @image{images/grassy-mountains.png}
-|5 @image{images/nz-mountains.png}
-|6 @image{images/sunny-grass-mountains.png}
-|7 @image{images/bear-lake.png}
-|8 @image{images/sunrise-mountains.png}
-|9 @image{images/arizona-mountains.png}
-|===
-}
-
-@slidebreak{Investigate}
-
-@lesson-instruction{
-Complete the *second section* of @printable-exercise{measuring-similarity.adoc}, "Sorting the Photos".
-}
-
-
-@teacher{After students have completed this section of the worksheet, there is a good chance that they will want to know if they were "right" or "wrong." A class show of hands will likely spark interesting conversation as well.}
 
 @slidebreak{Investigate}
 
 
-@lesson-instruction{
-- Let's vote about the first comparison (Q4):
-** Raise your hand if you thought Photo 2 was _more similar_ to Photo 1.
-** Raise your hand if you thought Photo 3 was _more similar_ to Photo 1?
-- Let's vote about the second comparison (Q6):
-** Raise your hand if you thought Photo 5 was _more similar_ to Photo 4.
-** Raise your hand if you thought Photo 6 was _more similar_ to Photo 4?   
-}
-
-@slidebreak{Investigate}
-
-@QandA{
-@Q{How was the experience of identifying similar and different photos? Was it simple or challenging?}
-@A{Student responses will vary. Some students may articulate that it was challenging to decide which similarities to prioritize, when they were able to identify similarities across all photos.}
-
-@Q{How confident are you in the decisions you made on the second section of the @printable-exercise{measuring-similarity.adoc}?} 
-@A{Student responses will vary, and will likely be influenced by your class-wide opinion as revealed by show of hands (above).}
-}
-
-@slidebreak{InvestigateC}
-Let's think about another way of measuring similarity. 
-
-@center{@image{images/mountains-v-water.png, 400}}
-
-@QandA{
-@Q{What do you Notice about the coordinate plane image?}
-@A{Only the first quadrant is visible.}
-@A{The x-axis is "body of water pixels", or how much space the body of water occupies in the photograph.}
-@A{The y-axis is "mountain pixels", or how much space the mountains occupy in the photograph.}
-@A{There are three mountain landscapes (numbers 1, 5, and 7) positioned at various points on the coordinate plane.}
-
-@Q{What do you Wonder about it?}
-@A{How were the labels on the axes determined?}
-@A{Where would I put the other landscapes on this coordinate plane?}
-@A{How can I position landscapes that do not have any body of water in them?}
-
-@Q{Where do you think Photo 2 belongs on this coordinate plane?}
-@A{Invite a student to the board to identify where Photo 2 goes.}
-@A{It should have a similar y-coordinate and a slightly greater x-coordinate.}
-
-@ifslide{@image{images/sunset-mountains.png, 200}}
-
-
-}
-
-@slidebreak{Investigate}
-
-@lesson-instruction{
-Complete the *third* section of @printable-exercise{measuring-similarity.adoc}, "Using the Coordinate Plane".
-}
-
-@slidebreak{Investigate}
-
-@QandA{
-You discovered two different ways of measuring similarity as you worked with the nine different mountain images. 
-
-@Q{Summarize the first way that you measured similarity. You may want to refer back to the *second* section of @printable-exercise{measuring-similarity.adoc}, "Sorting the Photos".}
-@A{Possible response: First I brainstormed what made _all_ of the photos similar and different. Then, I compared one photo with two others. Usually, I had a gut reaction about which of the two photos were more similar to the first one. To describe and defend my answer, I had to pinpoint which characteristics caused me to see the similarity (e.g., color, presence/absence of water, etc). Sometimes, I had to think about which characteristics were more important.}
-
-@Q{Summarize the second way that you measured similarity. You may want to refer back to the *third* section of @printable-exercise{measuring-similarity.adoc}, "Using the Coordinate Plane".}	
-@A{In the second method of measuring similarity, I placed the photos on a coordinate plane. For the given coordinate plane, the axes provided were "mountain pixels" and "body of water pixels". If two photos were _similar_ in that the both had a large body of water, they would have a close horizontal position on the coordinate plane. }
-}
 
 === Synthesize
 @slidebreak{Synthesize}

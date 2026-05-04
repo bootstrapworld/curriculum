@@ -1,0 +1,102 @@
+= Identical Images from different Expressions?
+
+++++
+<style>
+#content td {padding: 0rem 0px !important}
+#content th { text-align: center !important; }
+.fitb { padding-top: 0.5rem !important; }
+div#body.workbookpage .autonum {
+    padding-top: 0.9em !important;
+}
+</style>
+++++
+
+Use the @starter-file{identity} to respond to the questions below.
+
+== Scale
+
+@n With your partner, predict which expressions are equivalent to `dog` and place a checkmark in front of them.
+
+[.table1, cols="1,15,15", grid="none", frame="none", stripes="none"]
+|===
+|
+| @fitb{1em}{@ifsoln{&#x2705;}} @show{(code '(scale (/ 5 5) dog))}
+| @fitb{1em}{@ifsoln{&#x2705;}} @show{(code '(scale (+ -20 20) dog))}}
+
+|
+| @fitb{1em}{@ifsoln{&#x2705;}} @show{(code '(scale (* 1/2 2) dog))}
+| @fitb{1em}{} @show{(code '(scale 0 dog))}
+
+|
+| @fitb{1em}{} @show{(code '(scale -1 dog))}
+| @fitb{1em}{@ifsoln{&#x2705;}} @show{(code '(scale (+ 45 -45) dog))}
+|===
+
+@n Test each line of code in the starter-file and circle the ones that are equivalent to `dog`.
+
+@n What do all of the equivalent expressions have in common. @fitb{}{@ifsoln{a scale factor of 1... making images 100% of the size of the original.}} +
+@blanklines{1}{}
+
+@n Write an expression using `scale` and `cat` that will produce an image identical to `cat`. @fitb{}{@ifsoln{@show{(code '(scale 1 cat))}}}
+
+@teacher{There are multiple correct solutions.}
+
+== Rotate
+
+@n In the Interactions Area (right), type @show{(code '(rotate 90 dog))}. What happened? @fitb{}{@ifsoln{The image rotated counter-clockwise 90°. The dog is on its side.}} 
+
+@n With your partner, predict which expressions are equivalent to `dog` and place a checkmark in front of them.
+
+[.table2, cols="1,15,15", grid="none", frame="none", stripes="none"]
+|===
+|
+| @fitb{1em}{} @show{(code '(rotate 180 dog))}
+| @fitb{1em}{} @show{(code '(rotate -90 dog))}
+
+|
+| @fitb{1em}{@ifsoln{&#x2705;}} @show{(code '(rotate 360 dog))}
+| @fitb{1em}{@ifsoln{&#x2705;}} @show{(code '(rotate -360 dog))}
+
+|
+| @fitb{1em}{} @show{(code '(rotate 450 dog))}
+| @fitb{1em}{@ifsoln{&#x2705;}} @show{(code '(rotate (* 360 19) dog))}
+|===
+
+@n Test each line of code in the starter-file and circle the ones that are equivalent to `dog`.
+
+@n What did you discover? For what degrees did `rotate` produce an identical image? @fitb{}{@ifsoln{360°,   -360°,   360 multiplied by any integer.}} +
+@blanklines{1}{}
+
+@n How do these degree numbers relate to "one whole"? @fitb{}{@ifsoln{360° is equivalent to one complete revolution.}}
+
+@n Write an expression using `rotate` and `cat` that will produce an image identical to `cat`. @fitb{}{@ifsoln{@show{(code '(rotate 360 cat))}}}
+
+@teacher{There are multiple correct solutions.}
+
+== Flip
+
+@n In the Interactions Area (right), try out @show{(code '(flip-vertical dog))}, then try @show{(code '(flip-horizontal dog))}. What happened? @fitb{}{} +
+@fitb{}{@ifsoln{`flip-vertical` flips the dog upside down. `flip-horizontal` flips the dog to face right instead of left.}} 
+
+@n With your partner, predict which expressions are equivalent to `dog` and place a checkmark in front of them.
+[.table3, cols="1,15,15", grid="none", frame="none", stripes="none"]
+|===
+|
+| @fitb{1em}{} @show{(code '(flip-vertical (flip-horizontal dog)))}
+| @fitb{1em}{} @show{(code '(flip-horizontal (flip-vertical dog)))}
+
+|
+| @fitb{1em}{@ifsoln{&#x2705;}} @show{(code '(flip-vertical (flip-vertical dog)))}
+| @fitb{1em}{@ifsoln{&#x2705;}}  @show{(code '(flip-horizontal (flip-horizontal dog)))}
+|===
+
+@n Test each line of code in the starter-file and circle the ones that are equivalent to `dog`.
+
+@n What did you discover about which flips produce an identical image? @fitb{}{@ifsoln{A pair of either flip type will complete the flip}} +
+@fitb{}{@ifsoln{so that the dog goes all the way around back to where it started.}} 
+
+@n Write an expression using one or more "flip functions" and `cat` that will produce an image identical to `cat`. +
+@fitb{}{@ifsoln{@show{(code '(flip-horizontal (flip-horizontal cat)))}}}
+
+@teacher{There are multiple correct solutions.}
+
