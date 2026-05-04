@@ -405,22 +405,18 @@ When choosing a split for our root node, our goal is to ask a question that sort
 But how do we know what root will make the best possible split? To know where to split the data, we need to know how the data is _shaped_ for different species. Let's use visualizations to help us explore this, and compare splits based on `pounds` vs. a split based on `tail`...
 
 @slidebreak{InvestigateR}
-We can use the `image-dot-plot` from @printable-exercise{what-does-the-code-do.adoc}, which made a dot-plot showing the distribution of animals' `pounds`. Where does it make sense to split?
+We can refer back to the `image-dot-plot` from @printable-exercise{what-does-the-code-do.adoc}....
 
-@centered-image{images/dot-plot-pounds.png}
+[cols="1a,1a", frame="none"]
+|===
+| @image{images/dot-plot-pounds.png}
+| @image{images/dot-plot-tail.png}
+|===
 
 - Splitting on `r["pounds"] < 9` gives us two groups, cats and dogs on both sides
 - Splitting on `r["pounds"] < 6` is tempting, because there's a nice gap in the data! But it leaves cats and lizards on both sides of the split.
 - Splitting on `r["pounds"] < 3` is much better, with _all tarantulas and snails_ are on one side
-
-
-@slidebreak{InvestigateR}
-
-@centered-image{images/dot-plot-tail.png}
-
-To know where to split the data, we need to know how the data is _shaped_ for different species. Let's use visualizations to help us explore this. Let's look back at our `image-dot-plot` from @printable-exercise{what-does-the-code-do.adoc}.
-
-- Splitting on `r["tail"] == true` gives us two clean groups: lizards, cats and dogs on one side, snails and tarantulas on the other
+- Splitting on `r["tail"] == true` _also_ gives us two clean groups: lizards, cats and dogs on one side, snails and tarantulas on the other
 
 @slidebreak{Investigate-DN}
 @lesson-instruction{
