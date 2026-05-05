@@ -134,7 +134,8 @@
 
 (define *self-guided-counter* 0)
 (define *self-guided-text?* #f)
-(define *self-guided-context* "")
+(define *default-self-guided-context* "editorCode: {}")
+(define *self-guided-context* *default-self-guided-context*)
 
 (define *external-url-index*
   (let ([f (string-append *pathway-root-dir* "external-index.rkt")])
@@ -187,7 +188,7 @@
             (read-json i)))
         '())))
 
-(define *pyret-starter-file-prefix* "https://code.pyret.org/editor#shareurl=")
+(define *pyret-starter-file-prefix* "https://pyret.BootstrapWorld.org/editor#shareurl=")
 
 (define *assessments*
   (let ([assessments-file (format "distribution/~a/lib/assessments.js" *natlang*)])
@@ -497,7 +498,7 @@
     (display (create-begin-tag "div" ".sidebarlessons") o)
     (display "*Lessons*\n" o)
 
-    (display (create-begin-tag "ul" "") o)
+    (display (create-begin-tag "ul" ".17zxgn2tjtr-m x-text") o)
 
     (display (create-end-tag "ul") o)
     (display (create-end-tag "div") o)
@@ -506,7 +507,7 @@
 
 (define (display-standards-bar o)
   ;(printf "doing display-standards-bar\n")
-  (display "\n[.sidebarstandards,cols=\"a\"]" o)
+  (display "\n[.sidebarstandards.m17zxgn2tjtr-m.x-text,cols=\"a\"]" o)
   (display "\n|===\n" o)
   (display "| " o)
   (display "*Aligns to:*\n" o)
@@ -1428,7 +1429,6 @@
             ;(newline o))
             (newline o)))))
 
-
       (for ([lesson lessons])
         ;(printf "tackling lesson i ~s\n" lesson)
         (let ([lesson-asc-file
@@ -1496,7 +1496,6 @@
           (display p o) (newline o)))
       #:exists 'replace)))
 
-
 (define (init-flags in-file)
   ;(printf "doing init-flags\n")
   (set! *autonumber-index* 1)
@@ -1533,7 +1532,7 @@
   (set! *enclosing-directive* #f)
   (set! *self-guided-counter* 0)
   (set! *self-guided-text?* #f)
-  (set! *self-guided-context* "editorCode: {}")
+  (set! *self-guided-context* *default-self-guided-context*)
 
   (set! *pyret?* (string=? *proglang* "pyret"))
 
@@ -1636,6 +1635,7 @@
         (lambda (o)
           (fprintf o "~a\n" *self-guided-context*))
         #:exists 'replace)
+      (set! *self-guided-context* *default-self-guided-context*)
       (display (html-comment "stop_self_guided_piece") o)
       (newline o))))
 
@@ -1707,10 +1707,10 @@
                               (set! *inside-preparation?* #f))]
                            [(string=? directive "blanklines")
                             (let* ([n (string->number (read-group i directive))]
-                                   [height (* n 2.2)] ; each line is 2.2rem tall (see shared.less)
+                                   [height (* n 2.2)] ; each line is 2.2em tall (see shared.less)
                                    [text (read-group i directive #:multiline? #t)])
                               ; (printf "doing @blanklines ~s\n" n)
-                              (display-begin-span ".blanklines" o #:attribs (format "style=\"height: ~arem\"" (* 2.2 n)))
+                              (display-begin-span ".blanklines" o #:attribs (format "style=\"height: ~aem\"" (* 2.2 n)))
                               (display (expand-directives:string->string text #:enclosing-directive directive) o)
                               (display-end-span o))]
                            [(string=? directive "duration")
@@ -2117,7 +2117,7 @@
                               (set! *self-guided-context*
                                 (case directive
                                   [("editorconfig") (format "editorCode: ~a\n" text)]
-                                  [("imageconfig") (format "imageConfig: ~s\n" text)]
+                                  [("imageconfig") (format "imageConfig: ~s\n" (path->string (anonymize-filename text)))]
                                   [("videoconfig") (format "videoConfig: ~s\n" text)])))]
                            [(string=? directive "Bootstrap")
                             (fprintf o "https://www.bootstrapworld.org/[Bootstrap]")]
@@ -2496,13 +2496,6 @@
         (set! *internal-links-port* (open-output-file internal-links-file #:exists 'replace))
         (set! *external-links-port* (open-output-file external-links-file #:exists 'replace)))
       ;
-      (when (or *lesson-plan*
-                *narrative*
-                *teacher-resources*)
-        (print-menubar (build-path *containing-directory* ".cached" ".index-comment.txt")))
-      ;
-
-      ;
       (call-with-input-file *in-file*
         (lambda (i)
           (call-with-output-file *out-file*
@@ -2573,21 +2566,6 @@
               (when *lesson-plan*
                 (store-assessments)
                 (store-objectives)
-
-                (fprintf o "include::~a/{cachedir}.index-sidebar.asc[]\n\n" *containing-directory*)
-                (call-with-output-file (build-path *containing-directory* ".cached" ".index-sidebar.asc")
-                  (lambda (o)
-                    (display
-                      (enclose-openblock
-                        ".sidebar"
-                        (lambda ()
-                          (call-with-output-string
-                            (lambda (o)
-                            (display-prereqs-bar o)
-                            (display-standards-bar o)
-                            (display "%ENDSIDEBARCONTENT%" o))))) o))
-                  #:exists 'replace)
-
                 )
 
               )
@@ -2796,8 +2774,6 @@
             #;(warnmsg "~a: File ~a not found" (errmessage-context) id-file)
             #f])))
 
-
-
 (define (add-exercises)
   ; (printf "doing add-exercises ~s\n" *exercises-done*)
   (when (cons? *exercises-done*)
@@ -2814,7 +2790,6 @@
 
 (define (create-glossary-subfile file)
   ; (printf "doing create-glossary-subfile ~s ~s\n" file *narrative*)
-  ; (print-menubar (string-append file "-comment.txt"))
   (unless (empty? *glossary-items*)
     (set! *glossary-items*
       (sort *glossary-items* #:key first string-ci<=?))
@@ -2941,7 +2916,7 @@
   ;(printf "coe ~s\n" e)
   ; (create-zero-file (format "~a.uses-codemirror" *out-file*))
   (set! *uses-codemirror?* #t)
-  (enclose-div ".circleevalsexp"
+  (enclose-span ".circleevalsexp"
     (sexp->block e #:pyret (string=? *proglang* "pyret"))))
 
 (define *hole-symbol* '++_______++)
