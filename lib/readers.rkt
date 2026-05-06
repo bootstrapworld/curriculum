@@ -396,6 +396,7 @@
              ; (regexp-match "\\\\sqrt" text)
              ; (regexp-match "\\\\sqrt{[^}]+[-+]" text)
              (and (regexp-match "\\\\sqrt{.[^}]" text) asciidoc?)
+             (regexp-match "\\\\frac" text)
              (and (regexp-match "\\\\frac{" text) (regexp-match "=" text))
              (regexp-match "\\\\frac{[^ }]+ [^}]+}" text)
              (and (not asciidoc?) (regexp-match "\\\\overline" text))
