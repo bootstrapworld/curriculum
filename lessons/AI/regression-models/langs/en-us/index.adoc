@@ -1,9 +1,9 @@
 [.beta]
-= Supervised Learning: Self-Driving Cars
+= Regression Models
 
-@description{Students learn about the world’s first self-driving car. They then apply and extend their prior knowledge of functions within the context of artificial intelligence.}
+@description{Students return to the dataset, this time thinking about the factors that predict how long it will take for an animal to be adopted. This leads to an exploration of Linear Regression, then Multiple Regression. Finally, they learn about the world’s first self-driving car, and use multiple regression to control the steering wheel of a virtual car using AI.}
 
-@lesson-prereqs{data-driven-algorithms}
+@lesson-prereqs{data-driven-algorithms, fitting-models}
 
 @keywords{}
 
@@ -17,8 +17,9 @@
 | Student-facing Lesson Goals
 |
 
+- Let's use line-of-best-fit to predict how long it will take for an animal to be adopted!
 - Let's learn about the functioning of the very first self-driving car!
-
+- Let's use line-of-best-fit to predict how a self-driving car should steer!
 
 | Materials
 |[.materials-links]
@@ -29,16 +30,242 @@
 
 |===
 
-== Supervised Learning @duration{15 minutes}
+== Fitting Models for `weeks` in the Animals Dataset
+
+=== Overview
+What factors determine how many `weeks` an animal takes to be adopted? Students are introduced to the _concept_ of @vocab{linear regression}, and learn how to interpret the @vocab{slope} and @vocab{y-intercept} of @vocab{predictor functions}.
+
+=== Launch
+@slidebreak{Launch}
+
+Let's review the contract for another one our data visualization functions:
+
+@show{(contract "scatter-plot" '((table-name Table)  (label-col String) (x-col String) (y-col String)) "Image")}
+
+@QandA{
+@Q{What is the *name* of this function?}
+@A{`scatter-plot` (encourage students to call out the dash!)}
+
+@Q{How many arguments are in its *domain*, and what type of data are they?}
+@A{Four: A Table followed by three strings, indicating which column contains the label, x-coord, and y-coord for each datapoint}
+
+@Q{What is the *range* for this function?}
+@A{Image}
+}
+
+@slidebreak{Launch}
+@lesson-instruction{
+- Open the @starter-file{animals} in Pyret, and click "Run".
+- Make two scatter plots from the `animals-table`, using `age` as the explanatory variable in one visualization, and `pounds` as the @vocab{explanatory variable} in the other.
+
+- In both visualizations, use `weeks` as your @vocab{response variable} and `name` for the `labels`.
+- We will refer to the explanatory column as “xs” and the response column as “ys.”
+}
+
+
+@slidebreak{LaunchC}
+[cols="1a,1a", grid="none", frame="none"]
+|===
+| @image{images/pounds-v-weeks.png, 400}
+| @image{images/age-v-weeks.png, 400}
+|===
+
+@QandA{
+@Q{Based on these scatter plots, how does the *size* of an animal impact how long it takes to find a home?}
+@A{Heavier animals *tend to* take longer to be adopted.}
+
+@Q{How does the *age* of an animal impact how long it takes to find a home?}
+@A{Older animals *tend to* take longer to be adopted.}
+
+@Q{Do older and larger animals _always_ take more time to get adopted? Less time?}
+@A{Neither - it's a general trend for them to take longer, but that doesn't mean every old/large animal takes longer than every small/young one!}
+}
+
+Can we be more precise actually _predict_ how long it will take an animal to be adopted, based on these factors? And which one would give us a better prediction?
+
+=== Investigate
+@slidebreak{Investigate-DN}
+
+As you already learned about @lesson-link{fitting-models}, our goal is to fit a line to each of these scatter plots, minimizing the error as much as possible.
+
+@center{@math{weeks(age)=(M \times age) + B}}
+
+- `age` is the _variable_ of the function, and it contribute a _portion_ of the adoption time
+- This portion is `M`, with our xy-intercept `B` representing the predicted value if `age` is zero
+
+- TODO: make this page, with (1) scatter-plot creation, drawing guessed predictor, drawing real predictor (2) interpreting predictor, (3) using `lr-code`, (4) using `predict-col`. lots of references to "learning!"
+@lesson-instruction{
+- Open @online-activity{https://www.desmos.com/calculator/yhlohvkgvl, this Desmos graph}
+- Use this graph to complete the first section on @printable-exercise{lr-age-pounds.adoc}.
+}
+
+@slidebreak{InvestigateR}
+@right{@image{images/lr-pounds-v-weeks.png, 300}}
+Data scientists, statisticians, and machine learning engineers use a statistical method called @vocab{linear regression} to pinpoint linear relationships in a dataset. Linear regression is the math behind the @vocab{line of best fit}, which allows us to make predictions based on our data.
+
+- In Machine Learning, the act of shrinking this data into a function is called @vocab{training}
+- Regression finds patterns between a set of inputs and an already-know, target output
+
+Think of each row in the animals dataset as a flash card, with `pounds` written on the front and `weeks` on the back. The computer is learning to predict the answer by identifying the patterns in our data. This form of learning -- where we already know the target values on -- is called @vocab{supervised learning}.
+
+@slidebreak{Investigate-DN}
+
+@lesson-point{
+In supervised machine learning, the computer trains on example input-output pairs tagged by a human and learns a function that maps from input to output.
+}
+
+Pyret has a function that does this learning for us, and its contract is the *same* as the contract for `scatter-plot`:
+
+@show{(contract "lr-plot" '((table-name Table)  (label-col String) (x-col String) (y-col String)) "Image")}
+
+Now we want Pyret to "learn" a function like, with the best possible values for @math{M} and @math{B}:
+
+@center{@math{weeks(age)=(M \times age) + B}}
+
+@lesson-instruction{
+- Make sure you have @starter-file{animals} open.
+- Use Pyret to complete @printable-exercise{lr-age-pounds.adoc}.
+- Be ready to share your thinking!
+}
+
+@slidebreak{Investigate-DN}
+
+Pyret has a lot of useful tools for doing linear regression, all with the same Domain!
+
+@show{(contract "lr-coeffs" '((table-name Table)  (label-col String) (x-col String) (y-col String)) "Table")}
+@show{(contract "lr-code" '((table-name Table)  (label-col String) (x-col String) (y-col String)) "Code")}
+@show{(contract "lr-fun" '((table-name Table)  (label-col String) (x-col String) (y-col String)) "(Row -> Number)")}
+
+- `lr-coeffs` produces a table showing the slope and y-intercept of our model
+- `lr-code` produces code that you can copy and paste into the Definitions Area, to define the "trained" model
+- `lr-fun` produces the trained model itself (remember, it's just another function!)
+
+@lesson-instruction{
+- Try these three functions out!
+}
+
+@slidebreak{InvestigateR}
+@ifslide{@right{@image{images/lr-pounds-v-weeks.png, 300}}}
+@QandA{
+@Q{What is the equation of the `age` predictor?}
+@A{`weeks(r) = (0.79 \times r["age"]) + 2.3`}
+
+@Q{What does the slope (the coefficient for `age`) tell us about what our predictor has _learned_?}
+@A{An extra year of age predicts roughly 0.79 extra weeks at the shelter (about 5.5 days longer)}
+
+@Q{What is the equation of the `pounds` predictor?}
+@A{`weeks(r) = (0.08 \times r["pounds"]) + 2.5`}
+
+@Q{What does the slope (the coefficient for `pounds`) tell us about what our predictor has _learned_?}
+@A{An extra pound predicts roughly 0.08 extra weeks at the shelter (about half a day longer)}
+
+@Q{Based on these slopes, which has the bigger _impact_ on adoption time: `pounds` or `age?`}
+@A{`age`}
+
+@Q{Which predictor _fits better_ (has a lower @math{S})?}
+@A{`pounds`}
+
+@Q{How could we possibly build a better predictor?}
+@A{Split the dataset by species, and fit each one separately!}
+@A{Somehow use `pounds` _and_ `age` together!}
+}
+
+=== Common Misconceptions
+
+
+
+=== Synthesize
+@slidebreak{Synthesize}
+
+@QandA{
+@Q{Why does it only make sense to use predictor functions for values that fall _within the range of the dataset_?}
+@A{Because our function describes a pattern observed within that particular range. Lots of observable patterns do not continue outside of a certain range... for example, babies are supposed to triple in weight in their first year... but grownups definitely shouldn't!
+}
+@A{If students have completed @lesson-link{decision-trees-evaluating}, you can connect this back to trusting a classifier only on inputs that are similar to what it was trained on.}
+}
+
+== Multiple Regression
+
+=== Overview
+Students extend their understanding of linear regression in 2 dimensions, moving into multiple regression in 3 dimensions. They see the improvement to the model fit, and interpret the coefficients of a multiple-regression result.
+
+=== Launch
+@slidebreak{LaunchR}
+@right{@image{images/lr-pounds-v-weeks.png, 300}}
+
+@math{weeks(age)=(0.79 \times age) + 2.3} +
+`fun weeks(r): (0.79 \times r["age"]) + 2.3 end`
+
+This function (written in both math and Pyret notation) is our regression line, which we can draw on a 2 dimensional (x,y) scatter plot.
+
+@slidebreak{Launch}
+
+But what if we wanted to use `pounds` _and_ `age` on our flashcards, and train the computer to predict `weeks` based on the value of *both* variables?
+
+=== Investigate
+@slidebreak{InvestigateR}
+@right{@image{images/plane-of-best-fit.png, 300}}
+Nothing says we can't use multiple variables to make our predictions, or that we have to live in only 2 dimensions! Now we want Pyret to "learn" a function like this, with the best possible values for @math{A}, @math{B}, and @math{C}:
+
+@center{@math{weeks(age, pounds)=(A \times age) + (B \times pounds) + C}}
+
+- `age` and `weeks` are _both inputs_ to the function, and each contributes to a _portion_ of the adoption time
+- These portions are `A` and `B`, with our xy-intercept `C` representing the predicted value if `age` and `pounds` are both zero
+
+- TODO: make this page, with using (1) `mr-code`, interpreting output, (2) using `predict-col`, (3) adding "legs" as a column
+@lesson-instruction{
+- Open @online-activity{https://www.desmos.com/3d/3jcvluhvst, this Desmos graph} and explore!
+- Use this graph to complete the first section on @printable-exercise{mr-age-pounds.adoc}.
+- Use Pyret to complete @printable-exercise{mr-age-pounds.adoc}.
+- Be ready to share your thinking!
+}}
+
+
+@slidebreak{InvestigateR}
+@right{@image{images/plane-of-best-fit.png, 300}}
+What would the Pyret code for this look like?
+
+|===
+| @math{weeks(age, pounds)=(0.79 \times age) + (0.08 \times pounds) + 2.3}
+| `fun weeks(r): (0.79 \times r["age"]) + (0.08 \times r["pounds"]) + 2.3 end`
+|===
+
+We're already consuming the entire row `r`, so we already have access to `age` and `pounds`.
+
+=== Synthesize
+@slidebreak{Synthesize}
+
+
+== Self-Driving Cars @duration{15 minutes}
 
 @objective{ai-supervision}
 @objective{car-function}
 
 
 === Overview
-Students learn about ALVINN (Autonomous Land Vehicle in a Neural Network) as an example of supervised machine learning.
+Students learn about ALVINN (Autonomous Land Vehicle in a Neural Network) as an example of supervised machine learning, then explore a driving simulator and use multiple regression to train a model to drive for them.
 
 === Launch
+@slidebreak{LaunchR}
+--
+@right{@image{images/self-driving-car.jpg}}
+
+Self-driving cars feel like the future has really arrived! Many people think they are one of the strongest examples of "AI" really thinking, instead of just "following an algorithm". What do _you_ think?
+
+@teacher{Give students time to discuss. Remind them about the AI Effect, and how people also felt when the first spell-checkers were developed!}
+--
+
+@slidebreak{Launch}
+Self-driving cards work via a lot of inputs (sensors, cameras, etc) and a lot of outputs (how much to accelerate, brake, and steer). Steering, for example, is incredibly difficult! A car needs to think about:
+
+- Whether the road ahead bends to the left or right, and how sharply
+- How far the car is from the center of the lane
+- Whether the car is in-line with the lane, or heading towards one side
+- Obstacles and traffoc lights that could be in the way
+- And lots more!
+
+We're going to explore how @vocab{supervised learning} -- regression, specifically -- allows cars to "know where they're going".
+
 @slidebreak{LaunchR}
 
 Meet ALVINN!
@@ -68,15 +295,15 @@ Here's what ALVINN's training entailed:
 
 @slidebreak{Launch}
 
-(3) ALVINN's training data can be represented as an input-output table, with training images (reduced in resolution to 30x32 pixels) as inputs  and their associated corresponding "correct" steering angles as outputs.
+(3) ALVINN's training data can be represented as an input-output table, with training images (reduced in resolution to 30x32 pixels) and obstacle distances as inputs, and the associated corresponding "correct" steering angles as outputs.
 
 @indented{
 [cols="^.^1,^.^1", stripes="none", options="header"]
 |===
-| input data                      | output data
-| @image{images/road1.png, 100} 	| 0.02º
-| @image{images/road2.png, 100} 	| -95.2º
-| @image{images/road3.png, 100} 	| 135.43º
+| road image                      	| obstacle distance (ft)| output data
+| @image{images/road1.png, 100} 	|		21				|   0.02º
+| @image{images/road2.png, 100} 	|		49				| -95.20º
+| @image{images/road3.png, 100} 	|		37				| 135.43º
 |===
 
 @teacher{
@@ -86,26 +313,19 @@ Note: These images were selected for illustrative purposes. The 30x32 pixel imag
 
 @slidebreak{Launch}
 
-(4) Using the set of inputs and outputs, ALVINN generates a @vocab{function} for predicting steering angles from Images, which we can summarize using contract notation. 
+(4) Using the set of inputs and outputs, ALVINN generates a @vocab{function} for predicting steering angles from the images and obstacle distances, which we can summarize using contract notation.
 
 @indented{
 @show{(contract 'steer '((road-image Image)) "Number")}
 }
 
 @lesson-point{
-In the `steer` function, the Image is the @vocab{explanatory variable} and the steering angle is the @vocab{response variable}.
+In the `steer` function, the Image and Distance are the @vocab{explanatory variables} and the steering angle is the @vocab{response variable}.
 }
-
-_How does one generate a function? Techniques from statistics do that. We aren't going to focus on the statistics here. Note that the actual contract for `steer` would be more complex, including a second `Number` for the measure of confidence._
-
-The function that we get from statistics is what scientists call a @vocab{model}: a summary of data that captures relationships between variables. Typically, models are @vocab{lossy}, meaning that some of the original information in the dataset was lost through the process of summarizing and compressing the data to build the model. In machine learning, we use algorithms to learn models, which are generally functions.
-
-- In @vocab{supervised learning}, the abstraction of the function -- the act of shrinking the @vocab{training} -- takes place after (or sometimes in tandem with) demonstration.
-- In this example, the learned function is so complex that we're representing it in shorthand, with contract notation.
 
 @slidebreak{Launch}
 
-(5) After training is complete, a human can push ALVINN's run switch and the vehicle will begin driving.  As ALVINN drives, it produces steering angles it learned from the human driver (who demonstrated the steering angle at each segment of the road), along with a numeric of "confidence score" in the angle provided.
+(5) After training is complete, a human can push ALVINN's "run" switch and the vehicle will begin driving!  As ALVINN drives, it produces steering angles it learned from the human driver (who demonstrated the steering angle at each segment of the road), along with a numeric of "confidence score" in the angle provided.
 
 @teacher{
 If you want your students to see ALVINN in action, now is a good time to view @link{https://www.youtube.com/watch?v=ntIczNQKfjQ, "this brief two-minute video"}.
@@ -168,112 +388,32 @@ While responding to the questions on the worksheet, you hopefully arrived at a f
 
 @slidebreak{Investigate}
 
+Let's use the same kind of @vocab{supervised learning} algorithm we used to predict animals' adoption time -- and which ALVINN used to steer! -- to build a model that knows how to complete a driving simulator.
 
-@lesson-point{
-In supervised machine learning, the computer trains on example input-output pairs tagged by a human and learns a function that maps from input to output.
+@lesson-instruction{
+- Open @starter-file{self-driving}, and click "Run".
+- Use this file to complete @printable-exercise{self-driving-car.adoc}
 }
 
-
-The case of ALVINN is just one example of supervised learning. There are countless others!
-
-- *Spam detection.* When email users indicate that an email they have received is spam (_demonstration_), they are contributing to a massive, labeled dataset that can be used to train a model to classify emails as _spam_ and everything else, implicitly, as _not spam_. (Although Gmail sometimes asks users if something is “not spam” -- see the image, below.) The "supervision" comes from the fact that the training data includes examples of both spam and legitimate emails.
-
-@center{@image{images/report-not-spam.png, 500}}
-
-@slidebreak{Investigate}
-
--  *Image classification.* When you do an image search for "apple", how does the computer know which images are of apples? In 2006, AI researcher Fei-Fei Li began working on the idea for a large visual database (ImageNet) to develop and improve visual object recognition software. ImageNet collects millions of images that have been hand-annotated (_demonstration_) with object categories. This collection is used for training, to produce a function that can label new images. This labeling is used by image search engines.
-
-@slidebreak{Investigate}
-
-- *Handwriting Recognition.* The United States Postal Services uses handwritten address interpretation systems to read handwritten addresses on envelopes. The MNIST database (Modified National Institute of Standards and Technology database) is one example of an early database used for the training of such systems; it includes thousands of labelled images of handwritten digits.  
-  
-
 === Synthesize
+@slidebreak{Synthesize}
+Regression is a form of @vocab{supervised learning} that trains models to predict _quantitative_ outcomes:
+
+- Number of weeks to adopt a pet, given the age and weight
+- Number of degrees to turn the wheel, given the speed, road curvature, etc.
+
+Each of these relies on a training dataset with a number of input columns and a target column. For each of the following examples, what do you think the input columns are?
+
+- The rate you pay for car insurance
+- The price of gas at the pump
+- The predicted temperature in tomorrow's weather report
+
+@teacher{Give students a chance to discuss as a class.}
+
 @slidebreak{Synthesize}
 
 @QandA{
 
 @Q{What is supervised machine learning, and how is ALVINN an example it?}
 @A{In supervised machine learning, the computer trains on example input-output pairs tagged by a human, and learns a function that maps from input to output. ALVINN is an example of supervised machine learning because a human provided the correct steering angles (_demonstration_), allowing ALVINN to produce a predictor function (_function abstraction_).}
-
-@Q{How is the problem of Spotify trying to improve its recommendations similar to the problem of ALVINN trying to drive on new surfaces? +
-_Hint: Think back to the case study from @lesson-link{data-driven-algorithms} on Michelle's Spotify use. Recall that, at first, Michelle did not like Spotify's "Discover Weekly" playlist because the songs did not match her tastes._
-}
-
-@A{Giving Spotify more data is one possible way that Michelle could get better song recommendations. Similarly, ALVINN will produce safer, more accurate steering instructions when exposed to more training: training on snowy roads, on icy roads, on three-lane highways, etc. With data-driven algorithms, more data produces better results even when the same algorithm is being used!}
-
-@A{Another option, though, is to use a different algorithm! Just as an improvement to Spotify's algorithm might result in Michelle enjoying its output more, a change in ALVINN's contract could produce safer driving. For instance, ALVINN's programmers could update the contract for it's function so that the program takes into consideration some history, rather than making all decisions instantaneously. This way, the program could respond appropriately to road signs and other data.}
-
-
-
-}
-
-
-@scrub{
-== Multiple Regression in Pyret @duration{25 minutes}
-
-=== Overview
-
-=== Launch
-@slidebreak{Launch}
-
-Did you know that every driver on the road is required to have car insurance?
-
-Although car insurance is required for all drivers, how much each driver pays for that insurance can vary widely.
-
-@QandA{
-
-@Q{A wide variety of factors influence the cost of car insurance. What variables to you think affect the price of car insurance?}
-
-@A{If students are unable to make any guesses about variables that influence car insurance, you can offer a few from this list to get them started: driving record, driver age, credit history, car make and model, occupation, where you live, mileage, car age, zip code, gender, marital status, etc.}
-}
-
-@lesson-instruction{
-- Let's look at a dataset inspired by real-world factors influencing premiums.
-- Open the @starter-file{premiums} starter file. Click "Run" and then type `premiums-table` into the Interactions area. Press "Enter".}
-
-@lesson-link{linear-regression} can help us understand the relationship between the cost of car insurance and any *one* of the variables in this dataset. In Pyret, the `lr-plot` function is designed for this.
-
-With linear regression, a relationship between two variables is strong if knowing the x-coordinate of a data point gives us a very good idea of what its y-coordinate will be.
-
-@QandA{
-@Q{Which do you think correlates the *most* strongly with the cost of insurance: driver's age, number of accidents, annual mileage, or the car's age? Why?}
-
-@Q{Which of those variables do you think correlates the *least* strongly with the cost of insurance? Why?}
-}
-
-@lesson-instruction{
-- Record the predictions you just made in the first section of @printable-exercise{lr-predict.adoc}.
-- Complete the next section of the page, Assessing Correlations.
-}
-
-Based on the scatter plots we produced, each explanatory variable correlates differently with the cost of insurance. Let's consider one model, where we use the driver's age to determine the cost of insurance.
-
-@lesson-instruction{
-Complete the next section of @printable-exercise{lr-predict.adoc}, Driver's Age vs. Insurance Premium.}
-
-If we really want to predict insurance premiums accurately, we would need to use all of the variables at once.
-
-@hspace{4ex} driver's age = @math{x_1} +
-@hspace{4ex} experience = @math{x_2} +
-@hspace{4ex} number of accidents = @math{x_3} +
-@hspace{4ex} annual mileage = @math{x_4} +
-@hspace{4ex} car's age = @math{x_5}
-
-A @vocab{regression} equation that puts them together would look like this:
-
-@hspace{4ex}  @math{y = a + b_1 x_1 + b_2 x_2 + b_3 x_3 + b_4 x_4 + b_5 x_5}
-
-
-A scatter plot allows us to easily visualize linear regression.
-
-With *two* explanatory variables (X1 and X2), things get more complicated, but we can still visualize what is going on. The x-axis represents the first explanatory variable, the y-axis represents the second explanatory variable, and the z-axis represents the response variable. Rather than computing a line of best fit, we compute a plane of best fit. The model is the equation of a plane.
-
-When there are three or more explanatory variables, it becomes impossible to visualize the @vocab{model}, but the computer is still able to do the computations.
-
-
-=== Synthesize
-@slidebreak{Synthesize}
-
 }
