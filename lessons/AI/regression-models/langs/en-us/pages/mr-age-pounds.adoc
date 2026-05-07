@@ -1,57 +1,95 @@
-= Supervised Machine Learning: Training a Self-Driving Car
+= Predicting Weeks from Age _and_ Pounds
 
-== Thinking about Training
+++++
+<style>
+/* custom positioning for subscript */
+div#body sub { position: relative; bottom: 0.3em; }
 
-@vspace{1ex}
+/* have pyret studentAnswer match fitb on this page */
+.studentAnswerShort { min-width: 5em; }
 
-[cols="3a,1a", grid="none", frame="none"]
+.mr-table td:first-child { background: #eee !important; }
+
+.editbox { background: none !important; }
+</style>
+++++
+
+@n Find Kujo in the @online-exercise{https://www.desmos.com/3d/omnchml87a, Pounds v. Weeks Desmos graph}.
+
+@n Click and drag Kujo's data point to _rotate the 3d chart_. Does it look like the 3d points form a cloud of some kind?
+
+@blanklines{2}{
+@ifsoln{They are all flattened against the z-y plane. All the x-values are zero. There's a purple plane at the bottom, along the x-y-plane}
+}
+
+@n Adjust the sliders for @math{m_{age}}, @math{m_{pounds}}, and @math{b} to estimate the *plane of best fit* for this data, and write your estimates below:
+
+@center{
+@fitbruby{9em}{}{slope1: @math{m_{age}}} 	@hspace{4em}
+@fitbruby{9em}{}{slope2: @math{m_{pounds}}} @hspace{4em}
+@fitbruby{9em}{}{intercept: @math{b}} 		@hspace{4em}
+}
+
+@n Use these values to fill in the function notation and Pyret code below
+
+[.mr-table, cols="^1a, ^10a", frame="none", stripes="none", header="none]
 |===
+| *Function Notation*
 |
-@n _Refer to the weather forecast (right) in your response._ During a week of daytime test drives:
+@math{weeks(pounds, age) = ( }
+@fitbruby{5em}{}{@math{m_{age}}}
+@math{\times age) + (}
+@fitbruby{5em}{}{@math{m_{pounds}}}
+@math{\times pounds) + }
+@fitbruby{5em}{}{@math{b}}
 
-- On Wednesday and Friday, the self-driving car drives safely.
-- On the other days, the self-driving car is unsafe. 
 
-@vspace{1ex}
-
-What might explain why the car drove unsafely on some days? 
-|@image{../images/forecast.png, 220}
+| *Pyret Notation*
+|
+`fun weeks(r): (`
+@fitbruby{5em}{}{@math{m_{age}}}
+`* r["age"]) + (`
+@fitbruby{5em}{}{@math{m_{pounds}}}
+`* r["pounds"]) +`
+@fitbruby{5em}{}{@math{b}}
+`end`
 |===
 
-@blanklines{4}{
-@ifsoln{Given that the car drove unsafely only on days when the weather wasn't sunny, it probably wasn't trained on varied enough conditions.
-}
-}
+== Using Supervised Learning to Build Regression Models
 
-@n Imagine that a self-driving car has done extensive training on a one-lane road, in all weather conditions, and at all times of day. Would you expect it to be able to safely drive on a busy two-lane road? Explain.
+@n Evaluate `mr-coeffs(animals-table, [list: "pounds", "age"], "weeks")`, and fill in the table below (it's okay to round down to 2-3 decimal places):
 
-@blanklines{3}{
-@ifsoln{Although ALVINN's training at this point enables accurate steering in a variety of conditions, ALVINN is not trained on busy multi-lane roads. The steering angles differ when the road is wider, and the appearance of unexpected, unfamiliar objects (like other cars) could result in very dangerous driving.
-}
-}
+[.FillVerticalSpace, cols="1a,1a", stripes="none", options="header"]
+|===
+| `coefficient-name` 			| `coefficient-value`
+| @ifsoln{intercept}			| @ifsoln{2.461}
+| @ifsoln{pounds} 				| @ifsoln{0.083}
+| @ifsoln{age} 					| @ifsoln{0.083}
+|===
 
-@n Imagine that a self-driving car trained on isolated country roads, as well as city streets, and highways in all weather conditions and times of day. It would be pretty safe on many roads! What might it still not be prepared to navigate safely? 
+@n Copy and paste this code into the Definitions Area, *being sure to rename the function age-pounds-predictor* and click "Run". What does `age-pounds-predictor(cat-row)` evaluate to?
 
-@blanklines{4}{
-@ifsoln{*Unexpected moving things* like ambulance encounters, bikes, children running into the street to chase a ball, dogs, moose, etc.
-*Unexpected stationary objects* like fallen trees and other debris, hills, flooded roads, street car tracks, bike lanes, railroad crossings, draw bridges, etc. *Weather in other geographies* For example, many self-driving cars are trained in the Bay Area of California, which cannot prepare a vehicle for all of Alaska's driving conditions.
-}
-}
+@n Try using this new predictor with `S`, then `mr-S`. Explain the difference between these functions. @fitb{}{} +
+@fitb{}{@ifsoln{Each does the same thing, but with functions that consume numbers v. models}}
 
-== Confidence Rating
+@n What is the @math{S}-value of your multiple-regression model? @fitb{}{@ifsoln{TODO}}
 
-@n In addition to producing a steering angle for each image of the road, ALVINN produces a _numeric_ measure of "confidence" in its response.
+== Interpreting Regression Models
 
-- What do you think causes ALVINN's "confidence" to increase or decrease? 
+@n Our `weeks` function model estimates that animals weighing 0 pounds and being 0 years old will be adopted in
+@fitbruby{5em}{@ifsoln{}}{y-intercept}
+@fitbruby{10em}{@ifsoln{weeks}}{y-units} and that, +
+for every additional
+@fitbruby{15em}{pound an animal weighs}{x-variable units},
+@fitbruby{12em}{@ifsoln{weeks to adoption}}{y-variable} will
+@fitbruby{8em}{@ifsoln{increase}}{increase/decrease} by
+@fitbruby{5em}{@ifsoln{0.083}}{@math{m_{pounds}}}
+@fitbruby{6em}{@ifsoln{weeks}}{y-units}.
 
-@blanklines{3}{
-@ifsoln{*Confidence will be higher* when the image of the road matches an image from the training dataset.  *Confidence will be lower* when the image of the road is entirely unlike any image in the training dataset.
-}
-}
-
-- Is 100% "confidence" possible? 
-
-@blanklines{3}{
-@ifsoln{100% confidence is not possible, because, once the model is constructed, ALVINN will only have access to a lossy version of the original data. Since it is not comparing new images to the original images, if it encounters a patch of road it's seen before under identical conditions, it won't recognize it.
-}
-}
+@n *The error in the model* is described by an @vocab{S-value} of about
+@fitbruby{5em}{@ifsoln{4.72}}{S}
+@fitbruby{8em}{@ifsoln{weeks}}{y-units}. @hspace{1em} I
+@fitbruby{18em}{@ifsoln{agree/meh}}{strongly agree, agree, disagree, strongly disagree} that this model is a good fit considering that
+@fitbruby{10em}{@ifsoln{weeks}}{y-variable units} in this dataset range from
+@fitbruby{7em}{@ifsoln{1}}{lowest y-value} to
+@fitbruby{7em}{@ifsoln{30}}{highest y-value}.

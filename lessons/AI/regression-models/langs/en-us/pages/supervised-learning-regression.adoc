@@ -1,0 +1,74 @@
+= Supervised Learning - Regression
+++++
+<style>
+div#body sub { position: relative; bottom: 0.3em; }
+</style>
+++++
+
+(1) using `lr-plot`, (2) interpreting predictor, (3) using `lr-code`, (4) using `predict-col`. lots of references to "learning!"
+
+== Using Supervised Learning to Build Regression Models
+
+@n Use `lr-plot` to re-make your scatter plots, this time having Pyret fit the regression model to find the *best possible* values for @math{m} and @math{b}. Write the two models below, round your numbers to 2-3 decimal places.
+
+[cols="^.^1a, ^.^1a", stripes="none", frame="none"]
+|===
+| @math{weeks(pounds) = (}@fitbruby{5em}{@ifsoln{0.083}}{@math{m_{pounds}}}@math{\times pounds) + }@fitbruby{5em}{@ifsoln{2.461}}{@math{b}}
+| @math{weeks(age) = (}@fitbruby{5em}{@ifsoln{0.789}}{@math{m_{age}}}@math{\times age) + }@fitbruby{5em}{@ifsoln{2.309}}{@math{b}}
+|===
+
+*Change your predictor functions to use these values, and re-fit the new models.*
+
+@n What @math{S}-value did you get for the `pounds-predictor`? @fitb{6em}{@ifsoln{4.72}}. @hspace{2em} The `age-predictor`? @fitb{6em}{@ifsoln{5.54}}
+
+@n *Evaluate `cat-row` in the Interactions Area*. How heavy is this cat? @fitb{}{@ifsoln{6.5 pounds}}
+
+@n How long does `pounds-predictor(6.5)` predict it will take for a 6.5-pound animal to be adopted? @fitb{}{3 weeks}
+
+== Interpreting Regression Models
+
+@n Our `pounds-predictor` estimates that animals weighing 0 pounds will be adopted in
+@fitbruby{5em}{@ifsoln{2.46}}{y-intercept}
+@fitbruby{10em}{@ifsoln{weeks}}{y-units} and that, +
+for every additional
+@fitbruby{15em}{pound an animal weighs}{x-variable units},
+@fitbruby{12em}{@ifsoln{weeks to adoption}}{y-variable} will
+@fitbruby{8em}{@ifsoln{increase}}{increase/decrease} by
+@fitbruby{5em}{@ifsoln{0.083}}{@math{m_{pounds}}}
+@fitbruby{6em}{@ifsoln{weeks}}{y-units}.
+
+@n *The error in the model* is described by an @vocab{S-value} of about
+@fitbruby{5em}{@ifsoln{4.72}}{S}
+@fitbruby{8em}{@ifsoln{weeks}}{y-units}. @hspace{1em} I
+@fitbruby{18em}{@ifsoln{agree/meh}}{strongly agree, agree, disagree, strongly disagree} that this model is a good fit considering that
+@fitbruby{10em}{@ifsoln{weeks}}{y-variable units} in this dataset range from
+@fitbruby{7em}{@ifsoln{1}}{lowest y-value} to
+@fitbruby{7em}{@ifsoln{30}}{highest y-value}.
+
+== More Regression Tools
+
+@n Evaluate `lr-coeffs(animals-table, "pounds", "weeks")`, and fill in the table below (it's okay to round down to 2-3 decimal places):
+
+[.FillVerticalSpace, cols="1a,1a", stripes="none", options="header"]
+|===
+| `coefficient-name` 			| `coefficient-value`
+| @ifsoln{intercept}			| @ifsoln{2.461}
+| @ifsoln{pounds} 				| @ifsoln{0.083}
+|===
+
+
+@n Evaluate `lr-code(animals-table, "pounds", "weeks")`. Can you explain what you get back? @fitb{}{} +
+@fitb{}{@ifsoln{the code for a function that takes in a row, and uses the "pounds" column to predict adoption time}}
+
+@n How is the `predictor` function different from your `pounds-predictor`? @fitb{}{} +
+@fitb{}{@ifsoln{this one takes in a *row*, while the other only took in a number}}
+
+@n Copy and paste this code into the Definitions Area, and click "Run". What does `predictor(cat-row)` evaluate to?
+
+@n Evaluate `predictor(6.5)`. What happens, and why? @fitb{}{} +
+@fitb{}{@ifsoln{we get an error, because it was expecting a Row}}
+
+@n Try using this new predictor with `S`, then `mr-S`. Explain the difference between these functions. @fitb{}{} +
+@fitb{}{@ifsoln{Each does the same thing, but with functions that consume numbers v. models}}
+
+@n In the Definitions Area, *rewrite or replace your original `age-predictor` and `pounds-predictor` functions so they consume __Rows__ instead of Numbers*
