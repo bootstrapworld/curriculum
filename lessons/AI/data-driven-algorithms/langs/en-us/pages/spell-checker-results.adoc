@@ -1,0 +1,60 @@
+= Spell Checker Results
+
+@link-instructions{Open the @starter-file{spell-checker} and click "Run".} Follow each of the instructions below to explore the output of the Pyret Spell Checker
+
+To refresh your memory, here are the contracts you'll need for this page:
+
+[cols="1a,1a", frame="none"]
+|===
+|
+@show{(contract "first-n-rows" '("Table" "Number") "Table")}
+@show{(contract "dot-plot" '("Table" "String" "String") "Image")}
+@show{(contract "count" '("Table" "String") "Table")}
+|
+@show{(contract "bar-chart" '("Table" "String") "Image")}
+@show{(contract "row-n" '("Table" "Number") "Row")}
+|===
+== Analyzing Results
+
+@n At the bottom of the *Definitions Area*, type `results = alt-words("wello", WORDS-M, 3)` and click "Run". Then evaluate `results` in the *Interactions Area*. What did you get back? @fitb{}{@ifsoln{The table of alternative words}}
+
+@n How can we use the `first-n-rows` function to produce only the first 3 matches?
+
+@hspace{3em} @fitb{}{@showsoln{(code '(first-n-rows results 3))}}
+
+@n How can we use the `dot-plot` function to make a dot plot showing these words distributed over edit-distances of 1, 2, and 3?
+
+@hspace{3em} @fitb{}{@showsoln{(code '(dot-plot results "word" "edit-distance"))}}
+
+@n Use the `count` or `bar-chart` function to see how many results were in the `WORDS-M` dictionary for an `edit-distance` of:
+
+@hspace{6em} @fitbruby{10em}{@ifsoln{3}}{edit-distance = 1} @hspace{6em} @fitbruby{10em}{@ifsoln{21}}{edit-distance = 2} @hspace{6em} @fitbruby{10em}{@ifsoln{169}}{edit-distance = 3}
+
+
+== Row Accessors
+
+@n Use `row-n` to extract the _second_ row of the table. What word did Pyret suggest? @fitb{}{@ifsoln{"well"}}
+
+@n At the bottom of the *Definitions Area*, type `row2 = row-n(results, 1)` and click "Run". Then evaluate `row2` in the *Interactions Area*. What did you get back? @fitb{}{@ifsoln{The second row}}
+
+@n Evaluate `row-n(results, 1)["word"]`. What did you get back? @fitb{8em}{@ifsoln{"well"}}
+
+@n Evaluate `row2["word"]`. What did you get back? @fitb{6em}{@ifsoln{"well"}} What about `row2["edit-distance"]`? @fitb{}{@ifsoln{1}}
+
+@n What do you _think_ will happen if you evaluate `results["hello"]`? @fitb{}{@ifsoln{An error, because `hello` isn't a column in this row}}
+
+@n Try it out! Were you right? @fitb{5em}{}. In your own words, explain what happened. @fitb{}{} +
+@fitb{}{@ifsoln{Pyret tried to get the `hello` value of `row2`, but there IS no such value}}
+
+@n What do you _think_ will happen if you evaluate `results["word"]`? @fitb{}{@ifsoln{An error, because `results` isn't a row}}
+
+@n Try it out! Were you right? @fitb{5em}{}. In your own words, explain what happened. @fitb{}{} +
+@fitb{}{@ifsoln{Pyret tried to get the `"word"` value of `results`, but `results` was a table}}
+
+@n Code like this (`["word"]` or `["edit-distance"]`) is called a _row accessor_. In your own words, what do row accessors do?
+@blanklines{2}{@ifsoln{Given a row, they try to access the value stored at the column in quotes.}}
+
+@n What code will produce the top result from our table? (Just the word itself, not the whole row!) @fitb{}{@ifsoln{`row-n(results, 0)["word"]`}}
+
+@n *Predictions:* What will `row2["edit-distance"] + 1` evaluate to? @fitb{3em}{@ifsoln{1}} @hspace{4em} `row2["word"] == "wello"`? @fitb{3em}{@ifsoln{false}} +
+`row-n(results, 0)["edit-distance"] < 5`? @fitb{3em}{@ifsoln{true}} @hspace{4em} `row-n(results, 2)["edit-distance"] > 1`? @fitb{3em}{@ifsoln{false}}
