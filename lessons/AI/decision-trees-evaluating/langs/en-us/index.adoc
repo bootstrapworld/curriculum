@@ -317,7 +317,10 @@ Let's build a classifier that can tell the difference between these three genres
 }
 
 @lesson-instruction{
+- The `liveness` column is measuring how much a song sounds like a live recording v. a studio recording.
+- Do you think this would be a good column to use for classification? Why or why not?
 - Let's try writing a classifier using the `liveness` column...
+
 - Complete the rest of @printable-exercise{music-classifier.adoc}.
 }
 
@@ -348,6 +351,19 @@ As a second challenge, they should try to make the best classifier possible usin
 === Synthesize
 @slidebreak{Synthesize}
 
+@QandA{
+@Q{Why was `liveness` a bad column to use in our classifier?}
+@A{Liveness has nothing to do with the music itself! Only how it was recorded.}
+
+@Q{Suppose Spotify wanted to hire Data Scientists and Machine Learning Engineers to write a classifier like this. Does it matter whether they know anything about music?}
+@A{Yes! Someone who understands music would have known right away that `liveness` is a bad column to use. They might also have understood *why* the data is shaped in certain ways, as in the case of the `popularity` column.}
+
+@Q{What if a Machine Learning Engineer didn't know _anything_ about the domain they are trying to classify? Why might that be a problem?}
+@A{If they're writing a facial recognition classifier without knowing anything about human facial structure, they might write a classifier that performs well on one group of people, but has a lot of false classifications for another.}
+@A{This is where ethics and AI meet!}
+}
+
+@slidebreak{Synthesize}
 @QandA{
 @Q{What are some reasons that a decision tree might produce an inaccurate prediction or recommendation?}
 @A{The prediction might be over-fit to the training population rather than the actual population.}
