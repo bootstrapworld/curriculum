@@ -31,7 +31,7 @@ CURR_GIT_BRANCH=$(git branch --show-current)
 # DEPLOY_DIR_SUBSTR is a part of the eventual DEPLOY_DIR path on the server.
 
 DOMAIN=beta.bootstrapworld.org
-DEPLOY_DIR_SUBSTR=domains/beta.bootstrapworld.org/public_html/materials/$SEMESTER_YEAR
+DEPLOY_DIR_SUBSTR=domains/materials/$SEMESTER_YEAR
 
 test -d $DEPLOYABLES_DIR && rm -fr $DEPLOYABLES_DIR
 
