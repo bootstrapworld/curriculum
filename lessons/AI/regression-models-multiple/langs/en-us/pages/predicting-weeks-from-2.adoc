@@ -1,0 +1,63 @@
+= Predicting Weeks from Age _and_ Pounds
+
+++++
+<style>
+/* custom positioning for subscript */
+div#body sub { position: relative; bottom: 0.3em; }
+
+div#body img { height: 220px; width: 480px; }
+
+.mr-table td:first-child { background: #eee !important; }
+.mr-table td:last-child { padding: 0.5625em 0.125em !important; }
+
+.editbox { background: none !important; }
+</style>
+++++
+== Working in 3 Dimensions
+
+@centered-image{../images/3d-planes.webp}
+
+@n Open @online-exercise{https://www.desmos.com/3d/omnchml87a, Age v. Pounds v. Weeks}, and adjust the slider for @math{m_{age}}. What happens? @fitb{}{@ifsoln{the purple line tilts up and down.}}
+
+@n Find Kujo in the `Pounds v. Weeks (purple)` scatter plot, and drag his data point. What do you see? @fitb{}{} +
+@blanklines{2}{@ifsoln{It's a 3d chart! The blue points are all flattened against the z-y plane. All the x-values are zero. There's a purple plane at the bottom, along the x-y plane, which rises and falls as @math{m_{pounds}} changes.}}
+
+@n *Return the sliders to zero*, then click the folder icon next to `Age v. Weeks (blue)`, to "turn on" that scatter plot. What do you see?
+@blanklines{2}{@ifsoln{They are all flattened against the z-x plane. All the y-values are zero. There's a blue plane at the bottom, along the x-y plane}}
+
+@n Find Kujo in the `Age v. Weeks (blue)` scatter plot, and drag his data point. What do you see? @fitb{}{} +
+@blanklines{2}{@ifsoln{It's a 3d chart! The blue points are all flattened against the z-y plane. All the x-values are zero. There's a blue plane at the bottom, along the x-y plane, which rises and falls as @math{m_{age}} changes.}}
+
+@n *Return the sliders to zero*, then click the folder icon next to `Age v Pounds v Weeks (orange)`, to "turn on" that plot. What do you see? @fitb{}{@ifsoln{The points are in 3d!}} +
+@blanklines{2}{@ifsoln{The blue and purple plots are just "projections" (shadows) of the 3d data, and there's an orange plane at the bottom, along the x-y plane}}
+
+@n Fill in the blanks in the image above, showing which data would be projected onto each plane. We've done one ("projecting down") for you.
+
+
+== Fitting a 3d Model
+@n "Turn off" the blue and purple dots, then adjust the sliders to estimate the *plane of best fit* for this data.
+
+@n Use the slider estimates to fill in the function notation and Pyret code below
+
+[.mr-table, cols="^1a, ^10a", stripes="none", header="none]
+|===
+| *Function Notation*
+|
+@math{\text{age-pound-predictor}(pounds, age) = ( }
+@fitbruby{5em}{}{@math{m_{age}}}
+@math{\times age) + (}
+@fitbruby{5em}{}{@math{m_{pounds}}}
+@math{\times pounds) + }
+@fitbruby{5em}{}{@math{b}}
+
+
+| *Pyret Notation*
+|
+`fun age-pound-predictor(r): (`
+@fitbruby{4.5em}{}{@math{m_{age}}}
+`* r["age"]) + (`
+@fitbruby{4.5em}{}{@math{m_{pounds}}}
+`* r["pounds"]) +`
+@fitbruby{4.5em}{}{@math{b}}
+`end`
+|===

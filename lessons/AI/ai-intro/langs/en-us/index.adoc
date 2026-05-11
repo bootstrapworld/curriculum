@@ -26,173 +26,406 @@
 
 |===
 
-
-== What is (and isn't) AI?
-
-=== Overview
-
-Given a number of examples from the real world (image search, self driving cars, etc), students consider which ones are "thinking" vs. "just following steps". The goal of this section is for students to question what "thinking" is -- _not_ to learn about algorithms. However, teachers who want to go deeper into algorithms can do so here.
-
-=== Launch
-
-@QandA{
-@Q{Raise your hand if you've ever used some kind of Artificial Intelligence?}
-@A{Lots of students raise their hands. ("oh good, we have some experts here!")}
-@Q{What are some examples of AI?}
-@A{Chatbot LLMs: ChatGPT, Gemini, etc. (Wave these away and dig for more examples!)}
-@A{YouTube recommending my next video!}
-@A{Self-driving cars!}
-@A{Playing a video game against the computer!}
-@Q{Is a calculator an example of AI, when it "figures out" how to graph a line? Why or why not?}
-@A{No! It's just following instructions or steps.}
-}
-
-@slidebreak{Launch}
-
-A calculator is definitely not thinking! It's just blindly _following steps_ to plot each point, add numbers, etc. But it's not always easy to tell whether something is blindly following steps, or is truly "thinking!"
-
-@teacher{Cut and pass out a packet of @handout{ai-cards.adoc} to each group.}
-
-@lesson-instructions{
-Your group's job is to sort each of these cards into "thinking" and "just following steps".
-}
-
-@slidebreak{Launch}
-
-[cols="^2a, ^1a"]
-|===
-| Technology 					|	 🧐 or 👣?
-| spell-checking				|		？
-| plagiarism detectors			|		？
-| self-driving cars 			|		？
-| playing against a computer 	|		？
-| song/video recommendations 	|		？
-| language translators			|		？
-| ChatGPT, Gemini, etc... 		|		？
-|===
-
-@QandA{
-@Q{What did you choose, and why?}
-@Q{What criteria did your group look for when deciding if something is AI or not?}
-@A{Responses will vary.}
-@A{If students asked themselves whether human intelligence was needed to complete each task, highlight the inherent messiness of this approach.}
-}
-
-
-@slidebreak{LaunchR}
-
-@QandA{
-@Q{Is a spell-checker an example of AI?}
-@Q{Why or why not?}
-}
-
-When the first calculator came out, people were amazed! They couldn't believe that it could "do math", and were convinced that machines had started thinking for themselves.
-
-@slidebreak{Launch}
-
-Modern AI is largely driven by a set of techniques called @vocab{Machine Learning} (ML for short). In fact, modern AI relies _so deeply_ on Machine Learning that many people use the terms interchangeably!
-
-In @vocab{Machine Learning}, the computer analyzes lots of @vocab{data}, and looks for patterns. But how can something like a _song_ or an _image_ be turned into data?
-
-@slidebreak{Investigate}
-
-Tools like Spotify are often considered AI because they "understand music": we can pick any song, and it finds other songs that _it knows are similar_.
-
-@QandA{
-@Q{What's a popular song that most of us know?}
-@A{You'll get lots of answers - try to pick a song that is most distinct}
-}
-
-@teacher{Open @link{https://open.spotify.com/, Spotify}, search for the song, and play a few seconds of it}
-
-Turn to @printable-exercise{matching-songs-and-images.adoc}
-
-=== Investigate
-@slidebreak{Investigate}
-
-*I want more songs like this one!* But a computer can't really _hear_ the song the way we do. Computers like to work in terms of _numbers_. In our example, we can compute numbers about how many seconds long it is, or the average _beats per minute_ ("speed").
-
-Each of these numbers represents an @vocab{attribute} of the song, like length or speed.
-
-@QandA{
-@Q{How many other @vocab{attributes} could we compute from a song?}
-@A{Average volume!}
-@A{% of song that has high pitched noises}
-@A{Number of words in the lyrics}
-@A{Etc...}
-}
-
-@slidebreak{Investigate}
-
-@teacher{Click the three dots (`...`) on the song result, and select "Go to song radio". Let students see the other songs it recommended.}
-
-@lesson-instruction{
-In your groups, discuss:
-- Were these good matches or not?
-- In what ways are the matches _similar_ to our original song?
-- In what ways are the matches _different_?
-- What @vocab{attributes} do you think the computer was looking at, when it found these matches?
-}
-
-@slidebreak{InvestigateR}
-
-Tools like Google Image Search allow us to _search-by-image_: we pick an image, and it finds other images that _it knows are similar_.
-
-*I want more pictures like this one!* But a computer can't really _see_ a picture the way we do. Computers work in terms of _numbers_. In our example, we can compute numbers about how many pixels tall it is, or the average _luminescence_ ("brightness").
-
-@QandA{
-@Q{How many other @vocab{attributes} could we compute from an image?}
-@A{Average RGB value!}
-@A{% vertical or horizontal symmetry}
-@A{Etc...}
-}
-
-@slidebreak{InvestigateR}
-
-@teacher{Open @link{https://images.google.com/, Google Images}, and drag this puppy picture into the search box. Google will return matching images.}
-
-@lesson-instruction{
-In your groups, discuss:
-- Were these good matches or not?
-- In what ways are the matches _similar_ to our original image?
-- In what ways are the matches _different_?
-- What @vocab{attributes} do you think the computer was looking at, when it found these matches?
-}
-
-*TODO: turn this into a workbook page, so students can do the spotify and/or google image activities themselves in small groups. They should write down their ideas for attributes, rate the recommendations, and write down which attributes they think were used.*
-
-@slidebreak{Synthesize}
-
-@QandA{
-Suppose Spotify only had Country music in its library.
-@Q{Would it still be good at making a radio station if you gave it a Country song?}
-@A{Probably}
-@Q{Would it still be good at making a radio station if you gave it a Reggae song?}
-@A{No}
-@Q{If you gave it a Reggae song, would it "give up" and choose _random_ Country songs?}
-@A{No - it would still try to match the Country songs to the Reggae song, but the matches would be bad.}
-}
-
-@slidebreak{Synthesize}
-
-Machine Learning can be applied to virtually any kind of document: songs, images, stories, movies, you name it! People like to talk about AI as if it's "magic"; Machine Learning is actually surprisingly simple.
-
-Machine Learning relies on @vocab{data-driven algorithms}. A calculator follows a series of steps to graph a line, and Google Images and Spotify follow a series of steps to suggest images or songs. But with @vocab{data-driven algorithms}, the suggestions are only good once there's a LOT of data in the system.
-
-== Measuring Similarity
+== What is AI?
 
 @objective{ai-effect}
 @objective{ai-vs-ml}
 
 === Overview
 
-Students learn that one of the most critical concepts in modern AI is "measuring similarity", and that this concept shows up in virtually every example they're familiar with. They discover that the choice of which attributes to measure -- and which measures to prioritize -- can have a large impact on the quality of the AI.
+Students explore different examples of how people use AI every day, including a mix of recommendation systems and classifiers. Students discover the challenges of defining AI, and think about whether AI is just an algorithm, or something more.
 
 === Launch
+@slidebreak{Launch}
+Who here has ever used AI? Raise your hand if you've used an AI tool, or know someone who has.
+
+@QandA{
+@Q{What are some examples of AI tools you've seen?}
+@A{Gemini, ChatGPT, etc}
+@A{When Spotify or YouTube recommends a song or video}
+@A{When I play video games against the computer}
+@A{Self-driving cars}
+@A{Facial recognition}
+}
+
+@slidebreak{LaunchR}
+@lesson-point{Is it _thinking_, or is it _following an algorithm_?}
+--
+@right{@image{images/flow-chart.gif, 400}}
+The first spell-checker was written in 1961. It had a 10,000 word dictionary, and it would check every word you typed to see if it was in the dictionary. All it could do was tell you if a word _was_ or _wasn't_ spelled right.
+
+But it wasn't really _thinking:_ it was just mechanically comparing strings of letters against a long list. It was just following an following an @vocab{algorithm} -- a series of steps that tell a computer how to perform a task.
+--
 
 @slidebreak{Launch}
 
-Suppose you're running an animal shelter: you've got dogs, cats, rabbits, etc. You make a spreadsheet to keep track of them, with every animal in a row and columns for their attributes:
+In 1971, however, a new spell-checker arrived from the Stanford Artificial Intelligence Laboratory called SPELL. SPELL wouldn't just tell you if a word was misspelled - it would _suggest alternative words_ that you might have intended! People were *floored*, and swore that AI had arrived. After all, "how did the computer know what we intended to write?"
+
+Was SPELL _thinking_, or was it, too, just _following an algorithm_?
+
+@lesson-instruction{
+- Form groups of 2-3.
+- How did SPELL know what words to suggest?
+- Be ready to share your ideas with the class!
+}
+
+@teacher{Give time for productive discussion about possible algorithms.}
+
+@slidebreak{Launch}
+
+Here's SPELL's algorithm for checking a word:
+
+@indented{
+(1) If the word is in the dictionary, we're done!
+
+(2) If it's _not_ in the dictionary, find words that are "near" the misspelled word (one letter off, two letters swapped by accident, etc.)
+
+(3) See if any of _those_ words are in the dictionary, and suggest them as alternatives
+}
+SPELL had no idea what those alternative words meant. It didn't even know what a word _was!_ And it definitely didn't know what people were thinking when they typed. *It's just an algorithm.*
+
+@slidebreak{Launch}
+--
+@right{@image{images/mccarthy.png, 200}}
+After a while, most people stopped calling spell checkers AI. But in the early 2000s, cell phones introduced a feature called "predictive text": when you start typing a sentence, the phone makes suggestions about what the next word should be. People were *floored*, and swore that AI had arrived...but eventually they stopped calling predictive text AI, too.
+
+Computer scientist @link{https://en.wikipedia.org/wiki/John_McCarthy_(computer_scientist), John McCarthy} coined the phrase "AI effect" to describe this phenomenon: humans keep _moving the goalposts_ for what counts as "Artificial Intelligence" and what counts as "Human Intelligence"! In his words, "As soon as it works, no one calls it AI anymore."
+--
+
+
+=== Investigate
+@slidebreak{Investigate}
+@lesson-point{Is it _thinking_, or is it _following an algorithm_?}
+
+Which of these technologies falls into which category?
+
+[cols="1a,1a"]
+|===
+|
+- Talking to Gemini, ChatGPT, etc
+- Uploading a photo to a "What bird is this?" app
+- Getting a music recommendation from Spotify
+- Getting a video recommendation from YouTube
+- A spam filter in you email program
+- A self-driving car
+- Spell Checkers
+|
+- A computer-opponent in a game like Tic-Tac-Toe, Call of Duty, etc.
+- Facial Recognition
+- Dating apps that recommend matches
+- A program that does your homework
+- Predictive Text (suggestions as-you-type)
+|===
+
+@lesson-instruction{
+- With your group, see if you can sort this list into "thinking" or "following an algorithm".
+- Can you describe the rules you're using to decide which is which?
+- Be ready to share back and discuss with the class!
+}
+
+
+=== Synthesize
+
+@QandA{
+@Q{What did the class mostly agree were examples of *thinking*?}
+@Q{What did the class mostly agree were examples of *following an algorithm*?}
+@Q{What kinds of criteria did you come up with, to tell them apart}
+@Q{Are you starting to wonder if AI does any thinking at all?}
+}
+
+
+== Different Kinds of AI
+
+=== Overview
+Students learn that AI is actually a collection of technologies involving Machine Learning, and begin thinking about how they might work.
+
+=== Launch
+@slidebreak{Launch}
+
+Modern AI is largely driven by a set of techniques called @vocab{Machine Learning} (ML for short). AI relies so deeply on Machine Learning that many computer scientists just call it "AI/ML".
+
+There are many kinds of Machine Learning algorithms out there, and nearly every example we've come up with falls into one of three categories:
+
+[cols="^1a,^1a,^1a"]
+|===
+| @image{images/prediction-bots.webp, 250}
+| @image{images/recommendation-bot.png, 200}
+| @image{images/chat-bot.png, 250}
+
+| *Prediction* +
+"Given an input, predict an output" +
+Facial recognition, Credit Scores, etc. +
+
+| *Similarity* +
+"Given an input, find likely matches" +
+Spotify, dating apps, etc.
+
+| *Language* +
+"Given a phrase or sentence, should the next word(s) be?" +
+Homework solvers, ChatGPT, Gemini, etc.
+|===
+
+
+@slidebreak{Launch}
+In Machine Learning, the computer analyzes lots of @vocab{data}, and then identifies patterns in that data using statistics. Machine Learning can be applied to an incredibly diverse set of data (text, maps, pictures, movies, songs, etc), to make predictions, find similarity, and describe a language and generate examples.
+
+While AI is often spoken about as if it's something "magical", Machine Learning is actually very concrete: it is just a collection of @vocab{algorithms}!
+
+Let's play with some real tools that use AI, and see if we can make sense of how they might be working...
+
+=== Investigate
+@slidebreak{InvestigateR}
+--
+@right{@image{images/classifier-bot.png, 250}}
+
+There are several kinds of *predictive models* you probably interact with every day!
+
+@vocab{Classification Models} - also called @vocab{classifiers} - are all about *predicting categories*:
+
+- Is this junk mail or not?
+- Is this person a kid, a teenager, or an adult?
+- Is this customer likely to buy a video game or not?
+- Which Harry Potter house would I be in?
+
+@lesson-instruction{
+@link{https://www.nyckel.com/pretrained-classifiers/flowers-identifier/, Here's an example of an ML tool} that consumes an image of a flower, and tries to predict what *category* of flower it really is.
+- Find an image of a flower, and drag it into the box
+- What part(s) of the image do you think it's looking at, to make its prediction?
+}
+--
+
+
+
+@slidebreak{InvestigateR}
+@lesson-instruction{
+- Let's think a little about how classifiers might work!
+- With a partner, complete the first section on @printable-exercise{predictive-models-classifiers.adoc}
+- Be ready to share back!
+}
+
+@slidebreak{InvestigateR}
+@QandA{
+@ifslide{@right{@image{images/classifier-bot.png, 250}}}
+@Q{What were your predictions for each row?}
+@A{There's no right answer here - the important part is to see how much agreement or disagreement there is in the class}
+@Q{Why didn't we all make the same predictions?}
+@A{We made different decisions about which columns we valued most}
+@A{For the `income` column we might make different decisions about what the cutoff is for teenager v. adult}
+@A{For the `shoes` column, we might make different decisions about whether each kind of shoe is more of a "teenager shoe" or an "adult shoe"}
+@Q{Did the `color` column matter? Why or why not?}
+@A{No - people of any age can like any color, so their preference doesn't help us decide if someone is a teenager or an adult.}
+@Q{If you had the income, shoe preference, and weight of every person in America - do you think you could made better and more accurate decisions? Why or why not?}
+@A{If we know how much money teenagers _generally make_ vs. adults, we could pick a better cutoff}
+@A{If we know how much who _generally_ buys each kind of shoe, we could make better guesses based on shoes}
+}
+
+@lesson-instruction{
+- You just looked at a classification problem with only two outputs: "teenager" or "adult". But classifiers can have any number of possible outputs - including every species of flower!
+- Let's explore a classifier with more than two outputs, by completing the last section on @printable-exercise{predictive-models-classifiers.adoc}
+- Be ready to share back!
+}
+
+@slidebreak{InvestigateR}
+@QandA{
+@ifslide{@right{@image{images/classifier-bot.png, 250}}}
+@Q{What were your predictions for each row?}
+@A{There's no right answer here - the important part is to see how much agreement or disagreement there is in the class}
+@Q{Why didn't we all make the same predictions?}
+@A{We made different decisions about which columns we valued most}
+@Q{Which column was the *most helpful* in classifying the species? Why?}
+@A{...answers will vary...}
+@A{`legs` immediately classifies snails (0), tarantulas (8), and everything else (4)}
+@A{`pounds` immediately classifies dogs (generally heaviest), cats (generally in the middle), and everything else (very light)}
+}
+
+@slidebreak{InvestigateR}
+--
+@right{@image{images/prediction-bots.webp, 250}}
+
+But Classifiers aren't the only kind of prediction system out there!
+
+@vocab{Regression} is all about *predicting values*:
+- How much does each inch of height determine how many 3-pointers will they make?
+- How much does the amount a person earns determine how long they will live?
+- With a Credit Score of 632, how likely is this person to be able to pay back a car loan?
+
+@link{https://www.marriage.com/quizzes/how-many-kids-will-i-have/, Here's an example of an ML tool} that uses input data to predict the *number* of children you will have.
+--
+
+@slidebreak{InvestigateR}
+@ifslide{@right{@image{images/prediction-bots.webp, 250}}}
+@lesson-instruction{
+- Let's think a little about how regression models might work!
+- With a partner, complete the first section of @printable-exercise{predictive-models-regression.adoc}
+- Be ready to share back!
+}
+
+
+@slidebreak{InvestigateR}
+@QandA{
+@right{@image{images/pounds-v-weeks.png, 250}}
+@Q{What did you notice about the scatter plot?}
+@A{There seemed to be a pattern}
+@A{Some dots were really far away from the others!}
+@A{A lot of dots were clustered on the left}
+@Q{What kind of pattern did you see?}
+@A{A line sloping up as we go to the right}
+}
+
+@teacher{If you have a projector and a whiteboard, this is a great time to have students draw their different lines of best fit on the board!}
+
+Pretty much everyone saw a line with a positive slope, but they didn't necessarily see the _exact same_ line.
+@lesson-instruction{
+- Complete the first section of @printable-exercise{predictive-models-regression.adoc}
+- Be ready to share back!
+}
+
+
+
+
+@slidebreak{InvestigateR}
+@QandA{
+@ifslide{@right{@image{images/pounds-v-weeks.png, 250}}}
+@Q{How long did you predict it would take Daisy to be adopted? Maple?}
+@A{Answers will vary}
+@A{Could we write the equation for this line?}
+@A{Right now we're drawing our line based on a scatter plot of every kind of animal. Would we get a better fit if we just looked at each species separately?}
+@A{Probably! Each species must have a growth rate that can be graphed, but by combining all of them we get a line that's a mix of all the different species, and not good at predicting any individual one.}
+@Q{Is there another column of numbers we could use to predict adoption time?}
+@A{Age}
+}
+
+
+@slidebreak{InvestigateR}
+--
+@right{@image{images/recommendation-bot.png, 200}}
+
+@vocab{Similarity Models} is all about *measuring similarity*:
+
+- Which songs are most like this one?
+- Which people on a dating site are the best matches for this person?
+- Which essays are the most similar to this one?
+
+@link{https://open.spotify.com/, Let's try an example!}
+
+@teacher{Search for a song that your students will recognize. When you hover over the search result, you'll see a three dots (`...` appear on the right. Click these dots and select "Go to Song Radio")}
+--
+
+@slidebreak{InvestigateR}
+@ifslide{@right{@image{images/recommendation-bot.png, 200}}}
+
+How similar were Spotify's recommendations to the original song?
+
+@lesson-instruction{
+- Let's think a little about how similarity models might work!
+- With a partner, complete @printable-exercise{similarity-learning.adoc}
+- Be ready to share back!
+}
+
+@slidebreak{InvestigateR}
+@right{@image{images/recommendation-bot.png, 200}}
+
+@QandA{
+@Q{What do you think Spotify was paying attention to, when it recommended similar songs to the one we chose?}
+@A{Answers will vary (volume, duration, speed...)}
+@Q{When you upload an image to @link{https://www.google.com, Google Search}, what does it pay attention to when recommending similar images?}
+@A{Answers will vary (brightness, color, symmetry...)}
+}
+
+@slidebreak{InvestigateR}
+--
+@right{@image{images/chat-bot.png, 250}}
+
+@vocab{Language Models} (LMs) look for *patterns and frequency in language*, and use that to predict what word(s) should come next.
+
+- LMs trained on _English_ can be "chatbots", and generate English responses to questions!
+- LMs trained on _Spanish_ can be "chatbots", and generate Spanish responses to questions!
+- LMs trained on _Music_ can be "musicbots", and generate music!
+- LMs trained on _Drawings_ can be "Tic Tac Toe bots", and generate the next move!
+- LMs trained on _Tic Tac Toe_ can be "Tic Tac Toe bots", and generate the next move!
+
+@link{https://duck.ai/, Here's an example of an ML tool} that uses language you type to predict the *language* that should come back as a reply.
+
+@teacher{Give students 1-2m to try chatting}
+--
+
+We'll get to Language Models in a later lesson, but for now the important thing is to realize that this is yet another kind of @vocab{Machine Learning}.
+
+=== Synthesize
+TBD - give students examples of use-cases, and have them identify the kind of ML at work
+
+== Meet Pyret!
+
+=== Overview
+Students open up the Pyret environment (code.pyret.org, or "CPO") and see the Animals Dataset reflected there.
+
+=== Launch
+@slidebreak{LaunchR}
+
+Let's take a look at our programming environment, and see what the Animals Dataset looks like there.
+
+@lesson-instruction{
+- @right{@image{images/pyret.png, 100}}Open the @starter-file{animals} in a new tab. Click “Connect to Google Drive” to sign into your Google account. This will allow you to save Pyret files into your Google Drive.
+- Next, click the "File" menu and select "Save a Copy". This will save a copy of the file into your own account, so that you can make changes and retrieve them later.
+}
+
+=== Investigate
+@slidebreak{Investigate}
+
+@lesson-instruction{
+- Click "Run" to tell Pyret to read the code on the left-hand side.
+- On the right-hand side, type `animals-table` and hit the "Enter" or "Return" key.
+- A table of animals appears on the right-hand side of the screen.
+- Look on the left-hand side of the screen. Where is Pyret getting `animals-table` from?
+}
+
+@slidebreak{Investigate}
+
+The first line on the left-hand side of the screen tells Pyret to use a provided file, which contains tools we’ll want to use for this course.
+
+`use context shared-gdrive("Bootstrap-...")`
+
+After that, we see a line of code that _defines_ `shelter-sheet` to be a spreadsheet.
+
+`shelter-sheet = load-spreadsheet("https://docs.google.com....")`
+
+This table is loaded from Google Drive, so now Pyret can see the same spreadsheet you do. If you look carefully, you'll notice that the address listed here is the same address as the spreadsheet we just looked at!
+
+@pd-slide{
+*What Happens when Pyret loads a spreadsheet?*
+
+- When Pyret imports a sheet, it reads all the cells and builds something it calls a Table.
+- When making a table, Pyret checks all of the cells automatically, and holds us accountable for using clean and complete data.
+- Each time we sort, filter or change a Table, Pyret makes a new Table. This is beneficial for a variety of reasons!
+}
+
+@strategy{What Happens when Pyret loads a spreadsheet?}{
+- When Pyret imports a sheet, it reads all the cells and builds something it calls a _Table_. The original spreadsheet is still out there, exactly as it used to be!
+- When making a table, Pyret _checks all of the cells automatically_, and holds us accountable for using clean and complete data so that all visualizations can be trusted. Unlike Pyret, spreadsheets allow us to make visualizations out of any collection of cells -- even if those cells are blank, contain mismatched data, or contain data from multiple, unrelated tables -- which can jeopardize our analysis!
+- Each time we sort, filter or change a Table, Pyret makes a _new Table_. This means that we can explore one transformation or another, or even multiple transformations together...and can always go back as many steps as we want.  This is a big improvement over working with spreadsheets, where our options are to choose between making "backup" copies of sheets at every step (which means any change to one of those sheets needs to be replicated _by hand_ in all of the other sheets), or modifying the original sheet (which makes it really hard to undo mistakes).
+- Checking data by hand and the inability to undo mistakes are problematic for students, teachers, and Data Scientists alike!  While the strictness of programming may outweigh the benefits for younger students, for students who are comfortable writing code, programming is a vastly more powerful and learner-friendly tool for Data Science!
+}
+
+@slidebreak{Investigate}
+
+After that, we see the following code:
+
+```
+# load the 'pets' sheet as a table called animals-table
+animals-table = load-table: name, species, sex, age, fixed, legs, pounds, weeks
+  source: pets-sheet.sheet-by-name("pets", true)
+end
+```
+
+The first line (starting with `#`) is called a @vocab{Comment}. Comments are notes for humans, which the computer ignores. The next line defines a new table called animals-table, (loaded from the shelter-sheet!) and defines column names: `name`, `species`, `sex`, `age`, `fixed`, `legs`, `pounds` and `weeks`. We could use any names we want for these columns, but it’s always a good idea to pick names that make sense!
+
+@lesson-point{
+Even if your spreadsheet already has column headers, Pyret requires that you name them in the program itself.
+}
+
+@slidebreak{Investigate}
+
+Below is an example of a table with a *header row* and two *data rows*:
 
 [.pyret-table,cols="5a,5a,5a,5a,5a,5a,5a,5a",options="header"]
 |===
@@ -202,83 +435,25 @@ Suppose you're running an animal shelter: you've got dogs, cats, rabbits, etc. Y
 | "Mittens" | "cat"   | "female" | 2 	| true 	| 4 	| 7.4 	| 1
 |===
 
-@lesson-instruction{
-Discuss with your group:
-- Do you know what each of these attributes measures about an animal?
-- How many other @vocab{attributes} could we compute from an animal?
-
-Turn to @printable-exercise{animals-dataset.adoc}. What do you Notice? What do you Wonder?
-}
-
-=== Investigate
-@slidebreak{Investigate}
-
-Instead of finding similar _songs_ or similar _images_, suppose we wanted to find similar _animals_.
-
-@lesson-instruction{
-Tara saw a movie about an animal she loves, and now she wants to adopt a similar animal. Can you help recommend some possible matches?
-
-Turn to @printable-exercise{matching-animals.adoc}
-}
-
-
-@slidebreak{Investigate}
-
-
-
-=== Synthesize
-@slidebreak{Synthesize}
+Pyret lets us use many different kinds of data. In the animals table, for example, there are Numbers (the number of legs each animal has), Strings (the species of the animal), and Booleans (whether it is true or false that an animal is fixed).
 
 @QandA{
-@Q{How were the two ways you measured similarity alike? How were they different?}
-@A{The two methods both involved thinking about the same nine images of mountain landscapes.}
-@A{The two methods both required honing in on certain characteristics of those photos.}
-@A{The second method required me to think about distance and space, while the first method did not.}
-@A{In the first method, I needed to compare two images with one another before making a decision.}
-
-}
-
-
-== Thinking about AI in Pop Culture
-
-=== Overview
-
-Students consider messages from various media about AI.
-
-=== Launch
-@slidebreak{Launch}
-
-Many characterizations of AI envision technology that *doesn't exist yet*. The futuristic (often dystopian) AI imagined in movies, video games, and books can sometimes interfere with the way that we understand the technology of the present.
-
-Let's consider what sort of AI information we've absorbed just by consuming books, movies, TV, and video games, along with our own personal opinions.
-
-@lesson-instruction{
-- With a partner, choose one book / movie / TV show / video game that features AI.
-}
-
-=== Investigate
-@slidebreak{Investigate}
-
-@lesson-instruction{
-- With your partner, identify *one* of the messages about AI from the list below that the book / movie / TV show / video game you picked supports.
-** AI must be safely controlled at all times.
-** AI could lead to social isolation.
-** AI can help us understand what it means to be human.
-** AI can help advance humanity and scientific discovery.
-** AI may pose a threat to humanity.
-** AI can perpetuate biases and lead to unfair outcomes.
-** Humans are helpless in the face of AI.
-- Discuss how the media you picked supports the message.
-- Record your thinking on @printable-exercise{ai-in-pop-culture.adoc}.
-- Share your reflections with the class.
+@Q{What happens if you remove a column from the list in my program? Or add an extra one?}
+@A{When I remove a column, I get this message: "Loaded worksheet has 8 columns, but 7 column names were given."}
+@A{When I add a column, I get this message: "Loaded worksheet has 8 columns, but 9 column names were given."}
 }
 
 === Synthesize
 @slidebreak{Synthesize}
+Once you know how to program, you can do a _lot_ with tables in Pyret: make charts and graphs, filter it to show just the dogs, or build columns to look at different information.
 
 @QandA{
-@Q{What are some questions that you have about Artificial Intelligence and/or Machine Learning that you'd like to learn more about?}
-@Q{What _confuses_ you about AI/ML?}
+@Q{What does Pyret do with a google sheet?}
+@A{Pyret can load any google sheet and build a table using all of the columns of data in the sheet, naming them whatever we want.}
+@A{When Pyret loads a google sheet, it checks to make sure that the number of columns named in the file matches the number of columns in the sheet itself.}
+@A{Pyret can do computations with the data in the sheet without changing the original sheet at all.}
+@A{Pyret can build visualizations from the data and make new tables that are either a filtered subset of the rows in the original table or expanded tables including new columns we build.}
 }
 
-@teacher{Consider writing down students' questions and possible misconceptions about AI. You can revisit these questions as answers emerge in subsequent lessons. If there are questions that surface that might inform future Bootstrap lesson development, we'd love for you to share them with us at @link{mailto:contact@bootstrapworld.org, contact@bootstrapworld.org}!}
+@slidebreak{Synthesize}
+In this class, we'll use datasets like this one to explore Prediction Models, Similarity Models, and Language Models. But first we need to get comfortable with the basics of Pyret! Stay tuned...

@@ -1,0 +1,73 @@
+= Predicting Weeks from Age _or_ Pounds
+++++
+<style>
+/* custom positioning for subscript */
+div#body sub { position: relative; bottom: 0.3em; }
+
+/* have pyret studentAnswer match fitb on this page */
+.studentAnswerShort { min-width: 5em; }
+
+/* claw back some space from the table cells and autonum */
+div#body td { padding: 0 !important; }
+html div#body.workbookpage .autonum { padding-top: 0.9em; }
+</style>
+++++
+
+@n For each of the scatter plots below, draw what you think are the best regression functions to predict `weeks`.
+
+[cols="1a,1a", grid="none", frame="none"]
+|===
+| @image{../images/pounds-v-weeks.png}
+| @image{../images/age-v-weeks.png}
+|===
+
+== Finding Predictor Functions
+Explore the graphs in Desmos to help you define your predictor functions - also known as "lines of best fit", or "regression models".
+
+@n Open the @online-exercise{https://www.desmos.com/3d/ip4ucm56mx, Pounds v. Weeks Desmos graph}. Which point represents Kujo?
+
+@n Look at the axis labels on the graph, and circle the plane on which the pounds v. weeks scatter plot is graphed: @hspace{2em} x-y @hspace{2em} x-z @hspace{2em} @ifsoln-choice{y-z}
+
+@n Adjust the sliders for @math{m_{pounds}} and @math{b_{pounds}} to find the line of best fit. Write your answers below, in both function and Pyret form:
+
+[cols="^1a, ^1a", frame="none", stripes="none", header="none"]
+|===
+| @math{weeks(pounds) = (}@fitbruby{5em}{}{@math{m_{pounds}}}@math{\times pounds) + }@fitbruby{5em}{}{@math{b_{pounds}}}
+| @show{(code '(define (weeks pounds) (+ (* (?ANS m) pounds) (?ANS b))))}
+|===
+
+@n Open the @online-exercise{https://www.desmos.com/3d/glgrgcs4bp, Age v. Weeks Desmos graph}. Which point represents Kujo on _this_ plot?
+
+@n Look at the axis labels on the graph, and circle the plane on which the age v. weeks scatter plot is graphed: @hspace{4em} x-y @hspace{2em} @ifsoln-choice{x-z} @hspace{2em} y-z
+
+@n Adjust the sliders for @math{m_{age}} and @math{b_{age}} to find the line of best fit. Write your answers below, in both function and Pyret form:
+
+[cols="^1a, ^1a", frame="none", stripes="none", header="none"]
+|===
+| @math{weeks(age) = (}@fitbruby{5em}{}{@math{m_{age}}}@math{\times age) + }@fitbruby{5em}{}{@math{b_{age}}}
+| @show{(code '(define (weeks age) (+ (* (?ANS m) age) (?ANS b))))}
+|===
+
+== Defining, Using, and Evaluating Predictors in Pyret
+
+For convenience, here's the contract for `simple-S`:
+
+@show{(contract "simple-S" '("Table" "String" "String" "Number -> Number") "Number")}
+
+
+@n In the *Definitions Area*, fill in the slope and intercept for both `pounds-predictor` and `age-predictor` and click "Run".
+
+@n Use `fit-model` to fit them to each scatter plot. How do your plots in Pyret compare to the plots in Desmos? @fitb{}{@ifsoln{They are the same}} +
+@fitb{}{}
+
+@n *Evaluate `cat-row` in the Interactions Area*. How heavy is this cat? @fitb{10em}{@ifsoln{6.5 pounds}} @hspace{2em} How old? @fitb{}{@ifsoln{1}}
+
+@n How long does `pounds-predictor` estimate it will take for this cat to be adopted? @fitb{7em}{3 weeks}.  `age-predictor`? @fitb{}{@ifsoln{0.79 weeks}}
+
+@n Use `simple-S` to compute the @math{S}-value of your two predictors. `age-predictor`: @fitb{3em}{}, @hspace{1em} `pounds-predictor`?: @fitb{}{}
+
+@n Use `fit-model` to visualize the fit of `pounds-predictor`. How accurate is it? @fitb{}{} +
+@blanklines{2}{}
+
+@n Use `fit-model` to visualize the fit of `age-predictor`. How accurate is it, compared to `pounds-predictor`? @fitb{}{} +
+@blanklines{2}{}

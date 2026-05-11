@@ -1,0 +1,67 @@
+= Supervised Learning - Multiple Regression
+
+++++
+<style>
+/* custom positioning for subscript */
+div#body sub { position: relative; bottom: 0.3em; }
+
+div#body .center { padding: 0 !important; }
+
+.mr-table td:first-child { background: #eee !important; }
+.mr-table td:last-child { padding: 0.5625em 0.125em !important; }
+
+.editbox, .code { background: none !important; }
+</style>
+++++
+
+To complete this page, you'll be using the following contracts:
+
+@indented{
+@show{(contract "S" '((table-name Table) (x-cols List<String>) (y-col String)) "Table")} +
+@show{(contract "mr-coeffs" '((table-name Table) (x-cols List<String>) (y-col String)) "Table")} +
+@show{(contract "mr-code" '((table-name Table) (x-cols List<String>) (y-col String)) "Code")}
+}
+== Using Supervised Learning to Build Regression Models
+@n Evaluate `mr-coeffs(animals-table, [list: "pounds", "age"], "weeks")`, and fill in the table below (it's okay to round down to 2-3 decimal places):
+
+[.FillVerticalSpace, cols="^.^1a,^.^1a", stripes="none", options="header"]
+|===
+| `coefficient-name` 	| `coefficient-value`
+| `intercept`			| @ifsoln{1.58}
+| `pounds` 				| @ifsoln{0.072}
+| `age` 				| @ifsoln{0.299}
+|===
+
+@n Fill in the definition for `age-pounds-predictor`. What does `age-pounds-predictor(cat-row)` evaluate to? @fitb{}{2.348 weeks}
+
+@n Use `S` to compute the error of this model: @fitb{5em}{@ifsoln{7.705 weeks}}. Why doesn't `simple-S` work with this predictor? @fitb{}{} +
+@fitb{}{@ifsoln{`simple-S` expects a function that consumes numbers, but this predictor consumes a Row}}
+
+== Interpreting Regression Models
+
+@n Our `age-pound-predictor` model estimates that animals weighing 0 pounds and being 0 years old will be adopted in
+@fitbruby{5em}{@ifsoln{1.58}}{z-intercept}
+@fitbruby{10em}{@ifsoln{weeks}}{z-units}. For every additional
+@fitbruby{9em}{@ifsoln{pound}}{1st input units},
+@fitbruby{12em}{@ifsoln{weeks to adoption}}{z-variable} will
+@fitbruby{8em}{@ifsoln{increase}}{increase/decrease} by
+@fitbruby{5em}{@ifsoln{0.072}}{@math{m_{pounds}}}
+@fitbruby{6em}{@ifsoln{weeks}}{z-units}. For every additional
+@fitbruby{9em}{@ifsoln{year}}{2nd input units},
+@fitbruby{12em}{@ifsoln{weeks to adoption}}{z-variable} will
+@fitbruby{8em}{@ifsoln{increase}}{increase/decrease} by
+@fitbruby{5em}{@ifsoln{0.299}}{@math{m_{age}}}
+@fitbruby{6em}{@ifsoln{weeks}}{z-units}.
+
+@n *The error in the model* is described by an @vocab{S-value} of about
+@fitbruby{5em}{@ifsoln{4.704}}{S}
+@fitbruby{8em}{@ifsoln{weeks}}{z-units}. @hspace{1em} I
+@fitbruby{18em}{@ifsoln{agree/meh}}{strongly agree, agree, disagree, strongly disagree} that this model is a good fit considering that
+@fitbruby{10em}{@ifsoln{weeks}}{z-variable units} in this dataset range from
+@fitbruby{7em}{@ifsoln{1}}{lowest z-value} to
+@fitbruby{7em}{@ifsoln{30}}{highest z-value}.
+
+@n Does adding the `legs` attribute to our multiple regression analysis make the fit better or worse? Can you explain why? @fitb{}{} +
+@blanklines{2}{@ifsoln{It gets slightly better, because `legs` helps us differentiate between snails, tarantulas, and every other species. And since species influences adoption time, this helps us approximate regressing on `species`}}
+
+@n If we use `legs`, `age`, _and_ `pounds` to predict `weeks`, how many dimensions are we doing regression in? @fitb{}{@ifsoln{4}}

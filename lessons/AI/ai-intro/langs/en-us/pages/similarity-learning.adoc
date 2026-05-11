@@ -1,0 +1,71 @@
+= Similarity Learning
+++++
+<style>
+td { padding: 1px 3px !important; }
+td:first-child {
+	color: gray;
+	border: none;
+}
+body { counter-reset: image-counter; }
+img { filter: grayscale(90%); }
+.image-figure {
+	width: 178px;
+	counter-increment: image-counter;
+	position: relative;
+}
+.image-figure::after {
+  content: 		counter(image-counter);
+  position: 	absolute;
+  top: 			0px;
+  left: 		0px;
+  color: 		black;
+  padding: 		1px 5px;
+  background: 	rgba(255, 255, 255, 0.7);
+  font-weight: 	bold;
+}
+</style>
+++++
+
+== Music Recommendations
+Each of the rows in the table below represents a song. Can you tell which is which?
+
+[cols="^1a,^2a,^2a,^2a,^2a,^2a,^4a", options="header"]
+|===
+| ID | Speed (bpm)	| % Air Horn| % Guitar	| % Drums	| % Vocals	| % Keyboard
+|  1 | 65			      | 		0	| 		36 	| 		23	| 		 0	| 		19
+|  2 | 107			    | 		0	| 	 	52	|  		17	| 		52	| 		 2
+|  3 | 88			      | 		0	| 	 	47  |  		31	| 		 0	| 		25
+|  4 | 231 			    | 		6	| 		 8	|  		81	| 		33	| 		67
+|  5 | 136			     | 		4	| 	 	15	|  		76	| 		28	| 		71
+|===
+
+@n In which column are the numbers *most similar*? @fitb{}{@ifsoln{Drums}}
+
+@n In which column are the numbers *most different*? @fitb{}{@ifsoln{answers can vary}}
+
+[cols="^1a,^2a,^2a,^2a,^2a,^2a,^4a", options="header"]
+|===
+| ID | Beats Per Minute	| % Air Horn| % Guitar	| % Drums	| % Vocals	| % Keyboard
+| 83 | 185 				| 		7	| 		 58	|  		60	| 		34	| 		72
+|===
+
+@n If someone like the song above, which song IDs would you recommend from our table? @fitb{3em}{@ifsoln{4 and 5}} Explain why.
+@blanklines{2}{@ifsoln{The song is fast, and uses air horns. Songs 4 and 5 do too!}}
+
+== Image Recommendations
+The numbered images below are all images of mountains.
+
+@image{../images/adirondacks.png}
+@image{../images/arizona-mountains.png}
+@image{../images/grassy-mountains.png}
+@image{../images/nz-mountains.png}
+@image{../images/snowy-mountains.png}
+@image{../images/sunny-grass-mountains.png}
+@image{../images/sunrise-mountains.png}
+@image{../images/sunset-mountains.png}
+
+@n A user wants to find images like Image 1. Which other images would you *most recommend*? @fitb{3em}{} Why? @fitb{}{}
+@blanklines{2}{@ifsoln{While answers may vary, look for answers that talk about brightness (how much snow), contrast (sunrise/sunset images are higher contrast, etc.)}}
+
+@n Which images would be the *least recommended*? @fitb{3em}{} Why? @fitb{}{}
+@blanklines{2}{@ifsoln{While answers may vary, the key here is to look for thinking that's consistent with the previous answer}}

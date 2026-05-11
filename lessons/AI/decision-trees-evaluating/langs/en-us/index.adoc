@@ -1,0 +1,383 @@
+[.beta]
+= Evaluating Decision Trees
+++++
+<style>
+/* allow lesson-points to co-exist with images */
+.lesson-point{ clear: unset !important; }
+
+/* force some images to have a white background */
+.white-bg { background-color: white; display: block; }
+
+.highlight-diagonal tr:nth-child(1) td:nth-child(2),
+.highlight-diagonal tr:nth-child(2) td:nth-child(3),
+.highlight-diagonal tr:nth-child(3) td:nth-child(4),
+.highlight-diagonal tr:nth-child(4) td:nth-child(5),
+.highlight-diagonal tr:nth-child(5) td:nth-child(6) {
+  background: var(--bs-secondary-lighter-supernova) !important;
+  color: white !important;
+  font-weight: bold;
+}
+</style>
+++++
+
+@description{Students explore an approach to recommending videos and predicting election outcomes. They develop and analyze decision trees to predict individuals’ purchasing decisions.}
+
+@lesson-prereqs{decision-trees-building}
+
+
+@keywords{}
+
+[@lesson-intro-table]
+|===
+| Lesson Goals
+| Students will be able to...
+@objectives
+
+| Student-facing Lesson Goals
+|
+
+- Let's learn about how to evaluate the _accuracy_ of a classifier
+- Let's learn how the distribution in the training dataset influences the trees we build
+
+| Materials
+|[.materials-links]
+@material-links
+
+
+|===
+
+== Building Decision Trees in Pyret
+
+=== Overview
+Now that they know the algorithm, students explore Pyret's ability to build decision trees automatically! They explore the impact that different depths or columns have on the quality of a classifier.
+
+=== Launch
+@slidebreak{Launch}
+By now, you know that not all @vocab{decision trees} are created equal! You also know the algorithm to compute an _optimal tree_, so you could generate a @vocab{decision tree} for any dataset.
+
+[.data-table, cols="^2,^2,^3,^2,^2", stripes="none", options="header"]
+|===
+| name    | age        | shopping history     | interest in game  | buys game
+| Jan     | "teens"    | "previous customer"  | false             | false
+| Noah    | "thirties" | "previous customer"  | false             | true
+| Sydney  | "thirties" | "previous customer"  | true              | true
+| Mariana | "thirties" | "new customer"       | true              | false
+| Rasula  | "twenties" | "new customer"       | true              | true
+| Jillian | "teens"    | "previous customer"  | false             | false
+| Ariella | "teens"    | "new customer"       | true              | true
+| Isabela | "thirties" | "previous customer"  | true              | true
+|===
+
+*Targeted Advertising:* Based on a dataset like this, could you write a classifier that predicts which customers are most likely to buy a game, and mail them a targeted advertisement?
+
+@slidebreak{Launch}
+You also know that decision trees are really just functions called @vocab{classifiers}: they take an input and produce a prediction as their output.
+
+*Spam Filtering:* You could train a decision tree to predict whether an email is spam or not:
+
+[.data-table, cols="^1,^1,^1", stripes="none", options="header"]
+|===
+| sender in address book  | seen sender before      | mass email
+| true                    | true                    | true
+| true                    | false                   | false
+| false                   | true                    | true
+| false                   | false                   | false
+| true                    | true                    | true
+| true                    | false                   | false
+| false                   | false                   | true
+|===
+
+@slidebreak{Launch}
+
+*Handwriting Recognition:* The United States Postal Services uses handwritten address interpretation systems to read handwritten addresses on envelopes. The MNIST database (Modified National Institute of Standards and Technology database) is one example of an early database used for the training of such systems; it includes thousands of labelled images of handwritten digits.
+
+@slidebreak{Launch}
+In your @starter-file{decision-tree}, you already have at least one classifier defined: `tail-classifier`. Let's see how well it does on this dataset:
+
+@indented{`classify(training, "species", tail-classifier)`}
+
+How many animals did it get right?
+
+=== Investigate
+@slidebreak{Investigate}
+Of course, computing a decision tree by hand takes a long time, especially if you're dealing with tens of thousands of rows and hundreds of columns! Fortunately, computers are really, _really_ good at following algorithms.
+
+We've provided a function that will use a splitting algorithm similar to the one you know, to build the _optimal_ decision tree based on a set of training data! Here's the contract:
+
+@show{(contract "build-tree" '("Table" "List" "String" "Number") "DecisionTree")}
+
+The `build-tree` function takes *four arguments* in its Domain:
+
+- The _training dataset_ on which to fit the tree
+- A list of all the column names for the nodes to split on
+- The name of the _target_ column containing all the "answers" for the various categories
+- The _maximum depth_ the tree is allowed to be
+
+@lesson-instruction{
+Complete the first section, "Choosing the Right Split", on @printable-exercise{computing-decision-trees.adoc}
+}
+
+@slidebreak{Investigate}
+
+Given a dataset to train on, Pyret can build decision trees for us, and even give us the classifier code for those trees! This makes it really easy to build trees, using the algorithm you already know.
+
+@QandA{
+@Q{When you evaluated `dt-code(tree1)`, did you recognize the code that came back?}
+@A{It's the same function as `tail-classifier`, which was already in our Definitions Area}
+@Q{Which classifier did a better job on this training dataset?}
+@A{`c2` - the classifier that uses the `swim` column.}
+}
+
+@lesson-instruction{
+Complete the second section, "Deeper Trees vs. More Columns", on @printable-exercise{computing-decision-trees.adoc}
+}
+
+@slidebreak{Investigate}
+
+`tree3` and `tree4` both did a _lot_ better at predicting the species of our training dataset!
+
+@QandA{
+@Q{Which animals did `tree3` get wrong?}
+@A{Shadestar, Charlotte, and Webs}
+
+@Q{Why did it get Shadestar wrong?}
+@A{Looking only at the three columns `tree3` was trained on, Shadestar is indistinguishable from the dogs!}
+
+@Q{Why did it get Charlotte and Webs wrong?}
+@A{Looking only at the three columns `tree3` was trained on, the tarantulas are indistinguishable from the snails!}
+
+@Q{Why were `tree3` and `tree4` identical?}
+@A{Just because Pyret _can_ go deeper, doesn't mean it _should_. There's no new information to be gained by adding more levels to the tree, since we already know all the Boolean answers after the 3rd level}
+}
+
+@slidebreak{Investigate}
+`tree6` works just as well as `tree5`, even though it only has one column to train on!
+
+As is common for quantitative columns, there's more variability in `pounds` than there is for any of our categorical columns. In fact, the only way to _not_ have a perfect classifier based on `pounds` would be for animals from two different species to weight the exact same amount!
+
+
+@lesson-instruction{
+- Complete @printable-exercise{computing-decision-trees.adoc}
+}
+
+@slidebreak{Investigate}
+When given another dataset to classify, `tree3` is outscoring `tree6`! How is this possible?
+
+@QandA{
+@Q{Both of them mis-classified Bella the rabbit. Is this a problem?}
+@A{No! The training dataset didn't have any rabbits, so there was no way any of our classifiers would have worked for her}
+
+@Q{Why did `tree6` do so poorly?}
+@A{Let students share their theories}
+}
+
+@slidebreak{Investigate}
+[cols="^1a, ^1a", frame="none", options="header"]
+|===
+| Training Dataset
+| Testing Dataset
+
+| @image{images/dot-plot-pounds-training.png}
+| @image{images/dot-plot-pounds-testing.png}
+|===
+
+This is a classic example of what ML engineers call @vocab{over-fitting}. The more dependent a classifier is on a specific attribute, the more sensitive it is to variations in that attribute between populations. In this case, `tree6` was _totally dependent_ on `pounds`, whose distribution is very different in the testing dataset
+
+This would be like studying for a test by memorizing the answers to a previous test. You've learned out to ace _that specific test_, but not enough to actually do well on a different one.
+
+@slidebreak{Investigate}
+@ifslide{
+[cols="^1a, ^1a", frame="none", options="header"]
+|===
+| Training Dataset
+| Testing Dataset
+
+| @image{images/dot-plot-pounds-training.png}
+| @image{images/dot-plot-pounds-testing.png}
+|===
+}
+In Machine Learning, over-fitting happens when our decision tree it tries so hard to find a pattern in a specific set of data that it begins to "memorize" the details and random noise instead of learning the actual rule. That's exactly what happened with the `pounds` column here.
+
+The other columns didn't vary as much at all! Dogs and cats are all `mammals` no matter what. Most dogs like to `swim`. And most dogs, cats, and lizards all have a `tail`. These attributes are more stable across samples, whereas `pounds` can vary widely.
+
+=== Synthesize
+
+
+== Report Cards for Classifiers
+
+@objective{}
+
+=== Overview
+Students learn about confusion matrices, and use Pyret to generate them from classifier functions derived from decision trees.
+
+=== Launch
+@slidebreak{Launch}
+How do we know if a @vocab{decision tree} makes a good @vocab{classifier} or not? Using the `classify` function only tells us how many we got right, and how many we got wrong.
+
+It's not enough to know that a classifier messed up 6 times! Data Scientists and Machine Language Engineers want a full, detailed "classifier report card" showing _which mistake_ it made!
+
+@QandA{
+@Q{Out of the 5 cats in this dataset, how many did your best classifier classify _correctly_?}
+@Q{Roughly what *percentage* of the cats is that?}
+@Q{Out of the 2 snails in this dataset, how many did your best classifier classify _correctly_?}
+@Q{Roughly what *percentage* of the snails is that?}
+}
+
+@slidebreak{Investigate}
+This report card is called a @vocab{Confusion Matrix}. A confusion matrix typically shows _percentages:_ 4-out-of-5 cats becomes 80%, 2-out-of-2 lizards becomes 100%, and so on.
+
+We've created a function that does just that! Here's the contract:
+
+@show{(contract "confusion-matrix" '("Table" "String" "(Row -> String)") "Table")}
+
+Try it out with the original `tail-classifier`:
+
+@indented{`confusion-matrix(training, "species", tail-classifier)`}
+
+@slidebreak{Investigate}
+
+[.data-table.highlight-diagonal, cols="6a,^7a,^7a,^7a,^7a,^7a", options="header"]
+|===
+|actual-species|predicted-cat|predicted-dog|predicted-lizard|predicted-snail|predicted-tarantula
+|"cat"         |      1      |      0      |       0        |       0       |       0
+|"dog"         |      1      |      0      |       0        |       0       |       0
+|"lizard"      |      1      |      0      |       0        |       0       |       0
+|"snail"       |      0      |      0      |       0        |       1       |       0
+|"tarantula"   |      0      |      0      |       0        |       1       |       0
+|===
+
+The "correct scores" are shown in the diagonal, running from top-left to bottom-right.
+
+@QandA{
+@Q{What are some things we can infer from this confusion matrix?}
+@A{Our classifier got 100% of the cats and snails right}
+@A{It mis-classified all of our dogs as cats}
+@A{It mis-classified all of our lizards as cats}
+@A{It mis-classified all of our tarantulas as snails}
+@Q{What would the matrix for the *best possible classifier* look like?}
+@A{1s along the diagonal, showing 100% of each category was classified correctly. 0s everywhere else, showing no mis-classifications.}
+}
+
+@lesson-instruction{
+- TODO: add a workbook page where students fill out a confusion matrix for one of their classifiers, using the testing dataset
+}
+
+=== Synthesize
+@slidebreak{Synthesize}
+@QandA{
+@Q{Will a decision tree always have the same number of leaf nodes as there were rows in the training dataset? Why or why not?}
+@A{No. Generally multiple rows of a training dataset will have the same prediction. The training dataset we saw in this lesson section contained multiple knives, for example.}
+
+@Q{Can a decision tree have the _fewer_ leaf nodes than there are unique categories in the training dataset? Why or why not?}
+@A{Yes. A decision tree may not be deep enough to correctly classify every category - and in some cases, there may not *be* a way to correctly classify every category!}
+
+@Q{Explain what the decision tree and table for the training dataset have to do with one another.}
+@A{The column headers from the table are the questions that will get asked in the decision nodes of the decision tree.}
+@A{The data in each column are the answers to those questions which become the arrow labels of the decision tree ("yes" and "no", for this dataset).}
+@A{The output categories from the table are the leaf nodes in the decision tree.}
+}
+
+
+== Optional: Classifying Songs
+
+=== Overview
+Students are given a training dataset and a testing dataset, both drawn from the Spotify database. After train classifiers on the first data, they'll see how well they work on the second. Students will explore the problem of _over-fitting_, and return to dot-plots to explore natural variation between distributions in the training dataset v. the testing one.
+
+=== Launch
+@slidebreak{Launch}
+
+How can you tell the difference between an R-and-B, Rock-and-Roll, or Country song?
+
+@teacher{Let kids offer up a lot of suggestions!}
+
+Can we teach a _computer_ how to tell the difference?
+
+
+=== Investigate
+@slidebreak{Launch}
+
+Let's build a classifier that can tell the difference between these three genres.
+
+@lesson-instruction{
+- Open @starter-file{decision-tree-music}, and click "Run".
+- Complete the first section of @printable-exercise{music-classifier.adoc}.
+- Be ready to share back and discuss your answers!
+}
+
+=== Investigate
+@slidebreak{Investigate}
+
+@QandA{
+@Q{Share your observations about the `training` dataset}
+
+@Q{Did anything in this dataset surprise you?}
+
+@Q{Did you notice any groupings in the dot plots you made? What were they?}
+@A{Responses will vary, but `popularity` should definitely stand out!}
+}
+
+@lesson-instruction{
+- The `liveness` column is measuring how much a song sounds like a live recording v. a studio recording.
+- Do you think this would be a good column to use for classification? Why or why not?
+- Let's try writing a classifier using the `liveness` column...
+
+- Complete the rest of @printable-exercise{music-classifier.adoc}.
+}
+
+@slidebreak{Investigate}
+
+@QandA{
+@Q{How well did your classifier do on the `training` dataset?}
+@A{Fairly well!}
+
+@Q{How well did your classifier do on the `testing` dataset?}
+@A{Pretty poorly}
+
+@Q{Why?}
+@A{The distribution of `liveness` in Rock songs is very different between the training and testing dataset!}
+@A{As with the `pounds` classifier in the animals dataset, we over-fit our music classifier to the `liveness` column.}
+
+@Q{Will our classifier correctly identify k-pop and reggae songs? Why or why not?}
+@A{Not at all - since none of those songs were in the original dataset, our decision tree doesn't even _have_ leaf nodes for those genres.}
+}
+
+@lesson-instruction{
+TODO: another wbpage, this one challenging students to make the best classifier possible using whatever columns and depth they want. They should fill in the confusion matrix for the `testing` table in order to grade their results.
+
+As a second challenge, they should try to make the best classifier possible using _as few columns as possible_. What does it mean, if it turns out that one column can be discarded with minimal loss of classification power?
+}
+
+
+=== Synthesize
+@slidebreak{Synthesize}
+
+@QandA{
+@Q{Why was `liveness` a bad column to use in our classifier?}
+@A{Liveness has nothing to do with the music itself! Only how it was recorded.}
+
+@Q{Suppose Spotify wanted to hire Data Scientists and Machine Learning Engineers to write a classifier like this. Does it matter whether they know anything about music?}
+@A{Yes! Someone who understands music would have known right away that `liveness` is a bad column to use. They might also have understood *why* the data is shaped in certain ways, as in the case of the `popularity` column.}
+
+@Q{What if a Machine Learning Engineer didn't know _anything_ about the domain they are trying to classify? Why might that be a problem?}
+@A{If they're writing a facial recognition classifier without knowing anything about human facial structure, they might write a classifier that performs well on one group of people, but has a lot of false classifications for another.}
+@A{This is where ethics and AI meet!}
+}
+
+@slidebreak{Synthesize}
+@QandA{
+@Q{What are some reasons that a decision tree might produce an inaccurate prediction or recommendation?}
+@A{The prediction might be over-fit to the training population rather than the actual population.}
+@A{The training dataset might not completely represent the broader population, either in not having enough variables (columns) or enough samples (rows), as with k-pop and reggae in the music dataset.}
+@A{The training dataset could be inconsistent, in that the labeled outcomes for two rows are different while the rest of the columns have the same values, as with snails and tarantulas in the animals dataset.}
+
+@Q{After testing our tree, we discovered that it was not as accurate as we had expected or hoped. Can you think of concrete, real-world examples of how a training dataset might _under_ represent a population?}
+@A{Responses will vary, but here are a few examples:}
+@A{Medical systems being trained on only adults, but not children.}
+@A{Tutoring systems trained on only native speakers of a language.}
+@A{Music recommendation systems being trained on a narrow set of genres.}
+}
+
+@scrub{
+Creating a decision tree is a form of @vocab{supervised learning}, because the training data already contains the desired outcomes (as one column), and the algorithm just learns a function that maps from input to outcomes.
+
+}
