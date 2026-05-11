@@ -5,7 +5,6 @@
 
 @lesson-prereqs{}
 
-
 @keywords{}
 
 [@lesson-intro-table]
@@ -23,20 +22,18 @@
 | Materials
 |[.materials-links]
 @material-links
-
 |===
 
 == What is AI?
-
 @objective{ai-effect}
 @objective{ai-vs-ml}
 
 === Overview
-
 Students explore different examples of how people use AI every day, including a mix of recommendation systems and classifiers. Students discover the challenges of defining AI, and think about whether AI is just an algorithm, or something more.
 
 === Launch
 @slidebreak{Launch}
+
 Who here has ever used AI? Raise your hand if you've used an AI tool, or know someone who has.
 
 @QandA{
@@ -49,12 +46,11 @@ Who here has ever used AI? Raise your hand if you've used an AI tool, or know so
 }
 
 @slidebreak{LaunchR}
+
 @lesson-point{Is it _thinking_, or is it just _following an algorithm_?}
 --
 @right{@image{images/flow-chart.gif, 400}}
-The first spell-checker was written in 1961. It had a 10,000 word dictionary, and it would check every word you typed to see if it was in the dictionary. All it could do was tell you if a word _was_ or _wasn't_ spelled right.
-
-But it wasn't really _thinking:_ it was just mechanically comparing strings of letters against a long list. It was just following an following an @vocab{algorithm} -- a series of steps that tell a computer how to perform a task.
+The first spell-checker was written in 1961. It had a 10,000 word dictionary, and it would check every word you typed to see if it was in the dictionary. It wasn't really _thinking_. It was just following an following an @vocab{algorithm} -- a series of steps that tell a computer how to perform a task -- in this case mechanically comparing strings of letters against a long list. And all it could do was tell you if a word _was_ or _wasn't_ spelled correctly.
 --
 
 @slidebreak{Launch}
@@ -65,7 +61,7 @@ Was SPELL _thinking_, or was it, too, just _following an algorithm_?
 
 @lesson-instruction{
 - Form groups of 2-3.
-- How did SPELL know what words to suggest?
+- How do you think SPELL knew what words to suggest?
 - Be ready to share your ideas with the class!
 }
 
@@ -82,9 +78,10 @@ Here's SPELL's algorithm for checking a word:
 
 (3) See if any of _those_ words are in the dictionary, and suggest them as alternatives
 }
-SPELL had no idea what those alternative words meant. It didn't even know what a word _was!_ And it definitely didn't know what people were thinking when they typed. *It's just an algorithm.*
+SPELL had no idea what those alternative words meant. It didn't even know what a word _was!_ And it definitely didn't know what people were thinking when they typed. *It was just an algorithm.*
 
 @slidebreak{Launch}
+
 --
 @right{@image{images/mccarthy.png, 200}}
 After a while, most people stopped calling spell checkers AI. But in the early 2000s, cell phones introduced a feature called "predictive text": when you start typing a sentence, the phone makes suggestions about what the next word should be. People were *floored*, and swore that AI had arrived...but eventually they stopped calling predictive text AI, too.
@@ -92,14 +89,14 @@ After a while, most people stopped calling spell checkers AI. But in the early 2
 Computer scientist @link{https://en.wikipedia.org/wiki/John_McCarthy_(computer_scientist), John McCarthy} coined the phrase "AI effect" to describe this phenomenon: humans keep _moving the goalposts_ for what counts as "Artificial Intelligence" and what counts as "Human Intelligence"! In his words, "As soon as it works, no one calls it AI anymore."
 --
 
-
 === Investigate
 @slidebreak{Investigate}
 @lesson-point{Is it _thinking_, or is it _following an algorithm_?}
 
 Which of these technologies falls into which category?
 
-[cols="1a,1a"]
+@indented{
+[cols="1a,1a", grid="none", frame="none"]
 |===
 |
 - Talking to Gemini, ChatGPT, etc
@@ -116,6 +113,7 @@ Which of these technologies falls into which category?
 - A program that does your homework
 - Predictive Text (suggestions as-you-type)
 |===
+}
 
 @lesson-instruction{
 - With your group, see if you can sort this list into "thinking" or "following an algorithm".
@@ -123,17 +121,19 @@ Which of these technologies falls into which category?
 - Be ready to share back and discuss with the class!
 }
 
-
 === Synthesize
 
 @QandA{
 @Q{What did the class mostly agree were examples of *thinking*?}
+
 @Q{What did the class mostly agree were examples of *following an algorithm*?}
+
 @Q{What kinds of criteria did you come up with, to tell them apart}
+
 @Q{Are you starting to wonder if AI does any thinking at all?}
 }
 
-@teacher{The point of this section is *not* to claim that AI isn't anything new, or that it's not a really impressive advancement. It is! Instead, the purpose of this section is to dispel the misconception that AI is "thinking", rather than following an prescribed algorithm.}
+@teacher{The point of this section is *not* to claim that AI isn't anything new, or that it's not a really impressive advancement. It is! Instead, the purpose of this section is to dispel the misconception that AI is "thinking", rather than following a prescribed algorithm.}
 
 
 == Different Kinds of AI
@@ -167,8 +167,8 @@ Spotify, dating apps, etc.
 ChatGPT, Stable Diffusion, Gemini, etc.
 |===
 
-
 @slidebreak{Launch}
+
 In Machine Learning, the computer analyzes lots of @vocab{data}, and then identifies patterns in that data using statistics. Machine Learning can be applied to an incredibly diverse set of data (text, maps, pictures, movies, songs, etc), to make predictions, find similarity, and even generate new images, stories, etc.
 
 While AI is often spoken about as if it's something "magical", Machine Learning is actually very concrete: it is just a collection of @vocab{algorithms}!
@@ -177,6 +177,7 @@ Let's play with some real tools that use AI, and see if we can make sense of how
 
 === Investigate
 @slidebreak{InvestigateR}
+
 --
 @right{@image{images/classifier-bot.png, 250}}
 
@@ -190,13 +191,11 @@ There are several kinds of *predictive models* you probably interact with every 
 - Which Harry Potter house would I be in?
 
 @lesson-instruction{
-@online-exercise{https://www.nyckel.com/pretrained-classifiers/flowers-identifier/, Here's an example of an ML tool} that consumes an image of a flower, and tries to predict what *category* of flower it really is.
+- @online-exercise{https://www.nyckel.com/pretrained-classifiers/flowers-identifier/, This link } will take you to an example of a Machine Learning tool that consumes an image of a flower, and tries to predict what *category* of flower it really is.
 - Find an image of a flower, and drag it into the box
 - What part(s) of the image do you think it's looking at, to make its prediction?
 }
 --
-
-
 
 @slidebreak{InvestigateR}
 @lesson-instruction{
@@ -220,7 +219,9 @@ There are several kinds of *predictive models* you probably interact with every 
 
 @lesson-instruction{
 - You just looked at a _categorical_ classification problem: every flower image belongs to one category of flower.
-- Sometimes a classifier is just choosing between *two* categories: "is this animal a dog or a cat", "is this photo of a young or old person", etc.
+- Sometimes a classifier is just choosing between *two* categories: 
+  * "Is this animal a dog or a cat?"
+  * "Is this photo of a young or old person?", etc.
 - Let's explore a classifier with more than two outputs, by completing the last section on @printable-exercise{predictive-models-classifiers.adoc}
 - Be ready to share back!
 }
@@ -230,8 +231,10 @@ There are several kinds of *predictive models* you probably interact with every 
 @ifslide{@right{@image{images/classifier-bot.png, 250}}}
 @Q{What were your predictions for each row?}
 @A{There's no right answer here - the important part is to see how much agreement or disagreement there is in the class}
+
 @Q{Why didn't we all make the same predictions?}
 @A{We made different decisions about which columns we valued most}
+
 @Q{Which column was the *most helpful* in classifying the species? Why?}
 @A{...answers will vary...}
 @A{`legs` immediately classifies snails (0), tarantulas (8), and everything else (4)}
@@ -245,29 +248,31 @@ There are several kinds of *predictive models* you probably interact with every 
 But Classifiers aren't the only kind of prediction system out there!
 
 @vocab{Regression} is all about *predicting values*:
+
 - How much does each inch of height determine how many 3-pointers will they make?
 - How much does the amount a person earns determine how long they will live?
 - With a Credit Score of 632, how likely is this person to be able to pay back a car loan?
-
-@online-exercise{https://www.marriage.com/quizzes/how-many-kids-will-i-have/, Here's an example of an ML tool} that uses input data to predict the *number* of children you will have.
 --
 
 @slidebreak{InvestigateR}
+
 @ifslide{@right{@image{images/prediction-bots.webp, 250}}}
 @lesson-instruction{
 - Let's think a little about how regression models might work!
-- With a partner, complete the first section of @printable-exercise{predictive-models-regression.adoc}
+- With a partner, complete the first section of @printable-exercise{predictive-models-regression.adoc} using @online-exercise{https://www.marriage.com/quizzes/how-many-kids-will-i-have/, this ML tool} that predicts the *number* of children you will have based on input from a few questions.
 - Be ready to share back!
 }
 
 
 @slidebreak{InvestigateR}
+
 @QandA{
 @right{@image{images/pounds-v-weeks.png, 250}}
 @Q{What did you notice about the scatter plot?}
 @A{There seemed to be a pattern}
 @A{Some dots were really far away from the others!}
 @A{A lot of dots were clustered on the left}
+
 @Q{What kind of pattern did you see?}
 @A{A line sloping up as we go to the right}
 }
@@ -280,10 +285,8 @@ Pretty much everyone saw a line with a positive slope, but they didn't necessari
 - Be ready to share back!
 }
 
-
-
-
 @slidebreak{InvestigateR}
+
 @QandA{
 @ifslide{@right{@image{images/pounds-v-weeks.png, 250}}}
 @Q{How long did you predict it would take Daisy to be adopted? Maple?}
@@ -291,25 +294,28 @@ Pretty much everyone saw a line with a positive slope, but they didn't necessari
 @A{Could we write the equation for this line?}
 @A{Right now we're drawing our line based on a scatter plot of every kind of animal. Would we get a better fit if we just looked at each species separately?}
 @A{Probably! Each species must have a growth rate that can be graphed, but by combining all of them we get a line that's a mix of all the different species, and not good at predicting any individual one.}
+
 @Q{Is there another column of numbers we could use to predict adoption time?}
 @A{Age}
 }
 
-
 @slidebreak{InvestigateR}
+
 --
 @right{@image{images/recommendation-bot.png, 200}}
 
-@vocab{Similarity Models} is all about *measuring similarity*:
+@vocab{Similarity Models} are all about *measuring similarity*:
 
 - Which songs are most like this one?
 - Which people on a dating site are the best matches for this person?
 - Which essays are the most similar to this one?
 
-@link{https://open.spotify.com/, Let's try an example!}
+@link{https://open.spotify.com/, Let's try out an example in Spotify!}
 
 @teacher{Search for a song that your students will recognize. When you hover over the search result, you'll see a three dots (`...` appear on the right. Click these dots and select "Go to Song Radio")}
 --
+
+@scrub{SCHANZER this is NOT what I see when I click the link as someone who isn't logged in!}
 
 @slidebreak{InvestigateR}
 @ifslide{@right{@image{images/recommendation-bot.png, 200}}}
@@ -328,6 +334,7 @@ How similar were Spotify's recommendations to the original song?
 @QandA{
 @Q{What do you think Spotify was paying attention to, when it recommended similar songs to the one we chose?}
 @A{Answers will vary (volume, duration, speed...)}
+
 @Q{When you upload an image to @link{https://www.google.com, Google Search}, what does it pay attention to when recommending similar images?}
 @A{Answers will vary (brightness, color, symmetry...)}
 }
@@ -335,6 +342,8 @@ How similar were Spotify's recommendations to the original song?
 @slidebreak{InvestigateR}
 --
 @right{@image{images/chat-bot.png, 250}}
+
+@scrub{SCHANZER please explain why Generative Models are abbreviated as LMs. Need a bridge here.}
 
 @vocab{Generative Models} (LMs) look for *patterns and frequency in language*.
 
