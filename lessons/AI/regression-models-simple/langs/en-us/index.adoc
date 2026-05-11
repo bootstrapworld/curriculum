@@ -29,7 +29,7 @@
 
 |===
 
-== Fitting Models for Age and Pounds
+== Fitting Models for Age _or_ Pounds
 
 === Overview
 Students try fitting models to the animals dataset, comparing predictors for `age` and `pounds`.
@@ -136,7 +136,7 @@ This function is similar to `fit-model`! But instead of plotting points with lab
 @Q{Suppose we did this same supervised learning on a dataset of millions of animals, from shelters all over the world. Could we assume those predictors are generally accurate?}
 @A{It's definitely more likely, but there will still be variations from variables like differences between human preferences and differences between animals across shelters.}
 }
-== Simple Regression Models
+== Regression in Pyret
 
 === Overview
 Students are introduced to the concept (not algorithm) of @vocab{linear regression}, and learn how to interpret the @vocab{slope} and @vocab{y-intercept} of @vocab{predictor functions}.
@@ -145,18 +145,28 @@ Students are introduced to the concept (not algorithm) of @vocab{linear regressi
 === Launch
 @slidebreak{LaunchR}
 @right{@image{images/lr-pounds-v-weeks.png, 300}}
-Data scientists, statisticians, and machine learning engineers use a statistical method called @vocab{linear regression} to pinpoint linear relationships in a dataset. Linear regression is the math behind the @vocab{line of best fit}, which allows us to make predictions based on our data.
+Data scientists, statisticians, and machine learning engineers use a statistical method called @vocab{linear regression} to pinpoint linear relationships in a dataset. Linear regression is the math behind the @vocab{line of best fit}, which allows us to make the most accurate predictions possible, based on the input data.
 
 - In Machine Learning, the act of shrinking this data into a function is called @vocab{training}
 - Linear regression finds straight-line patterns between a set of inputs and an _already-known_, target output
 
 Think of each row in the animals dataset as a flash card, with `pounds` or `age` written on the front and `weeks` on the back. The computer is learning to predict the answer by identifying the patterns in our data. This form of learning -- where we already know the target values on -- is called @vocab{supervised learning}.
 
+@slidebreak{LaunchR}
+@right{@image{images/lr-pounds-v-weeks.png, 300}}
+
+The basic algorithm for regression is simple:
+
+- *Guess*: Draw a random line.
+- *Check*: Compute the *error* to see how far the dots are from the line (similar to @math{S}).
+- *Tweak*: Move the line to get closer to the dots.
+- *Repeat*: Go back to step 2 and see if the line can be improved.
+
 @teacher{
 Sharp-eyed students might ask if there are other, _non-linear_ patterns that can be found via supervised learning. The answer is a resounding yes! In fact, the most important patterns in data when it comes to Machine Learning aren't linear at all. Algebra 2 is a great place to dig into non-linear functions, and @dist-link{courses/algebra-2/, we have a ton of material on that}.
 }
 
-@slidebreak{Investigate-DN}
+@slidebreak{Launch}
 
 @lesson-point{
 In supervised learning, computers train on sample input-output pairs tagged by a human, to find the function that maps from input to output with the smallest amount of error.
@@ -185,13 +195,13 @@ Now we want Pyret to "learn" a function with the *best possible* values for @mat
 
 Pyret has a several tools for doing linear regression, all with the same Domain:
 
-@show{(contract "lr-coeffs" '((table-name Table)  (label-col String) (x-col String) (y-col String)) "Table"
+@show{(contract "lr-coeffs" '((table-name Table) (x-col String) (y-col String)) "Table"
 "produces a table showing all coefficients (including the intercept!) of our model"
 )}
 
 @vspace{1ex}
 
-@show{(contract "lr-code" '((table-name Table)  (label-col String) (x-col String) (y-col String)) "Code"
+@show{(contract "lr-code" '((table-name Table) (x-col String) (y-col String)) "Code"
 "produces code that you can copy and paste into the Definitions Area, to define the \"trained\" model")}
 
 @lesson-instruction{

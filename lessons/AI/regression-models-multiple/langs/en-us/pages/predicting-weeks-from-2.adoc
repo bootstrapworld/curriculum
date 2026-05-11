@@ -5,7 +5,7 @@
 /* custom positioning for subscript */
 div#body sub { position: relative; bottom: 0.3em; }
 
-div#body .center { padding: 0 !important; }
+div#body img { height: 220px; width: 480px; }
 
 .mr-table td:first-child { background: #eee !important; }
 .mr-table td:last-child { padding: 0.5625em 0.125em !important; }
@@ -13,22 +13,31 @@ div#body .center { padding: 0 !important; }
 .editbox { background: none !important; }
 </style>
 ++++
+== Working in 3 Dimensions
 
-@n Find Kujo in the @online-exercise{https://www.desmos.com/3d/omnchml87a, Pounds v. Weeks Desmos graph}, and drag the data point to _rotate the 3d chart_. Does it look like the 3d points form a cloud of some kind?
+@centered-image{../images/3d-planes.webp}
 
-@blanklines{2}{
-@ifsoln{They are all flattened against the z-y plane. All the x-values are zero. There's a purple plane at the bottom, along the x-y-plane}
-}
+@n Open @online-exercise{https://www.desmos.com/3d/omnchml87a, Age v. Pounds v. Weeks}, and adjust the slider for @math{m_{age}}. What happens? @fitb{}{@ifsoln{the purple line tilts up and down.}}
 
-@n Adjust the sliders for @math{m_{age}}, @math{m_{pounds}}, and @math{b} to estimate the *plane of best fit* for this data, and write your estimates below:
+@n Find Kujo in the `Pounds v. Weeks (purple)` scatter plot, and drag his data point. What do you see? @fitb{}{} +
+@blanklines{2}{@ifsoln{It's a 3d chart! The blue points are all flattened against the z-y plane. All the x-values are zero. There's a purple plane at the bottom, along the x-y plane, which rises and falls as @math{m_{pounds}} changes.}}
 
-@center{
-@fitbruby{9em}{}{slope1: @math{m_{age}}} 	@hspace{4em}
-@fitbruby{9em}{}{slope2: @math{m_{pounds}}} @hspace{4em}
-@fitbruby{9em}{}{intercept: @math{b}} 		@hspace{4em}
-}
+@n *Return the sliders to zero*, then click the folder icon next to `Age v. Weeks (blue)`, to "turn on" that scatter plot. What do you see?
+@blanklines{2}{@ifsoln{They are all flattened against the z-x plane. All the y-values are zero. There's a blue plane at the bottom, along the x-y plane}}
 
-@n Use these values to fill in the function notation and Pyret code below
+@n Find Kujo in the `Age v. Weeks (blue)` scatter plot, and drag his data point. What do you see? @fitb{}{} +
+@blanklines{2}{@ifsoln{It's a 3d chart! The blue points are all flattened against the z-y plane. All the x-values are zero. There's a blue plane at the bottom, along the x-y plane, which rises and falls as @math{m_{age}} changes.}}
+
+@n *Return the sliders to zero*, then click the folder icon next to `Age v Pounds v Weeks (orange)`, to "turn on" that plot. What do you see? @fitb{}{@ifsoln{The points are in 3d!}} +
+@blanklines{2}{@ifsoln{The blue and purple plots are just "projections" (shadows) of the 3d data, and there's an orange plane at the bottom, along the x-y plane}}
+
+@n Fill in the blanks in the image above, showing which data would be projected onto each plane. We've done one ("projecting down") for you.
+
+
+== Fitting a 3d Model
+@n "Turn off" the blue and purple dots, then adjust the sliders to estimate the *plane of best fit* for this data.
+
+@n Use the slider estimates to fill in the function notation and Pyret code below
 
 [.mr-table, cols="^1a, ^10a", stripes="none", header="none]
 |===
@@ -52,47 +61,3 @@ div#body .center { padding: 0 !important; }
 @fitbruby{4.5em}{}{@math{b}}
 `end`
 |===
-
-== Using Supervised Learning to Build Regression Models
-
-@n Evaluate `mr-coeffs(animals-table, [list: "pounds", "age"], "weeks")`, and fill in the table below (it's okay to round down to 2-3 decimal places):
-
-[.FillVerticalSpace, cols="^.^1a,^.^1a", stripes="none", options="header"]
-|===
-| `coefficient-name` 	| `coefficient-value`
-| `intercept`			| @ifsoln{1.58}
-| `pounds` 				| @ifsoln{0.072}
-| `age` 				| @ifsoln{0.299}
-|===
-
-@n Fill in the definition for `age-pounds-predictor`. What does `age-pounds-predictor(cat-row)` evaluate to? @fitb{}{2.348 weeks}
-
-@n Try using this new predictor with `S`, then `mr-S`. Explain the difference between these functions. @fitb{}{} +
-@fitb{}{@ifsoln{Each does the same thing, but with functions that consume numbers v. models}}
-
-== Interpreting Regression Models
-
-@n Our `age-pound-predictor` model estimates that animals weighing 0 pounds and being 0 years old will be adopted in
-@fitbruby{5em}{@ifsoln{1.58}}{z-intercept}
-@fitbruby{10em}{@ifsoln{weeks}}{z-units}. For every additional
-@fitbruby{9em}{@ifsoln{pound}}{1st input units},
-@fitbruby{12em}{@ifsoln{weeks to adoption}}{z-variable} will
-@fitbruby{8em}{@ifsoln{increase}}{increase/decrease} by
-@fitbruby{5em}{@ifsoln{0.072}}{@math{m_{pounds}}}
-@fitbruby{6em}{@ifsoln{weeks}}{z-units}. For every additional
-@fitbruby{9em}{@ifsoln{year}}{2nd input units},
-@fitbruby{12em}{@ifsoln{weeks to adoption}}{z-variable} will
-@fitbruby{8em}{@ifsoln{increase}}{increase/decrease} by
-@fitbruby{5em}{@ifsoln{0.299}}{@math{m_{age}}}
-@fitbruby{6em}{@ifsoln{weeks}}{z-units}.
-
-@n *The error in the model* is described by an @vocab{S-value} of about
-@fitbruby{5em}{@ifsoln{4.704}}{S}
-@fitbruby{8em}{@ifsoln{weeks}}{z-units}. @hspace{1em} I
-@fitbruby{18em}{@ifsoln{agree/meh}}{strongly agree, agree, disagree, strongly disagree} that this model is a good fit considering that
-@fitbruby{10em}{@ifsoln{weeks}}{z-variable units} in this dataset range from
-@fitbruby{7em}{@ifsoln{1}}{lowest z-value} to
-@fitbruby{7em}{@ifsoln{30}}{highest z-value}.
-
-@star Does adding the `legs` attribute to our multiple regression analysis make the fit better or worse? Can you explain why? @fitb{}{} +
-@blanklines{2}{@ifsoln{It gets slightly better, because `legs` helps us differentiate between snails, tarantulas, and every other species. And since species influences adoption time, this helps us approximate regressing on `species`}}

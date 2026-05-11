@@ -47,9 +47,9 @@ for every additional
 
 == More Regression Tools
 
-@n Evaluate `lr-coeffs(animals-table, "pounds", "weeks")`, and fill in the table below (it's okay to round down to 2-3 decimal places):
+@n Evaluate `lr-coeffs(animals-table, "pounds", "weeks")`, and fill in the table below (round down to 2-3 decimal places):
 
-[.FillVerticalSpace, cols="1a,1a", stripes="none", options="header"]
+[.FillVerticalSpace, cols="^1a,^1a", stripes="none", options="header"]
 |===
 | `coefficient-name` 			| `coefficient-value`
 | @ifsoln{intercept}			| @ifsoln{2.461}
@@ -63,12 +63,7 @@ for every additional
 @n How is the `predictor` function different from your `pounds-predictor`? @fitb{}{} +
 @fitb{}{@ifsoln{this one takes in a *row*, while the other only took in a number}}
 
-@n Copy and paste this code into the Definitions Area, and click "Run". What does `predictor(cat-row)` evaluate to?
+@n Copy/paste this code into the Definitions Area, and click "Run". What does `predictor(cat-row)` evaluate to? @fitb{}{@ifsoln{3.0005}}
 
 @n Evaluate `predictor(6.5)`. What happens, and why? @fitb{}{} +
 @fitb{}{@ifsoln{we get an error, because it was expecting a Row}}
-
-@n Try using this new predictor with `S`, then `mr-S`. Explain the difference between these functions. @fitb{}{} +
-@fitb{}{@ifsoln{Each does the same thing, but with functions that consume numbers v. models}}
-
-@n In the Definitions Area, *rewrite or replace your original `age-predictor` and `pounds-predictor` functions so they consume __Rows__ instead of Numbers*

@@ -1,2 +1,45 @@
 = Supervised Machine Learning: Training a Self-Driving Car
 
+Make sure you have @starter-file{self-driving} open in Pyret, and click "Run".
+
+@indented{
+```
+# train: Number -> Table
+# Consumes the speed of the simulation (in frames-per-second), and records
+# your driving as a table (use the left- and right-arrow keys to steer)
+
+# train-pov: Number -> Table
+# Consumes the speed of the simulation (in frames-per-second), and records
+# your driving as a table (use the left- and right-arrow keys to steer)
+
+# drive: Number, (Row -> Number) -> Table
+# Consumes the speed of the simulation (in frames-per-second) and prediction
+# model, then uses the trained model to drive through the simulation.
+```
+}
+
+== Collecting Training Data
+
+@n Evaluate `d = train(10)` to to run the simulation at 15 frames per second, and *save your training data* to the variable `d`. What do you get back when you evaluate `d`? @fitb{}{@ifsoln{my driving data}}
+
+@n What happens when you finish a track twice? @fitb{}{@ifsoln{It generates a different track!}}
+
+@n Want to try again at a faster speed? Evaluate `d2 = train(20)`.
+
+@n *Use the driving simulator a few times, until you can get complete 2-3 different tracks*
+
+@n Click "Run" and create two datasets: `good` and `bad`. Make `good` your most successful driving record, and then make a `bad` dataset on purpose where you crash into walls.
+
+== Training and Using the Model
+
+@n Train a function using `mr-code(good, [list: "speed", "curve-sharpness", "offset"], "steering-angle")`, and define that function as `good-predictor`. Do the same with `bad-predictor`.
+
+@n Run the simulation using your two functions: `drive(20, good-predictor)`, `drive(20, bad-predictor)`. What happens?
+
+@n There's one more column in your dataset (`heading-error`), which records how far out-of-alignment the vehicle is with the road it's own. Try training a new model, including this attribute in as another predictor.
+
+@n How well does this new model work?
+
+@n Use `mr-coeffs` to look at the coefficient for each of your explanatory variables. Which one contributes the _least_ to the `steering-angle`?
+
+@n Build a model that drops the least-important variable. How well does this model drive?

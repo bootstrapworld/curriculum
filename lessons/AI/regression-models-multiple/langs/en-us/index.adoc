@@ -1,5 +1,5 @@
 [.beta]
-= Multiple Regression
+= Multiple Regression Models
 
 @description{Students return to the dataset, this time thinking about the factors that predict how long it will take for an animal to be adopted. This leads to an exploration of Linear Regression, then Multiple Regression. Finally, they learn about the world’s first self-driving car, and use multiple regression to control the steering wheel of a virtual car using AI.}
 
@@ -29,34 +29,31 @@
 
 |===
 
-== Multiple Regression
+== Fitting Models for Age _and_ Pounds
 
 === Overview
 Students extend their understanding of linear regression in 2 dimensions, moving into multiple regression in 3 dimensions. They see the improvement to the model fit, and interpret the coefficients of a multiple-regression result.
 
 === Launch
 @slidebreak{LaunchR}
+--
 @right{@image{images/lr-pounds-v-weeks.png, 300}}
 
+@center{
 @math{weeks(age)=(0.79 \times age) + 2.3} +
 `fun weeks(r): (0.79 * r["age"]) + 2.3 end`
+}
 
 This function (written in both math and Pyret notation) is our regression line, which we can draw on a 2 dimensional (x,y) scatter plot.
 
-@slidebreak{Launch}
-
-But what if we wanted to use `pounds` _and_ `age` on our flashcards, and train the computer to predict `weeks` based on the value of *both* variables?
-
-We need one axis on our scatter plot to represent `weeks`. We tried using the other axis for one explanatory variable at time (age or pounds). How can we represent _both_ explanatory variables?
-
+But what if we wanted to use `pounds` _and_ `age` on our flashcards, and train the computer to predict `weeks` based on the value of *both* variables?  We need one axis on our scatter plot to represent `weeks`. We tried using the other axis for one explanatory variable at time (age or pounds). How can we represent _both_ explanatory variables?
+--
 @teacher{Give students a chance to discuss and brainstorm!}
 
-
 @slidebreak{LaunchR}
-@right{@image{images/project.webp}}
-
 @QandA{
-Take a look this picture.
+@right{@image{images/projection.webp, 350}}
+Take a look at this picture.
 
 @Q{What is making the square shadow on the blue wall?}
 @A{A light is shined at the side of the cylinder, casting a square shadow.}
@@ -78,7 +75,7 @@ Take a look this picture.
 @right{@image{images/plane-of-best-fit.png, 300}}
 That's exactly what's going on with our data! The points for each animal represent information in _three_ dimensions: `age`, `pounds`, and `weeks`.
 
-*We need to do regression in _three_ dimensions.* Now we want Pyret to "learn" a function like this, with the best possible values for @math{m_{age}}, @math{m_{pounds}}, and @math{b}:
+To make predictions in three dimensions, *we need to do regression in _three_ dimensions.* Now we want Pyret to "learn" a function like this, with the best possible values for @math{m_{age}}, @math{m_{pounds}}, and @math{b}:
 
 @center{@math{weeks(age, pounds)=(m_{age} \times age) + (m{pounds} \times pounds) + b}}
 
@@ -89,14 +86,13 @@ That's exactly what's going on with our data! The points for each animal represe
 === Investigate
 @slidebreak{InvestigateR}
 
-- TODO: make this page, with using (1) `mr-code`, interpreting output, (2) using `predict-col`, (3) adding "legs" as a column
-
 @lesson-instruction{
-- Open @online-exercise{https://www.desmos.com/3d/omnchml87a, this Desmos graph} and explore!
+- Open @online-exercise{https://www.desmos.com/3d/omnchml87a, this Desmos graph}.
 - Use this graph to complete the first section on @printable-exercise{predicting-weeks-from-2.adoc}.
-- Use Pyret to complete @printable-exercise{predicting-weeks-from-2.adoc}.
 - Be ready to share your thinking!
 }
+
+@teacher{Draw connections to the 3d projection image, emphasizing that each 2d scatter plot is just a projection (a literal "shadow of the data") that shows a part of the story.}
 
 
 @slidebreak{InvestigateR}
@@ -120,7 +116,66 @@ We're already consuming the entire row `r`, so we already have access to `age` a
 
 @Q{Why did adding `legs` improve our @math{S}-value?}
 @A{`legs` helps us differentiate between snails, tarantulas, and  the other species. And since species influences adoption time, this helps us "sort-of regress" on `species`}
+}
 
+== Multiple Regression in Pyret
+
+=== Overview
+Students discover Pyret's `S`, `mr-code`, and `mr-coeffs` API, and use multiple regression to compute the optimal plane-of-best-fit.
+
+=== Launch
+@slidebreak{LaunchR}
+--
+@right{@image{images/desmos3d.png, 350}}
+
+You may recall the following functions in Pyret:
+
+@show{(contract "simple-S" '((table-name Table) (x-col String) (y-col String)) "Table"
+"produces the S-value of our model"
+)} +
+@show{(contract "lr-coeffs" '((table-name Table) (x-col String) (y-col String)) "Table"
+"produces a table showing all coefficients (including the intercept!) of our model"
+)} +
+@show{(contract "lr-code" '((table-name Table) (x-col String) (y-col String)) "Code"
+"produces code that you can copy and paste into the Definitions Area, to define the \"trained\" model")}
+
+None of them allow us to work with 2 or more input columns: they all assume a single input is mapped to the target column. We need _new_ functions to handle multiple regression.
+--
+
+
+@slidebreak{Launch}
+
+@show{(contract "S" '((table-name Table) (x-cols List<String>) (y-col String)) "Table"
+"produces the S-value of our multiple-regression model"
+)}
+
+@vspace{1ex}
+
+@show{(contract "mr-coeffs" '((table-name Table) (x-cols List<String>) (y-col String)) "Table"
+"produces a table showing all coefficients (including the intercept!) of our multiple-regression model"
+)}
+
+@vspace{1ex}
+
+@show{(contract "mr-code" '((table-name Table) (x-cols List<String>) (y-col String)) "Code"
+"produces code that you can copy and paste into the Definitions Area, to define the \"trained\" model")}
+
+For example: `mr-code(animals-table, [list: "age",  "pounds"], "weeks")`
+
+=== Investigate
+
+@lesson-instruction{
+- Use these tools to complete @printable-exercise{pages/supervised-learning-multiple-regression.adoc}.
+- Try out your finished predictor function in Pyret!
+}
+
+=== Synthesize
+@QandA{
+@Q{Why did our multiple-regression function have *two* slopes?}
+@A{We were defining a *plane*. A flat sheet of metal only tip along two different axes!}
+
+@Q{Why did adding `legs` improve our @math{S}-value?}
+@A{`legs` helps us differentiate between snails, tarantulas, and  the other species. And since species influences adoption time, this helps us "sort-of regress" on `species`}
 }
 
 == Self-Driving Cars @duration{15 minutes}
