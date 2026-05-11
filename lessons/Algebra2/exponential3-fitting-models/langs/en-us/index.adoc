@@ -56,7 +56,7 @@ Now that you're familiar with @vocab{exponential functions}, let's use them to m
 
 @lesson-instruction{
 - Open @starter-file{program-list}, find your saved copy of the @starter-file{alg2-covid-mi} and click "Run".
-- Make a scatter plot showing the change in `positive` Covid cases over time (i.e. `day`) for `MA-table`.
+- Make a scatter plot showing the change in `positive` Covid cases over time (i.e. `day`) for `MI-table`.
 - With your partner, discuss what you can learn from the scatter plot about the exponential function that will model the data.
 }
 
@@ -81,27 +81,77 @@ Now that you're familiar with @vocab{exponential functions}, let's use them to m
 === Investigate
 @slidebreak{Investigate-DN}
 
-@teacher{Make sure your students have a link to  @starter-file{alg2-covid-mi-desmos} and you've advanced your teacher dashboard of to the fourth slide ("Exponential Model for MA") so that students are looking at the correct screen.
+@teacher{Make sure your students have a link to  @starter-file{alg2-covid-mi-desmos} and you've advanced your teacher dashboard of to the fourth slide ("Exponential Model for MI") so that students are looking at the correct screen.
 
-In the next activity, students will use our custom slider activity to find promising exponential models, which they will later fit programmatically in Pyret!}
+In the next activity, students will use our custom slider activity to find promising exponential models, which they will later fit programmatically in Pyret!
+}
 
 @lesson-instruction{
 - Let's return to the *Modeling Covid Spread Desmos file*.
-- You should now be on the fourth slide ("Exponential Model for MA").
+- You should now be on the *Slide 4: Exponential Model for MI*.
 - Use it to complete @printable-exercise{exponential-models-MI.adoc}.
 }
 
 @teacher{Crowdsource the various values for each model setting, writing 4-5 examples of each on the board.}
 
-- Look at all the lists of values we came up with for @math{a}, @math{b}, and @math{k}.
-- What do you notice? Are they clustered around a particular value, or completely spread out?  Are there any values that are really far from the others?
+@QandA{
+Look at all the lists of values we came up with for @math{a}, @math{b}, and @math{k}.
+
+@Q{What do you notice? 
+  * Are they clustered around a particular value, or completely spread out?  
+  * Are there any values that are really far from the others?
+}
+@Q{Is an exponential model a good fit for this data?}
+@A{Hopefully students can agree that it's a better fit than linear or quadratic models.}
+}
+
+@slidebreak{Investigate}
+@ifslide{@right{@image{images/confused-robot.png, 150}}}
+
+When it comes to fitting exponential models to data, can you out-model an AI?
+
+@lesson-instruction{
+- Turn to @printable-exercise{grading-ai.adoc} and consider how well the models fit the datasets.
+- Record what the AI got right and what it got wrong!
+}
+
+@teacher{Heads up: The final problem on @printable-exercise{grading-ai.adoc} is starred as a challenge, because it involves horizontal shift.}
+
+@slidebreak{Investigate}
+
+@lesson-instruction{
+- Turn to the first section of @printable-exercise{predicting-exponential-growth.adoc}. Define `exponential` using the model settings from the best model you identified on @printable-exercise{exponential-models-MI.adoc}.
+- We're going to use our model to do some ESTIMATING. The point of this is NOT to get the most perfect answer. The point is to record how our brains make sense of exponential models.
+	* *without zooming out* on the graph... 
+	* *without using a calculator*, mouse, or keyboard... 
+	* using only your eyes and mental math...
+	* *ESTIMATE* the number of covid cases predicted by the model you identified as the best one 
+- Record your estimates in the second section of @printable-exercise{predicting-exponential-growth.adoc}.
+}
+
+@teacher{Have students share their predictions for each of the time-spans in this section.}
 
 === Synthesize
 @slidebreak{Synthesize}
 
-- Is an exponential model a good fit for this data?
+@QandA{
+@Q{Linear regression allows us to find the _computationally optimal model_, not just a model that "fit really well."
+  * Do we know whether or not your `exponential` model is the _best?_ 
+}
+@A{We don't know!}
+@A{This fitting process was purely about adjusting sliders and seeing if @math{S} goes down. It was all trial-and-error, with no guarantee that there's no better model out there.}
 
-== Modeling in Pyret
+@Q{What was easier for your brain: mental math with the model definition or looking at the model on the graph?}
+
+@Q{Were you more confident about your predictions for 50 days or 450 days? Why?}
+@A{Hopefully students acknowledge that since 450 was off the graph it was harder to estimate!}
+
+@Q{Would you expect our model to make more accurate predictions about the number of covid cases in Michigan after 50 days or 450 days? Why?}
+@A{Our model is most reliable for predictions that fall within the range of the data. 450 days is outside of that range.}
+}
+
+
+== Limits of Computational Modeling
 @objective{model-fit-function}
 @objective{computing-with-roughnums}
 
@@ -158,6 +208,10 @@ Pyret's function @show{(code 'expt)} is the function that we use for exponents. 
 @slidebreak{Investigate-DN}
 
 Pyret has a special kind of Number, called a _RoughNum_, which chops off digits for faster calculation. But unlike other languages, Pyret wants to put the programmer in control. It will never drop digits _unless you tell it to!_
+ 
+@vspace{1ex}
+
+To turn a number into a RoughNum, we use the approximation symbol `~`. For example, the RoughNum `~3`, is "roughly three." This tells Pyret to round off the calculation, prioritizing *speed* over *accuracy* to get a result that is "roughly accurate". 
 
 @lesson-instruction{
 - Use @starter-file{alg2-covid-mi} to complete the *second section* of @printable-exercise{computational-limits.adoc}.
@@ -174,7 +228,7 @@ Pyret has a special kind of Number, called a _RoughNum_, which chops off digits 
 
 @slidebreak{Investigate}
 
-To turn a number into a RoughNum, we use the approximation symbol `~`. For example, the RoughNum `~3`, is "roughly three." This tells Pyret to round off the calculation, prioritizing *speed* over *accuracy* to get a result that is "roughly accurate". Any computations performed on a RoughNum will also produce RoughNums.
+Any computations performed on a RoughNum will also produce RoughNums.
 
 @QandA{
 @Q{In Pyret, try multiplying `~2 * 2`. What do you get?}
@@ -188,42 +242,23 @@ To turn a number into a RoughNum, we use the approximation symbol `~`. For examp
 
 Exponential growth and decay can create enormously large and enormously small numbers, which can slow down computation. When we try to fit our exponential models to the data, it could take a VERY long time to compute!
 
-@lesson-instruction{
-- In @starter-file{alg2-covid-mi}, find the definition of a function called `exponential`. Why does this definition multiply `x` by `~1`?
-- Turn to @printable-exercise{predicting-exponential-growth.adoc}. Using the exponential model you selected on @printable-exercise{exponential-models-MI.adoc}, fill in the blanks at the top of this page.
-- Remind yourselves why the model in Pyret needs `~1`! What do you think would happen without it? Why?
+To speed up computations in @starter-file{alg2-covid-mi, our starter files}, we use `~1 * x` to tell Pyret to work with an approximate value of x rather than the really long decimal version: +
+@indented{`fun exponential(x):  (... * expt(..., (~1 * x))) + ... end`}
+
+@QandA{
+@Q{Why does multiplying `x` by `~1` convert `x` into an approximation of itself?}
+@A{Any number times a RoughNum will result in a RoughNum}
+@A{1 is the multiplicative identity, so we can multiply anything by 1 without changing its value.}
 }
-
-@slidebreak{Investigate}
-@ifslide{@right{@image{images/confused-robot.png, 150}}}
-When it comes to fitting exponential models to data, can you out-model an AI?
-
-@lesson-instruction{
-Turn to @printable-exercise{grading-ai.adoc}, and grade the performance of an AI that was told to fit exponential models to real data!
-}
-
-@teacher{Heads up: The final problem on @printable-exercise{grading-ai.adoc} is starred as a challenge, because it involves horizontal shift.}
 
 === Synthesize
 @slidebreak{Synthesize}
 
 @QandA{
-@Q{What makes exponential models different from the linear and quadratic models you've seen before?}
-@A{They don't have constant growth like linear models.}
-@A{Unlike quadratic models, they only grow or decay in one direction. The growth rate also changes much more quickly.}
 @Q{Is it always okay for Data Scientists to round off their numbers to speed up computation? Why or why not?}
 @A{No! Sometimes approximations put lives at risk and it's worth taking the time to maximize precision.}
 }
 
-@slidebreak{Synthesize}
-
-@QandA{
-Linear regression allows us to find the _computationally optimal model_, not just a model that "fit really well."
-@Q{Do we know whether or not our exponential model is the _best?_}
-@A{We don't know!}
-@Q{How do you know?}
-@A{This fitting process was purely about adjusting sliders and seeing if @math{S} goes down. It was all trial-and-error, with no guarantee that there's no better model out there.}
-}
 
 == Reasoning about Exponential Growth
 
@@ -232,30 +267,26 @@ Students apply mental math to their models, and discover that it's very hard to 
 
 === Launch
 @slidebreak{Launch}
-Even when epidemiologists came up with exponential models for Covid spread, policymakers who were genuinely worried failed to understand how quickly the virus would spread. Why?
 
-@teacher{Invite students to share their ideas. Some answers may be political. Steer the conversation back to focusing on the math: Those who took the threat of Covid seriously underestimated how quickly it would spread. Why?}
+@lesson-instruction{
+- Open @starter-file{alg2-covid-mi} and find the function template for `exponential`.
+- Find the function definition you wrote for `exponential` at the top of @printable-exercise{predicting-exponential-growth.adoc}. 
+- Remind yourself why the model in Pyret needs to multiply `(x * ~1)`. 
+- Then use your `exponential` definition to complete the function template in the starter file and click "Run".
+}
+
+@QandA{
+@Q{What could you type into the Interactions Area to find out how many covid cases your `exponential` model predicts after 50 days?}
+@A{`exponential(50)`}
+}
+
+@lesson-instruction{
+- Complete the third section of @printable-exercise{predicting-exponential-growth.adoc} by using Pyret to compute the number of covid cases your model predicts and comparing them to your previous estimates.
+- Then use `fit-model` to compute the S-value for your model and complete the interpretation stems in the last section of @printable-exercise{predicting-exponential-growth.adoc}.
+}
 
 === Investigate
 @slidebreak{Investigate}
-Models are helpful because they give us an easy way to make predictions about complex data. Oftentimes, we can just use mental arithmetic to do a quick calculation! So why did mental arithmetic fail for exponential models like ours?
-
-- Good students know to never use a model to make predictions far outside the original dataset. 😇
-
-- But to prove a point, today we’re going to be *BAD*...and extrapolate way, _way_ outside the data! 😈
-
-@slidebreak{Investigate}
-
-@lesson-instruction{
-- Use your model to complete the first section, *Estimating with our Model* on @printable-exercise{predicting-exponential-growth.adoc}.
-- Be sure to use ONLY mental math: you can look at the graph and model, but don't use a calculator, Pyret, or anything else that will automatically give you the exact answer!
-}
-
-@teacher{Have students share their predictions for each of the time-spans in this section.}
-
-@lesson-instruction{
-- Using your model in Pyret, complete the last section, *Fitting Exponential Models in Pyret*, on @printable-exercise{predicting-exponential-growth.adoc}.
-}
 
 @QandA{
 @Q{How accurate were your "guesstimates" for your models' predictions after 50 days? (Very accurate? Not accurate at all?)}
@@ -267,29 +298,37 @@ Chances are, the error in your guesses grew _exponentially_ as the number of day
 
 @slidebreak{Investigate}
 
+Models are helpful because they give us an easy way to make predictions about complex data. Oftentimes, we can just use mental arithmetic to do a quick calculation! 
+
 *Why was it so much harder to guesstimate the farther out we got, when the number of days was always increasing by a fixed amount?*
 
-Humans evolved in nature, so our brains evolved to be really good at working with quantities that commonly show up in nature. It's normal to see groups of 2, 5, or even 10 or 100, and we have a pretty good intuition for comparing group sizes as long as they're small.
+Humans evolved in nature, so our brains evolved to be really good at working with quantities that commonly show up in nature. It's normal to see groups of 2, 5, or even 10 or 100, and we have a pretty good intuition for comparing group sizes as long as they're small. But our brains lose track of differences when two numbers get really enormous. When numbers grow really, really, _really_ fast...we get lost! 
 
-But when numbers grow really, really, _really_ fast...we get lost! Our brains lose track of differences when two numbers get really enormous.
-
-@slidebreak{Investigate}
-
-*Exponential growth poses a problem for those of us with human brains*, because the numbers get so big, so fast that it can be difficult to wrap our heads around it!
-
-@teacher{
-This has been proven by some really fascinating studies -- We know that the integer number line is made of infinite, equal-sized intervals...@link{https://www.scientificamerican.com/article/a-natural-log/, *but our brains don't process it that way at all!*}
+@strategy{Human Brains Process Growth the Opposite of Exponential}{
+We know that the integer number line is made of infinite, equal-sized intervals... *but our brains don't process it that way at all!*. Your students haven't gotten to logarithmic models yet, but @link{https://www.scientificamerican.com/article/a-natural-log/, check out this interesting study!}
 }
 
-Humans' inability to reason about exponential growth may have played a role in the sluggish response of many countries, and the tragic loss of life and decrease in public health that followed.
-
-=== Synthesize
-@slidebreak{Synthesize}
+@slidebreak{Investigate}
 
 @QandA{
 @Q{When would you expect mental arithmetic to be an effective strategy for reasoning about the world?}
 @A{With smallish numbers.} 
 @A{With constant growth, rather than exponential growth.}	
+
+@Q{Even when epidemiologists came up with exponential models for Covid spread, policymakers who were genuinely worried failed to understand how quickly the virus would spread. Why?}
+@A{Humans' inability to reason about exponential growth may have played a role in the sluggish response of many countries to the covid pandemic, and the loss of life and decrease in public health that followed.}
+}
+
+@teacher{If answers get political, steer the conversation back to focusing on the math: Those who took the threat of Covid seriously underestimated how quickly it would spread. Why?}
+
+=== Synthesize
+@slidebreak{Synthesize}
+
+@QandA{
+@Q{What makes exponential models different from the linear and quadratic models you've seen before?}
+@A{They don't have constant growth like linear models.}
+@A{Unlike quadratic models, they only grow or decay in one direction. The growth rate also changes much more quickly.}
+@A{They numbers get big so quickly that they are harder for our brains to reason about.}
 }
 
 == Additional Exercises
