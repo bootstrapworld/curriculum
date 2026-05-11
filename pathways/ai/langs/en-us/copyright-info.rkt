@@ -1,3 +1,3 @@
 (
- ("name" "Bootstrap:Data Science")
+ ("name" "Bootstrap:Artificial Intelligence")
  )

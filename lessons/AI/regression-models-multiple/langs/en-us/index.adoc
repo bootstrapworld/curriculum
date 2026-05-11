@@ -1,0 +1,309 @@
+[.beta]
+= Multiple Regression
+
+@description{Students return to the dataset, this time thinking about the factors that predict how long it will take for an animal to be adopted. This leads to an exploration of Linear Regression, then Multiple Regression. Finally, they learn about the world’s first self-driving car, and use multiple regression to control the steering wheel of a virtual car using AI.}
+
+@lesson-prereqs{regression-models-simple}
+
+@keywords{}
+
+[@lesson-intro-table]
+|===
+| Lesson Goals
+| Students will be able to...
+
+@objectives
+
+| Student-facing Lesson Goals
+|
+
+- Let's learn about the functioning of the very first self-driving car!
+- Let's use line-of-best-fit to predict how a self-driving car should steer!
+
+| Materials
+|[.materials-links]
+@material-links
+
+| Preparation
+| - @opt{If you think your students will want the chance to actually see the first self-driving car in action, you can share @link{https://www.youtube.com/watch?v=ntIczNQKfjQ, "this two-minute video"} from the Carnegie Mellon University Robotics Institute.}
+
+|===
+
+== Multiple Regression
+
+=== Overview
+Students extend their understanding of linear regression in 2 dimensions, moving into multiple regression in 3 dimensions. They see the improvement to the model fit, and interpret the coefficients of a multiple-regression result.
+
+=== Launch
+@slidebreak{LaunchR}
+@right{@image{images/lr-pounds-v-weeks.png, 300}}
+
+@math{weeks(age)=(0.79 \times age) + 2.3} +
+`fun weeks(r): (0.79 * r["age"]) + 2.3 end`
+
+This function (written in both math and Pyret notation) is our regression line, which we can draw on a 2 dimensional (x,y) scatter plot.
+
+@slidebreak{Launch}
+
+But what if we wanted to use `pounds` _and_ `age` on our flashcards, and train the computer to predict `weeks` based on the value of *both* variables?
+
+We need one axis on our scatter plot to represent `weeks`. We tried using the other axis for one explanatory variable at time (age or pounds). How can we represent _both_ explanatory variables?
+
+@teacher{Give students a chance to discuss and brainstorm!}
+
+
+@slidebreak{LaunchR}
+@right{@image{images/project.webp}}
+
+@QandA{
+Take a look this picture.
+
+@Q{What is making the square shadow on the blue wall?}
+@A{A light is shined at the side of the cylinder, casting a square shadow.}
+
+@Q{What is making the circle shadow on the yellow wall?}
+@A{A *different* light is shined at one end of the cylinder, casting a circular shadow.}
+
+@Q{What if someone shined a light _down_, to cast a shadow on the floor. What shape would the floor-shadow be?}
+@A{A square.}
+
+@Q{How can one shape cast such different shadows? And at the same time?!}
+@A{A 3d object has multiple sides, so there's more than one direction light can travel to cast a shadow.}
+
+@Q{If the _real_ shape is a cylinder, are the circle and square shadows "lying" to us somehow?}
+@A{No - they're just telling a *part* of the story!}
+}
+
+@slidebreak{LaunchR}
+@right{@image{images/plane-of-best-fit.png, 300}}
+That's exactly what's going on with our data! The points for each animal represent information in _three_ dimensions: `age`, `pounds`, and `weeks`.
+
+*We need to do regression in _three_ dimensions.* Now we want Pyret to "learn" a function like this, with the best possible values for @math{m_{age}}, @math{m_{pounds}}, and @math{b}:
+
+@center{@math{weeks(age, pounds)=(m_{age} \times age) + (m{pounds} \times pounds) + b}}
+
+- `age` and `weeks` are _both inputs_ to the function, and each contributes to a _portion_ of the adoption time
+- These portions are @math{m_{age}} and @math{m_{pounds}}, with our xy-intercept @math{b} representing the predicted value if `age` and `pounds` are _both_ zero
+
+
+=== Investigate
+@slidebreak{InvestigateR}
+
+- TODO: make this page, with using (1) `mr-code`, interpreting output, (2) using `predict-col`, (3) adding "legs" as a column
+
+@lesson-instruction{
+- Open @online-exercise{https://www.desmos.com/3d/omnchml87a, this Desmos graph} and explore!
+- Use this graph to complete the first section on @printable-exercise{predicting-weeks-from-2.adoc}.
+- Use Pyret to complete @printable-exercise{predicting-weeks-from-2.adoc}.
+- Be ready to share your thinking!
+}
+
+
+@slidebreak{InvestigateR}
+@ifslide{@right{@image{images/plane-of-best-fit.png, 300}}}
+What would this function look like?
+
+In *Function Notation*: +
+@math{weeks(age, pounds)=(0.79 \times age) + (0.08 \times pounds) + 2.3}
+
+In *Pyret Notation*: +
+`fun weeks(r): (0.79 * r["age"]) + (0.08 * r["pounds"]) + 2.3 end`
+
+We're already consuming the entire row `r`, so we already have access to `age` and `pounds`.
+
+=== Synthesize
+@slidebreak{Synthesize}
+
+@QandA{
+@Q{Why did our multiple-regression function have *two* slopes?}
+@A{We were defining a *plane*. A flat sheet of metal only tip along two different axes!}
+
+@Q{Why did adding `legs` improve our @math{S}-value?}
+@A{`legs` helps us differentiate between snails, tarantulas, and  the other species. And since species influences adoption time, this helps us "sort-of regress" on `species`}
+
+}
+
+== Self-Driving Cars @duration{15 minutes}
+
+@objective{ai-supervision}
+@objective{car-function}
+
+
+=== Overview
+Students learn about ALVINN (Autonomous Land Vehicle in a Neural Network) as an example of supervised machine learning, then explore a driving simulator and use multiple regression to train a model to drive for them.
+
+=== Launch
+@slidebreak{LaunchR}
+--
+@right{@image{images/self-driving-car.jpg, 300}}
+
+Self-driving cars feel like the future has really arrived! Many people think they are one of the strongest examples of "AI" really thinking, instead of just "following an algorithm". After all, how can a computer possibly make decisions about how to drive???
+
+What do _you_ think?
+--
+
+@teacher{Give students time to discuss. Remind them about the AI Effect, and how people also felt when the first spell-checkers were developed!}
+
+@slidebreak{Launch}
+Self-driving cards work via a lot of inputs (sensors, cameras, etc) and a lot of outputs (how much to accelerate, brake, and steer). Steering, for example, is incredibly difficult! A car needs to think about:
+
+- Whether the road ahead bends to the left or right, and how sharply
+- How far the car is from the center of the lane
+- Whether the car is in-line with the lane, or heading towards one side
+- Obstacles and traffoc lights that could be in the way
+- And lots more!
+
+We're going to explore how @vocab{supervised learning} -- regression, specifically -- allows cars to "know where they're going".
+
+@slidebreak{LaunchR}
+--
+@right{@image{images/navlab.png, 300}}
+Meet ALVINN!
+
+ALVINN (short for Autonomous Land Vehicle in a Neural Network) was developed in 1989 by a team of computer scientists at Carnegie Mellon University. ALVINN is the forebear of today's self-driving cars: a retrofitted Army ambulance equipped with sensors, computers, and small motors to turn the wheel, press the pedals, etc. ALVINN had about one-tenth of the processing power of an Apple Watch -- but was able to safely drive on a very limited course at 70 miles per hour by the early 1990s! How did it happen?
+--
+
+@slidebreak{Launch}
+
+As with all machine learning, ALVINN required @vocab{training}.
+
+The goal of that training? Learning how to steer.
+
+Here's what ALVINN's training entailed:
+
+(1) A person drove the vehicle while a front-facing video camera recorded the road.
+
+- In the context of @vocab{supervised learning}, the human driver is often referred to as the supervisor. 
+- The supervisor demonstrates the learning process.
+- The input-output pairs form the @vocab{training corpus}.
+
+(2) Every two seconds, ALVINN...
+
+- digitized an image of the road ahead
+- recorded the steering direction chosen by the driver
+
+@slidebreak{Launch}
+
+(3) ALVINN's training data can be represented as an input-output table, with training images (reduced in resolution to 30x32 pixels) and obstacle distances as inputs, and the associated corresponding "correct" steering angles as outputs.
+
+@indented{
+[cols="^.^1,^.^1,^.^1", stripes="none", options="header"]
+|===
+| `road-image`                      	| `obstacle-distance` (ft)| `steering-angle`
+| @image{images/road1.png, 100} 	|		21				|   0.02º
+| @image{images/road2.png, 100} 	|		49				| -95.20º
+| @image{images/road3.png, 100} 	|		37				| 135.43º
+|===
+
+@teacher{
+Note: These images were selected for illustrative purposes. The 30x32 pixel images produced by ALVINN were of much lower quality!
+}
+}
+
+@slidebreak{Launch}
+
+(4) Using the set of inputs and outputs, ALVINN generates a @vocab{function} for predicting steering angles from the images and obstacle distances:
+
+@indented{
+`mr-code(training-data, [list: "road-image", "obstacle-distance"], "steering-angle")`
+}
+
+@lesson-point{
+`road-image` and `obstacle-distance` are the @vocab{explanatory variables} and the `steering-angle` is the @vocab{response variable}.
+}
+
+@slidebreak{Launch}
+
+(5) After training is complete, a human can push ALVINN's "run" switch and the vehicle will begin driving!  As ALVINN drives, it produces steering angles it learned from the human driver (who supervised the steering angle at each segment of the road).
+
+@teacher{
+If you want your students to see ALVINN in action, now is a good time to view @link{https://www.youtube.com/watch?v=ntIczNQKfjQ, "this brief two-minute video"}.
+}
+
+@slidebreak{Launch}
+
+@QandA{
+@Q{What information does ALVINN process before producing a steering angle?}
+@A{ALVINN instantaneously processes the image of the road in front of it, along with an obstacle distance, in order to produce a steering angle.}
+
+@Q{When humans make decisions about which way to steer, we are working with a lot of other information besides an image and a single distance sensor. What examples can you come up with?}
+
+@A{We can use maps to give us a sense of what the road might do before we can see it.}
+@A{If a road is curving, we can predict that it will continue to curve.}
+@A{We know that roads don't curve beyond a certain degree--and if they do, we can expect to see a warning sign ahead of time.}
+@A{We can look at the cars in front of us to better understand how we should steer.}
+@A{If we know that we're going to be taking a left turn, we might switch lanes and slow down ahead of time.}
+}
+
+@slidebreak{Launch}
+
+In discovering the details of ALVINN's @vocab{supervised learning}, you may have noticed three big events:
+
+- Demonstration of the learning process
+- Function abstraction -- the machine learning algorithm finds a function that generalizes (hopefully well!) to new, unseen data
+- Use the function! Apply it on new data.
+
+As you explore other examples of @vocab{supervised learning} in this curriculum, you will notice that -- regardless of the context -- all three phases occur. 
+
+=== Investigate
+@slidebreak{Investigate}
+
+Let's use the same kind of @vocab{supervised learning} algorithm we used to predict animals' adoption time -- and which ALVINN used to steer! -- to build a model that knows how to complete a driving simulator.
+
+@lesson-instruction{
+- Open @starter-file{self-driving}, and click "Run".
+- Use this file to complete @printable-exercise{self-driving-car.adoc}
+}
+
+@slidebreak{Investigate}
+
+Let's reflect on what we know about @vocab{supervised learning}, ALVINN, and its training.
+
+@lesson-instruction{
+With a partner, complete @printable-exercise{self-driving-car-reflection.adoc}.
+}
+
+@strategy{Computers aren't people!}{
+
+In conversations about AI, computers often get anthropomorphized (given human-like traits) when they are not in fact human. This anthropomorphizing of AI is a slippery slope that can block students from understanding the mechanics of machine learning!
+
+Avoid referring to ALVINN as "him" or "he".
+
+Many students will suspect that ALVINN has thoughts and feelings of its own, a misconception that is important to correct.
+
+A machine's "confidence" is very different from a human's confidence. When you discuss ALVINN's "confidence", highlight that this score is a numeric value, which is the result of *mathematical computation*. All machine learning relies on data, functions, and computation.
+}
+
+
+@teacher{Review students' responses, allowing time for discussion, questions, and disagreement.}
+
+@slidebreak{Investigate}
+
+While responding to the questions on the worksheet, you hopefully arrived at a few conclusions about ALVINN:
+
+- At the beginning of training, ALVINN's guesses about the best steering direction are not good.
+- As ALVINN receives more examples, it becomes better at predicting and can imitate the steering reactions of a human driver.
+- Training on one surface does not help ALVINN on any other surface! Failure to repeat the same training for a variety of road types (two-lane, four-lane, intersections, covered with leaves, covered with snow, etc.) would lead to bad outcomes.
+
+=== Synthesize
+@slidebreak{Synthesize}
+Regression is a form of @vocab{supervised learning} that trains models to predict _quantitative_ outcomes:
+
+- Number of weeks to adopt a pet, given the age and weight
+- Number of degrees to turn the wheel, given the speed, road curvature, etc.
+
+Each of these relies on a training dataset with a number of input columns and a target column. For each of the following examples, what do you think the input columns are?
+
+- The rate you pay for car insurance
+- The price of gas at the pump
+- The predicted temperature in tomorrow's weather report
+
+@teacher{Give students a chance to discuss as a class.}
+
+@slidebreak{Synthesize}
+
+@QandA{
+
+@Q{What is supervised machine learning, and how is ALVINN an example it?}
+@A{In supervised machine learning, the computer trains on example input-output pairs tagged by a human, and learns a function that maps from input to output. ALVINN is an example of supervised machine learning because a human provided the correct steering angles (_demonstration_), allowing ALVINN to produce a predictor function (_function abstraction_).}
+}
