@@ -21,23 +21,18 @@
 
 | Student-facing Lesson Goals
 |
-
 - Let's play with spell checkers to learn about @vocab{data-driven algorithms}.
 
 | Materials
 |[.materials-links]
 @material-links
-
 |===
 
 == Do Spell-Checkers _Think?_ @duration{15 minutes}
-
 @objective{machines-v-people}
 
 === Overview
-
 Students consider one specific example of machine learning: evaluating how spell checkers' programmed behaviors compare and contrast with the behaviors of humans.
-
 
 === Launch
 @slidebreak{Launch}
@@ -62,6 +57,7 @@ We are so used to our spell-checker help we sometimes forget that it's there. Bu
 @QandA{
 @Q{How did you find the misspelled words?}
 @A{Answers will vary, but most people would say "I just knew it when I saw it". This is important to call out!}
+
 @Q{When you found a misspelled word, how did you figure out how to correct it?}
 @A{There was only one word it could be!}
 @A{I could tell from the rest of the sentence}
@@ -104,7 +100,6 @@ Exploring this particular algorithm can offer us interesting insights about one 
 After students have completed the activity, invite them to share their responses to the three reflection questions (below) in small groups.
 }
 
-
 @slidebreak{Investigate}
 
 @QandA{
@@ -121,7 +116,6 @@ After students have completed the activity, invite them to share their responses
 @A{Therefore, the strategies used by the human and computer may be extremely different for a similar task.}
 }
 
-
 === Synthesize
 @slidebreak{Synthesize}
 
@@ -130,18 +124,14 @@ After students have completed the activity, invite them to share their responses
 @A{Based on the above, they do not at all! Perhaps the outcomes are similar, depending on a wide variety of variables.}
 
 @Q{Would it be a good idea for a human to try mimic a spell checker's algorithm? Why or why not?}
-
 @A{The program we just discussed relies on computational brute force: primitive spell checking programs will repeatedly edit / transform a misspelled word, generating dozens of different words to verify in the dictionary. Were a human to undergo this process, it would be time-consuming, laborious, and highly error prone.}
 }
 
 
-
 == Spell Checking in Pyret @duration{25 minutes}
-
 @objective{data-driven-algos}
 
 === Overview
-
 Students explore both the algorithm and the datasets that power a Pyret-based spell checker, discovering that @vocab{data-driven algorithms} are at the heart of AI.
 
 === Launch
@@ -166,9 +156,10 @@ Complete the rest of @printable-exercise{pyret-spell-checker.adoc}.
 
 @teacher{If students get stuck on questions 3 and 4, invite them to view the @link{https://docs.google.com/spreadsheets/d/1RlwxGM1oZd6VfJDwuVNxGIwznB2yGyjwfuKHdXg6Gz8/, "dictionaries spreadsheet"} that is included in the Definitions area.}
 
+@scrub{
+SCHANZER Guessing none of this is still relevant?
+
 As you were interacting with the @starter-file{spell-checker}, you observed that it only proposed five-letter words. This is because the dictionary it draws from is actually a dictionary from the game "Wordle"!
-
-
 
 @slidebreak{Investigate-DN}
 
@@ -180,16 +171,18 @@ There are basically two "parameters" that our spell-checking program used:
 1. the *function* : what is outside of the parentheses
 
 2. the *dictionary* : provided inside the parentheses, as an argument
-}
+
 
 We've discussed some ways we could make the _function_ better. (e.g. Maybe try swapping out an additional letter?) 
 
 But it's also possible to improve the quality of the output _without changing how the function works_... by improving the _dictionary argument_!  Let's explore how directing Pyret to access differently-sized dictionaries influences the quality of the program's output.
+}
 
 @slidebreak{Investigate}
 
 @QandA{
 @Q{What did you discover about the dictionaries in @starter-file{spell-checker}?}
+
 @Q{Why did the same `alt-words` function not always return the same results?}
 }
 
@@ -201,11 +194,9 @@ When we offered _more representative data_ to our rudimentary Pyret spell checke
 @slidebreak{SynthesizeR}
 
 @QandA{
-
 Look at the screenshot (right) of a text messaging app's suggestions for the possibly misspelled word "Cose". The app suggests the original word ("Cose"), indicating that no error was made, along with two alternatives: "Code" and "Close".
 
 @right{@image{images/text-app.png, 250}}
-
 
 @Q{What sort of _algorithm_ do you think the app used in developing possible alternative words?}
 @A{Responses will vary.}
@@ -225,7 +216,7 @@ Look at the screenshot (right) of a text messaging app's suggestions for the pos
 == Playing with Spelling Suggestions
 
 === Overview
-Students use their knowledge of Pyret to manipulate the table produces by `alt-words`, producing the "top-3" and "bottom-3" suggestions along with several charts and graphs.
+Students use their knowledge of Pyret to manipulate the table produced by `alt-words`, producing the "top-3" and "bottom-3" suggestions along with several charts and graphs.
 
 === Launch
 @slidebreak{Launch}
@@ -244,8 +235,10 @@ You already know how to select rows, generate summaries, and make data visualiza
 @Q{How do you think the results would have changed if we used a smaller dictionary?}
 @A{We would have had fewer answers for each edit distance.}
 @A{Maybe it would have needed less time to give back the results?}
+
 @Q{What about a larger dictionary?}
 @A{More results}
+
 @Q{For every increase in `edit-distance`, the number of suggested words grew. Was the growth from 1-to-2 the _same_ as from 2-to-3? What do you think it would look like for an `edit-distance` of 4?}
 @A{The jump from 2-to-3 was *much* bigger than from 1-to-2. 4 might generate hundreds or thousands of alternatives!}
 }
