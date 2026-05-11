@@ -9,26 +9,37 @@ td:first-child {
 </style>
 ++++
 
-== Classifying Teenagers and Adults
-Each of the rows in the table below represents a teenager OR an adult. Can you tell which is which?
 
-[cols="^1a,^2a,^2a,^2a,^2a,^2a,^4a", options="header"]
+== Classifying Flowers
+For this section, you will need to have @online-exercise{https://www.nyckel.com/pretrained-classifiers/flowers-identifier/, Flower Identifier} open on your computer.
+
+@n Drag the first flower image into the drop box. What type of flower did it predict? @fitb{3em}{@ifsoln{Rose}} How confident is this prediction? @fitb{}{@ifsoln{98.64}}
+
+@n Drag the second flower image into the drop box. What type of flower did it predict? @fitb{3em}{@ifsoln{Carnation}}. How confident is this prediction? @fitb{}{@ifsoln{98.77%}}
+
+[cols="^1a,^1a", frame="none", grid="none"]
 |===
-| ID | Shoes		| Weight 	| Married	| Income		| Fav Color	| Prediction
-|  1 | Sneakers		| 110lbs	| Yes 		| $25,000/yr	| Red 		| teenager @hspace{2em} adult
-|  2 | Sandals		| 180lbs	| No 		| $60,000/yr	| Green 	| teenager @hspace{2em} adult
-|  3 | High Heels	| 140lbs	| Yes 		| $35,000/yr	| Purple	| teenager @hspace{2em} adult
-|  4 | Loafers 		| 80lbs		| No		| $15,000/yr	| Blue		| teenager @hspace{2em} adult
-|  5 | Sneakers		| No 		| No 		| $40,000/yr	| Black		| teenager @hspace{2em} adult
+| @image{../images/rose.webp}
+| @image{../images/pink_carnation.webp}
 |===
 
-@n In the "Prediction" column, circle whether you think the row represents a teenager or an adult.
+@n What do you *Notice* is different between these flower images? @fitb{}{} +
+@blanklines{2}{@ifsoln{the petal shape is different, and the shading on the petals is different}}
 
-@n When trying to classify each row as an adult or teenage, which column(s) mattered the most? Explain why.
-@blanklines{2}{}
+@n Brainstorm some properties of the *petals* can be counted or computed. We've completed one for you:
 
-@n Which column(s) mattered the least? Explain why. @fitb{}{}
-@blanklines{2}{}
+[.FillVerticalSpace, cols="1a"]
+|===
+| *Symmetry* - how much the left half of the petal resembles the right half. 0 = none at all, 1 = perfect symmetry
+|
+|
+|===
+
+@n Why do you think the classifier reports on "confidence"? @fitb{}{}+
+@fitb{}{@ifsoln{To help users tell the difference between a wild guess and a serious match}}
+
+@n How do you think this classifier is computing its "confidence"? @fitb{}{} +
+@fitb{}{@ifsoln{Maybe it some definition of "rose-ness", and it's just computing how far off the definition of *this rose* is from the one it knows}}
 
 == Classifying Animals
 Each of the rows in the table below represent animals at a shelter, including the number of `weeks` it took for them to be adopted.
@@ -50,9 +61,6 @@ Each of the rows in the table below represent animals at a shelter, including th
 @n In the "Prediction" column, circle whether you think the row represents a cat, dog, snail, or tarantula.
 
 @n Which column is the most important classifying *snails* and *tarantulas*? @fitb{}{@ifsoln{legs}}
-
-@n Can we classify every species in the shelter using _only_ the `legs` column? Why or why not? @fitb{}{}
-@blanklines{2}{@ifsoln{No - cats and dogs both have 4 legs}}
 
 @n Which column do you think is the most important one for classifying animals? Why?
 @blanklines{2}{@ifsoln{}}

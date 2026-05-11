@@ -49,7 +49,7 @@ Who here has ever used AI? Raise your hand if you've used an AI tool, or know so
 }
 
 @slidebreak{LaunchR}
-@lesson-point{Is it _thinking_, or is it _following an algorithm_?}
+@lesson-point{Is it _thinking_, or is it just _following an algorithm_?}
 --
 @right{@image{images/flow-chart.gif, 400}}
 The first spell-checker was written in 1961. It had a 10,000 word dictionary, and it would check every word you typed to see if it was in the dictionary. All it could do was tell you if a word _was_ or _wasn't_ spelled right.
@@ -133,6 +133,8 @@ Which of these technologies falls into which category?
 @Q{Are you starting to wonder if AI does any thinking at all?}
 }
 
+@teacher{The point of this section is *not* to claim that AI isn't anything new, or that it's not a really impressive advancement. It is! Instead, the purpose of this section is to dispel the misconception that AI is "thinking", rather than following an prescribed algorithm.}
+
 
 == Different Kinds of AI
 
@@ -160,14 +162,14 @@ Facial recognition, Credit Scores, etc. +
 "Given an input, find likely matches" +
 Spotify, dating apps, etc.
 
-| *Language* +
-"Given a phrase or sentence, should the next word(s) be?" +
-Homework solvers, ChatGPT, Gemini, etc.
+| *Generation* +
+"Make up a story - with pictures! - about an elephant" +
+ChatGPT, Stable Diffusion, Gemini, etc.
 |===
 
 
 @slidebreak{Launch}
-In Machine Learning, the computer analyzes lots of @vocab{data}, and then identifies patterns in that data using statistics. Machine Learning can be applied to an incredibly diverse set of data (text, maps, pictures, movies, songs, etc), to make predictions, find similarity, and describe a language and generate examples.
+In Machine Learning, the computer analyzes lots of @vocab{data}, and then identifies patterns in that data using statistics. Machine Learning can be applied to an incredibly diverse set of data (text, maps, pictures, movies, songs, etc), to make predictions, find similarity, and even generate new images, stories, etc.
 
 While AI is often spoken about as if it's something "magical", Machine Learning is actually very concrete: it is just a collection of @vocab{algorithms}!
 
@@ -188,7 +190,7 @@ There are several kinds of *predictive models* you probably interact with every 
 - Which Harry Potter house would I be in?
 
 @lesson-instruction{
-@link{https://www.nyckel.com/pretrained-classifiers/flowers-identifier/, Here's an example of an ML tool} that consumes an image of a flower, and tries to predict what *category* of flower it really is.
+@online-exercise{https://www.nyckel.com/pretrained-classifiers/flowers-identifier/, Here's an example of an ML tool} that consumes an image of a flower, and tries to predict what *category* of flower it really is.
 - Find an image of a flower, and drag it into the box
 - What part(s) of the image do you think it's looking at, to make its prediction?
 }
@@ -206,21 +208,19 @@ There are several kinds of *predictive models* you probably interact with every 
 @slidebreak{InvestigateR}
 @QandA{
 @ifslide{@right{@image{images/classifier-bot.png, 250}}}
-@Q{What were your predictions for each row?}
-@A{There's no right answer here - the important part is to see how much agreement or disagreement there is in the class}
-@Q{Why didn't we all make the same predictions?}
-@A{We made different decisions about which columns we valued most}
-@A{For the `income` column we might make different decisions about what the cutoff is for teenager v. adult}
-@A{For the `shoes` column, we might make different decisions about whether each kind of shoe is more of a "teenager shoe" or an "adult shoe"}
-@Q{Did the `color` column matter? Why or why not?}
-@A{No - people of any age can like any color, so their preference doesn't help us decide if someone is a teenager or an adult.}
-@Q{If you had the income, shoe preference, and weight of every person in America - do you think you could made better and more accurate decisions? Why or why not?}
-@A{If we know how much money teenagers _generally make_ vs. adults, we could pick a better cutoff}
-@A{If we know how much who _generally_ buys each kind of shoe, we could make better guesses based on shoes}
+@Q{Did the classifier do a good job identifying the flowers?}
+@A{Yes}
+
+@Q{What did you notice about the differences between the two flower images?}
+@A{Shape...tint...smooth v. ruffled edges on the petals}
+
+@Q{How do you think it's reporting "confidence?"}
+@A{Maybe it some definition of "rose-ness", and it's just computing how far off the definition of *this rose* is from the one it knows}
 }
 
 @lesson-instruction{
-- You just looked at a classification problem with only two outputs: "teenager" or "adult". But classifiers can have any number of possible outputs - including every species of flower!
+- You just looked at a _categorical_ classification problem: every flower image belongs to one category of flower.
+- Sometimes a classifier is just choosing between *two* categories: "is this animal a dog or a cat", "is this photo of a young or old person", etc.
 - Let's explore a classifier with more than two outputs, by completing the last section on @printable-exercise{predictive-models-classifiers.adoc}
 - Be ready to share back!
 }
@@ -249,7 +249,7 @@ But Classifiers aren't the only kind of prediction system out there!
 - How much does the amount a person earns determine how long they will live?
 - With a Credit Score of 632, how likely is this person to be able to pay back a car loan?
 
-@link{https://www.marriage.com/quizzes/how-many-kids-will-i-have/, Here's an example of an ML tool} that uses input data to predict the *number* of children you will have.
+@online-exercise{https://www.marriage.com/quizzes/how-many-kids-will-i-have/, Here's an example of an ML tool} that uses input data to predict the *number* of children you will have.
 --
 
 @slidebreak{InvestigateR}
@@ -336,7 +336,7 @@ How similar were Spotify's recommendations to the original song?
 --
 @right{@image{images/chat-bot.png, 250}}
 
-@vocab{Language Models} (LMs) look for *patterns and frequency in language*, and use that to predict what word(s) should come next.
+@vocab{Generative Models} (LMs) look for *patterns and frequency in language*.
 
 - LMs trained on _English_ can be "chatbots", and generate English responses to questions!
 - LMs trained on _Spanish_ can be "chatbots", and generate Spanish responses to questions!
