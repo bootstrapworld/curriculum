@@ -31,33 +31,33 @@
 You can also combine these functions to produce alternatives that are more than 1 edit from the original.
 
 @scrub{SCHANZER the functions below don't exist in pyret.}
-@n In your own words, what do you think `swap-letters(swap-letters("hello"))` will do? @fitb{}{}
+@n In your own words, what do you think `swaps(swaps("hello"))` will do? @fitb{}{}
 @blanklines{2}{@ifsoln{it will compute all possible swaps for "hello", then compute every swap for _those_ swaps!}}
 
-@n In your own words, what do you think `swap-letters(sub-letters("hello"))` will do? @fitb{}{}
+@n In your own words, what do you think `swaps(subs("hello"))` will do? @fitb{}{}
 @blanklines{2}{@ifsoln{For every possible 1-letter substitution, find every possible swap}}
 
 == Removing "Junk" Words
 
-@n Evaluate `only-real(sub-letters("hello"), WORDS-L)`. What does `only-real` do? @fitb{}{@ifsoln{It removes any word that isn't in the dictionary}}
+@n Evaluate `only-real(subs("hello"), WORDS-L)`. What does `only-real` do? @fitb{}{@ifsoln{It removes any word that isn't in the dictionary}}
 @fitb{}{}
 
-@n Try other dictionaries. For example, Evaluate `only-real(sub-letters("hello"), WORDS-M)`. Why do we get different results? +
+@n Try other dictionaries. For example, Evaluate `only-real(subs("hello"), WORDS-M)`. Why do we get different results? +
 @fitb{}{The size of the dictionary determines what words the algorithm will return. Smaller dictionaries mean more "unknown words."}
 
-== Finding Real, Alternate Words
+== Putting it All Together
 
-The `alt-words` function combines all of the functions you've seen so far. It also lets you decide _how many edits_ to consider. (WARNING: edits above 2 might grind your computer to a halt!)
+The `alt-words` function combines all of the functions you've seen so far. It also lets you decide _how many edits_ to consider. (WARNING: depending on your dictionary, edits of 3 or more can grind your computer to a halt!)
 
 @n Evaluate `alt-words("maple", WORDS-S)`, and record the first 3 results. In the last column, write what edit(s) were needed to go from "maple" to that word.
 
 [.FillVerticalSpace, cols="^2a, ^1a, ^5a", options="header", stripes="none"]
 |===
 | Alternative Word	| # Edits 			| Edits from "maple"
+|results will vary!	| 			 		|
+| as an example... 	| 			 		|
 | @ifsoln{male}		| @ifsoln{1} 		| @ifsoln{delete the "p"}
-| @ifsoln{able}		| @ifsoln{2} 		| @ifsoln{delete the "m", sub the "b" in for the "p"}
-| @ifsoln{apple}	| @ifsoln{2} 		| @ifsoln{delete the "m", sub the "b" in for the "p", and insert another "p"}
-| @ifsoln{cable}	| @ifsoln{2} 		| @ifsoln{sub "c" for "m", and "b" for "p"}
+| 					| 			 		|
 |===
 
 

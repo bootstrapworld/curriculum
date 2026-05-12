@@ -154,13 +154,6 @@ The third column of the table you completed was titled "Number of Edits." A more
 Complete the rest of @printable-exercise{pyret-spell-checker.adoc}.
 }
 
-@teacher{If students get stuck on questions 3 and 4, invite them to view the @link{https://docs.google.com/spreadsheets/d/1RlwxGM1oZd6VfJDwuVNxGIwznB2yGyjwfuKHdXg6Gz8/, "dictionaries spreadsheet"} that is included in the Definitions area.}
-
-@scrub{
-SCHANZER Guessing none of this is still relevant?
-
-As you were interacting with the @starter-file{spell-checker}, you observed that it only proposed five-letter words. This is because the dictionary it draws from is actually a dictionary from the game "Wordle"!
-
 @slidebreak{Investigate-DN}
 
 Disappointingly, Pyret did *not* find the correct spelling for "crosswrd" when using `WORDS-S`. But why?
@@ -183,12 +176,15 @@ But it's also possible to improve the quality of the output _without changing ho
 @QandA{
 @Q{What did you discover about the dictionaries in @starter-file{spell-checker}?}
 
-@Q{Why did the same `alt-words` function not always return the same results?}
+@Q{Why did `alt-words` return a different number of results, depending on which dictionary it was given?}
+@A{Because smaller dictionaries didn't know as many words, so `only-real` was removing words even though they could be found in larger dictionaries.}
 }
 
 @lesson-point{
-When we offered _more representative data_ to our rudimentary Pyret spell checker, we got better results _without changing the spell checker's code_.
+When we fed _more representative data_ to our spell checker, we got better results _without changing the spell checker's code_.
 }
+
+This is the defining characteristic of @vocab{data-driven algorithms}: their effectiveness is directly tied to the amount of data they have to work with. The same algorithm that performs terribly with a small dataset might almost appear "intelligent" when given a much larger one.
 
 === Synthesize
 @slidebreak{SynthesizeR}
