@@ -93,9 +93,10 @@ On the surface, these situations may not seem to have a lot in common. But all o
 | Facial Recognition| Your face 						            | Every person in America
 |===
 
-For example, the hairstyle quiz will probably rule out "ponytail" if the sex of the person taking the quiz is "male".  A classifier's job is to make the best guess possible, and it won't always be right! After all, some people with ponytails are male!
 
-@lesson-point{No classifier is perfect. _Some_ are useful.}
+For example, the hairstyle quiz will _probably_ rule out "ponytail" if the sex of the person taking the quiz is "male", but it won't always be right: After all, some people with ponytails are male! A classifier's job to make the *best guess possible*, and we know it will sometimes make mistakes.
+
+@lesson-point{Most models are wrong. _Some_ are useful.}
 
 === Investigate
 @slidebreak{Investigate}
@@ -275,12 +276,12 @@ We're going to play another round of "I Spy - Classify", but this time you're go
 
 Let's play a round of "I Spy - Classify" with _this_ dataset.
 
-- Once again, I'll pick one animal in this dataset.
-- This time, however, I'm targeting the _species_ of the animal instead of the name.
-- Your job is to predict the species of my animal, based only on the columns in the table. Your prediction will be cat, dog, lizard, snail, or tarantula.
+- This time, I'll pick one animal in this dataset
+- This time, however, I'm targeting the _species_ of the animal instead of the name
+- Your job is to predict the species (cat, dog, lizard, snail, or tarantula) of my animal, based only on the columns in the table
 
 @teacher{
-Encourage students to come up with both categorical and quantitative splits, and keep asking them to explain why they chose the split they did!
+Encourage students to come up with both categorical and quantitative questions, and keep asking them to explain why they chose the split they did. As before, keep drawing the decision tree as they go.
 }
 
 @slidebreak{Launch-DN}
@@ -293,7 +294,9 @@ Encourage students to come up with both categorical and quantitative splits, and
 @teacher{Debrief student answers to this page}
 
 === Investigate
-@slidebreak{InvestigateC}
+@slidebreak{InvestigateR}
+--
+@right{@image{images/@image{images/tail-classifier-tree.png}}}
 
 Remember, a @vocab{classifier} is _just a function!_
 
@@ -315,8 +318,31 @@ Suppose I want my first splitting question to be "does the animal have a tail?"
 @Q{What code would I write to check `frisky`?}
 @A{`frisky["tail"] == true`}
 }
+--
+@slidebreak{Investigate}
+@ifslide{@right{@image{images/@image{images/tail-classifier-tree.png}}}}
 
-Let's look at this same classifier function in Pyret, which works for _any_ row in the table...
+In Pyret, evaluate `training` so you can have a look at your training data.
+
+@QandA{
+Suppose our tree just has the one level: we ask if it has a tail, and then we take our best guess.
+@Q{Will it do the right thing for `firepaw`? Why or why not?}
+@A{Yes, because the `firepaw` row has `true` for the `tail`, the tree will classify him as a "cat", and he IS a cat!}
+
+@Q{For how many *tail-having* animals in the training dataset will our 1-level tree do the *right thing*?}
+@A{5 - all cats}
+
+@Q{Why will this tree do the wrong thing for dogs and lizards?}
+@A{Because they all have tails too, but the tree will always guess "cat" for them}
+
+@Q{For how many *non-tail-having* animals in the training dataset will our 1-level tree do the *right thing*?}
+@A{2 - all snails}
+
+@Q{Why will this tree do the wrong thing for tarantulas?}
+@A{Because they don't have tails either, but the tree will always guess "snail" for them}
+}
+
+Let's look at this same classifier function in Pyret...
 
 @slidebreak{Investigate-DN}
 [cols="^.^1a,^3a", frame="none", grid="none"]
@@ -383,6 +409,11 @@ If our tree ended here, we could still make a "best guess" about the species of 
 - The "yes" branch has more cats than anything else (5 out of 11), so "cat" is our best possible choice for a leaf. Our classifier will guess right about 45% of the time!
 - The "no" branch us evenly split between snails and tarantulas, so we could flip a coin and pick one - no matter what we choose, our classifier will be right 50% of the time!
 
+@lesson-point{Decision trees are @vocab{lossy}}
+
+A "lossy" algorithm is one that throws away at least some data. In this case, a decision tree reduces complexity and discards variance in the data, by looking for "general rules" that apply to most -- but not all - of the data.
+
+
 @slidebreak{Investigate-DN}
 @indented{@show{(contract "classify" '("Table" "String" "(Row -> String)") "Table")}}
 
@@ -442,11 +473,15 @@ This is the _exact same_ problem we solved for the root node: our goal is to ask
 In fact, the relationship between @vocab{decision trees} and functions is so direct that _we can convert any decision tree into a function **automatically**_:
 
 
-
-
 === Synthesize
 @slidebreak{Synthesize}
 
 @QandA{
+@Q{Will a decision tree always have the same number of leaf nodes as there were rows in the training dataset? Why or why not?}
+@A{No. Generally multiple rows of a training dataset will have the same prediction. The training dataset we saw in this lesson section contained multiple knives, for example.}
 
+@Q{Explain how the decision tree and training dataset correspond to each other.}
+@A{The column headers from the table are the questions that will get asked in the decision nodes of the decision tree.}
+@A{The data in each column are the answers to those questions which become the arrow labels of the decision tree ("yes" and "no", for this dataset).}
+@A{The output categories from the table are the leaf nodes in the decision tree.}
 }
