@@ -43,14 +43,14 @@ Students consider technologies that make predictions and recommendations, and th
 
 - What a decision tree is
 - That more than one tree can be constructed for a given dataset
-- That the quality of a decision tree for a single dataset depends on the shape of the tree (note - this is different from the quality of the tree having to do with the shape of the _data_, which is addressed in @lesson-link{decision-trees-evaluating})
+- That the quality of a decision tree for a single dataset depends on the shape of the tree (note - the quality of the tree also has to do with the shape of the _data_. We'll address that in @lesson-link{decision-trees-evaluating})
 
 === Launch
 @slidebreak{Launch}
 
 Consider each of the three situations described below:
 
-- You take an online quiz, which guesses your hairstyle.
+- You and your friends take an online quiz that tries to guess your hairstyles.
 - Two people who work for the _same company_ and earn the _same salary_ apply for a loan by filling out the _same online form_ at the local bank. One of them is granted a loan, but the other is not.
 - A news anchor displays a map with some states colored blue and others colored red. She explains that the map's predictions for the upcoming election were developed using historical census data.
 - A camera at the bank captures a picture of your face, in an attempt to match the picture to your identity.
@@ -66,7 +66,7 @@ On the surface, these situations may not seem to have a lot in common. But all o
 
 (2) Asks questions about that input
 
-(2) Use the answers to produce a predicted outcome from a list of categories
+(3) Use the answers to produce a predicted outcome from a list of categories
 }
 
 @QandA{
@@ -87,13 +87,13 @@ On the surface, these situations may not seem to have a lot in common. But all o
 [.data-table, cols="1a, 2a, 3a", options="header"]
 |===
 | Example 			    | Input Data _(known)_				      | Categories _(unknown)_
-| Hairstyle Quiz	  | Sex, age, race, music, ZIP... 	  | Ponytail vs. Pixie cut vs. Dreadlocks vs. Mohawk...
+| Hairstyle Quiz	  | Sex, age, race, music, ZIP... 	  | Ponytail vs. Pixie cut vs. Dreadlocks vs. crewcut vs. Mohawk...
 | Bank Loan 		    | Income, job, age, credit score... | Approved vs. Not-Approved
 | Elections 		    | Past voting, recent polls...	 	  | Red vs. Blue
 | Facial Recognition| Your face 						            | Every person in America
 |===
 
-For example, the hairstyle quiz can probably rule out "ponytail" if the sex of the person taking the quiz is "male".  A classifier's job to make the best guess possible, and it won't always be right! After all, some people with ponytails are male!
+For example, the hairstyle quiz will probably rule out "ponytail" if the sex of the person taking the quiz is "male".  A classifier's job is to make the best guess possible, and it won't always be right! After all, some people with ponytails are male!
 
 @lesson-point{No classifier is perfect. _Some_ are useful.}
 
@@ -121,7 +121,7 @@ We're going to play a version of "I Spy", called "I Spy - *Classify*!"...
 - One at a time, you'll ask me yes-or-no-questions to figure out the target
 - You can ask about _categories:_ For example, "are they wearing glasses?"
     - If I answer "yes", only students wearing glasses stay up, while the others return to their seats
-    - If I answer "no", only student *not* wearing glasses stay
+    - If I answer "no", only students *not* wearing glasses stay
 - You can ask about _quantities:_ For example, "are they taller than 5'7"?
     - If I answer "yes", only students taller than 5'7" stay up
     - If I answer "no", only students *not* taller than 5'7" stay up
@@ -191,7 +191,7 @@ If students start to complain that they're "stuck" with earlier questions, that'
 @A{Good questions help us eliminate many of the remaining categories whether the answer is yes _or_ no}
 
 @Q{Suppose our first question was "has glasses?", and only one student wears glasses. If that student happens to be my target, how many more questions will it take to find them?}
-@A{No! If the answer is "yes", we immediately know who it is!}
+@A{None! If the answer is "yes", we immediately know who it is!}
 
 @Q{Would that be the best question to start with, if we were going to play the game many times?}
 @A{No, because if the answer is "no" we haven't really narrowed it down at all}
