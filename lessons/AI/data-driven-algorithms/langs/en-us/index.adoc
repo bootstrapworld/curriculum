@@ -10,6 +10,8 @@
 
 @lesson-prereqs{ai-intro, contracts-tables}
 
+@add-to-lang{}
+
 @keywords{}
 
 [@lesson-intro-table]
@@ -67,7 +69,7 @@ Consider this sentence with your partner: @big{Teh cat meowed so loudky it woke 
 }
 
 @slidebreak{Launch}
-When humans spell check, they rely on _context clues, experience, and background_. The process of spell-checking varies not just by person, but by situation. If a complex, technical word had been misspelled you might have relied on a different spell checking strategy. 
+When humans spell check, they rely on _context clues, experience, and background_. The process of spell-checking varies not just by person, but by situation. If a complex, technical word had been misspelled, for example, you might have relied on a different spell checking strategy. 
 
 === Investigate
 @slidebreak{Investigate}
@@ -105,10 +107,11 @@ After students have completed the activity, invite them to share their responses
 
 @QandA{
 @Q{In what ways do spell checkers succeed at mimicking humans?}
-@A{Based on the above, they do not at all! Perhaps the outcomes are similar, depending on a wide variety of variables.}
+@A{They don't! But the outcomes might be similar, depending on a wide variety of variables.}
 
 @Q{Would it be a good idea for a human to try mimic a spell checker's algorithm? Why or why not?}
-@A{The program we just discussed relies on computational brute force: primitive spell checking programs will repeatedly edit / transform a misspelled word, generating dozens of different words to verify in the dictionary. Were a human to undergo this process, it would be time-consuming, laborious, and highly error prone.}
+@A{No. it would be time-consuming, laborious, and highly error prone for a human.}
+@A{The program we just discussed relies on computational brute force: primitive spell checking programs will repeatedly edit / transform a misspelled word, generating dozens of different words to verify in the dictionary.}
 }
 
 
@@ -123,36 +126,29 @@ Students explore both the algorithm and the datasets that power a Pyret-based sp
 
 @lesson-instruction{
 - Let's take a look at a spell checking program written in Pyret.
-- This program includes a built-in function called `alt-words`, which implements a spell-checking algorithm similar to the one we've just explored.
 - Open the @starter-file{spell-checker} and click "Run".
-- Complete Question 1 on @printable-exercise{pyret-spell-checker.adoc} to discover how the spell checker works.
+- Complete the first section of @printable-exercise{pyret-spell-checker.adoc}.
 }
 
 @slidebreak{Investigate}
 
-The third column of the table you completed was titled "Number of Edits." A more technical term with the same meaning is @vocab{edit distance}. @vocab{Edit distance} is one way that we can measure the similarity of two strings! 
+@QandA{
+@Q{How did the spellcheckers work compare to your efforts to be a computer on @printable-exercise{first-spell-checker.adoc}?}
+@A{It found everything we did and more than a hundred other insertions and substitutions in mere seconds!}
+
+@Q{Were all of Pyret's suggestions useful?}
+@A{No! Most of the words it proposed were nonsense.}
+}
+
+@slidebreak{Investigate}
+
+All of the "words" our spell checker generated in the first section involved a single change. A more technical term with the same meaning is @vocab{edit distance} - the edit distance for all of those words was 1. @vocab{Edit distance} is one way that we can measure the similarity of two strings! 
 
 @slidebreak{Investigate-DN}
 
 @lesson-instruction{
-Complete the rest of @printable-exercise{pyret-spell-checker.adoc}.
-}
-
-@slidebreak{Investigate-DN}
-
-Disappointingly, Pyret did *not* find the correct spelling for "crosswrd" when using `WORDS-S`. But why?
-
-There are basically two "parameters" that our spell-checking program used: 
-
-@indented{
-1. the *function* : what is outside of the parentheses
-
-2. the *dictionary* : provided inside the parentheses, as an argument
-
-
-We've discussed some ways we could make the _function_ better. (e.g. Maybe try swapping out an additional letter?) 
-
-But it's also possible to improve the quality of the output _without changing how the function works_... by improving the _dictionary argument_!  Let's explore how directing Pyret to access differently-sized dictionaries influences the quality of the program's output.
+- Let's take a look at how Pyret generates lists of words with a bigger edit distance and refines its suggestions to remove nonsensical words.
+- Complete the rest of @printable-exercise{pyret-spell-checker.adoc}.
 }
 
 @slidebreak{Investigate}
@@ -164,11 +160,13 @@ But it's also possible to improve the quality of the output _without changing ho
 @A{Because smaller dictionaries didn't know as many words, so `only-real` was removing words even though they could be found in larger dictionaries.}
 }
 
-@lesson-point{
 When we fed _more representative data_ to our spell checker, we got better results _without changing the spell checker's code_.
-}
 
-This is the defining characteristic of @vocab{data-driven algorithms}: their effectiveness is directly tied to the amount of data they have to work with. The same algorithm that performs terribly with a small dataset might almost appear "intelligent" when given a much larger one.
+@lesson-point{
+The effectivenes of @vocab{data-driven algorithms} is directly tied to the amount of data they have to work with.
+} 
+
+The same algorithm that performs terribly with a small dataset might almost appear "intelligent" when given a much larger one.
 
 === Synthesize
 @slidebreak{SynthesizeR}
@@ -229,10 +227,31 @@ You already know how to select rows, generate summaries, and make data visualiza
 @right{@image{images/text-app.png, 250}}
 
 But a cell phone or spell-checker doesn't show you rows and columns - it shows you the words themselves! This raises a question: once a spell checker gives us a table full of words and edit-disances....how do we get the words _out?_
+--
 
 @lesson-instruction{
 - Complete the rest of @printable-exercise{spell-checker-results.adoc}.
 }
---
+
+@slidebreak{Investigate}
+
+@vocab{Row accessors} allow us to extract data from specific cells of our table by specifying the row number and column title. 
+
+@QandA{
+@Q{What row number do we use to extract data from the first row of our table?}
+@A{0}
+
+@Q{What code did you write to extract the 75th suggested word from the table?}
+@A{}
+
+@Q{What was the 75th suggested word?}
+@A{}
+}
+
 === Synthesize
-TODO: Ask questions about row-accessors
+
+@QandA{
+@Q{Why would a spell checking app need to use Row Accessor functions?}
+@A{Because we want to suggest a word, not a whole row of a table!}
+@A{And we might want to take the edit-number into consideration when we make our suggestion.}
+}

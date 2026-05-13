@@ -1,64 +1,71 @@
 = A Pyret Spell Checker
 ++++
 <style>
-/* Make the last content section (ignore acknowledgement) grow "faster",
- * in order to take up more of the available space than the other sections
- */
-.sect1:nth-last-child(2) { flex-grow: 6 !important; }
+/* Shrink vertical spacing on fitbruby */
+.fitbruby{padding-top: 0.5rem;}
+
+/* Cut the padding under each section */
+.sect1 { padding: 0 !important; }
 </style>
 ++++
 @link-instructions{Open the @starter-file{spell-checker} and click "Run".} Follow each of the instructions below to discover how our very own Pyret spell checker works.
 
-== Functions that make word lists from a single change
+== Functions that suggest a list of words by making a single change
+These four functions produce results with an @vocab{edit-distance} of 1, meaning the suggestions are only one change away from the original.
 
-@n In the Interactions Area, evaluate `subs("hello")`. What does this function do? @fitb{}{}
-@fitb{}{@ifsoln{It produces every possible 1-letter substitution}}
+@n Evaluate `deletions("wello")`. How many suggestions does this function return? @fitb{}{@ifsoln{4}} +
+@hspace{1em}_Look back at your *deletions* in @printable-exercise{first-spell-checker.adoc}. How many of them are in this list?  1 2 3 4 5 _
 
-(Look back at your *substitutions* in @printable-exercise{first-spell-checker.adoc}. How many of them are in this list?)
+@n Evaluate `insertions("wello")`. How many suggestions does this function return? @fitb{}{@ifsoln{151}} +
+@hspace{1em}_Look back at your *insertions* in @printable-exercise{first-spell-checker.adoc}. How many of them are in this list?  1 2 3 4 5 _
 
-@n Evaluate `swaps("hello")`. What does this function do? @fitb{}{@ifsoln{Produces every possible swap of two adjacent letters}}
-@fitb{}{}
+@n Evaluate `swaps("wello")`.How many suggestions does this function return? @fitb{}{@ifsoln{4}} +
+@hspace{1em}_Look back at your *swaps* in @printable-exercise{first-spell-checker.adoc}. How many of them are in this list?  1 2 3 4 5 _
 
-(Look back at your *swaps* in @printable-exercise{first-spell-checker.adoc}. How many of them are in this list?)
-
-@n Evaluate `insertions("hello")`. What does this function do? @fitb{}{@ifsoln{Produces every possible insertion of a single letter into the word}}
-@fitb{}{}
-
-@n Evaluate `deletions("hello")`. What does this function do? @fitb{}{@ifsoln{Produces every possible deletion of a single letter from the word}}
-@fitb{}{}
+@n In the Interactions Area, evaluate `subs("wello")`. How many suggestions does this function return? @fitb{}{@ifsoln{125}} +
+@hspace{1em}_Look back at your *substitutions* in @printable-exercise{first-spell-checker.adoc}. How many of them are in this list?  1 2 3 4 _
 
 == Combining Functions
+Each of the functions above can be combined to generate word lists with a *larger edit-distance*.
 
-You can also combine these functions to produce alternatives that are more than 1 edit from the original.
+@n In your own words, what do you think `swaps(swaps("wello"))` does? @fitb{}{} +
+@fitb{}{@ifsoln{it will compute all possible swaps for "wello", then compute every swap for _those_ swaps!, resulting in a list with an edit-distance of 2.}}
 
-@n In your own words, what do you think `swaps(swaps("hello"))` will do? @fitb{}{}
-@blanklines{2}{@ifsoln{it will compute all possible swaps for "hello", then compute every swap for _those_ swaps!}}
-
-@n In your own words, what do you think `swaps(subs("hello"))` will do? @fitb{}{}
-@blanklines{2}{@ifsoln{For every possible 1-letter substitution, find every possible swap}}
+@n In your own words, what do you think `swaps(subs("wello"))` does? @fitb{}{} +
+@fitb{}{@ifsoln{For every possible 1-letter substitution, find every possible swap, resulting in a list with an edit-distance of 2.}}
 
 == Removing "Junk" Words
+Pyret has a function `only-real`, that takes in a table of suggested words and a dictionary.
 
-@n Evaluate `only-real(subs("hello"), WORDS-L)`. What does `only-real` do? @fitb{}{@ifsoln{It removes any word that isn't in the dictionary}}
-@fitb{}{}
+@n Evaluate `insertions("flt")`. How many suggestions does it return? @fitb{}{@ifsoln{101}}
 
-@n Try other dictionaries. For example, Evaluate `only-real(subs("hello"), WORDS-M)`. Why do we get different results? +
-@fitb{}{The size of the dictionary determines what words the algorithm will return. Smaller dictionaries mean more "unknown words."}
+@n Evaluate the three expressions below and record what they return
+
+[cols="1a,1a"]
+|===
+|`only-real(insertions("flt"), WORDS-S)`| @ifsoln{flat}
+|`only-real(insertions("flt"), WORDS-M)`| @ifsoln{felt, flat}
+|`only-real(insertions("flt"), WORDS-L)`| @ifsoln{felt, flat, flit}
+|===
+
+@n What does `only-real` do? Why do we get different results? @fitb{}{@ifsoln{It removes any word that isn't in the dictionary}} +
+@fitb{}{@ifsoln{The size of the dictionary determines what words the algorithm will return. Larger dictionaries contain more "real words."}}
 
 == Putting it All Together
 
-The `alt-words` function combines all of the functions you've seen so far. It takes in a "word", a dictionary, and a maximum number of edits allowed. _(WARNING: depending on your dictionary, edits of 3 or more can grind your computer to a halt!)_
+The `alt-words` function combines all 5 of these functions. It takes in a "word", a dictionary, and a maximum edit-distance.
 
-@n Evaluate `alt-words("maple", WORDS-S, 2)`, and record the first 3 results. In the last column, write what edit(s) were needed to go from "maple" to that word.
+@n If you had to guess, what word did the author mean to type when they wrote `crosswrd`? @fitb{}{}
+
+@n Evaluate `alt-words("crosswrd", WORDS-S, 2)`. Record the first 3 results. Describe the edit(s) to get here from "crosswrd".
 
 [.FillVerticalSpace, cols="^2a, ^1a, ^5a", options="header", stripes="none"]
 |===
-| Alternative Word	| # Edits 			| Edits from "maple"
-|results will vary!	| 			 		|
-| as an example... 	| 			 		|
-| @ifsoln{male}		| @ifsoln{1} 		| @ifsoln{delete the "p"}
-| 					| 			 		|
+| Alternative Word		| # Edits 									| Edits from "crosswrd"
+| @ifsoln{crossed}		| @ifsoln{2} @ifnotsoln{@vspace{1ex}}		| @ifsoln{delete the "w". replace "r" with "e"} 
+| @ifsoln{crossword}	| @ifsoln{1} @ifnotsoln{@vspace{1ex}}		| @ifsoln{delete the "w". replace "r" with "e"}
+| @ifsoln{crosswords}	| @ifsoln{2} @ifnotsoln{@vspace{1ex}}		| @ifsoln{delete the "w". replace "r" with "e"}
 |===
 
-@n How does the "edit distance" between two words help us measure similarity? @fitb{}{@ifsoln{A low edit distance indicates that two strings are very similar,}} +
-@fitb{}{@ifsoln{and a high edit distance indicates that two strings are very different.}}
+@n If the spellchecker were to take the number of edits into consideration, which of these suggestions do you think it would propose first? Why? 
+@fitb{}{@ifsoln{"crossword" because it has the smallest edit-distance, so is the most similar to the input}}
