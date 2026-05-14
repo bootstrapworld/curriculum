@@ -1,14 +1,17 @@
 #! /usr/bin/env bash
 
-export SEMESTER=fall
-export YEAR=2026
+export TOPDIR=$(pwd)
 
-bootstraproot=https://bootstrapworld.org/materials/$SEMESTER$YEAR
 SED=sed
 
 if which gsed|grep -q .; then
   SED=gsed
 fi
+
+$(grep 'export SEMESTER' $TOPDIR/Makefile|sed -e 's/\s*:=\s*/=/')
+$(grep 'export YEAR' $TOPDIR/Makefile|sed -e 's/\s*:=\s*/=/')
+
+bootstraproot=https://bootstrapworld.org/materials/$SEMESTER$YEAR
 
 regenid=
 rebuild=
@@ -66,8 +69,6 @@ fi
 if test -z "$PROGLANG"; then
   PROGLANG=pyret
 fi
-
-export TOPDIR=$(pwd)
 
 templateSlidesId=1vFGtTzhTlc1p8VJECRucj5DO83skm4wMI1BU3QbHE5k
 parentFolderId=1AP4vk0XwLSl9cU8HIHjmSTFK7dG3CrGn
