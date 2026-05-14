@@ -1,10 +1,7 @@
 #! /usr/bin/env bash
-
 course=
 nomake=
-
 otheropts="--nomake"
-
 while test $# -ne 0; do
   opt="$1"
   if test "$opt" = --nomake; then
@@ -19,27 +16,34 @@ while test $# -ne 0; do
     course=${course##*/}
   fi
 done
-
 if test -z "nomake"; then
   make
 fi
-
 function build_slide() {
   local lesson=$1
   echo calling build-slide $otheropts $lesson
   ./build-slide $otheropts $lesson
 }
-
 if test -z "$course"; then
   for lesson in distribution/en-us/lessons/*; do
     build_slide $lesson
   done
 else
-  courselessonlist=distribution/en-us/courses/$course/.cached/.workbook-lessons.rkt.kp
-  for lesson in $(cat $courselessonlist); do
-    if ! echo $lesson | grep -q "[()]"; then
-      build_slide $lesson
+  seen_lessons=""
+  IFS=',' read -ra courses <<< "$course"
+  for c in "${courses[@]}"; do
+    courselessonlist=distribution/en-us/courses/$c/.cached/.workbook-lessons.rkt.kp
+    if test ! -f "$courselessonlist"; then
+      echo "Warning: course '$c' not found, skipping"
+      continue
     fi
+    for lesson in $(sed 's/"//g' $courselessonlist); do
+      if ! echo $lesson | grep -q "[()]"; then
+        if ! echo "$seen_lessons" | grep -qx "$lesson"; then
+          seen_lessons="$seen_lessons"$'\n'"$lesson"
+          build_slide $lesson
+        fi
+      fi
+    done
   done
 fi
-
