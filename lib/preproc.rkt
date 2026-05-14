@@ -42,8 +42,6 @@
 
 (define *pyret?* #f)
 
-(define *github-prefix* "https://raw.githubusercontent.com/bootstrapworld/starter-files")
-
 (define *solutions-mode?* #f)
 
 (define *possibly-invalid-page?* #f)
@@ -188,7 +186,6 @@
             (read-json i)))
         '())))
 
-(define *pyret-starter-file-prefix* "https://pyret.BootstrapWorld.org/editor#shareurl=")
 
 (define *assessments*
   (let ([assessments-file (format "distribution/~a/lib/assessments.js" *natlang*)])
