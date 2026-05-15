@@ -36,65 +36,166 @@ Students consider how arbitrary documents (in this case, songs and images) can b
 
 |===
 
-== Categories Spaces
+== Categories, Attributes, and Dimensions
 
 === Overview
 
 Students explore the idea of _dimensionality_ -- that virtually any category of thing can be defined as having a set of attributes (e.g. - Fast Food chains can be defined by _price_ and _quality_), and any member of that category can be graphed as a point in space (e.g. - plotting fast food restaurants on a _price-quality_ graph).
 
-== Launch
+=== Launch
 @slidebreak{LaunchR}
-@right{@image{images/hamburger.jpg}}
-Which restaurant is the best, and why: McDonalds, Burger King, or Wendy's?
+@right{@image{images/burger.jpg, 300}}
+Which fast-food restaurant is the best, and why?
 
 @teacher{Give students a minute to discuss}
 
 
 @slidebreak{Launch}
-When evaluating a fast food chain, you might have a few different attributes (price, quality-of-fries, quality-of-nuggets, convenience, etc). Let's pick three attributes to start, on a scale of 1 to 5:
+When evaluating a fast food chain, you might have a few different attributes (price, quality-of-fries, quality-of-nuggets, convenience, etc). Let's pick three attributes to start:
 
-[cols="1a, ^1a, ^1a, ^1a"]
+[.data-table, cols="1a, ^1a, ^1a, ^1a", options="header"]
 |===
-| Restaurant  | Price (1 = cheap)| Fries (5=best) | Burger (5=best)
-| McDonalds   | 1.25             | 4.6            | 4.1
-| Burger King | 1.51             | 4.1            | 4.3
-| Wendy's     | 1.47             | 4.5            | 4.4
-| Five Guys   | 2.20             | 3.9            | 4.7
-| Dairy Queen | 2.11             | 3.7            | 3.9
+| Restaurant  | Price (1 = cheap)| Fries (5=best) | Burger (10=best)
+| McDonalds   | 1.25             | 4.6            | 5
+| Burger King | 1.51             | 4.1            | 6
+| Wendy's     | 1.47             | 4.5            | 7
+| Five Guys   | 2.20             | 3.9            | 8
+| Dairy Queen | 2.11             | 3.7            | 4
 |===
 
 (NOTE: These numbers are _totally made up_, and just used for the example!)
 
 @slidebreak{Launch}
-@ifslide{
-[cols="1a, ^1a, ^1a, ^1a"]
+This example used "Fast Food Brands" as a category, and came up with three attributes with which to measure each brand (Price, Fries, Burger). We could have done the same using *cars* as a category, and four attributes:
+
+[.data-table, cols="1a, ^1a, ^1a, ^1a, ^1", options="header"]
 |===
-| Restaurant  | Price (1 = cheap)| Fries (5=best) | Burger (5=best)
-| McDonalds   | 1.25             | 4.6            | 4.1
-| Burger King | 1.51             | 4.1            | 4.3
-| Wendy's     | 1.47             | 4.5            | 4.4
-| Five Guys   | 2.20             | 3.9            | 4.7
-| Dairy Queen | 2.11             | 3.7            | 3.9
+| Car         | HP   | MPG | Top-Speed  | 0-60 (sec)
+| Camry       | 225  | 51  | 115        | 7.0
+| Corvette    | 490  | 19  | 184        | 2.9
+| Mini Cooper | 161  | 32  | 140        | 7.4
+| Prius       | 194  | 57  | 112        | 7.2
+| Cybertruck  | 600  | 79  | 120        | 4.1
+|===
+
+
+@lesson-instruction{
+Now it's your turn!
+
+- Come up with a category for which you have multiple, _quantitative_ attributes. It could be restaurants, sports teams, movies, etc.
+- Create a table with _and at least 3_ attributes and _at least 5_ members of the category.
+- Be ready to share your categories!
+}
+
+
+@teacher{Walk around the room and facilitate discussion. All the attributes should be quantitative, so be careful to reset students who are creating categorical columns. After a few minutes, have students share their categories and attributes.}
+
+=== Investigate
+@slidebreak{Investigate}
+@ifslide{
+[.data-table, cols="1a, ^1a, ^1a, ^1a", options="header"]]
+|===
+| Restaurant  | Price (1 = cheap)| Fries (5=best) | Burger (10=best)
+| McDonalds   | 1.25             | 4.6            | 5
+| Burger King | 1.51             | 4.1            | 6
+| Wendy's     | 1.47             | 4.5            | 7
+| Five Guys   | 2.20             | 3.9            | 8
+| Dairy Queen | 2.11             | 3.7            | 4
 |===
 }
 
-If you're from the West Coast, you're probably wishing In-N-Out was on this list!
-[cols="1a, ^1a, ^1a, ^1a"]
+Suppose someone is a die-hard fan of a popular fast-food chain from the west coast...In-N-Out!
+[.data-table, cols="1a, ^1a, ^1a, ^1a", options="header"]
 |===
-| In-N-Out  | 1.45 | 4.4 | 4.5
+| Restaurant  | Price (1 = cheap)| Fries (5=best) | Burger (10=best)
+| In-N-Out    | 1.45 | 4.4 | 8
 |===
 
-Based on this data, which of the five chains in our table is _most similar_ to In-N-Out, and why?
+Unfortunately, In-N-Out isn't available everywhere, and this person is going to have to settle for one of the places in our table. Based on this data, which of the five chains in our table is _most similar_ to In-N-Out, and why?
 
 @teacher{Make sure you have students explain their thinking!}
 
+@slidebreak{Investigate}
+If we're just comparing based on Price, that's easy: plot the restaurants' prices on a number line, and find the one that's closes to In-N-Out.
 
+@centered-image{images/1-d-comparison.png}
+
+@slidebreak{Investigate}
+--
+@right{@image{images/2-d-comparison.png, 400}}
+But what if we want to compare based on Price _and_ Fry Quality? For this, we'll need a @vocab{scatter plot}!
+
+Let's take a look at this @online-exercise{https://www.desmos.com/3d/lhqra70cje, Fast Food Ratings} graph.
+
+- At the top of the expression panel on the left, you'll see a data table for our restaurants.
+- We have columns for Price, Fry Quality, Burger Quality, and "restaurant number" (e.g., 1 = McDonalds).
+- This 2-dimensional scatter plot shows the relationship between Price (Z) and Fry Quality (X).
+- We can "turn on" the folder for "In-N-Out", to see where it falls on the graph.
+- We want to find the blue dot that's most similar to the green one.
+- *How do we measure "similarity" in 2 dimensions?*
+--
+
+@slidebreak{Investigate}
+@teacher{Turn on the folder "Lines and Angle Calculation". A line will appear, pointing from the origin to the point for In-N-Out.}
+
+@QandA{
+By dropping lines from each point to the origin, we can *measure the angle between them!*
+@right{@image{images/2-d-comparison-w-lines.png, 400}}
+@Q{What is would be the _largest possible angle_ between any two points on this graph?}
+@A{90°: a fictional restaurant with $0 in price and the best fries, and another one with a zero for fries and a high price.}
+
+@Q{What is would be the _smallest possible angle_ between any two points on this graph?}
+@A{0°: two restaurants with the exact same score will result in two lines going to the same point from the origin.}
+}
+
+@teacher{Adjust the slider for @math{r_n}, showing the angle @math{θ} between In-N-Out and the other restaurants.}
+
+@slidebreak{Investigate}
+We can repeat the same process with our Burger v. Price scatter plot!
+
+@teacher{
+- Refresh the page to reset everything
+- Turn off the folder for "Fries v. Price" and turn *on* the folder "Burgers v. Price"
+- Click on the "X" label on bottom axis, and slowly drag it to the left.
+- This will rotate the 3D space, until you have a "flat" z-y plane with blue dots on it
+- Turn on "In-N-Out" and "Lines and Angle Calculation", and find the closest blue dot
+}
+
+In every case, we draw lines from our points to the origin and then compute the _angle-distance_ between them. But what if we want to compare Price, Fry Quality, _and_ Burger Quality? How can we compare all three?
+
+@teacher{Solicit student responses!}
+
+@slidebreak{Investigate}
+--
+@right{@image{images/projection.webp, 300}}
+
+This image represents a _projection_ of a 3D object into two, 2-dimensional planes. You can see that one shadow looks like a square and the other looks like a circle. Both are showing us a part of the story, and both are correct about the part they show. But the _real_ shape is 3-dimensional (3D).
+
+The same is true for our dataset! Our restaurants are described by 3 different attributes, so our "restaurant space" really has three dimensions! Like the shadows in this image, our two scatter plots are just _projections_ of 3D points onto the Z-X and Z-Y planes.
+--
+
+@slidebreak{InvestigateR}
+--
+@right{@image{images/3-d-comparison-w-lines.png, 400}}
+
+- Turn *on* "Fries v. Price" again, as well as "Fries v. Burgers v. Price".
+- Rotate the 3D space to match the projection image, so you can see how the 3D plot is "projected" onto the planes to create our 2D scatter plots.
+- Now turn *off* the 2d scatter plots ("Fries v. Price" and "Burger v. Price"), and turn *on* our "Lines and Angle Calculation"
+
+Even in three dimensions, we can draw our lines and measure the angle distance!
+--
+=== Synthesize
+@QandA{
+@Q{Which three attributes from _your_ categories would you choose?}
+
+@Q{Would the math still work in *four* dimensions? *Five*?}
+}
 
 == Song Similarity
 
 === Overview
 
-Students explore ways in which simple songs (composed only of "snaps" and "claps") can be represented as points in space, and how equality, Pythagorean distance, and angle distance can be used to measure similarity.
+Students explore ways in which simple songs (composed only of "snaps" and "claps") can also be represented as points in space, and angle distance can be used to measure similarity in music.
 
 === Launch
 @slidebreak{LaunchR}
@@ -102,16 +203,16 @@ Students explore ways in which simple songs (composed only of "snaps" and "claps
 
 @vocab{Similarity Models} are all about *measuring similarity*:
 
-- Which songs are most like this one?
-- Which images are most similar to this one?
-- Which essays are the most similar to this one?
+- Which restaurant is most like In-N-Out?
+- Which essays are the most similar to mine?
+- Which songs are most like "America the Beautiful"?
 
 @link{https://open.spotify.com/, Let's review our example from Spotify}, which you may remember from @lesson-link{ai-intro}.
 
 @teacher{Search for a song that your students will recognize. When you hover over the search result, you'll see a three dots (`...`) appear on the right. Click these dots and select "Go to Song Radio"}
 
 @slidebreak{Launch}
-When we asked Spotify to create a station based on that song, it tried to find other songs that are similar to it. But the computer doesn't have ears, and it doesn't have the human experience that informs how we hear a song.
+When we asked Spotify to create a station based on that song, it tried to find other songs that are _similar_ to it. But the computer doesn't have ears, and it doesn't have the human experience that informs how we hear a song.
 
 So how does it even know what "similar" means?
 
@@ -325,398 +426,6 @@ Much like our songs, we can come up with lots of ways to describe an image:
 
 What else can you come up with?
 
-
-
-== Bags of Words
-
-
-=== Overview
-
-Students practice thinking like a hacker to determine the basic requirements of a successful plagiarism detection program. They consider the "bag-of-words" model, which a user can query to better understand how similar or different two documents are.
-
-=== Launch
-@slidebreak{Launch}
-
-A student in your class has been accused of plagiarism because an AI plagiarism detector flagged their essay. 
-
-Your teacher seems to believe that the plagiarism detector can be trusted with 100% certainty -- but the student is your friend, and they assure you that they did not plagiarize.
-
-Let's learn how a plagiarism detector works so that we can defend the student.
-
-@scrub{
-But first, a though experiment: How are plagiarism detectors designed, anyhow?! Good designers of these systems have to imagine all the ways that someone might try to _hack_ or _fool_ them. This is called "adversarial thinking". Let's practice thinking like a designer.
-
-@QandA{
-@Q{What are some strategies that students might use to evade detection by a plagiarism detector?}
-@A{Responses will vary, but may include the following:
-  * replace common words with synonyms
-  * change the ordering of sentences and paragraphs
-  * plagiarize from an unlikely source (maybe a friend who took the class 5 years ago?)
-  * plagiarize from multiple sources
-  * paraphrase text so that its tone matches the student's voice
-  }
-}
-
-@strategy{Adversarial Thinking}{
-Go easy on your students! As students share their plagiarism strategies, you may feel judgmental. We urge you to keep those feelings at bay.
-
-In this exercise, we are trying to get students to engage in *Adversarial Thinking* (put simply, thinking like a hacker). This is a valuable strategy that is taught, for example, university courses focused on security, data protection, harms caused by AI, etc. Adversarial Thinking is a valuable skill for students to develop; the key is that they learn how to exercise it in an ethical way!
-
-Just because students excel at thinking in this way doesn't mean they are ethically compromised. Focus on and commend their creativity and reasoning instead of judging them.
-}
-
-As a student, you probably know what it feels like to be under surveillance.
-
-- When you use the internet at your school or on a school-issued computer, software probably monitors your web use and blocks you from visiting a multitude of sites.
-- When you take a test, it's likely proctored.
-- You might even go to a school where adults are stationed around the building and in the hallways or use cameras to check that students are dressed and behaving a certain way.
-- When you submit an essay to your English or History teacher, you can expect that they will check for plagiarism -- perhaps by running it through a plagiarism detector to be certain that all words and thoughts are your own.
-}
-
-
-=== Investigate
-
-@slidebreak{Investigate-DN}
-
-To understand the workings of plagiarism detection, we'll start by looking at a simple detector.
-
-@lesson-instruction{
-- Open the @starter-file{plagiarism}.
-- With a partner, complete the first two sections of @printable-exercise{primitive-plagiarism-detector.adoc}.
-}
-
-@slidebreak{Investigate}
-
-@teacher{Debrief the page with your class using the prompts below.}
-
-@QandA{
-@Q{What does the `simple-equality` detector do?}
-@A{Takes in two documents and returns `true` if they match exactly and `false` if they don't match exactly. The function does not include punctuation, capitalization or spacing when deciding if two strings match.}
-@Q{How would you evaluate the effectiveness of the `simple-equality` detector?}
-@A{It doesn't work very well! We have no way of knowing how similar the documents are unless they are basically an exact match. Whether two documents are almost identical or have nothing in common, we will be told that they aren't a match.}
-@Q{What might a more effective plagiarism detector do differently?}
-@A{Answers will vary.}
-}
-
-@slidebreak{Investigate}
-
-Plagiarizers usually alter at least a few words of the original document. Sometimes they change the ordering of the text, and sometimes they delete a sentence or word here and there.
-
-- If the `simple-equality` detector finds a match, we can be certain that identicality exists (disregarding spaces, punctuation, and capitalization).
-- If the detector does not find a match, all we know is that the two documents are not identical.
-
-*We need a more sophisticated plagiarism detector!*
-
-@slidebreak{Investigate}
-
-@teacher{The last section of @printable-exercise{primitive-plagiarism-detector.adoc} invites students to think about _measuring similarity_. Remind students about the mountain sorting activity that they completed during @lesson-link{ai-intro} to recontextualize the concept of measuring similarity.}
-
-@lesson-instruction{
-- Yara and Xola agree that there has to be a way to measure the _similarity_ of the two essays.
-- With a partner, complete the last section of @printable-exercise{primitive-plagiarism-detector.adoc}, where you will consider two proposals for measuring similarity -- and then develop your own method for measuring similarity!
-}
-
-@slidebreak{Investigate}
-
-Rather than detecting identicality, we need to determine the _closeness_ of two documents. To do that, we summarize each document, and then compute the distance between the summaries.
-
-@slidebreak{Investigate}
-
-One standard way to summarize a document is by creating a @vocab{"bag of words" model}. Let's try it on two documents (below); each document is an example of jazz "scatting", when a vocalist improvises with nonsense syllables.
-
-- *Document a*: "doo be doo be doo"
-- *Document b*: "doo doo be doo be"
-
-The bag-of-words summary for *Document a* looks like this: `"be": 2, "doo": 3`
-
-@lesson-point{
-A bag-of-words model represents text as an unordered collection of words with their frequencies.
-}
-
-@slidebreak{Investigate}
-
-As you can see, we've taken the original sentence and disregarded word order, creating a collection that focuses solely on *word frequency*.
-
-@QandA{
-@Q{What is the bag-of-words summary for *Document b*?}
-@A{The bag-of-words summary for Document b looks like this: `"be": 2, "doo": 3`.}
-@A{It should be identical to the bag-of-words summary for Document a.}
-@Q{How did you know what order to put the words in?}
-@A{I used the same order as the bag-of-words summary for Document a.}
-}
-
-_Note: We could have written these bag-of-words summaries as `"doo": 3, "be": 2`, but once we decide on a word order for one document, adhering to that same order is required. The simplest way to be consistent is to use alphabetical order._
-
-The bag-of-words summary for both documents is exactly the same!
-
-@slidebreak{Investigate-DN}
-
-A plagiarism detector that uses this model, taking stock of word frequency and word order, could compare the bags instead of the documents. If it did so, it would conclude that the two bags of words are a perfect match... and that Document a and Document b are suspiciously similar.
-
-@lesson-instruction{
-- Open the @starter-file{plagiarism}.
-- With a partner, complete @printable-exercise{slightly-less-primitive-detector.adoc}.
-}
-
-@slidebreak{Investigate}
-
-@QandA{
-@Q{How is the `bag-equality` plagiarism detector different from our primitive `simple-equality` plagiarism detector?}
-@A{The `bag-equality` plagiarism detector compares two bag-of-words summaries, rather than simply comparing two texts.}
-
-@Q{How is the `bag-equality` plagiarism detector similar to our primitive `simple-equality` plagiarism detector?}
-@A{Like our primitive plagiarism detector, it checks for identicality. It determines if the two bags of words are identical or not.}
-}
-
-Checking if two bags of words are identical *is* an improvement from checking if two texts are identical.
-
-=== Synthesize
-@slidebreak{Synthesize}
-
-@QandA{
-@Q{What similarities are there between a system that recommends songs and `bag-equality` plagiarism detection?}
-@A{Both systems build summaries of the available data and then work with those summaries.}
-
-@Q{Can you think of any other apps or technologies that _measure similarity_ in some way?}
-
-@A{Image retrieval -- finding images similar to a given image from a large database}
-@A{Facial recognition -- identifying and verifying individuals based on facial features}
-@A{Product recommendation -- suggesting items for purchase based on a customer's browsing history}
-
-}
-
-
-== Data Normalization
-
-@objective{data-normalization}
-
-=== Overview
-
-Students explore the importance of @vocab{data normalization}, when we organize data to follow a standard pattern.
-
-=== Launch
-@slidebreak{Launch}
-
-Here are some discoveries we have made so far:
-
-- Checking if two texts are identical is not an effective way of detecting plagiarism.
-- Summarizing documents as bags of words, and _then_ checking for identicality is better than comparing two texts... but it is also not an effective way of detecting plagiarism.
-
-@slidebreak{LaunchC}
-
-What we need is a way to check if bags are _similar_!
-
-One strategy programmers use for this is to represent bags of words as points in space.
-
-Let's see how that would work for Documents a and b.
-
-- We already know that *Document a* "doo be doo be doo" can be represented as the bag of words (`"be": 2, "doo": 3`).
-- Written as a coordinate pair, it would like this: (2, 3)
-- Plotting that point on the be-doo plane looks like this:
-
-@center{@image{images/3-2.png, 150}}
-
-@slidebreak{Investigate}
-
-When we plot a point on the _coordinate_ plane, we typically locate @math{x} on the horizontal axis and @math{y} on the vertical axis. Similarly, bags must use same word order if we want meaningful results. 
-
-@QandA{
-@Q{How would you represent Document b ("doo doo be doo be") as a point on the be-doo plane?}
-@A{The point would be in the exact same position as the point for Document a.}
-@A{Because we decided on "be" then "doo" for Document a, we must use "be" then "doo" for Document b also.}
-}
-
-@slidebreak{Investigate}
-
-The decision we just made -- to use "be" then "doo" for both bags of words -- is an example of @vocab{data normalization}. Data normalization is the act of adapting and modifying disparate data so that they all have the same characteristics (making them easy to compare and otherwise compute with).
-
-@lesson-point{
-Don't skip data normalization! 
-}
-
-Failure to normalize data can lead to useless and confusing outputs.
-
-=== Investigate
-@slidebreak{Investigate}
-
-Let's look at some slightly more complicated documents and consider how to plot their points in a multi-dimensional space.
-
-- Document c: "doo be doo be doo doo doo"
-- Document d: "be bop bop bop be bop bop"
-
-[cols="1,2,2", options="header", stripes="none"]
-|===
-| Document
-| Bag-of-words summary
-| Point
-
-| c
-| `"be": 2, "doo": 5`
-| (2, 5)
-
-| d
-| `"be": 2, "bop": 5`
-| (2, 5)
-|===
-
-@slidebreak{Investigate}
-
-*We have a problem.*  We can plainly see that Documents c and d are *not* the same ... but their points are...
-
-@QandA{
-@Q{What went wrong here?}
-@A{The point is to draw out student thinking here rather than to get to any particular answer. The remainder of the lesson will dig into the details. Students might suggest:
- * The points were written as if there were only two items in the list... but, in fact there are three different items!
- * 5 represents "doo" in the first point and "bop" in the second point... but we've lost that information.
-}
-}
-
-
-- Document c: "doo be doo be doo doo doo"
-- Document d: "be bop bop bop be bop bop"
-
-@ifslide{
-[cols="1,2,2", options="header", stripes="none"]
-|===
-| Document
-| Bag-of-words summary
-| Point
-
-| c
-| `"be": 2, "doo": 5`
-| (2, 5)
-
-| d
-| `"be": 2, "bop": 5`
-| (2, 5)
-|===
-}
-
-
-@slidebreak{InvestigateC}
-
-
-In the example @ifnotslide{above}, we forgot the @vocab{data normalization}. How can we fix it?
-
-To solve this problem, let's start by taking a closer look at our data.
-
-- Document c: "doo be doo be doo doo doo"
-- Document d: "be bop bop bop be bop bop"
-
-[cols="3a,^4a, 4a", grid="none", frame="none"]
-|===
-|
-When we use a Venn Diagram to visualize the data...
-| @image{images/scat-venn-diagram.png, 150}
-|...we recognize that Documents c and d +
-contain a total of *three different words*!
-|===
-
-@lesson-point{
-Because there are three words, we need to use a *three* dimensional space, rather than a coordinate plane, which has just two dimensions. 
-}
-
-@slidebreak{InvestigateR}
-
-We must revise our bag-of-words summaries and our points!
-
-@ifslide{
-- Document c: "doo be doo be doo doo doo"
-- Document d: "be bop bop bop be bop bop"
-}
-
-[cols="1,2,2", options="header", stripes="none"]
-|===
-| Document
-| Bag-of-words summary
-| Point
-
-| c
-| `"be": 2, "bop": 0, "doo": 5`
-| (2, 0, 5)
-
-| d
-| `"be": 2, "bop": 5, "doo": 0`
-| (2, 5, 0)
-|===
-
-
-@slidebreak{Investigate}
-
-Normalizing data requires that we consider _all_ the words; when a word occurs zero times in a document, we acknowledge it. Instead of glossing over the dimension, we indicate that a given word occurred zero times. When we include *all* of the words from both documents, we produce a @vocab{model} with the correct @vocab{dimensionality}. For the @vocab{bag-of-words model}, the dimensionality equals how many different words are in the @vocab{corpus}.
-
-@slidebreak{Investigate}
-
-
-It is a bit trickier to envision plotting these points, but not impossible!
-
-@QandA{
-@Q{@right{@image{images/2pts.png, 150}}In the 3-dimensional space to the right, which point represents @math{c}?}
-@A{The one on the bottom.} 
-@Q{How do you know?}
-@A{It's at point (2,5) on the be-doo plane, and has moved 0 in the bop direction.}
-}
-
-@ifslide{
-[cols="1,2,2", options="header", stripes="none"]
-|===
-| Document
-| Bag-of-words summary
-| Point
-
-| c
-| `"be": 2, "bop": 0, "doo": 5`
-| (2, 0, 5)
-
-| d
-| `"be": 2, "bop": 5, "doo": 0`
-| (2, 5, 0)
-|===
-}
-
-@slidebreak{Investigate}
-
-Let's recap:
-
-- We started out with two documents. 
-- Now, in place of our two documents, we have two points that exist at specific locations in a multi-dimensional space.
-- We are going to think about how to make use of those points very soon...
-
-@slidebreak{Investigate}
-
-
-@lesson-instruction{
-- But first, let's practice!
-- Complete @printable-exercise{plotting-bows.adoc}, where you will convert text documents into bags of words, and then plot points to represent those bags.
-- You will also get an opportunity to _reverse_ the process. (You will convert plotted points into bags and text!)
-}
-
-@slidebreak{InvestigateC}
-
-@teacher{Once students have completed @printable-exercise{plotting-bows.adoc}, reflect on the activity by discussing the prompts @ifnotslide{below}.}
-
-@QandA{
-@Q{Which cells on @printable-exercise{plotting-bows.adoc} had more than one correct solution? Why?}
-@A{When we were asked to write the _text_ when given either an ordered pair or a bag-of-words summary, multiple solutions were possible.}
-@A{For instance, in row I, "be doo doo" and "doo be doo" would both be correct responses.}
-@A{Multiple responses are correct in these instances because the bag-of-words model eliminates word order.}
-
-@Q{Who do you agree with, Sierra or Jaden?}
-@A{Students can reasonably agree with either Sierra or Jaden, depending on whether they think the _specific lyrics_ define song A, or if its repetitive nature is what defines song A.}
-@A{Some students may contest that it is too difficult to determine similarity with such limited information -- also a valid point.}
-@A{If your students discuss the actual distance of the different points on the coordinate plane, they are thinking like programmers!}
-}
-
-=== Synthesize
-@slidebreak{Synthesize}
-
-@QandA{
-@Q{Earlier in the lesson, you learned that generally, models _summarize_ the data, eliminating all but the most essential features. Which features of the starting document does the bag of words eliminate? Which features does it preserve?}
-@A{The bag-of-words model eliminates word order. It preserves word count.}
-
-@Q{Why is it important for the bag-of-words summary to acknowledge when a word occurs zero times?}
-@A{Each point exists in a multi-dimensional space. To compare points and consider their closeness, the points must exist in the same multi-dimensional space. When we omit a word that occurs zero times, we are in fact omitting a dimension and constructing a broken model.}
-}
 
 
 == Computing Closeness with Angle Difference
