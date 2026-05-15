@@ -13,35 +13,43 @@ To refresh your memory, here are the contracts you'll need for this page:
 [cols="1a,1a", frame="none"]
 |===
 |
-@show{(contract "first-n-rows" '("Table" "Number") "Table")}
-@show{(contract "dot-plot" '("Table" "String" "String") "Image")}
+@show{(contract "bar-chart" '("Table" "String") "Image")}
 @show{(contract "count" '("Table" "String") "Table")}
 |
-@show{(contract "bar-chart" '("Table" "String") "Image")}
+@show{(contract "first-n-rows" '("Table" "Number") "Table")}
 @show{(contract "row-n" '("Table" "Number") "Row")}
+@show{(contract "sort" '("Table" "String") "Table")}
 |===
 
 == Analyzing Results
 
 @link-instructions{Start by defining a table. At the bottom of the *Definitions Area*, type `results = alt-words("wello", WORDS-M, 3)`. Click "Run".}
 
-@n Describe the data contained in the `results` table. @fitb{}{}+
-@fitb{}{@ifsoln{193 words suggested as alternatives to "wello" by making up to 3 edits and then removing any results that weren't found in the `WORDS-M` library.}}
+@n Describe the data contained in the `results` table. @fitb{}{} +
+@fitb{}{@ifsoln{377 words suggested as alternatives to "wello" by making up to 3 edits and then removing any results that weren't found in the `WORDS-M` library.}}
 
-@n Use the `count` or `bar-chart` function to see how the results are distibuted by `edit-distance`:
+@n Use the `count` or `bar-chart` function to see how the results are distibuted by `"edit-distance"`:
 
-@hspace{6em} @fitbruby{10em}{@ifsoln{3}}{edit-distance = 1} @hspace{6em} @fitbruby{10em}{@ifsoln{21}}{edit-distance = 2} @hspace{6em} @fitbruby{10em}{@ifsoln{169}}{edit-distance = 3}
+@hspace{6em} @fitbruby{10em}{@ifsoln{3}}{edit-distance = 1} @hspace{6em} @fitbruby{10em}{@ifsoln{24}}{edit-distance = 2} @hspace{6em} @fitbruby{10em}{@ifsoln{188}}{edit-distance = 3}
 
-@n Complete the expression to extract just the first 3 rows. Then record them below. `first-n-rows(` @fitb{8em}{@ifsoln{`results, 3`}} `)` 
+@n Evaluate `sort(results, "word", true)` in the Interactions Area. What does it do? @fitb{}{@ifsoln{sorts the words in the table alphabetically}}
+
+@n What code could we write to sort the table by `"edit-distance"`? @fitb{}{@ifsoln{`sort(results, "edit-distance", true)`}}
+
+@n Which sorting criteria do you think will be more important for our spell checker?   `"word"`   or   @ifsoln-choice{`"edit-distance"`}   Why? @fitb{}{} +
+@fitb{}{@ifsoln{we're looking for the most likely replacement based on our training data and words from fewer edits are closer to the input.}}
+
+@n Complete the expression to extract just the first 3 rows with an `"edit-distance"` of 1. Then record them below. +
+`first-n-rows(` @fitb{40em}{@ifsoln{`sort(results, "edit-distance", true), 3`}} `)` 
 
 @vspace{1ex}
 @indented{
 [cols="1a,1a", options="header"]
 |===
-|word 	|edit-distance
-| 		|@vspace{1ex}	
-|		|@vspace{1ex}	
-|		|@vspace{1ex}	
+| word 	| edit-distance
+| hello	| @ifnotsoln{@vspace{1ex}} @ifsoln{1}
+|	wells | @ifnotsoln{@vspace{1ex}} @ifsoln{1}
+|	well	| @ifnotsoln{@vspace{1ex}} @ifsoln{1}
 |===
 }
 
@@ -66,11 +74,11 @@ To refresh your memory, here are the contracts you'll need for this page:
 [.myCustomClass]
 *Now that we know how to extract a single row from our table, we need to extract the specific information that we want from that row.*
 
-@n Evaluate `row2["word"]`. What do you get back? @fitb{}{@ifsoln{}} 
+@n Evaluate `row2["word"]`. What do you get back? @fitb{}{@ifsoln{toll}} 
 
-@n Evaluate `row2["edit-distance"]`? @fitb{}{@ifsoln{}}
+@n Evaluate `row2["edit-distance"]`? What do you get back? @fitb{}{@ifsoln{3}}
 
-@n Evaluate `row-n(results, 1)["word"]`. What did you get back? @fitb{8em}{@ifsoln{}}
+@n Evaluate `row-n(results, 1)["word"]`. What did you get back? @fitb{8em}{@ifsoln{toll}}
 
 @vspace{1ex}
 
@@ -86,5 +94,5 @@ To refresh your memory, here are the contracts you'll need for this page:
 
 @n What code will produce the seventy-fifth suggested word from our table? @fitb{}{@ifsoln{`row-n(results, 74)["word"]`}}
 
-@n What is the seventy-fifth suggested word? @fitb{}{}
+@n What is the seventy-fifth suggested word? @fitb{}{@ifsoln{wield}}
 

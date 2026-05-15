@@ -99,7 +99,6 @@ After students have completed the activity, invite them to share their responses
 @A{The first spell checking program did not have, or use, any of these strengths.}
 @A{In contrast, however, a human would not have the time, ability, or concentration to systematically list out thousands of potential words, whereas the computer has no difficulty doing so.}
 @A{Therefore, the strategies used by the human and computer may be extremely different for a similar task.}
-
 }
 
 === Synthesize
@@ -129,6 +128,8 @@ Students explore both the algorithm and the datasets that power a Pyret-based sp
 - Open the @starter-file{spell-checker} and click "Run".
 - Complete the first section of @printable-exercise{pyret-spell-checker.adoc}.
 }
+
+@teacher{Heads up: The functions used in this Pyret starter file only work in this particular starter file.}
 
 @slidebreak{Investigate}
 
@@ -227,6 +228,8 @@ You already know how to select rows, generate summaries, and make data visualiza
 @right{@image{images/text-app.png, 250}}
 
 But a cell phone or spell-checker doesn't show you rows and columns - it shows you the words themselves! This raises a question: once a spell checker gives us a table full of words and edit-disances....how do we get the words _out?_
+
+@vocab{Row accessors} allow us to extract data from specific cells of our table by specifying the row number and column title. 
 --
 
 @lesson-instruction{
@@ -235,17 +238,15 @@ But a cell phone or spell-checker doesn't show you rows and columns - it shows y
 
 @slidebreak{Investigate}
 
-@vocab{Row accessors} allow us to extract data from specific cells of our table by specifying the row number and column title. 
-
 @QandA{
 @Q{What row number do we use to extract data from the first row of our table?}
 @A{0}
 
 @Q{What code did you write to extract the 75th suggested word from the table?}
-@A{}
+@A{`row-n(results, 74)["word"]`}
 
 @Q{What was the 75th suggested word?}
-@A{}
+@A{wield}
 }
 
 === Synthesize
