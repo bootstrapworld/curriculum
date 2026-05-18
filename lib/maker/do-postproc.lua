@@ -16,6 +16,22 @@ local gtm_noscript_file = os.getenv'TOPDIR' .. '/lib/gtm-noscript.txt'
 local wp_prologue_file = os.getenv'TOPDIR' .. '/lib/wp-adaptors/prologue.txt'
 local wp_epilogue_file = os.getenv'TOPDIR' .. '/lib/wp-adaptors/epilogue.txt'
 
+-- Read these files once, not thousands of times
+local wp_prologue    = read_file_string(wp_prologue_file)
+local wp_epilogue    = read_file_string(wp_epilogue_file)
+local gtm_content    = read_file_string(gtm_file)
+local gtm_noscript_content = read_file_string(gtm_noscript_file)
+
+-- faster file copying: replaces os.execute('cp ' .. fhtml_cached .. ' ' .. fhtml_cached .. '.save')
+local function lua_copy(src, dst)
+  local i = io.open(src, 'rb')
+  local data = i:read('*all')
+  i:close()
+  local o = io.open(dst, 'wb')
+  o:write(data)
+  o:close()
+end
+
 local function calculate_dist_root_dir(fhtml_cached)
   local f = fhtml_cached:gsub('^%./', '')
   f = f:gsub('/%./', '/')
@@ -41,6 +57,16 @@ local function get_proglang(fhtml_cached)
 end
 
 local function postproc(fhtml_cached, tipe)
+   -- pre-compute tipe flags once
+  local is_shtml       = tipe == 'lessonplan' or tipe == 'pathwaynarrative' or tipe == 'pathwayresource'
+  local adds_analytics = tipe == 'lessonplan' or tipe == 'pathwaynarrative'
+  local strips_title   = tipe == 'lessonplan' or tipe == 'pathwayresource'
+  local adds_links     = tipe == 'lessonplan' or tipe == 'workbookpage'
+
+  -- fix undeclared globals
+  local read_end_sidebar_p = false
+  local num_of_lines_past_end_sidebar = 0
+
   local page_title = ''
   -- print('doing postproc', fhtml_cached, tipe)
   if not file_exists_p(fhtml_cached) then return end
@@ -49,7 +75,7 @@ local function postproc(fhtml_cached, tipe)
   local fdir = fhtml_cached:gsub('/%.cached/[^/]*html$', '')
   -- print('fdir is', fdir)
   local fbase = fhtml_cached:gsub('^.*/%.([^/]*html)$', '%1')
-  if memberp(tipe, {'lessonplan', 'pathwaynarrative', 'pathwayresource'}) then
+  if is_shtml then
     fbase = fbase:gsub('%.html$', '.shtml')
   end
   -- print('fbase is', fbase)
@@ -63,7 +89,8 @@ local function postproc(fhtml_cached, tipe)
   local f_mathjax_file = fhtml_cached:gsub('%.html$', '.asc.uses-mathjax')
   local f_codemirror_file = fhtml_cached:gsub('%.html$', '.asc.uses-codemirror')
   --
-  os.execute('cp ' .. fhtml_cached .. ' ' .. fhtml_cached .. '.save')
+  --os.execute('cp ' .. fhtml_cached .. ' ' .. fhtml_cached .. '.save')
+  lua_copy(fhtml_cached, fhtml_cached .. '.save') -- replaces line above
   local i = io.open(fhtml_cached, 'r')
   local o = io.open(fhtml, 'w')
   --
@@ -102,7 +129,7 @@ local function postproc(fhtml_cached, tipe)
       add_body_id_p = true
       add_end_body_id_p = true
       --
-      if memberp(tipe, {'lessonplan', 'pathwaynarrative'}) then
+      if adds_analytics then
         add_analytics_p = true
       end
       --
@@ -115,7 +142,7 @@ local function postproc(fhtml_cached, tipe)
         add_end_body_id_p = false
         x = x:gsub('</body>', '</div>\n%0')
       end
-      local y = read_file_string(wp_epilogue_file)
+      local y = wp_epilogue
       y = y:gsub('SEMESTER_YEAR', os.getenv'SEMESTER' .. ' ' .. os.getenv'YEAR')
       x = x:gsub('</body>', y)
     end
@@ -237,13 +264,13 @@ local function postproc(fhtml_cached, tipe)
       delete_line_p = true
     end
     --
-    if memberp(tipe, {'lessonplan', 'pathwayresource'}) then
+    if strips_title then
       if x:find('^<title>') then
         x = x:gsub('</?span[^>]*>', '')
       end
     end
     --
-    if memberp(tipe, {'lessonplan', 'workbookpage'}) then
+    if strips_title then
       if x:find('^<h[1-6] id') then
         -- tags to ignore inside section titles when making id=
         for _,tag in ipairs{'span', 'code', 'i', 'sup', 'sub'} do
@@ -267,12 +294,12 @@ local function postproc(fhtml_cached, tipe)
     --
     if add_analytics_p then
       add_analytics_p = false
-        copy_file_to_port(gtm_noscript_file, o)
+        o:write(gtm_noscript_content)
     end
     --
     if add_body_id_p then
       add_body_id_p = false
-        local y = read_file_string(wp_prologue_file)
+        local y = wp_prologue
         o:write(y)
         local klass = proglang
         if tipe == 'workbookpage' then
@@ -316,7 +343,7 @@ local function postproc(fhtml_cached, tipe)
     if add_codemirror_p then
       add_codemirror_p = false
       o:write('<link rel="stylesheet" href="' .. local_dist_root_dir .. 'lib/codemirror.css" />\n')
-      copy_file_to_port(gtm_file, o)
+      o:write(gtm_content)
       o:write('<script src="' .. local_dist_root_dir .. 'lib/codemirror.js"></script>\n')
       o:write('<script src="' .. local_dist_root_dir .. 'lib/runmode.js"></script>\n')
       o:write('<script src="' .. local_dist_root_dir .. 'lib/scheme2.js"></script>\n')
