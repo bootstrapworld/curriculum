@@ -161,6 +161,7 @@ export ADOCS_PATHWAYRESOURCE    := $(TOPDIR)/distribution/$(NATLANG)/.cached/.ad
 export ADOCS_PATHWAYNARRATIVE   := $(TOPDIR)/distribution/$(NATLANG)/.cached/.adocs-pathwaynarrative.txt
 
 preproc:
+	@$(eval T0 := $(shell date +%s%3N))
 	@echo ➤ Set up batch files
 	$(file >$(ADOCS_PATHWAYINDEPENDENT),$(subst $(SPACECHAR),$(newline),$(pathway-independent-adoc-files)))
 	$(file >$(ADOCS_WORKBOOKPAGE),$(subst $(SPACECHAR),$(newline),$(all-adoc-files)))
@@ -168,9 +169,20 @@ preproc:
 	$(file >$(ADOCS_PATHWAYRESOURCE),$(subst $(SPACECHAR),$(newline),$(resource-adoc-files)))
 	$(file >$(ADOCS_PATHWAYNARRATIVE),$(subst $(SPACECHAR),$(newline),$(narrative-adoc-files)))
 	@echo } >> $(IGNORABLE_DIRECTORIES)
+	@$(eval T1 := $(shell date +%s%3N))
+#	@echo "  preproc setup: $$(( $(T1) - $(T0) ))ms"
 	@$(MAKE_DIR)do-setup.lua
+	@test -f $(ADOC_POSTPROC_PATHWAYRESOURCE_INPUT) || \
+		  (echo "ERROR: do-setup.lua failed to create pathwayresource batch file" && exit 1)
+	@$(eval T2 := $(shell date +%s%3N))
+#	@echo "  preproc do-setup.lua: $$(( $(T2) - $(T1) ))ms"
 	@if test -s $(ADOCABLES_INPUT); then echo ➤ Racket preproc; $(PROGDIR)/adocables-preproc.rkt $(ADOCABLES_INPUT); fi
+	@$(eval T3 := $(shell date +%s%3N))
+#	@echo "  preproc Racket: $$(( $(T3) - $(T2) ))ms"
 	@if test -s "$(ADOC_INPUT)"; then echo ➤ Asciidoctor; $(MAKE_DIR)run-asciidoctor.sh; fi
+	@$(eval T4 := $(shell date +%s%3N))
+#	@echo "  preproc Asciidoctor: $$(( $(T4) - $(T3) ))ms"
+#	@echo "  preproc total: $$(( $(T4) - $(T0) ))ms"
 # specials = primitives + starterFiles
 
 coverage: coverage-report.html
@@ -186,6 +198,7 @@ specials: preproc
 	@$(MAKE_DIR)collect-specials.lua
 
 postproc: preproc
+	@$(eval T0 := $(shell date +%s%3N))
 	@echo ➤ Postproc
 	@$(MAKE_DIR)do-postproc.lua pathwayindependent & \
 	 $(MAKE_DIR)do-postproc.lua workbookpage       & \
@@ -193,7 +206,11 @@ postproc: preproc
 	 $(MAKE_DIR)do-postproc.lua pathwaynarrative   & \
 	 $(MAKE_DIR)do-postproc.lua pathwayresource    & \
 	 wait
+	@$(eval T1 := $(shell date +%s%3N))
+#	@echo "  postproc: $$(( $(T1) - $(T0) ))ms"
 	@$(MAKE_DIR)make-self-guided.sh
+	@$(eval T2 := $(shell date +%s%3N))
+#	@echo "  make-self-guided: $$(( $(T2) - $(T1) ))ms"
 
 tocs: preproc
 	@echo ➤ Make pathway-tocs.js

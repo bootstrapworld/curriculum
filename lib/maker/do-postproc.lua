@@ -270,7 +270,7 @@ local function postproc(fhtml_cached, tipe)
       end
     end
     --
-    if strips_title then
+    if adds_links then
       if x:find('^<h[1-6] id') then
         -- tags to ignore inside section titles when making id=
         for _,tag in ipairs{'span', 'code', 'i', 'sup', 'sub'} do
@@ -455,11 +455,9 @@ local batchf_map = {
 }
 run_postproc(batchf_map[tipe], tipe)
 
-dofile(make_dir .. 'make-slides.lua')
-
-do
+if tipe == 'lessonplan' then
+  dofile(make_dir .. 'make-slides.lua')
   local cached_html_files = dofile(lessonplan_batchf)
-  -- e.g., "distribution/en-us/lessons/quadratic3-fitting-models/.cached/.index.html"
   for _,cached_html_file in ipairs(cached_html_files) do
     local lesson_dir = cached_html_file:gsub('/%.cached/%.index.html', '')
     make_slides_file(lesson_dir)
