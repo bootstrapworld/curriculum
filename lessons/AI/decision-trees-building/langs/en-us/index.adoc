@@ -209,26 +209,27 @@ If students start to complain that they're "stuck" with earlier questions, that'
 @QandA{
 @Q{How does someone use a decision tree to make predictions?}
 @A{Ask the question at the root of the tree, then follow the branches to ask additional questions until we get to a category at the end of a path.}
+
 @Q{Suppose we were playing "Classify", but now you have to guess which *country* I'm thinking of. What might be a good starting question?}
 @A{Answers will vary, but look for answers that eliminate groups of countries quickly.}
 @A{Is it a country in the Western Hemisphere?}
 @A{Is it a country where people speak Spanish?}
 @A{etc...}
+
 @Q{What do we want to be true, about each question we ask?}
 @A{We would want it to cleanly split the list of possible targets as evenly as possible, to guarantee eliminating a significant number of options right off the bat.}
 }
 
 
 == Building Decision Trees from a Training Dataset
-
 @objective{ai-create-tree}
 
 === Overview
 Students refine their intuition for building decision trees, discovering how they are constructed from training datasets.
 
 === Launch
-
 @slidebreak{LaunchR}
+
 @right{[.white-bg]#@image{images/tree-3.png}#}
 @lesson-point{A @vocab{decision tree} is one way to model the structure hidden in the data.}
 
@@ -236,7 +237,9 @@ We can visualize these models as "upside-down trees" that show decisions and the
 
 You've learned that some @vocab{decision trees} are better than others. For example, the _frequency of each category_ affects the "best node" ("if everyone has glasses...").
 
-Machine-learning algorithms generate decision trees from training @vocab{datasets}, using the column headers as questions. Each node in the tree splits the dataset, allowing us to make the best prediction we can about some outcome.
+Unlike humans, who can generate their own questions, machine-learning algorithms generate decision trees from training @vocab{datasets}, using the column headers as questions. Each node in the tree splits the dataset, allowing us to make the best prediction we can about some outcome.
+
+Creating a decision tree is a form of supervised learning, because the training data already contains the desired outcomes (as one column), and the algorithm just learns a function that maps from input to outcomes. 
 
 @slidebreak{LaunchR}
 
@@ -248,12 +251,12 @@ Machine-learning algorithms generate decision trees from training @vocab{dataset
 - A @vocab{leaf node} is a node that contains the predicted outcome. These outcomes come from a designated column in the original dataset. Leaf nodes have no outgoing branches.
 - The sequence of questions from the root node to an outcome is called a path.
 
-@teacher{Discuss the decision tree you made during your "Classify" game to help students identify the root node, decision nodes, leaf nodes, and paths on the tree so far.
+@teacher{Discuss the decision tree you made during your "I Spy - Classify" game to help students identify the root node, decision nodes, leaf nodes, and paths on the tree so far.
 }
 
 @slidebreak{Launch-RP}
 
-We're going to play another round of "I Spy - Classify", but this time you're going to use a real dataset.
+We're going to play another round of "I Spy - Classify", but this time you're going to use a real dataset of animals. 
 
 [.data-table, cols="1,^1,^1,^1,^1,^1,^1", stripes="none", options="header"]
 |===
@@ -275,8 +278,6 @@ We're going to play another round of "I Spy - Classify", but this time you're go
 | "Webs"		  |"tarantula"| "female" 	  | 0.4 	| FALSE	| FALSE	| FALSE
 |===
 
-Let's play a round of "I Spy - Classify" with _this_ dataset.
-
 - This time, I'll pick one animal in this dataset
 - This time, however, I'm targeting the _species_ of the animal instead of the name
 - Your job is to predict the species (cat, dog, lizard, snail, or tarantula) of my animal, based only on the columns in the table
@@ -292,7 +293,7 @@ Encourage students to come up with both categorical and quantitative questions, 
 - Complete @printable-exercise{what-does-the-code-do.adoc}
 }
 
-@teacher{Debrief student answers to this page}
+@teacher{Debrief student answers to this page.}
 
 === Investigate
 @slidebreak{InvestigateR}
