@@ -19,6 +19,8 @@ local wp_epilogue_file = os.getenv'TOPDIR' .. '/lib/wp-adaptors/epilogue.txt'
 -- Read these files once, not thousands of times
 local wp_prologue    = read_file_string(wp_prologue_file)
 local wp_epilogue    = read_file_string(wp_epilogue_file)
+local wp_epilogue_expanded = wp_epilogue:gsub(
+  'SEMESTER_YEAR', os.getenv'SEMESTER' .. ' ' .. os.getenv'YEAR')
 local gtm_content    = read_file_string(gtm_file)
 local gtm_noscript_content = read_file_string(gtm_noscript_file)
 
@@ -86,6 +88,8 @@ local function postproc(fhtml_cached, tipe)
   if proglang == 'wescheme' then
     code_lang = 'racket'
   end
+  local pre_open  = '<pre><code class="' .. code_lang .. '">'
+  local code_open = '<code class="' .. code_lang .. '">'
   local f_mathjax_file = fhtml_cached:gsub('%.html$', '.asc.uses-mathjax')
   local f_codemirror_file = fhtml_cached:gsub('%.html$', '.asc.uses-codemirror')
   --
@@ -142,9 +146,7 @@ local function postproc(fhtml_cached, tipe)
         add_end_body_id_p = false
         x = x:gsub('</body>', '</div>\n%0')
       end
-      local y = wp_epilogue
-      y = y:gsub('SEMESTER_YEAR', os.getenv'SEMESTER' .. ' ' .. os.getenv'YEAR')
-      x = x:gsub('</body>', y)
+      x = x:gsub('</body>', wp_epilogue_expanded)
     end
     --
     if x:find('^<link.*curriculum%.css') then
@@ -166,9 +168,9 @@ local function postproc(fhtml_cached, tipe)
       goto continue
     end
     --
-    x = x:gsub('<pre>', '<pre><code class="' .. code_lang .. '">')
+    x = x:gsub('<pre>', pre_open)
     x = x:gsub('</pre>', '</code></pre>')
-    x = x:gsub('<code>', '<code class="' .. code_lang .. '">')
+    x = x:gsub('<code>', code_open)
     x = x:gsub('<p> </p>', '<p></p>')
     --
     if x:find('<p>%%BEGINQBLOCKITEM%%') then
@@ -193,26 +195,32 @@ local function postproc(fhtml_cached, tipe)
       x = x:gsub('%%END[QA]BLOCKITEM%%', '')
     end
     --
-    if x:find('class="exampleblock .-actually%-openblock ') and openblock_attribs then
-      x = x:gsub('class=".-"', '%0' .. openblock_attribs)
-      openblock_attribs = false
+    if x:find('actually%-openblock', 1, true) then
+      if x:find('class="exampleblock .-actually%-openblock ') and openblock_attribs then
+        x = x:gsub('class=".-"', '%0' .. openblock_attribs)
+        openblock_attribs = false
+      end
+      x = x:gsub('class="exampleblock (.-)actually%-openblock ', 'class="openblock %1')
     end
-    x = x:gsub('class="exampleblock (.-)actually%-openblock ', 'class="openblock %1')
     --
-    x = x:gsub('%%CURRICULUMMATHJAXMARKER%%', '$$')
+    if x:find('%%', 1, true) then
+      x = x:gsub('%%CURRICULUMMATHJAXMARKER%%', '$$')
+      --
+      x = x:gsub('%%CURRICULUMCOMMENTSTART%%', '<!--')
+      x = x:gsub('%%CURRICULUMCOMMENTSTOP%%', '-->')
+      --
+      x = x:gsub('%%CURRICULUMLT%%', '<')
+      x = x:gsub('%%CURRICULUMGT%%', '>')
+      --
+      x = x:gsub('%%CURRICULUM([^%%]*)%%', '<%1')
+      x = x:gsub('%%BEGINCURRICULUM([^%%]*)%%', '>')
+      x = x:gsub('%%ENDCURRICULUM([^%%]*)%%', '</%1>')
+    end
     --
-    x = x:gsub('%%CURRICULUMCOMMENTSTART%%', '<!--')
-    x = x:gsub('%%CURRICULUMCOMMENTSTOP%%', '-->')
-    --
-    x = x:gsub('%%CURRICULUMLT%%', '<')
-    x = x:gsub('%%CURRICULUMGT%%', '>')
-    --
-    x = x:gsub('%%CURRICULUM([^%%]*)%%', '<%1')
-    x = x:gsub('%%BEGINCURRICULUM([^%%]*)%%', '>')
-    x = x:gsub('%%ENDCURRICULUM([^%%]*)%%', '</%1>')
-    --
-    x = x:gsub('&#8656;', '&lt;=')
-    x = x:gsub('&#8594;', '-&gt;')
+    if x:find('&#', 1, true) then
+      x = x:gsub('&#8656;', '&lt;=')
+      x = x:gsub('&#8594;', '-&gt;')
+    end
     --
     x = x:gsub('^(<div id="preamble)">', '%1_disabled" class="lessonSummary">')
     --
