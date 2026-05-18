@@ -12,7 +12,7 @@ fi
 
 if test -z "$ASCIIDOCTOR_NODE"; then
   if test -z "$DEBUGADOC"; then
-    asciidoctor -a linkcss -a stylesheet=$cssfile -a cachedir=.cached/ -B . $(cat $ADOC_INPUT) > $MAKE_ERR_LOG 2>&1
+    time asciidoctor -a linkcss -a stylesheet=$cssfile -a cachedir=.cached/ -B . $(cat $ADOC_INPUT) > $MAKE_ERR_LOG 2>&1
   else
     echo $'\e[1;31m'🐌 Will be slow! Running asciidoctor once per file because DEBUGADOC=$DEBUGADOC $'\e[0m'
     for f in $(cat $ADOC_INPUT); do
@@ -35,7 +35,7 @@ else
   echo "];" >> $NODE_ADOC_INPUT
   echo "module.exports = adocFiles;" >> $NODE_ADOC_INPUT
   #
-  node lib/callAdoc.js $NODE_ADOC_INPUT 
+  time node lib/callAdoc.js $NODE_ADOC_INPUT
 fi
 
 if test -f $MAKE_ERR_LOG; then
