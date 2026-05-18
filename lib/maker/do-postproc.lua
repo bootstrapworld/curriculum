@@ -418,11 +418,15 @@ local function run_postproc(batchf, tipe)
   end
 end
 
-run_postproc(pathwayindependent_batchf, 'pathwayindependent')
-run_postproc(workbookpage_batchf, 'workbookpage')
-run_postproc(lessonplan_batchf, 'lessonplan')
-run_postproc(pathwaynarrative_batchf, 'pathwaynarrative')
-run_postproc(pathwayresource_batchf, 'pathwayresource')
+local tipe = arg[1]
+local batchf_map = {
+  pathwayindependent = os.getenv'ADOC_POSTPROC_PATHWAYINDEPENDENT_INPUT',
+  workbookpage       = os.getenv'ADOC_POSTPROC_WORKBOOKPAGE_INPUT',
+  lessonplan         = os.getenv'ADOC_POSTPROC_LESSONPLAN_INPUT',
+  pathwaynarrative   = os.getenv'ADOC_POSTPROC_PATHWAYNARRATIVE_INPUT',
+  pathwayresource    = os.getenv'ADOC_POSTPROC_PATHWAYRESOURCE_INPUT',
+}
+run_postproc(batchf_map[tipe], tipe)
 
 dofile(make_dir .. 'make-slides.lua')
 
