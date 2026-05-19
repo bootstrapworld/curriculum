@@ -26,6 +26,382 @@
 
 |===
 
+== Song Similarity
+
+=== Overview
+
+Students explore ways in which simple songs (composed only of "snaps" and "claps") can also be represented as points in space, and angle distance can be used to measure similarity in music.
+
+=== Launch
+@slidebreak{LaunchR}
+@right{@image{images/recommendation-bot.png, 200}}
+
+@vocab{Similarity Models} are all about *measuring similarity*:
+
+- Which restaurant is most like In-N-Out?
+- Which essays are the most similar to mine?
+- Which songs are most like "America the Beautiful"?
+
+@link{https://open.spotify.com/, Let's review our example from Spotify}, which you may remember from @lesson-link{ai-intro}.
+
+@teacher{Search for a song that your students will recognize. When you hover over the search result, you'll see a three dots (`...`) appear on the right. Click these dots and select "Go to Song Radio"}
+
+@slidebreak{Launch}
+When we asked Spotify to create a station based on that song, it tried to find other songs that are _similar_ to it. But the computer doesn't have ears, and it doesn't have the human experience that informs how we hear a song.
+
+So how does it even know what "similar" means?
+
+@slidebreak{Launch}
+Let's start by thinking about how to find similarity between _simple_ songs. Once we have an idea, we can scale it up and consider more complex ones.
+
+*Rules for simple songs:*
+
+- Tempo and rhythm are the _same_.
+- All songs are exactly 8 beats long.
+- There are only 2 sounds we can choose for each beat
+  - "snaps" (🫰)
+  - "claps" (👏)
+
+@lesson-instruction{
+- Can you still come up with something creative?
+- Complete the first section of @printable-exercise{snaps-and-claps.adoc}
+- TODO: start with space for ONE SONG, and a table below it with some pre-made songs. Make sure the Dacks and Tate's songs are in it, at the top. Also add two songs that are the *same*. Leave space for students to explain their thinking about Dacks and Tate.
+- Leave space for converting-to-coords
+- Leave space for graphing
+}
+
+=== Investigate
+@slidebreak{Investigate}
+
+What did you come up with?
+
+@teacher{
+- Have some of your students perform their songs.
+- Make sure you're being *really picky* about holding them to the same tempo and rhythm, and just snaps and claps!
+- As they perform them, make a list of songs on the board using "S" and "C" for the sounds.
+}
+
+@QandA{
+@Q{What are ways in which all these songs are _similar?_}
+@A{All made of snaps and claps!}
+@A{All just 8 "sounds" long!}
+
+@Q{What are ways in which these songs are _different?_}
+@A{Different sequences of snaps and claps}
+@A{Starting or ending with a different "sound"}
+@A{Longest-snap sequences differs between songs}
+
+@Q{Which two do you think are the most *similar*? Why?}
+@A{Which two do you think are the most *different*? Why?}
+}
+
+@slidebreak{Investigate}
+
+Tate and Dacks each chose two songs they think are *different*:
+
+[cols="^1a, ^1a", options="header"]
+|===
+| Tate                 | Dacks
+| 🫰👏🫰👏🫰👏🫰👏      | 👏👏👏👏👏👏👏👏
+| 👏🫰👏🫰👏🫰👏🫰      | 🫰🫰🫰🫰🫰🫰🫰🫰
+|===
+
+Whose songs are the *most different*?
+
+
+@slidebreak{Investigate}
+There are lots of ways to measure "difference" and "similarity" for these songs:
+
+- Most-claps-in-a-row (both of Tate's songs only have 1, while Dacks' songs have 8 and 0)
+- Number-of-switches (both of Tate's have 7, while both of Dacks' have 0)
+- Number of claps (both of takes have 4, while Dacks' have 8 and 0)
+- Number of snaps (both of takes have 4, while Dacks' have 0 and 8)
+
+We can choose any of these -- or even all of them -- when we measure similarity. Many of you honed in on counting the number of snaps and claps, so let's go with that for now.
+
+@slidebreak{InvestigateR}
+@right{@image{images/tate-dacks-scatter.png}}
+[cols="^1a, ^1a", options="header"]
+|===
+| Tate  (snaps, claps)       | Dacks (snaps, claps)
+| 🫰👏🫰👏🫰👏🫰👏 (4, 4)     | 👏👏👏👏👏👏👏👏 (0, 8)
+| 👏🫰👏🫰👏🫰👏🫰 (4, 4)     | 🫰🫰🫰🫰🫰🫰🫰🫰 (8, 0)
+|===
+
+Now every song can be represented as _two numbers:_ the count of snaps, and the count of claps. In fact, with this representation we could even _graph the songs as a scatter-plot_
+
+@lesson-instruction{
+- Complete the next section on @printable-exercise{snaps-and-claps.adoc}
+}
+
+
+@slidebreak{InvestigateR}
+@right{@image{images/songs-scatter.png}}
+
+@QandA{
+@Q{Where would two *truly identical songs* show up in our scatter-plot?}
+@A{They would be the same point}
+
+@Q{Where would the two *most different songs* be plotted?}
+@A{"All-Claps" (0, 8) and "All-Snaps" (8, 0)}
+
+@Q{Where would "snap-heavy-songs" fall in this scatter plot?}
+@A{High x-values, low y-values}
+
+@Q{Where would "clap-heavy-songs" fall in this scatter plot?}
+@A{Low x-values, high y-values}
+}
+
+@slidebreak{InvestigateR}
+@ifslide{@right{@image{images/song-scatter.png}}}
+
+The easiest way to check for similarity is to ask if two songs are *equal* -- if they occupy the exact same point in our scatter plot.
+
+CODE STUFF
+
+But this only tells us about _same-ness_, not _similarity!_ Can we do better?
+
+@slidebreak{InvestigateR}
+@right{@image{images/song-scatter-pythag.png}}
+
+Another option is to use the _distance formula_ (remember the @vocab{Pythagorean Theorem}?), measuring the length of the line between any two songs.
+
+CODE STUFF
+
+This is definitely a lot better! It still gets the identical songs right, and it gives us a reasonable measure of similarity.
+
+@slidebreak{InvestigateR}
+@right{@image{images/song-scatter-pythag-length.png}}
+
+But if we allow songs to be longer or shorter, our distance measure will always favor songs that are similar _lengths_ over songs with similar _sounds_.
+
+[cols="^1a, ^1a, ^1a", options="header"]
+|===
+|         | Group A                        | Group B
+|         | 🫰🫰🫰🫰🫰🫰🫰🫰🫰🫰🫰🫰 (9, 0) | 👏👏👏   (0, 3)
+|         | 🫰🫰🫰🫰🫰🫰🫰🫰🫰🫰👏 (4, 1)   | 🫰🫰🫰🫰 (4, 0)
+| Distance| ~5.74                          | 5
+|===
+
+What else can we do?
+
+@slidebreak{InvestigateR}
+@right{@image{images/song-scatter-angle.png}}
+
+*Option 1: switch from _number_ of snaps and claps to _percentage_*
+- This removes the length of a song completely!
+- Songs that are half-snaps and half-claps will always be (50, 50), no matter how long they are.
+
+*Option 2: Use the _angle_ between each song*
+- By drawing lines from each point to the origin, we can measure the angle between any two lines
+- This also removes length from the equation
+
+CODE STUFF
+
+@slidebreak{Investigate}
+This is getting pretty good at finding similar songs! But what if we want to add another sound, instead of just snaps and claps. When we slap our legs hard, we can make a loud "boom" sound.
+
+Let's make some new songs, this time of ANY length and with three sounds to choose from:
+
+- Snaps (🫰)
+- Claps (👏)
+- Booms (💥)
+
+@lesson-instruction{
+- Complete @printable-exercise{snap-clap-stomp.adoc}
+}
+
+
+@slidebreak{InvestigateR}
+@right{@image{images/3d-scatter.png}}
+
+Now we need _three_ numbers to represent each song in our library! Does our similarity measure still work?
+
+- Now we're plotting points in 3 dimensions
+- We can still draw lines to the origin for any 2 songs we want to compare
+- We know from geometry that 2 lines define a _plane_, so we're back to 2 dimensions when we measure our angle
+
+CODE STUFF
+
+=== Synthesize
+@slidebreak{Synthesize}
+
+@QandA{
+@Q{Would it work in more than 3 dimensions?}
+@Q{Could we have used some of our other measures instead?}
+@Q{What does this have to do with ethics?}
+}
+
+
+== Image Similarity
+
+=== Overview
+
+Students explore ways in which images can be represented as points in space, and the similarity measure we created for our songs generalizes to images as well.
+
+=== Launch
+@slidebreal{LaunchR}
+
+@link{https://images.google.com/, In Google Image Search}, you can drag a picture into the search box and have Google find other, _similar_ images.
+
+@teacher{Demo this functionality, using an image of your choosing}
+
+@slidebreak{Launch}
+When we asked Google to find images similar to this one, it came back with a lot of similar images! But the computer doesn't have eyes, and it doesn't have the human experience that informs how an image makes us feel.
+
+So how does it even know what "similar" means?
+
+
+@slidebreak{Launch}
+Much like our songs, we can come up with lots of ways to describe an image:
+
+- Width and height
+- Brightness ("luminance")
+- Busy-ness ("entropy")
+
+What else can you come up with?
+
+
+
+== Computing Closeness with Angle Difference
+
+=== Overview
+
+Compressing text into bags of words gives us a coarse-grained notion of similarity. Let's explore how to produce a more refined notion of similarity.
+
+=== Launch
+@slidebreak{Launch}
+
+When we ask people whether two documents are the same, they rarely give us a black-and-white "yes" or "no" answer. Instead they tend to speak about shades of similarity. Likewise, we would like our computer to give us a range of values that give us a sense of how similar the two documents are. In other words, we would like the output to be a Number, not just a Boolean (identical, not identical).
+
+=== Investigate
+@slidebreak{Investigate}
+
+Now that we know how to represent our bag of words summaries as points in space, we can draw a @vocab{ray} from the origin through each of those points and ask: What is the angle between the two rays?
+
+Take, for example, this comparison between two strings: `stringA` ("doo doo doo doo") and `stringB` ("be be be be").
+
+[cols="<.^8a,<.^8a,<.>8a",  stripes="none"]
+|===
+|
+`StringA`: `doo doo doo doo`
+[cols="1,1",options="header"]
+!===
+! Word  ! Frequency
+! be ! 0
+! doo! 4
+!===
+Ordered pair: (0,4)
+|
+`StringB`: `be be be be`
+[cols="1,1",options="header"]
+!===
+! Word  ! Frequency
+! be ! 4
+! doo! 0
+!===
+Ordered pair: (4,0)
+|
+
+@center{@image{images/soln1.png, 150}}
+
+The angle formed is 90°.
+|===
+
+@slidebreak{Investigate}
+
+If two documents are identical, they will be at the same point in space, and have the same ray extending from the origin to that point. That means the angle between those rays will be 0°. Even if one document just rearranges the other, their bags of words will be identical—thereby again making the angle between the lines 0°.
+
+@teacher{
+If you want your students to practice measuring angles with a protractor, we recommend using @printable-exercise{angle-difference.adoc}. If you do not have protractors available or would prefer that your students approximate angle size without measuring, we recommend printing and distributing @opt-printable-exercise{angle-difference-no-protractor.adoc} instead.
+}
+
+@lesson-instruction{
+- Complete @printable-exercise{angle-difference.adoc} or @opt-printable-exercise{angle-difference-no-protractor.adoc} using your knowledge of bags of words and plotting points.
+** First, fill in the frequency tables by referring to the provided string.
+** Translate the bags of words to ordered pairs.
+** Plot the points.
+** Draw a ray from the origin to each of the points.
+** Measure or approximate the angle size.
+}
+
+@slidebreak{Investigate}
+
+As the documents contain different words, the angles between the rays will grow. To reflect this, we can use the `angle-difference` function. It will give us a value between 0° (if the two are identical) and 90° (if the two have nothing in common).
+
+@strategy{Points, Rays, and Vectors}{
+As you've discovered, our plagiarism detector computes the angle difference between rays extending from the origin to various points that we have plotted space.
+
+In machine learning, we generally refer to these bag-of-word representations *not* as _points_, but as _vectors_. Why? A point represents a location in space, whereas a vector represents a magnitude and a direction.
+
+To reduce the amount of new vocabulary introduced in this lesson, we have opted to refer simply to points and rays. More commonly, however, the term _vector_ is used in a machine learning context.
+
+If you or your students are wondering why we wouldn't just compute the _distance_ between points, rather than complicating things and introducing angles... it's because typically, machine learning uses vectors, not points.
+}
+
+When two documents are represented as two points in space, @vocab{angle difference} is the difference between the angles formed by rays from the origin through those points.
+
+@lesson-point{
+Angle difference can be used to measure the similarity of two documents.
+}
+
+
+
+The contract for `angle-difference` is below.
+
+```
+# angle-difference :: (String, String) -> Number
+```
+
+@slidebreak{Investigate-DN}
+
+@lesson-instruction{
+Let's try the `angle-difference` function in Pyret.
+
+- Check your work on @printable-exercise{angle-difference.adoc}.
+.
+** Open @starter-file{plagiarism} and click "Run".
+** Enter `angle-difference("doo doo doo doo", "be be be be")` into the Interactions Area.
+** Does the angle size that Pyret produces match the angle that you drew? (Hopefully yes!)
+** Use `angle-difference` to compare each pair of strings on @printable-exercise{angle-difference.adoc}.
+}
+
+@strategy{Angles?!}{
+
+Yes, angles!
+
+Did you know that geometry is at the heart of modern AI? This lesson shows how. The same angles that your students learn to compute in middle-school are sitting at the heart of the machine learning calculations that power so many things in the world today. Even the plagiarism detectors that might be checking their essays on angles... are computing angles. So if your students ask “When are we ever going to use this?”, you can tell them, “You already do, all the time.”
+
+The plot thickens, especially if you have older students who have learned some trigonometry. In practice, real machine learning systems don't _quite_ use angles. Instead, they use the cosine of the angle. There are two reasons for this:
+
+- The angle itself is a somewhat awkward value to work with. In contrast, the cosine has a nice numeric range, between -1 and 1, which makes it convenient to use in various other mathematical settings. (Specifically, it's used in a process called gradient descent.)
+
+- It’s simpler to compute the cosine directly. In fact, inside Pyret, `angle-difference` actually first computes the cosine, then converts the result into an angle!
+
+For the purposes of this curriculum, you can ignore this difference. In particular, if your students have never even heard of the cosine, that's fine! For students who are familiar with cosine and curious to explore, the @starter-file{plagiarism} contains a `cosine-similarity function`.
+}
+
+=== Synthesize
+@slidebreak{Synthesize}
+
+@QandA{
+Here are three different lines of code.
+
+`angle-difference("hello world", "hello")`
+
+`angle-difference("hello", "goodbye")`
+
+`angle-difference("hello", "hello")`
+
+@Q{Which line of code produces 90°? How do you know?}
+@A{`angle-difference("hello", "goodbye")`; the two strings are completely different.}
+
+@Q{Which line of code produces 45°? How do you know?}
+@A{`angle-difference("hello world", "hello")`; the two strings have one word in common; they are not entirely different nor are they identical.}
+
+@Q{Which line of code produces 0°? How do you know?}
+@A{`angle-difference("hello", "hello")`; the two strings are exactly the same.}
+}
 
 
 

@@ -1,0 +1,56 @@
+= Song Similarity
+++++
+<style>
+
+</style>
+++++
+@lesson-instruction{
+For this page, you'll need @starter-file{ai-music} open on your computer. Make sure to click "Run"!
+}
+
+@center{
+@show{(contract "simple-similarity" '("Table" "String" "List<String>") "Table")} +
+@show{(contract "distance-similarity" '("Table" "String" "List<String>") "Table")} +
+@show{(contract "angle-similarity" '("Table" "String" "List<String>") "Table")}
+}
+
+The four functions above take three inputs in their Domain:
+
+@indented{
+(1) The table of rows being compared (first column must be called `ID`) +
+(2) The `ID` value of the row being used as an example +
+(3) All of the columns to use when computing similarity +
+}
+
+== Similar songs to "No Diggity"
+
+*Suppose we want to find songs similar to the R&B Classic "No Diggity"  -- by Blackstreet and Dr. Dre -- in this dataset.*
+
+@n Evaluate `simple-similarity(music-training, "No Diggity", [list: "popularity"])`. This uses simple equality checking, to find songs whose `popularity` is *exactly the same* as "No Diggity". Was any other song considered "similar"? @fitb{}{@ifsoln{Yes - "Take It Easy - 2013 Remaster" by the Eagles}}
+
+@n Is the result useful? Why or why not? @fitb{}{} +
+@blanklines{2}{
+@ifsoln{With everything being a zero or a one, this doesn't actually tell me what's *similar* at all! It just tells me if something is *the same*. It also relies entirely on popularity. This Eagles song just happens to have been exactly as popular as "No Diggity", but that doesn't mean it's actually similar.}
+}
+
+@n Evaluate `distance-similarity(music-training, "No Diggity", [list: "popularity"])`. This uses the distance formula to compute the distance between two songs, using `popularity` as the only dimension. Are these results better than the ones `simple-similarity` returned? Why or why not? @fitb{}{} +
+@blanklines{2}{
+@ifsoln{They're better, since it's not an all-or-nothing comparison. But we're still only evaluating in a single dimension}
+}
+
+@n Let's compare results from `distance-similarity` and `angle-similarity`, this time using `"popularity"` and `"tempo"` in our list. Which one produces better results? @fitb{}{@ifsoln{`angle-similarity`}}
+
+@n Experiment using `angle-similarity` with different columns. You can use as many as you like - as long as they're quantitative! Which combination gives you the best results? +
+@fitb{}{}
+
+== YOU choose a song
+
+@n Choose a song from the `music-training` OR `music-testing` dataset, and write its name: @fitb{}{}
+
+@n Experiment using `angle-similarity` with different columns. You can use as many as you like - as long as they're quantitative! Which combination gives you the best results? +
+@fitb{}{}
+
+@n Why do you think these columns give you the best results? Why might the best columns for finding similarities to *your* song be different from the columns for "No Diggity"? @fitb{}{} +
+@blanklines{3}{
+
+}
