@@ -184,7 +184,7 @@ local function postproc(fhtml_cached, tipe)
       x = x:gsub('%%END[QA]BLOCKITEM%%', '')
     end
     --
-    if x:find('actually%-openblock', 1, true) then
+    if x:find('actually%-openblock') then
       if x:find('class="exampleblock .-actually%-openblock ') and openblock_attribs then
         x = x:gsub('class=".-"', '%0' .. openblock_attribs)
         openblock_attribs = false
@@ -206,7 +206,7 @@ local function postproc(fhtml_cached, tipe)
       x = x:gsub('%%ENDCURRICULUM([^%%]*)%%', '</%1>')
     end
     --
-    if x:find('&#', 1, true) then
+    if x:find('&#') then
       x = x:gsub('&#8656;', '&lt;=')
       x = x:gsub('&#8594;', '-&gt;')
     end
