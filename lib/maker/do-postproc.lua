@@ -192,7 +192,7 @@ local function postproc(fhtml_cached, tipe)
       x = x:gsub('class="exampleblock (.-)actually%-openblock ', 'class="openblock %1')
     end
     --
-    if x:find('%%', 1, true) then
+    if x:find('%%') then
       x = x:gsub('%%CURRICULUMMATHJAXMARKER%%', '$$')
       --
       x = x:gsub('%%CURRICULUMCOMMENTSTART%%', '<!--')
