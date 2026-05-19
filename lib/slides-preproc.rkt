@@ -183,7 +183,7 @@
 
 (define (make-mathjax-math text)
   (string-append
-    "\n$" text "$\n"))
+    " $" text "$ "))
 
 (define (read-math-rev-word s)
   (let loop ([s (rest s)] [r (list (first s))])
