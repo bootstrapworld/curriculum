@@ -1,5 +1,5 @@
 -- Following works for both macOS (brew) and Linux
-local _stat_cmd = "stat -c '%Y\t%n'"   
+local _stat_cmd = "stat -c '%Y\t%n'"
 
 -- Returns a table mapping filepath -> mtime (integer).
 -- Uses a single xargs invocation for the whole list.
