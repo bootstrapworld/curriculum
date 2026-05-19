@@ -305,7 +305,7 @@ Encourage students to come up with both categorical and quantitative questions, 
 === Investigate
 @slidebreak{Investigate}
 
-Let's write a @vocab{classifier} function to predict species!
+Let's write a @vocab{classifier function} to predict species!
 
 - A function consumes some input and produces some output.
 - Each input will only ever have one output. 
@@ -317,6 +317,13 @@ Suppose our tree just has one level: we ask if it has a tail, and then we take o
 @QandA{
 @Q{What code should we write to look up the value in the `"tail"` column of a row?}
 @A{`r["tail"]`}
+
+@Q{What code should we write to check whether the value in the `"tail"` column of a row is `true`?}
+@A{`r["tail"] == true`}
+}
+
+@teacher{
+You might find it duplicative to check whether or not `r["tail"] == true` since the value in the cell itself is either `true` or `false`... and you're right! Our program would work just as well if it just read `r["tail"]`. But, using `r["tail"] == true` is consistent with how we use row accessors with non-Boolean columns. When the cell values aren't `true` or `false` we do have to check whether they match the value we have in mind, e.g. `r["species"] == cat`. We have learned over time that many students appreciate the consistency.
 }
 
 @slidebreak{InvestigateR}
