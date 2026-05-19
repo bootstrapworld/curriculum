@@ -61,6 +61,7 @@ When evaluating a fast food chain, you might have a few different attributes (pr
 | Wendy's     | 1.47             | 4.5            | 7
 | Five Guys   | 2.20             | 3.9            | 8
 | Dairy Queen | 2.11             | 3.7            | 4
+| In-N-Out    | 1.45             | 4.4            | 8
 |===
 
 (NOTE: These numbers are _totally made up_, and just used for the example!)
@@ -101,46 +102,64 @@ Now it's your turn!
 | Wendy's     | 1.47             | 4.5            | 7
 | Five Guys   | 2.20             | 3.9            | 8
 | Dairy Queen | 2.11             | 3.7            | 4
+| In-N-Out    | 1.45             | 4.4            | 8
 |===
 }
 
-Suppose someone is a die-hard fan of a popular fast-food chain from the west coast...In-N-Out!
-[.data-table, cols="1a, ^1a, ^1a, ^1a", options="header"]
-|===
-| Restaurant  | Price (1 = cheap)| Fries (5=best) | Burger (10=best)
-| In-N-Out    | 1.45 | 4.4 | 8
-|===
-
-Unfortunately, In-N-Out isn't available everywhere, and this person is going to have to settle for one of the places in our table. Based on this data, which of the five chains in our table is _most similar_ to In-N-Out, and why?
+Unfortunately for anyone on the West Coast, In-N-Out isn't available everywhere! If a Californian is on a road trip East, they're going to have to settle for one of the other 5 places in our table. Based on this data, which of the other restaurants in our table is _most similar_ to In-N-Out, and why?
 
 @teacher{Make sure you have students explain their thinking!}
 
 @slidebreak{Investigate}
-If we're just comparing based on Price, that's easy: plot the restaurants' prices on a number line, and find the one that's closes to In-N-Out.
+If we're just comparing based on Price (just one dimension), that's easy: plot the restaurants' prices on a number line, and find the one that's closest to In-N-Out.
 
-@centered-image{images/1-d-comparison.png}
+@lesson-instruction{
+- Complete the first two sections on @printable-exercise{fast-food-2-dimensions.adoc}.
+- Is there one clear answer? Why or why not?
+}
+
+@slidebreak{Investigate}
+
+@QandA{
+@Q{When comparing restaurants in 1 dimension, was the "most similar restaurant" to In-N-Out the same for every dimension?}
+@A{No - depending on the attribute, it could be Burger King, Five Guys, or Wendy's}
+
+@Q{How can this be?}
+@A{We have multiple, *independent* attributes for these restaurants! One restaurant might be the most similar to In-N-Out for fries, while another could be the most similar for price.}
+@A{Being similiar for one attribute doesn't mean a restaurant is going to be similar for all the others.}
+
+@Q{When comparing restaurants in 2 dimension, was there a clear "similar restaurant"}
+@A{Answers will vary}
+
+@Q{How many different ways could we measure the "similarity" between two restaurants in this graph?}
+@A{Euclidean distance (hypotenuse), manhattan distance (horizontal steps + vertical steps), angle difference...}
+}
 
 @slidebreak{Investigate}
 --
-@right{@image{images/2-d-comparison.png, 400}}
-But what if we want to compare based on Price _and_ Fry Quality? For this, we'll need a @vocab{scatter plot}!
+@right{@image{images/2-d-comparison.png, 300}}
 
-Let's take a look at this @online-exercise{https://www.desmos.com/3d/lhqra70cje, Fast Food Ratings} graph.
+Let's take a look at the graph you made @online-exercise{https://www.desmos.com/3D/lhqra70cje, is Desmos}.
 
-- At the top of the expression panel on the left, you'll see a data table for our restaurants.
-- We have columns for Price, Fry Quality, Burger Quality, and "restaurant number" (e.g., 1 = McDonalds).
-- This 2-dimensional scatter plot shows the relationship between Price (Z) and Fry Quality (X).
-- We can "turn on" the folder for "In-N-Out", to see where it falls on the graph.
-- We want to find the blue dot that's most similar to the green one.
-- *How do we measure "similarity" in 2 dimensions?*
+- At the top of the expression panel on the left, you'll see a data table for each of our restaurants
+- The table has columns for Price, Fry Quality, Burger Quality, and "restaurant number" (e.g., 1 = McDonalds)
+- This 2-dimensional scatter plot shows the relationship between Price (Z) and Fry Quality (X)
+- In-N-Out is represented in green, while the other restaurants are shown in blue
+- A line is drawn from the origin, pointing to In-N-Out
+- We want to find the blue dot that's most similar to the green one
 --
+
+@lesson-instruction{
+- Complete the third section on @printable-exercise{fast-food-2-dimensions.adoc}
+}
 
 @slidebreak{Investigate}
 @teacher{Turn on the folder "Lines and Angle Calculation". A line will appear, pointing from the origin to the point for In-N-Out.}
+@teacher{Adjust the slider for @math{r_n}, showing the angle @math{θ} between In-N-Out and the other restaurants.}
 
 @QandA{
 By dropping lines from each point to the origin, we can *measure the angle between them!*
-@right{@image{images/2-d-comparison-w-lines.png, 400}}
+@right{@image{images/2-d-comparison-w-lines.png, 300}}
 @Q{What is would be the _largest possible angle_ between any two points on this graph?}
 @A{90°: a fictional restaurant with $0 in price and the best fries, and another one with a zero for fries and a high price.}
 
@@ -148,23 +167,24 @@ By dropping lines from each point to the origin, we can *measure the angle betwe
 @A{0°: two restaurants with the exact same score will result in two lines going to the same point from the origin.}
 }
 
-@teacher{Adjust the slider for @math{r_n}, showing the angle @math{θ} between In-N-Out and the other restaurants.}
 
 @slidebreak{Investigate}
 We can repeat the same process with our Burger v. Price scatter plot!
 
 @teacher{
 - Refresh the page to reset everything
-- Turn off the folder for "Fries v. Price" and turn *on* the folder "Burgers v. Price"
+- Turn *on* the folder "Burgers v. Price"
 - Click on the "X" label on bottom axis, and slowly drag it to the left.
-- This will rotate the 3D space, until you have a "flat" z-y plane with blue dots on it
-- Turn on "In-N-Out" and "Lines and Angle Calculation", and find the closest blue dot
+- This will rotate the 3D space, until you have a "flat" Z-Y plane with blue dots on it
 }
 
 In every case, we draw lines from our points to the origin and then compute the _angle-distance_ between them. But what if we want to compare Price, Fry Quality, _and_ Burger Quality? How can we compare all three?
 
 @teacher{Solicit student responses!}
 
+@lesson-instruction{
+- Complete the first section on @printable-exercise{fast-food-3-dimensions.adoc}
+}
 @slidebreak{Investigate}
 --
 @right{@image{images/projection.webp, 300}}
@@ -176,7 +196,7 @@ The same is true for our dataset! Our restaurants are described by 3 different a
 
 @slidebreak{InvestigateR}
 --
-@right{@image{images/3-d-comparison-w-lines.png, 400}}
+@right{@image{images/3-d-comparison-w-lines.png, 300}}
 
 - Turn *on* "Fries v. Price" again, as well as "Fries v. Burgers v. Price".
 - Rotate the 3D space to match the projection image, so you can see how the 3D plot is "projected" onto the planes to create our 2D scatter plots.
@@ -191,4 +211,176 @@ Even in three dimensions, we can draw our lines and measure the angle distance!
 @Q{Would the math still work in *four* dimensions? *Five*?}
 }
 
+
+
+
+== Image Similarity
+
+=== Overview
+
+Students explore ways in which images can be represented as points in space, and the similarity measure we created for our songs generalizes to images as well.
+
+=== Launch
+@slidebreal{LaunchR}
+
+@link{https://images.google.com/, In Google Image Search}, you can drag a picture into the search box and have Google find other, _similar_ images.
+
+@teacher{Demo this functionality, using an image of your choosing}
+
+@slidebreak{Launch}
+When we asked Google to find images similar to this one, it came back with a lot of similar images! But the computer doesn't have eyes, and it doesn't have the human experience that informs how an image makes us feel.
+
+So how does it even know what "similar" means?
+
+
+@slidebreak{Launch}
+Much like our songs, we can come up with lots of ways to describe an image:
+
+- Width and height
+- Brightness ("luminance")
+- Busy-ness ("entropy")
+
+What else can you come up with?
+
+
+
+== Computing Closeness with Angle Difference
+
+=== Overview
+
+Compressing text into bags of words gives us a coarse-grained notion of similarity. Let's explore how to produce a more refined notion of similarity.
+
+=== Launch
+@slidebreak{Launch}
+
+When we ask people whether two documents are the same, they rarely give us a black-and-white "yes" or "no" answer. Instead they tend to speak about shades of similarity. Likewise, we would like our computer to give us a range of values that give us a sense of how similar the two documents are. In other words, we would like the output to be a Number, not just a Boolean (identical, not identical).
+
+=== Investigate
+@slidebreak{Investigate}
+
+Now that we know how to represent our bag of words summaries as points in space, we can draw a @vocab{ray} from the origin through each of those points and ask: What is the angle between the two rays?
+
+Take, for example, this comparison between two strings: `stringA` ("doo doo doo doo") and `stringB` ("be be be be").
+
+[cols="<.^8a,<.^8a,<.>8a",  stripes="none"]
+|===
+|
+`StringA`: `doo doo doo doo`
+[cols="1,1",options="header"]
+!===
+! Word  ! Frequency
+! be ! 0
+! doo! 4
+!===
+Ordered pair: (0,4)
+|
+`StringB`: `be be be be`
+[cols="1,1",options="header"]
+!===
+! Word  ! Frequency
+! be ! 4
+! doo! 0
+!===
+Ordered pair: (4,0)
+|
+
+@center{@image{images/soln1.png, 150}}
+
+The angle formed is 90°.
+|===
+
+@slidebreak{Investigate}
+
+If two documents are identical, they will be at the same point in space, and have the same ray extending from the origin to that point. That means the angle between those rays will be 0°. Even if one document just rearranges the other, their bags of words will be identical—thereby again making the angle between the lines 0°.
+
+@teacher{
+If you want your students to practice measuring angles with a protractor, we recommend using @printable-exercise{angle-difference.adoc}. If you do not have protractors available or would prefer that your students approximate angle size without measuring, we recommend printing and distributing @opt-printable-exercise{angle-difference-no-protractor.adoc} instead.
+}
+
+@lesson-instruction{
+- Complete @printable-exercise{angle-difference.adoc} or @opt-printable-exercise{angle-difference-no-protractor.adoc} using your knowledge of bags of words and plotting points.
+** First, fill in the frequency tables by referring to the provided string.
+** Translate the bags of words to ordered pairs.
+** Plot the points.
+** Draw a ray from the origin to each of the points.
+** Measure or approximate the angle size.
+}
+
+@slidebreak{Investigate}
+
+As the documents contain different words, the angles between the rays will grow. To reflect this, we can use the `angle-difference` function. It will give us a value between 0° (if the two are identical) and 90° (if the two have nothing in common).
+
+@strategy{Points, Rays, and Vectors}{
+As you've discovered, our plagiarism detector computes the angle difference between rays extending from the origin to various points that we have plotted space.
+
+In machine learning, we generally refer to these bag-of-word representations *not* as _points_, but as _vectors_. Why? A point represents a location in space, whereas a vector represents a magnitude and a direction.
+
+To reduce the amount of new vocabulary introduced in this lesson, we have opted to refer simply to points and rays. More commonly, however, the term _vector_ is used in a machine learning context.
+
+If you or your students are wondering why we wouldn't just compute the _distance_ between points, rather than complicating things and introducing angles... it's because typically, machine learning uses vectors, not points.
+}
+
+When two documents are represented as two points in space, @vocab{angle difference} is the difference between the angles formed by rays from the origin through those points.
+
+@lesson-point{
+Angle difference can be used to measure the similarity of two documents.
+}
+
+
+
+The contract for `angle-difference` is below.
+
+```
+# angle-difference :: (String, String) -> Number
+```
+
+@slidebreak{Investigate-DN}
+
+@lesson-instruction{
+Let's try the `angle-difference` function in Pyret.
+
+- Check your work on @printable-exercise{angle-difference.adoc}.
+.
+** Open @starter-file{plagiarism} and click "Run".
+** Enter `angle-difference("doo doo doo doo", "be be be be")` into the Interactions Area.
+** Does the angle size that Pyret produces match the angle that you drew? (Hopefully yes!)
+** Use `angle-difference` to compare each pair of strings on @printable-exercise{angle-difference.adoc}.
+}
+
+@strategy{Angles?!}{
+
+Yes, angles!
+
+Did you know that geometry is at the heart of modern AI? This lesson shows how. The same angles that your students learn to compute in middle-school are sitting at the heart of the machine learning calculations that power so many things in the world today. Even the plagiarism detectors that might be checking their essays on angles... are computing angles. So if your students ask “When are we ever going to use this?”, you can tell them, “You already do, all the time.”
+
+The plot thickens, especially if you have older students who have learned some trigonometry. In practice, real machine learning systems don't _quite_ use angles. Instead, they use the cosine of the angle. There are two reasons for this:
+
+- The angle itself is a somewhat awkward value to work with. In contrast, the cosine has a nice numeric range, between -1 and 1, which makes it convenient to use in various other mathematical settings. (Specifically, it's used in a process called gradient descent.)
+
+- It’s simpler to compute the cosine directly. In fact, inside Pyret, `angle-difference` actually first computes the cosine, then converts the result into an angle!
+
+For the purposes of this curriculum, you can ignore this difference. In particular, if your students have never even heard of the cosine, that's fine! For students who are familiar with cosine and curious to explore, the @starter-file{plagiarism} contains a `cosine-similarity function`.
+}
+
+=== Synthesize
+@slidebreak{Synthesize}
+
+@QandA{
+Here are three different lines of code.
+
+`angle-difference("hello world", "hello")`
+
+`angle-difference("hello", "goodbye")`
+
+`angle-difference("hello", "hello")`
+
+@Q{Which line of code produces 90°? How do you know?}
+@A{`angle-difference("hello", "goodbye")`; the two strings are completely different.}
+
+@Q{Which line of code produces 45°? How do you know?}
+@A{`angle-difference("hello world", "hello")`; the two strings have one word in common; they are not entirely different nor are they identical.}
+
+@Q{Which line of code produces 0°? How do you know?}
+@A{`angle-difference("hello", "hello")`; the two strings are exactly the same.}
+}
 
