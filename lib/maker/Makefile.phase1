@@ -118,6 +118,7 @@ distribution/$(NATLANG)/lib/page-not-found.adoc:
 
 ###############################################################################
 
+
 glossary: distribution/$(NATLANG)/lib/bilingual-glossary.adoc
 
 distribution/$(NATLANG)/lib/bilingual-glossary.adoc: lib/glossary-terms.json | initialization
@@ -125,12 +126,9 @@ distribution/$(NATLANG)/lib/bilingual-glossary.adoc: lib/glossary-terms.json | i
 	@$(MAKE_DIR)make-bilingual-glossary.lua $< $@
 
 ###############################################################################
-
 bootstraplessonjs: distribution/$(NATLANG)/lib/bootstraplesson.js
-
 distribution/$(NATLANG)/lib/bootstraplesson.js: lib/bootstraplesson.js
 	@cat $< | $(SED) -e 's/^const proglangs.*/const proglangs = "$(ALL_PROGLANGS)".split(new RegExp(" \\+"));/' > $@
-
 ###############################################################################
 
 starterFiles: distribution/$(NATLANG)/lib/starterFiles.js
@@ -142,17 +140,14 @@ distribution/$(NATLANG)/lib/starterFiles.js: | initialization
 ###############################################################################
 
 dictionaries: distribution/$(NATLANG)/lib/dictionaries.js
-
 alignment-dictionaries := $(wildcard \
 	shared/langs/en-us/standards/*.json \
 	shared/langs/en-us/textbooks/*.json \
 	shared/langs/en-us/practices/*.json)
-
 distribution/$(NATLANG)/lib/dictionaries.js: $(alignment-dictionaries)
 	@echo ➤ Build $@
 	@$(MAKE_DIR)make-json-dict.lua $@
 	@$(MAKE_DIR)check-dictionaries.sh
-
 ###############################################################################
 
 learningObjectives: distribution/$(NATLANG)/lib/learningObjectives.js
