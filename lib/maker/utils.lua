@@ -104,6 +104,15 @@ function copy_file_to_port(f, o)
   i:close()
 end
 
+function lua_copy(src, dst)
+  local i = io.open(src, 'rb')
+  local data = i:read('*all')
+  i:close()
+  local o = io.open(dst, 'wb')
+  o:write(data)
+  o:close()
+end
+
 function head(f, num, pat)
   -- true if file f contains the pattern pat within its first num lines
   local i = io.open(f)

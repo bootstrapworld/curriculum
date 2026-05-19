@@ -24,16 +24,6 @@ local wp_epilogue_expanded = wp_epilogue:gsub(
 local gtm_content    = read_file_string(gtm_file)
 local gtm_noscript_content = read_file_string(gtm_noscript_file)
 
--- faster file copying: replaces os.execute('cp ' .. fhtml_cached .. ' ' .. fhtml_cached .. '.save')
-local function lua_copy(src, dst)
-  local i = io.open(src, 'rb')
-  local data = i:read('*all')
-  i:close()
-  local o = io.open(dst, 'wb')
-  o:write(data)
-  o:close()
-end
-
 local function calculate_dist_root_dir(fhtml_cached)
   local f = fhtml_cached:gsub('^%./', '')
   f = f:gsub('/%./', '/')
@@ -59,13 +49,13 @@ local function get_proglang(fhtml_cached)
 end
 
 local function postproc(fhtml_cached, tipe)
-   -- pre-compute tipe flags once
+  -- pre-compute tipe flags once
   local is_shtml       = tipe == 'lessonplan' or tipe == 'pathwaynarrative' or tipe == 'pathwayresource'
   local adds_analytics = tipe == 'lessonplan' or tipe == 'pathwaynarrative'
   local strips_title   = tipe == 'lessonplan' or tipe == 'pathwayresource'
   local adds_links     = tipe == 'lessonplan' or tipe == 'workbookpage'
 
-  -- fix undeclared globals
+  -- declare our globals
   local read_end_sidebar_p = false
   local num_of_lines_past_end_sidebar = 0
 
@@ -93,8 +83,7 @@ local function postproc(fhtml_cached, tipe)
   local f_mathjax_file = fhtml_cached:gsub('%.html$', '.asc.uses-mathjax')
   local f_codemirror_file = fhtml_cached:gsub('%.html$', '.asc.uses-codemirror')
   --
-  --os.execute('cp ' .. fhtml_cached .. ' ' .. fhtml_cached .. '.save')
-  lua_copy(fhtml_cached, fhtml_cached .. '.save') -- replaces line above
+  lua_copy(fhtml_cached, fhtml_cached .. '.save')
   local i = io.open(fhtml_cached, 'r')
   local o = io.open(fhtml, 'w')
   --

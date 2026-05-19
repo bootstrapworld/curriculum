@@ -8,6 +8,7 @@ asc-file = $(dir $1).cached/.$(patsubst %.adoc,%.asc,$(notdir $1))
 
 pdf-file = $(dir $1)$(patsubst %.adoc,%.pdf,$(notdir $1))
 
+
 .PHONY: preproc postproc specials tocs coverage pdfs verifylinks books \
         dependency-graph images \
         phase1 phase2 phases \
