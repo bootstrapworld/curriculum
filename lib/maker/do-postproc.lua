@@ -428,7 +428,8 @@ local batchf_map = {
 }
 run_postproc(batchf_map[tipe], tipe)
 
-dofile(make_dir .. 'make-slides.lua')
+if tipe == 'lessonplan' then
+  dofile(make_dir .. 'make-slides.lua')
 
 do
   local cached_html_files = dofile(lessonplan_batchf)
