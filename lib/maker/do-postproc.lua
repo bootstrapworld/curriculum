@@ -16,6 +16,12 @@ local gtm_noscript_file = os.getenv'TOPDIR' .. '/lib/gtm-noscript.txt'
 local wp_prologue_file = os.getenv'TOPDIR' .. '/lib/wp-adaptors/prologue.txt'
 local wp_epilogue_file = os.getenv'TOPDIR' .. '/lib/wp-adaptors/epilogue.txt'
 
+-- Read these files once, not thousands of times
+local wp_prologue    = read_file_string(wp_prologue_file)
+local wp_epilogue    = read_file_string(wp_epilogue_file)
+local gtm_content    = read_file_string(gtm_file)
+local gtm_noscript_content = read_file_string(gtm_noscript_file)
+
 local function calculate_dist_root_dir(fhtml_cached)
   local f = fhtml_cached:gsub('^%./', '')
   f = f:gsub('/%./', '/')
@@ -41,6 +47,16 @@ local function get_proglang(fhtml_cached)
 end
 
 local function postproc(fhtml_cached, tipe)
+  -- pre-compute tipe flags once
+  local is_shtml       = tipe == 'lessonplan' or tipe == 'pathwaynarrative' or tipe == 'pathwayresource'
+  local adds_analytics = tipe == 'lessonplan' or tipe == 'pathwaynarrative'
+  local strips_title   = tipe == 'lessonplan' or tipe == 'pathwayresource'
+  local adds_links     = tipe == 'lessonplan' or tipe == 'workbookpage'
+
+  -- declare our globals
+  local read_end_sidebar_p = false
+  local num_of_lines_past_end_sidebar = 0
+
   local page_title = ''
   -- print('doing postproc', fhtml_cached, tipe)
   if not file_exists_p(fhtml_cached) then return end
@@ -49,7 +65,7 @@ local function postproc(fhtml_cached, tipe)
   local fdir = fhtml_cached:gsub('/%.cached/[^/]*html$', '')
   -- print('fdir is', fdir)
   local fbase = fhtml_cached:gsub('^.*/%.([^/]*html)$', '%1')
-  if memberp(tipe, {'lessonplan', 'pathwaynarrative', 'pathwayresource'}) then
+  if is_shtml then
     fbase = fbase:gsub('%.html$', '.shtml')
   end
   -- print('fbase is', fbase)
@@ -63,7 +79,7 @@ local function postproc(fhtml_cached, tipe)
   local f_mathjax_file = fhtml_cached:gsub('%.html$', '.asc.uses-mathjax')
   local f_codemirror_file = fhtml_cached:gsub('%.html$', '.asc.uses-codemirror')
   --
-  os.execute('cp ' .. fhtml_cached .. ' ' .. fhtml_cached .. '.save')
+  lua_copy(fhtml_cached, fhtml_cached .. '.save')
   local i = io.open(fhtml_cached, 'r')
   local o = io.open(fhtml, 'w')
   --
@@ -102,7 +118,7 @@ local function postproc(fhtml_cached, tipe)
       add_body_id_p = true
       add_end_body_id_p = true
       --
-      if memberp(tipe, {'lessonplan', 'pathwaynarrative'}) then
+      if adds_analytics then
         add_analytics_p = true
       end
       --
@@ -115,7 +131,7 @@ local function postproc(fhtml_cached, tipe)
         add_end_body_id_p = false
         x = x:gsub('</body>', '</div>\n%0')
       end
-      local y = read_file_string(wp_epilogue_file)
+      local y = wp_epilogue
       y = y:gsub('SEMESTER_YEAR', os.getenv'SEMESTER' .. ' ' .. os.getenv'YEAR')
       x = x:gsub('</body>', y)
     end
@@ -237,13 +253,13 @@ local function postproc(fhtml_cached, tipe)
       delete_line_p = true
     end
     --
-    if memberp(tipe, {'lessonplan', 'pathwayresource'}) then
+    if strips_title then
       if x:find('^<title>') then
         x = x:gsub('</?span[^>]*>', '')
       end
     end
     --
-    if memberp(tipe, {'lessonplan', 'workbookpage'}) then
+    if adds_links then
       if x:find('^<h[1-6] id') then
         -- tags to ignore inside section titles when making id=
         for _,tag in ipairs{'span', 'code', 'i', 'sup', 'sub'} do
@@ -267,12 +283,12 @@ local function postproc(fhtml_cached, tipe)
     --
     if add_analytics_p then
       add_analytics_p = false
-        copy_file_to_port(gtm_noscript_file, o)
+        o:write(gtm_noscript_content)
     end
     --
     if add_body_id_p then
       add_body_id_p = false
-        local y = read_file_string(wp_prologue_file)
+        local y = wp_prologue
         o:write(y)
         local klass = proglang
         if tipe == 'workbookpage' then
@@ -316,7 +332,7 @@ local function postproc(fhtml_cached, tipe)
     if add_codemirror_p then
       add_codemirror_p = false
       o:write('<link rel="stylesheet" href="' .. local_dist_root_dir .. 'lib/codemirror.css" />\n')
-      copy_file_to_port(gtm_file, o)
+      o:write(gtm_content)
       o:write('<script src="' .. local_dist_root_dir .. 'lib/codemirror.js"></script>\n')
       o:write('<script src="' .. local_dist_root_dir .. 'lib/runmode.js"></script>\n')
       o:write('<script src="' .. local_dist_root_dir .. 'lib/scheme2.js"></script>\n')
@@ -418,17 +434,21 @@ local function run_postproc(batchf, tipe)
   end
 end
 
-run_postproc(pathwayindependent_batchf, 'pathwayindependent')
-run_postproc(workbookpage_batchf, 'workbookpage')
-run_postproc(lessonplan_batchf, 'lessonplan')
-run_postproc(pathwaynarrative_batchf, 'pathwaynarrative')
-run_postproc(pathwayresource_batchf, 'pathwayresource')
+local tipe = arg[1]
+local batchf_map = {
+  pathwayindependent = os.getenv'ADOC_POSTPROC_PATHWAYINDEPENDENT_INPUT',
+  workbookpage       = os.getenv'ADOC_POSTPROC_WORKBOOKPAGE_INPUT',
+  lessonplan         = os.getenv'ADOC_POSTPROC_LESSONPLAN_INPUT',
+  pathwaynarrative   = os.getenv'ADOC_POSTPROC_PATHWAYNARRATIVE_INPUT',
+  pathwayresource    = os.getenv'ADOC_POSTPROC_PATHWAYRESOURCE_INPUT',
+}
+run_postproc(batchf_map[tipe], tipe)
 
-dofile(make_dir .. 'make-slides.lua')
+if tipe == 'lessonplan' then
+  dofile(make_dir .. 'make-slides.lua')
 
-do
   local cached_html_files = dofile(lessonplan_batchf)
-  -- e.g., "distribution/en-us/lessons/quadratic3-fitting-models/.cached/.index.html"
+
   for _,cached_html_file in ipairs(cached_html_files) do
     local lesson_dir = cached_html_file:gsub('/%.cached/%.index.html', '')
     make_slides_file(lesson_dir)

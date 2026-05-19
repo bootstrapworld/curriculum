@@ -130,8 +130,13 @@ local function display_subreport(dictionaries, standard_to_lessons_map)
         lessons_via_objectives = {}
       end
       local lessons_via_objectives_only = {}
+
+      local lessons_set = {}
+      for _, l in ipairs(lessons) do lessons_set[l] = true end
+
+      local lessons_via_objectives_only = {}
       for _,lesson in ipairs(lessons_via_objectives) do
-        if not memberp(lesson, lessons) then
+        if not lessons_set[lesson] then
           table.insert(lessons_via_objectives_only, lesson)
         end
       end
@@ -171,7 +176,7 @@ end
 o:write('= Coverage Report\n\n')
 o:write('Each line shows the name of the standard/practice/textbook followed by the number of times it\'s used.\n')
 o:write('If a standard is not used at all, the line is highlighted in [.unused]#red#.\n')
-o:write('If a lesson is not explicity associated a standard, but is associated with a related objective, it is highlighted in [.via_objectives_dict_only]#green#.\n')
+o:write('If a lesson is not explicitly associated a standard, but is associated with a related objective, it is highlighted in [.via_objectives_dict_only]#green#.\n')
 o:write('\n')
 
 local objectives_list = read_json_file('distribution/en-us/lib/learningObjectives.js')
@@ -190,7 +195,7 @@ end
 
 local objective_to_lessons_map = {}
 
-for _,lsn in ipairs(shell_output('ls distribution/en-us/lessons')) do
+for _,lsn in ipairs(read_file_lines(os.getenv'LESSONS_LIST_FILE')) do
   local lesson_objectives_file = 'distribution/en-us/lessons/' .. lsn .. '/.cached/.index-objectives.txt.kp'
   if file_exists_p(lesson_objectives_file) then
     local i = io.open(lesson_objectives_file)
@@ -206,16 +211,18 @@ end
 
 local standard_to_lessons_map = {}
 
-for std,objs in pairs(standard_to_objectives_map) do
-  if not standard_to_lessons_map[std] then
-    standard_to_lessons_map[std] = {}
-  end
+for std, objs in pairs(standard_to_objectives_map) do
+  local seen = {}
+  local lsns = {}
   for _,obj in ipairs(objs) do
-    local obj_lsns = objective_to_lessons_map[obj] or {}
-    for _,lsn in ipairs(obj_lsns) do
-      table.insert(standard_to_lessons_map[std], lsn)
+    for _,lsn in ipairs(objective_to_lessons_map[obj] or {}) do
+      if not seen[lsn] then
+        seen[lsn] = true
+        table.insert(lsns, lsn)
+      end
     end
   end
+  standard_to_lessons_map[std] = lsns
 end
 
 print_coverage_script_n_style()

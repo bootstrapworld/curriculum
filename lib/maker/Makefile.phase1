@@ -130,7 +130,7 @@ distribution/$(NATLANG)/lib/page-not-found.adoc:
 
 glossary: distribution/$(NATLANG)/lib/bilingual-glossary.adoc
 
-distribution/$(NATLANG)/lib/bilingual-glossary.adoc: lib/glossary-terms.json | initialization
+distribution/$(NATLANG)/lib/bilingual-glossary.adoc: lib/glossary-terms.json
 	@echo ➤ Build $@
 	@$(MAKE_DIR)make-bilingual-glossary.lua $< $@
 
@@ -145,9 +145,9 @@ distribution/$(NATLANG)/lib/bootstraplesson.js: lib/bootstraplesson.js
 
 starterFiles: distribution/$(NATLANG)/lib/starterFiles.js
 
-distribution/$(NATLANG)/lib/starterFiles.js: | initialization
+distribution/$(NATLANG)/lib/starterFiles.js: $(PROGDIR)/combine-dicts.js $(PROGDIR)/starterFiles
 	@echo ➤ Build $@
-	@node $(PROGDIR)/combine-dicts.js $(PROGDIR)/starterFiles $@
+	@node $+ $@
 
 ###############################################################################
 
@@ -167,18 +167,18 @@ distribution/$(NATLANG)/lib/dictionaries.js: $(alignment-dictionaries)
 
 learningObjectives: distribution/$(NATLANG)/lib/learningObjectives.js
 
-distribution/$(NATLANG)/lib/learningObjectives.js: | initialization
+distribution/$(NATLANG)/lib/learningObjectives.js: $(PROGDIR)/combine-dicts.js $(PROGDIR)/learningObjectives
 	@echo ➤ Build $@
-	@node $(PROGDIR)/combine-dicts.js $(PROGDIR)/learningObjectives $@
+	@node $+ $@
 
 
 ###############################################################################
 
 citations: distribution/$(NATLANG)/lib/citations.js
 
-distribution/$(NATLANG)/lib/citations.js: | initialization
+distribution/$(NATLANG)/lib/citations.js: $(PROGDIR)/combine-dicts.js $(PROGDIR)/citations
 	@echo ➤ Build $@
-	@node $(PROGDIR)/combine-dicts.js $(PROGDIR)/citations $@
+	@node $+ $@
 
 ###############################################################################
 
