@@ -19,11 +19,10 @@ local wp_epilogue_file = os.getenv'TOPDIR' .. '/lib/wp-adaptors/epilogue.txt'
 -- Read these files once, not thousands of times
 local wp_prologue    = read_file_string(wp_prologue_file)
 local wp_epilogue    = read_file_string(wp_epilogue_file)
-local gtm_content    = read_file_string(gtm_file)
-local gtm_noscript_content = read_file_string(gtm_noscript_file)
-
 local wp_epilogue_expanded = wp_epilogue:gsub(
   'SEMESTER_YEAR', os.getenv'SEMESTER' .. ' ' .. os.getenv'YEAR')
+local gtm_content    = read_file_string(gtm_file)
+local gtm_noscript_content = read_file_string(gtm_noscript_file)
 
 local function calculate_dist_root_dir(fhtml_cached)
   local f = fhtml_cached:gsub('^%./', '')
@@ -160,7 +159,7 @@ local function postproc(fhtml_cached, tipe)
     --
     x = x:gsub('<pre>', pre_open)
     x = x:gsub('</pre>', '</code></pre>')
-    x = x:gsub('<code>', '<code class="' .. code_lang .. '">')
+    x = x:gsub('<code>', code_open)
     x = x:gsub('<p> </p>', '<p></p>')
     --
     if x:find('<p>%%BEGINQBLOCKITEM%%') then
