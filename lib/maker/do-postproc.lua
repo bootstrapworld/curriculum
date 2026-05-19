@@ -22,6 +22,9 @@ local wp_epilogue    = read_file_string(wp_epilogue_file)
 local gtm_content    = read_file_string(gtm_file)
 local gtm_noscript_content = read_file_string(gtm_noscript_file)
 
+local wp_epilogue_expanded = wp_epilogue:gsub(
+  'SEMESTER_YEAR', os.getenv'SEMESTER' .. ' ' .. os.getenv'YEAR')
+
 local function calculate_dist_root_dir(fhtml_cached)
   local f = fhtml_cached:gsub('^%./', '')
   f = f:gsub('/%./', '/')
@@ -76,6 +79,8 @@ local function postproc(fhtml_cached, tipe)
   if proglang == 'wescheme' then
     code_lang = 'racket'
   end
+  local pre_open  = '<pre><code class="' .. code_lang .. '">'
+  local code_open = '<code class="' .. code_lang .. '">'
   local f_mathjax_file = fhtml_cached:gsub('%.html$', '.asc.uses-mathjax')
   local f_codemirror_file = fhtml_cached:gsub('%.html$', '.asc.uses-codemirror')
   --
@@ -131,9 +136,7 @@ local function postproc(fhtml_cached, tipe)
         add_end_body_id_p = false
         x = x:gsub('</body>', '</div>\n%0')
       end
-      local y = wp_epilogue
-      y = y:gsub('SEMESTER_YEAR', os.getenv'SEMESTER' .. ' ' .. os.getenv'YEAR')
-      x = x:gsub('</body>', y)
+      x = x:gsub('</body>', wp_epilogue_expanded)
     end
     --
     if x:find('^<link.*curriculum%.css') then
@@ -155,7 +158,7 @@ local function postproc(fhtml_cached, tipe)
       goto continue
     end
     --
-    x = x:gsub('<pre>', '<pre><code class="' .. code_lang .. '">')
+    x = x:gsub('<pre>', pre_open)
     x = x:gsub('</pre>', '</code></pre>')
     x = x:gsub('<code>', '<code class="' .. code_lang .. '">')
     x = x:gsub('<p> </p>', '<p></p>')

@@ -182,7 +182,7 @@ distribution/$(NATLANG)/lib/citations.js: $(PROGDIR)/combine-dicts.js $(PROGDIR)
 
 ###############################################################################
 
-courses-and-lessons: copy-lessons copy-pathways
+courses-and-lessons: copy-lessons copy-pathways | initialization
 	@if test -f "$(SCRATCHFILE)"; then rm -f $(SCRATCHFILE); else $(MAKE_DIR)double-check-distribution-lessons.sh; fi
 	@echo ➤ Collect exercises information
 	@$(MAKE_DIR)collect-distribution-info.lua
