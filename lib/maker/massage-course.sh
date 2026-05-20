@@ -10,12 +10,6 @@ source ${MAKE_DIR}src-subdir-mgt.sh
 
 if test -d "$d"; then
   echo "  " • Updating existing course $d
-  srcDate=$(dir_timestamp $src)
-  tgtDate=$(dir_timestamp $d)
-  if test $srcDate -gt $tgtDate; then
-    rm -fr $d
-    mkdir -p $d
-  fi
 else
   mkdir -p $d
 fi
