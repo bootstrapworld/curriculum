@@ -1,3 +1,67 @@
+-- Following works for both macOS (brew) and Linux
+local _stat_cmd = "stat -c '%Y\t%n'"
+
+-- Returns a table mapping filepath -> mtime (integer).
+-- Uses a single xargs invocation for the whole list.
+local function batch_mtimes(files)
+  if #files == 0 then return {} end
+  local tmp = os.tmpname()
+  local fh = io.open(tmp, 'w')
+  for _, f in ipairs(files) do fh:write(f, '\0') end
+  fh:close()
+  local mtimes = {}
+  local h = io.popen('xargs -0 ' .. _stat_cmd .. ' < ' .. tmp .. ' 2>/dev/null')
+  for line in h:lines() do
+    local t, f = line:match('^(%d+)\t(.+)$')
+    if t then mtimes[f] = tonumber(t) end
+  end
+  h:close()
+  os.remove(tmp)
+  return mtimes
+end
+
+-- Returns only the adoc files whose .asc is missing or older than the .adoc.
+function filter_stale(adoc_list)
+  if #adoc_list == 0 then return {} end
+  local asc_of = {}
+  local asc_list = {}
+  for _, adoc in ipairs(adoc_list) do
+    if adoc == '' then goto continue end          -- skip blank lines
+    local dir, base = adoc:match('^(.*)/([^/]+)$')
+    if not dir then goto continue end             -- skip anything with no slash
+    local asc = dir .. '/.cached/.' .. base:gsub('%.adoc$', '.asc')
+    asc_of[adoc] = asc
+    table.insert(asc_list, asc)
+    ::continue::
+  end
+  local adoc_mtimes = batch_mtimes(adoc_list)
+  local asc_mtimes  = batch_mtimes(asc_list)
+  local stale = {}
+  for _, adoc in ipairs(adoc_list) do
+    if not asc_of[adoc] then goto continue end    -- skip entries we couldn't parse
+    local asc_t  = asc_mtimes[asc_of[adoc]]
+    local adoc_t = adoc_mtimes[adoc]
+    if not asc_t or (adoc_t and adoc_t > asc_t) then
+      table.insert(stale, adoc)
+    end
+    ::continue::
+  end
+  return stale
+end
+
+-- Reads a plain text file of one path per line from the env var's path.
+function read_adoc_list(envvar)
+  local path = os.getenv(envvar)
+  if not path or not file_exists_p(path) then return {} end
+  local result = {}
+  for _, line in ipairs(read_file_lines(path)) do
+    if line ~= '' then
+      table.insert(result, line)
+    end
+  end
+  return result
+end
+
 function memberp(elt, tbl)
   -- true iff tbl contains elt
   -- tbl is not required to be pure array

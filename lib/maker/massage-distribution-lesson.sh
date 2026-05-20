@@ -17,16 +17,7 @@ updatingexistinglesson=
 if test -d "$d"; then
   echo "  " • Updating existing lesson $d
   updatingexistinglesson=yes
-  srcdate=$(dir_timestamp $src)
-  tgtdate=$(dir_timestamp $d)
-  deletepdfs=
-  if test $srcdate -gt $tgtdate; then
-    rm -fr $d
-    mkdir -p $d
-  else
-    updatingexistinglesson=yes
-    (cd $d; save_previously_built_solution_pages)
-  fi
+  (cd $d; save_previously_built_solution_pages)
 else
   mkdir -p $d
 fi
