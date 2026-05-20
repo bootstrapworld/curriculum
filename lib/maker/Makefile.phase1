@@ -6,9 +6,7 @@ phase1: node_modules initialization .git/hooks/pre-commit courses-and-lessons pa
 
 initialization:
 	@. ${HOME}/.nvm/nvm.sh && nvm use 22.5
-	@touch pathways/__sample/langs/en-us/lesson-order.txt
 	@mkdir -p $(PROGDIR)
-	@$(MAKE_DIR)dir-hoist-timestamp.sh pathways lessons
 	@$(CP) -upr shared/langs/en-us/* $(PROGDIR)
 	@$(CP) -upr lib/codemirror.css distribution/$(NATLANG)/lib
 	@node_modules/less/bin/lessc shared/langs/$(NATLANG)/curriculum.less > distribution/$(NATLANG)/lib/curriculum.css

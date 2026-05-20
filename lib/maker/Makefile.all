@@ -96,6 +96,8 @@ phases:
 	@if test ! -d distribution; then mkdir -p distribution; touch $(SCRATCHFILE); fi
 	@mkdir -p distribution/$(NATLANG)/.cached
 	@mkdir -p distribution/$(NATLANG)/lib
+	@touch pathways/__sample/langs/en-us/lesson-order.txt
+	@$(MAKE_DIR)dir-hoist-timestamp.sh pathways lessons
 	@echo ➤ Update distribution directory
 	@$(MAKE) --no-print-directory -j$(NUMCORES) -f $(MAKE_DIR)Makefile.phase1
 	@echo ➤ Find the files that need updating
