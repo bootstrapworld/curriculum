@@ -247,6 +247,7 @@ First we would parse the groupings formed by parentheses and other grouping symb
 
 @big{@math{8^2 \div 4 - 5 \times}} @show{(coe '(+ 3 9))} 
 
+@slidebreak{Investigate}
 Then we would parse groupings formed by exponents (and radicals like square roots).
 
 @show{(coe '(sqr 8))} @big{@math{ \div 4 - 5 \times}} @show{(coe '(+ 3 9))} 
@@ -258,11 +259,17 @@ Then we would parse groupings formed by multiplication and division, working our
 [.oooCOE]
 @show{(coe '(/ (sqr 8) 4))} @big{@math{ - }} @show{(coe '(* 5(+ 3 9)))} 
 
+@slidebreak{Investigate}
+@ifslide{
+[.oooCOE]
+@show{(coe '(/ (sqr 8) 4))} @big{@math{ - }} @show{(coe '(* 5(+ 3 9)))}
+}
 Then we would parse groupings formed by addition and subtraction, working our way from left to right.
 
 [.oooCOE]
 @show{(coe '(- (/ (sqr 8) 4) (* 5(+ 3 9)) ))} 
 
+@slidebreak{Investigate}
 @QandA{
 @Q{What should a student do if they encounter an expression without parentheses or other grouping symbols?}
 @A{Regardless of whether or not there are any grouping symbols in an expression, after we check for them, the Order of Operations tell us to check for groupings formed by exponents, then check for groupings formed by multiplication and division, and then to check for groupings formed by addition and subtraction.}

@@ -19,11 +19,10 @@ local wp_epilogue_file = os.getenv'TOPDIR' .. '/lib/wp-adaptors/epilogue.txt'
 -- Read these files once, not thousands of times
 local wp_prologue    = read_file_string(wp_prologue_file)
 local wp_epilogue    = read_file_string(wp_epilogue_file)
-local gtm_content    = read_file_string(gtm_file)
-local gtm_noscript_content = read_file_string(gtm_noscript_file)
-
 local wp_epilogue_expanded = wp_epilogue:gsub(
   'SEMESTER_YEAR', os.getenv'SEMESTER' .. ' ' .. os.getenv'YEAR')
+local gtm_content    = read_file_string(gtm_file)
+local gtm_noscript_content = read_file_string(gtm_noscript_file)
 
 local function calculate_dist_root_dir(fhtml_cached)
   local f = fhtml_cached:gsub('^%./', '')
@@ -160,7 +159,7 @@ local function postproc(fhtml_cached, tipe)
     --
     x = x:gsub('<pre>', pre_open)
     x = x:gsub('</pre>', '</code></pre>')
-    x = x:gsub('<code>', '<code class="' .. code_lang .. '">')
+    x = x:gsub('<code>', code_open)
     x = x:gsub('<p> </p>', '<p></p>')
     --
     if x:find('<p>%%BEGINQBLOCKITEM%%') then
@@ -185,26 +184,32 @@ local function postproc(fhtml_cached, tipe)
       x = x:gsub('%%END[QA]BLOCKITEM%%', '')
     end
     --
-    if x:find('class="exampleblock .-actually%-openblock ') and openblock_attribs then
-      x = x:gsub('class=".-"', '%0' .. openblock_attribs)
-      openblock_attribs = false
+    if x:find('actually%-openblock') then
+      if x:find('class="exampleblock .-actually%-openblock ') and openblock_attribs then
+        x = x:gsub('class=".-"', '%0' .. openblock_attribs)
+        openblock_attribs = false
+      end
+      x = x:gsub('class="exampleblock (.-)actually%-openblock ', 'class="openblock %1')
     end
-    x = x:gsub('class="exampleblock (.-)actually%-openblock ', 'class="openblock %1')
     --
-    x = x:gsub('%%CURRICULUMMATHJAXMARKER%%', '$$')
+    if x:find('%%') then
+      x = x:gsub('%%CURRICULUMMATHJAXMARKER%%', '$$')
+      --
+      x = x:gsub('%%CURRICULUMCOMMENTSTART%%', '<!--')
+      x = x:gsub('%%CURRICULUMCOMMENTSTOP%%', '-->')
+      --
+      x = x:gsub('%%CURRICULUMLT%%', '<')
+      x = x:gsub('%%CURRICULUMGT%%', '>')
+      --
+      x = x:gsub('%%CURRICULUM([^%%]*)%%', '<%1')
+      x = x:gsub('%%BEGINCURRICULUM([^%%]*)%%', '>')
+      x = x:gsub('%%ENDCURRICULUM([^%%]*)%%', '</%1>')
+    end
     --
-    x = x:gsub('%%CURRICULUMCOMMENTSTART%%', '<!--')
-    x = x:gsub('%%CURRICULUMCOMMENTSTOP%%', '-->')
-    --
-    x = x:gsub('%%CURRICULUMLT%%', '<')
-    x = x:gsub('%%CURRICULUMGT%%', '>')
-    --
-    x = x:gsub('%%CURRICULUM([^%%]*)%%', '<%1')
-    x = x:gsub('%%BEGINCURRICULUM([^%%]*)%%', '>')
-    x = x:gsub('%%ENDCURRICULUM([^%%]*)%%', '</%1>')
-    --
-    x = x:gsub('&#8656;', '&lt;=')
-    x = x:gsub('&#8594;', '-&gt;')
+    if x:find('&#') then
+      x = x:gsub('&#8656;', '&lt;=')
+      x = x:gsub('&#8594;', '-&gt;')
+    end
     --
     x = x:gsub('^(<div id="preamble)">', '%1_disabled" class="lessonSummary">')
     --
@@ -449,9 +454,7 @@ run_postproc(batchf_map[tipe], tipe)
 
 if tipe == 'lessonplan' then
   dofile(make_dir .. 'make-slides.lua')
-
   local cached_html_files = dofile(lessonplan_batchf)
-
   for _,cached_html_file in ipairs(cached_html_files) do
     local lesson_dir = cached_html_file:gsub('/%.cached/%.index.html', '')
     make_slides_file(lesson_dir)

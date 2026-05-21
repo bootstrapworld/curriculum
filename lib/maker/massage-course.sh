@@ -13,6 +13,7 @@ if test -d "$d"; then
   srcDate=$(dir_timestamp $src)
   tgtDate=$(dir_timestamp $d)
   if test $srcDate -gt $tgtDate; then
+    echo "    " - Getting fresh $d
     rm -fr $d
     mkdir -p $d
   fi

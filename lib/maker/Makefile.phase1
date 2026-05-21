@@ -6,9 +6,7 @@ phase1: node_modules initialization .git/hooks/pre-commit courses-and-lessons pa
 
 initialization:
 	@. ${HOME}/.nvm/nvm.sh && nvm use 22.5
-	@touch pathways/__sample/langs/en-us/lesson-order.txt
 	@mkdir -p $(PROGDIR)
-	@$(MAKE_DIR)dir-hoist-timestamp.sh pathways lessons
 	@$(CP) -upr shared/langs/en-us/* $(PROGDIR)
 	@$(CP) -upr lib/codemirror.css distribution/$(NATLANG)/lib
 	@node_modules/less/bin/lessc shared/langs/$(NATLANG)/curriculum.less > distribution/$(NATLANG)/lib/curriculum.css
@@ -43,16 +41,6 @@ initialization:
 	@$(CP) -p lib/wp-adaptors/* distribution/$(NATLANG)/lib/wp-adaptors
 	@$(CP) -pr lib/fonts/* distribution/$(NATLANG)/lib/fonts
 	@rm -f $(MAKE_ERR_LOG) $(ADOC_INPUT) $(PUPPETEER_INPUT)
-	@echo 'return {' > $(SETUP_PATHWAYINDEPENDENT)
-	@echo 'return {' > $(SETUP_WORKBOOKPAGE)
-	@echo 'return {' > $(SETUP_LESSONPLAN)
-	@echo 'return {' > $(SETUP_PATHWAYRESOURCE)
-	@echo 'return {' > $(SETUP_PATHWAYNARRATIVE)
-	@echo 'return {' > $(SETUP_PATHWAYINDEPENDENT_PDF)
-	@echo 'return {' > $(SETUP_WORKBOOKPAGE_PDF)
-	@echo 'return {' > $(SETUP_LESSONPLAN_PDF)
-	@echo 'return {' > $(SETUP_PATHWAYRESOURCE_PDF)
-	@echo 'return {' > $(SETUP_CONTRACTS_PDF)
 	@echo 'return {' > $(IGNORABLE_DIRECTORIES)
 
 # fixme: once logic is set, split above into actual rules to reduce re-doing,
@@ -65,7 +53,7 @@ node_modules:
 
 .git/hooks/pre-commit: lib/maker/git-pre-commit-hook.sh
 	@echo ➤ Install Git pre-commit hook
-	@cp -p $< $@
+	@$(CP) -p $< $@
 
 ###############################################################################
 
@@ -128,57 +116,52 @@ distribution/$(NATLANG)/lib/page-not-found.adoc:
 
 ###############################################################################
 
+
 glossary: distribution/$(NATLANG)/lib/bilingual-glossary.adoc
 
-distribution/$(NATLANG)/lib/bilingual-glossary.adoc: lib/glossary-terms.json
+distribution/$(NATLANG)/lib/bilingual-glossary.adoc: lib/glossary-terms.json | initialization
 	@echo ➤ Build $@
 	@$(MAKE_DIR)make-bilingual-glossary.lua $< $@
 
 ###############################################################################
-
 bootstraplessonjs: distribution/$(NATLANG)/lib/bootstraplesson.js
-
 distribution/$(NATLANG)/lib/bootstraplesson.js: lib/bootstraplesson.js
 	@cat $< | $(SED) -e 's/^const proglangs.*/const proglangs = "$(ALL_PROGLANGS)".split(new RegExp(" \\+"));/' > $@
-
 ###############################################################################
 
 starterFiles: distribution/$(NATLANG)/lib/starterFiles.js
 
-distribution/$(NATLANG)/lib/starterFiles.js: $(PROGDIR)/combine-dicts.js $(PROGDIR)/starterFiles
+distribution/$(NATLANG)/lib/starterFiles.js: | initialization
 	@echo ➤ Build $@
-	@node $+ $@
+	@node $(PROGDIR)/combine-dicts.js $(PROGDIR)/starterFiles $@
 
 ###############################################################################
 
 dictionaries: distribution/$(NATLANG)/lib/dictionaries.js
-
 alignment-dictionaries := $(wildcard \
 	shared/langs/en-us/standards/*.json \
 	shared/langs/en-us/textbooks/*.json \
 	shared/langs/en-us/practices/*.json)
-
 distribution/$(NATLANG)/lib/dictionaries.js: $(alignment-dictionaries)
 	@echo ➤ Build $@
 	@$(MAKE_DIR)make-json-dict.lua $@
 	@$(MAKE_DIR)check-dictionaries.sh
-
 ###############################################################################
 
 learningObjectives: distribution/$(NATLANG)/lib/learningObjectives.js
 
-distribution/$(NATLANG)/lib/learningObjectives.js: $(PROGDIR)/combine-dicts.js $(PROGDIR)/learningObjectives
+distribution/$(NATLANG)/lib/learningObjectives.js: | initialization
 	@echo ➤ Build $@
-	@node $+ $@
+	@node $(PROGDIR)/combine-dicts.js $(PROGDIR)/learningObjectives $@
 
 
 ###############################################################################
 
 citations: distribution/$(NATLANG)/lib/citations.js
 
-distribution/$(NATLANG)/lib/citations.js: $(PROGDIR)/combine-dicts.js $(PROGDIR)/citations
+distribution/$(NATLANG)/lib/citations.js: | initialization
 	@echo ➤ Build $@
-	@node $+ $@
+	@node $(PROGDIR)/combine-dicts.js $(PROGDIR)/citations $@
 
 ###############################################################################
 
