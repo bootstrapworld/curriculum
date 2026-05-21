@@ -136,11 +136,11 @@ force:
 deploy:
 	rm -fr $(TOPDIR)/distribution
 	$(MAKE) book
-	NATLANG=en-us node --max-old-space-size=8192 lib/maker/screenshot-elts.js
+	NATLANG=en-us node lib/maker/screenshot-elts.js
 	$(MAKE_DIR)deploy-to-hostinger.sh
 
 screenshots:
-	NATLANG=en-us node --max-old-space-size=8192 lib/maker/screenshot-elts.js
+	NATLANG=en-us node lib/maker/screenshot-elts.js
 
 
 quick-deploy:
