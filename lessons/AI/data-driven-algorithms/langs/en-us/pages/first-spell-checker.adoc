@@ -1,0 +1,69 @@
+= The First Spell Checker
+
+++++
+<style>
+.sectionbody > .paragraph:first-child .autonum { padding-top: 0 !important; }
+.big { font-style: italic; border: 1px dashed; padding: 5px; }
+</style>
+++++
+
+The very first spell checker would use misspelled words as inputs. For misspelled each word, it would:
+
+[.indentedpara]
+--
+(1) Develop a list of _alternative words_ by *deleting*, *substituting*, or *inserting* at each position within the misspelled word, or *swapping* the positions of two adjacent letters.
+
+(2) Search its dictionary of correct spellings to see which of the alternatives on the list were real words, and throw away the other "nonsense" spellings.
+
+(3) Produce a list of real, correctly spelled words for the user to choose from.
+--
+
+@vspace{1ex}
+
+@center{@big{*Misspelled Word: `wello`*}}
+
+== Deleting
+
+@n For each of the five letters in "wello", write an alternative word with one character deleted. _We’ve done the first one to get you started._
+
+@hspace{3em} @fitbruby{8em}{ello}{delete 1st letter} @hspace{3em} @fitbruby{8em}{@ifsoln{wllo}}{delete 2nd letter} @hspace{3em} @fitbruby{8em}{@ifsoln{welo}}{delete 3rd letter} @hspace{3em} @fitbruby{8em}{@ifsoln{welo}}{delete 4th letter} @hspace{3em} @fitbruby{8em}{@ifsoln{well}}{delete 5th letter}
+
+@star How many alternate words can be created from _every_ possible deletion? @fitb{}{@ifsoln{5 letters, 1 possibility for each one gives us @math{1 \times 5 = 5}}}
+
+== Substituting
+
+@n For each of the five letters in "wello", replace them with a different one. _We’ve provided a first option to get you started._
+
+@hspace{3em} @fitbruby{8em}{dello}{replace 1st letter} @hspace{3em} @fitbruby{8em}{}{replace 2nd letter} @hspace{3em} @fitbruby{8em}{}{replace 3rd letter} @hspace{3em} @fitbruby{8em}{}{replace 4th letter} @hspace{3em} @fitbruby{8em}{}{replace 5th letter}
+
+@n How many possible substitutions _could_ you make for the 1st letter? @fitb{}{@ifsoln{25 (because "w" is taken)}}
+
+@star How many alternate words can be created from _every_ possible substitution? @fitb{}{@ifsoln{5 letters, 25 possibilities for each one gives us @math{25 \times 5 = 125!}}}
+
+== Inserting
+
+@n For each of the five letters in "wello", write an alternative word with one character inserted after each position. _We’ve done the first one to get you started._
+
+@hspace{3em} @fitbruby{8em}{w**z**ello}{after 1st letter} @hspace{3em} @fitbruby{8em}{@ifsoln{we**z**llo}}{after 2nd letter} @hspace{3em} @fitbruby{8em}{@ifsoln{wel*p*lo}}{after 3rd letter} @hspace{3em} @fitbruby{8em}{@ifsoln{well**z**o}}{after 4th letter} @hspace{3em} @fitbruby{8em}{@ifsoln{wello**z**}}{after 5th letter}
+
+@n How many possible insertions _could_ you make after the 1st letter? @fitb{}{@ifsoln{25 (because "w" is taken)}}
+
+@star How many alternate words can be created from _every_ possible insertion? @fitb{}{@ifsoln{5 positions, 26 possibilities for each one gives us @math{26 \times 5 = 130}}}
+
+== Swapping
+
+@n Swap the positions of each pair of *adjacent* letters. _We’ve done the first two to get you started._
+
+@hspace{3em} @fitbruby{8em}{**ew**llo}{1st pair (WE)} @hspace{3em} @fitbruby{8em}{@ifsoln{w**le**lo}}{2nd pair (EL)} @hspace{3em} @fitbruby{8em}{@ifsoln{we**ll**o}}{3rd pair (LL)} @hspace{3em} @fitbruby{8em}{@ifsoln{wel*ol*}}{4th pair (LO)}
+
+@n How many possible swaps could you make for this word? @fitb{8em}{@ifsoln{4}}
+
+== Reflect
+
+@n How many real words did you come up with? @fitb{3em}{@ifsoln{probably 5 or less}} What were they? @fitb{}{@ifsoln{"well... cello, hello, jello... wells...}}
+
+@n Compared to your own strategy for spell-checking, how similar / different is the first spell checker's algorithm? 
+
+@blanklines{3}{
+@ifsoln{When you check spelling, you rely a lot on context, instinct, and previously acquired knowledge. The first spell checking program did not have, or use, any of these strengths. In contrast, however, a human would not have the time, ability, or concentration to systematically list out thousands of potential words, whereas the computer has no difficulty doing so. Therefore, the strategies used by the human and computer may be extremely different for a similar task.}
+}

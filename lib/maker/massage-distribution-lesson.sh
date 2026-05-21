@@ -21,10 +21,10 @@ if test -d "$d"; then
   tgtdate=$(dir_timestamp $d)
   deletepdfs=
   if test $srcdate -gt $tgtdate; then
+    echo "    " - Getting fresh $d
     rm -fr $d
     mkdir -p $d
   else
-    updatingexistinglesson=yes
     (cd $d; save_previously_built_solution_pages)
   fi
 else

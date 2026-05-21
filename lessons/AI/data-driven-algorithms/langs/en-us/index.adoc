@@ -1,0 +1,258 @@
+[.beta]
+= Data-Driven Algorithms
+++++
+<style>
+ /* Allow floated images to "punch through" lesson-instructions */
+.lesson-instruction { clear: unset !important; }
+</style>
+++++
+@description{By exploring a spell checker program, students discover that AI relies on _data-driven algorithms_. When we provide more representative data to the computer, data-driven algorithms generally produce a higher quality output. }
+
+@lesson-prereqs{ai-intro, contracts-tables}
+
+@add-to-lang{}
+
+@keywords{}
+
+[@lesson-intro-table]
+|===
+| Lesson Goals
+| Students will be able to...
+
+@objectives
+
+| Student-facing Lesson Goals
+|
+- Let's play with spell checkers to learn about @vocab{data-driven algorithms}.
+
+| Materials
+|[.materials-links]
+@material-links
+|===
+
+== Spell-checking: The Algorithm @duration{15 minutes}
+@objective{machines-v-people}
+
+=== Overview
+Students consider one specific example of machine learning: evaluating how spell checkers' programmed behaviors compare and contrast with the behaviors of humans.
+
+=== Launch
+@slidebreak{Launch}
+
+@lesson-instruction{
+Consider this sentence with your partner: @big{Teh cat meowed so loudky it woke thm upp.}
+
+- What do you think the author intended to write?
+- Be prepared to describe how you did your spell checking:
+  * How do you locate misspelled words?
+  * How do you correct misspelled words?
+  * How would you describe each of the spelling mistakes that the author made?
+}
+
+@slidebreak{Launch}
+@QandA{
+@Q{How did you find the misspelled words?}
+@A{Answers will vary, but most people would say "I just knew it when I saw it". This is important to call out!}
+
+@Q{When you found a misspelled word, how did you figure out how to correct it?}
+@A{Possible responses might include things like:
+  * There was only one word it could be!
+  * I could tell from the rest of the sentence.
+  * I've made this same typing mistake a million times.
+  }
+
+@Q{The author made four different kinds of mistakes when writing this sentence. What were they?}
+@A{*Teh*   Reversed the letters `h` and `e`}
+@A{*loudky*   Typed `k` instead of `l`}
+@A{*thm*   Left out the letter `e`}
+@A{*upp*   Added an extra `p` at the end}
+}
+
+@slidebreak{Launch}
+When humans spell check, they rely on _context clues, experience, and background_. The process of spell-checking varies not just by person, but by situation. If a complex, technical word had been misspelled, for example, you might have relied on a different spell checking strategy. 
+
+=== Investigate
+@slidebreak{Investigate}
+
+The spell checker built into your web browser or word processing system is a classic example of @vocab{machine learning}. To get a better sense of how machines work differently from us, we are going to follow the algorithm from one of the earliest forms of AI/ML.
+
+@lesson-instruction{
+- To complete @printable-exercise{first-spell-checker.adoc}, _you_ will be the computer, following an early spell checker's algorithm.
+- Reflect on the activity and how it compares to your own strategies.
+}
+
+@teacher{
+After students have completed the activity, invite them to share their responses to the three reflection questions (below) in small groups.
+}
+
+@slidebreak{Investigate}
+
+@QandA{
+@Q{What do you think are some limitations of the first spell checker's algorithm?}
+@A{There is an extremely limited number of ways in which a word can be misspelled. For example, if two separate letters in a word are incorrect, the spell checker has no chance of proposing the correct word!}
+
+@Q{How is the first spell checker's algorithm similar to whatever strategy *you* use when spell checking your writing?}
+@A{See what your students propose, and discuss. If they come up with any similarities, we'd love to hear what they are!}
+
+@Q{How is the first spell checker's algorithm different from whatever strategy *you* use when spell checking your writing?}
+@A{When you check spelling, you rely a lot on context, instinct, and previously acquired knowledge.}
+@A{The first spell checking program did not have, or use, any of these strengths.}
+@A{In contrast, however, a human would not have the time, ability, or concentration to systematically list out thousands of potential words, whereas the computer has no difficulty doing so.}
+@A{Therefore, the strategies used by the human and computer may be extremely different for a similar task.}
+}
+
+=== Synthesize
+@slidebreak{Synthesize}
+
+@QandA{
+@Q{In what ways do spell checkers succeed at mimicking humans?}
+@A{They don't! But the outcomes might be similar, depending on a wide variety of variables.}
+
+@Q{Would it be a good idea for a human to try mimic a spell checker's algorithm? Why or why not?}
+@A{No. it would be time-consuming, laborious, and highly error prone for a human.}
+@A{The program we just discussed relies on computational brute force: primitive spell checking programs will repeatedly edit / transform a misspelled word, generating dozens of different words to verify in the dictionary.}
+}
+
+
+== Spell Checking in Pyret @duration{25 minutes}
+@objective{data-driven-algos}
+
+=== Overview
+Students explore both the algorithm and the datasets that power a Pyret-based spell checker, discovering that @vocab{data-driven algorithms} are at the heart of AI.
+
+=== Launch
+@slidebreak{Launch-DN}
+
+@lesson-instruction{
+- Let's take a look at a spell checking program written in Pyret.
+- Open the @starter-file{spell-checker} and click "Run".
+- Complete the first section of @printable-exercise{pyret-spell-checker.adoc}.
+}
+
+@teacher{Heads up: The functions used in this Pyret starter file only work in this particular starter file.}
+
+@slidebreak{Investigate}
+
+@QandA{
+@Q{How did the spellcheckers work compare to your efforts to be a computer on @printable-exercise{first-spell-checker.adoc}?}
+@A{It found everything we did and more than a hundred other insertions and substitutions in mere seconds!}
+
+@Q{Were all of Pyret's suggestions useful?}
+@A{No! Most of the words it proposed were nonsense.}
+}
+
+@slidebreak{Investigate}
+
+All of the "words" our spell checker generated in the first section involved a single change. A more technical term with the same meaning is @vocab{edit distance} - the edit distance for all of those words was 1. @vocab{Edit distance} is one way that we can measure the similarity of two strings! 
+
+@slidebreak{Investigate-DN}
+
+@lesson-instruction{
+- Let's take a look at how Pyret generates lists of words with a bigger edit distance and refines its suggestions to remove nonsensical words.
+- Complete the rest of @printable-exercise{pyret-spell-checker.adoc}.
+}
+
+@slidebreak{Investigate}
+
+@QandA{
+@Q{What did you discover about the dictionaries in @starter-file{spell-checker}?}
+
+@Q{Why did `alt-words` return a different number of results, depending on which dictionary it was given?}
+@A{Because smaller dictionaries didn't know as many words, so `only-real` was removing words even though they could be found in larger dictionaries.}
+}
+
+When we fed _more representative data_ to our spell checker, we got better results _without changing the spell checker's code_.
+
+@lesson-point{
+The effectiveness of @vocab{data-driven algorithms} is directly tied to the amount of data they have to work with.
+} 
+
+The same algorithm that performs terribly with a small dataset might almost appear "intelligent" when given a much larger one.
+
+=== Synthesize
+@slidebreak{SynthesizeR}
+
+@QandA{
+Look at the screenshot (right) of a text messaging app's suggestions for the possibly misspelled word "Cose". The app suggests the original word ("Cose"), indicating that no error was made, along with two alternatives: "Code" and "Close".
+
+@right{@image{images/text-app.png, 250}}
+
+@Q{What sort of _algorithm_ do you think the app used in developing possible alternative words?}
+@A{Responses will vary.}
+@A{Students may refer to the algorithms discussed in the first half of the lesson.} 
+@A{Students might also imagine more complicated algorithms - for instance, algorithms that consider the proximity of letters on the keyboard!}
+
+@Q{What sort of _data_ do you think the spell checking app used in developing possible alternative words?}
+@A{Responses will vary.}
+@A{Which words the user is most likely to type}
+@A{The topic of the text conversation and the most probable next word} 
+@A{The dictionary of words the app draws from}
+}
+
+@teacher{Students will discuss a similar screenshot of a text messaging app in our lesson on @lesson-link{stat-lang-models-generating-text}. During that lesson, however, students explore how generative AI uses data-driven algorithms to determine what word to produce next.}
+
+
+== Playing with Spelling Suggestions
+
+=== Overview
+Students use their knowledge of Pyret to manipulate the table produced by `alt-words`, producing the "top-3" and "bottom-3" suggestions along with several charts and graphs.
+
+=== Launch
+@slidebreak{Launch}
+Now that we know how to use Pyret, let's explore the output of `alt-words` and use some of our programming skills to make sense of the output.
+
+@lesson-instruction{
+- Complete the first section ("Analyzing Results") of @printable-exercise{spell-checker-results.adoc}.
+}
+
+@teacher{Pay close attention to how your students do on this section. It's the first time they'll have flexed their Pyret muscles on a dataset other than animals, and that can be a bit of a leap for some students. This is a good time to remind them to focus on the contracts as a signpost for what to do!}
+
+@slidebreak{Launch}
+You already know how to select rows, generate summaries, and make data visualizations. This section asked you to try it out with a brand new dataset: the output of our spellchecker!
+
+@QandA{
+@Q{How do you think the results would have changed if we used a smaller dictionary?}
+@A{We would have had fewer answers for each edit distance.}
+@A{Maybe it would have needed less time to give back the results?}
+
+@Q{What about a larger dictionary?}
+@A{More results}
+
+@Q{For every increase in `edit-distance`, the number of suggested words grew. Was the growth from 1-to-2 the _same_ as from 2-to-3? What do you think it would look like for an `edit-distance` of 4?}
+@A{The jump from 2-to-3 was *much* bigger than from 1-to-2. 4 might generate hundreds or thousands of alternatives!}
+}
+
+=== Investigate
+@slidebreak{InvestigateR}
+--
+@right{@image{images/text-app.png, 250}}
+
+But a cell phone or spell-checker doesn't show you rows and columns - it shows you the words themselves! This raises a question: once a spell checker gives us a table full of words and edit-distances....how do we get the words _out?_
+
+@vocab{Row accessors} allow us to extract data from specific cells of our table by specifying the row number and column title. 
+--
+
+@lesson-instruction{
+- Complete the rest of @printable-exercise{spell-checker-results.adoc}.
+}
+
+@slidebreak{Investigate}
+
+@QandA{
+@Q{What row number do we use to extract data from the first row of our table?}
+@A{0}
+
+@Q{What code did you write to extract the 75th suggested word from the table?}
+@A{`row-n(results, 74)["word"]`}
+
+@Q{What was the 75th suggested word?}
+@A{wield}
+}
+
+=== Synthesize
+
+@QandA{
+@Q{Why would a spell checking app need to use Row Accessor functions?}
+@A{Because we want to suggest a word, not a whole row of a table!}
+@A{And we might want to take the edit-number into consideration when we make our suggestion.}
+}

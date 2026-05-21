@@ -73,8 +73,9 @@
 * SYSTEMWIDE STYLES
 */
 @font-color: rgba(1, 58, 99, 1) !important;
-@translucent-bg-color: #468fafAA;
-@translucent-bg-color2: #f26b45AA;
+@translucent-bg-color: #468FAFAA;
+@translucent-bg-color2: #96C0D9AA;
+@translucent-bg-color3: #F26B45AA;
 @text-font: 'Lato', Arial, Helvetica, sans-serif;
 @code-font: Hack, "Courier New", monospace;
 @code-comment-color: #cd7054;
@@ -519,7 +520,7 @@ div#body.narrativepage {
     margin-top: 30px;
     font-size: 18px;
     padding-left: 5px !important;
-    background: #f26b45aa;
+    background: @translucent-bg-color2;
   }
 }
 
@@ -545,7 +546,7 @@ div#body.LessonPlan {
       pointer-events: none;
       &::before { font-size: 12pt; content: "Slides are not yet available for this lesson"; }
     }
-    &.left-header tr td:nth-child(1) { background-color: @translucent-bg-color2; }
+    &.left-header tr td:nth-child(1) { background-color: @translucent-bg-color3; }
     &.left-header tr td:nth-child(1) p { font-weight: bold; }
 
     /* Custom materials link styles */
@@ -766,6 +767,9 @@ html div#body.workbookpage {
   top: 0;
   left: 0;
   max-width: unset;
+
+  /* Force acknowledgment section to the bottom of every page */
+  .acknowledgment { position: absolute; top: 100%; }
 
   #header > h1:first-child { text-align: center; margin-bottom: 0;}
   h1 { font-weight: bold; }

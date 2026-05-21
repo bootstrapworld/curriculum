@@ -13,7 +13,6 @@ function create_local_self_guided() {
   (cd $g
   mkdir -p self-guided
   cd self-guided
-  ln -sf $lib_dir/curriculum.css
   for sgf in $(ls $self_guided_dir); do
     # soft link to node_modules subdir from the generic dir;
     # other files copied

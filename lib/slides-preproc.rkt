@@ -183,7 +183,7 @@
 
 (define (make-mathjax-math text)
   (string-append
-    "\n$" text "$\n"))
+    " $" text "$ "))
 
 (define (read-math-rev-word s)
   (let loop ([s (rest s)] [r (list (first s))])
@@ -599,9 +599,14 @@
                      (printf "WARNING: Missing starter file ~a for ~a\n\n" lbl *proglang*)
                      ""]
                     [else
-                      (let ([title (or link-text (hash-ref p 'title #f)
-                                       (hash-ref c 'title))])
-                        (format "[~a](~a)" title (hash-ref p 'url)))]))])))
+                      (let* ([title (or link-text (hash-ref p 'title #f)
+                                       (hash-ref c 'title))]
+                            [url (hash-ref p 'url "")]
+                            [use-pyret-prefix?
+                              (string-prefix? url *github-prefix*)])
+                        (when use-pyret-prefix?
+                          (set! url (string-append *pyret-starter-file-prefix* url)))
+                        (format "[~a](~a)" title url))]))])))
 
 (define read-group
   (*make-read-group #:code identity #:errmessage-file-context errmessage-file-context))

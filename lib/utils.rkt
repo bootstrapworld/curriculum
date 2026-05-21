@@ -10,6 +10,8 @@
   anonymize-filename
   nicer-case
   extract-domain-name
+  *github-prefix*
+  *pyret-starter-file-prefix*
   )
 
 (require file/sha1)
@@ -98,3 +100,7 @@
          (let ([y (first x)])
            (and (not (string-ci=? y "google"))
                 (string-titlecase (substring y 0 (- (string-length y) 4))))))))
+
+(define *github-prefix* "https://raw.githubusercontent.com/bootstrapworld/starter-files")
+
+(define *pyret-starter-file-prefix* "https://pyret.BootstrapWorld.org/editor#shareurl=")

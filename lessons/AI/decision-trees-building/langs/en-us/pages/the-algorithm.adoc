@@ -1,0 +1,120 @@
+= Building a Decision Tree: The Algorithm
+++++
+<style>
+#preamble_disabled { flex-grow: 0 !important; }
+.fitb { min-width: 2em !important; }
+.autonum, .fitb.stretch::after { padding-top: 1em !important; }
+table.fit-content tr td { padding: 0.3em 0.625em !important; }
+</style>
+++++
+
+[cols="3a, 2a", frame="none", border="none", grid="none"]
+|===
+|
+[.data-table, cols="1,^1,^1,^1,^1,^1,^1", stripes="none", options="header"]
+!===
+! name 			! species	 ! sex			! pounds! tail	! mammal! swims
+! "Firepaw"		! "cat" 	 ! "female"		! 9.5	! TRUE	! TRUE	! FALSE
+! "Frisky"		! "dog" 	 ! "female"		! 9.6	! TRUE	! TRUE	! TRUE
+! "Socks"		! "dog" 	 ! "female"		! 11.1 	! TRUE	! TRUE	! TRUE
+! "stripes"		! "dog" 	 ! "male" 		! 10.0 	! TRUE	! TRUE	! TRUE
+! "Snickers"	! "dog" 	 ! "male" 		! 10.3 	! TRUE	! TRUE	! TRUE
+! "Leafpool"	! "cat" 	 ! "female"		! 10.6 	! TRUE	! TRUE	! FALSE
+! "Shadestar"	! "cat" 	 ! "female"		! 9.0 	! TRUE	! TRUE	! TRUE
+! "Bramble"		! "cat" 	 ! "female"		! 4.1 	! TRUE	! TRUE	! FALSE
+! "Brick"		! "cat" 	 ! "male" 		! 8.5 	! TRUE	! TRUE	! FALSE
+! "Bruni"		! "lizard" 	 ! "female" 	! 8.2 	! TRUE	! FALSE	! TRUE
+! "Jesús"		! "lizard"	 ! "male" 		! 3.5 	! TRUE	! FALSE	! FALSE
+! "Gary"		! "snail"	 !"hermaphrodite"! 0.1 	! FALSE	! FALSE	! FALSE
+! "Turbo"		! "snail"	 !"hermaphrodite"! 0.1 	! FALSE	! FALSE	! FALSE
+! "Charlotte"	! "tarantula"! "male" 		! 0.4 	! FALSE	! FALSE	! FALSE
+! "Webs"		! "tarantula"! "female" 	! 0.4 	! FALSE	! FALSE	! FALSE
+!===
+
+|
+@image{../images/empty-tree.png}
+|===
+
+== Categorical Splits
+@n Use `image-dot-plot` to make three visualizations of this dataset, showing the distribution of `sex`, `mammal`, `tail`, and `swims`. If we split on each of them, what will the "yes" and "no" leaves be? How many animals will be predicted correctly? We've done the first row for you.
+
+[%autowidth, cols="^,^,^,^", frame="none", stripes="none", options="header"]
+|===
+| Split on
+| "yes" leaf (most common in this group)
+| "no" leaf (most common in this group)
+| # Correct
+
+| `r["sex"] == "hermaphrodite"`
+| "snail" (2 of 2)
+| "cat" (5 of 13)
+| 6
+
+| `r["sex"] == "female"`
+| @ifsoln{"cat" (4 of 8)}
+| @ifsoln{"dog" or "snail" (2 of 11)}
+| @ifsoln{6}
+
+| `r["mammal"] == true`
+| @ifsoln{"cat" (5 of 9)}
+| @ifsoln{"snail" or "tarantula" (2 of 4)}
+| @ifsoln{7}
+
+| `r["tail"] == true`
+| @ifsoln{"cat" (5 of 11)}
+| @ifsoln{"snail" or "tarantula" (2 of 4)}
+| @ifsoln{7}
+
+| `r["swims"] == true`
+| @ifsoln{"dog" (4 of 6)}
+| @ifsoln{"cat" (4 of 9)}
+| @ifsoln{8}
+
+|===
+
+== Quantitative Splits
+
+@n Use `image-dot-plot` to look at the distribution of `pounds`. Where would you split, to predict `species`? @fitb{}{}
+
+@n What will happen for each of the `pounds` splits below? We've done the first row for you.
+
+[%autowidth, cols="^,^,^,^", frame="none", stripes="none", options="header"]
+|===
+| Split on
+| "yes" leaf
+| "no" leaf
+| # Correct
+
+| `r["pounds"] > 2`
+| "cat" (5 of 11)
+| "snail" or "tarantula" (2 of 4)
+| 7
+
+| `r["pounds"] > 6`
+| @ifsoln{"cat" or "dog" (4 of 9)}
+| @ifsoln{"snail" or "tarantula" (2 of 4)}
+| @ifsoln{6}
+
+| `r["pounds"] > 9.5`
+| @ifsoln{"dog" (4 of 5)}
+| @ifsoln{"cat" (4 of 10)}
+| @ifsoln{8}
+|===
+
+@n Choose your split! *Fill in the root at the top of the page, labeling the edges with the number of animals in each sub-group*. Explain your choice: @fitb{}{@ifsoln{`r["swims"] == true` or `r["pounds"] > 9.5` both lead to the most correct classifications}}
+
+@vspace{1ex}
+
+*In the @starter-file{decision-tree}, change the `my-classifier1` function in Pyret to use your root*
+
+@n Click "Run", and evaluate `classify(training, "species", my-classifier1)`. For each species, how many did your 1-level classifier get right?
+
+@center{
+*Dogs*: 	 @fitb{2em}{} of 4 @hspace{1em}
+*Cats*: 	 @fitb{2em}{} of 5 @hspace{1em}
+*Lizards*: 	 @fitb{2em}{} of 2 @hspace{1em}
+*Snails*: 	 @fitb{2em}{} of 2 @hspace{1em}
+*Tarantulas*:@fitb{2em}{} of 2 @hspace{1em}
+*TOTAL:* 	 @fitb{2em}{} of 15
+}
+@star Repeat this exercise for your "yes" and "no" sub-groups, and complete the decision three at the top of the page!

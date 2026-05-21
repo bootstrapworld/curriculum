@@ -24,27 +24,6 @@ else
 	pathway-independent-files := $(pathway-independent-pdf-files)
 endif
 
-build-pathway-independent: $(pathway-independent-files)
-
-define make-build-pathway-independent-rule
-$(call asc-file,$1): $1
-	@#echo build-pathway-independent: creating $$@ from $$<
-	@echo \"$$<\", >> $(SETUP_PATHWAYINDEPENDENT)
-
-endef
-
-$(eval $(foreach adocf,$(pathway-independent-adoc-files),$(call make-build-pathway-independent-rule,$(adocf))))
-
-define make-build-pathway-independent-pdf-rule
-$(call pdf-file,$1): $1 $(call asc-file,$1)
-	@#echo build-pathway-independent-pdf: creating $$@ from $$<
-	@echo \"$$<\", >> $(SETUP_PATHWAYINDEPENDENT_PDF)
-
-endef
-
-$(if $(BOOK),\
-$(eval $(foreach adocf,$(pathway-independent-adoc-files),$(call make-build-pathway-independent-pdf-rule,$(adocf)))),)
-
 ###############################################################################
 
 all-lessons := $(wildcard distribution/$(NATLANG)/lessons/*)
@@ -83,27 +62,6 @@ else
 	workbook-pages := $(relevant-asc-files) $(relevant-pdf-files)
 endif
 
-build-workbook-pages: $(workbook-pages)
-
-define make-build-workbook-page-rule
-$(call asc-file,$1): $1
-	@#echo building workbook-page-asc: $$@ from $$<
-	@echo \"$$<\", >> $(SETUP_WORKBOOKPAGE)
-
-endef
-
-$(eval $(foreach adocf,$(all-adoc-files),$(call make-build-workbook-page-rule,$(adocf))))
-
-define make-build-workbook-page-pdf-rule
-$(call pdf-file,$1): $1 $(call asc-file,$1)
-	@#echo building workbook-page-pdf: $$@ from $$<
-	@echo \"$$<\", >> $(SETUP_WORKBOOKPAGE_PDF)
-
-endef
-
-$(if $(BOOK),\
-$(eval $(foreach adocf,$(relevant-adoc-files),$(call make-build-workbook-page-pdf-rule,$(adocf)))),)
-
 #########################################################################
 
 all-lesson-plan-adoc-files := $(wildcard distribution/$(NATLANG)/lessons/*/index.adoc)
@@ -126,27 +84,6 @@ else
 	lesson-plan-files := $(relevant-lesson-plan-asc-files) $(relevant-lesson-plan-pdf-files)
 endif
 
-build-lesson-plans: $(lesson-plan-files)
-
-define make-build-lesson-plan-rule
-$(call asc-file,$1): $1
-	@#echo build-lesson-plan-asc: creating $$@ from $$<
-	@echo \"$$<\", >> $(SETUP_LESSONPLAN)
-
-endef
-
-$(eval $(foreach adocf,$(all-lesson-plan-adoc-files),$(call make-build-lesson-plan-rule,$(adocf))))
-
-define make-build-lesson-plan-pdf-rule
-$(call pdf-file,$1): $1 $(call asc-file,$1)
-	@#echo build-lesson-plan-pdf: creating $$@ from $$<
-	@echo \"$$<\", >> $(SETUP_LESSONPLAN_PDF)
-
-endef
-
-$(if $(BOOK),\
-$(eval $(foreach adocf,$(relevant-lesson-plan-adoc-files),$(call make-build-lesson-plan-pdf-rule,$(adocf)))),)
-
 ###############################################################################
 
 the-output-courses := $(foreach course-index-file,$(wildcard distribution/$(NATLANG)/courses/*/index.adoc),$(dir $(course-index-file)))
@@ -157,31 +94,11 @@ else
 	the-course-contracts-pdfs := $(foreach course,$(the-output-courses),$(patsubst %,%resources/pages/Contracts.pdf,$(course)))
 endif
 
-define make-build-contracts-pdf-rule
-$1: distribution/$(NATLANG)/Contracts.shtml
-	@echo \"$$@\", >> $(SETUP_CONTRACTS_PDF)
-
-endef
-
-$(if $(BOOK),\
-$(eval $(foreach contracts-pdf,$(the-course-contracts-pdfs),$(call make-build-contracts-pdf-rule,$(contracts-pdf)))),)
-
 ifeq "$(BOOK)" ""
 	all-contracts-pdf :=
 else
 	all-contracts-pdf := distribution/$(NATLANG)/Contracts.pdf
 endif
-
-define make-all-contracts-rule
-distribution/$(NATLANG)/Contracts.pdf: distribution/$(NATLANG)/Contracts.shtml
-	@echo \"$$<\", >> $(SETUP_PATHWAYINDEPENDENT_PDF)
-
-endef
-
-$(if $(BOOK),\
-$(eval $(call make-all-contracts-rule,x)),)
-
-build-contracts-pdfs: $(the-course-contracts-pdfs) $(all-contracts-pdf)
 
 ###############################################################################
 
@@ -203,44 +120,12 @@ else
 	resource-files := $(resource-pdf-files)
 endif
 
-build-pathway-resources: $(resource-files)
-
-define make-build-resource-rule
-$(call asc-file,$1): $1
-	@#echo build-resource-asc: creating $$@ from $$<
-	@echo \"$$<\", >> $(SETUP_PATHWAYRESOURCE)
-
-endef
-
-$(eval $(foreach adocf,$(resource-adoc-files),$(call make-build-resource-rule,$(adocf))))
-
-define make-build-resource-pdf-rule
-$(call pdf-file,$1): $1 $(call asc-file,$1)
-	@#echo build-resource-pdf: creating $$@ from $$<
-	@echo \"$$<\", >> $(SETUP_PATHWAYRESOURCE_PDF)
-
-endef
-
-$(if $(BOOK),\
-$(eval $(foreach adocf,$(resource-adoc-files),$(call make-build-resource-pdf-rule,$(adocf)))),)
-
 ########################################################################
 
 narrative-adoc-files := $(wildcard distribution/$(NATLANG)/courses/*/index.adoc)
 
 narrative-asc-files := $(foreach \
 	adocf,$(narrative-adoc-files),$(call asc-file,$(adocf)))
-
-build-pathway-narratives: $(narrative-asc-files)
-
-define make-build-narrative-rule
-$(call asc-file,$1): $1
-	@#echo build-narrative: creating $$@ from $$<
-	@echo \"$$<\", >> $(SETUP_PATHWAYNARRATIVE)
-
-endef
-
-$(eval $(foreach adocf,$(narrative-adoc-files),$(call make-build-narrative-rule,$(adocf))))
 
 ###############################################################################
 
@@ -264,23 +149,30 @@ distribution/$(NATLANG)/lib/dependency-graph.js: $(all-lesson-plan-adoc-files)
 
 ##########################################################################
 
-preproc: build-pathway-independent build-workbook-pages build-lesson-plans build-pathway-resources build-pathway-narratives build-contracts-pdfs
-	@echo } >> $(SETUP_PATHWAYINDEPENDENT)
-	@echo } >> $(SETUP_WORKBOOKPAGE)
-	@echo } >> $(SETUP_LESSONPLAN)
-	@echo } >> $(SETUP_PATHWAYRESOURCE)
-	@echo } >> $(SETUP_PATHWAYNARRATIVE)
-	@echo } >> $(SETUP_PATHWAYINDEPENDENT_PDF)
-	@echo } >> $(SETUP_WORKBOOKPAGE_PDF)
-	@echo } >> $(SETUP_LESSONPLAN_PDF)
-	@echo } >> $(SETUP_PATHWAYRESOURCE_PDF)
-	@echo } >> $(SETUP_CONTRACTS_PDF)
-	@echo } >> $(IGNORABLE_DIRECTORIES)
+define newline
+
+
+endef
+
+export ADOCS_PATHWAYINDEPENDENT := $(TOPDIR)/distribution/$(NATLANG)/.cached/.adocs-pathwayindependent.txt
+export ADOCS_WORKBOOKPAGE       := $(TOPDIR)/distribution/$(NATLANG)/.cached/.adocs-workbookpage.txt
+export ADOCS_LESSONPLAN         := $(TOPDIR)/distribution/$(NATLANG)/.cached/.adocs-lessonplan.txt
+export ADOCS_PATHWAYRESOURCE    := $(TOPDIR)/distribution/$(NATLANG)/.cached/.adocs-pathwayresource.txt
+export ADOCS_PATHWAYNARRATIVE   := $(TOPDIR)/distribution/$(NATLANG)/.cached/.adocs-pathwaynarrative.txt
+
+preproc:
 	@echo ➤ Set up batch files
+	$(file >$(ADOCS_PATHWAYINDEPENDENT),$(subst $(SPACECHAR),$(newline),$(pathway-independent-adoc-files)))
+	$(file >$(ADOCS_WORKBOOKPAGE),$(subst $(SPACECHAR),$(newline),$(all-adoc-files)))
+	$(file >$(ADOCS_LESSONPLAN),$(subst $(SPACECHAR),$(newline),$(all-lesson-plan-adoc-files)))
+	$(file >$(ADOCS_PATHWAYRESOURCE),$(subst $(SPACECHAR),$(newline),$(resource-adoc-files)))
+	$(file >$(ADOCS_PATHWAYNARRATIVE),$(subst $(SPACECHAR),$(newline),$(narrative-adoc-files)))
+	@echo } >> $(IGNORABLE_DIRECTORIES)
 	@$(MAKE_DIR)do-setup.lua
+	@test -f $(ADOC_POSTPROC_PATHWAYRESOURCE_INPUT) || \
+		  (echo "ERROR: do-setup.lua failed to create pathwayresource batch file" && exit 1)
 	@if test -s $(ADOCABLES_INPUT); then echo ➤ Racket preproc; $(PROGDIR)/adocables-preproc.rkt $(ADOCABLES_INPUT); fi
 	@if test -s "$(ADOC_INPUT)"; then echo ➤ Asciidoctor; $(MAKE_DIR)run-asciidoctor.sh; fi
-
 # specials = primitives + starterFiles
 
 coverage: coverage-report.html
@@ -297,7 +189,12 @@ specials: preproc
 
 postproc: preproc
 	@echo ➤ Postproc
-	@$(MAKE_DIR)do-postproc.lua
+	@$(MAKE_DIR)do-postproc.lua pathwayindependent & \
+	 $(MAKE_DIR)do-postproc.lua workbookpage       & \
+	 $(MAKE_DIR)do-postproc.lua lessonplan         & \
+	 $(MAKE_DIR)do-postproc.lua pathwaynarrative   & \
+	 $(MAKE_DIR)do-postproc.lua pathwayresource    & \
+	 wait
 	@$(MAKE_DIR)make-self-guided.sh
 
 tocs: preproc

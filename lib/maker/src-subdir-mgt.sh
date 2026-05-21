@@ -65,8 +65,7 @@ function shadowcopydir() {
 
 function dir_timestamp() {
   local d=$1
-  # find the timestamp of the newest file in $d
-  echo $(find $d -type f -printf '%T@ %p\n' | sort -n | tail -1 | cut -f1 -d" " | sed -e 's/\..*//')
+  find "$d" -type f -printf '%T@\n' | sort -n | tail -1 | sed 's/\..*//'
 }
 
 function save_previously_built_solution_pages() {

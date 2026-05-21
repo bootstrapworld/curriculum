@@ -1,0 +1,58 @@
+= Predictive Models: Classifiers
+++++
+<style>
+div#body td { padding: 1px 3px !important; }
+div#body td:first-child {
+	color: gray;
+	border: none;
+}
+/* Tightly control (and slightly squish!) images to save vertical space */
+div#body table img { width: 275px !important; max-height: 170px; }
+</style>
+++++
+
+== Classifying Flowers
+For this section, you will need to have @online-exercise{https://www.nyckel.com/pretrained-classifiers/flowers-identifier/, Flower Identifier} open on your computer.
+
+@n Drag the first flower image into the drop box. What type of flower did it predict? @fitb{3em}{@ifsoln{Rose}} How confident is this prediction? @fitb{}{@ifsoln{98.64}}
+
+@n Drag the second flower image into the drop box. What type of flower did it predict? @fitb{3em}{@ifsoln{Carnation}}. How confident is this prediction? @fitb{}{@ifsoln{98.77%}}
+
+[cols="^1a,^1a", frame="none", grid="none"]
+|===
+| @image{../images/rose.webp}
+| @image{../images/pink_carnation.webp}
+|===
+
+@n What do you *Notice* is different between these flower images? @fitb{}{} +
+@blanklines{2}{@ifsoln{the petal shape is different, and the shading on the petals is different}}
+
+@n Why do you think the classifier reports on "confidence"? @fitb{}{} +
+@fitb{}{@ifsoln{To help users tell the difference between a wild guess and a serious match}}
+
+@n How do you think this classifier is computing its "confidence"? @fitb{}{} +
+@fitb{}{@ifsoln{Maybe it some definition of "rose-ness", and it's just computing how far off the definition of *this rose* is from the one it knows}}
+
+== Classifying Animals
+Each of the rows in the table below represent animals at a shelter, including the number of `weeks` it took for them to be adopted.
+
+[cols="<1,2,^1,^2,^1,^1,^1,^4",options="header"]
+|===
+|ID| sex 			| age| fixed	| legs 	| pounds| weeks | Prediction
+| 1| female			|  1 | false	| 4 	| 6.5 	|  3 	| cat @hspace{2em} dog @hspace{2em} snail @hspace{2em} tarantula
+| 2| hermaphrodite	|0.5 | false 	| 0		| 0.1 	|  3 	| cat @hspace{2em} dog @hspace{2em} snail @hspace{2em} tarantula
+| 3| female			|  2 | true 	| 4 	| 6.5 	|  5 	| cat @hspace{2em} dog @hspace{2em} snail @hspace{2em} tarantula
+| 4| male 			|  1 | false	| 4 	| 3.2 	|  1 	| cat @hspace{2em} dog @hspace{2em} snail @hspace{2em} tarantula
+| 5| male 			|  3 | false	| 4 	| 13.4 	|  2 	| cat @hspace{2em} dog @hspace{2em} snail @hspace{2em} tarantula
+| 6| female			|  3 | true 	| 4 	| 48 	|  1 	| cat @hspace{2em} dog @hspace{2em} snail @hspace{2em} tarantula
+| 7| male 			|  3 | true 	| 3 	| 45.4 	|  9 	| cat @hspace{2em} dog @hspace{2em} snail @hspace{2em} tarantula
+| 8| male 			|  8 | false	| 4 	| 172 	| 30 	| cat @hspace{2em} dog @hspace{2em} snail @hspace{2em} tarantula
+| 9| male 			|  8 | true 	| 4 	| 76.1 	| 10 	| cat @hspace{2em} dog @hspace{2em} snail @hspace{2em} tarantula
+|10| female			|  2 | false	| 8 	| 0.1 	|  1 	| cat @hspace{2em} dog @hspace{2em} snail @hspace{2em} tarantula
+|===
+@n In the "Prediction" column, circle whether you think the row represents a cat, dog, snail, or tarantula.
+
+@n Which column is the most important for classifying *snails* and *tarantulas*? @fitb{}{@ifsoln{legs}}
+
+@n Which column do you think is the most important one for classifying animals? Why?
+@blanklines{2}{@ifsoln{}}
