@@ -1733,8 +1733,6 @@
                             (let* ([arg (read-group i directive)]
                                    [s (assoc-glossary arg)]
                                    [def (if s (second s) "missing")])
-                              (when (string=? def "missing")
-                                (printf "Warning: Not found in glossary: ~s\n" arg))
                               (when (string=? arg "")
                                 (warnmsg "Directive @vocab has ill-formed argument"))
                               (display (enclose-span
