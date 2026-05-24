@@ -2,41 +2,11 @@
 ++++
 <style>
 #preamble_disabled { flex-grow: 0 !important; }
-.fitb { min-width: 2em !important; }
-.autonum, .fitb.stretch::after { padding-top: 1em !important; }
+.fitb { min-width: 2em !important; padding-top: 0.7em !important;}
+.autonum, .fitb.stretch::after { padding-top: 0.7em !important; }
 table.fit-content tr td { padding: 0.3em 0.625em !important; }
 </style>
 ++++
-
-[cols="3a, 2a", frame="none", border="none", grid="none"]
-|===
-|
-[.data-table, cols="1,^1,^1,^1,^1,^1,^1", stripes="none", options="header"]
-!===
-! name 			! species	 ! sex			! pounds! tail	! mammal! swims
-! "Firepaw"		! "cat" 	 ! "female"		! 9.5	! TRUE	! TRUE	! FALSE
-! "Frisky"		! "dog" 	 ! "female"		! 9.6	! TRUE	! TRUE	! TRUE
-! "Socks"		! "dog" 	 ! "female"		! 11.1 	! TRUE	! TRUE	! TRUE
-! "stripes"		! "dog" 	 ! "male" 		! 10.0 	! TRUE	! TRUE	! TRUE
-! "Snickers"	! "dog" 	 ! "male" 		! 10.3 	! TRUE	! TRUE	! TRUE
-! "Leafpool"	! "cat" 	 ! "female"		! 10.6 	! TRUE	! TRUE	! FALSE
-! "Shadestar"	! "cat" 	 ! "female"		! 9.0 	! TRUE	! TRUE	! TRUE
-! "Bramble"		! "cat" 	 ! "female"		! 4.1 	! TRUE	! TRUE	! FALSE
-! "Brick"		! "cat" 	 ! "male" 		! 8.5 	! TRUE	! TRUE	! FALSE
-! "Bruni"		! "lizard" 	 ! "female" 	! 8.2 	! TRUE	! FALSE	! TRUE
-! "Jesús"		! "lizard"	 ! "male" 		! 3.5 	! TRUE	! FALSE	! FALSE
-! "Gary"		! "snail"	 !"hermaphrodite"! 0.1 	! FALSE	! FALSE	! FALSE
-! "Turbo"		! "snail"	 !"hermaphrodite"! 0.1 	! FALSE	! FALSE	! FALSE
-! "Charlotte"	! "tarantula"! "male" 		! 0.4 	! FALSE	! FALSE	! FALSE
-! "Webs"		! "tarantula"! "female" 	! 0.4 	! FALSE	! FALSE	! FALSE
-!===
-
-|
-@image{../images/empty-tree.png}
-|===
-
-== Categorical Splits
-@n Use `image-dot-plot` to make three visualizations of this dataset, showing the distribution of `sex`, `mammal`, `tail`, and `swims`. If we split on each of them, what will the "yes" and "no" leaves be? How many animals will be predicted correctly? We've done the first row for you.
 
 [%autowidth, cols="^,^,^,^", frame="none", stripes="none", options="header"]
 |===
@@ -45,15 +15,29 @@ table.fit-content tr td { padding: 0.3em 0.625em !important; }
 | "no" leaf (most common in this group)
 | # Correct
 
-| `r["sex"] == "hermaphrodite"`
-| "snail" (2 of 2)
-| "cat" (5 of 13)
-| 6
+| `r["tail"] == true`
+| "cat" (5 out of 11)
+| "snail" (2 out of 4)
+| 7
+|===
 
-| `r["sex"] == "female"`
-| @ifsoln{"cat" (4 of 8)}
-| @ifsoln{"dog" or "snail" (2 of 11)}
-| @ifsoln{6}
+*Use this table as a model for completing the Categorical and Quantitative Splits sections below.* Notice:
+
+- the first column is the code that will ask our question: "Does the animal have a tail?"
+- the second and third columns record our predictions for each leaf node (and the numbers they were based on)
+- the last column tell us how many animals from our testing table we predicted correctly 
+
+@vspace{1ex}
+
+== Categorical Splits
+@n Complete the table below, using `image-dot-plot` to see the distribution of `mammal`, `tail`, `swims` and `sex`.
+
+[%autowidth, cols="^,^,^,^", frame="none", stripes="none", options="header"]
+|===
+| Split on
+| "yes" leaf (most common in this group)
+| "no" leaf (most common in this group)
+| # Correct
 
 | `r["mammal"] == true`
 | @ifsoln{"cat" (5 of 9)}
@@ -70,13 +54,22 @@ table.fit-content tr td { padding: 0.3em 0.625em !important; }
 | @ifsoln{"cat" (4 of 9)}
 | @ifsoln{8}
 
+| `r["sex"] == "hermaphrodite"`
+| @ifsoln{"snail" (2 of 2)}
+| @ifsoln{"cat" (5 of 13)}
+| @ifsoln{6}
+
+| `r["sex"] == "female"`
+| @ifsoln{"cat" (3 of 7)}
+| @ifsoln{"dog" or "snail" or "cat" (2 of 8)}
+| @ifsoln{6}
 |===
 
+@n Why wouldn't it make sense to write two rules for for the `mammal` column? @fitb{}{} +
+@fitb{}{@ifsoln{For Boolean columns where there are only two options the split is identical whether we phrase the question as IS or ISN'T.}}
+
 == Quantitative Splits
-
-@n Use `image-dot-plot` to look at the distribution of `pounds`. Where would you split, to predict `species`? @fitb{}{}
-
-@n What will happen for each of the `pounds` splits below? We've done the first row for you.
+@n Complete the table below, using `image-dot-plot` to see the distribution of `pounds`.
 
 [%autowidth, cols="^,^,^,^", frame="none", stripes="none", options="header"]
 |===
@@ -101,13 +94,40 @@ table.fit-content tr td { padding: 0.3em 0.625em !important; }
 | @ifsoln{8}
 |===
 
-@n Choose your split! *Fill in the root at the top of the page, labeling the edges with the number of animals in each sub-group*. Explain your choice: @fitb{}{@ifsoln{`r["swims"] == true` or `r["pounds"] > 9.5` both lead to the most correct classifications}}
+== Completing the Tree
 
-@vspace{1ex}
+@n Choose your split and explain your choice: @fitb{}{@ifsoln{`r["swims"] == true` or `r["pounds"] > 9.5` both lead to the most correct classifications}}.
 
-*In the @starter-file{decision-tree}, change the `my-classifier1` function in Pyret to use your root*
+@n Fill in the root at the top of the tree and label the edges with the number of animals in each sub-group. 
 
-@n Click "Run", and evaluate `classify(training, "species", my-classifier1)`. For each species, how many did your 1-level classifier get right?
+[cols="3a, 2a", frame="none", border="none", grid="none"]
+|===
+|
+[.data-table, cols="1,^1,^1,^1,^1,^1,^1", stripes="none", options="header"]
+!===
+! name 			! species	 ! sex				! pounds! tail	! mammal! swims
+! "Firepaw"		! "cat" 	 ! "female"			! 9.5	! TRUE	! TRUE	! FALSE
+! "Leafpool"	! "cat" 	 ! "female"			! 10.6 	! TRUE	! TRUE	! FALSE
+! "Shadestar"	! "cat" 	 ! "female"			! 9.0 	! TRUE	! TRUE	! TRUE
+! "Bramble"		! "cat" 	 ! "female"			! 4.1 	! TRUE	! TRUE	! FALSE
+! "Brick"		! "cat" 	 ! "male" 			! 8.5 	! TRUE	! TRUE	! FALSE
+! "Frisky"		! "dog" 	 ! "female"			! 9.6	! TRUE	! TRUE	! TRUE
+! "Socks"		! "dog" 	 ! "female"			! 11.1 	! TRUE	! TRUE	! TRUE
+! "stripes"		! "dog" 	 ! "male" 			! 10.0 	! TRUE	! TRUE	! TRUE
+! "Snickers"	! "dog" 	 ! "male" 			! 10.3 	! TRUE	! TRUE	! TRUE
+! "Bruni"		! "lizard" 	 ! "female" 		! 8.2 	! TRUE	! FALSE	! TRUE
+! "Jesús"		! "lizard"	 ! "male" 			! 3.5 	! TRUE	! FALSE	! FALSE
+! "Gary"		! "snail"	 !"hermaphrodite"	! 0.1 	! FALSE	! FALSE	! FALSE
+! "Turbo"		! "snail"	 !"hermaphrodite"	! 0.1 	! FALSE	! FALSE	! FALSE
+! "Charlotte"	! "tarantula"! "male" 			! 0.4 	! FALSE	! FALSE	! FALSE
+! "Webs"		! "tarantula"! "female" 		! 0.4 	! FALSE	! FALSE	! FALSE
+!===
+
+|
+@image{../images/empty-tree.png}
+|===
+
+@n In the @starter-file{decision-tree}, change the `my-classifier1` function to use your root. Click "Run", and evaluate `classify(training, "species", my-classifier1)`. Place a checkmark in front of each row that was correctly classified. Then record how many of each species were classified correctly below.
 
 @center{
 *Dogs*: 	 @fitb{2em}{} of 4 @hspace{1em}
@@ -117,4 +137,8 @@ table.fit-content tr td { padding: 0.3em 0.625em !important; }
 *Tarantulas*:@fitb{2em}{} of 2 @hspace{1em}
 *TOTAL:* 	 @fitb{2em}{} of 15
 }
-@star Repeat this exercise for your "yes" and "no" sub-groups, and complete the decision three at the top of the page!
+
+@n Complete the second level of the decision tree and the `my-classifier2` in the starter file. 
+
+- Look at the "yes" rows (checkmarks). Choose a split. Fill in the leaf node on the tree. Label the edges with the number of animals in each sub-group.
+- Then look at the "no" rows (without checkmarks). Choose a split for them and complete the decision tree.

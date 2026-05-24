@@ -9,7 +9,6 @@
 (require "defines.rkt")
 (require "common-defines.rkt")
 (require "function-directives.rkt")
-(require "collect-lang-prereq.rkt")
 
 (provide
   preproc-adoc-file
@@ -1734,8 +1733,6 @@
                             (let* ([arg (read-group i directive)]
                                    [s (assoc-glossary arg)]
                                    [def (if s (second s) "missing")])
-                              (when (string=? def "missing")
-                                (printf "Warning: Not found in glossary: ~s\n" arg))
                               (when (string=? arg "")
                                 (warnmsg "Directive @vocab has ill-formed argument"))
                               (display (enclose-span
@@ -1846,7 +1843,7 @@
                                      *lesson-subdir* *in-file*))
                             (let ([args (map string->symbol (read-commaed-group i directive read-group))])
                               ;(printf "args = ~s\n" args)
-                              (for-each add-prereq/check args))]
+                              (for-each add-prereq args))]
                            [(string=? directive "material-links")
                             (unless *lesson-plan*
                               (error 'ERROR
@@ -2839,6 +2836,16 @@
         #:exists 'replace))
     #:exists 'replace))
 
+(define (store-functions-used prereqs-used prim-file)
+  ;(printf "doing store-functions-used ~s ~s\n" prereqs-used prim-file)
+  (call-with-output-file prim-file
+    (lambda (o)
+      (for ([prim prereqs-used])
+        ;no need to check if it's in *allowed-prims*
+        (write prim o) (newline o)))
+    #:exists 'replace))
+
+
 (define (display-standards-selection o *narrative*)
   ;(printf "doing display-standards-selection ~a\n" *narrative*)
   (let ([narrative? *narrative*])
@@ -3105,10 +3112,6 @@
             [else
               (warnmsg "~a in ~a not mentioned in langtable.js (are you sure you're using the WeScheme name?)"
                       sym (errmessage-file-context))]))))
-
-(define (add-prereq/check sym)
-  ; (printf "doing add-prereq/check ~s\n\n" sym)
-  (add-prereq sym #:check? check-in-langtable?))
 
 (define (add-starter-file sf autoinclude? #:opt? [opt? #f])
   (when (or *lesson-plan*
