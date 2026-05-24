@@ -25,14 +25,6 @@ Students consider how arbitrary documents (in this case, songs and images) can b
 |[.materials-links]
 @material-links
 
-| Preparation
-|
-@preparation{
-- The final section of this lesson involves an activity where students measure the angle difference between rays.
-- If you'd like your students to practice using their protractors, be sure to have have protractors available for @printable-exercise{angle-difference.adoc}. If your students will not use protractors, we recommend printing @opt-printable-exercise{angle-difference-no-protractor.adoc}, a second version of the worksheet that uses more easily approximated angles (e.g., 45°, 90°).
-- Alternatively, you can have your students estimate angle size using what they know about angle measures and the activity will still be valuable.
-}
-
 
 |===
 
@@ -354,7 +346,7 @@ Of course, Pyret has a function for angle-similarity, too!
 
 @show{(contract "angle-similarity" '("Table" "String" "List<String>") "Table")}
 
-This function _compares every row in the table_ to the Row with the given ID, calculating the angle-difference between the points specified by the columns. For example:
+This function _compares every row in the table_ to the Row with the given ID, calculating the angle-similarity between the points specified by the columns. For example:
 
 @show{(code '(angle-similarity fast-food "6" (list "price" "fries" "burgers")))}
 
@@ -375,7 +367,7 @@ The plot thickens, especially if you have older students who have learned some t
 
 - The angle itself is a somewhat awkward value to work with. In contrast, the cosine has a nice numeric range, between -1 and 1, which makes it convenient to use in various other mathematical settings. (Specifically, it's used in a process called gradient descent.)
 
-- It’s simpler to compute the cosine directly. In fact, inside Pyret, `angle-difference` actually computes the cosine _first_, then converts the result into an angle!
+- It’s simpler to compute the cosine directly. In fact, inside Pyret, `angle-similarity` actually computes the cosine _first_, then converts the result into an angle!
 
 For the purposes of this curriculum, you can ignore this difference. In particular, if your students have never even heard of the cosine, that's fine! For students who are familiar with cosine and curious to explore, the @starter-file{plagiarism} contains a `cosine-similarity function`.
 }
