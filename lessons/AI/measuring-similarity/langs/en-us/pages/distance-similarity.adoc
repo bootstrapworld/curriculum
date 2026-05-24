@@ -1,0 +1,69 @@
+= Distance Similarity
+++++
+<style>
+.one-dimension td, .two-dimensions td { padding: 0 0.6em !important; }
+#preamble_disabled { flex-grow: 0 !important; }
+</style>
+++++
+
+Here's the data table for our fast food restaurants:
+
+[.data-table, cols="^.^1a, 4a, ^4a, ^4a, ^4a", options="header"]]
+|===
+| ID| Restaurant  | Price (1 = cheap)| Fries (5=best) | Burgers (10=best)
+| 1 | McDonalds   | 1.45             | 4.6            | 5
+| 2 | Burger King | 1.51             | 4.1            | 6
+| 3 | Wendy's     | 1.47             | 4.5            | 7
+| 4 | Five Guys   | 2.20             | 3.9            | 8
+| 5 | Dairy Queen | 2.11             | 3.7            | 4
+| 6 | @star *In-N-Out* | *1.45*      | *4.4*          | *8*
+|===
+If In-N-Out isn't available, what's the _most similar alternative?_
+
+[.no-flex-section]
+== Distance in 1 Dimension
+@n For each of the attributes plotted below, find In-N-Out and mark it with a @star. Then find the restaurant that is closest in that dimension and write the `distance-similarity` to In-N-Out.
+
+[.one-dimension,cols="^5a, ^.^4a, ^.^1a", stripes="none", frame="none", options="header"]
+|===
+| Number Line
+| Closest Restaurant
+| Distance
+
+| @image{../images/number-line-price.png, 300}
+| @fitb{100%}{@ifsoln{McDonalds}}
+| @fitb{100%}{@ifsoln{0}}
+
+| @image{../images/number-line-fries.png, 300}
+| @fitb{100%}{@ifsoln{Wendy's}}
+| @fitb{100%}{@ifsoln{0.1}}
+
+| @image{../images/number-line-burger.png, 300}
+| @fitb{100%}{@ifsoln{Five Guys}}
+| @fitb{100%}{@ifsoln{0}}
+|===
+
+== Distance in 2 Dimensions
+
+@n In each graph below, find *In-N-Out* and *Five Guys* and *draw the line between them*.
+
+@n For each of the graphs, compare *Five Guys* to *In-N-Out* by calculating the `distance-similarity` between them using the distance formula (@math{d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}}).
+
+[.two-dimensions,cols="5a,1a,5a", frame="none", grid="none", stripes="none"]
+|===
+| @image{../images/fries-v-price-scatter.png}
+|
+| @image{../images/burgers-v-price-scatter.png}
+|===
+
+[.FillVerticalSpace,cols="1", frame="none"]
+|===
+|
+|===
+
+[.two-dimensions,cols="^5a,1a,^5a", frame="none", grid="none", stripes="none"]
+|===
+| distance to Five Guys: @fitb{10em}{@ifsoln{0.90}}
+|
+| distance to Five Guys: @fitb{10em}{@ifsoln{0.75}}
+|===
