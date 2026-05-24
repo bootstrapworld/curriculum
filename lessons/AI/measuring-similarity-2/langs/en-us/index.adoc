@@ -1,0 +1,181 @@
+[.beta]
+= Unsupervised Similarity Learning
+
+@description{
+Students consider how arbitrary documents (in this case, songs and images) can be represented as points in space, and explore different ways to measure the "distance" between those documents using a spatial representation.
+}
+
+@lesson-prereqs{data-driven-algorithms}
+
+@keywords{}
+
+[@lesson-intro-table]
+|===
+| Lesson Goals
+| Students will be able to...
+
+@objectives
+
+| Student-facing Lesson Goals
+|
+- Let's think about ways to represent documents as points in space
+- Let's think about how different measures of "distance" between these points can help us find documents that are "similar" to one another
+
+| Materials
+|[.materials-links]
+@material-links
+
+|===
+
+
+== Music Similarity
+
+=== Overview
+Students apply what they've learned to Spotify's music dataset, which has premade columns for tempo, loudness, energy, danceability, etc.
+
+=== Launch
+@slidebreak{Launch}
+@link{https://open.spotify.com/, Let's review our example from Spotify}, which you may remember from @lesson-link{ai-intro}.
+
+@teacher{Search for a song that your students will recognize. When you hover over the search result, you'll see a three dots (`...`) appear on the right. Click these dots and select "Go to Song Radio"}
+
+@slidebreak{Launch}
+When we asked Spotify to create a station based on that song, it tried to find other songs that are _similar_ to it. But the computer doesn't have ears, and it doesn't have the human experience that informs how we hear a song.
+
+So how does it even know what "similar" means?
+
+@slidebreak{Launch}
+@lesson-instruction{
+- Open @starter-file{ai-music} and click "Run"
+- Complete @printable-exercise{song-similarity.adoc}
+}
+
+== Image Similarity
+
+=== Overview
+
+Students explore ways in which images can be represented as points in space, and the similarity measure we created for our songs generalizes to images as well.
+
+=== Launch
+@slidebreal{LaunchR}
+
+@link{https://images.google.com/, In Google Image Search}, you can drag a picture into the search box and have Google find other, _similar_ images.
+
+@teacher{Demo this functionality, using an image of your choosing}
+
+@slidebreak{Launch}
+When we asked Google to find images similar to this one, it came back with a lot of similar images! But the computer doesn't have eyes, and it doesn't have the human experience that informs how an image makes us feel.
+
+So how does it even know what "similar" means?
+
+
+@slidebreak{Launch}
+Much like our songs, we can come up with lots of ways to describe an image:
+
+- Width and height
+- Brightness ("luminance")
+- Busy-ness ("entropy")
+
+What else can you come up with?
+
+
+
+== Computing Closeness with Angle Difference
+
+=== Overview
+
+Compressing text into bags of words gives us a coarse-grained notion of similarity. Let's explore how to produce a more refined notion of similarity.
+
+=== Launch
+@slidebreak{Launch}
+
+When we ask people whether two documents are the same, they rarely give us a black-and-white "yes" or "no" answer. Instead they tend to speak about shades of similarity. Likewise, we would like our computer to give us a range of values that give us a sense of how similar the two documents are. In other words, we would like the output to be a Number, not just a Boolean (identical, not identical).
+
+=== Investigate
+@slidebreak{Investigate}
+
+Now that we know how to represent our bag of words summaries as points in space, we can draw a @vocab{ray} from the origin through each of those points and ask: What is the angle between the two rays?
+
+Take, for example, this comparison between two strings: `stringA` ("doo doo doo doo") and `stringB` ("be be be be").
+
+
+@slidebreak{Investigate}
+
+If two documents are identical, they will be at the same point in space, and have the same ray extending from the origin to that point. That means the angle between those rays will be 0°. Even if one document just rearranges the other, their bags of words will be identical—thereby again making the angle between the lines 0°.
+
+@teacher{
+If you want your students to practice measuring angles with a protractor, we recommend using @printable-exercise{angle-difference.adoc}. If you do not have protractors available or would prefer that your students approximate angle size without measuring, we recommend printing and distributing @opt-printable-exercise{angle-difference-no-protractor.adoc} instead.
+}
+
+@lesson-instruction{
+- Complete @printable-exercise{angle-difference.adoc} or @opt-printable-exercise{angle-difference-no-protractor.adoc} using your knowledge of bags of words and plotting points.
+** First, fill in the frequency tables by referring to the provided string.
+** Translate the bags of words to ordered pairs.
+** Plot the points.
+** Draw a ray from the origin to each of the points.
+** Measure or approximate the angle size.
+}
+
+@slidebreak{Investigate}
+
+As the documents contain different words, the angles between the rays will grow. To reflect this, we can use the `angle-difference` function. It will give us a value between 0° (if the two are identical) and 90° (if the two have nothing in common).
+
+@strategy{Points, Rays, and Vectors}{
+As you've discovered, our plagiarism detector computes the angle difference between rays extending from the origin to various points that we have plotted space.
+
+In machine learning, we generally refer to these bag-of-word representations *not* as _points_, but as _vectors_. Why? A point represents a location in space, whereas a vector represents a magnitude and a direction.
+
+To reduce the amount of new vocabulary introduced in this lesson, we have opted to refer simply to points and rays. More commonly, however, the term _vector_ is used in a machine learning context.
+
+If you or your students are wondering why we wouldn't just compute the _distance_ between points, rather than complicating things and introducing angles... it's because typically, machine learning uses vectors, not points.
+}
+
+When two documents are represented as two points in space, @vocab{angle difference} is the difference between the angles formed by rays from the origin through those points.
+
+@lesson-point{
+Angle difference can be used to measure the similarity of two documents.
+}
+
+
+
+The contract for `angle-difference` is below.
+
+```
+# angle-difference :: (String, String) -> Number
+```
+
+@slidebreak{Investigate-DN}
+
+@lesson-instruction{
+Let's try the `angle-difference` function in Pyret.
+
+- Check your work on @printable-exercise{angle-difference.adoc}.
+.
+** Open @starter-file{plagiarism} and click "Run".
+** Enter `angle-difference("doo doo doo doo", "be be be be")` into the Interactions Area.
+** Does the angle size that Pyret produces match the angle that you drew? (Hopefully yes!)
+** Use `angle-difference` to compare each pair of strings on @printable-exercise{angle-difference.adoc}.
+}
+
+
+=== Synthesize
+@slidebreak{Synthesize}
+
+@QandA{
+Here are three different lines of code.
+
+`angle-difference("hello world", "hello")`
+
+`angle-difference("hello", "goodbye")`
+
+`angle-difference("hello", "hello")`
+
+@Q{Which line of code produces 90°? How do you know?}
+@A{`angle-difference("hello", "goodbye")`; the two strings are completely different.}
+
+@Q{Which line of code produces 45°? How do you know?}
+@A{`angle-difference("hello world", "hello")`; the two strings have one word in common; they are not entirely different nor are they identical.}
+
+@Q{Which line of code produces 0°? How do you know?}
+@A{`angle-difference("hello", "hello")`; the two strings are exactly the same.}
+}
