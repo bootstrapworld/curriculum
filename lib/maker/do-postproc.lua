@@ -156,10 +156,10 @@ local function postproc(fhtml_cached, tipe)
       goto continue
     end
     --
-    x = x:gsub('<pre>', pre_open)
-    x = x:gsub('</pre>', '</code></pre>')
-    x = x:gsub('<code>', code_open)
-    x = x:gsub('<p> </p>', '<p></p>')
+    if x:find('<pre>', 1, true)    then x = x:gsub('<pre>', pre_open)              end
+    if x:find('</pre>', 1, true)   then x = x:gsub('</pre>', '</code></pre>')       end
+    if x:find('<code>', 1, true)   then x = x:gsub('<code>', code_open)             end
+    if x:find('<p> </p>', 1, true) then x = x:gsub('<p> </p>', '<p></p>')           end
     --
     if x:find('<p>%%BEGINQBLOCKITEM%%') then
       x = x:gsub('<p>%%BEGINQBLOCKITEM%%', '<p class="qblock">')
@@ -210,10 +210,16 @@ local function postproc(fhtml_cached, tipe)
       x = x:gsub('&#8594;', '-&gt;')
     end
     --
-    x = x:gsub('^(<div id="preamble)">', '%1_disabled" class="lessonSummary">')
+    if x:find('id="preamble"', 1, true) then
+      x = x:gsub('^(<div id="preamble)">', '%1_disabled" class="lessonSummary">')
+    end
     --
-    x = x:gsub('<span class="([^"]+)">(<figure class="image")', '%2 style="text-align: %1"')
-    x = x:gsub('(</figure>)</span>', '%1')
+    if x:find('<figure class="image"', 1, true) then
+      x = x:gsub('<span class="([^"]+)">(<figure class="image")', '%2 style="text-align: %1"')
+    end
+    if x:find('</figure></span>', 1, true) then
+      x = x:gsub('(</figure>)</span>', '%1')
+    end
     --
     if x:find('BOGUSACKNOWLEDGMENTSECTIONHEADER') then
       delete_line_p = true
