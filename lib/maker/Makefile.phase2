@@ -24,6 +24,14 @@ else
 	pathway-independent-files := $(pathway-independent-pdf-files)
 endif
 
+ifeq "$(BOOK)" ""
+
+build-pathway-independent:
+	@$(file >$(TOPDIR)/distribution/$(NATLANG)/.cached/.adocs-pathwayindependent,$(pathway-independent-adoc-files))
+	@$(MAKE_DIR)collect-stale-adocs.lua $(SETUP_PATHWAYINDEPENDENT) < $(TOPDIR)/distribution/$(NATLANG)/.cached/.adocs-pathwayindependent
+
+else
+
 build-pathway-independent: $(pathway-independent-files)
 
 define make-build-pathway-independent-rule
@@ -34,6 +42,8 @@ $(call asc-file,$1): $1
 endef
 
 $(eval $(foreach adocf,$(pathway-independent-adoc-files),$(call make-build-pathway-independent-rule,$(adocf))))
+
+endif
 
 define make-build-pathway-independent-pdf-rule
 $(call pdf-file,$1): $1 $(call asc-file,$1)
@@ -83,6 +93,14 @@ else
 	workbook-pages := $(relevant-asc-files) $(relevant-pdf-files)
 endif
 
+ifeq "$(BOOK)" ""
+
+build-workbook-pages:
+	@$(file >$(TOPDIR)/distribution/$(NATLANG)/.cached/.adocs-workbookpage,$(all-adoc-files))
+	@$(MAKE_DIR)collect-stale-adocs.lua $(SETUP_WORKBOOKPAGE) < $(TOPDIR)/distribution/$(NATLANG)/.cached/.adocs-workbookpage
+
+else
+
 build-workbook-pages: $(workbook-pages)
 
 define make-build-workbook-page-rule
@@ -93,6 +111,8 @@ $(call asc-file,$1): $1
 endef
 
 $(eval $(foreach adocf,$(all-adoc-files),$(call make-build-workbook-page-rule,$(adocf))))
+
+endif
 
 define make-build-workbook-page-pdf-rule
 $(call pdf-file,$1): $1 $(call asc-file,$1)
@@ -126,6 +146,14 @@ else
 	lesson-plan-files := $(relevant-lesson-plan-asc-files) $(relevant-lesson-plan-pdf-files)
 endif
 
+ifeq "$(BOOK)" ""
+
+build-lesson-plans:
+	@$(file >$(TOPDIR)/distribution/$(NATLANG)/.cached/.adocs-lessonplan,$(all-lesson-plan-adoc-files))
+	@$(MAKE_DIR)collect-stale-adocs.lua $(SETUP_LESSONPLAN) < $(TOPDIR)/distribution/$(NATLANG)/.cached/.adocs-lessonplan
+
+else
+
 build-lesson-plans: $(lesson-plan-files)
 
 define make-build-lesson-plan-rule
@@ -136,6 +164,8 @@ $(call asc-file,$1): $1
 endef
 
 $(eval $(foreach adocf,$(all-lesson-plan-adoc-files),$(call make-build-lesson-plan-rule,$(adocf))))
+
+endif
 
 define make-build-lesson-plan-pdf-rule
 $(call pdf-file,$1): $1 $(call asc-file,$1)
@@ -203,6 +233,14 @@ else
 	resource-files := $(resource-pdf-files)
 endif
 
+ifeq "$(BOOK)" ""
+
+build-pathway-resources:
+	@$(file >$(TOPDIR)/distribution/$(NATLANG)/.cached/.adocs-pathwayresource,$(resource-adoc-files))
+	@$(MAKE_DIR)collect-stale-adocs.lua $(SETUP_PATHWAYRESOURCE) < $(TOPDIR)/distribution/$(NATLANG)/.cached/.adocs-pathwayresource
+
+else
+
 build-pathway-resources: $(resource-files)
 
 define make-build-resource-rule
@@ -213,6 +251,8 @@ $(call asc-file,$1): $1
 endef
 
 $(eval $(foreach adocf,$(resource-adoc-files),$(call make-build-resource-rule,$(adocf))))
+
+endif
 
 define make-build-resource-pdf-rule
 $(call pdf-file,$1): $1 $(call asc-file,$1)
@@ -231,16 +271,9 @@ narrative-adoc-files := $(wildcard distribution/$(NATLANG)/courses/*/index.adoc)
 narrative-asc-files := $(foreach \
 	adocf,$(narrative-adoc-files),$(call asc-file,$(adocf)))
 
-build-pathway-narratives: $(narrative-asc-files)
-
-define make-build-narrative-rule
-$(call asc-file,$1): $1
-	@#echo build-narrative: creating $$@ from $$<
-	@echo \"$$<\", >> $(SETUP_PATHWAYNARRATIVE)
-
-endef
-
-$(eval $(foreach adocf,$(narrative-adoc-files),$(call make-build-narrative-rule,$(adocf))))
+build-pathway-narratives:
+	@$(file >$(TOPDIR)/distribution/$(NATLANG)/.cached/.adocs-pathwaynarrative,$(narrative-adoc-files))
+	@$(MAKE_DIR)collect-stale-adocs.lua $(SETUP_PATHWAYNARRATIVE) < $(TOPDIR)/distribution/$(NATLANG)/.cached/.adocs-pathwaynarrative
 
 ###############################################################################
 
