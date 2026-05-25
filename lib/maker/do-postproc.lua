@@ -83,7 +83,6 @@ local function postproc(fhtml_cached, tipe)
   local f_mathjax_file = fhtml_cached:gsub('%.html$', '.asc.uses-mathjax')
   local f_codemirror_file = fhtml_cached:gsub('%.html$', '.asc.uses-codemirror')
   --
-  lua_copy(fhtml_cached, fhtml_cached .. '.save')
   local i = io.open(fhtml_cached, 'r')
   local o = io.open(fhtml, 'w')
   --
