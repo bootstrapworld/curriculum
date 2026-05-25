@@ -12,7 +12,28 @@ fi
 
 if test -z "$ASCIIDOCTOR_NODE"; then
   if test -z "$DEBUGADOC"; then
-    asciidoctor -a linkcss -a stylesheet=$cssfile -a cachedir=.cached/ -B . $(cat $ADOC_INPUT) > $MAKE_ERR_LOG 2>&1
+    n=${NUMCORES:-1}
+    nfiles=$(wc -l < "$ADOC_INPUT")
+    if test "$n" -le 1 -o "$nfiles" -lt 20; then
+      # Single-process: small workload or no parallelism available
+      asciidoctor -a linkcss -a stylesheet=$cssfile -a cachedir=.cached/ -B . $(cat $ADOC_INPUT) > $MAKE_ERR_LOG 2>&1
+    else
+      # Shard $ADOC_INPUT round-robin across N workers; merge error logs at the end.
+      tmpdir=$(mktemp -d)
+      awk -v n="$n" -v d="$tmpdir" '{ print > (d "/shard." (NR % n) ".txt") }' "$ADOC_INPUT"
+      pids=()
+      for ((k=0; k<n; k++)); do
+        shard="$tmpdir/shard.$k.txt"
+        test -s "$shard" || continue
+        (
+          asciidoctor -a linkcss -a stylesheet=$cssfile -a cachedir=.cached/ -B . $(cat "$shard") > "$tmpdir/err.$k.log" 2>&1
+        ) &
+        pids+=($!)
+      done
+      for pid in "${pids[@]}"; do wait "$pid"; done
+      cat "$tmpdir"/err.*.log > "$MAKE_ERR_LOG" 2>/dev/null
+      rm -rf "$tmpdir"
+    fi
   else
     echo $'\e[1;31m'🐌 Will be slow! Running asciidoctor once per file because DEBUGADOC=$DEBUGADOC $'\e[0m'
     for f in $(cat $ADOC_INPUT); do
