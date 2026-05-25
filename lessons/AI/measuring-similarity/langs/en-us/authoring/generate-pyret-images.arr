@@ -55,17 +55,21 @@ number-line-price = render-chart(from-list.num-dot-chart(
 fries-v-price = render-chart(from-list.scatter-plot(
     fast-food.column("fries"),
     fast-food.column("price"))
-    .point-size(30))
+    .point-size(20))
   .x-axis("fries")
   .y-axis("price")
+  .width(480)
+  .height(360)
   .get-image()
 
 burgers-v-price = render-chart(from-list.scatter-plot(
     fast-food.column("burgers"),
     fast-food.column("price"))
-    .point-size(30))
-  .x-axis("fries")
+    .point-size(20))
+  .x-axis("burgers")
   .y-axis("price")
+  .width(480)
+  .height(360)
   .get-image()
 
 
