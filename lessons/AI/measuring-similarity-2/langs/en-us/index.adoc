@@ -1,11 +1,11 @@
 [.beta]
-= Unsupervised Similarity Learning
+= Supervised and Unsupervised Similarity
 
 @description{
-Students consider how arbitrary documents (in this case, songs and images) can be represented as points in space, and explore different ways to measure the "distance" between those documents using a spatial representation.
+Students consider how arbitrary documents (in this case images) can be represented as points in space, and explore different ways to measure the "distance" between those documents using a spatial representation.
 }
 
-@lesson-prereqs{data-driven-algorithms}
+@lesson-prereqs{measuring-similarity}
 
 @keywords{}
 
@@ -18,8 +18,8 @@ Students consider how arbitrary documents (in this case, songs and images) can b
 
 | Student-facing Lesson Goals
 |
-- Let's think about ways to represent documents as points in space
-- Let's think about how different measures of "distance" between these points can help us find documents that are "similar" to one another
+- Let's think about ways to represent images as points in space
+
 
 | Materials
 |[.materials-links]
@@ -28,154 +28,175 @@ Students consider how arbitrary documents (in this case, songs and images) can b
 |===
 
 
-== Music Similarity
-
-=== Overview
-Students apply what they've learned to Spotify's music dataset, which has premade columns for tempo, loudness, energy, danceability, etc.
-
-=== Launch
-@slidebreak{Launch}
-@link{https://open.spotify.com/, Let's review our example from Spotify}, which you may remember from @lesson-link{ai-intro}.
-
-@teacher{Search for a song that your students will recognize. When you hover over the search result, you'll see a three dots (`...`) appear on the right. Click these dots and select "Go to Song Radio"}
-
-@slidebreak{Launch}
-When we asked Spotify to create a station based on that song, it tried to find other songs that are _similar_ to it. But the computer doesn't have ears, and it doesn't have the human experience that informs how we hear a song.
-
-So how does it even know what "similar" means?
-
-@slidebreak{Launch}
-@lesson-instruction{
-- Open @starter-file{ai-music} and click "Run"
-- Complete @printable-exercise{song-similarity.adoc}
-}
-
-== Image Similarity
+== Plotting Images in Space
 
 === Overview
 
-Students explore ways in which images can be represented as points in space, and the similarity measure we created for our songs generalizes to images as well.
+Students explore ways in which images can be represented as points in space, and how similarity measures can be applied to find "similar" images.
 
 === Launch
-@slidebreal{LaunchR}
+@slidebreak{LaunchR}
+@right{@image{images/image-search.png, 400}}
 
 @link{https://images.google.com/, In Google Image Search}, you can drag a picture into the search box and have Google find other, _similar_ images.
 
-@teacher{Demo this functionality, using an image of your choosing}
+@teacher{Give students a demo, using an image of your choice!}
 
 @slidebreak{Launch}
 When we asked Google to find images similar to this one, it came back with a lot of similar images! But the computer doesn't have eyes, and it doesn't have the human experience that informs how an image makes us feel.
 
 So how does it even know what "similar" means?
 
-
 @slidebreak{Launch}
-Much like our songs, we can come up with lots of ways to describe an image:
+@right{@image{images/computer-vision.jpg, 400}}
+Modern ML models are capable of interpreting elements of an image ("person", "car", etc.). This belong to a class of Machine Learning algorithms called "Computer Vision", which relies heavily on more advanced -- and computationally intensive -- concepts that we won't cover here.
 
-- Width and height
-- Brightness ("luminance")
-- Busy-ness ("entropy")
+Can a @vocab{Data Driven Algorithm} help us re-create Google Image Search, even without the fancy Compute Vision tech?
 
-What else can you come up with?
-
-
-
-== Computing Closeness with Angle Difference
-
-=== Overview
-
-Compressing text into bags of words gives us a coarse-grained notion of similarity. Let's explore how to produce a more refined notion of similarity.
-
-=== Launch
-@slidebreak{Launch}
-
-When we ask people whether two documents are the same, they rarely give us a black-and-white "yes" or "no" answer. Instead they tend to speak about shades of similarity. Likewise, we would like our computer to give us a range of values that give us a sense of how similar the two documents are. In other words, we would like the output to be a Number, not just a Boolean (identical, not identical).
 
 === Investigate
 @slidebreak{Investigate}
+Much like our fast-food restaurants, we can come up with lots of ways to describe an image using numbers:
 
-Now that we know how to represent our bag of words summaries as points in space, we can draw a @vocab{ray} from the origin through each of those points and ask: What is the angle between the two rays?
+- Width and height
+- Brightness
+- Vertical symmetry
 
-Take, for example, this comparison between two strings: `stringA` ("doo doo doo doo") and `stringB` ("be be be be").
-
+What other numbers could be used to describe an image?
 
 @slidebreak{Investigate}
 
-If two documents are identical, they will be at the same point in space, and have the same ray extending from the origin to that point. That means the angle between those rays will be 0°. Even if one document just rearranges the other, their bags of words will be identical—thereby again making the angle between the lines 0°.
-
-@teacher{
-If you want your students to practice measuring angles with a protractor, we recommend using @printable-exercise{angle-difference.adoc}. If you do not have protractors available or would prefer that your students approximate angle size without measuring, we recommend printing and distributing @opt-printable-exercise{angle-difference-no-protractor.adoc} instead.
-}
-
 @lesson-instruction{
-- Complete @printable-exercise{angle-difference.adoc} or @opt-printable-exercise{angle-difference-no-protractor.adoc} using your knowledge of bags of words and plotting points.
-** First, fill in the frequency tables by referring to the provided string.
-** Translate the bags of words to ordered pairs.
-** Plot the points.
-** Draw a ray from the origin to each of the points.
-** Measure or approximate the angle size.
+- Open the @starter-file{ai-image}, and click "Run".
+- Complete the first section of @printable-exercise{image-similarity.adoc}
 }
 
 @slidebreak{Investigate}
 
-As the documents contain different words, the angles between the rays will grow. To reflect this, we can use the `angle-difference` function. It will give us a value between 0° (if the two are identical) and 90° (if the two have nothing in common).
+- The _luminance_ of an image is (roughly) a measure of how *bright* it is
+- The _entropy_ of an image is (roughly) how *busy* it is
 
-@strategy{Points, Rays, and Vectors}{
-As you've discovered, our plagiarism detector computes the angle difference between rays extending from the origin to various points that we have plotted space.
+We can use these calculated values to create @vocab{attributes} for each of our images!
 
-In machine learning, we generally refer to these bag-of-word representations *not* as _points_, but as _vectors_. Why? A point represents a location in space, whereas a vector represents a magnitude and a direction.
+@slidebreak{Investigate}
+@QandA{
+@Q{A table is defined on lines 15-25. What is its name?}
+@A{`images`}
 
-To reduce the amount of new vocabulary introduced in this lesson, we have opted to refer simply to points and rays. More commonly, however, the term _vector_ is used in a machine learning context.
+@Q{What columns does it have?}
+@A{`ID`, `img`, `rating`, and `tags`}
 
-If you or your students are wondering why we wouldn't just compute the _distance_ between points, rather than complicating things and introducing angles... it's because typically, machine learning uses vectors, not points.
+@Q{What are the rows?}
+@A{It looks like they each have one of the images defined earlier, then the empty string for `rating` and `tag`}
+
+@Q{What's going on in lines 27-30?}
+@A{Some function is defined, which appears to shrink an image. Then it's used to transform the `img` column from `images`, creating a new table called `small-images`}
+
+@Q{What's happening in lines 35-39?}
+@A{Four Rows are being defined. All of them have a visible sun.}
 }
 
-When two documents are represented as two points in space, @vocab{angle difference} is the difference between the angles formed by rays from the origin through those points.
+@slidebreak{Investigate}
 
-@lesson-point{
-Angle difference can be used to measure the similarity of two documents.
-}
+For your convenience, we've provided a function that will add all of these attributes (and more!) to the image table:
 
+@center{@show{(contract "decorate-image-table" '("String") "Table")}}
 
-
-The contract for `angle-difference` is below.
-
-```
-# angle-difference :: (String, String) -> Number
-```
-
-@slidebreak{Investigate-DN}
+This function consumes a table and the name of the column holding our images, then produces a new table with _all_ of our various attributes computed. Processing large images can be very computationally intensive, and using this function on the original `images` table will get frustrating unless you're on a powerful machine. For this lesson we'll use`small-images` to keep things snappy.
 
 @lesson-instruction{
-Let's try the `angle-difference` function in Pyret.
-
-- Check your work on @printable-exercise{angle-difference.adoc}.
-.
-** Open @starter-file{plagiarism} and click "Run".
-** Enter `angle-difference("doo doo doo doo", "be be be be")` into the Interactions Area.
-** Does the angle size that Pyret produces match the angle that you drew? (Hopefully yes!)
-** Use `angle-difference` to compare each pair of strings on @printable-exercise{angle-difference.adoc}.
+- Complete the rest of @printable-exercise{image-similarity.adoc}
 }
-
 
 === Synthesize
 @slidebreak{Synthesize}
 
 @QandA{
-Here are three different lines of code.
+@right{@image{images/luminance-entropy.png}}
+Let's talk about the Luminance-Entropy Space you all created.
+@Q{What clusters did you see?}
+@A{Snowy mountains on the bottom-right}
+@A{High-contrast images on the top-left}
 
-`angle-difference("hello world", "hello")`
+@Q{Are the images with suns __high__-luminance? Why or why not?}
+@A{They are surprisingly low luminance, but that makes sense because the part *not* lit by the sun is much darker in every image}
 
-`angle-difference("hello", "goodbye")`
+@Q{Are there any other axes that give us good clustering?}
+@A{Responses will vary}
 
-`angle-difference("hello", "hello")`
-
-@Q{Which line of code produces 90°? How do you know?}
-@A{`angle-difference("hello", "goodbye")`; the two strings are completely different.}
-
-@Q{Which line of code produces 45°? How do you know?}
-@A{`angle-difference("hello world", "hello")`; the two strings have one word in common; they are not entirely different nor are they identical.}
-
-@Q{Which line of code produces 0°? How do you know?}
-@A{`angle-difference("hello", "hello")`; the two strings are exactly the same.}
+@Q{What other axes might we want?}
+@A{Responses will vary - but sharp students will want axes for color}
 }
+
+
+== Unsupervised Learning and Bag-of-Words
+
+=== Overview
+
+Student apply what their similarity measures to something the decorated image model they've created.
+
+=== Launch
+@slidebreak{Launch}
+
+You've just constructed a @vocab{model} for images, which captures certain information -- luminance, vertical symmetry, etc. -- and throws away the rest. We haven't asked humans to label which images have the sun, grass, or snow in them. Can we still do a decent image search, based solely on the machine-generated attributes? For example, could we choose one of our snow-covered mountains (like `"4"`) and have the computer produce the other (`"5`)?
+
+@slidebreak{LaunchR}
+@ifslide{@right{@image{images/luminance-entropy.png}}}
+
+@lesson-instruction{
+- Complete the first section on @printable-exercise{unsupervised-learning.adoc}
+}
+
+Luminance-Entropy Space is pretty good for this search, because both of the snowy images are already clustered together, away from the rest.
+
+@center{@show{(code '(angle-similarity decorated2 "4" (list "entropy", "luminance")))}}
+
+Was `simple-similarity` useful? How about `distance-similarity`?
+
+@slidebreak{LaunchR}
+@ifslide{@right{@image{images/luminance-entropy.png}}}
+
+It would be really nice to have axes for each color, so we could see how Red, Green, and Blue each image is. If we used `green` as an axis, those grassy images would definitely stand out in that dimension!
+
+@QandA{
+Let's take a closer look at `decorated2`, and see if there's anything we can use here.
+@Q{What is the `color-names` column about?}
+@A{It's the dominant color for every pixel in the image}
+
+@Q{How could we generate numbers from the `color-names` columns?}
+@A{Answers will vary, but hopefully students will suggest counting the occurrences of each color}
+}
+
+@slidebreak{Launch}
+*We could count the number of reds, greens and blues in `color-names`!*
+
+We don't really care about the _order_ of those words - we just want to know how many pixels are red-dominant, green-dominant, or blue-dominant!
+
+In the Definitions Area, define a new table:
+
+@show{(code '(define decorated-bag (add-bag-cols decorated "color-names")))}
+
+What did you get back?
+
+=== Investigate
+@slidebreak{InvestigateR}
+@right{@image{images/bag-of-colors.png}}
+
+Without the order of the words, it's as if we just put all the words into a sack and shook it. The information about _frequency_ of each word is still there, but we've lost the order. Machine Learning Engineers call this a @vocab{bag-of-words model}.
+
+@lesson-instruction{
+- Complete the second section on @printable-exercise{unsupervised-learning.adoc}
+- What axes would you use to get the best clustering?
+- Be ready to share your answer!
+}
+
+
+@slidebreak{Investigate}
+Luminance-Green Space was great for finding our grassy images, but not as good for the snowy ones. We want our Image Search to work for _both_ kids of images!
+
+We know that the grassy images cluster along the `"green"` axis, and the snowy ones cluster along the `"blue"` axis. Blue-Green Space is a good candidate for solving our problem! But then a user might want to search for pictures with the sun...
+
+@slidebreak{InvestigateR}
+@right{@image{images/luminance-entropy-green.png}}
+
+Think back to our burger-and-fries example: there _may_ be other clusters in other dimension. We just cant see them because we're only looking in 2 dimensions! There's no reason we can't add all three dimensions here, or four, or five, etc!
