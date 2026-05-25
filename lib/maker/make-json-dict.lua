@@ -1,4 +1,4 @@
-#! /usr/bin/env luajit
+#! /usr/bin/env lua
 
 local dict_js_file = ...
 

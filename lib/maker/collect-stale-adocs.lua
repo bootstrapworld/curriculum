@@ -1,4 +1,4 @@
-#! /usr/bin/env luajit
+#! /usr/bin/env lua
 -- Usage: collect-stale-adocs.lua <setup-file> < <adoc-list>
 -- Reads .adoc paths (whitespace-separated) from stdin,
 -- and appends those whose .asc is missing or older as quoted Lua

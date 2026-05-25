@@ -1,4 +1,4 @@
-#! /usr/bin/env luajit
+#! /usr/bin/env lua
 
 dofile(os.getenv'TOPDIR' .. '/' .. os.getenv'MAKE_DIR' .. 'utils.lua')
 

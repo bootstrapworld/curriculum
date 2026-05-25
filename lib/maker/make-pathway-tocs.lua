@@ -1,4 +1,4 @@
-#! /usr/bin/env luajit
+#! /usr/bin/env lua
 
 -- last modified 2025-05-29
 -- print('doing make-pathway-tocs.lua')

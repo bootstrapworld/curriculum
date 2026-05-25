@@ -1,4 +1,4 @@
-#! /usr/bin/env luajit
+#! /usr/bin/env lua
 
 local glossary_terms_file, glossary_adoc_file = ...
 
