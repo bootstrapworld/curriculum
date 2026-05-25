@@ -1,4 +1,4 @@
-#! /usr/bin/env lua
+#! /usr/bin/env luajit
 
 -- last modified 2026-03-10
 

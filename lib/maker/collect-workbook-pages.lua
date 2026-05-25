@@ -1,4 +1,4 @@
-#! /usr/bin/env lua
+#! /usr/bin/env luajit
 
 dofile(os.getenv('TOPDIR') .. '/' .. os.getenv('MAKE_DIR') .. 'utils.lua')
 
@@ -82,7 +82,7 @@ do
     end
     local actual_g = pwd .. '/pages/' .. g
     if not g:find('%.adoc$') then
-      ;
+      do end
     elseif not file_exists_p(actual_g) then
       print('WARNING: ' .. pwd .. '/' .. workbook_pages_og_file .. ' mentions non-existent file ' .. f)
     elseif f == g and (head(actual_g, 5, '^ *%[%.landscape%] *$') or head(actual_g, 60, 'body.*landscape')) then

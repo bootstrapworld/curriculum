@@ -1,4 +1,4 @@
-#! /usr/bin/env lua
+#! /usr/bin/env luajit
 
 local coverage_report_file = ...
 
@@ -184,7 +184,7 @@ local objectives_list = read_json_file('distribution/en-us/lib/learningObjective
 local standard_to_objectives_map = {}
 
 for objective,hashob in pairs(objectives_list) do
-  local hashob_standards = hashob.standards or {}
+  local hashob_standards = type(hashob.standards) == 'table' and hashob.standards or {}
   for _,std in ipairs(hashob_standards) do
     if not standard_to_objectives_map[std] then
       standard_to_objectives_map[std] = {}

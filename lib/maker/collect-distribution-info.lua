@@ -1,4 +1,4 @@
-#! /usr/bin/env lua
+#! /usr/bin/env luajit
 
 local make_dir = os.getenv'MAKE_DIR'
 
