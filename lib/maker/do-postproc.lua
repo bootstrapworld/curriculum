@@ -438,30 +438,46 @@ local function extract_self_guided(fhtml_cached, lesson_title)
   o:close()
 end
 
-local function run_postproc(batchf, tipe)
-  -- print('doing run_postproc', batchf, tipe)
-  local files = dofile(batchf)
-  for _,f in ipairs(files) do
-    local title = postproc(f, tipe)
-    if tipe == 'lessonplan' then extract_self_guided(f, title) end
+-- Build one combined worklist across all five types, then split it into
+-- NUMCORES even shards via a K/N round-robin arg. Each shard owns its
+-- lessons end-to-end: postproc, extract_self_guided, self-guided dir
+-- setup, and make_slides_file all happen within a single worker for
+-- the same lesson, so there are no synchronization barriers between
+-- per-lesson stages.
+
+local shard_k, shard_n
+if arg[1] then
+  local k, n = arg[1]:match('^(%d+)/(%d+)$')
+  shard_k, shard_n = tonumber(k), tonumber(n)
+end
+
+local types = {'pathwayindependent', 'workbookpage', 'lessonplan', 'pathwaynarrative', 'pathwayresource'}
+local batchf_env = {
+  pathwayindependent = 'ADOC_POSTPROC_PATHWAYINDEPENDENT_INPUT',
+  workbookpage       = 'ADOC_POSTPROC_WORKBOOKPAGE_INPUT',
+  lessonplan         = 'ADOC_POSTPROC_LESSONPLAN_INPUT',
+  pathwaynarrative   = 'ADOC_POSTPROC_PATHWAYNARRATIVE_INPUT',
+  pathwayresource    = 'ADOC_POSTPROC_PATHWAYRESOURCE_INPUT',
+}
+
+local jobs = {}
+for _,tipe in ipairs(types) do
+  for _,f in ipairs(dofile(os.getenv(batchf_env[tipe]))) do
+    table.insert(jobs, {tipe = tipe, file = f})
   end
 end
 
-local tipe = arg[1]
-local batchf_map = {
-  pathwayindependent = os.getenv'ADOC_POSTPROC_PATHWAYINDEPENDENT_INPUT',
-  workbookpage       = os.getenv'ADOC_POSTPROC_WORKBOOKPAGE_INPUT',
-  lessonplan         = os.getenv'ADOC_POSTPROC_LESSONPLAN_INPUT',
-  pathwaynarrative   = os.getenv'ADOC_POSTPROC_PATHWAYNARRATIVE_INPUT',
-  pathwayresource    = os.getenv'ADOC_POSTPROC_PATHWAYRESOURCE_INPUT',
-}
-run_postproc(batchf_map[tipe], tipe)
+dofile(make_dir .. 'make-slides.lua')
+local self_guided_sh = os.getenv'TOPDIR' .. '/' .. make_dir .. 'make-self-guided.sh'
 
-if tipe == 'lessonplan' then
-  dofile(make_dir .. 'make-slides.lua')
-  local cached_html_files = dofile(lessonplan_batchf)
-  for _,cached_html_file in ipairs(cached_html_files) do
-    local lesson_dir = cached_html_file:gsub('/%.cached/%.index.html', '')
-    make_slides_file(lesson_dir)
+for i, job in ipairs(jobs) do
+  if (not shard_k) or (((i - 1) % shard_n) + 1 == shard_k) then
+    local title = postproc(job.file, job.tipe)
+    if job.tipe == 'lessonplan' then
+      extract_self_guided(job.file, title)
+      local lesson_dir = job.file:gsub('/%.cached/%.index%.html', '')
+      os.execute(self_guided_sh .. ' ' .. lesson_dir)
+      make_slides_file(lesson_dir)
+    end
   end
 end
