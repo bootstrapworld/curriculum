@@ -180,7 +180,7 @@ What did you get back?
 
 === Investigate
 @slidebreak{InvestigateR}
-@right{@image{images/bag-of-colors.png}}
+@right{@image{images/bag-of-colors.png, 200}}
 
 Without the order of the words, it's as if we just put all the words into a sack and shook it. The information about _frequency_ of each word is still there, but we've lost the order. Machine Learning Engineers call this a @vocab{bag-of-words model}.
 
@@ -191,12 +191,31 @@ Without the order of the words, it's as if we just put all the words into a sack
 }
 
 
-@slidebreak{Investigate}
+@slidebreak{InvestigateR}
+@right{@image{images/luminance-entropy-green.png, 300}}
 Luminance-Green Space was great for finding our grassy images, but not as good for the snowy ones. We want our Image Search to work for _both_ kids of images!
 
 We know that the grassy images cluster along the `"green"` axis, and the snowy ones cluster along the `"blue"` axis. Blue-Green Space is a good candidate for solving our problem! But then a user might want to search for pictures with the sun...
 
 @slidebreak{InvestigateR}
-@right{@image{images/luminance-entropy-green.png}}
+@ifslide{@right{@image{images/luminance-entropy-green.png, 300}}}
 
-Think back to our burger-and-fries example: there _may_ be other clusters in other dimension. We just cant see them because we're only looking in 2 dimensions! There's no reason we can't add all three dimensions here, or four, or five, etc!
+Think back to our burger-and-fries example: there _may_ be other clusters in other dimensions. We just cant see them because we're only looking in 2 dimensions! There's no reason we can't add all three dimensions here, or four, or five, etc!
+
+Our image scatter plots for Luminance-Green and Luminance-Entropy are just _projections_ of higher-dimensional data.
+
+@lesson-instruction{
+- Suppose we want to find images similar to Image 7. What columns would be most useful?
+- Complete @printable-exercise{unsupervised-learning.adoc}!
+}
+
+=== Synthesize
+@slidebreak{Synthesize}
+
+@QandA{
+@Q{Which columns were most helpful to your search results?}
+@Q{Were there any columns that didn't seem to affect the search results?}
+@Q{Were any columns actually _harmful?_}
+}
+
+== Supervised Learning
