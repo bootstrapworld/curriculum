@@ -438,33 +438,16 @@ local function extract_self_guided(fhtml_cached, lesson_title)
   o:close()
 end
 
-local tipe = arg[1]
-
--- Optional second arg K/N selects every Nth file starting at offset K
--- (1-based), so callers can split one type's work across N parallel
--- processes via round-robin.
-local shard_k, shard_n = nil, nil
-if arg[2] then
-  local k, n = arg[2]:match('^(%d+)/(%d+)$')
-  shard_k, shard_n = tonumber(k), tonumber(n)
-end
-
 local function run_postproc(batchf, tipe)
   -- print('doing run_postproc', batchf, tipe)
   local files = dofile(batchf)
-  if shard_k then
-    local sub = {}
-    for i, f in ipairs(files) do
-      if ((i - 1) % shard_n) + 1 == shard_k then table.insert(sub, f) end
-    end
-    files = sub
-  end
   for _,f in ipairs(files) do
     local title = postproc(f, tipe)
     if tipe == 'lessonplan' then extract_self_guided(f, title) end
   end
 end
 
+local tipe = arg[1]
 local batchf_map = {
   pathwayindependent = os.getenv'ADOC_POSTPROC_PATHWAYINDEPENDENT_INPUT',
   workbookpage       = os.getenv'ADOC_POSTPROC_WORKBOOKPAGE_INPUT',
