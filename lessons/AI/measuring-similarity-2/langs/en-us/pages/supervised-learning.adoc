@@ -1,49 +1,58 @@
-= Unsupervised Learning
+= Supervised Learning
 
 @lesson-instruction{For this page, you'll need @starter-file{ai-image} open on your computer}
 
-== Searching in Luminance-Entropy Space
+== Calculating Centroids
 
-@n Images 4 and 5 are both "snowy". Which images are "grassy"? @fitb{}{@ifsoln{Images 3 and 6}}
+@n Fill in the table below using the two rows you "Like"-d, then compute their centroid. (NOTE: we've removed the symmetry columns)
 
-@n Evaluate `simple-similarity(decorated2, "4", [list: "luminance", "entropy"])`. Which image ID was the closest match to `"4"`? @fitb{}{@ifsoln{`"0"`}}
+[.data-table, cols="^.^1a, 4a, ^4a, ^4a, ^4a, ^4a, ^4a, ^4a", options="header"]]
+|===
+| ID 			| width | height| luminance | entropy | red  | green | blue
+|   			|       |       |   		|   	  |  	 |  	 |
+|   			|       |       |   		|		  | 	 |  	 |
+| LIKED CENTROID|		|		|			|		  |		 |		 |
+|===
 
-@n Try again, this time using `distance-similarity`. Which image ID was the closest match to `"4"`? @fitb{}{@ifsoln{`"3"`}}
+== What does the Code Do?
+The questions below rely on the following contracts:
 
-@n Try again, this time using `angle-similarity`. Which image ID was the closest match to `"4"`? @fitb{}{@ifsoln{`"5"`}}
+@show{(contract "add-centroid" '(Table, String, List<String>) "Table")}
+@show{(contract "liked-ids" '(Table) "List<String>")}
+@show{(contract "disliked-ids" '(Table) "List<String>")}
+@show{(contract "tagged-ids" '(Table String) "List<String>")}
 
-@n How well  `angle-similarity` work for image 3, using the same dimensions? @fitb{}{@ifsoln{not well!}}
-
-@n Evaluate `image-scatter-plot(decorated2, "luminance", "entropy", doc-thumbnail)`. Can you explain why searching in Luminance-Entropy Space worked well for our snowy images, but not the grassy ones?
-
-@blanklines{3}{
-@ifsoln{In Luminance-Entropy Space, there's a clear cluster for the snowy images. The grassy ones, however, are all spread out.}
-}
-
-== Bag-of-Words: Adding Color Axes
-
-*Define a new image model, with attributes for each color:* +
-@show{(code '(define decorated-bag (add-bag-cols decorated "color-names")))}
-
-@n Evaluate `image-scatter-plot(decorated2, "luminance", "green", doc-thumbnail)`.
-
-@n Are the grassy images clustered in Luminance-Green Space? @fitb{}{@ifsoln{yes!}} The snowy images? @fitb{}{@ifsoln{No}}
-
-@n Use `angle-similarity` to search for Image 3. Is Image 6 a good match? @fitb{}{@ifsoln{yes}}
-
-@n Will this work for snowy images, in Luminance-Green Space? @fitb{}{@ifsoln{no}}
-
-@n Can you find two axes that define a space that will work for snowy _and_ grassy images?
+@n What code will add a centroid called `"SNOW"` to the `decorated` table, for image IDs "4" and "5"? +
+@fitb{}{@ifsoln{`add-centroid(decorated, "SNOW", [list: "4", "5"])}}
 
 
-== The "Best" Axes
+*The code below defines `liked` as a list of IDs for all liked images in `decorated`:*
+@center{@isoln{`liked = liked-ids(decorated2)`}}
 
-We want an Image Search that does well with three kinds of images: snowy (4 and 5), grassy (3 and 6), and sunny (0, 6, 7 and 8). Some of our attributes will be helpful, some will not, and some might even result in _worse_ performance!
+@n What code will define `disliked` as a list of IDs for disliked all images in `decorated`? +
+@fitb{}{@isoln{`disliked = disliked-ids(decorated2)`}}
 
-@n *Starting with the sun:* identify which attributes are most helpful when searching for images similar to Image 7, and write them below:
+@n What code will define `sun-tagged` as a list of IDs for all images in `decorated` tagged with "sun"? +
+@fitb{}{@isoln{`sun-tagged = tagged-ids(decorated2, "sun")`}}
 
-@fitb{}{}
+@n What code will add a centroid for all liked images in `decorated`?
+@fitb{}{@ifsoln{add-centroid(decorated2, "LIKED", liked)}}
 
-@n *Scaling up:* identify which attributes are most helpful when searching for images in all three of our categories, and write them below:
+@n What code will add a centroid for all images in `decorated` tagged with "sun"?
+@fitb{}{@isoln{add-centroid(decorated2, "LIKED", sun-tagged)}}
 
-@fitb{}{}
+@n What code will compute the `cosine-similarity` for all liked images, using only the columns `"green"` and `"red"`? +
+@fitb{}{@ifsoln{`cosine-similarity(add-centroid(decorated2, "LIKED", sun-tagged), "LIKED CENTROID", [list: "green", "red"])`}}
+
+== Searching and Recommending
+
+The questions below rely on the following contracts:
+
+@show{(contract "recommend" '(Table List<String>) "Table")}
+@show{(contract "search-by-tag" '(Table List<String>) "Table")}
+
+@n What code will make recommendations from `decorated2`, using only the columns `"red"`, `"green"`, and `"blue"`? +
+@fitb{}{@ifsoln{`recommend(decorated2, [list: "red", "green", "blue"])`}}
+
+@n What code will find images matching "sun" from `decorated2`, using only the columns `"luminance"`, `"entropy"`, and `"green"`? +
+@fitb{}{@ifsoln{`recommend(decorated2, [list: "luminance", "entropy", "blue"])`}}

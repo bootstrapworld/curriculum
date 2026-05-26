@@ -47,12 +47,19 @@ When we asked Google to find images similar to this one, it came back with a lot
 
 So how does it even know what "similar" means?
 
+Let's start with how WE as humans think about similarity between images?
+
+@lesson-instruction{
+- Open the @starter-file{ai-image}, and click "Run".
+- Complete @printable-exercise{human-perception.adoc}
+}
+
 @slidebreak{Launch}
 @right{@image{images/computer-vision.jpg, 400}}
 Modern ML models are capable of interpreting elements of an image ("person", "car", etc.). This belong to a class of Machine Learning algorithms called "Computer Vision", which relies heavily on more advanced -- and computationally intensive -- concepts that we won't cover here.
 
-Can a @vocab{Data Driven Algorithm} help us re-create Google Image Search, even without the fancy Compute Vision tech?
 
+Can a Data Driven Algorithm help us re-create Google Image Search, even without the fancy Compute Vision tech?
 
 === Investigate
 @slidebreak{Investigate}
@@ -67,7 +74,6 @@ What other numbers could be used to describe an image?
 @slidebreak{Investigate}
 
 @lesson-instruction{
-- Open the @starter-file{ai-image}, and click "Run".
 - Complete the first section of @printable-exercise{image-similarity.adoc}
 }
 
@@ -218,6 +224,22 @@ Our image scatter plots for Luminance-Green and Luminance-Entropy are just _proj
 @Q{Were any columns actually _harmful?_}
 }
 
+@slidebreak{Synthesize}
+
+We interact with similarity models _every day:_
+
+- You ask your favorite music app to make a station out of a particular song
+- A dating app finds matches for a particular profile
+- Your favorite streaming service recommends movies like the one you just watched
+- You drag an image into Google Image Search, and it finds similar ones
+
+@QandA{
+@Q{What are some limitations of our system so far?}
+@A{Can't make a station out of *multiple* songs (e.g. entire artist, or my previous likes}
+
+@Q{Google Image Search also lets me type in a word like "frog", and it finds frog pictures}
+}
+
 == Supervised Learning
 
 === Overview
@@ -227,21 +249,42 @@ Having seeing the power -- and limits -- of unsupervised learning, students expl
 === Launch
 @slidebreak{Launch}
 
-...limitations of the system...
+The similarity systems we've been discussing and building so far are an example of @vocab{unsupervised learning}. We're using a protractor in high dimensions to measure the angle between rays, and those rays are defined by numbers in a table. But that leaves out something really important: _human knowledge and experience_.
 
-(1) can only find similarity to one document...
-(2) it doesn't actually know about human experience so it's limited......
+- All the sun images are different, but have *something* in common. If we want to find sun images, we want to find images similar to that *something*. But instead, we can only find images that are similar to a specific sun image. That means all the irrelevant differences in each image are included, leading to worse results.
+
+- Google Images _also_ lets us type words. But we can only search-by-image, telling the computer to match a specific picture rather than asking it to find all the pictures with "grass".
 
 @slidebreak{Launch}
+These problems exist in the real world, too:
 
-Suns are hard in this dataset, because they're so different. What we want is something that connects _all_ the suns.
+(1) Computers don't know that "Kung-Fu Panda" and "The Minecraft Movie" both star Jack Black
+(2) Computers don't know that you like "Single Ladies", but not "Lemonade"
+(3) Computers know that our snowy mountain pictures are similar, but has no idea that they both have snow in them.
+(4) Computers can tell us that two jazz songs are similar, but can't just start a "jazz" station
+
+We extracted the luminance, symmetry, and color information from the images by relying on mechanical analysis of the image data. But information about human preferences or groupings is something that requires human experience!
+
+@slidebreak{Launch}
+Of course, humans could _tell_ the computer this stuff by adding their knowledge and preferences to the dataset! This is where we shift from @vocab{unsupervised learning} to @vocab{supervised learning}.
+
+You'll notice that our image table has extra columns for exactly this! `liked` and `disliked`, for example, are set to `false` - meaning no images have been rated one way or the other. `tags` are all the empty string, meaning nothing has been tagged yet.
 
 
 === Investigate
 @slidebreak{Investigate}
 
 @lesson-instruction{
-Calculate the sun centroid on @printable-exercise{supervised-learning.adoc}
+In the Definitions Area of the @starter-file{ai-image}:
+
+- Find two images you *like*, and set those column values to `true`
+- Find two images you *dislike*, and set those column values to `true`
+- Tag all the images with suns in them, by changing the `tag` column value to `"sun"`
+- Click "Run" and make sure `decorated2` has your human-added values!
+}
+
+@lesson-instruction{
+- Complete the first section of @printable-exercise{supervised-learning.adoc}
 }
 
 
@@ -252,36 +295,94 @@ We've created a function in Pyret to calculate centroids for you:
 
 @show{(contract "add-centroid" '(Table, String, List<String>) "Table")}
 
-Calculate the sun-centroid in Pyret:
+It consume the table, a name for the centroid, and a *list of the document IDs* for which you want to build the centroid. For example:
 
 @show{(code '(add-centroid decorated2 "sun" (list: 0, 6, 7, 8)))}
 
-@slidebreak{Investigate}
-The whole centroid thing is powerful, because now we can add human information.
-
-- We can find a centroid for all the _liked_ images, and make better recommendations.
-- We can find a centroid for all the images with a tag, and use that to find other images that haven't been tagged
-
-@show{(contract "likes" '(Table) "List<String>")}
-@show{(contract "dislikes" '(Table) "List<String>")}
-@show{(contract "tagged" '(Table String) "List<String>")}
-
+Try it out!
 
 @slidebreak{Investigate}
-What will each of these do?
+Building centroids is powerful, because now we can add human information about _groups_. We've build some helper functions to get commonly-used document IDs:
 
-@show{(coe (add-centroid decorated2 "liked" (likes decorated2)))}
-@show{(coe (add-centroid decorated2 "disliked" (dislikes decorated2)))}
-@show{(coe (add-centroid decorated2 "sun" (tagged decorated2 "sun")))}
+@indented{
+@show{(contract "liked-ids" '(Table) "List<String>")}
+@show{(contract "disliked-ids" '(Table) "List<String>")}
+@show{(contract "tagged-ids" '(Table String) "List<String>")}
+}
+
+- We can find a centroid for all the _liked_ or _disliked_ images, and use cosine-similarity to make better recommendations.
+- We can find a centroid for all the images with a tag, and use that to find similar images that haven't been tagged
 
 @lesson-instruction{
-Do more stuff on @printable-exercise{supervised-learning.adoc}
+- Complete the second section of @printable-exercise{supervised-learning.adoc}
 }
 
 @slidebreak{Investigate}
-A recommendation system is just similarity-to-liked - similarity-to-disliked.
+Now a recommendation system is just:
+
+- Calculate the centroids for liked and dislked documents
+- Calculate the cosine similarities between every document and both centroids
+- Recommendation strength is @math{\text{similarity-to-liked} - \test{similarity-to-disliked}}!
+
+We've created a helper function that does exactly that, given a table and a list of columns:
+
+@show{(contract "recommend" '(Table List<String>) "Table")}
+
+The result is a table of all your documents, in descending order of recommendation-strength (strongest first).
 
 @slidebreak{Investigate}
-Image search is just similarity-to-tagged.
+Google's Image Search-by-word is just:
+
+- Find all documents tagged with that word, and compute their centroid
+- Compute the cosine-similarity of all the documents to that centroid
+- Match accuracy is just @math{\text{similarity}}
+
+We've created a helper function that does exactly that, given a table and a list of columns:
+
+@show{(contract "search-by-tag" '(Table List<String>) "Table")}
+
+The result is a table of all your documents, in descending order of similarity to the centroid of the documents that match your tag.
+
+@lesson-instruction{
+- Complete the last section of @printable-exercise{supervised-learning.adoc}
+}
 
 === Synthesize
+@slidebreak{Synthesize}
+@QandA{
+@Q{When you tell Spotify that you like a song, what computations happen on Spotify's servers?}
+@A{With a new list of "liked songs", Spotify recalculates my "liked" centroid}
+
+@Q{When you tell Spotify that to make a Jazz station, what computations happen on Spotify's servers?}
+@A{Google computes the centroid for every song *already tagged* with "jazz", then returns those alongside songs that are similar to the centroid}
+
+@Q{When you search for "sun" on Google Images, what computations happen on Google's servers?}
+@A{Google computes the centroid for every image *already tagged* with "sun", then returns those alongside images that are similar to the centroid}
+
+@Q{How does Google know to filter out offensive images of extreme violence?}
+@A{Google computes the centroid for every image *already tagged* as extremely violent, then filters our images that are similar to the centroid}
+}
+
+
+
+@slidebreak{Synthesize}
+@QandA{
+@Q{With tens of millions of images in Google's database, how many needed to be tagged by humans for results to be accurate?}
+@A{Hundreds? Thousands?}
+
+@Q{Which humans are tagging these images?}
+@A{We are! What do you think a CAPTCHA is?}
+@A{Humans get paid to do it}
+}
+
+
+@slidebreak{Synthesize}
+
+Supervised learning is a large part of what makes Machine Learning models feel like they "understand" humans. When we type in a sentence on Google Images, it feels like somehow the search engine _understood_ what we wanted! But in reality, it's another Data Driven Algorithm cranking through oceans of tagged and untagged data.
+
+But this comes at a cost: *someone has to tag millions of images!*
+
+In some cases that's US, clicking on images of busses in order to prove we're human. Those images are real images from a database where the similarity wasn't strong enough to be confident about whether they are or aren't a bus. By asking us to tag them, we are helping to train algorithm
+
+@slidebreak{Synthesize}
+But in other cases it's paid contractors, often in developing countries where tech companies can pay them a few dollars per day to stare at tens of thousands of images and tag them. But seeing tens of thousands of violent or offensive images has real impacts on mental health!
