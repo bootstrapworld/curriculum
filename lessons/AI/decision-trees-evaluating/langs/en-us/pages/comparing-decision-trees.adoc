@@ -1,0 +1,63 @@
+= Comparing Decision Trees
+
+++++
+<style>
+#preamble_disabled { flex-grow: 0 !important; }
+.fitb { min-width: 2em !important; }
+.autonum, .fitb.stretch::after { padding-top: 1em !important; }
+table.fit-content tr td { padding: 0.3em 0.625em !important; }
+#body table td:last-child img {
+    height: 180px; /* we have a limit to vertical space */
+	width:  250px; /* stretch the image outm slightly breaking proportion*/
+}
+
+.listingblock pre { padding: 0 !important; }
+</style>
+++++
+
+@link-instructions{
+To complete this page, you will need to refer to @printable-exercise{computing-decision-trees.adoc} and your saved copy of the @starter-file{decision-tree}.
+}
+
+== Comparing Trees for our Training Dataset
+
+[cols="1a,1a,1a,2a,2a", frame="none", stripes="none", options="header"]
+|===
+|tree 			| max levels 	| levels 	| # correct for `training`	| # correct for `testing`
+|`tree-cat1`	| 1 			| 1 		|@ifsoln{7}								|@ifsoln{7}
+|`tree-quant1`	| 1 			| 1 		|@ifsoln{8}								|@ifsoln{5}
+|`tree-any1`	| 1 			| 1 		|@ifsoln{8}								|@ifsoln{7}
+|`tree-cat2`	| 2 			|@ifsoln{1} |@ifsoln{7}								|@ifsoln{7}
+|`tree-quant2`	| 2 			|@ifsoln{2} |@ifsoln{10}							|@ifsoln{7}
+|`tree-any2`	| 2 			|@ifsoln{2} |@ifsoln{11}							|@ifsoln{10}
+|`tree-quant3`	| 3 			|@ifsoln{3} |@ifsoln{12}							|@ifsoln{6}
+|`tree-any3`	| 3 			|@ifsoln{3} |@ifsoln{14}							|@ifsoln{12}
+|`tree-quant4`	| 4 			|@ifsoln{4} |@ifsoln{13}							|@ifsoln{7}
+|`tree-any4`	| 4 			|@ifsoln{4} |@ifsoln{15}							|@ifsoln{13}
+|`tree-quant5`	| 5 			|@ifsoln{5} |@ifsoln{14}							|@ifsoln{6}
+|`tree-any5`	| 5 			|@ifsoln{4} |@ifsoln{15}							|@ifsoln{13}
+|`tree-quant6`	| 6 			|@ifsoln{6} |@ifsoln{15}							|@ifsoln{5}
+|===
+
+- Evaluate each of the decision trees we've defined and record how many levels deep it is in the *levels* column. 
+- `Classify` each of the Decisions trees using the `training` dataset, e.g. `classify(training, "species", tree-cat1)`, and complete the *number correct for training dataset* column. 
+
+@n What do you notice? What do you wonder? @fitb{}{@ifsoln{`tree-quant1` and `tree-any1` both had 8 correct.}} +
+@blanklines{2}{@ifsoln{How did the algorithm know which to choose? Pyret's algorithm had a tree that was correct within 4 splits. Using just the pounds column produced almost perfect predictions by the fifth level. @hspace{2em} `tree-any4` and `tree-quant6` both classified all of the animals' species correctly.}}
+
+@n Did allowing for more levels in the tree always make the tree better? @fitb{}{@ifsoln{No. Sometimes Pyret didn't use all of the available levels.}}  
+
+@n If we were using one column, which would do a better job of building a tree for the training data: categorical or quantitative? @fitb{}{@ifsoln{quantitative}}
+
+== Using our Classifiers with a Testing Dataset
+
+We built our classifiers using the `training` dataset. Let's see how well they do predicting `"species"` for a new dataset called `testing`. 
+
+@n `Classify` each of the Decisions trees using the `testing` dataset, e.g. `classify(testing, "species", tree-cat1)`, and complete the *number correct for training dataset* column. 
+
+@n Which two models did the most job with our `training` dataset? @fitb{8em}{@ifsoln{`tree-any4`}} and @fitb{8em}{@ifsoln{`tree-quant6`}}
+
+@n How did their success rates compare with our `testing` dataset? @fitb{}{@ifsoln{} +
+@fitb{}{@ifsoln{`tree-any4` got most of them correct, but `tree-quant6` did a terrible job, only predicting 1/3 of the animals' species correclty.}}
+
+@n Look carefully at the number correct for our `tree-quant` decision trees built on the pounds column as the number of allowable levels increases. What do you notice? @fitb{}{@ifsoln{Eventually the trees with more levels do a worse job of making predicitons!}}

@@ -20,10 +20,9 @@
 </style>
 ++++
 
-@description{Students explore an approach to recommending videos and predicting election outcomes. They develop and analyze decision trees to predict individuals’ purchasing decisions.}
+@description{Students learn how computers can automatically generate decision trees and how computer scientists evaluate them.}
 
 @lesson-prereqs{decision-trees-building}
-
 
 @keywords{}
 
@@ -35,15 +34,12 @@
 
 | Student-facing Lesson Goals
 |
-
 - Let's learn about how to evaluate the _accuracy_ of a classifier
 - Let's learn how the distribution in the training dataset influences the trees we build
 
 | Materials
 |[.materials-links]
 @material-links
-
-
 |===
 
 == Building Decision Trees in Pyret
@@ -53,56 +49,21 @@ Now that they know the algorithm, students explore Pyret's ability to build deci
 
 === Launch
 @slidebreak{Launch}
-By now, you know that not all @vocab{decision trees} are created equal! You also know the algorithm to compute an _optimal tree_, so you could generate a @vocab{decision tree} for any dataset.
+By now, you know:
 
-[.data-table, cols="^2,^2,^3,^2,^2", stripes="none", options="header"]
-|===
-| name    | age        | shopping history     | interest in game  | buys game
-| Jan     | "teens"    | "previous customer"  | false             | false
-| Noah    | "thirties" | "previous customer"  | false             | true
-| Sydney  | "thirties" | "previous customer"  | true              | true
-| Mariana | "thirties" | "new customer"       | true              | false
-| Rasula  | "twenties" | "new customer"       | true              | true
-| Jillian | "teens"    | "previous customer"  | false             | false
-| Ariella | "teens"    | "new customer"       | true              | true
-| Isabela | "thirties" | "previous customer"  | true              | true
-|===
+- There is a simple algorithm we can use to compute an _optimal tree_ for any dataset .
+- @vocab{Decision trees} are really just functions called @vocab{classifiers}: they take an input and produce a prediction as their output.
+- Not all @vocab{decision trees} are created equal! 
 
-*Targeted Advertising:* Based on a dataset like this, could you write a classifier that predicts which customers are most likely to buy a game, and mail them a targeted advertisement?
+Of course, computing a decision tree by hand takes a long time, especially if you're dealing with tens of thousands of rows and hundreds of columns! 
+Fortunately, computers are really, _really_ good at following algorithms.
 
-@slidebreak{Launch}
-You also know that decision trees are really just functions called @vocab{classifiers}: they take an input and produce a prediction as their output.
-
-*Spam Filtering:* You could train a decision tree to predict whether an email is spam or not:
-
-[.data-table, cols="^1,^1,^1", stripes="none", options="header"]
-|===
-| sender in address book  | seen sender before      | mass email
-| true                    | true                    | true
-| true                    | false                   | false
-| false                   | true                    | true
-| false                   | false                   | false
-| true                    | true                    | true
-| true                    | false                   | false
-| false                   | false                   | true
-|===
-
-@slidebreak{Launch}
-
-*Handwriting Recognition:* The United States Postal Services uses handwritten address interpretation systems to read handwritten addresses on envelopes. The MNIST database (Modified National Institute of Standards and Technology database) is one example of an early database used for the training of such systems; it includes thousands of labelled images of handwritten digits.
-
-@slidebreak{Launch}
-In your @starter-file{decision-tree}, you already have at least one classifier defined: `tail-classifier`. Let's see how well it does on this dataset:
-
-@indented{`classify(training, "species", tail-classifier)`}
-
-How many animals did it get right?
+One example of an early application for this kind of automation is used by the United States Postal Service to read handwritten addresses on envelopes.  Their address interpretation system was trained on the MNIST database (Modified National Institute of Standards and Technology database), which includes thousands of labelled images of handwritten digits.
 
 === Investigate
 @slidebreak{Investigate}
-Of course, computing a decision tree by hand takes a long time, especially if you're dealing with tens of thousands of rows and hundreds of columns! Fortunately, computers are really, _really_ good at following algorithms.
 
-We've provided a function that will use a splitting algorithm similar to the one you know, to build the _optimal_ decision tree based on a set of training data! Here's the contract:
+Given a dataset to train on, Pyret can build _optimal_ decision trees for us, and even give us the classifier code for those trees, using the algorithm you already know!
 
 @show{(contract "build-tree" '("Table" "List" "String" "Number") "DecisionTree")}
 
@@ -113,26 +74,49 @@ The `build-tree` function takes *four arguments* in its Domain:
 - The name of the _target_ column containing all the "answers" for the various categories
 - The _maximum depth_ the tree is allowed to be
 
+@slidebreak{Investigate}
+
 @lesson-instruction{
-Complete the first section, "Choosing the Right Split", on @printable-exercise{computing-decision-trees.adoc}
+- Complete the first section of @printable-exercise{computing-decision-trees.adoc} using the @starter-file{decision-tree}.
 }
 
 @slidebreak{Investigate}
-
-Given a dataset to train on, Pyret can build decision trees for us, and even give us the classifier code for those trees! This makes it really easy to build trees, using the algorithm you already know.
 
 @QandA{
 @Q{When you evaluated `dt-code(tree1)`, did you recognize the code that came back?}
 @A{It's the same function as `tail-classifier`, which was already in our Definitions Area}
-@Q{Which classifier did a better job on this training dataset?}
-@A{`c2` - the classifier that uses the `swim` column.}
-}
 
-@lesson-instruction{
-Complete the second section, "Deeper Trees vs. More Columns", on @printable-exercise{computing-decision-trees.adoc}
+@Q{What did Pyret do with the quantitative column (`"pounds"`)?}
+@A{It figured out that it made most sense to splite at 9.55 pounds!}
+
+@Q{What column did Pyret decide to use when it got to choose between all of the columns?}
+@A{`"swims"`}
 }
 
 @slidebreak{Investigate}
+
+@lesson-instruction{
+Complete the second section of @printable-exercise{computing-decision-trees.adoc}
+}
+
+@slidebreak{Investigate}
+
+@QandA{
+@Q{How are the definitions for `tree-cat1` and `tree-cat2` different?}
+@A{`tree-cat1` allows for a maximum of 1 level.}
+@A{`tree-cat2` allows for a maximum of 2 levels.}
+
+@Q{How are the trees for `tree-cat1` and `tree-cat2` different?}
+@A{They are the same! Once we split on whether or not animals have tails, there's no further sorting we can do with just the `"tail"` column.}
+
+@Q{How did `tree-quant1`, `tree-quant2` and `tree-quant3` compare?}
+@A{They all started with the same splits.}
+}
+
+@lesson-instruction{
+- Make sure you've saved all of the new definitions to your copy of the @starter-file{decision-tree}
+- Turn to @printable-exercise{comparing-decision-trees.adoc} and complete the first section.
+}
 
 `tree3` and `tree4` both did a _lot_ better at predicting the species of our training dataset!
 
@@ -151,10 +135,10 @@ Complete the second section, "Deeper Trees vs. More Columns", on @printable-exer
 }
 
 @slidebreak{Investigate}
-`tree6` works just as well as `tree5`, even though it only has one column to train on!
 
-As is common for quantitative columns, there's more variability in `pounds` than there is for any of our categorical columns. In fact, the only way to _not_ have a perfect classifier based on `pounds` would be for animals from two different species to weight the exact same amount!
+Notice that `tree-quant6` works just as well as `tree-any4`, even though it only has one column to train on!
 
+As is common for quantitative columns, there's more variability in `pounds` than there is for any of our categorical columns. In fact, the only way to _not_ have a perfect classifier based on `pounds` would be for animals from two different species to weigh the exact same amount!
 
 @lesson-instruction{
 - Complete @printable-exercise{computing-decision-trees.adoc}

@@ -485,12 +485,12 @@ Use one of our new tools to answer the following questions about our `tail-class
 |===
 }
 
-@teacher{All of the trees we are working with are binary (every node has only two paths). Some decision trees have decision nodes that split on 3 things or 10 things.}
-
 @QandA{
 @Q{How do we know which of these roots will make the best possible split?}
-@A{We want to choose a split that achieved the most correctly predicted outcomes for the training data.} 
+@A{We want to choose a split that achieved the most correctly predicted outcomes for the training data.}
 }
+
+@teacher{All of the trees we are working with are binary (every node has only two paths). Some decision trees have decision nodes that split on 3 things or 10 things.}
 
 @slidebreak{Investigate-DN}
 @lesson-instruction{
@@ -531,4 +531,44 @@ This is the _exact same_ problem we solved for the root node: our goal is to ask
 @A{The column headers from the table are the questions that will get asked in the decision nodes of the decision tree.}
 @A{The data in each column are the answers to those questions which become the arrow labels of the decision tree ("yes" and "no", for this dataset).}
 @A{The output categories from the table are the leaf nodes in the decision tree.}
+}
+
+@slidebreak{Synthesize}
+*Targeted Advertising:* 
+[.data-table, cols="^2,^2,^3,^2,^2", stripes="none", options="header"]
+|===
+| name    | age        | shopping history     | interest in game  | buys game
+| Jan     | "teens"    | "previous customer"  | false             | false
+| Noah    | "thirties" | "previous customer"  | false             | true
+| Sydney  | "thirties" | "previous customer"  | true              | true
+| Mariana | "thirties" | "new customer"       | true              | false
+| Rasula  | "twenties" | "new customer"       | true              | true
+| Jillian | "teens"    | "previous customer"  | false             | false
+| Ariella | "teens"    | "new customer"       | true              | true
+| Isabela | "thirties" | "previous customer"  | true              | true
+|===
+
+
+@QandA{
+@Q{Based on a dataset like this, could you write a classifier that predicts which customers are most likely to buy a game, and mail them a targeted advertisement?}
+@A{}
+}
+
+@slidebreak{Synthesize}
+*Spam Filtering:*
+[.data-table, cols="^1,^1,^1", stripes="none", options="header"]
+|===
+| sender in address book  | seen sender before      | mass email
+| true                    | true                    | true
+| true                    | false                   | false
+| false                   | true                    | true
+| false                   | false                   | false
+| true                    | true                    | true
+| true                    | false                   | false
+| false                   | false                   | true
+|===
+
+@QandA{
+@Q{Based on a dataset like this, could you write a classifier that predicts whether an email is spam or not?}
+@A{}
 }
