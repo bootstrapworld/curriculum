@@ -112,7 +112,7 @@ This function consumes a table and the name of the column holding our images, th
 @slidebreak{Synthesize}
 
 @QandA{
-@right{@image{images/luminance-entropy.png}}
+@right{@image{images/luminance-entropy.png, 300}}
 Let's talk about the Luminance-Entropy Space you all created.
 @Q{What clusters did you see?}
 @A{Snowy mountains on the bottom-right}
@@ -138,7 +138,7 @@ Student apply what their similarity measures to something the decorated image mo
 === Launch
 @slidebreak{Launch}
 
-You've just constructed a @vocab{model} for images, which captures certain information -- luminance, vertical symmetry, etc. -- and throws away the rest. We haven't asked humans to label which images have the sun, grass, or snow in them. Can we still do a decent image search, based solely on the machine-generated attributes? For example, could we choose one of our snow-covered mountains (like `"4"`) and have the computer produce the other (`"5`)?
+You've just constructed a @vocab{model} for images, which captures certain information -- luminance, vertical symmetry, etc. -- and throws away the rest. We haven't asked humans to label which images have the sun, grass, or snow in them. Can we still do a decent image search, based solely on the machine-generated attributes? For example, could we choose one of our snow-covered mountains (like `"4"`) and have the computer produce the other (`"5"`)?
 
 @slidebreak{LaunchR}
 @ifslide{@right{@image{images/luminance-entropy.png}}}
@@ -180,7 +180,7 @@ What did you get back?
 
 === Investigate
 @slidebreak{InvestigateR}
-@right{@image{images/bag-of-colors.png, 200}}
+@right{@image{images/bag-of-colors.png, 150}}
 
 Without the order of the words, it's as if we just put all the words into a sack and shook it. The information about _frequency_ of each word is still there, but we've lost the order. Machine Learning Engineers call this a @vocab{bag-of-words model}.
 
@@ -219,3 +219,69 @@ Our image scatter plots for Luminance-Green and Luminance-Entropy are just _proj
 }
 
 == Supervised Learning
+
+=== Overview
+Having seeing the power -- and limits -- of unsupervised learning, students explore what it means to pair machine-learning algorithms with human-tagged data. They learn about centroids and the connection to measures of center, and use that concept to build recommendation systems and tag-based testing of images.
+
+
+=== Launch
+@slidebreak{Launch}
+
+...limitations of the system...
+
+(1) can only find similarity to one document...
+(2) it doesn't actually know about human experience so it's limited......
+
+@slidebreak{Launch}
+
+Suns are hard in this dataset, because they're so different. What we want is something that connects _all_ the suns.
+
+
+=== Investigate
+@slidebreak{Investigate}
+
+@lesson-instruction{
+Calculate the sun centroid on @printable-exercise{supervised-learning.adoc}
+}
+
+
+@slidebreak{InvestigateR}
+@right{@image{images/centroid.png}}
+
+We've created a function in Pyret to calculate centroids for you:
+
+@show{(contract "add-centroid" '(Table, String, List<String>) "Table")}
+
+Calculate the sun-centroid in Pyret:
+
+@show{(code '(add-centroid decorated2 "sun" (list: 0, 6, 7, 8)))}
+
+@slidebreak{Investigate}
+The whole centroid thing is powerful, because now we can add human information.
+
+- We can find a centroid for all the _liked_ images, and make better recommendations.
+- We can find a centroid for all the images with a tag, and use that to find other images that haven't been tagged
+
+@show{(contract "likes" '(Table) "List<String>")}
+@show{(contract "dislikes" '(Table) "List<String>")}
+@show{(contract "tagged" '(Table String) "List<String>")}
+
+
+@slidebreak{Investigate}
+What will each of these do?
+
+@show{(coe (add-centroid decorated2 "liked" (likes decorated2)))}
+@show{(coe (add-centroid decorated2 "disliked" (dislikes decorated2)))}
+@show{(coe (add-centroid decorated2 "sun" (tagged decorated2 "sun")))}
+
+@lesson-instruction{
+Do more stuff on @printable-exercise{supervised-learning.adoc}
+}
+
+@slidebreak{Investigate}
+A recommendation system is just similarity-to-liked - similarity-to-disliked.
+
+@slidebreak{Investigate}
+Image search is just similarity-to-tagged.
+
+=== Synthesize
