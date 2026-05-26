@@ -3,7 +3,8 @@ local _stat_cmd = "stat -c '%Y\t%n'"
 
 -- Returns a table mapping filepath -> mtime (integer).
 -- Uses a single xargs invocation for the whole list.
-local function batch_mtimes(files)
+-- Missing files simply don't appear in the result.
+function batch_mtimes(files)
   if #files == 0 then return {} end
   local tmp = os.tmpname()
   local fh = io.open(tmp, 'w')
