@@ -230,7 +230,7 @@ Try it out with the original `tail-classifier`:
 |"tarantula"   |      0      |      0      |       0        |       1       |       0
 |===
 
-The "correct scores" are shown in the diagonal, running from top-left to bottom-right.
+The "correct scores" are shown in the diagonal, running from top-left to bottom-right. *Note that we use 0-1, instead of 0%-100%!* "80%" would show up as `0.8`.
 
 @QandA{
 @Q{What are some things we can infer from this confusion matrix?}
@@ -249,9 +249,6 @@ The "correct scores" are shown in the diagonal, running from top-left to bottom-
 === Synthesize
 @slidebreak{Synthesize}
 @QandA{
-@Q{Will a decision tree always have the same number of leaf nodes as there were rows in the training dataset? Why or why not?}
-@A{No. Generally multiple rows of a training dataset will have the same prediction. The training dataset we saw in this lesson section contained multiple knives, for example.}
-
 @Q{Can a decision tree have the _fewer_ leaf nodes than there are unique categories in the training dataset? Why or why not?}
 @A{Yes. A decision tree may not be deep enough to correctly classify every category - and in some cases, there may not *be* a way to correctly classify every category!}
 
