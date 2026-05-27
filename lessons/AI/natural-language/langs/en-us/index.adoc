@@ -1,0 +1,291 @@
+[.beta]
+= Dealing with Natural Language
+
+@description{Students explore the challenges of working with natural language.}
+
+@lesson-prereqs{measuring-similarity-2, data-driven-algorithms}
+
+@keywords{}
+
+[@lesson-intro-table]
+|===
+| Lesson Goals
+| Students will be able to...
+
+@objectives
+
+| Student-facing Lesson Goals
+|
+
+-
+
+| Materials
+|[.materials-links]
+@material-links
+
+|===
+
+
+== Plotting Essays in Space
+
+=== Overview
+
+Students review their progression from plotting numerical data to plotting image data, then consider the challenge of plotting human-written text. They apply the bag of words model from @lesson-link{measuring-similarity-2}, and confront the extra challenges that natural language presents.
+
+=== Launch
+@slidebreak{LaunchR}
+@right{@image{images/3-d-comparison-w-lines.png, 300}}
+Let's look back on our discussion of similarity. The main idea is *plotting documents in space*, and using *geometry* to calculate something approximating "similarity":
+
+- A table with numeric attributes (e.g., price, burger quality, fry quality...) can be graphed as points in @math{n}-dimensional space, where @math{n} is the number of attributes being used
+- The location of these points in space can be used to compute different measures of similarity
+- There are multiple ways to compute this (equality, Euclidean distance, angle measure), but Machine Learning Engineers typically use some form of angle measure
+
+
+@slidebreak{Launch}
+If the input data _isn't_ numeric, we can compute numbers anyway!
+
+- In our image search examples, we generated numeric attributes like symmetry, luminance, and entropy
+- We also generated very long Strings of `COLOR-NAMES`, listing each of the dominant primary colors in pixel order
+- We turned `COLOR-NAMES` into numbers, using a @vocab{bag of words} model to count the number of red-, green-, and blue-dominant pixels
+- The @vocab{bag of words} turned an ordered string of colors into an _un-ordered_ count of each color
+- Each count became another attribute, allowing us to plot images in "color-space"
+
+
+
+@slidebreak{Launch}
+Can we compute the similarity of _anything_ that way? Think about:
+
+- Drivers' License Photos
+- Essays
+- Recipes
+
+@slidebreak{Launch}
+Let's review our different similarity tools:
+
+@indented{
+@show{(contract "simple-similarity" '("Table" "String" "List<String>") "Table")} +
+@show{(contract "distance-similarity" '("Table" "String" "List<String>") "Table")} +
+@show{(contract "angle-similarity" '("Table" "String" "List<String>") "Table")} +
+}
+
+@teacher{This is a great time to review the parts of a contract!}
+
+=== Investigate
+@slidebreak{Investigate}
+@lesson-instruction{
+- Open the @starter-file{ai-text}, Save a Copy, and click "Run"
+- In the Interactions Area, evaluate `essays`
+- Turn to @printable-exercise{text-similarity.adoc}, and complete the first section
+}
+
+@slidebreak{Investigate}
+@QandA{
+@Q{Which essay was most like document `"❓"`?}
+@A{The elephant one}
+
+@Q{How do you know?}
+@A{It was the only other essay about elephants}
+
+@Q{As a human, what tells you what an essay is "about"? }
+@A{A word used a lot...}
+@A{I just know from reading...}
+}
+
+@slidebreak{Investigate-DN}
+@QandA{
+@Q{Was `simple-similarity` useful? Why or why not?}
+@A{No - it tests to see if the essays are exactly the same, so even one different word will come up with a score of zero}
+
+@Q{Why can't we use any of our other similarity functions on this dataset?}
+@A{They need numeric attributes, and all we have is our `DOC` string}
+
+@Q{What are some possible attributes we could calculate from these essays?}
+@A{Length of string}
+@A{Writing level}
+@A{Count the number of times important words show up}
+}
+
+
+@slidebreak{Investigate-DN}
+@lesson-instruction{
+Complete the second section on @printable-exercise{text-similarity.adoc}
+}
+
+=== Synthesize
+@slidebreak{Synthesize}
+
+With our image example, `luminance` and `entropy` told us at least _something_ about how the picture looked. But the number of characters, words, syllables and sentences don't tell us anything about the _subject_ of an essay.  This would be like trying to compare our mountain images, using only their width and height!
+
+@QandA{
+@Q{What else could we use, to compute something about the subject of these essays?}
+}
+
+== Data Normalization
+
+=== Overview
+Students explore the importance of @vocab{data normalization}, when we organize data to follow a standard pattern.
+
+=== Launch
+@slidebreak{LaunchR}
+@right{@image{images/bag-of-colors.png}}
+When working with images, we used a tool that looked at the _frequency of colors_ in the image:
+
+@show{(contract "add-bag-cols" '("Table" "String") "Table")}
+
+The `add-bag-cols` function dropped all the information about the _order_ of colors, and instead just counted how many of each pixel appears in the image. *How could we use this with our essays?*
+
+@slidebreak{Launch-DN}
+@lesson-instruction{
+Complete the first section of @printable-exercise{natural-language-is-messy.adoc}.
+}
+
+@slidebreak{Launch-DN}
+
+Now that we have dozens of columns, we need to some help choosing which columns to use for calculating similarity!
+
+@show{(contract "bag-similarity" '("Table" "String") "Table")}
+
+This function consumes a Table and the ID of a target Row, and then _uses all the numeric columns_ to compute the cosine similarity. For example: `bag-similarity(bags, "K")` will find the cosine-similarity of every document to "K", using every column containing numbers.
+
+@lesson-instruction{
+Complete the second section of @printable-exercise{natural-language-is-messy.adoc}
+}
+
+=== Investigate
+
+@slidebreak{Investigate-DN}
+
+@QandA{
+@Q{What does a perfect score of one mean, if we're using @vocab{bag of words} models? }
+@A{Two essays use the exact same words, the exact same number of times}
+
+@Q{What does the worst-possible score of zero mean, if we're using @vocab{bag of words} models? }
+@A{Two essays that don't using any of the same words at all}
+
+@Q{Which essay was most similar?}
+@A{The elephant essay}
+
+@Q{_How_ similar was it?}
+@A{Roughly 0.8653}
+
+@Q{What about the second-most-similar essay. What was it about, and how similar was it?}
+@A{The Polar Bear essay was roughly 0.4516}
+}
+
+@slidebreak{Investigate}
+We definitely found the most similar essay, but it's a little strange that the Polar Bear essay was computed to be similar at all! And it's not just slightly similar, either, 0.45 is pretty much halfway between "exact same words, the exact same number of times" and "not using any of the same words at all".
+
+*Why do you think we're seeing similarity about such different essays?*
+
+
+@slidebreak{Launch}
+The problem is that our data is "messy":
+
+- Punctuation: `areas` and `areas.` aren't different words
+- Capitalization: `By` and `by` aren't different words
+
+This means our counts for these word are off, and that we're creating extra, meaningless dimensions!
+
+But there's another problem here, too!
+
+- Common Words: `the`, `is`, and `a` are "similar" across all the essays
+
+These are called @vocab{stopwords}", which show up in almost any sentence.  These words create many dimensions in which the essays are close together, creating "false similarity". In our example, the elephant essay was able to rise above the noise and be clearly the most similar, but in other situations we might get a lot of false positives!
+
+
+@slidebreak{Investigate-DN}
+Addressing this "messiness" is called @vocab{data normalization}. Machine Learning Engineers and Data Scientists care a lot about normalizing their data in order to cut out the irrelevant noise and focus on what matters. We've provided two normalization functions for you to experiment with:
+
+@show{(contract "lowercase" '("Table" "String") "Table")} +
+@show{(contract "remove-punct" '("Table" "String") "Table")} +
+@show{(contract "remove-stops" '("Table" "String") "Table")}
+
+All three functions consume a Table, and the name of the column being normalized (in this case, `"DOC"`). They produce an identical table with the `"DOC"` transformed.
+
+@lesson-instruction{
+- Complete @printable-exercise{natural-language-is-messy.adoc}
+}
+
+=== Synthesize
+@QandA{
+@Q{Did normalizing our data give us better results? Why do they seem "better"?}
+@A{Yes! The elephant essay is still really similar, but the others are much *less* similar}
+
+@Q{Explain why normalizing the data was important here}
+@A{Removing garbage data and common words allowed us to focus our comparison on only the words that matter, and count them properly.}
+}
+
+== Detecting Plagiarism
+
+=== Overview
+Armed with their similarity detection, students explore the how that algorithm can be used to detect plagiarism. Now that they know how it works, they consider limitations of the algorithm and when it might not be ethical for teachers to use it.
+
+=== Launch
+@slidebreak{Launch}
+
+=== Investigate
+@slidebreak{Investigate}
+
+A @vocab{training corpus} is a collection of data used to train AI/ML @vocab{models}, enabling them to learn patterns and make predictions.
+
+For a plagiarism checker, the corpus is the set of documents previously fed into the checker.
+
+@QandA{
+@Q{What sorts of documents make up the training corpus of an _effective_ plagiarism detector? List as many as you can.}
+@A{The corpus would likely include:
+  * essays written and submitted by students currently in the class
+  * essays written and submitted by students previously in the class
+  * Wikipedia articles
+  * articles on relevant topics that are available on the internet, etc.}
+}
+
+@slidebreak{Investigate}
+The @vocab{training} phase is where the enormous corpus of essays, wikipedia articles, etc is converted to a bag-of-words for each document, and stored. *Our table of bags is the model!*
+
+Suppose a teacher wants a plagiarism detector for (short) animal essays. In addition to the paragraph we've already seen about the elephant, she gathers up paragraphs describing nine other animals. Each one is turned into a bag of words and added to our model. All this work is only done _once_; it can then be used on many different student submissions.
+
+@lesson-point{Once a @vocab{model} is @vocab{trained}, the corpus can be queried as many times as we want without having to repeat any of the work done during training!}
+
+
+@slidebreak{Investigate}
+A teacher who wants to catch plagiarism for _any_ essay will likely opt for a plagiarism detector that has trained on an _extremely_ large collection of documents. Processing a large training corpus will produce a complex, multi-dimensional @vocab{model}. Every single additional word will add another dimension to the space.
+
+@QandA{
+@Q{Let's say your teacher asks all 20 students in her class to write a 500-word essay. She plans to feed those 20 essays into a plagiarism detector to use as the training corpus, allowing her to detect if two students submitted essays that were a little too similar. *About* how many dimensions will there be in the model?}
+
+@A{Students should provide a wide range of estimates.}
+@A{The largest possible estimate would be 10,000 dimensions (20 essays multiplied by 500 words) --but it is not a good estimate, because we commonly repeat and reuse words like "the", "and", "a", and so on.}
+
+@A{Before making an estimate, students might have clarifying questions, like:
+  * Did all of the students write about the same topic?
+  * How sophisticated is the student writing?
+  * Did all students actually write 500 words?
+}
+
+@A{A reasonable prediction would probably be that there would be at least a few thousand dimensions in the model.}
+}
+
+@slidebreak{Investigate}
+
+@lesson-instruction{
+Complete @printable-exercise{matching-human-judgment.adoc}.}
+
+
+@QandA{
+
+@Q{What strategies did you use to complete the matching activity? Were any of the scenarios especially challenging to match?}
+}
+
+@lesson-instruction{
+Complete @printable-exercise{plagiarism-detection.adoc}
+}
+
+=== Synthesize
+@slidebreak{Synthesize}
+
+@QandA{
+@Q{Why is it less ethical to use a plagiarism detector for one situation, rather than another?}
+@A{Students' responses will vary...something about dimensionality and false-positives}
+}
+}
