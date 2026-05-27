@@ -249,6 +249,9 @@ The "correct scores" are shown in the diagonal, running from top-left to bottom-
 === Synthesize
 @slidebreak{Synthesize}
 @QandA{
+@Q{Will a decision tree always have the same number of leaf nodes as there were rows in the training dataset? Why or why not?}
+@A{No. Generally multiple rows of a training dataset will have share attributes: multiple dogs will swim, multiple animals are mammals, etc. The splitting algorithm works _by attribute_, and there's almost always a maximum depth that a tree is allowed to go. So unless each row has a unique combination of attributes _and_ the tree can infinitely deeply The training dataset we saw in this lesson section contained multiple cats, dogs, etc.}
+
 @Q{Can a decision tree have the _fewer_ leaf nodes than there are unique categories in the training dataset? Why or why not?}
 @A{Yes. A decision tree may not be deep enough to correctly classify every category - and in some cases, there may not *be* a way to correctly classify every category!}
 
