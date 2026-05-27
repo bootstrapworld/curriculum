@@ -174,8 +174,8 @@ The other columns didn't vary as much at all! Dogs and cats are all `mammals` no
 @A{The data in each column are the answers to those questions which become the arrow labels of the decision tree ("yes" and "no", for this dataset).}
 @A{The output categories from the table are the leaf nodes in the decision tree.}
 
-@Q{Will a decision tree always have the same number of leaf nodes as there were rows in the training dataset? Why or why not?}
-@A{No. Generally multiple rows of a training dataset will have the same prediction. The training dataset we saw in this lesson section contained multiple knives, for example.}
+@Q{Will a decision tree typically have the same number of leaf nodes as there were rows in the training dataset? Why or why not?}
+@A{No. The splitting algorithm works _by attribute_, and, generally multiple rows of a training dataset will share attributes: multiple dogs will swim, multiple animals are mammals, etc. So, unless each row has a unique combination of attributes _and_ the tree can go infinitely deeply the decision tree will have fewer leaves than there are rows in the training dataset.}
 
 @Q{Can a decision tree have _fewer_ leaf nodes than there are unique categories in the training dataset? Why or why not?}
 @A{Yes. A decision tree may not be deep enough to correctly classify every category - and in some cases, there may not *be* a way to correctly classify every category!}
@@ -283,7 +283,8 @@ Make a confusion matrix for our original `tail-classifier` and be prepared to sh
 
 @slidebreak{Investigate}
 
-[.data-table.highlight-diagonal, cols="6a,^7a,^7a,^7a,^7a,^7a", options="header"]
+@indented{
+[.data-table.highlight-diagonal, cols="6a,^7a,^7a,^7a,^7a,^7a", options="header", ]
 |===
 |actual-species|predicted-cat|predicted-dog|predicted-lizard|predicted-snail|predicted-tarantula
 |"cat"         |      1      |      0      |       0        |       0       |       0
@@ -292,6 +293,9 @@ Make a confusion matrix for our original `tail-classifier` and be prepared to sh
 |"snail"       |      0      |      0      |       0        |       1       |       0
 |"tarantula"   |      0      |      0      |       0        |       1       |       0
 |===
+}
+
+The "correct scores" are shown in the diagonal, running from top-left to bottom-right. *Note that we use 0-1, instead of 0%-100%!* "80%" would show up as `0.8`.
 
 @QandA{
 @Q{What are some things we can infer from this confusion matrix?}
