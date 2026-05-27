@@ -114,8 +114,6 @@ We're already consuming the entire row `r`, so we already have access to `age` a
 @Q{Why did our multiple-regression function have *two* slopes?}
 @A{We were defining a *plane*. A flat sheet of metal only tip along two different axes!}
 
-@Q{Why did adding `legs` improve our @math{S}-value?}
-@A{`legs` helps us differentiate between snails, tarantulas, and  the other species. And since species influences adoption time, this helps us "sort-of regress" on `species`}
 }
 
 == Multiple Regression in Pyret
@@ -170,13 +168,7 @@ For example: `mr-code(animals-table, [list: "age",  "pounds"], "weeks")`
 }
 
 === Synthesize
-@QandA{
-@Q{Why did our multiple-regression function have *two* slopes?}
-@A{We were defining a *plane*. A flat sheet of metal only tip along two different axes!}
-
-@Q{Why did adding `legs` improve our @math{S}-value?}
-@A{`legs` helps us differentiate between snails, tarantulas, and  the other species. And since species influences adoption time, this helps us "sort-of regress" on `species`}
-}
+TODO
 
 == Self-Driving Cars @duration{15 minutes}
 
@@ -232,22 +224,22 @@ Here's what ALVINN's training entailed:
 - The supervisor demonstrates the learning process.
 - The input-output pairs form the @vocab{training corpus}.
 
-(2) Every two seconds, ALVINN...
+(2) 10x each second, ALVINN...
 
-- digitized an image of the road ahead
+- digitized an image of the road ahead, along with a list of distances forming a "depth map" of potential obstacles
 - recorded the steering direction chosen by the driver
 
 @slidebreak{Launch}
 
-(3) ALVINN's training data can be represented as an input-output table, with training images (reduced in resolution to 30x32 pixels) and obstacle distances as inputs, and the associated corresponding "correct" steering angles as outputs.
+(3) ALVINN's training data can be represented as an input-output table, with training images (reduced in resolution to 30x32 pixels) and obstacle distances as inputs, and the associated corresponding "correct" steering angles as outputs. (NOTE: The depth map has been simplified to a single number)
 
 @indented{
 [cols="^.^1,^.^1,^.^1", stripes="none", options="header"]
 |===
-| `road-image`                      	| `obstacle-distance` (ft)| `steering-angle`
-| @image{images/road1.png, 100} 	|		21				|   0.02º
-| @image{images/road2.png, 100} 	|		49				| -95.20º
-| @image{images/road3.png, 100} 	|		37				| 135.43º
+| `road-image`                      | `obstacle-distance` (ft)	| `steering-angle`
+| @image{images/road1.png, 100} 	|			21				|   0.02º
+| @image{images/road2.png, 100} 	|			49				| -95.20º
+| @image{images/road3.png, 100} 	|			37				| 135.43º
 |===
 
 @teacher{
@@ -257,7 +249,7 @@ Note: These images were selected for illustrative purposes. The 30x32 pixel imag
 
 @slidebreak{Launch}
 
-(4) Using the set of inputs and outputs, ALVINN generates a @vocab{function} for predicting steering angles from the images and obstacle distances:
+(4) Using the dataset of inputs and outputs, ALVINN generates a @vocab{function} for predicting steering angles from the images and obstacle distances:
 
 @indented{
 `mr-code(training-data, [list: "road-image", "obstacle-distance"], "steering-angle")`
@@ -294,9 +286,9 @@ If you want your students to see ALVINN in action, now is a good time to view @l
 
 In discovering the details of ALVINN's @vocab{supervised learning}, you may have noticed three big events:
 
-- Demonstration of the learning process
-- Function abstraction -- the machine learning algorithm finds a function that generalizes (hopefully well!) to new, unseen data
-- Use the function! Apply it on new data.
+- Human-tagged data is recorded, demonstrating the knowledge to be learned
+- The machine learning algorithm finds a *function* that generalizes (hopefully well!) from that data to new, unseen data
+- The function is applied to new data.
 
 As you explore other examples of @vocab{supervised learning} in this curriculum, you will notice that -- regardless of the context -- all three phases occur. 
 

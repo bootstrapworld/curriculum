@@ -349,6 +349,26 @@ The result is a table of all your documents, in descending order of similarity t
 
 === Synthesize
 @slidebreak{Synthesize}
+You may recall the steps of @vocab{supervised learning} from a @lesson-link{regression-models-multiple, previous lesson}:
+
+- Human-tagged data is recorded, demonstrating the knowledge to be learned
+- The machine learning algorithm finds a *function* that generalizes (hopefully well!) from that data to new, unseen data
+- The function is applied to new data.
+
+ALVINN was given a table of inputs (images and depth maps), each row tagged with how a human turned the steering wheel. Then it found a function that would predict the steering wheel angle from new inputs, and used the function by applying it to new roads.
+
+@QandA{
+@Q{In our image search example, what is the human-tagged data for the computer?}
+@A{The input table tagged with likes or dislikes, or words}
+
+@Q{What algorithm is being used to find images?}
+@A{Some kind of angle measure for similarity, followed by sorting}
+
+@Q{Where is the generalization?}
+@A{A new, un-tagged image added to database is still being compared to the pre-computed centroids}
+}
+
+@slidebreak{Synthesize}
 @QandA{
 @Q{When you tell Spotify that you like a song, what computations happen on Spotify's servers?}
 @A{With a new list of "liked songs", Spotify recalculates my "liked" centroid}
@@ -378,11 +398,11 @@ The result is a table of all your documents, in descending order of similarity t
 
 @slidebreak{Synthesize}
 
-Supervised learning is a large part of what makes Machine Learning models feel like they "understand" humans. When we type in a sentence on Google Images, it feels like somehow the search engine _understood_ what we wanted! But in reality, it's another Data Driven Algorithm cranking through oceans of tagged and untagged data.
+Supervised learning is a large part of what makes Machine Learning models feel like they "understand" humans. When we type in a sentence on Google Images, it feels like somehow the search engine _understood_ what we wanted! But in reality, it's another Data Driven Algorithm cranking through oceans of tagged and un-tagged data.
 
 But this comes at a cost: *someone has to tag millions of images!*
 
-In some cases that's US, clicking on images of busses in order to prove we're human. Those images are real images from a database where the similarity wasn't strong enough to be confident about whether they are or aren't a bus. By asking us to tag them, we are helping to train algorithm
+In some cases that's US, clicking on images of buses in order to prove we're human. Those images are real images from a database where the similarity wasn't strong enough to be confident about whether they are or aren't a bus. By asking us to tag them, we are helping to train algorithm
 
 @slidebreak{Synthesize}
 But in other cases it's paid contractors, often in developing countries where tech companies can pay them a few dollars per day to stare at tens of thousands of images and tag them. But seeing tens of thousands of violent or offensive images has real impacts on mental health!
