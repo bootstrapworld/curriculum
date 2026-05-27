@@ -83,7 +83,7 @@ The `build-tree` function takes *four arguments* in its Domain:
 @slidebreak{Investigate}
 
 @QandA{
-@Q{When you evaluated `dt-code(tree1)`, did you recognize the code that came back?}
+@Q{When you evaluated `dt-code(tree-cat1)`, did you recognize the code that came back?}
 @A{It's the same function as `tail-classifier`, which was already in our Definitions Area}
 
 @Q{What did Pyret do with the quantitative column (`"pounds"`)?}
@@ -118,22 +118,6 @@ Complete the second section of @printable-exercise{computing-decision-trees.adoc
 - Turn to @printable-exercise{comparing-decision-trees.adoc} and complete the first section.
 }
 
-`tree3` and `tree4` both did a _lot_ better at predicting the species of our training dataset!
-
-@QandA{
-@Q{Which animals did `tree3` get wrong?}
-@A{Shadestar, Charlotte, and Webs}
-
-@Q{Why did it get Shadestar wrong?}
-@A{Looking only at the three columns `tree3` was trained on, Shadestar is indistinguishable from the dogs!}
-
-@Q{Why did it get Charlotte and Webs wrong?}
-@A{Looking only at the three columns `tree3` was trained on, the tarantulas are indistinguishable from the snails!}
-
-@Q{Why were `tree3` and `tree4` identical?}
-@A{Just because Pyret _can_ go deeper, doesn't mean it _should_. There's no new information to be gained by adding more levels to the tree, since we already know all the Boolean answers after the 3rd level}
-}
-
 @slidebreak{Investigate}
 
 Notice that `tree-quant6` works just as well as `tree-any4`, even though it only has one column to train on!
@@ -145,17 +129,14 @@ As is common for quantitative columns, there's more variability in `pounds` than
 }
 
 @slidebreak{Investigate}
-When given another dataset to classify, `tree3` is outscoring `tree6`! How is this possible?
+
+When given another dataset to classify, `tree-any4` is outscoring `tree-quant6`!
 
 @QandA{
-@Q{Both of them mis-classified Bella the rabbit. Is this a problem?}
-@A{No! The training dataset didn't have any rabbits, so there was no way any of our classifiers would have worked for her}
-
-@Q{Why did `tree6` do so poorly?}
+@Q{Why did `tree-quant6` do so poorly?}
 @A{Let students share their theories}
 }
 
-@slidebreak{Investigate}
 [cols="^1a, ^1a", frame="none", options="header"]
 |===
 | Training Dataset
@@ -165,9 +146,9 @@ When given another dataset to classify, `tree3` is outscoring `tree6`! How is th
 | @image{images/dot-plot-pounds-testing.png}
 |===
 
-This is a classic example of what ML engineers call @vocab{over-fitting}. The more dependent a classifier is on a specific attribute, the more sensitive it is to variations in that attribute between populations. In this case, `tree6` was _totally dependent_ on `pounds`, whose distribution is very different in the testing dataset
+This is a classic example of what ML engineers call @vocab{over-fitting}. The more dependent a classifier is on a specific attribute, the more sensitive it is to variations in that attribute between populations. In this case, `tree-quant6` was _totally dependent_ on `pounds`, whose distribution is very different in the `testing` dataset.
 
-This would be like studying for a test by memorizing the answers to a previous test. You've learned out to ace _that specific test_, but not enough to actually do well on a different one.
+This would be like studying for a test by memorizing the answers to a previous test. You've learned how to ace _that specific test_, but not enough to actually do well on a different one.
 
 @slidebreak{Investigate}
 @ifslide{
@@ -180,14 +161,27 @@ This would be like studying for a test by memorizing the answers to a previous t
 | @image{images/dot-plot-pounds-testing.png}
 |===
 }
-In Machine Learning, over-fitting happens when our decision tree it tries so hard to find a pattern in a specific set of data that it begins to "memorize" the details and random noise instead of learning the actual rule. That's exactly what happened with the `pounds` column here.
+
+In Machine Learning, over-fitting happens when our decision tree tries so hard to find a pattern in a specific set of data that it begins to "memorize" the details and random noise instead of learning the actual rule. That's exactly what happened with the `pounds` column here.
 
 The other columns didn't vary as much at all! Dogs and cats are all `mammals` no matter what. Most dogs like to `swim`. And most dogs, cats, and lizards all have a `tail`. These attributes are more stable across samples, whereas `pounds` can vary widely.
 
 === Synthesize
 
+@QandA{
+@Q{Explain how the table for the training dataset is related to the decision tree.}
+@A{The column headers from the table are the questions that will get asked in the decision nodes of the decision tree.}
+@A{The data in each column are the answers to those questions which become the arrow labels of the decision tree ("yes" and "no", for this dataset).}
+@A{The output categories from the table are the leaf nodes in the decision tree.}
 
-== Report Cards for Classifiers
+@Q{Will a decision tree always have the same number of leaf nodes as there were rows in the training dataset? Why or why not?}
+@A{No. Generally multiple rows of a training dataset will have the same prediction. The training dataset we saw in this lesson section contained multiple knives, for example.}
+
+@Q{Can a decision tree have _fewer_ leaf nodes than there are unique categories in the training dataset? Why or why not?}
+@A{Yes. A decision tree may not be deep enough to correctly classify every category - and in some cases, there may not *be* a way to correctly classify every category!}
+}
+
+== Is the Classifier Good?
 
 @objective{}
 
@@ -198,25 +192,94 @@ Students learn about confusion matrices, and use Pyret to generate them from cla
 @slidebreak{Launch}
 How do we know if a @vocab{decision tree} makes a good @vocab{classifier} or not? Using the `classify` function only tells us how many we got right, and how many we got wrong.
 
-It's not enough to know that a classifier messed up 6 times! Data Scientists and Machine Language Engineers want a full, detailed "classifier report card" showing _which mistake_ it made!
+It's not enough to know that a classifier messed up 6 times! Data Scientists and Machine Language Engineers want to know what percentage of the time the classifier did what it was supposed to and _which mistakes_ it made!
 
 @QandA{
-@Q{Out of the 5 cats in this dataset, how many did your best classifier classify _correctly_?}
+@Q{Out of the 5 cats in this dataset, how many did our `tail-classifier` classify _correctly_?}
+@A{5}
+
 @Q{Roughly what *percentage* of the cats is that?}
-@Q{Out of the 2 snails in this dataset, how many did your best classifier classify _correctly_?}
+@A{100%}
+
+@Q{Out of the 2 tarnatulas in this dataset, how many did our `tail-classifier` classify _correctly_?}
+@A{0}
+
 @Q{Roughly what *percentage* of the snails is that?}
+@A{0%}
 }
 
-@slidebreak{Investigate}
-This report card is called a @vocab{Confusion Matrix}. A confusion matrix typically shows _percentages:_ 4-out-of-5 cats becomes 80%, 2-out-of-2 lizards becomes 100%, and so on.
+@slidebreak{Launch}
 
-We've created a function that does just that! Here's the contract:
+The reports Data Scientists use to understand how "good" a classifier is are called @vocab{confusion matrices}. A @vocab{confusion matrix} typically shows _ratios:_ 
+
+- 4-out-of-5 cats becomes 80% or 0.8
+- 0-out-of-4 dogs becomes 0% or 0
+- 2-out-of-2 lizards becomes 100% or 1 
+
+...and so on.
+
+@lesson-instruction{
+- Turn to the first section of @printable-exercise{confusion-matrix.adoc}.
+- With your partner, follow the directions to create a confusion matrix for the `swims-classifier`.
+}
+
+@slidebreak{Launch}
+
+@center{@image{images/swims-confusion.png,600}}
+
+@QandA{
+@Q{Which species is the `swims-classifier` most accurate at predicting?}
+@A{dogs}
+
+@Q{Which species is the `swims-classifier` least accurate at predicting?}
+@A{snails, lizards and tarantulas}
+
+@Q{What else can we learn from the confusion matrix?}
+@A{All of the snails and tarantulas are getting misclassified as cats.}
+@A{Half of the lizards are getting misclassified as cats and the other half are getting misclassified as dogs.}
+@A{20% of the cats are getting misclassified as dogs.}
+}
+
+=== Investigate
+@slidebreak{Investigate}
+
+Pyret has a function that will make a @vocab{confusion matrix} for you! Here's the contract:
 
 @show{(contract "confusion-matrix" '("Table" "String" "(Row -> String)") "Table")}
 
-Try it out with the original `tail-classifier`:
+@slidebreak{Investigate}
 
-@indented{`confusion-matrix(training, "species", tail-classifier)`}
+@lesson-instruction{
+- Make sure you added the `swims-classifier` to your Definitions Area and clicked "Run".
+
+```
+fun swims-classifier(r):
+  if r["swims"] == true:
+    "dog"
+  else: 
+    "cat"
+  end
+end
+```
+
+- Test out the confusion matrix for our `swims-classifier` using the following code:
+
+@indented{`confusion-matrix(training, "species", swims-classifier)`}
+- Compare the confusion matrix you made to the one that Pyret made. If they don't match, work with your partner to figure out why.
+- Complete @printable-exercise{confusion-matrix.adoc}.
+}
+
+@slidebreak{Investigate}
+
+@QandA{
+@Q{How did the `swims-classifier` performance with the `testing` table compare to its performance with the `training` table.}
+@A{It did impressively well, but misclassified all of the rabbits as dogs.}
+@A{We wouldn't expect it to correctly classify the species of an animal that it wasn't trained on.}
+}
+
+@lesson-instruction{
+Make a confusion matrix for our original `tail-classifier` and be prepared to share what you learn from it.
+}
 
 @slidebreak{Investigate}
 
@@ -230,47 +293,42 @@ Try it out with the original `tail-classifier`:
 |"tarantula"   |      0      |      0      |       0        |       1       |       0
 |===
 
-The "correct scores" are shown in the diagonal, running from top-left to bottom-right.
-
 @QandA{
 @Q{What are some things we can infer from this confusion matrix?}
 @A{Our classifier got 100% of the cats and snails right}
 @A{It mis-classified all of our dogs as cats}
 @A{It mis-classified all of our lizards as cats}
 @A{It mis-classified all of our tarantulas as snails}
-@Q{What would the matrix for the *best possible classifier* look like?}
-@A{1s along the diagonal, showing 100% of each category was classified correctly. 0s everywhere else, showing no mis-classifications.}
-}
 
-@lesson-instruction{
-- TODO: add a workbook page where students fill out a confusion matrix for one of their classifiers, using the testing dataset
+@Q{What would the matrix for the *best possible classifier* look like?}
+@A{1s along the diagonal, showing: 
+  * 100% of the cats were predicted to be cats
+  * 100% of the dogs were predicted to be dogs
+  * 100% of the lizards were predicted to be lizards
+  * and so on, showing 100% of each category was classified correctly.} 
+@A{0s everywhere else, showing no mis-classifications.}
 }
 
 === Synthesize
 @slidebreak{Synthesize}
+
 @QandA{
-@Q{Will a decision tree always have the same number of leaf nodes as there were rows in the training dataset? Why or why not?}
-@A{No. Generally multiple rows of a training dataset will have the same prediction. The training dataset we saw in this lesson section contained multiple knives, for example.}
+@Q{Why doesn't a decision tree that is 100% accurate for the training data always make good predictions for testing data?}
+@A{If a classifier is overfitted to the training data, it might not make good predictions about related but different data.}
+@A{Models based on quantitative columns are particularly susceptible to overfitting.}
 
-@Q{Can a decision tree have the _fewer_ leaf nodes than there are unique categories in the training dataset? Why or why not?}
-@A{Yes. A decision tree may not be deep enough to correctly classify every category - and in some cases, there may not *be* a way to correctly classify every category!}
-
-@Q{Explain what the decision tree and table for the training dataset have to do with one another.}
-@A{The column headers from the table are the questions that will get asked in the decision nodes of the decision tree.}
-@A{The data in each column are the answers to those questions which become the arrow labels of the decision tree ("yes" and "no", for this dataset).}
-@A{The output categories from the table are the leaf nodes in the decision tree.}
+@Q{In your own words, describe what a confusion matrix is.}  
 }
-
 
 == Optional: Classifying Songs
 
 === Overview
-Students are given a training dataset and a testing dataset, both drawn from the Spotify database. After train classifiers on the first data, they'll see how well they work on the second. Students will explore the problem of _over-fitting_, and return to dot-plots to explore natural variation between distributions in the training dataset v. the testing one.
+Students are given a training dataset and a testing dataset, both drawn from the Spotify database. After training classifiers on the training data, they'll see how well they work on the testing data. Students will explore the problem of _over-fitting_, and return to dot-plots to explore natural variation between distributions in the two datasets.
 
 === Launch
 @slidebreak{Launch}
 
-How can you tell the difference between an R-and-B, Rock-and-Roll, or Country song?
+How can you tell the difference between R&B songs, Rock'n'Roll songs and Country songs?
 
 @teacher{Let kids offer up a lot of suggestions!}
 

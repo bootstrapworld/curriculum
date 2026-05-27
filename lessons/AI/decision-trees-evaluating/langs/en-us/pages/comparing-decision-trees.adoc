@@ -43,7 +43,7 @@ To complete this page, you will need to refer to @printable-exercise{computing-d
 - `Classify` each of the Decisions trees using the `training` dataset, e.g. `classify(training, "species", tree-cat1)`, and complete the *number correct for training dataset* column. 
 
 @n What do you notice? What do you wonder? @fitb{}{@ifsoln{`tree-quant1` and `tree-any1` both had 8 correct.}} +
-@blanklines{2}{@ifsoln{How did the algorithm know which to choose? Pyret's algorithm had a tree that was correct within 4 splits. Using just the pounds column produced almost perfect predictions by the fifth level. @hspace{2em} `tree-any4` and `tree-quant6` both classified all of the animals' species correctly.}}
+@blanklines{2}{@ifsoln{How did the algorithm know which to choose? @hspace{2em} Pyret's algorithm came up with a tree that was correct within 4 splits. Using just the pounds column produced perfect predictions by the sixth level. @hspace{2em} `tree-any4` and `tree-quant6` both classified all of the animals' species correctly.}}
 
 @n Did allowing for more levels in the tree always make the tree better? @fitb{}{@ifsoln{No. Sometimes Pyret didn't use all of the available levels.}}  
 
@@ -55,9 +55,9 @@ We built our classifiers using the `training` dataset. Let's see how well they d
 
 @n `Classify` each of the Decisions trees using the `testing` dataset, e.g. `classify(testing, "species", tree-cat1)`, and complete the *number correct for training dataset* column. 
 
-@n Which two models did the most job with our `training` dataset? @fitb{8em}{@ifsoln{`tree-any4`}} and @fitb{8em}{@ifsoln{`tree-quant6`}}
+@n Which two models did the besst job of predicting species for our `training` dataset? @fitb{8em}{@ifsoln{`tree-any4`}} and @fitb{8em}{@ifsoln{`tree-quant6`}}
 
-@n How did their success rates compare with our `testing` dataset? @fitb{}{@ifsoln{} +
+@n How did their success rates compare with our `testing` dataset? @fitb{}{@ifsoln{}} +
 @fitb{}{@ifsoln{`tree-any4` got most of them correct, but `tree-quant6` did a terrible job, only predicting 1/3 of the animals' species correctly.}}
 
 @n Look carefully at the number correct for our `tree-quant` decision trees built on the pounds column as the number of allowable levels increases. What do you notice? @fitb{}{@ifsoln{Eventually the trees with more levels do a worse job of making predictions!}}
