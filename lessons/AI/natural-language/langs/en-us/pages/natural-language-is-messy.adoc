@@ -2,7 +2,6 @@
 
 @lesson-instruction{For this page, you'll need @starter-file{ai-text} open on your computer}.
 
-
 == Adding the Bag
 @indented{
 @show{(contract "add-bag-cols" '("Table" "String") "Table")}
@@ -11,8 +10,7 @@
 @n In the Definitions Area, define a new table called `bags`, which is the result of applying `add-bag-cols` to the original `essays` table. Click "Run", and evaluate `bags` in the Interactions Area.
 
 @n Slowly scroll the table to the right. Write down at least three observations in the space below?
-@blanklines{4}{
-}
+@blanklines{3}{}
 
 @n When comparing essays, are there are any words that don't make sense to count? @fitb{}{}
 
@@ -29,7 +27,7 @@
 @fitb{}{@ifsoln{*All* essays use common words a lot! That doesn't help us identify the important words that make two essays similar or different}}
 
 == Computing Similarity
-@n Use `bag-similarity` to find the closest essay to `"K"`. Which one is it? @fitb{}{@ifsoln{D}} Roughly how similar was it? @fitb{}{@ifsoln{~0.8653}}
+@n Use `all-cols-similarity` to find the closest essay to `"K"`. Which one is it? @fitb{}{@ifsoln{D}} Roughly how similar was it? @fitb{}{@ifsoln{~0.8653}}
 
 @n What was the _second-closest_ essay to `"K"`? @fitb{}{@ifsoln{H}} Roughly how similar was it? @fitb{}{@ifsoln{~0.4516}}
 
@@ -37,15 +35,15 @@
 
 == Data Normalization
 
-
 @indented{
-@show{(contract "lowercase" '("Table" "String") "Table")} +
-@show{(contract "remove-punct" '("Table" "String") "Table")} +
-@show{(contract "remove-stops" '("Table" "String") "Table")}
+@show{(contract "lowercase" '("String") "String")} +
+@show{(contract "remove-punct" '("String") "String")} +
+@show{(contract "remove-stops" '("String") "String")}
 }
 
-@n In the Interactions Area, evaluate `lowercase(essays, "DOC")`. What do you get back? @fitb{}{@ifsoln{the same table, but now "DOC" is lowercase}}
+@n In the Interactions Area, evaluate `lowercase(badger)`. After you've experimented with the other functions, write the code that will remove punctuation _and_ put everything in lowercase: @fitb{}{@ifsoln{`remove-punct(lowercase(badger))`}}
 
-@n What code will create a table with punctuation removed _and_ everything in lowercase? (HINT: draw a Circle of Evaluation on scrap paper!) @fitb{}{@ifsoln{`remove-punct(lowercase(essays, "DOC"), "DOC")`}}
+@n In the Definitions Area add `essays-norm = normalize-text-table(essays, "DOC")`. What did happened to the `"DOC"` strings? @fitb{}{@ifsoln{they were all normalized!}}
 
-@n In the Definitions Area, define `essays-norm` to be a table where all three normalizations have been applied. Does `bag-similarity` produce better results with your normalized table? @fitb{}{}
+@n Use `add-bag-cols` with essays-norm to create `bags2`. Does `all-cols-similarity` do a better job with this table? Explain. +
+@fitb{}{@ifsoln{Definitely. The *real* similarity of documents D and K is still recognized, and the other documents aren't even close!}}

@@ -128,14 +128,15 @@ Students explore the importance of @vocab{data normalization}, when we organize 
 
 === Launch
 @slidebreak{LaunchR}
-@right{@image{images/bag-of-colors.png}}
+@right{@image{images/bag-of-colors.png, 250}}
 When working with images, we used a tool that looked at the _frequency of colors_ in the image:
 
 @show{(contract "add-bag-cols" '("Table" "String") "Table")}
 
-The `add-bag-cols` function dropped all the information about the _order_ of colors, and instead just counted how many of each pixel appears in the image. *How could we use this with our essays?*
+The `add-bag-cols` function dropped all the information about the _order_ of colors, and instead just counted how many of each pixel appears in the image.
 
-@slidebreak{Launch-DN}
+*How could we use this with our essays?*
+
 @lesson-instruction{
 Complete the first section of @printable-exercise{natural-language-is-messy.adoc}.
 }
@@ -144,9 +145,11 @@ Complete the first section of @printable-exercise{natural-language-is-messy.adoc
 
 Now that we have dozens of columns, we need to some help choosing which columns to use for calculating similarity!
 
-@show{(contract "bag-similarity" '("Table" "String") "Table")}
+@show{(contract "all-cols-similarity" '("Table" "String") "Table")}
 
-This function consumes a Table and the ID of a target Row, and then _uses all the numeric columns_ to compute the cosine similarity. For example: `bag-similarity(bags, "K")` will find the cosine-similarity of every document to "K", using every column containing numbers.
+This function consumes a Table and the ID of a target Row, and then _uses all the numeric columns_ to compute the cosine similarity. For example: `all-cols-similarity(bags, "K")` will find the cosine-similarity of every document to "K", using every column containing numbers.
+
+Don't forget: with cosine similarity, the scores go from 0-1 (1 being a "perfect match" between two bags of words).
 
 @lesson-instruction{
 Complete the second section of @printable-exercise{natural-language-is-messy.adoc}
@@ -157,10 +160,10 @@ Complete the second section of @printable-exercise{natural-language-is-messy.ado
 @slidebreak{Investigate-DN}
 
 @QandA{
-@Q{What does a perfect score of one mean, if we're using @vocab{bag of words} models? }
+@Q{What does a highest-possible score of 1 tell us, if we're using @vocab{bag of words} models? }
 @A{Two essays use the exact same words, the exact same number of times}
 
-@Q{What does the worst-possible score of zero mean, if we're using @vocab{bag of words} models? }
+@Q{What does the lowest-possible score of 0 tell us, if we're using @vocab{bag of words} models? }
 @A{Two essays that don't using any of the same words at all}
 
 @Q{Which essay was most similar?}
@@ -191,17 +194,16 @@ But there's another problem here, too!
 
 - Common Words: `the`, `is`, and `a` are "similar" across all the essays
 
-These are called @vocab{stopwords}", which show up in almost any sentence.  These words create many dimensions in which the essays are close together, creating "false similarity". In our example, the elephant essay was able to rise above the noise and be clearly the most similar, but in other situations we might get a lot of false positives!
+These are called @vocab{stopwords}, and they show up in almost any sentence.  These words create many dimensions in which the essays are close together, raising the similarity score between two essays simply because they're both English! In our example, the elephant essay was able to rise above the noise and was obviously the most similar, but in other situations we might get a lot of false positives!
 
 
 @slidebreak{Investigate-DN}
-Addressing this "messiness" is called @vocab{data normalization}. Machine Learning Engineers and Data Scientists care a lot about normalizing their data in order to cut out the irrelevant noise and focus on what matters. We've provided two normalization functions for you to experiment with:
+Addressing this "messiness" is called @vocab{data normalization}. Machine Learning Engineers and Data Scientists care a lot about normalizing their data in order to cut out the irrelevant noise and focus on what matters. We've provided three normalization functions for you to experiment with:
 
-@show{(contract "lowercase" '("Table" "String") "Table")} +
-@show{(contract "remove-punct" '("Table" "String") "Table")} +
-@show{(contract "remove-stops" '("Table" "String") "Table")}
+@show{(contract "lowercase" '("String") "String")} +
+@show{(contract "remove-punct" '("String") "String")} +
+@show{(contract "remove-stops" '("String") "String")}
 
-All three functions consume a Table, and the name of the column being normalized (in this case, `"DOC"`). They produce an identical table with the `"DOC"` transformed.
 
 @lesson-instruction{
 - Complete @printable-exercise{natural-language-is-messy.adoc}
@@ -241,7 +243,7 @@ For a plagiarism checker, the corpus is the set of documents previously fed into
 }
 
 @slidebreak{Investigate}
-The @vocab{training} phase is where the enormous corpus of essays, wikipedia articles, etc is converted to a bag-of-words for each document, and stored. *Our table of bags is the model!*
+The @vocab{training} phase is where the enormous corpus of essays, wikipedia articles, etc is converted to a bag-of-words for each document, and stored. *Our `bags` table is the model!*
 
 Suppose a teacher wants a plagiarism detector for (short) animal essays. In addition to the paragraph we've already seen about the elephant, she gathers up paragraphs describing nine other animals. Each one is turned into a bag of words and added to our model. All this work is only done _once_; it can then be used on many different student submissions.
 
@@ -249,7 +251,7 @@ Suppose a teacher wants a plagiarism detector for (short) animal essays. In addi
 
 
 @slidebreak{Investigate}
-A teacher who wants to catch plagiarism for _any_ essay will likely opt for a plagiarism detector that has trained on an _extremely_ large collection of documents. Processing a large training corpus will produce a complex, multi-dimensional @vocab{model}. Every single additional word will add another dimension to the space.
+A teacher who wants to catch plagiarism for _any_ essay will want a trained model that was given an _extremely_ large collection of documents. Processing a large training corpus will produce a complex, multi-dimensional @vocab{model}, with every unique word adding another dimension to the space.
 
 @QandA{
 @Q{Let's say your teacher asks all 20 students in her class to write a 500-word essay. She plans to feed those 20 essays into a plagiarism detector to use as the training corpus, allowing her to detect if two students submitted essays that were a little too similar. *About* how many dimensions will there be in the model?}
@@ -266,26 +268,20 @@ A teacher who wants to catch plagiarism for _any_ essay will likely opt for a pl
 @A{A reasonable prediction would probably be that there would be at least a few thousand dimensions in the model.}
 }
 
-@slidebreak{Investigate}
-
 @lesson-instruction{
 Complete @printable-exercise{matching-human-judgment.adoc}.}
-
-
-@QandA{
-
-@Q{What strategies did you use to complete the matching activity? Were any of the scenarios especially challenging to match?}
-}
-
-@lesson-instruction{
-Complete @printable-exercise{plagiarism-detection.adoc}
-}
 
 === Synthesize
 @slidebreak{Synthesize}
 
 @QandA{
-@Q{Why is it less ethical to use a plagiarism detector for one situation, rather than another?}
-@A{Students' responses will vary...something about dimensionality and false-positives}
+@Q{What strategies did you use to complete the matching activity? Were any of the scenarios especially challenging to match?}
+
+- In Class A, 3rd graders are asked to write 1-paragraph essays about zebras
+- In Class B, high school freshmen are asked to write a 3-page paper about their favorite TV show
+
+@Q{Is it *equally ethical* for the teachers in both classes to use plagiarism detectors with their students' work? Why or why not?}
+@A{Definitely not!}
+@A{3rd graders have smaller vocabularies, if all the essays are about zebras the number of unique words will be small (they'll all use "Zebra", "Stripes", and "Africa", for example). And being just one paragraph long, there's not a ton of room for the frequency of words to differ! It's very likely there will be false positives in Class A, and a plagiarism detector is just not appropriate.}
 }
 }
