@@ -227,9 +227,6 @@
 (define *opt-printable-exercise-links* '())
 (define *additional-exercises* '())
 (define *handout-exercise-links* '())
-(define *starter-file-links* '())
-(define *opt-starter-file-links* '())
-(define *opt-project-links* '())
 (define *project-lessons* '())
 
 (define *images-hash-list* '())
@@ -1234,37 +1231,6 @@
   (display "\n\n" o)
   )
 
-(define (link-to-opt-projects o)
-  ; (printf "doing link-to-opt-projects\n")
-  (let ([lessons (read-data-file
-                   (format "distribution/~a/courses/~a/lesson-order.txt"
-                           *natlang* *target-pathway*))]
-        [projects-title-done? #f])
-    (for ([lesson lessons])
-      (let ([lesson-opt-links (read-data-file
-                                (format "distribution/~a/lessons/~a/.cached/.index-opt-proj.rkt.kp"
-                                        *natlang* lesson)
-                                #:mode 'forms)])
-        ; (printf "lesson-opt-links for ~s is ~s\n" lesson lesson-opt-links)
-        (for ([x lesson-opt-links])
-          (let* ([proj-link (first x)]
-                 [proj-desc proj-link])
-            (set! proj-desc (regexp-replace "^link:\\.\\./\\.\\./" proj-desc ""))
-            (set! proj-desc (regexp-replace "\\]\\[.*\\]$" proj-desc ""))
-            (set! proj-desc (regexp-replace "pass:\\[" proj-desc ""))
-            (set! proj-desc (regexp-replace "pages/" proj-desc "pages/.cached/."))
-            (set! proj-desc (regexp-replace "\\.html$" proj-desc "-desc.txt.kp"))
-            (unless projects-title-done?
-              (set! projects-title-done? #t)
-              (fprintf o "\n\n*Single-Lesson Projects*\n\n"))
-            (fprintf o "- *~a* {startsb}~a{endsb}\n~a\n"
-                     (regexp-replace "^link:" proj-link "link:../")
-                     (regexp-replace "^link:" (second x) "link:../")
-                     (if (file-exists? proj-desc)
-                         (string-append " "
-                           (call-with-input-file proj-desc port->string))
-                         ""))))))))
-
 (define (link-to-notes-pages o)
   (let ([lessons (read-data-file
                    (format "distribution/~a/courses/~a/lesson-order.txt"
@@ -1505,9 +1471,6 @@
   (set! *opt-printable-exercise-links* '())
   (set! *additional-exercises* '())
   (set! *handout-exercise-links* '())
-  (set! *starter-file-links* '())
-  (set! *opt-starter-file-links* '())
-  (set! *opt-project-links* '())
   (set! *project-lessons* '())
   (set! *exercises-done* '())
   (set! *objectives-met* '())
@@ -1755,8 +1718,6 @@
                             (fprintf o "~a" (getenv "YEAR"))]
                            [(string=? directive "season")
                             (fprintf o "~a" (string-titlecase (getenv "SEMESTER")))]
-                           [(string=? directive "empty")
-                            (read-group i directive)]
                            [(string=? directive "n")
                             (fprintf o "{empty}[.autonum]##~a##" *autonumber-index*)
                             (set! *autonumber-index* (+ *autonumber-index* 1))]
@@ -1912,12 +1873,6 @@
                               (error 'ERROR
                                      "adoc-preproc: @all-exercises valid only in teacher resources"))
                             (fprintf o "\n[#exercises_and_solutions]\n&nbsp;\n")]
-                           [(string=? directive "all-projects")
-                            ; (printf "doing all-projects ~a\n" (errmessage-context))
-                            (unless *teacher-resources*
-                              (error 'ERROR
-                                     "adoc-preproc: @all-projects valid only in teacher resources"))
-                            (link-to-opt-projects o)]
                            [(string=? directive "lesson-info")
                             (unless *teacher-resources*
                               (error 'ERROR
@@ -2206,31 +2161,6 @@
                                                            title
                                                            ", window=\"&#x5f;blank\""
                                                            )])
-                                                  (when (and newly-added? autoinclude?)
-                                                    (let* ([materials-link-output
-                                                             (format
-                                                               "link:pass:[~a][~a~a]"
-                                                               url
-                                                               starter-file-title
-                                                               ", window=\"&#x5f;blank\""
-                                                               )]
-                                                           [styled-link-output
-                                                             (format "[StarterFile~a]##~a##"
-                                                                     (if opt? " Optional" "")
-                                                                     materials-link-output)])
-                                                      (cond [opt?
-                                                              (unless (member
-                                                                        styled-link-output
-                                                                        *opt-starter-file-links*)
-                                                                (set! *opt-starter-file-links*
-                                                                  (cons styled-link-output
-                                                                        *opt-starter-file-links*)))]
-                                                            [else
-                                                              (unless (member styled-link-output
-                                                                              *starter-file-links*)
-                                                                (set! *starter-file-links*
-                                                                  (cons styled-link-output
-                                                                        *starter-file-links*)))])))
                                                   (display link-output o))]))]))]
                           [(string=? directive "assessments")
                            (fprintf o "\ninclude::~a/{cachedir}.index-assessments.asc[]\n" *containing-directory*)]
@@ -2309,9 +2239,6 @@
                                                rubric-file-compts "rubric" "rubric-file")])]
                                    [project-link-output (dispatch-make-workbook-link
                                                           project-file-compts #f directive)])
-                              (unless (assoc project-link-output *opt-project-links*)
-                                (set! *opt-project-links*
-                                  (cons (list project-link-output rubric-link-output) *opt-project-links*)))
                               (display (enclose-span ".prefix" "Optional Project: ") o)
                               (display project-link-output o)
                               (display " __{startsb}" o)
@@ -2393,7 +2320,6 @@
                            (when *teacher-resources*
                              ; (printf "teacher resource autoloading stuff\n")
                              (fprintf o "\nlink:../index.shtml[Click here to return to lessons]\n\n")
-                             ; (link-to-opt-projects o)
                              ; (link-to-notes-pages o)
                              )])]
                   [(char=? c #\newline)
@@ -2598,65 +2524,6 @@
       (set! *prereqs-used* '())
 
       (when *lesson-plan*
-
-        (call-with-output-file (path-replace-extension *out-file* "-extra-mat.asc")
-          (lambda (o)
-            ; STARTER FILES
-            (for ([x (reverse *starter-file-links*)])
-              (fprintf o "\n* ~a\n\n" x))
-            ; SLIDES
-            (display-lesson-slides o)
-            ; GLOSSARY REFERENCE
-            (unless (empty? *glossary-items*)
-              (fprintf o "\n* link:~aGlossary.shtml?lesson=~a[Lesson Glossary]\n" *dist-root-dir* *lesson*))
-            ; LESSON PLAN
-            (when (or (string=? *proglang* "pyret") (string=? *proglang* "wescheme"))
-              (fprintf o "\n* link:index.pdf[Printable Lesson Plan] (a PDF of this web page)\n"))
-            ; STATUS BAR FOR PRINTING PDFS
-            (fprintf o "\n\n+++<span id=\"status\" style=\"display:none;\"><label for=\"file\">Assembling Pages:</label><progress id=\"file\"></progress></span>+++")
-
-            )
-          #:exists 'replace)
-
-        (call-with-output-file (path-replace-extension *out-file* "-extra-opt-mat.asc")
-          (lambda (o)
-
-            ; OPTIONAL PRINTED PAGES
-            (unless (empty? *opt-printable-exercise-links*)
-              (fprintf o "\n* link:javascript:downloadLessonPDFs(true)[Additional Printable Pages for Scaffolding and Practice]\n")
-              (fprintf o " [.showPageLinks]#link:javascript:showPageLinks(true)[ ]#")
-              (for ([x (reverse *opt-printable-exercise-links*)])
-                (fprintf o "\n** ~a\n\n" x))
-            )
-            ; OPTIONAL STARTER FILES
-            (for ([x (reverse *opt-starter-file-links*)])
-              (fprintf o "\n* ~a\n\n" x))
-            ; OPTIONAL PROJECTS
-            (let ([opt-proj-links (reverse *opt-project-links*)])
-              (call-with-output-file (path-replace-extension *out-file* "-opt-proj.rkt.kp")
-                (lambda (o)
-                  (for ([link-pair opt-proj-links])
-                    (write link-pair o)
-                    (newline o)))
-                #:exists 'replace)
-            (for ([x opt-proj-links])
-              (fprintf o "\n* [.OptProject]##~a {startsb}~a{endsb}##\n\n" (first x) (second x))))
-            ; OPTIONAL ONLINE EXERCISES
-            (for ([x (map cdr (reverse *opt-online-exercise-links*))])
-              (fprintf o "\n* ~a\n\n" x))
-            ; CONTRACTS REFERENCE
-            (fprintf o "\n* link:~aContracts.shtml[Contracts Reference]\n" *dist-root-dir* )
-            ; NO OPTIONAL ANYTHING - display a helpful message
-            (when (and *supplemental-materials-needed?*
-                       (empty? *opt-printable-exercise-links*)
-                       (empty? *opt-starter-file-links*)
-                       (empty? *opt-online-exercise-links*))
-              (warnmsg "~a has no supplemental materials yet!" (errmessage-context))
-              ; (fprintf o "_This lesson has no supplemental materials (yet!)_")
-              )
-
-            )
-          #:exists 'replace)
 
         (call-with-output-file (build-path *containing-directory* ".cached" ".lesson-keywords.json")
           (lambda (o)
