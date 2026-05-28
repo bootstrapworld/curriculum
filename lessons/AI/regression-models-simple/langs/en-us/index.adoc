@@ -11,12 +11,10 @@
 |===
 | Lesson Goals
 | Students will be able to...
-
 @objectives
 
 | Student-facing Lesson Goals
 |
-
 - Let's use estimate line-of-best-fit to predict how long it will take for an animal to be adopted!
 - Let's use computational tools to find the absolute _best_ fit!
 
@@ -24,9 +22,9 @@
 |[.materials-links]
 @material-links
 
-| Preparation
-| - @opt{If you think your students will want the chance to actually see the first self-driving car in action, you can share @link{https://www.youtube.com/watch?v=ntIczNQKfjQ, "this two-minute video"} from the Carnegie Mellon University Robotics Institute.}
-
+| Relevant Resources
+| 
+- If you think your students will want the chance to actually see the first self-driving car in action, you can share @link{https://www.youtube.com/watch?v=ntIczNQKfjQ, "this two-minute video"} from the Carnegie Mellon University Robotics Institute.
 |===
 
 == Fitting Models for Age _or_ Pounds
@@ -36,26 +34,42 @@ Students try fitting models to the animals dataset, comparing predictors for `ag
 
 === Launch
 @slidebreak{Launch}
-In @lesson-link{fitting-models}, we you learned that a relationship between two variables will show up as a point cloud in a 2d scatter plot, and that this relationship can be described by a @vocab{model}.
+
+In @lesson-link{fitting-models}, we learned that a relationship between two variables will show up as a point cloud in a 2D scatter plot, and that this relationship can be described by a @vocab{model}.
+
+- A model for a 2D relationship is a @vocab{line of best fit}.
+- Models built on real world data line don't usually _perfectly_ fit the points. They tend to be @vocab{lossy}, meaning they limit complexity and discard variance in the data, by looking for "general rules" that apply to most — but not all - of the data. 
+- If the model is a good fit, however, the information lost is minimal and the predictions we make from the model can be useful.
 
 @lesson-point{Most models are wrong. Some are _useful_.}
 
-- A model for a 2d relationship is a @vocab{line of best fit}
-- When it comes data from the real world, most models are @vocab{lossy}, meaning the line won't _perfectly_ fit the points. It will usually be at least a little "wrong".
-- If the model is a good fit, however, the information lost is minimal and the predictions we make from the model can be useful.
-
-Can we use `pounds` and `age` in our animals dataset to _predict_ how long it takes for an animal to be adopted?
+Can we _predict_ how long it takes for an animal in our dataset to be adopted based on `pounds`? Based on `age`?
 
 @slidebreak{Launch}
+
 @lesson-instruction{
-- Open the @starter-file{animals} in Pyret, and click "Run".
-- Evaluate `animals-table` to see the data. Which animal is the oldest? Which is the heaviest? Which took the most weeks to be adopted?
+- Open the @starter-file{ai-animals} in Pyret, and click "Run".
+- Evaluate `animals-table` to see the data. 
+}
+
+@QandA{
+@Q{Which animal is the oldest?}
+@A{Felix}
+
+@Q{Which is the heaviest?} 
+@A{Kujo}
+
+@Q{Which took the most weeks to be adopted?}
+@A{Kujo}
+}
+
+@lesson-instruction{
 - Make a scatter plot, using `name` as the label, `age` as the explanatory variable and `weeks` as the response. _Can you find Kujo on this plot?_
 - Make another scatter plot, this time using `pounds` as the explanatory variable. _Find Kujo on this plot._
 }
 
-
 @slidebreak{LaunchC}
+
 [cols="1a,1a", grid="none", frame="none"]
 |===
 | @image{images/pounds-v-weeks.png, 400}
@@ -86,9 +100,9 @@ As you already learned about @lesson-link{fitting-models}, our goal is to fit a 
 - The impact of @math{age} is the slope @math{m_{age}} in our equation, with our y-intercept @math{b_{age}} representing the predicted value if @math{age = 0}
 
 @lesson-instruction{
-- Make sure you have made your two scatter plots in @starter-file{animals}
-- Open Desmos graphs for *both* @online-exercise{https://www.desmos.com/3d/glgrgcs4bp, Pounds v. Weeks}, and @online-exercise{https://www.desmos.com/3d/ip4ucm56mx, Age v. Weeks}.
-- Use these Desmos graphs to complete the first section on @printable-exercise{predicting-weeks-from-1.adoc}.
+- Make sure you have made your two scatter plots in the @starter-file{ai-animals}.
+- Open *both* of the these files: @starter-file{pounds-v-weeks} and @starter-file{age-v-weeks}.
+- Use the two Desmos graphs to complete the first section on @printable-exercise{predicting-weeks-from-1.adoc}.
 }
 
 @teacher{
@@ -184,7 +198,7 @@ Now we want Pyret to "learn" a function with the *best possible* values for @mat
 @slidebreak{Investigate-DN}
 
 @lesson-instruction{
-- Make sure you have @starter-file{animals} open.
+- Make sure you have @starter-file{ai-animals} open.
 - Use Pyret to complete the *first two sections* on @printable-exercise{supervised-learning-regression.adoc}.
 - Be ready to share your thinking!
 }
@@ -239,7 +253,6 @@ Pyret has a several tools for doing linear regression, all with the same Domain:
 === Common Misconceptions
 - *Don't forget to look at sample size!* A linear regression plot with an @math{r}-value of 0.999 is strong...but that's useless if it's a sample of just three data points!
 
-
 === Synthesize
 @slidebreak{Synthesize}
 
@@ -247,7 +260,7 @@ Pyret has a several tools for doing linear regression, all with the same Domain:
 @Q{Why does it only make sense to use predictor functions for values that fall _within the range of the dataset_?}
 @A{Because our function describes a pattern observed within that particular range. Lots of observable patterns do not continue outside of a certain range... for example, babies are supposed to triple in weight in their first year... but grownups definitely shouldn't!
 }
-@A{If students have completed @lesson-link{decision-trees-evaluating}, you can connect this back to trusting a classifier only on inputs that are similar to what it was trained on.}
+@teacher{If students have completed @lesson-link{decision-trees-evaluating}, you can connect this back to trusting a classifier only on inputs that are similar to what it was trained on.}
 
 @Q{Would it make sense to split the dataset by species, and do our supervised learning on each one separately?}
 @A{Probably! Different species have wildly different sizes and lifespans. A 12 year old dog is quite old, while a 12 year old tarantula may have another 15 years to go.}
