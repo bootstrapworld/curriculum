@@ -213,8 +213,7 @@ You chopped up the first line of our corpus into differently sized chunks (one w
 
 |===
 
-@slidebreak{Launch}
-
+@slidebreak{LaunchR}
 
 The formal word computer scientists use in this context is not "chunk" but @vocab{n-gram}. In an @math{n}-gram, @math{n} represents the number of words in the chunk. For special cases where @math{n} is 1, 2, or 3, the @math{n}-grams are called @vocab{unigrams}, @vocab{bigrams}, and @vocab{trigrams}.
 
@@ -227,6 +226,17 @@ The formal word computer scientists use in this context is not "chunk" but @voca
 @A{biceps, triceps, (quadriceps)}
 @A{unicorn}
 }
+
+@slidebreak{LaunchR}
+@right{@image{images/bag-of-colors.png}}
+@lesson-point{The Table of Unigrams is effectively a Bag of Words}
+
+When restricted to a single word (unigrams only), the n-gram language model stores the exact same information as the Bag of Words! Even though they store the same data, however, it's important to keep in mind that they come from two very different places:
+
+- Bag-of-Words is a _representation_ of a corpus of documents, which turns them into coordinates of n-dimensions for the sake of classification or regression.
+- Unigrams come from _Language Modeling_. They (and their siblings bigrams, trigrams, etc) are used to _calculate probabilities_.
+
+Same data, very different purposes.
 
 === Investigate
 @slidebreak{Investigate}
