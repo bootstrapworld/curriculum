@@ -1879,13 +1879,6 @@
                                      "adoc-predoc: @lesson-info valid only in teacher resources"))
                             (display (enclose-tag "div" "" "" #:attribs "id=\"lesson-info-table\"") o)
                             (newline o)]
-                           [(string=? directive "solutions-workbook")
-                            ;TODO: don't need this anymore -- link is autogen'd
-                            (unless *teacher-resources*
-                              (error 'ERROR
-                                     "adoc-preproc: @solutions-workbook valid only in teacher resources"))
-                            (fprintf o "link:./protected/workbook-sols.pdf[Workbook (w/Solutions)]")
-                            ]
                            [(string=? directive "do")
                             (let ([exprs (string-to-form (read-group i directive #:scheme? #t))])
                               (for-each massage-arg-def exprs))]
