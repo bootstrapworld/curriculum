@@ -406,7 +406,7 @@ end
 @slidebreak{Investigate}
 You've probably noticed that:
 
-- Just like any other function - `tail-classifier` has a contract! It consumes a Row (an animal) and produces a String (the species that the classifier predicts the animal will be).
+- Just like any other function, `tail-classifier` has a contract! It consumes a Row (an animal) and produces a String (the species that the classifier predicts the animal will be).
 - `tail-classifier` is using a row-accessor to access the information in the `"tail"` column.
 - This function uses some code we haven't seen before like `if` and `else`.
 
@@ -417,6 +417,10 @@ You've probably noticed that:
 
 @Q{What does this part of the function definition do `else: "snail"`?}
 @A{It checks to see whether the value in the `"tail"` column is `true`, and, if it says anything other than `true`, it classifies the animal as a `"snail"`.}
+
+@Q{What does `tail-classifier(firepaw)` do}
+@A{Tells us how the `tail-classifier` will classify our `firepaw` row}
+@A{Returns "cat"}
 }
 
 @teacher{
