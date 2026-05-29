@@ -124,7 +124,7 @@ But are all users recommended the _same_ completions?
 @QandA{
 @Q{What do you think? Will your phone suggest the same words as your classmates' phones would? Why or why not?}
 @A{Before we get into the in-depth student-facing explanation, below, invite discussion!}
-@A{This question is a great opportunity to revisit previous concepts, in particular the process of training and sampling that students discussed when thinking about @lesson-link{natural-language, "plagiarism detection"}.}
+@A{This question is a great opportunity to revisit previous concepts, in particular the process of training and sampling that students discussed when thinking about @lesson-link{decision-trees-evaluating} and @lesson-link{regression-models-simple}.}
 }
 
 @slidebreak{Investigate}
@@ -213,8 +213,7 @@ You chopped up the first line of our corpus into differently sized chunks (one w
 
 |===
 
-@slidebreak{Launch}
-
+@slidebreak{LaunchR}
 
 The formal word computer scientists use in this context is not "chunk" but @vocab{n-gram}. In an @math{n}-gram, @math{n} represents the number of words in the chunk. For special cases where @math{n} is 1, 2, or 3, the @math{n}-grams are called @vocab{unigrams}, @vocab{bigrams}, and @vocab{trigrams}.
 
@@ -226,22 +225,36 @@ The formal word computer scientists use in this context is not "chunk" but @voca
 @A{triangle, n-gon}
 @A{biceps, triceps, (quadriceps)}
 @A{unicorn}
-
 }
+
+@slidebreak{LaunchR}
+@right{@image{images/bag-of-colors.png}}
+@lesson-point{The Table of Unigrams is effectively a Bag of Words}
+
+When restricted to a single word (unigrams only), the n-gram language model stores the exact same information as the Bag of Words! Even though they store the same data, however, it's important to keep in mind that they come from two very different places:
+
+- Bag-of-Words is a _representation_ of a corpus of documents, which turns them into coordinates of n-dimensions for the sake of classification or regression.
+- Unigrams come from _Language Modeling_. They (and their siblings bigrams, trigrams, etc) are used to _calculate probabilities_.
+
+Same data, very different purposes.
 
 === Investigate
 @slidebreak{Investigate}
 
-Let's dig a little deeper...
-
-@teacher{
-Share the @handout{old-lady-lyrics.adoc, song lyrics} with students to read independently. If desired, you could also listen to a recorded version of the song.
+@lesson-instruction{
+- Open the @starter-file{ai-ngrams}, Save a Copy, and click "Run"
+- Evaluate `corpus` in the Interactions Area
+- Evaluate `generate-ngrams(corpus, 1)`.
 }
+
+@slidebreak{Investigate}
+
+Let's dig a little deeper...
 
 The phrase "there was an old lady who swallowed a..." is repeated in our corpus! Let's zoom in on one unigram from that phrase: “there”.
 
 @QandA{
-@Q{Referring to the corpus (the @handout{old-lady-lyrics.adoc, "lyrics"} *and the title*: how many times does the word "there" appear in the song?}
+@Q{Referring to the corpus (the @printable-exercise{old-lady-lyrics.adoc, "lyrics"} *and the title*: how many times does the word "there" appear in the song?}
 @A{5}
 @Q{In this corpus, how many times was the word "there" followed by the word "was"?}
 @A{5}
@@ -271,7 +284,6 @@ We can represent this computation with a special notation:
 }
 
 
-
 @slidebreak{Investigate}
 
 @QandA{
@@ -281,11 +293,19 @@ We can represent this computation with a special notation:
 
 @Q{Make a prediction: How can we make use of the ratios we completed on @printable-exercise{constructing-model.adoc}?}
 @A{We can refer to our ratios to determine which word is the most likely to follow a given word.}
-
 }
 
 @teacher{
-Are you and your students interested in exploring probability in more depth? Check out our lesson on @lesson-link{probability-inference} to dig deeper.
+If you'd like to explore probability and sampling in greater depth, check out our lesson on @lesson-link{probability-inference, the subject}!
+}
+
+@slidebreak{Investigate}
+
+@lesson-instruction{
+- Return to @starter-file{ai-ngrams}
+- *In the Definitions Area*, build your language mode by evaluating `m = build-lang-model(corpus)`, then click "Run".
+- Evaluate `m` to see what it looks like!
+- To find the probability of one word following another, evaluate `next-word-probability(m, "swallowed a", "fly")`
 }
 
 === Synthesize
@@ -323,18 +343,26 @@ How might we go about doing that?
 === Investigate
 @slidebreak{Investigate}
 
-Let's give this process a try, returning to our "Old Lady" corpus.
+We've created helper functions for this, too:
 
-@teacher{Note that on @printable-exercise{sampling.adoc}, questions build on one another. In other words, a student who misses Question 2 will also get Question 3 incorrect. To ensure that class runs smoothly, we encourage you to require that students check their work with a partner before moving from one question to the next. Encouraging students to annotate @handout{old-lady-lyrics.adoc} will also result in more accurate counting and therefore more correct responses!}
+@show{(contract "completions" '((model Table), (start String)) "Table")} +
+@show{(contract "choose-completion" '((model Table), (start String)) "String")}
+
+- We can use these contract to find all the possible completions for a starting string: `completions(c, "swallowed the")`
+
+- Or to choose one completion at random: `choose-completion(c, "swallowed the")`
+
+
+@slidebreak{Investigate}
+
+
+@teacher{Note that on @printable-exercise{sampling.adoc}, questions build on one another. In other words, a student who misses Question 2 will also get Question 3 incorrect. To ensure that class runs smoothly, we encourage you to require that students check their work with a partner before moving from one question to the next. Encouraging students to annotate @printable-exercise{old-lady-lyrics.adoc} will also result in more accurate counting and therefore more correct responses!}
 
 @lesson-instruction{
-
-- Complete the first section of @printable-exercise{sampling.adoc} using @handout{old-lady-lyrics.adoc}.
-- Tip: Annotate your @handout{old-lady-lyrics.adoc}! Highlighters and different colors of ink can help you to stay organized.
+- Complete the first section of @printable-exercise{sampling.adoc}.
 }
 
-@teacher{The two questions below are on students' worksheets, but merit follow-up and discussion.}
-
+@slidebreak{Investigate}
 @QandA{
 @Q{What four-word phrase did you generate?}
 @A{"She swallowed a fly"}
@@ -348,6 +376,7 @@ Let's give this process a try, returning to our "Old Lady" corpus.
 
 @lesson-instruction{
 - Complete the second section of @printable-exercise{sampling.adoc}.
+- When you're finished, discuss: what would happen if we just kept evaluating `choose-completion`, over and over?
 }
 
 @QandA{
@@ -356,9 +385,18 @@ Let's give this process a try, returning to our "Old Lady" corpus.
 
 @Q{Why didn't everyone end up with the same phrase?}
 @A{We were forced to incorporate randomness when there was a tie for the most probable word to follow "spider".}
+
+@Q{What would happen if we just kept evaluating `choose-completion`, over and over?}
+@A{It would keep choosing words!}
 }
 
+@slidebreak{Investigate}
+If you're curious to see what would happen if we just kept going, evaluate `generate-from(m, "there")`, or `generate-from(m, "cat")`!
 
+@QandA{
+@Q{Will we always get the same output if we always use the same input?}
+@A{No - in the event of a tie, it will choose randomly!}
+}
 
 === Synthesize
 @slidebreak{Synthesize}
