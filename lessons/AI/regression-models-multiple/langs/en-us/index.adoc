@@ -35,25 +35,11 @@
 Students extend their understanding of linear regression in 2 dimensions, moving into multiple regression in 3 dimensions. They see the improvement to the model fit, and interpret the coefficients of a multiple-regression result.
 
 === Launch
-@slidebreak{LaunchR}
---
-@right{@image{images/lr-pounds-v-weeks.png, 300}}
-
-@center{
-@math{weeks(age)=(0.79 \times age) + 2.3} +
-`fun weeks(r): (0.79 * r["age"]) + 2.3 end`
-}
-
-This function (written in both math and Pyret notation) is our regression line, which we can draw on a 2 dimensional (x,y) scatter plot.
-
-But what if we wanted to use `pounds` _and_ `age` on our flashcards, and train the computer to predict `weeks` based on the value of *both* variables?  We need one axis on our scatter plot to represent `weeks`. We tried using the other axis for one explanatory variable at time (age or pounds). How can we represent _both_ explanatory variables?
---
-@teacher{Give students a chance to discuss and brainstorm!}
 
 @slidebreak{LaunchR}
 @QandA{
 @right{@image{images/projection.webp, 350}}
-Take a look at this picture.
+Take a look at this picture of a cylinder floating in a box.
 
 @Q{What is making the square shadow on the blue wall?}
 @A{A light is shined at the side of the cylinder, casting a square shadow.}
@@ -70,6 +56,23 @@ Take a look at this picture.
 @Q{If the _real_ shape is a cylinder, are the circle and square shadows "lying" to us somehow?}
 @A{No - they're just telling a *part* of the story!}
 }
+
+
+@slidebreak{LaunchR}
+--
+@right{@image{images/lr-pounds-v-weeks.png, 300}}
+
+@center{
+@math{age-predictor(age)=(0.79 \times age) + 2.3} +
+`fun age-predictor(r): (0.79 * r["age"]) + 2.3 end`
+}
+
+This function (written in both math and Pyret notation) is our regression line, which we can draw on a 2 dimensional (x,y) scatter plot.
+
+But what if we wanted to use `pounds` _and_ `age` on our flashcards, and train the computer to predict `weeks` based on the value of *both* variables?  We need one axis on our scatter plot to represent `weeks`. We tried using the other axis for one explanatory variable at time (age or pounds). How can we represent _both_ explanatory variables?
+--
+@teacher{Give students a chance to discuss and brainstorm!}
+
 
 @slidebreak{LaunchR}
 @right{@image{images/plane-of-best-fit.png, 300}}

@@ -83,18 +83,33 @@ Can we _predict_ how long it takes for an animal in our dataset to be adopted ba
 @Q{How does the *age* of an animal impact how long it takes to find a home?}
 @A{Older animals *tend to* take longer to be adopted.}
 
+@Q{Which one do you think would give us a better prediction, *size* or *age*?}
+@A{Answers will vary.}
+
 @Q{Do older and larger animals _always_ take more time to get adopted? Less time?}
 @A{Neither - it's a general trend for them to take longer, but that doesn't mean every old/large animal takes longer than every small/young one!}
 }
 
-Can we be more precise actually _predict_ how long it will take an animal to be adopted, based on these factors? And which one would give us a better prediction?
+@slidebreak{Launch}
+
+Can we be more precise and actually predict how long it will take an animal to be adopted based on these factors? 
+
+@lesson-instruction{
+- Turn to @printable-exercise{predicting-weeks-from-1.adoc} and draw a straight line on each of the scatter plots so that we can actually _predict_ how long it will take an animal to be adopted based on these factors. 
+- Looking at your lines, which variable do you think would give us a better prediction of adoption time, *size* or *age*?
+}
 
 === Investigate
 @slidebreak{Investigate-DN}
 
-As you already learned about @lesson-link{fitting-models}, our goal is to fit a line to each of these scatter plots, minimizing the error as much as possible.
+Now let's use Desmos to visually fit the best line we can to each of these scatter plots, minimizing the error as much as possible.
 
-@center{@big{@math{weeks(age)=(m_{age} \times age) + b_{age}}}}
+@lesson-instruction{
+- Open *both* of the these files: @starter-file{pounds-v-weeks} and @starter-file{age-v-weeks}.
+- Use the two Desmos graphs to complete the first section on @printable-exercise{predicting-weeks-from-1.adoc}.
+}
+
+@center{@big{@math{age-predictor(age)=(m_{age} \times age) + b_{age}}}}
 
 - The function @math{weeks} has one variable named @math{age}, which explains a _portion_ of the adoption time (there might other factors besides age!)
 - The impact of @math{age} is the slope @math{m_{age}} in our equation, with our y-intercept @math{b_{age}} representing the predicted value if @math{age = 0}
@@ -106,7 +121,7 @@ As you already learned about @lesson-link{fitting-models}, our goal is to fit a 
 }
 
 @teacher{
-- Note: reloading the page will reset the graph to its original configuration!
+Note: reloading the page will reset the graph to its original configuration!
 }
 
 @slidebreak{InvestigateR}
@@ -116,11 +131,9 @@ As you already learned about @lesson-link{fitting-models}, our goal is to fit a 
 
 Suppose we're not interested in the graphs, and we _only_ want to know how well the model fits. How could we just get the @math{S}-value, without bothering with `fit-model`?
 
-
 @slidebreak{Investigate}
 
 @show{(contract "simple-S" '("Table" "String" "String" "Number -> Number") "Number" "Consumes a table, the name of the input and target output, and a model of the form f(x) = ...")}
-
 
 @QandA{
 @Q{What is the *name* of this function?}
@@ -140,6 +153,7 @@ This function is similar to `fit-model`! But instead of plotting points with lab
 }
 
 === Synthesize
+@slidebreak{Synthesize}
 
 @QandA{
 @Q{Should we assume that either of our predictors will be generally accurate for another animal shelter?}
@@ -150,14 +164,16 @@ This function is similar to `fit-model`! But instead of plotting points with lab
 @Q{Suppose we did this same supervised learning on a dataset of millions of animals, from shelters all over the world. Could we assume those predictors are generally accurate?}
 @A{It's definitely more likely, but there will still be variations from variables like differences between human preferences and differences between animals across shelters.}
 }
+
+
 == Regression in Pyret
 
 === Overview
 Students are introduced to the concept (not algorithm) of @vocab{linear regression}, and learn how to interpret the @vocab{slope} and @vocab{y-intercept} of @vocab{predictor functions}.
 
-
 === Launch
 @slidebreak{LaunchR}
+
 @right{@image{images/lr-pounds-v-weeks.png, 300}}
 Data scientists, statisticians, and machine learning engineers use a statistical method called @vocab{linear regression} to pinpoint linear relationships in a dataset. Linear regression is the math behind the @vocab{line of best fit}, which allows us to find the best possible fit for a straight line, based on the input data.
 
@@ -260,9 +276,8 @@ Pyret has a several tools for doing linear regression, all with the same Domain:
 @Q{Why does it only make sense to use predictor functions for values that fall _within the range of the dataset_?}
 @A{Because our function describes a pattern observed within that particular range. Lots of observable patterns do not continue outside of a certain range... for example, babies are supposed to triple in weight in their first year... but grownups definitely shouldn't!
 }
-@teacher{If students have completed @lesson-link{decision-trees-evaluating}, you can connect this back to trusting a classifier only on inputs that are similar to what it was trained on.}
 
 @Q{Would it make sense to split the dataset by species, and do our supervised learning on each one separately?}
 @A{Probably! Different species have wildly different sizes and lifespans. A 12 year old dog is quite old, while a 12 year old tarantula may have another 15 years to go.}
-@A{In fact, lumping different subgroups together can hide a relationship, or even express the *wrong* relationship! This is known as Simpson's Paradox, which we talk about in @lesson-link{exponential4-simpsons-paradox}.}
+@A{In fact, lumping different subgroups together can hide a relationship, or even express the *wrong* relationship! (We have an entire lesson devoted to exploring @lesson-link{exponential4-simpsons-paradox}.)}
 }
