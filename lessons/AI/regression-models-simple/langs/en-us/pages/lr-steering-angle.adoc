@@ -1,0 +1,54 @@
+= Building a Predictor for Steering Angle
+
+++++
+<style>
+div#body sub { position: relative; bottom: 0.3em; }
+div#body .studentAnswerMedium { min-width: 35pt; }
+</style>
+++++
+
+Make sure you have @starter-file{self-driving} open with `training-data` loaded.
+
+== Fitting a Model by Hand
+
+@n Look at your `curve` vs. `steering-angle` scatter plot. Estimate a slope @math{m} and y-intercept @math{b} for a line of best fit:
+
+[%autowidth, cols="<, >", frame="none", stripes="none"]
+|===
+| @math{curve\text{-}predictor(curve) = (}@fitbruby{4em}{@ifsoln{19.5}}{@math{m}}@math{\times curve) + }@fitbruby{4em}{0.41}{@math{b}}
+| @show{(code '(define (curve-predictor curve) (+ (* (?ANS 19.5) curve) (?ANS 0.41))))}
+|===
+
+@n Define `curve-predictor` in the starter file using your estimates and click "Run". Use `fit-model` to see how well it fits. Describe what you see. @fitb{}{} +
+@fitb{}{}
+
+== Using Linear Regression
+
+@n Evaluate `lr-plot(training-data, "id", "curve", "steering-angle")`, and find the equation for the line-of-best-fit.
+
+@n How does Pyret's best-fit line compare to the one you estimated by hand? @fitb{}{} +
+@fitb{}{@ifsoln{Pyret's line fits more tightly overall, minimizing the total error across all the data points.}}
+
+@n Our `curve-predictor` estimates that when `curve = 0` (a perfectly straight road), the steering angle will be @fitbruby{2em}{@ifsoln{≈ 0}}{intercept} @fitbruby{5.5em}{@ifsoln{degrees}}{units}. Does this make real-world sense? @fitb{}{} +
+@fitb{}{@ifsoln{Yes! If the road is straight and the car is centered, there's no reason to steer.}}
+
+@n If `curve` increases by 1, this predictor expects the steering angle to @fitbruby{8em}{@ifsoln{increase}}{increase/decrease} by @fitbruby{5em}{@ifsoln{m}}{slope} @fitbruby{8em}{@ifsoln{degrees}}{units}. What does this tell us about what the model _learned_? @fitb{}{} +
+@fitb{}{@ifsoln{The sharper the road curves, the more the model predicts you need to steer — proportionally.}}
+
+== Completing the Predictor Functions
+
+@n Evaluate `lr-plot` for each of the other three variables, fill in the table below:
+
+[cols="<, ^, ^, ^",options="header"]
+|===
+| Explanatory Variable 	| 		Slope 	 | 	Intercept 	| @math{S}-value
+| `offset` 				| @ifsoln{-2.8}	 | @ifsoln{1.0}	| @ifsoln{37.0}
+| `skew` 				| @ifsoln{-2.2}	 | @ifsoln{0.9} | @ifsoln{37.8}
+| `speed` 				| @ifsoln{-2.46} | @ifsoln{7.0} | @ifsoln{47.0}
+|===
+
+
+== Driving with the Model
+
+@n Evaluate `drive(curve-predictor)` and read the error carefully. What do you think it is telling us? @fitb{}{} +
+@blanklines{2}{@ifsoln{The predictor was given a Row, but it expected a number. `drive` gives our predictors *Rows*, but `curve-predictor` takes a Number.}}

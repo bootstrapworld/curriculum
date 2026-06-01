@@ -17,51 +17,59 @@ div#body .center { padding: 0 !important; }
 To complete this page, you'll be using the following contracts:
 
 @indented{
-@show{(contract "S" '((table-name Table) (x-cols List<String>) (y-col String)) "Table")} +
-@show{(contract "mr-coeffs" '((table-name Table) (x-cols List<String>) (y-col String)) "Table")} +
-@show{(contract "mr-code" '((table-name Table) (x-cols List<String>) (y-col String)) "Code")}
+@show{(contract "reg-model-S" '((table-name Table) (x-cols List<String>) (y-col String)) "Number")} +
+@show{(contract "reg-model-code" '((table-name Table) (x-cols List<String>) (y-col String)) "Code")}
 }
-== Using Supervised Learning to Build Regression Models
-@n Evaluate `mr-coeffs(animals-table, [list: "pounds", "age"], "weeks")`, and fill in the table below (it's okay to round down to 2-3 decimal places):
+
+== Building a Two-Variable Model
+
+@n Evaluate `reg-model-code(training-data, [list: "curve", "skew"], "steering-angle")` to produce the predictor function. Read the function to fill in the table below (round your numbers to 2-3 decimal places):
 
 [.FillVerticalSpace, cols="^.^1a,^.^1a", stripes="none", options="header"]
 |===
-| `coefficient-name` 	| `coefficient-value`
-| `intercept`			| @ifsoln{1.58}
-| `pounds` 				| @ifsoln{0.072}
-| `age` 				| @ifsoln{0.299}
+| `coefficient-name` | `coefficient-value`
+| `intercept`        | @ifsoln{}
+| `curve`            | @ifsoln{}
+| `skew`             | @ifsoln{}
 |===
 
-@n Fill in the definition for `age-pounds-predictor`. What does `age-pounds-predictor(cat-row)` evaluate to? @fitb{}{2.348 weeks}
+@n Which variable has the larger coefficient? @fitb{}{@ifsoln{`curve`}} What does that tell you? @fitb{}{} +
+@fitb{}{@ifsoln{`curve` has more "pull" on the prediction — a one-unit change in `curve` shifts the predicted steering angle more than a one-unit change in `skew`.}}
 
-@n Use `S` to compute the error of this model: @fitb{5em}{@ifsoln{7.705 weeks}}. Why doesn't `simple-S` work with this predictor? @fitb{}{} +
-@fitb{}{@ifsoln{`simple-S` expects a function that consumes numbers, but this predictor consumes a Row}}
+@n Use `reg-model-S` to compare the fit of your single-variable and two-variable models:
 
-== Interpreting Regression Models
+[cols="3a, 1a", options="header", stripes="none"]
+|===
+| Model                                                                           | @math{S}-value
+| `reg-model-S(training-data, [list: "curve"], "steering-angle")`                          | @ifsoln{}
+| `reg-model-S(training-data, [list: "curve", "skew"], "steering-angle")`                  | @ifsoln{}
+|===
 
-@n Our `age-pound-predictor` model estimates that animals weighing 0 pounds and being 0 years old will be adopted in
-@fitbruby{5em}{@ifsoln{1.58}}{z-intercept}
-@fitbruby{10em}{@ifsoln{weeks}}{z-units}. For every additional
-@fitbruby{9em}{@ifsoln{pound}}{1st input units},
-@fitbruby{12em}{@ifsoln{weeks to adoption}}{z-variable} will
-@fitbruby{8em}{@ifsoln{increase}}{increase/decrease} by
-@fitbruby{5em}{@ifsoln{0.072}}{@math{m_{pounds}}}
-@fitbruby{6em}{@ifsoln{weeks}}{z-units}. For every additional
-@fitbruby{9em}{@ifsoln{year}}{2nd input units},
-@fitbruby{12em}{@ifsoln{weeks to adoption}}{z-variable} will
-@fitbruby{8em}{@ifsoln{increase}}{increase/decrease} by
-@fitbruby{5em}{@ifsoln{0.299}}{@math{m_{age}}}
-@fitbruby{6em}{@ifsoln{weeks}}{z-units}.
+@n Adding `skew` made the S-value @fitbruby{8em}{@ifsoln{smaller}}{larger/smaller}. Does that mean the fit is @fitbruby{8em}{@ifsoln{better}}{better/worse}?
 
-@n *The error in the model* is described by an @vocab{S-value} of about
-@fitbruby{5em}{@ifsoln{4.704}}{S}
-@fitbruby{8em}{@ifsoln{weeks}}{z-units}. @hspace{1em} I
-@fitbruby{18em}{@ifsoln{agree/meh}}{strongly agree, agree, disagree, strongly disagree} that this model is a good fit considering that
-@fitbruby{10em}{@ifsoln{weeks}}{z-variable units} in this dataset range from
-@fitbruby{7em}{@ifsoln{1}}{lowest z-value} to
-@fitbruby{7em}{@ifsoln{30}}{highest z-value}.
+== Thinking Critically About Variables
 
-@n Does adding the `legs` attribute to our multiple regression analysis make the fit better or worse? Can you explain why? @fitb{}{} +
-@blanklines{2}{@ifsoln{It gets slightly better, because `legs` helps us differentiate between snails, tarantulas, and every other species. And since species influences adoption time, this helps us approximate regressing on `species`}}
+@n If you had to *drop one variable* from the two-variable model, which would you drop, and why? @fitb{}{} +
+@blanklines{2}{@ifsoln{`skew` — its coefficient is smaller, meaning it contributes less to the prediction. Dropping it would cost less accuracy than dropping `curve`.}}
 
-@n If we use `legs`, `age`, _and_ `pounds` to predict `weeks`, how many dimensions are we doing regression in? @fitb{}{@ifsoln{4}}
+@n What do you think would happen to the S-value if you added all four variables — `curve`, `skew`, `offset`, and `speed` — to the model? Try it! @fitb{}{} +
+@fitb{}{@ifsoln{S-value:}} +
+@blanklines{2}{@ifsoln{It decreases further — more variables can explain more variation, even if some contribute only a little.}}
+
+@n Suppose the `curve` sensor in your self-driving car broke and could not be used. Try building the best model you can _without_ `curve`. What combination of remaining variables gives the lowest S-value?
+
+[options="header", stripes="none"]
+|===
+| Variables Used (no `curve`) | S-value
+| @ifsoln{} | @ifsoln{}
+| @ifsoln{} | @ifsoln{}
+| @ifsoln{} | @ifsoln{}
+|===
+
+Best combination (without `curve`): @fitb{}{}
+
+@n Use `reg-model-code` to build your best no-`curve` predictor and try it with `drive`. How does it perform compared to the `curve`-only model from the last lesson? @fitb{}{} +
+@blanklines{2}{@ifsoln{Significantly worse in tight curves — `curve` carries the most important information about when and how much to steer. The other variables can partially compensate, but not fully.}}
+
+@n What does this tell you about how important `curve` is to the model? @fitb{}{} +
+@blanklines{2}{@ifsoln{`curve` is the most critical variable — it explains far more of the variation in `steering-angle` than any other single variable. A model without it is fundamentally missing the most important signal.}}
