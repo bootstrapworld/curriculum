@@ -4,7 +4,7 @@
 <style>
  div#body .graph td {
   --width:    3.25in;
-  --height:   2.5in;
+  --height:   2.0in;
   --top_pct:  0.9;
   --left_pct: 0.1;
   --x_label: '';
@@ -12,9 +12,24 @@
   position: relative;
 }
 
-/* Make the middle cell white, overriding all the graph stuff */
- div#body .graph td:nth-child(2),
- div#body .graph th:nth-child(2) { background: white !important; }
+/* Override normal position for the y-axis label in the whole table */
+div#body.workbookpage table.graph td::before {
+    top: 20% !important;
+}
+
+/* add an x-label just for the first table cell */
+div#body .graph td:nth-child(1) {
+    --x_label: 'Crunchiness';
+}
+
+/* Make the middle cell white, overriding all the graph stuff
+ * and removing the label
+ */
+div#body .graph td:nth-child(2),
+div#body .graph th:nth-child(2) {
+    background: white !important;
+    --y_label: '';
+}
 
 </style>
 ++++
@@ -59,9 +74,7 @@
 
 @n Plot your examples as points in both graphs, using a star (@star) to plot your favorite example and a triangle (&#9651;) for the example you selected as most similar above.
 
-@n Using only the first graph to identify the dessert most similar to your favorite example, would you have picked the same dessert? @fitb{3em}{}  
-
-@n Using only the second graph to identify the dessert most similar to your favorite example, would you have picked the same dessert? @fitb{3em}{}
+@n Is your choice for "most similar" (&#9651;) the closest to your favorite (@star) in the *first graph* ? @fitb{2em}{} @hspace{1em} In the *second graph*? @fitb{}{}
 
 @n Do you have any new ideas for how to *measure* the similarity between any two desserts? @fitb{}{} +
 @blanklines{2}{}
