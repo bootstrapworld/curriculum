@@ -19,7 +19,7 @@
   <script src="lib/dependency-graph.js"></script>
   <script src="lib/pathway-tocs.js"></script>
   <script src="lib/bootstraplesson.js"></script>
-  <script src="lib/langtable.js"></script>
+  <script src="lib/langTables.js"></script>
   <style>
 
     /* override some asciidoctor and shared.less defaults */
@@ -109,7 +109,7 @@
 
     // set the list of contracts, sorted alphabetically and filtered by proglang
     const contracts = Array.prototype.concat(
-      ...Object.values(langTable).map(t => t.primitives))
+      ...Object.values(langTables).map(t => t.primitives))
       .sort((a,b) => processName(a).toUpperCase() > processName(b).toUpperCase()? 1 : -1)
       .filter(elideProgLangSpecificPrimitives);
 
