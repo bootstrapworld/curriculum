@@ -1,6 +1,7 @@
 #! /usr/bin/env bash
 course=
 nomake=
+pd=
 otheropts="--nomake"
 while test $# -ne 0; do
   opt="$1"
@@ -8,6 +9,8 @@ while test $# -ne 0; do
     nomake=1; shift
   elif test "$opt" = --skipnode; then
     otheropts="$otheropts $opt"; shift
+  elif test "$opt" = --pd; then
+    pd=1; otheropts="$otheropts --pd"; shift
   elif test "$opt" = --rebuild -o "$opt" = -f; then
     otheropts="$otheropts $opt"; shift
   else
@@ -24,7 +27,26 @@ function build_slide() {
   echo calling build-slide $otheropts $lesson
   ./build-slide $otheropts $lesson
 }
-if test -z "$course"; then
+if test -n "$pd"; then
+  seen_lessons=""
+  pd_lessons=()
+  while IFS= read -r adoc; do
+    grep -qF '@pd-slide{' "$adoc" || continue
+    lesson=${adoc#*/lessons/}
+    lesson=${lesson%%/*}
+    if ! echo "$seen_lessons" | grep -qx "$lesson"; then
+      seen_lessons="$seen_lessons"$'\n'"$lesson"
+      pd_lessons+=("$lesson")
+    fi
+  done < <(find distribution/en-us/lessons -name index.adoc)
+  echo "Found ${#pd_lessons[@]} lesson(s) with PD slides:"
+  for lesson in "${pd_lessons[@]}"; do
+    echo "  $lesson"
+  done
+  for lesson in "${pd_lessons[@]}"; do
+    build_slide "$lesson"
+  done
+elif test -z "$course"; then
   for lesson in distribution/en-us/lessons/*; do
     build_slide $lesson
   done
