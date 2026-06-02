@@ -1,0 +1,58 @@
+= Exploring the Driving Simulator
+
+Make sure you have @starter-file{self-driving} open in Pyret, and click "Run".
+
+This file provides three functions you can play with:
+
+[%autowidth, cols="<, ^, >", frame="none"]
+|===
+| @show{(contract "train-bev" '(Number) "Table")}
+| @show{(contract "train-pov" '(Number) "Table")}
+| @show{(contract "drive" '("(Row -> Number)") "Table")}
+|===
+
+== Playing the Game
+
+@n Evaluate `train-pov(10)` to run the simulator at 5 frames per second. Use the left- and right-arrow keys to steer. Try `train-bev(10)` as well. In the top-left corner of the simulator, you'll find the current `steering-angle`, along with some some other data.
+
+@n What happens when you cross the finish line? @fitb{}{@ifsoln{New track}}
+
+@n What happens when you close the training window, or press "escape"? @fitb{}{@ifsoln{A table with that data}}
+
+@n Run the simulation and *save your data*: evaluate `d = train(10)`. When you're done, evaluate `d` to see the training data.
+
+@n How many rows are in table `d`? @fitb{6em}{@ifsoln{varies}} @hspace{2em} What columns? @fitb{}{@ifsoln{speed, offset, curve, skew, and steering-angle}}
+
+@n What do the columns below tell us about our training session?
+
+@indented{
+	* *`speed`* - @fitb{}{@ifsoln{speed of the car}}
+	* *`curve`* - @fitb{}{@ifsoln{how sharp the curve in the road is}}
+	* *`offset`* - @fitb{}{@ifsoln{how far the car is from the center yellow line}}
+	* *`skew`* - @fitb{}{@ifsoln{how far out-of-line the car is from the angle of the road}}
+}
+
+== Examining the Training Data
+
+Each row in your table represents one snapshot of your drive, showing the car's state at that instant.
+
+@n What does a *positive* `steering-angle` mean? @fitb{10em}{@ifsoln{Turning right}} @hspace{1em} A *negative* one? @fitb{}{@ifsoln{Turning left}}
+
+@n What does a *positive* `curve` mean? @fitb{15em}{@ifsoln{The road is bending to the right)}} @hspace{1em} A *negative* one? @fitb{}{@ifsoln{Road bends to the left}}
+
+@n What does `skew` tell us about the car? @fitb{}{@ifsoln{How far the car's heading is out of alignment with the road direction}} +
+@fitb{}{}
+
+@n Which column do you think is most important for predicting `steering-angle`? Why? @fitb{}{} +
+@fitb{}{}
+
+== The Challenge of Training
+
+@n Suppose that all of your training data was collected on a perfectly straight road. What do you think would happen if you built a model from that data and tried to drive on a curved road? @fitb{}{} +
+@fitb{}{@ifsoln{The model would have no idea what to do — it's never seen a curve. It would predict nearly-zero steering even when the road bends sharply.}}
+
+@n Would you trust a model trained only on `d` to drive safely on all roads? @fitb{}{} +
+@fitb{}{@ifsoln{Probably not — we haven't seen enough variety. A model can only generalize from what it's been trained on.}}
+
+@n Describe your *ideal* training dataset: how many rows does it have? Is it trained on different tracks? Speeds? What else? @fitb{}{} +
+@blanklines{2}{@ifsoln{Hundreds if not thousands of rows, over many different tracks driven in different ways (always on one side of the line or the other, or in the center, different speeds, etc.)}}

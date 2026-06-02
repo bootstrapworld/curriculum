@@ -3,6 +3,13 @@
 <style>
 /* Push content to the top (instead of the default vertical distribution), which was leaving empty space at the top. */
 #content { display: block !important; }
+
+/* add a dotted border around specialized directions */
+.callout {
+  border: dotted 1px black;
+  padding: 8px !important;
+  text-align: center;
+}
 </style>
 ++++
 
@@ -25,8 +32,8 @@ To refresh your memory, here are the contracts you'll need for this page:
 
 @link-instructions{Start by defining a table. At the bottom of the *Definitions Area*, type `results = alt-words("wello", WORDS-M, 3)`. Click "Run".}
 
-@n Describe the data contained in the `results` table. @fitb{}{} +
-@fitb{}{@ifsoln{377 words suggested as alternatives to "wello" by making up to 3 edits and then removing any results that weren't found in the `WORDS-M` library.}}
+@n Describe the data contained in the `results` table. @fitb{}{@ifsoln{377 words suggested as alternatives}} +
+@fitb{}{@ifsoln{ to "wello" by making up to 3 edits and then removing any results that weren't found in the `WORDS-M` library.}}
 
 @n Use the `count` or `bar-chart` function to see how the results are distributed by `"edit-distance"`:
 
@@ -36,63 +43,39 @@ To refresh your memory, here are the contracts you'll need for this page:
 
 @n What code could we write to sort the table by `"edit-distance"`? @fitb{}{@ifsoln{`sort(results, "edit-distance", true)`}}
 
-@n Which sorting criteria do you think will be more important for our spell checker?   `"word"`   or   @ifsoln-choice{`"edit-distance"`}   Why? @fitb{}{} +
+@n Which sorting criteria do you think will be more important for our spell checker?   `"word"`   or   @ifsoln-choice{`"edit-distance"`}   Why? +
 @fitb{}{@ifsoln{we're looking for the most likely replacement based on our training data and words from fewer edits are closer to the input.}}
 
-@n Complete the expression to extract just the first 3 rows with an `"edit-distance"` of 1. Then record them below. +
+@n Complete the expression to extract just the first 3 rows with an `"edit-distance"` of 1. +
 `first-n-rows(` @fitb{40em}{@ifsoln{`sort(results, "edit-distance", true), 3`}} `)` 
 
-@vspace{1ex}
-@indented{
-[cols="1a,1a", options="header"]
-|===
-| word 	| edit-distance
-| hello	| @ifnotsoln{@vspace{1ex}} @ifsoln{1}
-|	wells | @ifnotsoln{@vspace{1ex}} @ifsoln{1}
-|	well	| @ifnotsoln{@vspace{1ex}} @ifsoln{1}
-|===
-}
-
+@indented{What are the words for those three rows? @fitb{}{@ifsoln{hello, wells, well}}}
 == Real Spell Checkers Don't Return a Table...
 
-@link-instructions{Let's define a row. At the bottom of the *Definitions Area*, type `row2 = row-n(results, 1)`. Click "Run".""} 
+@link-instructions{Let's define a row. At the bottom of the Definitions Area, *type `row2 = row-n(results, 1)`*. Click "Run".}
 
 @n Evaluate `row2` in the *Interactions Area*. What do you get back? @fitb{}{@ifsoln{The second row}}
 
 @vspace{1ex}
 
-++++
-<style>
-/* add a dotted border around specialized directions */
-.myCustomClass { 
-  border: dotted 1px black; 
-  p {position: center !important;}
-}
-</style>
-++++
 
-[.myCustomClass]
-*Now that we know how to extract a single row from our table, we need to extract the specific information that we want from that row.*
-
-@n Evaluate `row2["word"]`. What do you get back? @fitb{}{@ifsoln{toll}} 
-
-@n Evaluate `row2["edit-distance"]`? What do you get back? @fitb{}{@ifsoln{3}}
+@n What does `row2["word"]` evaluate to? @fitb{3em}{@ifsoln{toll}}  `row2["edit-distance"]`? @fitb{}{@ifsoln{3}}
 
 @n Evaluate `row-n(results, 1)["word"]`. What did you get back? @fitb{8em}{@ifsoln{toll}}
 
 @vspace{1ex}
 
-[.myCustomClass]
-*Code like this (`["word"]` or `["edit-distance"]`) is called a @vocab{row accessor}.* 
+[.callout]
+*Code like this (`row2["word"]` or `row2["edit-distance"]`) is called a @vocab{row accessor}.*
 
 @n In your own words, what do row accessors do? @fitb{}{}
 @blanklines{2}{@ifsoln{Given a row and the title of a column, they try to access the value stored in that cell of the table.}}
 
-@n What code will produce the first suggested word from our table? @fitb{}{@ifsoln{`row-n(results, 0)["word"]`}}
+@n What code will produce the _first_ suggested word from our table? @fitb{}{@ifsoln{`row-n(results, 0)["word"]`}}
 
-@n What code will produce the edit-distance of the fifth suggested word from our table? @fitb{}{@ifsoln{`row-n(results, 4)["edit-distance"]`}}
+@n How can we get the `edit-distance` of the _fifth_ suggested word from our table? @fitb{}{@ifsoln{`row-n(results, 4)["edit-distance"]`}}
 
-@n What code will produce the seventy-fifth suggested word from our table? @fitb{}{@ifsoln{`row-n(results, 74)["word"]`}}
+@n How can we get the seventy-fifth suggested word from our table? @fitb{}{@ifsoln{`row-n(results, 74)["word"]`}}
 
 @n What is the seventy-fifth suggested word? @fitb{}{@ifsoln{wield}}
 

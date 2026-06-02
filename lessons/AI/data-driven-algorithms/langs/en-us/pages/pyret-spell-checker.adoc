@@ -6,32 +6,45 @@
 
 /* Cut the padding under each section */
 .sect1 { padding: 0 !important; }
+
+td { padding: 3px !important; }
 </style>
 ++++
 @link-instructions{Open the @starter-file{spell-checker} and click "Run".} Follow each of the instructions below to discover how our very own Pyret spell checker works.
 
-== Functions that suggest a list of words by making a single change
-These four functions produce results with an @vocab{edit-distance} of 1, meaning the suggestions are only one change away from the original.
+== Suggestions for 1 Edit-Distance
+The four functions below consume a word, and suggest a list of words that can be reached by making a *single change*.
 
-@n Evaluate `deletions("wello")`. How many suggestions does this function return? @fitb{}{@ifsoln{4}} +
-@hspace{1em}_Look back at your *deletions* in @printable-exercise{first-spell-checker.adoc}. How many of them are in this list?  1 2 3 4 5 _
+@vspace{1ex}
 
-@n Evaluate `insertions("wello")`. How many suggestions does this function return? @fitb{}{@ifsoln{151}} +
-@hspace{1em}_Look back at your *insertions* in @printable-exercise{first-spell-checker.adoc}. How many of them are in this list?  1 2 3 4 5 _
+Complete the table below by evaluating each expression, and recording the *number of suggestions* Pyret returns. *How many of YOUR suggestions from  @printable-exercise{first-spell-checker.adoc}* are in Pyret's list?
 
-@n Evaluate `swaps("wello")`.How many suggestions does this function return? @fitb{}{@ifsoln{4}} +
-@hspace{1em}_Look back at your *swaps* in @printable-exercise{first-spell-checker.adoc}. How many of them are in this list?  1 2 3 4 5 _
+[%autowidth, options="header", cols="<, ^, ^"]
+|===
+| Expression 	| # Suggestions | How many of your suggestions are here? (circle one)
+| @n `deletions("wello")`
+| @ifsoln{4}
+| @hspace{4em}1@hspace{4em}2@hspace{4em}3@hspace{4em}4@hspace{4em}5@hspace{4em}
 
-@n In the Interactions Area, evaluate `subs("wello")`. How many suggestions does this function return? @fitb{}{@ifsoln{125}} +
-@hspace{1em}_Look back at your *substitutions* in @printable-exercise{first-spell-checker.adoc}. How many of them are in this list?  1 2 3 4 _
+| @n `insertions("wello")`
+| @ifsoln{151}
+| @hspace{4em}1@hspace{4em}2@hspace{4em}3@hspace{4em}4@hspace{4em}5@hspace{4em}
 
-== Combining Functions
-Each of the functions above can be combined to generate word lists with a *larger edit-distance*.
+| @n `swaps("wello")`
+| @ifsoln{4}
+| @hspace{4em}1@hspace{4em}2@hspace{4em}3@hspace{4em}4@hspace{4em}5@hspace{4em}
 
-@n In your own words, what do you think `swaps(swaps("wello"))` does? @fitb{}{} +
+| @n `subs("wello")`
+| @ifsoln{125}
+| @hspace{4em}1@hspace{4em}2@hspace{4em}3@hspace{4em}4@hspace{4em}5@hspace{4em}
+|===
+
+== Suggestions for Larger Edit-Distances
+
+@n Evaluate `swaps(swaps("wello"))`. What does it do? @fitb{}{} +
 @fitb{}{@ifsoln{it will compute all possible swaps for "wello", then compute every swap for _those_ swaps!, resulting in a list with an edit-distance of 2.}}
 
-@n In your own words, what do you think `swaps(subs("wello"))` does? @fitb{}{} +
+@n Evaluate `swaps(subs("wello"))`. What does it do?: @fitb{}{} +
 @fitb{}{@ifsoln{For every possible 1-letter substitution, find every possible swap, resulting in a list with an edit-distance of 2.}}
 
 == Removing "Junk" Words
@@ -39,7 +52,7 @@ Pyret has a function `only-real`, that takes in a table of suggested words and a
 
 @n Evaluate `insertions("flt")`. How many suggestions does it return? @fitb{}{@ifsoln{101}}
 
-@n Evaluate the three expressions below and record what they return
+@n Evaluate the three expressions below and record the words they return
 
 [cols="1a,1a"]
 |===
