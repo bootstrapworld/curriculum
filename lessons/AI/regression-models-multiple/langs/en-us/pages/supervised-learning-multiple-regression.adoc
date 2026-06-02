@@ -7,69 +7,69 @@ div#body sub { position: relative; bottom: 0.3em; }
 
 div#body .center { padding: 0 !important; }
 
-.mr-table td:first-child { background: #eee !important; }
-.mr-table td:last-child { padding: 0.5625em 0.125em !important; }
+/* subtract the 5px padding to line up with .indented block */
+.big-codeblock .big {
+	background: #f7f7f8;
+	display: inline-block;
+	padding: 5px;
+	margin-left: calc(3em - 5px);
+	margin-top: 2ex;
+}
 
-.editbox, .code { background: none !important; }
+.editbox, .code, .pyret-comment { background: none !important; }
 </style>
 ++++
 
 To complete this page, you'll be using the following contracts:
 
 @indented{
-@show{(contract "reg-model-S" '((table-name Table) (x-cols List<String>) (y-col String)) "Number")} +
-@show{(contract "reg-model-code" '((table-name Table) (x-cols List<String>) (y-col String)) "Code")}
+@show{(contract "reg-model-code" '((table-name Table) (explanatory List<String>) (response String)) "Code")} +
+@show{(contract "reg-model-S" '((table-name Table) (explanatory List<String>) (response String) (model "Row->Number")) "Number")}
 }
+
+@vspace{1ex}
 
 == Building a Two-Variable Model
 
-@n Evaluate `reg-model-code(training-data, [list: "curve", "skew"], "steering-angle")` to produce the predictor function. Read the function to fill in the table below (round your numbers to 2-3 decimal places):
+@n Evaluate `reg-model-code(training-data, [list: "curve", "skew"], "steering-angle")` to produce the predictor function, then fill in the model below. (Round your numbers to 2-3 digits)
 
-[.FillVerticalSpace, cols="^.^1a,^.^1a", stripes="none", options="header"]
-|===
-| `coefficient-name` | `coefficient-value`
-| `intercept`        | @ifsoln{}
-| `curve`            | @ifsoln{}
-| `skew`             | @ifsoln{}
-|===
+[.big-codeblock]
+@big{
+`fun cs-predictor(r):` +
+@hspace{2em} `(` @fitbruby{8em}{}{@math{m_{curve}}} `* r["curve"]) + (` @fitbruby{8em}{}{@math{m_{skew}}} `* r["skew"]) +` @fitbruby{8em}{}{@math{b}} +
+`end`
+}
 
-@n Which variable has the larger coefficient? @fitb{}{@ifsoln{`curve`}} What does that tell you? @fitb{}{} +
+
+@n Which variable has the larger coefficient? @fitb{5em}{@ifsoln{`curve`}} What does that tell you? @fitb{}{} +
 @fitb{}{@ifsoln{`curve` has more "pull" on the prediction — a one-unit change in `curve` shifts the predicted steering angle more than a one-unit change in `skew`.}}
 
-@n Use `reg-model-S` to compare the fit of your single-variable and two-variable models:
+@n *Copy-and-paste* your model into the Definitions Area, and *change the name* to `cs-predictor`.
 
-[cols="3a, 1a", options="header", stripes="none"]
+@n Use `reg-model-S` to compare the fit of your 1-variable and 2-variable models:
+
+[cols="6a, ^1a", options="header", stripes="none"]
 |===
-| Model                                                                           | @math{S}-value
-| `reg-model-S(training-data, [list: "curve"], "steering-angle")`                          | @ifsoln{}
-| `reg-model-S(training-data, [list: "curve", "skew"], "steering-angle")`                  | @ifsoln{}
+| Model
+| @math{S}-value
+| `reg-model-S(training-data, [list: "curve"], "steering-angle", curve-predictor)`
+| @ifsoln{}
+
+
+| `reg-model-S(training-data, [list: "curve", "skew"], "steering-angle", cs-predictor)`
+| @ifsoln{}
 |===
 
-@n Adding `skew` made the S-value @fitbruby{8em}{@ifsoln{smaller}}{larger/smaller}. Does that mean the fit is @fitbruby{8em}{@ifsoln{better}}{better/worse}?
+@n Adding `skew` to the model made the S-value @fitbruby{14em}{@ifsoln{smaller}}{larger/smaller}. Does that mean the fit is @fitbruby{13em}{@ifsoln{better}}{better/worse}?
 
 == Thinking Critically About Variables
 
 @n If you had to *drop one variable* from the two-variable model, which would you drop, and why? @fitb{}{} +
 @blanklines{2}{@ifsoln{`skew` — its coefficient is smaller, meaning it contributes less to the prediction. Dropping it would cost less accuracy than dropping `curve`.}}
 
-@n What do you think would happen to the S-value if you added all four variables — `curve`, `skew`, `offset`, and `speed` — to the model? Try it! @fitb{}{} +
-@fitb{}{@ifsoln{S-value:}} +
+@n What do you think would happen to the S-value if you added all four variables — `curve`, `skew`, `offset`, and `speed` — to the model? @fitb{}{} +
+@fitb{}{}
+
+
+@n Try it out! What was the result? @math{S-value:} @fitb{}{@ifsoln{}} +
 @blanklines{2}{@ifsoln{It decreases further — more variables can explain more variation, even if some contribute only a little.}}
-
-@n Suppose the `curve` sensor in your self-driving car broke and could not be used. Try building the best model you can _without_ `curve`. What combination of remaining variables gives the lowest S-value?
-
-[options="header", stripes="none"]
-|===
-| Variables Used (no `curve`) | S-value
-| @ifsoln{} | @ifsoln{}
-| @ifsoln{} | @ifsoln{}
-| @ifsoln{} | @ifsoln{}
-|===
-
-Best combination (without `curve`): @fitb{}{}
-
-@n Use `reg-model-code` to build your best no-`curve` predictor and try it with `drive`. How does it perform compared to the `curve`-only model from the last lesson? @fitb{}{} +
-@blanklines{2}{@ifsoln{Significantly worse in tight curves — `curve` carries the most important information about when and how much to steer. The other variables can partially compensate, but not fully.}}
-
-@n What does this tell you about how important `curve` is to the model? @fitb{}{} +
-@blanklines{2}{@ifsoln{`curve` is the most critical variable — it explains far more of the variation in `steering-angle` than any other single variable. A model without it is fundamentally missing the most important signal.}}

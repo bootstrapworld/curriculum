@@ -81,7 +81,7 @@ To make predictions in three dimensions, *we need to do regression in _three_ di
 
 [.big-codeblock]
 @big{
-`fun steering-angle(r):` +
+`fun curve-skew-predictor(r):` +
 @hspace{2em} `(` @math{m_{curve}} `* r["curve"]) + (` @math{m_{skew}} `* r["skew"]) + b` +
 `end`
 }
@@ -124,7 +124,7 @@ Different fields use different vocabulary for the same ideas:
 
 [cols="^1a,^1a", options="header", stripes="none"]
 |===
-| Math Term  | Machine Learning Term
+| In Math... | In Machine Learning...
 | Variable   | Parameter
 | Slope      | Weight
 |===
@@ -139,7 +139,7 @@ Some tech companies make a show of open-sourcing their models while declining to
 == Multiple Regression in Pyret
 
 === Overview
-Students use `reg-model-code` with multiple input columns to build a two-variable steering predictor, use `mr-coeffs` and `S` to evaluate and compare models, and think critically about which variables to keep.
+Students use `reg-model-code` with multiple input columns to build a two-variable steering predictor, and `reg-model-S` to evaluate and compare models. They think critically about which variables to keep.
 
 === Launch
 @slidebreak{Launch}
@@ -154,8 +154,8 @@ Adding a second variable to the list is all it takes to go from a line to a plan
 
 Pyret also has a tool to measure the fit of any row-consuming regression model:
 
-@show{(contract "reg-model-S" '((table-name Table) (explanatories List<String>) (response String)) "Number"
-"produces the S-value (overall error) of a multiple-regression model"
+@show{(contract "reg-model-S" '((table-name Table) (explanatory List<String>) (response String) (model "Row->Number")) "Number")}
+"produces the S-value (overall error) of a multiple-regression model, fit to the specific columns"
 )}
 
 === Investigate
@@ -163,23 +163,41 @@ Pyret also has a tool to measure the fit of any row-consuming regression model:
 
 @lesson-instruction{
 - Make sure @starter-file{self-driving} is open, and you can evaluate `training-data`.
-- Use `reg-model-code`, `reg-model-S` to complete @printable-exercise{supervised-learning-multiple-regression.adoc}.
+- Use `reg-model-code`, `reg-model-S` to complete the first section of @printable-exercise{supervised-learning-multiple-regression.adoc}.
 }
 
 @slidebreak{InvestigateR}
-
+@right{@image{images/self-driving-car.jpg, 300}}
 @QandA{
 @Q{How did the S-value change when you added `skew` as a second predictor?}
 @A{It decreased — using two predictors explains more of the variation in `steering-angle`, leaving less unexplained error.}
 
 @Q{Looking at the coefficients for `curve` and `skew`, which has more _influence_ on the predicted steering angle?}
 @A{`curve` — its coefficient is larger, meaning a one-unit change in `curve` moves the prediction more than a one-unit change in `skew`.}
+}
 
+@slidebreak{Investigate}
+
+*Sensors cost money!* Adding all the various sensors to make a car self-driving adds thousands of dollars to the cost of manufacturing, and the extra computing power needed to process the data makes the chips used in those cars more expensive too. To make cars affordable, companies need to make tough decisions about which sensors to keep and which to drop.
+
+@lesson-instruction{
+- Complete the rest of @printable-exercise{supervised-learning-multiple-regression.adoc}.
+- @opt{For a deeper exploration, complete @opt-printable-exercise{dropping-variables.adoc}}
+}
+
+
+@slidebreak{InvestigateR}
+@ifslide{@right{@image{images/self-driving-car.jpg, 300}}}
+@QandA{
 @Q{If you had to drop one of the two variables, which would you drop and why?}
 @A{`skew` — it has the smaller coefficient and removing it would cost less accuracy than removing `curve`.}
 
 @Q{If you couldn't use `curve` at all, could you still build a workable model?}
 @A{You could build a model, but it would perform significantly worse. `curve` carries the most information about how to steer; the other variables only fill in part of the gap.}
+}
+
+@lesson-instruction{
+- Complete @printable-exercise{self-driving-car-reflection.adoc}.
 }
 
 === Synthesize

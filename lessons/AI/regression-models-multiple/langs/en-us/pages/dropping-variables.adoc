@@ -1,0 +1,58 @@
+= Dropping Variables
+
+++++
+<style>
+/* custom positioning for subscript */
+div#body sub { position: relative; bottom: 0.3em; }
+
+div#body .center { padding: 0 !important; }
+
+/* subtract the 5px padding to line up with .indented block */
+.big-codeblock .big {
+	background: #f7f7f8;
+	display: inline-block;
+	padding: 5px;
+	margin-left: calc(3em - 5px);
+	margin-top: 2ex;
+}
+
+.editbox, .code, .pyret-comment { background: none !important; }
+</style>
+++++
+
+To complete this page, you'll be using the following contracts:
+
+@indented{
+@show{(contract "reg-model-code" '((table-name Table) (explanatory List<String>) (response String)) "Code")} +
+@show{(contract "reg-model-S" '((table-name Table) (explanatory List<String>) (response String) (model "Row->Number")) "Number")}
+}
+
+@vspace{1ex}
+
+*A car company wants to cut the price of the car, by removing unneeded sensors. As their machine learning engineer, they ask you if they could drop the video camera used to determine the `curve` of the road.*
+
+@n What combination of remaining variables gives the lowest S-value, when fit to _all the explanatory columns_? (Round your numbers to 2-3 digits)
+
+[options="header", stripes="none"]
+|===
+| Variables Used (no `curve`) 	| S-value
+| `skew` and `offset` 			| @ifsoln{33.98}
+| `skew` and `speed` 			| @ifsoln{43.57}
+| `offset` and `speed`			| @ifsoln{37.90}
+| `skew`, `offset`, and `speed` | @ifsoln{33.98}
+|===
+
+Best combination (without `curve`): @fitb{}{}
+
+@n Use `reg-model-code` to build your best no-`curve` predictor and try it with `drive`. How does it perform compared to the `curve`-only model from the last lesson? @fitb{}{} +
+@blanklines{3}{@ifsoln{Significantly worse in tight curves — `curve` carries the most important information about when and how much to steer. The other variables can partially compensate, but not fully.}}
+
+@n What does this tell you about how important `curve` is to the model? @fitb{}{} +
+@blanklines{3}{@ifsoln{`curve` is the most critical variable — it explains far more of the variation in `steering-angle` than any other single variable. A model without it is fundamentally missing the most important signal.}}
+
+
+@n They ask you to recommend *two* sensors that can be dropped, with the smallest-possible loss to safety. Which would you drop, and why?
+
+@blanklines{3}{
+@ifsoln{`speed` has no effect on the @math{S}-value, so that's an easy one. `offset` has the second-smallest impact, so that's the next best candidate to drop as well.}
+}
