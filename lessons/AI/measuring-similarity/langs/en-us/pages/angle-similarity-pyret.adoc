@@ -1,0 +1,56 @@
+= Angle Similarity (Pyret)
+
+@link-instructions{Return to the @starter-file{ai-fast-food} and make sure you've clicked "Run".}
+
+== Price v Fries
+
+- Make `image-scatter-plot(fast-food, "fries", "price", restaurant-img)`. 
+- Adjust the `x-min:` and `y-min:` to `0` so that we can imagine the rays that would connect our points to the origin. 
+
+@n Use the code for `restaurant-img` in the Definitions Area to help you determine which restaurant each dot represents.
+
+- Which dot represents In-N-Out? @fitb{}{@ifsoln{the green one}}
+- Which restaurant does the biggest dot represent? @fitb{}{@ifsoln{Dairy Queen}}
+
+@n Based on the image scatter plot, which restaurants do you expect to be most similar to `In-N-Out` in the Price-Fries space through the lens of `angle-similarity`? Why? @fitb{}{@ifsoln{McDonalds (represented by the smallest dot) and Wendy's (the black dot that is the same size as In-N-Out)}}
+@fitb{}{@ifsoln{are in almost the same direction from the origin as In-N-Out}}
+
+@n Compute `angle-similarity(fast-food, "I", [list: "fries", "price"])`. Which restaurant does it compute to be the most similar? @fitb{}{@ifsoln{Wendy's with an angle of 0.1489}}
+
+Test out @show{(code '(angle-similarity fast-food "I" (list "price")))} 
+
+@n Why are all of the measures for angle similarity zero? @fitb{}{@ifsoln{It doesn't make any sense to find the angle between the price and the price.}}
+
+== Price v Burgers
+
+- Make an image scatter plot comparing the restaurants based on burgers and price.
+- Adjust the `x-min:` and `y-min:` to `0` so that we can imagine the rays that would connect our points to the origin. 
+
+@n Based on the image scatter plot, which restaurants do you expect to be most similar to `In-N-Out` in the Price-Burgers space through the lens of `angle-similarity`? Why? @fitb{}{@ifsoln{Wendy's is almost on the same ray from the origin.}}
+@fitb{}{}
+
+@teacher{Students might be tempted by the fact that Five Guys is on the same vertical grid line as In--Out. Remind them to connect rays back to the origin and notice how large that angle is!}
+
+@n Compute `angle-similarity(fast-food, "I", [list: "burgers", "price"])`. Which restaurant does it compute to be the most similar? @fitb{}{@ifsoln{Wendy's with an angle of 1.586}}
+
+
+== Burgers v Fries
+
+- Make an image scatter plot comparing the restaurants based on burgers and fries.
+- Adjust the `x-min:` and `y-min:` to `0` so that we can imagine the rays that would connect our points to the origin. 
+
+@n Based on the image scatter plot, which restaurants do you expect to be most similar to `In-N-Out` in the Burgers-Fries space through the lens of `angle-similarity`? Why? @fitb{}{@ifsoln{Five Guys}}
+
+@teacher{If students forget to change the `x-min` and `y-min` they will likely get a wildly different answer here!}
+
+@n Compute `angle-similarity(fast-food, "I", [list: "burgers", "fries"])`. Which restaurant does it compute to be the most similar? @fitb{}{@ifsoln{Five Guys with an angle of 2.82}}
+
+== Price v Burgers v Fries
+
+@n What if we want to measure similarity, taking into account Price, Fry Quality, and Burger Quality? How can we use all three? @fitb{}{}
+
+@ifnotsoln{@blanklines{2}{}}
+
+@vspace{1ex}
+
+@teacher{It's worth surfacing students' ideas here, but please don't try to actually answer the question before moving on in the lesson. We have several excellent visuals designed to support this cognitive leap!}
