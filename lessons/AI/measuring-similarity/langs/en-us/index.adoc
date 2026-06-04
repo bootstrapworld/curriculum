@@ -314,11 +314,11 @@ Suppose the `(fries, burgers)` scores for two places with different strengths ar
 @A{The places with different strengths.}
 }
 
-There are a few problems here:
+There are a few problems with using the distance formula, however:
 
-- Our distance algorithm doesn't take _scales_ into account.  
-  * `fries` and `price` are both scored 1-to-5 and `burgers` are scored 1-to-10. The distance between a score of 9 and 10 for burgers is larger than the one between a 4.0 and a 4.5 for fries, even though they are proportionally the same.
-@scrub{- TODO @schanzer can we highlight another problem here?}
+- It focuses on _count_, rather than _proportion_: restaurant scores that differ by 1 on the `fries` scale are _just as different_ as scores that differ by 2 on the `burgers` scale (both are one-fifth of the maximum points). The distance formula will treat the `burgers` difference as being "larger", because 2 > 1.
+- It ignores _orientation_: As humans, we know that two places that focus on burgers are going to be a lot more similar that one that focuses on burgers and another that focuses on fries! But the distance formula doesn't care if two restaurants both specialize in the same thing or not -- it only cares about the distance _between_ the points, not _where those points are on the graph._
+
 
 === Investigate
 @slidebreak{InvestigateR}
@@ -392,7 +392,8 @@ Pyret also has a function for computing the `angle-similarity` of every row in t
 
 @QandA{
 @Q{What is an advantage of `angle-similarity` over `distance-similarity`?}
-@A{When points are very similar based on one attribute but far apart based on another, it will do a better job of accounting for the similarity.}
+@A{Angle similarity focuses on the proportion of scores ("these restaurants' burgers are all _twice as good_ as the fries"), but distance focuses only on the scores themselves ("the distance between these two restaurants is 4.3"). One of these is much more useful to a person who wants a good burger!}
+@A{Angle similarity takes _direction_ into account, and pays attention to points that are more on the burger side v. the fry side of the coordinate plane. Distance doesn't.}
 }
 
 == Similarity in Multiple Dimensions
