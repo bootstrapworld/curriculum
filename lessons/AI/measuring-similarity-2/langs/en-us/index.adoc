@@ -59,7 +59,7 @@ Let's start with how WE as humans think about similarity between images?
 Modern ML models are capable of interpreting elements of an image ("person", "car", etc.). This belong to a class of Machine Learning algorithms called "Computer Vision", which relies heavily on more advanced -- and computationally intensive -- concepts that we won't cover here.
 
 
-Can a Data Driven Algorithm help us re-create Google Image Search, even without the fancy Compute Vision tech?
+Can a Data Driven Algorithm help us re-create Google Image Search, even without the fancy Computer Vision tech?
 
 === Investigate
 @slidebreak{Investigate}
@@ -74,6 +74,7 @@ What other numbers could be used to describe an image?
 @slidebreak{Investigate}
 
 @lesson-instruction{
+- Open the @starter-file{ai-image}
 - Complete the first section of @printable-exercise{image-similarity.adoc}
 }
 
@@ -155,7 +156,7 @@ You've just constructed a @vocab{model} for images, which captures certain infor
 
 Luminance-Entropy Space is pretty good for this search, because both of the snowy images are already clustered together, away from the rest.
 
-@center{@show{(code '(angle-similarity decorated2 "4" (list "entropy", "luminance")))}}
+@center{@show{(code '(angle-similarity decorated "4" (list "ENTROPY" "LUMINANCE")))}}
 
 Was `simple-similarity` useful? How about `distance-similarity`?
 
@@ -165,22 +166,22 @@ Was `simple-similarity` useful? How about `distance-similarity`?
 It would be really nice to have axes for each color, so we could see how Red, Green, and Blue each image is. If we used `green` as an axis, those grassy images would definitely stand out in that dimension!
 
 @QandA{
-Let's take a closer look at `decorated2`, and see if there's anything we can use here.
-@Q{What is the `color-names` column about?}
+Let's take a closer look at `decorated`, and see if there's anything we can use here.
+@Q{What is the `COLOR-NAMES` column about?}
 @A{It's the dominant color for every pixel in the image}
 
-@Q{How could we generate numbers from the `color-names` columns?}
+@Q{How could we generate numbers from the `COLOR-NAMES` columns?}
 @A{Answers will vary, but hopefully students will suggest counting the occurrences of each color}
 }
 
 @slidebreak{Launch}
-*We could count the number of reds, greens and blues in `color-names`!*
+*We could count the number of reds, greens and blues in `COLOR-NAMES`!*
 
 We don't really care about the _order_ of those words - we just want to know how many pixels are red-dominant, green-dominant, or blue-dominant!
 
 In the Definitions Area, define a new table:
 
-@show{(code '(define decorated-bag (add-bag-cols decorated "color-names")))}
+@show{(code '(define decorated-bag (add-bag-cols decorated "COLOR-NAMES")))}
 
 What did you get back?
 
@@ -280,7 +281,7 @@ In the Definitions Area of the @starter-file{ai-image}:
 - Find two images you *like*, and set those column values to `true`
 - Find two images you *dislike*, and set those column values to `true`
 - Tag all the images with suns in them, by changing the `tag` column value to `"sun"`
-- Click "Run" and make sure `decorated2` has your human-added values!
+- Click "Run" and make sure `decorated-bag` has your human-added values!
 }
 
 @lesson-instruction{
@@ -289,15 +290,15 @@ In the Definitions Area of the @starter-file{ai-image}:
 
 
 @slidebreak{InvestigateR}
-@right{@image{images/centroid.png}}
+@right{@image{images/centroid.png, 300}}
 
 We've created a function in Pyret to calculate centroids for you:
 
-@show{(contract "add-centroid" '(Table, String, List<String>) "Table")}
+@show{(contract "add-centroid" '(Table String List<String>) "Table")}
 
 It consume the table, a name for the centroid, and a *list of the document IDs* for which you want to build the centroid. For example:
 
-@show{(code '(add-centroid decorated2 "sun" (list: 0, 6, 7, 8)))}
+@show{(code '(add-centroid decorated-bag "sun" (list: 0 6 7 8)))}
 
 Try it out!
 
@@ -305,8 +306,8 @@ Try it out!
 Building centroids is powerful, because now we can add human information about _groups_. We've build some helper functions to get commonly-used document IDs:
 
 @indented{
-@show{(contract "liked-ids" '(Table) "List<String>")}
-@show{(contract "disliked-ids" '(Table) "List<String>")}
+@show{(contract "liked-ids" '(Table) "List<String>")} +
+@show{(contract "disliked-ids" '(Table) "List<String>")} +
 @show{(contract "tagged-ids" '(Table String) "List<String>")}
 }
 

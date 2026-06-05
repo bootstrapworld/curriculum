@@ -6,7 +6,7 @@
 
 @n Images 4 and 5 are both "snowy". Which images are "grassy"? @fitb{}{@ifsoln{Images 3 and 6}}
 
-@n Evaluate `simple-similarity(decorated2, "4", [list: "luminance", "entropy"])`. Which image ID was the closest match to `"4"`? @fitb{}{@ifsoln{`"0"`}}
+@n Evaluate `simple-similarity(decorated, "4", [list: "LUMINANCE", "ENTROPY"])`. Which image ID was the closest match to `"4"`? @fitb{}{@ifsoln{`"0"`}}
 
 @n Try again, this time using `distance-similarity`. Which image ID was the closest match to `"4"`? @fitb{}{@ifsoln{`"3"`}}
 
@@ -14,7 +14,7 @@
 
 @n How well  `angle-similarity` work for image 3, using the same dimensions? @fitb{}{@ifsoln{not well!}}
 
-@n Evaluate `image-scatter-plot(decorated2, "luminance", "entropy", doc-thumbnail)`. Can you explain why searching in Luminance-Entropy Space worked well for our snowy images, but not the grassy ones?
+@n Evaluate `image-scatter-plot(decorated2, "LUMINANCE", "ENTROPY", doc-thumbnail)`. Can you explain why searching in Luminance-Entropy Space worked well for our snowy images, but not the grassy ones?
 
 @blanklines{3}{
 @ifsoln{In Luminance-Entropy Space, there's a clear cluster for the snowy images. The grassy ones, however, are all spread out.}
@@ -25,7 +25,7 @@
 *Define a new image model, with attributes for each color:* +
 @show{(code '(define decorated-bag (add-bag-cols decorated "color-names")))}
 
-@n Evaluate `image-scatter-plot(decorated2, "luminance", "green", doc-thumbnail)`.
+@n Evaluate `image-scatter-plot(decorated-bag, "LUMINANCE", "green", doc-thumbnail)`.
 
 @n Are the grassy images clustered in Luminance-Green Space? @fitb{}{@ifsoln{yes!}} The snowy images? @fitb{}{@ifsoln{No}}
 
