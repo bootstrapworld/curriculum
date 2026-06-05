@@ -1,4 +1,4 @@
--- last modified 2026-06-5
+-- last modified 2023-03-12
 
 -- sread(i) reads an s-expression from buffered input port i
 --
@@ -9,74 +9,29 @@
 local function sread_line(i)
   while true do
     local c = i:read(1)
-    if not c or c == '\r' or c == '\n' then break end
+    if c == '\r' or c == '\n' then
+      break
+    end
   end
 end
 
 local function sread_block_comment(i)
   while true do
     local c = i:read(1)
-    if not c then break end  -- EOF guard
     if c == '|' then
       c = i:read(1)
-      if not c or c == '#' then break end
-      if c == '|' then buf_toss_back_char(c, i) end
+      if c == '#' then
+        break
+      elseif c == '|' then
+        buf_toss_back_char(c, i)
+      end
     end
   end
-end
-
-local function sread_string(i)
-  local result = {}
-  local in_escape_p = false
-  while true do
-    local c = i:read(1)
-    if not c then break end  -- EOF guard
-    if in_escape_p then
-      in_escape_p = false
-      table.insert(result, c)
-    elseif c == '\\' then
-      in_escape_p = true
-    elseif c == '"' then
-      break
-    else
-      table.insert(result, c)
-    end
-  end
-  return table.concat(result)
-end
-
-local function sread_atom(i)
-  local c
-  local result = {}
-  local in_escape_p = false
-  while true do
-    c = buf_peek_char(i)
-    if not c then break end  -- EOF guard
-    if in_escape_p then
-      in_escape_p = false
-      i:read(1)
-      table.insert(result, c)
-    elseif c == '\\' then
-      in_escape_p = true
-      i:read(1)
-      table.insert(result, c)
-    elseif c == ' ' or c == '\t' or c == '\n' or c == '\r'
-        or c == '(' or c == '[' or c == ')' or c == ']' or c == ';' then
-      break
-    else
-      i:read(1)
-      table.insert(result, c)
-    end
-  end
-  result = table.concat(result)
-  local n = tonumber(result)
-  return (n or result)
 end
 
 local function sread_ignorespaces(i)
   while true do
     local c = buf_peek_char(i)
-    if not c then break end  -- EOF guard
     if c == ' ' or c == '\t' or c == '\n' or c == '\r' then
       i:read(1)
     elseif c == ';' then
