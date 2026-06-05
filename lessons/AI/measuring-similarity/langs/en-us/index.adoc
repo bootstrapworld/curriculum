@@ -186,7 +186,7 @@ Pyret has several functions for measuring similarity. They all work a little dif
 
 @hspace{1em}@show{(contract "simple-similarity" '("Table" "String" "List<String>") "Table")}
 
-Pyret's `simple-similarity` function _compares every row in the table_ to the Row with the given ID, checking to see if the specified columns are identical. If they are, the similarity value is one. If not, the similarity value is zero. 
+Pyret's `simple-similarity` function _compares every row in the table_ to the Row with the given ID, checking to see if the specified columns are identical. If they are, the similarity value is one. If not, the similarity value is zero. It produces a Table, sorted from "most similar" to "least similar", with an extra column of zeroes and ones listing the similarity score.
 
 For example, if we wanted to know which restaurants had the same `price` as In-N-Out (whose ID is `I`) we would use the following code: +
 @hspace{1em}@show{(code '(simple-similarity fast-food "I" (list "price")))}
@@ -196,11 +196,11 @@ For example, if we wanted to know which restaurants had the same `price` as In-N
 }
 
 @QandA{
-@Q{How many dimensions did our `simple-similarity` function use?}
+@Q{How many dimensions did our `simple-similarity` function use when comparing restrautants based on `price`?}
 @A{one}
 
 @Q{Why does `simple-similarity` give a 1 for McDonalds when we use the `price` column?}
-@A{McDonalds `price` rating in our data table is the exact same as the `price` rating for In-N-Out.}
+@A{McDonalds' `price` rating in our data table is the exact same as the `price` rating for In-N-Out.}
 
 @Q{Why will we *always* get at least one perfect match in a `simple-similarity` table?}
 @A{Because whatever ID we use will always be identical to itself!}

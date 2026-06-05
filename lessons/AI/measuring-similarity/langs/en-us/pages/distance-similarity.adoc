@@ -3,34 +3,29 @@
 <style>
 .one-dimension td, .two-dimensions td { padding: 0 0.6em !important; }
 #preamble_disabled { flex-grow: 0 !important; }
-table { margin: 0 !important; }
+table:not(.data-table) { margin: 0 !important; }
 </style>
 ++++
 
-Here's the data table for our fast food restaurants:
+Here's the data table for our fast food restaurants. If In-N-Out isn't available, what's the _most similar alternative?_
 
 [.data-table, cols="^.^1a, 4a, ^4a, ^4a, ^4a", options="header"]]
 |===
-| ID| Restaurant  | Price (1 = cheap)| Fries (5=best) | Burgers (10=best)
-| 1 | McDonalds   | 1.45             | 4.6            | 5
-| 2 | Burger King | 1.51             | 4.1            | 6
-| 3 | Wendy's     | 1.47             | 4.5            | 7
-| 4 | Five Guys   | 2.20             | 3.9            | 8
-| 5 | Dairy Queen | 2.11             | 3.7            | 4
-| 6 | @star *In-N-Out* | *1.45*      | *4.4*          | *8*
+| ID  |  Restaurant  | Price (1 = cheap)| Fries (5=best) | Burgers (10=best)
+| "M" | McDonalds   | 1.45             | 4.6            | 5
+| "B" | Burger King | 1.51             | 4.1            | 6
+| "W" | Wendy's     | 1.47             | 4.5            | 7
+| "F" | Five Guys   | 2.20             | 3.9            | 8
+| "D" | Dairy Queen | 2.11             | 3.7            | 4
+| "I" | @star *In-N-Out* | *1.45*      | *4.4*          | *8*
 |===
 
-@vspace{1ex}
-
-Let's Investigate: If In-N-Out isn't available, what's the _most similar alternative?_
-
-@vspace{1ex}
 
 [.no-flex-section]
 == Distance in 1 Dimension
-@n For each of the attributes plotted below, *find In-N-Out* and mark it with a @star. 
+@n Use the data table at the top of the page to help you find *In-N-Out* on each of the dot-plots below, and mark it with a star (@star).
 
-@n Using the provided number lines below and the corresponding columns of data above, complete each row below by *finding the closest restaurant* in that dimension and *calculating the `distance-similarity`* to In-N-Out. 
+@n Complete each row by *finding the closest restaurant* in that dimension and *calculating the `distance-similarity`* to In-N-Out.
 
 @vspace{1ex}
 
@@ -75,8 +70,6 @@ Let's Investigate: If In-N-Out isn't available, what's the _most similar alterna
 |===
 
 @n Use the @starter-file{ai-fast-food} to compute a `distance-similarity` table for In-N-Out and each pair of columns below. Then find the distance between In-N-Out and Five Guys in each space, using the tables.
-
-@vspace{1ex}
 
 [.two-dimensions,cols="5a,1a,5a", frame="none", grid="none", stripes="none"]
 |===
