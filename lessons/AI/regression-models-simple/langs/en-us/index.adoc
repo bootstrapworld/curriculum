@@ -24,7 +24,7 @@
 
 | Relevant Resources
 |
-- @opt{If you think your students will want the chance to actually see the first self-driving car in action, you can share @link{https://www.youtube.com/watch?v=ntIczNQKfjQ, "this two-minute video"} from the Carnegie Mellon University Robotics Institute.}
+- @link{https://www.youtube.com/watch?v=ntIczNQKfjQ, "This two-minute video"} from the Carnegie Mellon University Robotics Institute} shows the first self-driving car in action.
 |===
 
 == Self-Driving Cars
@@ -46,7 +46,7 @@ What do _you_ think?
 
 @slidebreak{Launch}
 
-Self-driving cars work via a lot of inputs (sensors, cameras, etc.) and a lot of outputs (how much to accelerate, brake, and steer). Steering, for example, is incredibly difficult! A car needs to think about:
+Self-driving cars work via a lot of inputs (sensors, cameras, etc.) and a lot of outputs (how much to accelerate, brake, and steer). Steering, for example, is incredibly difficult! Considerations include:
 
 - Whether the road ahead bends to the left or right, and how sharply
 - How far the car is from the center of the lane
@@ -75,8 +75,7 @@ Here's what ALVINN's training entailed:
 (1) A person drove the vehicle while a front-facing video camera recorded the road.
 
 - In the context of @vocab{supervised learning}, the human driver is often referred to as the _supervisor_.
-- The supervisor demonstrates the correct behavior.
-- The input-output pairs collected during this phase form the @vocab{training corpus}.
+- The supervisor demonstrates the correct behavior (e.g. which direction the steering wheel should be turned)
 
 (2) 10 times each second, ALVINN recorded...
 
@@ -85,7 +84,7 @@ Here's what ALVINN's training entailed:
 
 @slidebreak{Launch}
 
-(3) ALVINN's training data can be represented as an input-output table, with road images and obstacle distances as inputs and the correct steering angles as outputs.
+(3) ALVINN's training data (@vocab{training corpus}) can be represented as an input-output table, with road images and obstacle distances as inputs and the correct steering angles as outputs.
 
 @indented{
 [cols="^.^1,^.^1,^.^1", stripes="none", options="header"]
@@ -161,39 +160,41 @@ Give students several minutes to play the simulator before debriefing. Students 
 @Q{What columns did you see in your training data table?}
 @A{`speed`, `curve`, `skew`, `offset`, and `steering-angle`}
 
-@Q{What does a positive `steering-angle` mean? A negative one?}
-@A{Positive means turning right; negative means turning left (or vice versa, depending on the simulator's convention).}
+@Q{What is the difference between a positive and negative `steering-angle`?}
+@A{Positive means turning right}
+@A{Negative means turning left}
+@A{(This could be vice versa for other simulators, depending on the simulator's convention.)}
 
 @Q{How many rows of data did you collect in a few minutes of driving?}
-@A{Answers will vary — probably a few hundred rows.}
+@A{Answers will vary — probably 500 to 1000.}
 
-@Q{Do you think that's enough data to build a reliable model?}
-@A{Probably not — a few minutes of driving won't cover all possible road conditions. There's a lot of variation we might have missed.}
+@Q{Training a driving model requires the best possible data. Do you think that you or someone else could do a better job of driving the car around the track with more practice?}
+@A{Probably!}
 }
 
 @slidebreak{Investigate}
 
-Training a model requires a lot of data — far more than students can collect in a classroom.
-
 @lesson-point{
-We've prepared a large @vocab{training corpus} for you — thousands of rows of expert driving data, collected across many different road conditions. It's already loaded in the starter file as `training-data`.
+We've prepared a @vocab{training corpus} for you containing expert driving data, collected across many different road conditions and driving speeds. It's already loaded in the starter file as `training-data`.
+}
+
+@QandA{
+@Q{Looking at the `training-data` table, what is the thing we're trying to _predict_?}
+@A{The `steering-angle` — how far to turn the wheel.}
+
+@Q{What _type_ of value is a steering angle?}
+@A{A number (degrees of rotation).}
+
+@Q{What other data types do you see in this table?}
+@A{None! All of the data columns are quantitative.}
 }
 
 === Synthesize
 @slidebreak{Synthesize}
 
 @QandA{
-@Q{Looking at the training data table, what is the thing we're trying to _predict_?}
-@A{The `steering-angle` — how far to turn the wheel.}
-
-@Q{What _type_ of value is a steering angle?}
-@A{A number (degrees of rotation).}
-
-@Q{In the @lesson-link{fitting-models} lesson, what were we trying to find?}
-@A{A function (a model) that maps from an explanatory variable to a response variable.}
-
-@Q{So if our response variable is `steering-angle`, what kind of problem are we trying to solve?}
-@A{We need to find a function that predicts `steering-angle` from some input — that's a regression problem!}
+@Q{Why do we refer to the process of training a self-driving car as supervised learning?}
+@A{Because the target column of our dataset is a record of what humans would do when given the values in the other columns.}
 }
 
 
@@ -203,16 +204,6 @@ We've prepared a large @vocab{training corpus} for you — thousands of rows of 
 Students identify candidate explanatory variables from the training corpus, make scatter plots to explore the relationship between each variable and `steering-angle`, and settle on `curve` as the strongest single predictor.
 
 === Launch
-@slidebreak{Launch}
-Let's use some Data Science to find some evidence about what really _is_ the best explanatory variable for our `steering-angle`.
-
-@QandA{
-@Q{What data visualization would be the best to use here?}
-@A{Scatter plots}
-
-@Q{Why?}
-@A{They show the relationship between two quantitative variables}
-}
 
 @slidebreak{Launch}
 
@@ -221,20 +212,28 @@ In the @lesson-link{fitting-models} lesson, we learned that a relationship betwe
 - The @vocab{explanatory variable} (x-axis) is the input we're predicting _from_.
 - The @vocab{response variable} (y-axis) is what we're trying to predict.
 
-Our response variable is `steering-angle`. The training data has several columns that could serve as an explanatory variable:
+In this case, our response variable is `steering-angle`. The training data has several columns that could serve as an explanatory variable:
 
 [cols="^1a,^3a", options="header", stripes="none"]
 |===
 | Column       | What it measures
 | `speed`      | How fast the car is moving
 | `curve`      | How sharply the road is curving (positive = right, negative = left)
-| `skew`       | How far out of alignment the car's heading is with the road
+| `skew`       | How far out of alignment the car's orientation is from the direction the road is headed
 | `offset`     | How far the car is from the center of the lane
 |===
 
 @QandA{
-@Q{Which of these do _you_ think would be the best predictor of steering angle, and why?}
+@Q{Which of these do you expect to be the best predictor of steering angle, and why?}
 @A{Answers will vary — this is meant to generate discussion and surface intuitions before the data speaks.}
+}
+
+@slidebreak{Launch}
+Let's use some Data Science to find some evidence about what really _is_ the best explanatory variable for our `steering-angle`.
+
+@QandA{
+@Q{What data visualization works best for showing possible relationships between two quantitative variables?}
+@A{Scatter plots}
 
 @Q{What should we look for in our visualizations, to choose the best explanatory variable?}
 @A{The strongest-looking relationship (points most-tightly clustered around a line) is the one that is most strongly connected to `steering-angle`}
@@ -244,9 +243,9 @@ Our response variable is `steering-angle`. The training data has several columns
 @slidebreak{Investigate-DN}
 
 @lesson-instruction{
-- Make sure @starter-file{self-driving} is open with `training-data` loaded.
-- Use `scatter-plot` to explore the relationship between `steering-angle` and each of the four candidate variables.
-- Complete @printable-exercise{steering-angle-scatter-plots.adoc}, recording your observations for each.
+- Return to the @starter-file{self-driving}.
+- Use `scatter-plot` to compare each of the four possible explanatory columns to `steering-angle`.
+- Then complete @printable-exercise{steering-angle-scatter-plots.adoc}.
 }
 
 @teacher{
@@ -256,85 +255,65 @@ Circulate and encourage students to read the scatter plots critically. Push them
 @slidebreak{InvestigateR}
 
 @QandA{
-@Q{Which variable showed the *strongest* relationship with `steering-angle`?}
+@Q{Which variable appeared to show the *strongest* relationship with `steering-angle`?}
 @A{`curve` — it has a clear, nearly linear relationship. As the road curves more sharply in one direction, the steering angle increases proportionally.}
 
-@Q{Which variable showed the *weakest* relationship?}
+@Q{Which variable appeared to show the *weakest* relationship?}
 @A{`speed` — there's a lot of scatter with no clear linear pattern.}
 
 @Q{Did any of the relationships surprise you?}
 @A{Answers will vary.}
 }
 
+@opt{If you'd like to give your students more practice with `fit-model` and interpreting @vocab{S-values}, you could have them define all 4 of their models in the starter file and evaluate their fit.}
+
 === Synthesize
 @slidebreak{Synthesize}
 
 @QandA{
-@Q{Suppose you had only 2 rows of training data — but they fell in a perfectly straight line. Would you trust a model built from those 2 points?}
+@Q{Suppose you only had 2 rows of training data — and they fell in a perfectly straight line. Would you trust a model built from those 2 points?}
 @A{No — two points can *always* be connected by a line. That doesn't mean the pattern is real or will generalize.}
 
 @Q{How much data do you think you'd need before you could trust a model?}
 @A{There's no single answer, but more data collected across a wider variety of conditions makes a model more trustworthy.}
 
 @Q{Is size-of-dataset the only important factor in what makes a good training set?}
-@A{No - we also need deriving data on all kinds of roads, from different offsets, etc.}
-}
-
-
-@slidebreak{Synthesize}
-@lesson-point{
-Can we use one of our variables to predict `steering-angle`?
-}
-
-@QandA{
-@Q{Have we seen a similar problem?}
-@A{Yes! In @lesson-link{fitting-models}, we tried to predict the weeks-to-adoption as a function of how many `pounds` each lizard weighed}
+@A{No - we also need representative data! A self-driving car needs to be built on data from all kinds of different roads, weather, offsets, times of day, road sizes, speeds, traffic density, etc.}
 }
 
 
 == Linear Regression
 
 === Overview
-Students manually fit a linear model to the `curve` vs. `steering-angle` data, then use Pyret's `lr-plot` to find the optimal fit. They interpret the model's coefficients, use `mr-code` to generate row-consuming predictor functions, and test their predictors using the `drive` function. Finally, they reflect on what it means to have trained a model.
+Having already manually fit linear model to the  data, students use Pyret's `lr-plot` to find the optimal fit for the data. They interpret the model's coefficients, use `mr-code` to generate row-consuming predictor functions, and test their predictors using the `drive` function. Finally, they reflect on what it means to have trained a model.
 
 === Launch
 @slidebreak{Launch}
 
-Recall from @lesson-link{fitting-models} that a model for a linear relationship is a *line of best fit*:
+On @printable-exercise{steering-angle-scatter-plots.adoc} you estimated the @vocab{slope} @math{m} and @vocab{y-intercept} @math{b} of the lines you fitted to the scatter plots. But how do we know whether or not they were the _best_ linear model: the @vocab{line of best fit} for the data?
 
-@center{@big{@math{steering\text{-}angle(curve) = (m \times curve) + b}}}
+@slidebreak{Launch}
 
-To find the best line, we need to find values of @math{m} (slope) and @math{b} (y-intercept) that minimize the error between the line and the data points.
+Data scientists use a method called @vocab{linear regression} to find the straight-line pattern that describes a set of inputs and an already-known target output with the mathematically _optimal_ values of @math{m} and @math{b} - that minimizes error as much as possible.
 
-@lesson-instruction{
-- Turn to @printable-exercise{lr-steering-angle.adoc} and complete the first section: *Fitting a Model by Hand*.
-- Use your scatter plot from the previous activity to estimate @math{m} and @math{b}.
-- Define your `curve-predictor` in @starter-file{self-driving} using your estimates, then use `fit-model` to see how it fits.
-}
-
-=== Investigate
-@slidebreak{InvestigateR}
-@right{@image{images/steering-v-curve-lr.png, 300}}
-
-Data scientists use a method called @vocab{linear regression} to find the mathematically _optimal_ values of @math{m} and @math{b} — the line that minimizes error as much as possible.
-
-- In Machine Learning, the act of finding this function from data is called @vocab{training}.
-- Linear regression finds straight-line patterns between a set of inputs and an already-known target output.
 - This form of learning — where we already know the correct output for each input — is called @vocab{supervised learning}.
+- In Machine Learning, the act of finding a function from the data is called @vocab{training}.
 
-Pyret has a function to find and visualize this line, and its contract is the same as `scatter-plot`:
+@slidebreak{Launch}
+
+Pyret's `lr-plot` function computes and visualizes the @vocab{line of best fit}. Its contract is the same as `scatter-plot`:
 
 @show{(contract "lr-plot" '((table-name Table) (labels String) (xs String) (ys String)) "Image")}
 
-@slidebreak{Investigate-DN}
+@slidebreak{Launch-DN}
 @lesson-instruction{
-- Use `lr-plot` on `training-data` to find the best-fit line for `curve` vs. `steering-angle`.
-- Complete the second section of @printable-exercise{lr-steering-angle.adoc}.
-- How does Pyret's optimal model compare to the one you fit by hand?
+- Turn to the first section of @printable-exercise{lr-steering-angle.adoc}.
+- Use `lr-plot` on `training-data` to find the best-fit line for each of the variables as compared to `steering-angle`.
+- How do Pyret's optimal models for the data compare to the ones you fit by hand?
 }
 
 @teacher{
-Students will notice that `lr-plot` produces a tighter fit than their hand-drawn model. This motivates the idea that the computer can optimize this much better and faster than humans — which is, after all, the point of machine learning.
+Students will notice that `lr-plot` defines models down to decimal values, certainly a level of specificity more than their hand-drawn model. This motivates the idea that the computer can optimize this much better and faster than humans — which is, after all, the point of machine learning.
 }
 
 @slidebreak{InvestigateR}
@@ -344,20 +323,17 @@ Students will notice that `lr-plot` produces a tighter fit than their hand-drawn
 
 @Q{Does the y-intercept make sense in the real world? Why or why not?}
 
-@Q{Which variable had the best @math{S}-value?}
+@Q{What does the @math{S}-value tell us?}
 }
 
-@slidebreak{Investigate-DN}
-@lesson-instruction{
-- Let's use `lr-plot` on `training-data` to find the best predictors for the other possible variables!
-- Complete the third section of @printable-exercise{lr-steering-angle.adoc}.
-}
+
+=== Investigate
+
+@slidebreak{Investigate}
 
 @teacher{
 These template functions are Number-consuming: `curve-predictor(curve)`, `offset-predictor(offset)`, etc. Students are filling in the learned slope and intercept. This sets up the contrast with the Row-consuming version `drive` needs.
 }
-
-@slidebreak{Investigate}
 
 Are we ready to use these predictors to drive the car? Pyret has a `drive` function:
 
