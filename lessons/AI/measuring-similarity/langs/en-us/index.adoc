@@ -31,6 +31,77 @@ Students consider how arbitrary documents (in this case, restaurant ratings) can
 }
 |===
 
+
+
+
+== How do Computers "See"?
+
+=== Overview
+
+Students explore ways in which attributes of images can be computed, using various functions.
+
+=== Launch
+@slidebreak{LaunchR}
+@right{@image{images/image-search.png, 400}}
+
+@link{https://images.google.com/, In Google Image Search}, you can drag a picture into the search box and have Google find other, _similar_ images.
+
+@teacher{Give students a demo, using an image of your choice!}
+
+@slidebreak{Launch}
+When we asked Google to find images similar to this one, it came back with a lot of similar images! But the computer doesn't have eyes, and it doesn't have the human experience that informs how an image makes us feel.
+
+So how does it even know what "similar" means?
+
+Let's start with how WE as humans use our eyes to notice properties of images.
+
+@lesson-instruction{
+- Open the @starter-file{ai-image}, and click "Run".
+- Complete the first section on @printable-exercise{human-perception.adoc}.
+}
+
+@slidebreak{Launch}
+@right{@image{images/computer-vision.jpg, 400}}
+Modern ML models are capable of interpreting elements of an image ("person", "car", etc.). This belong to a class of Machine Learning algorithms called "Computer Vision", which relies heavily on more advanced -- and computationally intensive -- concepts that we won't cover here.
+
+@lesson-instruction{
+- For now, we're going to use our human brains to see these elements in our images!
+- On lines 28-39 of the *Definitions Area*, you'll see that the mountain images are used to define a _table_ called `images`.
+- There are columns for the identifier (`ID`), the image document (`DOC`), whether the image is `LIKED` or `DISLIKED`, and also for any descriptive `TAGS` in the image.
+- Complete the last section on @printable-exercise{human-perception.adoc}.
+}
+
+Can a Data Driven Algorithm help us re-create Google Image Search, even without the fancy Computer Vision tech?
+
+=== Investigate
+@slidebreak{Investigate}
+
+Computers don't experience the world in the same way we do. Where we see a beautiful mountain scene, a computer only sees a grid of _pixels_ – tiny dots that make up the image. Each pixel has a particular amount of Red, Green, and Blue in it.
+
+For our purposes, we'll use a scale of 0-255 for each color that makes up a pixel. White is made of every color, so a white pixel would have a value of 255 for Red, Green, _and_ Blue. A black pixel, on the other hand, would have zeros for all three colors.
+
+- A medium, blue pixel would only have _some_ Blue in it, and nothing else: `(0, 0, 150)`
+- A light purple pixel might have have a mix of Red and Blue, and no Green at all: `(255, 0, 255)`
+
+@slidebreak{Investigate}
+
+Computers can look at groups of pixels to compute values. For example, a computer can compare the pixels on one side of the image to the pixels on the other, to determine how _symmetrical_ the image is! Let's explore Pyret functions that do exactly that:
+
+@lesson-instruction{
+Complete @printable-exercise{computer-perception.adoc}
+}
+
+@slidebreak{Investigate}
+
+@QandA{
+@Q{}
+}
+
+
+
+
+
+
 == Categories, Attributes, Spaces and Sameness
 
 === Overview
@@ -116,7 +187,7 @@ We might find a table of ratings that looks like this (_Note the data in this ta
 @right{@image{images/burger.jpg, 300}} *Pay attention to scale:* 
 
 - For `Price`, 1 is the best possible rating out of 5. 
-- For `Fries`, the scale is opposite - 5 is the best! 
+- For `Fries`, the scale is opposite - 5 is the best!
 - Meanwhile, `Burgers` are rated on a 1-to-10 scale.
 
 @QandA{
@@ -215,9 +286,8 @@ For example, we could check which restaurants had the same `price` as In-N-Out (
 @slidebreak{Investigate}
 
 @QandA{
-<<<<<<< HEAD
-@Q{Why did we get a 1 for McDonalds?}
-@A{McDonalds `price` rating in our data table is the exact same as the `price` rating for In-N-Out.}
+@Q{How many dimensions did our `simple-similarity` function use when comparing restaurants based on `price`?}
+@A{one}
 }
 
 @lesson-instruction{
@@ -410,7 +480,7 @@ Let's try another form of similarity, which relies on the idea that "burger-forw
 
 Pyret also has a function for computing the `angle-similarity` of every row in the table to a Row with a given ID within the space defined by a list of columns. 
 
-@hspace{1em}@show{(contract "angle-similarity" '("Table" "String" "List<String>") "Table")} 
+@hspace{1em}@show{(contract "angle-similarity" '("Table" "String" "List<String>") "Table")}
 
 @lesson-instruction{
 - Return to your @starter-file{ai-fast-food} and make sure you've clicked "Run" to load the file.
