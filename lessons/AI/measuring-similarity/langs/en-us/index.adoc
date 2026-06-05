@@ -2,7 +2,7 @@
 = Measuring Similarity
 
 @description{
-Students consider how arbitrary documents (in this case, songs and images) can be represented as points in space, and explore different ways to measure the "distance" between those documents using a spatial representation.
+Students consider how arbitrary documents (in this case, restaurant ratings) can be represented as points in space, and explore different ways to measure the "distance" between those documents using a spatial representation.
 }
 
 @lesson-prereqs{data-driven-algorithms}
@@ -27,12 +27,11 @@ Students consider how arbitrary documents (in this case, songs and images) can b
 | Preparation
 |
 @preparation{
-- The final section of this lesson involves an activity where students measure the angle difference between rays. The standard page in the workbook uses more easily approximated angles (0°, 45°, and 90°).
-- If you'd like your students to practice using their protractors -- or estimating the angles using what they know about angle measures -- be sure to have have protractors available for @opt-printable-exercise{angle-similarity-protractors.adoc}.
+- When we introduce angle similarity in this lesson, the rays on the standard page in the workbook meet at easily approximated angles (0°, 45°, and 90°).  If you'd like your students to estimate a wider range of angles and practice using their protractors, be sure to have protractors available for @opt-printable-exercise{angle-similarity-protractors.adoc}.
 }
 |===
 
-== Categories, Attributes, and Spaces
+== Categories, Attributes, Spaces and Sameness
 
 === Overview
 Students explore the idea of _dimensionality_ -- that virtually any category of thing can be defined as having a set of attributes (e.g. - desserts can be defined by _chocolatiness_, _crunchiness_, and a long list of other things), and any member of that category can be graphed as a point in space (e.g. - plotting desserts on a _chocolatiness-v-crunchiness_ graph, or a graph based on any other pair of attributes).
@@ -93,7 +92,7 @@ You are about to facilitate some warmup brainstorming about quantitative attribu
 
 @Q{What ideas did you come up with for how we could *measure* the similarity between any two examples?}
 
-@Q{Did the two scatter plots you made support the idea that the desserts you marked with @star and &#9651; were similar?}
+@Q{Did either or both of the scatter plots you made support the idea that the desserts you marked with @star and &#9651; were similar?}
 }
 
 === Investigate
@@ -101,7 +100,7 @@ You are about to facilitate some warmup brainstorming about quantitative attribu
 
 Suppose we were on a road trip and needed to stop for a meal. When evaluating fast food chains, we might care about a few different attributes (price, quality-of-fries, convenience, clean-bathrooms, etc). 
 
-We might find a table of ratings that looks like this (_Note the data in this table is fictional!_:
+We might find a table of ratings that looks like this (_Note the data in this table is fictional!_):
 
 [.data-table, cols="^.^1a, 4a, ^4a, ^4a, ^4a", options="header"]
 |===
@@ -117,8 +116,8 @@ We might find a table of ratings that looks like this (_Note the data in this ta
 @right{@image{images/burger.jpg, 300}} *Pay attention to scale:* 
 
 - For `Price`, 1 is the best possible rating out of 5. 
-- For `Fries`, it's the opposite - 5 is the best! 
-- Meanwhile, `Burger` is based on a 1-to-10 scale.
+- For `Fries`, the scale is opposite - 5 is the best! 
+- Meanwhile, `Burgers` are rated on a 1-to-10 scale.
 
 @QandA{
 @Q{If you were from California, and traveling out East, you might want to know which of the restaurant chains is *most similar* to In-N-Out. Based on the fictional data in our table, which would you pick as *most similar* to In-N-Out, and why?}
@@ -126,7 +125,42 @@ We might find a table of ratings that looks like this (_Note the data in this ta
 
 @slidebreak{Launch}
 
-Any two of these attributes can be used to define a 2-dimensional space. For now, let's focus on the `Price` and `Fries` attributes.
+@lesson-instruction{
+- Let's load our data in Pyret so that we can look at these attributes in 2-dimensional space.
+- Open the @starter-file{ai-fast-food} and click "Run".
+}
+
+@QandA{
+Before we start building scatter plots, let's take a look at the Definitions Area on the left.
+
+@Q{What is the *table* called in this file?}
+@A{`fast-food`}
+
+@Q{What *rows* are defined in this file?}
+@A{The first row: `mcdonalds = row-n(fast-food, 0)`}
+@A{The sixth row: `in-n-out = row-n(fast-food, 5)`}
+
+@Q{What is the ID for Wendy's?}
+@A{6}
+
+@Q{Notice that this file defines a `restaurant-img` function that takes in a row and produces an image. +
+What kinds of images does this function produce?}
+@A{Circles of various sizes.}
+
+@Q{Look at the comments on line 33. What special data visualization function do you see referenced?}
+@A{`image-scatter-plot`}
+}
+
+@slidebreak{Launch}
+
+@lesson-instruction{
+@right{@image{images/window.png, 140}}
+
+- Type `scatter-plot(fast-food, "ID", "fries", "price")` in the Interactions Area and hit enter.
+- On the right hand side of the graph change the `x-min` and `y-min` to 0 and the `x-max` and `y-max` to 5. Then click "Redraw".
+}
+
+@slidebreak{Launch}
 
 @QandA{
 @right{@image{images/price-v-fries-desmos.png, 300}}
@@ -145,34 +179,18 @@ Any two of these attributes can be used to define a 2-dimensional space. For now
 @slidebreak{Investigate}
 
 @lesson-instruction{
-- Open the @starter-file{ai-fast-food} and click "Run".
+- Make another scatter plot for the "Price-Burger Space".
 }
 
 @QandA{
-@Q{What is the *table* called in this file?}
-@A{`fast-food`}
+@Q{Would it make sense to adjust the `y-min` of this graph to 0 and the `y-max` to 5, as we did with the "Price-Fries Space? Why or Why Not?}
+@A{No! "Burgers" are rated on 1-10 scale so a `y-max` of 5 would hide some of our points!}
 
-@Q{What *rows* are defined in this file?}
-@A{The first row: `mcdonalds = row-n(fast-food, 0)`}
-@A{The sixth row: `in-n-out = row-n(fast-food, 5)`}
+@Q{Why might it be helpful to compare the restaurants in multiple spaces?}
+@A{They tell different stories.}
 
-@Q{What is the ID for Wendy's?}
-@A{6}
-
-@Q{Notice that this file defines a `restaurant-img` function that takes in a row and produces an image. +
-What kinds of images does this function produce?}
-@A{Circles of various sizes.}
-
-@Q{Look at the comments on line 33. What special data visualization function do you see referenced?}
-@A{`image-scattter-plot`}
-}
-
-@slidebreak{Investigate}
-
-@lesson-instruction{
-- Make a scatter plot of the "Price-Fries Space".
-- Make another for the "Price-Burger Space".
-- Make a third for the "Burgers-Fries Space".
+@Q{Max thinks comparing restaurants based on "fries" and "bathroom cleanliness" would be most important on a road trip. Can we do that with this dataset? Why or why not?}
+@A{No. We don't have any data about "bathroom cleanliness"!}
 }
 
 @teacher{
@@ -188,23 +206,39 @@ Pyret has several functions for measuring similarity. They all work a little dif
 
 Pyret's `simple-similarity` function _compares every row in the table_ to the Row with the given ID, checking to see if the specified columns are identical. If they are, the similarity value is one. If not, the similarity value is zero. 
 
-For example, if we wanted to know which restaurants had the same `price` as In-N-Out (whose ID is `I`) we would use the following code: +
-@hspace{1em}@show{(code '(simple-similarity fast-food "I" (list "price")))}
+For example, we could check which restaurants had the same `price` as In-N-Out (whose ID is `I`).
 
 @lesson-instruction{
-- Try using `simple-similarity` with a variety of different columns and a variety of different _restaurant IDs_.
+- Evaluate @show{(code '(simple-similarity fast-food "I" (list "price")))}.
 }
 
+@slidebreak{Investigate}
+
 @QandA{
-@Q{How many dimensions did our `simple-similarity` function use?}
-@A{one}
-
-@Q{Why does `simple-similarity` give a 1 for McDonalds when we use the `price` column?}
+@Q{Why did we get a 1 for McDonalds?}
 @A{McDonalds `price` rating in our data table is the exact same as the `price` rating for In-N-Out.}
+}
 
-@Q{Why will we *always* get at least one perfect match in a `simple-similarity` table?}
-@A{Because whatever ID we use will always be identical to itself!}
+@lesson-instruction{
+- Try using simple similarity with other colummns and see if you get any other matches.
+}
 
+@slidebreak{Investigate}
+
+@QandA{
+@Q{Did you turn up any other recommendations?}
+@A{It recommended "Five Guys" for "burgers".}
+
+@Q{Why was there *always* at least one perfect match in the `simple-similarity` table?}
+@A{Because it told us that "In-N-Out" was identical to itself!}
+
+@Q{What happens when we try using `simple-similarity` with all of the columns at once? Why?}
+@A{We don't get any recommendations, because there aren't any restaurants that match "In-N-Out" for price", "burgers" and "fries"!}
+}
+
+@slidebreak{Investigate}
+
+@QandA{
 @Q{Is `simple-similarity` a _useful_ way to measure similarity?}
 @A{Not at all.}
 
@@ -215,22 +249,23 @@ For example, if we wanted to know which restaurants had the same `price` as In-N
 === Synthesize
 @slidebreak{Synthesize}
 @QandA{
-
+@Q{}
 }
 
-== Other Forms of Similarity
+== Similarity in One and Two Dimensions
 
 === Overview
 Students explore other forms of similarity, using Euclidean distance and angle measures.
 
 === Launch
 @slidebreak{Launch}
+
 Checking for perfect equality is not a very useful way to look for alternatives to our favorite restaurant chain! 
 
 Another option is to measure the _distance between points_.  In one dimension, this comparison is straight-forward: plot the values on a number line, and find the one that's closest to In-N-Out. Let's try it out.
 
 @lesson-instruction{
-- Complete the first section on @printable-exercise{distance-similarity.adoc}.
+- Complete the *Distance in 1 Dimension* section of @printable-exercise{distance-similarity.adoc}.
 }
 
 @slidebreak{Launch}
@@ -245,12 +280,12 @@ Another option is to measure the _distance between points_.  In one dimension, t
 @A{We have multiple, *independent* attributes for these restaurants!}
 @A{Being similar for one attribute doesn't mean a restaurant is going to be similar for all the others.}
 
-@Q{How could we measure the distance between two restaurants using more than one dimension?}
+@Q{Could we measure the distance between two restaurants using more than one dimension? How?}
 @A{We could graph the points using two dimensions and use the distance formula: @math{d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}}}
 }
 
 @teacher{
-Your students will not need to do calculation with the distance formula in this lesson, because we are about to introduce the `distance-similarity` function.  Ideally, however, they would already have an understanding of how distance is computed in two dimensions.  If your students could use an introduction to or review of the distance formula and the Pythagorean Theorem, you might want to @lesson-link{distance, check out our lesson on distance in the coordinate plane.}
+Your students will not need to calculate distance with the distance formula in this lesson because we are about to introduce the `distance-similarity` function.  Ideally, however, they would already have an understanding of how distance is computed in two dimensions.  If your students could use an introduction to or review of the distance formula and the Pythagorean Theorem, you might want to @lesson-link{distance, check out our lesson on distance in the coordinate plane.}
 }
 
 @slidebreak{Launch}
@@ -279,13 +314,21 @@ But it can also compute distance in a plane described by any list of columns!
 @Q{What do you notice about the Price-Fries space compared to the Price-Burgers space?}
 @A{Five Guys and In-N-Out are spaced fairly far apart on both planes}
 @A{On the Price-Burgers plane Five Guys and In-N-Out are on the same vertical grid line.}
+
+@Q{Why were the restaurants listed in different orders on the tables?}
+@A{Because they are ordered from most similar to least similar and the most similar restaurants change depending on the space}
+
+@Q{Why might the distances have been larger for the Price-Burgers space than the Price-Fries space?}
+@A{The burger ratings are on a 1-10 scale, not a 1-5 scale. The burgers might also be more different than the fries.}
 }
 
-@slidebreak{Launch}
+
+=== Investigate
+@slidebreak{Investigate}
 
 Our new `distance-similarity` formula is a huge improvement over `simple-similarity`! It's no longer an all-or-nothing situation. And, if In-N-Out isn't available, we have some suggested alternatives.
 
-Let's take a look at how `distance-similarity` compares to human perception of similarity.
+Let's consider how `distance-similarity` compares to human perception of similarity.
 
 @QandA{
 @right{@image{images/burger-fry-blank.png, 250}}
@@ -303,7 +346,7 @@ Some restaurants specialize in burgers, while others are all about the fries.
 @A{Most humans would generally say that the two places that specialize in burgers are more similar.}
 }
 
-@slidebreak{Launch}
+@slidebreak{Investigate}
 
 @QandA{
 @ifslide{@right{@image{images/burger-fry-blank.png, 250}}}
@@ -314,14 +357,14 @@ Suppose the `(fries, burgers)` scores for two places with different strengths ar
 @A{The places with different strengths.}
 }
 
-There are a few problems with using the distance formula, however:
+@slidebreak{Investigate}
+
+There are a few problems with using the distance formula:
 
 - It focuses on _count_, rather than _proportion_: restaurant scores that differ by 1 on the `fries` scale are _just as different_ as scores that differ by 2 on the `burgers` scale (both are one-fifth of the maximum points). The distance formula will treat the `burgers` difference as being "larger", because 2 > 1.
-- It ignores _orientation_: As humans, we know that two places that focus on burgers are going to be a lot more similar that one that focuses on burgers and another that focuses on fries! But the distance formula doesn't care if two restaurants both specialize in the same thing or not -- it only cares about the distance _between_ the points, not _where those points are on the graph._
+- It ignores _orientation_: As humans, we know that two places that focus on burgers are going to be a lot more similar that one that focuses on burgers and another that focuses on fries! But the distance formula doesn't care if two restaurants both specialize in the same thing or not -- when calculating the distance _between_ the points it doesn't consider _where those points are on the graph._
 
-
-=== Investigate
-@slidebreak{InvestigateR}
+@slidebreak{Investigate}
 
 @lesson-instruction{
 Let's try another form of similarity, which relies on the idea that "burger-forward" places will all cluster on one axis, and "fry-forward" places on the other. _Angle similarity_ compares the angles formed by two rays drawn from two points to the origin.
@@ -362,11 +405,11 @@ Let's try another form of similarity, which relies on the idea that "burger-forw
 
 @slidebreak{Investigate}
 
-@right{@image{images/2-d-comparison.png, 400}}
+@scrub{@right{@image{images/2-d-comparison.png, 400}}}
 
 Pyret also has a function for computing the `angle-similarity` of every row in the table to a Row with a given ID within the space defined by a list of columns. 
 
-@hspace{1em}@show{(contract "angle-similarity" '("Table" "String" "List<String>") "Table")}
+@hspace{1em}@show{(contract "angle-similarity" '("Table" "String" "List<String>") "Table")} 
 
 @lesson-instruction{
 - Return to your @starter-file{ai-fast-food} and make sure you've clicked "Run" to load the file.

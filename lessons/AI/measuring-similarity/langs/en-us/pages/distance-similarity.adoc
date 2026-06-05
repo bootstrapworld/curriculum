@@ -7,8 +7,6 @@ table { margin: 0 !important; }
 </style>
 ++++
 
-Here's the data table for our fast food restaurants:
-
 [.data-table, cols="^.^1a, 4a, ^4a, ^4a, ^4a", options="header"]]
 |===
 | ID| Restaurant  | Price (1 = cheap)| Fries (5=best) | Burgers (10=best)
@@ -20,17 +18,9 @@ Here's the data table for our fast food restaurants:
 | 6 | @star *In-N-Out* | *1.45*      | *4.4*          | *8*
 |===
 
-@vspace{1ex}
-
-Let's Investigate: If In-N-Out isn't available, what's the _most similar alternative?_
-
-@vspace{1ex}
-
 [.no-flex-section]
 == Distance in 1 Dimension
-@n For each of the attributes plotted below, *find In-N-Out* and mark it with a @star. 
-
-@n Using the provided number lines below and the corresponding columns of data above, complete each row below by *finding the closest restaurant* in that dimension and *calculating the `distance-similarity`* to In-N-Out. 
+@n For each of the attributes plotted below, *find In-N-Out* and mark it with a @star. Then use the number lines and the corresponding columns of data above to complete each row of the table below by *finding the closest restaurant* in that dimension and *calculating the `distance-similarity`* to In-N-Out. 
 
 @vspace{1ex}
 
@@ -40,15 +30,15 @@ Let's Investigate: If In-N-Out isn't available, what's the _most similar alterna
 | Closest Restaurant
 | Distance
 
-| @image{../images/number-line-price.png, 300}
+| @image{../images/number-line-price.png, 250}
 | @ifsoln{McDonalds}
 | @ifsoln{0}
 
-| @image{../images/number-line-fries.png, 300}
+| @image{../images/number-line-fries.png, 250}
 | @ifsoln{Wendy's}
 | @ifsoln{0.1}
 
-| @image{../images/number-line-burger.png, 300}
+| @image{../images/number-line-burger.png, 250}
 | @ifsoln{Five Guys}
 | @ifsoln{0}
 |===
@@ -59,30 +49,23 @@ Let's Investigate: If In-N-Out isn't available, what's the _most similar alterna
 
 == Distance in 2 Dimensions
 
-@n Use the data table at the top of the page to help you find *In-N-Out* on each of the graphs below and mark it with a star (@star).
-
-@n Use the data table at the top of the page to help you find *Five Guys* on each of the graphs below and mark it with a triangle (&#9651;).
-
-@n Draw a line connecting *In-N-Out* and *Five Guys* on each of the graphs below to show the distance between them.
+@n Use the data table at the top of the page to help you find *In-N-Out* on each of the graphs below and mark it with a star (@star). Then find *Five Guys* on each of the graphs below and mark it with a triangle (&#9651;). Draw a line connecting them on each of the graphs below.
 
 @vspace{1ex}
 
-[.two-dimensions,cols="^5a,2a,^5a", frame="none", grid="none", stripes="none"]
+[.two-dimensions,cols="^5a,^5a", frame="none", grid="none", stripes="none"]
 |===
-| @image{../images/fries-v-price-scatter.png}
-|
-| @image{../images/burgers-v-price-scatter.png}
+| @image{../images/fries-v-price-scatter.png, 250}
+| @image{../images/burgers-v-price-scatter.png, 250}
+
+| *Price-Fries* Distance - *In-N-Out* to *Five Guys*: @fitb{}{@ifsoln{0.90}}
+| *Price-Burgers* Distance - *In-N-Out* to *Five Guys*: @fitb{}{@ifsoln{0.75}}
 |===
 
-@n Use the @starter-file{ai-fast-food} to compute a `distance-similarity` table for In-N-Out and each pair of columns below. Then find the distance between In-N-Out and Five Guys in each space, using the tables.
+@n Use the @starter-file{ai-fast-food} to generate a table with a column for `distance-similarity` to In-N-Out for the Price-Fries Space and another table for the Price-Burgers space. Record the distances from In-N-Out to Five Guys above.
 
-@vspace{1ex}
+@n Why are the restaurants listed in different orders in these tables? @fitb{}{} +
+@fitb{}{@ifsoln{because they are ordered from most similar to least similar and the most similar restaurants change depending on the space}}
 
-[.two-dimensions,cols="5a,1a,5a", frame="none", grid="none", stripes="none"]
-|===
-| 
-Price-Fries Distance - In-N-Out to Five Guys: @fitb{}{@ifsoln{0.90}}
-|
-| 
-Price-Burgers Distance - In-N-Out to Five Guys: @fitb{}{@ifsoln{0.75}}
-|===
+@n Why might the values in the `distance-similarity` column be bigger for the Price-Burgers Space? @fitb{}{} +
+@fitb{}{@ifsoln{The burger ratings are on a 1-10 scale, not a 1-5 scale. The burgers might be more different than the fries.}}
