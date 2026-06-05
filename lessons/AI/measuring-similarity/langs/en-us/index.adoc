@@ -204,7 +204,7 @@ Pyret has several functions for measuring similarity. They all work a little dif
 
 @hspace{1em}@show{(contract "simple-similarity" '("Table" "String" "List<String>") "Table")}
 
-Pyret's `simple-similarity` function _compares every row in the table_ to the Row with the given ID, checking to see if the specified columns are identical. If they are, the similarity value is one. If not, the similarity value is zero. 
+Pyret's `simple-similarity` function _compares every row in the table_ to the Row with the given ID, checking to see if the specified columns are identical. If they are, the similarity value is one. If not, the similarity value is zero. It produces a Table, sorted from "most similar" to "least similar", with an extra column of zeroes and ones listing the similarity score.
 
 For example, we could check which restaurants had the same `price` as In-N-Out (whose ID is `I`).
 
@@ -215,6 +215,7 @@ For example, we could check which restaurants had the same `price` as In-N-Out (
 @slidebreak{Investigate}
 
 @QandA{
+<<<<<<< HEAD
 @Q{Why did we get a 1 for McDonalds?}
 @A{McDonalds `price` rating in our data table is the exact same as the `price` rating for In-N-Out.}
 }
