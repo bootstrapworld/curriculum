@@ -1,0 +1,125 @@
+= Plotting Images
+
+@lesson-instruction{For this page, you'll need @starter-file{ai-image} open on your computer}
+
+
+== Plotting Images in 1 Dimensions
+@n In the *Interactions Area*, evaluate `image-dot-plot(decorated-bag, "green", doc-thumbnail)`, and hover your mouse over the images.
+
+@indented{
+- What are the `green` values for our grassy images? @fitb{6em}{@ifsoln{5,245}} and @fitb{6em}{@ifsoln{4784}} How far apart are they? @fitb{}{@ifsoln{461}}
+- How does this help us look for similarity? @fitb{}{@ifsoln{The smaller the distance, the more similar the image!}}
+}
+
+@n Evaluate `distance-similarity(decorated-bag, "3", [list: "green"])`. Was image 6 the most similar? @fitb{}{@ifsoln{yes!}}
+
+
+== Plotting Images in 2 Dimensions
+@n In the *Interactions Area*, evaluate `image-scatter-plot(decorated-bag, "green", "blue", doc-thumbnail)`. Can we still calculate the distance? @fitb{}{@ifsoln{yes! The distance formula!}}
+
+@n Are the grassy images still clustered together? @fitb{4em}{@ifsoln{yes}} Do you see any _other_ clusters? @fitb{}{} +
+@fitb{}{@ifsoln{The images with trees and water are clustered, and the squares are clustered with the sunset.}}
+
+@n Let's see how well `distance-similarity` works for our 2-dimensional space:
+
+[%autowidth, cols="<,^,^", options="header"]
+|===
+| Check 	| Code 																| Success?
+| *Grass*  	| `distance-similarity(decorated-bag, "3", [list: "green", "blue"])` | @ifsoln{Yes}
+| *Snow*  	| `distance-similarity(decorated-bag, "5", [list: "green", "blue"])` | @ifsoln{Yes}
+| *Sun* 	| `distance-similarity(decorated-bag, "0", [list: "green", "blue"])` | @ifsoln{No}
+|===
+
+@n Looking at the `decorated-bag` table (not a chart!), do you think using `"red"` would show us that our two squares are similar? Why or why not? @fitb{}{} +
+@fitb{}{@ifsoln{No - the numbers are so far apart!}}
+
+
+== Connecting Different 2D Plots
+
+@n The following Pyret scatter plots show the relationship between both Blue-v-Green and Blue-v-Red, for the images in our model:
+
+[cols="<3a, 1a, >3a", frame="none", "grid="none"]
+|===
+| @image{../images/blue-v-green.png} | | @image{../images/blue-v-red.png}
+|===
+
+@n Are the points in similar places? @fitb{3em}{@ifsoln{No}} How can the plots be so different, if they represent the same images? @fitb{}{} +
+@fitb{}{@ifsoln{we're using different axes}}
+
+
+
+
+
+== Luminance-Entropy Space
+
+@n In the *Interactions Area*, evaluate `decorated`. What do you see? @fitb{}{} +
+@fitb{}{@ifsoln{All of our mountain images, with columns for each of the functions we've played with}}
+
+@n What does `sun1` evaluate to? @fitb{}{@ifsoln{A row from the table}}
+
+@n What does `doc-thumbnail(sun1)` evaluate to? @fitb{}{@ifsoln{a thumbnail of the mountain image from that row}}
+
+@n Evaluate `image-scatter-plot(decorated, "LUMINANCE", "ENTROPY", doc-thumbnail)`. What do you get back? @fitb{}{} +
+@fitb{}{@ifsoln{A scatter plot with LUMINANCE and ENTROPY for axes, with thumbnails of our image plotted on it.}}
+
+@n Adjust the x-min and y-min values to the right of the scatter-plot, so that *both axes start at zero*.
+
+@n Are the grassy images clustered together? @fitb{4em}{@ifsoln{No}} Snowy images? @fitb{4em}{@ifsoln{Yes}} Images with sunrises and sunsets? @fitb{}{@ifsoln{No}}
+
+@n Why do we only see *one* red square? @fitb{}{@ifsoln{They are on top of each other}}
+
+== Color Spaces
+@n In the *Definitions Area*, define a new table: `decorated-bag = add-bag-cols(decorated, "COLOR-NAMES")`.
+
+@n Click "Run" and check out your new table! What happened? @fitb{}{} +
+@fitb{}{@ifsoln{The "COLOR-NAMES" column was replaced with three columns, counting the number of red, green, and blue pixels}}
+
+@n Use `image-scatter-plot` with your new `decorated-bag` table. Can you find two color axes that will cluster the grassy images together, *and also*  cluster the snowy images together? @fitb{}{@ifsoln{Blue and Green}}
+
+
+
+== Searching in Luminance-Entropy Space
+
+@n Images 4 and 5 are both "snowy". Which images are "grassy"? @fitb{}{@ifsoln{Images 3 and 6}}
+
+@n Evaluate `simple-similarity(decorated, "4", [list: "LUMINANCE", "ENTROPY"])`. Which image ID was the closest match to `"4"`? @fitb{}{@ifsoln{`"0"`}}
+
+@n Try again, this time using `distance-similarity`. Which image ID was the closest match to `"4"`? @fitb{}{@ifsoln{`"3"`}}
+
+@n Try again, this time using `angle-similarity`. Which image ID was the closest match to `"4"`? @fitb{}{@ifsoln{`"5"`}}
+
+@n How well  `angle-similarity` work for image 3, using the same dimensions? @fitb{}{@ifsoln{not well!}}
+
+@n Evaluate `image-scatter-plot(decorated2, "LUMINANCE", "ENTROPY", doc-thumbnail)`. Can you explain why searching in Luminance-Entropy Space worked well for our snowy images, but not the grassy ones?
+
+@blanklines{3}{
+@ifsoln{In Luminance-Entropy Space, there's a clear cluster for the snowy images. The grassy ones, however, are all spread out.}
+}
+
+== Bag-of-Words: Adding Color Axes
+
+*Define a new image model, with attributes for each color:* +
+@show{(code '(define decorated-bag (add-bag-cols decorated "color-names")))}
+
+@n Evaluate `image-scatter-plot(decorated-bag, "LUMINANCE", "green", doc-thumbnail)`.
+
+@n Are the grassy images clustered in Luminance-Green Space? @fitb{}{@ifsoln{yes!}} The snowy images? @fitb{}{@ifsoln{No}}
+
+@n Use `angle-similarity` to search for Image 3. Is Image 6 a good match? @fitb{}{@ifsoln{yes}}
+
+@n Will this work for snowy images, in Luminance-Green Space? @fitb{}{@ifsoln{no}}
+
+@n Can you find two axes that define a space that will work for snowy _and_ grassy images?
+
+
+== The "Best" Axes
+
+We want an Image Search that does well with three kinds of images: snowy (4 and 5), grassy (3 and 6), and sunny (0, 6, 7 and 8). Some of our attributes will be helpful, some will not, and some might even result in _worse_ performance!
+
+@n *Starting with the sun:* identify which attributes are most helpful when searching for images similar to Image 7, and write them below:
+
+@fitb{}{}
+
+@n *Scaling up:* identify which attributes are most helpful when searching for images in all three of our categories, and write them below:
+
+@fitb{}{}

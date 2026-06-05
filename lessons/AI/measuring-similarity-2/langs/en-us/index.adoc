@@ -28,7 +28,176 @@ Students consider how arbitrary documents (in this case images) can be represent
 |===
 
 
-== What Do Images Look Like to a Computer?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+== Categories, Attributes, Spaces and Sameness
+
+=== Overview
+Students explore the idea of _dimensionality_ -- that virtually any category of thing can be defined as having a set of attributes (e.g. - desserts can be defined by _chocolatiness_, _crunchiness_, and a long list of other things), and any member of that category can be graphed as a point in space (e.g. - plotting desserts on a _chocolatiness-v-crunchiness_ graph, or a graph based on any other pair of attributes).
+
+=== Launch
+@slidebreak{Launch}
+
+We compare things around us all the time, using characteristics called @vocab{attributes}. Some of those attributes are quantitative and can be measured on a scale.
+
+@teacher{
+You are about to facilitate some warmup brainstorming about quantitative attributes. Feel free to swap the question below for things that you hear your students talking about instead!
+}
+
+@QandA{
+@Q{If we wanted to compare team sports, we might measure attributes like *median winning score* or *likelihood of serious injury*.  What are some other quantitative attributes you can think of for comparing team sports?}
+@A{Answers might include:
+  * amount of physical contact
+  * number of players on a team
+  * length of play
+  * percent of time when game is stopped
+}
+
+@Q{What are some quantitative attributes we might use to compare movies?}
+@A{Answers might include:
+  * scariness
+  * duration
+  * level of violence
+  * level of humor
+  * percent of movie that is animated
+  * number of special effects
+}
+
+@Q{What are some quantitative attributes we might use to compare pant styles?}
+@A{Answers might include:
+  * bagginess of legs
+  * waist height
+  * number of pockets
+  * length of pant legs
+}
+}
+
+@slidebreak{Launch}
+
+@lesson-instruction{
+- With you partner complete @printable-exercise{comparing-desserts.adoc}.
+}
+
+@slidebreak{Launch}
+
+@QandA{
+@Q{What other attributes did you come up with for comparing desserts?}
+@A{Answers might include:
+  * sweetness
+  * saltiness
+  * creaminess
+  * calories
+  }
+
+@Q{What ideas did you come up with for how we could *measure* the similarity between any two examples?}
+
+@Q{Did either or both of the scatter plots you made support the idea that the desserts you marked with @star and &#9651; were similar?}
+}
+
+=== Investigate
+@slidebreak{LaunchR}
+
+Suppose we were on a road trip and needed to stop for a meal. When evaluating fast food chains, we might care about a few different attributes (price, quality-of-fries, convenience, clean-bathrooms, etc).
+
+We might find a table of ratings that looks like this (_Note the data in this table is fictional!_):
+
+[.data-table, cols="^.^1a, 4a, ^4a, ^4a, ^4a", options="header"]
+|===
+| ID| Restaurant  | Price (1=cheap)	| Fries (5=best) | Burgers (10=best)
+| 1 | McDonalds   | 1.45            	| 4.6            | 5
+| 2 | Burger King | 1.51             	| 4.1            | 6
+| 3 | Wendy's     | 1.47             	| 4.5            | 7
+| 4 | Five Guys   | 2.20             	| 3.9            | 8
+| 5 | Dairy Queen | 2.11             	| 3.7            | 4
+| 6 | In-N-Out    | 1.45             	| 4.4            | 8
+|===
+
+@right{@image{images/burger.jpg, 300}} *Pay attention to scale:*
+
+- For `Price`, 1 is the best possible rating out of 5.
+- For `Fries`, the scale is opposite - 5 is the best!
+- Meanwhile, `Burgers` are rated on a 1-to-10 scale.
+
+@QandA{
+@Q{If you were from California, and traveling out East, you might want to know which of the restaurant chains is *most similar* to In-N-Out. Based on the fictional data in our table, which would you pick as *most similar* to In-N-Out, and why?}
+}
+
+@slidebreak{Launch}
+
+@lesson-instruction{
+- Let's load our data in Pyret so that we can look at these attributes in 2-dimensional space.
+- Open the @starter-file{ai-fast-food} and click "Run".
+}
+
+@QandA{
+Before we start building scatter plots, let's take a look at the Definitions Area on the left.
+
+@Q{What is the *table* called in this file?}
+@A{`fast-food`}
+
+@Q{What *rows* are defined in this file?}
+@A{The first row: `mcdonalds = row-n(fast-food, 0)`}
+@A{The sixth row: `in-n-out = row-n(fast-food, 5)`}
+
+@Q{What is the ID for Wendy's?}
+@A{6}
+
+@Q{Notice that this file defines a `restaurant-img` function that takes in a row and produces an image. +
+What kinds of images does this function produce?}
+@A{Circles of various sizes.}
+
+@Q{Look at the comments on line 33. What special data visualization function do you see referenced?}
+@A{`image-scatter-plot`}
+}
+
+@slidebreak{Launch}
+
+@lesson-instruction{
+@right{@image{images/window.png, 140}}
+
+- Type `scatter-plot(fast-food, "ID", "fries", "price")` in the Interactions Area and hit enter.
+- On the right hand side of the graph change the `x-min` and `y-min` to 0 and the `x-max` and `y-max` to 5. Then click "Redraw".
+}
+
+@slidebreak{Launch}
+
+@QandA{
+@right{@image{images/price-v-fries-desmos.png, 300}}
+
+@Q{What do you *Notice* about the "Price-Fries Space"?}
+@A{Four of the restaurants are clustered around $1.25-$1.50, while the remaining two are much farther away from the group above $2.}
+@A{Three of the restaurants all have very similar ratings for french fries, while the others are more spread out.}
+@A{All of the fries get fairly positive reviews.}
+
+@Q{Do you notice any trends or patterns in the data?}
+@A{The more expensive restaurants appear to have _worse_ fries!}
+}
+
+@teacher{Make sure you have students explain their thinking!}
+
+@slidebreak{Investigate}
+
+
+=== Investigate
+
+
+
+== How do Computers "See"?
 
 === Overview
 
@@ -51,13 +220,19 @@ Let's start with how WE as humans use our eyes to notice properties of images.
 
 @lesson-instruction{
 - Open the @starter-file{ai-image}, and click "Run".
-- Complete @printable-exercise{human-perception.adoc}
+- Complete the first section on @printable-exercise{human-perception.adoc}.
 }
 
 @slidebreak{Launch}
 @right{@image{images/computer-vision.jpg, 400}}
 Modern ML models are capable of interpreting elements of an image ("person", "car", etc.). This belong to a class of Machine Learning algorithms called "Computer Vision", which relies heavily on more advanced -- and computationally intensive -- concepts that we won't cover here.
 
+@lesson-instruction{
+- For now, we're going to use our human brains to see these elements in our images!
+- On lines 28-39 of the *Definitions Area*, you'll see that the mountain images are used to define a _table_ called `images`.
+- There are columns for the identifier (`ID`), the image document (`DOC`), whether the image is `LIKED` or `DISLIKED`, and also for any descriptive `TAGS` in the image.
+- Complete the last section on @printable-exercise{human-perception.adoc}.
+}
 
 Can a Data Driven Algorithm help us re-create Google Image Search, even without the fancy Computer Vision tech?
 
