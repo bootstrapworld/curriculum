@@ -366,13 +366,20 @@
               " :: "
               (contract-types-to-commaed-string domain-list)
               " -> "
-              (htmlize range))]
+              range)]
          [s2 (and purpose
                   (string-append
                     prefix purpose))])
+    ;; Emit markdown inline-code (double backticks) instead of HTML <code>
+    ;; tags so that md2googleslides' markdown-it does not try to parse
+    ;; embedded angle brackets in parameterized types (e.g. `List<String>`,
+    ;; `Function<A,B>`) as HTML tags.  Backticks treat their body as literal
+    ;; text, which also means the prior asymmetric `htmlize` on `range` is
+    ;; no longer needed (and was already wrong for parameterized types in
+    ;; the domain list, which were never escaped).
     (if purpose
-        (format "<code>~a</code>\n\n<code>~a</code>" s s2)
-        (format "<code>~a</code>" s))))
+        (format "``~a``\n\n``~a``" s s2)
+        (format "``~a``" s))))
 
 (define (contracts . args)
   (let ([res ""])
