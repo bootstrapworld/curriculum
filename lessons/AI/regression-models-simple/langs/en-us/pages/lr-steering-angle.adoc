@@ -35,11 +35,12 @@ div#body .studentAnswerMedium { min-width: 35pt; }
 |===
 | @math{curve\text{-}predictor(curve) = (}@fitbruby{4em}{@ifsoln{19.5}}{@math{m}}@math{\times curve) + }@fitbruby{4em}{@ifsoln{0.41}}{@math{b}}
 | @show{(code '(define (curve-predictor curve) (+ (* (?ANS 19.5) curve) (?ANS 0.41))))}
+|===
 
 @n When `curve = 0` (a perfectly straight road), what does our `curve-predictor` estimate the steering angle to be to the nearest degree? @fitbruby{2em}{@ifsoln{≈ 0}}{intercept} @fitbruby{5.5em}{degrees}{units}. Does this make real-world sense? @fitb{}{} +
 @fitb{}{@ifsoln{Yes! If the road is straight and the car is centered, there's no reason to steer.}}
 
-@n If `curve` increases by 1, the `curve-predictor` expects the steering angle to @fitbruby{8em}{@ifsoln{increase}}{increase/decrease} by @fitbruby{5em}{@ifsoln{19.5}}{slope} @fitbruby{8em}{@ifsoln{degrees}}{units}. 
+@n If `curve` increases by 1, the `curve-predictor` expects the steering angle to @fitbruby{8em}{@ifsoln{increase}}{increase/decrease} by @fitbruby{5em}{@ifsoln{19.5}}{slope} @fitbruby{8em}{@ifsoln{degrees}}{units}.
 
 @n To generalize what the model _learned_, we could say: +
 The sharper the road curves, the @fitb{10em}{@ifsoln{more}} you need to steer.}}
