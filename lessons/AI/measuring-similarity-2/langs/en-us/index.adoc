@@ -127,8 +127,6 @@ We might find a table of ratings that looks like this (_Note the data in this ta
 | 6 | In-N-Out    | 1.45             	| 4.4            | 8
 |===
 
-@right{@image{images/burger.jpg, 300}} *Pay attention to scale:*
-
 - For `Price`, 1 is the best possible rating out of 5.
 - For `Fries`, the scale is opposite - 5 is the best!
 - Meanwhile, `Burgers` are rated on a 1-to-10 scale.
@@ -168,7 +166,6 @@ What kinds of images does this function produce?}
 @slidebreak{Launch}
 
 @lesson-instruction{
-@right{@image{images/window.png, 140}}
 
 - Type `scatter-plot(fast-food, "ID", "fries", "price")` in the Interactions Area and hit enter.
 - On the right hand side of the graph change the `x-min` and `y-min` to 0 and the `x-max` and `y-max` to 5. Then click "Redraw".
@@ -177,7 +174,6 @@ What kinds of images does this function produce?}
 @slidebreak{Launch}
 
 @QandA{
-@right{@image{images/price-v-fries-desmos.png, 300}}
 
 @Q{What do you *Notice* about the "Price-Fries Space"?}
 @A{Four of the restaurants are clustered around $1.25-$1.50, while the remaining two are much farther away from the group above $2.}
@@ -197,120 +193,6 @@ What kinds of images does this function produce?}
 
 
 
-== How do Computers "See"?
-
-=== Overview
-
-Students explore ways in which attributes of images can be computed, using various functions.
-
-=== Launch
-@slidebreak{LaunchR}
-@right{@image{images/image-search.png, 400}}
-
-@link{https://images.google.com/, In Google Image Search}, you can drag a picture into the search box and have Google find other, _similar_ images.
-
-@teacher{Give students a demo, using an image of your choice!}
-
-@slidebreak{Launch}
-When we asked Google to find images similar to this one, it came back with a lot of similar images! But the computer doesn't have eyes, and it doesn't have the human experience that informs how an image makes us feel.
-
-So how does it even know what "similar" means?
-
-Let's start with how WE as humans use our eyes to notice properties of images.
-
-@lesson-instruction{
-- Open the @starter-file{ai-image}, and click "Run".
-- Complete the first section on @printable-exercise{human-perception.adoc}.
-}
-
-@slidebreak{Launch}
-@right{@image{images/computer-vision.jpg, 400}}
-Modern ML models are capable of interpreting elements of an image ("person", "car", etc.). This belong to a class of Machine Learning algorithms called "Computer Vision", which relies heavily on more advanced -- and computationally intensive -- concepts that we won't cover here.
-
-@lesson-instruction{
-- For now, we're going to use our human brains to see these elements in our images!
-- On lines 28-39 of the *Definitions Area*, you'll see that the mountain images are used to define a _table_ called `images`.
-- There are columns for the identifier (`ID`), the image document (`DOC`), whether the image is `LIKED` or `DISLIKED`, and also for any descriptive `TAGS` in the image.
-- Complete the last section on @printable-exercise{human-perception.adoc}.
-}
-
-Can a Data Driven Algorithm help us re-create Google Image Search, even without the fancy Computer Vision tech?
-
-=== Investigate
-@slidebreak{Investigate}
-Much like our fast-food restaurants, we can come up with lots of ways to describe an image using numbers:
-
-- Width and height
-- Brightness
-- Vertical symmetry
-
-What other numbers could be used to describe an image?
-
-@slidebreak{Investigate}
-
-@lesson-instruction{
-- Open the @starter-file{ai-image}
-- Complete the first section of @printable-exercise{image-similarity.adoc}
-}
-
-@slidebreak{Investigate}
-
-- The _luminance_ of an image is (roughly) a measure of how *bright* it is
-- The _entropy_ of an image is (roughly) how *busy* it is
-
-We can use these calculated values to create @vocab{attributes} for each of our images!
-
-@slidebreak{Investigate}
-@QandA{
-@Q{A table is defined on lines 15-25. What is its name?}
-@A{`images`}
-
-@Q{What columns does it have?}
-@A{`ID`, `img`, `rating`, and `tags`}
-
-@Q{What are the rows?}
-@A{It looks like they each have one of the images defined earlier, then the empty string for `rating` and `tag`}
-
-@Q{What's going on in lines 27-30?}
-@A{Some function is defined, which appears to shrink an image. Then it's used to transform the `img` column from `images`, creating a new table called `small-images`}
-
-@Q{What's happening in lines 35-39?}
-@A{Four Rows are being defined. All of them have a visible sun.}
-}
-
-@slidebreak{Investigate}
-
-For your convenience, we've provided a function that will add all of these attributes (and more!) to the image table:
-
-@center{@show{(contract "decorate-image-table" '("String") "Table")}}
-
-This function consumes a table and the name of the column holding our images, then produces a new table with _all_ of our various attributes computed. Processing large images can be very computationally intensive, and using this function on the original `images` table will get frustrating unless you're on a powerful machine. For this lesson we'll use`small-images` to keep things snappy.
-
-@lesson-instruction{
-- Complete the rest of @printable-exercise{image-similarity.adoc}
-}
-
-=== Synthesize
-@slidebreak{Synthesize}
-
-@QandA{
-@right{@image{images/luminance-entropy.png, 300}}
-Let's talk about the Luminance-Entropy Space you all created.
-@Q{What clusters did you see?}
-@A{Snowy mountains on the bottom-right}
-@A{High-contrast images on the top-left}
-
-@Q{Are the images with suns __high__-luminance? Why or why not?}
-@A{They are surprisingly low luminance, but that makes sense because the part *not* lit by the sun is much darker in every image}
-
-@Q{Are there any other axes that give us good clustering?}
-@A{Responses will vary}
-
-@Q{What other axes might we want?}
-@A{Responses will vary - but sharp students will want axes for color}
-}
-
-
 == Unsupervised Learning and Bag-of-Words
 
 === Overview
@@ -323,11 +205,7 @@ Student apply what their similarity measures to something the decorated image mo
 You've just constructed a @vocab{model} for images, which captures certain information -- luminance, vertical symmetry, etc. -- and throws away the rest. We haven't asked humans to label which images have the sun, grass, or snow in them. Can we still do a decent image search, based solely on the machine-generated attributes? For example, could we choose one of our snow-covered mountains (like `"4"`) and have the computer produce the other (`"5"`)?
 
 @slidebreak{LaunchR}
-@ifslide{@right{@image{images/luminance-entropy.png}}}
 
-@lesson-instruction{
-- Complete the first section on @printable-exercise{unsupervised-learning.adoc}
-}
 
 Luminance-Entropy Space is pretty good for this search, because both of the snowy images are already clustered together, away from the rest.
 
@@ -336,7 +214,6 @@ Luminance-Entropy Space is pretty good for this search, because both of the snow
 Was `simple-similarity` useful? How about `distance-similarity`?
 
 @slidebreak{LaunchR}
-@ifslide{@right{@image{images/luminance-entropy.png}}}
 
 It would be really nice to have axes for each color, so we could see how Red, Green, and Blue each image is. If we used `green` as an axis, those grassy images would definitely stand out in that dimension!
 
@@ -367,20 +244,17 @@ What did you get back?
 Without the order of the words, it's as if we just put all the words into a sack and shook it. The information about _frequency_ of each word is still there, but we've lost the order. Machine Learning Engineers call this a @vocab{bag-of-words model}.
 
 @lesson-instruction{
-- Complete the second section on @printable-exercise{unsupervised-learning.adoc}
 - What axes would you use to get the best clustering?
 - Be ready to share your answer!
 }
 
 
 @slidebreak{InvestigateR}
-@right{@image{images/luminance-entropy-green.png, 300}}
 Luminance-Green Space was great for finding our grassy images, but not as good for the snowy ones. We want our Image Search to work for _both_ kids of images!
 
 We know that the grassy images cluster along the `"green"` axis, and the snowy ones cluster along the `"blue"` axis. Blue-Green Space is a good candidate for solving our problem! But then a user might want to search for pictures with the sun...
 
 @slidebreak{InvestigateR}
-@ifslide{@right{@image{images/luminance-entropy-green.png, 300}}}
 
 Think back to our burger-and-fries example: there _may_ be other clusters in other dimensions. We just cant see them because we're only looking in 2 dimensions! There's no reason we can't add all three dimensions here, or four, or five, etc!
 
@@ -388,7 +262,6 @@ Our image scatter plots for Luminance-Green and Luminance-Entropy are just _proj
 
 @lesson-instruction{
 - Suppose we want to find images similar to Image 7. What columns would be most useful?
-- Complete @printable-exercise{unsupervised-learning.adoc}!
 }
 
 === Synthesize
