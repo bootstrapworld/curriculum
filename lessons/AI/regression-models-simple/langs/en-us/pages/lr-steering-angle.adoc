@@ -13,9 +13,7 @@ div#body .studentAnswerMedium { min-width: 35pt; }
 
 == Using Linear Regression
 
-@n Evaluate `lr-plot` for each of the variables, and fill in the table below:
-
-@hspace{1em}_For example `lr-plot(training-data, "id", "curve", "steering-angle")`_
+@n Evaluate `lr-plot` for each variable (e.g. - `lr-plot(training-data, "id", "curve", "steering-angle")`), and use the result to fill in the table below:
 
 [cols="<, ^, ^, ^",options="header"]
 |===
@@ -42,10 +40,23 @@ div#body .studentAnswerMedium { min-width: 35pt; }
 
 @n If `curve` increases by 1, the `curve-predictor` expects the steering angle to @fitbruby{8em}{@ifsoln{increase}}{increase/decrease} by @fitbruby{5em}{@ifsoln{19.5}}{slope} @fitbruby{8em}{@ifsoln{degrees}}{units}.
 
-@n To generalize what the model _learned_, we could say: +
-The sharper the road curves, the @fitb{10em}{@ifsoln{more}} you need to steer.}}
+@n To generalize what the model _learned_: "the more sharply the road curves, the @fitbruby{10em}{@ifsoln{more}}{less? more?} sharply you need to steer".
 
 == Driving with the Model
 
 @n Evaluate `drive(curve-predictor)` and read the error carefully. What do you think it is telling us? @fitb{}{} +
 @blanklines{2}{@ifsoln{The predictor was given a Row, but it expected a number. `drive` gives our predictors *Rows*, but `curve-predictor` takes a Number.}}
+
+@vspace{1ex}
+
+*Evaluate `reg-model-code(training-data, [list: "curve"], "steering-angle")`*
+
+@n How is the code produced by `reg-model-code` *similar* to your `curve-predictor` function? @fitb{}{} +
+@blanklines{2}{
+@ifsoln{It's consuming one thing in the domain, and producing a number. It seems to use the same slope and intercept that I do as well.}
+}
+
+@n How is it *different*? @fitb{}{} +
+@blanklines{2}{
+@ifsoln{The curve predictor appears to take in a Row, and then grab the curve data from inside that row.}
+}
