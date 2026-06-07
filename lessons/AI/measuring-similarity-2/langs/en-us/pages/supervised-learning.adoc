@@ -2,68 +2,78 @@
 
 @lesson-instruction{For this page, you'll need @starter-file{ai-image} open on your computer}
 
+@vspace{1ex}
+
+*How good is our `angle-similarity` measure at finding similar images for snow, grass, and sun?*
+
+@n Evaluate each of the expressions below, paying attention to the closest matches at the top of the result table
+
+(a) *Snow*: `angle-similarity(decorated-bag, "4", [list: "LUMINANCE", "ENTROPY", "red", "green", "blue"])` +
+(b) *Grass*: `angle-similarity(decorated-bag, "6", [list: "LUMINANCE", "ENTROPY", "red", "green", "blue"])` +
+(c) *Sun*: `angle-similarity(decorated-bag, "7", [list: "LUMINANCE", "ENTROPY", "red", "green", "blue"])`
+
+@indented{
+Were the top results right for images with snow? @fitb{6em}{@ifsoln{Yes}} Grass? @fitb{6em}{@ifsoln{Yes}} Sun? @fitb{6em}{@ifsoln{No}}
+}
+
+Why is our similarity method worse at recommending sun images than it is with snow or grass? @fitb{}{} +
+@fitb{}{@ifsoln{The sunset image is _really_ different from the others. Any time we search by the `ID` of the other images (0, 6, or 7), we get other recommendations before image 8.}}
+
+
 == Calculating Centroids
 
-@n Fill in the table below using the two rows you "Like"-d, then compute their centroid. (NOTE: we've removed the symmetry columns)
+@n Table below includes two rows with images of the sun (`"6"` and `"7"`). Complete the table by filling the Centroid. (NOTE: we're just showing _some_ of the columns on this page)
 
-[%AUTOWIDTH, .FillVerticalSpace, cols="^.^, ^, ^a, ^a, ^a, ^a, ^a, ^a", options="header", stripes="none"]
+[%AUTOWIDTH, .FillVerticalSpace, cols="^.^, ^, ^a, ^a, ^a, ^a", options="header", stripes="none"]
 |===
-| ID 			| WIDTH | HEIGHT| LUMINANCE | ENTROPY | red  | green | blue
-|   			|       |       |   		|   	  |  	 |  	 |
-|   			|       |       |   		|		  | 	 |  	 |
-| LIKED CENTROID|		|		|			|		  |		 |		 |
+| ID
+| WIDTH
+| HEIGHT
+| red
+| green
+| blue
+
+
+| `"6"`
+| 160
+| 107
+| 8932
+| 5245
+| 2921
+
+| `"7"`
+| 160
+| 107
+| 10971
+| 175
+| 5908
+
+| `"SUN CENTROID"`
+|@ifsoln{160}
+|@ifsoln{107}
+|@ifsoln{9,951.5}
+|@ifsoln{2,710}
+|@ifsoln{4,414.5}
 |===
 
-== What does the Code Do?
-The questions below rely on the following contracts:
+@n *Pyret includes a function for adding Centroids to our model!* Define a new model with `m67 = add-centroid(decorated-bag, "SUN", [list: "6", "7"])`, then evaluate `m67`. What do you get back? (HINT: Be sure to view all the rows of the resulting table!) @fitb{}{} +
+@fitb{}{@ifsoln{It added a centroid to our table, matching what I did by hand}}
 
-[%AUTOWIDTH, cols="<,<",frame="none"]
-|===
-|
-@show{(contract "add-centroid" '(Table String List<String>) "Table")} +
-@show{(contract "liked-ids" '(Table) "List<String>")} +
-|
-@show{(contract "disliked-ids" '(Table) "List<String>")} +
-@show{(contract "tagged-ids" '(Table String) "List<String>")}
-|===
+@n Complete the code below, to find similar images using the `"SUN CENTROID"` in our new model, then try it out in Pyret:
 
-@n What code will add a centroid called `"SNOW"` to the `decorated-bag` table, for image IDs "4" and "5"? +
-@fitb{}{@ifsoln{`add-centroid(decorated-bag, "SNOW", [list: "4", "5"])}}
-
-
-*The code below defines `liked` as a list of IDs for all liked images in `decorated`:*
-
-@center{`liked = liked-ids(decorated-bag)`}
-
-@n What code will define `disliked` as a list of IDs for disliked all images in `decorated`? +
-@fitb{}{@ifsoln{`disliked = disliked-ids(decorated-bag)`}}
-
-@n What code will define `sun-tagged` as a list of IDs for all images in `decorated` tagged with "sun"? +
-@fitb{}{@ifsoln{`sun-tagged = tagged-ids(decorated-bag, "sun")`}}
-
-@n What code will add a centroid for all liked images in `decorated`?
-@fitb{}{@ifsoln{add-centroid(decorated-bag, "LIKED", liked)}}
-
-@n What code will add a centroid for all images in `decorated` tagged with "sun"?
-@fitb{}{@ifsoln{add-centroid(decorated-bag, "LIKED", sun-tagged)}}
-
-@n What code will compute the `cosine-similarity` for all liked images, using only the columns `"green"` and `"red"`? +
-@fitb{}{@ifsoln{`cosine-similarity(add-centroid(decorated-bag, "LIKED", sun-tagged), "LIKED CENTROID", [list: "green", "red"])`}}
+`angle-similarity(` @fitbruby{5em}{@ifsoln{m67}}{Table}, @fitbruby{10em}{@ifsoln{"SUN CENTROID"}}{ID to compare}, `[list: "LUMINANCE", "ENTROPY", "red", "green", "blue"])`.
 
 == Searching and Recommending
 
 The questions below rely on the following contracts:
 
-[%AUTOWIDTH, cols="<,<",frame="none"]
-|===
-|
-@show{(contract "recommend" '(Table List<String>) "Table")} +
-|
-@show{(contract "search-by-tag" '(Table List<String>) "Table")}
-|===
+- @show{(contract "search-by-tag" '(Table String) "Table")}
+- @show{(contract "recommend" '(Table) "Table")}
 
-@n What code will make recommendations from `decorated-bag`, using only the columns `"red"`, `"green"`, and `"blue"`? +
-@fitb{}{@ifsoln{`recommend(decorated-bag, [list: "red", "green", "blue"])`}}
+@n Make sure that only images `"6"` and `"7"` are tagged with "sun", click "Run", and evaluate `search-by-tag(decorated-bag, "sun")`. What does `search-by-tag` do? @fitb{}{} +
+@fitb{}{@ifsoln{It find the images that have a matching tag, builds a centroid, then returns images similar to the centroid}}
 
-@n What code will find images matching "sun" from `decorated-bag`, using only the columns `"luminance"`, `"entropy"`, and `"green"`? +
-@fitb{}{@ifsoln{`recommend(decorated-bag, [list: "luminance", "entropy", "blue"])`}}
+@n Try tagging *one* of grass images. Does `search-by-tag(decorated-bag, "grass")` recommend the other? @fitb{3em}{@ifsoln{yes}} What about for snowy images? @fitb{}{@ifsoln{yes}}
+
+@n Try adding a small number of likes and dislikes to the table, then evaluate `recommend(decorated-bag)`.  The `recommend function` builds _two_ centroids. Can you figure out why? @fitb{}{} +
+@fitb{}{@ifsoln{It builds one for likes and another for dislikes, then find images that are close to the first and far from the second}}

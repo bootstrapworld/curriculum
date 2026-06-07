@@ -6,50 +6,43 @@
 ++++
 
 == Projection
-[cols="<1a, <2a", frame="none"]
+[%autowidth, cols="<,<", frame="none"]
 |===
-| @image{../images/projection-bw.png, 400}
+| @image{../images/projection-bw.png, 175}
 |
-@n In the image to the left, we see a cylinder casting two different shadows on two perpendicular surfaces. +
-In your own words, explain what's happening. @fitb{}{} +
-@blanklines{6}{}
+@n In your own words, explain what is happening in this picture. @fitb{}{} +
+@blanklines{5}{}
 |===
 
-== 3 Dimensional Comparison
-@link-instructions{@online-exercise{https://www.desmos.com/3d/qmu6fmrs6h, RGB Image Plot}.}
+== Plotting Images in 2 Dimensions ("Blue-Green-Red Space")
+@link-instructions{You'll need the @online-exercise{https://www.desmos.com/3d/qmu6fmrs6h, RGB Image Plot} Desmos file open on your computer. At any time, you can click  &#8635;   to reset the file to the beginning.}
 
-- At the top of the expression panel on the left, you'll see a data table for each of the images from our corpus.
-- The table has columns for ID (@math{i}), Red (@math{R}), Green (@math{G}), and Blue (@math{B}).
-- The 2-dimensional scatter plot you see is a plot of our images in "Blue-Green Space", showing the relationship between Blue (on the z-axis) and Green (y-axis).
 - Image 4 is represented as a purple dot, while the points for our other images are shown in green.
-- *Remember the mission:* We want to find the green point that's "most similar" to the purple one.
+- *Remember the mission!* We want to find the green point that's "most similar" to the purple one.
 
-@n Follow each of the instructions below carefully!
+@n This is the same as the Pyret scatter plot on the bottom of @printable-exercise{plotting-images.adoc} for (circle one): @hspace{1em} @ifsoln-choice{Blue-Green Space} @hspace{2em} Blue-Red Space
 
-- Click  &#8635;   to reload the Desmos file. Once you reload, the "Fries v. Price" folder should be on.
-- *Turn on* the "Burgers v. Price" folder. 
-- *Turn on* the "Fries v. Burgers v. Price" folder.
-- Click on the "X" label on bottom axis, and slowly rotate the 3D space.
+@n *Turn on* the "Blue-Red" folder, and explain what you see. @fitb{}{} +
+@blanklines{1}{@ifsoln{A bunch of red points appear, all along the blue (Z) axis}}
 
-@n What do the orange points represent? @fitb{}{} +
-@fitb{}{@ifsoln{Each restaurant as a point in a 3D scatter plot, with axes for Price, Fry, and Burger}}
+@n Click on any dot, drag it around to explore, and explain what you see. @fitb{}{} +
+@blanklines{1}{@ifsoln{The whole cube rotates! I can see the Blue-Green scatter plot against one wall of the cube, and the Blue-Red scatter plot against the other}}
 
-@n Rotate the space so that the orange dots _completely cover_ the red ones. What plane are you looking at? @fitb{}{@ifsoln{y-z}}
+@n Rotate the cube so that the Blue-Red scatter plot is at the "front" of the cube. Compare it to the Pyret scatter plot on the bottom of @printable-exercise{plotting-images.adoc}.
 
-@n Rotate the space so that the orange dots _completely cover_ the blue ones? What plane are you looking at? @fitb{}{@ifsoln{x-z}}
+@n *Turn on* the "Blue-Green-Red" folder, and rotate the cube as needed. Explain what you see. @fitb{}{}
+@blanklines{1}{@ifsoln{A bunch of blue points appear, one for each image. This time they are being plotted inside the cube, instead of on a face.}}
 
-@n Rotate the space so that you are looking at the x-y plane. Describe the arrangement of the dots you see. @fitb{}{} +
-@blanklines{1}{@ifsoln{The red dots all fall on the y-axis. The blue dots all fall on the x-axis and the orange dots are distributed across the plane}}
+@n Can you rotate the space so that the blue (3D) points _completely cover_ the green (2D) ones? The red (2D) ones?
 
 @n How is the 3D model in this desmos file like the image at the top of the page? @fitb{}{} +
-@blanklines{3}{@ifsoln{Like the image at the top of the page, it means each of our 2D scatter plots is a projection of the data}}.
+@blanklines{2}{@ifsoln{Like the image at the top of the page, it means each of our 2D scatter plots is a projection of the data}}.
+
+== Lines and Angles
+@n *Turn on* the "Lines" folder, then adjust the @math{I_n} slider draw lines to different Images. Explain what is happening. @fitb{}{} +
+@blanklines{2}{@ifsoln{There's always a line from the origin to the purple dot. The slider adds another line from the origin to the dot of my choosing.}}
 
 @n Could you imagine two lines in this 3D space that start at the origin and *wouldn't* form an angle we can measure? If so, what are they? If not, why not? @fitb{}{} +
-@blanklines{2}{
+@blanklines{1}{
 @ifsoln{No - as long as both lines need to start at the origin, they will always form a "V" - or "slingshot" - shape. And no matter how that "V" is rotated or tilted, the angle between the lines can always be measured.}
 }
-
-== Other Spaces
-
-We just defined a 3D space for fast-food chains, with axes for price, fries, and burgers. Think back to the attributes you defined for @printable-exercise{comparing-desserts.adoc}. Do you think we could compare *more than three axes* at once? @fitb{}{} +
-@fitb{}{@ifsoln{our `angle-similiraty` function can compute on more than three axes, but we can't visually imagine more than 3 dimensions}}

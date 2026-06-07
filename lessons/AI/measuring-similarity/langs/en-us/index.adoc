@@ -2,7 +2,7 @@
 = Measuring Similarity
 
 @description{
-Students consider how arbitrary documents (in this case, restaurant ratings) can be represented as points in space, and explore different ways to measure the "distance" between those documents using a spatial representation.
+Students consider how arbitrary documents (in this case, Images) can be represented as unlabeled points in space, and explore different ways to measure the "distance" between those documents using a spatial representation.
 }
 
 @lesson-prereqs{data-driven-algorithms}
@@ -44,7 +44,7 @@ Students explore ways in which attributes of images can be computed, using vario
 @slidebreak{LaunchR}
 @right{@image{images/image-search.png, 400}}
 
-@link{https://images.google.com/, In Google Image Search}, you can drag a picture into the search box and have Google find other, _similar_ images.
+@link{https://images.google.com/, In Google Image Search}, you can drag a picture into the search box and have Google find other, _similar_ images. Image search is basically a *recommendation system*, where the user uploads an image they like and Google produces a list of recommended matches.
 
 When we ask Google to find images similar to the one we dragged, it comes back with a lot of similar images! But the computer doesn't have eyes, and it doesn't have the human experience that informs how an image makes us feel.
 
@@ -243,10 +243,10 @@ Try it yourself!
 @A{No - they are very similar, but they are not identical!}
 }
 
-== Defining "Image Space"
+== Measuring Distance in "Image Space"
 
 === Overview
-Students are introduced to _distance_ as a notion of similarity. This requires them to visualize images in a spatial system - first in one dimension, then in two.
+Students are introduced to _distance_ as a notion of similarity. This requires them to visualize images in a spatial system - first in one dimension, then in two, then eventually three.
 
 === Launch
 @slidebreak{Launch}
@@ -312,24 +312,11 @@ Our images are described by 3 different colors (Red, Blue, and Green), so our "C
 - Open the @online-exercise{https://www.desmos.com/3d/qmu6fmrs6h, RGB Image Plot} in Desmos
 - The table at the top of the panel contains the Red, Green, and Blue values from our `decorated-bag` table
 - The scatter-plot for Blue-v-Green is visible against the "back wall" of the cube, with each image plotted as a *green* dot. Compare it to the Pyret scatter plot on @printable-exercise{plotting-images.adoc}.
-- Click on any dot in the plot, and drag to rotate the cube until you can see _both_ the Z-X and Z-Y planes.
-- Turn on the "Blue-v-Red" folder, and rotate the cube until this scatter plot plot is visible against the "front wall" of the cube, with each image plotted as a red *dot*. Turn off the "Blue-v-Green" dots, and compare _this_ scatter plot to the Pyret scatter plot on @printable-exercise{plotting-images.adoc}.
-- Are these the same plots?
+- Complete the first two sections on @printable-exercise{from-2-to-3.adoc}.
 }
 
 @slidebreak{InvestigateR}
-
-@lesson-instruction{
 @right{@image{images/3d-rgb.webp, 300}}
-
-Remember, these scatter plots are just _projections_ of what is actually *3-dimensional* data!
-
-- Click on any dot in the plot, and drag to rotate the cube until you are back to seeing _both_ the Z-X and Z-Y planes.
-- Turn on the "Blue-v-Red-v-Green" folder, to see the points for our images plotted in all three dimensions!
-- Rotate the cube: can you make the blue dots cover the green ones? The red ones?
-}
-
-@slidebreak{Investigate}
 
 The distance formula works in 3 dimensions too! In fact, it works in _any number of dimensions_ we want -- we just can't see more than 3 with our eyes. But *the math holds true*, and we can use `distance-similarity` with any number of attributes we want.
 
@@ -349,11 +336,52 @@ Overall, `distance-similarity` is a huge upgrade compared to `simple-similarity`
 -
 - It ignores _orientation_: As humans, we know that two images that are "mostly red" are a lot more similar that two images that are different colors! But the distance formula doesn't care if two images are dominated by the same color or not -- when calculating the distance _between_ the points it doesn't consider _where those points are on the graph._
 
-@slidebreak{InvestigateR}
-@right{@image{images/3-d-comparison-w-lines.png, 300}}
+=== Synthesize
+@slidebreak{Synthesize}
+TODO
 
+== Measuring Angles in "Image Space"
+
+=== Overview
+Students are introduced to _angle-measurement_ as a notion of similarity. This reinforces the visualization of images in a spatial system.
+
+=== Launch
+@slidebreak{Launch}
 Let's try another form of similarity, which relies on the idea that "red-dominant" images will all cluster on one axis, and "blue-dominant" places on the other. _Angle similarity_ compares the angles formed by two rays drawn from two points to the origin.
 
+@lesson-instruction{
+- Complete the last section on @printable-exercise{from-2-to-3.adoc}
+}
+
+@slidebreak{LaunchR}
+@right{@image{images/3-d-comparison-w-lines.png, 300}}
+
+We can draw lines (called "rays") from the origin to any of our image-points in space. Instead of computing the distance between these points, we can compute the _angle between these lines_. Two points that are identical will have an angle of *zero*, meaning "the greatest possible similarity". Two points that fall on totally different axes (all-blue v. all-red, for example) will have an angle of *ninety*, meaning "the least possible similarity."
+
+This solves both of the problems with `distance-similarity`:
+
+- Count v. Proportion: The angle between both of our red squares will be zero, since they both fall exactly on the `red` axis. This correctly identifies that our two red squares are similar.
+- Orientation: Angle measure, by definition, describes how closely two rays are oriented.
+
+@slidebreak{LaunchR}
+@ifslide{@right{@image{images/3-d-comparison-w-lines.png, 300}}}
+@QandA{
+@Q{Does angle-similarity work in 1-dimension? Could we have used it in our "Green Space"?}
+@A{No! One limitation of angle similarity is that the angle will *always be zero* unless we compare documents across multiple dimensions.}
+
+@Q{Are Images the only things we can plot in 3-dimensional space and use angle-similarity for?}
+@A{No! We could plot anything with quantitative attributes}
+}
+
+=== Investigate
+@slidebreak{Investigate}
+@lesson-instruction{
+- Suppose we had some data on fast food restaurants, comparing their average review scores for Burgers and Fries. Could we use angle-similarity to look compare them?
+- Complete @printable-exercise{angle-similarity.adoc}
+}
+
+@slidebreak{InvestigateR}
+@ifslide{@right{@image{images/3-d-comparison-w-lines.png, 300}}}
 Of course, Pyret has a function for angle similarity, too!
 
 @hspace{1em}@show{(contract "angle-similarity" '("Table" "String" "List<String>") "Table")}
@@ -361,18 +389,18 @@ Of course, Pyret has a function for angle similarity, too!
 This function _compares every row in the table_ to the Row with the given ID, calculating the angle-similarity between the points specified by the columns.
 
 @lesson-instruction{
-- Complete @printable-exercise{angle-similarity.adoc}
+Complete @printable-exercise{angle-similarity-pyret.adoc}
 }
 
-@slidebreak{InvestigateR}
-@ifslide{@right{@image{images/3-d-comparison-w-lines.png, 300}}}
+@slidebreak{Investigate}
+Is measuring angles closer to human perception than measuring distance?
 
 @lesson-instruction{
 - Try `angle-similarity(decorated-bag, "3", [list: "red", "green", "blue"])`, and see how well this works at finding the similarity between images with *grass*.
 - Try it again with ID `"5"`, to see how well it works at finding the similarity between images with *snow*.
 - Try it again with ID `"10"`, to see how well it works at finding the similarity between images with *red squares*.
-- Try it again with ID `"6"`, to see how well it works at finding the similarity between images with *sun*.
-- Try adding _other_ columns! Can you come up with a higher-dimensional space that works for all four groups?
+- Try it again with ID `"8"`, to see how well it works at finding the similarity between images with *sun*.
+- Is it useful to add our `WIDTH` and `HEIGHT` columns? Why or why not?
 
 }
 
@@ -393,12 +421,26 @@ If you have older students who have learned some trigonometry, you might want to
 For the purposes of this curriculum, you can safely ignore the difference between angle and cosine similarity! But, for students who are familiar with cosine and curious to explore, all of the starter files in our AI pathway have access to a `cosine-similarity` function.
 }
 
+
 === Synthesize
+@slidebreak{Synthesize}
+Angle similarity really helped us improve the machines' "perception" of what makes two images similar. Given one image, we're able to produce much better search results! Thinking back to the notion of search as a *recommendation system*, you could also imagine doing the same with other kinds of data: picking a song and asking Spotify to recommend similar matches!
+
+@slidebreak{Synthesize}
 @QandA{
 @Q{It's obvious why `angle-similarity` works in two dimensions: you can use a protractor on a piece of paper if you have to! How could you explain why it still works in *three dimensions*?}
 @A{All we need is two rays coming from the origin, forming a "V" shape like the bands in a slingshot. No matter how you turn and twist the "V", it will always define a plane on which we can use a protractor.}
 
-@Q{Would the math still work in *four* dimensions? *Five*?}
-@A{Let students discuss!}
-@A{Just because we can't picture it, doesn't mean a computer can't calculate it!}
+@Q{Given this image corpus, which includes our red squares, why couldn't we use angle similarity on a Blue-Green Space?}
+@A{Angle similarity requires drawing two rays, so that the angle between them can be measured. But our red squares have zero as their value for both `blue` and `green`, so their coordinates in Blue Green Space would be @math{(0,0)}. It's impossible to draw a line between a point and itself, so there's no way to measure the angle between either of our red squares and any other image.}
+
+@Q{Are there any limitations to using angle measures for similarity, where distance might be better?}
+@A{If we're only measuring in 1 dimension, the angle will always be zero}
 }
+
+@slidebreak{Synthesize}
+There are still a lot of limitations to our system, however:
+
+- We can only _search by document_, where we pick an image and find similar ones. Google lets us type in a word like "grass"! (A music example: Spotify lets us type in a word like "jazz", rather than asking to tell it a specific song)
+- We're only recommending matches based on a single document: we can't find images, songs, or anything else based on a _collection_ of liked or disliked documents.
+
