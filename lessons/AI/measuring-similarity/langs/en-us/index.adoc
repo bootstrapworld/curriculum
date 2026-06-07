@@ -46,12 +46,12 @@ Students explore ways in which attributes of images can be computed, using vario
 
 @link{https://images.google.com/, In Google Image Search}, you can drag a picture into the search box and have Google find other, _similar_ images.
 
+When we ask Google to find images similar to the one we dragged, it comes back with a lot of similar images! But the computer doesn't have eyes, and it doesn't have the human experience that informs how an image makes us feel.
+
 @teacher{Give students a demo, using an image of your choice!}
 
 @slidebreak{Launch}
-When we asked Google to find images similar to this one, it came back with a lot of similar images! But the computer doesn't have eyes, and it doesn't have the human experience that informs how an image makes us feel.
-
-So how does it even know what "similar" means?
+So how does Google Images even know what a "similar image" _means_?
 
 Let's start with how WE as humans use our eyes to notice properties of images.
 
@@ -183,7 +183,7 @@ The $64,000 question is: can we do something like Google Image Search, using onl
 === Investigate
 @slidebreak{Investigate}
 
-Pyret has several functions for measuring similarity, and they each work a little differently. Let's start with the simplest:
+Pyret has several functions for measuring similarity, and they each work a little differently. Let's start by just asking "are these values the same?" for the columns we care about:
 
 @indented{@show{(contract "simple-similarity" '("Table" "String" "List<String>") "Table")}}
 
@@ -243,7 +243,7 @@ Try it yourself!
 @A{No - they are very similar, but they are not identical!}
 }
 
-== Distance and Angle Similarity
+== Defining "Image Space"
 
 === Overview
 Students are introduced to _distance_ as a notion of similarity. This requires them to visualize images in a spatial system - first in one dimension, then in two.
@@ -254,12 +254,18 @@ The `simple-similarity` function is all-or-nothing: either the images match _pre
 
 What else could we do?
 
-@slidebreak{Launch}
-One option is to think of these columns as _number lines_, and plot the images on those lines. The distance between the images tells us how similar (or different) they are.
-
 @lesson-instruction{
 Complete the first section on @printable-exercise{plotting-images.adoc}
 }
+
+
+@slidebreak{Launch}
+@lesson-point{We can think of our images as _points in space_}
+
+The big breakthrough here is recognizing that these columns each represents a _number line_, and every image falls _somewhere on that line_. This allows us to imagine our images existing as points in space, and opens up new ways to measure similarity by thinking about distance between those points.
+
+The worksheet had you use the `"green"` column to define a number line, creating a 1-dimensional "Green Space" where every image was plotted according to how many green-dominant pixels it had. Images with similar numbers of green pixels will be close to each other in this space, and Images with wildly different numbers of green pixel will be far away from each other. *The distance is the difference!*
+
 
 @slidebreak{Launch}
 Pyret has a function for computing the `distance-similarity`. Just like `simple-similarity`, it compares every row in the table to a Row with a given ID.
@@ -277,7 +283,7 @@ Complete the second section on @printable-exercise{plotting-images.adoc}
 @slidebreak{LaunchR}
 @right{@image{images/blue-v-green-images.png, 300}}
 
-By choosing _two_ columns from our dataset and using them as axes, you've defined "Green-Blue Space"! Each of the images from our corpus exists as a point in that space. "Green-Blue Space" is decent for finding our grassy images, snowy images _and_ our red images because each group is already clustered together, away from the rest. But images with the sun don't fare quite as well...
+By choosing _two_ columns from our dataset and using them as axes, you've defined a 2-dimensional "Blue-Green Space"! Each of the images from our corpus now exists as a point in that space. "Blue-Green Space" is decent for finding our grassy images, snowy images _and_ our red images because each group is already clustered together, away from the rest. But images with the sun don't fare quite as well...
 
 @QandA{
 @Q{Why did the distance measure work in two dimensions?}
@@ -303,7 +309,7 @@ Our images are described by 3 different colors (Red, Blue, and Green), so our "C
 @slidebreak{Investigate}
 
 @lesson-instruction{
-- Open the @online-exercise{https://www.desmos.com/3d/qmu6fmrs6h,RGB Image Plot} in Desmos
+- Open the @online-exercise{https://www.desmos.com/3d/qmu6fmrs6h, RGB Image Plot} in Desmos
 - The table at the top of the panel contains the Red, Green, and Blue values from our `decorated-bag` table
 - The scatter-plot for Blue-v-Green is visible against the "back wall" of the cube, with each image plotted as a *green* dot. Compare it to the Pyret scatter plot on @printable-exercise{plotting-images.adoc}.
 - Click on any dot in the plot, and drag to rotate the cube until you can see _both_ the Z-X and Z-Y planes.
