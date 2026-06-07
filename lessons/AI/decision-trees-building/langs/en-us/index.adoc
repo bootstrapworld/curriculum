@@ -318,7 +318,7 @@ When choosing a split for our root node, our goal is to ask a question that sort
 @A{Good questions help us eliminate many of the remaining categories whether the answer is yes _or_ no}
 
 @Q{What do we want to be true about each question we ask?}
-@A{We would want it to cleanly split the list of possible targets as evenly as possible, to guarantee eliminating a significant number of options.}
+@A{We would want it to cleanly split the list of possible targets as cleanly as possible, while eliminating as many options as possible.}
 
 @Q{How does someone use a decision tree to make predictions?}
 @A{Ask the question at the root of the tree, then follow the branches to ask additional questions until we get to a category at the end of a path.}
@@ -367,8 +367,8 @@ Of the 15 animals in our @vocab{training dataset}, 11 have tails and 4 do not.
 It reduces complexity and discards variance in the data, by looking for "general rules" that apply to most -- but not all - of the data.
 }
 
-- The "yes" branch has more cats than anything else (5 out of 11), but our classifier will only guess right about 45% of the time!
-- The "no" branch is evenly split between snails and tarantulas, but no matter what we choose, our classifier will only be right 50% of the time!
+- The "yes" branch has more cats than anything else (5 out of 11). Even though cats are the most likely species for animals with a tail, our classifier will only guess right about 45% of the time!
+- The "no" branch is evenly split between snails and tarantulas. No matter which species our rule predicts, our classifier will only be right 50% of the time!
 
 @slidebreak{Launch}
 
@@ -379,7 +379,7 @@ It reduces complexity and discards variance in the data, by looking for "general
 - Type `training` into the Interactions Area to see the table we'll be working with for now. 
    * It should be the same dataset we just used for our "I Spy - Classify" game. 
    * Notice that you can click the link at the bottom to see the last 5 rows. 
-- Then complete the first section of @printable-exercise{what-does-the-code-do.adoc} with your partner.
+- Then complete the first 2 sections of @printable-exercise{what-does-the-code-do.adoc} with your partner.
 }
 
 @slidebreak{Launch}
@@ -406,7 +406,7 @@ end
 @slidebreak{Investigate}
 You've probably noticed that:
 
-- Just like any other function - `tail-classifier` has a contract! It consumes a Row (an animal) and produces a String (the species that the classifier predicts the animal will be).
+- Just like any other function, `tail-classifier` has a contract! It consumes a Row (an animal) and produces a String (the species that the classifier predicts the animal will be).
 - `tail-classifier` is using a row-accessor to access the information in the `"tail"` column.
 - This function uses some code we haven't seen before like `if` and `else`.
 
@@ -417,6 +417,10 @@ You've probably noticed that:
 
 @Q{What does this part of the function definition do `else: "snail"`?}
 @A{It checks to see whether the value in the `"tail"` column is `true`, and, if it says anything other than `true`, it classifies the animal as a `"snail"`.}
+
+@Q{What does `tail-classifier(firepaw)` do}
+@A{Tells us how the `tail-classifier` will classify our `firepaw` row}
+@A{Returns "cat"}
 }
 
 @teacher{
@@ -485,12 +489,12 @@ Use one of our new tools to answer the following questions about our `tail-class
 |===
 }
 
-@teacher{All of the trees we are working with are binary (every node has only two paths). Some decision trees have decision nodes that split on 3 things or 10 things.}
-
 @QandA{
 @Q{How do we know which of these roots will make the best possible split?}
-@A{We want to choose a split that achieved the most correctly predicted outcomes for the training data.} 
+@A{We want to choose a split that achieved the most correctly predicted outcomes for the training data.}
 }
+
+@teacher{All of the trees we are working with are binary (every node has only two paths). Some decision trees have decision nodes that split on 3 things or 10 things.}
 
 @slidebreak{Investigate-DN}
 @lesson-instruction{
@@ -524,11 +528,48 @@ This is the _exact same_ problem we solved for the root node: our goal is to ask
 @slidebreak{Synthesize}
 
 @QandA{
-@Q{Will a decision tree always have the same number of leaf nodes as there were rows in the training dataset? Why or why not?}
-@A{No. Generally multiple rows of a training dataset will have the same prediction. The training dataset we saw in this lesson section contained multiple knives, for example.}
-
 @Q{Explain how the decision tree and training dataset correspond to each other.}
 @A{The column headers from the table are the questions that will get asked in the decision nodes of the decision tree.}
 @A{The data in each column are the answers to those questions which become the arrow labels of the decision tree ("yes" and "no", for this dataset).}
 @A{The output categories from the table are the leaf nodes in the decision tree.}
+}
+
+@slidebreak{Synthesize}
+*Targeted Advertising:* 
+[.data-table, cols="^2,^2,^3,^2,^2", stripes="none", options="header"]
+|===
+| name    | age        | shopping history     | interest in game  | buys game
+| Jan     | "teens"    | "previous customer"  | false             | false
+| Noah    | "thirties" | "previous customer"  | false             | true
+| Sydney  | "thirties" | "previous customer"  | true              | true
+| Mariana | "thirties" | "new customer"       | true              | false
+| Rasula  | "twenties" | "new customer"       | true              | true
+| Jillian | "teens"    | "previous customer"  | false             | false
+| Ariella | "teens"    | "new customer"       | true              | true
+| Isabela | "thirties" | "previous customer"  | true              | true
+|===
+
+
+@QandA{
+@Q{Based on a dataset like this, could you write a classifier that predicts which customers are most likely to buy a game, and mail them a targeted advertisement?}
+@A{}
+}
+
+@slidebreak{Synthesize}
+*Spam Filtering:*
+[.data-table, cols="^1,^1,^1", stripes="none", options="header"]
+|===
+| sender in address book  | seen sender before      | mass email
+| true                    | true                    | true
+| true                    | false                   | false
+| false                   | true                    | true
+| false                   | false                   | false
+| true                    | true                    | true
+| true                    | false                   | false
+| false                   | false                   | true
+|===
+
+@QandA{
+@Q{Based on a dataset like this, could you write a classifier that predicts whether an email is spam or not?}
+@A{}
 }

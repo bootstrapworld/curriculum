@@ -1,0 +1,49 @@
+= Natural Language is Messy
+
+@lesson-instruction{For this page, you'll need @starter-file{ai-text} open on your computer}.
+
+== Adding the Bag
+@indented{
+@show{(contract "add-bag-cols" '("Table" "String") "Table")}
+}
+
+@n In the Definitions Area, define a new table called `bags`, which is the result of applying `add-bag-cols` to the original `essays` table. Click "Run", and evaluate `bags` in the Interactions Area.
+
+@n Slowly scroll the table to the right. Write down at least three observations in the space below?
+@blanklines{3}{}
+
+@n When comparing essays, are there are any words that don't make sense to count? @fitb{}{}
+
+@n Scroll until you find the count for `areas`. Is it a problem that we have a _separate_ count for `areas.` (with a period). Why or why not? @fitb{}{} +
+@fitb{}{@ifsoln{punctuation shouldn't count!}}
+
+@n Scroll until you find the count for `By`. Is it a problem that we have a _separate_ count for `by` (lowercase). Why or why not? @fitb{}{} +
+@fitb{}{@ifsoln{Capitalization shouldn't count!}}
+
+@n Why is there a column for `whale`, when most of the essays don't even mention it? @fitb{}{} +
+@fitb{}{}
+
+@n Scroll until you find the count for `the`. Is it a problem that we're counting common words like this? Why or why not? @fitb{}{} +
+@fitb{}{@ifsoln{*All* essays use common words a lot! That doesn't help us identify the important words that make two essays similar or different}}
+
+== Computing Similarity
+@n Use `all-cols-similarity` to find the closest essay to `"K"`. Which one is it? @fitb{}{@ifsoln{D}} Roughly how similar was it? @fitb{}{@ifsoln{~0.8653}}
+
+@n What was the _second-closest_ essay to `"K"`? @fitb{}{@ifsoln{H}} Roughly how similar was it? @fitb{}{@ifsoln{~0.4516}}
+
+@n Does the second-closest say seem at all similar to `"K?"` @fitb{}{}
+
+== Data Normalization
+
+@indented{
+@show{(contract "lowercase" '("String") "String")} +
+@show{(contract "remove-punct" '("String") "String")} +
+@show{(contract "remove-stops" '("String") "String")}
+}
+
+@n In the Interactions Area, evaluate `lowercase(badger)`. After you've experimented with the other functions, write the code that will remove punctuation _and_ put everything in lowercase: @fitb{}{@ifsoln{`remove-punct(lowercase(badger))`}}
+
+@n In the Definitions Area add `essays-norm = normalize-text-table(essays, "DOC")`. What did happened to the `"DOC"` strings? @fitb{}{@ifsoln{they were all normalized!}}
+
+@n Use `add-bag-cols` with essays-norm to create `bags2`. Does `all-cols-similarity` do a better job with this table? Explain. +
+@fitb{}{@ifsoln{Definitely. The *real* similarity of documents D and K is still recognized, and the other documents aren't even close!}}

@@ -1,0 +1,410 @@
+[.beta]
+= Supervised and Unsupervised Similarity
+
+@description{
+Students consider how arbitrary documents (in this case images) can be represented as points in space, and explore different ways to measure the "distance" between those documents using a spatial representation.
+}
+
+@lesson-prereqs{measuring-similarity}
+
+@keywords{}
+
+[@lesson-intro-table]
+|===
+| Lesson Goals
+| Students will be able to...
+
+@objectives
+
+| Student-facing Lesson Goals
+|
+- Let's think about ways to represent images as points in space
+
+
+| Materials
+|[.materials-links]
+@material-links
+
+|===
+
+
+== Plotting Images in Space
+
+=== Overview
+
+Students explore ways in which images can be represented as points in space, and how similarity measures can be applied to find "similar" images.
+
+=== Launch
+@slidebreak{LaunchR}
+@right{@image{images/image-search.png, 400}}
+
+@link{https://images.google.com/, In Google Image Search}, you can drag a picture into the search box and have Google find other, _similar_ images.
+
+@teacher{Give students a demo, using an image of your choice!}
+
+@slidebreak{Launch}
+When we asked Google to find images similar to this one, it came back with a lot of similar images! But the computer doesn't have eyes, and it doesn't have the human experience that informs how an image makes us feel.
+
+So how does it even know what "similar" means?
+
+Let's start with how WE as humans think about similarity between images?
+
+@lesson-instruction{
+- Open the @starter-file{ai-image}, and click "Run".
+- Complete @printable-exercise{human-perception.adoc}
+}
+
+@slidebreak{Launch}
+@right{@image{images/computer-vision.jpg, 400}}
+Modern ML models are capable of interpreting elements of an image ("person", "car", etc.). This belong to a class of Machine Learning algorithms called "Computer Vision", which relies heavily on more advanced -- and computationally intensive -- concepts that we won't cover here.
+
+
+Can a Data Driven Algorithm help us re-create Google Image Search, even without the fancy Computer Vision tech?
+
+=== Investigate
+@slidebreak{Investigate}
+Much like our fast-food restaurants, we can come up with lots of ways to describe an image using numbers:
+
+- Width and height
+- Brightness
+- Vertical symmetry
+
+What other numbers could be used to describe an image?
+
+@slidebreak{Investigate}
+
+@lesson-instruction{
+- Open the @starter-file{ai-image}
+- Complete the first section of @printable-exercise{image-similarity.adoc}
+}
+
+@slidebreak{Investigate}
+
+- The _luminance_ of an image is (roughly) a measure of how *bright* it is
+- The _entropy_ of an image is (roughly) how *busy* it is
+
+We can use these calculated values to create @vocab{attributes} for each of our images!
+
+@slidebreak{Investigate}
+@QandA{
+@Q{A table is defined on lines 15-25. What is its name?}
+@A{`images`}
+
+@Q{What columns does it have?}
+@A{`ID`, `img`, `rating`, and `tags`}
+
+@Q{What are the rows?}
+@A{It looks like they each have one of the images defined earlier, then the empty string for `rating` and `tag`}
+
+@Q{What's going on in lines 27-30?}
+@A{Some function is defined, which appears to shrink an image. Then it's used to transform the `img` column from `images`, creating a new table called `small-images`}
+
+@Q{What's happening in lines 35-39?}
+@A{Four Rows are being defined. All of them have a visible sun.}
+}
+
+@slidebreak{Investigate}
+
+For your convenience, we've provided a function that will add all of these attributes (and more!) to the image table:
+
+@center{@show{(contract "decorate-image-table" '("String") "Table")}}
+
+This function consumes a table and the name of the column holding our images, then produces a new table with _all_ of our various attributes computed. Processing large images can be very computationally intensive, and using this function on the original `images` table will get frustrating unless you're on a powerful machine. For this lesson we'll use`small-images` to keep things snappy.
+
+@lesson-instruction{
+- Complete the rest of @printable-exercise{image-similarity.adoc}
+}
+
+=== Synthesize
+@slidebreak{Synthesize}
+
+@QandA{
+@right{@image{images/luminance-entropy.png, 300}}
+Let's talk about the Luminance-Entropy Space you all created.
+@Q{What clusters did you see?}
+@A{Snowy mountains on the bottom-right}
+@A{High-contrast images on the top-left}
+
+@Q{Are the images with suns __high__-luminance? Why or why not?}
+@A{They are surprisingly low luminance, but that makes sense because the part *not* lit by the sun is much darker in every image}
+
+@Q{Are there any other axes that give us good clustering?}
+@A{Responses will vary}
+
+@Q{What other axes might we want?}
+@A{Responses will vary - but sharp students will want axes for color}
+}
+
+
+== Unsupervised Learning and Bag-of-Words
+
+=== Overview
+
+Student apply what their similarity measures to something the decorated image model they've created.
+
+=== Launch
+@slidebreak{Launch}
+
+You've just constructed a @vocab{model} for images, which captures certain information -- luminance, vertical symmetry, etc. -- and throws away the rest. We haven't asked humans to label which images have the sun, grass, or snow in them. Can we still do a decent image search, based solely on the machine-generated attributes? For example, could we choose one of our snow-covered mountains (like `"4"`) and have the computer produce the other (`"5"`)?
+
+@slidebreak{LaunchR}
+@ifslide{@right{@image{images/luminance-entropy.png}}}
+
+@lesson-instruction{
+- Complete the first section on @printable-exercise{unsupervised-learning.adoc}
+}
+
+Luminance-Entropy Space is pretty good for this search, because both of the snowy images are already clustered together, away from the rest.
+
+@center{@show{(code '(angle-similarity decorated "4" (list "ENTROPY" "LUMINANCE")))}}
+
+Was `simple-similarity` useful? How about `distance-similarity`?
+
+@slidebreak{LaunchR}
+@ifslide{@right{@image{images/luminance-entropy.png}}}
+
+It would be really nice to have axes for each color, so we could see how Red, Green, and Blue each image is. If we used `green` as an axis, those grassy images would definitely stand out in that dimension!
+
+@QandA{
+Let's take a closer look at `decorated`, and see if there's anything we can use here.
+@Q{What is the `COLOR-NAMES` column about?}
+@A{It's the dominant color for every pixel in the image}
+
+@Q{How could we generate numbers from the `COLOR-NAMES` columns?}
+@A{Answers will vary, but hopefully students will suggest counting the occurrences of each color}
+}
+
+@slidebreak{Launch}
+*We could count the number of reds, greens and blues in `COLOR-NAMES`!*
+
+We don't really care about the _order_ of those words - we just want to know how many pixels are red-dominant, green-dominant, or blue-dominant!
+
+In the Definitions Area, define a new table:
+
+@show{(code '(define decorated-bag (add-bag-cols decorated "COLOR-NAMES")))}
+
+What did you get back?
+
+=== Investigate
+@slidebreak{InvestigateR}
+@right{@image{images/bag-of-colors.png, 150}}
+
+Without the order of the words, it's as if we just put all the words into a sack and shook it. The information about _frequency_ of each word is still there, but we've lost the order. Machine Learning Engineers call this a @vocab{bag-of-words model}.
+
+@lesson-instruction{
+- Complete the second section on @printable-exercise{unsupervised-learning.adoc}
+- What axes would you use to get the best clustering?
+- Be ready to share your answer!
+}
+
+
+@slidebreak{InvestigateR}
+@right{@image{images/luminance-entropy-green.png, 300}}
+Luminance-Green Space was great for finding our grassy images, but not as good for the snowy ones. We want our Image Search to work for _both_ kids of images!
+
+We know that the grassy images cluster along the `"green"` axis, and the snowy ones cluster along the `"blue"` axis. Blue-Green Space is a good candidate for solving our problem! But then a user might want to search for pictures with the sun...
+
+@slidebreak{InvestigateR}
+@ifslide{@right{@image{images/luminance-entropy-green.png, 300}}}
+
+Think back to our burger-and-fries example: there _may_ be other clusters in other dimensions. We just cant see them because we're only looking in 2 dimensions! There's no reason we can't add all three dimensions here, or four, or five, etc!
+
+Our image scatter plots for Luminance-Green and Luminance-Entropy are just _projections_ of higher-dimensional data.
+
+@lesson-instruction{
+- Suppose we want to find images similar to Image 7. What columns would be most useful?
+- Complete @printable-exercise{unsupervised-learning.adoc}!
+}
+
+=== Synthesize
+@slidebreak{Synthesize}
+
+@QandA{
+@Q{Which columns were most helpful to your search results?}
+@Q{Were there any columns that didn't seem to affect the search results?}
+@Q{Were any columns actually _harmful?_}
+}
+
+@slidebreak{Synthesize}
+
+We interact with similarity models _every day:_
+
+- You ask your favorite music app to make a station out of a particular song
+- A dating app finds matches for a particular profile
+- Your favorite streaming service recommends movies like the one you just watched
+- You drag an image into Google Image Search, and it finds similar ones
+
+@QandA{
+@Q{What are some limitations of our system so far?}
+@A{Can't make a station out of *multiple* songs (e.g. entire artist, or my previous likes}
+
+@Q{Google Image Search also lets me type in a word like "frog", and it finds frog pictures}
+}
+
+== Supervised Learning
+
+=== Overview
+Having seeing the power -- and limits -- of unsupervised learning, students explore what it means to pair machine-learning algorithms with human-tagged data. They learn about centroids and the connection to measures of center, and use that concept to build recommendation systems and tag-based testing of images.
+
+
+=== Launch
+@slidebreak{Launch}
+
+The similarity systems we've been discussing and building so far are an example of @vocab{unsupervised learning}. We're using a protractor in high dimensions to measure the angle between rays, and those rays are defined by numbers in a table. But that leaves out something really important: _human knowledge and experience_.
+
+- All the sun images are different, but have *something* in common. If we want to find sun images, we want to find images similar to that *something*. But instead, we can only find images that are similar to a specific sun image. That means all the irrelevant differences in each image are included, leading to worse results.
+
+- Google Images _also_ lets us type words. But we can only search-by-image, telling the computer to match a specific picture rather than asking it to find all the pictures with "grass".
+
+@slidebreak{Launch}
+These problems exist in the real world, too:
+
+(1) Computers don't know that "Kung-Fu Panda" and "The Minecraft Movie" both star Jack Black
+(2) Computers don't know that you like "Single Ladies", but not "Lemonade"
+(3) Computers know that our snowy mountain pictures are similar, but has no idea that they both have snow in them.
+(4) Computers can tell us that two jazz songs are similar, but can't just start a "jazz" station
+
+We extracted the luminance, symmetry, and color information from the images by relying on mechanical analysis of the image data. But information about human preferences or groupings is something that requires human experience!
+
+@slidebreak{Launch}
+Of course, humans could _tell_ the computer this stuff by adding their knowledge and preferences to the dataset! This is where we shift from @vocab{unsupervised learning} to @vocab{supervised learning}.
+
+You'll notice that our image table has extra columns for exactly this! `liked` and `disliked`, for example, are set to `false` - meaning no images have been rated one way or the other. `tags` are all the empty string, meaning nothing has been tagged yet.
+
+
+=== Investigate
+@slidebreak{Investigate}
+
+@lesson-instruction{
+In the Definitions Area of the @starter-file{ai-image}:
+
+- Find two images you *like*, and set those column values to `true`
+- Find two images you *dislike*, and set those column values to `true`
+- Tag all the images with suns in them, by changing the `tag` column value to `"sun"`
+- Click "Run" and make sure `decorated-bag` has your human-added values!
+}
+
+@lesson-instruction{
+- Complete the first section of @printable-exercise{supervised-learning.adoc}
+}
+
+
+@slidebreak{InvestigateR}
+@right{@image{images/centroid.png, 300}}
+
+We've created a function in Pyret to calculate centroids for you:
+
+@show{(contract "add-centroid" '(Table String List<String>) "Table")}
+
+It consume the table, a name for the centroid, and a *list of the document IDs* for which you want to build the centroid. For example:
+
+@show{(code '(add-centroid decorated-bag "sun" (list: 0 6 7 8)))}
+
+Try it out!
+
+@slidebreak{Investigate}
+Building centroids is powerful, because now we can add human information about _groups_. We've build some helper functions to get commonly-used document IDs:
+
+@indented{
+@show{(contract "liked-ids" '(Table) "List<String>")} +
+@show{(contract "disliked-ids" '(Table) "List<String>")} +
+@show{(contract "tagged-ids" '(Table String) "List<String>")}
+}
+
+- We can find a centroid for all the _liked_ or _disliked_ images, and use cosine-similarity to make better recommendations.
+- We can find a centroid for all the images with a tag, and use that to find similar images that haven't been tagged
+
+@lesson-instruction{
+- Complete the second section of @printable-exercise{supervised-learning.adoc}
+}
+
+@slidebreak{Investigate}
+Now a recommendation system is just:
+
+- Calculate the centroids for liked and dislked documents
+- Calculate the cosine similarities between every document and both centroids
+- Recommendation strength is @math{\text{similarity-to-liked} - \test{similarity-to-disliked}}!
+
+We've created a helper function that does exactly that, given a table and a list of columns:
+
+@show{(contract "recommend" '(Table List<String>) "Table")}
+
+The result is a table of all your documents, in descending order of recommendation-strength (strongest first).
+
+@slidebreak{Investigate}
+Google's Image Search-by-word is just:
+
+- Find all documents tagged with that word, and compute their centroid
+- Compute the cosine-similarity of all the documents to that centroid
+- Match accuracy is just @math{\text{similarity}}
+
+We've created a helper function that does exactly that, given a table and a list of columns:
+
+@show{(contract "search-by-tag" '(Table List<String>) "Table")}
+
+The result is a table of all your documents, in descending order of similarity to the centroid of the documents that match your tag.
+
+@lesson-instruction{
+- Complete the last section of @printable-exercise{supervised-learning.adoc}
+}
+
+=== Synthesize
+@slidebreak{Synthesize}
+You may recall the steps of @vocab{supervised learning} from a @lesson-link{regression-models-multiple, previous lesson}:
+
+- Human-tagged data is recorded, demonstrating the knowledge to be learned
+- The machine learning algorithm finds a *function* that generalizes (hopefully well!) from that data to new, unseen data
+- The function is applied to new data.
+
+ALVINN was given a table of inputs (images and depth maps), each row tagged with how a human turned the steering wheel. Then it found a function that would predict the steering wheel angle from new inputs, and used the function by applying it to new roads.
+
+@QandA{
+@Q{In our image search example, what is the human-tagged data for the computer?}
+@A{The input table tagged with likes or dislikes, or words}
+
+@Q{What algorithm is being used to find images?}
+@A{Some kind of angle measure for similarity, followed by sorting}
+
+@Q{Where is the generalization?}
+@A{A new, un-tagged image added to database is still being compared to the pre-computed centroids}
+}
+
+@slidebreak{Synthesize}
+@QandA{
+@Q{When you tell Spotify that you like a song, what computations happen on Spotify's servers?}
+@A{With a new list of "liked songs", Spotify recalculates my "liked" centroid}
+
+@Q{When you tell Spotify that to make a Jazz station, what computations happen on Spotify's servers?}
+@A{Google computes the centroid for every song *already tagged* with "jazz", then returns those alongside songs that are similar to the centroid}
+
+@Q{When you search for "sun" on Google Images, what computations happen on Google's servers?}
+@A{Google computes the centroid for every image *already tagged* with "sun", then returns those alongside images that are similar to the centroid}
+
+@Q{How does Google know to filter out offensive images of extreme violence?}
+@A{Google computes the centroid for every image *already tagged* as extremely violent, then filters our images that are similar to the centroid}
+}
+
+
+
+@slidebreak{Synthesize}
+@QandA{
+@Q{With tens of millions of images in Google's database, how many needed to be tagged by humans for results to be accurate?}
+@A{Hundreds? Thousands?}
+
+@Q{Which humans are tagging these images?}
+@A{We are! What do you think a CAPTCHA is?}
+@A{Humans get paid to do it}
+}
+
+
+@slidebreak{SynthesizeR}
+@right{@image{images/CAPTCHA.png}}
+
+Supervised learning is a large part of what makes Machine Learning models feel like they "understand" humans. When we type in a sentence on Google Images, it feels like somehow the search engine _understood_ what we wanted! But in reality, it's another Data Driven Algorithm cranking through oceans of tagged and un-tagged data.
+
+But this comes at a cost: *someone has to tag millions of images!*
+
+In some cases that's US, clicking on images of buses in order to prove we're human. Those images are real images from a database where the similarity wasn't strong enough to be confident about whether they are or aren't a bus. By asking us to tag them, we are helping to train algorithm
+
+@slidebreak{Synthesize}
+But in other cases it's paid contractors, often in developing countries where tech companies can pay them a few dollars per day to stare at tens of thousands of images and tag them. But seeing tens of thousands of violent or offensive images has real impacts on mental health!

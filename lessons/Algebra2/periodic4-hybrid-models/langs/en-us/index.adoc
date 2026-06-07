@@ -24,14 +24,12 @@
 
 [@lesson-intro-table]
 |===
-
 | Lesson Goals
 | Students will be able to...
 @objectives
 
 | Student-facing Lesson Goals
 |
-
 - Let's use Pyret to model periodic relationships in data.
 
 | Materials
@@ -41,7 +39,6 @@
 | Supplemental Materials
 |[.materials-links]
 @opt-material-links
-
 |===
 
 == Deconstructing Models
@@ -120,8 +117,8 @@ fun periodic-cos2(x):     wave-cos(x)      +      midline-cos(x) end
   * `wave-cos` is all of the parts of the `periodic-cos` function except for that vertical shift.
 }
 }
-@slidebreak{Launch}
 
+@slidebreak{Launch}
 
 @QandA{
 @Q{What kind of line passed between the peaks and waves of our `periodic-cos` model?}
@@ -151,6 +148,7 @@ Our `periodic-cos2` model splits these terms into _separate functions_, and then
 | [.hybridCOE.second]
 @show{(coe '(+ (wave-cos x) (midline-cos x)))}
 |===
+
 @slidebreak{Launch}
 
 @lesson-instruction{
@@ -165,7 +163,6 @@ Our `periodic-cos2` model splits these terms into _separate functions_, and then
 @slidebreak{Investigate}
 
 The scatter plot we just looked at on @printable-exercise{choosing-the-best-model.adoc} was generated from @math{\text{CO}_2} data, but had a very different shape from our `periodic-sin` model! That's because we built our `periodic-sin` model using @math{\text{CO}_2} data from the `recent-table`, which focuses on a small window: _just one year_. And the scatter plot was made from the `modern-table`, which includes historical @math{\text{CO}_2} levels from the thirteen-year span from 2010 to 2023. Let's take a closer look!
-
 
 @slidebreak{Investigate-DN}
 
@@ -222,7 +219,6 @@ The scatter plot we just looked at on @printable-exercise{choosing-the-best-mode
 }
 
 @slidebreak{InvestigateC}
-
 @ifslide{@image{images/modern-co2-model-soln.png,350}}
 
 @QandA{
@@ -250,7 +246,6 @@ The scatter plot we just looked at on @printable-exercise{choosing-the-best-mode
 == Hybrid Models
 
 === Overview
-
 Students explore the possibility that a model could combine various kinds of models and use function composition to define functions from other functions.
 
 @teacher{
@@ -328,9 +323,8 @@ We can visualize the body of the function using the Circles of Evaluation.
 @A{Because it captures both the overarching trend and the seasonal trend.}
 
 @Q{Why doesn't it make sense to compare the following @vocab{S-values}?
- 
-* the error we expect for predictions made from our `periodic-sin` model with the data in the `modern-table`
-* the error we expect for predictions made from our `periodic-sin` model with the data in the `recent-table`
+  * the error we expect for predictions made from our `periodic-sin` model with the data in the `modern-table`
+  * the error we expect for predictions made from our `periodic-sin` model with the data in the `recent-table`
 }
 @A{The datasets have completely different ranges!}
 }
@@ -341,4 +335,3 @@ We can visualize the body of the function using the Circles of Evaluation.
 - Have your students refer back to @lesson-link{exponential1-exploring-covid}. As with the `recent-table` table in @starter-file{alg2-hybrid}, the starter file there constrains the dataset to show only recent data. This is done for the same reason: to introduce students to a more perfectly-exponential model. Now that students know how to combine terms from different models, they can go back and build a model that fits the entire Covid dataset!
 }
 }
-

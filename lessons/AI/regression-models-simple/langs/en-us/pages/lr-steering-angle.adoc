@@ -1,0 +1,51 @@
+= Building a Predictor for Steering Angle
+
+++++
+<style>
+div#body sub { position: relative; bottom: 0.3em; }
+div#body .studentAnswerMedium { min-width: 35pt; }
+
+#preamble_disabled { flex-grow: 0 !important; }
+</style>
+++++
+
+@link-instructions{This page is designed for use with the @starter-file{self-driving}}
+
+== Using Linear Regression
+
+@n Evaluate `lr-plot` for each of the variables, and fill in the table below:
+
+@hspace{1em}_For example `lr-plot(training-data, "id", "curve", "steering-angle")`_
+
+[cols="<, ^, ^, ^",options="header"]
+|===
+| Explanatory Variable 	| 		Slope 	 | 	Intercept 	| @math{S}-value
+| `curve`				| @ifsoln{19.5}  | @ifsoln{0.41}| @ifsoln{37.0}
+| `offset` 				| @ifsoln{-2.8}	 | @ifsoln{1.0}	| @ifsoln{37.0}
+| `skew` 				| @ifsoln{-2.2}	 | @ifsoln{0.9} | @ifsoln{37.8}
+| `speed` 				| @ifsoln{-2.46} | @ifsoln{7.0} | @ifsoln{47.0}
+|===
+
+@n How do Pyret's best-fit lines compare to your estimates on @printable-exercise{steering-angle-scatter-plots.adoc} @fitb{}{} +
+@fitb{}{@ifsoln{}}
+
+@n Use the values you calculated with `lr-plot` for `curve` to define `curve-predictor` in math and Pyret notation below. Then complete the template in the starter file and click "Run".
+
+[%autowidth, cols="<, >", frame="none", stripes="none"]
+|===
+| @math{curve\text{-}predictor(curve) = (}@fitbruby{4em}{@ifsoln{19.5}}{@math{m}}@math{\times curve) + }@fitbruby{4em}{@ifsoln{0.41}}{@math{b}}
+| @show{(code '(define (curve-predictor curve) (+ (* (?ANS 19.5) curve) (?ANS 0.41))))}
+|===
+
+@n When `curve = 0` (a perfectly straight road), what does our `curve-predictor` estimate the steering angle to be to the nearest degree? @fitbruby{2em}{@ifsoln{≈ 0}}{intercept} @fitbruby{5.5em}{degrees}{units}. Does this make real-world sense? @fitb{}{} +
+@fitb{}{@ifsoln{Yes! If the road is straight and the car is centered, there's no reason to steer.}}
+
+@n If `curve` increases by 1, the `curve-predictor` expects the steering angle to @fitbruby{8em}{@ifsoln{increase}}{increase/decrease} by @fitbruby{5em}{@ifsoln{19.5}}{slope} @fitbruby{8em}{@ifsoln{degrees}}{units}. 
+
+@n To generalize what the model _learned_, we could say: +
+The sharper the road curves, the @fitb{10em}{@ifsoln{more}} you need to steer.}}
+
+== Driving with the Model
+
+@n Evaluate `drive(curve-predictor)` and read the error carefully. What do you think it is telling us? @fitb{}{} +
+@blanklines{2}{@ifsoln{The predictor was given a Row, but it expected a number. `drive` gives our predictors *Rows*, but `curve-predictor` takes a Number.}}

@@ -1,18 +1,4 @@
 = Computing Decision Trees
-++++
-<style>
-#preamble_disabled { flex-grow: 0 !important; }
-.fitb { min-width: 2em !important; }
-.autonum, .fitb.stretch::after { padding-top: 1em !important; }
-table.fit-content tr td { padding: 0.3em 0.625em !important; }
-#body table td:last-child img {
-    height: 180px; /* we have a limit to vertical space */
-	width:  250px; /* stretch the image outm slightly breaking proportion*/
-}
-
-.listingblock pre { padding: 0 !important; }
-</style>
-++++
 
 @center{@show{(contract "build-tree" '("Table" "List" "String" "Number") "DecisionTree")}}
 
@@ -29,65 +15,76 @@ The `build-tree` function takes *four arguments* in its Domain:
 (d) The _maximum depth_ the tree is allowed to be
 |===
 
-== Choosing the Right Split
+@link-instructions{Return to your copy of the @starter-file{decision-tree}.}
+== Building One-Level Decision Trees
 
-@n In the *Definitions Area*, define a simple, 1-level tree using only the `"tail"` column, defining it as `c1`:
-
-@indented{`tree1 = build-tree(training, [list: "tail"], "species", 1)`}
-
-@n Click "Run", and evaluate `tree1`. What species will this classifier predict for animals *without* tails?  @fitb{}{@ifsoln{snail}}
-
-@n Evaluate `dt-code(tree1)`. Have you seen code like this before? @fitb{}{@ifsoln{it's the code for `tail-classifier`!}}
-
-@n Which column will make the best @vocab{root node} for predicting `species` in the `training` dataset? @fitb{}{@ifsoln{`swims`}}
-
-@n Let's see if Pyret agrees, by letting _it_ choose from all the columns. Add this definition to your program:
-
-@indented{`tree2 = build-tree(training, [list: "tail", "mammal", "swims"], "species", 1)`}
+*Pyret can build one-level Decision Trees...*
 
 @vspace{1ex}
 
-*Use the `classify` function on `tail-classifier` and `tree2`:*
+*Based on a categorical column of our choosing.* 
 
-@indented{
-```
-classify(training, "species", tail-classifier)
-classify(training, "species", tree1)
-classify(training, "species", tree2)
-```
-}
+In the Definitions Area, define `tree1` to be a 1-level tree using only the `"tail"` column:
 
-@n How many did `tail-classifer` classifier get right? @fitb{7em}{@ifsoln{7}} @hspace{2em} `tree1`? @fitb{7em}{@ifsoln{7}} @hspace{2em} `tree2`? @fitb{7em}{@ifsoln{8}}
+@hspace{1em}`tree-cat1 = build-tree(training, [list: "tail"], "species", 1)`
 
-== Deeper Trees vs. More Columns
+@n Click "Run", and evaluate `tree-cat1`. What species will this classifier predict for animals *without* tails?  @fitb{}{@ifsoln{snail}}
 
-@n Let's allow Pyret to split on use more columns, and go a lot deeper!
+@n Evaluate `dt-code(tree-cat1)`. Where have we seen this code before? @fitb{}{@ifsoln{it's the code for `tail-classifier`!}}
 
-@indented{`tree3 = build-tree(training, [list: "tail", "mammal", "swims"], "species", 3)`}
+@vspace{1ex}
 
-@n How many animals does `tree3` get right? @fitb{3em}{@ifsoln{12}} Why did Shadestar get classified as a dog? @fitb{}{} +
-@fitb{}{@ifsoln{Since she swims, all three column values "looks" the same as the dogs}}
+*Based on a quantitative column of our choosing.* 
 
-@n Why did Charlotte and Webs get classified as snails? @fitb{}{} +
-@fitb{}{@ifsoln{Their values for those three columns are all the same as snails, so there's no way to tell the difference!}}
+In the Definitions Area, define `tree2` to be a 1-level tree using the `"pounds"` column:
 
-@n Define `tree4` to use the *same columns* as `tree3`, but raise the max-depth to 10. Why do `tree3` and `tree4` look identical? @fitb{}{@ifsoln{There's no more information to be used, so there's no point in splitting further}}
+@hspace{1em}`tree-quant1 = build-tree(training, [list: "pounds"], "species", 1)`
 
-@n Build `tree5`, this time adding the `pounds` column. How many levels deep will Pyret's tree go? @fitb{}{3}
+@n Click "Run", and evaluate `tree-quant1`. What split did it come up with? @fitb{}{@ifsoln{pounds < 9.55}}
 
-@n Build `tree6`, using _only_ the `pounds` column and letting it go as deep as possible. How many does `tree6` get right? @fitb{}{@ifsoln{15}}
+@vspace{1ex}
 
-== Using our Classifiers with a Testing Dataset
+*Based on whichever column Pyret determines will make the best predictions for our training dataset*.
 
-@n Use the `classify` function to compare trees 4-6, this time using the `testing` dataset:
+@hspace{1em}`tree-any1 = build-tree(training, [list: "sex", "tail", "mammal", "swims", "pounds"], "species", 1)`
 
-@indented{
-```
-classify(testing, "species", tree4)
-classify(testing, "species", tree5)
-classify(testing, "species", tree6)
-```
-}
+@n First, which column did you think would make the best @vocab{root node} for predicting `species` in the `training` dataset? @fitb{}{@ifsoln{`swims`}}
 
-@n Write your observations, and an explanation what you saw. @fitb{}{} +
-@blanklines{2}{@ifsoln{`tree6` did horribly! It's fit specifically to the `pounds` column of the `training` dataset, which has a really different distribution in the testing dataset}}
+@n Click "Run", and evaluate `tree-any1`. Which column did Pyret choose? @fitb{}{@ifsoln{`swims`}}
+
+== Building Multi-level Decision Trees
+The trees we just built were restricted to a single level, but we can give Pyret any maximum number of levels to work with. 
+
+@n Add the following definitions to your Definitions Area and click "Run". 
+
+@hspace{1em}`tree-cat2 = build-tree(training, [list: "tail"], "species", 2)` +
+@hspace{1em}`tree-quant2 = build-tree(training, [list: "pounds"], "species", 2)` +
+@hspace{1em}`tree-any2 = build-tree(training, [list: "sex", "tail", "mammal", "swims", "pounds"], "species", 2)` 
+
+@n What was the maximum number of levels defined for `tree-cat2`? @fitb{3em}{@ifsoln{2}} Evaluate `tree-cat2`. How many levels does it have? @fitb{3em}{@ifsoln{1}} Why? @fitb{}{@ifsoln{once we split between animals with and without tails, there's no further sorting we can do with just the `"tail"` column.}}
+
+@n Add the following definitions to your Definitions Area and click "Run". 
+
+@hspace{1em}`tree-quant3 = build-tree(training, [list: "pounds"], "species", 3)` +
+@hspace{1em}`tree-quant4 = build-tree(training, [list: "pounds"], "species", 4)` +
+@hspace{1em}`tree-quant5 = build-tree(training, [list: "pounds"], "species", 5)` +
+@hspace{1em}`tree-any3 = build-tree(training, [list: "sex", "tail", "mammal", "swims", "pounds"], "species", 3)` +
+@hspace{1em}`tree-any4 = build-tree(training, [list: "sex", "tail", "mammal", "swims", "pounds"], "species", 4)` +
+@hspace{1em}`tree-any5 = build-tree(training, [list: "sex", "tail", "mammal", "swims", "pounds"], "species", 5)`
+
+@n Take a look at the trees in the table below. What do you notice? What do you wonder? @fitb{}{} +
+@blanklines{1}{@ifsoln{the trees all start with the same splits. will pyret always do that?}}
+
+[cols="3a,4a,5a", stripes="none"]
+|===
+| `tree-quant1` 
+| `tree-quant2` 
+| `tree-quant3`
+
+| @image{../images/tree-quant1.png,110}
+| @image{../images/tree-quant2.png,140}
+| @image{../images/tree-quant3.png,160}
+|===
+
+
+Be sure to save your copy of the @starter-file{decision-tree}. Then turn to @printable-exercise{comparing-decision-trees.adoc}.

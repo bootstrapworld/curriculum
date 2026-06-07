@@ -1,0 +1,69 @@
+= Supervised Learning
+
+@lesson-instruction{For this page, you'll need @starter-file{ai-image} open on your computer}
+
+== Calculating Centroids
+
+@n Fill in the table below using the two rows you "Like"-d, then compute their centroid. (NOTE: we've removed the symmetry columns)
+
+[%AUTOWIDTH, .FillVerticalSpace, cols="^.^, ^, ^a, ^a, ^a, ^a, ^a, ^a", options="header", stripes="none"]
+|===
+| ID 			| WIDTH | HEIGHT| LUMINANCE | ENTROPY | red  | green | blue
+|   			|       |       |   		|   	  |  	 |  	 |
+|   			|       |       |   		|		  | 	 |  	 |
+| LIKED CENTROID|		|		|			|		  |		 |		 |
+|===
+
+== What does the Code Do?
+The questions below rely on the following contracts:
+
+[%AUTOWIDTH, cols="<,<",frame="none"]
+|===
+|
+@show{(contract "add-centroid" '(Table String List<String>) "Table")} +
+@show{(contract "liked-ids" '(Table) "List<String>")} +
+|
+@show{(contract "disliked-ids" '(Table) "List<String>")} +
+@show{(contract "tagged-ids" '(Table String) "List<String>")}
+|===
+
+@n What code will add a centroid called `"SNOW"` to the `decorated-bag` table, for image IDs "4" and "5"? +
+@fitb{}{@ifsoln{`add-centroid(decorated-bag, "SNOW", [list: "4", "5"])}}
+
+
+*The code below defines `liked` as a list of IDs for all liked images in `decorated`:*
+
+@center{`liked = liked-ids(decorated-bag)`}
+
+@n What code will define `disliked` as a list of IDs for disliked all images in `decorated`? +
+@fitb{}{@ifsoln{`disliked = disliked-ids(decorated-bag)`}}
+
+@n What code will define `sun-tagged` as a list of IDs for all images in `decorated` tagged with "sun"? +
+@fitb{}{@ifsoln{`sun-tagged = tagged-ids(decorated-bag, "sun")`}}
+
+@n What code will add a centroid for all liked images in `decorated`?
+@fitb{}{@ifsoln{add-centroid(decorated-bag, "LIKED", liked)}}
+
+@n What code will add a centroid for all images in `decorated` tagged with "sun"?
+@fitb{}{@ifsoln{add-centroid(decorated-bag, "LIKED", sun-tagged)}}
+
+@n What code will compute the `cosine-similarity` for all liked images, using only the columns `"green"` and `"red"`? +
+@fitb{}{@ifsoln{`cosine-similarity(add-centroid(decorated-bag, "LIKED", sun-tagged), "LIKED CENTROID", [list: "green", "red"])`}}
+
+== Searching and Recommending
+
+The questions below rely on the following contracts:
+
+[%AUTOWIDTH, cols="<,<",frame="none"]
+|===
+|
+@show{(contract "recommend" '(Table List<String>) "Table")} +
+|
+@show{(contract "search-by-tag" '(Table List<String>) "Table")}
+|===
+
+@n What code will make recommendations from `decorated-bag`, using only the columns `"red"`, `"green"`, and `"blue"`? +
+@fitb{}{@ifsoln{`recommend(decorated-bag, [list: "red", "green", "blue"])`}}
+
+@n What code will find images matching "sun" from `decorated-bag`, using only the columns `"luminance"`, `"entropy"`, and `"green"`? +
+@fitb{}{@ifsoln{`recommend(decorated-bag, [list: "luminance", "entropy", "blue"])`}}
