@@ -6,57 +6,45 @@
 </style>
 ++++
 
-@link-instructions{Return to the @starter-file{ai-fast-food} and make sure you've clicked "Run".}
+@link-instructions{Return to the @starter-file{ai-image} and make sure you've clicked "Run".}
 
-== Price v Fries
+== Red v Blue
 
-- Make `image-scatter-plot(fast-food, "fries", "price", restaurant-img)`. 
+- Make `image-scatter-plot(decorated-bag, "red", "blue", thumbnail)`.
 - Adjust the `x-min:` and `y-min:` to `0` so that we can imagine the rays that would connect our points to the origin. 
 
-@n Use the code for `restaurant-img` in the Definitions Area to help you determine which restaurant each dot represents.
+@n Based on the image scatter plot, which image(s) do you expect to be most similar to the snowy image `"5"` in the Blue-Red Space through the lens of `angle-similarity`? Why? @fitb{}{@ifsoln{Images 4, 2, and 1)}}
+@fitb{}{@ifsoln{are in almost the same direction from the origin as image 5}}
 
-- Which dot represents In-N-Out? @fitb{}{@ifsoln{the green one}}
-- Which restaurant does the biggest dot represent? @fitb{}{@ifsoln{Dairy Queen}}
+@n Compute `angle-similarity(decorated-bag, "4", [list: "red", "blue"])`. Which Image does it compute to be the most similar? @fitb{}{@ifsoln{Image 2, with an angle of 0.85}}
 
-@n Based on the image scatter plot, which restaurants do you expect to be most similar to `In-N-Out` in the Price-Fries space through the lens of `angle-similarity`? Why? @fitb{}{@ifsoln{McDonalds (represented by the smallest dot) and Wendy's (the black dot that is the same size as In-N-Out)}}
-@fitb{}{@ifsoln{are in almost the same direction from the origin as In-N-Out}}
+Test out @show{(code '(angle-similarity decorated-bag "4" (list "red")))}
 
-@n Compute `angle-similarity(fast-food, "I", [list: "fries", "price"])`. Which restaurant does it compute to be the most similar? @fitb{}{@ifsoln{Wendy's with an angle of 0.1489}}
+@n Why are all of the measures for angle similarity zero? @fitb{}{@ifsoln{It doesn't make any sense to find the angle between `red` and `red`!}}
 
-Test out @show{(code '(angle-similarity fast-food "I" (list "price")))} 
+== Red v Green
 
-@n Why are all of the measures for angle similarity zero? @fitb{}{@ifsoln{It doesn't make any sense to find the angle between the price and the price.}}
+- Make an image scatter plot comparing the Images based on `red` and `green`.
+- Adjust the `x-min:` and `y-min:` to `0` so that we can imagine the rays that would connect our points to the origin.
 
-== Price v Burgers
-
-- Make an image scatter plot comparing the restaurants based on burgers and price.
-- Adjust the `x-min:` and `y-min:` to `0` so that we can imagine the rays that would connect our points to the origin. 
-
-@n Based on the image scatter plot, which restaurants do you expect to be most similar to `In-N-Out` in the Price-Burgers space through the lens of `angle-similarity`? Why? @fitb{}{@ifsoln{Wendy's is almost on the same ray from the origin.}}
+@n Based on the image scatter plot, which restaurants do you expect to be most similar to the snowy image `"5"`in Red-Green space through the lens of `angle-similarity`? Why? @fitb{}{@ifsoln{The other snowy image is close, but Image 6 is almost on the same Ray!}}
 @fitb{}{}
 
-@teacher{Students might be tempted by the fact that Five Guys is on the same vertical grid line as In--Out. Remind them to connect rays back to the origin and notice how large the angle between In-N-Out and Five Guys is!}
+@n Compute `angle-similarity(fast-food, "4", [list: "red", "green"])`. Which Image does it compute to be the most similar? @fitb{}{@ifsoln{Image 6 (one of our sunrise images), with an angle of 2.91}}
 
-@n Compute `angle-similarity(fast-food, "I", [list: "burgers", "price"])`. Which restaurant does it compute to be the most similar? @fitb{}{@ifsoln{Wendy's with an angle of 1.586}}
+== Entropy v Luminance
+
+- Make an image scatter plot comparing the Images based on `ENTROPY` and `LUMINANCE`.
+- Adjust the `x-min:` and `y-min:` to `0` so that we can imagine the rays that would connect our points to the origin.
+
+@n Based on the image scatter plot, which restaurants do you expect to be most similar to the snowy image `"5"`in Entropy-Luminance space through the lens of `angle-similarity`? Why? @fitb{}{@ifsoln{The other snowy image is almost on the same ray from the origin.}}
+@fitb{}{}
+
+@n Compute `angle-similarity(fast-food, "4", [list: "ENTROPY", "LUMINANCE"])`. Which Image does it compute to be the most similar? @fitb{}{@ifsoln{The other snowy image, with an angle of 0.12}}
 
 
-== Burgers v Fries
+== Red v. Green v. Blue v. LUMINANCE v. ENTROPY
 
-- Make an image scatter plot comparing the restaurants based on burgers and fries.
-- Adjust the `x-min:` and `y-min:` to `0` so that we can imagine the rays that would connect our points to the origin. 
-
-@n Based on the image scatter plot, which restaurants do you expect to be most similar to `In-N-Out` in the Burgers-Fries space through the lens of `angle-similarity`? Why? @fitb{}{@ifsoln{Five Guys}}
-
-@teacher{If students forget to change the `x-min` and `y-min` they will likely get a wildly different answer here!}
-
-@n Compute `angle-similarity(fast-food, "I", [list: "burgers", "fries"])`. Which restaurant does it compute to be the most similar? @fitb{}{@ifsoln{Five Guys with an angle of 2.82}}
-
-== Price v Burgers v Fries
-
-@n What if we want to measure similarity, taking into account Price, Fry Quality, and Burger Quality? How can we use all three? @fitb{}{}
+@n What if we want to measure similarity, taking into account `red` v. `green` v. `blue` v. `LUMINANCE`, _and_ `ENTROPY`? How can we use all five? @fitb{}{}
 
 @ifnotsoln{@blanklines{2}{}}
-
-@vspace{1ex}
-
-@teacher{It's worth surfacing students' ideas here, but please don't try to actually answer the question before moving on in the lesson. We have several excellent visuals designed to support this cognitive leap!}

@@ -2,7 +2,7 @@
 = Measuring Similarity
 
 @description{
-Students consider how arbitrary documents (in this case, restaurant ratings) can be represented as points in space, and explore different ways to measure the "distance" between those documents using a spatial representation.
+Students consider how arbitrary documents (in this case, Images) can be represented as unlabeled points in space, and explore different ways to measure the "distance" between those documents using a spatial representation.
 }
 
 @lesson-prereqs{data-driven-algorithms}
@@ -27,469 +27,382 @@ Students consider how arbitrary documents (in this case, restaurant ratings) can
 | Preparation
 |
 @preparation{
+- Processing images is VERY computationally intensive, and the starter file for this lesson may bog down on older machines or slower chromebooks. For performance reasons, we've scaled all of the images by one-half, but you can change the starter file to shrink them even more! Be sure to test the file on your students' machines before teaching!
 - When we introduce angle similarity in this lesson, the rays on the standard page in the workbook meet at easily approximated angles (0°, 45°, and 90°).  If you'd like your students to estimate a wider range of angles and practice using their protractors, be sure to have protractors available for @opt-printable-exercise{angle-similarity-protractors.adoc}.
 }
 |===
 
-== Categories, Attributes, Spaces and Sameness
+
+
+
+== How do Computers "See"?
 
 === Overview
-Students explore the idea of _dimensionality_ -- that virtually any category of thing can be defined as having a set of attributes (e.g. - desserts can be defined by _chocolatiness_, _crunchiness_, and a long list of other things), and any member of that category can be graphed as a point in space (e.g. - plotting desserts on a _chocolatiness-v-crunchiness_ graph, or a graph based on any other pair of attributes).
+
+Students explore ways in which attributes of images can be computed, using various functions.
+
+=== Launch
+@slidebreak{LaunchR}
+@right{@image{images/image-search.png, 400}}
+
+@link{https://images.google.com/, In Google Image Search}, you can drag a picture into the search box and have Google find other, _similar_ images. Image search is basically a *recommendation system*, where the user uploads an image they like and Google produces a list of recommended matches.
+
+When we ask Google to find images similar to the one we dragged, it comes back with a lot of similar images! But the computer doesn't have eyes, and it doesn't have the human experience that informs how an image makes us feel.
+
+@teacher{Give students a demo, using an image of your choice!}
+
+@slidebreak{Launch}
+So how does Google Images even know what a "similar image" _means_?
+
+Let's start with how WE as humans use our eyes to notice properties of images.
+
+@lesson-instruction{
+- Open the @starter-file{ai-image}, and click "Run".
+- Complete the first section on @printable-exercise{human-perception.adoc}.
+}
+
+@slidebreak{Launch}
+@right{@image{images/computer-vision.jpg, 400}}
+Modern ML models are capable of interpreting elements of an image ("person", "car", etc.). This belong to a class of Machine Learning algorithms called "Computer Vision", which relies heavily on more advanced -- and computationally intensive -- concepts that we won't cover here.
+
+@lesson-instruction{
+- For now, we're going to use our human brains to see these elements in our images!
+- On lines 28-39 of the *Definitions Area*, you'll see that the mountain images are used to define a _table_ called `images`.
+- There are columns for the identifier (`ID`), the image document (`DOC`), whether the image is `LIKED` or `DISLIKED`, and also for any descriptive `TAGS` in the image.
+- Complete the last section on @printable-exercise{human-perception.adoc}.
+}
+
+Can a Data Driven Algorithm help us re-create Google Image Search, even without the fancy Computer Vision tech?
+
+=== Investigate
+@slidebreak{Investigate}
+
+Computers don't experience the world in the same way we do. Where we see a beautiful mountain scene, a computer only sees a grid of _pixels_ – tiny dots that make up the image. Each pixel has a particular amount of Red, Green, and Blue in it.
+
+For our purposes, we'll use a scale of 0-255 for each color that makes up a pixel. White is made of every color, so a white pixel would have a value of 255 for Red, Green, _and_ Blue. A black pixel, on the other hand, would have zeros for all three colors.
+
+- A medium, blue pixel would only have _some_ Blue in it, and nothing else: `(0, 0, 150)`
+- A light purple pixel might have have a mix of Red and Blue, and no Green at all: `(255, 0, 255)`
+
+@slidebreak{Investigate}
+
+Computers can look at groups of pixels to compute values. For example, a computer can compare the pixels on one side of the image to the pixels on the other, to determine how _symmetrical_ the image is! Let's explore Pyret functions that do exactly that:
+
+@lesson-instruction{
+Complete @printable-exercise{computer-perception.adoc}
+}
+
+@slidebreak{Investigate}
+
+@QandA{
+@Q{Which images had both vertical _and_ horizontal symmetry?}
+@A{All the squares, and the blue circle}
+
+@Q{What do you think _luminance_ tells us about an image?}
+@A{How bright it is}
+
+@Q{What do you think _entropy_ tells us about an image?}
+@A{Loosely, how much variation in brightness there is across an image. }
+}
+@slidebreak{Investigate}
+
+@lesson-point{_Luminance_ and _Entropy_ aren't about color!}
+
+Instead, they give us different kinds of information about the "brightness" of a picture:
+
+- *Luminance* measures @vocab{central tendency} - "what's the average brightness of this image?"
+- *Entropy* measures @vocab{spread} - "how much variation in brightness is there?"
+
+@lesson-instruction{
+Pyret has several functions for working with colors, but we're going to use just one in this lesson. Complete the rest of @printable-exercise{computer-perception.adoc} to find out how it works!
+}
+
+=== Synthesize
+@slidebreak{Synthesize}
+
+@QandA{
+@Q{Think back to our mountain images. Which ones do you think will have the highest _luminance_? Why?}
+@A{Responses will vary}
+
+@Q{Which ones do you think will have the highest _entropy_? Why?}
+@A{Responses will vary}
+
+
+@Q{Which one has the most red? The most green?}
+@A{Image 9 has the most red}
+@A{The grassy images have the most green}
+
+
+@Q{How might we use these functions to identify the fact that one snowy image is _similar_ to another?}
+@A{They are both blue-dominant. Maybe we could look at the colors somehow?}
+@A{They are both the most uniform. Maybe we could use the `entropy` column?}
+}
+
+
+== Simple Similarity
+
+=== Overview
+Students explore a corpus of mountain images, and practice making image scatter plots to see how these images are distributed across different 2-dimensional spaces.
+
 
 === Launch
 @slidebreak{Launch}
 
-We compare things around us all the time, using characteristics called @vocab{attributes}. Some of those attributes are quantitative and can be measured on a scale.
+Let's explore the rest of this @starter-file{ai-image}:
 
-@teacher{
-You are about to facilitate some warmup brainstorming about quantitative attributes. Feel free to swap the question below for things that you hear your students talking about instead!
-}
+- Line 13-22 define each of our mountain images
+- These images (and our red squares!) are used in the `image` corpus, which is defined on the next few lines
+- Processing images uses a lot of computing power, so we _scale_ the large, mountain images in our corpus to be half their original size
+- Under the table, we define a new value called `decorated`. What is it?
 
-@QandA{
-@Q{If we wanted to compare team sports, we might measure attributes like *median winning score* or *likelihood of serious injury*.  What are some other quantitative attributes you can think of for comparing team sports?}
-@A{Answers might include:
-  * amount of physical contact
-  * number of players on a team
-  * length of play
-  * percent of time when game is stopped
-}
-
-@Q{What are some quantitative attributes we might use to compare movies?}
-@A{Answers might include:
-  * scariness
-  * duration
-  * level of violence
-  * level of humor
-  * percent of movie that is animated
-  * number of special effects	
-}
-
-@Q{What are some quantitative attributes we might use to compare pant styles?}
-@A{Answers might include:
-  * bagginess of legs
-  * waist height
-  * number of pockets
-  * length of pant legs
-}
-}
 
 @slidebreak{Launch}
+It would be nice to take _color_ into account, and measures these images according to how much Red, Green, or Blue they have. At the moment, however, that information is locked inside the `"COLOR-NAMES"` string. *How could we calculate the amount of each color that's in each image?*
 
-@lesson-instruction{
-- With you partner complete @printable-exercise{comparing-desserts.adoc}.
-}
 
 @slidebreak{Launch}
+Pyret has a special function that takes in a Table and the name of a column, and _replaces that column_ with a bunch of columns that count the number of times each word appears in the corpus.
 
-@QandA{
-@Q{What other attributes did you come up with for comparing desserts?}
-@A{Answers might include:
-  * sweetness
-  * saltiness
-  * creaminess
-  * calories
-  }
+Evaluate `decorated-bag` in the Interactions Area, to see what this looks like.
 
-@Q{What ideas did you come up with for how we could *measure* the similarity between any two examples?}
+@slidebreak{LaunchR}
+@right{@image{images/bag-of-colors.png, 150}}
+The `add-bag-cols` function counted the number of reds, greens and blues in `COLOR-NAMES`!
 
-@Q{Did either or both of the scatter plots you made support the idea that the desserts you marked with @star and &#9651; were similar?}
-}
+We don't really care about the _order_ of those words - we just want to know how many pixels are red-dominant, green-dominant, or blue-dominant!
+
+Without the order of the words, it's as if we just put all the words into a bag and shook them up! The information about _frequency_ of each word is still there, but we've lost the _order_. Machine Learning Engineers call this a @vocab{bag-of-words model}.
+
+@slidebreak{Launch}
+Let's review where we are:
+
+- We've created a @vocab{model} called `decorated-bag` from our image corpus, which captures certain information -- luminance, vertical symmetry, etc.
+- We've left the original images in the `DOC` column for us humans to see, but to a computer they don't matter at all!
+
+The $64,000 question is: can we do something like Google Image Search, using only the machine-generated attributes in our table? For example, could we look for images similar to one of our snow-covered mountains (like `"4"`) and have the computer produce the other (`"5"`)?
 
 === Investigate
-@slidebreak{LaunchR}
-
-Suppose we were on a road trip and needed to stop for a meal. When evaluating fast food chains, we might care about a few different attributes (price, quality-of-fries, convenience, clean-bathrooms, etc). 
-
-We might find a table of ratings that looks like this (_Note the data in this table is fictional!_):
-
-[.data-table, cols="^.^1a, 4a, ^4a, ^4a, ^4a", options="header"]
-|===
-| ID| Restaurant  | Price (1=cheap)	| Fries (5=best) | Burgers (10=best)
-| 1 | McDonalds   | 1.45            	| 4.6            | 5
-| 2 | Burger King | 1.51             	| 4.1            | 6
-| 3 | Wendy's     | 1.47             	| 4.5            | 7
-| 4 | Five Guys   | 2.20             	| 3.9            | 8
-| 5 | Dairy Queen | 2.11             	| 3.7            | 4
-| 6 | In-N-Out    | 1.45             	| 4.4            | 8
-|===
-
-@right{@image{images/burger.jpg, 300}} *Pay attention to scale:* 
-
-- For `Price`, 1 is the best possible rating out of 5. 
-- For `Fries`, the scale is opposite - 5 is the best! 
-- Meanwhile, `Burgers` are rated on a 1-to-10 scale.
-
-@QandA{
-@Q{If you were from California, and traveling out East, you might want to know which of the restaurant chains is *most similar* to In-N-Out. Based on the fictional data in our table, which would you pick as *most similar* to In-N-Out, and why?}
-}
-
-@slidebreak{Launch}
-
-@lesson-instruction{
-- Let's load our data in Pyret so that we can look at these attributes in 2-dimensional space.
-- Open the @starter-file{ai-fast-food} and click "Run".
-}
-
-@QandA{
-Before we start building scatter plots, let's take a look at the Definitions Area on the left.
-
-@Q{What is the *table* called in this file?}
-@A{`fast-food`}
-
-@Q{What *rows* are defined in this file?}
-@A{The first row: `mcdonalds = row-n(fast-food, 0)`}
-@A{The sixth row: `in-n-out = row-n(fast-food, 5)`}
-
-@Q{What is the ID for Wendy's?}
-@A{6}
-
-@Q{Notice that this file defines a `restaurant-img` function that takes in a row and produces an image. +
-What kinds of images does this function produce?}
-@A{Circles of various sizes.}
-
-@Q{Look at the comments on line 33. What special data visualization function do you see referenced?}
-@A{`image-scatter-plot`}
-}
-
-@slidebreak{Launch}
-
-@lesson-instruction{
-@right{@image{images/window.png, 140}}
-
-- Type `scatter-plot(fast-food, "ID", "fries", "price")` in the Interactions Area and hit enter.
-- On the right hand side of the graph change the `x-min` and `y-min` to 0 and the `x-max` and `y-max` to 5. Then click "Redraw".
-}
-
-@slidebreak{Launch}
-
-@QandA{
-@right{@image{images/price-v-fries-desmos.png, 300}}
-
-@Q{What do you *Notice* about the "Price-Fries Space"?}
-@A{Four of the restaurants are clustered around $1.25-$1.50, while the remaining two are much farther away from the group above $2.}
-@A{Three of the restaurants all have very similar ratings for french fries, while the others are more spread out.}
-@A{All of the fries get fairly positive reviews.}
-
-@Q{Do you notice any trends or patterns in the data?}
-@A{The more expensive restaurants appear to have _worse_ fries!}
-}
-
-@teacher{Make sure you have students explain their thinking!}
-
 @slidebreak{Investigate}
 
-@lesson-instruction{
-- Make another scatter plot for the "Price-Burger Space".
-}
+Pyret has several functions for measuring similarity, and they each work a little differently. Let's start by just asking "are these values the same?" for the columns we care about:
 
-@QandA{
-@Q{Would it make sense to adjust the `y-min` of this graph to 0 and the `y-max` to 5, as we did with the "Price-Fries Space? Why or Why Not?}
-@A{No! "Burgers" are rated on 1-10 scale so a `y-max` of 5 would hide some of our points!}
+@indented{@show{(contract "simple-similarity" '("Table" "String" "List<String>") "Table")}}
 
-@Q{Why might it be helpful to compare the restaurants in multiple spaces?}
-@A{They tell different stories.}
+Pyret's `simple-similarity` function _compares every row in the table_ to the Row with the given ID, checking to see if the specified columns are *identical*. If they are, the similarity value is one. If not, the similarity value is zero. It produces a Table, sorted from "most similar" to "least similar", with an extra column of zeroes and ones listing the similarity score.
 
-@Q{Max thinks comparing restaurants based on "fries" and "bathroom cleanliness" would be most important on a road trip. Can we do that with this dataset? Why or why not?}
-@A{No. We don't have any data about "bathroom cleanliness"!}
-}
 
-@teacher{
-The notion that these restaurants must be compared in multiple, independent dimensions is the key takeaway for this lesson. +
-For now, it doesn't matter whether your students make regular scatter plots or image scatter plots.
-}
+For example, we could check which images have the same `SYMMETRY-V` as our little red square (whose ID is `"9"`):
 
-@slidebreak{Investigate}
-
-Pyret has several functions for measuring similarity. They all work a little differently. Let's start with the simplest:
-
-@hspace{1em}@show{(contract "simple-similarity" '("Table" "String" "List<String>") "Table")}
-
-Pyret's `simple-similarity` function _compares every row in the table_ to the Row with the given ID, checking to see if the specified columns are identical. If they are, the similarity value is one. If not, the similarity value is zero. It produces a Table, sorted from "most similar" to "least similar", with an extra column of zeroes and ones listing the similarity score.
-
-For example, we could check which restaurants had the same `price` as In-N-Out (whose ID is `I`).
-
-@lesson-instruction{
-- Evaluate @show{(code '(simple-similarity fast-food "I" (list "price")))}.
-}
+@show{(code '(simple-similarity decorated-bag "9" (list "SYMMETRY-V")))}
 
 @slidebreak{Investigate}
 
 @QandA{
-<<<<<<< HEAD
-@Q{Why did we get a 1 for McDonalds?}
-@A{McDonalds `price` rating in our data table is the exact same as the `price` rating for In-N-Out.}
-}
+@Q{What did `simple-similarity` produce?}
+@A{Our decorated table again, but now there's another column called `similarity`}
 
-@lesson-instruction{
-- Try using simple similarity with other colummns and see if you get any other matches.
+@Q{Was the little red square similar to itself?}
+@A{Of course!}
+
+@Q{Was the big red square similar to the little one? Why or why not?}
+@A{Yes! They have exactly the same vertical symmetry}
 }
 
 @slidebreak{Investigate}
+
+Let's try comparing _both_ symmetry columns:
+
+@show{(code '(simple-similarity decorated-bag "9" (list "SYMMETRY-V" "SYMMETRY-H")))}
 
 @QandA{
-@Q{Did you turn up any other recommendations?}
-@A{It recommended "Five Guys" for "burgers".}
+@Q{What do you think we'll get back, and why?}
+@A{The same table, because both squares are perfectly symmetric in both ways}
 
-@Q{Why was there *always* at least one perfect match in the `simple-similarity` table?}
-@A{Because it told us that "In-N-Out" was identical to itself!}
+@Q{Could we get the same result using any of our other columns?}
+@A{Yes - the `red` column would also work}
 
-@Q{What happens when we try using `simple-similarity` with all of the columns at once? Why?}
-@A{We don't get any recommendations, because there aren't any restaurants that match "In-N-Out" for price", "burgers" and "fries"!}
+@Q{Would we get the same result for every possible columns?}
+@A{No - the `WIDTH` and `HEIGHT` are different}
 }
 
-@slidebreak{Investigate}
+Try it yourself!
+
+=== Synthesize
+@slidebreak{Synthesize}
 
 @QandA{
 @Q{Is `simple-similarity` a _useful_ way to measure similarity?}
 @A{Not at all.}
 
+@Q{Why or why not?}
+@A{Two images can be similar even if they aren't *identical*!}
+
 @Q{What would make a measure of similarity more useful?}
-@A{We should at least be able to tell the difference between a restaurant that comes close (McDonald's) and a restaurant that's totally different (Outback Steakhouse)}
+@A{We should at least be able to tell the difference between an image that comes close and another that's totally different.}
+
+@Q{Could we use `simple-similarity` to compare our snowy mountain images? Why or why not?}
+@A{No - they are very similar, but they are not identical!}
 }
 
-=== Synthesize
-@slidebreak{Synthesize}
-@QandA{
-@Q{}
-}
-
-== Similarity in One and Two Dimensions
+== Measuring Distance in "Image Space"
 
 === Overview
-Students explore other forms of similarity, using Euclidean distance and angle measures.
+Students are introduced to _distance_ as a notion of similarity. This requires them to visualize images in a spatial system - first in one dimension, then in two, then eventually three.
 
 === Launch
 @slidebreak{Launch}
+The `simple-similarity` function is all-or-nothing: either the images match _precisely_ (1), or they don't (0). We want something with more nuance, which can tell that one grassy image is a lot closer to the other one than it is to a red square! A simple 1-and-0 score isn't good enough.
 
-Checking for perfect equality is not a very useful way to look for alternatives to our favorite restaurant chain! 
-
-Another option is to measure the _distance between points_.  In one dimension, this comparison is straight-forward: plot the values on a number line, and find the one that's closest to In-N-Out. Let's try it out.
+What else could we do?
 
 @lesson-instruction{
-- Complete the *Distance in 1 Dimension* section of @printable-exercise{distance-similarity.adoc}.
+Complete the first section on @printable-exercise{plotting-images.adoc}
 }
+
 
 @slidebreak{Launch}
+@lesson-point{We can think of our images as _points in space_}
 
-@QandA{
-@Q{Did you find a clear answer as to which restaurant was most similar using 1 dimension? Why or why not?}
-@A{No! The "most similar restaurant" to In-N-Out depended on the attribute:
-  * McDonald's for price
-  * Five Guys for burgers
-  * Wendy's for fries
-  }
-@A{We have multiple, *independent* attributes for these restaurants!}
-@A{Being similar for one attribute doesn't mean a restaurant is going to be similar for all the others.}
+The big breakthrough here is recognizing that these columns each represents a _number line_, and every image falls _somewhere on that line_. This allows us to imagine our images existing as points in space, and opens up new ways to measure similarity by thinking about distance between those points.
 
-@Q{Could we measure the distance between two restaurants using more than one dimension? How?}
-@A{We could graph the points using two dimensions and use the distance formula: @math{d = \sqrt{(x_2 - x_1)^2 + (y_2 - y_1)^2}}}
-}
+The worksheet had you use the `"green"` column to define a number line, creating a 1-dimensional "Green Space" where every image was plotted according to how many green-dominant pixels it had. Images with similar numbers of green pixels will be close to each other in this space, and Images with wildly different numbers of green pixel will be far away from each other. *The distance is the difference!*
 
-@teacher{
-Your students will not need to calculate distance with the distance formula in this lesson because we are about to introduce the `distance-similarity` function.  Ideally, however, they would already have an understanding of how distance is computed in two dimensions.  If your students could use an introduction to or review of the distance formula and the Pythagorean Theorem, you might want to @lesson-link{distance, check out our lesson on distance in the coordinate plane.}
-}
 
 @slidebreak{Launch}
-
-Pyret has a function for computing the `distance-similarity`, comparing every row in the table to a Row with a given ID. 
+Pyret has a function for computing the `distance-similarity`. Just like `simple-similarity`, it compares every row in the table to a Row with a given ID.
 
 @hspace{1em}@show{(contract "distance-similarity" '("Table" "String" "List<String>") "Table")}
 
-It will compute distance on a number line if the list we give it only includes a single column.
+This is definitely a big improvement! By plotting the images in "Green Space", we can clearly see that one grassy image is the _most similar_ to the other one.
 
-@hspace{1em} To compute a table with distances from In-N-Out (ID `"I"`) on the price scale: +
-@hspace{1em} @show{(code '(distance-similarity fast-food "I" (list "price")))} 
-
-But it can also compute distance in a plane described by any list of columns! 
-
-@hspace{1em} To compute a table with distances from In-N-Out (ID `"I"`) on the Fries-Burgers plane: +
-@hspace{1em} @show{(code '(distance-similarity fast-food "I" (list "burgers" "fries")))}
+But comparing images based only on one property (how many green pixels they have) is still pretty limited. Can we compare images based on _more than one?_
 
 @lesson-instruction{
-- Complete @printable-exercise{distance-similarity.adoc}.
+Complete the second section on @printable-exercise{plotting-images.adoc}
 }
 
-@slidebreak{Launch}
+@slidebreak{LaunchR}
+@right{@image{images/blue-v-green-images.png, 300}}
+
+By choosing _two_ columns from our dataset and using them as axes, you've defined a 2-dimensional "Blue-Green Space"! Each of the images from our corpus now exists as a point in that space. "Blue-Green Space" is decent for finding our grassy images, snowy images _and_ our red images because each group is already clustered together, away from the rest. But images with the sun don't fare quite as well...
 
 @QandA{
-@Q{What do you notice about the Price-Fries space compared to the Price-Burgers space?}
-@A{Five Guys and In-N-Out are spaced fairly far apart on both planes}
-@A{On the Price-Burgers plane Five Guys and In-N-Out are on the same vertical grid line.}
+@Q{Why did the distance measure work in two dimensions?}
+@A{Because you can still calculate the distance in 2 dimensions, using the distance formula}
 
-@Q{Why were the restaurants listed in different orders on the tables?}
-@A{Because they are ordered from most similar to least similar and the most similar restaurants change depending on the space}
-
-@Q{Why might the distances have been larger for the Price-Burgers space than the Price-Fries space?}
-@A{The burger ratings are on a 1-10 scale, not a 1-5 scale. The burgers might also be more different than the fries.}
+@Q{Could it work in _three_ dimensions? Why or why not?}
 }
 
+@lesson-instruction{
+Complete the last section on @printable-exercise{plotting-images.adoc}
+}
 
 === Investigate
-@slidebreak{Investigate}
-
-Our new `distance-similarity` formula is a huge improvement over `simple-similarity`! It's no longer an all-or-nothing situation. And, if In-N-Out isn't available, we have some suggested alternatives.
-
-Let's consider how `distance-similarity` compares to human perception of similarity.
-
-@QandA{
-@right{@image{images/burger-fry-blank.png, 250}}
-Some restaurants specialize in burgers, while others are all about the fries.
-@Q{Roughly where on the graph would you expect to see restaurants that specialize in burgers plotted?}
-@A{Top-Left}
-
-@Q{Roughly where on the graph would you expect to see restaurants that specialize in fries plotted?}
-@A{Bottom-Right}
-
-@Q{Roughly where on the graph would you expect to see restaurants that are equally good (or bad!) at both burgers and fries?}
-@A{Along the diagonal @math{y = x}}
-
-@Q{What would you expect to be more similar: two places with terrible fries and good burgers, or two places with different strengths?}
-@A{Most humans would generally say that the two places that specialize in burgers are more similar.}
-}
-
-@slidebreak{Investigate}
-
-@QandA{
-@ifslide{@right{@image{images/burger-fry-blank.png, 250}}}
-Suppose the `(fries, burgers)` scores for two burger joints are @math{(1, 7)} and @math{(1, 10)}. The distance between them is 3. +
-Suppose the `(fries, burgers)` scores for two places with different strengths are @math{(2, 0)} and @math{(0, 2)}. The distance is @math{\sqrt(8) = ~2.8}
-
-@Q{Which pair will `distance-similarity` say is closer?}
-@A{The places with different strengths.}
-}
-
-@slidebreak{Investigate}
-
-There are a few problems with using the distance formula:
-
-- It focuses on _count_, rather than _proportion_: restaurant scores that differ by 1 on the `fries` scale are _just as different_ as scores that differ by 2 on the `burgers` scale (both are one-fifth of the maximum points). The distance formula will treat the `burgers` difference as being "larger", because 2 > 1.
-- It ignores _orientation_: As humans, we know that two places that focus on burgers are going to be a lot more similar that one that focuses on burgers and another that focuses on fries! But the distance formula doesn't care if two restaurants both specialize in the same thing or not -- when calculating the distance _between_ the points it doesn't consider _where those points are on the graph._
-
-@slidebreak{Investigate}
-
-@lesson-instruction{
-Let's try another form of similarity, which relies on the idea that "burger-forward" places will all cluster on one axis, and "fry-forward" places on the other. _Angle similarity_ compares the angles formed by two rays drawn from two points to the origin.
-
-- Turn to @printable-exercise{angle-similarity.adoc}. 
-- Notice that this page focuses on a different dataset. We'll come back to our original dataset in a minute.
-- Let's look at question 1 together.
-}
-
-@QandA{
-@Q{Which two restaurants are being compared?}
-@A{Burger Sting and Dead Robin}
-
-@Q{Where did the coordinates for A come from?}
-@A{The fries and burgers values for the Burger Sting row.}
-
-@Q{There are two rays (arrows) drawn on the graph. Each connects the origin to one of the points listed. What angle do they form? How do you know?}
-@A{90°}
-@A{The rays are on the axes. And we know that the axes are perpendicular to each other.}
-}
-
-@slidebreak{Investigate}
-
-@lesson-instruction{
-- Complete @printable-exercise{angle-similarity.adoc}.
-}
-
 @slidebreak{InvestigateR}
-
-@QandA{
-@ifslide{@right{@image{images/burger-fry-blank.png, 250}}}
-@Q{When comparing two *identical* restaurants using angle similarity, what angle would we get?}
-@A{0°}
-
-@Q{What angle would represent the *least similar* any two restaurants can be?}
-@A{90°}
-}
-
-@slidebreak{Investigate}
-
-@scrub{@right{@image{images/2-d-comparison.png, 400}}}
-
-Pyret also has a function for computing the `angle-similarity` of every row in the table to a Row with a given ID within the space defined by a list of columns. 
-
-@hspace{1em}@show{(contract "angle-similarity" '("Table" "String" "List<String>") "Table")} 
-
-@lesson-instruction{
-- Return to your @starter-file{ai-fast-food} and make sure you've clicked "Run" to load the file.
-- Complete @printable-exercise{angle-similarity-pyret.adoc}
-}
-
-@slidebreak{Investigate}
-
-@QandA{
-@Q{What did you learn about which restaurants were most similar to In-N-Out?}
-@A{For both comparisons involving price, Pyret recommended Wendy's.}
-@A{When we compared burgers and fries without considering price, Five Guys was the most similar}
-
-@Q{Why are all of the measures for angle similarity zero when our list only included price?}
-@A{It doesn't make any sense to find the angle between the price and the price.}
-
-@Q{What if we want to measure similarity, taking into account Price, Fry Quality, _and_ Burger Quality? How can we use all three?}
-@A{Solicit student responses! But please don't actually try to answer the question before moving on in the lesson. We have several excellent visuals designed to support this cognitive leap!}
-}
-
-=== Synthesize
-@slidebreak{Synthesize}
-
-@QandA{
-@Q{What is an advantage of `angle-similarity` over `distance-similarity`?}
-@A{Angle similarity focuses on the proportion of scores ("these restaurants' burgers are all _twice as good_ as the fries"), but distance focuses only on the scores themselves ("the distance between these two restaurants is 4.3"). One of these is much more useful to a person who wants a good burger!}
-@A{Angle similarity takes _direction_ into account, and pays attention to points that are more on the burger side v. the fry side of the coordinate plane. Distance doesn't.}
-}
-
-== Similarity in Multiple Dimensions
-
-=== Overview
-Students take what they've learned about angle similarity, and apply it to the third dimension.
-
-=== Launch
-@slidebreak{Launch}
-
-@lesson-instruction{
-- Complete the first section on @printable-exercise{fast-food-3-dimensions.adoc}
-- Be ready to share your thoughts!
-}
-
-@teacher{Give students ample time to share and discuss what's happening at the top of this page. It can be a very challenging, abstract idea to wrap one's head around. This is an excellent time to use visual aids, flashlights, etc. to get the idea across.
-}
-
-@slidebreak{Launch}
---
 @right{@image{images/projection.webp, 300}}
 
 This image represents a _projection_ of a 3D object into two, 2-dimensional planes. You can see that one shadow looks like a square and the other looks like a circle. Both are showing us a part of the story, and both are correct about the part they show. But the _real_ shape is 3-dimensional (3D).
 
 *The same is true for our dataset!*
 
-Our restaurants are described by 3 different attributes, so our "restaurant space" has three dimensions! Like the shadows in this image, our two scatter plots in "Price-Fry Space" and "Price-Burger Space" are just _projections_ of 3D points onto the Z-X and Z-Y planes.
---
+Our images are described by 3 different colors (Red, Blue, and Green), so our "Color Space" has three dimensions! Like the shadows in this image, our two scatter plots in "Blue-v-Green Space" and "Blue-v-Red Space" are just _projections_ of 3D points onto the Z-X and Z-Y planes.
 
-=== Investigate
-@slidebreak{InvestigateR}
-@right{@image{images/3-d-comparison-w-lines.png, 300}}
+@slidebreak{Investigate}
 
 @lesson-instruction{
-- Return to @starter-file{fast-food-desmos}
-- Complete the remainder of @printable-exercise{fast-food-3-dimensions.adoc}
+- Open the @online-exercise{https://www.desmos.com/3d/qmu6fmrs6h, RGB Image Plot} in Desmos
+- The table at the top of the panel contains the Red, Green, and Blue values from our `decorated-bag` table
+- The scatter-plot for Blue-v-Green is visible against the "back wall" of the cube, with each image plotted as a *green* dot. Compare it to the Pyret scatter plot on @printable-exercise{plotting-images.adoc}.
+- Complete the first two sections on @printable-exercise{from-2-to-3.adoc}.
+}
+
+@slidebreak{InvestigateR}
+@right{@image{images/3d-rgb.webp, 300}}
+
+The distance formula works in 3 dimensions too! In fact, it works in _any number of dimensions_ we want -- we just can't see more than 3 with our eyes. But *the math holds true*, and we can use `distance-similarity` with any number of attributes we want.
+
+@lesson-instruction{
+- Try `distance-similarity(decorated-bag, "3", [list: "red", "green", "blue"])`, and see how well this works at finding the similarity between images with *grass*.
+- Try it again with ID `"5"`, to see how well it works at finding the similarity between images with *snow*.
+- Try it again with ID `"10"`, to see how well it works at finding the similarity between images with *red squares*.
+- Try it again with ID `"6"`, to see how well it works at finding the similarity between images with *sun*.
+- Try adding _other_ columns! Can you come up with a higher-dimensional space that works for all four groups?
 }
 
 @slidebreak{Investigate}
 
+Overall, `distance-similarity` is a huge upgrade compared to `simple-similarity`. But it suffers from two major problems:
+
+- It focuses on _count_, rather than _proportion_: our small red square and big red square are obviously similar, but distance only counts the number of red pixels. Our larger mountain images have more red pixels than the tiny square, even if only a small percentage of the overall image is red!
+-
+- It ignores _orientation_: As humans, we know that two images that are "mostly red" are a lot more similar that two images that are different colors! But the distance formula doesn't care if two images are dominated by the same color or not -- when calculating the distance _between_ the points it doesn't consider _where those points are on the graph._
+
+=== Synthesize
+@slidebreak{Synthesize}
+TODO
+
+== Measuring Angles in "Image Space"
+
+=== Overview
+Students are introduced to _angle-measurement_ as a notion of similarity. This reinforces the visualization of images in a spatial system.
+
+=== Launch
+@slidebreak{Launch}
+Let's try another form of similarity, which relies on the idea that "red-dominant" images will all cluster on one axis, and "blue-dominant" places on the other. _Angle similarity_ compares the angles formed by two rays drawn from two points to the origin.
+
+@lesson-instruction{
+- Complete the last section on @printable-exercise{from-2-to-3.adoc}
+}
+
+@slidebreak{LaunchR}
+@right{@image{images/3-d-comparison-w-lines.png, 300}}
+
+We can draw lines (called "rays") from the origin to any of our image-points in space. Instead of computing the distance between these points, we can compute the _angle between these lines_. Two points that are identical will have an angle of *zero*, meaning "the greatest possible similarity". Two points that fall on totally different axes (all-blue v. all-red, for example) will have an angle of *ninety*, meaning "the least possible similarity."
+
+This solves both of the problems with `distance-similarity`:
+
+- Count v. Proportion: The angle between both of our red squares will be zero, since they both fall exactly on the `red` axis. This correctly identifies that our two red squares are similar.
+- Orientation: Angle measure, by definition, describes how closely two rays are oriented.
+
+@slidebreak{LaunchR}
+@ifslide{@right{@image{images/3-d-comparison-w-lines.png, 300}}}
+@QandA{
+@Q{Does angle-similarity work in 1-dimension? Could we have used it in our "Green Space"?}
+@A{No! One limitation of angle similarity is that the angle will *always be zero* unless we compare documents across multiple dimensions.}
+
+@Q{Are Images the only things we can plot in 3-dimensional space and use angle-similarity for?}
+@A{No! We could plot anything with quantitative attributes}
+}
+
+=== Investigate
+@slidebreak{Investigate}
+@lesson-instruction{
+- Suppose we had some data on fast food restaurants, comparing their average review scores for Burgers and Fries. Could we use angle-similarity to look compare them?
+- Complete @printable-exercise{angle-similarity.adoc}
+}
+
+@slidebreak{InvestigateR}
+@ifslide{@right{@image{images/3-d-comparison-w-lines.png, 300}}}
 Of course, Pyret has a function for angle similarity, too!
 
 @hspace{1em}@show{(contract "angle-similarity" '("Table" "String" "List<String>") "Table")}
 
-This function _compares every row in the table_ to the Row with the given ID, calculating the angle-similarity between the points specified by the columns. For example:
-
-@show{(code '(angle-similarity fast-food "6" (list "price" "fries")))}
+This function _compares every row in the table_ to the Row with the given ID, calculating the angle-similarity between the points specified by the columns.
 
 @lesson-instruction{
-- Try calculating the `angle-similarity` to In-N-Out using only the `Fries` column.
-- Try calculating the `angle-similarity` to In-N-Out using all the columns.
-- Try some other comparisons!
+Complete @printable-exercise{angle-similarity-pyret.adoc}
+}
+
+@slidebreak{Investigate}
+Is measuring angles closer to human perception than measuring distance?
+
+@lesson-instruction{
+- Try `angle-similarity(decorated-bag, "3", [list: "red", "green", "blue"])`, and see how well this works at finding the similarity between images with *grass*.
+- Try it again with ID `"5"`, to see how well it works at finding the similarity between images with *snow*.
+- Try it again with ID `"10"`, to see how well it works at finding the similarity between images with *red squares*.
+- Try it again with ID `"8"`, to see how well it works at finding the similarity between images with *sun*.
+- Is it useful to add our `WIDTH` and `HEIGHT` columns? Why or why not?
+
 }
 
 @strategy{Isn't this Middle School Math?!}{
@@ -500,7 +413,7 @@ The same points and angles your students plot and compute in middle-school are s
 
 If you have older students who have learned some trigonometry, you might want to share that real machine learning systems use the cosine of the angle. There are two reasons for this:
 
-- It’s simpler to compute the cosine directly. 
+- It’s simpler to compute the cosine directly.
   * In fact, inside Pyret, `angle-similarity` actually computes the cosine _first_, then converts the result into an angle!)
 - The angle itself is a somewhat awkward value to work with.
   * The idea that 0° means "most similar" and that 90° (the largest angle) actually means the _least_ similarity can be counter-intuitive.
@@ -509,12 +422,26 @@ If you have older students who have learned some trigonometry, you might want to
 For the purposes of this curriculum, you can safely ignore the difference between angle and cosine similarity! But, for students who are familiar with cosine and curious to explore, all of the starter files in our AI pathway have access to a `cosine-similarity` function.
 }
 
+
 === Synthesize
+@slidebreak{Synthesize}
+Angle similarity really helped us improve the machines' "perception" of what makes two images similar. Given one image, we're able to produce much better search results! Thinking back to the notion of search as a *recommendation system*, you could also imagine doing the same with other kinds of data: picking a song and asking Spotify to recommend similar matches!
+
+@slidebreak{Synthesize}
 @QandA{
 @Q{It's obvious why `angle-similarity` works in two dimensions: you can use a protractor on a piece of paper if you have to! How could you explain why it still works in *three dimensions*?}
 @A{All we need is two rays coming from the origin, forming a "V" shape like the bands in a slingshot. No matter how you turn and twist the "V", it will always define a plane on which we can use a protractor.}
 
-@Q{Would the math still work in *four* dimensions? *Five*?}
-@A{Let students discuss!}
-@A{Just because we can't picture it, doesn't mean a computer can't calculate it!}
+@Q{Given this image corpus, which includes our red squares, why couldn't we use angle similarity on a Blue-Green Space?}
+@A{Angle similarity requires drawing two rays, so that the angle between them can be measured. But our red squares have zero as their value for both `blue` and `green`, so their coordinates in Blue Green Space would be @math{(0,0)}. It's impossible to draw a line between a point and itself, so there's no way to measure the angle between either of our red squares and any other image.}
+
+@Q{Are there any limitations to using angle measures for similarity, where distance might be better?}
+@A{If we're only measuring in 1 dimension, the angle will always be zero}
 }
+
+@slidebreak{Synthesize}
+There are still a lot of limitations to our system, however:
+
+- We can only _search by document_, where we pick an image and find similar ones. Google lets us type in a word like "grass"! (A music example: Spotify lets us type in a word like "jazz", rather than asking to tell it a specific song)
+- We're only recommending matches based on a single document: we can't find images, songs, or anything else based on a _collection_ of liked or disliked documents.
+

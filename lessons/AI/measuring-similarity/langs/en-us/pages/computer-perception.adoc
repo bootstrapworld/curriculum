@@ -1,0 +1,107 @@
+= How Computers See Images
+++++
+<style>
+div#body td { padding: 0.5em 3px !important; }
+</style>
+++++
+@n In the *Interactions Area*, evaluate each of the images defined at the top of this file:
+
+[%autowidth, cols="^a,^a,^a,^a,^a,^a,^a", frame="none", grid="none"]
+|===
+| @ifsoln-choice{`white-sq`}
+| @ifsoln-choice{`black-sq`}
+| `half-and-half`
+| @ifsoln-choice{`red-sq`}
+| @ifsoln-choice{`big-red-sq`}
+| @ifsoln-choice{`blue-c`}
+|`green-t`
+|===
+
+@n Which of these images do you think will have _vertical symmetry?_ Which do you think will have _horizontal symmetry?_ Circle the images in the list above that are both horizontally *and* vertically symmetrical.
+
+== Calculating Image Attributes in Pyret
+Pyret has a number of functions that compute numbers, describing different attributes of an image:
+
+[%autowidth, cols="<,<", frame="none", grid="none"]
+|===
+|
+@show{(contract "image-width" '(Image) "Number")}
+@show{(contract "image-height" '(Image) "Number")}
+@show{(contract "image-luminance" '(Image) "Number")}
+
+|
+@show{(contract "image-entropy" '(Image) "Number")}
+@show{(contract "image-symmetry-horizontal" '(Image) "Number")}
+@show{(contract "image-symmetry-vertical" '(Image) "Number")}
+|===
+
+@n What does `image-width(red-sq)` produce? @fitb{5em}{@ifsoln{50}}. `image-width(big-red-sq)`? @fitb{5em}{@ifsoln{100}}
+
+@n Complete the table below, by applying these functions to different images. (We've gotten you started!)
+
+[%autowidth, cols="<,^,^,^,^", options="header"]
+|===
+| Image Name
+| `image-symmetry-horizontal`
+| `image-symmetry-vertical`
+| `image-luminance`
+| `image-entropy`
+
+| `white-sq`
+| 1
+| 1
+| @ifsoln{255}
+| @ifsoln{0}
+
+| `black-sq`
+| 1
+| 1
+| @ifsoln{0}
+| @ifsoln{0}
+
+| `half-and-half`
+| @ifsoln{1}
+| @ifsoln{0.134}
+| @ifsoln{127.5}
+| @ifsoln{1}
+
+| `red-sq`
+| 1
+| 1
+| @ifsoln{54.213}
+| @ifsoln{0}
+
+| `big-red-sq`
+| 1
+| 1
+| @ifsoln{54.213}
+| @ifsoln{0}
+
+| `blue-c`
+| @ifsoln{1}
+| @ifsoln{1}
+| @ifsoln{14.73}
+| @ifsoln{0.72}
+
+| `green-t`
+| @ifsoln{0.505}
+| @ifsoln{1}
+| @ifsoln{95.74}
+| @ifsoln{0.998}
+|===
+
+@n What do you think "luminance" tell us about an image? @fitb{}{@ifsoln{How bright it is}} +
+@blanklines{2}{}
+
+@star What do you think "entropy" tell us about an image? @fitb{}{@ifsoln{How bright it is}} +
+@blanklines{2}{}
+
+== Working with Colors
+@n Evaluate `image-color-names(red-sq)`, then again with `blue-c`. What does `image-color-names` do? @fitb{}{} +
+@fitb{}{@ifsoln{lists the dominant color names for each pixel}}
+
+@n Evaluate `image-color-names(black-sq)`, then again with `white-sq`. Can you explain what happens? @fitb{}{} +
+@fitb{}{@ifsoln{{Shades of gray have no dominant color, so there is no color to report for any part of the image}}}
+
+@n Use `image-color-names` with `red-sq` and `big-red-sq`. How are the results *similar*? How are they *different*? @fitb{}{} +
+@fitb{}{@ifsoln{they're both completely red-dominated images, but `big-red-square` is MUCH larger}}
