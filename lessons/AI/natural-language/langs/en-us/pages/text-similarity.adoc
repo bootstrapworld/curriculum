@@ -1,0 +1,57 @@
+= Text Similarity
+
+@lesson-instruction{For this page, you'll need @starter-file{ai-text} open on your computer}. You may also want to review these Contracts:
+
+@indented{
+@show{(contract "simple-similarity" '("Table" "String" "List<String>") "Table")} +
+@show{(contract "distance-similarity" '("Table" "String" "List<String>") "Table")} +
+@show{(contract "angle-similarity" '("Table" "String" "List<String>") "Table")}
+}
+
+== What's Going on in this Code?
+
+@n *Save a Copy and click "Run"*. What is being defined in the first 22 lines of this file? @fitb{}{@ifsoln{a bunch of strings, which are essays about animals}} +
+@fitb{}{}
+
+@n What happens on lines 25-38? @fitb{}{@ifsoln{Those strings are put into a table called `essays`}}
+
+@n What is defined on line 40? @fitb{}{@ifsoln{a variable called `whale-essay`, which is the first row in the table}}
+
+@n In the Interactions Area, evaluate `whale-essay` and then `whale-essay["EMOJI"]`. What does the second expression do? @fitb{}{} +
+@fitb{}{@ifsoln{extracts the value from the "EMOJI" column of the `whale-essay` Row}}
+
+@n Evaluate `title-img(whale-essay)`. Explain what `title-img` does. @fitb{}{@ifsoln{grabs the "ID" column from the row, and makes an emoji picture}}
+
+@n Which essay is _most similar_ to our `mystery` document `"⁇"`? How do you know? @fitb{}{} +
+@fitb{}{}
+
+
+@n Use `simple-similarity` to compute the similarity scores to `"❓"`. Was it helpful? Why or why not? @fitb{}{} +
+@fitb{}{}
+
+@n Why _can't_ we use the other similarity functions with this table, as-is? @fitb{}{@ifsoln{No numeric attributes}} +
+@fitb{}{}
+
+== Describing Essays with Numbers
+
+*Pyret has a number of functions that compute numbers, describing different features of text:*
+
+[cols="1a,1a", frame="none"]
+|===
+| @show{(contract "string-length" '(String) "Number")}
+  @show{(contract "num-words"     '(String) "Number")}
+  @show{(contract "num-syllables" '(String) "Number")}
+| @show{(contract "num-sentences" '(String) "Number")}
+  @show{(contract "text-grade"    '(String) "Number")}
+|===
+
+@n Evaluate `string-length(badger)`, and experiment with the other functions.
+
+@n In the Definitions Area, define a new table: `decorated = decorate-text-table(essays, "DOC")`. Click "Run" and evaluate `decorated`. What did you get back? +
+@fitb{}{@ifsoln{a table with columns for the number of characters, words, syllables, sentences, and grade-level}}
+
+@n Make an `image-scatter-plot` using `title-img`, showing these essays in "WORDS-SYLLABLES Space" and another in "WORDS-SENTENCES Space". What do these scatter plots tell us? @fitb{}{} +
+@fitb{}{@ifsoln{Essays with more words tend to have more syllables, *and* more sentences}}
+
+@n Try using `distance-similarity` and `angle-similarity` with any combination of your new columns. Can you create a space where we can see that `"❓"` is closest to `🐘`? Why or why not? +
+@blanklines{2}{}

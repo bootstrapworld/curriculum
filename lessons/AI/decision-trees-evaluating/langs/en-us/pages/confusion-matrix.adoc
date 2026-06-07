@@ -1,0 +1,62 @@
+[.landscape]
+= Confusion Matrices
+
+@link-instructions{Open your copy of the @starter-file{decision-tree}, add the definition for `swims-classifier` to your Definitions Area and click "Run".}
+
+```
+fun swims-classifier(r):
+  if r["swims"] == true:
+    "dog"
+  else: 
+    "cat"
+  end
+end
+```
+
+== Computing the Report by Hand
+
+@n Use the `classify` functions with the `swims-classifier` to complete the confusion matrix table below.
+[cols="5a,^7a,^7a,^7a,^7a,^7a", options="header"]
+|===
+|actual-species|predicted-cat|predicted-dog|predicted-lizard|predicted-snail|predicted-tarantula
+|"cat"         
+|  @fitbruby{1em}{@ifsoln{4}}{out of 5} = @fitbruby{1em}{@ifsoln{80}}{%}  
+|  @fitbruby{1em}{@ifsoln{1}}{out of 5} = @fitbruby{1em}{@ifsoln{20}}{%}      
+|  @fitbruby{1em}{@ifsoln{0}}{out of 5} = @fitbruby{1em}{@ifsoln{0}}{%} 
+|  @fitbruby{1em}{@ifsoln{0}}{out of 5} = @fitbruby{1em}{@ifsoln{0}}{%}    
+|  @fitbruby{1em}{@ifsoln{0}}{out of 5} = @fitbruby{1em}{@ifsoln{0}}{%} 
+|ratio as decimal |@ifsoln{1}|@ifsoln{0.8}|@ifsoln{0}|@ifsoln{0}|@ifsoln{0}    
+|"dog"         
+|  @fitbruby{1em}{@ifsoln{0}}{out of 4} = @fitbruby{1em}{@ifsoln{0}}{%}    
+|  @fitbruby{1em}{@ifsoln{4}}{out of 4} = @fitbruby{1em}{@ifsoln{100}}{%}  
+|  @fitbruby{1em}{@ifsoln{0}}{out of 4} = @fitbruby{1em}{@ifsoln{0}}{%}   
+|  @fitbruby{1em}{@ifsoln{0}}{out of 4} = @fitbruby{1em}{@ifsoln{0}}{%}   
+|  @fitbruby{1em}{@ifsoln{0}}{out of 4} = @fitbruby{1em}{@ifsoln{0}}{%}   
+|ratio as decimal |@ifsoln{0}|@ifsoln{1}|@ifsoln{0}|@ifsoln{0}|@ifsoln{0}    
+|"lizard"      
+|  @fitbruby{1em}{@ifsoln{1}}{out of 2} = @fitbruby{1em}{@ifsoln{50}}{%}       
+|  @fitbruby{1em}{@ifsoln{1}}{out of 2} = @fitbruby{1em}{@ifsoln{50}}{%}      
+|  @fitbruby{1em}{@ifsoln{0}}{out of 2} = @fitbruby{1em}{@ifsoln{0}}{%}       
+|  @fitbruby{1em}{@ifsoln{0}}{out of 2} = @fitbruby{1em}{@ifsoln{0}}{%}      
+|  @fitbruby{1em}{@ifsoln{0}}{out of 2} = @fitbruby{1em}{@ifsoln{0}}{%}         
+|ratio as decimal |@ifsoln{0.5}|@ifsoln{0.5}|@ifsoln{0}|@ifsoln{0}|@ifsoln{0}    
+|"snail"       
+|  @fitbruby{1em}{@ifsoln{2}}{out of 2} = @fitbruby{1em}{@ifsoln{100}}{%}      
+|  @fitbruby{1em}{@ifsoln{0}}{out of 2} = @fitbruby{1em}{@ifsoln{0}}{%}      
+|  @fitbruby{1em}{@ifsoln{0}}{out of 2} = @fitbruby{1em}{@ifsoln{0}}{%}     
+|  @fitbruby{1em}{@ifsoln{0}}{out of 2} = @fitbruby{1em}{@ifsoln{0}}{%}      
+|  @fitbruby{1em}{@ifsoln{0}}{out of 2} = @fitbruby{1em}{@ifsoln{0}}{%}      
+|ratio as decimal |@ifsoln{1}|@ifsoln{0}|@ifsoln{0}|@ifsoln{0}|@ifsoln{0}    
+|"tarantula"   
+|  @fitbruby{1em}{@ifsoln{2}}{out of 2} = @fitbruby{1em}{@ifsoln{100}}{%}       
+|  @fitbruby{1em}{@ifsoln{0}}{out of 2} = @fitbruby{1em}{@ifsoln{0}}{%}      
+|  @fitbruby{1em}{@ifsoln{0}}{out of 2} = @fitbruby{1em}{@ifsoln{0}}{%}       
+|  @fitbruby{1em}{@ifsoln{0}}{out of 2} = @fitbruby{1em}{@ifsoln{0}}{%}      
+|  @fitbruby{1em}{@ifsoln{0}}{out of 2} = @fitbruby{1em}{@ifsoln{0}}{%}       
+|ratio as decimal |@ifsoln{1}|@ifsoln{0}|@ifsoln{0}|@ifsoln{0}|@ifsoln{0}    
+|===
+
+== Let Pyret Make the Report
+
+@n Have Pyret generate a `confusion-matrix` for our `swims-classifier` using the `testing` table. What can we learn? How does the `swim-classifer` performance with the `testing` table compare to its performance with the `training` table? @fitb{}{} +
+@blanklines{2}{@ifsoln{It does equally well at predicting species for all of the animals that were in the training dataset. But it misclassified all of the rabbits as dogs.}}

@@ -1,0 +1,61 @@
+= Angle Similarity (Unplugged)
+++++
+<style>
+td .autonum { padding-bottom: 3em; }
+</style>
+++++
+Here's the data table from a different source. It has different restaurants, and only includes data for Fries and Burgers.
+
+[.data-table, cols="^.^1a, 4a, ^4a, ^4a", options="header"]]
+|===
+| ID  | Restaurant  	| Fries (5=best) | Burgers (5=best)
+| "U" | Burger Sting 	| 0    		     | 4
+| "V" | Dead Robin		| 4    	         | 0
+| "W" | Five Lies     	| 2   	         | 2
+| "X" | Snake Shack		| 2            	 | 3
+| "Y" | In-N-Doubt 		| 1  	         | 1
+| "Z" | Dairy Spleen 	| 1 			 | 1.5
+|===
+
+@vspace{1ex}
+
+To compare each pair of restaurants in the questions below:
+
+- Find the (Fries, Burgers) coordinates for each restaurant in the table above.
+- Plot the points on the graph provided. 
+- Draw a ray connecting the origin to each of the points.
+- Use logic and your knowledge of angles to determine the `angle-similarity` of the 2 points.
+
+@vspace{1ex}
+
+[.FillVerticalSpace, cols="^1a,^1a",  stripes="none", frame="none"]
+|===
+|
+@n *Burger Sting v. Dead Robin* +
+Coordinate U: @fitb{6em}{(0,4)}
+Coordinate V: @fitb{6em}{(4,0)} +
+@image{../images/soln1.png, 250} +
+The `angle-similarity` between them is @fitb{4em}{@ifsoln{90°}}.
+
+| @n *In-N-Doubt v. Burger Sting* +
+Coordinate Y: @fitb{6em}{@ifsoln{(1,1)}}
+Coordinate U: @fitb{6em}{@ifsoln{(0,4)}} +
+@ifnotsoln{@image{../images/burger-fry-blank.png, 250}}
+@ifsoln{@image{../images/soln2.png, 250}} +
+The `angle-similarity` between them is @fitb{4em}{@ifsoln{45°}}.
+
+| @n *Five Lies v. Dead Robin* +
+Coordinate W: @fitb{6em}{@ifsoln{(2,2)}}
+Coordinate V: @fitb{6em}{@ifsoln{(4,0)}} +
+@ifnotsoln{@image{../images/burger-fry-blank.png, 250}}
+@ifsoln{@image{../images/soln3.png, 250}} +
+The `angle-similarity` between them is @fitb{4em}{@ifsoln{45°}}.
+
+| @n *Snake Shack v. Dairy Spleen* +
+Coordinate X: @fitb{6em}{@ifsoln{(2,3)}}
+Coordinate Z: @fitb{6em}{@ifsoln{(1,1.5)}} +
+@ifnotsoln{@image{../images/burger-fry-blank.png, 250}}
+@ifsoln{@image{../images/soln4.png, 250}} +
+The `angle-similarity` between them is @fitb{4em}{@ifsoln{0°}}.
+|===
+

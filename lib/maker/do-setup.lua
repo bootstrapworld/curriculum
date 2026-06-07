@@ -1,6 +1,7 @@
 #! /usr/bin/env lua
 
 dofile(os.getenv'TOPDIR' .. '/' .. os.getenv'MAKE_DIR' .. 'utils.lua')
+
 local natlang = os.getenv'NATLANG'
 
 local otherdirs = { 'fragments', 'xtra', 'xtras' }
@@ -13,12 +14,12 @@ local pathways_to_ignore = {
   -- 'zample'
 }
 
-local pathwayindependent_adocs = filter_stale(read_adoc_list('ADOCS_PATHWAYINDEPENDENT'))
-local workbookpage_adocs        = filter_stale(read_adoc_list('ADOCS_WORKBOOKPAGE'))
-local lessonplan_adocs          = filter_stale(read_adoc_list('ADOCS_LESSONPLAN'))
-local pathwayresource_adocs     = filter_stale(read_adoc_list('ADOCS_PATHWAYRESOURCE'))
-local pathwaynarrative_adocs    = filter_stale(read_adoc_list('ADOCS_PATHWAYNARRATIVE'))
-local ignorable_directories     = dofile(os.getenv 'IGNORABLE_DIRECTORIES')  -- unchanged
+local pathwayindependent_adocs = dofile(os.getenv 'SETUP_PATHWAYINDEPENDENT')
+local workbookpage_adocs = dofile(os.getenv 'SETUP_WORKBOOKPAGE')
+local lessonplan_adocs = dofile(os.getenv 'SETUP_LESSONPLAN')
+local pathwayresource_adocs = dofile(os.getenv 'SETUP_PATHWAYRESOURCE')
+local pathwaynarrative_adocs = dofile(os.getenv 'SETUP_PATHWAYNARRATIVE')
+local ignorable_directories = dofile(os.getenv 'IGNORABLE_DIRECTORIES')
 
 local adocables_input_o = io.open(os.getenv 'ADOCABLES_INPUT', 'w')
 local adoc_input_o = io.open(os.getenv 'ADOC_INPUT', 'w')
@@ -257,18 +258,12 @@ local book_p = os.getenv 'BOOK'
 if book_p == '' then book_p = false end
 
 if book_p then
-  local all_courses = dofile(os.getenv 'COURSES_LIST_FILE')
-  local contracts_pdfs = {}
-  for _,course in ipairs(all_courses) do
-    local pdf = 'distribution/' .. natlang .. '/courses/' .. course .. '/resources/pages/Contracts.pdf'
-    table.insert(contracts_pdfs, pdf)
-  end
 
-  -- rest of the book_p block unchanged ...
-  local pathwayindependent_adocs_4pdf = pathwayindependent_adocs
-  local workbookpage_adocs_4pdf       = workbookpage_adocs
-  local lessonplan_adocs_4pdf         = lessonplan_adocs
-  local pathwayresource_adocs_4pdf    = pathwayresource_adocs
+  local pathwayindependent_adocs_4pdf = dofile(os.getenv 'SETUP_PATHWAYINDEPENDENT_PDF')
+  local workbookpage_adocs_4pdf = dofile(os.getenv 'SETUP_WORKBOOKPAGE_PDF')
+  local lessonplan_adocs_4pdf = dofile(os.getenv 'SETUP_LESSONPLAN_PDF')
+  local pathwayresource_adocs_4pdf = dofile(os.getenv 'SETUP_PATHWAYRESOURCE_PDF')
+  local contracts_pdfs = dofile(os.getenv 'SETUP_CONTRACTS_PDF')
 
   local puppeteer_input_o = io.open(os.getenv 'PUPPETEER_INPUT', 'w')
 

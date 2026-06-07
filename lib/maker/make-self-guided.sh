@@ -1,46 +1,34 @@
 #! /usr/bin/env bash
 
-lib_dir=$TOPDIR/distribution/$NATLANG/lib
-self_guided_dir=$lib_dir/self-guided
+# Usage: make-self-guided.sh <lesson_dir>
+#
+# Sets up <lesson_dir>/self-guided/ for a single lesson by copying
+# (or symlinking) the contents of $TOPDIR/distribution/$NATLANG/lib/self-guided/
+# and moving the lesson's freshly-extracted selfGuidedBits.jsx into place.
+#
+# Skips lessons that don't have a selfGuidedBits.jsx (i.e. lessons where
+# extract_self_guided wasn't invoked). The one-time setup of
+# self-guided/node_modules is handled by the Makefile.
 
-if test ! -d $self_guided_dir/node_modules; then
-  ln -sf $TOPDIR/node_modules $self_guided_dir/node_modules
-fi
+g=$1
+test -f "$g/selfGuidedBits.jsx" || exit 0
 
-function create_local_self_guided() {
-  local g=$1
-  test -f $g/selfGuidedBits.jsx || return
-  (cd $g
-  mkdir -p self-guided
-  cd self-guided
-  for sgf in $(ls $self_guided_dir); do
-    # soft link to node_modules subdir from the generic dir;
-    # other files copied
-    if test -d $self_guided_dir/$sgf; then
-      ln -sf $self_guided_dir/$sgf
-    else
-      cp -p $self_guided_dir/$sgf .
-    fi
-  done
-  mv ../selfGuidedBits.jsx .
-  test -d ../images && ln -sf ../images
-  test -d ../videos && ln -sf ../videos
-  )
-}
+self_guided_dir=$TOPDIR/distribution/$NATLANG/lib/self-guided
 
-if test -s $RELEVANT_LESSONS_LIST_FILE; then
-  # if make called with COURSE= only create self-guided dirs for the relevant lessons
-  for f in $(cat $RELEVANT_LESSONS_LIST_FILE); do
-    g=$TOPDIR/distribution/$NATLANG/lessons/$f
-    create_local_self_guided $g
-  done
-else
-  # create self-guided dirs for all lessons
-  for f in $(ls $TOPDIR/distribution/$NATLANG/lessons); do
-    g=$TOPDIR/distribution/$NATLANG/lessons/${f%/}
-    create_local_self_guided $g
-  done
-fi
+mkdir -p "$g/self-guided"
+cd "$g/self-guided" || exit 1
 
-# keep make happy with explicit exit 0
+for sgf in "$self_guided_dir"/*; do
+  test -e "$sgf" || continue
+  if test -d "$sgf"; then
+    ln -sf "$sgf"
+  else
+    cp -p "$sgf" .
+  fi
+done
+
+mv ../selfGuidedBits.jsx .
+test -d ../images && ln -sf ../images
+test -d ../videos && ln -sf ../videos
+
 exit 0

@@ -359,7 +359,7 @@ translate(pupil, 10, 30, eye-white)
             If you'd like to watch the video again, click on the screen.
 
 <p/>
-             <input type="button" value="Click here to open Pyret in a new window" onclick="window.open('https://code.pyret.org/editor#share=1bJJzrW_XM1gQzg1oghlW98HSIsA9WWt0&v=31c9aaf', '_blank')"/> when you're ready to play around with this file in the classic Pyret editor.
+             <input type="button" value="Click here to open Pyret in a new window" onclick="window.open('https://pyret.bootstrapworld.org/editor#share=1bJJzrW_XM1gQzg1oghlW98HSIsA9WWt0&v=31c9aaf', '_blank')"/> when you're ready to play around with this file in the classic Pyret editor.
              `
     },
 
@@ -380,7 +380,7 @@ translate(pupil, 10, 30, eye-white)
           <p/>
           The pieces have been defined behind the scenes so you won't be able to change them... but you don't have to use them all and, once you have successfully created an image that will make sense to other viewers, you can use what you've learned to improve upon it by defining any additional values you like!
           <p/>
-         <input type="button" value="Click here to open the Winter Wonderland Puzzle" onclick="window.open('https://code.pyret.org/editor#share=1Lgax_uAdFxUJzyGKPbx2BESj9BNkTK3i&v=1904b2c', '_blank')"/>  in a new Pyret window and click "Run" to load the initial image.</a>
+         <input type="button" value="Click here to open the Winter Wonderland Puzzle" onclick="window.open('https://pyret.bootstrapworld.org/editor#share=1Lgax_uAdFxUJzyGKPbx2BESj9BNkTK3i&v=1904b2c', '_blank')"/>  in a new Pyret window and click "Run" to load the initial image.</a>
        `
     },
   ]

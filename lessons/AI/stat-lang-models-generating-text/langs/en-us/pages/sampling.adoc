@@ -1,7 +1,12 @@
 = Sampling from the Language Model
 
-@link-instructions{Use @handout{old-lady-lyrics.adoc} to answer the questions, below. *Note that the title of the song is a part of the corpus!*}
+@link-instructions{Use Pyret to answer the questions below.}
 
+@indented{
+@show{(contract "build-lang-model" '((corpus String)) "Table")} +
+@show{(contract "generate-ngrams" '((model Table) (size Number)) "Table")} +
+@show{(contract "completions" '((model Table) (start String)) "Table")}
+}
 
 == Text Generation Exercise #1
 
@@ -22,7 +27,7 @@
 
 @n Everyone in your class should have generated the *same* text. Why do you think that was the outcome?
 
-@blanklines{5}{
+@blanklines{3}{
 @ifsoln{The corpus included a lot of repetition. Every single time we saw the word "She", it was followed by "swallowed". There were no instances when two different words had the same likelihood of following a given word.}
 }
 
@@ -39,7 +44,7 @@ Here is a list of the most common unigrams in the corpus: @hspace{2em} "the": 12
 
 @n There are two words that have an equal probability of appearing in the third spot! What are they? @fitb{7em}{@ifsoln{that}} and @fitb{}{@ifsoln{to}}
 
-@n Flip a coin to determine which one you will use to complete *Text Generation 2a* and use statistical language modeling to determine the fourth word. Then repeat the process for *Text Generation 2b* using the other word that tied for the third spot.
+@n Use statistical language modeling to determine the fourth word for each of the sentences below, using each of the two words you computed for the third spot.
 
 @vspace{1ex}
 
@@ -67,7 +72,7 @@ Some students will have the 2a response in the 2b blanks, and vice versa — whi
 
 @n Why was there only one result for *Text Generation Exercise 1*, while *Text Generation Exercise 2* had two possible results?
 
-@blanklines{4}{
+@blanklines{3}{
 @ifsoln{In *Text Generation Exercise 2*, there was a "tie" for the most likely next word after "spider", whereas there was always a most likely word for *Text Generation Exercise 1*}
 }
 

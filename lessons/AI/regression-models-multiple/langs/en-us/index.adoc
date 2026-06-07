@@ -1,7 +1,12 @@
 [.beta]
 = Multiple Regression Models
+++++
+<style>
+.big-codeblock .big { background: #f7f7f8; display: inline-block; padding: 15px; }
+</style>
+++++
 
-@description{Students return to the dataset, this time thinking about the factors that predict how long it will take for an animal to be adopted. This leads to an exploration of Linear Regression, then Multiple Regression. Finally, they learn about the world’s first self-driving car, and use multiple regression to control the steering wheel of a virtual car using AI.}
+@description{Students extend single-variable regression to multiple regression, discovering how a line-of-best-fit in 2D becomes a plane-of-best-fit in 3D. Using `curve` and `skew` as two explanatory variables, they build a stronger steering predictor, compare model fits, and think critically about which variables matter most.}
 
 @lesson-prereqs{regression-models-simple}
 
@@ -11,354 +16,213 @@
 |===
 | Lesson Goals
 | Students will be able to...
-
 @objectives
 
 | Student-facing Lesson Goals
 |
-
-- Let's learn about the functioning of the very first self-driving car!
-- Let's use line-of-best-fit to predict how a self-driving car should steer!
+- Let's use two variables at once to build an even better steering predictor!
+- Let's explore what a "plane of best fit" looks like in three dimensions!
 
 | Materials
 |[.materials-links]
 @material-links
 
-| Preparation
-| - @opt{If you think your students will want the chance to actually see the first self-driving car in action, you can share @link{https://www.youtube.com/watch?v=ntIczNQKfjQ, "this two-minute video"} from the Carnegie Mellon University Robotics Institute.}
-
 |===
 
-== Fitting Models for Age _and_ Pounds
+== Multiple Regression
 
 === Overview
-Students extend their understanding of linear regression in 2 dimensions, moving into multiple regression in 3 dimensions. They see the improvement to the model fit, and interpret the coefficients of a multiple-regression result.
+Students extend their understanding of single-variable linear regression to multiple regression with two predictors. Using `curve` and `skew`, they see that each scatter plot from the previous lesson was a 2D projection of higher-dimensional data, and that a plane of best fit is the natural extension of a line of best fit.
 
 === Launch
 @slidebreak{LaunchR}
---
-@right{@image{images/lr-pounds-v-weeks.png, 300}}
 
-@center{
-@math{weeks(age)=(0.79 \times age) + 2.3} +
-`fun weeks(r): (0.79 * r["age"]) + 2.3 end`
-}
-
-This function (written in both math and Pyret notation) is our regression line, which we can draw on a 2 dimensional (x,y) scatter plot.
-
-But what if we wanted to use `pounds` _and_ `age` on our flashcards, and train the computer to predict `weeks` based on the value of *both* variables?  We need one axis on our scatter plot to represent `weeks`. We tried using the other axis for one explanatory variable at time (age or pounds). How can we represent _both_ explanatory variables?
---
-@teacher{Give students a chance to discuss and brainstorm!}
-
-@slidebreak{LaunchR}
 @QandA{
 @right{@image{images/projection.webp, 350}}
-Take a look at this picture.
+Take a look at this picture of a cylinder floating in a box.
 
 @Q{What is making the square shadow on the blue wall?}
-@A{A light is shined at the side of the cylinder, casting a square shadow.}
+@A{A light shined at the side of the cylinder casts a square shadow.}
 
 @Q{What is making the circle shadow on the yellow wall?}
-@A{A *different* light is shined at one end of the cylinder, casting a circular shadow.}
+@A{A *different* light shined at one end of the cylinder casts a circular shadow.}
 
-@Q{What if someone shined a light _down_, to cast a shadow on the floor. What shape would the floor-shadow be?}
+@Q{What shape would the shadow be on the floor?}
 @A{A square.}
 
-@Q{How can one shape cast such different shadows? And at the same time?!}
-@A{A 3d object has multiple sides, so there's more than one direction light can travel to cast a shadow.}
+@Q{How can one shape cast such different shadows?}
+@A{A 3D object has multiple sides, so different lights cast different shadows.}
 
-@Q{If the _real_ shape is a cylinder, are the circle and square shadows "lying" to us somehow?}
-@A{No - they're just telling a *part* of the story!}
+@Q{If the _real_ shape is a cylinder, are the circle and square shadows "lying" to us?}
+@A{No — they're each just telling a *part* of the story!}
 }
+
+@slidebreak{LaunchR}
+--
+@right{@image{images/steering-v-curve-lr.png, 300}}
+
+In the last lesson, we made four scatter plots — one for each candidate explanatory variable. Each showed a 2D relationship between one variable and `steering-angle`.
+
+But `curve`, `skew`, `offset`, and `speed` are all being measured _at the same time_, for the same data point. Each scatter plot we made was showing just one "shadow" of the data — a 2D projection of information that actually exists in more dimensions.
+@QandA{
+@Q{If `curve` and `skew` are both inputs, and `steering-angle` is the output, how many dimensions would we need to represent all three at once?}
+@A{Three! One axis for `curve`, one for `skew`, one for `steering-angle`.}
+}
+--
+
+@teacher{Give students a chance to discuss and brainstorm before moving on.}
 
 @slidebreak{LaunchR}
 @right{@image{images/plane-of-best-fit.png, 300}}
-That's exactly what's going on with our data! The points for each animal represent information in _three_ dimensions: `age`, `pounds`, and `weeks`.
 
-To make predictions in three dimensions, *we need to do regression in _three_ dimensions.* Now we want Pyret to "learn" a function like this, with the best possible values for @math{m_{age}}, @math{m_{pounds}}, and @math{b}:
+If we want to consider all three, then we need to consider each snapshot in the training corpus as a 3d point, with values for `curve`, `skew`, _and_ `steering-angle`.
 
-@center{@math{weeks(age, pounds)=(m_{age} \times age) + (m{pounds} \times pounds) + b}}
+To make predictions in three dimensions, *we need to do regression in _three_ dimensions.* Instead of a line of best fit, we're looking for a *plane of best fit*. We want Pyret to learn a function with the best possible values for @math{m_{curve}}, @math{m_{skew}}, and @math{b}:
 
-- `age` and `weeks` are _both inputs_ to the function, and each contributes to a _portion_ of the adoption time
-- These portions are @math{m_{age}} and @math{m_{pounds}}, with our xy-intercept @math{b} representing the predicted value if `age` and `pounds` are _both_ zero
+[.big-codeblock]
+@big{
+`fun curve-skew-predictor(r):` +
+@hspace{2em} `(` @math{m_{curve}} `* r["curve"]) + (` @math{m_{skew}} `* r["skew"]) + b` +
+`end`
+}
 
+- `curve` and `skew` are both values in a given snapshot, each explaining a _portion_ of the steering angle at that moment
+- @math{m_{curve}} and @math{m_{skew}} are their slopes — the "amount of pull" each variable has
+- @math{b} is the intercept: the predicted steering angle when both inputs are zero
 
 === Investigate
-@slidebreak{InvestigateR}
+@slidebreak{Investigate-DN}
 
 @lesson-instruction{
 - Open @online-exercise{https://www.desmos.com/3d/omnchml87a, this Desmos graph}.
-- Use this graph to complete the first section on @printable-exercise{predicting-weeks-from-2.adoc}.
+- Use it to complete @printable-exercise{predicting-steering-from-2.adoc}.
 - Be ready to share your thinking!
 }
 
-@teacher{Draw connections to the 3d projection image, emphasizing that each 2d scatter plot is just a projection (a literal "shadow of the data") that shows a part of the story.}
-
+@teacher{Draw connections to the cylinder-and-shadows image: each 2D scatter plot from the last lesson is a literal "shadow" of the 3D data, cast by collapsing one dimension flat.}
 
 @slidebreak{InvestigateR}
 @ifslide{@right{@image{images/plane-of-best-fit.png, 300}}}
-What would this function look like?
-
-In *Function Notation*: +
-@math{weeks(age, pounds)=(0.79 \times age) + (0.08 \times pounds) + 2.3}
-
-In *Pyret Notation*: +
-`fun weeks(r): (0.79 * r["age"]) + (0.08 * r["pounds"]) + 2.3 end`
-
-We're already consuming the entire row `r`, so we already have access to `age` and `pounds`.
 
 === Synthesize
 @slidebreak{Synthesize}
 
 @QandA{
-@Q{Why did our multiple-regression function have *two* slopes?}
-@A{We were defining a *plane*. A flat sheet of metal only tip along two different axes!}
+@Q{Why does our multiple-regression function have *two* slopes?}
+@A{Because we're defining a *plane*. A flat sheet can tip along two different axes independently, so it needs two slopes — one for each.}
 
-@Q{Why did adding `legs` improve our @math{S}-value?}
-@A{`legs` helps us differentiate between snails, tarantulas, and  the other species. And since species influences adoption time, this helps us "sort-of regress" on `species`}
+@Q{Each scatter plot from the last lesson was a "shadow" of the 3D data. When we looked at `curve` vs. `steering-angle`, in which direction was the light shining?}
+@A{Along the `skew` axis — all the variation in `skew` got collapsed into a flat 2D view.}
+
+@Q{Does that mean the `curve` vs. `steering-angle` scatter plot was "wrong"?}
+@A{No — it was accurate, just incomplete. It told part of the story.}
 }
+
+@slidebreak{Synthesize}
+
+Different fields use different vocabulary for the same ideas:
+
+[cols="^1a,^1a", options="header", stripes="none"]
+|===
+| In Math... | In Machine Learning...
+| Variable   | Parameter
+| Slope      | Weight
+|===
+
+In math, the "amount of pull" a variable has on the output is its _slope_. In machine learning, the same idea is called a _weight_. When tech companies talk about "releasing model weights" — or refuse to — they mean the learned coefficients of their regression models.
+
+@teacher{
+Some tech companies make a show of open-sourcing their models while declining to share the weights. That's a little like saying "we predict steering angle from curve and skew" but refusing to tell anyone the actual slope for either one.
+}
+
 
 == Multiple Regression in Pyret
 
 === Overview
-Students discover Pyret's `S`, `mr-code`, and `mr-coeffs` API, and use multiple regression to compute the optimal plane-of-best-fit.
+Students use `reg-model-code` with multiple input columns to build a two-variable steering predictor, and `reg-model-S` to evaluate and compare models. They think critically about which variables to keep.
 
 === Launch
-@slidebreak{LaunchR}
---
-@right{@image{images/desmos3d.png, 350}}
-
-You may recall the following functions in Pyret:
-
-@show{(contract "simple-S" '((table-name Table) (x-col String) (y-col String)) "Table"
-"produces the S-value of our model"
-)} +
-@show{(contract "lr-coeffs" '((table-name Table) (x-col String) (y-col String)) "Table"
-"produces a table showing all coefficients (including the intercept!) of our model"
-)} +
-@show{(contract "lr-code" '((table-name Table) (x-col String) (y-col String)) "Code"
-"produces code that you can copy and paste into the Definitions Area, to define the \"trained\" model")}
-
-None of them allow us to work with 2 or more input columns: they all assume a single input is mapped to the target column. We need _new_ functions to handle multiple regression.
---
-
-
 @slidebreak{Launch}
 
-@show{(contract "S" '((table-name Table) (x-cols List<String>) (y-col String)) "Table"
-"produces the S-value of our multiple-regression model"
+In the last lesson, we used `reg-model-code` with a list of one explanatory variable:
+
+`reg-model-code(training-data, [list: "curve"], "steering-angle")`
+
+Adding a second variable to the list is all it takes to go from a line to a plane!
+
+`reg-model-code(training-data, [list: "curve", "skew"], "steering-angle")`
+
+Pyret also has a tool to measure the fit of any row-consuming regression model:
+
+@show{(contract "reg-model-S" '((table-name Table) (explanatory List<String>) (response String) (model "Row->Number")) "Number")}
+"produces the S-value (overall error) of a multiple-regression model, fit to the specific columns"
 )}
-
-@vspace{1ex}
-
-@show{(contract "mr-coeffs" '((table-name Table) (x-cols List<String>) (y-col String)) "Table"
-"produces a table showing all coefficients (including the intercept!) of our multiple-regression model"
-)}
-
-@vspace{1ex}
-
-@show{(contract "mr-code" '((table-name Table) (x-cols List<String>) (y-col String)) "Code"
-"produces code that you can copy and paste into the Definitions Area, to define the \"trained\" model")}
-
-For example: `mr-code(animals-table, [list: "age",  "pounds"], "weeks")`
 
 === Investigate
+@slidebreak{Investigate-DN}
 
 @lesson-instruction{
-- Use these tools to complete @printable-exercise{pages/supervised-learning-multiple-regression.adoc}.
-- Try out your finished predictor function in Pyret!
+- Make sure @starter-file{self-driving} is open, and you can evaluate `training-data`.
+- Use `reg-model-code`, `reg-model-S` to complete the first section of @printable-exercise{supervised-learning-multiple-regression.adoc}.
+}
+
+@slidebreak{InvestigateR}
+@right{@image{images/self-driving-car.jpg, 300}}
+@QandA{
+@Q{How did the S-value change when you added `skew` as a second predictor?}
+@A{It decreased — using two predictors explains more of the variation in `steering-angle`, leaving less unexplained error.}
+
+@Q{Looking at the coefficients for `curve` and `skew`, which has more _influence_ on the predicted steering angle?}
+@A{`curve` — its coefficient is larger, meaning a one-unit change in `curve` moves the prediction more than a one-unit change in `skew`.}
+}
+
+@slidebreak{Investigate}
+
+*Sensors cost money!* Adding all the various sensors to make a car self-driving adds thousands of dollars to the cost of manufacturing, and the extra computing power needed to process the data makes the chips used in those cars more expensive too. To make cars affordable, companies need to make tough decisions about which sensors to keep and which to drop.
+
+@lesson-instruction{
+- Complete the rest of @printable-exercise{supervised-learning-multiple-regression.adoc}.
+- @opt{For a deeper exploration, complete @opt-printable-exercise{dropping-variables.adoc}}
+}
+
+
+@slidebreak{InvestigateR}
+@ifslide{@right{@image{images/self-driving-car.jpg, 300}}}
+@QandA{
+@Q{If you had to drop one of the two variables, which would you drop and why?}
+@A{`skew` — it has the smaller coefficient and removing it would cost less accuracy than removing `curve`.}
+
+@Q{If you couldn't use `curve` at all, could you still build a workable model?}
+@A{You could build a model, but it would perform significantly worse. `curve` carries the most information about how to steer; the other variables only fill in part of the gap.}
+}
+
+@lesson-instruction{
+- Complete @printable-exercise{self-driving-car-reflection.adoc}.
 }
 
 === Synthesize
+@slidebreak{Synthesize}
+
 @QandA{
-@Q{Why did our multiple-regression function have *two* slopes?}
-@A{We were defining a *plane*. A flat sheet of metal only tip along two different axes!}
+@Q{ALVINN used hundreds of pixel values _and_ an obstacle distance as inputs. How does that connect to what we just did?}
+@A{ALVINN's model had hundreds of parameters — one per pixel, each with its own learned weight — plus the obstacle distance. The same multiple regression principle applies, just at a much larger scale.}
 
-@Q{Why did adding `legs` improve our @math{S}-value?}
-@A{`legs` helps us differentiate between snails, tarantulas, and  the other species. And since species influences adoption time, this helps us "sort-of regress" on `species`}
+@Q{What would it mean for a pixel to have a very _small_ weight in ALVINN's model?}
+@A{That pixel barely affects the steering prediction — it probably captures a part of the image that rarely matters for navigating the road, like the sky.}
+
+@Q{What would it mean for a pixel to have a very _large_ weight?}
+@A{That pixel strongly influences the predicted steering angle — likely a part of the image that reliably signals road direction.}
 }
 
-== Self-Driving Cars @duration{15 minutes}
-
-@objective{ai-supervision}
-@objective{car-function}
-
-
-=== Overview
-Students learn about ALVINN (Autonomous Land Vehicle in a Neural Network) as an example of supervised machine learning, then explore a driving simulator and use multiple regression to train a model to drive for them.
-
-=== Launch
-@slidebreak{LaunchR}
---
-@right{@image{images/self-driving-car.jpg, 300}}
-
-Self-driving cars feel like the future has really arrived! Many people think they are one of the strongest examples of "AI" really thinking, instead of just "following an algorithm". After all, how can a computer possibly make decisions about how to drive???
-
-What do _you_ think?
---
-
-@teacher{Give students time to discuss. Remind them about the AI Effect, and how people also felt when the first spell-checkers were developed!}
-
-@slidebreak{Launch}
-Self-driving cards work via a lot of inputs (sensors, cameras, etc) and a lot of outputs (how much to accelerate, brake, and steer). Steering, for example, is incredibly difficult! A car needs to think about:
-
-- Whether the road ahead bends to the left or right, and how sharply
-- How far the car is from the center of the lane
-- Whether the car is in-line with the lane, or heading towards one side
-- Obstacles and traffoc lights that could be in the way
-- And lots more!
-
-We're going to explore how @vocab{supervised learning} -- regression, specifically -- allows cars to "know where they're going".
-
-@slidebreak{LaunchR}
---
-@right{@image{images/navlab.png, 300}}
-Meet ALVINN!
-
-ALVINN (short for Autonomous Land Vehicle in a Neural Network) was developed in 1989 by a team of computer scientists at Carnegie Mellon University. ALVINN is the forebear of today's self-driving cars: a retrofitted Army ambulance equipped with sensors, computers, and small motors to turn the wheel, press the pedals, etc. ALVINN had about one-tenth of the processing power of an Apple Watch -- but was able to safely drive on a very limited course at 70 miles per hour by the early 1990s! How did it happen?
---
-
-@slidebreak{Launch}
-
-As with all machine learning, ALVINN required @vocab{training}.
-
-The goal of that training? Learning how to steer.
-
-Here's what ALVINN's training entailed:
-
-(1) A person drove the vehicle while a front-facing video camera recorded the road.
-
-- In the context of @vocab{supervised learning}, the human driver is often referred to as the supervisor. 
-- The supervisor demonstrates the learning process.
-- The input-output pairs form the @vocab{training corpus}.
-
-(2) Every two seconds, ALVINN...
-
-- digitized an image of the road ahead
-- recorded the steering direction chosen by the driver
-
-@slidebreak{Launch}
-
-(3) ALVINN's training data can be represented as an input-output table, with training images (reduced in resolution to 30x32 pixels) and obstacle distances as inputs, and the associated corresponding "correct" steering angles as outputs.
-
-@indented{
-[cols="^.^1,^.^1,^.^1", stripes="none", options="header"]
-|===
-| `road-image`                      	| `obstacle-distance` (ft)| `steering-angle`
-| @image{images/road1.png, 100} 	|		21				|   0.02º
-| @image{images/road2.png, 100} 	|		49				| -95.20º
-| @image{images/road3.png, 100} 	|		37				| 135.43º
-|===
-
-@teacher{
-Note: These images were selected for illustrative purposes. The 30x32 pixel images produced by ALVINN were of much lower quality!
-}
-}
-
-@slidebreak{Launch}
-
-(4) Using the set of inputs and outputs, ALVINN generates a @vocab{function} for predicting steering angles from the images and obstacle distances:
-
-@indented{
-`mr-code(training-data, [list: "road-image", "obstacle-distance"], "steering-angle")`
-}
+@slidebreak{Synthesize}
 
 @lesson-point{
-`road-image` and `obstacle-distance` are the @vocab{explanatory variables} and the `steering-angle` is the @vocab{response variable}.
+Multiple regression is the same idea as linear regression, extended to any number of input variables. Each input gets its own slope (weight), and the model learns all of them at once to minimize error.
 }
 
-@slidebreak{Launch}
+Multiple regression is the engine behind many real AI systems:
+- ALVINN's hundreds of pixel weights
+- Car insurance rates based on age, location, and driving history
+- Weather forecasts based on temperature, humidity, pressure, and wind speed
 
-(5) After training is complete, a human can push ALVINN's "run" switch and the vehicle will begin driving!  As ALVINN drives, it produces steering angles it learned from the human driver (who supervised the steering angle at each segment of the road).
-
-@teacher{
-If you want your students to see ALVINN in action, now is a good time to view @link{https://www.youtube.com/watch?v=ntIczNQKfjQ, "this brief two-minute video"}.
-}
-
-@slidebreak{Launch}
-
-@QandA{
-@Q{What information does ALVINN process before producing a steering angle?}
-@A{ALVINN instantaneously processes the image of the road in front of it, along with an obstacle distance, in order to produce a steering angle.}
-
-@Q{When humans make decisions about which way to steer, we are working with a lot of other information besides an image and a single distance sensor. What examples can you come up with?}
-
-@A{We can use maps to give us a sense of what the road might do before we can see it.}
-@A{If a road is curving, we can predict that it will continue to curve.}
-@A{We know that roads don't curve beyond a certain degree--and if they do, we can expect to see a warning sign ahead of time.}
-@A{We can look at the cars in front of us to better understand how we should steer.}
-@A{If we know that we're going to be taking a left turn, we might switch lanes and slow down ahead of time.}
-}
-
-@slidebreak{Launch}
-
-In discovering the details of ALVINN's @vocab{supervised learning}, you may have noticed three big events:
-
-- Demonstration of the learning process
-- Function abstraction -- the machine learning algorithm finds a function that generalizes (hopefully well!) to new, unseen data
-- Use the function! Apply it on new data.
-
-As you explore other examples of @vocab{supervised learning} in this curriculum, you will notice that -- regardless of the context -- all three phases occur. 
-
-=== Investigate
-@slidebreak{Investigate}
-
-Let's use the same kind of @vocab{supervised learning} algorithm we used to predict animals' adoption time -- and which ALVINN used to steer! -- to build a model that knows how to complete a driving simulator.
-
-@lesson-instruction{
-- Open @starter-file{self-driving}, and click "Run".
-- Use this file to complete @printable-exercise{self-driving-car.adoc}
-}
-
-@slidebreak{Investigate}
-
-Let's reflect on what we know about @vocab{supervised learning}, ALVINN, and its training.
-
-@lesson-instruction{
-With a partner, complete @printable-exercise{self-driving-car-reflection.adoc}.
-}
-
-@strategy{Computers aren't people!}{
-
-In conversations about AI, computers often get anthropomorphized (given human-like traits) when they are not in fact human. This anthropomorphizing of AI is a slippery slope that can block students from understanding the mechanics of machine learning!
-
-Avoid referring to ALVINN as "him" or "he".
-
-Many students will suspect that ALVINN has thoughts and feelings of its own, a misconception that is important to correct.
-
-A machine's "confidence" is very different from a human's confidence. When you discuss ALVINN's "confidence", highlight that this score is a numeric value, which is the result of *mathematical computation*. All machine learning relies on data, functions, and computation.
-}
-
-
-@teacher{Review students' responses, allowing time for discussion, questions, and disagreement.}
-
-@slidebreak{Investigate}
-
-While responding to the questions on the worksheet, you hopefully arrived at a few conclusions about ALVINN:
-
-- At the beginning of training, ALVINN's guesses about the best steering direction are not good.
-- As ALVINN receives more examples, it becomes better at predicting and can imitate the steering reactions of a human driver.
-- Training on one surface does not help ALVINN on any other surface! Failure to repeat the same training for a variety of road types (two-lane, four-lane, intersections, covered with leaves, covered with snow, etc.) would lead to bad outcomes.
-
-=== Synthesize
-@slidebreak{Synthesize}
-Regression is a form of @vocab{supervised learning} that trains models to predict _quantitative_ outcomes:
-
-- Number of weeks to adopt a pet, given the age and weight
-- Number of degrees to turn the wheel, given the speed, road curvature, etc.
-
-Each of these relies on a training dataset with a number of input columns and a target column. For each of the following examples, what do you think the input columns are?
-
-- The rate you pay for car insurance
-- The price of gas at the pump
-- The predicted temperature in tomorrow's weather report
-
-@teacher{Give students a chance to discuss as a class.}
-
-@slidebreak{Synthesize}
-
-@QandA{
-
-@Q{What is supervised machine learning, and how is ALVINN an example it?}
-@A{In supervised machine learning, the computer trains on example input-output pairs tagged by a human, and learns a function that maps from input to output. ALVINN is an example of supervised machine learning because a human provided the correct steering angles (_demonstration_), allowing ALVINN to produce a predictor function (_function abstraction_).}
-}
+The same three phases always apply: collect labeled data, train a function, apply it to new inputs.

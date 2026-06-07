@@ -4,22 +4,28 @@
 table.compare tr:last-child td { background: #eee !important; }
 </style>
 ++++
-You'll need @starter-file{ai-music} open on your computer.
+
+@scrub{
+@link-instructions{Open the @opt-starter-file{ai-music} on your computer and click "Run".}
+}
 
 == Exploring the Song Dataset
 
-@n This file contains two datasets. What are they named? @fitb{}{@ifsoln{`training` and `testing`}}
+@n Take a look at the columns listed on lines 8-19.
 
-@n Are there any columns that you have questions about? @fitb{}{}
+- Are there any columns that you and your classmates didn't think of? @fitb{}{}
+- Are there any columns you have questions about? @fitb{}{}
+- Are there any other columns you wish were included? @fitb{}{} 
 
-@n Which column will be our *target* column? @fitb{}{@ifsoln{genre}}
+@n This file contains two datasets. What are they named? @fitb{}{@ifsoln{`music-training` and `music-testing`}}
 
-@n There's a function defined here, which takes in a song and produces an image representing the genre. What is its name? @fitb{}{@ifsoln{genre-img}}
+@n This file defines a function `genre-img`. What does it do? @fitb{}{}
 
-@n Take a look at the `training` dataset, and write at least two things you *Notice*:
+@n Load the `music-training` dataset. Record at least two things you Notice. @fitb{}{}
 @blanklines{2}{}
 
-*Look at the distribution of genres across different columns, using `image-dot-plot`. For example: `image-dot-plot(training-table, "liveness", genre-img)`*
+@n Use `image-dot-plot` explore the distribution of genres across different columns. For example: +
+@indented{`image-dot-plot(training-table, "liveness", genre-img)`}
 
 @n Make an image dot plot for the other columns, looking for two columns where the genres are mostly clustered together within a particular interval. These are great columns to split on! Fill in the table below with the column, and the interval that you think would be good to split on for each column.
 

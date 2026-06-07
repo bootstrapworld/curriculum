@@ -1,11 +1,11 @@
 = There Was an Old Lady Who Swallowed a Fly
 ++++
 <style>
-	#body { counter: line-number 0; }
-	.paragraph { counter-increment: line-number; margin: 0.5ex 0 !important; }
-	.sectionbody > * { position: relative; }
-	.sectionbody p { margin-left: 2em !important; }
-	.sectionbody p:before {
+	.lyrics { counter: line-number 0; }
+	.lyrics .paragraph { counter-increment: line-number; margin: 0.5ex 0 !important; }
+	.lyrics .sectionbody > * { position: relative; }
+	.lyrics .sectionbody p { margin-left: 2em !important; }
+	.lyrics .sectionbody p:before {
 		color: gray;
 		display: inline-block;
 		content: counter(line-number) !important;
@@ -14,9 +14,16 @@
 		width: 100%;
 		border-bottom: 1px dashed #ddd;
 	}
-	.indentedpara p:before { left: -3em; width: calc(100% + 3em);}
+	.lyrics .indentedpara p:before { left: -3em; width: calc(100% + 3em);}
+	.lyrics p { font-size: 16px !important; }
+	.lyrics .indentedpara { margin-left: 4em; }
 </style>
 ++++
+
+[.no-flex-section]
+== Corpus
+[.lyrics]
+--
 There was an old lady who swallowed a fly,
 
 I don't know why she swallowed a fly – perhaps she'll die!
@@ -60,3 +67,34 @@ That wriggled and jiggled and tickled inside her,
 She swallowed the spider to catch the fly;}
 
 I don't know why she swallowed a fly – perhaps she'll die!
+--
+
+== Chunking the Title
+@n How many 1-, 2-, and 3-word chunks can you find in the first line of the song? Finish the list of chunks in each row.
+
+[.FillVerticalSpace, cols="^1a, 10a, ^1a". frame="none", options="header", stripes="none"]
+|===
+| Words
+| Chunks
+| Count
+
+| 1 word
+| "there", "was", "an", "old", "lady", "who", "swallowed", "a", "fly" ...
+| @ifsoln{9}
+
+| 2 words
+| "there was", "was an", "an old", "old lady" ...
+  @ifsoln{"lady who", "who swallowed", "swallowed a", "a fly"}
+| @ifsoln{8}
+
+| 3 words
+| "there was an", "was an old", "an old lady who" ...
+  @ifsoln{"Lady Who Swallowed", "Who Swallowed a", "Swallowed a Fly"}
+| @ifsoln{7}
+|===
+
+@n In this corpus (*the lyrics _and_ the title!*) How many times does the word "there" appear? @fitb{}{@ifsoln{5}}
+
+@n In this corpus, how many times was the word "there" followed by the word "was"? @fitb{}{@ifsoln{5}}
+
+@n If you picked any of the "there"s in the corpus, what is the probability that the next word would be "was"? @fitb{}{@ifsoln{100%}}
