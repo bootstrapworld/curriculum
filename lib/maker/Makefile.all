@@ -92,14 +92,7 @@ export NUMCORES := $(shell getconf _NPROCESSORS_ONLN)
 
 all: phases
 
-# `phases` runs the actual build (in _phases-impl) with its combined output
-# piped through bench-filter.sh, which echoes everything verbatim and appends
-# a per-step timing summary after the build finishes. `set -o pipefail` keeps
-# Make's exit code accurate when _phases-impl fails.
 phases:
-	@bash -c 'set -o pipefail; $(MAKE) --no-print-directory _phases-impl 2>&1 | $(MAKE_DIR)bench-filter.sh'
-
-_phases-impl:
 	@if test ! -d distribution; then mkdir -p distribution; touch $(SCRATCHFILE); fi
 	@mkdir -p distribution/$(NATLANG)/.cached
 	@mkdir -p distribution/$(NATLANG)/lib
