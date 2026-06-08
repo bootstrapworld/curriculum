@@ -445,12 +445,17 @@ div#body:not(.LessonPlan, .narrativepage) p {
   line-height:  1.3;
 }
 
+/* The acknowledgement section should never expand */
+.acknowledgmentsect { flex-grow: 0 !important; }
+
 /************************************************************************************
 * SIDEBAR STYLES
 *
 */
 
 #sidebar {
+  max-width: 325px;
+  font-family: "Rubik", sans-serif;
   > * { margin: 0px 10px !important; }
   label { display: inline; font-size: 0.8em; }
   select { border:  none; width: 100%; }
@@ -460,11 +465,11 @@ div#body:not(.LessonPlan, .narrativepage) p {
   table { background: none !important; border: 0 !important; width: auto; }
   table td, table tr { padding: 0 !important; background: none !important; border: 0 !important; }
   table .title { display: none; }
-  dl * { margin: 0; display: inline; font-size: smaller; }
-  dd { margin-left: 0 !important; }
+  dl dt, dl dd { display: inline; margin-inline-start: 0; }
+  dl dd p { display: inline; margin: 0; }
   dt { font-weight: bold; }
-  dd::after { content: '\A'; white-space: pre;}
-  dt::after { content: ' ·'; white-space: pre; font-size: 0.7em; }
+  dt::after { content: ' ·'; font-size: 0.7em; margin: 0 5px; }
+  dl dd::after { content: ""; display: block; margin-bottom: 0.6em; } /* gap between definitions */
   table dt { margin-top: 10px; }
   #sidebarlessons {
     ul {
@@ -474,15 +479,14 @@ div#body:not(.LessonPlan, .narrativepage) p {
       max-height: 200px;
       overflow:   scroll;
       padding:    10px !important;
-      font-size:  10pt !important;
+      font-size:  11pt !important;
     }
-    li:nth-child(odd) { background: @translucent-bg-color; }
+    li:nth-child(odd) { background: @translucent-bg-color2; }
   }
   #sidebarstandards {
     select { margin-top: 10px; }
     a { display: none; }
-    dl { line-height: 1; }
-    dt { margin-bottom: 5px; }
+    dl { line-height: 1.2; }
   }
 }
 
@@ -753,7 +757,7 @@ html div#body.workbookpage {
   max-width: unset;
 
   /* Force acknowledgment section to the bottom of every page */
-  .acknowledgment { position: absolute; top: 100%; }
+  .acknowledgment { position: absolute; top: calc(100% + 0.5in); opacity: 0.5; }
 
   #header > h1:first-child { text-align: center; margin-bottom: 0;}
   h1 { font-weight: bold; }
@@ -761,8 +765,8 @@ html div#body.workbookpage {
   h2 .editbox, h2 .editbox *, h2 .pyret { color: black; background: none; margin: 0 5px; }
 
   /* set page dimensions */
-  &:not(.landscape) { width: 7.5in !important; height: calc(9.8in + 1.5in) !important; }
-  &.landscape { width: 9.8in !important; height:  calc(7.5in + 1.5in) !important; page: landscape; } /* define 'landscape' page type */
+  &:not(.landscape) { width: 7.5in !important; height: 9.8in !important; }
+  &.landscape { width: 9.8in !important; height: 7.5in !important; page: landscape; } /* define 'landscape' page type */
 
   /* Make content of page as tall as possible */
   #content, #preamble_disabled, #preamble_disabled .sectionbody,
@@ -1400,9 +1404,16 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
     line-height:      2.5em;
   }
 
-  #savetodrive-div { display: none; height: 30px !important; }
-
-  div#body.workbookpage { margin-left: 3em; }
+  /* When viewing workbook pages on the web...
+   * zoom in
+   * abuse stacked box-shadows to create the page boundary and margin
+   */
+  div#body.workbookpage {
+    zoom:       1.25;
+    box-shadow: 0 0 0 0.5in #ffffff,                  /* print margin    */
+                0 0 0 calc(0.5in + 1px) lightgray,    /* 1px page border */
+                0 0 10px calc(0.5in + 2px) lightgray; /* tiny shadow     */
+  }
   /********************************************************************
    *  Collapsing Headers
    */
@@ -1491,7 +1502,7 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
   ::-webkit-scrollbar { display:  none; }
   a[href]::after { content: none !important; }
   #savetodrive-div, .copyright, #footer, #outOfDate, .web-page-only, .section-link,
-  .acknowledgmentsect, .sidebar, .CodeMirror div.CodeMirror-cursor, #MathJax_Message {
+  .acknowledgmentsect, #sidebar, .CodeMirror div.CodeMirror-cursor, #MathJax_Message {
     display: none !important; float: none;
   }
   div#body{ position: static; } /* page-break fails on absolute positioning */
@@ -1531,9 +1542,6 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
   }
 
   html div#body.workbookpage {
-    /* set page dimensions to ignore acknowledgement padding */
-    &:not(.landscape) { height: 9.8in !important; }
-    &.landscape       { height:  7.5in !important; page: landscape; }
 
     /* Use B&W colors for headers */
     #header> h1:first-child, .sect1 > h1:first-child {
