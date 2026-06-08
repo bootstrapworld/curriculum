@@ -1406,65 +1406,65 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
   /********************************************************************
    *  Collapsing Headers
    */
-   div#body.LessonPlan, div#body.TeacherResources {
-      /* add a bottom padding to prevent browser-scroll */
-      padding-bottom:  5in;
-      /* adjust colors */
-      h2 {
-        background-color: @translucent-bg-color;
+  div#body.LessonPlan, div#body.TeacherResources {
+    /* add a bottom padding to prevent browser-scroll */
+    padding-bottom:  5in;
+    /* adjust colors */
+    h2 {
+      background-color: @translucent-bg-color;
+      color: white;
+      font-weight: 600;
+      font-size: 1.75em;
+      cursor: pointer;
+      padding: 5px !important;
+      width: 100%;
+      border: none;
+      text-align: left;
+      outline: none;
+      /* add the plus/minus signs ("expand me" / "collapse me") for discoverability */
+      &::after {
+        content: '▼';
+        width: 16px;
+        font-size: 16px;
+        line-height: 30px;
         color: white;
-        font-weight: 600;
-        font-size: 1.75em;
-        cursor: pointer;
-        padding: 5px !important;
-        width: 100%;
-        border: none;
-        text-align: left;
-        outline: none;
-        /* add the plus/minus signs ("expand me" / "collapse me") for discoverability */
-        &::after {
-          content: '▼';
-          width: 16px;
-          font-size: 16px;
-          line-height: 30px;
-          color: white;
-          font-weight: bold;
-          float: left;
-          margin-right: 5px;
-        }
-        &.active::after { content: '▲'; }
-        &.active, &:hover { background-color: @translucent-bg-color2; }
+        font-weight: bold;
+        float: left;
+        margin-right: 5px;
       }
-      /* set collapsed size and transition rules */
-      .sect1:not(.acknowledgmentsect) .sectionbody {
-        padding: 10px 18px;
-        max-height: 100px;
-        overflow: hidden;
-        transition: max-height 0.2s ease-out;
-        position: relative;
-        /* Add a white fade to hint for discoverability */
-        &::after {
-          content  : "";
-          position : absolute;
-          z-index  : 1;
-          bottom   : 0;
-          left     : 0;
-          pointer-events   : none;
-          background-image : linear-gradient(to bottom,
-                            rgba(255,255,255, 0),
-                            rgba(255,255,255, 1) 90%);
-          width    : 100%;
-          height   : 10em;
-        }
+      &.active::after { content: '▲'; }
+      &.active, &:hover { background-color: @translucent-bg-color2; }
+    }
+    /* set collapsed size and transition rules */
+    .sect1:not(.acknowledgmentsect) .sectionbody {
+      padding: 10px 18px;
+      max-height: 100px;
+      overflow: hidden;
+      transition: max-height 0.2s ease-out;
+      position: relative;
+      /* Add a white fade to hint for discoverability */
+      &::after {
+        content  : "";
+        position : absolute;
+        z-index  : 1;
+        bottom   : 0;
+        left     : 0;
+        pointer-events   : none;
+        background-image : linear-gradient(to bottom,
+                          rgba(255,255,255, 0),
+                          rgba(255,255,255, 1) 90%);
+        width    : 100%;
+        height   : 10em;
       }
-      .sect1:not(.acknowledgmentsect) h2+.sectionbody:after { height: 4em; }
-      /* don't add the fade for summaries or active sections */
-      .lessonSummary .sectionbody { max-height: unset; }
-      .lessonSummary .sectionbody, h2.active+.sectionbody {
-        &::after { display: none; }
-      }
-      .sect1:not(.acknowledgmentsect) h2:not(.active)+.sectionbody h3 { display: none; }
-   }
+    }
+    .sect1:not(.acknowledgmentsect) h2+.sectionbody:after { height: 4em; }
+    /* don't add the fade for summaries or active sections */
+    .lessonSummary .sectionbody { max-height: unset; }
+    .lessonSummary .sectionbody, h2.active+.sectionbody {
+      &::after { display: none; }
+    }
+    .sect1:not(.acknowledgmentsect) h2:not(.active)+.sectionbody h3 { display: none; }
+  }
 }
 
 
