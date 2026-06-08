@@ -113,22 +113,22 @@ If you've ever played the game "I spy", you've already got some practice buildin
 @slidebreak{Investigate-RP}
 
 @lesson-instruction{
-@right{@image{images/tree-1.png}}
 We're going to play a version of "I Spy", called "I Spy - *Classify*!"...
 
 - Everyone will stand a their desks (or front of the room, etc)
-- I'm going to choose one student as the target, but keep their identity secret
-- One at a time, you'll ask me yes-or-no-questions to figure out the target
-- You can ask about _categories:_ For example, "are they wearing glasses?"
+- I'll choose one student as the target, but I won't tell anyone
+- One at a time, you'll ask me yes-or-no-questions to figure out who they are
+- You can ask about _categories:_ "are they wearing glasses?"
     - If I answer "yes", only students wearing glasses stay up, while the others return to their seats
     - If I answer "no", only students *not* wearing glasses stay
-- You can ask about _quantities:_ For example, "are they taller than 5'7"?
+- You can ask about _quantities:_ "are they taller than 5'7"?
     - If I answer "yes", only students taller than 5'7" stay up
     - If I answer "no", only students *not* taller than 5'7" stay up
-- I'll keep track of our progress on the board
 }
 
 @slidebreak{Investigate-RP}
+@right{@image{images/tree-1.png}}
+- While the classes tries to guess who the target is, I'll keep track of our progress on the board
 
 *I Spy*...a student in this class. Who am I thinking of? *Classify!*
 
@@ -198,21 +198,20 @@ If students start to complain that they're "stuck" with earlier questions, that'
 }
 
 ==== Decision Tree Terminology
-
+@slidebreak{InvestigateR}
 @right{@image{images/terminology-tree.png, 300}}
-
---
-- A @vocab{decision node} splits a dataset around the values in one of its columns. The attribute in the column serves as the "question" that is being asked.
+- A @vocab{decision node} splits a dataset around the values in one of its columns. This is the first "question".
    * The very top decision node is called the @vocab{root node}. It represents an entire dataset.
-- A @vocab{leaf node} is a node that contains the predicted outcome. These outcomes come from a designated column in the original dataset. Leaf nodes have no outgoing branches.
-- @vocab{Splitting} is the process of creating branches and additional nodes corresponding to subsets of a dataset based on values in one column. 
-  * (We're sticking to splits that only create two branch nodes, but some decisions trees use splits that create more than two.)
-  * (Computer scientists call the sequence of questions from the root node to an outcome a path.)
---
+- A @vocab{leaf node} contains the predicted outcome, and has no other branches. Outcomes are from a designated column in the dataset.
+- @vocab{Splitting} creates more branches and nodes, which represent subsets of a dataset based on a new “question” about a column.
+
+
+We're sticking to splits that only create two branch nodes, but some decisions trees use splits that create more. Computer scientists call the sequence of questions from the root node to an outcome a "path".
 
 @teacher{Discuss the decision tree you made during your "I Spy - Classify" game to help students identify the root node, decision nodes, leaf nodes, and paths on the tree so far.
 }
 
+@slidebreak{Investigate}
 @lesson-instruction{
 - We're going to play another round of "I Spy - Classify", but this time you're going to use a real dataset of animals. 
 - Before we begin take a moment to look at the dataset.
@@ -239,14 +238,12 @@ If students start to complain that they're "stuck" with earlier questions, that'
 |===
 
 @QandA{
-@Q{What do you Notice?}
+@Q{What do you *Notice* about the animals in this dataset?}
 @A{Answers will vary:
   * Shadestar is a cat who swims! 
   * Charlotte is a male tarantula! 
   * Snails are very light!
   }
-
-@Q{What do you Wonder?}
 
 @Q{What types of data do you see in this table?}
 @A{Strings, Numbers and Booleans}
@@ -294,6 +291,9 @@ Creating a decision tree is a form of @vocab{supervised learning}, because the t
 Encourage students to come up with both categorical and quantitative questions, and keep asking them to explain why they chose the split they did. As before, keep drawing the decision tree as they go.
 }
 
+=== Synthesize
+@slidebreak{Synthesize}
+
 @QandA{
 @Q{How was generating questions from a dataset similar to the other "I Spy - Classify" game we played?}
 @A{Sample responses might include:
@@ -306,13 +306,13 @@ Encourage students to come up with both categorical and quantitative questions, 
   }
 }
 
-=== Synthesize
 @slidebreak{Synthesize}
 
 You've learned that some @vocab{decision trees} are better than others. For example, the _frequency of each category_ affects the "best node" ("if everyone has glasses...").
 
 When choosing a split for our root node, our goal is to ask a question that sorts the data into the _neatest, most organized piles that we can_. For example, it would be ideal to get all the cats on one side, and all the dogs on the other. We can't always get a perfect split like this, but we want to get as close as possible.
 
+@slidebreak{Synthesize}
 @QandA{
 @Q{How do you know if a question is a good one to start with or not?}
 @A{Good questions help us eliminate many of the remaining categories whether the answer is yes _or_ no}
@@ -340,14 +340,13 @@ Let's learn how to write a @vocab{classifier function} to predict species in Pyr
 Remember:
 
 - A function consumes some input and produces some output.
-- Each input will only ever have one output. 
-   * If our classifier is good, it will _always_ predict that `firepaw` is a cat.
-   * If it accidentally classifies him as a snail, it will _always_ predict that he's a snail.
+- Because of the vertical line test, we know that our classifier will classify the same animal the same way, every time we ask
+   * If it predicts that `firepaw` is a cat, it will _always_ predict that
+   * If it predicts that `firepaw` is a snail, it will _always_ predict that
 
 We'll need to choose a question. Then we'll need to write a rule. 
 
-@slidebreak{Launch}
-
+@slidebreak{LaunchR}
 @QandA{
 @right{@image{images/tail-classifier-tree-1.png}}
 Suppose our tree just has one level: we ask if it has a tail, and then we take our best guess. +
@@ -370,7 +369,7 @@ It reduces complexity and discards variance in the data, by looking for "general
 - The "yes" branch has more cats than anything else (5 out of 11). Even though cats are the most likely species for animals with a tail, our classifier will only guess right about 45% of the time!
 - The "no" branch is evenly split between snails and tarantulas. No matter which species our rule predicts, our classifier will only be right 50% of the time!
 
-@slidebreak{Launch}
+@slidebreak{Launch-DN}
 
 @lesson-instruction{
 - Let's take a look at how we would define our `tail-classifier` function in Pyret...
@@ -401,6 +400,8 @@ end
 ```
 |===
 
+@ifslide{What did you notice?}
+
 @teacher{Give students ample time to discuss and share back!}
 
 @slidebreak{Investigate}
@@ -412,13 +413,17 @@ You've probably noticed that:
 
 @slidebreak{Launch}
 @QandA{
-@Q{What does this part of the function definition do `if r["tail"] == true: "cat"`?}
+@Q{What does this part of the function definition do? +
+@hspace{3em}`if r["tail"] == true: "cat"`
+}
 @A{It checks to see whether the value in the `"tail"` column is `true`, and, if it is, it classifies the animal as a `"cat"`.}
 
-@Q{What does this part of the function definition do `else: "snail"`?}
+@Q{What does this part of the function definition do? +
+@hspace{3em}`else: "snail"`
+}
 @A{It checks to see whether the value in the `"tail"` column is `true`, and, if it says anything other than `true`, it classifies the animal as a `"snail"`.}
 
-@Q{What does `tail-classifier(firepaw)` do}
+@Q{What does `tail-classifier(firepaw)` do?}
 @A{Tells us how the `tail-classifier` will classify our `firepaw` row}
 @A{Returns "cat"}
 }
@@ -453,7 +458,8 @@ You've just encountered two new Pyret functions that will help us to make sense 
 @QandA{
 Use one of our new tools to answer the following questions about our `tail-classifier` tree. 
 
-@hspace{1em}`image-dot-plot(training, "tail", animal-img)` @hspace{3em} `classify(training, "species", tail-classifier)`  
+@hspace{1em}`image-dot-plot(training, "tail", animal-img)` +
+@hspace{1em}`classify(training, "species", tail-classifier)`
 
 @Q{For how many *tail-having* animals in the training dataset will our 1-level tree do the *right thing*?}
 @A{5 - all cats}
@@ -552,7 +558,6 @@ This is the _exact same_ problem we solved for the root node: our goal is to ask
 
 @QandA{
 @Q{Based on a dataset like this, could you write a classifier that predicts which customers are most likely to buy a game, and mail them a targeted advertisement?}
-@A{}
 }
 
 @slidebreak{Synthesize}
@@ -571,5 +576,4 @@ This is the _exact same_ problem we solved for the root node: our goal is to ask
 
 @QandA{
 @Q{Based on a dataset like this, could you write a classifier that predicts whether an email is spam or not?}
-@A{}
 }

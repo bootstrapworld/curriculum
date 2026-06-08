@@ -58,17 +58,15 @@ Take a look at this picture of a cylinder floating in a box.
 }
 
 @slidebreak{LaunchR}
---
 @right{@image{images/steering-v-curve-lr.png, 300}}
 
-In the last lesson, we made four scatter plots — one for each candidate explanatory variable. Each showed a 2D relationship between one variable and `steering-angle`.
+In @lesson-link{regression-models-simple}, we made four scatter plots — one for each candidate explanatory variable. Each showed a 2D relationship between one variable and `steering-angle`.
 
 But `curve`, `skew`, `offset`, and `speed` are all being measured _at the same time_, for the same data point. Each scatter plot we made was showing just one "shadow" of the data — a 2D projection of information that actually exists in more dimensions.
 @QandA{
 @Q{If `curve` and `skew` are both inputs, and `steering-angle` is the output, how many dimensions would we need to represent all three at once?}
 @A{Three! One axis for `curve`, one for `skew`, one for `steering-angle`.}
 }
---
 
 @teacher{Give students a chance to discuss and brainstorm before moving on.}
 
@@ -77,7 +75,11 @@ But `curve`, `skew`, `offset`, and `speed` are all being measured _at the same t
 
 If we want to consider all three, then we need to consider each snapshot in the training corpus as a 3d point, with values for `curve`, `skew`, _and_ `steering-angle`.
 
-To make predictions in three dimensions, *we need to do regression in _three_ dimensions.* Instead of a line of best fit, we're looking for a *plane of best fit*. We want Pyret to learn a function with the best possible values for @math{m_{curve}}, @math{m_{skew}}, and @math{b}:
+To make _predictions_ in three dimensions, we need to do _regression_ in three dimensions. Instead of a line of best fit, we're looking for a *plane of best fit*.
+
+@slidebreak{LaunchR}
+@ifslide{@right{@image{images/plane-of-best-fit.png, 300}}}
+We want Pyret to learn a function with the best possible values for @math{m_{curve}}, @math{m_{skew}}, and @math{b}:
 
 [.big-codeblock]
 @big{
@@ -101,11 +103,9 @@ To make predictions in three dimensions, *we need to do regression in _three_ di
 
 @teacher{Draw connections to the cylinder-and-shadows image: each 2D scatter plot from the last lesson is a literal "shadow" of the 3D data, cast by collapsing one dimension flat.}
 
-@slidebreak{InvestigateR}
-@ifslide{@right{@image{images/plane-of-best-fit.png, 300}}}
-
 === Synthesize
-@slidebreak{Synthesize}
+@slidebreak{SynthesizeR}
+@ifslide{@right{@image{images/plane-of-best-fit.png, 300}}}
 
 @QandA{
 @Q{Why does our multiple-regression function have *two* slopes?}
@@ -152,9 +152,10 @@ Adding a second variable to the list is all it takes to go from a line to a plan
 
 `reg-model-code(training-data, [list: "curve", "skew"], "steering-angle")`
 
+@slidebreak{Launch}
 Pyret also has a tool to measure the fit of any row-consuming regression model:
 
-@show{(contract "reg-model-S" '((table-name Table) (explanatory List<String>) (response String) (model "Row->Number")) "Number")}
+@show{(contract "lr-plot" '((t Table) (labels Str) (xs Str) (ys Str)) "Image"
 "produces the S-value (overall error) of a multiple-regression model, fit to the specific columns"
 )}
 
@@ -187,8 +188,8 @@ Pyret also has a tool to measure the fit of any row-consuming regression model:
 
 
 @slidebreak{InvestigateR}
-@ifslide{@right{@image{images/self-driving-car.jpg, 300}}}
 @QandA{
+@ifslide{@right{@image{images/self-driving-car.jpg, 300}}}
 @Q{If you had to drop one of the two variables, which would you drop and why?}
 @A{`skew` — it has the smaller coefficient and removing it would cost less accuracy than removing `curve`.}
 

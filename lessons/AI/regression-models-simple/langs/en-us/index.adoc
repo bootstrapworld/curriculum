@@ -34,13 +34,11 @@ Students are introduced to ALVINN, the world's first self-driving car, as a comp
 
 === Launch
 @slidebreak{LaunchR}
---
 @right{@image{images/self-driving-car.jpg, 300}}
 
-Self-driving cars feel like the future has really arrived! Many people think they are one of the strongest examples of "AI" really _thinking_, instead of just "following an algorithm". After all, how can a computer possibly make decisions about how to drive???
+Self-driving cars feel like the future has really arrived! Many people think they are one of the strongest examples of "AI" really thinking, instead of just "following an algorithm". After all, _how can a computer possibly make decisions about how to drive?_
 
-What do _you_ think?
---
+What do you think?
 
 @teacher{Give students time to discuss. Remind them about the AI Effect, and how people also felt when the first spell-checkers were developed!}
 
@@ -54,30 +52,24 @@ Self-driving cars work via a lot of inputs (sensors, cameras, etc.) and a lot of
 - Obstacles and traffic lights that could be in the way
 - And lots more!
 
-We're going to explore how @vocab{supervised learning} -- regression, specifically -- allows cars to "know where they're going".
+We're going to explore how one form of @vocab{supervised learning} -- regression, specifically -- allows cars to "know where they're going".
 
 @slidebreak{LaunchR}
---
 @right{@image{images/navlab.png, 300}}
-Meet ALVINN!
+*Meet ALVINN!*
 
 ALVINN (short for Autonomous Land Vehicle in a Neural Network) was developed in 1989 by a team of computer scientists at Carnegie Mellon University. ALVINN is the forebear of today's self-driving cars: a retrofitted Army ambulance equipped with sensors, computers, and small motors to turn the wheel, press the pedals, etc. ALVINN had about one-tenth of the processing power of an Apple Watch -- but was able to safely drive on a very limited course at 70 miles per hour by the early 1990s! How did it happen?
---
 
 @slidebreak{Launch}
 
-As with all machine learning, ALVINN required @vocab{training}.
-
-The goal of that training? Learning how to steer.
-
-Here's what ALVINN's training entailed:
+As with all machine learning, ALVINN required @vocab{training}. The goal of that training? _Learning how to steer._ Here's what ALVINN's training entailed:
 
 (1) A person drove the vehicle while a front-facing video camera recorded the road.
 
-- In the context of @vocab{supervised learning}, the human driver is often referred to as the _supervisor_.
+- In @vocab{supervised learning}, the human driver is often called the _supervisor_
 - The supervisor demonstrates the correct behavior (e.g. which direction the steering wheel should be turned)
 
-(2) 10 times each second, ALVINN recorded...
+(2) Ten times each second, ALVINN recorded...
 
 - a digitized image of the road ahead, along with a distance to the nearest obstacle
 - the steering direction chosen by the driver at that moment
@@ -212,8 +204,9 @@ In the @lesson-link{fitting-models} lesson, we learned that a relationship betwe
 - The @vocab{explanatory variable} (x-axis) is the input we're predicting _from_.
 - The @vocab{response variable} (y-axis) is what we're trying to predict.
 
-In this case, our response variable is `steering-angle`. The training data has several columns that could serve as an explanatory variable:
+In this case, our response variable is `steering-angle`. The training data has several columns that could serve as an explanatory variable.
 
+@slidebreak{Launch}
 [cols="^1a,^3a", options="header", stripes="none"]
 |===
 | Column       | What it measures
@@ -252,7 +245,7 @@ Let's use some Data Science to find some evidence about what really _is_ the bes
 Circulate and encourage students to read the scatter plots critically. Push them to notice whether the relationship looks linear, how much scatter there is, and whether there are obvious outliers.
 }
 
-@slidebreak{InvestigateR}
+@slidebreak{Investigate}
 
 @QandA{
 @Q{Which variable appeared to show the *strongest* relationship with `steering-angle`?}
@@ -303,7 +296,7 @@ Data scientists use a method called @vocab{linear regression} to find the straig
 
 Pyret's `lr-plot` function computes and visualizes the @vocab{line of best fit}. Its contract is the same as `scatter-plot`:
 
-@show{(contract "lr-plot" '((table-name Table) (labels String) (xs String) (ys String)) "Image")}
+@show{(contract "lr-plot" '((t Table) (labels Str) (xs Str) (ys Str)) "Image")}
 
 @slidebreak{Launch-DN}
 @lesson-instruction{
@@ -358,11 +351,13 @@ Notice that `drive` takes a *Row-consuming* function — but `curve-predictor` c
 @A{We need a new Pyret function that generates Row-consuming code from our training data.}
 }
 
+@teacher{This is a _great_ challenge if you want your students to flex their programming muscles!}
+
 @slidebreak{Investigate}
 
-Pyret has exactly the right tool:
+We could write it by hand, but Pyret has exactly the right tool:
 
-@show{(contract "reg-model-code" '((table-name Table) (explanatory List<String>) (response String)) "Code"
+@show{(contract "reg-model-code" '((t Table) (inputs List<Str>) (prediction Str)) "Code"
 "produces code that defines a trained, row-consuming model (copy/paste into the Definitions Area!)")}
 
 For example: `reg-model-code(training-data, [list: "curve"], "steering-angle")`
@@ -377,7 +372,7 @@ For example: `reg-model-code(training-data, [list: "curve"], "steering-angle")`
 Students will find that `curve-predictor` drives much better than the others. Allow time for them to try all four and compare results before debriefing.
 }
 
-@slidebreak{InvestigateR}
+@slidebreak{Investigate}
 
 @QandA{
 @Q{Which predictor drove the best? Did that match your predictions from the scatter plots?}
@@ -411,7 +406,7 @@ Congratulations — you have just *trained a machine learning model!*
 @A{The model was never trained on those conditions. It will predict as if conditions are normal — which could be very wrong.}
 
 @Q{When an AI system confidently produces a wrong answer because the input is outside its training data, that's sometimes called a _hallucination_. How does what you just built connect to that idea?}
-@A{Our predictor will confidently output a steering angle for any input — even situations it's never seen. It doesn't know what it doesn't know.}
+@A{Our predictor will confidently output a steering angle for ANY input — even situations it's never seen. It doesn't know what it doesn't know.}
 }
 
 @slidebreak{Synthesize}

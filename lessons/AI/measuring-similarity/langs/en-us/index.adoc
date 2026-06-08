@@ -47,12 +47,12 @@ Students explore ways in which attributes of images can be computed, using vario
 
 @link{https://images.google.com/, In Google Image Search}, you can drag a picture into the search box and have Google find other, _similar_ images. Image search is basically a *recommendation system*, where the user uploads an image they like and Google produces a list of recommended matches.
 
-When we ask Google to find images similar to the one we dragged, it comes back with a lot of similar images! But the computer doesn't have eyes, and it doesn't have the human experience that informs how an image makes us feel.
+When we ask Google to find images similar to the one we dragged, it comes back with a lot of similar images!
 
 @teacher{Give students a demo, using an image of your choice!}
 
-@slidebreak{Launch}
-So how does Google Images even know what a "similar image" _means_?
+@slidebreak{LaunchR}
+But the computer doesn't have eyes, and it doesn't have the human experience that informs how an image makes us feel. So how does Google Images even know what a "similar image" _means_?
 
 Let's start with how WE as humans use our eyes to notice properties of images.
 
@@ -61,12 +61,17 @@ Let's start with how WE as humans use our eyes to notice properties of images.
 - Complete the first section on @printable-exercise{human-perception.adoc}.
 }
 
-@slidebreak{Launch}
+@slidebreak{LaunchR}
 @right{@image{images/computer-vision.jpg, 400}}
-Modern ML models are capable of interpreting elements of an image ("person", "car", etc.). This belong to a class of Machine Learning algorithms called "Computer Vision", which relies heavily on more advanced -- and computationally intensive -- concepts that we won't cover here.
+Some ML models are capable of recognizing parts of an image ("person", "car", etc.). This belong to a class of ML algorithms called "Computer Vision", which relies heavily on more advanced -- and computationally intensive -- concepts that we won't cover here.
 
 @lesson-instruction{
 - For now, we're going to use our human brains to see these elements in our images!
+}
+
+
+@slidebreak{Launch}
+@lesson-instruction{
 - On lines 28-39 of the *Definitions Area*, you'll see that the mountain images are used to define a _table_ called `images`.
 - There are columns for the identifier (`ID`), the image document (`DOC`), whether the image is `LIKED` or `DISLIKED`, and also for any descriptive `TAGS` in the image.
 - Complete the last section on @printable-exercise{human-perception.adoc}.
@@ -265,13 +270,15 @@ Complete the first section on @printable-exercise{plotting-images.adoc}
 
 The big breakthrough here is recognizing that these columns each represents a _number line_, and every image falls _somewhere on that line_. This allows us to imagine our images existing as points in space, and opens up new ways to measure similarity by thinking about distance between those points.
 
-The worksheet had you use the `"green"` column to define a number line, creating a 1-dimensional "Green Space" where every image was plotted according to how many green-dominant pixels it had. Images with similar numbers of green pixels will be close to each other in this space, and Images with wildly different numbers of green pixel will be far away from each other. *The distance is the difference!*
+@slidebreak{Launch}
+@ifslide{@lesson-point{We can think of our images as _points in space_}}
+The worksheet had you use the `"green"` column to define a number line, creating a 1-dimensional "Green Space" where every image was plotted according to how many green-dominant pixels it had. Images with similar numbers of green pixels will be close to each other in this space, and Images with wildly different numbers of green pixel will be far away from each other. *The distance __is__ the difference!*
 
 
 @slidebreak{Launch}
 Pyret has a function for computing the `distance-similarity`. Just like `simple-similarity`, it compares every row in the table to a Row with a given ID.
 
-@hspace{1em}@show{(contract "distance-similarity" '("Table" "String" "List<String>") "Table")}
+@show{(contract "distance-similarity" '("Table" "Str" "List<String>") "Table")}
 
 This is definitely a big improvement! By plotting the images in "Green Space", we can clearly see that one grassy image is the _most similar_ to the other one.
 
@@ -287,10 +294,10 @@ Complete the second section on @printable-exercise{plotting-images.adoc}
 By choosing _two_ columns from our dataset and using them as axes, you've defined a 2-dimensional "Blue-Green Space"! Each of the images from our corpus now exists as a point in that space. "Blue-Green Space" is decent for finding our grassy images, snowy images _and_ our red images because each group is already clustered together, away from the rest. But images with the sun don't fare quite as well...
 
 @QandA{
-@Q{Why did the distance measure work in two dimensions?}
+@Q{How did the distance measure work in 2 dimensions?}
 @A{Because you can still calculate the distance in 2 dimensions, using the distance formula}
 
-@Q{Could it work in _three_ dimensions? Why or why not?}
+@Q{Could it work in _**3**_ dimensions? Why or why not?}
 }
 
 @lesson-instruction{
@@ -321,6 +328,7 @@ Our images are described by 3 different colors (Red, Blue, and Green), so our "C
 
 The distance formula works in 3 dimensions too! In fact, it works in _any number of dimensions_ we want -- we just can't see more than 3 with our eyes. But *the math holds true*, and we can use `distance-similarity` with any number of attributes we want.
 
+@slidebreak{Investigate}
 @lesson-instruction{
 - Try `distance-similarity(decorated-bag, "3", [list: "red", "green", "blue"])`, and see how well this works at finding the similarity between images with *grass*.
 - Try it again with ID `"5"`, to see how well it works at finding the similarity between images with *snow*.
@@ -333,9 +341,8 @@ The distance formula works in 3 dimensions too! In fact, it works in _any number
 
 Overall, `distance-similarity` is a huge upgrade compared to `simple-similarity`. But it suffers from two major problems:
 
-- It focuses on _count_, rather than _proportion_: our small red square and big red square are obviously similar, but distance only counts the number of red pixels. Our larger mountain images have more red pixels than the tiny square, even if only a small percentage of the overall image is red!
--
-- It ignores _orientation_: As humans, we know that two images that are "mostly red" are a lot more similar that two images that are different colors! But the distance formula doesn't care if two images are dominated by the same color or not -- when calculating the distance _between_ the points it doesn't consider _where those points are on the graph._
+- It focuses on _count_, rather than _proportion_: For example, a giant mountain photo has far more red pixels than a tiny red square—and thus appears less 'similar' by this metric—even if red makes up only a tiny fraction of the mountain image.
+- It ignores _orientation_: Humans see two "mostly red" images as similar, but the distance formula doesn't. It only calculates the space between points, ignoring where they _actually lie on the graph_.
 
 === Synthesize
 @slidebreak{Synthesize}
@@ -357,8 +364,9 @@ Let's try another form of similarity, which relies on the idea that "red-dominan
 @slidebreak{LaunchR}
 @right{@image{images/3-d-comparison-w-lines.png, 300}}
 
-We can draw lines (called "rays") from the origin to any of our image-points in space. Instead of computing the distance between these points, we can compute the _angle between these lines_. Two points that are identical will have an angle of *zero*, meaning "the greatest possible similarity". Two points that fall on totally different axes (all-blue v. all-red, for example) will have an angle of *ninety*, meaning "the least possible similarity."
+We can draw lines (called "rays") from the origin to any of our image-points in space. Instead of computing the distance between these points, we can compute the _angle between these lines_. Two points that are identical will have an angle of *0°*, meaning "the greatest possible similarity". Two points that fall on totally different axes (all-blue v. all-red, for example) will have an angle of *90°*, meaning "the least possible similarity."
 
+@slidebreak{Launch}
 This solves both of the problems with `distance-similarity`:
 
 - Count v. Proportion: The angle between both of our red squares will be zero, since they both fall exactly on the `red` axis. This correctly identifies that our two red squares are similar.
@@ -381,8 +389,7 @@ This solves both of the problems with `distance-similarity`:
 - Complete @printable-exercise{angle-similarity.adoc}
 }
 
-@slidebreak{InvestigateR}
-@ifslide{@right{@image{images/3-d-comparison-w-lines.png, 300}}}
+@slidebreak{Investigate}
 Of course, Pyret has a function for angle similarity, too!
 
 @hspace{1em}@show{(contract "angle-similarity" '("Table" "String" "List<String>") "Table")}

@@ -49,7 +49,7 @@ Now that they know the algorithm, students explore Pyret's ability to build deci
 
 === Launch
 @slidebreak{Launch}
-By now, you know:
+Let's review what we know about classifiers:
 
 - There is a simple algorithm we can use to compute an _optimal tree_ for any dataset .
 - @vocab{Decision trees} are really just functions called @vocab{classifiers}: they take an input and produce a prediction as their output.
@@ -58,6 +58,7 @@ By now, you know:
 Of course, computing a decision tree by hand takes a long time, especially if you're dealing with tens of thousands of rows and hundreds of columns! 
 Fortunately, computers are really, _really_ good at following algorithms.
 
+@slidebreak{Launch}
 One example of an early application for this kind of automation is used by the United States Postal Service to read handwritten addresses on envelopes.  Their address interpretation system was trained on the MNIST database (Modified National Institute of Standards and Technology database), which includes thousands of labelled images of handwritten digits.
 
 === Investigate
@@ -130,13 +131,14 @@ As is common for quantitative columns, there's more variability in `pounds` than
 
 @slidebreak{Investigate}
 
-When given another dataset to classify, `tree-any4` is outscoring `tree-quant6`!
+When given another dataset to classify, `tree-any4` is out-scoring `tree-quant6`!
 
 @QandA{
 @Q{Why did `tree-quant6` do so poorly?}
 @A{Let students share their theories}
 }
 
+@slidebreak{Investigate}
 [cols="^1a, ^1a", frame="none", options="header"]
 |===
 | Training Dataset
@@ -146,9 +148,7 @@ When given another dataset to classify, `tree-any4` is outscoring `tree-quant6`!
 | @image{images/dot-plot-pounds-testing.png}
 |===
 
-This is a classic example of what ML engineers call @vocab{over-fitting}. The more dependent a classifier is on a specific attribute, the more sensitive it is to variations in that attribute between populations. In this case, `tree-quant6` was _totally dependent_ on `pounds`, whose distribution is very different in the `testing` dataset.
-
-This would be like studying for a test by memorizing the answers to a previous test. You've learned how to ace _that specific test_, but not enough to actually do well on a different one.
+This is a classic example of what ML engineers call @vocab{over-fitting}. The more a classifier depends on an attribute, the more sensitive it is to variations in that attribute between populations. In this case, `tree-quant6` was _totally dependent_ on `pounds`, whose distribution is very different in the `testing` dataset.
 
 @slidebreak{Investigate}
 @ifslide{
@@ -161,7 +161,9 @@ This would be like studying for a test by memorizing the answers to a previous t
 | @image{images/dot-plot-pounds-testing.png}
 |===
 }
+This would be like studying for a test by memorizing the answers to a previous test. You've learned how to ace _that specific test_, but not enough to actually do well on a different one.
 
+@slidebreak{Investigate}
 In Machine Learning, over-fitting happens when our decision tree tries so hard to find a pattern in a specific set of data that it begins to "memorize" the details and random noise instead of learning the actual rule. That's exactly what happened with the `pounds` column here.
 
 The other columns didn't vary as much at all! Dogs and cats are all `mammals` no matter what. Most dogs like to `swim`. And most dogs, cats, and lizards all have a `tail`. These attributes are more stable across samples, whereas `pounds` can vary widely.
@@ -182,7 +184,7 @@ The other columns didn't vary as much at all! Dogs and cats are all `mammals` no
 @A{Yes. A decision tree may not be deep enough to correctly classify every category - and in some cases, there may not *be* a way to correctly classify every category!}
 }
 
-== Is the Classifier Good?
+== Evaluating a Classifier
 @objective{}
 
 === Overview
@@ -212,9 +214,9 @@ It's not enough to know that a classifier messed up 6 times! Data Scientists and
 
 The reports Data Scientists use to understand how "good" a classifier is are called @vocab{confusion matrices}. A @vocab{confusion matrix} typically shows _ratios:_ 
 
-- 4-out-of-5 cats becomes 80% or 0.8
-- 0-out-of-4 dogs becomes 0% or 0
-- 2-out-of-2 lizards becomes 100% or 1 
+- 0-out-of-4 dogs becomes 0% (0 in decimal form)
+- 2-out-of-2 lizards becomes 100% or (1)
+- 4-out-of-5 cats becomes 80% (0.8)
 
 ...and so on.
 
@@ -228,10 +230,10 @@ The reports Data Scientists use to understand how "good" a classifier is are cal
 @center{@image{images/swims-confusion.png,600}}
 
 @QandA{
-@Q{Which species is the `swims-classifier` most accurate at predicting?}
+@Q{Which species did `swims-classifier` predict _most_ accurately?}
 @A{dogs}
 
-@Q{Which species is the `swims-classifier` least accurate at predicting?}
+@Q{Which species did `swims-classifier` predict _least_ accurately?}
 @A{snails, lizards and tarantulas}
 
 @Q{What else can we learn from the confusion matrix?}
@@ -261,7 +263,11 @@ fun swims-classifier(r):
   end
 end
 ```
+}
 
+@slidebreak{Investigate}
+
+@lesson-instruction{
 - Test out the confusion matrix for our `swims-classifier` using the following code:
 
 @indented{`confusion-matrix(training, "species", swims-classifier)`}
@@ -272,13 +278,13 @@ end
 @slidebreak{Investigate}
 
 @QandA{
-@Q{How did the `swims-classifier` performance with the `testing` table compare to its performance with the `training` table.}
+@Q{How did the `swims-classifier` performance with the `testing` table compare to its performance with the `training` table?}
 @A{It did impressively well, but misclassified all of the rabbits as dogs.}
 @A{We wouldn't expect it to correctly classify the species of an animal that it wasn't trained on.}
 }
 
 @lesson-instruction{
-Make a confusion matrix for our original `tail-classifier` and be prepared to share what you learn from it.
+- Make a confusion matrix for our original `tail-classifier` and be prepared to share what you learn from it.
 }
 
 @slidebreak{Investigate}

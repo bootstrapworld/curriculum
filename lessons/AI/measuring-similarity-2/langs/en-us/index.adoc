@@ -120,9 +120,9 @@ Remember, our system isn't actually _seeing_ the snow on those mountains. And ev
 @slidebreak{Launch}
 Machine Learning engineers at Netflix, Spotify, and Google have confronted these same problems:
 
-(1) Computers don't know that "Kung-Fu Panda" and "The Minecraft Movie" both star Jack Black
-(2) Computers don't know that you like "Single Ladies", but not "Lemonade"
-(3) Computers can tell us that two jazz songs are similar, but can't just start a "jazz" station
+(1) Computers don't know that "Kung-Fu Panda" and "The Minecraft Movie" both star Jack Black +
+(2) Computers don't know that you like "Single Ladies", but not "Lemonade" +
+(3) Computers can tell us that two jazz songs are similar, but can't just start a "jazz" station +
 (4) _In our example_, computers know that our snowy mountain pictures are similar, but has no idea that they both have snow in them.
 
 So...what if *we humans* started telling these model about Jack Black, what songs they like, which songs are jazz and which images have snow?
@@ -205,7 +205,7 @@ If every image in our corpus is a point in space, then a middle ground for the s
 === Investigate
 @slidebreak{InvestigateR}
 @right{@image{images/centroid.png, 300}}
-For any given set of points in space, the "middle" point we are trying to find is called the @vocab{Centroid}. Computing the Centroid from a list of 1-dimensional points is just like computing a measure of center in math class you can take the @vocab{mean} (average) or the @vocab{median}, and you're done! Median is a helpful measure if you have a few extreme outliers that don't really represent that bulk of the data.
+For any set of points, the "middle" point is the @vocab{Centroid}. For 1D points, you can simply find the @vocab{mean} (average) or the @vocab{median}. The median is especially useful if your data includes extreme outliers.
 
 @QandA{
 @Q{Should we use mean or median when computing the centroid for snowy images in our corpus? Why or why not?}
@@ -247,6 +247,7 @@ Building @vocab{centroids} is powerful, because now we can add human-labeled inf
 - We can find a centroid for all the images labeled with "sun", and use that to find __un__-labeled images that are close to "sun-ness".
 - We can find a centroid for all the _liked_ or _disliked_ images, and then recommend __un__-labeled images close to "liked-ness" and far from "disliked-ness"
 
+@slidebreak{Investigate}
 In each case, the steps are the same: (1) find all the labeled documents (liked, disliked, tagged, etc), (2) build a centroid, (3) find un-labeled documents that are similar to the centroid using the relevant columns.
 
 @lesson-instruction{
@@ -259,7 +260,9 @@ Now a recommendation system is just:
 
 - Calculate the centroids for liked and disliked documents
 - Calculate the cosine similarities between every document and both centroids
-- Recommendation strength is @math{\text{similarity-to-liked} - \test{similarity-to-disliked}}!
+- Recommendation strength is a simple equation:
+
+@indented{@math{\text{similarity-to-liked} - \text{similarity-to-disliked}}!}
 
 We've created a helper function that does exactly that, given a table and a list of columns:
 
@@ -299,6 +302,8 @@ You may recall the steps of @vocab{supervised learning} from a @lesson-link{regr
 - The machine learning algorithm finds a *function* that generalizes (hopefully well!) from that data to new, unseen data
 - The function is applied to new data.
 
+@slidebreak{InvestigateR}
+@right{@image{images/navlab.png}}
 ALVINN was given a table of inputs (images and depth maps), each row tagged with how a human turned the steering wheel. Then it found a function that would predict the steering wheel angle from new inputs, and used the function by applying it to new roads.
 
 @QandA{
@@ -341,19 +346,20 @@ ALVINN was given a table of inputs (images and depth maps), each row tagged with
 
 
 @slidebreak{SynthesizeR}
-@right{@image{images/CAPTCHA.png}}
-
 Supervised learning is a large part of what makes Machine Learning models feel like they "understand" humans. When we type in a sentence on Google Images, it feels like somehow the search engine _understood_ what we wanted! But in reality, it's another Data Driven Algorithm cranking through oceans of tagged and un-tagged data.
 
 But this comes at a cost: *someone has to tag millions of images!*
 
+@slidebreak{SynthesizeR}
+@right{@image{images/CAPTCHA.png}}
 In some cases that's US, clicking on images of buses in order to prove we're human. Those images are real images from a database where the similarity wasn't strong enough to be confident about whether they are or aren't a bus. By asking us to tag them, we are helping to train algorithm.
 
+@slidebreak{Synthesize}
 But in other cases it's paid contractors, often in developing countries where tech companies can pay them a few dollars (or pennies!) per day to stare at tens of thousands of images and tag them.
 
-@slidebreak{Synthesize}
 Similarity systems are also used to help screen out violent and offensive images, by comparing them to a corpus of images tagged as violent and offensive. But _someone_ had to look at those images to begin with! Seeing tens of thousands of violent or offensive images can have serious impacts on mental health.
 
+@slidebreak{Synthesize}
 We rarely think about the human cost of training the Machine Learning models we use every day. When we ask Google to find similar images or Spotify to recommend music based on our Likes and Dislikes, we rarely think about the important role supervised learning has to play in making it all work...and the humans responsible for providing that supervision.
 
 @teacher{
