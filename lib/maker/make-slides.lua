@@ -42,6 +42,8 @@ local function read_if_poss(i, xxx)
 end
 
 local allowed_slide_layouts = {
+  "AI Title Slide",
+  "AI Title and Body",
   "Core Title Slide",
   "Core Title and Body",
   "Math Title Slide",
@@ -444,6 +446,8 @@ function make_slides_file(lesson_dir)
     course_string = 'Math'
   elseif lesson_superdir == 'Reactive' then
     course_string = 'R'
+  elseif lesson_superdir == 'AI' then
+    course_string = 'AI'
   else
     course_string = 'Core'
   end
@@ -466,7 +470,7 @@ function make_slides_file(lesson_dir)
         o:write('{layout="', course_string, ' Title Slide"}\n')
         o:write('# ', slide.header, '\n\n')
         o:write('<!--\n')
-        o:write('\n\nThis is the **'..proglang..'** version of this lesson. Make sure you are using the right software tool (WeScheme, Pyret, CODAP, etc...')
+        o:write('\n\nThis is the **'..proglang..'** version of this lesson. Make sure you are using the right software tool (WeScheme, Pyret, CODAP, etc...)')
         o:write('\n\nTo learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en')
         if slide.preparation then
           o:write('\n\nPreparation:\n')
