@@ -38,8 +38,6 @@ Students are introduced to ALVINN, the world's first self-driving car, as a comp
 
 Self-driving cars feel like the future has really arrived! Many people think they are one of the strongest examples of "AI" really thinking, instead of just "following an algorithm". After all, _how can a computer possibly make decisions about how to drive?_
 
-What do you think?
-
 @teacher{Give students time to discuss. Remind them about the AI Effect, and how people also felt when the first spell-checkers were developed!}
 
 @slidebreak{Launch}
@@ -248,8 +246,10 @@ Circulate and encourage students to read the scatter plots critically. Push them
 @slidebreak{Investigate}
 
 @QandA{
+@right{@image{images/steering-v-curve-on-offset-scale.png, 350}}
 @Q{Which variable appeared to show the *strongest* relationship with `steering-angle`?}
-@A{`curve` — it has a clear, nearly linear relationship. As the road curves more sharply in one direction, the steering angle increases proportionally.}
+@A{`curve` has a clear, nearly linear relationship. As the road curves more sharply in one direction, the steering angle increases proportionally.}
+@A{Some students may notice that the scatter plot for `offset` has a nearly mirror image scatter plot to the `curve` data and think that it makes an equally good predictor (as the car is more offset in one direction, the steering angle decreases proportionally). Draw their attention to the fact that the x-axes ranges on `curve` and `offset` are quite different. When the `curve` scatterplot window is @math{-30 < x < 30} (matching the window for the `offset` plot), we see that data is much more tightly clustered.}
 
 @Q{Which variable appeared to show the *weakest* relationship?}
 @A{`speed` — there's a lot of scatter with no clear linear pattern.}
@@ -312,31 +312,33 @@ Students will notice that `lr-plot` defines models down to decimal values, certa
 @slidebreak{InvestigateR}
 @QandA{
 @right{@image{images/steering-v-curve-lr.png, 300}}
-@Q{What does the slope of our model tell us?}
+@Q{What does the slope of our `curve` model tell us?}
+@A{That the steering angle increases by about 19.5 degrees for each 1 degree increase in the curve.}
 
 @Q{Does the y-intercept make sense in the real world? Why or why not?}
+@A{Yes. If the curve is zero, the road is straight and the steering angle should be zero.}
 
 @Q{What does the @math{S}-value tell us?}
-}
+@A{We expect the error in predictions made by this model to be off by about 37 degrees.}
 
+@Q{Based on the @math{S}-value, would you expect the `curve` model to successfully be able to "drive" a full lap around a course in the game?}
+@A{Probably not! 37 degrees is a pretty large error.}
+
+@Q{Do our predictor functions expect steering angle to increase as our other variables increase?}
+@A{No! Steering angle is expected to decrease as `skew` and `offset` increase.}
+}
 
 === Investigate
 
 @slidebreak{Investigate}
 
-@teacher{
-These template functions are Number-consuming: `curve-predictor(curve)`, `offset-predictor(offset)`, etc. Students are filling in the learned slope and intercept. This sets up the contrast with the Row-consuming version `drive` needs.
-}
-
-Are we ready to use these predictors to drive the car? Pyret has a `drive` function:
+Let's see how well our predictors drive the car! Pyret has a `drive` function:
 
 @show{(contract "drive" '((predictor ("Row" "Number"))) "Table"
 "runs the driving simulator, using predictor to compute the steering angle at each frame")}
 
-Read that Domain _carefully!_ What do you *Notice*?
-
 @lesson-instruction{
-- Complete @printable-exercise{lr-steering-angle.adoc}.
+- Complete #7 and #8 on @printable-exercise{lr-steering-angle.adoc}.
 - Spend some time thinking about what the error message you get might be telling you!
 }
 
@@ -363,9 +365,11 @@ We could write it by hand, but Pyret has exactly the right tool:
 For example: `reg-model-code(training-data, [list: "curve"], "steering-angle")`
 
 @lesson-instruction{
-- Use `reg-model-code` to generate a row-consuming predictor for each of the four variables.
-- Define them as `curve-predictor` (replacing your existing one), `offset-predictor`, `skew-predictor`, and `speed-predictor`.
-- Try each one with `drive(...)`. Which model is the best driver?
+- Complete @printable-exercise{lr-steering-angle.adoc}.
+- Use the code you just considered to complete the `curve-predictor2` template in your Definitions area and click "Run" to load it. Then evaluate `drive(curve-predictor2)` in the Interactions Area.
+- Use `reg-model-code` to generate a row-consuming predictor for each of the other variables.
+- Update the templates for `offset-predictor`, `skew-predictor`, and `speed-predictor`. Click "Run" to load them. 
+- Try each one with `drive(...)`.
 }
 
 @teacher{
@@ -378,11 +382,9 @@ Students will find that `curve-predictor` drives much better than the others. Al
 @Q{Which predictor drove the best? Did that match your predictions from the scatter plots?}
 @A{`curve-predictor` — yes, it had the strongest linear relationship with `steering-angle`.}
 
-@Q{What does the slope of the `curve` predictor tell us about what the model _learned_?}
-@A{For every additional unit of curve sharpness, the model predicts a proportional increase in steering angle. Sharper curve = more steering.}
-
-@Q{What does the y-intercept tell us?}
-@A{When the road is perfectly straight (`curve = 0`), the model predicts a steering angle near 0 — meaning don't turn. That makes intuitive sense!}
+@Q{Did the predictor "drive" better than you did? Why?}
+@A{No!}
+@A{When we were driving, we could take all of the variables into account and the predictor was only using one.}
 }
 
 === Common Misconceptions

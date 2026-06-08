@@ -18,9 +18,9 @@ div#body .studentAnswerMedium { min-width: 35pt; }
 [cols="<, ^, ^, ^",options="header"]
 |===
 | Explanatory Variable 	| 		Slope 	 | 	Intercept 	| @math{S}-value
-| `curve`				| @ifsoln{19.5}  | @ifsoln{0.41}| @ifsoln{37.0}
-| `offset` 				| @ifsoln{-2.8}	 | @ifsoln{1.0}	| @ifsoln{37.0}
-| `skew` 				| @ifsoln{-2.2}	 | @ifsoln{0.9} | @ifsoln{37.8}
+| `curve`				| @ifsoln{19.5}  | @ifsoln{-0.4}| @ifsoln{37.0}
+| `offset` 				| @ifsoln{-2.8}	 | @ifsoln{1.1}	| @ifsoln{37.9}
+| `skew` 				| @ifsoln{-2.2}	 | @ifsoln{0.9} | @ifsoln{43.5}
 | `speed` 				| @ifsoln{-2.46} | @ifsoln{7.0} | @ifsoln{47.0}
 |===
 
@@ -31,32 +31,38 @@ div#body .studentAnswerMedium { min-width: 35pt; }
 
 [%autowidth, cols="<, >", frame="none", stripes="none"]
 |===
-| @math{curve\text{-}predictor(curve) = (}@fitbruby{4em}{@ifsoln{19.5}}{@math{m}}@math{\times curve) + }@fitbruby{4em}{@ifsoln{0.41}}{@math{b}}
-| @show{(code '(define (curve-predictor curve) (+ (* (?ANS 19.5) curve) (?ANS 0.41))))}
+| @math{curve\text{-}predictor(curve) = (}@fitbruby{4em}{@ifsoln{19.5}}{@math{m}}@math{\times curve) + }@fitbruby{4em}{@ifsoln{-0.41}}{@math{b}}
+| @show{(code '(define (curve-predictor curve) (+ (* (?ANS 19.5) curve) (?ANS -0.41))))}
 |===
 
 @n When `curve = 0` (a perfectly straight road), what does our `curve-predictor` estimate the steering angle to be to the nearest degree? @fitbruby{2em}{@ifsoln{≈ 0}}{intercept} @fitbruby{5.5em}{degrees}{units}. Does this make real-world sense? @fitb{}{} +
 @fitb{}{@ifsoln{Yes! If the road is straight and the car is centered, there's no reason to steer.}}
 
-@n If `curve` increases by 1, the `curve-predictor` expects the steering angle to @fitbruby{8em}{@ifsoln{increase}}{increase/decrease} by @fitbruby{5em}{@ifsoln{19.5}}{slope} @fitbruby{8em}{@ifsoln{degrees}}{units}.
+@n If the `curve` of the road increases by 1º, the `curve-predictor` expects the steering angle to @fitbruby{8em}{@ifsoln{increase}}{increase/decrease} by @fitbruby{5em}{@ifsoln{19.5º}}{slope}.
 
 @n To generalize what the model _learned_: "the more sharply the road curves, the @fitbruby{10em}{@ifsoln{more}}{less? more?} sharply you need to steer".
 
 == Driving with the Model
 
+@show{(contract "drive" '((predictor ("Row" "Number"))) "Table"
+"runs the driving simulator, using predictor to compute the steering angle at each frame")}
+
+@n Read the Domain of `drive` carefully. What do you Notice? @fitb{}{} +
+@fitb{}{}
+
 @n Evaluate `drive(curve-predictor)` and read the error carefully. What do you think it is telling us? @fitb{}{} +
-@blanklines{2}{@ifsoln{The predictor was given a Row, but it expected a number. `drive` gives our predictors *Rows*, but `curve-predictor` takes a Number.}}
+@blanklines{1}{@ifsoln{`drive` needs access to full *Rows* of data, but we defined `curve-predictor` to only take in a Number.}}
 
 @vspace{1ex}
 
-*Evaluate `reg-model-code(training-data, [list: "curve"], "steering-angle")`*
+*Evaluate `reg-model-code(training-data, [list: "curve"], "steering-angle")`* and read the resulting code carefully. 
 
-@n How is the code produced by `reg-model-code` *similar* to your `curve-predictor` function? @fitb{}{} +
-@blanklines{2}{
-@ifsoln{It's consuming one thing in the domain, and producing a number. It seems to use the same slope and intercept that I do as well.}
+@n How is the resulting code *similar* to your `curve-predictor` function? @fitb{}{} +
+@blanklines{1}{
+@ifsoln{It seems to use the same slope and intercept that I do. It consumes one thing in the domain, and produces a number.}
 }
 
-@n How is it *different*? @fitb{}{} +
-@blanklines{2}{
-@ifsoln{The curve predictor appears to take in a Row, and then grab the curve data from inside that row.}
+@n How is it *different*? @fitb{}{@ifsoln{`curve-predictor` took in the curve value. }} +
+@blanklines{1}{
+@ifsoln{This `predictor` appears to take in a Row, and then grab the curve data from inside that row.}
 }
