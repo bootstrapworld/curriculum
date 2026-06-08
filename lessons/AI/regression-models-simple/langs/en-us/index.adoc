@@ -359,15 +359,15 @@ Notice that `drive` takes a *Row-consuming* function — but `curve-predictor` c
 
 We could write it by hand, but Pyret has exactly the right tool:
 
-@show{(contract "reg-model-code" '((t Table) (inputs List<Str>) (prediction Str)) "Code"
+@show{(contract "regression-model-code" '((t Table) (inputs List<Str>) (prediction Str)) "Code"
 "produces code that defines a trained, row-consuming model (copy/paste into the Definitions Area!)")}
 
-For example: `reg-model-code(training-data, [list: "curve"], "steering-angle")`
+For example: `regression-model-code(training-data, [list: "curve"], "steering-angle")`
 
 @lesson-instruction{
 - Complete @printable-exercise{lr-steering-angle.adoc}.
 - Use the code you just considered to complete the `curve-predictor2` template in your Definitions area and click "Run" to load it. Then evaluate `drive(curve-predictor2)` in the Interactions Area.
-- Use `reg-model-code` to generate a row-consuming predictor for each of the other variables.
+- Use `regression-model-code` to generate a row-consuming predictor for each of the other variables.
 - Update the templates for `offset-predictor`, `skew-predictor`, and `speed-predictor`. Click "Run" to load them. 
 - Try each one with `drive(...)`.
 }
