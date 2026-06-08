@@ -53,6 +53,9 @@ Take a look at this picture of a cylinder floating in a box.
 @Q{How can one shape cast such different shadows?}
 @A{A 3D object has multiple sides, so different lights cast different shadows.}
 
+@Q{If we only saw the circle shadow, would we know for sure that it was cast by a cylinder like this?}
+@A{No. It could be cast by a short or tall cylinder... or even a sphere, a cone, an hour glass, etc.}
+
 @Q{If the _real_ shape is a cylinder, are the circle and square shadows "lying" to us?}
 @A{No — they're each just telling a *part* of the story!}
 }
@@ -70,35 +73,40 @@ But `curve`, `skew`, `offset`, and `speed` are all being measured _at the same t
 
 @teacher{Give students a chance to discuss and brainstorm before moving on.}
 
-@slidebreak{LaunchR}
-@right{@image{images/plane-of-best-fit.png, 300}}
-
-If we want to consider all three, then we need to consider each snapshot in the training corpus as a 3d point, with values for `curve`, `skew`, _and_ `steering-angle`.
-
-To make _predictions_ in three dimensions, we need to do _regression_ in three dimensions. Instead of a line of best fit, we're looking for a *plane of best fit*.
-
-@slidebreak{LaunchR}
-@ifslide{@right{@image{images/plane-of-best-fit.png, 300}}}
-We want Pyret to learn a function with the best possible values for @math{m_{curve}}, @math{m_{skew}}, and @math{b}:
-
-[.big-codeblock]
-@big{
-`fun curve-skew-predictor(r):` +
-@hspace{2em} `(` @math{m_{curve}} `* r["curve"]) + (` @math{m_{skew}} `* r["skew"]) + b` +
-`end`
-}
-
-- `curve` and `skew` are both values in a given snapshot, each explaining a _portion_ of the steering angle at that moment
-- @math{m_{curve}} and @math{m_{skew}} are their slopes — the "amount of pull" each variable has
-- @math{b} is the intercept: the predicted steering angle when both inputs are zero
 
 === Investigate
 @slidebreak{Investigate-DN}
 
 @lesson-instruction{
-- Open @online-exercise{https://www.desmos.com/3d/omnchml87a, this Desmos graph}.
-- Use it to complete @printable-exercise{predicting-steering-from-2.adoc}.
+- Complete @printable-exercise{predicting-steering-from-2.adoc} using @online-exercise{https://www.desmos.com/3d/omnchml87a, this Desmos graph}.
 - Be ready to share your thinking!
+}
+
+@slidebreak{LaunchR}
+@right{@image{images/plane-of-best-fit.png, 300}}
+
+If we want to consider all three, then we need to consider each snapshot in the training corpus as a 3d point, with values for `curve`, `skew`, _and_ `steering-angle`.
+
+To make _predictions_ in three dimensions, we need to do _regression_ in three dimensions. 
+
+@lesson-point{
+Instead of a line of best fit, we're looking for a *plane of best fit*.
+}
+
+@scrub{
+@slidebreak{LaunchR}
+
+@ifslide{@right{@image{images/plane-of-best-fit.png, 300}}}
+
+- If `curve` and `skew` are both values in a given snapshot, they each explain a _portion_ of the steering angle at that moment
+- We need a function that takes in both slopes (@math{m_{curve}} and @math{m_{skew}}) - considering the "amount of pull" each variable has on the steering angle
+- @math{b} is the intercept: the predicted steering angle when both inputs are zero
+We want Pyret to learn a function with the best possible values for @math{m_{curve}}, @math{m_{skew}}, and @math{b}:
+
+[.big-codeblock]
+@big{
+`fun curve-skew-predictor(r): (` @math{m_{curve}}` * r["curve"]) + ( `@math{m_{skew}} `* r["skew"]) + b end`
+}
 }
 
 @teacher{Draw connections to the cylinder-and-shadows image: each 2D scatter plot from the last lesson is a literal "shadow" of the 3D data, cast by collapsing one dimension flat.}
@@ -194,12 +202,32 @@ Pyret also has a tool to measure the fit of any row-consuming regression model:
 @A{`skew` — it has the smaller coefficient and removing it would cost less accuracy than removing `curve`.}
 
 @Q{If you couldn't use `curve` at all, could you still build a workable model?}
-@A{You could build a model, but it would perform significantly worse. `curve` carries the most information about how to steer; the other variables only fill in part of the gap.}
+@A{You could build a model, but it would perform significantly worse.}
+@A{`curve` carries the most information about how to steer; the other variables only fill in part of the gap.}
 }
 
 @lesson-instruction{
 - Complete @printable-exercise{self-driving-car-reflection.adoc}.
 }
+
+@slidebreak{Investigate}
+
+@lesson-point{
+Multiple regression is the same idea as linear regression, extended to any number of input variables. Each input gets its own slope (weight), and the model learns all of them at once to minimize error.
+}
+
+Multiple regression is the engine behind many real AI systems:
+
+- ALVINN's hundreds of pixel weights
+- Car insurance rates based on age, location, and driving history
+- Weather forecasts based on temperature, humidity, pressure, and wind speed
+
+The same three phases always apply when training and using a model: 
+
+. Collect labeled data.
+. Train a function.
+. Apply the function to new inputs.
+
 
 === Synthesize
 @slidebreak{Synthesize}
@@ -214,16 +242,3 @@ Pyret also has a tool to measure the fit of any row-consuming regression model:
 @Q{What would it mean for a pixel to have a very _large_ weight?}
 @A{That pixel strongly influences the predicted steering angle — likely a part of the image that reliably signals road direction.}
 }
-
-@slidebreak{Synthesize}
-
-@lesson-point{
-Multiple regression is the same idea as linear regression, extended to any number of input variables. Each input gets its own slope (weight), and the model learns all of them at once to minimize error.
-}
-
-Multiple regression is the engine behind many real AI systems:
-- ALVINN's hundreds of pixel weights
-- Car insurance rates based on age, location, and driving history
-- Weather forecasts based on temperature, humidity, pressure, and wind speed
-
-The same three phases always apply: collect labeled data, train a function, apply it to new inputs.
