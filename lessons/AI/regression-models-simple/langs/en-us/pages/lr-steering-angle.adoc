@@ -31,18 +31,18 @@ div#body .functions .fitbruby, div#body .functions .fitb {
 @n How do Pyret's best-fit lines compare to your estimates on @printable-exercise{steering-angle-scatter-plots.adoc} @fitb{}{} +
 @fitb{}{@ifsoln{}}
 
-@n Use the values you calculated with `lr-plot` for `curve` to define `curve-predictor` in math and Pyret notation below. Then complete the template in the starter file and click "Run".
+@n Use the values you calculated with `lr-plot` for `curve` to define `c-predictor` in math and Pyret notation below. Then complete the template in the starter file and click "Run".
 
 [%autowidth, role="functions", cols="<, >", frame="none", stripes="none"]
 |===
-| @math{curve\text{-}predictor(curve) = (}@fitbruby{4em}{@ifsoln{19.5}}{@math{m}}@math{\times curve) + }@fitbruby{4em}{@ifsoln{-0.41}}{@math{b}}
-| @show{(code '(define (curve-predictor curve) (+ (* (?ANS 19.5) curve) (?ANS -0.41))))}
+| @math{c\text{-}predictor(curve) = (}@fitbruby{4em}{@ifsoln{19.5}}{@math{m}}@math{\times curve) + }@fitbruby{4em}{@ifsoln{-0.41}}{@math{b}}
+| @show{(code '(define (c-predictor curve) (+ (* (?ANS 19.5) curve) (?ANS -0.41))))}
 |===
 
-@n When `curve = 0` (a perfectly straight road), what does our `curve-predictor` estimate the steering angle to be to the nearest degree? @fitbruby{2em}{@ifsoln{≈ 0}}{intercept} @fitbruby{5.5em}{degrees}{units}. Does this make real-world sense? @fitb{}{} +
+@n When `curve = 0` (a perfectly straight road), what does our `c-predictor` estimate the steering angle to be to the nearest degree? @fitbruby{2em}{@ifsoln{≈ 0}}{intercept} @fitbruby{5.5em}{degrees}{units}. Does this make real-world sense? @fitb{}{} +
 @fitb{}{@ifsoln{Yes! If the road is straight and the car is centered, there's no reason to steer.}}
 
-@n If the `curve` of the road increases by 1º, the `curve-predictor` expects the steering angle to @fitbruby{8em}{@ifsoln{increase}}{increase/decrease} by @fitbruby{5em}{@ifsoln{19.5º}}{slope}.
+@n If the `curve` of the road increases by 1º, the `c-predictor` expects the steering angle to @fitbruby{8em}{@ifsoln{increase}}{increase/decrease} by @fitbruby{5em}{@ifsoln{19.5º}}{slope}.
 
 @n To generalize what the model _learned_: "the more sharply the road curves, the @fitbruby{10em}{@ifsoln{more}}{less? more?} sharply you need to steer".
 
@@ -54,19 +54,19 @@ div#body .functions .fitbruby, div#body .functions .fitb {
 @n Read the Domain of `drive` carefully. What do you Notice? @fitb{}{} +
 @fitb{}{}
 
-@n Evaluate `drive(curve-predictor)` and read the error carefully. What do you think it is telling us? @fitb{}{} +
-@blanklines{1}{@ifsoln{`drive` needs access to full *Rows* of data, but we defined `curve-predictor` to only take in a Number.}}
+@n Evaluate `drive(c-predictor)` and read the error carefully. What do you think it is telling us? @fitb{}{} +
+@blanklines{1}{@ifsoln{`drive` needs access to full *Rows* of data, but we defined `c-predictor` to only take in a Number.}}
 
 @vspace{1ex}
 
 *Evaluate `regression-model-code(training-data, [list: "curve"], "steering-angle")`* and read the resulting code carefully.
 
-@n How is the resulting code *similar* to your `curve-predictor` function? @fitb{}{} +
+@n How is the resulting code *similar* to your `c-predictor` function? @fitb{}{} +
 @blanklines{1}{
 @ifsoln{It seems to use the same slope and intercept that I do. It consumes one thing in the domain, and produces a number.}
 }
 
-@n How is it *different*? @fitb{}{@ifsoln{`curve-predictor` took in the curve value. }} +
+@n How is it *different*? @fitb{}{@ifsoln{`c-predictor` took in the curve value. }} +
 @blanklines{1}{
 @ifsoln{This `predictor` appears to take in a Row, and then grab the curve data from inside that row.}
 }
