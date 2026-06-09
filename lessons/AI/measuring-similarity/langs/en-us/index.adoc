@@ -36,9 +36,9 @@ Students consider how arbitrary documents (in this case, Images) can be represen
 
 
 == How do Computers "See"?
+@objective{ai-machines-v-people}
 
 === Overview
-
 Students explore ways in which attributes of images can be computed, using various functions.
 
 === Launch
@@ -145,6 +145,8 @@ Pyret has several functions for working with colors, but we're going to use just
 
 
 == Simple Similarity
+@objective{ai-similarity}
+@objective{attributes-as-dimensions}
 
 === Overview
 Students explore a corpus of mountain images, and practice making image scatter plots to see how these images are distributed across different 2-dimensional spaces.
@@ -158,7 +160,21 @@ Let's explore the rest of this @starter-file{ai-image}:
 - Line 13-22 define each of our mountain images
 - These images (and our red squares!) are used in the `image` corpus, which is defined on the next few lines
 - Processing images uses a lot of computing power, so we _scale_ the large, mountain images in our corpus to be half their original size
-- Under the table, we define a new value called `decorated`. What is it?
+
+@QandA{
+Under the table in the Definitions Area, we define a new value called `decorated`.
+
+@Q{What do you think it is?}
+@A{Answers will vary}
+
+@Q{Evaluate `decorated` in the Interactions Area. What did you get back?}
+@A{A table, with all those computed columns for every image.}
+
+*This is our image-model*, which includes lots of numeric attributes we've computed from the original images. Note: we've left the original images in the table to make it easier to explore, but the computer ignores them -- a real image model drops the image completely, and _only_ uses the computed columns.
+
+@Q{The computer only uses the numeric columns in the `decorated` model. How is this lossy? What details of the original training data does it lose?}
+@A{The actual images! We only keep the numbers for the properties we chose. Everything else is lost.}
+}
 
 
 @slidebreak{Launch}
@@ -176,7 +192,7 @@ The `add-bag-cols` function counted the number of reds, greens and blues in `COL
 
 We don't really care about the _order_ of those words - we just want to know how many pixels are red-dominant, green-dominant, or blue-dominant!
 
-Without the order of the words, it's as if we just put all the words into a bag and shook them up! The information about _frequency_ of each word is still there, but we've lost the _order_. Machine Learning Engineers call this a @vocab{bag-of-words model}.
+Without the order of the words, it's as if we just put all the words into a bag and shook them up! The information about _frequency_ of each word is still there, but we've lost the _order_. Machine Learning Engineers call this a @vocab{bag of words model}.
 
 @slidebreak{Launch}
 Let's review where we are:
@@ -250,6 +266,7 @@ Try it yourself!
 }
 
 == Measuring Distance in "Image Space"
+@objective{ai-similarity}
 
 === Overview
 Students are introduced to _distance_ as a notion of similarity. This requires them to visualize images in a spatial system - first in one dimension, then in two, then eventually three.
@@ -349,6 +366,8 @@ Overall, `distance-similarity` is a huge upgrade compared to `simple-similarity`
 TODO
 
 == Measuring Angles in "Image Space"
+@objective{ai-similarity}
+@objective{ai-high-dimensions-similarity}
 
 === Overview
 Students are introduced to _angle-measurement_ as a notion of similarity. This reinforces the visualization of images in a spatial system.

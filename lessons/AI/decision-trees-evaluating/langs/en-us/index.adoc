@@ -43,7 +43,8 @@
 |===
 
 == Building Decision Trees in Pyret
-
+@objective{pyret-build-trees}
+@objective{ai-over-fitting}
 === Overview
 Now that they know the algorithm, students explore Pyret's ability to build decision trees automatically! They explore the impact that different depths or columns have on the quality of a classifier.
 
@@ -148,7 +149,7 @@ When given another dataset to classify, `tree-any4` is out-scoring `tree-quant6`
 | @image{images/dot-plot-pounds-testing.png}
 |===
 
-This is a classic example of what ML engineers call @vocab{over-fitting}. The more a classifier depends on an attribute, the more sensitive it is to variations in that attribute between populations. In this case, `tree-quant6` was _totally dependent_ on `pounds`, whose distribution is very different in the `testing` dataset.
+This is an example of what ML engineers call @vocab{over-fitting}. The more a classifier depends on an attribute, the more sensitive it is to variations in that attribute between populations. In this case, `tree-quant6` was _totally dependent_ on `pounds`, whose distribution is very different in the `testing` dataset.
 
 @slidebreak{Investigate}
 @ifslide{
@@ -185,7 +186,7 @@ The other columns didn't vary as much at all! Dogs and cats are all `mammals` no
 }
 
 == Evaluating a Classifier
-@objective{}
+@objective{ai-confusion-matrix}
 
 === Overview
 Students learn about confusion matrices, and use Pyret to generate them from classifier functions derived from decision trees.

@@ -28,6 +28,7 @@
 |===
 
 == Self-Driving Cars
+@objective{ai-alvinn-training}
 
 === Overview
 Students are introduced to ALVINN, the world's first self-driving car, as a compelling example of supervised machine learning. They explore a driving simulator, collect their own training data, and discover that predicting steering angle is a regression problem.
@@ -189,6 +190,7 @@ We've prepared a @vocab{training corpus} for you containing expert driving data,
 
 
 == Predicting Steering Angle
+@objective{models-compare-fit}
 
 === Overview
 Students identify candidate explanatory variables from the training corpus, make scatter plots to explore the relationship between each variable and `steering-angle`, and settle on `curve` as the strongest single predictor.
@@ -276,6 +278,8 @@ Circulate and encourage students to read the scatter plots critically. Push them
 
 
 == Linear Regression
+@objective{ai-hallucination}
+@objective{ai-training-lossy}
 
 === Overview
 Having already manually fit linear model to the  data, students use Pyret's `lr-plot` to find the optimal fit for the data. They interpret the model's coefficients, use `mr-code` to generate row-consuming predictor functions, and test their predictors using the `drive` function. Finally, they reflect on what it means to have trained a model.
@@ -326,6 +330,9 @@ Students will notice that `lr-plot` defines models down to decimal values, certa
 
 @Q{Do our predictor functions expect steering angle to increase as our other variables increase?}
 @A{No! Steering angle is expected to decrease as `skew` and `offset` increase.}
+
+@Q{How is a regression model "lossy"? What details of the original training data does it lose?}
+@A{Everything above or below the regression line is real data, which we throw away when we use the line.}
 }
 
 === Investigate

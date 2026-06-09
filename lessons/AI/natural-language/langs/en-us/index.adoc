@@ -27,6 +27,8 @@
 
 
 == Plotting Essays in Space
+@objective{ai-bag-of-words}
+@objective{ai-training-lossy}
 
 === Overview
 
@@ -47,9 +49,14 @@ If the input data _isn't_ numeric, we can compute numbers anyway!
 
 - In our image search examples, we generated numeric attributes like symmetry, luminance, and entropy
 - We also generated very long Strings of `COLOR-NAMES`, listing each of the dominant primary colors in pixel order
-- We turned `COLOR-NAMES` into numbers, using a @vocab{bag of words} model to count the number of red-, green-, and blue-dominant pixels
-- The @vocab{bag of words} turned an ordered string of colors into an _un-ordered_ count of each color
+- We turned `COLOR-NAMES` into numbers, using a @vocab{bag of words model} to count the number of red-, green-, and blue-dominant pixels
+- The bag of words model turned an ordered string of colors into an _un-ordered_ count of each color
 - Each count became another attribute, allowing us to plot images in "color-space"
+
+@QandA{
+@Q{How is a bag-of-words model "lossy"? What details of the original training data does it lose?}
+@A{The order of the words}
+}
 
 
 
@@ -124,7 +131,7 @@ With our image example, `luminance` and `entropy` told us at least _something_ a
 }
 
 == Data Normalization
-
+@objective{ai-data-normalization}
 === Overview
 Students explore the importance of @vocab{data normalization}, when we organize data to follow a standard pattern.
 
@@ -162,10 +169,10 @@ Complete the second section of @printable-exercise{natural-language-is-messy.ado
 @slidebreak{Investigate}
 
 @QandA{
-@Q{What does a highest-possible score of 1 tell us, if we're using @vocab{bag of words} models? }
+@Q{What does a highest-possible score of 1 tell us, if we're using @vocab{bag of words models}? }
 @A{Two essays use the exact same words, the exact same number of times}
 
-@Q{What does the lowest-possible score of 0 tell us, if we're using @vocab{bag of words} models? }
+@Q{What does the lowest-possible score of 0 tell us, if we're using @vocab{bag of words models}? }
 @A{Two essays that don't using any of the same words at all}
 
 @Q{Which essay was most similar?}
@@ -224,7 +231,7 @@ Addressing this "messiness" is called @vocab{data normalization}. Machine Learni
 }
 
 == Detecting Plagiarism
-
+@objective{ai-plagiarism-detector-ethics}
 === Overview
 Armed with their similarity detection, students explore the how that algorithm can be used to detect plagiarism. Now that they know how it works, they consider limitations of the algorithm and when it might not be ethical for teachers to use it.
 
