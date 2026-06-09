@@ -6,6 +6,10 @@ div#body sub { position: relative; bottom: 0.3em; }
 div#body .studentAnswerMedium { min-width: 35pt; }
 
 #preamble_disabled { flex-grow: 0 !important; }
+
+div#body .functions .fitbruby, div#body .functions .fitb {
+	padding-top: 0 !important;
+}
 </style>
 ++++
 
@@ -13,12 +17,12 @@ div#body .studentAnswerMedium { min-width: 35pt; }
 
 == Using Linear Regression
 
-@n Evaluate `lr-plot` for each variable (e.g. - `lr-plot(training-data, "id", "curve", "steering-angle")`), and use the result to fill in the table below:
+@n `lr-plot(training-data, "id", "curve", "steering-angle")` was used to fill in the first row below. Complete the table.
 
 [cols="<, ^, ^, ^",options="header"]
 |===
 | Explanatory Variable 	| 		Slope 	 | 	Intercept 	| @math{S}-value
-| `curve`				| @ifsoln{19.5}  | @ifsoln{-0.4}| @ifsoln{37.0}
+| `curve`				|		  19.5   | 		  -0.4  | 		  37.0
 | `offset` 				| @ifsoln{-2.8}	 | @ifsoln{1.1}	| @ifsoln{37.9}
 | `skew` 				| @ifsoln{-2.2}	 | @ifsoln{0.9} | @ifsoln{43.5}
 | `speed` 				| @ifsoln{-2.46} | @ifsoln{7.0} | @ifsoln{47.0}
@@ -29,7 +33,7 @@ div#body .studentAnswerMedium { min-width: 35pt; }
 
 @n Use the values you calculated with `lr-plot` for `curve` to define `curve-predictor` in math and Pyret notation below. Then complete the template in the starter file and click "Run".
 
-[%autowidth, cols="<, >", frame="none", stripes="none"]
+[%autowidth, role="functions", cols="<, >", frame="none", stripes="none"]
 |===
 | @math{curve\text{-}predictor(curve) = (}@fitbruby{4em}{@ifsoln{19.5}}{@math{m}}@math{\times curve) + }@fitbruby{4em}{@ifsoln{-0.41}}{@math{b}}
 | @show{(code '(define (curve-predictor curve) (+ (* (?ANS 19.5) curve) (?ANS -0.41))))}

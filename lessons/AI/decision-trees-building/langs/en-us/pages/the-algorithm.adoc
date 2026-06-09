@@ -1,31 +1,32 @@
 = Building a Decision Tree: The Algorithm
 ++++
 <style>
-#preamble_disabled { flex-grow: 0 !important; }
-.fitb { min-width: 2em !important; padding-top: 0.7em !important;}
-.autonum, .fitb.stretch::after { padding-top: 0.7em !important; }
-table.fit-content tr td { padding: 0.3em 0.625em !important; }
+div#body #preamble_disabled { flex-grow: 0 !important; }
+div#body .fitb { min-width: 2em !important; padding-top: 0.7em !important;}
+div#body .autonum, .fitb.stretch::after { padding-top: 0.7em !important; }
+div#body table.fit-content tr td { padding: 0.3em 0.625em !important; }
+div#body table { margin: 0 !important; }
 </style>
 ++++
 
 [%autowidth, cols="^,^,^,^", frame="none", stripes="none", options="header"]
 |===
 | Split on
-| "yes" leaf (most common in this group)
 | "no" leaf (most common in this group)
+| "yes" leaf (most common in this group)
 | # Correct
 
 | `r["tail"] == true`
-| "cat" (5 out of 11)
 | "snail" (2 out of 4)
+| "cat" (5 out of 11)
 | 7
 |===
 
 *Use this table as a model for completing the Categorical and Quantitative Splits sections below.* Notice:
 
-- the first column is the code that will ask our question: "Does the animal have a tail?"
-- the second and third columns record our predictions for each leaf node (and the numbers they were based on)
-- the last column tell us how many animals from our testing table we predicted correctly 
+- the 1st column is the code that will ask our question: "Does the animal have a tail?"
+- the 2nd and 3rd columns show predicted species for animals with and without tails (and the numbers these predictions were based on)
+- the last column tell us how many of these predictions would be correct for the animals in our testing table
 
 @vspace{1ex}
 
@@ -35,37 +36,37 @@ table.fit-content tr td { padding: 0.3em 0.625em !important; }
 [%autowidth, cols="^,^,^,^", frame="none", stripes="none", options="header"]
 |===
 | Split on
-| "yes" leaf (most common)
 | "no" leaf (most common)
+| "yes" leaf (most common)
 | # Correct
 
 | `r["mammal"] == true`
-| "cat" (5 of 9)
 | "snail" or "tarantula" (2 of 4)
+| "cat" (5 of 9)
 | 7
 
 | `r["tail"] == true`
-| @ifsoln{"cat" (5 of 11)}
 | @ifsoln{"snail" or "tarantula" (2 of 4)}
+| @ifsoln{"cat" (5 of 11)}
 | @ifsoln{7}
 
 | `r["swims"] == true`
-| @ifsoln{"dog" (4 of 6)}
 | @ifsoln{"cat" (4 of 9)}
+| @ifsoln{"dog" (4 of 6)}
 | @ifsoln{8}
 
 | `r["sex"] == "hermaphrodite"`
-| @ifsoln{"snail" (2 of 2)}
 | @ifsoln{"cat" (5 of 13)}
+| @ifsoln{"snail" (2 of 2)}
 | @ifsoln{6}
 
 | `r["sex"] == "female"`
-| @ifsoln{"cat" (3 of 7)}
 | @ifsoln{"dog" or "snail" or "cat" (2 of 8)}
+| @ifsoln{"cat" (3 of 7)}
 | @ifsoln{6}
 |===
 
-@n Why wouldn't it make sense to write two rules for for the `mammal` column? @fitb{}{} +
+@n Why wouldn't it make sense to have a second row for `r["mammal"] == false`? @fitb{}{} +
 @fitb{}{@ifsoln{For Boolean columns where there are only two options the split is identical whether we phrase the question as IS or ISN'T.}}
 
 == Quantitative Splits
@@ -74,23 +75,23 @@ table.fit-content tr td { padding: 0.3em 0.625em !important; }
 [%autowidth, cols="^,^,^,^", frame="none", stripes="none", options="header"]
 |===
 | Split on
-| "yes" leaf
 | "no" leaf
+| "yes" leaf
 | # Correct
 
 | `r["pounds"] > 2`
-| "cat" (5 of 11)
 | "snail" or "tarantula" (2 of 4)
+| "cat" (5 of 11)
 | 7
 
 | `r["pounds"] > 6`
-| @ifsoln{"cat" or "dog" (4 of 9)}
 | @ifsoln{"snail" or "tarantula" (2 of 4)}
+| @ifsoln{"cat" or "dog" (4 of 9)}
 | @ifsoln{6}
 
 | `r["pounds"] > 9.5`
-| @ifsoln{"dog" (4 of 5)}
 | @ifsoln{"cat" (4 of 10)}
+| @ifsoln{"dog" (4 of 5)}
 | @ifsoln{8}
 |===
 
@@ -98,7 +99,7 @@ table.fit-content tr td { padding: 0.3em 0.625em !important; }
 
 @n Choose your split and explain your choice: @fitb{}{@ifsoln{`r["swims"] == true` or `r["pounds"] > 9.5` both lead to the most correct classifications}}.
 
-@n Fill in the root at the top of the tree and label the edges with the number of animals in each sub-group. 
+@n Fill in the root at the top of the tree below, and label the edges with the number of animals in each sub-group. Place a check next to each row of the table that your split predicts correctly.
 
 [cols="3a, 2a", frame="none", border="none", grid="none"]
 |===
@@ -126,19 +127,3 @@ table.fit-content tr td { padding: 0.3em 0.625em !important; }
 |
 @image{../images/empty-tree.png}
 |===
-
-@n In the @starter-file{decision-tree}, change the `my-classifier1` function to use your root. Click "Run", and evaluate `classify(training, "species", my-classifier1)`. Place a checkmark in front of each row that was correctly classified. Then record how many of each species were classified correctly below.
-
-@center{
-*Dogs*: 	 @fitb{2em}{} of 4 @hspace{1em}
-*Cats*: 	 @fitb{2em}{} of 5 @hspace{1em}
-*Lizards*: 	 @fitb{2em}{} of 2 @hspace{1em}
-*Snails*: 	 @fitb{2em}{} of 2 @hspace{1em}
-*Tarantulas*:@fitb{2em}{} of 2 @hspace{1em}
-*TOTAL:* 	 @fitb{2em}{} of 15
-}
-
-@n Complete the second level of the decision tree and the `my-classifier2` in the starter file. 
-
-- Look at the "yes" rows (checkmarks). Choose a split. Fill in the leaf node on the tree. Label the edges with the number of animals in each sub-group.
-- Then look at the "no" rows (without checkmarks). Choose a split for them and complete the decision tree.

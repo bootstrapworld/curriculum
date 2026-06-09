@@ -1,5 +1,9 @@
 = What Does the Code Do?
-
+++++
+<style>
+div#body table { margin: 0 !important; }
+</style>
+++++
 @link-instructions{For this page, you'll need to open the @starter-file{decision-tree} on your computer and click "Run".}
 
 == Defining Rows
@@ -18,7 +22,7 @@
 
 == Defining our `tail-classifier` Function
 *Focus on lines 23-31 in the Definitions Area.* +
-Take a moment to read the code for `tail-classifier` carefully and discuss it with your partner. Use the @vocab{decision tree} diagram to guide you.
+Read the code for `tail-classifier` carefully. Use the @vocab{decision tree} diagram to guide you.
 
 [cols="^.^1a,^3a", frame="none", grid="none"]
 |===
@@ -37,16 +41,11 @@ end
 ```
 |===
 
-@n What do you *Notice* about this code? What do you *Wonder*? @fitb{}{@ifsoln{It starts with a contract and purpose statement.}} +
-@blanklines{1}{@ifsoln{This code uses a bunch of code we've never seen before like `if` and `else`. I see `end` twice. I see a row accessor `r["tail"]`.}}
+@n What will the function return if the animal has a tail? @fitb{7em}{@ifsoln{"cat"}} How do you know? @fitb{}{} +
+@blanklines{1}{@ifsoln{The function checks to see whether the value in the `"tail"` column is `true`, and, if it is, it classifies the animal as a `"cat"`.}}
 
-@n What code will look up the value in the `"tail"` column of a row? @fitb{}{@ifsoln{`r["tail"]`}}
-
-@n What does this part of the function definition do `if r["tail"] == true: "cat"`? @fitb{}{} +
-@blanklines{1}{@ifsoln{It checks to see whether the value in the `"tail"` column is `true`, and, if it is, it classifies the animal as a `"cat"`.}}
-
-@n What does this part of the function definition do `else: "snail"`? @fitb{}{} +
-@blanklines{1}{@ifsoln{It checks to see whether the value in the `"tail"` column is `true`, and, if it says anything other than `true`, it classifies the animal as a `"snail"`.}}
+@n What will the function return if the animal does NOT have a tail?? @fitb{7em}{@ifsoln{"cat"}} How do you know? @fitb{}{} +
+@blanklines{1}{@ifsoln{If the value in the `"tail"` column is anything other than `true`, it classifies the animal as a `"snail"`.}}
 
 == Some helpful Functions
 *Focus on lines 37-59 in the Definitions Area.*

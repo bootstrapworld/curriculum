@@ -5,56 +5,62 @@
 /* custom positioning for subscript */
 div#body sub { position: relative; bottom: 0.1em; }
 
-div#body img { height: 220px; width: 480px; }
+div#body img { height: 180px; width: 450px; }
 
 .editbox { background: none !important; }
+
+div#body td { padding: 0 1em 0 0 !important; }
+
+.paragraph > p > strong { display: inline-block; padding-top: 1em !important; }
 </style>
 ++++
 
-@link-instructions{Make sure you have @online-exercise{https://www.desmos.com/3d/omnchml87a, Curve v. Skew v. Steering Angle} open in Desmos. Click on the wrench button ([.desmosbutton]#{wrench}#) in the top-right corner of the Desmos graph to *Open the "Graph Settings" window.* At the bottom of the "More Options" list, check the box in front of *Translucent Surfaces*.} 
+@link-instructions{Make sure you have @online-exercise{https://www.desmos.com/3d/omnchml87a, Curve v. Skew v. Steering Angle} open in Desmos. Click on the wrench button ([.desmosbutton]#{wrench}#) in the top-right corner to *Open "Graph Settings".* At the bottom of the "More Options" list, check the box for *Translucent Surfaces*.}
 
 == Working in 3 Dimensions
 
-@n When you first open the file you should see a scatter plot of purple dots. What plane are we in? @hspace{2em}x-y @hspace{2em}x-z @hspace{2em}@ifsoln-choice{y-z}
+@n The 3D graph shows a (purple) 2D scatter plot. Which plane is the scatter plot on? @hspace{2em}x-y @hspace{2em}x-z @hspace{2em}@ifsoln-choice{y-z}
 
-@n Look for a pattern in these dots, then complete the sentence: @hspace{2em} _As skew increases, the steering-angle_ @fitb{}{@ifsoln{decreases}}
+*Rotate the cube so that the z-axis is pointing up, the y-axis is pointing to the right, and the x-axis is pointing towards you*
 
-@n Adjust the @math{m_{skew}} and @math{b} sliders to make a line appear on the plot. What settings make the best model?    @math{m_{skew}}: @fitb{4em}{@ifsoln{-2 to -3}}    @math{b}: @fitb{4em}{@ifsoln{30 to 45}}.
+@n Adjust @math{m_{skew}} and @math{b} to find the best fit.  @math{m_{skew}}: @fitb{4em}{@ifsoln{-2 to -3}}    @math{b}: @fitb{4em}{@ifsoln{30 to 45}}. _As skew increases, the steering-angle_ @fitb{}{@ifsoln{decreases}}
 
-@n Notice that we can see the z-axis labels ranging from @fitb{3em}{@ifsoln{-40}} to @fitb{3em}{@ifsoln{60}}, but y-axis labels are hidden. 
+*Rotate the cube so that the z-axis is pointing up, the x-axis is pointing to the right, and the y-axis is pointing towards you*
 
-@n _Make sure you followed the directions at the top to select Translucent Surfaces._ Then click somewhere in the top middle of the graph and pull down and to the right to rotate it until you can read the y-axis labels. They range from @fitb{3em}{@ifsoln{0}} to @fitb{3em}{@ifsoln{25}}.
+@n Why do the purple dots look like they're in one line? @fitb{}{@ifsoln{from this angle, we can't see the x-distance between them}}
 
-@n What happened to your graph? @fitb{}{@ifsoln{It rendered in 3D!}}
+*Turn off the "Steering-Angle v. Skew (purple)" folder and turn on "Steering-Angle v. Curve (blue)"*
 
-@n What happened to the line when you rotated the graph? @fitb{}{@ifsoln{It rendered as a plane!}}
+@n Now the 3D graph shows a (blue) 2D scatter plot. Which plane is the scatter plot on? @hspace{2em}x-y @hspace{2em}@ifsoln-choice{x-z} @hspace{2em}y-z
 
-@n Click  &#8635;   to reload the Desmos file and retrieve its initial settings. Drag a point on the x-axis to the right until you're in the x-z plane. What happened to your purple dots? @fitb{}{@ifsoln{They're all on the y-axis.}}
+@n Adjust @math{m_{curve}} and @math{b} to find the the best fit.  @math{m_{skew}}: @fitb{4em}{@ifsoln{-2 to -3}}    @math{b}: @fitb{4em}{@ifsoln{30 to 45}}.  _As curve increases, the steering-angle_ @fitb{}{@ifsoln{increases}}
 
-@n Turn *off* the "Steering-Angle v. Skew (purple)" folder and turn *on* the folder "Steering-Angle v. Curve (blue)". You'll see blue points appear. Scroll down beneath the "Steering-Angle v. Curve (blue)" to reveal the @math{m_{curve}} slider. Adjust the @math{m_{curve}} and the same @math{b} slider you used before to make a line appear on the plot. What settings make the best model for these points?    @math{m_{skew}}: @fitb{4em}{@ifsoln{-2 to -3}}    @math{b}: @fitb{4em}{@ifsoln{30 to 45}}.
+@vspace{1ex}
 
-@n Label the planes below.
+[cols="1a, ^2a", frame="none"]
+|===
+| @n _Where is each relationship shown?_
 
-@centered-image{../images/3d-planes.webp}
+@vspace{1ex}
 
-@n Drag any point in the `Skew v. Steering Angle (purple)` scatter plot. What do you see? @fitb{}{} +
-@blanklines{2}{@ifsoln{It's a 3D chart! The purple points are all flattened against the steering-curve plane. All the curve-values are zero. There's a purple plane that rises and falls with changes to @math{b} and @math{m_{skew}}.}}
+- Return the sliders to zero
+- Click the folder icon to "turn on" the `Curve v. Steering Angle (blue)` scatter plot so you can see both blue and purple dots
+- Rotate the cube to explore and label the planes in the image on the right
+| @image{../images/3d-planes.webp}
+|===
 
-@n *Return the sliders to zero*, then click the folder icon to "turn on" the `Curve v. Steering Angle (blue)` scatter plot. What do you see? @fitb{}{} +
-@fitb{}{@ifsoln{The blue points are flattened against the perpendicular plane. All the skew-values are zero.}}
+== Making Connections
 
-*Rotate the cube* so that you are looking straight at the blue scatter plot.
-
-@n Adjust the sliders to find a good fit for this data. @math{m_{skew}}: @fitb{15em}{@ifsoln{should be between 15 and 20}} and @math{b}: @fitb{}{@ifsoln{should be between -30 and -10}}.
-
-@n *Return the sliders to zero*, then "turn on" the `Curve v. Skew v. Steering Angle (orange)` folder and spin the cube. What do you see? @fitb{}{@ifsoln{The points are in 3D!}} +
-@blanklines{2}{@ifsoln{The purple and blue plots are just "projections" (shadows) of the 3D data onto each 2D plane.}}
-
-@n Fill in the blanks in the image above, showing which variable goes on each axis and which data is projected onto each plane.
-
+[cols=".^3a, ^3a", frame="none"]
+|===
+| @n *Set the sliders to zero*, then "turn on" _all the folders_. Rotate the cube and explore. What does this have to do with the diagram on the right? +
+@blanklines{4}{@ifsoln{The purple and blue plots are just "projections" (shadows) of the 3D data onto each 2D plane.}}
+| @image{../images/projection-bw.png}
+|===
 == Fitting a 3D Model
 
-@n "Turn off" the 2d projections (blue and purple). Adjust all three sliders to find the *plane of best fit* for this data. (HINT: use the slopes you already found!)
+@n "Turn off" the 2d projections (blue and purple). Adjust all three sliders to find the *plane of best fit* for this data. +
+_(HINT: start with the slopes you already found!)_
 
 @n Use your slider estimates to complete the Pyret definition below:
 

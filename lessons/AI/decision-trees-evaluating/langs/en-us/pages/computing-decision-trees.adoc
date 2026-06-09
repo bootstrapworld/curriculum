@@ -1,85 +1,67 @@
 = Computing Decision Trees
+++++
+<style>
+div#body .pyret-comment .fitbruby { min-width: 9em; }
 
-@center{@show{(contract "build-tree" '("Table" "List" "String" "Number") "DecisionTree")}}
-
-The `build-tree` function takes *four arguments* in its Domain:
-
-[cols="1a,2a", frame="none", grid="none"]
-|===
-|
-(a) The _training data_ on which to fit the tree +
-(b) A list of all the column names to split on
-
-|
-(c) The name of the _target_ column, containing all the "answers" for the various categories +
-(d) The _maximum depth_ the tree is allowed to be
-|===
+</style>
+++++
+@center{@show{(contract "build-tree" '(("Training Data" "Table" ) ("Columns to split on" "List<String>") ("\"Answer key\" Column" "String") ("Maximum depth" "Number")) "DecisionTree")}}
 
 @link-instructions{Return to your copy of the @starter-file{decision-tree}.}
-== Building One-Level Decision Trees
+== Building One-Level Decision Trees from Categorical and Quantitative Splits
 
-*Pyret can build one-level Decision Trees...*
+*In the Definitions Area, define `tree-c1` and to be a 1-level tree using only the _categorical_ `"tail"` column, and click "Run":*
 
-@vspace{1ex}
+@hspace{1em}`tree-c1 = build-tree(training, [list: "tail"], "species", 1)`
 
-*Based on a categorical column of our choosing.* 
+@n Evaluate `tree-c1`. If an animals has no tail, it will predict: @fitb{5em}{@ifsoln{snail}}
 
-In the Definitions Area, define `tree1` to be a 1-level tree using only the `"tail"` column:
-
-@hspace{1em}`tree-cat1 = build-tree(training, [list: "tail"], "species", 1)`
-
-@n Click "Run", and evaluate `tree-cat1`. What species will this classifier predict for animals *without* tails?  @fitb{}{@ifsoln{snail}}
-
-@n Evaluate `dt-code(tree-cat1)`. Where have we seen this code before? @fitb{}{@ifsoln{it's the code for `tail-classifier`!}}
+@n Evaluate `dt-code(tree-c1)`. Where have we seen this code before? @fitb{}{@ifsoln{it's the code for `tail-classifier`!}}
 
 @vspace{1ex}
 
-*Based on a quantitative column of our choosing.* 
+*In the Definitions Area, define `tree-q1` to be a 1-level tree using only the _quantitative_ `"pounds"` column, and click "Run":*
 
-In the Definitions Area, define `tree2` to be a 1-level tree using the `"pounds"` column:
+@hspace{1em}`tree-q1 = build-tree(training, [list: "pounds"], "species", 1)`
 
-@hspace{1em}`tree-quant1 = build-tree(training, [list: "pounds"], "species", 1)`
-
-@n Click "Run", and evaluate `tree-quant1`. What split did it come up with? @fitb{}{@ifsoln{pounds < 9.55}}
+@n Evaluate `tree-q1`. What split did it come up with? @fitb{}{@ifsoln{pounds < 9.55}}
 
 @vspace{1ex}
 
-*Based on whichever column Pyret determines will make the best predictions for our training dataset*.
+*In the Definitions Area, define `tree-any` to be a 1-level tree using the _any_ column, and click "Run":*
 
 @hspace{1em}`tree-any1 = build-tree(training, [list: "sex", "tail", "mammal", "swims", "pounds"], "species", 1)`
 
-@n First, which column did you think would make the best @vocab{root node} for predicting `species` in the `training` dataset? @fitb{}{@ifsoln{`swims`}}
+@n Which column would *you* choose for the @vocab{root node}? @fitb{5em}{@ifsoln{`swims`}}. Evaluate `tree-any1`. Which one did *Pyret* choose? @fitb{}{@ifsoln{`swims`}}
 
-@n Click "Run", and evaluate `tree-any1`. Which column did Pyret choose? @fitb{}{@ifsoln{`swims`}}
+== Building Multi-level Decision Trees from Categorical and Quantitative Splits
 
-== Building Multi-level Decision Trees
-The trees we just built were restricted to a single level, but we can give Pyret any maximum number of levels to work with. 
+*Add the following definitions to your Definitions Area and click "Run":*
 
-@n Add the following definitions to your Definitions Area and click "Run". 
-
-@hspace{1em}`tree-cat2 = build-tree(training, [list: "tail"], "species", 2)` +
-@hspace{1em}`tree-quant2 = build-tree(training, [list: "pounds"], "species", 2)` +
+@hspace{1em}`tree-c2 = build-tree(training, [list: "tail"], "species", 2)` +
+@hspace{1em}`tree-q2 = build-tree(training, [list: "pounds"], "species", 2)` +
 @hspace{1em}`tree-any2 = build-tree(training, [list: "sex", "tail", "mammal", "swims", "pounds"], "species", 2)` 
 
-@n What was the maximum number of levels defined for `tree-cat2`? @fitb{3em}{@ifsoln{2}} Evaluate `tree-cat2`. How many levels does it have? @fitb{3em}{@ifsoln{1}} Why? @fitb{}{@ifsoln{once we split between animals with and without tails, there's no further sorting we can do with just the `"tail"` column.}}
+@n In the code above, we allowed `tree-c2` to have a maximum depth of @fitb{2em}{@ifsoln{2}}. The resulting tree actually had @fitb{2em}{@ifsoln{1}} level. Why? +
+@fitb{}{@ifsoln{once we split between animals with and without tails, there's no further sorting we can do with just the `"tail"` column.}}
 
-@n Add the following definitions to your Definitions Area and click "Run". 
+*Add the following definitions to your Definitions Area and click "Run":*
 
-@hspace{1em}`tree-quant3 = build-tree(training, [list: "pounds"], "species", 3)` +
-@hspace{1em}`tree-quant4 = build-tree(training, [list: "pounds"], "species", 4)` +
-@hspace{1em}`tree-quant5 = build-tree(training, [list: "pounds"], "species", 5)` +
+@hspace{1em}`tree-q3 = build-tree(training, [list: "pounds"], "species", 3)` +
+@hspace{1em}`tree-q4 = build-tree(training, [list: "pounds"], "species", 4)` +
+@hspace{1em}`tree-q5 = build-tree(training, [list: "pounds"], "species", 5)` +
 @hspace{1em}`tree-any3 = build-tree(training, [list: "sex", "tail", "mammal", "swims", "pounds"], "species", 3)` +
 @hspace{1em}`tree-any4 = build-tree(training, [list: "sex", "tail", "mammal", "swims", "pounds"], "species", 4)` +
 @hspace{1em}`tree-any5 = build-tree(training, [list: "sex", "tail", "mammal", "swims", "pounds"], "species", 5)`
 
-@n Take a look at the trees in the table below. What do you notice? What do you wonder? @fitb{}{} +
-@blanklines{1}{@ifsoln{the trees all start with the same splits. will pyret always do that?}}
+@n We've produced three of the trees below. How are they similar? How are they different? @fitb{}{} +
+@blanklines{2}{@ifsoln{The trees all start with the same root nodes, and q2 and q3 have the same 2nd-level decision node. The only difference is really the depth}}
 
-[cols="3a,4a,5a", stripes="none"]
+[%autowidth, cols="^a,^a,^a", stripes="none", options="header"]
 |===
-| `tree-quant1` 
-| `tree-quant2` 
-| `tree-quant3`
+| `tree-q1`
+| `tree-q2`
+| `tree-q3`
 
 | @image{../images/tree-quant1.png,110}
 | @image{../images/tree-quant2.png,140}

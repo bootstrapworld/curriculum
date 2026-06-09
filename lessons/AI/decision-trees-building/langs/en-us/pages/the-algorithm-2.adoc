@@ -1,0 +1,129 @@
+= Building a Decision Tree: The Algorithm (Continued)
+++++
+<style>
+#preamble_disabled { flex-grow: 0 !important; }
+.fitb { min-width: 3em !important; padding-top: 0 !important;}
+.autonum, .fitb.stretch::after { padding-top: 0 !important; }
+table.fit-content tr td { padding: 0.3em 0.625em !important; }
+</style>
+++++
+
+[cols="3a, 2a", frame="none", border="none", grid="none"]
+|===
+|
+[.data-table, cols="1,^1,^1,^1,^1,^1,^1", stripes="none", options="header"]
+!===
+! name 			! species	 ! sex				! pounds! tail	! mammal! swims
+! "Firepaw"		! "cat" 	 ! "female"			! 9.5	! TRUE	! TRUE	! FALSE
+! "Leafpool"	! "cat" 	 ! "female"			! 10.6 	! TRUE	! TRUE	! FALSE
+! "Shadestar"	! "cat" 	 ! "female"			! 9.0 	! TRUE	! TRUE	! TRUE
+! "Bramble"		! "cat" 	 ! "female"			! 4.1 	! TRUE	! TRUE	! FALSE
+! "Brick"		! "cat" 	 ! "male" 			! 8.5 	! TRUE	! TRUE	! FALSE
+! "Frisky"		! "dog" 	 ! "female"			! 9.6	! TRUE	! TRUE	! TRUE
+! "Socks"		! "dog" 	 ! "female"			! 11.1 	! TRUE	! TRUE	! TRUE
+! "stripes"		! "dog" 	 ! "male" 			! 10.0 	! TRUE	! TRUE	! TRUE
+! "Snickers"	! "dog" 	 ! "male" 			! 10.3 	! TRUE	! TRUE	! TRUE
+! "Bruni"		! "lizard" 	 ! "female" 		! 8.2 	! TRUE	! FALSE	! TRUE
+! "Jesús"		! "lizard"	 ! "male" 			! 3.5 	! TRUE	! FALSE	! FALSE
+! "Gary"		! "snail"	 !"hermaphrodite"	! 0.1 	! FALSE	! FALSE	! FALSE
+! "Turbo"		! "snail"	 !"hermaphrodite"	! 0.1 	! FALSE	! FALSE	! FALSE
+! "Charlotte"	! "tarantula"! "male" 			! 0.4 	! FALSE	! FALSE	! FALSE
+! "Webs"		! "tarantula"! "female" 		! 0.4 	! FALSE	! FALSE	! FALSE
+!===
+
+|
+@image{../images/empty-tree.png}
+|===
+
+
+@n In the diagram above, fill in the code for your root node and the number of animals in each branch from your work on @printable-exercise{the-algorithm.adoc}.
+
+@n In the @starter-file{decision-tree}, change the `my-classifier1` function to use your root. Click "Run", and evaluate `classify(training, "species", my-classifier1)`. How many did your classifier get right?
+
+@center{
+*Dogs*: 	 @fitb{3em}{} of 4 @hspace{1em}
+*Cats*: 	 @fitb{3em}{} of 5 @hspace{1em}
+*Lizards*: 	 @fitb{3em}{} of 2 @hspace{1em}
+*Snails*: 	 @fitb{3em}{} of 2 @hspace{1em}
+*Tarantulas*:@fitb{3em}{} of 2 @hspace{1em}
+}
+
+@center{*TOTAL:* 	 @fitb{3em}{} of 15}
+
+== Choosing a Split for Animals on the Left
+What is the best split to use for the animals on the left?
+
+[%autowidth, cols="^,^,^,^", frame="none", stripes="none", options="header"]
+|===
+| Split on
+| "no" leaf (most common)
+| "yes" leaf (most common)
+| # Correct
+
+| `r["mammal"] == true`
+| "snail" or "tarantula" (2 of 5)
+| "cat" (4 of 4)
+| 6
+
+| `r["tail"] == true`
+| @ifsoln{"snail" or "tarantula" (2 of 4)}
+| @ifsoln{"cat" (4 of 5)}
+| @ifsoln{6}
+
+| `r["sex"] == "hermaphrodite"`
+| @ifsoln{"cat" (4 of 7)}
+| @ifsoln{"snail" (2 of 2)}
+| @ifsoln{6}
+
+| `r["sex"] == "female"`
+| @ifsoln{"snail" (2 of 4)}
+| @ifsoln{"cat" (4 of 5)}
+| @ifsoln{6}
+|===
+
+== Choosing a Split for Animals on the Right
+What is the best split to use for the animals on the right?
+
+[%autowidth, cols="^,^,^,^", frame="none", stripes="none", options="header"]
+|===
+| Split on
+| "no" leaf (most common)
+| "yes" leaf (most common)
+| # Correct
+
+| `r["mammal"] == true`
+| "lizard" (1 of 1)
+| "dog" (4 of 5)
+| 5
+
+| `r["tail"] == true`
+| @ifsoln{no answer! (0 of 0)}
+| @ifsoln{"dog" (4 of 6)}
+| @ifsoln{4}
+
+| `r["sex"] == "hermaphrodite"`
+| @ifsoln{"dog" (4 of 4)}
+| @ifsoln{"snail" (2 of 2)}
+| @ifsoln{6}
+
+| `r["sex"] == "female"`
+| @ifsoln{"dog" (2 of 4)}
+| @ifsoln{"dog" (2 of 4)}
+| @ifsoln{4}
+|===
+
+
+@n Choose your splits, filling in the second level of the decision tree diagram at the top of this page.
+
+@n Complete the `my-classifier2` in the starter file. Click "Run", and evaluate `classify(training, "species", my-classifier2)`. How many did your classifier get right?
+
+@center{
+*Dogs*: 	 @fitb{3em}{} of 4 @hspace{1em}
+*Cats*: 	 @fitb{3em}{} of 5 @hspace{1em}
+*Lizards*: 	 @fitb{3em}{} of 2 @hspace{1em}
+*Snails*: 	 @fitb{3em}{} of 2 @hspace{1em}
+*Tarantulas*:@fitb{3em}{} of 2 @hspace{1em}
+}
+
+@center{*TOTAL:* 	 @fitb{3em}{} of 15}
+
