@@ -86,46 +86,19 @@ But `curve`, `skew`, `offset`, and `speed` are all being measured _at the same t
 @slidebreak{LaunchR}
 @right{@image{images/plane-of-best-fit.png, 300}}
 
-If we want to consider all three, then we need to consider each snapshot in the training corpus as a 3d point, with values for `curve`, `skew`, _and_ `steering-angle`.
+--
+If we want to consider all three variables in our model, then we need to consider each snapshot in the training corpus as a 3d point, with values for `curve`, `skew`, _and_ `steering-angle`.
 
-To make _predictions_ in three dimensions, we need to do _regression_ in three dimensions. 
+- If `curve` and `skew` are both values in a given snapshot, they each explain a _portion_ of the steering angle at that moment.
+
+- To make _predictions_ in three dimensions, we need to do _regression_ in three dimensions. 
 
 @lesson-point{
 Instead of a line of best fit, we're looking for a *plane of best fit*.
 }
-
-@scrub{
-@slidebreak{LaunchR}
-
-@ifslide{@right{@image{images/plane-of-best-fit.png, 300}}}
-
-- If `curve` and `skew` are both values in a given snapshot, they each explain a _portion_ of the steering angle at that moment
-- We need a function that takes in both slopes (@math{m_{curve}} and @math{m_{skew}}) - considering the "amount of pull" each variable has on the steering angle
-- @math{b} is the intercept: the predicted steering angle when both inputs are zero
-We want Pyret to learn a function with the best possible values for @math{m_{curve}}, @math{m_{skew}}, and @math{b}:
-
-[.big-codeblock]
-@big{
-`fun curve-skew-predictor(r): (` @math{m_{curve}}` * r["curve"]) + ( `@math{m_{skew}} `* r["skew"]) + b end`
-}
-}
+--
 
 @teacher{Draw connections to the cylinder-and-shadows image: each 2D scatter plot from the last lesson is a literal "shadow" of the 3D data, cast by collapsing one dimension flat.}
-
-=== Synthesize
-@slidebreak{SynthesizeR}
-@ifslide{@right{@image{images/plane-of-best-fit.png, 300}}}
-
-@QandA{
-@Q{Why does our multiple-regression function have *two* slopes?}
-@A{Because we're defining a *plane*. A flat sheet can tip along two different axes independently, so it needs two slopes — one for each.}
-
-@Q{Each scatter plot from the last lesson was a "shadow" of the 3D data. When we looked at `curve` vs. `steering-angle`, in which direction was the light shining?}
-@A{Along the `skew` axis — all the variation in `skew` got collapsed into a flat 2D view.}
-
-@Q{Does that mean the `curve` vs. `steering-angle` scatter plot was "wrong"?}
-@A{No — it was accurate, just incomplete. It told part of the story.}
-}
 
 @slidebreak{Synthesize}
 
@@ -145,35 +118,77 @@ Some tech companies make a show of open-sourcing their models while declining to
 }
 
 
+@scrub{
+@slidebreak{LaunchR}
+
+@ifslide{@right{@image{images/plane-of-best-fit.png, 300}}}
+
+
+- We need a function that takes in both slopes (@math{m_{curve}} and @math{m_{skew}}) - considering the "amount of pull" each variable has on the steering angle
+- @math{b} is the intercept: the predicted steering angle when both inputs are zero
+We want Pyret to learn a function with the best possible values for @math{m_{curve}}, @math{m_{skew}}, and @math{b}:
+
+[.big-codeblock]
+@big{
+`fun curve-skew-predictor(r): (` @math{m_{curve}}` * r["curve"]) + ( `@math{m_{skew}} `* r["skew"]) + b end`
+}
+}
+
+=== Synthesize
+@slidebreak{SynthesizeR}
+@ifslide{@right{@image{images/plane-of-best-fit.png, 300}}}
+
+@QandA{
+@Q{Why does our multiple-regression function have *two* slopes?}
+@A{Because we're defining a *plane*. A flat sheet can tip along two different axes independently, so it needs two slopes — one for each.}
+
+@Q{Each scatter plot from the last lesson was a "shadow" of the 3D data. When we looked at `curve` vs. `steering-angle`, in which direction was the light shining?}
+@A{Along the `skew` axis — all the variation in `skew` got collapsed into a flat 2D view.}
+
+@Q{Does that mean the `curve` vs. `steering-angle` scatter plot was "wrong"?}
+@A{No — it was accurate, just incomplete. It told part of the story.}
+
+@Q{Do we know that the model we fit in Desmos is really the best for the data?}
+@A{No! We just used our eyes to find a plane that looked like it might represent the pattern in the points.}
+}
+
 == Multiple Regression in Pyret
 @objective{models-multivariable}
+
 === Overview
 Students use `regression-model-code` with multiple input columns to build a two-variable steering predictor, and `regression-model-S` to evaluate and compare models. They think critically about which variables to keep.
 
 === Launch
 @slidebreak{Launch}
 
-In the last lesson, we used `regression-model-code` with a list of one explanatory variable:
+Let's use Pyret to find the best model for our data! 
 
-`regression-model-code(training-data, [list: "curve"], "steering-angle")`
+@QandA{
+@Q{For linear regression we used a function called `lr-plot`. What did it do?}
+@A{It graphed a scatter plot with a line of best fit on it.}
+@A{It defined the predictor function.}
+@A{It told us how much error to expect in predictions made with the model by reporting the @math{S-value} and @math{r^2}.}
+}
 
-Adding a second variable to the list is all it takes to go from a line to a plane!
+Pyret can't plot data in more than two dimensions at a time, but it can compute in many dimensions!
 
-`regression-model-code(training-data, [list: "curve", "skew"], "steering-angle")`
-
-@slidebreak{Launch}
-Pyret also has a tool to measure the fit of any row-consuming regression model:
-
-@show{(contract "lr-plot" '((t Table) (labels Str) (xs Str) (ys Str)) "Image"
-"produces the S-value (overall error) of a multiple-regression model, fit to the specific columns"
+- To get the code for a predictor function we can use `regression-model-code`. +
+@hspace{2em}@show{(contract "regression-model-code" '((table-name Table) (explanatory List<String>) (response String)) "Code")} +
+  * In the last lesson we gave it a list with just one explanatory variable. For example: +
+@hspace{2em}`regression-model-code(training-data, [list: "curve"], "steering-angle")`
+  * Adding a second variable to the list is all it takes to go from a regression line to a regression plane! For example: +
+@hspace{2em}`regression-model-code(training-data, [list: "curve", "skew"], "steering-angle")`
+- Pyret also has a tool for measuring the fit of any row-consuming regression model:
+@hspace{2em}@show{(contract "regression-model-S" '((table-name Table) (explanatory List<String>) (response String) (model "Row->Number")) "Number" 
+"produces the S-value of a multiple-regression model, fit to the specific columns"
 )}
 
 === Investigate
 @slidebreak{Investigate-DN}
 
 @lesson-instruction{
-- Make sure @starter-file{self-driving} is open, and you can evaluate `training-data`.
-- Use `regression-model-code`, `regression-model-S` to complete the first section of @printable-exercise{supervised-learning-multiple-regression.adoc}.
+- Open your copy of @starter-file{self-driving} and click "Run".
+- Use `regression-model-code` and `regression-model-S` to complete the first section of @printable-exercise{supervised-learning-multiple-regression.adoc}.
 }
 
 @slidebreak{InvestigateR}

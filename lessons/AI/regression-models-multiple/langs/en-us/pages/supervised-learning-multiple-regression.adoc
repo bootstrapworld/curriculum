@@ -20,7 +20,7 @@ div#body .center { padding: 0 !important; }
 </style>
 ++++
 
-To complete this page, you'll be using the following contracts:
+@link-instructions{To complete this page, open your copy of @starter-file{self-driving} and click "Run". You'll be using the following functions:}
 
 @indented{
 @show{(contract "regression-model-code" '((table-name Table) (explanatory List<String>) (response String)) "Code")} +
@@ -40,11 +40,12 @@ To complete this page, you'll be using the following contracts:
 `end`
 }
 
+@n The variable that has the larger coefficient in the function has more "pull" on the prediction. Which will that be? @fitb{5em}{@ifsoln{`curve`}} 
 
-@n Which variable has the larger coefficient? @fitb{5em}{@ifsoln{`curve`}} What does that tell you? @fitb{}{} +
-@fitb{}{@ifsoln{`curve` has more "pull" on the prediction — a one-unit change in `curve` shifts the predicted steering angle more than a one-unit change in `skew`.}}
+- a one-unit change in `curve` shifts the predicted steering angle @fitb{}{} 
+- a one-unit change in `skew` shifts the predicted steering angle @fitb{}{} 
 
-@n *Copy-and-paste* your model into the Definitions Area, and *change the name* to `cs-predictor`.
+@n *Copy-and-paste* your model into the Definitions Area.
 
 @n Use `reg-model-S` to compare the fit of your 1-variable and 2-variable models:
 
@@ -52,15 +53,15 @@ To complete this page, you'll be using the following contracts:
 |===
 | Model
 | @math{S}-value
+
 | `reg-model-S(training-data, [list: "curve"], "steering-angle", curve-predictor)`
 | @ifsoln{}
 
-
-| `reg-model-S(training-data, [list: "curve", "skew"], "steering-angle", cs-predictor)`
+| `reg-model-S(training-data, [list: "curve", "skew"], "steering-angle", curve-skew-predictor)`
 | @ifsoln{}
 |===
 
-@n Adding `skew` to the model made the S-value @fitbruby{14em}{@ifsoln{smaller}}{larger/smaller}. Does that mean the fit is @fitbruby{13em}{@ifsoln{better}}{better/worse}?
+@n Adding `skew` to the model made the S-value @fitbruby{14em}{@ifsoln{smaller}}{larger/smaller} so we know that the fit is @fitbruby{13em}{@ifsoln{better}}{better/worse}.
 
 == Thinking Critically About Variables
 

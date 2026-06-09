@@ -5,13 +5,13 @@
 /* custom positioning for subscript */
 div#body sub { position: relative; bottom: 0.1em; }
 
-div#body img { height: 180px; width: 450px; }
+/* div#body img { height: 180px; width: 450px; }*/
 
-.editbox { background: none !important; }
+.editbox { background: none !important; }  
 
 div#body td { padding: 0 1em 0 0 !important; }
 
-.paragraph > p > strong { display: inline-block; padding-top: 1em !important; }
+*/ .paragraph > p > strong { display: inline-block; padding-top: 1em !important; } */
 </style>
 ++++
 
@@ -36,54 +36,59 @@ div#body td { padding: 0 1em 0 0 !important; }
 ////
 
 @include{fragments/desmos.adoc}
-@link-instructions{Make sure you have @online-exercise{https://www.desmos.com/3d/omnchml87a, Curve v. Skew v. Steering Angle} open in Desmos. Click on the wrench button ([.desmosbutton]#{wrench}#) in the top-right corner to *Open "Graph Settings".* At the bottom of the "More Options" list, check the box for *Translucent Surfaces*.}
+@link-instructions{Make sure you have @online-exercise{https://www.desmos.com/3d/omnchml87a, Curve v. Skew v. Steering Angle} open in Desmos. Click on the wrench button ([.desmosbutton]#{wrench}#) in the top-right corner to *Open "Graph Settings".* At the bottom of the "More Options" list and check the box for *Translucent Surfaces*.}
 
 == Working in 3 Dimensions
 
-@n The 3D graph shows a (purple) 2D scatter plot. Which plane is the scatter plot on? @hspace{2em}x-y @hspace{2em}x-z @hspace{2em}@ifsoln-choice{y-z}
-
-*Rotate the cube so that the z-axis is pointing up, the y-axis is pointing to the right, and the x-axis is pointing towards you*
-
-@n Adjust @math{m_{skew}} and @math{b} to find the best fit.  @math{m_{skew}}: @fitb{4em}{@ifsoln{-2 to -3}}    @math{b}: @fitb{4em}{@ifsoln{30 to 45}}. _As skew increases, the steering-angle_ @fitb{}{@ifsoln{decreases}}
-
-*Rotate the cube so that the z-axis is pointing up, the x-axis is pointing to the right, and the y-axis is pointing towards you*
-
-@n Why do the purple dots look like they're in one line? @fitb{}{@ifsoln{from this angle, we can't see the x-distance between them}}
-
-*Turn off the "Steering-Angle v. Skew (purple)" folder and turn on "Steering-Angle v. Curve (blue)"*
-
-@n Now the 3D graph shows a (blue) 2D scatter plot. Which plane is the scatter plot on? @hspace{2em}x-y @hspace{2em}@ifsoln-choice{x-z} @hspace{2em}y-z
-
-@n Adjust @math{m_{curve}} and @math{b} to find the the best fit.  @math{m_{skew}}: @fitb{4em}{@ifsoln{-2 to -3}}    @math{b}: @fitb{4em}{@ifsoln{30 to 45}}.  _As curve increases, the steering-angle_ @fitb{}{@ifsoln{increases}}
-
-@vspace{1ex}
-
-[cols="1a, ^2a", frame="none"]
+[cols="3a, ^2a", frame="none"]
 |===
-| @n _Where is each relationship shown?_
-
-@vspace{1ex}
-
-- Return the sliders to zero
-- Click the folder icon to "turn on" the `Curve v. Steering Angle (blue)` scatter plot so you can see both blue and purple dots
-- Rotate the cube to explore and label the planes in the image on the right
+| @n What do you Notice? What do you Wonder? 
+@blanklines{4}{}
 | @image{../images/3d-planes.webp}
 |===
 
+@vspace{1ex}
+
+*Click on the cube to drag and rotate it so that the z-axis points up, y-axis points to the right, and x-axis points towards you.*
+
+@n Now the 3D graph shows a (purple) 2D scatter plot. Which plane is the scatter plot on? @hspace{2em}x-y @hspace{2em}x-z @hspace{2em}@ifsoln-choice{y-z}
+
+@n Which variables are being compared in this plane? @fitb{}{@ifsoln{angle and skew}}
+
+@n Adjust @math{m_{skew}} and @math{b} to find the best fit.  @hspace{1em} @math{m_{skew}}: @fitb{4em}{@ifsoln{-2 to -5}}    @math{b}: @fitb{5em}{@ifsoln{30 to 45}}. _As skew increases, the steering-angle_ @fitb{}{@ifsoln{decreases}}
+
+@vspace{1ex}
+
+*Rotate the cube to the right, so that the z-axis points up, y-axis points to the right, and x-axis points towards you.*
+
+@n What did the line look like while you were rotating the cube? @fitb{}{@ifsoln{a plane!}}
+
+@n Why do the purple dots look like they're in one line? @fitb{}{@ifsoln{from this angle, we can't see the x-distance between them}}
+
+@vspace{1ex}
+
+*Turn off the "Steering-Angle v. Skew (purple)" folder and turn on "Steering-Angle v. Curve (blue)"*
+
+@n Now the 3D graph shows a (blue) 2D scatter plot. Which plane is the scatter plot on? @hspace{2em}x-y @hspace{2em}@ifsoln-choice{x-z} @hspace{2em}y-z +
+
+@n If you haven't already, label the planes on the 3D plot at the top of the page with the correct variable names.
+
+@n Use the sliders to fit a line to the points in this plane. _(Note:_ @math{m_{curve}} _is beneath the curve folder!)_ +
+@hspace{1em}@math{m_{curve}}: @fitb{4em}{@ifsoln{15 to 20}}    @math{b}: @fitb{5em}{@ifsoln{-30 to -10}}. _As curve increases, the steering-angle_ @fitb{8em}{@ifsoln{increases}} 
+
+
 == Making Connections
 
-[cols=".^3a, ^3a", frame="none"]
+[cols=".^5a, ^3a", frame="none"]
 |===
-| @n *Set the sliders to zero*, then "turn on" _all the folders_. Rotate the cube and explore. What does this have to do with the diagram on the right? +
-@blanklines{4}{@ifsoln{The purple and blue plots are just "projections" (shadows) of the 3D data onto each 2D plane.}}
-| @image{../images/projection-bw.png}
+| @n *Set the sliders to zero*, then "turn on" _all the folders_. Rotate the cube and explore. What do the orange dots have to do with the diagram on the right? +
+@blanklines{3}{@ifsoln{The purple and blue plots are just "projections" (shadows) of the orange 3D data onto each 2D plane.}}
+| @image{../images/projection-bw.png, 200}
 |===
+
 == Fitting a 3D Model
 
-@n "Turn off" the 2d projections (blue and purple). Adjust all three sliders to find the *plane of best fit* for this data. +
-_(HINT: start with the slopes you already found!)_
-
-@n Use your slider estimates to complete the Pyret definition below:
+@n "Turn off" the 2d projections (blue and purple) and focus on the orange dots. Set the slope sliders to the values you found for your the 2D plots and adjust the y-intercept slider to the *plane of best fit* for this data. Readjust the slope sliders if need be. Then use your slider estimates to complete the Pyret definition below:
 
 `fun steering-angle(r): (`
 @fitbruby{4.5em}{@ifsoln{20}}{@math{m_{curve}}}

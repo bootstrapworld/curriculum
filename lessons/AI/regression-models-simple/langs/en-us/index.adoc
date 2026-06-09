@@ -137,7 +137,7 @@ We're going to do exactly the same thing — training our own model to steer a v
 @slidebreak{Investigate-DN}
 
 @lesson-instruction{
-- Open @starter-file{self-driving} and click "Run".
+- Open @starter-file{self-driving} and save a copy of your own. Then click "Run".
 - Turn to @printable-exercise{driving-game-exploration.adoc} and follow the instructions there.
 }
 
@@ -350,19 +350,19 @@ Let's see how well our predictors drive the car! Pyret has a `drive` function:
 }
 
 @slidebreak{Investigate}
-Notice that `drive` takes a *Row-consuming* function — but `curve-predictor` consumes *Numbers*, not Rows!
+Notice that `drive` takes a *Row-consuming* function — but `c-predictor` consumes *Numbers*, not Rows!
 
 @QandA{
 @Q{Why does `drive` need a Row-consuming function instead of a Number-consuming one?}
 @A{Because at each moment, `drive` has access to the entire row of data — not just one column. A Row-consuming function can decide which columns to look at.}
 
-@Q{How can we get a Row-consuming version of `curve-predictor`?}
+@Q{How can we get a Row-consuming version of `c-predictor`?}
 @A{We need a new Pyret function that generates Row-consuming code from our training data.}
 }
 
 @strategy{Want Deeper Programming?}{
 
-If you're teaching this in the context of a CS, CTE, or any other class where programming is an important learning outcome, have students figure out how to make their `curve-predictor` function take a Row instead of a Number. This is a great exercise about abstraction and the idea of a data structure, and it uses programming tools they've seen in prior lessons.
+If you're teaching this in the context of a CS, CTE, or any other class where programming is an important learning outcome, have students figure out how to make their `c-predictor` function take a Row instead of a Number. This is a great exercise about abstraction and the idea of a data structure, and it uses programming tools they've seen in prior lessons.
 
 If your learning goals are more about AI Literacy or Mathematics, this would make a good challenge exercise for an advanced student. Otherwise, it's okay for you to move on to `regression-model-code`, which will write the Row-accessing code for them.
 }
@@ -378,9 +378,9 @@ For example: `regression-model-code(training-data, [list: "curve"], "steering-an
 
 @lesson-instruction{
 - Complete @printable-exercise{lr-steering-angle.adoc}.
-- Use the code you just considered to complete the `curve-predictor2` template in your Definitions area and click "Run" to load it. Then evaluate `drive(curve-predictor2)` in the Interactions Area.
+- Copy and past the `curve-predictor` definition you just genereated into your Definitions area and click "Run" to load it. Then evaluate `drive(curve-predictor)` in the Interactions Area.
 - Use `regression-model-code` to generate a row-consuming predictor for each of the other variables.
-- Update the templates for `offset-predictor`, `skew-predictor`, and `speed-predictor`. Click "Run" to load them. 
+- Copy and paste the resulting definitions for `offset-predictor`, `skew-predictor`, and `speed-predictor` into your Definitions Area. Click "Run" to load them. 
 - Try each one with `drive(...)`.
 }
 
@@ -428,11 +428,8 @@ Congratulations — you have just *trained a machine learning model!*
 @QandA{
 @Q{Could we train a model using more than one explanatory variable?}
 
-@Q{What would a line-of-best-fit look like on a scatter plot with _two_ explanatory variables?}
-
-@A{Would we have one slope and intercept? Two?}
+@Q{What would a line-of-best-fit look like on a scatter plot with _two_ explanatory variables? Would we have one slope and intercept? Two?}
 }
-
 
 @strategy{Computers aren't people!}{
 
