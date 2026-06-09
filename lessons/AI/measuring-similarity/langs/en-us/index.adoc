@@ -32,9 +32,6 @@ Students consider how arbitrary documents (in this case, Images) can be represen
 }
 |===
 
-
-
-
 == How do Computers "See"?
 @objective{ai-machines-v-people}
 
@@ -52,6 +49,7 @@ When we ask Google to find images similar to the one we dragged, it comes back w
 @teacher{Give students a demo, using an image of your choice!}
 
 @slidebreak{LaunchR}
+
 But the computer doesn't have eyes, and it doesn't have the human experience that informs how an image makes us feel. So how does Google Images even know what a "similar image" _means_?
 
 Let's start with how WE as humans use our eyes to notice properties of images.
@@ -63,21 +61,20 @@ Let's start with how WE as humans use our eyes to notice properties of images.
 
 @slidebreak{LaunchR}
 @right{@image{images/computer-vision.jpg, 400}}
+
 Some ML models are capable of recognizing parts of an image ("person", "car", etc.). This belong to a class of ML algorithms called "Computer Vision", which relies heavily on more advanced -- and computationally intensive -- concepts that we won't cover here.
 
 @lesson-instruction{
 - For now, we're going to use our human brains to see these elements in our images!
 }
 
-
 @slidebreak{Launch}
+
 @lesson-instruction{
 - On lines 28-39 of the *Definitions Area*, you'll see that the mountain images are used to define a _table_ called `images`.
 - There are columns for the identifier (`ID`), the image document (`DOC`), whether the image is `LIKED` or `DISLIKED`, and also for any descriptive `TAGS` in the image.
 - Complete the last section on @printable-exercise{human-perception.adoc}.
 }
-
-Can a Data Driven Algorithm help us re-create Google Image Search, even without the fancy Computer Vision tech?
 
 === Investigate
 @slidebreak{Investigate}
@@ -150,7 +147,6 @@ Pyret has several functions for working with colors, but we're going to use just
 
 === Overview
 Students explore a corpus of mountain images, and practice making image scatter plots to see how these images are distributed across different 2-dimensional spaces.
-
 
 === Launch
 @slidebreak{Launch}
@@ -265,6 +261,7 @@ Try it yourself!
 @A{No - they are very similar, but they are not identical!}
 }
 
+
 == Measuring Distance in "Image Space"
 @objective{ai-similarity}
 
@@ -281,18 +278,20 @@ What else could we do?
 Complete the first section on @printable-exercise{plotting-images.adoc}
 }
 
-
 @slidebreak{Launch}
+
 @lesson-point{We can think of our images as _points in space_}
 
 The big breakthrough here is recognizing that these columns each represents a _number line_, and every image falls _somewhere on that line_. This allows us to imagine our images existing as points in space, and opens up new ways to measure similarity by thinking about distance between those points.
 
 @slidebreak{Launch}
 @ifslide{@lesson-point{We can think of our images as _points in space_}}
+
 The worksheet had you use the `"green"` column to define a number line, creating a 1-dimensional "Green Space" where every image was plotted according to how many green-dominant pixels it had. Images with similar numbers of green pixels will be close to each other in this space, and Images with wildly different numbers of green pixel will be far away from each other. *The distance __is__ the difference!*
 
 
 @slidebreak{Launch}
+
 Pyret has a function for computing the `distance-similarity`. Just like `simple-similarity`, it compares every row in the table to a Row with a given ID.
 
 @show{(contract "distance-similarity" '("Table" "Str" "List<String>") "Table")}
@@ -346,6 +345,7 @@ Our images are described by 3 different colors (Red, Blue, and Green), so our "C
 The distance formula works in 3 dimensions too! In fact, it works in _any number of dimensions_ we want -- we just can't see more than 3 with our eyes. But *the math holds true*, and we can use `distance-similarity` with any number of attributes we want.
 
 @slidebreak{Investigate}
+
 @lesson-instruction{
 - Try `distance-similarity(decorated-bag, "3", [list: "red", "green", "blue"])`, and see how well this works at finding the similarity between images with *grass*.
 - Try it again with ID `"5"`, to see how well it works at finding the similarity between images with *snow*.
@@ -364,6 +364,7 @@ Overall, `distance-similarity` is a huge upgrade compared to `simple-similarity`
 === Synthesize
 @slidebreak{Synthesize}
 TODO
+
 
 == Measuring Angles in "Image Space"
 @objective{ai-similarity}
@@ -409,6 +410,7 @@ This solves both of the problems with `distance-similarity`:
 }
 
 @slidebreak{Investigate}
+
 Of course, Pyret has a function for angle similarity, too!
 
 @hspace{1em}@show{(contract "angle-similarity" '("Table" "String" "List<String>") "Table")}
@@ -420,6 +422,7 @@ Complete @printable-exercise{angle-similarity-pyret.adoc}
 }
 
 @slidebreak{Investigate}
+
 Is measuring angles closer to human perception than measuring distance?
 
 @lesson-instruction{
@@ -432,7 +435,6 @@ Is measuring angles closer to human perception than measuring distance?
 }
 
 @strategy{Isn't this Middle School Math?!}{
-
 Yes, it is!
 
 The same points and angles your students plot and compute in middle-school are sitting at the heart of the machine learning calculations that power so many things in the world today. Even the plagiarism detectors that might be checking their essays are computing angles. So if your students ask “When are we ever going to use this?”, you can tell them, “You already do, all the time.”
@@ -448,12 +450,13 @@ If you have older students who have learned some trigonometry, you might want to
 For the purposes of this curriculum, you can safely ignore the difference between angle and cosine similarity! But, for students who are familiar with cosine and curious to explore, all of the starter files in our AI pathway have access to a `cosine-similarity` function.
 }
 
-
 === Synthesize
 @slidebreak{Synthesize}
+
 Angle similarity really helped us improve the machines' "perception" of what makes two images similar. Given one image, we're able to produce much better search results! Thinking back to the notion of search as a *recommendation system*, you could also imagine doing the same with other kinds of data: picking a song and asking Spotify to recommend similar matches!
 
 @slidebreak{Synthesize}
+
 @QandA{
 @Q{It's obvious why `angle-similarity` works in two dimensions: you can use a protractor on a piece of paper if you have to! How could you explain why it still works in *three dimensions*?}
 @A{All we need is two rays coming from the origin, forming a "V" shape like the bands in a slingshot. No matter how you turn and twist the "V", it will always define a plane on which we can use a protractor.}
@@ -466,8 +469,8 @@ Angle similarity really helped us improve the machines' "perception" of what mak
 }
 
 @slidebreak{Synthesize}
+
 There are still a lot of limitations to our system, however:
 
 - We can only _search by document_, where we pick an image and find similar ones. Google lets us type in a word like "grass"! (A music example: Spotify lets us type in a word like "jazz", rather than asking to tell it a specific song)
 - We're only recommending matches based on a single document: we can't find images, songs, or anything else based on a _collection_ of liked or disliked documents.
-
