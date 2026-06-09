@@ -34,6 +34,8 @@ Students consider how arbitrary documents (in this case, Images) can be represen
 
 == How do Computers "See"?
 @objective{ai-machines-v-people}
+@objective{ai-similarity}
+@objective{attributes-as-dimensions}
 
 === Overview
 Students explore ways in which attributes of images can be computed, using various functions.
@@ -48,218 +50,103 @@ When we ask Google to find images similar to the one we dragged, it comes back w
 
 @teacher{Give students a demo, using an image of your choice!}
 
-@slidebreak{LaunchR}
-
-But the computer doesn't have eyes, and it doesn't have the human experience that informs how an image makes us feel. So how does Google Images even know what a "similar image" _means_?
-
-Let's start with how WE as humans use our eyes to notice properties of images.
-
 @lesson-instruction{
-- Open the @starter-file{ai-image}, and click "Run".
-- Complete the first section on @printable-exercise{human-perception.adoc}.
+- Open the @starter-file{ai-image} on your computer and save a copy that's just for you. Then click "Run".
+- Evaluate `mountains` in the *Interactions Area*, then click on the thumbnail to expand it. 
 }
 
-@slidebreak{LaunchR}
-@right{@image{images/computer-vision.jpg, 400}}
-
-Some ML models are capable of recognizing parts of an image ("person", "car", etc.). This belong to a class of ML algorithms called "Computer Vision", which relies heavily on more advanced -- and computationally intensive -- concepts that we won't cover here.
-
-@lesson-instruction{
-- For now, we're going to use our human brains to see these elements in our images!
+@QandA{
+@Q{What attributes do these nine images share? What makes the images similar?}
+@Q{What attributes distinguish these nine images? What makes them different?}
+@Q{Which is _more similar_ to Photo 1:   Photo 2 or Photo 3?  Why?}
+@A{Photo 2 possible responses: Like the mountains in Photo 1, the mountains in Photo 2 fill up just a narrow strip of the whole photo. Similar to Photo 1, Photo 2 also includes a body of water in the foreground and a sun in the background.}
+@A{Photo 3 possible responses: Photo 3's color palette includes mostly white, brown, and blue.}
 }
 
-@slidebreak{Launch}
+Computers don't experience the world in the same way we do. 
+
+@lesson-point{Where we see a beautiful mountain scene, a computer only sees a grid of @vocab{pixels} – tiny dots that make up the image.} 
+
+Each pixel has a particular amount of Red, Green, and Blue in it. For our purposes, we'll use a scale of 0-255 to record the amount of each color that makes up a pixel. 
+
+- White is made of every color, so a white pixel would have a value of 255 for Red, Green, _and_ Blue. (255, 255, 255)
+- A black pixel, on the other hand, is the _absence_ of color, so it would have zeros for all three colors. (0, 0, 0)
+- A red pixel uses all of the possible red and no blue or green (255, 0, 0)
+- An orange pixel might use most of the red, some of the green, and no blue (254, 165, 0)
+
+@slidebreak{Investigate}
+
+Computers can look at groups of pixels to compute values. For example:
+@right{@image{images/butterfly.png, 100}}
+- How blue the image is. 
+- *Symmetry* - measures "how similar are the pixels on one side of the image to the pixels on the other side of the image?". 
+- *Luminance* measures @vocab{central tendency} - "what's the average brightness of this image?"
+- *Entropy* measures @vocab{spread} - "how much variation in brightness is there?"
 
 @lesson-instruction{
-- On lines 28-39 of the *Definitions Area*, you'll see that the mountain images are used to define a _table_ called `images`.
-- There are columns for the identifier (`ID`), the image document (`DOC`), whether the image is `LIKED` or `DISLIKED`, and also for any descriptive `TAGS` in the image.
-- Complete the last section on @printable-exercise{human-perception.adoc}.
+- Open @starter-file{ai-image} and experiment for a moment.
+}
+
+@teacher{Perhaps look at:
+
+- `image-to-color-list(square(5, "solid", "orange"))`
+- `image-color-names(square(5, "solid", "orange"))`
+- `image-luminance` for `black-sq` and `white-sq` and predict luminance for `half-and-half`
+- `image-entropy` for `half-and-half` and `white-sq` and predict luminance for `black-sq`
+- `horizontal-symmetry` and `vertical-symmetry` for `red-sq`, `green-t` and `half-and-half`
 }
 
 === Investigate
 @slidebreak{Investigate}
 
-Computers don't experience the world in the same way we do. Where we see a beautiful mountain scene, a computer only sees a grid of _pixels_ – tiny dots that make up the image. Each pixel has a particular amount of Red, Green, and Blue in it.
+@slidebreak{LaunchR}
+@right{@image{images/computer-vision.jpg, 400}}
 
-For our purposes, we'll use a scale of 0-255 for each color that makes up a pixel. White is made of every color, so a white pixel would have a value of 255 for Red, Green, _and_ Blue. A black pixel, on the other hand, would have zeros for all three colors.
+Some ML models are capable of recognizing parts of an image ("person", "car", etc.). This belong to a class of ML algorithms called "Computer Vision", which relies heavily on more advanced -- and computationally intensive -- concepts that we won't cover here. We're going to use our human brains to see these elements in our images! And then explore whether a Data Driven Algorithm can help us re-create Google Image Search, even without the fancy Computer Vision tech.
 
-- A medium, blue pixel would only have _some_ Blue in it, and nothing else: `(0, 0, 150)`
-- A light purple pixel might have have a mix of Red and Blue, and no Green at all: `(255, 0, 255)`
-
-@slidebreak{Investigate}
-
-Computers can look at groups of pixels to compute values. For example, a computer can compare the pixels on one side of the image to the pixels on the other, to determine how _symmetrical_ the image is! Let's explore Pyret functions that do exactly that:
+@slidebreak{Launch}
 
 @lesson-instruction{
-Complete @printable-exercise{computer-perception.adoc}
+- Take a look at lines 26-40 of our Definitions Area.
+  * Notice we're defining a _table_ called `images`.
+  * There are columns for the identifier (`ID`), the image document (`DOC`), whether the image is `LIKED` or `DISLIKED`, and also for any descriptive `TAGS` in the image.
+  * For now, none of the images are liked, disliked, or tagged. By defining the table here in the code, we've set ourselves up to be able to make changes.
+- Choose the *two mountain images you like the best*, and change the values for those images in the `LIKED` from `false` to `true`.
+- In the `TAGS` column:
+  * change `""` to `"snow"`, for the snowy images.
+  * change `""` to `"sun"` for the three images with sunsets or sunrises.
+- Then click "Run" to load your changes.
 }
-
-@slidebreak{Investigate}
 
 @QandA{
-@Q{Which images had both vertical _and_ horizontal symmetry?}
-@A{All the squares, and the blue circle}
-
-@Q{What do you think _luminance_ tells us about an image?}
-@A{How bright it is}
-
-@Q{What do you think _entropy_ tells us about an image?}
-@A{Loosely, how much variation in brightness there is across an image. }
-}
-@slidebreak{Investigate}
-
-@lesson-point{_Luminance_ and _Entropy_ aren't about color!}
-
-Instead, they give us different kinds of information about the "brightness" of a picture:
-
-- *Luminance* measures @vocab{central tendency} - "what's the average brightness of this image?"
-- *Entropy* measures @vocab{spread} - "how much variation in brightness is there?"
-
-@lesson-instruction{
-Pyret has several functions for working with colors, but we're going to use just one in this lesson. Complete the rest of @printable-exercise{computer-perception.adoc} to find out how it works!
-}
-
-=== Synthesize
-@slidebreak{Synthesize}
-
-@QandA{
-@Q{Think back to our mountain images. Which ones do you think will have the highest _luminance_? Why?}
-@A{Responses will vary}
-
-@Q{Which ones do you think will have the highest _entropy_? Why?}
-@A{Responses will vary}
-
-
-@Q{Which one has the most red? The most green?}
-@A{Image 9 has the most red}
-@A{The grassy images have the most green}
-
+Think back to our mountain images.
 
 @Q{How might we use these functions to identify the fact that one snowy image is _similar_ to another?}
 @A{They are both blue-dominant. Maybe we could look at the colors somehow?}
 @A{They are both the most uniform. Maybe we could use the `entropy` column?}
 }
 
+@teacher{
+- Which image has the most red? (Image 9)
+- Which one has the most green? (the grassy one)
+- Which do you think will have the most entropy? luminance? symmetry?
+}
 
-== Simple Similarity
-@objective{ai-similarity}
-@objective{attributes-as-dimensions}
-
-=== Overview
-Students explore a corpus of mountain images, and practice making image scatter plots to see how these images are distributed across different 2-dimensional spaces.
-
-=== Launch
 @slidebreak{Launch}
 
-Let's explore the rest of this @starter-file{ai-image}:
+@lesson-instruction{
+- Evaluate `decorated-bag` in the Interactions Area.
+}
 
-- Line 13-22 define each of our mountain images
-- These images (and our red squares!) are used in the `image` corpus, which is defined on the next few lines
-- Processing images uses a lot of computing power, so we _scale_ the large, mountain images in our corpus to be half their original size
+Note: we've left the original images in the table to make it easier to explore, but the computer ignores them -- a real image model drops the image completely, and _only_ uses the computed columns.
 
 @QandA{
-Under the table in the Definitions Area, we define a new value called `decorated`.
-
-@Q{What do you think it is?}
-@A{Answers will vary}
-
-@Q{Evaluate `decorated` in the Interactions Area. What did you get back?}
-@A{A table, with all those computed columns for every image.}
-
-*This is our image-model*, which includes lots of numeric attributes we've computed from the original images. Note: we've left the original images in the table to make it easier to explore, but the computer ignores them -- a real image model drops the image completely, and _only_ uses the computed columns.
-
-@Q{The computer only uses the numeric columns in the `decorated` model. How is this lossy? What details of the original training data does it lose?}
+@Q{The computer only uses the numeric columns. How is this lossy? What details of the original training data does it lose?}
 @A{The actual images! We only keep the numbers for the properties we chose. Everything else is lost.}
 }
 
-
-@slidebreak{Launch}
-It would be nice to take _color_ into account, and measures these images according to how much Red, Green, or Blue they have. At the moment, however, that information is locked inside the `"COLOR-NAMES"` string. *How could we calculate the amount of each color that's in each image?*
-
-
-@slidebreak{Launch}
-Pyret has a special function that takes in a Table and the name of a column, and _replaces that column_ with a bunch of columns that count the number of times each word appears in the corpus.
-
-Evaluate `decorated-bag` in the Interactions Area, to see what this looks like.
-
-@slidebreak{LaunchR}
-@right{@image{images/bag-of-colors.png, 150}}
-The `add-bag-cols` function counted the number of reds, greens and blues in `COLOR-NAMES`!
-
-We don't really care about the _order_ of those words - we just want to know how many pixels are red-dominant, green-dominant, or blue-dominant!
-
-Without the order of the words, it's as if we just put all the words into a bag and shook them up! The information about _frequency_ of each word is still there, but we've lost the _order_. Machine Learning Engineers call this a @vocab{bag of words model}.
-
-@slidebreak{Launch}
-Let's review where we are:
-
-- We've created a @vocab{model} called `decorated-bag` from our image corpus, which captures certain information -- luminance, vertical symmetry, etc.
-- We've left the original images in the `DOC` column for us humans to see, but to a computer they don't matter at all!
-
-The $64,000 question is: can we do something like Google Image Search, using only the machine-generated attributes in our table? For example, could we look for images similar to one of our snow-covered mountains (like `"4"`) and have the computer produce the other (`"5"`)?
-
-=== Investigate
-@slidebreak{Investigate}
-
-Pyret has several functions for measuring similarity, and they each work a little differently. Let's start by just asking "are these values the same?" for the columns we care about:
-
-@indented{@show{(contract "simple-similarity" '("Table" "String" "List<String>") "Table")}}
-
-Pyret's `simple-similarity` function _compares every row in the table_ to the Row with the given ID, checking to see if the specified columns are *identical*. If they are, the similarity value is one. If not, the similarity value is zero. It produces a Table, sorted from "most similar" to "least similar", with an extra column of zeroes and ones listing the similarity score.
-
-
-For example, we could check which images have the same `SYMMETRY-V` as our little red square (whose ID is `"9"`):
-
-@show{(code '(simple-similarity decorated-bag "9" (list "SYMMETRY-V")))}
-
-@slidebreak{Investigate}
-
-@QandA{
-@Q{What did `simple-similarity` produce?}
-@A{Our decorated table again, but now there's another column called `similarity`}
-
-@Q{Was the little red square similar to itself?}
-@A{Of course!}
-
-@Q{Was the big red square similar to the little one? Why or why not?}
-@A{Yes! They have exactly the same vertical symmetry}
-}
-
-@slidebreak{Investigate}
-
-Let's try comparing _both_ symmetry columns:
-
-@show{(code '(simple-similarity decorated-bag "9" (list "SYMMETRY-V" "SYMMETRY-H")))}
-
-@QandA{
-@Q{What do you think we'll get back, and why?}
-@A{The same table, because both squares are perfectly symmetric in both ways}
-
-@Q{Could we get the same result using any of our other columns?}
-@A{Yes - the `red` column would also work}
-
-@Q{Would we get the same result for every possible columns?}
-@A{No - the `WIDTH` and `HEIGHT` are different}
-}
-
-Try it yourself!
-
 === Synthesize
 @slidebreak{Synthesize}
-
-@QandA{
-@Q{Is `simple-similarity` a _useful_ way to measure similarity?}
-@A{Not at all.}
-
-@Q{Why or why not?}
-@A{Two images can be similar even if they aren't *identical*!}
-
-@Q{What would make a measure of similarity more useful?}
-@A{We should at least be able to tell the difference between an image that comes close and another that's totally different.}
-
-@Q{Could we use `simple-similarity` to compare our snowy mountain images? Why or why not?}
-@A{No - they are very similar, but they are not identical!}
-}
 
 
 == Measuring Distance in "Image Space"
@@ -270,7 +157,10 @@ Students are introduced to _distance_ as a notion of similarity. This requires t
 
 === Launch
 @slidebreak{Launch}
-The `simple-similarity` function is all-or-nothing: either the images match _precisely_ (1), or they don't (0). We want something with more nuance, which can tell that one grassy image is a lot closer to the other one than it is to a red square! A simple 1-and-0 score isn't good enough.
+
+Pyret has several functions for measuring similarity, and they each work a little differently. The `simple-similarity` function is all-or-nothing: either the images match _precisely_ (1), or they don't (0). 
+
+We want something with more nuance, which can tell that one grassy image is a lot closer to the other one than it is to a red square! A simple 1-and-0 score isn't good enough.
 
 What else could we do?
 
