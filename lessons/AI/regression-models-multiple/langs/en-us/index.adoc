@@ -27,6 +27,9 @@
 |[.materials-links]
 @material-links
 
+| Supplemental Materials
+|[.materials-links]
+@opt-material-links
 |===
 
 == Multiple Regression
@@ -170,13 +173,13 @@ Let's use Pyret to find the best model for our data!
 @A{It told us how much error to expect in predictions made with the model by reporting the @math{S-value} and @math{r^2}.}
 }
 
-Pyret can't plot data in more than two dimensions at a time, but it can compute in many dimensions!
+Pyret can't plot data in more than two dimensions at a time, but it can _compute_ in as many dimensions as we want!
 
 - To get the code for a predictor function we can use `regression-model-code`. +
 @hspace{2em}@show{(contract "regression-model-code" '((table-name Table) (explanatory List<String>) (response String)) "Code")} +
   * In the last lesson we gave it a list with just one explanatory variable. For example: +
 @hspace{2em}`regression-model-code(training-data, [list: "curve"], "steering-angle")`
-  * Adding a second variable to the list is all it takes to go from a regression line to a regression plane! For example: +
+  * Adding a second variable to the list is all it takes to go from a regression _line_ to a *regression __plane!__* For example: +
 @hspace{2em}`regression-model-code(training-data, [list: "curve", "skew"], "steering-angle")`
 - Pyret also has a tool for measuring the fit of any row-consuming regression model:
 @hspace{2em}@show{(contract "regression-model-S" '((table-name Table) (explanatory List<String>) (response String) (model "Row->Number")) "Number" 
@@ -184,16 +187,18 @@ Pyret can't plot data in more than two dimensions at a time, but it can compute 
 )}
 
 === Investigate
-@slidebreak{Investigate-DN}
+@slidebreak{InvestigateR-DN}
 
 @lesson-instruction{
+@right{@image{images/self-driving-car.jpg, 300}}
 - Open your copy of @starter-file{self-driving} and click "Run".
 - Use `regression-model-code` and `regression-model-S` to complete the first section of @printable-exercise{supervised-learning-multiple-regression.adoc}.
 }
 
 @slidebreak{InvestigateR}
-@right{@image{images/self-driving-car.jpg, 300}}
 @QandA{
+@iflside{@right{@image{images/self-driving-car.jpg, 300}}}
+
 @Q{How did the S-value change when you added `skew` as a second predictor?}
 @A{It decreased — using two predictors explains more of the variation in `steering-angle`, leaving less unexplained error.}
 
