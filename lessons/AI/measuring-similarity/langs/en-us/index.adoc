@@ -78,6 +78,7 @@ Each pixel has a particular amount of Red, Green, and Blue in it. For our purpos
 
 Computers can look at groups of pixels to compute values. For example:
 @right{@image{images/butterfly.png, 100}}
+
 - How blue the image is. 
 - *Symmetry* - measures "how similar are the pixels on one side of the image to the pixels on the other side of the image?". 
 - *Luminance* measures @vocab{central tendency} - "what's the average brightness of this image?"
@@ -85,15 +86,12 @@ Computers can look at groups of pixels to compute values. For example:
 
 @lesson-instruction{
 - Open @starter-file{ai-image} and experiment for a moment.
-}
-
-@teacher{Perhaps look at:
-
-- `image-to-color-list(square(5, "solid", "orange"))`
-- `image-color-names(square(5, "solid", "orange"))`
-- `image-luminance` for `black-sq` and `white-sq` and predict luminance for `half-and-half`
-- `image-entropy` for `half-and-half` and `white-sq` and predict luminance for `black-sq`
-- `horizontal-symmetry` and `vertical-symmetry` for `red-sq`, `green-t` and `half-and-half`
+Perhaps look at:
+  * `horizontal-symmetry` and `vertical-symmetry` for `red-sq`, `green-t` and `half-and-half`
+  * `image-to-color-list(square(5, "solid", "orange"))`
+  * `image-color-names(square(5, "solid", "orange"))`
+  * `image-luminance` for `black-sq` and `white-sq` and predict luminance for `half-and-half`
+  * `image-entropy` for `half-and-half` and `white-sq` and predict luminance for `black-sq`
 }
 
 === Investigate
@@ -111,7 +109,7 @@ Some ML models are capable of recognizing parts of an image ("person", "car", et
   * Notice we're defining a _table_ called `images`.
   * There are columns for the identifier (`ID`), the image document (`DOC`), whether the image is `LIKED` or `DISLIKED`, and also for any descriptive `TAGS` in the image.
   * For now, none of the images are liked, disliked, or tagged. By defining the table here in the code, we've set ourselves up to be able to make changes.
-- Choose the *two mountain images you like the best*, and change the values for those images in the `LIKED` from `false` to `true`.
+- Choose the *two mountain images you like the best*, and change the values for those images in the `LIKED` colum from `false` to `true`.
 - In the `TAGS` column:
   * change `""` to `"snow"`, for the snowy images.
   * change `""` to `"sun"` for the three images with sunsets or sunrises.
@@ -135,7 +133,17 @@ Think back to our mountain images.
 @slidebreak{Launch}
 
 @lesson-instruction{
-- Evaluate `decorated-bag` in the Interactions Area.
+- Evaluate `decorated-bag` in the Interactions Area and take a look at the table.
+- What do you Notice? What do you Wonder?
+}
+
+@scrub{SCHANZER if I were teaching this lesson I would want a teacher note about the scale of each column here. A little cheat sheet to help me anchor my thinking so I could field questions from students.
+}
+
+@QandA{
+@Q{Where do you think the last 3 columns come from?}
+@A{The dominant color of each pixel.}
+@A{If we add the numbers in the red, green and blue columns we get the number of pixels in the image.}
 }
 
 Note: we've left the original images in the table to make it easier to explore, but the computer ignores them -- a real image model drops the image completely, and _only_ uses the computed columns.
@@ -144,6 +152,8 @@ Note: we've left the original images in the table to make it easier to explore, 
 @Q{The computer only uses the numeric columns. How is this lossy? What details of the original training data does it lose?}
 @A{The actual images! We only keep the numbers for the properties we chose. Everything else is lost.}
 }
+
+@scrub{SCHANZER - DOES IT REALLY not look at the Boolean columns? or the tags?}
 
 === Synthesize
 @slidebreak{Synthesize}
@@ -160,35 +170,58 @@ Students are introduced to _distance_ as a notion of similarity. This requires t
 
 Pyret has several functions for measuring similarity, and they each work a little differently. The `simple-similarity` function is all-or-nothing: either the images match _precisely_ (1), or they don't (0). 
 
-We want something with more nuance, which can tell that one grassy image is a lot closer to the other one than it is to a red square! A simple 1-and-0 score isn't good enough.
+We want something with more nuance.
 
-What else could we do?
+@center{@image{images/mountains-grid.png}}
 
+@QandA{
+@Q{Which images would you identify as having a lot of grass in them?}
+@A{3 and 6}
+
+@Q{Which color column would you expect to have similar values for two grassy images?}
+@A{green}
+}
+
+@slidebreak{Launch}
 @lesson-instruction{
-Complete the first section on @printable-exercise{plotting-images.adoc}
+- Let's see how the images compare on the `"green"` scale by evaluating `image-dot-plot(decorated-bag, "green", doc-thumbnail)`.
+- Find the images we identified as grassy on the plot. 
+- What do you notice?
+}
+
+@teacher{
+The big breakthrough here is recognizing that these columns each represents a _number line_, and every image falls _somewhere on that line_. This allows us to imagine our images existing as points in space, and opens up new ways to measure similarity by thinking about distance between those points.
 }
 
 @slidebreak{Launch}
 
-@lesson-point{We can think of our images as _points in space_}
+We used the `"green"` column to define a number line - a "Green Space" - where every image was plotted according to how many green-dominant pixels it had. And our two grassy images are located near each other.
 
-The big breakthrough here is recognizing that these columns each represents a _number line_, and every image falls _somewhere on that line_. This allows us to imagine our images existing as points in space, and opens up new ways to measure similarity by thinking about distance between those points.
+@QandA{
+@Q{How could we quantify how similar images are to each other in this "green space"?}
+@A{We could calculate the distance between them.}
+}
+
+@slidebreak{Launch}
+
+Pyret has a function for computing the `distance-similarity`. It computes the distance between every row in the table and a Row with a given ID and builds a new column with those values.
+
+@show{(contract "distance-similarity" '("Table" "Str" "List<String>") "Table")}
+
+For example, we could evaluate `distance-similarity(decorated-bag, "3", [list: "green"])` to compute how similar each image is to image 3.
 
 @slidebreak{Launch}
 @ifslide{@lesson-point{We can think of our images as _points in space_}}
 
-The worksheet had you use the `"green"` column to define a number line, creating a 1-dimensional "Green Space" where every image was plotted according to how many green-dominant pixels it had. Images with similar numbers of green pixels will be close to each other in this space, and Images with wildly different numbers of green pixel will be far away from each other. *The distance __is__ the difference!*
+Comparing images based on how many green pixels they have is a pretty limited understanding. We need to be able to compare images based on multiple columns of data!
 
+@QandA{
+@Q{How could we plot images using two columns of data?}
+@A{On a scatter plot}
 
-@slidebreak{Launch}
-
-Pyret has a function for computing the `distance-similarity`. Just like `simple-similarity`, it compares every row in the table to a Row with a given ID.
-
-@show{(contract "distance-similarity" '("Table" "Str" "List<String>") "Table")}
-
-This is definitely a big improvement! By plotting the images in "Green Space", we can clearly see that one grassy image is the _most similar_ to the other one.
-
-But comparing images based only on one property (how many green pixels they have) is still pretty limited. Can we compare images based on _more than one?_
+@Q{Can we measure the distance betweeen 2 points in 2-dimensions?}
+@A{Yes! That's what the distance formula does.}
+}
 
 @lesson-instruction{
 Complete the second section on @printable-exercise{plotting-images.adoc}
@@ -214,7 +247,7 @@ Complete the last section on @printable-exercise{plotting-images.adoc}
 @slidebreak{InvestigateR}
 @right{@image{images/projection.webp, 300}}
 
-This image represents a _projection_ of a 3D object into two, 2-dimensional planes. You can see that one shadow looks like a square and the other looks like a circle. Both are showing us a part of the story, and both are correct about the part they show. But the _real_ shape is 3-dimensional (3D).
+Recall this image of a _projection_ of a 3D object into two, 2-dimensional planes. Both the square shadow and the circle shadow are showing us a part of the story, but the _real_ shape is 3-dimensional (3D).
 
 *The same is true for our dataset!*
 
