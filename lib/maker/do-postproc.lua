@@ -346,8 +346,8 @@ local function postproc(fhtml_cached, tipe)
       add_codemirror_p = false
       o:write('<link rel="stylesheet" href="' .. local_dist_root_dir .. 'lib/codemirror.css" />\n')
       o:write(gtm_content)
-      o:write('<script src="' .. local_dist_root_dir .. 'lib/codemirror.js"></script>\n')
-      o:write('<script src="' .. local_dist_root_dir .. 'lib/runmode.js"></script>\n')
+      --o:write('<script src="' .. local_dist_root_dir .. 'lib/codemirror.js"></script>\n')
+      o:write('<script src="' .. local_dist_root_dir .. 'lib/runmode-standalone.js"></script>\n')
       o:write('<script src="' .. local_dist_root_dir .. 'lib/scheme2.js"></script>\n')
       o:write('<script src="' .. local_dist_root_dir .. 'lib/pyret-mode.js"></script>\n')
 
