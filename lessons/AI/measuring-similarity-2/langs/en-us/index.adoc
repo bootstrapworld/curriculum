@@ -189,25 +189,18 @@ Open the @starter-file{ai-image} and click "Run", then evaluate `mountains` in t
 @slidebreak{LaunchR}
 @right{@image{images/blue-v-green-images.png, 300}}
 
-When we search for an image that has a visible sun, we don't actually want an image that's similar to image 0. We don't want an image that's similar to image 6, either! Instead, we want an image that's similar to what these sun images _have in common._ How can we use our spatial representation to find the "sun-ness" of an image?
+@lesson-point{
+When we search for an image that has a visible sun, we want an image that's similar to what sun images _have in common._
+}
+
+How can we find the "sun-ness" of an image?
 
 @slidebreak{LaunchR}
 @right{@image{images/blue-v-green-images-centroid.png, 300}}
 
-If every image in our corpus is a point in space, then a middle ground for the snowy images must literally be a point _in the middle_. In our 2-dimensional Blue-Green Space, for example, the midpoint halfway between images 6 and 7 defines one kind of "sun-ness"!
+If every image in our corpus is a point in space, then common ground is literally a point _in the middle_. 
 
-@QandA{
-@Q{We have *three* images where the sun is visible. How can we find the middle of those three?}
-@A{It's the middle of a triangle!}
-
-@Q{Can we find the middle of 3D shape?}
-@A{Yes! }
-}
-
-
-=== Investigate
-@slidebreak{InvestigateR}
-For any set of points, the "middle" point is the @vocab{Centroid}. For 1D points, you can simply find the @vocab{mean} (average) or the @vocab{median}. The median is especially useful if your data includes extreme outliers.
+In one-dimension, we find the @vocab{mean} (average) or the @vocab{median}. The median is especially useful if your data includes extreme outliers.
 
 @QandA{
 @Q{Should we use mean or median when computing the centroid for snowy images in our corpus? Why or why not?}
@@ -218,23 +211,32 @@ For any set of points, the "middle" point is the @vocab{Centroid}. For 1D points
 
 }
 
-@slidebreak{Investigate}
-If you have more than 1 dimension, the same math applies: compute the centroid for each column separately. Can we get a better result for sunny images by teaching Pyret what "sun-ness" looks like for two of our images?
+In our 2-dimensional Blue-Green Space, for example, the midpoint halfway between images 6 and 7 defines one kind of "sun-ness"!
 
-@image{images/centroid.png, 300} @image{images/tetrahedron-centroid.png, 300}
+@QandA{
+@Q{We have *three* images where the sun is visible. How can we find the middle of those three?}
+@A{It's the middle of a triangle!}
+
+@Q{Can we find the middle of 3D shape?}
+@A{Yes! }
+}
+
 @lesson-instruction{
 - Complete the first section of @printable-exercise{supervised-learning.adoc}
 }
 
+If you have more than 1 dimension, the same math applies: compute the centroid for each column separately. Can we get a better result for sunny images by teaching Pyret what "sun-ness" looks like for two of our images?
 
+For any set of points, the "middle" point is the @vocab{Centroid}. 
+
+@image{images/centroid.png, 300} @image{images/tetrahedron-centroid.png, 300}
+
+=== Investigate
 @slidebreak{InvestigateR}
 @QandA{
 @ifslide{@right{@image{images/centroid.png, 300}}}
 @Q{Our unsupervised `angle-similarity` measure did a fine job recommending similar images when given a grassy or snowy image. Why did it struggle to finding images with the sun?}
 @A{The sunset image is _really_ different from the others. Any time we search by the `ID` of the other images (0, 6, or 7), we get other recommendations before image 8.}
-
-@Q{Why did building a centroid from Images 6 and 7, help us improve the recommendation?}
-@A{Because the centroid was "closer" to all the sun images than any one of them was to all the others}
 }
 
 @slidebreak{Investigate}
@@ -258,6 +260,11 @@ We've provided two functions that do exactly this, using every available column 
 - Complete the second section of @printable-exercise{supervised-learning.adoc}
 }
 
+@QandA{
+@Q{Why did building a centroid from Images 6 and 7, help us improve the recommendation?}
+@A{Because the centroid was "closer" to all the sun images than any one of them was to all the others}
+
+}
 @slidebreak{Investigate}
 Now a recommendation system is just:
 
