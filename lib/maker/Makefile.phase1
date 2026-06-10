@@ -8,7 +8,8 @@ initialization:
 	@. ${HOME}/.nvm/nvm.sh && nvm use 22.5
 	@mkdir -p $(PROGDIR)
 	@$(CP) -upr shared/langs/en-us/* $(PROGDIR)
-	@$(CP) -upr lib/codemirror.css distribution/$(NATLANG)/lib
+	@$(CP) -p node_modules/codemirror/lib/codemirror.css distribution/$(NATLANG)/lib
+	@$(CP) -p node_modules/codemirror/addon/runmode/runmode-standalone.js distribution/$(NATLANG)/lib
 	@node_modules/less/bin/lessc shared/langs/$(NATLANG)/curriculum.less > distribution/$(NATLANG)/lib/curriculum.css
 	@if test $(NATLANG) != en-us -a -d shared/langs/$(NATLANG); then \
 		$(CP) -upr shared/langs/$(NATLANG)/* $(PROGDIR); fi

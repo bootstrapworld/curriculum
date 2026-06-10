@@ -79,6 +79,7 @@
 @text-font: 'Lato', Arial, Helvetica, sans-serif;
 @code-font: Hack, "Courier New", monospace;
 @code-comment-color: #cd7054;
+@code-comment-color-wescheme: #bd2bbd;
 @top-padding-for-writing: 1.2em;
 @top-padding-for-dr: 1em;
 @print-section-heading: lightgray;
@@ -1354,13 +1355,13 @@ td.halign-center .circleevalsexp { text-align: center; }
 .wescheme-boolean,    .cm-scheme-boolean  { color: darkred;}
 .wescheme-character,  .cm-scheme-character{ color: orange;}
 .wescheme-symbol,     .cm-scheme-symbol   { color: steelblue;}
-.wescheme-comment,    .cm-scheme-comment  { color: @code-comment-color; }
+.wescheme-comment,    .cm-scheme-comment  { color: @code-comment-color-wescheme !important; }
 .cm-scheme-punctuation                    { color: black;}
 .cm-scheme-rparen                         { color: black;}
 
 /* PYRET COLORS */
 .cm-s-default.CodeMirror                  { color: black; }
-.cm-comment, .hljs-comment                { color: @code-comment-color; }
+.cm-comment, .hljs-comment                { color: @code-comment-color !important; }
 .cm-boolean                               { color: darkred; }
 .cm-builtin, .hljs-built_in               { color: #555; }
 .cm-variable, .hljs-name                  { color: #4d5966; }
@@ -1389,8 +1390,8 @@ div.leftColumn .obeyspaces, div.rightColumn .obeyspaces {
   word-break: break-word;
 }
 
-code.pyret-comment { background-color: #f7f7f8 !important; color: #a50; }
-code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
+code.pyret-comment { background-color: #f7f7f8 !important; color: @code-comment-color-wescheme; }
+code.racket-comment { background-color: #f7f7f8 !important; color: @code-comment-color-wescheme; }
 
 /************************************************************************************
 * SCREEN MEDIA
