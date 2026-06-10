@@ -65,9 +65,9 @@ When we ask Google to find images similar to the one we dragged, it comes back w
 @QandA{
 @Q{What attributes do these nine images share? What makes the images similar?}
 @Q{What attributes distinguish these nine images? What makes them different?}
-@Q{Which is _more similar_ to Photo 1:   Photo 2 or Photo 3?  Why?}
-@A{Photo 2 possible responses: Like the mountains in Photo 1, the mountains in Photo 2 fill up just a narrow strip of the whole photo. Similar to Photo 1, Photo 2 also includes a body of water in the foreground and a sun in the background.}
-@A{Photo 3 possible responses: Photo 3's color palette includes mostly white, brown, and blue.}
+@Q{Which is _more similar_ to `day1`:   `day2` or `day3`?  Why?}
+@A{`day2` possible responses: Like the mountains in `day1`, the mountains in `day2` fill up just a narrow strip of the whole photo. Similar to `day1`, `day2` also includes a body of water in the foreground and a sun in the background.}
+@A{`day3` possible responses: `day3`'s color palette includes mostly white, brown, and blue.}
 }
 
 === Investigate
@@ -255,7 +255,7 @@ Pyret has a function for computing the `distance-similarity`. It computes the di
 
 @show{(contract "distance-similarity" '("Table" "Str" "List<String>") "Table")}
 
-For example, we could evaluate `distance-similarity(model, "3", [list: "green"])` to compute how similar each image is to image 3.
+For example, we could evaluate `distance-similarity(model, "grass1", [list: "green"])` to compute how similar each image is to image 3.
 
 @slidebreak{Launch}
 @ifslide{@lesson-point{We can think of our images as _points in space_}}
@@ -317,10 +317,10 @@ The distance formula works in 3 dimensions too! In fact, it works in _any number
 @slidebreak{Investigate}
 
 @lesson-instruction{
-- Try `distance-similarity(model, "3", [list: "red", "green", "blue"])`, and see how well this works at finding the similarity between images with *grass*.
-- Try it again with ID `"5"`, to see how well it works at finding the similarity between images with *snow*.
-- Try it again with ID `"10"`, to see how well it works at finding the similarity between images with *red squares*.
-- Try it again with ID `"6"`, to see how well it works at finding the similarity between images with *sun*.
+- Try `distance-similarity(model, "grass1", [list: "red", "green", "blue"])`, and see how well this works at finding the similarity between images with *grass*.
+- Try it again with ID `"snow2"`, to see how well it works at finding the similarity between images with *snow*.
+- Try it again with ID `"red2"`, to see how well it works at finding the similarity between images with *red squares*.
+- Try it again with ID `"grass2"`, to see how well it works at finding the similarity between images with *sun*.
 - Try adding _other_ columns! Can you come up with a higher-dimensional space that works for all four groups?
 }
 
@@ -396,10 +396,10 @@ Complete @printable-exercise{angle-similarity-pyret.adoc}
 Is measuring angles closer to human perception than measuring distance?
 
 @lesson-instruction{
-- Try `angle-similarity(model, "3", [list: "red", "green", "blue"])`, and see how well this works at finding the similarity between images with *grass*.
-- Try it again with ID `"5"`, to see how well it works at finding the similarity between images with *snow*.
-- Try it again with ID `"10"`, to see how well it works at finding the similarity between images with *red squares*.
-- Try it again with ID `"8"`, to see how well it works at finding the similarity between images with *sun*.
+- Try `angle-similarity(model, "grass1", [list: "red", "green", "blue"])`, and see how well this works at finding the similarity between images with *grass*.
+- Try it again with ID `"snow2"`, to see how well it works at finding the similarity between images with *snow*.
+- Try it again with ID `"red2"`, to see how well it works at finding the similarity between images with *red squares*.
+- Try it again with ID `"sun2"`, to see how well it works at finding the similarity between images with *sun*.
 - Is it useful to add our `WIDTH` and `HEIGHT` columns? Why or why not?
 
 }
