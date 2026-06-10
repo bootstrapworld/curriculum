@@ -4,22 +4,32 @@
 td .autonum { padding: 0 0 1em 0 !important; }
 </style>
 ++++
-Here's the data table from a different source. This one focuses on attributes of different _restaurants_, and with data for Fries and Burgers.
+Here's a simpler image model, with only a handful rows representing small images, and only the columns for `red`, `green`, and `blue`.
 
-[.data-table, cols="^.^1a, 4a, ^4a, ^4a", options="header"]]
+[cols="2a,6a", frame="none"]
 |===
-| ID  | Restaurant  	| Fries (5=best) | Burgers (5=best)
-| "U" | Burger Sting 	| 0    		     | 4
-| "V" | Dead Robin		| 4    	         | 0
-| "W" | Five Lies     	| 2   	         | 2
-| "X" | Snake Shack		| 2            	 | 3
-| "Y" | In-N-Doubt 		| 1  	         | 1
-| "Z" | Dairy Spleen 	| 1 			 | 1.5
+|
+[.data-table, cols="^.^1a, ^1a, ^1a, ^1a", options="header"]
+!===
+! ID  ! red ! green ! blue
+! "U" !  0  !   82  !   4
+! "V" !  4  !   40  !   4
+! "W" !  2  !   76  !   2
+! "X" !  2  !   55  !   4
+! "Y" !  1  !   98  !   1
+! "Z" !  1  !   67  !   2
+!===
+
+|
+@n These images are _overwhelmingly_ dominated by what color? @fitb{5em}{@ifsoln{green}} If we're looking to measures their differences, which colors make the most sense to use, and why? +
+@blanklines{2}{
+@ifsoln{We already know they are super-green! The place where differences matter is in the other colors}
+}
 |===
 
-To compare each pair of restaurants in the questions below:
+To compare each pair of images in the questions below:
 
-- Find the (Fries, Burgers) coordinates for each restaurant in the table above.
+- Find the (red, blue) coordinates for each image in the table above.
 - Plot the points on the graph provided, and draw a ray connecting the origin to each of the points.
 - Use logic and your knowledge of angles to determine the `angle-similarity` of the 2 points.
 
@@ -28,30 +38,22 @@ To compare each pair of restaurants in the questions below:
 [.FillVerticalSpace, cols="^1a,^1a",  stripes="none", frame="none"]
 |===
 |
-@n *Burger Sting v. Dead Robin* +
-Coordinate U: @fitb{6em}{(0,4)}
-Coordinate V: @fitb{6em}{(4,0)} +
+@n Coordinate U: @fitb{4em}{(0,4)} Coordinate V: @fitb{6em}{(4,0)} +
 @image{../images/soln1.png, 250} +
 The `angle-similarity` between them is @fitb{4em}{@ifsoln{90°}}.
 
-| @n *In-N-Doubt v. Burger Sting* +
-Coordinate Y: @fitb{6em}{@ifsoln{(1,1)}}
-Coordinate U: @fitb{6em}{@ifsoln{(0,4)}} +
-@ifnotsoln{@image{../images/burger-fry-blank.png, 250}}
+| @n Coordinate Y: @fitb{6em}{@ifsoln{(1,1)}} Coordinate U: @fitb{6em}{@ifsoln{(0,4)}} +
+@ifnotsoln{@image{../images/blue-red-blank.png, 250}}
 @ifsoln{@image{../images/soln2.png, 250}} +
 The `angle-similarity` between them is @fitb{4em}{@ifsoln{45°}}.
 
-| @n *Five Lies v. Dead Robin* +
-Coordinate W: @fitb{6em}{@ifsoln{(2,2)}}
-Coordinate V: @fitb{6em}{@ifsoln{(4,0)}} +
-@ifnotsoln{@image{../images/burger-fry-blank.png, 250}}
+| @n Coordinate W: @fitb{6em}{@ifsoln{(2,2)}} Coordinate V: @fitb{6em}{@ifsoln{(4,0)}} +
+@ifnotsoln{@image{../images/blue-red-blank.png, 250}}
 @ifsoln{@image{../images/soln3.png, 250}} +
 The `angle-similarity` between them is @fitb{4em}{@ifsoln{45°}}.
 
-| @n *Snake Shack v. Dairy Spleen* +
-Coordinate X: @fitb{6em}{@ifsoln{(2,3)}}
-Coordinate Z: @fitb{6em}{@ifsoln{(1,1.5)}} +
-@ifnotsoln{@image{../images/burger-fry-blank.png, 250}}
+| @n Coordinate X: @fitb{6em}{@ifsoln{(2,3)}} Coordinate Z: @fitb{6em}{@ifsoln{(1,1.5)}} +
+@ifnotsoln{@image{../images/blue-red-blank.png, 250}}
 @ifsoln{@image{../images/soln4.png, 250}} +
 The `angle-similarity` between them is @fitb{4em}{@ifsoln{0°}}.
 |===
