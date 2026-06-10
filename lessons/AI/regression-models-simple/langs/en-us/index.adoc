@@ -313,7 +313,7 @@ Pyret's `lr-plot` function computes and visualizes the @vocab{line of best fit}.
 Students will notice that `lr-plot` defines models down to decimal values, certainly a level of specificity more than their hand-drawn model. This motivates the idea that the computer can optimize this much better and faster than humans — which is, after all, the point of machine learning.
 }
 
-@slidebreak{InvestigateR}
+@slidebreak{LaunchR}
 @QandA{
 @right{@image{images/steering-v-curve-lr.png, 300}}
 @Q{What does the slope of our `curve` model tell us?}
@@ -334,6 +334,11 @@ Students will notice that `lr-plot` defines models down to decimal values, certa
 @Q{How is a regression model "lossy"? What details of the original training data does it lose?}
 @A{Everything above or below the regression line is real data, which we throw away when we use the line.}
 }
+
+@slidebreak{LaunchR}
+@lesson-point{We can't calculate @math{S} unless we have more than two rows in our table!}
+
+Remember, we use two points to define the line, and if there's no _other_ data left over then there's nothing to fit! In order for us to calculate @math{S}, we need a table with _three or more points._
 
 === Investigate
 
