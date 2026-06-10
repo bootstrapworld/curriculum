@@ -247,10 +247,12 @@ Let's talk about the other major limitation of our unsupervised similarity syste
 How can our @vocab{centroid} implementation solve this problem, too?
 
 @slidebreak{Investigate}
-Building @vocab{centroids} is powerful, because now we can add human-labeled information about _groups_. And we can use that to solve *both* of the limitations of our unsupervised system!
+Building @vocab{centroids} is powerful, because now we can access the power of human-labeled information to reason about _groups_. Instead of looking at one image with grass, we can now look at multiple grassy images and talk about _what they have in common: "grass-ness"_.
 
-- We can find a centroid for all the images labeled with "sun", and use that to find __un__-labeled images that are close to "sun-ness".
-- We can find a centroid for all the _liked_ or _disliked_ images, and then recommend __un__-labeled images close to "liked-ness" and far from "disliked-ness"
+And we can use that to solve *both* of the limitations of our unsupervised system!
+
+- We can find a centroid for all the images labeled with "sun", and use that to find __un__-labeled images that are close to "sun-ness". Without centroids, we're stuck comparing images to *one picture with a sun*.
+- We can find a centroid for all the _liked_ or _disliked_ images, and then recommend __un__-labeled images close to "liked-ness" and far from "disliked-ness". Without centroids, we're stuck comparing images to *one liked*.
 
 @slidebreak{Investigate}
 In each case, the steps are the same: (1) find all the labeled documents (liked, disliked, tagged, etc), (2) build a centroid, (3) find un-labeled documents that are similar to the centroid using the relevant columns.
@@ -281,7 +283,7 @@ We've created a helper function that does exactly that, given a table and a list
 The result is a table of all your documents, in descending order of recommendation-strength (strongest first).
 
 @slidebreak{Investigate}
-Google's Image Search-by-word is just:
+Image Search-by-word is just:
 
 - Find all documents tagged with that word, and compute their centroid
 - Compute the cosine-similarity of all the documents to that centroid
@@ -333,7 +335,7 @@ ALVINN was given a table of inputs (images and depth maps), each row tagged with
 @A{With a new list of "liked songs", Spotify recalculates my "liked" centroid}
 
 @Q{When you tell Spotify that to make a Jazz station, what computations happen on Spotify's servers?}
-@A{Google computes the centroid for every song *already tagged* with "jazz", then returns those alongside songs that are similar to the centroid}
+@A{Spotify computes the centroid for every song *already tagged* with "jazz", then returns those alongside songs that are similar to the centroid}
 
 @Q{When you search for "sun" on Google Images, what computations happen on Google's servers?}
 @A{Google computes the centroid for every image *already tagged* with "sun", then returns those alongside images that are similar to the centroid}
