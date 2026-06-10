@@ -133,7 +133,7 @@ Think back to our mountain images.
 @slidebreak{Launch}
 
 @lesson-instruction{
-- Evaluate `decorated-bag` in the Interactions Area and take a look at the table.
+- Evaluate `model` in the Interactions Area and take a look at the table.
 - What do you Notice? What do you Wonder?
 }
 
@@ -179,7 +179,7 @@ We want something with more nuance.
 
 @slidebreak{Launch}
 @lesson-instruction{
-- Let's see how the images compare on the `"green"` scale by evaluating `image-dot-plot(decorated-bag, "green", doc-thumbnail)`.
+- Let's see how the images compare on the `"green"` scale by evaluating `image-dot-plot(model, "green", thumbnail)`.
 - Find the images we identified as grassy on the plot. 
 - What do you notice?
 }
@@ -203,7 +203,7 @@ Pyret has a function for computing the `distance-similarity`. It computes the di
 
 @show{(contract "distance-similarity" '("Table" "Str" "List<String>") "Table")}
 
-For example, we could evaluate `distance-similarity(decorated-bag, "3", [list: "green"])` to compute how similar each image is to image 3.
+For example, we could evaluate `distance-similarity(model, "3", [list: "green"])` to compute how similar each image is to image 3.
 
 @slidebreak{Launch}
 @ifslide{@lesson-point{We can think of our images as _points in space_}}
@@ -252,7 +252,7 @@ Our images are described by 3 different colors (Red, Blue, and Green), so our "C
 
 @lesson-instruction{
 - Open the @online-exercise{https://www.desmos.com/3d/qmu6fmrs6h, RGB Image Plot} in Desmos
-- The table at the top of the panel contains the Red, Green, and Blue values from our `decorated-bag` table
+- The table at the top of the panel contains the Red, Green, and Blue values from our `model` table
 - The scatter-plot for Blue-v-Green is visible against the "back wall" of the cube, with each image plotted as a *green* dot. Compare it to the Pyret scatter plot on @printable-exercise{plotting-images.adoc}.
 - Complete the first two sections on @printable-exercise{from-2-to-3.adoc}.
 }
@@ -265,7 +265,7 @@ The distance formula works in 3 dimensions too! In fact, it works in _any number
 @slidebreak{Investigate}
 
 @lesson-instruction{
-- Try `distance-similarity(decorated-bag, "3", [list: "red", "green", "blue"])`, and see how well this works at finding the similarity between images with *grass*.
+- Try `distance-similarity(model, "3", [list: "red", "green", "blue"])`, and see how well this works at finding the similarity between images with *grass*.
 - Try it again with ID `"5"`, to see how well it works at finding the similarity between images with *snow*.
 - Try it again with ID `"10"`, to see how well it works at finding the similarity between images with *red squares*.
 - Try it again with ID `"6"`, to see how well it works at finding the similarity between images with *sun*.
@@ -344,7 +344,7 @@ Complete @printable-exercise{angle-similarity-pyret.adoc}
 Is measuring angles closer to human perception than measuring distance?
 
 @lesson-instruction{
-- Try `angle-similarity(decorated-bag, "3", [list: "red", "green", "blue"])`, and see how well this works at finding the similarity between images with *grass*.
+- Try `angle-similarity(model, "3", [list: "red", "green", "blue"])`, and see how well this works at finding the similarity between images with *grass*.
 - Try it again with ID `"5"`, to see how well it works at finding the similarity between images with *snow*.
 - Try it again with ID `"10"`, to see how well it works at finding the similarity between images with *red squares*.
 - Try it again with ID `"8"`, to see how well it works at finding the similarity between images with *sun*.
