@@ -47,17 +47,26 @@ div#body .center { padding: 0 !important; }
 
 @n *Copy-and-paste* your model into the Definitions Area.
 
-@n Use `reg-model-S` to compare the fit of your 1-variable and 2-variable models:
+@n Use `regression-model-S` to compare the fit of your 1-variable and 2-variable models:
 
 [cols="6a, ^1a", options="header", stripes="none"]
 |===
 | Model
 | @math{S}-value
 
-| `reg-model-S(training-data, [list: "curve"], "steering-angle", curve-predictor)`
+|
+@comment{We use ---- so asciidoctor will preserve the whitespace for indenting the second line}
+----
+regression-model-S(
+  training-data, [list: "curve"], "steering-angle", curve-predictor)
+----
 | @ifsoln{}
 
-| `reg-model-S(training-data, [list: "curve", "skew"], "steering-angle", curve-skew-predictor)`
+|
+----
+regression-model-S(
+  training-data, [list: "curve", "skew"], "steering-angle", curve-skew-predictor)
+----
 | @ifsoln{}
 |===
 

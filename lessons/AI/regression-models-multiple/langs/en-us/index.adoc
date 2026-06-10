@@ -82,9 +82,29 @@ But `curve`, `skew`, `offset`, and `speed` are all being measured _at the same t
 @slidebreak{Investigate-DN}
 
 @lesson-instruction{
+Let's explore what a 3-D scatter plot looks like, using a _small subset_ of our driving data:
+
 - Complete @printable-exercise{predicting-steering-from-2.adoc} using @starter-file{driving-desmos}.
 - Be ready to share your thinking!
 }
+
+@define{perspective-note}{
+Our brains naturally process the 3D world using perspective! Train tracks going off into the distance will _appear_ to get closer and closer, even though they are parallel lines. Desmos lets you choose how much _perspective_ to use when drawing the plot, by clicking on the wrench icon adjusting the slider. Teachers should pay careful attention to this slider!
+
+- *Minimum perspective* - When looking "head on" at the X-Z or Y-Z plane, we _don't_ want perspective! We want the scatter plots to resemble a flat sheet of paper as much as possible, for the plane-of-best-fit to look like a line, and for the 3D points to line up perfectly with the 3D scatter plots. Minimum perspective is what you want, when building the bridge from 2D to 3D!
+
+- *Maximum perspective* - When rotating and viewing the cube in 3 dimensions, we _do_ want perspective! Since our brains expect to see perspective when viewing 3D space, rotating the cube without perspective makes it harder for students to engage their visual processing to make sense of things.
+
+We've set the Desmos activity to start with minimum perspective, but teachers should be ready to adjust the perspective if students struggle to make sense of the plot when viewing it in 3D.
+}
+
+@strategy{Using Perspective in Desmos3D}{@perspective-note}
+
+@pd-slide{
+@slidebreak{Launch}
+@perspective-note
+}
+
 
 @slidebreak{LaunchR}
 @right{@image{images/plane-of-best-fit.png, 300}}
@@ -186,6 +206,18 @@ Pyret can't plot data in more than two dimensions at a time, but it can _compute
 "produces the S-value of a multiple-regression model, fit to the specific columns"
 )}
 
+@teacher{
+Consider the trade-off between clarity and amount-of-typing: for some students, rename their predictors using a shorthand is a big win! For example, `curve-skew-offset-predictor` could be renamed `cso-pred`.
+}
+
+@slidebreak{Launch}
+@lesson-point{`regression-model-S` needs to know about your explanatory columns!}
+
+When we were calculating @math{S} in a 2-dimensional model (1 explanatory, 1 response), we needed _more than two rows_. Two points are enough to define a line, but if there's no third row then there's nothing else to fit the line _to!_ But now we're dealing with models in 3-dimensions (2 explanatory, 1 response), and we need _more than three rows_.
+
+(That's why the list of explanatory columns matters!)
+
+
 === Investigate
 @slidebreak{InvestigateR-DN}
 
@@ -197,7 +229,7 @@ Pyret can't plot data in more than two dimensions at a time, but it can _compute
 
 @slidebreak{InvestigateR}
 @QandA{
-@iflside{@right{@image{images/self-driving-car.jpg, 300}}}
+@ifslide{@right{@image{images/self-driving-car.jpg, 300}}}
 
 @Q{How did the S-value change when you added `skew` as a second predictor?}
 @A{It decreased — using two predictors explains more of the variation in `steering-angle`, leaving less unexplained error.}
