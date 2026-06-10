@@ -137,7 +137,14 @@ Think back to our mountain images.
 - What do you Notice? What do you Wonder?
 }
 
-@scrub{SCHANZER if I were teaching this lesson I would want a teacher note about the scale of each column here. A little cheat sheet to help me anchor my thinking so I could field questions from students.
+@teacher{
+The `model` has several ideas worth unpacking:
+
+- Many of the scales you'll see here go from 0-255. We use 8-bit color for the simpler shapes (think original Nintendo!), and that allows for 256 possible unique values.
+- `LUMINANCE` - the average brightness of an image. `image-luminance(black-sq)` is zero, while `image-luminance(white-sq)` is 255
+- `ENTROPY` - measures the randomness in brightness across pixels in an image. `image-entropy(black-sq)` and `image-entropy(white-sq)` are both zero, because every color in both images is the same: no randomness! However, `image-entropy(half-and-half)` is 1, because there is an exactly equal probability of selecting a black or white pixel at random. Without any clear majority, we have maximum entropy.
+- `SYMMETRY-V` and `SYMMETRY-H` - Both calculated on a scale of 0-1, with 1 being perfect symmetry and 0 being perfect asymmetry.
+- `DOMINANT-RGB-COLORS` - Shows the dominant color (red, green, or blue) for every pixel in order. Our `red-sq` is 10x10 in size, so we expect to see "red" written out 100 times. The pixels in our `black-sq` image, however, are _equally balanced_ across red, green, and blue (all zeros), so there is _no dominant color at all_.
 }
 
 @QandA{
