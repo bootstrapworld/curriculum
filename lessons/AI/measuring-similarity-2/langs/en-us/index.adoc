@@ -2,7 +2,7 @@
 = Supervised and Unsupervised Similarity
 
 @description{
-This lesson uses an *supervised* learning approach to image similarity, and compares it to the unsupervised approach used in the prior lesson. Students think about how arbitrary documents (in this case, Images) can be represented as _labeled_ points in space, and how those human-labeled points can be used to improve the quality of searches and recommendations.
+This lesson uses a *supervised* learning approach to image similarity, and compares it to the unsupervised approach used in the prior lesson. Students think about how arbitrary documents (in this case, Images) can be represented as _labeled_ points in space, and how those human-labeled points can be used to improve the quality of searches and recommendations.
 }
 
 @lesson-prereqs{measuring-similarity}
@@ -13,13 +13,11 @@ This lesson uses an *supervised* learning approach to image similarity, and comp
 |===
 | Lesson Goals
 | Students will be able to...
-
 @objectives
 
 | Student-facing Lesson Goals
 |
 - Let's think about ways to represent images as points in space
-
 
 | Materials
 |[.materials-links]
@@ -28,7 +26,7 @@ This lesson uses an *supervised* learning approach to image similarity, and comp
 |===
 
 == Unsupervised vs. Supervised Learning
-@bjective{ai-supervised-v-unsupervised}
+@objective{ai-supervised-v-unsupervised}
 
 === Overview
 Students consider the limitations of the similarity system they built in @lesson-link{measuring-similarity}, and learn the difference between unsupervised and supervised learning.
@@ -46,7 +44,7 @@ Similarity models are also _recommendation systems!_ When you ask Google to find
 You also learned that these machine-generated attributes can be used to define _spaces_, in which we can plot those images. And once we see those images as points in space, we can use different measures to approximate similarity.
 
 @QandA{
-@Q{What distance measures did we learn?}
+@Q{What similarity measures did we learn?}
 @A{Distance similarity - measures the euclidean distance between two points in any number of dimensions}
 @A{Angle similarity - measures the angle between rays drawn from the origin to any two points in dimensions of 2 or more}
 
@@ -57,6 +55,8 @@ You also learned that these machine-generated attributes can be used to define _
 
 === Investigate
 @slidebreak{Investigate}
+
+@scrub{
 @QandA{
 @Q{If we wanted to compare team sports, we might measure attributes like *median winning score* or *likelihood of serious injury*.  What are some other quantitative attributes you can think of for comparing team sports?}
 @A{Answers might include:
@@ -109,6 +109,7 @@ You also learned that these machine-generated attributes can be used to define _
 @Q{Could we use our angle or distance similarity measures to recommend desserts?}
 
 @Q{What are some examples of recommendation systems in the real world, and what attributes do you think they might use?}
+}
 }
 
 @slidebreak{Investigate}
@@ -200,13 +201,12 @@ If every image in our corpus is a point in space, then a middle ground for the s
 @A{It's the middle of a triangle!}
 
 @Q{Can we find the middle of 3D shape?}
-@A{Yes! (Use simple examples of cubes, spheres, etc...)}
+@A{Yes! }
 }
 
 
 === Investigate
 @slidebreak{InvestigateR}
-@right{@image{images/centroid.png, 300}}
 For any set of points, the "middle" point is the @vocab{Centroid}. For 1D points, you can simply find the @vocab{mean} (average) or the @vocab{median}. The median is especially useful if your data includes extreme outliers.
 
 @QandA{
@@ -221,6 +221,7 @@ For any set of points, the "middle" point is the @vocab{Centroid}. For 1D points
 @slidebreak{Investigate}
 If you have more than 1 dimension, the same math applies: compute the centroid for each column separately. Can we get a better result for sunny images by teaching Pyret what "sun-ness" looks like for two of our images?
 
+@image{images/centroid.png, 300} @image{images/tetrahedron-centroid.png, 300}
 @lesson-instruction{
 - Complete the first section of @printable-exercise{supervised-learning.adoc}
 }
