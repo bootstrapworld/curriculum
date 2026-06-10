@@ -121,13 +121,13 @@ Students add labels for likes, dislikes, and tags to their image corpus, and use
 Open the @starter-file{ai-image} and click "Run", then evaluate `mountains` in the Interactions Area
 
 @Q{Which images have visible *snow*?}
-@A{4 and 5}
-
-@Q{Which images have a visible *sun* (either a sunset or sunrise)?}
-@A{0, 6, 7, and 8)}
+@A{`"snow1"` and `"snow2"`}
 
 @Q{Which images have visible *grass*?}
-@A{3 and 6 (and maybe a little of 0)}
+@A{`"grass1"` and `"grass2"` (and maybe a little of `"day1"`)}
+
+@Q{Which images have a visible *sun* (either a sunset or sunrise)?}
+@A{`"day1"`, `"grass2"`, `"sun1"`, and `"sun2"`)}
 }
 
 @slidebreak{LaunchR}
@@ -142,20 +142,11 @@ How can we find the "sun-ness" of an image?
 @slidebreak{LaunchR}
 @right{@image{images/blue-v-green-images-centroid.png, 300}}
 
-If every image in our corpus is a point in space, then common ground is literally a point _in the middle_. 
+If every image in our corpus is a point in space, then common ground is literally a point _in the middle_. We have a bunch of images containing the sun, and we want to find the center.
 
-In one-dimension, we find the @vocab{mean} (average) or the @vocab{median}. The median is especially useful if your data includes extreme outliers.
+In our 2-dimensional Blue-Green Space, for example, the midpoint halfway between `"grass2"` and `"sun1"` defines one kind of "sun-ness"!
 
-@QandA{
-@Q{Should we use mean or median when computing the centroid for snowy images in our corpus? Why or why not?}
-@A{Mean is fine - both images are very similar}
-
-@Q{Should we use mean or median when computing the centroid for images with the sun in our corpus? Why or why not?}
-@A{This one is tricky! The sunset image is really different from the others, so there's an argument to be made for computing the centroid using the median.}
-
-}
-
-In our 2-dimensional Blue-Green Space, for example, the midpoint halfway between images 6 and 7 defines one kind of "sun-ness"!
+(Do you remember learning about mean, median, and mode? In Machine Learning, there are algorithms for finding clusters of points in space that are literally named `k-means`, `k-medians`, and `k-modes` clustering! _Measures of Center are a critical in modern Machine Learning._)
 
 @QandA{
 @Q{We have *three* images where the sun is visible. How can we find the middle of those three?}
@@ -207,7 +198,7 @@ We've provided two functions that do exactly this, using every available column 
 }
 
 @QandA{
-@Q{Why did building a centroid from Images 6 and 7, help us improve the recommendation?}
+@Q{Why did building a centroid from `"grass2"` and `"sun1"` help us improve the recommendation?}
 @A{Because the centroid was "closer" to all the sun images than any one of them was to all the others}
 
 }

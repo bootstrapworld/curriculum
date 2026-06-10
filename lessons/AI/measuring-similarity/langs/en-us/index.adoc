@@ -137,30 +137,49 @@ Computers can look at groups of pixels to compute values. For example:
   * There are columns for the identifier (`ID`), the image document (`DOC`), whether the image is `LIKED` or `DISLIKED`, and also for any descriptive `TAGS` in the image.
   * By defining the table here in the code, we’ve set ourselves up to be able to make changes.
 - Lines 47-52 direct the computer to build a model using the functions we experimented with.
-- Evaluate `model` in the Interactions Area.
-- Scroll down to find the row for `blue-red`.
+- Evaluate `model-with-color-names` in the Interactions Area.
+- Scroll down to find the row for `red-blue`.
+- Now evaluate `model`. What columns are different? What columns are the same?
 - What do you Notice? What do you Wonder?
 }
 
-@QandA{
-@Q{Where do you think the last 3 columns come from?}
-@A{The dominant color of each pixel.}
-@A{If we add the numbers in the red, green and blue columns we get the number of pixels in the image.}
-
-We've left the image thumbnails in this file as a reference for our human brains, but the model that the computer is working with does not include the images. This is another example of how models are @vocab{lossy}!
-
-@Q{What are some things that your brain knows about the images, that are not recorded in these columns?}
-}
-
 @teacher{
-The `model` has several ideas worth unpacking:
+The columns in these models have several ideas worth unpacking:
 
 - Many of the scales you'll see here go from 0-255. We use 8-bit color for the simpler shapes (think original Nintendo!), and that allows for 256 possible unique values.
 - `LUMINANCE` - the average brightness of an image. `image-luminance(black-sq)` is zero, while `image-luminance(white-sq)` is 255
 - `ENTROPY` - measures the randomness in brightness across pixels in an image. `image-entropy(black-sq)` and `image-entropy(white-sq)` are both zero, because every color in both images is the same: no randomness! However, `image-entropy(half-and-half)` is 1, because there is an exactly equal probability of selecting a black or white pixel at random. Without any clear majority, we have maximum entropy.
 - `SYMMETRY-V` and `SYMMETRY-H` - Both calculated on a scale of 0-1, with 1 being perfect symmetry and 0 being perfect asymmetry.
-- `DOMINANT-RGB-COLORS` - Shows the dominant color (red, green, or blue) for every pixel in order. Our `red-sq` is 10x10 in size, so we expect to see "red" written out 100 times. The pixels in our `black-sq` image, however, are _equally balanced_ across red, green, and blue (all zeros), so there is _no dominant color at all_.
+- `DOMINANT-RGB-COLORS` - Shows the dominant color (red, green, or blue) for every pixel in order. Our `red-sq` is 10x10 in size, so we expect to see "red" written out 100 times. The pixels in our `black-sq` image, however, are _equally balanced_ across red, green, and blue (all zeros), so there is _no dominant color at all_. *This column is only found in `model-with-color-names`*
+- In Computer Science, it's a convention to use the order "Red, Green, Blue" when talking about pixel values, but our `add-bag-cols` function (line 52) always puts the columns in _alphabetical order_. In Desmos and our worksheets, we've stuck with the RGB convention - but these different conventions could be a source of confusion for some students.
 }
+
+
+@slidebreak{Investigate}
+@QandA{
+@Q{How is `model` different from `model-with-color-names`?}
+@A{The `DOMINANT-RGB-COLORS` column is missing in `model`. Instead, it's been replaced by three other columns: `blue`, `green`, and `red`.}
+
+@Q{Where do you think the last 3 columns come from?}
+@A{They are a *count* of the number of times each color appeared in the original string.}
+
+@Q{By counting the number of times each word appears in the string, what information did we _lose_?}
+@A{We lose any information about *order*. We could take the pixels of one image and totally shuffle them around, and both images would still have the exact same number of red, green, and blue pixels}
+}
+
+@slidebreak{Investigate}
+@right{@image{images/bag-of-colors.png, 200}}
+Counting the words and discarding their order is a technique for extracting the _frequency_ of words in a String. It's as if we cut out all the words from the string and shoved them into a bag: we still know how many of each word are there, but we have no idea which came first, second, third. etc.
+
+In Machine Learning, this is called a @vocab{bag of words model}. For now we're just counting colors, but you could imagine it being useful for finding similarity between books, essays, etc.
+
+@QandA{
+We've left the image thumbnails in this file as a reference for our human brains, but the model that the computer is working with does not include the images. This is another example of how models are @vocab{lossy}!
+
+@Q{What are some things that your brain knows about the images, that are not recorded in these columns?}
+}
+
+
 
 @slidebreak{Investigate}
 
@@ -178,32 +197,6 @@ Think back to our mountain images.
 - Which do you think will have the most entropy? luminance? symmetry?
 }
 
-@slidebreak{Launch}
-
-@lesson-instruction{
-- Evaluate `model` in the Interactions Area and take a look at the table.
-- What do you Notice? What do you Wonder?
-}
-
-@teacher{
-The `model` has several ideas worth unpacking:
-
-- Many of the scales you'll see here go from 0-255. We use 8-bit color for the simpler shapes (think original Nintendo!), and that allows for 256 possible unique values.
-- `LUMINANCE` - the average brightness of an image. `image-luminance(black-sq)` is zero, while `image-luminance(white-sq)` is 255
-- `ENTROPY` - measures the randomness in brightness across pixels in an image. `image-entropy(black-sq)` and `image-entropy(white-sq)` are both zero, because every color in both images is the same: no randomness! However, `image-entropy(half-and-half)` is 1, because there is an exactly equal probability of selecting a black or white pixel at random. Without any clear majority, we have maximum entropy.
-- `SYMMETRY-V` and `SYMMETRY-H` - Both calculated on a scale of 0-1, with 1 being perfect symmetry and 0 being perfect asymmetry.
-- `DOMINANT-RGB-COLORS` - Shows the dominant color (red, green, or blue) for every pixel in order. Our `red-sq` is 10x10 in size, so we expect to see "red" written out 100 times. The pixels in our `black-sq` image, however, are _equally balanced_ across red, green, and blue (all zeros), so there is _no dominant color at all_.
-}
-
-@QandA{
-@Q{Where do you think the last 3 columns come from?}
-@A{The dominant color of each pixel.}
-@A{If we add the numbers in the red, green and blue columns we get the number of pixels in the image.}
-
-We've left the image thumbnails in this file as a reference for our human brains, but the model that the computer is working with does not include the images. This is another example of how models are @vocab{lossy}! 
-
-@Q{What are some things that your brain knows about the images, that are not recorded in these columns?}
-}
 
 === Synthesize
 @slidebreak{Synthesize}
