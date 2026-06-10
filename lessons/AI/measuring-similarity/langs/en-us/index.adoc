@@ -41,7 +41,7 @@ Students consider how arbitrary documents (in this case, Images) can be represen
 Students explore ways in which attributes of images can be computed, using various functions.
 
 === Launch
-@slidebreak{LaunchR}
+@slidebreak{Launch}
 
 @link{https://images.google.com/, In Google Image Search}, you can drag a picture into the search box and have Google find other, _similar_ images. Image search is basically a *recommendation system*, where the user uploads an image they like and Google produces a list of recommended matches.
 
@@ -54,6 +54,8 @@ When we ask Google to find images similar to the one we dragged, it comes back w
 |===
 
 @teacher{Give students a demo, using an image of your choice!}
+
+@slidebreak{Launch}
 
 @lesson-instruction{
 - Open the @starter-file{ai-image} on your computer and save a copy that's just for you. Then click "Run".
@@ -68,9 +70,13 @@ When we ask Google to find images similar to the one we dragged, it comes back w
 @A{Photo 3 possible responses: Photo 3's color palette includes mostly white, brown, and blue.}
 }
 
+@slidebreak{Launch}
+
 Computers don't experience the world in the same way we do. 
 
 @lesson-point{Where we see a beautiful mountain scene, a computer only sees a grid of @vocab{pixels} – tiny dots that make up the image.} 
+
+@slidebreak{Launch}
 
 Each pixel has a particular amount of Red, Green, and Blue in it. For our purposes, we'll use a scale of 0-255 to record the amount of each color that makes up a pixel. 
 
@@ -79,30 +85,82 @@ Each pixel has a particular amount of Red, Green, and Blue in it. For our purpos
 - A red pixel uses all of the possible red and no blue or green (255, 0, 0)
 - An orange pixel might use most of the red, some of the green, and no blue (254, 165, 0)
 
-@slidebreak{Investigate}
+@slidebreak{Launch}
+
+While the training corpus takes in images, once the model is trained, the computer won't have access to those images anymore. Let's take a look at how the computer processes a simple image.
+
+@lesson-instruction{
+- Return to the @starter-file{ai-image} and evaluate `red-blue-tile`.
+}
+
+@QandA{
+@Q{How would you describe what you see?}
+@A{Answers will vary. Draw out details.} 
+@A{Sample response: A small red square with a smaller blue square centered on it.}
+}
+
+@slidebreak{Launch}
+
+@lesson-instruction{
+- Evaluate `pixel` and `pixel-dominant-rgb` to get a sense of what information the computer is going to build our model from.  
+}
+
+@slidebreak{Launch}
 
 Computers can look at groups of pixels to compute values. For example:
-@right{@image{images/butterfly.png, 100}}
+@right{@image{images/butterfly.png, 200}}
 
 - *Color* - "how blue is the image?" 
 - *Symmetry* - "how similar are the pixels on one side of the image to the pixels on the other side of the image?". 
 - *Luminance* measures @vocab{central tendency} - "what's the average brightness of this image?"
 - *Entropy* measures @vocab{spread} - "how much variation in brightness is there?"
 
+@slidebreak{Investigate}
+
 @lesson-instruction{
-- Open @starter-file{ai-image} and experiment for a moment.
-Perhaps look at:
+- Return to the @starter-file{ai-image} and experiment for a moment. Look at
   * `horizontal-symmetry` and `vertical-symmetry` for `red-sq`, `green-t` and `half-and-half`
-  * `image-to-color-list(square(5, "solid", "orange"))`
-  * `image-color-names(square(5, "solid", "orange"))`
   * `image-luminance` for `black-sq` and `white-sq` and predict luminance for `half-and-half`
   * `image-entropy` for `half-and-half` and `white-sq` and predict luminance for `black-sq`
+  * `image-to-color-list(square(5, "solid", "orange"))`
+  * `image-color-names(square(5, "solid", "orange"))`
+- What do you Notice? What do you Wonder?
+}
+
+@slidebreak{Investigate}
+
+@lesson-instruction{
+- Take a look at lines 31-45 of our Definitions Area.
+  * Notice we're defining a _table_ called `image-corpus`.
+  * There are columns for the identifier (`ID`), the image document (`DOC`), whether the image is `LIKED` or `DISLIKED`, and also for any descriptive `TAGS` in the image.
+  * By defining the table here in the code, we’ve set ourselves up to be able to make changes.
+- Evaluate `model` in the Interactions Area.
+- Scroll down to find the row for `blue-red`.
+- What do you Notice? What do you Wonder?
+}
+
+@QandA{
+@Q{Where do you think the last 3 columns come from?}
+@A{The dominant color of each pixel.}
+@A{If we add the numbers in the red, green and blue columns we get the number of pixels in the image.}
+
+We've left the image thumbnails in this file as a reference for our human brains, but the model that the computer is working with does not include the images. This is another example of how models are @vocab{lossy}! 
+
+@Q{What are some things that your brain knows about the images, that are not recorded in these columns?}
+}
+
+@teacher{
+The `model` has several ideas worth unpacking:
+
+- Many of the scales you'll see here go from 0-255. We use 8-bit color for the simpler shapes (think original Nintendo!), and that allows for 256 possible unique values.
+- `LUMINANCE` - the average brightness of an image. `image-luminance(black-sq)` is zero, while `image-luminance(white-sq)` is 255
+- `ENTROPY` - measures the randomness in brightness across pixels in an image. `image-entropy(black-sq)` and `image-entropy(white-sq)` are both zero, because every color in both images is the same: no randomness! However, `image-entropy(half-and-half)` is 1, because there is an exactly equal probability of selecting a black or white pixel at random. Without any clear majority, we have maximum entropy.
+- `SYMMETRY-V` and `SYMMETRY-H` - Both calculated on a scale of 0-1, with 1 being perfect symmetry and 0 being perfect asymmetry.
+- `DOMINANT-RGB-COLORS` - Shows the dominant color (red, green, or blue) for every pixel in order. Our `red-sq` is 10x10 in size, so we expect to see "red" written out 100 times. The pixels in our `black-sq` image, however, are _equally balanced_ across red, green, and blue (all zeros), so there is _no dominant color at all_.
 }
 
 === Investigate
 @slidebreak{Investigate}
-
-@slidebreak{LaunchR}
 @right{@image{images/computer-vision.jpg, 400}}
 
 Some ML models are capable of recognizing parts of an image ("person", "car", etc.). This belong to a class of ML algorithms called "Computer Vision", which relies heavily on more advanced -- and computationally intensive -- concepts that we won't cover here. We're going to use our human brains to see these elements in our images! And then explore whether a Data Driven Algorithm can help us re-create Google Image Search, even without the fancy Computer Vision tech.
@@ -110,9 +168,7 @@ Some ML models are capable of recognizing parts of an image ("person", "car", et
 @slidebreak{Launch}
 
 @lesson-instruction{
-- Take a look at lines 26-40 of our Definitions Area.
-  * Notice we're defining a _table_ called `image-corpus`.
-  * There are columns for the identifier (`ID`), the image document (`DOC`), whether the image is `LIKED` or `DISLIKED`, and also for any descriptive `TAGS` in the image.
+- Return to lines 26-40 of our Definitions Area.
   * For now, none of the images are liked, disliked, or tagged. By defining the table here in the code, we've set ourselves up to be able to make changes.
 - Choose the *two mountain images you like the best*, and change the values for those images in the `LIKED` colum from `false` to `true`.
 - In the `TAGS` column:
@@ -139,28 +195,10 @@ Think back to our mountain images.
 
 @lesson-instruction{
 - Evaluate `model` in the Interactions Area and take a look at the table.
-- What do you Notice? What do you Wonder?
+
 }
 
-@teacher{
-The `model` has several ideas worth unpacking:
 
-- Many of the scales you'll see here go from 0-255. We use 8-bit color for the simpler shapes (think original Nintendo!), and that allows for 256 possible unique values.
-- `LUMINANCE` - the average brightness of an image. `image-luminance(black-sq)` is zero, while `image-luminance(white-sq)` is 255
-- `ENTROPY` - measures the randomness in brightness across pixels in an image. `image-entropy(black-sq)` and `image-entropy(white-sq)` are both zero, because every color in both images is the same: no randomness! However, `image-entropy(half-and-half)` is 1, because there is an exactly equal probability of selecting a black or white pixel at random. Without any clear majority, we have maximum entropy.
-- `SYMMETRY-V` and `SYMMETRY-H` - Both calculated on a scale of 0-1, with 1 being perfect symmetry and 0 being perfect asymmetry.
-- `DOMINANT-RGB-COLORS` - Shows the dominant color (red, green, or blue) for every pixel in order. Our `red-sq` is 10x10 in size, so we expect to see "red" written out 100 times. The pixels in our `black-sq` image, however, are _equally balanced_ across red, green, and blue (all zeros), so there is _no dominant color at all_.
-}
-
-@QandA{
-@Q{Where do you think the last 3 columns come from?}
-@A{The dominant color of each pixel.}
-@A{If we add the numbers in the red, green and blue columns we get the number of pixels in the image.}
-
-We've left the image thumbnails in this file as a reference for our human brains, but the model that the computer is working with does not include the images. This is another example of how models are @vocab{lossy}! 
-
-@Q{What are some things that your brain knows about the images, that are not recorded in these columns?}
-}
 
 === Synthesize
 @slidebreak{Synthesize}
