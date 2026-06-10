@@ -70,13 +70,14 @@ When we ask Google to find images similar to the one we dragged, it comes back w
 @A{Photo 3 possible responses: Photo 3's color palette includes mostly white, brown, and blue.}
 }
 
-@slidebreak{Launch}
+== Investigate
+@slidebreak{Investigate}
 
 Computers don't experience the world in the same way we do. 
 
 @lesson-point{Where we see a beautiful mountain scene, a computer only sees a grid of @vocab{pixels} – tiny dots that make up the image.} 
 
-@slidebreak{Launch}
+@slidebreak{Investigate}
 
 Each pixel has a particular amount of Red, Green, and Blue in it. For our purposes, we'll use a scale of 0-255 to record the amount of each color that makes up a pixel. 
 
@@ -85,7 +86,7 @@ Each pixel has a particular amount of Red, Green, and Blue in it. For our purpos
 - A red pixel uses all of the possible red and no blue or green (255, 0, 0)
 - An orange pixel might use most of the red, some of the green, and no blue (254, 165, 0)
 
-@slidebreak{Launch}
+@slidebreak{Investigate}
 
 While the training corpus takes in images, once the model is trained, the computer won't have access to those images anymore. Let's take a look at how the computer processes a simple image.
 
@@ -99,14 +100,14 @@ While the training corpus takes in images, once the model is trained, the comput
 @A{Sample response: A small red square with a smaller blue square centered on it.}
 }
 
-@slidebreak{Launch}
+@slidebreak{Investigate}
 
 @lesson-instruction{
 - Evaluate `pixel` and `pixel-dominant-rgb` to get a sense of what information the computer is going to build our model from.  
 - How similar is the computer's initial summary to ours?
 }
 
-@slidebreak{Launch}
+@slidebreak{Investigate}
 
 Computers can look at groups of pixels to compute values. For example:
 @right{@image{images/butterfly.png, 200}}
@@ -161,23 +162,7 @@ The `model` has several ideas worth unpacking:
 - `DOMINANT-RGB-COLORS` - Shows the dominant color (red, green, or blue) for every pixel in order. Our `red-sq` is 10x10 in size, so we expect to see "red" written out 100 times. The pixels in our `black-sq` image, however, are _equally balanced_ across red, green, and blue (all zeros), so there is _no dominant color at all_.
 }
 
-=== Investigate
 @slidebreak{Investigate}
-@right{@image{images/computer-vision.jpg, 400}}
-
-Some ML models are capable of recognizing parts of an image ("person", "car", etc.). This belong to a class of ML algorithms called "Computer Vision", which relies heavily on more advanced -- and computationally intensive -- concepts that we won't cover here. We're going to use our human brains to see these elements in our images! And then explore whether a Data Driven Algorithm can help us re-create Google Image Search, even without the fancy Computer Vision tech.
-
-@slidebreak{Launch}
-
-@lesson-instruction{
-- Return to lines 26-40 of our Definitions Area.
-  * For now, none of the images are liked, disliked, or tagged. By defining the table here in the code, we've set ourselves up to be able to make changes.
-- Choose the *two mountain images you like the best*, and change the values for those images in the `LIKED` colum from `false` to `true`.
-- In the `TAGS` column:
-  * change `""` to `"snow"`, for the snowy images.
-  * change `""` to `"sun"` for the three images with sunsets or sunrises.
-- Then click "Run" to load your changes.
-}
 
 @QandA{
 Think back to our mountain images.
@@ -192,15 +177,6 @@ Think back to our mountain images.
 - Which one has the most green? (the grassy one)
 - Which do you think will have the most entropy? luminance? symmetry?
 }
-
-@slidebreak{Launch}
-
-@lesson-instruction{
-- Evaluate `model` in the Interactions Area and take a look at the table.
-
-}
-
-
 
 === Synthesize
 @slidebreak{Synthesize}
@@ -417,10 +393,33 @@ If you have older students who have learned some trigonometry, you might want to
 For the purposes of this curriculum, you can safely ignore the difference between angle and cosine similarity! But, for students who are familiar with cosine and curious to explore, all of the starter files in our AI pathway have access to a `cosine-similarity` function.
 }
 
-=== Synthesize
-@slidebreak{Synthesize}
+Angle similarity really helped us improve the machines' "perception" of what makes two images similar. Given one image, we're able to produce much better search results! Thinking back to the notion of search as a *recommendation system*, you could also imagine doing the same with other kinds of data: for example picking a song and asking for similar recommendations!
 
-Angle similarity really helped us improve the machines' "perception" of what makes two images similar. Given one image, we're able to produce much better search results! Thinking back to the notion of search as a *recommendation system*, you could also imagine doing the same with other kinds of data: picking a song and asking Spotify to recommend similar matches!
+There are still a lot of limitations to our system, however:
+
+- We can only _search by document_, where we pick an image and find similar ones. 
+  * Image-search engines lets us type in a word like "grass"! 
+  * Music streaming apps like Tidal lets us type in a word like "jazz", rather than asking to tell it a specific song)
+- We're only recommending matches based on a single document: we can't find images, songs, or anything else based on a _collection_ of liked or disliked documents.
+
+@slidebreak{Investigate}
+@right{@image{images/computer-vision.jpg, 400}}
+
+Some ML models are capable of recognizing parts of an image ("person", "car", etc.). This belong to a class of ML algorithms called "Computer Vision", which relies heavily on more advanced -- and computationally intensive --concepts that we won't cover here. We're going to use our human brains to see these elements in our images! And then explore whether a Data Driven Algorithm can help us re-create Image Search technologies, even without the fancy Computer Vision tech.
+
+@slidebreak{Launch}
+
+@lesson-instruction{
+- Return to lines 26-40 of our Definitions Area.
+  * For now, none of the images are liked, disliked, or tagged. By defining the table here in the code, we've set ourselves up to be able to make changes.
+- Choose the *two mountain images you like the best*, and change the values for those images in the `LIKED` colum from `false` to `true`.
+- In the `TAGS` column:
+  * change `""` to `"snow"`, for the snowy images.
+  * change `""` to `"sun"` for the three images with sunsets or sunrises.
+- Then click "Run" to load your changes.
+}
+
+=== Synthesize
 
 @slidebreak{Synthesize}
 
@@ -434,10 +433,3 @@ Angle similarity really helped us improve the machines' "perception" of what mak
 @Q{Are there any limitations to using angle measures for similarity, where distance might be better?}
 @A{If we're only measuring in 1 dimension, the angle will always be zero}
 }
-
-@slidebreak{Synthesize}
-
-There are still a lot of limitations to our system, however:
-
-- We can only _search by document_, where we pick an image and find similar ones. Google lets us type in a word like "grass"! (A music example: Spotify lets us type in a word like "jazz", rather than asking to tell it a specific song)
-- We're only recommending matches based on a single document: we can't find images, songs, or anything else based on a _collection_ of liked or disliked documents.
