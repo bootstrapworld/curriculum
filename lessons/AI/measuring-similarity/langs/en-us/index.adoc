@@ -96,14 +96,14 @@ While the training corpus takes in images, once the model is trained, the comput
 
 @QandA{
 @Q{How would you describe what you see?}
-@A{Answers will vary. Draw out details.} 
+@A{Answers will vary. Draw out details.}
 @A{Sample response: A small red square with a smaller blue square centered on it.}
 }
 
 @slidebreak{Investigate}
 
 @lesson-instruction{
-- Evaluate `pixel` and `pixel-dominant-rgb` to get a sense of what information the computer is going to build our model from.  
+- Evaluate `pixel` and `pixel-dominant-rgb` to get a sense of what information the computer is going to build our model from.
 - How similar is the computer's initial summary to ours?
 }
 
@@ -136,7 +136,7 @@ Computers can look at groups of pixels to compute values. For example:
   * Notice we're defining a _table_ called `image-corpus`.
   * There are columns for the identifier (`ID`), the image document (`DOC`), whether the image is `LIKED` or `DISLIKED`, and also for any descriptive `TAGS` in the image.
   * By defining the table here in the code, we’ve set ourselves up to be able to make changes.
-- Lines 47-52 direct the computer to build a model using the functions we experimented with. 
+- Lines 47-52 direct the computer to build a model using the functions we experimented with.
 - Evaluate `model` in the Interactions Area.
 - Scroll down to find the row for `blue-red`.
 - What do you Notice? What do you Wonder?
@@ -147,7 +147,7 @@ Computers can look at groups of pixels to compute values. For example:
 @A{The dominant color of each pixel.}
 @A{If we add the numbers in the red, green and blue columns we get the number of pixels in the image.}
 
-We've left the image thumbnails in this file as a reference for our human brains, but the model that the computer is working with does not include the images. This is another example of how models are @vocab{lossy}! 
+We've left the image thumbnails in this file as a reference for our human brains, but the model that the computer is working with does not include the images. This is another example of how models are @vocab{lossy}!
 
 @Q{What are some things that your brain knows about the images, that are not recorded in these columns?}
 }
@@ -178,6 +178,33 @@ Think back to our mountain images.
 - Which do you think will have the most entropy? luminance? symmetry?
 }
 
+@slidebreak{Launch}
+
+@lesson-instruction{
+- Evaluate `model` in the Interactions Area and take a look at the table.
+- What do you Notice? What do you Wonder?
+}
+
+@teacher{
+The `model` has several ideas worth unpacking:
+
+- Many of the scales you'll see here go from 0-255. We use 8-bit color for the simpler shapes (think original Nintendo!), and that allows for 256 possible unique values.
+- `LUMINANCE` - the average brightness of an image. `image-luminance(black-sq)` is zero, while `image-luminance(white-sq)` is 255
+- `ENTROPY` - measures the randomness in brightness across pixels in an image. `image-entropy(black-sq)` and `image-entropy(white-sq)` are both zero, because every color in both images is the same: no randomness! However, `image-entropy(half-and-half)` is 1, because there is an exactly equal probability of selecting a black or white pixel at random. Without any clear majority, we have maximum entropy.
+- `SYMMETRY-V` and `SYMMETRY-H` - Both calculated on a scale of 0-1, with 1 being perfect symmetry and 0 being perfect asymmetry.
+- `DOMINANT-RGB-COLORS` - Shows the dominant color (red, green, or blue) for every pixel in order. Our `red-sq` is 10x10 in size, so we expect to see "red" written out 100 times. The pixels in our `black-sq` image, however, are _equally balanced_ across red, green, and blue (all zeros), so there is _no dominant color at all_.
+}
+
+@QandA{
+@Q{Where do you think the last 3 columns come from?}
+@A{The dominant color of each pixel.}
+@A{If we add the numbers in the red, green and blue columns we get the number of pixels in the image.}
+
+We've left the image thumbnails in this file as a reference for our human brains, but the model that the computer is working with does not include the images. This is another example of how models are @vocab{lossy}! 
+
+@Q{What are some things that your brain knows about the images, that are not recorded in these columns?}
+}
+
 === Synthesize
 @slidebreak{Synthesize}
 
@@ -205,7 +232,7 @@ We want something with more nuance.
 @slidebreak{Launch}
 @lesson-instruction{
 - Let's see how the images compare on the `"green"` scale by evaluating `image-dot-plot(model, "green", thumbnail)`.
-- Find `grass1` and `grass2` on the plot. 
+- Find `grass1` and `grass2` on the plot.
 - What do you notice?
 }
 
@@ -397,8 +424,8 @@ Angle similarity really helped us improve the machines' "perception" of what mak
 
 There are still a lot of limitations to our system, however:
 
-- We can only _search by document_, where we pick an image and find similar ones. 
-  * Image-search engines lets us type in a word like "grass"! 
+- We can only _search by document_, where we pick an image and find similar ones.
+  * Image-search engines lets us type in a word like "grass"!
   * Music streaming apps like Tidal lets us type in a word like "jazz", rather than asking to tell it a specific song)
 - We're only recommending matches based on a single document: we can't find images, songs, or anything else based on a _collection_ of liked or disliked documents.
 
