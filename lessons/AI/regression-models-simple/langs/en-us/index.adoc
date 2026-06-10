@@ -70,7 +70,7 @@ As with all machine learning, ALVINN required @vocab{training}. The goal of that
 
 (2) Ten times each second, ALVINN recorded...
 
-- a digitized image of the road ahead, along with a distance to the nearest obstacle
+- a digitized image of the road ahead
 - the steering direction chosen by the driver at that moment
 
 @slidebreak{Launch}
@@ -78,12 +78,12 @@ As with all machine learning, ALVINN required @vocab{training}. The goal of that
 (3) ALVINN's training data (@vocab{training corpus}) can be represented as an input-output table, with road images and obstacle distances as inputs and the correct steering angles as outputs.
 
 @indented{
-[cols="^.^1,^.^1,^.^1", stripes="none", options="header"]
+[cols="^.^1,^.^1", stripes="none", options="header"]
 |===
-| `road-image`                      | `obstacle-distance` (ft) | `steering-angle`
-| @image{images/road1.png, 100}     |          21              |   0.02º
-| @image{images/road2.png, 100}     |          49              |  55.20º
-| @image{images/road3.png, 100}     |          37              | -25.43º
+| `road-image`                  | `steering-angle`
+| @image{images/road1.png, 100} |   0.02º
+| @image{images/road2.png, 100} |  55.20º
+| @image{images/road3.png, 100} | -25.43º
 |===
 
 @teacher{
@@ -93,7 +93,7 @@ Note: These images were selected for illustrative purposes. The 30x32 pixel imag
 
 @slidebreak{Launch}
 
-(4) Using this dataset, ALVINN uses regression to generate a @vocab{function} for predicting the correct steering angle from the road image and obstacle distance.
+(4) Using this dataset, ALVINN generates a @vocab{function} for predicting the correct steering angle from the road image and obstacle distance.
 
 @lesson-point{
 `road-image` and `obstacle-distance` are the @vocab{explanatory variables}. `steering-angle` is the @vocab{response variable}.
@@ -126,12 +126,17 @@ If you want your students to see ALVINN in action, now is a good time to view @l
 In discovering the details of ALVINN's training, you may have noticed three key phases:
 
 1. Human-tagged data is recorded, demonstrating the knowledge to be learned
-2. A machine learning algorithm finds a *function* that maps from inputs to the correct outputs
+2. A machine learning algorithm finds a *function* that maps from inputs to the correct outputs (the "answer key")
 3. That function is applied to new, unseen data
 
+These phases are a part of _any kind of supervised learning!_
+
+@slidebreak{Launch}
 @lesson-point{
-We're going to do exactly the same thing — training our own model to steer a virtual self-driving car!
+We're going to apply those phases, and train our own model to steer a virtual self-driving car!
 }
+
+ALVINN pioneered the use of _neural networks_, a powerful way to create a sophisticated functions that map complex inputs to a set of outputs. Neural networks rely on some advanced concepts that we won't have time to cover in this course. But fortunately, you've already got some experience building simple functions yourself!
 
 === Investigate
 @slidebreak{Investigate-DN}
@@ -204,7 +209,7 @@ In the @lesson-link{fitting-models} lesson, we learned that a relationship betwe
 - The @vocab{explanatory variable} (x-axis) is the input we're predicting _from_.
 - The @vocab{response variable} (y-axis) is what we're trying to predict.
 
-In this case, our response variable is `steering-angle`. The training data has several columns that could serve as an explanatory variable.
+In this case, our response variable is `steering-angle`: the number of degrees to turn the wheel. The training data has several columns that could serve as an explanatory variable.
 
 @slidebreak{Launch}
 [cols="^1a,^3a", options="header", stripes="none"]
@@ -278,7 +283,6 @@ Circulate and encourage students to read the scatter plots critically. Push them
 
 
 == Linear Regression
-@objective{ai-hallucination}
 @objective{ai-training-lossy}
 
 === Overview
@@ -319,8 +323,11 @@ Students will notice that `lr-plot` defines models down to decimal values, certa
 @Q{What does the slope of our `curve` model tell us?}
 @A{That the steering angle increases by about 19.5 degrees for each 1 degree increase in the curve.}
 
-@Q{Does the y-intercept make sense in the real world? Why or why not?}
-@A{Yes. If the curve is zero, the road is straight and the steering angle should be zero.}
+@Q{What does the y-intercept of our `curve` model tell us about the relationship between `curve` and `steering-angle`?}
+@A{If the curve is zero, the steering angle should be zero.}
+
+@Q{Does that _make sense in the real world?_}
+@A{Yes! A road with zero curve should need zero degrees of steering!}
 
 @Q{What does the @math{S}-value tell us?}
 @A{We expect the error in predictions made by this model to be off by about 37 degrees.}
@@ -405,7 +412,7 @@ Students will find that `curve-predictor` drives much better than the others. Al
 }
 
 === Common Misconceptions
-- *More steering isn't always better.* Students may expect that a predictor trained on "good" data will drive perfectly. Remind them that a model can only generalize from what it's seen — it has no understanding of the road.
+*More steering isn't always better.* Students may expect that a predictor build from "good" steering data will drive perfectly. Remind them that a model can only generalize from what it's seen — it has no understanding of the road. Data from a perfect drive on a straight road will produce a model that might do _very poorly_ on a curved one!
 
 === Synthesize
 @slidebreak{Synthesize}
@@ -423,9 +430,6 @@ Congratulations — you have just *trained a machine learning model!*
 
 @Q{What if our training data was all collected on dry roads, and the car now drives on ice?}
 @A{The model was never trained on those conditions. It will predict as if conditions are normal — which could be very wrong.}
-
-@Q{When an AI system confidently produces a wrong answer because the input is outside its training data, that's sometimes called a _hallucination_. How does what you just built connect to that idea?}
-@A{Our predictor will confidently output a steering angle for ANY input — even situations it's never seen. It doesn't know what it doesn't know.}
 }
 
 @slidebreak{Synthesize}

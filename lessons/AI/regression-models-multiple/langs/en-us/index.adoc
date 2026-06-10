@@ -223,6 +223,7 @@ When we were calculating @math{S} in a 2-dimensional model (1 explanatory, 1 res
 
 @lesson-instruction{
 @right{@image{images/self-driving-car.jpg, 300}}
+
 - Open your copy of @starter-file{self-driving} and click "Run".
 - Use `regression-model-code` and `regression-model-S` to complete the first section of @printable-exercise{supervised-learning-multiple-regression.adoc}.
 }
@@ -271,7 +272,6 @@ Multiple regression is the same idea as linear regression, extended to any numbe
 
 Multiple regression is the engine behind many real AI systems:
 
-- ALVINN's hundreds of pixel weights
 - Car insurance rates based on age, location, and driving history
 - Weather forecasts based on temperature, humidity, pressure, and wind speed
 
@@ -286,12 +286,12 @@ The same three phases always apply when training and using a model:
 @slidebreak{Synthesize}
 
 @QandA{
-@Q{ALVINN used hundreds of pixel values _and_ an obstacle distance as inputs. How does that connect to what we just did?}
-@A{ALVINN's model had hundreds of parameters — one per pixel, each with its own learned weight — plus the obstacle distance. The same multiple regression principle applies, just at a much larger scale.}
+@Q{Modern self-driving cars use data from _dozens_ of sensors as inputs. How does that connect to what we just did?}
+@A{We are combining multiple variables to determine a single output.}
 
-@Q{What would it mean for a pixel to have a very _small_ weight in ALVINN's model?}
-@A{That pixel barely affects the steering prediction — it probably captures a part of the image that rarely matters for navigating the road, like the sky.}
+@Q{What would it mean for a sensor to have a very _small_ weight in our car's model?}
+@A{That sensor measures something that barely affects the steering prediction — it probably captures something that rarely matters for steering, like the number of people in the car.}
 
-@Q{What would it mean for a pixel to have a very _large_ weight?}
-@A{That pixel strongly influences the predicted steering angle — likely a part of the image that reliably signals road direction.}
+@Q{What would it mean for a sensor to have a very _large_ weight in our car's model?}
+@A{That sensor measures something that strongly influences the predicted steering angle — like `curve` or `skew`.}
 }
