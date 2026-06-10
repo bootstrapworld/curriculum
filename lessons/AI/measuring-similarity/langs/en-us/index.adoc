@@ -42,11 +42,16 @@ Students explore ways in which attributes of images can be computed, using vario
 
 === Launch
 @slidebreak{LaunchR}
-@right{@image{images/image-search.png, 400}}
 
 @link{https://images.google.com/, In Google Image Search}, you can drag a picture into the search box and have Google find other, _similar_ images. Image search is basically a *recommendation system*, where the user uploads an image they like and Google produces a list of recommended matches.
 
 When we ask Google to find images similar to the one we dragged, it comes back with a lot of similar images!
+
+[cols="1a,1a", grid="none", frame="none"]
+|===
+|@image{images/image-search.png, 400} 
+|@image{images/search-results.png, 200}
+|===
 
 @teacher{Give students a demo, using an image of your choice!}
 
@@ -79,8 +84,8 @@ Each pixel has a particular amount of Red, Green, and Blue in it. For our purpos
 Computers can look at groups of pixels to compute values. For example:
 @right{@image{images/butterfly.png, 100}}
 
-- How blue the image is. 
-- *Symmetry* - measures "how similar are the pixels on one side of the image to the pixels on the other side of the image?". 
+- *Color* - "how blue is the image?" 
+- *Symmetry* - "how similar are the pixels on one side of the image to the pixels on the other side of the image?". 
 - *Luminance* measures @vocab{central tendency} - "what's the average brightness of this image?"
 - *Entropy* measures @vocab{spread} - "how much variation in brightness is there?"
 
@@ -106,7 +111,7 @@ Some ML models are capable of recognizing parts of an image ("person", "car", et
 
 @lesson-instruction{
 - Take a look at lines 26-40 of our Definitions Area.
-  * Notice we're defining a _table_ called `images`.
+  * Notice we're defining a _table_ called `image-corpus`.
   * There are columns for the identifier (`ID`), the image document (`DOC`), whether the image is `LIKED` or `DISLIKED`, and also for any descriptive `TAGS` in the image.
   * For now, none of the images are liked, disliked, or tagged. By defining the table here in the code, we've set ourselves up to be able to make changes.
 - Choose the *two mountain images you like the best*, and change the values for those images in the `LIKED` colum from `false` to `true`.
