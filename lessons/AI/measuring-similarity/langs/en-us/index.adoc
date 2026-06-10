@@ -103,6 +103,7 @@ While the training corpus takes in images, once the model is trained, the comput
 
 @lesson-instruction{
 - Evaluate `pixel` and `pixel-dominant-rgb` to get a sense of what information the computer is going to build our model from.  
+- How similar is the computer's initial summary to ours?
 }
 
 @slidebreak{Launch}
@@ -134,6 +135,7 @@ Computers can look at groups of pixels to compute values. For example:
   * Notice we're defining a _table_ called `image-corpus`.
   * There are columns for the identifier (`ID`), the image document (`DOC`), whether the image is `LIKED` or `DISLIKED`, and also for any descriptive `TAGS` in the image.
   * By defining the table here in the code, we’ve set ourselves up to be able to make changes.
+- Lines 47-52 direct the computer to build a model using the functions we experimented with. 
 - Evaluate `model` in the Interactions Area.
 - Scroll down to find the row for `blue-red`.
 - What do you Notice? What do you Wonder?
@@ -220,17 +222,14 @@ We want something with more nuance.
 @center{@image{images/mountains-grid.png}}
 
 @QandA{
-@Q{Which images would you identify as having a lot of grass in them?}
-@A{3 and 6}
-
-@Q{Which color column would you expect to have similar values for two grassy images?}
+@Q{Which color column would you expect to have similar values for two images with a lot of grass in them?}
 @A{green}
 }
 
 @slidebreak{Launch}
 @lesson-instruction{
 - Let's see how the images compare on the `"green"` scale by evaluating `image-dot-plot(model, "green", thumbnail)`.
-- Find the images we identified as grassy on the plot. 
+- Find `grass1` and `grass2` on the plot. 
 - What do you notice?
 }
 
