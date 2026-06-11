@@ -6,8 +6,9 @@ div#body td .fitbruby { min-width: 3em; }
 div#body .listingblock { width: 300px; margin: auto; }
 </style>
 ++++
-@link-instructions{Open your copy of the @starter-file{decision-tree}, add the definition for `swims-classifier` to your Definitions Area and click "Run".}
-
+[cols="^1a, <1a, grid="none", frame="none"]
+|===
+|
 ```
 fun swims-classifier(r):
   if r["swims"] == true:
@@ -17,15 +18,24 @@ fun swims-classifier(r):
   end
 end
 ```
+|
+@link-instructions{Open your copy of the @starter-file{decision-tree}, add the definition for `swims-classifier` to your Definitions Area and click "Run".}
+
+@n Use the `classify` functions with the `swims-classifier` to complete the confusion matrix table below.
+
+- Fill in the first blank ("out of X")
+- Then, convert the _count_ of correct predictions into a _percentage_
+- Finally, convert the _percentage_ of correct predictions into a _decimal_
+
+|===
 
 == Computing the Report by Hand
 
-@n Use the `classify` functions with the `swims-classifier` to complete the confusion matrix table below.
 [cols="5a,^7a,^7a,^7a,^7a,^7a", options="header"]
 |===
 |actual-species|predicted-cat|predicted-dog|predicted-lizard|predicted-snail|predicted-tarantula
 | *"cat"*
-| @fitbruby{1em}{@ifsoln{4}}{out of 5} = @fitbruby{1em}{@ifsoln{80}}{% pct} = @fitbruby{1em}{@ifsoln{0.8}}{decimal}
+| @fitbruby{1em}{4}{out of 5} = @fitbruby{1em}{80}{% pct} = @fitbruby{1em}{0.8}{decimal}
 | @fitbruby{1em}{@ifsoln{1}}{out of 5} = @fitbruby{1em}{@ifsoln{20}}{% pct} = @fitbruby{1em}{@ifsoln{0.2}}{decimal}
 | @fitbruby{1em}{@ifsoln{0}}{out of 5} = @fitbruby{1em}{@ifsoln{0}}{% pct} = @fitbruby{1em}{@ifsoln{0}}{decimal}
 | @fitbruby{1em}{@ifsoln{0}}{out of 5} = @fitbruby{1em}{@ifsoln{0}}{% pct} = @fitbruby{1em}{@ifsoln{0}}{decimal}
