@@ -110,10 +110,10 @@ While the training corpus takes in images, once the model is trained, the comput
 - How similar is the computer's initial summary to ours?
 }
 
-@slidebreak{Investigate}
+@slidebreak{InvestigateR}
+@right{@image{images/butterfly.png, 200}}
 
 Computers can look at groups of pixels to compute values. For example:
-@right{@image{images/butterfly.png, 200}}
 
 - *Color* - "how blue is the image?" 
 - *Symmetry* - "how similar are the pixels on one side of the image to the pixels on the other side of the image?". 
@@ -124,7 +124,7 @@ Computers can look at groups of pixels to compute values. For example:
 
 @lesson-instruction{
 - Return to the @starter-file{ai-image} and experiment for a moment. Look at
-  * `horizontal-symmetry` and `vertical-symmetry` for `red-sq`, `green-t` and `half-and-half`
+  * `horizontal-symmetry` and `vertical-symmetry` for `red-sq`, `green-t`, and `half-and-half`
   * `image-luminance` for `black-sq` and `white-sq` and predict luminance for `half-and-half`
   * `image-entropy` for `half-and-half` and `white-sq` and predict luminance for `black-sq`
   * `image-to-color-list(square(5, "solid", "orange"))`
@@ -170,13 +170,15 @@ The columns in these models have several ideas worth unpacking:
 @A{We lose any information about *order*. We could take the pixels of one image and totally shuffle them around, and both images would still have the exact same number of red, green, and blue pixels}
 }
 
-@slidebreak{Investigate}
+@slidebreak{InvestigateR}
 @right{@image{images/bag-of-colors.png, 200}}
 
 Counting the words and discarding their order is a technique for extracting the _frequency_ of words in a String. It's as if we cut out all the words from the string and shoved them into a bag: we still know how many of each word are there, but we have no idea which came first, second, third. etc.
 
 In Machine Learning, this is called a @vocab{bag of words model}. For now we're just counting colors, but you could imagine it being useful for finding similarity between books, essays, etc.
 
+@slidebreak{InvestigateR}
+@ifslide{@right{@image{images/bag-of-colors.png, 200}}}
 @QandA{
 We've left the image thumbnails in this file as a reference for our human brains, but the model that the computer is working with does not include the images. This is another example of how models are @vocab{lossy}!
 
@@ -214,11 +216,11 @@ Think back to our mountain images.
 Students are introduced to _distance_ as a notion of similarity. This requires them to visualize images in a spatial system - first in one dimension, then in two, then eventually three.
 
 === Launch
-@slidebreak{Launch}
+@slidebreak{LaunchR}
 
-Pyret has several functions for measuring similarity, and they each work a little differently. The `simple-similarity` function is all-or-nothing: either the images match _precisely_ (1), or they don't (0). 
+One way to compare images is just to ask "are they identical?" This is all-or-nothing: either the images match _precisely_, or they don't.
 
-We want something with more nuance.
+But we want something with more nuance.
 
 @center{@image{images/all-mountains.webp}}
 
@@ -316,15 +318,15 @@ The distance formula works in 3 dimensions too! In fact, it works in _any number
 
 @lesson-instruction{
 - Try `distance-similarity(model, "grass1", [list: "red", "green", "blue"])`, and see how well this works at finding the similarity between images with *grass*.
-- Try it again with ID `"snow2"`, to see how well it works at finding the similarity between images with *snow*.
-- Try it again with ID `"red2"`, to see how well it works at finding the similarity between images with *red squares*.
-- Try it again with ID `"grass2"`, to see how well it works at finding the similarity between images with *sun*.
+- Try it with ID `"snow2"`, to see how well it works at finding the similarity between images with *snow*.
+- Try it with ID `"red2"`, to see how well it works at finding the similarity between images with *red squares*.
+- Try it with ID `"grass2"`, to see how well it works at finding the similarity between images with *sun*.
 - Try adding _other_ columns! Can you come up with a higher-dimensional space that works for all four groups?
 }
 
 @slidebreak{Investigate}
 
-Overall, `distance-similarity` is a huge upgrade compared to `simple-similarity`. But it suffers from two major problems:
+Overall, `distance-similarity` is a huge upgrade compared to the "are they identical?" question. But it suffers from two major problems:
 
 - It focuses on _count_, rather than _proportion_: For example, a giant mountain photo has far more red pixels than a tiny red square—and thus appears less 'similar' by this metric—even if red makes up only a tiny fraction of the mountain image.
 - It ignores _orientation_: Humans see two "mostly red" images as similar, but the distance formula doesn't. It only calculates the space between points, ignoring where they _actually lie on the graph_.
@@ -418,8 +420,11 @@ If you have older students who have learned some trigonometry, you might want to
 For the purposes of this curriculum, you can safely ignore the difference between angle and cosine similarity! But, for students who are familiar with cosine and curious to explore, all of the starter files in our AI pathway have access to a `cosine-similarity` function.
 }
 
+@slidebreak{Investigate}
+@ifslide{@right{@image{images/3-d-comparison-w-lines.png, 300}}}
 Angle similarity really helped us improve the machines' "perception" of what makes two images similar. Given one image, we're able to produce much better search results! Thinking back to the notion of search as a *recommendation system*, you could also imagine doing the same with other kinds of data: for example picking a song and asking for similar recommendations!
 
+@slidebreak{Investigate}
 There are still a lot of limitations to our system, however:
 
 - We can only _search by document_, where we pick an image and find similar ones.

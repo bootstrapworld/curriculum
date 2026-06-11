@@ -65,9 +65,12 @@ Remember, our system isn't actually _seeing_ the snow on those mountains. And ev
 @slidebreak{Launch}
 Machine Learning engineers at Netflix, Spotify, and Google have confronted these same problems:
 
-(1) Computers don't know that "Kung-Fu Panda" and "The Minecraft Movie" both star Jack Black +
-(2) Computers don't know that you like "Single Ladies", but not "Lemonade" +
-(3) Computers can tell us that two jazz songs are similar, but can't just start a "jazz" station +
+(1) Computers don't know that you like "Single Ladies", but not "Lemonade"
+
+(2) They don't know that Jack Black is in "Kung-Fu Panda" _and_ "The Minecraft Movie"
+
+(3) They can tell us that two jazz songs are similar, but can't just start a "jazz" station
+
 (4) _In our example_, computers know that our snowy mountain pictures are similar, but has no idea that they both have snow in them.
 
 So...what if *we humans* started telling these model about Jack Black, what songs they like, which songs are jazz and which images have snow?
@@ -146,8 +149,11 @@ If every image in our corpus is a point in space, then common ground is literall
 
 In our 2-dimensional Blue-Green Space, for example, the midpoint halfway between `"grass2"` and `"sun1"` defines one kind of "sun-ness"!
 
-(Do you remember learning about mean, median, and mode? In Machine Learning, there are algorithms for finding clusters of points in space that are literally named `k-means`, `k-medians`, and `k-modes` clustering! _Measures of Center are a critical in modern Machine Learning._)
+(Do you remember learning about mean, median, and mode? In Machine Learning, there are algorithms for finding clusters of points in space that are literally named `k-means`, `k-medians`, and `k-modes` clustering! _Measures of Center are a critical part of modern Machine Learning._)
 
+
+@slidebreak{LaunchR}
+@right{@image{images/blue-v-green-images-centroid.png, 300}}
 @QandA{
 @Q{We have *three* images where the sun is visible. How can we find the middle of those three?}
 @A{It's the middle of a triangle!}
@@ -190,7 +196,13 @@ And we can use that to solve *both* of the limitations of our unsupervised syste
 - We can find a centroid for all the _liked_ or _disliked_ images, and then recommend __un__-labeled images close to "liked-ness" and far from "disliked-ness". Without centroids, we're stuck comparing images to *one liked*.
 
 @slidebreak{Investigate}
-In each case, the steps are the same: (1) find all the labeled documents (liked, disliked, tagged, etc), (2) build a centroid, (3) find un-labeled documents that are similar to the centroid using the relevant columns.
+In each case, the steps are the same:
+
+(1) find all the labeled documents (liked, disliked, tagged, etc)
+
+(2) build a centroid
+
+(3) find un-labeled documents that are similar to the centroid using the relevant columns.
 
 @lesson-instruction{
 We've provided two functions that do exactly this, using every available column in the model.
@@ -206,7 +218,7 @@ We've provided two functions that do exactly this, using every available column 
 Now a recommendation system is just:
 
 - Calculate the centroids for liked and disliked documents
-- Calculate the cosine similarities between every document and both centroids
+- Calculate the similarities between every document and both centroids
 - Recommendation strength is a simple equation:
 
 @indented{@math{\text{similarity-to-liked} - \text{similarity-to-disliked}}!}
@@ -221,7 +233,7 @@ The result is a table of all your documents, in descending order of recommendati
 Image Search-by-word is just:
 
 - Find all documents tagged with that word, and compute their centroid
-- Compute the cosine-similarity of all the documents to that centroid
+- Compute the similarity of all the documents to that centroid
 - Match accuracy is just @math{\text{similarity}}
 
 We've created a helper function that does exactly that, given a table and a list of columns:
@@ -350,7 +362,7 @@ ALVINN was given a table of inputs (images and depth maps), each row tagged with
 }
 
 
-@slidebreak{SynthesizeR}
+@slidebreak{Synthesize}
 Supervised learning is a large part of what makes Machine Learning models feel like they "understand" humans. When we type in a sentence on Google Images, it feels like somehow the search engine _understood_ what we wanted! But in reality, it's another Data Driven Algorithm cranking through oceans of tagged and un-tagged data.
 
 But this comes at a cost: *someone has to tag millions of images!*

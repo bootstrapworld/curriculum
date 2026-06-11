@@ -71,8 +71,6 @@ Can we compute the similarity of _anything_ that way? Think about:
 Let's review our different similarity tools:
 
 @indented{
-@show{(contract "simple-similarity" '("Table" "String" "List<String>") "Table")}
-
 @show{(contract "distance-similarity" '("Table" "String" "List<String>") "Table")}
 
 @show{(contract "angle-similarity" '("Table" "String" "List<String>") "Table")}
@@ -103,8 +101,8 @@ Let's review our different similarity tools:
 
 @slidebreak{Investigate-DN}
 @QandA{
-@Q{Was `simple-similarity` useful? Why or why not?}
-@A{No - it tests to see if the essays are exactly the same, so even one different word will come up with a score of zero}
+@Q{Would it be useful to just _ask_ if two essays are identical or not?}
+@A{No!}
 
 @Q{Why can't we use any of our other similarity functions on this dataset?}
 @A{They need numeric attributes, and all we have is our `DOC` string}
@@ -156,9 +154,7 @@ Now that we have dozens of columns, we need to some help choosing which columns 
 
 @show{(contract "all-cols-similarity" '("Table" "String") "Table")}
 
-This function consumes a Table and the ID of a target Row, and then _uses all the numeric columns_ to compute the cosine similarity. For example: `all-cols-similarity(bags, "K")` will find the cosine-similarity of every document to "K", using every column containing numbers.
-
-Don't forget: with cosine similarity, the scores go from 0-1 (1 being a "perfect match" between two bags of words).
+This function consumes a Table and the ID of a target Row, and then _uses all the numeric columns_ to compute the angle-similarity. For example: `all-cols-similarity(bags, "K")` will find the angle-similarity of every document to "K", using every column containing numbers.
 
 @lesson-instruction{
 Complete the second section of @printable-exercise{natural-language-is-messy.adoc}
