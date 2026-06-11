@@ -4,33 +4,33 @@
 
 
 == Plotting Images in 1 Dimension ("Green Space")
-@n In the *Interactions Area*, evaluate `image-dot-plot(decorated-bag, "green", doc-thumbnail)`, and hover your mouse over the images.
+@n In the *Interactions Area*, evaluate `image-dot-plot(model, "green", thumbnail)`, and hover your mouse over the images.
 
 @indented{
 - What are the `green` values for our grassy images? @fitb{6em}{@ifsoln{5,245}} and @fitb{6em}{@ifsoln{4784}} How far apart are they? @fitb{}{@ifsoln{461}}
 - How does this help us look for similarity? @fitb{}{@ifsoln{The smaller the distance, the more similar the image!}}
 }
 
-@n Evaluate `distance-similarity(decorated-bag, "3", [list: "green"])`. Was image 6 the most similar? @fitb{}{@ifsoln{yes!}}
+@n Evaluate `distance-similarity(model, "grass1", [list: "green"])`. Was `"grass2"` the most similar? @fitb{}{@ifsoln{yes!}}
 
 
 == Plotting Images in 2 Dimensions ("Blue-Green Space")
-@n In the *Interactions Area*, evaluate `image-scatter-plot(decorated-bag, "green", "blue", doc-thumbnail)`. Can we still calculate the distance? @fitb{}{@ifsoln{yes! The distance formula!}}
+@n In the *Interactions Area*, evaluate `image-scatter-plot(model, "green", "blue", thumbnail)`. Can we still calculate the distance? @fitb{}{@ifsoln{yes! The distance formula!}}
 
 @n Are the grassy images still clustered together? @fitb{4em}{@ifsoln{yes}} Do you see any _other_ clusters? @fitb{}{} +
 @fitb{}{@ifsoln{The images with trees and water are clustered, and the squares are clustered with the sunset.}}
 
-@n Let's see how well `distance-similarity` works for our 2-dimensional space:
+@n Will `distance-similarity` give us the right clusters for grass, snow, and sun in our 2-dimensional space?
 
 [%autowidth, cols="<,^,^", options="header"]
 |===
-| Check 	| Code 																| Success?
-| *Grass*  	| `distance-similarity(decorated-bag, "3", [list: "green", "blue"])` | @ifsoln{Yes}
-| *Snow*  	| `distance-similarity(decorated-bag, "5", [list: "green", "blue"])` | @ifsoln{Yes}
-| *Sun* 	| `distance-similarity(decorated-bag, "0", [list: "green", "blue"])` | @ifsoln{No}
+| Check 	| Code 															  | Clustered?
+| *Grass*  	| `distance-similarity(model, "grass1", [list: "green", "blue"])` | @ifsoln{Yes}
+| *Snow*  	| `distance-similarity(model, "snow2", [list: "green", "blue"])`  | @ifsoln{Yes}
+| *Sun* 	| `distance-similarity(model, "day1", [list: "green", "blue"])`   | @ifsoln{No}
 |===
 
-@n Looking at the `decorated-bag` table (not a chart!), do you think using `"red"` would show us that our two squares are similar? Why or why not? @fitb{}{} +
+@n Looking at the numbers in your `model`, do you think using `"red"` would show us that our two squares are similar? Why or why not? @fitb{}{} +
 @fitb{}{@ifsoln{No - the numbers are so far apart!}}
 
 

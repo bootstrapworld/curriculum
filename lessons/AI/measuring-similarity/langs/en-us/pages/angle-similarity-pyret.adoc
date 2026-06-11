@@ -10,15 +10,15 @@
 
 == Red v Blue
 
-- Make `image-scatter-plot(decorated-bag, "red", "blue", thumbnail)`.
+- Make `image-scatter-plot(model, "red", "blue", thumbnail)`.
 - Adjust the `x-min:` and `y-min:` to `0` so that we can imagine the rays that would connect our points to the origin. 
 
-@n Based on the image scatter plot, which image(s) do you expect to be most similar to the snowy image `"5"` in the Blue-Red Space through the lens of `angle-similarity`? Why? @fitb{}{@ifsoln{Images 4, 2, and 1)}}
-@fitb{}{@ifsoln{are in almost the same direction from the origin as image 5}}
+@n Based on the image scatter plot, which image(s) do you expect to be most similar to `"snow2"` in the Blue-Red Space through the lens of `angle-similarity`? Why? @fitb{}{@ifsoln{}}
+@fitb{}{@ifsoln{}}
 
-@n Compute `angle-similarity(decorated-bag, "4", [list: "red", "blue"])`. Which Image does it compute to be the most similar? @fitb{}{@ifsoln{Image 2, with an angle of 0.85}}
+@n Compute `angle-similarity(model, "grass1", [list: "red", "blue"])`. Which Image does it compute to be the most similar? @fitb{}{@ifsoln{}}
 
-Test out @show{(code '(angle-similarity decorated-bag "4" (list "red")))}
+*Evaluate `angle-similarity(model, "snow1", [list: "red"])`*
 
 @n Why are all of the measures for angle similarity zero? @fitb{}{@ifsoln{It doesn't make any sense to find the angle between `red` and `red`!}}
 
@@ -27,20 +27,20 @@ Test out @show{(code '(angle-similarity decorated-bag "4" (list "red")))}
 - Make an image scatter plot comparing the Images based on `red` and `green`.
 - Adjust the `x-min:` and `y-min:` to `0` so that we can imagine the rays that would connect our points to the origin.
 
-@n Based on the image scatter plot, which restaurants do you expect to be most similar to the snowy image `"5"`in Red-Green space through the lens of `angle-similarity`? Why? @fitb{}{@ifsoln{The other snowy image is close, but Image 6 is almost on the same Ray!}}
+@n Based on the image scatter plot, which restaurants do you expect to be most similar to the snowy image `"snow1"`in Red-Green space through the lens of `angle-similarity`? Why? @fitb{}{@ifsoln{}}
 @fitb{}{}
 
-@n Compute `angle-similarity(fast-food, "4", [list: "red", "green"])`. Which Image does it compute to be the most similar? @fitb{}{@ifsoln{Image 6 (one of our sunrise images), with an angle of 2.91}}
+@n Compute `angle-similarity(model, "grass1", [list: "red", "green"])`. Which Image does it compute to be the most similar? @fitb{}{@ifsoln{}}
 
 == Entropy v Luminance
 
 - Make an image scatter plot comparing the Images based on `ENTROPY` and `LUMINANCE`.
 - Adjust the `x-min:` and `y-min:` to `0` so that we can imagine the rays that would connect our points to the origin.
 
-@n Based on the image scatter plot, which restaurants do you expect to be most similar to the snowy image `"5"`in Entropy-Luminance space through the lens of `angle-similarity`? Why? @fitb{}{@ifsoln{The other snowy image is almost on the same ray from the origin.}}
+@n Based on the image scatter plot, which restaurants do you expect to be most similar to the snowy image `"snow1"`in Entropy-Luminance space through the lens of `angle-similarity`? Why? @fitb{}{@ifsoln{The other snowy image is almost on the same ray from the origin.}}
 @fitb{}{}
 
-@n Compute `angle-similarity(fast-food, "4", [list: "ENTROPY", "LUMINANCE"])`. Which Image does it compute to be the most similar? @fitb{}{@ifsoln{The other snowy image, with an angle of 0.12}}
+@n Compute `angle-similarity(model, "snow1", [list: "ENTROPY", "LUMINANCE"])`. Which Image does it compute to be the most similar? @fitb{}{@ifsoln{The other snowy image, with an angle of 0.12}}
 
 
 == Red v. Green v. Blue v. LUMINANCE v. ENTROPY

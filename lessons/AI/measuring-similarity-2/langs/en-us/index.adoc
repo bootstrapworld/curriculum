@@ -2,7 +2,7 @@
 = Supervised and Unsupervised Similarity
 
 @description{
-This lesson uses an *supervised* learning approach to image similarity, and compares it to the unsupervised approach used in the prior lesson. Students think about how arbitrary documents (in this case, Images) can be represented as _labeled_ points in space, and how those human-labeled points can be used to improve the quality of searches and recommendations.
+This lesson uses a *supervised* learning approach to image similarity, and compares it to the unsupervised approach used in the prior lesson. Students think about how arbitrary documents (in this case, Images) can be represented as _labeled_ points in space, and how those human-labeled points can be used to improve the quality of searches and recommendations.
 }
 
 @lesson-prereqs{measuring-similarity}
@@ -13,13 +13,11 @@ This lesson uses an *supervised* learning approach to image similarity, and comp
 |===
 | Lesson Goals
 | Students will be able to...
-
 @objectives
 
 | Student-facing Lesson Goals
 |
 - Let's think about ways to represent images as points in space
-
 
 | Materials
 |[.materials-links]
@@ -28,7 +26,7 @@ This lesson uses an *supervised* learning approach to image similarity, and comp
 |===
 
 == Unsupervised vs. Supervised Learning
-@bjective{ai-supervised-v-unsupervised}
+@objective{ai-supervised-v-unsupervised}
 
 === Overview
 Students consider the limitations of the similarity system they built in @lesson-link{measuring-similarity}, and learn the difference between unsupervised and supervised learning.
@@ -46,7 +44,7 @@ Similarity models are also _recommendation systems!_ When you ask Google to find
 You also learned that these machine-generated attributes can be used to define _spaces_, in which we can plot those images. And once we see those images as points in space, we can use different measures to approximate similarity.
 
 @QandA{
-@Q{What distance measures did we learn?}
+@Q{What similarity measures did we learn?}
 @A{Distance similarity - measures the euclidean distance between two points in any number of dimensions}
 @A{Angle similarity - measures the angle between rays drawn from the origin to any two points in dimensions of 2 or more}
 
@@ -56,60 +54,6 @@ You also learned that these machine-generated attributes can be used to define _
 }
 
 === Investigate
-@slidebreak{Investigate}
-@QandA{
-@Q{If we wanted to compare team sports, we might measure attributes like *median winning score* or *likelihood of serious injury*.  What are some other quantitative attributes you can think of for comparing team sports?}
-@A{Answers might include:
-  * amount of physical contact
-  * number of players on a team
-  * length of play
-  * percent of time when game is stopped
-}
-
-@Q{What are some quantitative attributes we might use to compare movies?}
-@A{Answers might include:
-  * scariness
-  * duration
-  * level of violence
-  * level of humor
-  * percent of movie that is animated
-  * number of special effects
-}
-
-@Q{What are some quantitative attributes we might use to compare pant styles?}
-@A{Answers might include:
-  * bagginess of legs
-  * waist height
-  * number of pockets
-  * length of pant legs
-}
-}
-
-@slidebreak{Investigate}
-
-@lesson-instruction{
-- With you partner complete @printable-exercise{comparing-desserts.adoc}.
-}
-
-@slidebreak{Investigate}
-
-@QandA{
-@Q{What other attributes did you come up with for comparing desserts?}
-@A{Answers might include:
-  * sweetness
-  * saltiness
-  * creaminess
-  * calories
-  }
-
-@Q{What ideas did you come up with for how we could *measure* the similarity between any two examples?}
-
-@Q{Did either or both of the scatter plots you made support the idea that the desserts you marked as favorite and 2nd-favorite were similar?}
-
-@Q{Could we use our angle or distance similarity measures to recommend desserts?}
-
-@Q{What are some examples of recommendation systems in the real world, and what attributes do you think they might use?}
-}
 
 @slidebreak{Investigate}
 Unfortunately, the system we've built so far has two major limitations compared to real-world ones. Let's start with the first one:
@@ -166,6 +110,7 @@ You built a model of images in the previous lesson, including columns like `ENTR
 == Computing Centroids
 @objective{ai-centroids}
 @objective{ai-supervision-ethics}
+
 === Overview
 Students add labels for likes, dislikes, and tags to their image corpus, and use some helper functions to see how this labeling expands the power of the image search.
 
@@ -176,64 +121,57 @@ Students add labels for likes, dislikes, and tags to their image corpus, and use
 Open the @starter-file{ai-image} and click "Run", then evaluate `mountains` in the Interactions Area
 
 @Q{Which images have visible *snow*?}
-@A{4 and 5}
-
-@Q{Which images have a visible *sun* (either a sunset or sunrise)?}
-@A{0, 6, 7, and 8)}
+@A{`"snow1"` and `"snow2"`}
 
 @Q{Which images have visible *grass*?}
-@A{3 and 6 (and maybe a little of 0)}
+@A{`"grass1"` and `"grass2"` (and maybe a little of `"day1"`)}
+
+@Q{Which images have a visible *sun* (either a sunset or sunrise)?}
+@A{`"day1"`, `"grass2"`, `"sun1"`, and `"sun2"`)}
 }
 
 @slidebreak{LaunchR}
 @right{@image{images/blue-v-green-images.png, 300}}
 
-When we search for an image that has a visible sun, we don't actually want an image that's similar to image 0. We don't want an image that's similar to image 6, either! Instead, we want an image that's similar to what these sun images _have in common._ How can we use our spatial representation to find the "sun-ness" of an image?
+@lesson-point{
+When we search for an image that has a visible sun, we want an image that's similar to what sun images _have in common._
+}
+
+How can we find the "sun-ness" of an image?
 
 @slidebreak{LaunchR}
 @right{@image{images/blue-v-green-images-centroid.png, 300}}
 
-If every image in our corpus is a point in space, then a middle ground for the snowy images must literally be a point _in the middle_. In our 2-dimensional Blue-Green Space, for example, the midpoint halfway between images 6 and 7 defines one kind of "sun-ness"!
+If every image in our corpus is a point in space, then common ground is literally a point _in the middle_. We have a bunch of images containing the sun, and we want to find the center.
+
+In our 2-dimensional Blue-Green Space, for example, the midpoint halfway between `"grass2"` and `"sun1"` defines one kind of "sun-ness"!
+
+(Do you remember learning about mean, median, and mode? In Machine Learning, there are algorithms for finding clusters of points in space that are literally named `k-means`, `k-medians`, and `k-modes` clustering! _Measures of Center are a critical in modern Machine Learning._)
 
 @QandA{
 @Q{We have *three* images where the sun is visible. How can we find the middle of those three?}
 @A{It's the middle of a triangle!}
 
 @Q{Can we find the middle of 3D shape?}
-@A{Yes! (Use simple examples of cubes, spheres, etc...)}
+@A{Yes! }
 }
-
-
-=== Investigate
-@slidebreak{InvestigateR}
-@right{@image{images/centroid.png, 300}}
-For any set of points, the "middle" point is the @vocab{Centroid}. For 1D points, you can simply find the @vocab{mean} (average) or the @vocab{median}. The median is especially useful if your data includes extreme outliers.
-
-@QandA{
-@Q{Should we use mean or median when computing the centroid for snowy images in our corpus? Why or why not?}
-@A{Mean is fine - both images are very similar}
-
-@Q{Should we use mean or median when computing the centroid for images with the sun in our corpus? Why or why not?}
-@A{This one is tricky! The sunset image is really different from the others, so there's an argument to be made for computing the centroid using the median.}
-
-}
-
-@slidebreak{Investigate}
-If you have more than 1 dimension, the same math applies: compute the centroid for each column separately. Can we get a better result for sunny images by teaching Pyret what "sun-ness" looks like for two of our images?
 
 @lesson-instruction{
 - Complete the first section of @printable-exercise{supervised-learning.adoc}
 }
 
+If you have more than 1 dimension, the same math applies: compute the centroid for each column separately. Can we get a better result for sunny images by teaching Pyret what "sun-ness" looks like for two of our images?
 
+For any set of points, the "middle" point is the @vocab{Centroid}. 
+
+@image{images/centroid.png, 300} @image{images/tetrahedron-centroid.png, 300}
+
+=== Investigate
 @slidebreak{InvestigateR}
 @QandA{
 @ifslide{@right{@image{images/centroid.png, 300}}}
 @Q{Our unsupervised `angle-similarity` measure did a fine job recommending similar images when given a grassy or snowy image. Why did it struggle to finding images with the sun?}
 @A{The sunset image is _really_ different from the others. Any time we search by the `ID` of the other images (0, 6, or 7), we get other recommendations before image 8.}
-
-@Q{Why did building a centroid from Images 6 and 7, help us improve the recommendation?}
-@A{Because the centroid was "closer" to all the sun images than any one of them was to all the others}
 }
 
 @slidebreak{Investigate}
@@ -244,10 +182,12 @@ Let's talk about the other major limitation of our unsupervised similarity syste
 How can our @vocab{centroid} implementation solve this problem, too?
 
 @slidebreak{Investigate}
-Building @vocab{centroids} is powerful, because now we can add human-labeled information about _groups_. And we can use that to solve *both* of the limitations of our unsupervised system!
+Building @vocab{centroids} is powerful, because now we can access the power of human-labeled information to reason about _groups_. Instead of looking at one image with grass, we can now look at multiple grassy images and talk about _what they have in common: "grass-ness"_.
 
-- We can find a centroid for all the images labeled with "sun", and use that to find __un__-labeled images that are close to "sun-ness".
-- We can find a centroid for all the _liked_ or _disliked_ images, and then recommend __un__-labeled images close to "liked-ness" and far from "disliked-ness"
+And we can use that to solve *both* of the limitations of our unsupervised system!
+
+- We can find a centroid for all the images labeled with "sun", and use that to find __un__-labeled images that are close to "sun-ness". Without centroids, we're stuck comparing images to *one picture with a sun*.
+- We can find a centroid for all the _liked_ or _disliked_ images, and then recommend __un__-labeled images close to "liked-ness" and far from "disliked-ness". Without centroids, we're stuck comparing images to *one liked*.
 
 @slidebreak{Investigate}
 In each case, the steps are the same: (1) find all the labeled documents (liked, disliked, tagged, etc), (2) build a centroid, (3) find un-labeled documents that are similar to the centroid using the relevant columns.
@@ -257,6 +197,11 @@ We've provided two functions that do exactly this, using every available column 
 - Complete the second section of @printable-exercise{supervised-learning.adoc}
 }
 
+@QandA{
+@Q{Why did building a centroid from `"grass2"` and `"sun1"` help us improve the recommendation?}
+@A{Because the centroid was "closer" to all the sun images than any one of them was to all the others}
+
+}
 @slidebreak{Investigate}
 Now a recommendation system is just:
 
@@ -273,7 +218,7 @@ We've created a helper function that does exactly that, given a table and a list
 The result is a table of all your documents, in descending order of recommendation-strength (strongest first).
 
 @slidebreak{Investigate}
-Google's Image Search-by-word is just:
+Image Search-by-word is just:
 
 - Find all documents tagged with that word, and compute their centroid
 - Compute the cosine-similarity of all the documents to that centroid
@@ -294,6 +239,64 @@ Can you tell the difference between supervised and unsupervised learning in the 
 
 @lesson-instruction{
 - Complete @printable-exercise{supervised-or-unsupervised.adoc}
+}
+
+@opt{
+We've explored building a model for comparing images based on a set of attributes.  Let's think about attributes we might build models from for other categories of things that aren't images!
+
+@QandA{
+@Q{If we wanted to compare team sports, we might measure attributes like *median winning score* or *likelihood of serious injury*.  What are some other quantitative attributes you can think of for comparing team sports?}
+@A{Answers might include:
+  * amount of physical contact
+  * number of players on a team
+  * length of play
+  * percent of time when game is stopped
+}
+
+@Q{What are some quantitative attributes we might use to compare movies?}
+@A{Answers might include:
+  * scariness
+  * duration
+  * level of violence
+  * level of humor
+  * percent of movie that is animated
+  * number of special effects
+}
+
+@Q{What are some quantitative attributes we might use to compare pant styles?}
+@A{Answers might include:
+  * bagginess of legs
+  * waist height
+  * number of pockets
+  * length of pant legs
+}
+}
+
+@slidebreak{Investigate}
+
+@lesson-instruction{
+- With you partner complete @printable-exercise{comparing-desserts.adoc}.
+}
+
+@slidebreak{Investigate}
+
+@QandA{
+@Q{What other attributes did you come up with for comparing desserts?}
+@A{Answers might include:
+  * sweetness
+  * saltiness
+  * creaminess
+  * calories
+  }
+
+@Q{What ideas did you come up with for how we could *measure* the similarity between any two examples?}
+
+@Q{Did either or both of the scatter plots you made support the idea that the desserts you marked as favorite and 2nd-favorite were similar?}
+
+@Q{Could we use our angle or distance similarity measures to recommend desserts?}
+
+@Q{What are some examples of recommendation systems in the real world, and what attributes do you think they might use?}
+}
 }
 
 === Synthesize
@@ -325,7 +328,7 @@ ALVINN was given a table of inputs (images and depth maps), each row tagged with
 @A{With a new list of "liked songs", Spotify recalculates my "liked" centroid}
 
 @Q{When you tell Spotify that to make a Jazz station, what computations happen on Spotify's servers?}
-@A{Google computes the centroid for every song *already tagged* with "jazz", then returns those alongside songs that are similar to the centroid}
+@A{Spotify computes the centroid for every song *already tagged* with "jazz", then returns those alongside songs that are similar to the centroid}
 
 @Q{When you search for "sun" on Google Images, what computations happen on Google's servers?}
 @A{Google computes the centroid for every image *already tagged* with "sun", then returns those alongside images that are similar to the centroid}

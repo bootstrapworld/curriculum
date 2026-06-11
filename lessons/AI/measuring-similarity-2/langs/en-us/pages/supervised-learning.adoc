@@ -8,9 +8,9 @@
 
 @n Evaluate each of the expressions below, paying attention to the closest matches at the top of the result table
 
-(a) *Snow*: `angle-similarity(decorated-bag, "4", [list: "LUMINANCE", "ENTROPY", "red", "green", "blue"])` +
-(b) *Grass*: `angle-similarity(decorated-bag, "6", [list: "LUMINANCE", "ENTROPY", "red", "green", "blue"])` +
-(c) *Sun*: `angle-similarity(decorated-bag, "7", [list: "LUMINANCE", "ENTROPY", "red", "green", "blue"])`
+(a) *Snow*: `angle-similarity(model, "4", [list: "LUMINANCE", "ENTROPY", "red", "green", "blue"])` +
+(b) *Grass*: `angle-similarity(model, "6", [list: "LUMINANCE", "ENTROPY", "red", "green", "blue"])` +
+(c) *Sun*: `angle-similarity(model, "7", [list: "LUMINANCE", "ENTROPY", "red", "green", "blue"])`
 
 @indented{
 Were the top results right for images with snow? @fitb{6em}{@ifsoln{Yes}} Grass? @fitb{6em}{@ifsoln{Yes}} Sun? @fitb{6em}{@ifsoln{No}}
@@ -22,7 +22,7 @@ Why is our similarity method worse at recommending sun images than it is with sn
 
 == Calculating Centroids
 
-@n Table below includes two rows with images of the sun (`"6"` and `"7"`). Complete the table by filling the Centroid. (NOTE: we're just showing _some_ of the columns on this page)
+@n Table below includes two rows with images of the sun (`"grass2"` and `"sun1"`). Complete the table by filling the Centroid. (NOTE: we're just showing _some_ of the columns on this page)
 
 [%AUTOWIDTH, .FillVerticalSpace, cols="^.^, ^, ^a, ^a, ^a, ^a", options="header", stripes="none"]
 |===
@@ -34,14 +34,14 @@ Why is our similarity method worse at recommending sun images than it is with sn
 | blue
 
 
-| `"6"`
+| `"grass2"`
 | 160
 | 107
 | 8932
 | 5245
 | 2921
 
-| `"7"`
+| `"sun1"`
 | 160
 | 107
 | 10971
@@ -56,12 +56,12 @@ Why is our similarity method worse at recommending sun images than it is with sn
 |@ifsoln{4,414.5}
 |===
 
-@n *Pyret includes a function for adding Centroids to our model!* Define a new model with `m67 = add-centroid(decorated-bag, "SUN", [list: "6", "7"])`, then evaluate `m67`. What do you get back? (HINT: Be sure to view all the rows of the resulting table!) @fitb{}{} +
+@n *Evaluate `m-sun = add-centroid(model, "SUN", [list: "grass2", "sun1"])`* to define a new model with the centroid, then `m-sun` to see it. What do you get back? (HINT: Be sure to view all the rows `m-sun`!) @fitb{}{} +
 @fitb{}{@ifsoln{It added a centroid to our table, matching what I did by hand}}
 
 @n Complete the code below, to find similar images using the `"SUN CENTROID"` in our new model, then try it out in Pyret:
 
-`angle-similarity(` @fitbruby{5em}{@ifsoln{m67}}{Table}, @fitbruby{10em}{@ifsoln{"SUN CENTROID"}}{ID to compare}, `[list: "LUMINANCE", "ENTROPY", "red", "green", "blue"])`.
+`angle-similarity(` @fitbruby{5em}{@ifsoln{`m-sun`}}{Table}, @fitbruby{10em}{@ifsoln{"SUN CENTROID"}}{ID to compare}, `[list: "LUMINANCE", "ENTROPY", "red", "green", "blue"])`.
 
 == Searching and Recommending
 
@@ -70,10 +70,10 @@ The questions below rely on the following contracts:
 - @show{(contract "search-by-tag" '(Table String) "Table")}
 - @show{(contract "recommend" '(Table) "Table")}
 
-@n Make sure that only images `"6"` and `"7"` are tagged with "sun", click "Run", and evaluate `search-by-tag(decorated-bag, "sun")`. What does `search-by-tag` do? @fitb{}{} +
+@n Make sure that only `"grass2"` and `"sun1"` are tagged with "sun", click "Run", and evaluate `search-by-tag(model, "sun")`. What does `search-by-tag` do? @fitb{}{} +
 @fitb{}{@ifsoln{It find the images that have a matching tag, builds a centroid, then returns images similar to the centroid}}
 
-@n Try tagging *one* of grass images. Does `search-by-tag(decorated-bag, "grass")` recommend the other? @fitb{3em}{@ifsoln{yes}} What about for snowy images? @fitb{}{@ifsoln{yes}}
+@n Try tagging *one* of the grass images. Does `search-by-tag(model, "grass")` recommend the other? @fitb{3em}{@ifsoln{yes}} What about for snowy images? @fitb{}{@ifsoln{yes}}
 
-@n Try adding a small number of likes and dislikes to the table, then evaluate `recommend(decorated-bag)`.  The `recommend function` builds _two_ centroids. Can you figure out why? @fitb{}{} +
+@n Try adding a small number of likes and dislikes to the table, then evaluate `recommend(model)`.  The `recommend function` builds _two_ centroids. Can you figure out why? @fitb{}{} +
 @fitb{}{@ifsoln{It builds one for likes and another for dislikes, then find images that are close to the first and far from the second}}
