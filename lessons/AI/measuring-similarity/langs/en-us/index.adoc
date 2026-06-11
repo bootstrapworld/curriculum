@@ -62,6 +62,9 @@ When we ask Google to find images similar to the one we dragged, it comes back w
 - Evaluate `mountains` in the *Interactions Area*, then click on the thumbnail to expand it. 
 }
 
+@slidebreak{LaunchR}
+@ifslide{@image{images/all-mountains.webp}}
+
 @QandA{
 @Q{What attributes do these nine images share? What makes the images similar?}
 @Q{What attributes distinguish these nine images? What makes them different?}
@@ -154,8 +157,8 @@ The columns in these models have several ideas worth unpacking:
 - In Computer Science, it's a convention to use the order "Red, Green, Blue" when talking about pixel values, but our `add-bag-cols` function (line 52) always puts the columns in _alphabetical order_. In Desmos and our worksheets, we've stuck with the RGB convention - but these different conventions could be a source of confusion for some students.
 }
 
-
 @slidebreak{Investigate}
+
 @QandA{
 @Q{How is `model` different from `model-with-color-names`?}
 @A{The `DOMINANT-RGB-COLORS` column is missing in `model`. Instead, it's been replaced by three other columns: `blue`, `green`, and `red`.}
@@ -169,6 +172,7 @@ The columns in these models have several ideas worth unpacking:
 
 @slidebreak{Investigate}
 @right{@image{images/bag-of-colors.png, 200}}
+
 Counting the words and discarding their order is a technique for extracting the _frequency_ of words in a String. It's as if we cut out all the words from the string and shoved them into a bag: we still know how many of each word are there, but we have no idea which came first, second, third. etc.
 
 In Machine Learning, this is called a @vocab{bag of words model}. For now we're just counting colors, but you could imagine it being useful for finding similarity between books, essays, etc.
@@ -178,8 +182,6 @@ We've left the image thumbnails in this file as a reference for our human brains
 
 @Q{What are some things that your brain knows about the images, that are not recorded in these columns?}
 }
-
-
 
 @slidebreak{Investigate}
 
@@ -192,15 +194,18 @@ Think back to our mountain images.
 }
 
 @teacher{
-- Which image has the most red? (Image 9)
+- Which image has the most red? (`sun2`)
 - Which one has the most green? (the grassy one)
 - Which do you think will have the most entropy? luminance? symmetry?
 }
 
-
 === Synthesize
 @slidebreak{Synthesize}
 
+@QandA{
+@Q{What is a bag of words model?}
+@Q{What is the difference between entropy and luminance?}
+}
 
 == Measuring Distance in "Image Space"
 @objective{ai-similarity}
@@ -235,9 +240,9 @@ The big breakthrough here is recognizing that these columns each represents a _n
 
 @slidebreak{Launch}
 
+@QandA{
 We used the `"green"` column to define a number line - a "Green Space" - where every image was plotted according to how many green-dominant pixels it had. And our two grassy images are located near each other.
 
-@QandA{
 @Q{How could we quantify how similar images are to each other in this "green space"?}
 @A{We could calculate the distance between them.}
 }
