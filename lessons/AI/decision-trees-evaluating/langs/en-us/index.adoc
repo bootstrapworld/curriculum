@@ -126,7 +126,7 @@ Complete the second section of @printable-exercise{computing-decision-trees.adoc
 
 @slidebreak{Investigate}
 
-Notice that `tree-quant6` works just as well as `tree-any4`, even though it only has one column to train on!
+Notice that `tree-q6` works just as well as `tree-any4`, even though it only has one column to train on!
 
 As is common for quantitative columns, there's more variability in `pounds` than there is for any of our categorical columns. In fact, the only way to _not_ have a perfect classifier based on `pounds` would be for animals from two different species to weigh the exact same amount!
 
@@ -136,10 +136,10 @@ As is common for quantitative columns, there's more variability in `pounds` than
 
 @slidebreak{Investigate}
 
-When given another dataset to classify, `tree-any4` is out-scoring `tree-quant6`!
+When given another dataset to classify, `tree-any4` is out-scoring `tree-q6`!
 
 @QandA{
-@Q{Why did `tree-quant6` do so poorly?}
+@Q{Why did `tree-q6` do so poorly?}
 @A{Let students share their theories}
 }
 
@@ -153,7 +153,7 @@ When given another dataset to classify, `tree-any4` is out-scoring `tree-quant6`
 | @image{images/dot-plot-pounds-testing.png}
 |===
 
-This is an example of what ML engineers call @vocab{over-fitting}. The more a classifier depends on an attribute, the more sensitive it is to variations in that attribute between populations. In this case, `tree-quant6` was _totally dependent_ on `pounds`, whose distribution is very different in the `testing` dataset.
+This is an example of what ML engineers call @vocab{over-fitting}. The more a classifier depends on an attribute, the more sensitive it is to variations in that attribute between populations. In this case, `tree-q6` was _totally dependent_ on `pounds`, whose distribution is very different in the `testing` dataset.
 
 @slidebreak{Investigate}
 @ifslide{

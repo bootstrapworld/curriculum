@@ -197,15 +197,17 @@ If students start to complain that they're "stuck" with earlier questions, that'
 @A{If it divides the class as close to "in half" as possible}
 }
 
-==== Decision Tree Terminology
 @slidebreak{InvestigateR}
+==== Decision Tree Terminology
 @right{@image{images/terminology-tree.png, 300}}
 - A @vocab{decision node} splits a dataset around the values in one of its columns. This is the first "question".
    * The very top decision node is called the @vocab{root node}. It represents an entire dataset.
-- A @vocab{leaf node} contains the predicted outcome, and has no other branches. Outcomes are from a designated column in the dataset.
 - @vocab{Splitting} creates more branches and nodes, which represent subsets of a dataset based on a new “question” about a column.
+- A @vocab{leaf node} contains the predicted outcome, and has no other branches. Outcomes are from a designated column in the dataset.
 
 
+@slidebreak{InvestigateR}
+@ifslide{@right{@image{images/terminology-tree.png, 300}}}
 We're sticking to splits that only create two branch nodes, but some decisions trees use splits that create more. Computer scientists call the sequence of questions from the root node to an outcome a "path".
 
 @teacher{Discuss the decision tree you made during your "I Spy - Classify" game to help students identify the root node, decision nodes, leaf nodes, and paths on the tree so far.
@@ -425,9 +427,9 @@ You've probably noticed that:
 }
 @A{It checks to see whether the value in the `"tail"` column is `true`, and, if it says anything other than `true`, it classifies the animal as a `"snail"`.}
 
-@Q{What does `tail-classifier(firepaw)` do?}
+@Q{What does `tail-classifier(firepaw)` evaluate to? Can you explain why?}
 @A{Tells us how the `tail-classifier` will classify our `firepaw` row}
-@A{Returns "cat"}
+@A{It returns "cat", because the first part of the if-branch will always produce "cat" for any animal with a tail}
 }
 
 @teacher{
@@ -446,8 +448,7 @@ We have learned over time that many students do better with keeping things consi
 - Complete @printable-exercise{what-does-the-code-do.adoc}
 }
 
-@slidebreak{Investigate}
-
+@slidebreak{InvestigateR}
 @right{@image{images/dot-plot-tail.png, 450}}
 You've just encountered two new Pyret functions that will help us to make sense of the data as we build our @vocab{decision trees}. 
 
@@ -498,7 +499,7 @@ Use one of our new tools to answer the following questions about our `tail-class
 }
 
 @QandA{
-@Q{How do we know which of these roots will make the best possible split?}
+@Q{How do we choose a root that will make the best possible split?}
 @A{We want to choose a split that achieved the most correctly predicted outcomes for the training data.}
 }
 

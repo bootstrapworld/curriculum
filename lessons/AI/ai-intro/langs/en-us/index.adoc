@@ -45,15 +45,14 @@ Who here has ever used AI? Raise your hand if you've used an AI tool, or know so
 }
 
 @slidebreak{LaunchR}
+@right{@image{images/flow-chart.gif, 400}}
 
 @lesson-point{Is it _thinking_, or is it just _following an algorithm_?}
---
-@right{@image{images/flow-chart.gif, 400}}
-The first spell-checker was written in 1961. It had a 10,000 word dictionary, and it would check every word you typed to see if it was in the dictionary. It wasn't really _thinking_. It was just following an following an @vocab{algorithm} -- a series of steps that tell a computer how to perform a task -- in this case mechanically comparing strings of letters against a long list. And all it could do was tell you if a word _was_ or _wasn't_ spelled correctly.
---
+
+The first spell-checker was written in 1961. It had a 10,000 word dictionary, and it would check every word you typed to see if it was in the dictionary. It wasn't really _thinking_. It was just following an @vocab{algorithm} -- a series of steps that tell a computer how to perform a task -- in this case mechanically comparing strings of letters against a long list. And all it could do was tell you if a word _was_ or _wasn't_ spelled correctly.
+
 
 @slidebreak{Launch}
-
 In 1971, however, a new spell-checker arrived from the Stanford Artificial Intelligence Laboratory called SPELL. SPELL wouldn't just tell you if a word was misspelled - it would _suggest alternative words_ that you might have intended! People were *floored*, and swore that AI had arrived. After all, "how did the computer know what we intended to write?"
 
 Was SPELL _thinking_, or was it, too, just _following an algorithm_?
@@ -79,14 +78,13 @@ Here's SPELL's algorithm for checking a word:
 }
 SPELL had no idea what those alternative words meant. It didn't even know what a word _was!_ And it definitely didn't know what people were thinking when they typed. *It was just an algorithm.*
 
-@slidebreak{Launch}
-
---
+@slidebreak{LaunchR}
 @right{@image{images/mccarthy.png, 200}}
+
 After a while, most people stopped calling spell checkers AI. But in the early 2000s, cell phones introduced a feature called "predictive text": when you start typing a sentence, the phone makes suggestions about what the next word should be. People were *floored*, and swore that AI had arrived...but eventually they stopped calling predictive text AI, too.
 
 Computer scientist @link{https://en.wikipedia.org/wiki/John_McCarthy_(computer_scientist), John McCarthy} developed the term "AI effect" to describe this phenomenon: humans keep _moving the goalposts_ for what counts as "Artificial Intelligence" and what counts as "Human Intelligence"! In other words, "As soon as it works, no one calls it AI anymore."
---
+
 
 === Investigate
 @slidebreak{Investigate}
@@ -177,8 +175,6 @@ Let's play with some real tools that use AI, and see if we can make sense of how
 
 === Investigate
 @slidebreak{InvestigateR}
-
---
 @right{@image{images/classifier-bot.png, 250}}
 
 There are several kinds of *predictive models* you probably interact with every day!
@@ -190,14 +186,17 @@ There are several kinds of *predictive models* you probably interact with every 
 - Is this customer likely to buy a video game or not?
 - Which Harry Potter house would I be in?
 
+@slidebreak{InvestigateR}
+@ifslide{@right{@image{images/classifier-bot.png, 250}}}
 @lesson-instruction{
-- @online-exercise{https://www.nyckel.com/pretrained-classifiers/flowers-identifier/, This link } will take you to an example of a Machine Learning tool that consumes an image of a flower, and tries to predict what *category* of flower it really is.
+@online-exercise{https://www.nyckel.com/pretrained-classifiers/flowers-identifier/, This link } will take you to an example of a Machine Learning tool that consumes an image of a flower, and tries to predict what *category* of flower it really is.
+
 - Find an image of a flower, and drag it into the box
 - What part(s) of the image do you think it's looking at, to make its prediction?
 }
---
 
-@slidebreak{InvestigateR}
+
+@slidebreak{Investigate}
 @lesson-instruction{
 - Let's think a little about how classifiers might work!
 - With a partner, complete the first section on @printable-exercise{predictive-models-classifiers.adoc}
@@ -217,6 +216,7 @@ There are several kinds of *predictive models* you probably interact with every 
 @A{Maybe it some definition of "rose-ness", and it's just computing how far off the definition of *this rose* is from the one it knows}
 }
 
+@slidebreak{Investigate}
 @lesson-instruction{
 - You just looked at a _categorical_ classification problem: every flower image belongs to one category of flower.
 - Sometimes a classifier is just choosing between *two* categories: 
@@ -242,7 +242,6 @@ There are several kinds of *predictive models* you probably interact with every 
 }
 
 @slidebreak{InvestigateR}
---
 @right{@image{images/prediction-bots.webp, 250}}
 
 But Classifiers aren't the only kind of prediction system out there!
@@ -252,11 +251,10 @@ But Classifiers aren't the only kind of prediction system out there!
 - How many 3-pointers do we predict for player who is 6'5"?
 - How long do we predict a person will live, based on an income of $95,000?
 - How likely is it a student will do well in college, based on an SAT score of 1028?
---
 
 @slidebreak{InvestigateR}
-
 @ifslide{@right{@image{images/prediction-bots.webp, 250}}}
+
 @lesson-instruction{
 - Let's think a little about how regression models might work!
 - Have you ever taken one of those silly online quizzes, which claims to predict how long you'll live or how much money you'll make based on a few questions?
@@ -264,7 +262,7 @@ But Classifiers aren't the only kind of prediction system out there!
 - Be ready to share back!
 }
 
-@slidebreak{InvestigateR}
+@slidebreak{Investigate}
 @QandA{
 @Q{What variables did you come up with?}
 
@@ -318,8 +316,6 @@ Pretty much everyone saw a line with a positive slope, but they didn't necessari
 }
 
 @slidebreak{InvestigateR}
-
---
 @right{@image{images/recommendation-bot.png, 200}}
 
 Similarity and Recommendation Models are all about *measuring differences*:
@@ -331,7 +327,6 @@ Similarity and Recommendation Models are all about *measuring differences*:
 @link{https://open.spotify.com/, Let's try out an example in Spotify!}
 
 @teacher{Search for a song that your students will recognize, making sure to filter by "songs". When you hover over any of the songs in the search results, you'll see a three dots (`...`) appear on the right. Click these dots and select "Go to Song Radio"}
---
 
 @slidebreak{InvestigateR}
 @ifslide{@right{@image{images/recommendation-bot.png, 200}}}
@@ -356,7 +351,6 @@ How similar were Spotify's recommendations to the original song?
 }
 
 @slidebreak{InvestigateR}
---
 @right{@image{images/chat-bot.png, 250}}
 
 *Generative Models* look for *patterns and frequency in language*. In fact, they are often called "language models"
@@ -367,10 +361,12 @@ How similar were Spotify's recommendations to the original song?
 - LMs trained on _Drawings_ can be "art bots", and generate images
 - LMs trained on _Tic Tac Toe_ can be "tic tac Toe tots", and generate moves in the game
 
+@slidebreak{InvestigateR}
+@ifslide{@right{@image{images/chat-bot.png, 250}}}
+
 @link{https://duck.ai/, Here's an example of an ML tool} in the form of a chatbot: it generates text in response to what you write, based on patterns it has picked up by processing trillions of examples.
 
 @teacher{Give students 1-2m to try chatting}
---
 
 We'll get to Language Models in a later lesson, but for now the important thing is to realize that this is yet another kind of @vocab{Machine Learning}.
 
@@ -440,31 +436,24 @@ animals-table = load-table: name, species, sex, age, fixed, legs, pounds, weeks
 end
 ```
 
-The first line (starting with `#`) is called a @vocab{Comment}. Comments are notes for humans, which the computer ignores. The next line defines a new table called animals-table, (loaded from the shelter-sheet!) and defines column names: `name`, `species`, `sex`, `age`, `fixed`, `legs`, `pounds` and `weeks`. We could use any names we want for these columns, but it’s always a good idea to pick names that make sense!
+The first line (starting with `#`) is called a @vocab{Comment}. Comments are notes for humans, which the computer ignores.
+
+@slidebreak{Investigate}
+@ifslide{
+```
+# load the 'pets' sheet as a table called animals-table
+animals-table = load-table: name, species, sex, age, fixed, legs, pounds, weeks
+  source: pets-sheet.sheet-by-name("pets", true)
+end
+```
+}
+
+The next line defines a new table called `animals-table`, (loaded from the shelter-sheet!) and defines column names: `name`, `species`, `sex`, `age`, `fixed`, `legs`, `pounds` and `weeks`. We could use any names we want for these columns, but it’s always a good idea to pick names that make sense!
 
 @lesson-point{
 Even if your spreadsheet already has column headers, Pyret requires that you name them in the program itself.
 }
 
-@slidebreak{Investigate}
-
-Below is an example of a table with a *header row* and two *data rows*:
-
-[.pyret-table,cols="5a,5a,5a,5a,5a,5a,5a,5a",options="header"]
-|===
-
-| name 		| species | sex 	 | age 	| fixed | legs 	| pounds| weeks
-| "Sasha" 	| "cat"	  | "female" | 1 	| false | 4 	| 6.5 	| 3
-| "Mittens" | "cat"   | "female" | 2 	| true 	| 4 	| 7.4 	| 1
-|===
-
-Pyret lets us use many different kinds of data. In the animals table, for example, there are Numbers (the number of legs each animal has), Strings (the species of the animal), and Booleans (whether it is true or false that an animal is fixed).
-
-@QandA{
-@Q{What happens if you remove a column from the list in my program? Or add an extra one?}
-@A{When I remove a column, I get this message: "Loaded worksheet has 8 columns, but 7 column names were given."}
-@A{When I add a column, I get this message: "Loaded worksheet has 8 columns, but 9 column names were given."}
-}
 
 === Synthesize
 @slidebreak{Synthesize}

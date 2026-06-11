@@ -23,27 +23,27 @@ To complete this page, you will need to refer to @printable-exercise{computing-d
 
 [cols="1a,1a,1a,2a,2a", frame="none", stripes="none", options="header"]
 |===
-|tree 			| max levels 	| levels 	| # correct for `training`	| # correct for `testing`
-|`tree-cat1`	| 1 			| 1 		|@ifsoln{7}								|@ifsoln{7}
-|`tree-quant1`	| 1 			| 1 		|@ifsoln{8}								|@ifsoln{5}
-|`tree-any1`	| 1 			| 1 		|@ifsoln{8}								|@ifsoln{7}
-|`tree-cat2`	| 2 			|@ifsoln{1} |@ifsoln{7}								|@ifsoln{7}
-|`tree-quant2`	| 2 			|@ifsoln{2} |@ifsoln{10}							|@ifsoln{7}
-|`tree-any2`	| 2 			|@ifsoln{2} |@ifsoln{11}							|@ifsoln{10}
-|`tree-quant3`	| 3 			|@ifsoln{3} |@ifsoln{12}							|@ifsoln{6}
-|`tree-any3`	| 3 			|@ifsoln{3} |@ifsoln{14}							|@ifsoln{12}
-|`tree-quant4`	| 4 			|@ifsoln{4} |@ifsoln{13}							|@ifsoln{7}
-|`tree-any4`	| 4 			|@ifsoln{4} |@ifsoln{15}							|@ifsoln{13}
-|`tree-quant5`	| 5 			|@ifsoln{5} |@ifsoln{14}							|@ifsoln{6}
-|`tree-any5`	| 5 			|@ifsoln{4} |@ifsoln{15}							|@ifsoln{13}
-|`tree-quant6`	| 6 			|@ifsoln{6} |@ifsoln{15}							|@ifsoln{5}
+|tree 		| max levels| levels 	| # correct for `training`	| # correct for `testing`
+|`tree-c1`	| 1 		| 1 		|@ifsoln{7}					|@ifsoln{7}
+|`tree-q1`	| 1 		| 1 		|@ifsoln{8}					|@ifsoln{5}
+|`tree-any1`| 1 		| 1 		|@ifsoln{8}					|@ifsoln{7}
+|`tree-c2`	| 2 		|@ifsoln{1} |@ifsoln{7}					|@ifsoln{7}
+|`tree-q2`	| 2 		|@ifsoln{2} |@ifsoln{10}				|@ifsoln{7}
+|`tree-any2`| 2 		|@ifsoln{2} |@ifsoln{11}				|@ifsoln{10}
+|`tree-q3`	| 3 		|@ifsoln{3} |@ifsoln{12}				|@ifsoln{6}
+|`tree-any3`| 3 		|@ifsoln{3} |@ifsoln{14}				|@ifsoln{12}
+|`tree-q4`	| 4 		|@ifsoln{4} |@ifsoln{13}				|@ifsoln{7}
+|`tree-any4`| 4 		|@ifsoln{4} |@ifsoln{15}				|@ifsoln{13}
+|`tree-q5`	| 5 		|@ifsoln{5} |@ifsoln{14}				|@ifsoln{6}
+|`tree-any5`| 5 		|@ifsoln{4} |@ifsoln{15}				|@ifsoln{13}
+|`tree-q6`	| 6 		|@ifsoln{6} |@ifsoln{15}				|@ifsoln{5}
 |===
 
 - Evaluate each of the decision trees we've defined and record how many levels deep it is in the *levels* column. 
-- `Classify` each of the Decisions trees using the `training` dataset, e.g. `classify(training, "species", tree-cat1)`, and complete the *number correct for training dataset* column. 
+- `Classify` each of the Decisions trees using the `training` dataset, e.g. `classify(training, "species", tree-c1)`, and complete the *number correct for training dataset* column.
 
-@n What do you notice? What do you wonder? @fitb{}{@ifsoln{`tree-quant1` and `tree-any1` both had 8 correct.}} +
-@blanklines{2}{@ifsoln{How did the algorithm know which to choose? @hspace{2em} Pyret's algorithm came up with a tree that was correct within 4 splits. Using just the pounds column produced perfect predictions by the sixth level. @hspace{2em} `tree-any4` and `tree-quant6` both classified all of the animals' species correctly.}}
+@n What do you notice? What do you wonder? @fitb{}{@ifsoln{`tree-q1` and `tree-any1` both had 8 correct.}} +
+@blanklines{2}{@ifsoln{How did the algorithm know which to choose? @hspace{2em} Pyret's algorithm came up with a tree that was correct within 4 splits. Using just the pounds column produced perfect predictions by the sixth level. @hspace{2em} `tree-any4` and `tree-q6` both classified all of the animals' species correctly.}}
 
 @n Did allowing for more levels in the tree always make the tree better? @fitb{}{@ifsoln{No. Sometimes Pyret didn't use all of the available levels.}}  
 
@@ -53,11 +53,11 @@ To complete this page, you will need to refer to @printable-exercise{computing-d
 
 We built our classifiers using the `training` dataset. Let's see how well they do predicting `"species"` for a new dataset called `testing`. 
 
-@n `Classify` each of the Decisions trees using the `testing` dataset, e.g. `classify(testing, "species", tree-cat1)`, and complete the *number correct for training dataset* column. 
+@n `Classify` each of the Decisions trees using the `testing` dataset, e.g. `classify(testing, "species", tree-c1)`, and complete the *number correct for training dataset* column.
 
-@n Which two models did the besst job of predicting species for our `training` dataset? @fitb{8em}{@ifsoln{`tree-any4`}} and @fitb{8em}{@ifsoln{`tree-quant6`}}
+@n Which two models did the besst job of predicting species for our `training` dataset? @fitb{8em}{@ifsoln{`tree-any4`}} and @fitb{8em}{@ifsoln{`tree-q6`}}
 
 @n How did their success rates compare with our `testing` dataset? @fitb{}{@ifsoln{}} +
-@fitb{}{@ifsoln{`tree-any4` got most of them correct, but `tree-quant6` did a terrible job, only predicting 1/3 of the animals' species correctly.}}
+@fitb{}{@ifsoln{`tree-any4` got most of them correct, but `tree-q6` did a terrible job, only predicting 1/3 of the animals' species correctly.}}
 
-@n Look carefully at the number correct for our `tree-quant` decision trees built on the pounds column as the number of allowable levels increases. What do you notice? @fitb{}{@ifsoln{Eventually the trees with more levels do a worse job of making predictions!}}
+@n Look carefully at the number correct for our `tree-q` decision trees built on the pounds column as the number of allowable levels increases. What do you notice? @fitb{}{@ifsoln{Eventually the trees with more levels do a worse job of making predictions!}}
