@@ -119,19 +119,6 @@ div#body {
   max-width:      1400px !important;
   -webkit-font-smoothing: antialiased;
 
-  &.beta::after {
-    position: absolute;
-    top: 40%;
-    left: 40%;
-    transform: rotate(-45deg);
-    content: "BETA";
-    opacity: 0.2;
-    line-height: 3em;
-    color: gray;
-    font-size: 100pt;
-    font-weight: bold;
-    z-index: -1;
-  }
   /* Set Defaults (many asciidoc overrides) */
   h1 {
     font-size:      24px;
@@ -447,6 +434,22 @@ div#body {
   }
 
 }
+
+body.beta div#body::after {
+    position: absolute;
+    top: 25%;
+    left: 20%;
+    transform: rotate(-45deg);
+    content: "BETA";
+    opacity: 0.2;
+    line-height: 3em;
+    color: gray;
+    font-size: 100pt;
+    font-weight: bold;
+    z-index: -1;
+  }
+
+
 /* use 'thin' instead of 1px border to try and avoid disappearing
 lines on some browsers */
 .fitb, .fitbruby, .fitb.stretch::after, .fitbruby.stretch::after {
