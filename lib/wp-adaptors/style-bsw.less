@@ -31,33 +31,43 @@
   --x-body-scroll-active-bar-size: 15px;
 }
 
+// =========================================================================
+// Responsive breakpoints (Cornerstone/X-Theme tier system).
+// At or above each value, the next-larger layout activates.
+// =========================================================================
+@bp-sm:  480px;  // mobile -> tablet portrait
+@bp-md:  767px;  // tablet -> small laptop
+@bp-lg:  979px;  // small laptop -> desktop
+@bp-xl: 1200px;  // desktop -> wide desktop
+
+
 body { margin: 0; line-height: 1.7; }
 
-@media (min-width:1200px) {
+@media (min-width: @bp-xl) {
   .x-hide-xl {
     display: none !important;
   }
 }
 
-@media (min-width:979px) and (max-width:1199px) {
+@media (min-width: @bp-lg) and (max-width: (@bp-xl - 1px)) {
   .x-hide-lg {
     display: none !important;
   }
 }
 
-@media (min-width:767px) and (max-width:978px) {
+@media (min-width: @bp-md) and (max-width: (@bp-lg - 1px)) {
   .x-hide-md {
     display: none !important;
   }
 }
 
-@media (min-width:480px) and (max-width:766px) {
+@media (min-width: @bp-sm) and (max-width: (@bp-md - 1px)) {
   .x-hide-sm {
     display: none !important;
   }
 }
 
-@media (max-width:479px) {
+@media (max-width: (@bp-sm - 1px)) {
   .x-hide-xs {
     display: none !important;
   }
@@ -97,7 +107,7 @@ body { margin: 0; line-height: 1.7; }
   max-width: 1600px;
 }
 
-@media (max-width:978.98px) {
+@media (max-width: (@bp-lg - 1px)) {
 
   }
 
@@ -721,7 +731,7 @@ body { margin: 0; line-height: 1.7; }
   flex-basis: auto;
 }
 
-@media screen and (max-width:978px) {
+@media screen and (max-width: (@bp-lg - 1px)) {
   .m1f-1c.x-anchor .x-anchor-content {
     padding-right: 3em;
   }
@@ -737,7 +747,7 @@ body { margin: 0; line-height: 1.7; }
   }
 }
 
-@media screen and (max-width:766px) {
+@media screen and (max-width: (@bp-md - 1px)) {
   .m1f-o.x-bar-container {
     justify-content: flex-start;
   }
@@ -753,7 +763,7 @@ body { margin: 0; line-height: 1.7; }
   
   }
 
-@media screen and (max-width:479px) {
+@media screen and (max-width: (@bp-sm - 1px)) {
   
   
   }
@@ -1436,7 +1446,7 @@ body { margin: 0; line-height: 1.7; }
   flex-basis: auto;
 }
 
-@media screen and (max-width:1199px) {
+@media screen and (max-width: (@bp-xl - 1px)) {
   .m463-r.x-bar-container {
     padding-left: 0;
   }
@@ -1467,7 +1477,7 @@ body { margin: 0; line-height: 1.7; }
   }
 }
 
-@media screen and (max-width:978px) {
+@media screen and (max-width: (@bp-lg - 1px)) {
   .m463-3 .x-bar-content {
     flex-direction: column;
   }
@@ -1531,21 +1541,21 @@ body { margin: 0; line-height: 1.7; }
   }
 }
 
-@media screen and (min-width:767px) and (max-width:978px) {
+@media screen and (min-width: @bp-md) and (max-width: (@bp-lg - 1px)) {
   .m463-21 {
     align-items: stretch;
     align-content: stretch;
   }
 }
 
-@media screen and (min-width:767px) and (max-width:1199px) {
+@media screen and (min-width: @bp-md) and (max-width: (@bp-xl - 1px)) {
   .m463-2r>.x-row-inner {
     margin-top: calc(((0 / 2) + 1px) * -1);
     margin-bottom: calc(((0 / 2) + 1px) * -1);
   }
 }
 
-@media screen and (max-width:766px) {
+@media screen and (max-width: (@bp-md - 1px)) {
   .m463-2.x-bar {
     padding-top: 20px;
     padding-bottom: 20px;
@@ -1636,7 +1646,7 @@ body { margin: 0; line-height: 1.7; }
   }
 }
 
-@media screen and (max-width:479px) {
+@media screen and (max-width: (@bp-sm - 1px)) {
   .m463-1f.x-text {
     max-width: 200px;
   }
@@ -2388,7 +2398,7 @@ body { margin: 0; line-height: 1.7; }
   aspect-ratio: auto;
 }
 
-@media screen and (max-width:978px) {
+@media screen and (max-width: (@bp-lg - 1px)) {
   .m17zxgn2tjtr-b>.x-row-inner>*:nth-child(2n - 0) {
     flex-basis: calc(33.33% - clamp(0px, var(--gap), 9999px));
   }
@@ -2402,7 +2412,7 @@ body { margin: 0; line-height: 1.7; }
   }
 }
 
-@media screen and (max-width:766px) {
+@media screen and (max-width: (@bp-md - 1px)) {
   .m17zxgn2tjtr-a>.x-row-inner {
     justify-content: center;
   }
@@ -2437,13 +2447,13 @@ body { margin: 0; line-height: 1.7; }
   }
 }
 
-@media screen and (min-width:480px) and (max-width:978px) {
+@media screen and (min-width: @bp-sm) and (max-width: (@bp-lg - 1px)) {
   .m17zxgn2tjtr-m.x-text {
     max-width: 300px;
   }
 }
 
-@media screen and (max-width:479px) {
+@media screen and (max-width: (@bp-sm - 1px)) {
   .m17zxgn2tjtr-c>.x-row-inner>*:nth-child(1n - 0) {
     flex-basis: calc(100% - clamp(0px, var(--gap), 9999px));
   }
