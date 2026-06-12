@@ -259,7 +259,7 @@ local function postproc(fhtml_cached, tipe)
       o:write('<link rel="preconnect" href="https://fonts.googleapis.com">\n')
       o:write('<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n')
       o:write('<link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">\n')
-      o:write('<script src="' .. local_dist_root_dir .. 'lib/wp-adaptors/script.js"></script>\n')
+      o:write('<script defer src="' ..local_dist_root_dir .. 'lib/wp-adaptors/script.js"></script>\n')
       --
       o:write(z, '\n')
       --
@@ -346,10 +346,10 @@ local function postproc(fhtml_cached, tipe)
       add_codemirror_p = false
       o:write('<link rel="stylesheet" href="' .. local_dist_root_dir .. 'lib/codemirror.css" />\n')
       o:write(gtm_content)
-      --o:write('<script src="' .. local_dist_root_dir .. 'lib/codemirror.js"></script>\n')
-      o:write('<script src="' .. local_dist_root_dir .. 'lib/runmode-standalone.js"></script>\n')
-      o:write('<script src="' .. local_dist_root_dir .. 'lib/scheme2.js"></script>\n')
-      o:write('<script src="' .. local_dist_root_dir .. 'lib/pyret-mode.js"></script>\n')
+      --o:write('<script defer src="' ..local_dist_root_dir .. 'lib/codemirror.js"></script>\n')
+      o:write('<script defer src="' ..local_dist_root_dir .. 'lib/runmode-standalone.js"></script>\n')
+      o:write('<script defer src="' ..local_dist_root_dir .. 'lib/scheme2.js"></script>\n')
+      o:write('<script defer src="' ..local_dist_root_dir .. 'lib/pyret-mode.js"></script>\n')
 
     end
     --
@@ -360,20 +360,20 @@ local function postproc(fhtml_cached, tipe)
         o:write('<script async defer src="https://unpkg.com/pdf-lib@1.4.0"></script>\n')
         o:write('<script async defer src="https://unpkg.com/@pdf-lib/fontkit/dist/fontkit.umd.min.js"></script>\n')
         o:write('<script async defer src="https://unpkg.com/downloadjs@1.4.7"></script>\n')
-        o:write('<script src="' .. local_dist_root_dir .. 'lib/dependency-graph.js"></script>\n')
-        o:write('<script src="' .. local_dist_root_dir .. 'lib/makeWorkbook.js"></script>\n')
-        o:write('<script src="' .. local_dist_root_dir .. 'lib/dictionaries.js"></script>\n')
-        o:write('<script src="' .. local_dist_root_dir .. 'lib/pathway-tocs.js"></script>\n')
-        o:write('<script src="' .. local_dist_root_dir .. 'lib/starterFiles.js"></script>\n')
+        o:write('<script defer src="' ..local_dist_root_dir .. 'lib/dependency-graph.js"></script>\n')
+        o:write('<script defer src="' ..local_dist_root_dir .. 'lib/makeWorkbook.js"></script>\n')
+        o:write('<script defer src="' ..local_dist_root_dir .. 'lib/dictionaries.js"></script>\n')
+        o:write('<script defer src="' ..local_dist_root_dir .. 'lib/pathway-tocs.js"></script>\n')
+        o:write('<script defer src="' ..local_dist_root_dir .. 'lib/starterFiles.js"></script>\n')
       end
-      o:write('<script src="' .. local_dist_root_dir .. 'lib/bootstraplesson.js"></script>\n')
+      o:write('<script defer src="' ..local_dist_root_dir .. 'lib/bootstraplesson.js"></script>\n')
       o:write('<script>var pathway;</script>\n')
     end
     --
     if add_mathjax_p then
       -- print('adding mathjax')
       add_mathjax_p = false
-      o:write('<script src="' .. 'https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml-full-speech.min.js' .. '"><script>\n')
+      o:write('<script defer src="' .. 'https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml-full-speech.min.js' .. '"></script>\n')
       o:write('<script>window.status = "not_ready_to_print";</script>\n')
     end
     --
