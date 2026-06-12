@@ -373,7 +373,7 @@ local function postproc(fhtml_cached, tipe)
     if add_mathjax_p then
       -- print('adding mathjax')
       add_mathjax_p = false
-      o:write('<script defer src="' .. 'https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml-full-speech.min.js' .. '"></script>\n')
+      o:write('<script id="MathJax-script" async defer src="' .. 'https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml.js' .. '"></script>\n')
       o:write('<script>window.status = "not_ready_to_print";</script>\n')
     end
     --
