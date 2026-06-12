@@ -1,18 +1,16 @@
 = Plotting Images
 
-@lesson-instruction{For this page, you'll need @starter-file{ai-image} open on your computer}
-
+@link-instructions{For this page, you'll need @starter-file{ai-image} open on your computer}.
 
 == Plotting Images in 1 Dimension ("Green Space")
 @n In the *Interactions Area*, evaluate `image-dot-plot(model, "green", thumbnail)`, and hover your mouse over the images.
 
 @indented{
-- What are the `green` values for our grassy images? @fitbruby{6em}{@ifsoln{4784}}{grass} and @fitbruby{6em}{@ifsoln{5,245}}{grass-sun} and  How far apart are they? @fitb{}{@ifsoln{461}}
+- What are the `green` values for our grassy images? @fitbruby{6em}{@ifsoln{4784}}{grass} and @fitbruby{6em}{@ifsoln{5,245}}{grass-sun}.   How far apart are they? @fitb{}{@ifsoln{461}}
 - How does this help us look for similarity? @fitb{}{@ifsoln{The smaller the distance, the more similar the image!}}
 }
 
 @n Evaluate `distance-similarity(model, "grass", [list: "green"])`. Was `"grass-sun"` the most similar? @fitb{}{@ifsoln{yes!}}
-
 
 == Plotting Images in 2 Dimensions ("Blue-Green Space")
 @n In the *Interactions Area*, evaluate `image-scatter-plot(model, "green", "blue", thumbnail)`. Can we still calculate the distance? @fitb{}{@ifsoln{yes! The distance formula!}}
@@ -25,24 +23,25 @@
 [%autowidth, cols="<,^,^", options="header"]
 |===
 | Check 	| Code 															  | Clustered?
-| *Grass*  	| `distance-similarity(model, "grass", [list: "green", "blue"])` | @ifsoln{Yes}
+| *Grass*  	| `distance-similarity(model, "grass", [list: "green", "blue"])`  | @ifsoln{Yes}
 | *Snow*  	| `distance-similarity(model, "snow2", [list: "green", "blue"])`  | @ifsoln{Yes}
 | *Sun* 	| `distance-similarity(model, "sun1", [list: "green", "blue"])`   | @ifsoln{No}
 |===
 
-@n Looking at the raw data in your `model`, do you think `distance-similarity` would tell us that our two squares are similar? Why or why not? @fitb{}{} +
-@fitb{}{@ifsoln{No - the numbers are so far apart!}}
+@n What is the distance between the red squares (`red1` adn `red2`) in our "Blue-Green Space"? @fitb{}{@ifsoln{0}}
 
+@n Looking at the raw data in your `model`, do you think `distance-similarity`, would you expect `red2` to be closer to `red1` or to `sunset` in other spaces? @fitb{}{@ifsoln{`sunset` - because `red1` is such a small image that the red pixel counts are very different!}}
 
 == Connecting Blue-Green and Blue-Red Space
 
-@n The following Pyret scatter plots show the relationship between both Blue-v-Green and Blue-v-Red, for the images in our model:
+@n The scatter plots below show our images plotted in Blue-v-Green and Blue-v-Red Space.
 
 [cols="<3a, 1a, >3a", frame="none", "grid="none"]
 |===
-| @image{../images/blue-v-green.png} | | @image{../images/blue-v-red.png}
+| @image{../images/blue-v-green.png,275} | | @image{../images/blue-v-red.png,275}
 |===
 
-@n Are the points in similar places? @fitb{3em}{@ifsoln{No}} How can the plots be so different, if they represent the same images? @fitb{}{} +
-@fitb{}{@ifsoln{we're using different axes}}
+@n What's similar? @fitb{}{@ifsoln{The blue axis. They both have a point at (0,0).}} 
 
+@n What's different? Why? @fitb{}{@ifsoln{The models I would draw would be completely different!}} +
+@fitb{}{@ifsoln{The horizontal axis if focused on green for one and red for the other, with scale changing from <5000 to <14000.}} 

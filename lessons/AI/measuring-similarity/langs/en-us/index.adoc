@@ -70,7 +70,7 @@ When we ask Google to find images similar to the one we dragged, it comes back w
 @Q{What attributes distinguish these nine images? What makes them different?}
 @Q{Which is _more similar_ to `sun1`:   `day1` or `day2`?  Why?}
 @A{`day1` possible responses: Like the mountains in `sun1`, the mountains in `day1` fill up just a narrow strip of the whole photo. Similar to `sun1`, `day1` also includes a body of water in the foreground and a sun in the background.}
-@A{`day2` possible responses: `day2`'s color palette includes mostly white, brown, and blue.}
+@A{`day2` possible responses: The color palettes for `sun1` and `day2` are mostly white, brown, and blue.}
 }
 
 === Investigate
@@ -153,7 +153,8 @@ The columns in these models have several ideas worth unpacking:
 - `LUMINANCE` - the average brightness of an image. `image-luminance(black-sq)` is zero, while `image-luminance(white-sq)` is 255
 - `ENTROPY` - measures the randomness in brightness across pixels in an image. `image-entropy(black-sq)` and `image-entropy(white-sq)` are both zero, because every color in both images is the same: no randomness! However, `image-entropy(half-and-half)` is 1, because there is an exactly equal probability of selecting a black or white pixel at random. Without any clear majority, we have maximum entropy.
 - `SYMMETRY-V` and `SYMMETRY-H` - Both calculated on a scale of 0-1, with 1 being perfect symmetry and 0 being perfect asymmetry.
-- `DOMINANT-RGB-COLORS` - Shows the dominant color (red, green, or blue) for every pixel in order. Our `red-sq` is 10x10 in size, so we expect to see "red" written out 100 times. The pixels in our `black-sq` image, however, are _equally balanced_ across red, green, and blue (all zeros), so there is _no dominant color at all_. *This column is only found in `model-with-color-names`*
+- `DOMINANT-RGB-COLORS` - Lists the dominant color (red, green, or blue) for every pixel in order. Our `red-sq` is 10x10 in size, so we expect to see "red" written out 100 times. The pixels in our `black-sq` image, however, are _equally balanced_ across red, green, and blue (all zeros), so there is _no dominant color at all_. *This column is only found in `model-with-color-names`*
+- `blue`, `green`, `red` - These columns summarize the information from `DOMINANT-RGB-COLORS`, giving a count of the number of times each color was listed as the dominant color for a pixel. The sum of the values in these three columns should equal the total number of pixels in the image. *These three columns are only found in `model`*
 - In Computer Science, it's a convention to use the order "Red, Green, Blue" when talking about pixel values, but our `add-bag-cols` function (line 52) always puts the columns in _alphabetical order_. In Desmos and our worksheets, we've stuck with the RGB convention - but these different conventions could be a source of confusion for some students.
 }
 
@@ -226,7 +227,7 @@ One way to compare images is just to ask "are they identical?" This is all-or-no
 }
 
 @slidebreak{LaunchR}
-@center{@image{images/all-mountains.webp}}
+@center{@image{images/all-mountains.webp, 650}}
 
 @QandA{
 @Q{If we wanted to look for an image that was similar to another image with a lot of grass in it, one option might be to focus on images with a similar color palette. Which color column would you expect to have similar values for two images with a lot of grass in them?}
@@ -260,11 +261,14 @@ Pyret has several functions for measuring similarity, and they each work a littl
 
 `distance-similarity` computes the distance between every row in the table and a Row with a given ID and builds a new column with those values.
 
-@show{(contract "distance-similarity" '("Table" "Str" "List<String>") "Table")}
+@hspace{1em}@show{(contract "distance-similarity" '("Table" "Str" "List<String>") "Table")}
 
 For example, we could evaluate `distance-similarity(model, "grass", [list: "green"])` to compute how similar each image is to `grass`.
 
-@lesson-instruction{Complete the first section of @printable-exercise{plotting-images.adoc}}
+@lesson-instruction{
+- Return to the @starter-file{ai-image}.
+- Use it to complete the first section of @printable-exercise{plotting-images.adoc}.
+}
 
 @slidebreak{Launch}
 @ifslide{@lesson-point{We can think of our images as _points in space_}}
@@ -280,23 +284,34 @@ Comparing images based on how many green pixels they have is a start, but it's a
 }
 
 @lesson-instruction{
-Complete the second section on @printable-exercise{plotting-images.adoc}
+- Complete the second section on @printable-exercise{plotting-images.adoc} to explore our images in "Blue-Green Space".
 }
 
-@slidebreak{LaunchR}
-@right{@image{images/blue-v-green-images.png, 300}}
+By choosing _two_ columns from our dataset and using them as axes, you've defined a 2-dimensional "Blue-Green Space"! Each of the images from our corpus now exists as a point in that space.
 
-By choosing _two_ columns from our dataset and using them as axes, you've defined a 2-dimensional "Blue-Green Space"! Each of the images from our corpus now exists as a point in that space. "Blue-Green Space" is decent for finding our grassy images, snowy images _and_ our red images because each group is already clustered together, away from the rest. But images with the sun don't fare quite as well...
+@slidebreak{LaunchR}
+@center{@image{images/blue-v-green-images.png, 500}}
 
 @QandA{
-@Q{How did the distance measure work in 2 dimensions?}
-@A{Because you can still calculate the distance in 2 dimensions, using the distance formula}
+@Q{What image clusters did you find in our "Blue-Green Space"?}
+@A{images with red - bottom left}
+@A{snow - top left}
+@A{grass - right} 
 
-@Q{Could it work in _**3**_ dimensions? Why or why not?}
+@Q{How did the "Blue-Green Space" do at collecting the images with a visible sun?}
+@A{They're all over the place!}
+
+@Q{What distance is being computed in 2 dimensions?}
+@A{When they images don't share a coordinate, `distance-similarity` is computing the diagonal distance.}
+@A{We can compute the distance between any two points using the distance formula.}
+
+@Q{Could we find the distance between 2 points in _**3**_ dimensions? Why or why not?}
+@A{Yes!}
+@A{While you might not yet have learned how to compute the distance between 2 coordinate pairs in 3D space, we can certainly measure distance between any two objects in our classroom with a ruler and it is a 3D space!}
 }
 
 @lesson-instruction{
-Complete the last section on @printable-exercise{plotting-images.adoc}
+- Complete the last section on @printable-exercise{plotting-images.adoc}.
 }
 
 === Investigate
@@ -305,9 +320,11 @@ Complete the last section on @printable-exercise{plotting-images.adoc}
 
 Recall this image of a _projection_ of a 3D object into two, 2-dimensional planes. Both the square shadow and the circle shadow are showing us a part of the story, but the _real_ shape is 3-dimensional (3D).
 
-*The same is true for our dataset!*
+The same is true of our dataset! Our images are described by 3 different colors (Red, Blue, and Green).
 
-Our images are described by 3 different colors (Red, Blue, and Green), so our "Color Space" has three dimensions! Like the shadows in this image, our two scatter plots in "Blue-v-Green Space" and "Blue-v-Red Space" are just _projections_ of 3D points onto the Z-X and Z-Y planes.
+Like the shadows in this image, our two scatter plots in "Blue-v-Green Space" and "Blue-v-Red Space" are just _projections_ of 3D points onto the Z-X and Z-Y planes.
+
+@lesson-point{Our "Color-Space" is three dimensional. Scatter plots only show the data from one point of view.} 
 
 @slidebreak{Investigate}
 
@@ -321,29 +338,36 @@ Our images are described by 3 different colors (Red, Blue, and Green), so our "C
 @slidebreak{InvestigateR}
 @right{@image{images/3d-rgb.webp, 300}}
 
-The distance formula works in 3 dimensions too! In fact, it works in _any number of dimensions_ we want -- we just can't see more than 3 with our eyes. But *the math holds true*, and we can use `distance-similarity` with any number of attributes we want.
+We can't see more than 3 dimensions at time with our eyes. But the computer can compute distance in many dimensions. *The math holds true*, and we can use `distance-similarity`, with any number of attributes we want.
 
 @slidebreak{Investigate}
 
 @lesson-instruction{
-- Try `distance-similarity(model, "grass", [list: "red", "green", "blue"])`, and see how well this works at finding the similarity between images with *grass*.
+Let's see how well `distance-similarity` identifies similarity in our 3D Colorspace.
+- Evaluate `distance-similarity(model, "grass", [list: "red", "green", "blue"])` to see how effectively it computes similarity between images with *grass*.
 - Try it with ID `"snow2"`, to see how well it works at finding the similarity between images with *snow*.
 - Try it with ID `"red2"`, to see how well it works at finding the similarity between images with *red squares*.
 - Try it with ID `"grass-sun"`, to see how well it works at finding the similarity between images with *sun*.
-- Try adding _other_ columns! Can you come up with a higher-dimensional space that works for all four groups?
+- Can you identify a higher-dimensional space that works well for all four groups? Try adding other columns!
 }
 
 @slidebreak{Investigate}
 
 Overall, `distance-similarity` is a huge upgrade compared to the "are they identical?" question. But it suffers from two major problems:
 
-- It focuses on _count_, rather than _proportion_: For example, a giant mountain photo has far more red pixels than a tiny red square—and thus appears less 'similar' by this metric—even if red makes up only a tiny fraction of the mountain image.
+- It focuses on _count_, rather than _proportion_: For example, a giant mountain photo has far more red pixels than a tiny red square—and thus appears more 'similar' to the big red square than the tiny square does by this metric—even if red makes up only a tiny fraction of the mountain image.
 - It ignores _orientation_: Humans see two "mostly red" images as similar, but the distance formula doesn't. It only calculates the space between points, ignoring where they _actually lie on the graph_.
 
 === Synthesize
 @slidebreak{Synthesize}
-TODO
 
+@QandA{
+@Q{What role does each column of our table play in defining the space the images are compared in?}
+@A{Each column is connected to an axis.}
+
+@Q{Scatter plots are 2D and our data has many more dimensions. Do the scatter plots really tell us about our data?}
+@A{Yes! Just as we can't see a whole sculpture from a single point of view and whatever angle we view it from tells us a lot about the sculpture, the scatter plots are missing information about other columns of data, but can tell us a lot about the relationships of the data in the plane we are viewing it in.}
+}
 
 == Measuring Angles in "Image Space"
 @objective{ai-similarity}
@@ -363,7 +387,10 @@ Let's try another form of similarity, which relies on the idea that "red-dominan
 @slidebreak{LaunchR}
 @right{@image{images/3-d-comparison-w-lines.png, 300}}
 
-We can draw lines (called "rays") from the origin to any of our image-points in space. Instead of computing the distance between these points, we can compute the _angle between these lines_. Two points that are identical will have an angle of *0°*, meaning "the greatest possible similarity". Two points that fall on totally different axes (all-blue v. all-red, for example) will have an angle of *90°*, meaning "the least possible similarity."
+We can draw lines (called "rays") from the origin to any of our image-points in space. Instead of computing the distance between these points, we can compute the _angle between these lines_. 
+
+- Two points that are identical will have an angle of *0°*, meaning "the greatest possible similarity". 
+- Two points that fall on totally different axes (all-blue v. all-red, for example) will have an angle of *90°*, meaning "the least possible similarity."
 
 @slidebreak{Launch}
 This solves both of the problems with `distance-similarity`:
@@ -378,15 +405,15 @@ This solves both of the problems with `distance-similarity`:
 @A{No! One limitation of angle similarity is that the angle will *always be zero* unless we compare documents across multiple dimensions.}
 
 @Q{Are Images the only things we can plot in 3-dimensional space and use angle-similarity for?}
-@A{No! We could plot anything with quantitative attributes}
+@A{No! We could plot any data with quantitative attributes.}
+}
+
+@lesson-instruction{
+- Let's use our knowledge of angles to estimate the angle similarity of some points in a 2D color space.
+- Complete @printable-exercise{angle-similarity.adoc}.
 }
 
 === Investigate
-@slidebreak{Investigate}
-@lesson-instruction{
-- Suppose we had some data on fast food restaurants, comparing their average review scores for Burgers and Fries. Could we use angle-similarity to look compare them?
-- Complete @printable-exercise{angle-similarity.adoc}
-}
 
 @slidebreak{Investigate}
 
