@@ -7,11 +7,11 @@
 @n In the *Interactions Area*, evaluate `image-dot-plot(model, "green", thumbnail)`, and hover your mouse over the images.
 
 @indented{
-- What are the `green` values for our grassy images? @fitb{6em}{@ifsoln{5,245}} and @fitb{6em}{@ifsoln{4784}} How far apart are they? @fitb{}{@ifsoln{461}}
+- What are the `green` values for our grassy images? @fitbruby{6em}{@ifsoln{4784}}{grass} and @fitbruby{6em}{@ifsoln{5,245}}{grass-sun} and  How far apart are they? @fitb{}{@ifsoln{461}}
 - How does this help us look for similarity? @fitb{}{@ifsoln{The smaller the distance, the more similar the image!}}
 }
 
-@n Evaluate `distance-similarity(model, "grass1", [list: "green"])`. Was `"grass2"` the most similar? @fitb{}{@ifsoln{yes!}}
+@n Evaluate `distance-similarity(model, "grass", [list: "green"])`. Was `"grass-sun"` the most similar? @fitb{}{@ifsoln{yes!}}
 
 
 == Plotting Images in 2 Dimensions ("Blue-Green Space")
@@ -25,9 +25,9 @@
 [%autowidth, cols="<,^,^", options="header"]
 |===
 | Check 	| Code 															  | Clustered?
-| *Grass*  	| `distance-similarity(model, "grass1", [list: "green", "blue"])` | @ifsoln{Yes}
+| *Grass*  	| `distance-similarity(model, "grass", [list: "green", "blue"])` | @ifsoln{Yes}
 | *Snow*  	| `distance-similarity(model, "snow2", [list: "green", "blue"])`  | @ifsoln{Yes}
-| *Sun* 	| `distance-similarity(model, "day1", [list: "green", "blue"])`   | @ifsoln{No}
+| *Sun* 	| `distance-similarity(model, "sun1", [list: "green", "blue"])`   | @ifsoln{No}
 |===
 
 @n Looking at the raw data in your `model`, do you think `distance-similarity` would tell us that our two squares are similar? Why or why not? @fitb{}{} +

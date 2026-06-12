@@ -68,9 +68,9 @@ When we ask Google to find images similar to the one we dragged, it comes back w
 @QandA{
 @Q{What attributes do these nine images share? What makes the images similar?}
 @Q{What attributes distinguish these nine images? What makes them different?}
-@Q{Which is _more similar_ to `day1`:   `day2` or `day3`?  Why?}
-@A{`day2` possible responses: Like the mountains in `day1`, the mountains in `day2` fill up just a narrow strip of the whole photo. Similar to `day1`, `day2` also includes a body of water in the foreground and a sun in the background.}
-@A{`day3` possible responses: `day3`'s color palette includes mostly white, brown, and blue.}
+@Q{Which is _more similar_ to `sun1`:   `day1` or `day2`?  Why?}
+@A{`day1` possible responses: Like the mountains in `sun1`, the mountains in `day1` fill up just a narrow strip of the whole photo. Similar to `sun1`, `day1` also includes a body of water in the foreground and a sun in the background.}
+@A{`day2` possible responses: `day2`'s color palette includes mostly white, brown, and blue.}
 }
 
 === Investigate
@@ -196,7 +196,7 @@ Think back to our mountain images.
 }
 
 @teacher{
-- Which image has the most red? (`sun2`)
+- Which image has the most red? (`sunset`)
 - Which one has the most green? (the grassy one)
 - Which do you think will have the most entropy? luminance? symmetry?
 }
@@ -216,28 +216,33 @@ Think back to our mountain images.
 Students are introduced to _distance_ as a notion of similarity. This requires them to visualize images in a spatial system - first in one dimension, then in two, then eventually three.
 
 === Launch
-@slidebreak{LaunchR}
+@slidebreak{Launch}
 
 One way to compare images is just to ask "are they identical?" This is all-or-nothing: either the images match _precisely_, or they don't.
 
-But we want something with more nuance.
+@QandA{
+@Q{When we're looking for recommendations, are we hoping for a list of things that are exactly the same?}
+@A{Not usually! We want something with more nuance that recommends things that are _similar_.}
+}
 
+@slidebreak{LaunchR}
 @center{@image{images/all-mountains.webp}}
 
 @QandA{
-@Q{Which color column would you expect to have similar values for two images with a lot of grass in them?}
+@Q{If we wanted to look for an image that was similar to another image with a lot of grass in it, one option might be to focus on images with a similar color palette. Which color column would you expect to have similar values for two images with a lot of grass in them?}
 @A{green}
 }
 
 @slidebreak{Launch}
+
 @lesson-instruction{
 - Let's see how the images compare on the `"green"` scale by evaluating `image-dot-plot(model, "green", thumbnail)`.
-- Find `grass1` and `grass2` on the plot.
+- Find `grass` and `grass-sun` on the plot.
 - What do you notice?
 }
 
 @teacher{
-The big breakthrough here is recognizing that these columns each represents a _number line_, and every image falls _somewhere on that line_. This allows us to imagine our images existing as points in space, and opens up new ways to measure similarity by thinking about distance between those points.
+The big breakthrough here is recognizing that these columns can each be represented as a _number line_, with every image falling _somewhere on that line_. This allows us to imagine our images existing as points in space, and opens up new ways to measure similarity by thinking about distance between those points.
 }
 
 @slidebreak{Launch}
@@ -246,21 +251,25 @@ The big breakthrough here is recognizing that these columns each represents a _n
 We used the `"green"` column to define a number line - a "Green Space" - where every image was plotted according to how many green-dominant pixels it had. And our two grassy images are located near each other.
 
 @Q{How could we quantify how similar images are to each other in this "green space"?}
-@A{We could calculate the distance between them.}
+@A{We could calculate the distance between them on that number line.}
 }
 
 @slidebreak{Launch}
 
-Pyret has a function for computing the `distance-similarity`. It computes the distance between every row in the table and a Row with a given ID and builds a new column with those values.
+Pyret has several functions for measuring similarity, and they each work a little differently. 
+
+`distance-similarity` computes the distance between every row in the table and a Row with a given ID and builds a new column with those values.
 
 @show{(contract "distance-similarity" '("Table" "Str" "List<String>") "Table")}
 
-For example, we could evaluate `distance-similarity(model, "grass1", [list: "green"])` to compute how similar each image is to image 3.
+For example, we could evaluate `distance-similarity(model, "grass", [list: "green"])` to compute how similar each image is to `grass`.
+
+@lesson-instruction{Complete the first section of @printable-exercise{plotting-images.adoc}}
 
 @slidebreak{Launch}
 @ifslide{@lesson-point{We can think of our images as _points in space_}}
 
-Comparing images based on how many green pixels they have is a pretty limited understanding. We need to be able to compare images based on multiple columns of data!
+Comparing images based on how many green pixels they have is a start, but it's a pretty limited understanding. We need to be able to compare images based on multiple columns of data!
 
 @QandA{
 @Q{How could we plot images using two columns of data?}
@@ -317,10 +326,10 @@ The distance formula works in 3 dimensions too! In fact, it works in _any number
 @slidebreak{Investigate}
 
 @lesson-instruction{
-- Try `distance-similarity(model, "grass1", [list: "red", "green", "blue"])`, and see how well this works at finding the similarity between images with *grass*.
+- Try `distance-similarity(model, "grass", [list: "red", "green", "blue"])`, and see how well this works at finding the similarity between images with *grass*.
 - Try it with ID `"snow2"`, to see how well it works at finding the similarity between images with *snow*.
 - Try it with ID `"red2"`, to see how well it works at finding the similarity between images with *red squares*.
-- Try it with ID `"grass2"`, to see how well it works at finding the similarity between images with *sun*.
+- Try it with ID `"grass-sun"`, to see how well it works at finding the similarity between images with *sun*.
 - Try adding _other_ columns! Can you come up with a higher-dimensional space that works for all four groups?
 }
 
@@ -396,10 +405,10 @@ Complete @printable-exercise{angle-similarity-pyret.adoc}
 Is measuring angles closer to human perception than measuring distance?
 
 @lesson-instruction{
-- Try `angle-similarity(model, "grass1", [list: "red", "green", "blue"])`, and see how well this works at finding the similarity between images with *grass*.
+- Try `angle-similarity(model, "grass", [list: "red", "green", "blue"])`, and see how well this works at finding the similarity between images with *grass*.
 - Try it again with ID `"snow2"`, to see how well it works at finding the similarity between images with *snow*.
 - Try it again with ID `"red2"`, to see how well it works at finding the similarity between images with *red squares*.
-- Try it again with ID `"sun2"`, to see how well it works at finding the similarity between images with *sun*.
+- Try it again with ID `"sunset"`, to see how well it works at finding the similarity between images with *sun*.
 - Is it useful to add our `WIDTH` and `HEIGHT` columns? Why or why not?
 
 }
