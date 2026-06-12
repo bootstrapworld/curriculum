@@ -362,7 +362,6 @@ local function postproc(fhtml_cached, tipe)
         o:write('<script async defer src="https://unpkg.com/downloadjs@1.4.7"></script>\n')
         o:write('<script src="' .. local_dist_root_dir .. 'lib/dependency-graph.js"></script>\n')
         o:write('<script src="' .. local_dist_root_dir .. 'lib/makeWorkbook.js"></script>\n')
-        o:write('<script src="' .. local_dist_root_dir .. 'lib/dictionaries.js"></script>\n')
         o:write('<script src="' .. local_dist_root_dir .. 'lib/pathway-tocs.js"></script>\n')
         o:write('<script src="' .. local_dist_root_dir .. 'lib/starterFiles.js"></script>\n')
       end
@@ -373,7 +372,7 @@ local function postproc(fhtml_cached, tipe)
     if add_mathjax_p then
       -- print('adding mathjax')
       add_mathjax_p = false
-      o:write('<script src="' .. 'https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml-full-speech.min.js' .. '"><script>\n')
+      o:write('<script id="MathJax-script" async src="' .. 'https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml.js' .. '"></script>\n')
       o:write('<script>window.status = "not_ready_to_print";</script>\n')
     end
     --
