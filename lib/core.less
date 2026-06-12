@@ -118,8 +118,8 @@
 @translucent-bg-color3: var(--bs-primary-dark-orange-translucent);
 @text-font: 'Lato', Arial, Helvetica, sans-serif;
 @code-font: Hack, "Courier New", monospace;
-@code-comment-color: #cd7054;
-@code-comment-color-wescheme: #bd2bbd;
+@pyret-comment-color:    var(--pyret-comment-color);
+@wescheme-comment-color: var(--wescheme-comment-color);
 @top-padding-for-writing: 1.2em;
 @top-padding-for-dr: 1em;
 @print-section-heading: lightgray;
@@ -152,7 +152,7 @@ div#body {
   }
   h3 { font-size: 16px; font-weight: bold;  }
   .prefix { font-style: italic; color: gray; }
-  a       { color:  #2156a5 !important; }
+  a       { color:  var(--link-color) !important; }
   p       { margin: 10px 0px; font-size: inherit; }
   sup     { font-size: smaller; top: -0.55em; left: 1px; }
   sub     { font-size: smaller; bottom: -0.35em; }
@@ -336,7 +336,7 @@ div#body {
   }
   .editbox {
     width:              auto;
-    background-color:   #f7f7f8;
+    background-color:   var(--code-bg);
     margin:             2px;
     padding:            0 2px;
     text-align:         left;
@@ -1123,7 +1123,7 @@ div#body{
     p  { margin-top: 0; }
     td { padding: .1em .625em !important; height: 23pt; }
     tr:nth-child(odd) { border-top: solid 2px black; }
-    tbody tr:nth-child(odd) * { color: @code-comment-color !important; }
+    tbody tr:nth-child(odd) * { color: @pyret-comment-color !important; }
     tbody tr:nth-child(odd) td:first-child .tableblock { margin-left: 1em; }
     tbody tr:nth-child(odd) td:first-child::before { position: absolute;  }
     tbody tr:nth-child(even) * { font-family: monospace; white-space: pre; }
@@ -1398,13 +1398,13 @@ td.halign-center .circleevalsexp { text-align: center; }
 .wescheme-boolean,    .cm-scheme-boolean  { color: darkred;}
 .wescheme-character,  .cm-scheme-character{ color: orange;}
 .wescheme-symbol,     .cm-scheme-symbol   { color: steelblue;}
-.wescheme-comment,    .cm-scheme-comment  { color: @code-comment-color-wescheme !important; }
+.wescheme-comment,    .cm-scheme-comment  { color: @wescheme-comment-color !important; }
 .cm-scheme-punctuation                    { color: black;}
 .cm-scheme-rparen                         { color: black;}
 
 /* PYRET COLORS */
 .cm-s-default.CodeMirror                  { color: black; }
-.cm-comment, .hljs-comment                { color: @code-comment-color !important; }
+.cm-comment, .hljs-comment                { color: @pyret-comment-color !important; }
 .cm-boolean                               { color: darkred; }
 .cm-builtin, .hljs-built_in               { color: #555; }
 .cm-variable, .hljs-name                  { color: #4d5966; }
@@ -1428,13 +1428,13 @@ div.leftColumn .obeyspaces, div.rightColumn .obeyspaces {
 .codetwo {
   font-family: @code-font;
   font-size: 0.85em;
-  background-color: #f7f7f8;
+  background-color: var(--code-bg);
   color: #666;
   word-break: break-word;
 }
 
-code.pyret-comment { background-color: #f7f7f8 !important; color: @code-comment-color; }
-code.racket-comment { background-color: #f7f7f8 !important; color: @code-comment-color-wescheme; }
+code.pyret-comment { background-color: var(--code-bg) !important; color: @pyret-comment-color; }
+code.racket-comment { background-color: var(--code-bg) !important; color: @wescheme-comment-color; }
 
 /************************************************************************************
 * SCREEN MEDIA
