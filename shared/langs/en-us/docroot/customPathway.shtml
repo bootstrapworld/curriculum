@@ -74,6 +74,9 @@
         button { background: none; border: none; font-weight: 900; padding: 0; user-select: none; }
 
         #content { position: relative; }
+        #selected { float: left !important; }
+        #accessible { position: sticky; top: 0;  }
+
         #accessible * { font-size: 14px; }
         #accessible h2 { font-size:16px; font-weight:bold; }
         #accessible button {display: none; }
@@ -431,7 +434,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <!-- end prologue.txt -->
 
-    <div id="body">
+  <div id="body" class="narrativepage article canBeLongerThanAPage">
         <div id="header">
             <h1 id="pathwayTitle" style="border-bottom: none;" onClick="makeEditable(this)" onBlur="save(this)"></h1>
         </div>
@@ -445,7 +448,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 </div>
             </div>
 
-        <div class="clearfix item two-thirds">
+        <div id="selected" class="clearfix item two-thirds">
             <div class="sectionbody">
                 <h2>Lesson Plans <span id="totalDays" class="day"/></h2>
                 <dl id="lesson-list" ></dl>
@@ -460,7 +463,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
 
 
-        <div class="clearfix item top-border bottom-border">
+        <div class="clearfix item two-thirds top-border bottom-border">
             <h2>Student Workbooks</h2>
             <p>Every page can be accessed individually from the lesson plans, in both Web and PDF format. You can print only what you need for each day, or get every page combined as a complete <a href="javascript:void(0)" onclick="makeCustomBook(pathway, lessons, { reqPages: true, optPages: false, solns: false, addTOC: true })">Student Workbook</a>.
             <p/>
@@ -471,7 +474,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </p>
         </div>
 
-        <div class="clearfix item bottom-border">
+        <div class="clearfix two-thirds item bottom-border">
             <h2>Other Resources</h2>
             <p>Of course, there's more to a curriculum than software
             and lesson plans! We also provide a number of resources to educators,
