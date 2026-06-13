@@ -24,6 +24,7 @@ initialization:
 	@$(CP) -upr shared/langs/en-us/docroot/* distribution/$(NATLANG)
 	@if test $(NATLANG) != en-us -a -d shared/langs/$(NATLANG)/docroot; then \
 		$(CP) -upr shared/langs/$(NATLANG)/docroot/* distribution/$(NATLANG); fi
+	@for f in distribution/$(NATLANG)/*html; do $(SED) -i -e "s/SEMESTER_YEAR/$(SEMESTER)$(YEAR)/g" $$f; done
 	@mkdir -p distribution/$(NATLANG)/pages/.cached
 	@mkdir -p distribution/$(NATLANG)/textbooks/.cached
 	@$(CP) -p lib/*.html $(PROGDIR)
