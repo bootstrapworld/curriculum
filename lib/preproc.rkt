@@ -1669,7 +1669,7 @@
                                    [height (* n 2.2)] ; each line is 2.2em tall (see shared.less)
                                    [text (read-group i directive #:multiline? #t)])
                               ; (printf "doing @blanklines ~s\n" n)
-                              ; height is a placeholder; bootstraplesson.js
+                              ; height is a placeholder; page-render.js
                               ; (drawBlankLines) overrides it to match @fitb
                               ; line spacing, using data-lines for the count
                               (display-begin-span ".blanklines" o #:attribs (format "style=\"height: ~aem\" data-lines=\"~a\"" (* 2.2 n) n))

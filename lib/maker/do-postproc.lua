@@ -362,8 +362,9 @@ local function postproc(fhtml_cached, tipe)
         o:write('<script defer src="' ..local_dist_root_dir .. 'lib/dictionaries.js"></script>\n')
         o:write('<script defer src="' ..local_dist_root_dir .. 'lib/pathway-tocs.js"></script>\n')
         o:write('<script defer src="' ..local_dist_root_dir .. 'lib/starterFiles.js"></script>\n')
+        o:write('<script defer src="' ..local_dist_root_dir .. 'lib/graph-pages.js"></script>\n')
       end
-      o:write('<script defer src="' ..local_dist_root_dir .. 'lib/bootstraplesson.js"></script>\n')
+      o:write('<script defer src="' ..local_dist_root_dir .. 'lib/page-render.js"></script>\n')
       o:write('<script>var pathway;</script>\n')
     end
     --
