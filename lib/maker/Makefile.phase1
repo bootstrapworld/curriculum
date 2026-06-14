@@ -32,7 +32,7 @@ initialization:
 	@$(CP) -p lib/*.json $(PROGDIR)
 	@$(CP) -p lib/*.pdf distribution/$(NATLANG)/lib
 	@$(CP) -p lib/*.css distribution/$(NATLANG)/lib
-	@$(CP) -p lib/[!b]*.js distribution/$(NATLANG)/lib
+	@$(CP) -p $(filter-out lib/graph-pages.js lib/page-render.js,$(wildcard lib/*.js)) distribution/$(NATLANG)/lib
 	@$(CP) -p lib/images/*.png distribution/$(NATLANG)/lib/images
 	@$(CP) -p lib/self-guided/*.css distribution/$(NATLANG)/lib/self-guided
 	@$(CP) -p lib/self-guided/*.html distribution/$(NATLANG)/lib/self-guided
@@ -137,9 +137,13 @@ distribution/$(NATLANG)/lib/bilingual-glossary.adoc: lib/glossary-terms.json | i
 	@$(MAKE_DIR)make-bilingual-glossary.lua $< $@
 
 ###############################################################################
-bootstraplessonjs: distribution/$(NATLANG)/lib/bootstraplesson.js
-distribution/$(NATLANG)/lib/bootstraplesson.js: lib/bootstraplesson.js
+# formerly bootstraplesson.js, now split into graph-pages.js (graph/standards/
+# printing) and page-render.js (mathjax/codemirror/tables/blanklines)
+bootstraplessonjs: distribution/$(NATLANG)/lib/graph-pages.js distribution/$(NATLANG)/lib/page-render.js
+distribution/$(NATLANG)/lib/graph-pages.js: lib/graph-pages.js
 	@cat $< | $(SED) -e 's/^const proglangs.*/const proglangs = "$(ALL_PROGLANGS)".split(new RegExp(" \\+"));/' > $@
+distribution/$(NATLANG)/lib/page-render.js: lib/page-render.js
+	@cat $< > $@
 ###############################################################################
 
 starterFiles: distribution/$(NATLANG)/lib/starterFiles.js
