@@ -59,6 +59,11 @@ done
 
 find $DEPLOYABLES_DIR -name .cached -type d -exec rm -fr {} \; > /dev/null 2>&1
 
+# strip authoring-only source dirs and macOS cruft; neither belongs on the server
+find $DEPLOYABLES_DIR -name authoring -type d -exec rm -fr {} \; > /dev/null 2>&1
+
+find $DEPLOYABLES_DIR -name .DS_Store -delete
+
 for f in adoc asc aux md id rkt rkt.kp titletxt txt txt.kp; do
   find $DEPLOYABLES_DIR -name \*.$f -delete
 done
