@@ -168,14 +168,23 @@ In our 2-dimensional Blue-Green Space, for example, the midpoint halfway between
 
 If you have more than 1 dimension, the same math applies: compute the centroid for each column separately. Can we get a better result for sunny images by teaching Pyret what "sun-ness" looks like for two of our images?
 
-For any set of points, the "middle" point is the @vocab{Centroid}. 
+For any set of points (in any number of dimensions!), the "middle" point is the @vocab{Centroid}.
 
-@image{images/centroid.png, 300} @image{images/tetrahedron-centroid.png, 300}
+[cols="^.^1a, ^.^1a, ^.^1a", grid="none", frame="none", options="header"]
+|===
+| In 1 dimension...
+| In 2 dimensions...
+| In 3 dimensions...
+
+| @image{images/centroid-1d.png, 300}
+| @image{images/centroid-2d.png, 300}
+| @image{images/centroid-3d.png, 200}
+|===
 
 === Investigate
 @slidebreak{InvestigateR}
 @QandA{
-@ifslide{@right{@image{images/centroid.png, 300}}}
+@ifslide{@right{@image{images/centroid-3d.png, 300}}}
 @Q{Our unsupervised `angle-similarity` measure did a fine job recommending similar images when given a grassy or snowy image. Why did it struggle to finding images with the sun?}
 @A{The sunset image is _really_ different from the others. Any time we search by the `ID` of the other images (0, 6, or 7), we get other recommendations before image 8.}
 }
@@ -321,7 +330,7 @@ You may recall the steps of @vocab{supervised learning} from a @lesson-link{regr
 
 @slidebreak{InvestigateR}
 @right{@image{images/navlab.png, 200}}
-A self-driving car is given a table of inputs (images and depth maps), each row tagged with how a human turned the steering wheel. Then it found a function that would predict the steering wheel angle from new inputs, and used the function by applying it to new roads.
+A self-driving car is given a table of inputs (data from various sensors), each row tagged with how a human turned the steering wheel. Then it found a function that would predict the steering wheel angle from new inputs, and used the function by applying it to new roads.
 
 @QandA{
 @Q{In our image search example, what is the human-tagged data for the computer?}
