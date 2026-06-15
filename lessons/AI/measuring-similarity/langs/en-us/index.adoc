@@ -266,12 +266,38 @@ Pyret has several functions for measuring similarity, and they each work a littl
 For example, we could evaluate `distance-similarity(model, "grass", [list: "green"])` to compute how similar each image is to `grass`.
 
 @lesson-instruction{
-- Return to the @starter-file{ai-image}.
+- Return to the @starter-file{ai-image} and find lines 26-40 of our Definitions Area.
+  * For now, none of the images are liked, disliked, or tagged. By defining the table here in the code, we've set ourselves up to be able to make changes.
+- In the `TAGS` column:
+  * change `""` to `"grass"`, for images with large amounts of grass.
+  * change `""` to `"snow"`, for the snowy images.
+  * change `""` to `"sun"` for the four images with a visible sun.
+  * add tags for water and red (to give an image a second tag, use a comma, e.g. `"grass, sun"`)
+- Choose the *two mountain images you like the best*, and change the values for those images in the `LIKED` colum from `false` to `true`.
+- Then click "Run" to load your changes.
 - Use it to complete the first section of @printable-exercise{plotting-images.adoc}.
 }
 
 @slidebreak{Launch}
-@ifslide{@lesson-point{We can think of our images as _points in space_}}
+
+@QandA{
+@Q{How many images did you tag with `"grass"`?}
+@A{2}
+
+@Q{Did `distance-similarity(model, "grass", [list: "green"])` sort them all to the top of the table?}
+@A{Yes.}
+@A{`distance-similarity` will always return a table with the rows sorted from most to least similar.}
+
+@Q{What is the `distance-similarity` for the top row in the table? Why?}
+@A{0. Because our `"grass"` row is identical to itself.}
+
+@Q{What characteristic led Pyret to compute `day1` and `day2` as similar to the grassy images in our Green Space?}
+@A{The number of green-dominant pixels in the images!}
+@A{The human eye recognizes those green-dominant pixels as patches of forest.}
+}
+
+@slidebreak{Launch}
+@ifslide{@lesson-point{We can think of our images as _points in space_.}}
 
 Comparing images based on how many green pixels they have is a start, but it's a pretty limited understanding. We need to be able to compare images based on multiple columns of data!
 
@@ -282,6 +308,8 @@ Comparing images based on how many green pixels they have is a start, but it's a
 @Q{Can we measure the distance between 2 points in 2-dimensions?}
 @A{Yes! That's what the distance formula does.}
 }
+
+@slidebreak{Launch}
 
 @lesson-instruction{
 - Complete the second section on @printable-exercise{plotting-images.adoc} to explore our images in "Blue-Green Space".
@@ -344,6 +372,7 @@ We can't see more than 3 dimensions at time with our eyes. But the computer can 
 
 @lesson-instruction{
 Let's see how well `distance-similarity` identifies similarity in our 3D Colorspace.
+
 - Evaluate `distance-similarity(model, "grass", [list: "red", "green", "blue"])` to see how effectively it computes similarity between images with *grass*.
 - Try it with ID `"snow2"`, to see how well it works at finding the similarity between images with *snow*.
 - Try it with ID `"red2"`, to see how well it works at finding the similarity between images with *red squares*.
@@ -436,9 +465,12 @@ Is measuring angles closer to human perception than measuring distance?
 - Try it again with ID `"snow2"`, to see how well it works at finding the similarity between images with *snow*.
 - Try it again with ID `"red2"`, to see how well it works at finding the similarity between images with *red squares*.
 - Try it again with ID `"sunset"`, to see how well it works at finding the similarity between images with *sun*.
-- Is it useful to add our `WIDTH` and `HEIGHT` columns? Why or why not?
-
+- Explore whether or not it's useful to add our `WIDTH` and `HEIGHT` columns.
 }
+
+@slidebreak{Investigate}
+@ifslide{@right{@image{images/3-d-comparison-w-lines.png, 300}}}
+Angle similarity really helped us improve the machines' "perception" of what makes two images similar. Given one image, we're able to produce much better search results! Thinking back to the notion of search as a *recommendation system*, you could also imagine doing the same with other kinds of data: for example picking a song and asking for similar recommendations!
 
 @strategy{Isn't this Middle School Math?!}{
 Yes, it is!
@@ -457,10 +489,6 @@ For the purposes of this curriculum, you can safely ignore the difference betwee
 }
 
 @slidebreak{Investigate}
-@ifslide{@right{@image{images/3-d-comparison-w-lines.png, 300}}}
-Angle similarity really helped us improve the machines' "perception" of what makes two images similar. Given one image, we're able to produce much better search results! Thinking back to the notion of search as a *recommendation system*, you could also imagine doing the same with other kinds of data: for example picking a song and asking for similar recommendations!
-
-@slidebreak{Investigate}
 There are still a lot of limitations to our system, however:
 
 - We can only _search by document_, where we pick an image and find similar ones.
@@ -472,18 +500,6 @@ There are still a lot of limitations to our system, however:
 @right{@image{images/computer-vision.jpg, 400}}
 
 Some ML models are capable of recognizing parts of an image ("person", "car", etc.). This belong to a class of ML algorithms called "Computer Vision", which relies heavily on more advanced -- and computationally intensive --concepts that we won't cover here. We're going to use our human brains to see these elements in our images! And then explore whether a Data Driven Algorithm can help us re-create Image Search technologies, even without the fancy Computer Vision tech.
-
-@slidebreak{Launch}
-
-@lesson-instruction{
-- Return to lines 26-40 of our Definitions Area.
-  * For now, none of the images are liked, disliked, or tagged. By defining the table here in the code, we've set ourselves up to be able to make changes.
-- Choose the *two mountain images you like the best*, and change the values for those images in the `LIKED` colum from `false` to `true`.
-- In the `TAGS` column:
-  * change `""` to `"snow"`, for the snowy images.
-  * change `""` to `"sun"` for the three images with sunsets or sunrises.
-- Then click "Run" to load your changes.
-}
 
 === Synthesize
 
