@@ -1,7 +1,7 @@
 [.beta]
 = Simple Regression Models
 
-@description{Students explore a driving simulator, collect training data, make scatter plots to find the best explanatory variable, and use Pyret's linear regression tools to build and evaluate predictor functions. The lesson serves as a concrete application of Supervised Learning, in which driving data from the simulator serves as the "answer key".}
+@description{Students are introduced to ALVINN — the world's first self-driving car — as a compelling example of supervised machine learning. They explore a driving simulator, collect training data, make scatter plots to find the best explanatory variable, and use Pyret's linear regression tools to build and evaluate predictor functions.}
 
 @lesson-prereqs{data-driven-algorithms, fitting-models}
 
@@ -28,10 +28,10 @@
 |===
 
 == Self-Driving Cars
-@objective{ai-driving-training}
+@objective{ai-alvinn-training}
 
 === Overview
-Students reflect on self-driving cars, as a compelling example of supervised machine learning. They explore a driving simulator, collect their own training data, and discover that predicting steering angle is a regression problem.
+Students are introduced to ALVINN, the world's first self-driving car, as a compelling example of supervised machine learning. They explore a driving simulator, collect their own training data, and discover that predicting steering angle is a regression problem.
 
 === Launch
 @slidebreak{LaunchR}
@@ -53,76 +53,90 @@ Self-driving cars work via a lot of inputs (sensors, cameras, etc.) and a lot of
 
 We're going to explore how one form of @vocab{supervised learning} -- regression, specifically -- allows cars to "know where they're going".
 
+@slidebreak{LaunchR}
+@right{@image{images/navlab.png, 300}}
+*Meet ALVINN!*
+
+ALVINN (short for Autonomous Land Vehicle in a Neural Network) was developed in 1989 by a team of computer scientists at Carnegie Mellon University. ALVINN is the forebear of today's self-driving cars: a retrofitted Army ambulance equipped with sensors, computers, and small motors to turn the wheel, press the pedals, etc. ALVINN had about one-tenth of the processing power of an Apple Watch -- but was able to safely drive on a very limited course at 70 miles per hour by the early 1990s! How did it happen?
+
 @slidebreak{Launch}
 
-Teaching an AI what it means to steer requires @vocab{training}. Here's what that training entails:
+As with all machine learning, ALVINN required @vocab{training}. The goal of that training? _Learning how to steer._ Here's what ALVINN's training entailed:
 
-(1) A person drives the vehicle
+(1) A person drove the vehicle while a front-facing video camera recorded the road.
 
 - In @vocab{supervised learning}, the human driver is often called the _supervisor_
 - The supervisor demonstrates the correct behavior (e.g. which direction the steering wheel should be turned)
 
-(2) Many times each second, car records...
+(2) Ten times each second, ALVINN recorded...
 
-- information from many sensors around the car
+- a digitized image of the road ahead
 - the steering direction chosen by the driver at that moment
 
 @slidebreak{Launch}
 
-(3) The training data (@vocab{training corpus}) is be represented as an input-output table, with columns for sensor data as inputs and the correct steering angles as outputs.
+(3) ALVINN's training data (@vocab{training corpus}) can be represented as an input-output table, with road images and obstacle distances as inputs and the correct steering angles as outputs.
 
 @indented{
 [cols="^.^1,^.^1", stripes="none", options="header"]
 |===
-| `curve`   | `speed`	| `steering-angle`
-| 0° 		|	45	 	|  	  0.02º
-| 70° 		|  	21 		|	 55.20º
-| -30° 		| 	56 		| 	-25.43º
+| `road-image`                  | `steering-angle`
+| @image{images/road1.png, 100} |   0.02º
+| @image{images/road2.png, 100} |  55.20º
+| @image{images/road3.png, 100} | -25.43º
 |===
+
+@teacher{
+Note: These images were selected for illustrative purposes. The 30x32 pixel images produced by ALVINN were of much lower quality!
+}
 }
 
 @slidebreak{Launch}
 
-(4) This dataset is used to generates a @vocab{function} for predicting the correct steering angle from the road image and obstacle distance.
+(4) Using this dataset, ALVINN generates a @vocab{function} for predicting the correct steering angle from the road image and obstacle distance.
 
 @lesson-point{
-`curve` and `speed` are the @vocab{explanatory variables}. `steering-angle` is the @vocab{response variable}.
+`road-image` and `obstacle-distance` are the @vocab{explanatory variables}. `steering-angle` is the @vocab{response variable}.
 }
 
-(5) After training is complete, a human pushes the "run" switch and the vehicle begins driving. As the car drives, it continuously evaluates its learned function to produce steering angles — just as the human driver did during training.
+(5) After training is complete, a human pushes ALVINN's "run" switch and the vehicle begins driving. As ALVINN drives, it continuously evaluates its learned function to produce steering angles — just as the human driver did during training.
 
 @teacher{
-If you want your students to see an example of an early self-driving car (1989!) in action, now is a good time to view @link{https://www.youtube.com/watch?v=ntIczNQKfjQ, "this brief two-minute video"}.
+If you want your students to see ALVINN in action, now is a good time to view @link{https://www.youtube.com/watch?v=ntIczNQKfjQ, "this brief two-minute video"}.
 }
 
 @slidebreak{Launch}
 
 @QandA{
-@Q{What other sensor input might help us determine the desired steering angle?}
-@A{What lane we're in, whether the car is lined up with the road, obstacles in our path...}
+@Q{What information does ALVINN process before producing a steering angle?}
+@A{ALVINN processes the image of the road in front of it, along with an obstacle distance, and evaluates its learned function to produce a steering angle.}
 
-@Q{@vocab{Supervised Learning} involves a computer learning _from_ something. What is the computer learning from, in our example?}
+@Q{What did ALVINN learn _from_?}
 @A{A human driver — the supervisor — who demonstrated correct steering. Those input-output pairs form the training corpus.}
 
-@Q{Why is the resulting model a _function?_}
-@A{Given the same set of inputs (sensor data), the model should always predict the same output (steering angle)}
+@Q{What is ALVINN actually _computing_ when it decides how to steer?}
+@A{It's evaluating a function: given the inputs (road image, obstacle distance), produce a steering angle. The function was learned from the training data.}
 
-@Q{Why is this _called_ supervised learning?}
-@A{Because a human provided the correct answers (steering angles) during training, "supervising" what the machine learned.}
+@Q{Why is this called _supervised_ learning?}
+@A{Because a human provided the correct answers (steering angles) during training, supervising what the machine learned.}
 }
 
 @slidebreak{Launch}
 
-These phases are a part of any kind of @vocab{supervised learning}:
+In discovering the details of ALVINN's training, you may have noticed three key phases:
 
 1. Human-tagged data is recorded, demonstrating the knowledge to be learned
 2. A machine learning algorithm finds a *function* that maps from inputs to the correct outputs (the "answer key")
 3. That function is applied to new, unseen data
 
+These phases are a part of _any kind of supervised learning!_
 
+@slidebreak{Launch}
 @lesson-point{
 We're going to apply those phases, and train our own model to steer a virtual self-driving car!
 }
+
+ALVINN pioneered the use of _neural networks_, a powerful way to create a sophisticated functions that map complex inputs to a set of outputs. Neural networks rely on some advanced concepts that we won't have time to cover in this course. But fortunately, you've already got some experience building simple functions yourself!
 
 === Investigate
 @slidebreak{Investigate-DN}
