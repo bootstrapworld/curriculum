@@ -1,0 +1,60 @@
+= Measuring Similarity with AI
+++++
+<style>
+div#body img { max-height: 80px; margin: 10px auto; }
+
+/* Override the default no-flex-on-notes rule for this page */
+div#body.LessonNotes #content { display: flex !important; }
+</style>
+++++
+
+Another huge job AI does is *similarity*: given an input, find the things most _like_ it. Every recommendation system -- Spotify suggesting songs, Google finding matching images, a dating app proposing matches -- is really a similarity engine.
+
+The catch is that a computer doesn't _see_ an image or _hear_ a song. Where we see a mountain, the computer only sees a grid of @vocab{pixels} -- numbers. So the first step is always the same:
+
+@lesson-point{Almost anything can be described by a list of numeric attributes -- and once it is, we can plot it as a *point in space.*}
+
+Once every document is a point, "similar" simply means "close together." But there's more than one way to measure "close":
+
+[cols="^.^1a,^.^1a,^.^1a", frame="none", grid="none", options="header", stripes="none"]
+|===
+| Simple (Exact-Match) | Distance | Angle
+
+|
+_"Are they identical?"_
+
+All-or-nothing: either two documents match *precisely*, or they don't. Simple, but with no room for nuance.
+
+|
+_"How far apart are the points?"_
+
+@image{../images/2-d-comparison.png}
+
+Plot each document and measure the straight-line (@vocab{Euclidean}) distance between points. *Closer = more similar.*
+
+|
+_"How aligned are the points?"_
+
+@image{../images/3-d-comparison-w-lines.png}
+
+Draw a ray from the origin to each point and measure the @vocab{angle} between them. *0° = most similar, 90° = least.*
+|===
+
+
+Converting documents into a table of points isn't _learning_: every document still has its own row, and a search just compares the query against _all_ of them. That's a real and widely-used AI technique, but it's closer to a *lookup* that it is to *learning* -- the computer is _memorizing_ examples, not learning a general pattern from them.
+
+== Centroids: Where the Learning Happens
+@right{@image{../images/centroid.png}} Labels unlock a powerful idea. If every image with a sun is a point in space, then "sun-ness" is just the point _in the middle_ of those points. +
+This is the moment we finally *build a model* -- and where real _learning_ happens. A centroid throws away the individual points and keeps only their summary, *aggregating many documents into one and losing the original detail.* That is exactly what @vocab{training} means: a centroid _generalizes_ a whole group into a single point, instead of memorizing every example.
+
+@lesson-point{Searching by nearest neighbor _memorizes_ the data; building a centroid _generalizes_ it into a model.}
+
+A centroid lets us reason about a whole *group* instead of a single document, which solves two big limitations of an unlabeled system.
+
+- *Search by concept:* build the centroid of every song tagged "hip-hop," then find unlabeled songs close to it -- so we can search by the _word_ "hip-hop," not just by one example song.
+- *Recommendation:* build a centroid for _liked_ images, then find unlabeled images close to it -- so we can search for recommendations based on all those songs, not just by one.
+
+
+== The Hidden Cost of Supervised Learning
+
+Supervised learning only works because *humans* did the labeling -- and that labor is often invisible. Every CAPTCHA you solve ("click all the traffic lights"), every paid data-labeler, and every content moderator is helping train someone's model. It's worth asking who does this work, and at what cost.
