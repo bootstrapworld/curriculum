@@ -13,31 +13,31 @@ td { padding: 3px !important; }
 @link-instructions{Open the @starter-file{spell-checker} and click "Run".} Follow each of the instructions below to discover how our very own Pyret spell checker works.
 
 == Suggestions for 1 Edit-Distance
-The four functions below consume a word, and suggest a list of words that can be reached by making a *single change*.
+`deletions`, `insertions`, `swaps`, and `subs` consume a word, and suggest a list of words that can be reached by making a *single change*.
 
-@vspace{1ex}
+@n Fill in the 2nd column of table below by evaluating each expression, and recording the *number of suggestions* Pyret returns.
 
-Complete the table below by evaluating each expression, and recording the *number of suggestions* Pyret returns. *How many of YOUR suggestions from  @printable-exercise{first-spell-checker.adoc}* are in Pyret's list?
-
-[%autowidth, options="header", cols="<, ^, ^"]
+[cols="^5a,^5a,6a", options="header"]
 |===
-| Expression 	| # Suggestions | How many of your suggestions are here? (circle one)
-| @n `deletions("wello")`
+| Expression 	| # Suggestions | How many of YOUR suggestions did Pyret find?
+| `deletions("wello")`
 | @ifsoln{4}
-| 0@hspace{4em}1@hspace{4em}2@hspace{4em}3@hspace{4em}4@hspace{4em}5@hspace{4em}
+|
 
-| @n `insertions("wello")`
+| `insertions("wello")`
 | @ifsoln{151}
-| 0@hspace{4em}1@hspace{4em}2@hspace{4em}3@hspace{4em}4@hspace{4em}5@hspace{4em}
+|
 
-| @n `swaps("wello")`
+| `swaps("wello")`
 | @ifsoln{4}
-| 0@hspace{4em}1@hspace{4em}2@hspace{4em}3@hspace{4em}4@hspace{4em}5@hspace{4em}
+|
 
-| @n `subs("wello")`
+| `subs("wello")`
 | @ifsoln{125}
-| 0@hspace{4em}1@hspace{4em}2@hspace{4em}3@hspace{4em}4@hspace{4em}5@hspace{4em}
+|
 |===
+
+@n *Flip back to @printable-exercise{first-spell-checker.adoc}.* How many of YOUR suggestions are in Pyret's list? Fill in the 3rd column of the table above.
 
 == Suggestions for Larger Edit-Distances
 
