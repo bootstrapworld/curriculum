@@ -1,5 +1,5 @@
 [.beta]
-= Dealing with Natural Language
+= Working with Natural Language
 
 @description{Students explore the challenges of working with natural language.}
 
@@ -36,21 +36,24 @@ Students review their progression from plotting numerical data to plotting image
 
 === Launch
 @slidebreak{LaunchR}
+Let's think back to our discussion of @lesson-link{measuring-similarity, similarity}. 
+
+@lesson-point{
+We *plotted documents in space* and used *geometry* to calculate something approximating "similarity".
+}
+
 @right{@image{images/3-d-comparison-w-lines.png, 300}}
-Let's look back on our discussion of @lesson-link{measuring-similarity, similarity}. The main idea is *plotting documents in space*, and using *geometry* to calculate something approximating "similarity":
 
-- A table with @math{n} numeric attributes (e.g., price, burger quality, fry quality...) can be graphed as points in @math{n}-dimensional space
-- The location of these points in space can be used to compute different measures of similarity
-- While you can use absolute equality or Euclidean distance, Machine Learning Engineers typically use an angle measure.
-
+- A table with @math{n} numeric attributes (e.g., number of green-dominant pixels) can be graphed as points in @math{n}-dimensional space
+- The location of these points in space can be used to compute different measures of similarity (equality, distance similarity, angle similarity)
+- Machine Learning Engineers typically use angle measure, because it more closely reflects human intuition for things clustered on an axis being more similar to each other than things clustered on different axes.
 
 @slidebreak{Launch}
 If the input data _isn't_ numeric, we can compute numbers anyway!
 
 - In our image search examples, we generated numeric attributes like symmetry, luminance, and entropy
-- We also generated very long Strings of `COLOR-NAMES`, listing each of the dominant primary colors in pixel order
-- We turned `COLOR-NAMES` into numbers, using a @vocab{bag of words model} to count the number of red-, green-, and blue-dominant pixels
-- The bag of words model turned an ordered string of colors into an _un-ordered_ count of each color
+- We also generated very long Strings of `COLOR-NAMES`, listing each of the dominant primary colors in pixel order.
+- We turned our ordered string of colors into an _un-ordered_ count of the number of red-, green-, and blue-dominant pixels using a @vocab{bag of words model}
 - Each count became another attribute, allowing us to plot images in "color-space"
 
 @QandA{
@@ -58,9 +61,8 @@ If the input data _isn't_ numeric, we can compute numbers anyway!
 @A{The order of the words}
 }
 
-
-
 @slidebreak{Launch}
+
 Can we compute the similarity of _anything_ that way? Think about:
 
 - Drivers' License Photos
@@ -80,9 +82,10 @@ Let's review our different similarity tools:
 
 === Investigate
 @slidebreak{Investigate}
+
 @lesson-instruction{
 - Open the @starter-file{ai-text}, Save a Copy, and click "Run"
-- In the Interactions Area, evaluate `essays`
+- In the Interactions Area, evaluate `essays`.
 - Turn to @printable-exercise{text-similarity.adoc}, and complete the first section
 }
 
@@ -233,10 +236,6 @@ Armed with their similarity detection, students explore the how that algorithm c
 
 === Launch
 @slidebreak{Launch}
-
-=== Investigate
-@slidebreak{Investigate}
-
 A @vocab{training corpus} is a collection of data used to train AI/ML @vocab{models}, enabling them to learn patterns and make predictions.
 
 For a plagiarism checker, the corpus is the set of documents previously fed into the checker.
@@ -250,13 +249,16 @@ For a plagiarism checker, the corpus is the set of documents previously fed into
   * articles on relevant topics that are available on the internet, etc.}
 }
 
-@slidebreak{Investigate}
-The @vocab{training} phase is where the enormous corpus of essays, wikipedia articles, etc is converted to a bag-of-words for each document, and stored. *Our `bags` table is the model!*
-
 Suppose a teacher builds a plagiarism detector for short animal essays. She turns paragraphs for ten different animals into bags of words and adds them to the model. This setup is done only _once_, and can be reused for any student submission.
 
-@lesson-point{Once a @vocab{model} is @vocab{trained}, the corpus can be queried as many times as we want without having to repeat any of the work done during training!}
+The @vocab{training} phase is where the enormous corpus of essays, wikipedia articles, etc is converted to a bag-of-words for each document, and stored. 
 
+*Our `bags` table is our model!*
+
+=== Investigate
+@slidebreak{Investigate}
+
+@lesson-point{Once a @vocab{model} is @vocab{trained}, the corpus can be queried as many times as we want without having to repeat any of the work done during training!}
 
 @slidebreak{Investigate}
 To catch plagiarism across _any_ essay, a teacher needs a model trained on a _massive_ document collection. Processing this large corpus creates a complex, high-dimensional space where each unique word adds a new dimension.
