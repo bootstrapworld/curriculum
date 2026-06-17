@@ -11,15 +11,14 @@ For this page you'll need the @starter-file{spell-checker} open on your computer
 }
 
 == Sorting Results
-
-Five hundred random words is _not_ a useful spelling suggestion. It's more likely that the `"spran"` has a single typo, rather than two or three! It would be much better to *sort the table*, putting 1-typo suggestions at the top.
+1-typo errors are more common than 2- or 3-typo errors, so we'd like to *sort the suggestions*, putting the more likely suggestions at the top.
 
 
 @n Test out these two expressions and record what you learn below:
 @vspace{1ex}
 
-* @show{(code '(sort results "edit-distance" false))}
-* @show{(code '(sort results "word" true))}
+- @show{(code '(sort results "edit-distance" false))} @fitb{}{}
+- @show{(code '(sort results "word" true))} @fitb{}{}
 
 @n You've seen data types like Numbers, Strings, and Booleans. What data type does the `sort` function produce? @fitb{}{@ifsoln{a Table!}}
 
@@ -39,11 +38,10 @@ Five hundred random words is _not_ a useful spelling suggestion. It's more likel
 
 @hspace{2em}@show{(contract 'sort '(Table String Boolean) "Table")}
 
-@indented{
 - Each Contract begins with the function name: @fitb{}{_in this case_ `sort`}
 - Lists the data types required to satisfy its *Domain*: @fitb{}{_in this case_ `Table, String, Boolean`}
 - And then declares the data type of the *Range* it will return: @fitb{}{_in this case_ `Table`}
-}
+
 
 @vspace{1ex}
 
@@ -54,10 +52,8 @@ Five hundred random words is _not_ a useful spelling suggestion. It's more likel
 
 @n What code will sort `results` in alphabetical order, from A-Z? @fitb{}{@ifsoln{@show{(code '(sort results "word" true))}}}
 
-@n Did you use `true` or `false`? Explain why. @fitb{}{}
-
 == Trimming Results
-Five hundred is still *overwhelming*! When we make a typo, our cell phones only show us 3-5 suggestions. We'd like to trim the table, showing only the first handful of suggestions.
+When we make a typo, our cell phones only show us 3-5 suggestions. We'd like to trim the table, showing only the first handful of suggestions.
 
 @n Type @show{(code '(first-n-rows results 10))}. What happens? @fitb{}{@ifsoln{It returns a new table with the first 10 rows from `results` table}}
 
