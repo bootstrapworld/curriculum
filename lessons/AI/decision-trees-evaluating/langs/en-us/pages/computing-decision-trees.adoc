@@ -5,7 +5,7 @@ div#body .pyret-comment .fitbruby { min-width: 9em; }
 
 </style>
 ++++
-@center{@show{(contract "build-tree" '(("Training Data" "Table" ) ("Columns to split on" "List<String>") ("\"Answer key\" Column" "String") ("Maximum depth" "Number")) "DecisionTree")}}
+@center{@show{(contract "build-tree" '(("Training Data" "Table" ) ("Columns to Split On" "List<String>") ("\"Answer key\" Column" "String") ("Maximum Depth" "Number")) "DecisionTree")}}
 
 @link-instructions{Return to your copy of the @starter-file{decision-tree}.}
 == Building One-Level Decision Trees from Categorical and Quantitative Splits
@@ -63,9 +63,28 @@ div#body .pyret-comment .fitbruby { min-width: 9em; }
 | `tree-q2`
 | `tree-q3`
 
-| @image{../images/tree-quant1.png,110}
-| @image{../images/tree-quant2.png,140}
-| @image{../images/tree-quant3.png,160}
+| ```
+pounds < 9.55?
+├true─ → cat
+└false─ → dog
+```
+| ```
+pounds < 9.55?
+├true─ pounds < 0.19?
+│   ├true─ → snail
+│   └false─ → cat
+└false─ → dog
+```
+
+| ```
+pounds < 9.55?
+├true─ pounds < 0.19?
+│   ├true─ → snail
+│   └false─ pounds < 1.95?
+│       ├true─ → tarantula
+│       └false─ → cat
+└false─ → dog
+```
 |===
 
 

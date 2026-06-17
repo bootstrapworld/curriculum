@@ -11,7 +11,7 @@
 ++++
 @description{Students explore an approach to recommending videos and predicting election outcomes. They develop and analyze decision trees to predict individuals’ purchasing decisions.}
 
-@lesson-prereqs{data-driven-algorithms, dot-plots}
+@lesson-prereqs{programming-spelling-suggestions}
 
 @keywords{}
 
@@ -32,7 +32,9 @@
 @material-links
 
 | Relevant Resources
-| This lesson exposes piecewise functions. If you're interested in taking a deeper dive at some point, we have an entire lesson devoted to @lesson-link{piecewise-functions-conditionals}.} 
+|
+- This lesson uses dot plots to support students' thinking about how data is clustered, and assumes that your students are at least somewhat familiar with them. If this is not the case, we recommend having students complete @lesson-link{dot-plots} prior to building decision trees.
+- This lesson also exposes conditionals, also known as _if-then-else_ expressions in the CS world, or _piecewise functions_ in the math world. If you're interested in taking a deeper dive at some point, we have an entire lesson devoted to @lesson-link{piecewise-functions-conditionals}.}
 |===
 
 == Predicting Categories @duration{25 minutes}
@@ -502,8 +504,8 @@ Use one of our new tools to answer the following questions about our `tail-class
 @Q{How do we choose a root node that will make the best possible split?}
 @A{We want to choose a split that achieved the most correctly predicted outcomes for the training data.}
 
-@Q{How do @vocab{clusters} and @vocab{gaps} help us choose that root node?}
-@A{If a clusters mostly contains just one species, then a split that falls in the gaps around that cluster might be a great candidate!}
+@Q{How does looking at the dot plot help us choose a root node?}
+@A{If a cluster mostly contains just one species, then a split that falls in the gaps around that cluster might be a great candidate!}
 
 @Q{How - if at all - do @vocab{outliers} help us choose a root that will make a good split?}
 @A{Outliers probably don't represent the bulk of their species, so we might not want to prioritize them in our splits.}
@@ -511,6 +513,13 @@ Use one of our new tools to answer the following questions about our `tail-class
 }
 
 @teacher{All of the trees we are working with are binary (every node has only two paths). Some decision trees have decision nodes that split on 3 things or 10 things.}
+
+@pd-slide{
+@slidebreak{Investigate}
+
+The next exercise has students build a decision tree from the animals data. We suggest having students talk through their decision trees _on the wall_ (whiteboard, flip-chart paper, etc), using the workbook page as a scaffold for the activity. This gives you a physical artifact to discuss, which is critical for engagement. You can then have students present their trees to one another, do a gallery walk, etc.
+}
+
 
 @slidebreak{Investigate-DN}
 @lesson-instruction{
@@ -543,6 +552,7 @@ This is the _exact same_ problem we solved for the root node: our goal is to ask
 @lesson-instruction{
 - Complete @printable-exercise{the-algorithm-2.adoc}
 }
+
 
 === Synthesize
 @slidebreak{Synthesize}
