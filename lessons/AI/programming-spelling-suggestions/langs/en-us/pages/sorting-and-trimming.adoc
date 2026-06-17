@@ -1,0 +1,80 @@
+= Sorting and Trimming Tables
+++++
+<style>
+/* Push content to the top (instead of the default vertical distribution), which was leaving empty space at the top. */
+#content { display: block !important; }
+</style>
+++++
+
+@link-instructions{
+For this page you'll need the @starter-file{spell-checker} open on your computer, with `results = alt-words("plation", WORDS-L, 4)` defined in the *Definitions Area.* Make sure that after clicking "Run", you can evaluate `results` in the Interactions Area and see your table!
+}
+
+== Sorting Results
+
+Five hundred random words is _not_ a useful spelling suggestion. It's more likely that the `"spran"` has a single typo, rather than two or three! It would be much better to *sort the table*, putting 1-typo suggestions at the top.
+
+
+@n Test out these two expressions and record what you learn below:
+@vspace{1ex}
+
+* @show{(code '(sort results "edit-distance" false))}
+* @show{(code '(sort results "word" true))}
+
+@n You've seen data types like Numbers, Strings, and Booleans. What data type does the `sort` function produce? @fitb{}{@ifsoln{a Table!}}
+
+@n The `sort` function takes in three pieces of information (called arguments). Record what you know about them below.
+
+[cols="1a,^1a,^4a", options="header"]
+|===
+|  					^| Data Type 		^| Information it Contains
+| *Argument 1*	| 		Table		| The table being sorted
+| *Argument 2*	| 		String		| @ifsoln{The name of the column to sort}
+| *Argument 3*	| @ifsoln{Boolean} 	| @ifsoln{true if ascending, false if descending}
+|===
+
+[.myCustomClass]
+--
+@hspace{1em}There are many other functions available to us in Pyret. We can describe them using @vocab{contracts}. The Contract for `sort` is:
+
+@hspace{2em}@show{(contract 'sort '(Table String Boolean) "Table")}
+
+@indented{
+- Each Contract begins with the function name: @fitb{}{_in this case_ `sort`}
+- Lists the data types required to satisfy its *Domain*: @fitb{}{_in this case_ `Table, String, Boolean`}
+- And then declares the data type of the *Range* it will return: @fitb{}{_in this case_ `Table`}
+}
+
+@vspace{1ex}
+
+@hspace{1em}Contracts can also be written with more detail, by annotating the Domain with _variable names_:
+
+@hspace{2em}@show{(contract 'sort '((t Table) (column String) (ascending Boolean)) "Table")}
+--
+
+@n What code will sort `results` in alphabetical order, from A-Z? @fitb{}{@ifsoln{@show{(code '(sort results "word" true))}}}
+
+@n Did you use `true` or `false`? Explain why. @fitb{}{}
+
+== Trimming Results
+Five hundred is still *overwhelming*! When we make a typo, our cell phones only show us 3-5 suggestions. We'd like to trim the table, showing only the first handful of suggestions.
+
+@n Type @show{(code '(first-n-rows results 10))}. What happens? @fitb{}{@ifsoln{It returns a new table with the first 10 rows from `results` table}}
+
+@n If we wanted a table of the first 5 rows of the `results` table, what code would we write? @fitb{}{@ifsoln{@show{(code '(first-n-rows results 5))}}}
+
+@n How many arguments are the *Domain* of `first-n-rows`? @fitb{3em}{@ifsoln{2}} What is the *Range*? @fitb{}{@ifsoln{Table}}
+
+@n Using the contract for `sort` as an example, can you write the contract for `first-n-rows`?
+
+@fitbruby{20em}{@ifsoln{first-n-rows}}{function name} {two-colons}
+@fitbruby{25em}{@ifsoln{Table, Number}}{Domain} ->
+@fitbruby{10em}{@ifsoln{Table}}{Range}
+
+@n Pyret also has a function called `last-n-rows`. *Make a prediction:* What do you think its contract is?
+
+@fitbruby{20em}{@ifsoln{first-n-rows}}{function name} {two-colons}
+@fitbruby{25em}{@ifsoln{Table, Number}}{Domain} ->
+@fitbruby{10em}{@ifsoln{Table}}{Range}
+
+@n Test it out in Pyret! Was your prediction right?
