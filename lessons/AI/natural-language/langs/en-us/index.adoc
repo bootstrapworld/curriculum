@@ -39,186 +39,257 @@ Students review their progression from plotting numerical data to plotting image
 Let's think back to our discussion of @lesson-link{measuring-similarity, similarity}. 
 
 @lesson-point{
-We *plotted documents in space* and used *geometry* to calculate something approximating "similarity".
+We can *plot documents in space* and use *geometry* to calculate something approximating "similarity".
 }
 
 @right{@image{images/3-d-comparison-w-lines.png, 300}}
 
 - A table with @math{n} numeric attributes (e.g., number of green-dominant pixels) can be graphed as points in @math{n}-dimensional space
-- The location of these points in space can be used to compute different measures of similarity (equality, distance similarity, angle similarity)
+- The location of these points in space can be used to compute different measures of similarity (equality, distance similarity, angle similarity, etc.)
 - Machine Learning Engineers typically use angle measure, because it more closely reflects human intuition for things clustered on an axis being more similar to each other than things clustered on different axes.
 
 @slidebreak{Launch}
-If the input data _isn't_ numeric, we can compute numbers anyway!
 
-- In our image search examples, we generated numeric attributes like symmetry, luminance, and entropy
+@lesson-point{If the input data _isn't_ numeric, we can compute numbers anyway!}
+
+- In our @opt-starter-file{ai-image}, we generated numeric attributes like `SYMMETRY`, `LUMINANCE`, and `ENTROPY`
 - We also generated very long Strings of `COLOR-NAMES`, listing each of the dominant primary colors in pixel order.
-- We turned our ordered string of colors into an _un-ordered_ count of the number of red-, green-, and blue-dominant pixels using a @vocab{bag of words model}
-- Each count became another attribute, allowing us to plot images in "color-space"
-
-@QandA{
-@Q{How is a bag-of-words model "lossy"? What details of the original training data does it lose?}
-@A{The order of the words}
-}
+- We used a @vocab{bag of words model} to turn our ordered string of colors into an _un-ordered_ count of the number of `red`-, `green`-, and `blue`-dominant pixels, allowing us to plot images in "color-space"
 
 @slidebreak{Launch}
-
-Can we compute the similarity of _anything_ that way? Think about:
-
-- Drivers' License Photos
-- Essays
-- Recipes
-
-@slidebreak{Launch}
-Let's review our different similarity tools:
-
-@indented{
-@show{(contract "distance-similarity" '("Table" "String" "List<String>") "Table")}
-
-@show{(contract "angle-similarity" '("Table" "String" "List<String>") "Table")}
-}
-
-@teacher{This is a great time to review the parts of a contract!}
-
-=== Investigate
-@slidebreak{Investigate}
 
 @lesson-instruction{
-- Open the @starter-file{ai-text}, Save a Copy, and click "Run"
-- In the Interactions Area, evaluate `essays`.
-- Turn to @printable-exercise{text-similarity.adoc}, and complete the first section
+- Open the @starter-file{ai-text2}, save a copy, and click "Run".
+- Find lines 25-39 of the Definitions Area, which define our initial `corpus` table.
 }
 
-@slidebreak{Investigate}
-@QandA{
-@Q{Which essay was most like document `"❓"`?}
-@A{The elephant one}
+Recall our similarity functions.
+@indented{
+@show{(contract 'distance-similarity '((table-name Table) ("row ID" String) ("quantitative columns" List<String>)) "Table")}
 
-@Q{How do you know?}
-@A{It was the only other essay about elephants}
+@show{(contract 'angle-similarity '((table-name Table) ("row ID" String) ("quantitative columns" List<String>)) "Table")}
+}
+
+@QandA{
+@Q{Why can't we use `distance-similarity` or `angle-similarity` with our `corpus`, as-is?}
+@A{It doesn't contain any @vocab{quantitative} columns!}
+}
+
+@slidebreak{Launch}
+
+@lesson-instruction{
+- Lines 3-23 of the Definitions Area in our @ifslide{@starter-file{ai-text2}} define a series of short texts about animals.
+- Find `mystery` on line 23 and scan the text.
+}
+  
+@QandA{
+@Q{Which of the other documents would you expect `mystery` to be most similar to? Why?}
+@A{`elephant`. Because both documents are about elephants.}
 
 @Q{As a human, what tells you what an essay is "about"? }
 @A{A word used a lot...}
 @A{I just know from reading...}
 }
 
-@slidebreak{Investigate-DN}
+=== Investigate
+@slidebreak{Investigate}
+
+As we know, Pyret can't think about these documents. It can only compute possible attributes from the essays and compare their similarity using angles or distance.
+
 @QandA{
-@Q{Would it be useful to just _ask_ if two essays are identical or not?}
-@A{No!}
-
-@Q{Why can't we use any of our other similarity functions on this dataset?}
-@A{They need numeric attributes, and all we have is our `DOC` string}
-
-@Q{What are some possible attributes we could calculate from these essays?}
-@A{Length of string}
-@A{Writing level}
-@A{Count the number of times important words show up}
+@Q{What ideas do you have for quantitative columns Pyret might be able to compute about these documents?}
+@A{Record a list on the board. Possible answers might include: 
+  * Number of Words
+  * Number of Sentences
+  * Average number of words per sentence
+  * Average length of the words used
+  * Number of syllables in the document
+  * Average number of syllables per word
+  * Bag of Words -> the number of times each word shows up
+}
 }
 
+@slidebreak{Investigate}
+@QandA{
+@Q{Which of the attributes in our list do you think would do the best job of deciding which document is most similar to `mystery`?}
+@Q{Which of the ideas on our list are things you thought about when you were deciding which text was most similar to our `mystery` text?}
+@A{Likely none of them.}
 
-@slidebreak{Investigate-DN}
+@Q{Thinking back to how you decided which text was most similar, do you have any more ideas for columns Pyret might be able to compute?}
+}
+
+@slidebreak{Investigate}
+
+*Pyret has a number of functions that compute numbers that describe different features of text:*
+
+[cols="1a,1a", frame="none"]
+|===
+| @show{(contract "string-length" '(String) "Number")}
+  @show{(contract "num-words"     '(String) "Number")}
+  @show{(contract "num-syllables" '(String) "Number")}
+| @show{(contract "num-sentences" '(String) "Number")}
+  @show{(contract "text-grade"    '(String) "Number")}
+|===
+
+@slidebreak{Investigate}
+
 @lesson-instruction{
-Complete the second section on @printable-exercise{text-similarity.adoc}
+- Return to your @starter-file{ai-text2}.
+- Evaluate `decorated` to see a table with columns generated by those functions.
+- What do you Notice? What do you Wonder?
+- Take a minute to experiment and see how useful these columns are for telling us which texts are most similar to `?`. These functions might be helpful:
+  * `angle-similarity`
+  * `distance-similarity`
+  * `image-scatter-plot`
+  * `image-dot-plot`
+}
+
+@slidebreak{Investigate}
+
+@QandA{
+@Q{Did you find any comparisons that would have helped determine which text was most similar to the `mystery`?}
+@A{Probably not.}
+
+@Q{Do any of the columns Pyret computed get at what an essay is _about_?}
+@A{With our image example, `luminance` and `entropy` told us at least _something_ about how the picture looked. But the number of characters, words, syllables and sentences don't tell us anything about the _subject_ of an essay.  This would be like trying to compare our mountain images, using only their width and height!}
+@A{To get at the subject of the essay, we're going to have to look at which words are used.}
+}
+
+@slidebreak{Investigate}
+
+@lesson-instruction{
+- Our best tool for comparing the actual content of the texts is to compute their @vocab{bag of words}.
+- Evaluate `computed` to see a table with columns representing the counts for each word.
+}
+
+@QandA{
+@Q{What do you Notice? What do you Wonder?}
+@A{Take time to have students surface lots of noticings here! These might include:
+  * Many words only appear once in a single essay!
+  * There's not a lot of overlap between the words used.
+  * There are some words that appear in almost every essay.
+  * Some of the words are actually numbers.
+  * Some of the words are listed with punctuation like commas and periods.
+  * Unless words are exactly the same, they get counted separately, e.g. `adult`, `adulthood.`
+}
+}
+
+@slidebreak{Investigate}
+
+@QandA{
+@Q{Why might this bag of words prove to be less useful than the ones we used to define the color space of our images?}
+@A{There are a lot of columns in the `computed` table! And most of them either have similar values in every row or no overlapping values at all!}
+@A{When we computed a bag of words for our images, there were only 3 columns and they were relevant to every image.}
 }
 
 === Synthesize
 @slidebreak{Synthesize}
 
-With our image example, `luminance` and `entropy` told us at least _something_ about how the picture looked. But the number of characters, words, syllables and sentences don't tell us anything about the _subject_ of an essay.  This would be like trying to compare our mountain images, using only their width and height!
-
 @QandA{
-@Q{What else could we use, to compute something about the subject of these essays?}
+@Q{What are some limitations of our similarity computing functions as applied to text.}
+@A{They can only work with quantitative columns.}
+@A{Not all quantitative columns tell us much about how similar to texts are.}
 }
+
 
 == Data Normalization
 @objective{ai-data-normalization}
+
 === Overview
 Students explore the importance of @vocab{data normalization}, when we organize data to follow a standard pattern.
 
 === Launch
-@slidebreak{LaunchR}
-@right{@image{images/bag-of-colors.png, 250}}
-When working with images, we used a tool that looked at the _frequency of colors_ in the image:
+@slidebreak{Launch}
 
-@show{(contract "add-bag-cols" '("Table" "String") "Table")}
-
-The `add-bag-cols` function dropped all the information about the _order_ of colors, and instead just counted how many of each pixel appears in the image.
-
-*How could we use this with our essays?*
+Now that we're using a @vocab{bag of words model} for text that's more complex than our long lists of `red`, `blue`, and `green` pixels, we're ending up with a lot of columns, many of which don't contain much useful information.
 
 @lesson-instruction{
-Complete the first section of @printable-exercise{natural-language-is-messy.adoc}.
+- Let's take a moment to consider *what humans know about text that machines don't*.
+- Complete the first section of @printable-exercise{normalizing-text.adoc}.
 }
 
-@slidebreak{Launch-DN}
+@slidebreak{Launch}
 
-Now that we have dozens of columns, we need to some help choosing which columns to use for calculating similarity!
+@QandA{
+@Q{Why didn't Pyret identify the same number of `badger` references in the text as you did?}
+@A{Our data is "messy":
+  * Punctuation: `badger` and `badger,` aren’t different words
+  * Capitalization: `By` and `by` aren’t different words
+  }
 
-@show{(contract "all-cols-similarity" '("Table" "String") "Table")}
+@Q{What are some words that you would suggest Pyret ignore when looking for similarity between documents?}
+@A{is, a, in, to, the, and, of, by, with, as...}
 
-This function consumes a Table and the ID of a target Row, and then _uses all the numeric columns_ to compute the angle-similarity. For example: `all-cols-similarity(bags, "K")` will find the angle-similarity of every document to "K", using every column containing numbers.
-
-@lesson-instruction{
-Complete the second section of @printable-exercise{natural-language-is-messy.adoc}
+@Q{What ideas do you have for how to improve Pyret's ability to recognize words that are the same as the same?}
+@A{Listen to student word choices as they try to articulate this big idea! Then introduce vocabulary.} 
+@A{Cleaning the data before we make our bag of words model:
+  * remove capitalization
+  * remove punctuation from the end of words
+  * remove words that appear in every document
+  }
 }
+
+@slidebreak{Launch}
+
+Our data is "messy".
+
+When the computer "reads" the same word with different punctualization and capitalization as different:
+
+. Our counts for these word are off, so we're not seeing how common they really are.
+. We're creating extra, meaningless dimensions in which text gets compared!
+
+When the computer looks for similarity between texts that include @vocab{stopwords}
+
+. It creates many dimensions in which the essays are close together.
+. Those dimensions raise the similarity score between two essays simply because they're both English! 
+. We might end up falsely identify texts as similar.
+
+Addressing this "messiness" is called @vocab{data normalization}. 
 
 === Investigate
 
 @slidebreak{Investigate}
 
-@QandA{
-@Q{What does a highest-possible score of 1 tell us, if we're using @vocab{bag of words models}? }
-@A{Two essays use the exact same words, the exact same number of times}
+Machine Learning Engineers and Data Scientists care a lot about @vocab{normalizing} their data in order to cut out the irrelevant noise and focus on what matters. We've provided three normalization functions for you to experiment with:
 
-@Q{What does the lowest-possible score of 0 tell us, if we're using @vocab{bag of words models}? }
-@A{Two essays that don't using any of the same words at all}
-
-@Q{Which essay was most similar?}
-@A{The elephant essay}
-
-@Q{_How_ similar was it?}
-@A{Roughly 0.8653}
-
-@Q{What about the second-most-similar essay. What was it about, and how similar was it?}
-@A{The Polar Bear essay was roughly 0.4516}
-}
-
-@slidebreak{Investigate}
-We definitely found the most similar essay, but it's a little strange that the Polar Bear essay was computed to be similar at all! And it's not just slightly similar, either.
-
-*Why do you think we're seeing similarity about such different essays?*
-
-
-@slidebreak{Launch}
-The problem is that our data is "messy":
-
-- Punctuation: `areas` and `areas.` aren't different words
-- Capitalization: `By` and `by` aren't different words
-
-This means our counts for these word are off, and that we're creating extra, meaningless dimensions!
-
-@slidebreak{Launch}
-But there's another problem here, too!
-
-- Common Words: `the`, `is`, and `a` are "similar" across all the essays
-
-These are called @vocab{stopwords}, and they show up in almost any sentence.  These words create many dimensions in which the essays are close together, raising the similarity score between two essays simply because they're both English! In our example, the elephant essay was able to rise above the noise and was obviously the most similar, but in other situations we might get a lot of false positives!
-
-
-@slidebreak{Investigate-DN}
-Addressing this "messiness" is called @vocab{data normalization}. Machine Learning Engineers and Data Scientists care a lot about normalizing their data in order to cut out the irrelevant noise and focus on what matters. We've provided three normalization functions for you to experiment with:
-
+@indented{
 @show{(contract "lowercase" '("String") "String")}
 
 @show{(contract "remove-punct" '("String") "String")}
 
 @show{(contract "remove-stops" '("String") "String")}
+}
 
+@slidebreak{Investigate}
 
 @lesson-instruction{
-- Complete @printable-exercise{natural-language-is-messy.adoc}
+- Complete the second section of @printable-exercise{normalizing-text.adoc} to explore what each of these functions does.
 }
+
+@QandA{
+@Q{What do you Notice? What do you Wonder?}
+@A{Answers will vary, but may include:
+  * The text gets much shorter.
+  * The text doesn't totally make sense after its normalized
+  * The `remove-punct` function is imperfect because `badger's` becomes `badgers`, which will still end up in its own column
+  * We don't have a function for removing plurals.
+  } 
+}
+
+@slidebreak{Investigate}
+
+Now that we have dozens of columns, it's harder to choose which columns would be helpful for calculating similarity. We need some help... and Pyret has another similarity function we can use!
+
+@show{(contract 'all-cols-similarity '((table-name Table) ("row ID" String)) "Table")}
+
+This function consumes a Table and the ID of a target Row, and then _uses all the numeric columns_ to compute the angle-similarity. For example: `all-cols-similarity(computed, "?")` will find the angle-similarity of every document to our mystery row `"?"`, using every column containing numbers in our `computed` table.
+
+@lesson-instruction{
+- Let's see whether Pyret can identify which document is most similar to `?`
+- Complete the last section on @printable-exercise{normalizing-text.adoc}.
+}
+
+
 
 === Synthesize
 @QandA{
