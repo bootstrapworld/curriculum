@@ -140,9 +140,9 @@ Computers can look at groups of pixels to compute values. For example:
   * There are columns for the identifier (`ID`), the image document (`DOC`), whether the image is `LIKED` or `DISLIKED`, and also for any descriptive `TAGS` in the image.
   * By defining the table here in the code, we’ve set ourselves up to be able to make changes.
 - Lines 47-52 direct the computer to build a model using the functions we experimented with.
-- Evaluate `model-with-color-names` in the Interactions Area.
+- Evaluate `computed-with-color-names` in the Interactions Area.
 - Scroll down to find the row for `red-blue`.
-- Now evaluate `model`. What columns are different? What columns are the same?
+- Now evaluate `computed`. What columns are different? What columns are the same?
 - What do you Notice? What do you Wonder?
 }
 
@@ -153,16 +153,16 @@ The columns in these models have several ideas worth unpacking:
 - `LUMINANCE` - the average brightness of an image. `image-luminance(black-sq)` is zero, while `image-luminance(white-sq)` is 255
 - `ENTROPY` - measures the randomness in brightness across pixels in an image. `image-entropy(black-sq)` and `image-entropy(white-sq)` are both zero, because every color in both images is the same: no randomness! However, `image-entropy(half-and-half)` is 1, because there is an exactly equal probability of selecting a black or white pixel at random. Without any clear majority, we have maximum entropy.
 - `SYMMETRY-V` and `SYMMETRY-H` - Both calculated on a scale of 0-1, with 1 being perfect symmetry and 0 being perfect asymmetry.
-- `DOMINANT-RGB-COLORS` - Lists the dominant color (red, green, or blue) for every pixel in order. Our `red-sq` is 10x10 in size, so we expect to see "red" written out 100 times. The pixels in our `black-sq` image, however, are _equally balanced_ across red, green, and blue (all zeros), so there is _no dominant color at all_. *This column is only found in `model-with-color-names`*
-- `blue`, `green`, `red` - These columns summarize the information from `DOMINANT-RGB-COLORS`, giving a count of the number of times each color was listed as the dominant color for a pixel. The sum of the values in these three columns should equal the total number of pixels in the image. *These three columns are only found in `model`*
+- `DOMINANT-RGB-COLORS` - Lists the dominant color (red, green, or blue) for every pixel in order. Our `red-sq` is 10x10 in size, so we expect to see "red" written out 100 times. The pixels in our `black-sq` image, however, are _equally balanced_ across red, green, and blue (all zeros), so there is _no dominant color at all_. *This column is only found in `computed-with-color-names`*
+- `blue`, `green`, `red` - These columns summarize the information from `DOMINANT-RGB-COLORS`, giving a count of the number of times each color was listed as the dominant color for a pixel. The sum of the values in these three columns should equal the total number of pixels in the image. *These three columns are only found in `computed`*
 - In Computer Science, it's a convention to use the order "Red, Green, Blue" when talking about pixel values, but our `add-bag-cols` function (line 52) always puts the columns in _alphabetical order_. In Desmos and our worksheets, we've stuck with the RGB convention - but these different conventions could be a source of confusion for some students.
 }
 
 @slidebreak{Investigate}
 
 @QandA{
-@Q{How is `model` different from `model-with-color-names`?}
-@A{The `DOMINANT-RGB-COLORS` column is missing in `model`. Instead, it's been replaced by three other columns: `blue`, `green`, and `red`.}
+@Q{How is `computed` different from `computed-with-color-names`?}
+@A{The `DOMINANT-RGB-COLORS` column is missing in `computed`. Instead, it's been replaced by three other columns: `blue`, `green`, and `red`.}
 
 @Q{Where do you think the last 3 columns come from?}
 @A{They are a *count* of the number of times each color appeared in the original string.}
@@ -237,7 +237,7 @@ One way to compare images is just to ask "are they identical?" This is all-or-no
 @slidebreak{Launch}
 
 @lesson-instruction{
-- Let's see how the images compare on the `"green"` scale by evaluating `image-dot-plot(model, "green", thumbnail)`.
+- Let's see how the images compare on the `"green"` scale by evaluating `image-dot-plot(computed, "green", thumbnail)`.
 - Find `grass` and `grass-sun` on the plot.
 - What do you notice?
 }
@@ -263,7 +263,7 @@ Pyret has several functions for measuring similarity, and they each work a littl
 
 @hspace{1em}@show{(contract "distance-similarity" '("Table" "Str" "List<String>") "Table")}
 
-For example, we could evaluate `distance-similarity(model, "grass", [list: "green"])` to compute how similar each image is to `grass`.
+For example, we could evaluate `distance-similarity(computed, "grass", [list: "green"])` to compute how similar each image is to `grass`.
 
 @lesson-instruction{
 - Return to the @starter-file{ai-image} and find lines 26-40 of our Definitions Area.
@@ -284,7 +284,7 @@ For example, we could evaluate `distance-similarity(model, "grass", [list: "gree
 @Q{How many images did you tag with `"grass"`?}
 @A{2}
 
-@Q{Did `distance-similarity(model, "grass", [list: "green"])` sort them all to the top of the table?}
+@Q{Did `distance-similarity(computed, "grass", [list: "green"])` sort them all to the top of the table?}
 @A{Yes.}
 @A{`distance-similarity` will always return a table with the rows sorted from most to least similar.}
 
@@ -358,7 +358,7 @@ Like the shadows in this image, our two scatter plots in "Blue-v-Green Space" an
 
 @lesson-instruction{
 - Open the @online-exercise{https://www.desmos.com/3d/qmu6fmrs6h, RGB Image Plot} in Desmos
-- The table at the top of the panel contains the Red, Green, and Blue values from our `model` table
+- The table at the top of the panel contains the Red, Green, and Blue values from our `computed` table
 - The scatter-plot for Blue-v-Green is visible against the "back wall" of the cube, with each image plotted as a *green* dot. Compare it to the Pyret scatter plot on @printable-exercise{plotting-images.adoc}.
 - Complete the first two sections on @printable-exercise{from-2-to-3.adoc}.
 }
@@ -373,7 +373,7 @@ We can't see more than 3 dimensions at time with our eyes. But the computer can 
 @lesson-instruction{
 Let's see how well `distance-similarity` identifies similarity in our 3D Colorspace.
 
-- Evaluate `distance-similarity(model, "grass", [list: "red", "green", "blue"])` to see how effectively it computes similarity between images with *grass*.
+- Evaluate `distance-similarity(computed, "grass", [list: "red", "green", "blue"])` to see how effectively it computes similarity between images with *grass*.
 - Try it with ID `"snow2"`, to see how well it works at finding the similarity between images with *snow*.
 - Try it with ID `"red2"`, to see how well it works at finding the similarity between images with *red squares*.
 - Try it with ID `"grass-sun"`, to see how well it works at finding the similarity between images with *sun*.
@@ -461,7 +461,7 @@ Complete @printable-exercise{angle-similarity-pyret.adoc}
 Is measuring angles closer to human perception than measuring distance?
 
 @lesson-instruction{
-- Try `angle-similarity(model, "grass", [list: "red", "green", "blue"])`, and see how well this works at finding the similarity between images with *grass*.
+- Try `angle-similarity(computed, "grass", [list: "red", "green", "blue"])`, and see how well this works at finding the similarity between images with *grass*.
 - Try it again with ID `"snow2"`, to see how well it works at finding the similarity between images with *snow*.
 - Try it again with ID `"red2"`, to see how well it works at finding the similarity between images with *red squares*.
 - Try it again with ID `"sunset"`, to see how well it works at finding the similarity between images with *sun*.
