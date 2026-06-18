@@ -54,7 +54,7 @@ We can *plot documents in space* and use *geometry* to calculate something appro
 
 - In our @opt-starter-file{ai-image}, we generated numeric attributes like `SYMMETRY`, `LUMINANCE`, and `ENTROPY`
 - We also generated very long Strings of `COLOR-NAMES`, listing each of the dominant primary colors in pixel order.
-- We used a @vocab{bag of words model} to turn our ordered string of colors into an _un-ordered_ count of the number of `red`-, `green`-, and `blue`-dominant pixels, allowing us to plot images in "color-space"
+- We used a @vocab{bag of words model} to turn our ordered string of colors into an _un-ordered_ count of the number of `red`-, `green`-, and `blue`-dominant pixels, allowing us to plot images in a 3-dimensional "color-space"
 
 @slidebreak{Launch}
 
@@ -252,13 +252,11 @@ Addressing this "messiness" is called @vocab{data normalization}.
 
 Machine Learning Engineers and Data Scientists care a lot about @vocab{normalizing} their data in order to cut out the irrelevant noise and focus on what matters. We've provided three normalization functions for you to experiment with:
 
-@indented{
-@show{(contract "lowercase" '("String") "String")}
+@hspace{1em}@show{(contract "lowercase" '("String") "String")}
 
-@show{(contract "remove-punct" '("String") "String")}
+@hspace{1em}@show{(contract "remove-punct" '("String") "String")}
 
-@show{(contract "remove-stops" '("String") "String")}
-}
+@hspace{1em}@show{(contract "remove-stops" '("String") "String")}
 
 @slidebreak{Investigate}
 
@@ -280,7 +278,7 @@ Machine Learning Engineers and Data Scientists care a lot about @vocab{normalizi
 
 Now that we have dozens of columns, it's harder to choose which columns would be helpful for calculating similarity. We need some help... and Pyret has another similarity function we can use!
 
-@show{(contract 'all-cols-similarity '((table-name Table) ("row ID" String)) "Table")}
+@hspace{1em}@show{(contract 'all-cols-similarity '((table-name Table) ("row ID" String)) "Table")}
 
 This function consumes a Table and the ID of a target Row, and then _uses all the numeric columns_ to compute the angle-similarity. For example: `all-cols-similarity(computed, "?")` will find the angle-similarity of every document to our mystery row `"?"`, using every column containing numbers in our `computed` table.
 
@@ -289,16 +287,43 @@ This function consumes a Table and the ID of a target Row, and then _uses all th
 - Complete the last section on @printable-exercise{normalizing-text.adoc}.
 }
 
+@slidebreak{Investigate}
 
+@QandA{
+@Q{Before we normalized our data, did Pyret compute `elephant` as the most similar text to `mystery`?}
+@A{Yes.}
+
+@Q{Before we normalized our data, did Pyret compute any other texts to be somewhat similar to `mystery`?}
+
+@Q{How did that compare to the similarity computations after we normalized our data?}
+
+@Q{Explain why normalizing the data changed the results?}
+@A{Removing garbage data and common words allowed us to focus our comparison on only the words that matter, and count them properly.
+}
+}
 
 === Synthesize
 @QandA{
-@Q{Did normalizing our data give us better results? Why do they seem "better"?}
-@A{Yes! The elephant essay is still really similar, but the others are much *less* similar}
+@Q{What does it mean to normalize text?}
+@A{To standardize it to reduce redundancies and noise.}
+@A{Goal 1: make sure that each occurance of a word ends up being counted as the same word.}
+@A{Goal 2: remove @vocab{stopwords} so they don't lead texts to falsely be computed as similar.}
 
-@Q{Explain why normalizing the data was important here}
-@A{Removing garbage data and common words allowed us to focus our comparison on only the words that matter, and count them properly.}
+@Q{What might it look like to normalize data involving addresses?}
+@A{standardize how names are written so we don't end up with separate entries for Drive, Dr. and Dr}
+
+@Q{What might it look like to normalize data about grade levels?}
+@A{standardize so that eighth, 8th and 8 aren't all recorded as separate}
+
+@Q{What might it look like to normalize data about phone numbers?}
+@A{standardize the number of digits and formatting expected}
+@A{do we want to start with country code?}
+@A{do we want to use spaces or hyphens or none?}
+
+@Q{What might it look like to normalize data about people's height?}
+@A{standardize units: do we want to go with 5'8" or 68" or 1.72m or 172cm?}
 }
+
 
 == Detecting Plagiarism
 @objective{ai-plagiarism-detector-ethics}
