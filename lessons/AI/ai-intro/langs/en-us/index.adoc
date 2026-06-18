@@ -373,99 +373,77 @@ We'll get to Language Models in a later lesson, but for now the important thing 
 === Synthesize
 TBD - give students examples of use-cases, and have them identify the kind of ML at work
 
-== Meet Pyret!
+
+
+== What _is_ a Model, Anyway?
 
 === Overview
-Students open up the Pyret environment (pyret.bootstrapworld.org, or "PBO") and see the Animals Dataset reflected there.
+Students begin to think about the meaning of the term "model", which is a broad term that different disciplines use in subtly different ways. Note that the goal of this section is to give them the beginning of an intuition for thinking about models, _not_ a rigorous definition!
 
 === Launch
-@slidebreak{LaunchR}
+@slidebreak{Launch}
+In this lesson, you've already seen the word "model" being used when it comes to AI. We've talked about Prediction Models such as Classification Models and Regression Models. We've talked about Generative/Language Models, and you probably know some famous ones like GPT, Gemini, or Claude.
 
-Let's take a look at our programming environment, and see what the Animals Dataset looks like there.
+But what IS a model, anyway?
 
-@lesson-instruction{
-- @right{@image{images/pyret.png, 100}}Open the @starter-file{animals} in a new tab. Click “Connect to Google Drive” to sign into your Google account. This will allow you to save Pyret files into your Google Drive.
-- Next, click the "File" menu and select "Save a Copy". This will save a copy of the file into your own account, so that you can make changes and retrieve them later.
+@slidebreak{Launch}
+@lesson-point{A model is a mathematical summary of a dataset}
+
+Defining the term "Model" is actually pretty hard, because different disciplines would define the same word in slightly different ways! But what they all have in common is that models are used to _represent a dataset_, and to do so in a more compact way. When we summarize an essay, we're trying to *identify the main ideas* and *leave the rest behind* - models do the same thing with data, identifying the most important patterns or structures and leaving the rest behind.
+
+@slidebreak{Launch}
+All Models summarize features of a dataset, and all models leave some details out!
+
+You may already be familiar with some simple mathematical models:
+
+- Mean, median, and mode are different ways of summarizing the "center" of a list of numbers, but they leave out the original list
+- A line of best fit summarizes the relationship between points in a scatter plot, but they leave out the original points
+
+Both of these tell us something about a feature of the original dataset, and leave out the less important details.
+
+
+@strategy{Not all Definitions are Black and White!}{
+Someone with a background in Machine Learning would argue that the average of a list of numbers isn't a models at all! In Machine Learning, models are typically used to _make predictions_. A mathematician would disagree.
+
+The fact is that these lines are somewhat blurry, and for an introductory class we've tried to use a least-common-denominator approach by focusing on two main ideas that are common across every discipline: (a) models summarize the features of a dataset, and (b) that summary leaves out parts of the dataset.
 }
 
 === Investigate
 @slidebreak{Investigate}
+@lesson-point{All models are wrong. Some are useful.}
 
-@lesson-instruction{
-- Click "Run" to tell Pyret to read the code on the left-hand side.
-- On the right-hand side, type `animals-table` and hit the "Enter" or "Return" key.
-- A table of animals appears on the right-hand side of the screen.
-- Look on the left-hand side of the screen. Where is Pyret getting `animals-table` from?
-}
+By definition, a model leaves out some details about the original dataset.
 
-@slidebreak{Investigate}
+- Rush hour is generally between 4:30-6:30pm (but not on holiday weekends!)
+- White is the most common color of car in the world (but millions of cars are not white!)
 
-The first line on the left-hand side of the screen tells Pyret to use a provided file, which contains tools we’ll want to use for this course.
+The goal of a model is not to be right every time, but to be _right enough to be useful_. Both of the generalizations above are wrong sometimes. But if you're planning a road trip, only one is useful.
 
-`use context shared-gdrive("Bootstrap-...")`
-
-After that, we see a line of code that _defines_ `shelter-sheet` to be a spreadsheet.
-
-`shelter-sheet = load-spreadsheet("https://docs.google.com....")`
-
-This table is loaded from Google Drive, so now Pyret can see the same spreadsheet you do. If you look carefully, you'll notice that the address listed here is the same address as the spreadsheet we just looked at!
-
-@pd-slide{
-*What Happens when Pyret loads a spreadsheet?*
-
-- When Pyret imports a sheet, it reads all the cells and builds something it calls a Table.
-- When making a table, Pyret checks all of the cells automatically, and holds us accountable for using clean and complete data.
-- Each time we sort, filter or change a Table, Pyret makes a new Table. This is beneficial for a variety of reasons!
-}
-
-@strategy{What Happens when Pyret loads a spreadsheet?}{
-- When Pyret imports a sheet, it reads all the cells and builds something it calls a _Table_. The original spreadsheet is still out there, exactly as it used to be!
-- When making a table, Pyret _checks all of the cells automatically_, and holds us accountable for using clean and complete data so that all visualizations can be trusted. Unlike Pyret, spreadsheets allow us to make visualizations out of any collection of cells -- even if those cells are blank, contain mismatched data, or contain data from multiple, unrelated tables -- which can jeopardize our analysis!
-- Each time we sort, filter or change a Table, Pyret makes a _new Table_. This means that we can explore one transformation or another, or even multiple transformations together...and can always go back as many steps as we want.  This is a big improvement over working with spreadsheets, where our options are to choose between making "backup" copies of sheets at every step (which means any change to one of those sheets needs to be replicated _by hand_ in all of the other sheets), or modifying the original sheet (which makes it really hard to undo mistakes).
-- Checking data by hand and the inability to undo mistakes are problematic for students, teachers, and Data Scientists alike!  While the strictness of programming may outweigh the benefits for younger students, for students who are comfortable writing code, programming is a vastly more powerful and learner-friendly tool for Data Science!
-}
 
 @slidebreak{Investigate}
 
-After that, we see the following code:
-
-```
-# load the 'pets' sheet as a table called animals-table
-animals-table = load-table: name, species, sex, age, fixed, legs, pounds, weeks
-  source: pets-sheet.sheet-by-name("pets", true)
-end
-```
-
-The first line (starting with `#`) is called a @vocab{Comment}. Comments are notes for humans, which the computer ignores.
-
-@slidebreak{Investigate}
-@ifslide{
-```
-# load the 'pets' sheet as a table called animals-table
-animals-table = load-table: name, species, sex, age, fixed, legs, pounds, weeks
-  source: pets-sheet.sheet-by-name("pets", true)
-end
-```
+@QandA{
+@Q{Can you come up with your own example of a model?}
+@A{Some ideas:
+- A height, weight, or BMI chart at the doctors office (a summary of the growth of a population)
+- Weather prediction (a summary of environmental trends and relationships)
 }
 
-The next line defines a new table called `animals-table`, (loaded from the shelter-sheet!) and defines column names: `name`, `species`, `sex`, `age`, `fixed`, `legs`, `pounds` and `weeks`. We could use any names we want for these columns, but it’s always a good idea to pick names that make sense!
+@Q{When is your model wrong?}
+@A{A bodybuilder has a dangerously high BMI, but they're not actually unhealthy}
+@A{Weather reports might misjudge how hot it will get, or whether it'll rain}
 
-@lesson-point{
-Even if your spreadsheet already has column headers, Pyret requires that you name them in the program itself.
+@Q{Is your model useful?}
+@A{Responses will vary}
 }
 
 
 === Synthesize
 @slidebreak{Synthesize}
-Once you know how to program, you can do a _lot_ with tables in Pyret: make charts and graphs, filter it to show just the dogs, or build columns to look at different information.
+Models summarize the features of a dataset, and leave out the details
 
 @QandA{
-@Q{What does Pyret do with a google sheet?}
-@A{Pyret can load any google sheet and build a table using all of the columns of data in the sheet, naming them whatever we want.}
-@A{When Pyret loads a google sheet, it checks to make sure that the number of columns named in the file matches the number of columns in the sheet itself.}
-@A{Pyret can do computations with the data in the sheet without changing the original sheet at all.}
-@A{Pyret can build visualizations from the data and make new tables that are either a filtered subset of the rows in the original table or expanded tables including new columns we build.}
+@Q{What features do you think our flower classifier was looking at, when comparing a picture to different species of flower? What was it ignoring?}
+@Q{What features do you think Spotify looks at, when comparing a songs? What does it ignore?}
+@Q{What features did YOU look at when predicting adoption time for animals in our shelter? What did you ignore?}
 }
-
-@slidebreak{Synthesize}
-In this class, we'll use datasets like this one to explore Prediction Models, Similarity Models, and Language Models. But first we need to get comfortable with the basics of Pyret! Stay tuned...
