@@ -1,0 +1,342 @@
+[.beta]
+= Programming with Spelling Suggestions
+++++
+<style>
+ /* Allow floated images to "punch through" lesson-instructions */
+.lesson-instruction { clear: unset !important; }
+</style>
+++++
+@description{Students explore data types and contracts in the Pyret programming language, using spelling corrections suggested in @lesson-link{data-driven-algorithms}}
+
+@lesson-prereqs{data-driven-algorithms, simple-data-types}
+
+@add-to-lang{sort, first-n-rows, dot-plot, bar-chart}
+
+@keywords{}
+
+[@lesson-intro-table]
+|===
+| Lesson Goals
+| Students will be able to...
+
+@objectives
+
+| Student-facing Lesson Goals
+|
+- Let's learn how to manipulate tables, draw pictures, and apply functions in Pyret
+
+| Materials
+|[.materials-links]
+@material-links
+
+| Key Points For The Facilitator
+|
+- Check frequently for understanding of @vocab{data types} and @vocab{contracts} during this lesson and throughout subsequent lessons.
+|===
+
+== Introducing Contracts
+@objective{contract-parts}
+@objective{read-contracts}
+@objective{contract-use}
+@objective{functions-domain-range}
+
+=== Overview
+Building on their understanding of @lesson-link{simple-data-types}, students are introduced to functions in Pyret for working with tables, making visualizations, and creating images. They are also introduced to _contracts_ as an "instruction manual for functions". Contracts are a *major* pedagogical component of the curriculum, and being comfortable reading them is absolutely critical.
+
+=== Launch
+@slidebreak{LaunchR}
+@right{@image{images/text-app.png, 250}}
+
+Make sure you've got the @starter-file{spell-checker} open, and your Definitions Area includes `results = alt-words("plation", WORDS-L, 4)`.
+
+Our spell-checker gives us lots of data to play with, in the form of tables of suggested words and their edit distances. We know how to save that data using variable definitions, so that we can refer back to it without having to recalculate the whole table.
+
+Can we do anything _interesting_ with that data?
+
+@slidebreak{LaunchR}
+@ifslide{@right{@image{images/text-app.png, 250}}}
+
+A spell-checker doesn't give us a table of 500 suggestions. Our cell phones don't tell us the edit distance for the suggestions they make. But just because it doesn't show us the edit distance doesn't mean it's not used! Your cell phone and spell checker uses the edit distance to help pick out the most-likely words to suggestion.
+
+We want to take the output of `alt-words` and _do something_ to it, just as spell checkers and cell phones do.
+
+=== Investigate
+@slidebreak{Investigate}
+
+@lesson-instruction{
+Turn to @printable-exercise{sorting-and-trimming.adoc} and complete the first section: *Sorting Results*.
+}
+
+@slidebreak{Investigate}
+
+@QandA{
+@Q{What did these `sort` expressions do?}
+@A{They took in the `results` table, the `edit-distance` column, and true or false... producing a new table, sorted alphabetically +
+@hspace{1em}(ascending for `true` and descending for `false`)
+}
+
+@Q{What does it mean that the Range of `sort` is Table?}
+@A{The function produces a new table.}
+
+@Q{Type `results` and hit "Enter". Did sorting our animals change the value of the table?}
+@A{No. It made a new one.}
+}
+
+@slidebreak{Investigate}
+
+Let's review what we've learned about Contracts. Every Contract has three parts:
+
+1. *Name* -- the name of the function, which we type in whenever we want to use it
+2. *Domain* -- the type(s) of data we give to the function
+3. *Range* -- the type of data the function produces
+
+@lesson-point{
+Contracts are the _instruction manual_ for functions.
+}
+
+@slidebreak{Investigate}
+
+Let's explore the Contract for another function that works with Tables: `first-n-rows`
+
+@lesson-instruction{
+- Complete the second section of @printable-exercise{sorting-and-trimming.adoc}: *Trimming Results*.
+}
+
+@slidebreak{Investigate}
+
+@lesson-instruction{
+Pyret knows about more than just Numbers, String, Booleans, and Tables! It can also make _Images_.
+
+- Have some fun with @printable-exercise{image-contracts.adoc}.
+}
+
+@strategy{Supporting Diverse Learners}{
+
+- Image exploration is a low threshold / high-ceiling activity that should be engaging to all students.
+- Some students may find ALL of the contracts, but most will not!
+- When the first student in your class has successfully used the text function, give directions about which functions to prioritize with the remaining time.
+
+For a deeper dive into Image and Table contracts, have students work on pages from @lesson-link{contracts-strings-images} and @lesson-link{contracts-tables}.
+
+@teacher{
+Do not try to keep your students in lock-step. What is important here is for _everyone to have the opportunity to explore._
+
+Students do *not* need to find all of the contracts on this page in order to complete the lesson or the following pages. If you have to prioritize, make sure students complete the first five (up to and include `text`).
+}
+}
+
+
+
+=== Synthesize
+@slidebreak{Synthesize}
+
+@QandA{
+@Q{`first-n-rows` and `last-n-rows` have exactly the same Domain and Range, but do different things. So do `circle` and `triangle`. How is it possible to have the same Domain _and_ Range, and behave so differently?}
+@A{What a function *needs* is not the same as what it *does*.}
+
+@Q{Why did `sort` need more arguments in its Domain than either of the other two?}
+@A{It needed to know more things!}
+}
+
+== Composing with Circles of Evaluation
+
+=== Overview
+
+Students learn to work with more than one function at once, by way of Circles of Evaluation, a visual representation of the underlying structure.
+
+=== Launch
+@slidebreak{Launch}
+
+@lesson-instruction{
+- Your cell phone doesn't show you every possible suggestion: it only shows you the top 3-5.
+- How do you think the functions you've learned could be used to do the same thing?
+- Discuss with the other students at your table or nearby.
+}
+
+@teacher{Have students share their ideas}
+
+
+@slidebreak{Launch}
+What if we wanted to sort _and_ trim our tables?
+
+- By looking at the Range, we know that `sort` produces a Table
+
+@hspace{2em} @show{(contract 'sort '((t Table) (col String) (ascending Boolean)) "Table")}
+
+- By looking at the Domain, we know that `first-n-rows` _consumes_ a Table
+
+@hspace{2em} @show{(contract 'first-n-rows '((t Table) (num Number)) "Table")}
+
+_But how could the `sort` and `first-n-rows` functions work together?_
+
+=== Investigate
+@slidebreak{Investigate}
+
+One way to organize our thoughts is to diagram what we want to do. *Circles of Evaluation* help us think about what we want to do, without worrying about syntax like quotation marks, parentheses, etc. They let us use all our brains for _thinking_, before we use them for _coding_.
+
+The rules are simple:
+
+(1) Every Circle of Evaluation must have one -- and only one! -- function, written at the top.
+
+(2) The arguments of the function are written left-to-right, in the middle of the Circle.
+
+ * Values like Numbers, String, and Booleans are still written by themselves. It’s only when we want to _use a function_ that we need to draw a nested Circle.
+
+(3) Circles can contain other Circles!
+
+@slidebreak{Investigate}
+
+@lesson-instruction{
+- Suppose we want to see the top 5 results of `alt-words`, sorted by increasing edit-distance.
+- Turn to @printable-exercise{composing-coe.adoc} and complete the Notice and Wonder section.
+}
+
+@do{
+(define sort-exp '(sort results "edit-distance" true))
+(define trim-exp '(first-n-rows (sort results "edit-distance" true) 5))
+}
+
+++++
+<style>
+.circle2 .expression { background: aquamarine !important; }
+.circle2 .expression .expression { background: white !important; }
+</style>
+++++
+
+@slidebreak{Investigate}
+
+_Circles of Evaluation let us see the structure._
+
+[%autowidth, cols="^a, ^.^a, ^a", grid="none", stripes="none", frame="none"]
+|===
+
+| We can start by generating the sorted table.
+|
+| And then use `first-n-rows` to grab the top 5
+
+| @show{(coe sort-exp)}
+| &rarr;
+| [.circle2]
+@show{(coe trim-exp)}
+
+| @show{(code sort-exp)}
+|
+| @show{(code trim-exp)}
+|===
+
+@lesson-instruction{
+What do you Notice? What do you Wonder?
+}
+
+@slidebreak{Investigate}
+
+@ifslide{
+[cols="^4, ^.^1,^5", grid="none", stripes="none", frame="none"]
+|===
+| @show{(code sort-exp)}
+|
+| @show{(code trim-exp)}
+|===
+}
+
+To convert a Circle of Evaluation into code, we start at the outside and work our way in. After each function, we write a pair of parentheses, and then convert each argument inside the Circle.
+
+@lesson-instruction{
+- Complete @printable-exercise{composing-coe.adoc}.
+}
+
+@teacher{
+- There are multiple solutions to the bottom half of this page! Press your students to come up with both.
+- Both @lesson-link{contracts-strings-images} and @lesson-link{contracts-tables} include worksheets to help students practice composing functions using the Circles of Evaluation.
+- For a more project-based approach that's suitable for a CS or Math class, teach @lesson-link{transform-compose-images} and have students tackle @lesson-link{project-logo} or @lesson-link{project-flags}.
+
+}
+
+=== Synthesize
+@slidebreak{Synthesize}
+
+@QandA{
+@Q{Why might it be useful to separate the _thinking_ and _coding_ steps? Why not just do them at the same time, all the time?}
+}
+
+== Data Visualization
+
+=== Overview
+Students continue practicing with Contracts, this time creating data visualizations. They also practice their function composition skills using Circles of Evaluation, combining sorting, trimming, and visualization.
+
+=== Launch
+@slidebreak{Launch}
+
+There were only a few suggestions with an `edit-distance` of 1, but more with distances of 2, 3, and 4. As `edit-distance` increases, the number of suggestions increases, too.
+
+@QandA{
+@Q{But does it increase by the same amount each time?}
+@A{No! It grows by larger amounts for each `edit-distance`!}
+@A{It's almost exponentially larger}
+
+@Q{How could you communicate this growth to someone else, without making them scan the whole table?}
+@A{You could count the number of suggestions for each `edit-distance`}
+@A{You could make a chart}
+}
+
+=== Investigate
+@slidebreak{Investigate}
+
+@lesson-instruction{
+- Complete the first section of @printable-exercise{visualizing.adoc}
+}
+
+@slidebreak{Investigate}
+
+The `count` function produces a frequency table, showing how often a suggested word has an `edit-distance` of 1, 2, 3, and so on.
+
+@QandA{
+@Q{How is our bar chart connected to our frequency table?}
+@A{The bars are the same height as the numbers in that table}
+
+@Q{Could you make a bar chart of the _first 200 suggestions_ in your `results` table?}
+@A{Yes! We could diagram it using the Circle of Evaluation, with one circle for trimming and another for the bar chart}
+}
+
+@slidebreak{Investigate}
+Here's the Circle of Evaluation for our bar chart, showing only the first 200 suggestions:
+
+@show{(coe '(bar-chart (first-n-rows results 200) "edit-distance"))}
+
+What will _this_ Circle of Evaluation do?
+@show{(coe '(bar-chart (first-n-rows (sort results "edit-distance" true) 200) "edit-distance"))}
+
+@slidebreak{InvestigateR}
+@right{@image{images/text-app.png, 250}}
+A cell phone or spell-checker doesn't show you rows and columns - _it just shows you the words!_ Once a spell checker gives us a table full of words and edit-distances....how do we get the words _out?_
+
+@lesson-instruction{
+- Complete @printable-exercise{visualizing.adoc}
+}
+
+@teacher{
+This lesson is not intended to teacher students how to read or interpret data visualizations! If you're blending this material into a Data Science or Math class where various visualizations are part of your learning goals, we highly recommend exploring our @dist-link{courses/data-science/index.shtml, Data Science} course.
+}
+
+
+@slidebreak{Investigate}
+@vocab{Row accessors} allow us to extract data from specific cells of our table by specifying the row number and column title.
+
+@QandA{
+@Q{What row number do we use to extract data from the first row of our table?}
+@A{0}
+
+@Q{What code did you write to extract the 75th suggested word from the table?}
+@A{`row-n(results, 74)["word"]`}
+
+@Q{What was the 75th suggested word?}
+@A{wield}
+}
+
+=== Synthesize
+@slidebreak{Synthesize}
+@QandA{
+@Q{Why would a spell checking app need to use Row Accessor functions?}
+@A{Because we want to suggest a word, not a whole row of a table!}
+@A{And we might want to take the edit-number into consideration when we make our suggestion.}
+}

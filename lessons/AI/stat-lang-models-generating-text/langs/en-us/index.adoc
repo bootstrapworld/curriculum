@@ -3,7 +3,7 @@
 
 @description{Students consider how statistics and probability drive AI text generation, learning that language models can produce text that sounds credible but may not actually be credible.}
 
-@lesson-prereqs{}
+@lesson-prereqs{data-driven-algorithms}
 
 @keywords{}
 
@@ -16,9 +16,7 @@
 
 | Student-facing Lesson Goals
 |
-
 - Let's explore how probability influences the output of generative AI models.
-
 
 | Materials
 |[.materials-links]
@@ -27,17 +25,12 @@
 | Preparation
 | @preparation{
 - Make a copy of the @online-exercise{https://docs.google.com/forms/u/1/d/1C1WSad_IrVT0pd_IXG7yCCM30CVoIibv9kBDKnEJ5RI/copy, What comes next? Survey Google Form} so that you can examine your class's data. _If you are using our Google Slides, be sure to add the link to your copy of the form to the appropriate slide._}
-
 |===
 
-
-
 == Introduction to Statistical Language Modeling
-
 @objective{ai-slm}
 
 === Overview
-
 Students explore how text prediction relies on statistical language modeling.
 
 === Launch
@@ -303,7 +296,7 @@ If you'd like to explore probability and sampling in greater depth, check out ou
 
 @lesson-instruction{
 - Return to @starter-file{ai-ngrams}
-- *In the Definitions Area*, build your language mode by evaluating `m = build-lang-model(corpus)`, then click "Run".
+- *In the Definitions Area*, build your language model by evaluating `m = build-lang-model(corpus)`, then click "Run".
 - Evaluate `m` to see what it looks like!
 - To find the probability of one word following another, evaluate `next-word-probability(m, "swallowed a", "fly")`
 }
@@ -322,6 +315,7 @@ We can say that, _in this corpus_, as the n-gram gets longer, the number of comp
 @Q{Do you think it will generally be true of other corpuses that as the n-gram gets longer, the number of completion options decreases?}
 @A{Yes, in general, this is a true statement: longer phrases have fewer possible completions than single words.}
 }
+
 
 == Sampling from the Model
 @objective{ai-slm-hallucination}
@@ -347,11 +341,11 @@ We've created helper functions for this, too:
 
 @show{(contract "completions" '((model Table) (start String)) "Table")}
 
-@show{(contract "choose-completion" '((model Table) (start String)) "String")}
+@show{(contract "choose-completion" '((model Table) (start String) (n Number)) "String")}
 
 - We can use these contract to find all the possible completions for a starting string: `completions(c, "swallowed the")`
 
-- Or to choose one completion at random: `choose-completion(c, "swallowed the")`
+- Or to choose the next `n` words at random: `choose-completion(c, "swallowed the", 1)` chooses one word; increase the `1` to generate more at once
 
 
 @slidebreak{Investigate}
@@ -401,7 +395,22 @@ If you're curious to see what would happen if we just kept going, evaluate `gene
 
 === Synthesize
 @slidebreak{Synthesize}
+@lesson-point{A model is a mathematical summary of a dataset}
 
+@QandA{
+@Q{What does our n-grams table summarize about this dataset?}
+@Q{What does it leave out?}
+}
+
+@slidebreak{Synthesize}
+@lesson-point{All models are wrong. Some are useful.}
+
+@QandA{
+@A{Will _any_ line we draw be *perfect*? Why or why not?}
+@A{When is a line useful?}
+}
+
+@slidebreak{Synthesize}
 @QandA{
 Critics of ChatGPT and other language models raise a variety of concerns. Consider each of them, below.
 

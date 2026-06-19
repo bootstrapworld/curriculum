@@ -8,7 +8,7 @@
 ++++
 @description{By exploring a spell checker program, students discover that AI relies on _data-driven algorithms_. When we provide more representative data to the computer, data-driven algorithms generally produce a higher quality output. }
 
-@lesson-prereqs{ai-intro, contracts-tables}
+@lesson-prereqs{ai-intro}
 
 @add-to-lang{}
 
@@ -193,69 +193,77 @@ Look at the screenshot (right) of a text messaging app's suggestions for the pos
 
 @teacher{Students will discuss a similar screenshot of a text messaging app in our lesson on @lesson-link{stat-lang-models-generating-text}. During that lesson, however, students explore how generative AI uses data-driven algorithms to determine what word to produce next.}
 
-
-== Playing with Spelling Suggestions
-@objective{row-accessors}
+== Defining Values
+@objective{Define values of various types}
+@objective{Simplify a complex expression by replacing repeated parts with defined names,}
+@objective{Explain why variables are useful in math and programming}
 
 === Overview
-Students use their knowledge of Pyret to manipulate the table produced by `alt-words`, producing the "top-3" and "bottom-3" suggestions along with several charts and graphs.
+Students are introduced to variable definition in Pyret, motivated by a desire to save computationally-expensive operations to re-use their results.
 
 === Launch
-@slidebreak{Launch}
-Now that we know how to use Pyret, let's explore the output of `alt-words` and use some of our programming skills to make sense of the output.
-
-@lesson-instruction{
-- Complete the first section ("Analyzing Results") of @printable-exercise{spell-checker-results.adoc}.
-}
-
-@teacher{Pay close attention to how your students do on this section. It's the first time they'll have flexed their Pyret muscles on a dataset other than animals, and that can be a bit of a leap for some students. This is a good time to remind them to focus on the contracts as a signpost for what to do!}
-
-@slidebreak{Launch}
-You already know how to select rows, generate summaries, and make data visualizations. This section asked you to try it out with a brand new dataset: the output of our spellchecker!
+@slidebreak{Launch-DN}
 
 @QandA{
-@Q{How do you think the results would have changed if we used a smaller dictionary?}
-@A{We would have had fewer answers for each edit distance.}
-@A{Maybe it would have needed less time to give back the results?}
+Let's experiment with a bigger list of suggestions...
 
-@Q{What about a larger dictionary?}
-@A{More results}
+- In the Interactions Window on the right type `alt-words("plation", WORDS-L, 4)` and hit "Enter" to see the table.
 
-@Q{For every increase in `edit-distance`, the number of suggested words grew. Was the growth from 1-to-2 the _same_ as from 2-to-3? What do you think it would look like for an `edit-distance` of 4?}
-@A{The jump from 2-to-3 was *much* bigger than from 1-to-2. 4 might generate hundreds or thousands of alternatives!}
-}
+@Q{How long did Pyret take to generate all the substitutions, deletions, insertions, and swaps, and then filter by only real words?}
+@A{A while!}
 
-=== Investigate
-@slidebreak{InvestigateR}
---
-@right{@image{images/text-app.png, 250}}
+@Q{Would asking it to do the _same thing_ over again go faster? Why or why not?}
+@A{Responses may vary}
 
-But a cell phone or spell-checker doesn't show you rows and columns - it shows you the words themselves! This raises a question: once a spell checker gives us a table full of words and edit-distances....how do we get the words _out?_
-
-@vocab{Row accessors} allow us to extract data from specific cells of our table by specifying the row number and column title. 
---
-
-@lesson-instruction{
-- Complete the rest of @printable-exercise{spell-checker-results.adoc}.
+@Q{Try it out! What happened? Can you explain why?}
+@A{It still took forever, because we are asking it to redo the same work.}
 }
 
 @slidebreak{Investigate}
+When we ask Pyret to do something over and over, it has no way of knowing that it should save its work! As a result, _it does the work over and over, too!_ Fortunately, the world of math has a solution: define a @vocab{variable}.
 
 @QandA{
-@Q{What row number do we use to extract data from the first row of our table?}
-@A{0}
+In the *Interactions Area*, evaluate `results = alt-words("plation", WORDS-L, 4)`.
 
-@Q{What code did you write to extract the 75th suggested word from the table?}
-@A{`row-n(results, 74)["word"]`}
+@Q{Did anything come back? Why or why not?}
+@A{No! Defining a variable doesn't produce anything, *just like in math!*}
+@A{@math{x = 4} doesn't have an "answer", because definitions aren't expressions.}
 
-@Q{What was the 75th suggested word?}
-@A{wield}
+@Q{Now evaluate `results` three times. What happens?}
+@A{It was lightning fast!}
+
+@Q{Click "Run", and evaluate `results`. What happens?}
+@A{We get an error message! Pyret "forgot" about our variable}
+
+@Q{Evaluate `feeling = "Joy"` and hit Enter. What do you think will happen if we evaluate `feeling`?}
+@A{We'll get back `"Joy"`}
 }
 
-=== Synthesize
+@slidebreak{Investigate}
+When we want Pyret to remember a definition, we add it to the *Definitions Area*. Every time we click "Run" Pyret re-runs all the code, including the definition!
+
+@lesson-instruction{
+- Add `results = alt-words("plation", WORDS-L, 4)` to the Definitions Area, and click "Run". Evaluate `results` in the Interactions Area.
+- Add a _second_ definition to the Interactions Area
+- What happens if you add another definition that _also_ has the name `results`?
+}
+
 @slidebreak{Synthesize}
 @QandA{
-@Q{Why would a spell checking app need to use Row Accessor functions?}
-@A{Because we want to suggest a word, not a whole row of a table!}
-@A{And we might want to take the edit-number into consideration when we make our suggestion.}
+@Q{Why are variable definitions valuable?}
+@A{We can save expensive work}
+
+@Q{What kinds of values can we define, besides just tables of spelling corrections?}
+@A{Anything!}
+
+@Q{Why can't we define two variables with the same name?}
+@A{Pyret only allows a variable name to have one value.}
+}
+
+@slidebreak{Synthesize}
+@QandA{
+@Q{Now that we can generate and save spelling suggestions, what are some things we might want to _do_ with them?}
+@A{We might want to sort the results, putting the suggestions with shorter edit distances first}
+@A{We might want to just show the "top 5", rather than a table with hundreds of entries}
+@A{Maybe we could make a chart or a graph?}
 }

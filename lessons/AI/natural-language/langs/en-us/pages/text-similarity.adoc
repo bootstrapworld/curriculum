@@ -1,6 +1,6 @@
 = Text Similarity
 
-@lesson-instruction{For this page, you'll need @starter-file{ai-text} open on your computer}. You may also want to review these Contracts:
+@link-instructions{Save a copy of @starter-file{ai-text2} and click "Run". You may also want to review these Contracts:}
 
 @indented{
 @show{(contract "distance-similarity" '("Table" "String" "List<String>") "Table")} +
@@ -9,24 +9,21 @@
 
 == What's Going on in this Code?
 
-@n *Save a Copy and click "Run"*. What is being defined in the first 22 lines of this file? @fitb{}{@ifsoln{a bunch of strings, which are essays about animals}} +
+@n What is being defined in the first 22 lines of this file? @fitb{}{@ifsoln{a bunch of strings, which are essays about animals}} +
 @fitb{}{}
 
 @n What happens on lines 25-38? @fitb{}{@ifsoln{Those strings are put into a table called `essays`}}
 
-@n What is defined on line 40? @fitb{}{@ifsoln{a variable called `whale-essay`, which is the first row in the table}}
+@n What is defined on line 40? @fitb{}{@ifsoln{a variable called `whale-essay`, which is the second row in the table}}
 
-@n In the Interactions Area, evaluate `whale-essay` and then `whale-essay["EMOJI"]`. What does the second expression do? @fitb{}{} +
-@fitb{}{@ifsoln{extracts the value from the "EMOJI" column of the `whale-essay` Row}}
+@n In the Interactions Area, evaluate `whale-essay`, then `whale-essay["EMOJI"]` and `essay-img(whale-essay)`. Explain what `essay-img` does. @fitb{}{@ifsoln{grabs the "ID" column from the row, and makes an emoji picture}}
 
-@n Evaluate `title-img(whale-essay)`. Explain what `title-img` does. @fitb{}{@ifsoln{grabs the "ID" column from the row, and makes an emoji picture}}
-
-@n Which essay is _most similar_ to our `mystery` document `"⁇"`? How do you know? @fitb{}{} +
+@n Find line 22 and scan the text of the `mystery` document (`"❓"`). Which essay do you expect it to be _most similar_ to? Why? @fitb{}{@ifsoln{`elephant`. They're both about elephants.}} +
 @fitb{}{}
 
-
-@n Why _can't_ we use the other similarity functions with this table, as-is? @fitb{}{@ifsoln{No numeric attributes}} +
+@n Why _can't_ we use our `distance-similarity` and `angle-similarity` functions with the `essays` table, as-is? @fitb{}{@ifsoln{It doesn't have any numeric attributes}} +
 @fitb{}{}
+
 
 == Describing Essays with Numbers
 
@@ -46,7 +43,7 @@
 @n In the Definitions Area, define a new table: `decorated = decorate-text-table(essays, "DOC")`. Click "Run" and evaluate `decorated`. What did you get back? +
 @fitb{}{@ifsoln{a table with columns for the number of characters, words, syllables, sentences, and grade-level}}
 
-@n Make an `image-scatter-plot` using `title-img`, showing these essays in "WORDS-SYLLABLES Space" and another in "WORDS-SENTENCES Space". What do these scatter plots tell us? @fitb{}{} +
+@n Evaluate `image-scatter-plot(decorated, "WORDS", "SYLLABLES", essay-img)` to see these essays in "WORDS-SYLLABLES Space". Then make another plot in "WORDS-SENTENCES Space". What do these scatter plots tell us? @fitb{}{} +
 @fitb{}{@ifsoln{Essays with more words tend to have more syllables, *and* more sentences}}
 
 @n Try using `distance-similarity` and `angle-similarity` with any combination of your new columns. Can you create a space where we can see that `"❓"` is closest to `🐘`? Why or why not? +

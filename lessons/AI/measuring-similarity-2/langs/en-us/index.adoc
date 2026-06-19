@@ -25,7 +25,7 @@ This lesson uses a *supervised* learning approach to image similarity, and compa
 
 |===
 
-== Unsupervised vs. Supervised Learning
+== But We Still Haven't _Learned_ Anything!
 @objective{ai-supervised-v-unsupervised}
 
 === Overview
@@ -76,15 +76,10 @@ Machine Learning engineers at Netflix, Spotify, and Google have confronted these
 So...what if *we humans* started telling these model about Jack Black, what songs they like, which songs are jazz and which images have snow?
 
 @slidebreak{Investigate}
-There are several different times of Machine Learning, and we're about to cross from one into another:
+There are several different times of Machine Learning, and so far *our similarity system doesn't use either one!*
 
-* Unsupervised Learning - the computer is given a corpus of data and asked to find patterns. There's no "answer key"!
-* Supervised Learning - the corpus has been labeled, providing a sort of answer key. The computer has to find patterns that map inputs to outputs, staying as close to the correct answers as possible.
-
-@slidebreak{Investigate}
-@lesson-point{AI isn't just one thing: it involves different kinds of learning!}
-
-Image search is just one example of how supervised and unsupervised learning show up in AI. Every example of Machine Learning usually starts with one of these two. There are actually other kinds of machine learning too, but we'll get to that later.
+* Unsupervised Learning - the computer is given a corpus of data and asked to find patterns. There's no "answer key"! We could ask the computer to find the _@math{N}_ clusters of images that are near each other.
+* Supervised Learning - the corpus has been labeled, providing a sort of answer key. The computer has to find patterns that map inputs to outputs, staying as close to the correct answers as possible. Now we could ask the computer to find image similar to those we like, or those we've tagged with one term or another.
 
 === Synthesize
 @slidebreak{Synthesize}
@@ -110,7 +105,7 @@ You built a model of images in the previous lesson, including columns like `ENTR
 @A{`LIKES`, `DISLIKES`, and `TAGS`}
 }
 
-== Computing Centroids
+== Let the Learning Begin!
 @objective{ai-centroids}
 @objective{ai-supervision-ethics}
 
@@ -127,14 +122,14 @@ Open the @starter-file{ai-image} and click "Run", then evaluate `mountains` in t
 @A{`"snow1"` and `"snow2"`}
 
 @Q{Which images have visible *grass*?}
-@A{`"grass1"` and `"grass2"` (and maybe a little of `"day1"`)}
+@A{`"grass"` and `"grass-sun"` (and maybe a little of `"sun1"`)}
 
 @Q{Which images have a visible *sun* (either a sunset or sunrise)?}
-@A{`"day1"`, `"grass2"`, `"sun1"`, and `"sun2"`)}
+@A{`"sun1"`, `"grass-sun"`, `"sun2"`, and `"sunset"`)}
 }
 
 @slidebreak{LaunchR}
-@right{@image{images/blue-v-green-images.png, 300}}
+@ifslide{@right{@image{images/blue-v-green-images.png, 300}}}
 
 @lesson-point{
 When we search for an image that has a visible sun, we want an image that's similar to what sun images _have in common._
@@ -147,14 +142,14 @@ How can we find the "sun-ness" of an image?
 
 If every image in our corpus is a point in space, then common ground is literally a point _in the middle_. We have a bunch of images containing the sun, and we want to find the center.
 
-In our 2-dimensional Blue-Green Space, for example, the midpoint halfway between `"grass2"` and `"sun1"` defines one kind of "sun-ness"!
+In our 2-dimensional Blue-Green Space, for example, the midpoint halfway between `"grass-sun"` and `"sun2"` defines one kind of "sun-ness"!
 
 (Do you remember learning about mean, median, and mode? In Machine Learning, there are algorithms for finding clusters of points in space that are literally named `k-means`, `k-medians`, and `k-modes` clustering! _Measures of Center are a critical part of modern Machine Learning._)
 
 
 @slidebreak{LaunchR}
-@right{@image{images/blue-v-green-images-centroid.png, 300}}
 @QandA{
+@ifslide{@image{images/blue-v-green-images-centroid.png, 300}}
 @Q{We have *three* images where the sun is visible. How can we find the middle of those three?}
 @A{It's the middle of a triangle!}
 
@@ -168,27 +163,36 @@ In our 2-dimensional Blue-Green Space, for example, the midpoint halfway between
 
 If you have more than 1 dimension, the same math applies: compute the centroid for each column separately. Can we get a better result for sunny images by teaching Pyret what "sun-ness" looks like for two of our images?
 
-For any set of points, the "middle" point is the @vocab{Centroid}. 
+For any set of points (in any number of dimensions!), the "middle" point is the @vocab{Centroid}.
 
-@image{images/centroid.png, 300} @image{images/tetrahedron-centroid.png, 300}
+[cols="^.^1a, ^.^1a, ^.^1a", grid="none", frame="none", options="header"]
+|===
+| In 1 dimension...
+| In 2 dimensions...
+| In 3 dimensions...
+
+| @image{images/centroid-1d.png, 300}
+| @image{images/centroid-2d.png, 300}
+| @image{images/centroid-3d.png, 200}
+|===
 
 === Investigate
 @slidebreak{InvestigateR}
 @QandA{
-@ifslide{@right{@image{images/centroid.png, 300}}}
-@Q{Our unsupervised `angle-similarity` measure did a fine job recommending similar images when given a grassy or snowy image. Why did it struggle to finding images with the sun?}
-@A{The sunset image is _really_ different from the others. Any time we search by the `ID` of the other images (0, 6, or 7), we get other recommendations before image 8.}
+@ifslide{@right{@image{images/centroid-3d.png, 300}}}
+@Q{Even without any real _learning_, our `angle-similarity` measure did a fine job recommending similar images when given a grassy or snowy image. Why did it struggle to finding images with the sun?}
+@A{The sunset image is _really_ different from the others. Any time we search by the `ID` of the other images (`"sun1"`, `"grass-sun"`, or `"sun2"`), we get other recommendations ahead of `"sunset"`.}
 }
 
 @slidebreak{Investigate}
-Let's talk about the other major limitation of our unsupervised similarity system, compared to real ones:
+Remember the biggest problem of our non-learning system:
 
 - We're only recommending matches based on a _single document_: we can't find images, songs, or anything else based on a _collection_ of liked or disliked documents.
 
 How can our @vocab{centroid} implementation solve this problem, too?
 
 @slidebreak{Investigate}
-Building @vocab{centroids} is powerful, because now we can access the power of human-labeled information to reason about _groups_. Instead of looking at one image with grass, we can now look at multiple grassy images and talk about _what they have in common: "grass-ness"_.
+Building @vocab{centroids} is where we *start generalizing across rows*, because now we can access the power of human-labeled information to reason about _groups_. Instead of looking at one image with grass, we can now look at multiple grassy images and talk about _what they have in common: "grass-ness"_.
 
 And we can use that to solve *both* of the limitations of our unsupervised system!
 
@@ -205,12 +209,12 @@ In each case, the steps are the same:
 (3) find un-labeled documents that are similar to the centroid using the relevant columns.
 
 @lesson-instruction{
-We've provided two functions that do exactly this, using every available column in the model.
+- We've provided two functions that do exactly this, using every available column in the table.
 - Complete the second section of @printable-exercise{supervised-learning.adoc}
 }
 
 @QandA{
-@Q{Why did building a centroid from `"grass2"` and `"sun1"` help us improve the recommendation?}
+@Q{Why did building a centroid from `"grass-sun"` and `"sun2"` help us improve the recommendation?}
 @A{Because the centroid was "closer" to all the sun images than any one of them was to all the others}
 
 }
@@ -320,8 +324,8 @@ You may recall the steps of @vocab{supervised learning} from a @lesson-link{regr
 - The function is applied to new data.
 
 @slidebreak{InvestigateR}
-@right{@image{images/navlab.png}}
-ALVINN was given a table of inputs (images and depth maps), each row tagged with how a human turned the steering wheel. Then it found a function that would predict the steering wheel angle from new inputs, and used the function by applying it to new roads.
+@right{@image{images/navlab.png, 200}}
+A self-driving car is given a table of inputs (data from various sensors), each row tagged with how a human turned the steering wheel. Then it found a function that would predict the steering wheel angle from new inputs, and used the function by applying it to new roads.
 
 @QandA{
 @Q{In our image search example, what is the human-tagged data for the computer?}

@@ -5,7 +5,7 @@
 Students consider how arbitrary documents (in this case, Images) can be represented as unlabeled points in space, and explore different ways to measure the "distance" between those documents using a spatial representation.
 }
 
-@lesson-prereqs{data-driven-algorithms}
+@lesson-prereqs{programming-spelling-suggestions}
 
 @keywords{}
 
@@ -68,9 +68,9 @@ When we ask Google to find images similar to the one we dragged, it comes back w
 @QandA{
 @Q{What attributes do these nine images share? What makes the images similar?}
 @Q{What attributes distinguish these nine images? What makes them different?}
-@Q{Which is _more similar_ to `day1`:   `day2` or `day3`?  Why?}
-@A{`day2` possible responses: Like the mountains in `day1`, the mountains in `day2` fill up just a narrow strip of the whole photo. Similar to `day1`, `day2` also includes a body of water in the foreground and a sun in the background.}
-@A{`day3` possible responses: `day3`'s color palette includes mostly white, brown, and blue.}
+@Q{Which is _more similar_ to `sun1`:   `day1` or `day2`?  Why?}
+@A{`day1` possible responses: Like the mountains in `sun1`, the mountains in `day1` fill up just a narrow strip of the whole photo. Similar to `sun1`, `day1` also includes a body of water in the foreground and a sun in the background.}
+@A{`day2` possible responses: The color palettes for `sun1` and `day2` are mostly white, brown, and blue.}
 }
 
 === Investigate
@@ -91,7 +91,7 @@ Each pixel has a particular amount of Red, Green, and Blue in it. For our purpos
 
 @slidebreak{Investigate}
 
-While the training corpus takes in images, once the model is trained, the computer won't have access to those images anymore. Let's take a look at how the computer processes a simple image.
+While the training corpus starts with images, the computer focuses only on _the computed attributes of those images_. Let's take a look at how the computer processes a simple image.
 
 @lesson-instruction{
 - Return to the @starter-file{ai-image} and evaluate `red-blue-tile`.
@@ -106,7 +106,7 @@ While the training corpus takes in images, once the model is trained, the comput
 @slidebreak{Investigate}
 
 @lesson-instruction{
-- Evaluate `pixel` and `pixel-dominant-rgb` to get a sense of what information the computer is going to build our model from.
+- Evaluate `pixel` and `pixel-dominant-rgb` to get a sense of what information the computer is going to use to calculate these attributes.
 - How similar is the computer's initial summary to ours?
 }
 
@@ -139,29 +139,30 @@ Computers can look at groups of pixels to compute values. For example:
   * Notice we're defining a _table_ called `image-corpus`.
   * There are columns for the identifier (`ID`), the image document (`DOC`), whether the image is `LIKED` or `DISLIKED`, and also for any descriptive `TAGS` in the image.
   * By defining the table here in the code, we’ve set ourselves up to be able to make changes.
-- Lines 47-52 direct the computer to build a model using the functions we experimented with.
-- Evaluate `model-with-color-names` in the Interactions Area.
+- Lines 47-52 direct the computer to build a table of computed attributes using the functions we experimented with.
+- Evaluate `computed-with-color-names` in the Interactions Area.
 - Scroll down to find the row for `red-blue`.
-- Now evaluate `model`. What columns are different? What columns are the same?
+- Now evaluate `computed`. What columns are different? What columns are the same?
 - What do you Notice? What do you Wonder?
 }
 
 @teacher{
-The columns in these models have several ideas worth unpacking:
+The columns in these tables have several ideas worth unpacking:
 
 - Many of the scales you'll see here go from 0-255. We use 8-bit color for the simpler shapes (think original Nintendo!), and that allows for 256 possible unique values.
 - `LUMINANCE` - the average brightness of an image. `image-luminance(black-sq)` is zero, while `image-luminance(white-sq)` is 255
 - `ENTROPY` - measures the randomness in brightness across pixels in an image. `image-entropy(black-sq)` and `image-entropy(white-sq)` are both zero, because every color in both images is the same: no randomness! However, `image-entropy(half-and-half)` is 1, because there is an exactly equal probability of selecting a black or white pixel at random. Without any clear majority, we have maximum entropy.
 - `SYMMETRY-V` and `SYMMETRY-H` - Both calculated on a scale of 0-1, with 1 being perfect symmetry and 0 being perfect asymmetry.
-- `DOMINANT-RGB-COLORS` - Shows the dominant color (red, green, or blue) for every pixel in order. Our `red-sq` is 10x10 in size, so we expect to see "red" written out 100 times. The pixels in our `black-sq` image, however, are _equally balanced_ across red, green, and blue (all zeros), so there is _no dominant color at all_. *This column is only found in `model-with-color-names`*
+- `DOMINANT-RGB-COLORS` - Lists the dominant color (red, green, or blue) for every pixel in order. Our `red-sq` is 10x10 in size, so we expect to see "red" written out 100 times. The pixels in our `black-sq` image, however, are _equally balanced_ across red, green, and blue (all zeros), so there is _no dominant color at all_. *This column is only found in `computed-with-color-names`*
+- `blue`, `green`, `red` - These columns summarize the information from `DOMINANT-RGB-COLORS`, giving a count of the number of times each color was listed as the dominant color for a pixel. The sum of the values in these three columns should equal the total number of pixels in the image. *These three columns are only found in `computed`*
 - In Computer Science, it's a convention to use the order "Red, Green, Blue" when talking about pixel values, but our `add-bag-cols` function (line 52) always puts the columns in _alphabetical order_. In Desmos and our worksheets, we've stuck with the RGB convention - but these different conventions could be a source of confusion for some students.
 }
 
 @slidebreak{Investigate}
 
 @QandA{
-@Q{How is `model` different from `model-with-color-names`?}
-@A{The `DOMINANT-RGB-COLORS` column is missing in `model`. Instead, it's been replaced by three other columns: `blue`, `green`, and `red`.}
+@Q{How is `computed` different from `computed-with-color-names`?}
+@A{The `DOMINANT-RGB-COLORS` column is missing in `computed`. Instead, it's been replaced by three other columns: `blue`, `green`, and `red`.}
 
 @Q{Where do you think the last 3 columns come from?}
 @A{They are a *count* of the number of times each color appeared in the original string.}
@@ -175,15 +176,7 @@ The columns in these models have several ideas worth unpacking:
 
 Counting the words and discarding their order is a technique for extracting the _frequency_ of words in a String. It's as if we cut out all the words from the string and shoved them into a bag: we still know how many of each word are there, but we have no idea which came first, second, third. etc.
 
-In Machine Learning, this is called a @vocab{bag of words model}. For now we're just counting colors, but you could imagine it being useful for finding similarity between books, essays, etc.
-
-@slidebreak{InvestigateR}
-@ifslide{@right{@image{images/bag-of-colors.png, 200}}}
-@QandA{
-We've left the image thumbnails in this file as a reference for our human brains, but the model that the computer is working with does not include the images. This is another example of how models are @vocab{lossy}!
-
-@Q{What are some things that your brain knows about the images, that are not recorded in these columns?}
-}
+This is called a @vocab{bag of words model}. For now we're just counting colors, but you could imagine it being useful for finding similarity between essays (counting words), chess strategies (counting moves), etc.
 
 @slidebreak{Investigate}
 
@@ -196,7 +189,7 @@ Think back to our mountain images.
 }
 
 @teacher{
-- Which image has the most red? (`sun2`)
+- Which image has the most red? (`sunset`)
 - Which one has the most green? (the grassy one)
 - Which do you think will have the most entropy? luminance? symmetry?
 }
@@ -209,6 +202,21 @@ Think back to our mountain images.
 @Q{What is the difference between entropy and luminance?}
 }
 
+@slidebreak{Synthesize}
+@lesson-point{A model is a mathematical summary of a dataset}
+
+@QandA{
+@Q{What does a Bag of Words summarize about an image, in this example?}
+@A{The number of pixels that are red-, green-, or blue-dominant}
+
+@Q{What does it leave out?}
+@A{The rest of the color in each pixel, the order of the pixels, and more!}
+
+@Q{Do we have one large model here, or a table fill of per-image models?}
+@A{*A table full of per-image models!* Remember, a model is all about allowing us to _generalize_. But these bags of words only apply to the images we made them from - they don't tell us anything about other images. Our table still has just as many rows as it did before! We've summarized _within_ each image. But there's been no summary _across_ the images}
+}
+
+
 == Measuring Distance in "Image Space"
 @objective{ai-similarity}
 
@@ -216,28 +224,33 @@ Think back to our mountain images.
 Students are introduced to _distance_ as a notion of similarity. This requires them to visualize images in a spatial system - first in one dimension, then in two, then eventually three.
 
 === Launch
-@slidebreak{LaunchR}
+@slidebreak{Launch}
 
 One way to compare images is just to ask "are they identical?" This is all-or-nothing: either the images match _precisely_, or they don't.
 
-But we want something with more nuance.
+@QandA{
+@Q{When we're looking for recommendations, are we hoping for a list of things that are exactly the same?}
+@A{Not usually! We want something with more nuance that recommends things that are _similar_.}
+}
 
-@center{@image{images/all-mountains.webp}}
+@slidebreak{LaunchR}
+@center{@image{images/all-mountains.webp, 650}}
 
 @QandA{
-@Q{Which color column would you expect to have similar values for two images with a lot of grass in them?}
+@Q{If we wanted to look for an image that was similar to another image with a lot of grass in it, one option might be to focus on images with a similar color palette. Which color column would you expect to have similar values for two images with a lot of grass in them?}
 @A{green}
 }
 
 @slidebreak{Launch}
+
 @lesson-instruction{
-- Let's see how the images compare on the `"green"` scale by evaluating `image-dot-plot(model, "green", thumbnail)`.
-- Find `grass1` and `grass2` on the plot.
+- Let's see how the images compare on the `"green"` scale by evaluating `image-dot-plot(computed, "green", thumbnail)`.
+- Find `grass` and `grass-sun` on the plot.
 - What do you notice?
 }
 
 @teacher{
-The big breakthrough here is recognizing that these columns each represents a _number line_, and every image falls _somewhere on that line_. This allows us to imagine our images existing as points in space, and opens up new ways to measure similarity by thinking about distance between those points.
+The big breakthrough here is recognizing that these columns can each be represented as a _number line_, with every image falling _somewhere on that line_. This allows us to imagine our images existing as points in space, and opens up new ways to measure similarity by thinking about distance between those points.
 }
 
 @slidebreak{Launch}
@@ -246,21 +259,54 @@ The big breakthrough here is recognizing that these columns each represents a _n
 We used the `"green"` column to define a number line - a "Green Space" - where every image was plotted according to how many green-dominant pixels it had. And our two grassy images are located near each other.
 
 @Q{How could we quantify how similar images are to each other in this "green space"?}
-@A{We could calculate the distance between them.}
+@A{We could calculate the distance between them on that number line.}
 }
 
 @slidebreak{Launch}
 
-Pyret has a function for computing the `distance-similarity`. It computes the distance between every row in the table and a Row with a given ID and builds a new column with those values.
+Pyret has several functions for measuring similarity, and they each work a little differently.
 
-@show{(contract "distance-similarity" '("Table" "Str" "List<String>") "Table")}
+`distance-similarity` computes the distance between every row in the table and a Row with a given ID and builds a new column with those values.
 
-For example, we could evaluate `distance-similarity(model, "grass1", [list: "green"])` to compute how similar each image is to image 3.
+@hspace{1em}@show{(contract "distance-similarity" '("Table" "Str" "List<String>") "Table")}
+
+For example, we could evaluate `distance-similarity(computed, "grass", [list: "green"])` to compute how similar each image is to `grass`.
+
+@lesson-instruction{
+- Return to the @starter-file{ai-image} and find lines 26-40 of our Definitions Area.
+  * For now, none of the images are liked, disliked, or tagged. By defining the table here in the code, we've set ourselves up to be able to make changes.
+- In the `TAGS` column:
+  * change `""` to `"grass"`, for images with large amounts of grass.
+  * change `""` to `"snow"`, for the snowy images.
+  * change `""` to `"sun"` for the four images with a visible sun.
+  * add tags for water and red (to give an image a second tag, use a comma, e.g. `"grass, sun"`)
+- Choose the *two mountain images you like the best*, and change the values for those images in the `LIKED` column from `false` to `true`.
+- Then click "Run" to load your changes.
+- Use it to complete the first section of @printable-exercise{plotting-images.adoc}.
+}
 
 @slidebreak{Launch}
-@ifslide{@lesson-point{We can think of our images as _points in space_}}
 
-Comparing images based on how many green pixels they have is a pretty limited understanding. We need to be able to compare images based on multiple columns of data!
+@QandA{
+@Q{How many images did you tag with `"grass"`?}
+@A{2}
+
+@Q{Did `distance-similarity(computed, "grass", [list: "green"])` sort them all to the top of the table?}
+@A{Yes.}
+@A{`distance-similarity` will always return a table with the rows sorted from most to least similar.}
+
+@Q{What is the `distance-similarity` for the top row in the table? Why?}
+@A{0. Because our `"grass"` row is identical to itself.}
+
+@Q{What characteristic led Pyret to compute `day1` and `day2` as similar to the grassy images in our Green Space?}
+@A{The number of green-dominant pixels in the images!}
+@A{The human eye recognizes those green-dominant pixels as patches of forest.}
+}
+
+@slidebreak{Launch}
+@ifslide{@lesson-point{We can think of our images as _points in space_.}}
+
+Comparing images based on how many green pixels they have is a start, but it's a pretty limited understanding. We need to be able to compare images based on multiple columns of data!
 
 @QandA{
 @Q{How could we plot images using two columns of data?}
@@ -270,24 +316,37 @@ Comparing images based on how many green pixels they have is a pretty limited un
 @A{Yes! That's what the distance formula does.}
 }
 
+@slidebreak{Launch}
+
 @lesson-instruction{
-Complete the second section on @printable-exercise{plotting-images.adoc}
+- Complete the second section on @printable-exercise{plotting-images.adoc} to explore our images in "Blue-Green Space".
 }
+
+By choosing _two_ columns from our dataset and using them as axes, you've defined a 2-dimensional "Blue-Green Space"! Each of the images from our corpus now exists as a point in that space.
 
 @slidebreak{LaunchR}
-@right{@image{images/blue-v-green-images.png, 300}}
-
-By choosing _two_ columns from our dataset and using them as axes, you've defined a 2-dimensional "Blue-Green Space"! Each of the images from our corpus now exists as a point in that space. "Blue-Green Space" is decent for finding our grassy images, snowy images _and_ our red images because each group is already clustered together, away from the rest. But images with the sun don't fare quite as well...
+@center{@image{images/blue-v-green-images.png, 500}}
 
 @QandA{
-@Q{How did the distance measure work in 2 dimensions?}
-@A{Because you can still calculate the distance in 2 dimensions, using the distance formula}
+@Q{What image clusters did you find in our "Blue-Green Space"?}
+@A{images with red - bottom left}
+@A{snow - top left}
+@A{grass - right}
 
-@Q{Could it work in _**3**_ dimensions? Why or why not?}
+@Q{How did the "Blue-Green Space" do at collecting the images with a visible sun?}
+@A{They're all over the place!}
+
+@Q{What distance is being computed in 2 dimensions?}
+@A{When they images don't share a coordinate, `distance-similarity` is computing the diagonal distance.}
+@A{We can compute the distance between any two points using the distance formula.}
+
+@Q{Could we find the distance between 2 points in _**3**_ dimensions? Why or why not?}
+@A{Yes!}
+@A{While you might not yet have learned how to compute the distance between 2 coordinate pairs in 3D space, we can certainly measure distance between any two objects in our classroom with a ruler and it is a 3D space!}
 }
 
 @lesson-instruction{
-Complete the last section on @printable-exercise{plotting-images.adoc}
+- Complete the last section on @printable-exercise{plotting-images.adoc}.
 }
 
 === Investigate
@@ -296,15 +355,17 @@ Complete the last section on @printable-exercise{plotting-images.adoc}
 
 Recall this image of a _projection_ of a 3D object into two, 2-dimensional planes. Both the square shadow and the circle shadow are showing us a part of the story, but the _real_ shape is 3-dimensional (3D).
 
-*The same is true for our dataset!*
+The same is true of our dataset! Our images are described by 3 different colors (Red, Blue, and Green).
 
-Our images are described by 3 different colors (Red, Blue, and Green), so our "Color Space" has three dimensions! Like the shadows in this image, our two scatter plots in "Blue-v-Green Space" and "Blue-v-Red Space" are just _projections_ of 3D points onto the Z-X and Z-Y planes.
+Like the shadows in this image, our two scatter plots in "Blue-v-Green Space" and "Blue-v-Red Space" are just _projections_ of 3D points onto the Z-X and Z-Y planes.
+
+@lesson-point{Our "Color-Space" is three dimensional. Scatter plots only show the data from one point of view.}
 
 @slidebreak{Investigate}
 
 @lesson-instruction{
 - Open the @online-exercise{https://www.desmos.com/3d/qmu6fmrs6h, RGB Image Plot} in Desmos
-- The table at the top of the panel contains the Red, Green, and Blue values from our `model` table
+- The table at the top of the panel contains the Red, Green, and Blue values from our `computed` table
 - The scatter-plot for Blue-v-Green is visible against the "back wall" of the cube, with each image plotted as a *green* dot. Compare it to the Pyret scatter plot on @printable-exercise{plotting-images.adoc}.
 - Complete the first two sections on @printable-exercise{from-2-to-3.adoc}.
 }
@@ -312,29 +373,37 @@ Our images are described by 3 different colors (Red, Blue, and Green), so our "C
 @slidebreak{InvestigateR}
 @right{@image{images/3d-rgb.webp, 300}}
 
-The distance formula works in 3 dimensions too! In fact, it works in _any number of dimensions_ we want -- we just can't see more than 3 with our eyes. But *the math holds true*, and we can use `distance-similarity` with any number of attributes we want.
+We can't see more than 3 dimensions at time with our eyes. But the computer can compute distance in many dimensions. *The math holds true*, and we can use `distance-similarity`, with any number of attributes we want.
 
 @slidebreak{Investigate}
 
 @lesson-instruction{
-- Try `distance-similarity(model, "grass1", [list: "red", "green", "blue"])`, and see how well this works at finding the similarity between images with *grass*.
+Let's see how well `distance-similarity` identifies similarity in our 3D Colorspace.
+
+- Evaluate `distance-similarity(computed, "grass", [list: "red", "green", "blue"])` to see how effectively it computes similarity between images with *grass*.
 - Try it with ID `"snow2"`, to see how well it works at finding the similarity between images with *snow*.
 - Try it with ID `"red2"`, to see how well it works at finding the similarity between images with *red squares*.
-- Try it with ID `"grass2"`, to see how well it works at finding the similarity between images with *sun*.
-- Try adding _other_ columns! Can you come up with a higher-dimensional space that works for all four groups?
+- Try it with ID `"grass-sun"`, to see how well it works at finding the similarity between images with *sun*.
+- Can you identify a higher-dimensional space that works well for all four groups? Try adding other columns!
 }
 
 @slidebreak{Investigate}
 
 Overall, `distance-similarity` is a huge upgrade compared to the "are they identical?" question. But it suffers from two major problems:
 
-- It focuses on _count_, rather than _proportion_: For example, a giant mountain photo has far more red pixels than a tiny red square—and thus appears less 'similar' by this metric—even if red makes up only a tiny fraction of the mountain image.
+- It focuses on _count_, rather than _proportion_: For example, a giant mountain photo has far more red pixels than a tiny red square—and thus appears more 'similar' to the big red square than the tiny square does by this metric—even if red makes up only a tiny fraction of the mountain image.
 - It ignores _orientation_: Humans see two "mostly red" images as similar, but the distance formula doesn't. It only calculates the space between points, ignoring where they _actually lie on the graph_.
 
 === Synthesize
 @slidebreak{Synthesize}
-TODO
 
+@QandA{
+@Q{What role does each column of our table play in defining the space the images are compared in?}
+@A{Each column is connected to an axis.}
+
+@Q{Scatter plots are 2D and our data has many more dimensions. Do the scatter plots really tell us about our data?}
+@A{Yes! Just as we can't see a whole sculpture from a single point of view and whatever angle we view it from tells us a lot about the sculpture, the scatter plots are missing information about other columns of data, but can tell us a lot about the relationships of the data in the plane we are viewing it in.}
+}
 
 == Measuring Angles in "Image Space"
 @objective{ai-similarity}
@@ -354,7 +423,10 @@ Let's try another form of similarity, which relies on the idea that "red-dominan
 @slidebreak{LaunchR}
 @right{@image{images/3-d-comparison-w-lines.png, 300}}
 
-We can draw lines (called "rays") from the origin to any of our image-points in space. Instead of computing the distance between these points, we can compute the _angle between these lines_. Two points that are identical will have an angle of *0°*, meaning "the greatest possible similarity". Two points that fall on totally different axes (all-blue v. all-red, for example) will have an angle of *90°*, meaning "the least possible similarity."
+We can draw lines (called "rays") from the origin to any of our image-points in space. Instead of computing the distance between these points, we can compute the _angle between these lines_.
+
+- Two points that are identical will have an angle of *0°*, meaning "the greatest possible similarity".
+- Two points that fall on totally different axes (all-blue v. all-red, for example) will have an angle of *90°*, meaning "the least possible similarity."
 
 @slidebreak{Launch}
 This solves both of the problems with `distance-similarity`:
@@ -369,16 +441,15 @@ This solves both of the problems with `distance-similarity`:
 @A{No! One limitation of angle similarity is that the angle will *always be zero* unless we compare documents across multiple dimensions.}
 
 @Q{Are Images the only things we can plot in 3-dimensional space and use angle-similarity for?}
-@A{No! We could plot anything with quantitative attributes}
+@A{No! We could plot any data with quantitative attributes.}
+}
+
+@lesson-instruction{
+- Let's use our knowledge of angles to estimate the angle similarity of some points in a 2D color space.
+- Complete @printable-exercise{angle-similarity.adoc}.
 }
 
 === Investigate
-@slidebreak{Investigate}
-@lesson-instruction{
-- Let's get some practice calculating angle-similarity!
-- Complete @printable-exercise{angle-similarity.adoc}
-}
-
 @slidebreak{Investigate}
 
 Of course, Pyret has a function for angle similarity, too!
@@ -396,13 +467,16 @@ Complete @printable-exercise{angle-similarity-pyret.adoc}
 Is measuring angles closer to human perception than measuring distance?
 
 @lesson-instruction{
-- Try `angle-similarity(model, "grass1", [list: "red", "green", "blue"])`, and see how well this works at finding the similarity between images with *grass*.
+- Try `angle-similarity(computed, "grass", [list: "red", "green", "blue"])`, and see how well this works at finding the similarity between images with *grass*.
 - Try it again with ID `"snow2"`, to see how well it works at finding the similarity between images with *snow*.
 - Try it again with ID `"red2"`, to see how well it works at finding the similarity between images with *red squares*.
-- Try it again with ID `"sun2"`, to see how well it works at finding the similarity between images with *sun*.
-- Is it useful to add our `WIDTH` and `HEIGHT` columns? Why or why not?
-
+- Try it again with ID `"sunset"`, to see how well it works at finding the similarity between images with *sun*.
+- Explore whether or not it's useful to add our `WIDTH` and `HEIGHT` columns.
 }
+
+@slidebreak{Investigate}
+@ifslide{@right{@image{images/3-d-comparison-w-lines.png, 300}}}
+Angle similarity really helped us improve the machines' "perception" of what makes two images similar. Given one image, we're able to produce much better search results! Thinking back to the notion of search as a *recommendation system*, you could also imagine doing the same with other kinds of data: for example picking a song and asking for similar recommendations!
 
 @strategy{Isn't this Middle School Math?!}{
 Yes, it is!
@@ -421,10 +495,6 @@ For the purposes of this curriculum, you can safely ignore the difference betwee
 }
 
 @slidebreak{Investigate}
-@ifslide{@right{@image{images/3-d-comparison-w-lines.png, 300}}}
-Angle similarity really helped us improve the machines' "perception" of what makes two images similar. Given one image, we're able to produce much better search results! Thinking back to the notion of search as a *recommendation system*, you could also imagine doing the same with other kinds of data: for example picking a song and asking for similar recommendations!
-
-@slidebreak{Investigate}
 There are still a lot of limitations to our system, however:
 
 - We can only _search by document_, where we pick an image and find similar ones.
@@ -435,19 +505,7 @@ There are still a lot of limitations to our system, however:
 @slidebreak{InvestigateR}
 @right{@image{images/computer-vision.jpg, 400}}
 
-Some ML models are capable of recognizing parts of an image ("person", "car", etc.). This belong to a class of ML algorithms called "Computer Vision", which relies heavily on more advanced -- and computationally intensive --concepts that we won't cover here. We're going to use our human brains to see these elements in our images! And then explore whether a Data Driven Algorithm can help us re-create Image Search technologies, even without the fancy Computer Vision tech.
-
-@slidebreak{Launch}
-
-@lesson-instruction{
-- Return to lines 26-40 of our Definitions Area.
-  * For now, none of the images are liked, disliked, or tagged. By defining the table here in the code, we've set ourselves up to be able to make changes.
-- Choose the *two mountain images you like the best*, and change the values for those images in the `LIKED` colum from `false` to `true`.
-- In the `TAGS` column:
-  * change `""` to `"snow"`, for the snowy images.
-  * change `""` to `"sun"` for the three images with sunsets or sunrises.
-- Then click "Run" to load your changes.
-}
+Some ML systems are capable of recognizing parts of an image ("person", "car", etc.). This belong to a class of ML algorithms called "Computer Vision", which relies heavily on more advanced -- and computationally intensive --concepts that we won't cover here. We're going to use our human brains to see these elements in our images! And then explore whether a Data Driven Algorithm can help us re-create Image Search technologies, even without the fancy Computer Vision tech.
 
 === Synthesize
 

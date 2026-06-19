@@ -14,7 +14,7 @@
 .highlight-diagonal tr:nth-child(4) td:nth-child(5),
 .highlight-diagonal tr:nth-child(5) td:nth-child(6) {
   background: var(--bs-secondary-lighter-supernova) !important;
-  color: white !important;
+  color: black !important;
   font-weight: bold;
 }
 </style>
@@ -197,9 +197,47 @@ Students learn about confusion matrices, and use Pyret to generate them from cla
 
 === Launch
 @slidebreak{Launch}
-How do we know if a @vocab{decision tree} makes a good @vocab{classifier} or not? Using the `classify` function only tells us how many we got right, and how many we got wrong.
+Tests for the flu, measles, etc are all forms of @vocab{classifiers}! When looking at any of these tests, public health officials need to think about the following:
 
-It's not enough to know that a classifier messed up 6 times! Data Scientists and Machine Language Engineers want to know what percentage of the time the classifier did what it was supposed to and _which mistakes_ it made!
+[.highlight-diagonal, cols="<1a,^2a,^2a", stripes="none", options="header"]
+|===
+| Actual Status
+| Predicted Positive
+| Predicted Negative
+
+| Infected
+| *True Positive:* +
+   The test says someone is infected, and they _actually are_
+| *False Positive:* +
+   The test says someone is infected, but they aren't
+
+| Not Infected
+| *False Positive:* +
+   The test says someone is healthy, but they're sick
+| *True Negative:* +
+   The test says someone is healthy, and they _actually are_
+|===
+
+There are two ways for the test to be right, and two ways for it to be wrong.
+
+@slidebreak{Launch}
+Suppose we have an outbreak of a really deadly, highly-contagious disease, and two possible tests to choose from.
+
+- Test A has tons of *false positives:* It will almost always do the right thing if you're sick, but a lot of healthy people get told they are infected
+- Test B has tons of *false negatives:* It will almost always do the right thing if you're healthy, but a lot of sick people get told they are fine
+
+@lesson-instruction{
+- YOU are in the minister of public health, for a country struggling with an outbreak of this disease.
+- Which test do you choose, for your country?
+- Would you pick a different test for a less contagious disease?
+}
+
+@teacher{
+Give students ample time to discuss. What matters isn't that the class comes to a conclusion, but that students begin to see how it's not simply a matter of "how often is the test accurate?", but instead "how often is the test accurate in _which ways_?"
+}
+
+@slidebreak{Launch}
+This real-world example makes it clear that it's not enough to simply say "the classifier was right half the time."
 
 @QandA{
 @Q{Out of the 5 cats in this dataset, how many did our `tail-classifier` classify _correctly_?}
@@ -217,7 +255,7 @@ It's not enough to know that a classifier messed up 6 times! Data Scientists and
 
 @slidebreak{Launch}
 
-The reports Data Scientists use to understand how "good" a classifier is are called @vocab{confusion matrices}. A @vocab{confusion matrix} typically shows _ratios:_ 
+The reports Data Scientists (and public health officials!) use to understand how "good" a classifier is are called @vocab{confusion matrices}. A @vocab{confusion matrix} typically shows _ratios:_
 
 - 0-out-of-4 dogs becomes 0% (0 in decimal form)
 - 2-out-of-2 lizards becomes 100% or (1)
@@ -295,7 +333,7 @@ end
 @slidebreak{Investigate}
 
 @indented{
-[.data-table.highlight-diagonal, cols="6a,^7a,^7a,^7a,^7a,^7a", options="header", ]
+[.data-table.highlight-diagonal, cols="6a,^7a,^7a,^7a,^7a,^7a", options="header"]
 |===
 |actual-species|predicted-cat|predicted-dog|predicted-lizard|predicted-snail|predicted-tarantula
 |"cat"         |      1      |      0      |       0        |       0       |       0
@@ -334,6 +372,15 @@ The "correct scores" are shown in the diagonal, running from top-left to bottom-
 
 @Q{In your own words, describe what a confusion matrix is.}  
 }
+
+@slidebreak{Synthesize}
+@lesson-point{All models are wrong. Some are useful.}
+
+@QandA{
+@A{When is a Decision Tree wrong?}
+@A{When is a Decision Tree useful?}
+}
+
 
 @strategy{Coming Soon!}{
 

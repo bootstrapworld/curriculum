@@ -3,11 +3,36 @@
 <style>
 /* We want the cell contents centered, but the automnum forced to the top-left */
 div#body td .autonum { position: absolute; top: 1.25em; left: 1em; }
+
+.variables img { width: 95%; }
+.plots img { width: 100%; }
 </style>
 ++++
 
+*There are four explanatory variables in our dataset:*
+
+[.variables, cols="^1,^1,^1,^1", stripes="none", frame="none"]
+|===
+| *Curve* +
+  @image{../images/curve.png} +
+  The curvature of the road in front of the car
+
+| *Speed* +
+  @image{../images/speed.png} +
+  How fast the car is moving
+
+| *Offset* +
+  @image{../images/offset.png} +
+  How far the car is from the center line
+
+| *Skew* +
+  @image{../images/skew.png} +
+  Angle of the car relative to the road
+|===
+
+
 @link-instructions{
-Make four scatter plots of `steering-angle` v. each of the possible explanatory variables in @starter-file{self-driving}.
+Make a scatter plot of `steering-angle` v. each of these variables in @starter-file{self-driving}.
 }
 
 @vspace{1ex}
@@ -16,9 +41,8 @@ For each of the plots below:
 
 - *Match* them to the scatter plots you made in Pyret to fill in the titles with the missing variables
 - *Draw* what you think the model (line of best fit) would look like and *estimate* its slope and y-intercept
-- When you're finished, choose the two predictive models that you think will make the best predictor of `steering-angle`.
 
-[.FillVerticalSpace, cols="^.^1a,^.^1a", stripes="none", frame="none"]
+[.FillVerticalSpace.plots, cols="^.^1a,^.^1a", stripes="none", frame="none"]
 |===
 | @n *@fitb{8em}{@ifsoln{`skew`}} v. `steering-angle`*
 @image{../images/steering-v-skew.png}
@@ -38,5 +62,5 @@ For each of the plots below:
 |===
 
 
-@n Why two models do you think will be the best predictors of `steering-angle`, and why? @fitb{}{} +
-@blanklines{4}{}
+
+@n Why two models do you think will be the best predictors of `steering-angle`? @fitb{}{}

@@ -1,0 +1,66 @@
+= Making Predictions with AI
+++++
+<style>
+th, .paragraph:has(img) *  { text-align: center !important; }
+img { max-height: 200px; margin: 10px auto; }
+</style>
+++++
+
+One of the biggest jobs AI does is *prediction*: given an input, predict an output. Prediction comes in two flavors, depending on what kind of question we are trying to answer.
+
+[cols="5a, 1a, 5a", frame="none", grid="none", options="header", stripes="none"]
+|===
+| Classification ("Which One?")
+|
+| Regression ("How Much?")
+
+|
+A @vocab{classifier} predicts *which category* an input belongs to (_"Is animal this a dog, a cat, or a snail?"_). This unit covers @vocab{decision trees}, a common tool for classification.
+
+@image{../images/optimal-animals-tree.png}
+
+- These trees are composed of @vocab{decision nodes}, each of which asks a question to narrow down the possible category.
+- Each question narrows the possibilities until only one prediction remains (called a @vocab{leaf node})
+- *Some questions are better than others.* A good split divides the data into the _neatest, most organized piles_ -- ideally each pile is all one category.
+- A @vocab{confusion matrix} shows the accuracy of a classifier _per category_ -- so we can see exactly _which_ mistakes a model makes, not just an overall score.
+
+(If you've ever played "I Spy", you've built a Decision Tree yourself!)
+|
+
+|
+@vocab{Regression} predicts a _number_ instead of a category (_"How many degrees to turn the steering wheel?"_ +). The result of regression is a _function_ that maps inputs to outputs.
+
+@vspace{1ex}
+
+@image{../images/steering-v-curve-lr.png}
+
+- With *one* explanatory variable, the model is a *line of best fit* in 2D.
+- With *two* variables, that line becomes a *plane of best fit* in 3D, with a *slope* for each input variable. (This gets more exotic in higher dimensions, but the principles are the same!)
+- We compare how closely different models fit the data using statistical measures of fit like @math{S-value}.
+- The math we already know maps directly onto AI vocabulary: a *variable* is a *parameter*, and a *slope* is a *weight*. Multiple regression with many weighted inputs is the engine behind a lot of real AI systems.
+|===
+
+
+== Supervised Learning
+Whether we're predicting a category or a value, these models are built from *training data*.
+
+- @vocab{Supervised learning} is when humans create a corpus of labeled examples -- known inputs with known answers (think "answer key") -- and the algorithm tries to find the pattern in these examples in order to make predictions about _new_ inputs it has never seen.
+- @vocab{Training} is the computation that extracts those patterns, transforming a corpus into a model. This is typically a *lossy* process: we aggregate the data and lose some of the original detail along the way. The model is a _summary_ of the dataset, not a copy.
+
+Every model in this unit -- decision tree or regression -- is built the same three-step way:
+
+@indented{
+(1) *Record* a corpus of human-labeled examples: known inputs paired with known answers.
+
+(2) *Learn* a model that captures the pattern in those examples. (This step is the "training".)
+
+(3) *Apply* the model to brand-new inputs it has never seen, to predict their answers.
+}
+
+@vspace{1ex}
+
+@lesson-point{A model that fits its training data perfectly isn't always better!}
+
+@vspace{1ex}
+
+@vocab{Over-fitting} happens when a model "memorizes" the noise in its training data -- often from highly variable quantitative columns -- and then performs badly on new data it hasn't seen. The goal isn't to memorize the past; it's to *predict the future*.
