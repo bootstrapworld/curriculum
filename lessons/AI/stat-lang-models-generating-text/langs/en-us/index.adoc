@@ -341,11 +341,11 @@ We've created helper functions for this, too:
 
 @show{(contract "completions" '((model Table) (start String)) "Table")}
 
-@show{(contract "choose-completion" '((model Table) (start String)) "String")}
+@show{(contract "choose-completion" '((model Table) (start String) (n Number)) "String")}
 
 - We can use these contract to find all the possible completions for a starting string: `completions(c, "swallowed the")`
 
-- Or to choose one completion at random: `choose-completion(c, "swallowed the")`
+- Or to choose the next `n` words at random: `choose-completion(c, "swallowed the", 1)` chooses one word; increase the `1` to generate more at once
 
 
 @slidebreak{Investigate}
