@@ -85,6 +85,18 @@
         #status { display: none; }
         #status, label, progress { width: 100%; }
         .pathway_external_links li { margin-top: 25px !important; }
+
+    #copyBtn {
+      text-align: center;
+        border-radius: 100px;
+        background-color: var(--bs-primary-light-blue-translucent);
+        margin-top: 0;
+        margin-bottom: 0.75em;
+      margin-left: 1em;
+        padding: 0.35em 1em;
+    }
+    #copyBtn:hover { background-color: var(--bs-primary-light-blue); }
+
     </style>
 
     <!-- Latest compiled and minified CSS -->
@@ -96,11 +108,10 @@
     <script defer src="https://unpkg.com/downloadjs@1.4.7"></script>
 
 
-    <script defer src="lib/dependency-graph.js"></script>
-    <script defer src="lib/pathway-tocs.js"></script>
-    <script defer src="lib/page-render.js"></script>
-    <script defer src="lib/graph-pages.js"></script>
-    <script defer src="lib/makeWorkbook.js"></script>
+    <script src="lib/dependency-graph.js"></script>
+    <script src="lib/pathway-tocs.js"></script>
+    <script src="lib/bootstraplesson.js"></script>
+    <script src="lib/makeWorkbook.js"></script>
 
     <script>
     let url = new URL(location);
@@ -437,7 +448,24 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   <div id="body" class="narrativepage article canBeLongerThanAPage">
         <div id="header">
-            <h1 id="pathwayTitle" style="border-bottom: none;" onClick="makeEditable(this)" onBlur="save(this)"></h1>
+            <h1 id="pathwayTitle" style="border-bottom: none; display: inline;" onClick="makeEditable(this)" onBlur="save(this)"></h1>
+<button id="copyBtn" onclick="copyURL()">
+<svg data-component="Octicon" aria-hidden="true" focusable="false" class="octicon octicon-copy" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" display="inline-block" overflow="visible" style="vertical-align:text-bottom"><path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path></svg>
+</button>
+
+<script>
+async function copyURL() {
+  const btn = document.getElementById('copyBtn');
+  try {
+    await navigator.clipboard.writeText(window.location.href);
+    btn.textContent = 'Copied!';
+    setTimeout(() => { btn.textContent = 'Copy URL'; }, 1500);
+  } catch (err) {
+    btn.textContent = 'Failed';
+    console.error(err);
+  }
+}
+</script>
         </div>
         <div id="content">
             <div id="preamble_disabled" class="lessonSummary">
@@ -526,7 +554,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div id="sidebar" class="x-col e4468439224895391-e5 m17zxgn2tjtr-d m17zxgn2tjtr-f m17zxgn2tjtr-g" style="padding-bottom: 48px;">
 
   <div class="x-div e4468439224895391-e6 m17zxgn2tjtr-r m17zxgn2tjtr-s m17zxgn2tjtr-t m17zxgn2tjtr-u m17zxgn2tjtr-v m17zxgn2tjtr-w m17zxgn2tjtr-x m17zxgn2tjtr-y m17zxgn2tjtr-z">
-    <div class="x-text x-content e4468439224895391-e7 m17zxgn2tjtr-j m17zxgn2tjtr-l m17zxgn2tjtr-m m17zxgn2tjtr-n">SEMESTER_YEAR</div>
+    <div class="x-text x-content e4468439224895391-e7 m17zxgn2tjtr-j m17zxgn2tjtr-l m17zxgn2tjtr-m m17zxgn2tjtr-n">fall2026</div>
   </div>
 
   <div class="x-div e4468439224895391-e8 m17zxgn2tjtr-v m17zxgn2tjtr-w m17zxgn2tjtr-x m17zxgn2tjtr-y m17zxgn2tjtr-10">
