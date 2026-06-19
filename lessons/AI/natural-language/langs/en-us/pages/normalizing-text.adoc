@@ -1,37 +1,25 @@
 = Normalizing Text
 
-++++
-<style>
-/* Shrink vertical spacing on fitb and fitbruby */
-.fitbruby{padding-top: 0.5rem;}
-.fitb{padding-top: 0.5rem;}
-</style>
-++++
-
 @link-instructions{This page is designed for use with @starter-file{ai-text2}.}
 
-== What do Humans know about text that Machines don't?
+== Counting Badgers
 
 @vspace{1ex}
 
 @indented{_The American badger is a North American badger similar in appearance to the European badger, although not closely related. It is found in the western, central, and northeastern United States, northern Mexico, and south-central Canada to certain areas of southwestern British Columbia. The American badger's habitat is typified by open grasslands with available prey (such as mice, squirrels, and groundhogs)._}
 
-@n How many badger references can you find in this essay? @fitb{}{@ifsoln{4}}
+@n How many times does the word "badger" appear in this essay? @fitb{}{@ifsoln{4}}
 
-@n Evaluate `computed` in the Interactions Area and scroll right to see how many badger references our bag of words counted. @fitb{}{@ifsoln{2}}
+@n Evaluate `computed` in the Interactions Area and find the `badger` column. How many did Pyret find? @fitb{}{@ifsoln{2}}
 
-@n Why didn't the bag of words count the same number of `badger` references in the essay as you did? @fitb{}{} +
-@blanklines{1}{@ifsoln{because it counted `badger's` and `badger,` as separate words.}}
+@n Why didn't Pyret find the same number of `badger` mentions that you did? @fitb{}{} +
+@fitb{}{@ifsoln{because it counted `badger's` and `badger,` as separate words.}}
 
-@n How could we improve our bag of words model so that its counts would match ours better? _Try to generate as many suggestions as you can. Scroll through the table and look for other examples of words that the model counted as separate that humans would count as the same._
+@n What could Pyret do differently, to find all the badger references that you did?  _Try to generate as many suggestions as you can. Look for other examples in the table where a word was improperly counted as separate._
 
 @blanklines{2}{@ifsoln{remove punctuation (`.`, `,`, `'s`), remove capitalization, remove plurals}}
 
-@n In addition to being able to recognize multiple forms of a word as the same, when humans scan text for similarity, there are lots of words that we don't pay much attention to. We call these words @vocab{stop words}. 
-
-@vspace{1ex}
-
-Fill in each of the 10 blanks below with a word from this essay that you would expect to find in most essays and we can safely ignore as unlikely to tell us much about how similar this essay is to another. +
+@n When humans scan text for similarity, there are many words that we tune out because they're used all the time. We call these @vocab{stop words}. Find 10 @vocab{stop words} in the badger essay, to fill in the blanks below: +
 @hspace{1em}
 @fitb{5em}{@ifsoln{is}}  
 @fitb{5em}{@ifsoln{a}}  
@@ -44,7 +32,7 @@ Fill in each of the 10 blanks below with a word from this essay that you would e
 @fitb{5em}{@ifsoln{with}}  
 @fitb{5em}{@ifsoln{as}}  
 
-== Pyret functions for "cleaning" text data so that computations are more related to human-noticings
+== Normalizing Text in Pyret
 @link-instructions{Evaluate `vacation` in the Interactions Area.}
 
 @vspace{1ex}
@@ -56,20 +44,19 @@ Describe them: @fitb{}{@ifsoln{It changes all 4 capital letters to lowercase let
 @n Evaluate `remove-punct(vacation)`. How many changes does `remove-punct` make to the original string? @fitb{}{@ifsoln{3}} +
 Describe them: @fitb{}{@ifsoln{It removes all of the periods, exclamation points.}}
 
-@n Evaluate `remove-stops(vacation)`. Mark all of the changes on the string at the top. 
-How many changes does `remove-stops` make to the original string? @fitb{3em}{@ifsoln{12}}  Describe what happened: @fitb{}{} +
+@n Evaluate `remove-stop-words(vacation)`. Mark all of the changes on the string at the top.
+How many changes does `remove-stop-words` make to the original string? @fitb{3em}{@ifsoln{12}}  Describe what happened: @fitb{}{} +
 @fitb{}{@ifsoln{It removed a lot of little words. What's left is more concise, but doesn't completely make sense.}}
 
-@star Write the code to `remove-punct` and make text `lowercase` at the same time: @fitb{}{@ifsoln{`remove-punct(lowercase(vacation))`}}
+@star What code will take `vacation` and remove punctuation _and_ convert to lowercase? @fitb{}{@ifsoln{`remove-punct(lowercase(vacation))`}}
 
-== Why Normalizing Data Matters
-
-@n Evaluate `all-cols-similarity(computed, "?")`. Before normalizing the data, 
+== Why Normalizing Matters
+@n Evaluate `all-cols-similarity(computed, "?")`. *Before normalizing the data...*
 
 - which essay is most similar to `?` @fitb{3em}{@ifsoln{`E`}}.  What's the angle-similarity between them? @fitb{}{@ifsoln{30°}}
 - what's the range of angle-similarity measures between `?` and the other documents? @fitb{}{@ifsoln{63° to 80°}}
 
-@n Evaluate `all-cols-similarity(norm-computed, "?")`. After normalizing the data,
+@n Evaluate `all-cols-similarity(norm-computed, "?")`. *After normalizing the data...*
 
 - which essay is most similar to `?` @fitb{3em}{@ifsoln{`E`}}.  What's the angle-similarity between them? @fitb{}{@ifsoln{0°}}
 - what's the range of angle-similarity measures between `?` and the other documents? @fitb{}{@ifsoln{88° to 90°}}

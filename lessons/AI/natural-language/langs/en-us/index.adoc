@@ -52,7 +52,7 @@ We can *plot documents in space* and use *geometry* to calculate something appro
 
 - In our @opt-starter-file{ai-image}, we generated numeric attributes like `SYMMETRY`, `LUMINANCE`, and `ENTROPY`
 - We also generated very long Strings of `COLOR-NAMES`, listing each of the dominant primary colors in pixel order.
-- We used a @vocab{bag of words model} to turn our ordered string of colors into an _un-ordered_ count of the number of `red`-, `green`-, and `blue`-dominant pixels, allowing us to plot images in a 3-dimensional "color-space"
+- For each image, we turned our ordered string of colors into a @vocab{bag of words model}: an _un-ordered_ count of the number of `red`-, `green`-, and `blue`-dominant pixels, allowing us to plot images in a 3-dimensional "color-space"
 
 @slidebreak{Launch}
 @lesson-instruction{
@@ -90,7 +90,7 @@ Recall our angle similarity function.
 === Investigate
 @slidebreak{Investigate}
 
-As we know, Pyret can't think about these documents. It can only compute possible attributes from the essays and compare their similarity using angles or distance.
+As we know, Pyret doesn't understand anything about what these documents _mean_. But it _can_ compute various attributes from the documents, and compare their similarity using angles or distance.
 
 @QandA{
 @Q{What ideas do you have for quantitative columns Pyret might be able to compute about these documents?}
@@ -144,9 +144,9 @@ As we know, Pyret can't think about these documents. It can only compute possibl
 
 We can use `angle-similarity`, `image-scatter-plot` and `image-dot-plot` to explore relationships in our new columns.
 
-And Pyret also has another similarity function that _uses all the numeric columns_ to compute the angle-similarity to a given Row.
+Pyret also has another similarity function that _uses all the numeric columns_ to compute the angle-similarity to a given Row.
 
-@hspace{1em}@show{(contract 'all-cols-similarity '((table-name Table) ("row ID" String)) "Table")}
+@hspace{1em}@show{(contract 'all-cols-similarity '((table-name Table) ("row ID" String)) "Table")}
 
 For example: `all-cols-similarity(decorated, "?")` will find the angle-similarity of every document to our mystery row `"?"`, using every column containing numbers in our `decorated` table.
 
@@ -200,7 +200,7 @@ Our best tool for comparing the actual content of the texts is to compute their 
 @A{There are a lot of columns in the `computed` table! And most of them either have similar values in every row or no overlapping values at all!}
 @A{When we computed a bag of words for our images, there were only 3 columns and they were relevant to every image.}
 
-@Q{If our `computed` table has 365 columns in total, how many dimensions does our `computed` bag of words model have?}
+@Q{If our `computed` table has 365 columns _in total_, how many dimensions does our `computed` bag of words model have?}
 @A{360. Because 5 of our columns aren't quantitative.}
 }
 
@@ -223,7 +223,7 @@ Students explore the importance of @vocab{data normalization}, when we organize 
 === Launch
 @slidebreak{Launch}
 
-Now that we're using a @vocab{bag of words model} for text that's more complex than our long lists of `red`, `blue`, and `green` pixels, we're ending up with a lot of columns, many of which don't contain much useful information.
+Now that we're using a @vocab{bag of words model} for text that's more complex than our long lists of `red`, `blue`, and `green` pixels, we're ending up with a _lot_ of columns, many of which don't contain much useful information.
 
 @lesson-instruction{
 - Let's take a moment to consider *what humans know about text that machines don't*.
@@ -255,12 +255,12 @@ Now that we're using a @vocab{bag of words model} for text that's more complex t
 
 Our data is "messy".
 
-Inconsistent *capitalization* and *punctuation* prevent the computer from recognizing words as the same. As a result:
+Inconsistent *capitalization* and *punctuation* prevent the computer from recognizing the same word whenever it's used. As a result:
 
-. Our counts for these word are off, so we're not seeing how common they really are.
+. Our counts for these words are off, so we're not seeing how common they really are.
 . We're creating extra, meaningless dimensions in which text gets compared!
 
-The presence of @vocab{stop words} might lead the computer to falsely compute texts as similar.
+The near-universal presence of words like "is", "a", "the", etc. (known as @vocab{stop words}) in every essay is also a problem:
 
 . It creates many dimensions in which the essays are close together.
 . Those dimensions raise the similarity score between two essays simply because they're both English! 
@@ -277,7 +277,7 @@ Machine Learning Engineers and Data Scientists care a lot about @vocab{normalizi
 
 @hspace{1em}@show{(contract "remove-punct" '("String") "String")}
 
-@hspace{1em}@show{(contract "remove-stops" '("String") "String")}
+@hspace{1em}@show{(contract "remove-stop-words" '("String") "String")}
 
 @slidebreak{Investigate}
 
@@ -346,12 +346,9 @@ Machine Learning Engineers and Data Scientists care a lot about @vocab{normalizi
 @A{standardize units: do we want to go with 5'8" or 68" or 1.72m or 172cm?}
 }
 
-@teacher{
-Words are just one kind of token that can be used by a language and processed by a @vocab{bag of words model}. Musical tokens might be notes. Pyret tokens could be simple values (e.g. Number, String, Boolean) or syntax (e.g. `fun`, `end`, `if-else`). In a chess game the tokens might be moves in the game.
-}
-
 == Detecting Plagiarism
 @objective{ai-plagiarism-detector-ethics}
+
 === Overview
 Armed with their similarity detection, students explore the how that algorithm can be used to detect plagiarism. Now that they know how it works, they consider limitations of the algorithm and when it might not be ethical for teachers to use it.
 
