@@ -48,6 +48,13 @@ local function get_proglang(fhtml_cached)
   end
 end
 
+-- Narrative/resource pages live under distribution/<lang>/courses/<pathway>/...;
+-- pull the <pathway> segment out of the path. Returns nil for lesson plans and
+-- other pages that aren't tied to a single pathway.
+local function get_pathway(fhtml_cached)
+  return fhtml_cached:match('/courses/([^/]+)/')
+end
+
 local function postproc(fhtml_cached, tipe)
   -- pre-compute tipe flags once
   local is_shtml       = tipe == 'lessonplan' or tipe == 'pathwaynarrative' or tipe == 'pathwayresource'
@@ -365,7 +372,14 @@ local function postproc(fhtml_cached, tipe)
         o:write('<script defer src="' ..local_dist_root_dir .. 'lib/graph-pages.js"></script>\n')
       end
       o:write('<script defer src="' ..local_dist_root_dir .. 'lib/page-render.js"></script>\n')
-      o:write('<script>var pathway;</script>\n')
+      -- Expose the page's pathway to scripts. Course pages (narrative/resource)
+      -- carry it in their path; elsewhere it's left undefined (read from the URL).
+      local pathway = get_pathway(fhtml_cached)
+      if pathway then
+        o:write('<script>var pathway = "' .. pathway .. '";</script>\n')
+      else
+        o:write('<script>var pathway;</script>\n')
+      end
     end
     --
     if add_mathjax_p then
