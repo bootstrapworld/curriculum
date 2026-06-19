@@ -57,39 +57,39 @@ We're going to explore how one form of @vocab{supervised learning} -- regression
 
 Teaching an AI what it means to steer requires @vocab{training}. Here's what that training entails:
 
-(1) A person drives the vehicle
+*A person drives the vehicle*
 
 - In @vocab{supervised learning}, the human driver is often called the _supervisor_
 - The supervisor demonstrates the correct behavior (e.g. which direction the steering wheel should be turned)
 
-(2) Many times each second, car records...
+*Many times each second, car records...*
 
 - information from many sensors around the car
 - the steering direction chosen by the driver at that moment
 
 @slidebreak{Launch}
 
-(3) The training data (@vocab{training corpus}) is be represented as an input-output table, with columns for sensor data as inputs and the correct steering angles as outputs.
+*The training data (@vocab{training corpus}) is be represented as an input-output table*, with columns for sensor data as inputs and the correct steering angles as outputs. For example:
 
 @indented{
-[cols="^.^1,^.^1", stripes="none", options="header"]
+[cols="^.^1,^.^1,^.^1", stripes="none", options="header"]
 |===
-| `curve`   | `speed`	| `steering-angle`
-| 0° 		|	45	 	|  	  0.02º
-| 70° 		|  	21 		|	 55.20º
-| -30° 		| 	56 		| 	-25.43º
+| `curve` | `speed`	| `steering-angle`
+|     1° 	|	  45	 	| 		0.02º
+|     4° 	|  	21 		|	  	55.20º
+|    -2° 	| 	56 		| 	 -25.43º
 |===
 }
 
 @slidebreak{Launch}
 
-(4) This dataset is used to generates a @vocab{function} for predicting the correct steering angle from the road image and obstacle distance.
+*This dataset is used to generate a @vocab{function} for predicting the correct steering angle from the sensor data.*
 
 @lesson-point{
-`curve` and `speed` are the @vocab{explanatory variables}. `steering-angle` is the @vocab{response variable}.
+In this example, `curve` and `speed` are @vocab{explanatory variables}. `steering-angle` is the @vocab{response variable}.
 }
 
-(5) After training is complete, a human pushes the "run" switch and the vehicle begins driving. As the car drives, it continuously evaluates its learned function to produce steering angles — just as the human driver did during training.
+*After training is complete, a human pushes the "run" switch and the vehicle begins driving!* As the car drives, it continuously evaluates its learned function to produce steering angles — just as the human driver did during training.
 
 @teacher{
 If you want your students to see an example of an early self-driving car (1989!) in action, now is a good time to view @link{https://www.youtube.com/watch?v=ntIczNQKfjQ, "this brief two-minute video"}.
@@ -197,15 +197,26 @@ In the @lesson-link{fitting-models} lesson, we learned that a relationship betwe
 
 In this case, our response variable is `steering-angle`: the number of degrees to turn the wheel. The training data has several columns that could serve as an explanatory variable.
 
-@slidebreak{Launch}
-[cols="^1a,^3a", options="header", stripes="none"]
+@slidebreak{Investigate}
+[cols="^1,^1,^1,^1", stripes="none", frame="none"]
 |===
-| Column       | What it measures
-| `speed`      | How fast the car is moving
-| `curve`      | How sharply the road is curving (positive = right, negative = left)
-| `skew`       | How far out of alignment the car's orientation is from the direction the road is headed
-| `offset`     | How far the car is from the center of the lane
+| *Curve* +
+  @image{images/curve.png} +
+  The curvature of the road in front of the car
+
+| *Speed* +
+  @image{images/speed.png} +
+  How fast the car is moving
+
+| *Offset* +
+  @image{images/offset.png} +
+  How far the car is from the center line
+
+| *Skew* +
+  @image{images/skew.png} +
+  Angle of the car relative to the road
 |===
+
 
 @QandA{
 @Q{Which of these do you expect to be the best predictor of steering angle, and why?}
@@ -375,8 +386,8 @@ We could write it by hand, but Pyret has exactly the right tool:
 For example: `regression-model-code(training-data, [list: "curve"], "steering-angle")`
 
 @slidebreak{Investigate}
-@right{@image{images/navlab.png, 300}}
 @lesson-instruction{
+@right{@image{images/navlab.png, 300}}
 - Complete @printable-exercise{lr-steering-angle.adoc}.
 - Copy and past the `curve-predictor` definition you just generated into your Definitions area and click "Run" to load it. Then evaluate `drive(curve-predictor)` in the Interactions Area.
 - Use `regression-model-code` to generate a row-consuming predictor for each of the other variables.
