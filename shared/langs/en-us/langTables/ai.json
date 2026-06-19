@@ -1,10 +1,120 @@
 {
   "AI": {
     "primitives": [
-      {"name": "classify",
-       "domain": [{"name": "table-name", "type":"Table"}, {"name": "column", "type": "String"}, {"name": "classifier-function", "type": "(Row -> String)"}],
-       "range": "Table",
-       "example-pyret": "classify(training, \"species\", tail-classifier)"}
+      {
+        "name": "classify",
+        "domain": [{"name": "table-name", "type":"Table"}, {"name": "column", "type": "String"}, {"name": "classifier-function", "type": "(Row -> String)"}],
+        "range": "Table",
+        "example-pyret": "classify(training, \"species\", tail-classifier)"
+      },
+      {
+        "name": "confusion-matrix",
+        "domain": [{"name": "table-name", "type":"Table"}, {"name": "answer-col", "type": "String"}, {"name": "classifier-function", "type": "(Row -> String)"}],
+        "range": "Table",
+        "example-pyret": "confusion-matrix(testing, \"species\", tail-classifier)"
+      },
+      {
+        "name": "build-tree",
+        "domain": [{"name": "table-name", "type":"Table"}, {"name": "split-cols", "type": "List<String>"}, {"name": "answer-col", "type": "String"}, {"name": "max-depth", "type": "Number"}],
+        "range": "DecisionTree",
+        "example-pyret": "build-tree(training, [list: \"swims\", \"mammal\", \"pounds\"], \"species\", 3)"
+      },
+      {
+        "name": "dt-code",
+        "domain": [{"name": "tree", "type":"DecisionTree"}],
+        "range": "String",
+        "example-pyret": "dt-code(tree-c1)"
+      },
+      {
+        "name": "regression-model-code",
+        "domain": [{"name": "table-name", "type":"Table"}, {"name": "explanatory-cols", "type": "List<String>"}, {"name": "response-col", "type": "String"}],
+        "range": "String",
+        "example-pyret": "regression-model-code(training-data, [list: \"curve\"], \"steering-angle\")"
+      },
+      {
+        "name": "regression-model-S",
+        "domain": [{"name": "table-name", "type":"Table"}, {"name": "explanatory-cols", "type": "List<String>"}, {"name": "response-col", "type": "String"}, {"name": "model", "type": "(Row -> Number)"}],
+        "range": "Number",
+        "example-pyret": "regression-model-S(training-data, [list: \"curve\"], \"steering-angle\", curve-skew-predictor)"
+      },
+      {
+        "name": "distance-similarity",
+        "domain": [{"name": "table-name", "type":"Table"}, {"name": "ID", "type": "String"}, {"name": "dimensions", "type": "List<String>"}],
+        "range": "Number",
+        "example-pyret": "distance-similarity(computed, \"grass\", [list: \"green\"])"
+      },
+      {
+        "name": "angle-similarity",
+        "domain": [{"name": "table-name", "type":"Table"}, {"name": "ID", "type": "String"}, {"name": "dimensions", "type": "List<String>"}],
+        "range": "Number",
+        "example-pyret": "distance-similarity(computed, \"grass\", [list: \"green\", \"blue\"])"
+      },
+      {
+        "name": "recommend",
+        "domain": [{"name": "table-name", "type":"Table"}],
+        "range": "Number",
+        "example-pyret": "recommend(computed, [list: \"green\", \"blue\"])"
+      },
+      {
+        "name": "search-by-tag",
+        "domain": [{"name": "table-name", "type":"Table"}, {"name": "tags", "type": "List<String>"}],
+        "range": "Number",
+        "example-pyret": "search-by-tag(computed, [list: \"green\", \"blue\"])"
+      },
+      {
+        "name": "all-cols-similarity",
+        "domain": [{"name": "table-name", "type":"Table"}, {"name": "ID", "type": "String"}],
+        "range": "Number",
+        "example-pyret": "all-cols-similarity(computed, \"W\")"
+      },
+      {
+        "name": "lowercase",
+        "domain": [{"name": "str", "type":"String"}],
+        "range": "String",
+        "example-pyret": "lowercase(\"SIIIIIX SEEEEVEN\")"
+      },
+      {
+        "name": "remove-punct",
+        "domain": [{"name": "str", "type":"String"}],
+        "range": "String",
+        "example-pyret": "remove-punct(\"Remove the exclamation mark!\")"
+      },
+      {
+        "name": "remove-stop-words",
+        "domain": [{"name": "str", "type":"String"}],
+        "range": "String",
+        "example-pyret": "remove-stop-words(\"The zebra is on the savannah\")"
+      },
+      {
+        "name": "build-lang-model",
+        "domain": [{"name": "corpus", "type":"String"}],
+        "range": "LanguageModel",
+        "example-pyret": "build-lang-model(corpus)"
+      },
+      {
+        "name": "next-word-probability",
+        "domain": [{"name": "model", "type": "LanguageModel"}, {"name": "start", "type":"String"}, {"name": "next", "type":"String"}],
+        "range": "Number",
+        "example-pyret": "next-word-probability(m, \"swallowed a\", \"fly\")"
+      },
+      {
+        "name": "completions",
+        "domain": [{"name": "model", "type": "LanguageModel"}, {"name": "start", "type": "String"}],
+        "range": "Table",
+        "example-pyret": "completions(m, \"swallowed the\")"
+      },
+      {
+        "name": "choose-completion",
+        "domain": [{"name": "model", "type":"LanguageModel"}, {"name": "start", "type":"String"}, {"name": "n", "type": "Number"}],
+        "range": "Table",
+        "example-pyret": "choose-completion(m, \"swallowed the\", 3)"
+      },
+      {
+        "name": "generate-from",
+        "domain": [{"name": "model", "type":"LanguageModel"}, {"name": "start", "type":"String"}],
+        "range": "Table",
+        "example-pyret": "generate-from(m, \"swallowed the\")"
+      }
      ],
      "values": ["This whole table is a table!"]
    }

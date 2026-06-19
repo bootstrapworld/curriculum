@@ -124,11 +124,11 @@ Computers can look at groups of pixels to compute values. For example:
 
 @lesson-instruction{
 - Return to the @starter-file{ai-image} and experiment for a moment. Look at
-  * `horizontal-symmetry` and `vertical-symmetry` for `red-sq`, `green-t`, and `half-and-half`
+  * `image-symmetry-horizontal` and `image-symmetry-vertical` for `red-sq`, `green-t`, and `half-and-half`
   * `image-luminance` for `black-sq` and `white-sq` and predict luminance for `half-and-half`
   * `image-entropy` for `half-and-half` and `white-sq` and predict luminance for `black-sq`
   * `image-to-color-list(square(5, "solid", "orange"))`
-  * `image-color-names(square(5, "solid", "orange"))`
+  * `dominant-rgb-colors(square(5, "solid", "orange"))`
 - What do you Notice? What do you Wonder?
 }
 
@@ -268,7 +268,7 @@ Pyret has several functions for measuring similarity, and they each work a littl
 
 `distance-similarity` computes the distance between every row in the table and a Row with a given ID and builds a new column with those values.
 
-@hspace{1em}@show{(contract "distance-similarity" '("Table" "Str" "List<String>") "Table")}
+@hspace{1em}@show{(contract "distance-similarity" '((t Table) (ID Str) (dimensions List<String>)) "Table")}
 
 For example, we could evaluate `distance-similarity(computed, "grass", [list: "green"])` to compute how similar each image is to `grass`.
 
@@ -454,7 +454,7 @@ This solves both of the problems with `distance-similarity`:
 
 Of course, Pyret has a function for angle similarity, too!
 
-@hspace{1em}@show{(contract "angle-similarity" '("Table" "String" "List<String>") "Table")}
+@hspace{1em}@show{(contract "angle-similarity" '((t Table) (ID Str) (dimensions List<String>)) "Table")}
 
 This function _compares every row in the table_ to the Row with the given ID, calculating the angle-similarity between the points specified by the columns.
 

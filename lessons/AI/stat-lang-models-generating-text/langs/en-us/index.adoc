@@ -221,15 +221,16 @@ The formal word computer scientists use in this context is not "chunk" but @voca
 }
 
 @slidebreak{LaunchR}
-@right{@image{images/bag-of-colors.png, 300}}
 @lesson-point{The Table of Unigrams is effectively a Bag of Words}
-
+--
+@right{@image{images/bag-of-colors.png, 250}}
 When restricted to single words (unigrams), an n-gram model stores the exact same data as a Bag of Words, though they originate from very different concepts:
 
 - The @vocab{bag of words model} represents documents as @math{n}-dimensional coordinates, allowing them to be used for classification or regression.
 - Unigrams come from Language Modeling and—along with bigrams and trigrams—are used to _calculate probabilities_.
 
 Same data, very different purposes.
+--
 
 === Investigate
 @slidebreak{Investigate}
@@ -343,9 +344,9 @@ We've created helper functions for this, too:
 
 @show{(contract "choose-completion" '((model Table) (start String) (n Number)) "String")}
 
-- We can use these contract to find all the possible completions for a starting string: `completions(c, "swallowed the")`
+- We can use these contract to find all the possible completions for a starting string: `completions(m, "swallowed the")`
 
-- Or to choose the next `n` words at random: `choose-completion(c, "swallowed the", 1)` chooses one word; increase the `1` to generate more at once
+- Or to choose the next `n` words at random: `choose-completion(m, "swallowed the", 1)` chooses one word; increase the `1` to generate more at once
 
 
 @slidebreak{Investigate}

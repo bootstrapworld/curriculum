@@ -225,11 +225,11 @@ Now a recommendation system is just:
 - Calculate the similarities between every document and both centroids
 - Recommendation strength is a simple equation:
 
-@indented{@math{\text{similarity-to-liked} - \text{similarity-to-disliked}}!}
+@indented{@math{\text{strength} = \text{similarity-to-liked} - \text{similarity-to-disliked}}!}
 
 We've created a helper function that does exactly that, given a table and a list of columns:
 
-@show{(contract "recommend" '(Table List<String>) "Table")}
+@show{(contract "recommend" '((t Table)) "Table")}
 
 The result is a table of all your documents, in descending order of recommendation-strength (strongest first).
 
@@ -242,7 +242,7 @@ Image Search-by-word is just:
 
 We've created a helper function that does exactly that, given a table and a list of columns:
 
-@show{(contract "search-by-tag" '(Table List<String>) "Table")}
+@show{(contract "search-by-tag" '((t Table) (tags List<String>)) "Table")}
 
 The result is a table of all your documents, in descending order of similarity to the centroid of the documents that match your tag.
 
@@ -372,7 +372,7 @@ Supervised learning is a large part of what makes Machine Learning models feel l
 But this comes at a cost: *someone has to tag millions of images!*
 
 @slidebreak{SynthesizeR}
-@right{@image{images/CAPTCHA.png}}
+@right{@image{images/CAPTCHA.png, 200}}
 In some cases that's US, clicking on images of buses in order to prove we're human. Those images are real images from a database where the similarity wasn't strong enough to be confident about whether they are or aren't a bus. By asking us to tag them, we are helping to train algorithm.
 
 @slidebreak{Synthesize}
