@@ -91,7 +91,7 @@ Each pixel has a particular amount of Red, Green, and Blue in it. For our purpos
 
 @slidebreak{Investigate}
 
-While the training corpus takes in images, once the model is trained, the computer won't have access to those images anymore. Let's take a look at how the computer processes a simple image.
+While the training corpus starts with images, the computer focuses only on _the computed attributes of those images_. Let's take a look at how the computer processes a simple image.
 
 @lesson-instruction{
 - Return to the @starter-file{ai-image} and evaluate `red-blue-tile`.
@@ -106,7 +106,7 @@ While the training corpus takes in images, once the model is trained, the comput
 @slidebreak{Investigate}
 
 @lesson-instruction{
-- Evaluate `pixel` and `pixel-dominant-rgb` to get a sense of what information the computer is going to build our model from.
+- Evaluate `pixel` and `pixel-dominant-rgb` to get a sense of what information the computer is going to use to calculate these attributes.
 - How similar is the computer's initial summary to ours?
 }
 
@@ -139,7 +139,7 @@ Computers can look at groups of pixels to compute values. For example:
   * Notice we're defining a _table_ called `image-corpus`.
   * There are columns for the identifier (`ID`), the image document (`DOC`), whether the image is `LIKED` or `DISLIKED`, and also for any descriptive `TAGS` in the image.
   * By defining the table here in the code, we’ve set ourselves up to be able to make changes.
-- Lines 47-52 direct the computer to build a model using the functions we experimented with.
+- Lines 47-52 direct the computer to build a table of computed attributes using the functions we experimented with.
 - Evaluate `computed-with-color-names` in the Interactions Area.
 - Scroll down to find the row for `red-blue`.
 - Now evaluate `computed`. What columns are different? What columns are the same?
@@ -147,7 +147,7 @@ Computers can look at groups of pixels to compute values. For example:
 }
 
 @teacher{
-The columns in these models have several ideas worth unpacking:
+The columns in these tables have several ideas worth unpacking:
 
 - Many of the scales you'll see here go from 0-255. We use 8-bit color for the simpler shapes (think original Nintendo!), and that allows for 256 possible unique values.
 - `LUMINANCE` - the average brightness of an image. `image-luminance(black-sq)` is zero, while `image-luminance(white-sq)` is 255
@@ -176,15 +176,7 @@ The columns in these models have several ideas worth unpacking:
 
 Counting the words and discarding their order is a technique for extracting the _frequency_ of words in a String. It's as if we cut out all the words from the string and shoved them into a bag: we still know how many of each word are there, but we have no idea which came first, second, third. etc.
 
-In Machine Learning, this is called a @vocab{bag of words model}. For now we're just counting colors, but you could imagine it being useful for finding similarity between books, essays, etc.
-
-@slidebreak{InvestigateR}
-@ifslide{@right{@image{images/bag-of-colors.png, 200}}}
-@QandA{
-We've left the image thumbnails in this file as a reference for our human brains, but the model that the computer is working with does not include the images. This is another example of how models are @vocab{lossy}!
-
-@Q{What are some things that your brain knows about the images, that are not recorded in these columns?}
-}
+This is called a @vocab{bag of words model}. For now we're just counting colors, but you could imagine it being useful for finding similarity between essays (counting words), chess strategies (counting moves), etc.
 
 @slidebreak{Investigate}
 
@@ -209,6 +201,21 @@ Think back to our mountain images.
 @Q{What is a bag of words model?}
 @Q{What is the difference between entropy and luminance?}
 }
+
+@slidebreak{Synthesize}
+@lesson-point{A model is a mathematical summary of a dataset}
+
+@QandA{
+@Q{What does a Bag of Words summarize about an image, in this example?}
+@A{The number of pixels that are red-, green-, or blue-dominant}
+
+@Q{What does it leave out?}
+@A{The rest of the color in each pixel, the order of the pixels, and more!}
+
+@Q{Do we have one large model here, or a table fill of per-image models?}
+@A{*A table full of per-image models!* Remember, a model is all about allowing us to _generalize_. But these bags of words only apply to the images we made them from - they don't tell us anything about other images. Our table still has just as many rows as it did before! We've summarized _within_ each image. But there's been no summary _across_ the images}
+}
+
 
 == Measuring Distance in "Image Space"
 @objective{ai-similarity}
@@ -499,7 +506,7 @@ There are still a lot of limitations to our system, however:
 @slidebreak{InvestigateR}
 @right{@image{images/computer-vision.jpg, 400}}
 
-Some ML models are capable of recognizing parts of an image ("person", "car", etc.). This belong to a class of ML algorithms called "Computer Vision", which relies heavily on more advanced -- and computationally intensive --concepts that we won't cover here. We're going to use our human brains to see these elements in our images! And then explore whether a Data Driven Algorithm can help us re-create Image Search technologies, even without the fancy Computer Vision tech.
+Some ML systems are capable of recognizing parts of an image ("person", "car", etc.). This belong to a class of ML algorithms called "Computer Vision", which relies heavily on more advanced -- and computationally intensive --concepts that we won't cover here. We're going to use our human brains to see these elements in our images! And then explore whether a Data Driven Algorithm can help us re-create Image Search technologies, even without the fancy Computer Vision tech.
 
 === Synthesize
 
