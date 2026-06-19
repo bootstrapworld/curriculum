@@ -456,7 +456,7 @@ You've just encountered two new Pyret functions that will help us to make sense 
 
 - The `image-dot-plot` function uses emojis for each animal instead of dots to help us see how the species are distributed across the split in our classifier-function. +
 - The `classify` function will add our @vocab{classifier function}'s predictions to the table and compute whether or not they were correct. +
-@show{(contract "classify" '("Table" "String" "(Row -> String)") "Table")} 
+@show{(contract "classify" '((t Table) (answer-col String) (classifier-fn "(Row -> String)")) "Table")}
 
 @slidebreak{Investigate}
 

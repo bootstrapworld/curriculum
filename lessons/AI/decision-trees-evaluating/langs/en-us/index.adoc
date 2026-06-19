@@ -71,7 +71,7 @@ One example of an early application for this kind of automation is used by the U
 
 Given a dataset to train on, Pyret can build _optimal_ decision trees for us, and even give us the classifier code for those trees, using the algorithm you already know!
 
-@show{(contract "build-tree" '("Table" "List<String>" "String" "Number") "DecisionTree")}
+@show{(contract "build-tree" '((t Table) (split-cols "List<String>") (answer-col String) "Number") "DecisionTree")}
 
 The `build-tree` function takes *four arguments* in its Domain:
 
@@ -290,7 +290,7 @@ The reports Data Scientists (and public health officials!) use to understand how
 
 Pyret has a function that will make a @vocab{confusion matrix} for you! Here's the contract:
 
-@show{(contract "confusion-matrix" '("Table" "String" "(Row -> String)") "Table")}
+@show{(contract "confusion-matrix" '((t Table) (answer-col String) (classifier-fn "(Row -> String)")) "Table")}
 
 @slidebreak{Investigate}
 

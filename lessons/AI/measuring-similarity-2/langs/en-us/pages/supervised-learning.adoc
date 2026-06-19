@@ -68,8 +68,8 @@ Why is our similarity method worse at recommending sun images than it is with sn
 
 The questions below rely on the following contracts:
 
-- @show{(contract "search-by-tag" '(Table String) "Table")}
-- @show{(contract "recommend" '(Table) "Table")}
+- @show{(contract "search-by-tag" '((t Table) (tag String)) "Table")}
+- @show{(contract "recommend" '((t Table)) "Table")}
 
 @n Make sure that only `"grass-sun"` and `"sun2"` are tagged with "sun", click "Run", and evaluate `search-by-tag(computed, "sun")`. What does `search-by-tag` do? @fitb{}{} +
 @fitb{}{@ifsoln{It find the images that have a matching tag, builds a centroid, then returns images similar to the centroid}}
