@@ -448,24 +448,64 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   <div id="body" class="narrativepage article canBeLongerThanAPage">
         <div id="header">
-            <h1 id="pathwayTitle" style="border-bottom: none; display: inline;" onClick="makeEditable(this)" onBlur="save(this)"></h1>
-<button id="copyBtn" onclick="copyURL()">
-<svg data-component="Octicon" aria-hidden="true" focusable="false" class="octicon octicon-copy" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" display="inline-block" overflow="visible" style="vertical-align:text-bottom"><path d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z"></path><path d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path></svg>
+            <h1 id="pathwayTitle" style="border-bottom: none; display: inline; vertical-align: middle;" onClick="makeEditable(this)" onBlur="save(this)"></h1>
+
+<button id="copyBtn" onclick="copyURL()" title="Copy URL" aria-label="Copy URL">
+  <svg id="copyIcon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
+  </svg>
 </button>
 
 <script>
+// Material Design icon paths
+const ICONS = {
+  copy:  'M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z',
+  check: 'M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z',
+  error: 'M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z'
+};
+
+function setIcon(name) {
+  document.getElementById('copyIcon').querySelector('path').setAttribute('d', ICONS[name]);
+}
+
 async function copyURL() {
-  const btn = document.getElementById('copyBtn');
+  const text = window.location.href;
   try {
-    await navigator.clipboard.writeText(window.location.href);
-    btn.textContent = 'Copied!';
-    setTimeout(() => { btn.textContent = 'Copy URL'; }, 1500);
+    if (navigator.clipboard && window.isSecureContext) {
+      // Modern async Clipboard API
+      await navigator.clipboard.writeText(text);
+    } else {
+      // Fallback for older browsers / non-secure contexts
+      fallbackCopy(text);
+    }
+    setIcon('check');
   } catch (err) {
-    btn.textContent = 'Failed';
-    console.error(err);
+    console.error('Copy failed:', err);
+    setIcon('error');
+  }
+  setTimeout(() => setIcon('copy'), 1500);
+}
+
+function fallbackCopy(text) {
+  const textarea = document.createElement('textarea');
+  textarea.value = text;
+  // Keep it off-screen and unobtrusive
+  textarea.style.position = 'fixed';
+  textarea.style.top = '-9999px';
+  textarea.style.opacity = '0';
+  document.body.appendChild(textarea);
+  textarea.focus();
+  textarea.select();
+  try {
+    const ok = document.execCommand('copy');
+    if (!ok) throw new Error('execCommand returned false');
+  } finally {
+    document.body.removeChild(textarea);
   }
 }
 </script>
+
+
         </div>
         <div id="content">
             <div id="preamble_disabled" class="lessonSummary">
