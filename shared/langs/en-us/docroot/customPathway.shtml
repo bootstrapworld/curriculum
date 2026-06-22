@@ -112,6 +112,7 @@
     <script src="lib/pathway-tocs.js"></script>
     <script src="lib/bootstraplesson.js"></script>
     <script src="lib/makeWorkbook.js"></script>
+  <script src="lib/graph-pages.js"></script>
 
     <script>
     let url = new URL(location);
@@ -446,9 +447,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <!-- end prologue.txt -->
 
-  <div id="body" class="narrativepage article canBeLongerThanAPage">
+  <div id="body" class="customPathway article canBeLongerThanAPage">
         <div id="header">
-            <h1 id="pathwayTitle" style="border-bottom: none; display: inline; vertical-align: middle;" onClick="makeEditable(this)" onBlur="save(this)"></h1>
+            <h1 id="pathwayTitle" style="border-bottom: none; display: inline; vertical-align: middle;" onClick="makeEditable(this)" onBlur="save(this)">Click to name this Pathway</h1>
 
 <button id="copyBtn" onclick="copyURL()" title="Copy URL" aria-label="Copy URL">
   <svg id="copyIcon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
@@ -519,7 +520,7 @@ function fallbackCopy(text) {
 
         <div id="selected" class="clearfix item two-thirds">
             <div class="sectionbody">
-                <h2>Lesson Plans <span id="totalDays" class="day"/></h2>
+                <h2 style="margin: 20px 0; ">Lesson Plans <span id="totalDays" class="day"/></h2>
                 <dl id="lesson-list" ></dl>
             </div>
         </div>
