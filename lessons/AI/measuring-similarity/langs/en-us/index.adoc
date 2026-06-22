@@ -84,10 +84,10 @@ Computers don't experience the world in the same way we do.
 
 Each pixel has a particular amount of Red, Green, and Blue in it. For our purposes, we'll use a scale of 0-255 to record the amount of each color that makes up a pixel. 
 
-- White is made of every color, so a white pixel would have a value of 255 for Red, Green, _and_ Blue. (255, 255, 255)
-- A black pixel, on the other hand, is the _absence_ of color, so it would have zeros for all three colors. (0, 0, 0)
-- A red pixel uses all of the possible red and no blue or green (255, 0, 0)
-- An orange pixel might use most of the red, some of the green, and no blue (254, 165, 0)
+- *White* is made of every color, so a white pixel would have a value of 255 for Red, Green, _and_ Blue. (255, 255, 255)
+- A *black* pixel, on the other hand, is the _absence_ of color, so it would have zeros for all three colors. (0, 0, 0)
+- A *red* pixel uses all of the possible red and no blue or green (255, 0, 0)
+- An *orange* pixel might use most of the red, some of the green, and no blue (254, 165, 0)
 
 @slidebreak{Investigate}
 
@@ -120,7 +120,7 @@ Computers can look at groups of pixels to compute values. For example:
 - *Luminance* measures @vocab{central tendency} - "what's the average brightness of this image?"
 - *Entropy* measures @vocab{spread} - "how much variation in brightness is there?"
 
-@slidebreak{Investigate}
+@slidebreak{Investigate-DN}
 
 @lesson-instruction{
 - Return to the @starter-file{ai-image} and experiment for a moment. Look at
@@ -140,6 +140,11 @@ Computers can look at groups of pixels to compute values. For example:
   * There are columns for the identifier (`ID`), the image document (`DOC`), whether the image is `LIKED` or `DISLIKED`, and also for any descriptive `TAGS` in the image.
   * By defining the table here in the code, we’ve set ourselves up to be able to make changes.
 - Lines 47-52 direct the computer to build a table of computed attributes using the functions we experimented with.
+}
+
+@slidebreak{Investigate}
+
+@lesson-instruction{
 - Evaluate `computed-with-color-names` in the Interactions Area.
 - Scroll down to find the row for `red-blue`.
 - Now evaluate `computed`. What columns are different? What columns are the same?
@@ -270,8 +275,9 @@ Pyret has several functions for measuring similarity, and they each work a littl
 
 @hspace{1em}@show{(contract "distance-similarity" '((t Table) (ID Str) (dimensions List<String>)) "Table")}
 
-For example, we could evaluate `distance-similarity(computed, "grass", [list: "green"])` to compute how similar each image is to `grass`.
+To compute how similar each image is to grass, we could evaluate `distance-similarity(computed, "grass", [list: "green"])`.
 
+@slidebreak{Launch-DN}
 @lesson-instruction{
 - Return to the @starter-file{ai-image} and find lines 26-40 of our Definitions Area.
   * For now, none of the images are liked, disliked, or tagged. By defining the table here in the code, we've set ourselves up to be able to make changes.
@@ -280,6 +286,10 @@ For example, we could evaluate `distance-similarity(computed, "grass", [list: "g
   * change `""` to `"snow"`, for the snowy images.
   * change `""` to `"sun"` for the four images with a visible sun.
   * add tags for water and red (to give an image a second tag, use a comma, e.g. `"grass, sun"`)
+}
+
+@slidebreak{Launch-DN}
+@lesson-instruction{
 - Choose the *two mountain images you like the best*, and change the values for those images in the `LIKED` column from `false` to `true`.
 - Then click "Run" to load your changes.
 - Use it to complete the first section of @printable-exercise{plotting-images.adoc}.
@@ -316,7 +326,7 @@ Comparing images based on how many green pixels they have is a start, but it's a
 @A{Yes! That's what the distance formula does.}
 }
 
-@slidebreak{Launch}
+@slidebreak{Launch-DN}
 
 @lesson-instruction{
 - Complete the second section on @printable-exercise{plotting-images.adoc} to explore our images in "Blue-Green Space".
@@ -353,15 +363,18 @@ By choosing _two_ columns from our dataset and using them as axes, you've define
 @slidebreak{InvestigateR}
 @right{@image{images/projection.webp, 300}}
 
-Recall this image of a _projection_ of a 3D object into two, 2-dimensional planes. Both the square shadow and the circle shadow are showing us a part of the story, but the _real_ shape is 3-dimensional (3D).
+Recall this image of a 3D object being *projected* onto 2-dimensional planes. Both the square and circle shadows are showing us a part of the story, but the real shape is 3-dimensional (3D).
 
 The same is true of our dataset! Our images are described by 3 different colors (Red, Blue, and Green).
+
+@slidebreak{InvestigateR}
+@ifslide{@right{@image{images/projection.webp, 300}}}
 
 Like the shadows in this image, our two scatter plots in "Blue-v-Green Space" and "Blue-v-Red Space" are just _projections_ of 3D points onto the Z-X and Z-Y planes.
 
 @lesson-point{Our "Color-Space" is three dimensional. Scatter plots only show the data from one point of view.}
 
-@slidebreak{Investigate}
+@slidebreak{Investigate-DN}
 
 @lesson-instruction{
 - Open the @online-exercise{https://www.desmos.com/3d/qmu6fmrs6h, RGB Image Plot} in Desmos
@@ -373,25 +386,27 @@ Like the shadows in this image, our two scatter plots in "Blue-v-Green Space" an
 @slidebreak{InvestigateR}
 @right{@image{images/3d-rgb.webp, 300}}
 
-We can't see more than 3 dimensions at time with our eyes. But the computer can compute distance in many dimensions. *The math holds true*, and we can use `distance-similarity`, with any number of attributes we want.
+We can't _see_ more than 3 dimensions at time with our eyes. But the computer can compute distance in many dimensions. *The math holds true*, and we can use `distance-similarity`, with any number of attributes we want.
 
 @slidebreak{Investigate}
 
 @lesson-instruction{
-Let's see how well `distance-similarity` identifies similarity in our 3D Colorspace.
+How well does `distance-similarity` in our 3D Colorspace work for images with *grass*?
 
-- Evaluate `distance-similarity(computed, "grass", [list: "red", "green", "blue"])` to see how effectively it computes similarity between images with *grass*.
-- Try it with ID `"snow2"`, to see how well it works at finding the similarity between images with *snow*.
-- Try it with ID `"red2"`, to see how well it works at finding the similarity between images with *red squares*.
-- Try it with ID `"grass-sun"`, to see how well it works at finding the similarity between images with *sun*.
-- Can you identify a higher-dimensional space that works well for all four groups? Try adding other columns!
+@center{`distance-similarity(computed, "grass", [list: "red", "green", "blue"])`}
+
+- Try it with ID `"snow2"`, to see how well it works for images with *snow*
+- Try it with ID `"red2"`, to see how well it works for images with *red squares*
+- Try it with ID `"grass-sun"` to see how well it works for images with *sun*
+
+Can you identify a higher-dimensional space that works well for all four groups? Try adding other columns!
 }
 
 @slidebreak{Investigate}
 
 Overall, `distance-similarity` is a huge upgrade compared to the "are they identical?" question. But it suffers from two major problems:
 
-- It focuses on _count_, rather than _proportion_: For example, a giant mountain photo has far more red pixels than a tiny red square—and thus appears more 'similar' to the big red square than the tiny square does by this metric—even if red makes up only a tiny fraction of the mountain image.
+- It focuses on _count_, rather than _proportion_: For example, a giant mountain photo has far more red pixels than a tiny red square—and thus appears “closer” to the big red square than the tiny one—even if only a small fraction of the mountain image is red
 - It ignores _orientation_: Humans see two "mostly red" images as similar, but the distance formula doesn't. It only calculates the space between points, ignoring where they _actually lie on the graph_.
 
 === Synthesize
@@ -467,14 +482,17 @@ Complete @printable-exercise{angle-similarity-pyret.adoc}
 Is measuring angles closer to human perception than measuring distance?
 
 @lesson-instruction{
-- Try `angle-similarity(computed, "grass", [list: "red", "green", "blue"])`, and see how well this works at finding the similarity between images with *grass*.
-- Try it again with ID `"snow2"`, to see how well it works at finding the similarity between images with *snow*.
-- Try it again with ID `"red2"`, to see how well it works at finding the similarity between images with *red squares*.
-- Try it again with ID `"sunset"`, to see how well it works at finding the similarity between images with *sun*.
+How well does `angle-similarity` in our 3D Colorspace work for images with *grass*?
+
+@center{`angle-similarity(computed, "grass", [list: "red", "green", "blue"])`}
+
+- Try it with ID `"snow2"`, to see how well it works for images with *snow*
+- Try it with ID `"red2"`, to see how well it works for images with *red squares*
+- Try it with ID `"grass-sun"` to see how well it works for images with *sun*
 - Explore whether or not it's useful to add our `WIDTH` and `HEIGHT` columns.
 }
 
-@slidebreak{Investigate}
+@slidebreak{InvestigateR}
 @ifslide{@right{@image{images/3-d-comparison-w-lines.png, 300}}}
 Angle similarity really helped us improve the machines' "perception" of what makes two images similar. Given one image, we're able to produce much better search results! Thinking back to the notion of search as a *recommendation system*, you could also imagine doing the same with other kinds of data: for example picking a song and asking for similar recommendations!
 

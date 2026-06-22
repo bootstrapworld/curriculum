@@ -71,7 +71,7 @@ One example of an early application for this kind of automation is used by the U
 
 Given a dataset to train on, Pyret can build _optimal_ decision trees for us, and even give us the classifier code for those trees, using the algorithm you already know!
 
-@show{(contract "build-tree" '((t Table) (split-cols "List<String>") (answer-col String) "Number") "DecisionTree")}
+@show{(contract "build-tree" '((t Table) (split-cols "List<String>") (answer-col String) (max-depth Number)) "DecisionTree")}
 
 The `build-tree` function takes *four arguments* in its Domain:
 
@@ -80,7 +80,7 @@ The `build-tree` function takes *four arguments* in its Domain:
 - The name of the _target_ column containing all the "answers" for the various categories
 - The _maximum depth_ the tree is allowed to be
 
-@slidebreak{Investigate}
+@slidebreak{Investigate-DN}
 
 @lesson-instruction{
 - Complete the first section of @printable-exercise{computing-decision-trees.adoc} using the @starter-file{decision-tree}.
@@ -99,13 +99,13 @@ The `build-tree` function takes *four arguments* in its Domain:
 @A{`"swims"`}
 }
 
-@slidebreak{Investigate}
+@slidebreak{Investigate-DN}
 
 @lesson-instruction{
 Complete the second section of @printable-exercise{computing-decision-trees.adoc}
 }
 
-@slidebreak{Investigate}
+@slidebreak{Investigate-DN}
 
 @QandA{
 @Q{How are the *definitions* for `tree-c1` and `tree-c2` different?}
@@ -124,7 +124,7 @@ Complete the second section of @printable-exercise{computing-decision-trees.adoc
 - Turn to @printable-exercise{comparing-decision-trees.adoc} and complete the first section.
 }
 
-@slidebreak{Investigate}
+@slidebreak{Investigate-DN}
 
 Notice that `tree-q6` works just as well as `tree-any4`, even though it only has one column to train on!
 
@@ -139,7 +139,7 @@ As is common for quantitative columns, there's more variability in `pounds` than
 When given another dataset to classify, `tree-any4` is out-scoring `tree-q6`!
 
 @QandA{
-@Q{Why did `tree-q6` do so poorly?}
+@Q{*Why did `tree-q6` do so poorly?*}
 @A{Let students share their theories}
 }
 
@@ -226,6 +226,15 @@ Suppose we have an outbreak of a really deadly, highly-contagious disease, and t
 - Test A has tons of *false positives:* It will almost always do the right thing if you're sick, but a lot of healthy people get told they are infected
 - Test B has tons of *false negatives:* It will almost always do the right thing if you're healthy, but a lot of sick people get told they are fine
 
+@slidebreak{Launch}
+
+@ifslide{
+@center{
+Test A has tons of *false positives*
+Test B has tons of *false negatives*
+}
+}
+
 @lesson-instruction{
 - YOU are in the minister of public health, for a country struggling with an outbreak of this disease.
 - Which test do you choose, for your country?
@@ -295,7 +304,7 @@ Pyret has a function that will make a @vocab{confusion matrix} for you! Here's t
 @slidebreak{Investigate}
 
 @lesson-instruction{
-- Make sure you added the `swims-classifier` to your Definitions Area and clicked "Run".
+- Make sure you added the `swims-classifier` below to your Definitions Area and clicked "Run".
 
 ```
 fun swims-classifier(r):
@@ -377,8 +386,8 @@ The "correct scores" are shown in the diagonal, running from top-left to bottom-
 @lesson-point{All models are wrong. Some are useful.}
 
 @QandA{
-@A{When is a Decision Tree wrong?}
-@A{When is a Decision Tree useful?}
+@Q{When is a Decision Tree wrong?}
+@Q{When is a Decision Tree useful?}
 }
 
 

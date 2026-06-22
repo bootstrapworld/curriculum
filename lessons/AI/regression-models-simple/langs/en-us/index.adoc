@@ -83,7 +83,7 @@ Teaching an AI what it means to steer requires @vocab{training}. Here's what tha
 
 @slidebreak{Launch}
 
-*This dataset is used to generate a @vocab{function} for predicting the correct steering angle from the sensor data.*
+This dataset is used to generate a @vocab{function} for predicting the correct steering angle from the sensor data.
 
 @lesson-point{
 In this example, `curve` and `speed` are @vocab{explanatory variables}. `steering-angle` is the @vocab{response variable}.
@@ -253,7 +253,7 @@ Let's use some Data Science to find some evidence about what really _is_ the bes
 Circulate and encourage students to read the scatter plots critically. Push them to notice whether the relationship looks linear, how much scatter there is, and whether there are obvious outliers.
 }
 
-@slidebreak{Investigate}
+@slidebreak{InvestigateR}
 
 @QandA{
 @right{@image{images/steering-v-curve-on-offset-scale.png, 350}}
@@ -334,7 +334,10 @@ Students will notice that `lr-plot` defines models down to decimal values, certa
 
 @Q{What does the @math{S}-value tell us?}
 @A{We expect the error in predictions made by this model to be off by about 37 degrees.}
+}
 
+@QandA{
+@ifslide{@right{@image{images/steering-v-curve-lr.png, 300}}}
 @Q{Based on the @math{S}-value, would you expect the `curve` model to successfully be able to "drive" a full lap around a course in the game?}
 @A{Probably not! 37 degrees is a pretty large error.}
 
@@ -345,7 +348,7 @@ Students will notice that `lr-plot` defines models down to decimal values, certa
 @A{Everything above or below the regression line is real data, which we throw away when we use the line.}
 }
 
-@slidebreak{LaunchR}
+@slidebreak{Launch}
 @lesson-point{We can't calculate @math{S} unless we have more than two rows in our table!}
 
 Remember, we use two points to define the line, and if there's no _other_ data left over then there's nothing to fit! In order for us to calculate @math{S}, we need a table with _three or more points._
@@ -391,11 +394,18 @@ We could write it by hand, but Pyret has exactly the right tool:
 
 For example: `regression-model-code(training-data, [list: "curve"], "steering-angle")`
 
-@slidebreak{Investigate}
+@slidebreak{InvestigateR}
 @lesson-instruction{
 @right{@image{images/navlab.png, 300}}
+
 - Complete @printable-exercise{lr-steering-angle.adoc}.
 - Copy and past the `curve-predictor` definition you just generated into your Definitions area and click "Run" to load it. Then evaluate `drive(curve-predictor)` in the Interactions Area.
+}
+
+
+@slidebreak{InvestigateR}
+@lesson-instruction{
+@ifslide{@right{@image{images/navlab.png, 300}}}
 - Use `regression-model-code` to generate a row-consuming predictor for each of the other variables.
 - Copy and paste the resulting definitions for `offset-predictor`, `skew-predictor`, and `speed-predictor` into your Definitions Area. Click "Run" to load them. 
 - Try each one with `drive(...)`.

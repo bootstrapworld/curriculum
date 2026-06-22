@@ -44,7 +44,7 @@ We can *plot documents in space* and use *geometry* to calculate something appro
 
 - A table with @math{n} numeric attributes (e.g., number of green-dominant pixels) can be graphed as points in @math{n}-dimensional space
 - The location of these points in space can be used to compute different measures of similarity (equality, distance similarity, angle similarity, etc.)
-- Machine Learning Engineers typically use angle measure, because it more closely reflects human intuition for things clustered on an axis being more similar to each other than things clustered on different axes.
+- Machine Learning Engineers typically use angle measure, because it’s closer reflects human intuition
 
 @slidebreak{Launch}
 
@@ -150,6 +150,7 @@ Pyret also has another similarity function that _uses all the numeric columns_ t
 
 For example: `all-cols-similarity(decorated, "?")` will find the angle-similarity of every document to our mystery row `"?"`, using every column containing numbers in our `decorated` table.
 
+@slidebreak{Investigate-DN}
 @lesson-instruction{
 - Take a moment to experiment with our new columns using the following functions:
   * `all-cols-similarity`
@@ -260,6 +261,7 @@ Inconsistent *capitalization* and *punctuation* prevent the computer from recogn
 . Our counts for these words are off, so we're not seeing how common they really are.
 . We're creating extra, meaningless dimensions in which text gets compared!
 
+@slidebreak{Launch}
 The near-universal presence of words like "is", "a", "the", etc. (known as @vocab{stop words}) in every essay is also a problem:
 
 . It creates many dimensions in which the essays are close together.

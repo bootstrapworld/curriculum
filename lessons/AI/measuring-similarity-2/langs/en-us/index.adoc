@@ -94,7 +94,7 @@ When you trained Decision Trees to identify the species of an animal based on co
 @A{Because the data included the labeled answers (the species of each animal).}
 
 
-You built a model of images in the previous lesson, including columns like `ENTROPY`, `WIDTH`, `red`, etc.
+You built a model of images, including columns like `ENTROPY`, `WIDTH`, `red`, etc.
 @Q{Was this an example of supervised learning or unsupervised learning?}
 @A{Unsupervised}
 
@@ -144,12 +144,13 @@ If every image in our corpus is a point in space, then common ground is literall
 
 In our 2-dimensional Blue-Green Space, for example, the midpoint halfway between `"grass-sun"` and `"sun2"` defines one kind of "sun-ness"!
 
+@slidebreak{LaunchR}
+@ifslide{@right{@image{images/blue-v-green-images-centroid.png, 300}}}
 (Do you remember learning about mean, median, and mode? In Machine Learning, there are algorithms for finding clusters of points in space that are literally named `k-means`, `k-medians`, and `k-modes` clustering! _Measures of Center are a critical part of modern Machine Learning._)
 
 
-@slidebreak{LaunchR}
+@slidebreak{Launch}
 @QandA{
-@ifslide{@image{images/blue-v-green-images-centroid.png, 300}}
 @Q{We have *three* images where the sun is visible. How can we find the middle of those three?}
 @A{It's the middle of a triangle!}
 
@@ -163,7 +164,7 @@ In our 2-dimensional Blue-Green Space, for example, the midpoint halfway between
 
 If you have more than 1 dimension, the same math applies: compute the centroid for each column separately. Can we get a better result for sunny images by teaching Pyret what "sun-ness" looks like for two of our images?
 
-For any set of points (in any number of dimensions!), the "middle" point is the @vocab{Centroid}.
+For any set of points (in any number of dimensions!), the "middle" is the @vocab{Centroid}.
 
 [cols="^.^1a, ^.^1a, ^.^1a", grid="none", frame="none", options="header"]
 |===

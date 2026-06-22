@@ -67,9 +67,9 @@ Take a look at this picture of a cylinder floating in a box.
 @slidebreak{LaunchR}
 @right{@image{images/steering-v-curve-lr.png, 300}}
 
-In @lesson-link{regression-models-simple}, we made four scatter plots — one for each candidate explanatory variable. Each showed a 2D relationship between one variable and `steering-angle`.
+In @lesson-link{regression-models-simple}, we made a scatter plot for each explanatory variable, showing a 2D relationship between it and the `steering-angle`.
 
-But `curve`, `skew`, `offset`, and `speed` are all being measured _at the same time_, for the same data point. Each scatter plot we made was showing just one "shadow" of the data — a 2D projection of information that actually exists in more dimensions.
+But `curve`, `skew`, `offset`, and `speed` are all being measured _at the same time_, for the same data point. Each scatter plot we made was showing just one "shadow" of the data — a 2D projection.
 @QandA{
 @Q{If `curve` and `skew` are both inputs, and `steering-angle` is the output, how many dimensions would we need to represent all three at once?}
 @A{Three! One axis for `curve`, one for `skew`, one for `steering-angle`.}
@@ -109,7 +109,6 @@ We've set the Desmos activity to start with minimum perspective, but teachers sh
 @slidebreak{LaunchR}
 @right{@image{images/plane-of-best-fit.png, 300}}
 
---
 If we want to consider all three variables in our model, then we need to consider each snapshot in the training corpus as a 3d point, with values for `curve`, `skew`, _and_ `steering-angle`.
 
 - If `curve` and `skew` are both values in a given snapshot, they each explain a _portion_ of the steering angle at that moment.
@@ -119,7 +118,6 @@ If we want to consider all three variables in our model, then we need to conside
 @lesson-point{
 Instead of a line of best fit, we're looking for a *plane of best fit*.
 }
---
 
 @teacher{Draw connections to the cylinder-and-shadows image: each 2D scatter plot from the last lesson is a literal "shadow" of the 3D data, cast by collapsing one dimension flat.}
 
@@ -193,14 +191,21 @@ Let's use Pyret to find the best model for our data!
 @A{It told us how much error to expect in predictions made with the model by reporting the @math{S-value} and @math{r^2}.}
 }
 
-Pyret can't plot data in more than two dimensions at a time, but it can _compute_ in as many dimensions as we want!
+@slidebreak{Launch}
+Pyret can't _plot_ data in more than two dimensions at a time, but it can _compute_ in as many dimensions as we want!
 
-- To get the code for a predictor function we can use `regression-model-code`. +
+- To get the code for a predictor function we can use `regression-model-code`.
+
 @hspace{2em}@show{(contract "regression-model-code" '((table-name Table) (explanatory List<String>) (response String)) "Code")} +
-  * In the last lesson we gave it a list with just one explanatory variable. For example: +
-@hspace{2em}`regression-model-code(training-data, [list: "curve"], "steering-angle")`
-  * Adding a second variable to the list is all it takes to go from a regression _line_ to a *regression __plane!__* For example: +
-@hspace{2em}`regression-model-code(training-data, [list: "curve", "skew"], "steering-angle")`
+  * In the last lesson we gave it a list with just one explanatory variable.
+
+`regression-model-code(training-data, [list: "curve"], "steering-angle")`
+
+  * Adding a second variable to the list is all it takes to go from a regression _line_ to a *regression __plane!__*
+
+`regression-model-code(training-data, [list: "curve", "skew"], "steering-angle")`
+
+@slidebreak{Launch}
 - Pyret also has a tool for measuring the fit of any row-consuming regression model:
 @hspace{2em}@show{(contract "regression-model-S" '((table-name Table) (explanatory List<String>) (response String) (model "Row->Number")) "Number" 
 "produces the S-value of a multiple-regression model, fit to the specific columns"
@@ -211,9 +216,9 @@ Consider the trade-off between clarity and amount-of-typing: for some students, 
 }
 
 @slidebreak{Launch}
-@lesson-point{`regression-model-S` needs to know about your explanatory columns!}
+Why does `regression-model-S` need to know about your explanatory columns?
 
-When we were calculating @math{S} in a 2-dimensional model (1 explanatory, 1 response), we needed _more than two rows_. Two points are enough to define a line, but if there's no third row then there's nothing else to fit the line _to!_ But now we're dealing with models in 3-dimensions (2 explanatory, 1 response), and we need _more than three rows_.
+When we calculated @math{S} in a 2-dimensional model (1 explanatory, 1 response), we _needed_ more than two rows. Two points are enough to define a line, but if there's no third row then there's nothing else to fit the line _to!_ But now we're dealing with models in 3-dimensions (2 explanatory, 1 response), and we need _more than three rows_.
 
 (That's why the list of explanatory columns matters!)
 
@@ -239,7 +244,7 @@ When we were calculating @math{S} in a 2-dimensional model (1 explanatory, 1 res
 @A{`curve` — its coefficient is larger, meaning a one-unit change in `curve` moves the prediction more than a one-unit change in `skew`.}
 }
 
-@slidebreak{Investigate}
+@slidebreak{Investigate-DN}
 
 *Sensors cost money!* Adding all the various sensors to make a car self-driving adds thousands of dollars to the cost of manufacturing, and the extra computing power needed to process the data makes the chips used in those cars more expensive too. To make cars affordable, companies need to make tough decisions about which sensors to keep and which to drop.
 

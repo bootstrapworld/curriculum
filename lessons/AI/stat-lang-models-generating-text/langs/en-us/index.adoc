@@ -69,7 +69,7 @@ Let's look a little more closely at the words we generated.
 @A{For example: If there are 25 students in your class, and 8 students chose “door”, it was chosen 8/25ths of the time.}
 }
 
-@slidebreak{Investigate2}
+@slidebreak{Investigate}
 
 Statistical language models are built on the assumption that the fraction of the time that a word follows a series of words in a training corpus can help predict the likelihood of it being the right word to follow that same series of words in a future scenario. In this lesson, we will refer to that fraction as its @vocab{probability}.
 
@@ -126,8 +126,8 @@ For a variety of reasons, not all phones will propose the same completions:
 
 - If there are multiple words with equal probability, the system will select the word at random. As a result, even the same phone won't necessarily propose the same word every time.
 - Not all phones use the same system, or the same amount of randomness.
-- A messaging app also includes a @vocab{model} of _the words that the owner uses_, to personalize suggestions to the way the user writes. The app can also account for previously-accepted word suggestions.
-- Some predictive text features even account for the specific message being written! For instance, typing first letter of an unusual word that you used in the same message triggers the app to propose that unusual word.
+- A messaging app also includes a @vocab{model} of _the words that the owner uses_, to personalize suggestions to the way the user writes.
+- Some predictive text features even account for the specific message being written! Typing first letter of an unusual word that you used in the same message triggers the app to propose that unusual word.
 
 @scrub{
 @slidebreak{Investigate}
@@ -222,7 +222,7 @@ The formal word computer scientists use in this context is not "chunk" but @voca
 
 @slidebreak{LaunchR}
 @lesson-point{The Table of Unigrams is effectively a Bag of Words}
---
+
 @right{@image{images/bag-of-colors.png, 250}}
 When restricted to single words (unigrams), an n-gram model stores the exact same data as a Bag of Words, though they originate from very different concepts:
 
@@ -230,7 +230,6 @@ When restricted to single words (unigrams), an n-gram model stores the exact sam
 - Unigrams come from Language Modeling and—along with bigrams and trigrams—are used to _calculate probabilities_.
 
 Same data, very different purposes.
---
 
 === Investigate
 @slidebreak{Investigate}
@@ -349,7 +348,7 @@ We've created helper functions for this, too:
 - Or to choose the next `n` words at random: `choose-completion(m, "swallowed the", 1)` chooses one word; increase the `1` to generate more at once
 
 
-@slidebreak{Investigate}
+@slidebreak{Investigate-DN}
 
 
 @teacher{Note that on @printable-exercise{sampling.adoc}, questions build on one another. In other words, a student who misses Question 2 will also get Question 3 incorrect. To ensure that class runs smoothly, we encourage you to require that students check their work with a partner before moving from one question to the next. Encouraging students to annotate @printable-exercise{old-lady-lyrics.adoc} will also result in more accurate counting and therefore more correct responses!}
@@ -407,8 +406,8 @@ If you're curious to see what would happen if we just kept going, evaluate `gene
 @lesson-point{All models are wrong. Some are useful.}
 
 @QandA{
-@A{Will _any_ line we draw be *perfect*? Why or why not?}
-@A{When is a line useful?}
+@Q{Will _any_ language model *perfect*? Why or why not?}
+@Q{When is a language model *useful*?}
 }
 
 @slidebreak{Synthesize}
