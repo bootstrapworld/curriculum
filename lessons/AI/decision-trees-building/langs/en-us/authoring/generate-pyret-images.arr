@@ -40,6 +40,7 @@ tail-series = from-list.image-dot-chart(images, training.column("tail").map(to-r
 dot-plot-mammal = render-chart(mammal-series).height(250).get-image()
 dot-plot-pounds = render-chart(pounds-series).height(250).get-image()
 dot-plot-sex = render-chart(sex-series).height(250).get-image()
+dot-plot-swims = render-chart(swims-series).height(250).get-image()
 dot-plot-tail = render-chart(tail-series).height(250).get-image()
 
 

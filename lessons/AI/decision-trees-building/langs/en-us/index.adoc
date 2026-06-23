@@ -220,6 +220,7 @@ We're sticking to splits that only create two branch nodes, but some decisions t
 We're going to play another round of "I Spy - Classify", but this time you're going to use a real dataset of animals.
 }
 
+@define{data-table}{
 [.data-table, cols="1,^1,^1,^1,^1,^1,^1", stripes="none", options="header"]
 |===
 | name         | species    | sex            | pounds| tail | mammal| swims
@@ -239,6 +240,9 @@ We're going to play another round of "I Spy - Classify", but this time you're go
 | "Charlotte"  | "tarantula"| "male"         |  0.35 | FALSE| FALSE  | FALSE
 | "Webs"       | "tarantula"| "female"       |  0.4  | FALSE| FALSE  | FALSE
 |===
+}
+
+@data-table
 
 @QandA{
 @Q{What do you *Notice* about the animals in this dataset?}
@@ -261,28 +265,7 @@ Unlike humans, who can generate their own questions, machine-learning algorithms
 Creating a decision tree is a form of @vocab{supervised learning}, because the training data already contains the desired outcomes (as one column), and the algorithm just learns a function that maps from input to outcomes. 
 
 @slidebreak{Investigate-RP}
-
-@ifslide{
-[.data-table, cols="1,^1,^1,^1,^1,^1,^1", stripes="none", options="header"]
-|===
-| name        | species   | sex         | pounds| tail  | mammal| swims
-| "Firepaw"   | "cat"     | "female"    |  9.5  | TRUE  | TRUE  | FALSE
-| "Frisky"    | "dog"     | "female"    |  9.6  | TRUE  | TRUE  | TRUE
-| "Socks"     | "dog"     | "female"    | 11.1  | TRUE  | TRUE  | TRUE
-| "stripes"   | "dog"     | "male"      | 10.0  | TRUE  | TRUE  | TRUE
-| "Snickers"  | "dog"     | "male"      | 10.3  | TRUE  | TRUE  | TRUE
-| "Leafpool"  | "cat"     | "female"    | 10.6  | TRUE  | TRUE  | FALSE
-| "Shadestar" | "cat"     | "female"    |  9.0  | TRUE  | TRUE  | TRUE
-| "Bramble"   | "cat"     | "female"    |  4.1  | TRUE  | TRUE  | FALSE
-| "Brick"     | "cat"     | "male"      |  8.5  | TRUE  | TRUE  | FALSE
-| "Bruni"     | "lizard"  | "female"    |  8.2  | TRUE  | FALSE | TRUE
-| "Jesús"     | "lizard"  | "male"      |  3.5  | TRUE  | FALSE | FALSE
-| "Gary"      | "snail"   |"hermaphrodite"| 0.1 | FALSE | FALSE | FALSE
-| "Turbo"     | "snail"   |"hermaphrodite"| 0.1 | FALSE | FALSE | FALSE
-| "Charlotte" |"tarantula"| "male"      | 0.4   | FALSE | FALSE | FALSE
-| "Webs"      |"tarantula"| "female"    | 0.4   | FALSE | FALSE | FALSE
-|=== 
-}
+@ifslide{@data-table}
 
 @lesson-instruction{
 - I'm going to pick one animal in the dataset.
@@ -292,6 +275,15 @@ Creating a decision tree is a form of @vocab{supervised learning}, because the t
 
 @teacher{
 Encourage students to come up with both categorical and quantitative questions, and keep asking them to explain why they chose the split they did. As before, keep drawing the decision tree as they go.
+}
+
+@slidebreak{Investigate-RP}
+@ifslide{@data-table}
+
+@lesson-instruction{
+- In small groups, play a few rounds of this game! Are some questions better than others?
+- At the wall, or on a sheet of scrap paper: what do you think is the *best root node* for this dataset? (i.e. - which question is the most useful to start with?)
+- Can you explain why you chose that question?
 }
 
 === Synthesize
@@ -386,7 +378,7 @@ It reduces complexity and discards variance in the data, by looking for "general
 - Then complete the first 2 sections of @printable-exercise{what-does-the-code-do.adoc} with your partner.
 }
 
-@slidebreak{Launch}
+@slidebreak{LaunchC}
 
 [cols="^.^1a,^3a", frame="none", grid="none"]
 |===
@@ -405,7 +397,7 @@ end
 ```
 |===
 
-@ifslide{What did you notice?}
+@ifslide{What does the Decision Tree have to do with the function?}
 
 @teacher{Give students ample time to discuss and share back!}
 
