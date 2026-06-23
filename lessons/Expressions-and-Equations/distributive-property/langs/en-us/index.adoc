@@ -1,4 +1,9 @@
 = The Distributive Property
+++++
+<style>
+.circleevalsexp { display: inline; }
+</style>
+++++
 
 @description{Students develop an understanding of the Distributive Property by studying equivalent Circles of Evaluation. They then apply their understanding of the Distributive Property to make efficient mental computations.}
 
@@ -40,7 +45,7 @@ Students consider whether various @proglang functions are distributive.
 
 [.embedded, cols="^.^1,^.^15,^.^2,^.^15,^.^1", stripes="none", grid="none", frame="none"]
 |===
-|| @show{(coe '(scale 0.5 (beside aqua-star orange-dot)))} | &rarr; | @show{(coe  '(beside (scale 0.5 orange-dot) (scale 0.5 aqua-star)))} |
+|| @show{(coe '(scale 0.5 (beside aqua-star orange-dot)))} |  | @show{(coe  '(beside (scale 0.5 orange-dot) (scale 0.5 aqua-star)))} |
 |===
 
 @QandA{
@@ -54,38 +59,43 @@ Students consider whether various @proglang functions are distributive.
 @A{Possible Wonderings: 
   * Are these equivalent? 
   * What do they evaluate to? 
-  * Why is there one `scale` in the first Circle of Evaluation, but two 9s in the second Circle?
+  * Why is there one `scale` in the first Circle of Evaluation, but two in the second Circle?
 }
 }
 
 @slidebreak{Launch}
 
-Sometimes instead of combining two objects before transforming them, we can transform each object and then combine them. Let's take a look at what's happening inside each of these Circles of Evaluation.
+@ifnotslide{
+Sometimes instead of combining two objects before transforming them, we can transform each object and then combine them. 
+}
 
 [.embedded, cols="^.^1,^.^15,^.^2,^.^15,^.^1", stripes="none", grid="none", frame="none"]
 |===
-|| @show{(coe '(scale 0.5 (beside aqua-star orange-dot)))} | &rarr; | @show{(coe  '(beside (scale 0.5 orange-dot) (scale 0.5 aqua-star)))} |
+
+|| Factored Form || Expanded Form |
+
+|| @show{(coe '(scale 0.5 (beside aqua-star orange-dot)))} | 	
+&#8596; | @show{(coe  '(beside (scale 0.5 orange-dot) (scale 0.5 aqua-star)))} |
 |===
 
 [.embedded, cols="^.^1,^.^15,^.^2,^.^15,^.^1", stripes="none", grid="none", frame="none"]
 |===
-||In this first expression, the `aqua-star` is placed `beside` the `orange-dot`, and then the whole thing is `scaled` down to half its size. 
-||In this second expression, both images are `scaled` down to half their size, and then the small `aqua-star` is placed `beside` the small `orange-dot`. 
+||`aqua-star` is placed `beside` the `orange-dot`. +
+Then the whole thing is `scaled` down to half its size. 
+||Both images are `scaled` down to half their size. +
+Then small `aqua-star` is placed `beside` small `orange-dot`. 
 |
 |===
+
+@ifnotslide{
+This resequencing is called @vocab{distributing}. As a programmer, @vocab{distributing} can allow us to complete otherwise complex computations with efficiency and ease... But, _before we can distribute_, we need to know which image-transforming @proglang functions it works for!
+}
 
 @lesson-instruction{
 - Make a prediction: Will these two Circles of Evaluation produce the same images? 
 - Then turn to @printable-exercise{distribution-and-code.adoc}.
 - And test your prediction using the @starter-file{expressions-equations}.
 }
-
-@slidebreak{Launch}
-
-When we encounter an expression that applies a function to a group as a whole and rewrite the expression to apply the function to each element of the group before forming the group, we are @vocab{distributing} the function.
-}
-
-As a programmer, distributing can allow us to complete otherwise complex computations with efficiency and ease... But, before we can distribute, we need to know which image-transforming @proglang functions it works for!
 
 === Investigate
 @slidebreak{Investigate}
@@ -186,59 +196,48 @@ The Distributive Property is often considered one of the most difficult properti
 @citation{clerjuste-et-al-2024, "Clerjuste et al. (2024)"} argue that the Distributive Property, alongside the Associative Property and Commutative Property, facilitates equation manipulation, algebraic simplification, along with abstract mathematical thinking such as proportional reasoning.
 }
 
-@slidebreak{Launch}
-
-@teacher{
-In the next activity, students will use Circles of Evaluation to explore how the mathematical structure of an expression shifts when we apply the Distributive Property.
-}
+=== Investigate
+@slidebreak{Investigate}
 
 @lesson-instruction{
-- On @printable-exercise{expanded-to-factored.adoc}, fill in the blanks so that the Circle of Evaluation on the right is equivalent to the Circle of Evaluation on the left.
+- Complete @printable-exercise{expanded-to-factored.adoc} and @printable-exercise{factored-to-expanded.adoc}.
+- Fill in the blanks so that the Circles of Evaluation on the right are equivalent to the Circles of Evaluation on the left.
 - Use computation to confirm that the Circles of Evaluation in each pair are equivalent.
 - After you finish evaluating each Circle of Evaluation, place a checkmark next to the Circle of Evaluation that you think results in a simpler computation.
 }
 
-@slidebreak{Launch}
+@opt{@printable-exercise{distribution-challenge.adoc} includes expressions with fractions and decimals and applies the Distributive Property in both diretions.}
+
+@teacher{The last two questions on @printable-exercise{factored-to-expanded.adoc} and @printable-exercise{distribution-challenge.adoc}ask students to use a made-up function at the top of the Circle of Evaluation, rather than an operator. These functions -- which are descriptively named `triple`, `double`, `times9`, and `times7` -- take in just _one_ input. Students should observe that these functions distribute over addition and subtraction in the same manner as multiplication does.}
+
+@slidebreak{Investigate}
 
 @QandA{
 @Q{When was it easier to compute the _sum_? When was it easier to compute the _product_?}
 @A{There are no right or wrong answers, here. We want students to begin to consider how a nuanced understanding of the Distributive Property can result in more flexible and efficient mental math.}
 }
 
-@slidebreak{Launch}
-
-@lesson-instruction{
-- On @printable-exercise{factored-to-expanded.adoc}, the Circle of Evaluation representing a product is provided, and you will complete the Circle of Evaluation that represents a sum.
-- Complete @printable-exercise{distribution-challenge.adoc}, where you will practice applying the Distributive Property in both directions -- and with expressions that include fractions and decimals!
-- Finally, complete @printable-exercise{does-distribution-hold-for-division.adoc}
-}
-
-@teacher{The last two questions on each of the above pages ask students to use a made-up function at the top of the Circle of Evaluation, rather than an operator. These functions -- which are descriptively named `triple`, `double`, `times9`, and `times7` -- take in just _one_ input. Students should observe that these functions distribute over addition and subtraction in the same manner as multiplication does.}
-
-=== Investigate
 @slidebreak{Investigate}
 
-Dani says: @big{@math{5 \times 43 = 208}}   Because 43 is the sum of 40 and 3. So you can multiply 5 by 40 to get 200, and add 5 and 3 to get 8.
-
-Elise says:   We should add 200 + 15, not 200 + 8.
-
-@QandA{
-@Q{Who is correct -- Elise or Dani?}
-@A{Elise is correct. We need to multiply each value by 5.}
-@A{If we drew the Circles of Evaluation it would help us to picture how the operations get distributed:
-@show{(coe '(* 5 43))} = @show{(coe '(* 5 (+ 40 3)))} = @show{(coe '(+ (* 5 40) (* 5 3)))}
-}
-}
-
-@teacher{
-The activities in the Launch focused on students' internalizing the structure of expressions both before and after applying the Distributive Property. During this segment of the lesson, students apply what they have learned.
-}
-
-@slidebreak{Investigate}
+As we've seen, being fluent with using the Distributive Property to translate between expanded and factored form can simplify computations. But it takes practice! Many students mis-translate expressions when they are first working with Distribution. Let's see if we can spot some common mistakes.
 
 @lesson-instruction{
 - Turn to @printable-exercise{true-or-false.adoc}, where you will determine whether or not each pair of Circles of Evaluation are equivalent. Explain your response.
 - Complete @printable-exercise{which-not-equivalent.adoc} by crossing out the Circle of Evaluation that isn't equivalent to the others, and then explain your choice.
+}
+
+@slidebreak{Investigate}
+
+@lesson-instruction{
+- Take a minute to stop and think. Make a prediction: Does the Distributive Property hold for division?
+- Complete @printable-exercise{does-distribution-hold-for-division.adoc} with your partner.
+- Be ready to explain your thinking about why the Distributive Property does or doesn't work with division. 
+}
+
+@QandA{
+@Q{What did you decide: Can we apply the Distributive Property to problems involving division? Why or Why not?}
+@A{Yes! The Distributive Property hold for division, too!}
+@A{The Multiplicative Inverse Property tells us that any division problem can be rewritten as multiplying by the inverse, so if the property holds for multiplication, it must also hold for division.}
 }
 
 === Synthesize
@@ -247,11 +246,11 @@ The activities in the Launch focused on students' internalizing the structure of
 @QandA{
 @Q{How would you summarize the Distributive Property in your own words?}
 
-@Q{Elise and Dani are looking at this problem: @math{4 \times (100 - 1.25)}. +
+@Q{Elise and Dani are looking at this problem: @math{4 \times (100 - 6)}. +
 Dani tells Elise that we must _always_ evaluate what's inside the parentheses first. +
 Do you agree with this idea -- or can Dani be more flexible? Explain.
 }
-@A{Some students may agree with Dani. Acknowledge that evaluating what's inside the parentheses first will definitely work, but that doesn't mean that it is the only way.}
+@A{Some students may agree with Dani. Acknowledge that it will *always work* to evaluate what's inside the parentheses first, *but it's not the only way!*.}
 @A{Some students may suggest that distributing is a way of addressing the grouping symbol.}
 @A{In this particular instance, applying the Distributive Property results in a much simpler computation with the same correct result.}
 }
@@ -272,7 +271,7 @@ Students discover how some computations are simpler and more efficient when we a
 @Q{Can you represent the expression @math{45 \times 81 - 45 \times 79} in a simpler way?}
 @A{Yes. We can apply the Distributive Property, transforming the expression into @math{45 \times (81 - 79)} or @math{45(81 - 79)}.}
 
-@Q{Can you represent your solving process with a chain of Circles of Evaluation?}
+@Q{Can you represent your computation process with a chain of Circles of Evaluation?}
 @A{Invite a student to draw on the board. See below for one possible representation. You might need to draw a Circle or two to get students to see what's going on}
 }
 
@@ -295,23 +294,20 @@ The expression we just looked at can also be written as   @math{45(81 - 79)}, 
 === Investigate
 @slidebreak{Investigate}
 
-@teacher{
-If we were asked to compute @math{70 \times 39}, we could use calculator or the standard algorithm. Now that we are familiar with the Distributive Property, we have another valuable tool for efficient mental computation.
-}
+Now that we are familiar with the Distributive Property, if we were asked to compute @math{70 \times 39}, we have another valuable tool for efficient mental computation.
 
 @lesson-instruction{
-Turn to @printable-exercise{mental-math.adoc} and look at the first problem.
+- Turn to @printable-exercise{mental-math.adoc} and look at the first problem.
+- Our goal here is to make the math easier by creating an equivalent expression that we can solve in our heads!  
+   * We can think of 39 as the difference of 40 and 1.
+   * That allows us to compute @math{70 \times 39} by findinf the difference between @math{70 \times 40} and @math{70 \times 1}.
+- Complete the rest of the page by creating equivalent expressions that we can solve in our heads.
 }
-
-Our goal here is to make the math easier by creating an equivalent expression that we can solve in our heads! So, instead of finding the product of 70 and 39, we are going to multiply 70 by the difference of 40 and 1.
 
 @slidebreak{Investigate}
 
-@lesson-instruction{
-- Complete the next Circle of Evaluation, which shows that we are going to _distribute_ 70.
-- Observe how we can now compute our solution by finding the difference between two products.
- * Do you find this process more efficient than the standard algorithm for multiplication? Explain.
-- Complete the rest of the page by creating equivalent expressions that we can solve in our heads.
+@QandA{
+@Q{So far, do you find this process more efficient than the standard algorithm for multiplication? Explain.}
 }
 
 @teacher{Like any solving strategy, this takes practice! There is a good chance that students will *not* find this efficient at first. }
@@ -324,6 +320,10 @@ Our goal here is to make the math easier by creating an equivalent expression th
 @A{We can think of the two digit number as an addition problem and then distribute. e.g. @math{87 \times 6 = (80 + 7) \times 6} so we can compute @math{(80 \times 6) + (7 \times 6)}
 }
 
-@Q{Can you think of a multiplication problem that would be _easier_ to solve using the Distributive Property?}
+@Q{Think of an example where calculations would be simpler if we use the *Expanded Form* of an expression, like @math{(a * b) + (a * c)}.}
 @A{We recommend inviting many students to share the problems they come up with. Make a list on the board for students to review together.}
+@A{When the sum is not a round number that's easy to work with the expanded products might be simpler to compute before adding.}
+
+@Q{Think of an example where calculations would be simpler if we use the *Factored Form* of an expression, like @math{a(b + c)}.}
+@A{When the sum is a round number that's easy to work with.}
 }
