@@ -153,7 +153,7 @@ When given another dataset to classify, `tree-any4` is out-scoring `tree-q6`!
 | @image{images/dot-plot-pounds-testing.png}
 |===
 
-This is an example of what ML engineers call @vocab{over-fitting}. The more a classifier depends on an attribute, the more sensitive it is to variations in that attribute between populations. In this case, `tree-q6` was _totally dependent_ on `pounds`, whose distribution is very different in the `testing` dataset.
+This is an example of what ML engineers call @vocab{over-fitting}. The more a classifier depends on the quirks of an attribute in the training data, the more sensitive it is to variations in that attribute when it comes time to use new inputs. In this case, `tree-q6` was _totally dependent on very specific thresholds in the `pounds` column_, so when the testing dataset had different thresholds the classifier performed poorly.
 
 @slidebreak{Investigate}
 @ifslide{
@@ -199,7 +199,7 @@ Students learn about confusion matrices, and use Pyret to generate them from cla
 @slidebreak{Launch}
 Tests for the flu, measles, etc are all forms of @vocab{classifiers}! When looking at any of these tests, public health officials need to think about the following:
 
-[.highlight-diagonal, cols="<1a,^2a,^2a", stripes="none", options="header"]
+[.highlight-diagonal, cols="<.^1a,^.^2a,^.^2a", stripes="none", options="header"]
 |===
 | Actual Status
 | Predicted Positive
@@ -208,7 +208,7 @@ Tests for the flu, measles, etc are all forms of @vocab{classifiers}! When looki
 | Infected
 | *True Positive:* +
    The test says someone is infected, and they _actually are_
-| *False Positive:* +
+| *False Negative:* +
    The test says someone is infected, but they aren't
 
 | Not Infected

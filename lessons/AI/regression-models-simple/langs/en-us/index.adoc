@@ -323,17 +323,18 @@ Students will notice that `lr-plot` defines models down to decimal values, certa
 @slidebreak{LaunchR}
 @QandA{
 @right{@image{images/steering-v-curve-lr.png, 300}}
-@Q{What does the slope of our `curve` model tell us?}
+@Q{What does the slope of our `curve` model (~19.5) tell us?}
 @A{That the steering angle increases by about 19.5 degrees for each 1 degree increase in the curve.}
 
-@Q{What does the y-intercept of our `curve` model tell us about the relationship between `curve` and `steering-angle`?}
-@A{If the curve is zero, the steering angle should be zero.}
+@Q{What does the y-intercept of our `curve` model (~0.41) tell us about the relationship between `curve` and `steering-angle`?}
+@A{If the curve is zero, the steering angle should be 0.41°.}
 
 @Q{Does that _make sense in the real world?_}
-@A{Yes! A road with zero curve should need zero degrees of steering!}
+@A{Almost. A road with zero curve should need zero degrees of steering, but instead we're seeing just under half a degree worth of curve!}
 
 @Q{What does the @math{S}-value tell us?}
 @A{We expect the error in predictions made by this model to be off by about 37 degrees.}
+@A{This might explain some of that mysterious 0.41° turn when the road is straight!}
 }
 
 @QandA{
@@ -349,9 +350,9 @@ Students will notice that `lr-plot` defines models down to decimal values, certa
 }
 
 @slidebreak{Launch}
-@lesson-point{We can't calculate @math{S} unless we have more than two rows in our table!}
+@lesson-point{We can't calculate a _meaningful_ @math{S} unless we have more than two rows in our table!}
 
-Remember, we use two points to define the line, and if there's no _other_ data left over then there's nothing to fit! In order for us to calculate @math{S}, we need a table with _three or more points._
+A line through two points fits both exactly, so our @math{S}-value is zero. But that says less about the model than it does about the lack of data: there’s no error to measure, so it's a "perfect fit" without any real meaning.
 
 === Investigate
 
@@ -427,7 +428,7 @@ Students will find that `curve-predictor` drives much better than the others. Al
 }
 
 === Common Misconceptions
-*More steering isn't always better.* Students may expect that a predictor build from "good" steering data will drive perfectly. Remind them that a model can only generalize from what it's seen — it has no understanding of the road. Data from a perfect drive on a straight road will produce a model that might do _very poorly_ on a curved one!
+*Training data may not be representative of the real world!* Students may expect that a predictor built from "good" steering data will drive perfectly. Remind them that a model can only generalize from what it's seen — it has no understanding of the road. Data from a perfect drive on a straight road will produce a model that might do _very poorly_ on a curved one!
 
 === Synthesize
 @slidebreak{Synthesize}
