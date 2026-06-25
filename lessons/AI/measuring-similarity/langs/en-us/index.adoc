@@ -59,13 +59,14 @@ When we ask Google to find images similar to the one we dragged, it comes back w
 
 @lesson-instruction{
 - Open the @starter-file{ai-image} on your computer and save a copy that's just for you. Then click "Run".
-- Evaluate `mountains` in the *Interactions Area*, then click on the thumbnail to expand it. 
+- There are a lot of definitions in this file! Experiment with them in the Interactions Area to see what they are.
 }
 
 @slidebreak{LaunchR}
 @ifslide{@image{images/all-mountains.webp}}
 
 @QandA{
+Evaluate `mountains` in the *Interactions Area*, then click on the thumbnail to expand it.
 @Q{What attributes do these nine images share? What makes the images similar?}
 @Q{What attributes distinguish these nine images? What makes them different?}
 @Q{Which is _more similar_ to `sun1`:   `day1` or `day2`?  Why?}
@@ -94,6 +95,7 @@ Each pixel has a particular amount of Red, Green, and Blue in it. For our purpos
 While the training corpus starts with images, the computer focuses only on _the computed attributes of those images_. Let's take a look at how the computer processes a simple image.
 
 @lesson-instruction{
+- In the *Definitions Area*, find the definition of `red-blue-tile`, `pixel`, and `pixel-dominant-rgb`.
 - Return to the @starter-file{ai-image} and evaluate `red-blue-tile`.
 }
 
@@ -113,7 +115,7 @@ While the training corpus starts with images, the computer focuses only on _the 
 @slidebreak{InvestigateR}
 @right{@image{images/butterfly.png, 200}}
 
-Computers can look at groups of pixels to compute values. For example:
+Computers can look at _groups of pixels_ to compute values. For example:
 
 - *Color* - "how blue is the image?" 
 - *Symmetry* - "how similar are the pixels on one side of the image to the pixels on the other side of the image?". 
@@ -123,12 +125,13 @@ Computers can look at groups of pixels to compute values. For example:
 @slidebreak{Investigate-DN}
 
 @lesson-instruction{
-- Return to the @starter-file{ai-image} and experiment for a moment. Look at
-  * `image-symmetry-horizontal` and `image-symmetry-vertical` for `red-sq`, `green-t`, and `half-and-half`
-  * `image-luminance` for `black-sq` and `white-sq` and predict luminance for `half-and-half`
-  * `image-entropy` for `half-and-half` and `white-sq` and predict luminance for `black-sq`
-  * `image-to-color-list(square(5, "solid", "orange"))`
-  * `dominant-rgb-colors(square(5, "solid", "orange"))`
+Evaluate each of the following:
+
+- `image-symmetry-horizontal(red-sq)`, then try it for `green-t` and `half-and-half`. What about `image-symmetry-vertical`?
+- `image-luminance(black-sq)`, then `white-sq`. What do you think the luminance will be for `half-and-half`?
+- `image-entropy(black-sq)`, then `white-sq`. What do you think the entropy will be for `half-and-half`?
+- `image-to-color-list(square(5, "solid", "orange"))`
+- `dominant-rgb-colors(square(5, "solid", "orange"))`
 - What do you Notice? What do you Wonder?
 }
 
@@ -379,6 +382,7 @@ Like the shadows in this image, our two scatter plots in "Blue-v-Green Space" an
 @lesson-instruction{
 - Open the @online-exercise{https://www.desmos.com/3d/qmu6fmrs6h, RGB Image Plot} in Desmos
 - The table at the top of the panel contains the Red, Green, and Blue values from our `computed` table
+- Find the point for the grass image, which is plotted as a purple dot
 - The scatter-plot for Blue-v-Green is visible against the "back wall" of the cube, with each image plotted as a *green* dot. Compare it to the Pyret scatter plot on @printable-exercise{plotting-images.adoc}.
 - Complete the first two sections on @printable-exercise{from-2-to-3.adoc}.
 }
@@ -399,7 +403,7 @@ How well does `distance-similarity` in our 3D Colorspace work for images with *g
 - Try it with ID `"red2"`, to see how well it works for images with *red squares*
 - Try it with ID `"grass-sun"` to see how well it works for images with *sun*
 
-Can you identify a higher-dimensional space that works well for all four groups? Try adding other columns!
+Try adding other columns to our dimension list. Can you identify a __higher__-dimensional space that works well for all four groups?
 }
 
 @slidebreak{Investigate}
@@ -523,7 +527,9 @@ There are still a lot of limitations to our system, however:
 @slidebreak{InvestigateR}
 @right{@image{images/computer-vision.jpg, 400}}
 
-Some ML systems are capable of recognizing parts of an image ("person", "car", etc.). This belong to a class of ML algorithms called "Computer Vision", which relies heavily on more advanced -- and computationally intensive --concepts that we won't cover here. We're going to use our human brains to see these elements in our images! And then explore whether a Data Driven Algorithm can help us re-create Image Search technologies, even without the fancy Computer Vision tech.
+Some ML systems are capable of recognizing parts of an image ("person", "car", etc.). This belong to a class of ML algorithms called "Computer Vision", which relies heavily on more advanced -- and computationally intensive --concepts that we won't cover here.
+
+We're going to use our human brains to see these elements in our images, and then explore whether a @vocab{Data Driven Algorithm} can help us re-create Image Search technologies, even without the fancy Computer Vision tech.
 
 === Synthesize
 

@@ -348,16 +348,31 @@ Machine Learning Engineers and Data Scientists care a lot about @vocab{normalizi
 @A{standardize units: do we want to go with 5'8" or 68" or 1.72m or 172cm?}
 }
 
-== Detecting Plagiarism
+== Super- and Unsupervised Language Similarity
 @objective{ai-plagiarism-detector-ethics}
 
 === Overview
-Armed with their similarity detection, students explore the how that algorithm can be used to detect plagiarism. Now that they know how it works, they consider limitations of the algorithm and when it might not be ethical for teachers to use it.
+Armed with their similarity detection, students explore the how that algorithm can be used to detect plagiarism and perform sentiment analysis. Now that they know how it works, they consider limitations of the algorithm and when it might not be ethical for teachers to use these models for plagiarism detection, or when to use it to check the tone of their emails.
 
 === Launch
 @slidebreak{Launch}
 A @vocab{training corpus} is a collection of data used to train AI/ML @vocab{models}, enabling them to learn patterns and make predictions.
 
+*Let's consider an unsupervised application...*
+
+@QandA{
+@Q{When might we want to know if two essays are similar?}
+@Q{When might a _teacher_ want to know if two essays are similar?}
+}
+
+
+*Let's consider a supervised application…*
+@QandA{
+@Q{Why might it be useful to have centroids for emails with lots of "angry words"? With "friendly words"?}
+@Q{Why might it be useful to have centroids for hundreds of different topics?}
+}
+
+@slidebreak{Launch}
 For a plagiarism checker, the corpus is the set of documents previously fed into the checker.
 
 @QandA{
@@ -388,25 +403,37 @@ To catch plagiarism across _any_ essay, a teacher needs a model trained on a _ma
 
 @A{Students should provide a wide range of estimates.}
 @A{The largest possible estimate would be 10,000 dimensions (20 essays multiplied by 500 words) --but it is not a good estimate, because we commonly repeat and reuse words like "the", "and", "a", and so on.}
-
 @A{Before making an estimate, students might have clarifying questions, like:
   * Did all of the students write about the same topic?
   * How sophisticated is the student writing?
   * Did all students actually write 500 words?
 }
-
 @A{A reasonable prediction would probably be that there would be at least a few hundred dimensions in the model.}
 }
 
 @lesson-instruction{
-Complete @printable-exercise{matching-human-judgment.adoc}.}
+Complete @printable-exercise{matching-human-judgment.adoc}.
+}
+
+
+@slidebreak{Investigate}
+@QandA{
+@Q{What words would show up in a centroid for "angry words"?}
+@Q{What words would show up in a centroid for "friendly words"?}
+@Q{What words would show up in a centroid for "professional words"?}
+@Q{How does Grammarly check to see if the email to your boss is going to get you in trouble?}
+}
+
+@slidebreak{Investigate}
+By adding @vocab{supervised learning} to our tool belt, we can start performing what ML engineers call "sentiment analysis" on the _tone_ or _topic_ of our emails and text messages!
+
+- This allows us the algorithm to check if our email is "friendly" or "angry"
+- This allows our phone to summarize all the texts we got from our friend into a concise summary notification
 
 === Synthesize
 @slidebreak{Synthesize}
 
 @QandA{
-@Q{What strategies did you use to complete the matching activity? Were any of the scenarios especially challenging to match?}
-
 - In Class A, 3rd graders are asked to write 1-paragraph essays about zebras
 - In Class B, high school freshmen are asked to write a 3-page paper about their favorite TV show
 

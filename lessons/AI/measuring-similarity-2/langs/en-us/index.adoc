@@ -164,6 +164,7 @@ In our 2-dimensional Blue-Green Space, for example, the midpoint halfway between
 
 If you have more than 1 dimension, the same math applies: compute the centroid for each column separately. Can we get a better result for sunny images by teaching Pyret what "sun-ness" looks like for two of our images?
 
+@slidebreak{LaunchC}
 For any set of points (in any number of dimensions!), the "middle" is the @vocab{Centroid}.
 
 [cols="^.^1a, ^.^1a, ^.^1a", grid="none", frame="none", options="header"]
@@ -195,6 +196,7 @@ How can our @vocab{centroid} implementation solve this problem, too?
 @slidebreak{Investigate}
 Building @vocab{centroids} is where we *start generalizing across rows*, because now we can access the power of human-labeled information to reason about _groups_. Instead of looking at one image with grass, we can now look at multiple grassy images and talk about _what they have in common: "grass-ness"_.
 
+@slidebreak{Investigate}
 And we can use that to solve *both* of the limitations of our unsupervised system!
 
 - We can find a centroid for all the images labeled with "sun", and use that to find __un__-labeled images that are close to "sun-ness". Without centroids, we're stuck comparing images to *one picture with a sun*.
