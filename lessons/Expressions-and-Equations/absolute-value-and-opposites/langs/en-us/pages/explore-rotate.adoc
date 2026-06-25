@@ -1,5 +1,5 @@
-[.landscape]
 = Exploring Rotations
+[.landscape]
 
 ++++
 <style>
@@ -13,53 +13,51 @@ Use the @starter-file{expressions-equations} for this page.
 
 @n Draw the image that each Circle of Evaluation will produce. The first one has been done for you.
 
-[.FillVerticalSpace, cols="^.^1a,^.^1a,^.^1a,^.^1a,^.^1a,^.^1a,^.^1a", stripes="none"]
+[cols="^.^1a,^.^1a,^.^1a,^.^1a,^.^1a,^.^1a,^.^1a,^.^1a", stripes="none"]
 |===
-
 | @show{(coe '(rotate 45 hello))}
+| @show{(coe '(rotate -45 hello))}
 | @show{(coe '(rotate 90 hello))}
+| @show{(coe '(rotate -90 hello))}
 | @show{(coe '(rotate 135 hello))}
+| @show{(coe '(rotate -135 hello))}
 | @show{(coe '(rotate 180 hello))}
-| @show{(coe '(rotate 225 hello))}
-| @show{(coe '(rotate 270 hello))}
-| @show{(coe '(rotate 315 hello))}
+| @show{(coe '(rotate -180 hello))}
 
 | @image{../images/hello-45.png, 40}
+| @ifsoln{@image{../images/hello-315.png, 40}}@ifnotsoln{@vspace{8ex}}
 | @ifsoln{@image{../images/hello-90.png, 20}}
-| @ifsoln{@image{../images/hello-135.png, 40}}
-| @ifsoln{@image{../images/hello-180.png, 40}}
-| @ifsoln{@image{../images/hello-225.png, 40}}
 | @ifsoln{@image{../images/hello-270.png, 20}}
-| @ifsoln{@image{../images/hello-315.png, 40}}
-
+| @ifsoln{@image{../images/hello-135.png, 40}}
+| @ifsoln{@image{../images/hello-225.png, 40}}
+| @ifsoln{@image{../images/hello-180.png, 40}}
+| @ifsoln{@image{../images/hello-180.png, 40}}
 |===
 
-@n What did you discover? (Some questions to consider: What happens when you rotate an image 90 degrees? 180 degrees? Were rotations clockwise or counter-clockwise?) @fitb{}{} +
-@fitb{}{} +
-@fitb{}{}
+@n What did you discover? @fitb{}{@ifsoln{answers will vary}} +
+@fitb{}{@ifsoln{be sure to sureface that positive rotations are counter clockwise}} 
 
 @vspace{1ex}
 
 @n The table below includes negation, absolute value, and composed rotations. Draw the image that each Circle of Evaluation will produce.
 
-[cols="^.^1a,^.^1a,^.^1a,^.^1a,^.^1a", stripes="none"]
+[cols="^.^2a,^.^3a,^.^2a,^.^2a,^.^2a", stripes="none"]
 |===
-
 | @show{(coe '(rotate (negate 180) hello))}
 | @show{(coe '(rotate (negate (negate 90)) hello))}
 | @show{(coe '(rotate (abs -45) hello))}
 | @show{(coe '(rotate -30 (rotate 30 hello)))}
 | @show{(coe '(rotate (abs 225) hello))}
 
-| @ifsoln{@image{../images/hello-180.png, 40}} @vspace{.5in}
+| @ifsoln{@image{../images/hello-180.png, 40}} @ifnotsoln{@vspace{8ex}}
 | @ifsoln{@image{../images/hello.png, 40}}
 | @ifsoln{@image{../images/hello-45.png, 40}}
 | @ifsoln{@image{../images/hello.png, 40}}
 | @ifsoln{@image{../images/hello-225.png, 40}}
 
-5+| *@star For each Circle in the table above, can you up with a _simpler, equivalent_ Circle of Evaluation that will produce the same image? Draw them in the empty boxes below.*
+5+| *@star For each Circle of Evaluation above, draw a _simpler, equivalent_ Circle of Evaluation below that will produce the same image.*
 
-| @ifsoln{@show{(coe '(rotate 180 hello))}} @vspace{1.5in}
+| @ifsoln{@show{(coe '(rotate 180 hello))}} @ifnotsoln{@vspace{8ex}}
 | @ifsoln{@show{(coe '(rotate 90 hello))}}
 | @ifsoln{@show{(coe '(rotate 45 hello))}}
 | @ifsoln{@show{(coe 'hello)}}
