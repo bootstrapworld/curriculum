@@ -270,15 +270,23 @@ We used the `"green"` column to define a number line - a "Green Space" - where e
 @A{We could calculate the distance between them on that number line.}
 }
 
-@slidebreak{Launch}
+@slidebreak{LaunchR}
+@right{@image{images/matchmaker.jpg, 200}}
+_A mother goes to the village matchmaker. "This is my child," she says, "can you find them a match that has a good sense of humor, works hard, and loves the outdoors?" The matchmaker thinks about everyone she knows, and writes down the name of her most-compatible match, her second-most-compatible match, and so on._
 
-Pyret has several functions for measuring similarity, and they each work a little differently.
+This story is a pretty good summary of what we're trying to do.
 
-`distance-similarity` computes the distance between every row in the table and a Row with a given ID and builds a new column with those values.
+- The computer is our matchmaker
+- We bring a specific image and ask it to find a match
+- We have specific qualities that we care about
+- The "matchmaker" thinks about all the images in the corpus, and ranks them in descending order of compatibility
 
+@slidebreak{LaunchR}
+@ifslide{@right{@image{images/matchmaker.jpg, 200}}}
 @hspace{1em}@show{(contract "distance-similarity" '((t Table) (ID Str) (dimensions List<String>)) "Table")}
 
-To compute how similar each image is to grass, we could evaluate `distance-similarity(computed, "grass", [list: "green"])`.
+For example, we could ask our matchmaking function for a list of matches for our `"grass"` image, caring only about the amount of `green`: +
+@indented{`distance-similarity(computed, "grass", [list: "green"])`}
 
 @slidebreak{Launch-DN}
 @lesson-instruction{
@@ -408,7 +416,7 @@ Try adding other columns to our dimension list. Can you identify a __higher__-di
 
 @slidebreak{Investigate}
 
-Overall, `distance-similarity` is a huge upgrade compared to the "are they identical?" question. But it suffers from two major problems:
+Overall, `distance-similarity` is a huge upgrade compared to the "are they identical?" question. But as a matchmaker, it still suffers from two major problems:
 
 - It focuses on _count_, rather than _proportion_: For example, a giant mountain photo has far more red pixels than a tiny red square—and thus appears “closer” to the big red square than the tiny one—even if only a small fraction of the mountain image is red
 - It ignores _orientation_: Humans see two "mostly red" images as similar, but the distance formula doesn't. It only calculates the space between points, ignoring where they _actually lie on the graph_.
@@ -469,13 +477,18 @@ This solves both of the problems with `distance-similarity`:
 }
 
 === Investigate
-@slidebreak{Investigate}
+@slidebreak{InvestigateR}
+@right{@image{images/matchmaker.jpg, 200}}
 
-Of course, Pyret has a function for angle similarity, too!
+Of course, Pyret has a "matchmaker" function for angle similarity, too!
 
 @hspace{1em}@show{(contract "angle-similarity" '((t Table) (ID Str) (dimensions List<String>)) "Table")}
 
-This function _compares every row in the table_ to the Row with the given ID, calculating the angle-similarity between the points specified by the columns.
+This matchmaker does exactly the same job as `distance-similarity`:
+
+- We bring a specific image and ask it to find a match
+- We have specific qualities that we care about
+- The "matchmaker" thinks about all the images in the corpus, and ranks them in descending order of compatibility. But this time, it's using *the angle between the rays* rather than the distance between the points.
 
 @lesson-instruction{
 Complete @printable-exercise{angle-similarity-pyret.adoc}
