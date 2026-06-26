@@ -4,6 +4,7 @@
 /* add a dotted border around specialized directions */
 .myCustomClass {
   border: dotted 1px black;
+  text-align: center;
   p {margin-left: .25em !important; padding: 10px !important;}
 }
 </style>
@@ -14,7 +15,7 @@ Open @starter-file{self-driving} in Pyret and save a copy of your own. Then clic
 
 == Playing the Game
 
-@n *Test run:* to get a feel for the simulator, evaluate `train-bev(30)` to run the simulator at a speedy 30 frames per second. Use the left- and right-arrow keys to steer the car once around the track and cross the finish line. In the top-left corner of the simulator, you'll find the current `steering-angle`, along with some some other data. _We won't be saving this data, so don't worry about driving perfectly right now!_
+@n *Test run:* evaluate `train-bev(20)` to run the simulator at a speedy 20 frames per second. *Use the left- and right-arrow keys to steer the car*. In the top-left corner of the simulator, you'll find the current `steering-angle`, along with some some other data.
 
 @n What happens to the track when you cross the finish line? @fitb{}{@ifsoln{We get a new track with a different shape.}}
 
@@ -24,24 +25,35 @@ Open @starter-file{self-driving} in Pyret and save a copy of your own. Then clic
 @vspace{1ex}
 
 [.myCustomClass]
-Every time we evaluate `train-bev`, we'll get a new table, based on how we steer the car. To save data from a training session, we need to define it as something before we start, e.g. `first-attempt = train-bev(20)`.
+Every time we drive the car, we create a new table based on how we steer. But to _save that data_ and use it later, *we need to define it*.
 
-@n *Training run:* slow down the training lap to get better data, and *save it as a variable*. Evaluate `b-data = train-bev(10)` and steer the car to the finish the line. When you close the simulator, evaluate `b-data`. How many rows are in your table? @fitb{}{@ifsoln{answers will vary - likely 500 to 1000}}
+@n *Training run:* slow down the training lap to get better data, and *save it as a variable*. Evaluate `run1 = train-bev(10)` and steer the car to the finish the line. When you close the simulator, evaluate `run1`. How many rows are in your table? @fitb{}{@ifsoln{answers will vary - likely 500 to 1000}}
 
-@n Now let's try another lap using a "Point of View" simulation. Evaluate `p-data = train-pov(5)`. Which view do you prefer, and why? @fitb{}{@ifsoln{Answer will vary.}} +
+@n Now let's try another lap using a "Point of View" simulation. Evaluate `run2 = train-pov(5)`. Which view do you prefer, and why? @fitb{}{@ifsoln{Answer will vary.}} +
 @fitb{}{@ifsoln{Birds Eye View, because we could anticipate what was coming and plan ahead. Also, the road didn't get hidden as we went up.}}
 
 == Examining the Training Data
 
 Each row in your table represents one snapshot of your drive, showing the car's state at that instant.
 
-[.data-table, cols="^1a,^3a", options="header", stripes="none", frame="none"]
+[cols="^1,^1,^1,^1", stripes="none", frame="none"]
 |===
-| Column       | What it measures
-| `speed`      | How fast the car is moving
-| `curve`      | How sharply the road is curving (positive = right, negative = left)
-| `skew`       | How far out of alignment the car's orientation is from the direction the road is headed
-| `offset`     | How far the car is from the center of the lane
+| *Curve* +
+  @image{../images/curve.png, 135} +
+  The curvature of the road in front of the car (-6° to 6°)
+
+| *Speed* +
+  @image{../images/speed.png, 135} +
+  How fast the car is moving +
+  (2 to 3)
+
+| *Offset* +
+  @image{../images/offset.png, 135} +
+  How far the car is from the center line (-45 to 45)
+
+| *Skew* +
+  @image{../images/skew.png, 135} +
+  Angle of the car relative to the road (-135° to 135°)
 |===
 
 @n Which column do you think is most important for predicting `steering-angle`? Why? @fitb{}{} +
@@ -52,8 +64,5 @@ Each row in your table represents one snapshot of your drive, showing the car's 
 @n What might happen if a self-driving car traveled on a _curved_ road, after being trained on data collected on a perfectly _straight_ road? @fitb{}{@ifsoln{The model would have no idea what to do —}} +
 @fitb{}{@ifsoln{ it's never seen a curve. It would predict nearly-zero steering even when the road bends sharply.}}
 
-@n Would you trust a model trained only on `p-data` to drive safely on all roads? @fitb{}{} +
-@fitb{}{@ifsoln{Probably not — we haven't seen enough variety. A model can only generalize from what it's been trained on.}}
-
 @n Describe your *ideal* training dataset: how many rows does it have? Is it trained on different tracks? Speeds? What else? @fitb{}{} +
-@blanklines{2}{@ifsoln{Hundreds if not thousands of rows, over many different tracks driven in different ways (always on one side of the line or the other, or in the center, different speeds, etc.)}}
+@blanklines{3}{@ifsoln{Hundreds if not thousands of rows, over many different tracks driven in different ways (always on one side of the line or the other, or in the center, different speeds, etc.)}}

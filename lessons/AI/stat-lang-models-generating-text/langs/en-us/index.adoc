@@ -258,11 +258,11 @@ The phrase "there was an old lady who swallowed a..." is repeated in our corpus!
 
 @slidebreak{Investigate}
 
-In the example you just worked through, you computed the probability that "was" appears after the unigram "there"...
+In the example you just worked through, you computed the _conditional probability_ that "was" appears after the unigram "there"...
 
-@indented{by dividing the number of times `"there"` is followed by `"was"` (5) by the number of times we see `"there"` followed by anything (5)}
+@indented{by dividing the number of times *`"there"` is followed by `"was"`* (5) by the number of times we see *`"there"` followed by anything* (5)}
 
-We can represent this computation with a special notation:
+This fraction represents the  that "was" will come after "there":
 
 @indented{
 @math{p(was | there) = \frac
@@ -345,8 +345,11 @@ We've created helper functions for this, too:
 
 - We can use these contract to find all the possible completions for a starting string: `completions(m, "swallowed the")`
 
-- Or to choose the next `n` words at random: `choose-completion(m, "swallowed the", 1)` chooses one word; increase the `1` to generate more at once
-
+- Or to choose the next `n` words at random:
+@indented{
+`choose-completion(m, "swallowed the", 1)`
+`choose-completion(m, "swallowed the", 2)`
+}
 
 @slidebreak{Investigate-DN}
 

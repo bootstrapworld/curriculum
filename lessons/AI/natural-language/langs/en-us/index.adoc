@@ -67,7 +67,6 @@ Recall our angle similarity function: +
 @hspace{1em}@show{(contract 'angle-similarity '((table-name Table) ("row ID" String) ("quantitative columns" List<String>)) "Table")} +
 We want to ask it to find matches for a particular essay, and tell it which attributes we care about.
 
-
 @QandA{
 @Q{Why can't we use `angle-similarity` with our `corpus`, as-is?}
 @A{It doesn't contain any @vocab{quantitative} columns!}
@@ -441,7 +440,8 @@ By adding @vocab{supervised learning} to our tool belt, we can start performing 
 - In Class A, 3rd graders are asked to write 1-paragraph essays about zebras
 - In Class B, high school freshmen are asked to write a 3-page paper about their favorite TV show
 
-@Q{Is it *equally ethical* for the teachers in both classes to use plagiarism detectors with their students' work? Why or why not?}
-@A{Definitely not!}
-@A{3rd graders have smaller vocabularies, if all the essays are about zebras the number of unique words will be small (they'll all use "Zebra", "Stripes", and "Africa", for example). And being just one paragraph long, there's not a ton of room for the frequency of words to differ! It's very likely there will be false positives in Class A, and a plagiarism detector is just not appropriate.}
+@Q{*Given what you know about how plagiarism detectors work*, why would we expect the plagiarism detector to accuse more students in Class A than Class B?}
+@A{All the essays are about zebras, so the number of unique words will be small (they'll all use "Zebra", "Stripes", and "Africa", for example).}
+@A{Being just one paragraph long, there's not a ton of room for the frequency of words to differ! It's very likely there will be false positives in Class A, and a plagiarism detector is just not appropriate.}
+@A{3rd graders have smaller vocabularies than high schoolers, so their essays will have more words in common no matter what.}
 }
