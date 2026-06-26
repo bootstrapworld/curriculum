@@ -88,24 +88,25 @@ The function used to represent "the opposite" is called `negate`. When we use `n
 @slidebreak{InvestigateR}
 
 @QandA{
-@show{(coe '(negate 2))}
-@Q{What does this Circle of Evaluation evaluate to?}
-@A{The Circle evaluates to @math{-2}.}
+@Q{How would you read this Circle of Evaluation out loud? @show{(coe '(negate 2))}}
+@A{The opposite of 2.}
+
+@Q{What does it evaluate to.}
+@A{@math{-2}}
 }
 
 @slidebreak{InvestigateR}
 
 @QandA{
-@show{(coe '(negate (negate 2)))}
-@Q{What happens if we nest a negating Circle of Evaluation _inside of_ another negating Circle, like in the above Circle?}
-@A{The opposite of the opposite of a number is the number itself, so it evaluates to @math{2}.}
+@Q{What happens if we nest a negating Circle of Evaluation _inside of_ another negating Circle? How would you translate this Circle of Evaluation into words? And what does it evaluate to? @show{(coe '(negate (negate 2)))}}
+@A{The opposite of the opposite of the opposite of 2. It evaluates to @math{2}.}
+@A{The opposite of the opposite of any number is the number itself.}
 }
 
 @slidebreak{Investigate}
 
 @QandA{
-@Q{What do each of these Circles evaluate to?}
-@A{@math{5}, @math{-5}, @math{5}, @math{-5}, and @math{5}}
+@Q{What do each of these Circles of Evaluation evaluate to? Be sure to translate them into words for yourself as you think about them.}
 
 [cols="^.^1,^.^1,^.^1,^.^1,^.^1", grid="none", stripes="none" frame="none"]
 |===
@@ -115,13 +116,15 @@ The function used to represent "the opposite" is called `negate`. When we use `n
 | @show{(coe '(negate (negate (negate 5))))}
 | @show{(coe '(negate (negate (negate -5))))}
 |===
+@A{@math{5}, @math{-5}, @math{5}, @math{-5}, and @math{5}}
 }
 
 @slidebreak{Investigate}
 
 @lesson-instruction{
-- Practice applying `negate` on @printable-exercise{true-or-false-negate.adoc}. Evaluate each side of the @vocab{equation} to confirm if it is true or false.
-- On @printable-exercise{true-or-false-negate-2.adoc}, explore Circles of Evaluation with @vocab{Variables}, and review previously explored properties (Identity, Commutative, Associative, and Distributive).
+- Practice applying `negate` and finding @vocab{opposites} on @printable-exercise{true-or-false-negate.adoc}. 
+- Evaluate each expression to determine whether or not they are equivalent.
+- Then complete @printable-exercise{true-or-false-negate-2.adoc}. You'll be exploring Circles of Evaluation with @vocab{Variables} and reviewing properties (Identity, Commutative, Associative, and Distributive).
 }
 
 @slidebreak{Investigate}
@@ -167,11 +170,11 @@ Students consider the meaning of @vocab{absolute value}, and apply the concept t
 === Launch
 @slidebreak{Launch}
 
-@lesson-instruction{
-What is the distance between these two points on the number line: @math{-8} and @math{5}?
+@QandA{
+@Q{How could we find the distance between   @math{-8}   and   @math{5}   on the number line?}
+@A{Give students a minute to contemplate, and then invite them to verbally share their strategies. Record students' thinking on the board, annotating the number line. All strategies are welcome.}
+@A{Especially of interest is any discussion that hones in on the idea of _the distance of a number from zero._}
 }
-
-@teacher{Give students a minute to contemplate, and then invite them to verbally share their strategies. Record students' thinking on the board, annotating the number line. All strategies are welcome, with a special interest in any discussion that hones in on the idea of _the distance of a number from zero._}
 
 We have a term for _the distance of a number from zero_ -- it's @vocab{absolute value}.
 
@@ -191,7 +194,7 @@ The @vocab{function} that we will use to represent absolute value is @show{(code
 @slidebreak{Investigate}
 
 @QandA{
-@Q{Let's try evaluating some Circles of Evaluation with `abs`! What does each of these Circles evaluate to?}
+@Q{Let's try evaluating some expressions involving absolute value. What does each of these Circles of Evaluation evaluate to?}
 @A{@math{20}, @math{20}, @math{43}, @math{43}, @math{43}}
 
 [cols="^.^1,^.^1,^.^1,^.^1,^.^1", grid="none", stripes="none", frame="none"]
