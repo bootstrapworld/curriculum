@@ -23,6 +23,13 @@ for _,course in ipairs(all_courses) do
   local this_course_lessons_file = course_dir .. '.cached/.workbook-lessons.rkt.kp'
   if not file_exists_p(this_course_lessons_file) then goto continue end
   local lesson_units = sread_file(this_course_lessons_file)
+  -- An empty or malformed .kp makes sread_file return a non-table (false on
+  -- empty/exhausted input). Skip the course rather than indexing into it.
+  if type(lesson_units) ~= 'table' then
+    io.stderr:write('WARNING: skipping pathway-toc for ' .. course ..
+      ' -- empty/unparseable ' .. this_course_lessons_file .. '\n')
+    goto continue
+  end
   o:write('  \"' .. course .. '\": [\n')
   for _,lunit in ipairs(lesson_units) do
     local unit_name = lunit[1]
