@@ -72,12 +72,22 @@ for pl in $proglangs; do
     fi
   done
 
+  # Publish .workbook-lessons.rkt.kp atomically. make-workbook-lessons-list.lua
+  # opens its output with 'w' (truncates to 0 immediately), so a crash or
+  # interrupt would leave a 0-byte file that a later build's reader chokes on.
+  # Write a temp and mv it into place only on success; never leave it empty.
+  kp=.cached/.workbook-lessons.rkt.kp
   if test ! -f lesson-order.txt; then
     echo WARNING: No lesson-order.txt in pathway $targetpathway
     touch lesson-order.txt
-    touch .cached/.workbook-lessons.rkt.kp
+    printf '()\n' > "$kp"        # valid empty s-expression, not a 0-byte file
   else
-    $TOPDIR/${MAKE_DIR}make-workbook-lessons-list.lua lesson-order.txt .cached/.workbook-lessons.rkt.kp $pl
+    if $TOPDIR/${MAKE_DIR}make-workbook-lessons-list.lua lesson-order.txt "$kp.tmp" $pl; then
+      mv -f "$kp.tmp" "$kp"
+    else
+      echo "ERROR: make-workbook-lessons-list failed for $targetpathway; keeping previous $kp" >&2
+      rm -f "$kp.tmp"
+    fi
   fi
 
   cd ..

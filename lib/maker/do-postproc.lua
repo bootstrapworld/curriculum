@@ -99,6 +99,7 @@ local function postproc(fhtml_cached, tipe)
   local add_codemirror_p = false
   local add_body_id_p = false
   local add_landscape_p = false
+  local add_can_be_longer_p = false
   local add_end_body_id_p = false
   local delete_line_p = false
   local openblock_attribs = false
@@ -123,6 +124,12 @@ local function postproc(fhtml_cached, tipe)
       if x:find('landscape') then
         x = x:gsub('landscape', '')
         add_landscape_p = true
+      end
+      -- An authored [.canBeLongerThanAPage] role lands on <body>; copy it onto
+      -- the #body div, where the `div#body.canBeLongerThanAPage` CSS lives. Leave
+      -- it on <body> too, since html2pdf.js keys off `body.canBeLongerThanAPage`.
+      if x:find('canBeLongerThanAPage') then
+        add_can_be_longer_p = true
       end
       --
       add_body_id_p = true
@@ -340,6 +347,10 @@ local function postproc(fhtml_cached, tipe)
         if add_landscape_p then
           add_landscape_p = false
           klass = klass .. ' landscape'
+        end
+        if add_can_be_longer_p then
+          add_can_be_longer_p = false
+          klass = klass .. ' canBeLongerThanAPage'
         end
         --
         o:write('<div id="body" class="' .. klass .. '">\n')
