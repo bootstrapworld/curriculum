@@ -109,6 +109,12 @@ div#body {
     line-height: 0;
     i+sup { margin-left: 2px; }
   }
+  /* In FillVerticalSpace (stretch) tables the cell's div.paragraph is a flex
+     container with align-items:center, and its <p> is display:contents -- so the
+     text runs and a .mathunicode span become sibling flex items, center-aligned
+     rather than sharing a baseline. That lifts text-only math (e.g. "10") up like
+     an orphaned numerator. Align the paragraph's items to the baseline instead. */
+  table.FillVerticalSpace td .paragraph { align-items: baseline; }
   em .mathunicode { font-family: 'MJXTEX-I';}
   strong .mathunicode { font-family: 'MJXTEX-B'; }
   em strong .mathunicode, strong em .mathunicode, strong .MathJax .TEX-I, em .MathJax .TEX-B {
