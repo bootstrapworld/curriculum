@@ -7,7 +7,7 @@
 @show{(contract "add-bag-cols" '((t Table) (document-col String)) "Table")}
 }
 
-@n In the Definitions Area, define a new table called `bags`, which is the result of applying `add-bag-cols` to the original `essays` table. Click "Run", and evaluate `bags` in the Interactions Area.
+@n In the Definitions Area, define a new table called `bags`, which is the result of applying `add-bag-cols` to the original `corpus` table. Click "Run", and evaluate `bags` in the Interactions Area.
 
 @n Slowly scroll the table to the right. Write down at least three observations in the space below?
 @blanklines{3}{}
@@ -43,7 +43,7 @@
 
 @n In the Interactions Area, evaluate `lowercase(badger)`. After you've experimented with the other functions, write the code that will remove punctuation _and_ put everything in lowercase: @fitb{}{@ifsoln{`remove-punct(lowercase(badger))`}}
 
-@n In the Definitions Area add `essays-norm = normalize-text-table(essays, "DOC")`. What did happened to the `"DOC"` strings? @fitb{}{@ifsoln{they were all normalized!}}
+@n Add `norm = normalize-text-table(corpus, "DOC")` to the bottom of the Definitions Area, click "Run", and evaluate `norm`. What did happened to the `"DOC"` strings? @fitb{}{@ifsoln{they were all normalized!}}
 
-@n Use `add-bag-cols` with essays-norm to create `bags2`. Does `all-cols-similarity` do a better job with this table? Explain. +
+@n Add `norm-computed = add-bag-cols(norm, "DOC")` to the bottom of the Definitions Area, and click "Run". Does `all-cols-similarity` do a better job with `norm-computed` than it did with `computed`? Explain. +
 @fitb{}{@ifsoln{Definitely. The *real* similarity of documents D and K is still recognized, and the other documents aren't even close!}}

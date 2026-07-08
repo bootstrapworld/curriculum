@@ -102,29 +102,61 @@ Let's explore the Contract for another function that works with Tables: `first-n
 - Complete the second section of @printable-exercise{sorting-and-trimming.adoc}: *Trimming Results*.
 }
 
+
 @slidebreak{Investigate}
 
-@lesson-instruction{
-Pyret knows about more than just Numbers, String, Booleans, and Tables! It can also make _Images_.
+There were only a few suggestions with an `edit-distance` of 1, but more with distances of 2, 3, and 4. As `edit-distance` increases, the number of suggestions increases, too.
 
-- Have some fun with @printable-exercise{image-contracts.adoc}.
+@QandA{
+@Q{But does it increase by the same amount each time?}
+@A{No! It grows by larger amounts for each `edit-distance`!}
+@A{It's almost exponentially larger}
+
+@Q{How could you communicate this growth to someone else, without making them scan the whole table?}
+@A{You could count the number of suggestions for each `edit-distance`}
+@A{You could make a chart}
 }
 
-@strategy{Supporting Diverse Learners}{
+@slidebreak{Investigate-DN}
+@lesson-instruction{
+- Complete the first section of @printable-exercise{visualizing.adoc}
+}
 
-- Image exploration is a low threshold / high-ceiling activity that should be engaging to all students.
-- Some students may find ALL of the contracts, but most will not!
-- When the first student in your class has successfully used the text function, give directions about which functions to prioritize with the remaining time.
+@slidebreak{Investigate}
 
-For a deeper dive into Image and Table contracts, have students work on pages from @lesson-link{contracts-strings-images} and @lesson-link{contracts-tables}.
+The `count` function produces a frequency table, showing how often a suggested word has an `edit-distance` of 1, 2, 3, and so on.
+
+@QandA{
+@Q{How is our bar chart connected to our frequency table?}
+@A{The bars are the same height as the numbers in that table}
+}
+
+@slidebreak{InvestigateR}
+@right{@image{images/text-app.png, 250}}
+A cell phone or spell-checker doesn't show you rows and columns - _it just shows you the words!_ Once a spell checker gives us a table full of words and edit-distances....how do we get the words _out?_
+
+@lesson-instruction{
+- Complete @printable-exercise{visualizing.adoc}
+}
 
 @teacher{
-Do not try to keep your students in lock-step. What is important here is for _everyone to have the opportunity to explore._
-
-Students do *not* need to find all of the contracts on this page in order to complete the lesson or the following pages. If you have to prioritize, make sure students complete the first five (up to and include `text`).
-}
+This lesson is not intended to teacher students how to read or interpret data visualizations! If you're blending this material into a Data Science or Math class where various visualizations are part of your learning goals, we highly recommend exploring our @dist-link{courses/data-science/index.shtml, Data Science} course.
 }
 
+
+@slidebreak{Investigate}
+@vocab{Row accessors} allow us to extract data from specific cells of our table by specifying the row number and column title.
+
+@QandA{
+@Q{What row number do we use to extract data from the first row of our table?}
+@A{0}
+
+@Q{What code did you write to extract the 75th suggested word from the table?}
+@A{`row-n(results, 74)["word"]`}
+
+@Q{What was the 75th suggested word?}
+@A{wield}
+}
 
 
 === Synthesize
@@ -137,6 +169,14 @@ Students do *not* need to find all of the contracts on this page in order to com
 @Q{Why did `sort` need more arguments in its Domain than either of the other two?}
 @A{It needed to know more things!}
 }
+
+@slidebreak{Synthesize}
+@QandA{
+@Q{Why would a spell checking app need to use Row Accessor functions?}
+@A{Because we want to suggest a word, not a whole row of a table!}
+@A{And we might want to take the edit-number into consideration when we make our suggestion.}
+}
+
 
 == Composing with Circles of Evaluation
 
@@ -245,12 +285,36 @@ To convert a Circle of Evaluation into code, we start at the outside and work ou
 - Complete @printable-exercise{composing-coe.adoc}.
 }
 
+
+@slidebreak{Investigate}
+
+@lesson-instruction{
+Pyret knows about more than just Numbers, String, Booleans, and Tables! It can also make _Images_.
+
+- Have some fun with @printable-exercise{spellchecker-UI.adoc}.
+}
+
+@strategy{Supporting Diverse Learners}{
+
+- Image exploration is a low threshold / high-ceiling activity that should be engaging to all students.
+- Some students may find ALL of the contracts, but most will not!
+- When the first student in your class has successfully used the text function, give directions about which functions to prioritize with the remaining time.
+
+For a deeper dive into Image and Table contracts, have students work on pages from @lesson-link{contracts-strings-images} and @lesson-link{contracts-tables}.
+
 @teacher{
-- There are multiple solutions to the bottom half of this page! Press your students to come up with both.
+Do not try to keep your students in lock-step. What is important here is for _everyone to have the opportunity to explore._
+
+Students do *not* need to find all of the contracts on this page in order to complete the lesson or the following pages. If you have to prioritize, make sure students complete the first five (up to and include `text`).
+}
+}
+
+
+@teacher{
 - Both @lesson-link{contracts-strings-images} and @lesson-link{contracts-tables} include worksheets to help students practice composing functions using the Circles of Evaluation.
 - For a more project-based approach that's suitable for a CS or Math class, teach @lesson-link{transform-compose-images} and have students tackle @lesson-link{project-logo} or @lesson-link{project-flags}.
-
 }
+
 
 === Synthesize
 @slidebreak{Synthesize}
@@ -267,17 +331,6 @@ Students continue practicing with Contracts, this time creating data visualizati
 === Launch
 @slidebreak{Launch}
 
-There were only a few suggestions with an `edit-distance` of 1, but more with distances of 2, 3, and 4. As `edit-distance` increases, the number of suggestions increases, too.
-
-@QandA{
-@Q{But does it increase by the same amount each time?}
-@A{No! It grows by larger amounts for each `edit-distance`!}
-@A{It's almost exponentially larger}
-
-@Q{How could you communicate this growth to someone else, without making them scan the whole table?}
-@A{You could count the number of suggestions for each `edit-distance`}
-@A{You could make a chart}
-}
 
 === Investigate
 @slidebreak{Investigate-DN}
@@ -297,6 +350,7 @@ The `count` function produces a frequency table, showing how often a suggested w
 @Q{Could you make a bar chart of the _first 200 suggestions_ in your `results` table?}
 @A{Yes! We could diagram it using the Circle of Evaluation, with one circle for trimming and another for the bar chart}
 }
+}
 
 @slidebreak{Investigate}
 Here's the Circle of Evaluation for our bar chart, showing only the first 200 suggestions:
@@ -306,37 +360,5 @@ Here's the Circle of Evaluation for our bar chart, showing only the first 200 su
 What will _this_ Circle of Evaluation do?
 @show{(coe '(bar-chart (first-n-rows (sort results "edit-distance" true) 200) "edit-distance"))}
 
-@slidebreak{InvestigateR}
-@right{@image{images/text-app.png, 250}}
-A cell phone or spell-checker doesn't show you rows and columns - _it just shows you the words!_ Once a spell checker gives us a table full of words and edit-distances....how do we get the words _out?_
-
-@lesson-instruction{
-- Complete @printable-exercise{visualizing.adoc}
-}
-
-@teacher{
-This lesson is not intended to teacher students how to read or interpret data visualizations! If you're blending this material into a Data Science or Math class where various visualizations are part of your learning goals, we highly recommend exploring our @dist-link{courses/data-science/index.shtml, Data Science} course.
-}
-
-
-@slidebreak{Investigate}
-@vocab{Row accessors} allow us to extract data from specific cells of our table by specifying the row number and column title.
-
-@QandA{
-@Q{What row number do we use to extract data from the first row of our table?}
-@A{0}
-
-@Q{What code did you write to extract the 75th suggested word from the table?}
-@A{`row-n(results, 74)["word"]`}
-
-@Q{What was the 75th suggested word?}
-@A{wield}
-}
 
 === Synthesize
-@slidebreak{Synthesize}
-@QandA{
-@Q{Why would a spell checking app need to use Row Accessor functions?}
-@A{Because we want to suggest a word, not a whole row of a table!}
-@A{And we might want to take the edit-number into consideration when we make our suggestion.}
-}
