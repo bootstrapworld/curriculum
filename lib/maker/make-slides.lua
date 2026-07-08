@@ -100,6 +100,7 @@ local function get_slides(lsn_plan_adoc_file, addl_exercises_list_file)
   local beginning_of_line_p = true
   local tableIdx = -1 -- to skip the preamble table
   local coeIdx = 0
+  local contractIdx = 0
   local imgIdx = 0
   local curr_slide
   local curr_slide_header = ''
@@ -177,6 +178,11 @@ local function get_slides(lsn_plan_adoc_file, addl_exercises_list_file)
             if not inside_table_p then
               update_curr_slide_text('@autogen-image{coe' .. coeIdx .. '}{images/AUTOGEN-COE' .. coeIdx .. '.png}')
             end
+          elseif arg:match('%(contract') then
+            contractIdx = contractIdx + 1
+            if not inside_table_p then
+              update_curr_slide_text('@autogen-image{contract' .. contractIdx .. '}{images/AUTOGEN-CONTRACT' .. contractIdx .. '.png}')
+            end
           else
             if not inside_table_p then
               update_curr_slide_text(c .. directive .. '{' .. arg .. '}')
@@ -211,6 +217,8 @@ local function get_slides(lsn_plan_adoc_file, addl_exercises_list_file)
           tableIdx = tableIdx + n
           _, n = txt:gsub('@show{%(coe', 'z')
           coeIdx = coeIdx + n
+          _, n = txt:gsub('@show{%(contract', 'z')
+          contractIdx = contractIdx + n
           txt2, n = txt2:gsub('@image{', 'z')
           imgIdx = imgIdx + n
           txt2, n = txt2:gsub('@centered%-image{', 'z')
