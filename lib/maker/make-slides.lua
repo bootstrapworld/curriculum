@@ -173,18 +173,14 @@ local function get_slides(lsn_plan_adoc_file, addl_exercises_list_file)
         local directive = read_word(i)
         if directive == 'show' then
           local arg = read_group(i, directive, 'scheme', 'multiline')
-          if arg:match('%(coe') then
-            coeIdx = coeIdx + 1
-            if not inside_table_p then
+          if not inside_table_p then
+            if arg:match('%(coe') then
+              coeIdx = coeIdx + 1
               update_curr_slide_text('@autogen-image{coe' .. coeIdx .. '}{images/AUTOGEN-COE' .. coeIdx .. '.png}')
-            end
-          elseif arg:match('%(contract') then
-            contractIdx = contractIdx + 1
-            if not inside_table_p then
+            elseif arg:match('%(contract') then
+              contractIdx = contractIdx + 1
               update_curr_slide_text('@autogen-image{contract' .. contractIdx .. '}{images/AUTOGEN-CONTRACT' .. contractIdx .. '.png}')
-            end
-          else
-            if not inside_table_p then
+            else
               update_curr_slide_text(c .. directive .. '{' .. arg .. '}')
             end
           end
