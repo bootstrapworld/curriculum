@@ -89,12 +89,12 @@ Similar to other AI systems we've discussed, predictive text features are traine
 
 During training:
 
-1. The computer extracts each use of the phrase "Close the" from the training dataset, along with the subsequent word.
+1. The computer extracts each use of the phrase "Close the" from the corpus, along with the subsequent word.
 2. It then determines the probability of each possible next word.
 
 @ifnotslide{@right{@image{images/texting-app.png, 200}} When making a suggestion: 
 
-@hspace{1em}It offers the words that had the highest probability of following "Close the" in the training dataset.
+@hspace{1em}It offers the words that had the highest probability of following "Close the" in the corpus.
 
 Consider this screenshot from a text messaging app. +
 In the @vocab{training corpus} it was built on, "door", "doors", and "house"  most commonly appeared after "Close the". +
@@ -104,7 +104,7 @@ But are all users recommended the _same_ completions?
 
 @ifslide{When making a suggestion: 
 
-@hspace{1em}It offers the words that had the highest probability of following "Close the" in the training dataset.
+@hspace{1em}It offers the words that had the highest probability of following "Close the" in the corpus.
 
 @slidebreak{InvestigateR}
 
@@ -261,9 +261,7 @@ The phrase "there was an old lady who swallowed a..." is repeated in our corpus!
 
 @slidebreak{Investigate}
 
-In the example you just worked through, you computed the _conditional probability_ that "was" appears after the unigram "there"...
-
-@indented{by dividing the number of times *`"there"` is followed by `"was"`* (5) by the number of times we see *`"there"` followed by anything* (5)}
+In the example you just worked through, you computed the _conditional probability_ that "was" appears after the unigram "there" by dividing the number of times *`"there"` is followed by `"was"`* (five times) by the number of times we see *`"there"` followed by anything* (five times)}
 
 This fraction represents the  that "was" will come after "there":
 
@@ -370,6 +368,9 @@ We've created helper functions for this, too:
 
 @Q{Did everyone in your class end up with same phrase? How and why did that happen?}
 @A{Yes. When considering which word to generate next, there was always one word that was clearly the most probable, and there were no ties.}
+
+@Q{What do you think would happen if you start with a word like "llama", which doesn't appear _at all_ in the original corpus?}
+@A{The probability of following "llama" is the same for every word: zero. Maybe `choose-completion` would choose at random?}
 }
 
 

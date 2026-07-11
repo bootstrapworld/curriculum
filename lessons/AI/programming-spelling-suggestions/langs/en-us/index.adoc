@@ -58,6 +58,13 @@ Can we do anything _interesting_ with that data?
 
 A spell-checker doesn't give us a table of 500 suggestions. Our cell phones don't tell us the edit distance for the suggestions they make. But just because it doesn't show us the edit distance doesn't mean it's not used! Your cell phone and spell checker uses the edit distance to help pick out the most-likely words to suggestion.
 
+@slidebreak{Launch}
+
+@lesson-instruction{
+- If you have access to a cell phone, try starting a new text message with the word `"plation"`. If not, open a new text document (in Google Docs, TextEdit, Gmail, etc.) and type `"plation"`.
+- What alternate spellings does your computer suggest?
+}
+
 We want to take the output of `alt-words` and _do something_ to it, just as spell checkers and cell phones do.
 
 === Investigate
@@ -188,9 +195,12 @@ Students learn to work with more than one function at once, by way of Circles of
 @slidebreak{Launch}
 
 @lesson-instruction{
-- Your cell phone doesn't show you every possible suggestion: it only shows you the top 3-5.
-- How do you think the functions you've learned could be used to do the same thing?
-- Discuss with the other students at your table or nearby.
+Your cell phone doesn't show you every possible suggestion:
+
+- It only shows you the top 3-5
+- It usually sorts them by edit-distance (smaller mistakes first)
+
+How do you think the functions you've learned could be used to do the same thing? Discuss with the other students at your table or nearby.
 }
 
 @teacher{Have students share their ideas}
@@ -322,43 +332,3 @@ Students do *not* need to find all of the contracts on this page in order to com
 @QandA{
 @Q{Why might it be useful to separate the _thinking_ and _coding_ steps? Why not just do them at the same time, all the time?}
 }
-
-== Data Visualization
-
-=== Overview
-Students continue practicing with Contracts, this time creating data visualizations. They also practice their function composition skills using Circles of Evaluation, combining sorting, trimming, and visualization.
-
-=== Launch
-@slidebreak{Launch}
-
-
-=== Investigate
-@slidebreak{Investigate-DN}
-
-@lesson-instruction{
-- Complete the first section of @printable-exercise{visualizing.adoc}
-}
-
-@slidebreak{Investigate}
-
-The `count` function produces a frequency table, showing how often a suggested word has an `edit-distance` of 1, 2, 3, and so on.
-
-@QandA{
-@Q{How is our bar chart connected to our frequency table?}
-@A{The bars are the same height as the numbers in that table}
-
-@Q{Could you make a bar chart of the _first 200 suggestions_ in your `results` table?}
-@A{Yes! We could diagram it using the Circle of Evaluation, with one circle for trimming and another for the bar chart}
-}
-}
-
-@slidebreak{Investigate}
-Here's the Circle of Evaluation for our bar chart, showing only the first 200 suggestions:
-
-@show{(coe '(bar-chart (first-n-rows results 200) "edit-distance"))}
-
-What will _this_ Circle of Evaluation do?
-@show{(coe '(bar-chart (first-n-rows (sort results "edit-distance" true) 200) "edit-distance"))}
-
-
-=== Synthesize
