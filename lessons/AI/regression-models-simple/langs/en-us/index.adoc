@@ -154,11 +154,11 @@ Give students several minutes to play the simulator before debriefing. Students 
 @slidebreak{Investigate}
 
 @lesson-point{
-We've prepared a @vocab{training corpus} for you containing expert driving data, collected across many different road conditions and driving speeds. It's already loaded in the starter file as `training-data`.
+We've prepared a @vocab{training corpus} for you containing expert driving data, collected across many different road conditions and driving speeds. It's already loaded in the starter file as `training`.
 }
 
 @QandA{
-@Q{Looking at the `training-data` table, what is the thing we're trying to _predict_?}
+@Q{Looking at the `training` table, what is the thing we're trying to _predict_?}
 @A{The `steering-angle` — how far to turn the wheel.}
 
 @Q{What _type_ of value is a steering angle?}
@@ -168,7 +168,7 @@ We've prepared a @vocab{training corpus} for you containing expert driving data,
 @A{None! All of the data columns are quantitative.}
 }
 
-@strategy{Where did `training-data` come from?}{
+@strategy{Where did `training` come from?}{
 This dataset began as real data from a very slow, careful run through multiple tracks. The original size was a little north of 10,000 rows, and was assembled from separate "ideal" runs over multiple tracks. The raw, combined data was then _post-processed_ via a @link{https://en.wikipedia.org/wiki/Moving_average, moving average}, which smooths out extreme values into something far more natural. Another post-processing step involved removing the most severe outliers, using knowledge of the track (a `skew` above 80°, for example, obviously represents human error!).
 
 We've even provided an API so that your students can do some of this post-processing themselves!
@@ -324,7 +324,7 @@ Pyret's `lr-plot` function computes and visualizes the @vocab{line of best fit}.
 @slidebreak{Launch-DN}
 @lesson-instruction{
 - Turn to the first section of @printable-exercise{lr-steering-angle.adoc}.
-- Use `lr-plot` on `training-data` to find the best-fit line for each of the variables as compared to `steering-angle`.
+- Use `lr-plot` on `training` to find the best-fit line for each of the variables as compared to `steering-angle`.
 - How do Pyret's optimal models for the data compare to the ones you fit by hand?
 }
 
@@ -406,7 +406,7 @@ We could write it by hand, but Pyret has exactly the right tool:
 @show{(contract "regression-model-code" '((t Table) (inputs List<Str>) (prediction Str)) "Code"
 "produces code that defines a trained, row-consuming model (copy/paste into the Definitions Area!)")}
 
-For example: `regression-model-code(training-data, [list: "curve"], "steering-angle")`
+For example: `regression-model-code(training, [list: "curve"], "steering-angle")`
 
 @slidebreak{InvestigateR}
 @lesson-instruction{

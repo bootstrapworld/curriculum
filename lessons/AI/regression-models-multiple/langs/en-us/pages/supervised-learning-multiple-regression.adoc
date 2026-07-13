@@ -31,7 +31,7 @@ div#body .center { padding: 0 !important; }
 
 == Building a Two-Variable Model
 
-@n Evaluate `regression-model-code(training-data, [list: "curve", "skew"], "steering-angle")` to produce the predictor function, then fill in the model below. (Round your numbers to 2-3 digits)
+@n Evaluate `regression-model-code(training, [list: "curve", "skew"], "steering-angle")` to produce the predictor function, then fill in the model below. (Round your numbers to 2-3 digits)
 
 [.big-codeblock]
 @big{
@@ -53,14 +53,14 @@ div#body .center { padding: 0 !important; }
 @comment{We use ---- so asciidoctor will preserve the whitespace for indenting the second line}
 ----
 regression-model-S(
-  training-data, [list: "curve"], "steering-angle", curve-predictor)
+  training, [list: "curve"], "steering-angle", curve-predictor)
 ----
 | @ifsoln{}
 
 |
 ----
 regression-model-S(
-  training-data, [list: "curve", "skew"], "steering-angle", curve-skew-predictor)
+  training, [list: "curve", "skew"], "steering-angle", curve-skew-predictor)
 ----
 | @ifsoln{}
 |===
