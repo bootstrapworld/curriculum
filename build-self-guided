@@ -82,12 +82,12 @@ for NATLANG in *; do
     continue
   fi
 
-  if test ! -d $NATLANG/lessons/$lsn/.cached/self-guided; then
-    echo Lesson $NATLANG/lessons/$lsn/.cached/self-guided not found in distribution
+  if test ! -d $NATLANG/lessons/$lsn/self-guided; then
+    echo Lesson $NATLANG/lessons/$lsn/self-guided not found in distribution
     continue
   fi
 
-  cd $NATLANG/lessons/$lsn/.cached/self-guided
+  cd $NATLANG/lessons/$lsn/self-guided
   npm run build &> /dev/null
 
   rm -fr ../../self-guided
