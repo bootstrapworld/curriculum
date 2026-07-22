@@ -23,8 +23,8 @@ div#body .center { padding: 0 !important; }
 To complete this page, you'll be using the following contracts:
 
 @indented{
-@show{(contract "reg-model-code" '((table-name Table) (explanatory List<String>) (response String)) "Code")} +
-@show{(contract "reg-model-S" '((table-name Table) (explanatory List<String>) (response String) (model "Row->Number")) "Number")}
+@show{(contract "regression-model-code" '((table-name Table) (explanatory List<String>) (response String)) "Code")} +
+@show{(contract "regression-model-S" '((table-name Table) (explanatory List<String>) (response String) (model "Row->Number")) "Number")}
 }
 
 @vspace{1ex}
@@ -44,7 +44,7 @@ To complete this page, you'll be using the following contracts:
 
 Best combination (without `curve`): @fitb{}{}
 
-@n Use `reg-model-code` to build your best no-`curve` predictor and try it with `drive`. How does it perform compared to the `curve`-only model from the last lesson? @fitb{}{} +
+@n Use `regression-model-code` to build your best no-`curve` predictor and try it with `drive`. How does it perform compared to the `curve`-only model from the last lesson? @fitb{}{} +
 @blanklines{3}{@ifsoln{Significantly worse in tight curves — `curve` carries the most important information about when and how much to steer. The other variables can partially compensate, but not fully.}}
 
 @n What does this tell you about how important `curve` is to the model? @fitb{}{} +

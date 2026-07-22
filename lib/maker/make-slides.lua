@@ -42,6 +42,8 @@ local function read_if_poss(i, xxx)
 end
 
 local allowed_slide_layouts = {
+  "AI Title Slide",
+  "AI Title and Body",
   "Core Title Slide",
   "Core Title and Body",
   "Math Title Slide",
@@ -98,6 +100,7 @@ local function get_slides(lsn_plan_adoc_file, addl_exercises_list_file)
   local beginning_of_line_p = true
   local tableIdx = -1 -- to skip the preamble table
   local coeIdx = 0
+  local contractIdx = 0
   local imgIdx = 0
   local curr_slide
   local curr_slide_header = ''
@@ -170,13 +173,14 @@ local function get_slides(lsn_plan_adoc_file, addl_exercises_list_file)
         local directive = read_word(i)
         if directive == 'show' then
           local arg = read_group(i, directive, 'scheme', 'multiline')
-          if arg:match('%(coe') then
-            coeIdx = coeIdx + 1
-            if not inside_table_p then
+          if not inside_table_p then
+            if arg:match('%(coe') then
+              coeIdx = coeIdx + 1
               update_curr_slide_text('@autogen-image{coe' .. coeIdx .. '}{images/AUTOGEN-COE' .. coeIdx .. '.png}')
-            end
-          else
-            if not inside_table_p then
+            elseif arg:match('%(contract') then
+              contractIdx = contractIdx + 1
+              update_curr_slide_text('@autogen-image{contract' .. contractIdx .. '}{images/AUTOGEN-CONTRACT' .. contractIdx .. '.png}')
+            else
               update_curr_slide_text(c .. directive .. '{' .. arg .. '}')
             end
           end
@@ -209,6 +213,8 @@ local function get_slides(lsn_plan_adoc_file, addl_exercises_list_file)
           tableIdx = tableIdx + n
           _, n = txt:gsub('@show{%(coe', 'z')
           coeIdx = coeIdx + n
+          _, n = txt:gsub('@show{%(contract', 'z')
+          contractIdx = contractIdx + n
           txt2, n = txt2:gsub('@image{', 'z')
           imgIdx = imgIdx + n
           txt2, n = txt2:gsub('@centered%-image{', 'z')
@@ -444,6 +450,8 @@ function make_slides_file(lesson_dir)
     course_string = 'Math'
   elseif lesson_superdir == 'Reactive' then
     course_string = 'R'
+  elseif lesson_superdir == 'AI' then
+    course_string = 'AI'
   else
     course_string = 'Core'
   end
@@ -466,7 +474,7 @@ function make_slides_file(lesson_dir)
         o:write('{layout="', course_string, ' Title Slide"}\n')
         o:write('# ', slide.header, '\n\n')
         o:write('<!--\n')
-        o:write('\n\nThis is the **'..proglang..'** version of this lesson. Make sure you are using the right software tool (WeScheme, Pyret, CODAP, etc...')
+        o:write('\n\nThis is the **'..proglang..'** version of this lesson. Make sure you are using the right software tool (WeScheme, Pyret, CODAP, etc...)')
         o:write('\n\nTo learn more about how to use PearDeck, and how to view the embedded links on these slides without going into present mode visit https://help.peardeck.com/en')
         if slide.preparation then
           o:write('\n\nPreparation:\n')

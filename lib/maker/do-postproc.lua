@@ -48,6 +48,13 @@ local function get_proglang(fhtml_cached)
   end
 end
 
+-- Narrative/resource pages live under distribution/<lang>/courses/<pathway>/...;
+-- pull the <pathway> segment out of the path. Returns nil for lesson plans and
+-- other pages that aren't tied to a single pathway.
+local function get_pathway(fhtml_cached)
+  return fhtml_cached:match('/courses/([^/]+)/')
+end
+
 local function postproc(fhtml_cached, tipe)
   -- pre-compute tipe flags once
   local is_shtml       = tipe == 'lessonplan' or tipe == 'pathwaynarrative' or tipe == 'pathwayresource'
@@ -92,6 +99,7 @@ local function postproc(fhtml_cached, tipe)
   local add_codemirror_p = false
   local add_body_id_p = false
   local add_landscape_p = false
+  local add_can_be_longer_p = false
   local add_end_body_id_p = false
   local delete_line_p = false
   local openblock_attribs = false
@@ -116,6 +124,12 @@ local function postproc(fhtml_cached, tipe)
       if x:find('landscape') then
         x = x:gsub('landscape', '')
         add_landscape_p = true
+      end
+      -- An authored [.canBeLongerThanAPage] role lands on <body>; copy it onto
+      -- the #body div, where the `div#body.canBeLongerThanAPage` CSS lives. Leave
+      -- it on <body> too, since html2pdf.js keys off `body.canBeLongerThanAPage`.
+      if x:find('canBeLongerThanAPage') then
+        add_can_be_longer_p = true
       end
       --
       add_body_id_p = true
@@ -256,10 +270,7 @@ local function postproc(fhtml_cached, tipe)
       ]])
       -- added for DesignHammer
       o:write('<link rel="stylesheet" type="text/css" href="' .. local_dist_root_dir .. 'lib/wp-adaptors/style-bsw.css">\n')
-      o:write('<link rel="preconnect" href="https://fonts.googleapis.com">\n')
-      o:write('<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n')
-      o:write('<link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">\n')
-      o:write('<script src="' .. local_dist_root_dir .. 'lib/wp-adaptors/script.js"></script>\n')
+      o:write('<script defer src="' ..local_dist_root_dir .. 'lib/wp-adaptors/script.js"></script>\n')
       --
       o:write(z, '\n')
       --
@@ -337,6 +348,10 @@ local function postproc(fhtml_cached, tipe)
           add_landscape_p = false
           klass = klass .. ' landscape'
         end
+        if add_can_be_longer_p then
+          add_can_be_longer_p = false
+          klass = klass .. ' canBeLongerThanAPage'
+        end
         --
         o:write('<div id="body" class="' .. klass .. '">\n')
     --
@@ -346,10 +361,10 @@ local function postproc(fhtml_cached, tipe)
       add_codemirror_p = false
       o:write('<link rel="stylesheet" href="' .. local_dist_root_dir .. 'lib/codemirror.css" />\n')
       o:write(gtm_content)
-      o:write('<script src="' .. local_dist_root_dir .. 'lib/codemirror.js"></script>\n')
-      o:write('<script src="' .. local_dist_root_dir .. 'lib/runmode.js"></script>\n')
-      o:write('<script src="' .. local_dist_root_dir .. 'lib/scheme2.js"></script>\n')
-      o:write('<script src="' .. local_dist_root_dir .. 'lib/pyret-mode.js"></script>\n')
+      --o:write('<script defer src="' ..local_dist_root_dir .. 'lib/codemirror.js"></script>\n')
+      o:write('<script defer src="' ..local_dist_root_dir .. 'lib/runmode-standalone.js"></script>\n')
+      o:write('<script defer src="' ..local_dist_root_dir .. 'lib/scheme2.js"></script>\n')
+      o:write('<script defer src="' ..local_dist_root_dir .. 'lib/pyret-mode.js"></script>\n')
 
     end
     --
@@ -360,20 +375,28 @@ local function postproc(fhtml_cached, tipe)
         o:write('<script async defer src="https://unpkg.com/pdf-lib@1.4.0"></script>\n')
         o:write('<script async defer src="https://unpkg.com/@pdf-lib/fontkit/dist/fontkit.umd.min.js"></script>\n')
         o:write('<script async defer src="https://unpkg.com/downloadjs@1.4.7"></script>\n')
-        o:write('<script src="' .. local_dist_root_dir .. 'lib/dependency-graph.js"></script>\n')
-        o:write('<script src="' .. local_dist_root_dir .. 'lib/makeWorkbook.js"></script>\n')
-        o:write('<script src="' .. local_dist_root_dir .. 'lib/dictionaries.js"></script>\n')
-        o:write('<script src="' .. local_dist_root_dir .. 'lib/pathway-tocs.js"></script>\n')
-        o:write('<script src="' .. local_dist_root_dir .. 'lib/starterFiles.js"></script>\n')
+        o:write('<script defer src="' ..local_dist_root_dir .. 'lib/dependency-graph.js"></script>\n')
+        o:write('<script defer src="' ..local_dist_root_dir .. 'lib/makeWorkbook.js"></script>\n')
+        o:write('<script defer src="' ..local_dist_root_dir .. 'lib/dictionaries.js"></script>\n')
+        o:write('<script defer src="' ..local_dist_root_dir .. 'lib/pathway-tocs.js"></script>\n')
+        o:write('<script defer src="' ..local_dist_root_dir .. 'lib/starterFiles.js"></script>\n')
+        o:write('<script defer src="' ..local_dist_root_dir .. 'lib/graph-pages.js"></script>\n')
       end
-      o:write('<script src="' .. local_dist_root_dir .. 'lib/bootstraplesson.js"></script>\n')
-      o:write('<script>var pathway;</script>\n')
+      o:write('<script defer src="' ..local_dist_root_dir .. 'lib/page-render.js"></script>\n')
+      -- Expose the page's pathway to scripts. Course pages (narrative/resource)
+      -- carry it in their path; elsewhere it's left undefined (read from the URL).
+      local pathway = get_pathway(fhtml_cached)
+      if pathway then
+        o:write('<script>var pathway = "' .. pathway .. '";</script>\n')
+      else
+        o:write('<script>var pathway;</script>\n')
+      end
     end
     --
     if add_mathjax_p then
       -- print('adding mathjax')
       add_mathjax_p = false
-      o:write('<script src="' .. 'https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml-full-speech.min.js' .. '"><script>\n')
+      o:write('<script id="MathJax-script" async defer src="' .. 'https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml.js' .. '"></script>\n')
       o:write('<script>window.status = "not_ready_to_print";</script>\n')
     end
     --

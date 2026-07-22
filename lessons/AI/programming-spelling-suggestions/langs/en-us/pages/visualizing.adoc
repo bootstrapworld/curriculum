@@ -1,0 +1,68 @@
+= Data Visualization for Tables
+
+== Frequency Tables, Bar Charts and Pie Charts
+@link-instructions{
+For this page you'll need the @starter-file{spell-checker} open on your computer, with `results = alt-words("plation", WORDS-L, 4)` defined in the *Definitions Area.* Make sure that after clicking "Run", you can evaluate `results` in the Interactions Area and see your table!
+}
+
+@n Scroll through all the suggested words in `results`. Which `edit-distance` is the most common? @fitb{5em}{@ifsoln{3}} Least common? @fitb{}{@ifsoln{1}}
+
+@n Evaluate @show{(code '(count results "edit-distance"))}. What did you get back? @fitb{}{@ifsoln{A table showing how many of each edit distance}}
+
+@n Write the contract for Pyret's `count` function below:
+
+@fitbruby{20em}{@ifsoln{count}}{function name} {two-colons}
+@fitbruby{25em}{@ifsoln{Table, String}}{Domain} ->
+@fitbruby{10em}{@ifsoln{Table}}{Range}
+
+@vspace{1ex}
+
+@center{*The contract for Pyret's `bar-chart` function is* @show{(contract 'bar-chart '(Table String) "Image")}}
+
+@n Make a bar chart of your `results` table, using "edit-distance" for your column. What did you get back? @fitb{}{@ifsoln{A bar chart}}
+
+@n Move your cursor over one of the bars. What information does this tell you? @fitb{}{@ifsoln{The number of words in each bar}}
+
+@n How is this related to the table you got from `count`? @fitb{}{@ifsoln{The bars are the same height as the numbers in that table}} +
+@fitb{}{}
+
+
+@n Try making a bar chart using the `"word"` column. Is this visualization _useful_? Why or why not? @fitb{}{} +
+@fitb{}{@ifsoln{No - each word is unique so we just get a lot of tiny, equally-tall bars}}
+
+@center{*The contract for Pyret's `pie-chart` function is* @show{(contract 'pie-chart '(Table String) "Image")}}
+
+
+@n Make a pie chart of your `results` table, using "edit-distance" for the column.
+
+== Real Spell Checkers Return Words, not Tables!
+@link-instructions{Let's define a row. At the bottom of the Definitions Area, *type `row2 = row-n(results, 1)`*. Click "Run".}
+
+@n Evaluate `row2` in the *Interactions Area*. What do you get back? @fitb{}{@ifsoln{The second row}}
+
+@n In your own words, explain what `row-n` does. @fitb{}{@ifsoln{It takes a row of the table}}
+
+@n Complete the contract for `row-n` below. _We've provided the Range for you._
+
+@center{
+@fitbruby{10em}{@ifsoln{row-n}}{function name} {two-colons}
+@fitbruby{15em}{@ifsoln{Table, Number}}{Domain} ->
+@fitbruby{10em}{Row}{Range}
+}
+
+@n What does `row2["word"]` evaluate to? @fitb{10em}{@ifsoln{toll}}  `row2["edit-distance"]`? @fitb{}{@ifsoln{3}}
+
+@n Evaluate `row-n(results, 1)["word"]`. What did you get back? @fitb{8em}{@ifsoln{toll}}
+
+@vspace{1ex}
+
+[.callout]
+*Code like this (`row2["word"]` or `row2["edit-distance"]`) is called a @vocab{row accessor}.*
+
+@n In your own words, what do row accessors do? @fitb{}{}
+@blanklines{2}{@ifsoln{Given a row and the title of a column, they try to access the value stored in that cell of the table.}}
+
+@n What code will produce the _first_ suggested word from our table? @fitb{}{@ifsoln{`row-n(results, 0)["word"]`}}
+
+@n How can we get the `edit-distance` of the _fifth_ suggested word from our table? @fitb{}{@ifsoln{`row-n(results, 4)["edit-distance"]`}}
+

@@ -1,84 +1,15 @@
-/************************************************************************************
-* FONTS
-*/
-/* lato-regular - latin_latin-ext */
-@font-face {
-  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-  font-family: 'Lato';
-  font-style: normal;
-  font-weight: 400;
-  src: url('https://www.bootstrapworld.org/fonts/lato/lato-v24-latin_latin-ext-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
-}
-/* lato-italic - latin_latin-ext */
-@font-face {
-  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-  font-family: 'Lato';
-  font-style: italic;
-  font-weight: 400;
-  src: url('https://www.bootstrapworld.org/fonts/lato/lato-v24-latin_latin-ext-italic.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
-}
-/* lato-700 - latin_latin-ext */
-@font-face {
-  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-  font-family: 'Lato';
-  font-style: normal;
-  font-weight: 700;
-  src: url('https://www.bootstrapworld.org/fonts/lato/lato-v24-latin_latin-ext-700.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
-}
-/* lato-900 - latin_latin-ext */
-@font-face {
-  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-  font-family: 'Lato';
-  font-style: normal;
-  font-weight: 900;
-  src: url('https://www.bootstrapworld.org/fonts/lato/lato-v24-latin_latin-ext-900.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
-}
-/* lato-900italic - latin_latin-ext */
-@font-face {
-  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-  font-family: 'Lato';
-  font-style: italic;
-  font-weight: 900;
-  src: url('https://www.bootstrapworld.org/fonts/lato/lato-v24-latin_latin-ext-900italic.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
-}
-@font-face {
-  font-family: 'Hack';
-  src: url('https://www.bootstrapworld.org/fonts/hack/hack-regular.woff2') format('woff2'), url('fonts/hack/hack-regular.woff') format('woff');
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Hack';
-  src: url('https://www.bootstrapworld.org/fonts/hack/hack-bold.woff2') format('woff2'), url('fonts/hack/hack-bold.woff') format('woff');
-  font-weight: 700;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Hack';
-  src: url('https://www.bootstrapworld.org/fonts/hack/hack-italic.woff2') format('woff2'), url('fonts/hack/hack-italic.woff') format('woff');
-  font-weight: 400;
-  font-style: italic;
-}
-
-@font-face {
-  font-family: 'Hack';
-  src: url('https://www.bootstrapworld.org/fonts/hack/hack-bolditalic.woff2') format('woff2'), url('fonts/hack/hack-bolditalic.woff') format('woff');
-  font-weight: 700;
-  font-style: italic;
-}
 
 /************************************************************************************
 * SYSTEMWIDE STYLES
 */
-@font-color: rgba(1, 58, 99, 1) !important;
-@translucent-bg-color: #468FAFAA;
-@translucent-bg-color2: #96C0D9AA;
-@translucent-bg-color3: #F26B45AA;
-@text-font: 'Lato', Arial, Helvetica, sans-serif;
-@code-font: Hack, "Courier New", monospace;
-@code-comment-color: #cd7054;
+@font-color: var(--bs-secondary-astronaut-blue) !important;
+@translucent-bg-color:  var(--bs-primary-dark-blue-translucent);
+@translucent-bg-color2: var(--bs-primary-light-blue-translucent);
+@translucent-bg-color3: var(--bs-primary-dark-orange-translucent);
+@text-font: var(--text-font);
+@code-font: var(--code-font);
+@pyret-comment-color:    var(--pyret-comment-color);
+@wescheme-comment-color: var(--wescheme-comment-color);
 @top-padding-for-writing: 1.2em;
 @top-padding-for-dr: 1em;
 @print-section-heading: lightgray;
@@ -98,19 +29,6 @@ div#body {
   max-width:      1400px !important;
   -webkit-font-smoothing: antialiased;
 
-  &.beta::after {
-    position: absolute;
-    top: 40%;
-    left: 40%;
-    transform: rotate(-45deg);
-    content: "BETA";
-    opacity: 0.2;
-    line-height: 3em;
-    color: gray;
-    font-size: 100pt;
-    font-weight: bold;
-    z-index: -1;
-  }
   /* Set Defaults (many asciidoc overrides) */
   h1 {
     font-size:      24px;
@@ -124,7 +42,7 @@ div#body {
   }
   h3 { font-size: 16px; font-weight: bold;  }
   .prefix { font-style: italic; color: gray; }
-  a       { color:  #2156a5 !important; }
+  a       { color:  var(--link-color) !important; }
   p       { margin: 10px 0px; font-size: inherit; }
   sup     { font-size: smaller; top: -0.55em; left: 1px; }
   sub     { font-size: smaller; bottom: -0.35em; }
@@ -191,6 +109,12 @@ div#body {
     line-height: 0;
     i+sup { margin-left: 2px; }
   }
+  /* In FillVerticalSpace (stretch) tables the cell's div.paragraph is a flex
+     container with align-items:center, and its <p> is display:contents -- so the
+     text runs and a .mathunicode span become sibling flex items, center-aligned
+     rather than sharing a baseline. That lifts text-only math (e.g. "10") up like
+     an orphaned numerator. Align the paragraph's items to the baseline instead. */
+  table.FillVerticalSpace td .paragraph { align-items: baseline; }
   em .mathunicode { font-family: 'MJXTEX-I';}
   strong .mathunicode { font-family: 'MJXTEX-B'; }
   em strong .mathunicode, strong em .mathunicode, strong .MathJax .TEX-I, em .MathJax .TEX-B {
@@ -308,7 +232,7 @@ div#body {
   }
   .editbox {
     width:              auto;
-    background-color:   #f7f7f8;
+    background-color:   var(--code-bg);
     margin:             2px;
     padding:            0 2px;
     text-align:         left;
@@ -426,6 +350,22 @@ div#body {
   }
 
 }
+
+body.beta div#body::after {
+    position: absolute;
+    top: 25%;
+    left: 20%;
+    transform: rotate(-45deg);
+    content: "BETA";
+    opacity: 0.2;
+    line-height: 3em;
+    color: gray;
+    font-size: 100pt;
+    font-weight: bold;
+    z-index: -1;
+  }
+
+
 /* use 'thin' instead of 1px border to try and avoid disappearing
 lines on some browsers */
 .fitb, .fitbruby, .fitb.stretch::after, .fitbruby.stretch::after {
@@ -445,12 +385,17 @@ div#body:not(.LessonPlan, .narrativepage) p {
   line-height:  1.3;
 }
 
+/* The acknowledgement section should never expand */
+.acknowledgmentsect { flex-grow: 0 !important; }
+
 /************************************************************************************
 * SIDEBAR STYLES
 *
 */
 
 #sidebar {
+  max-width: 325px;
+  font-family: "Rubik", sans-serif;
   > * { margin: 0px 10px !important; }
   label { display: inline; font-size: 0.8em; }
   select { border:  none; width: 100%; }
@@ -460,11 +405,11 @@ div#body:not(.LessonPlan, .narrativepage) p {
   table { background: none !important; border: 0 !important; width: auto; }
   table td, table tr { padding: 0 !important; background: none !important; border: 0 !important; }
   table .title { display: none; }
-  dl * { margin: 0; display: inline; font-size: smaller; }
-  dd { margin-left: 0 !important; }
+  dl dt, dl dd { display: inline; margin-inline-start: 0; }
+  dl dd p { display: inline; margin: 0; }
   dt { font-weight: bold; }
-  dd::after { content: '\A'; white-space: pre;}
-  dt::after { content: ' ·'; white-space: pre; font-size: 0.7em; }
+  dt::after { content: ' ·'; font-size: 0.7em; margin: 0 5px; }
+  dl dd::after { content: ""; display: block; margin-bottom: 0.6em; } /* gap between definitions */
   table dt { margin-top: 10px; }
   #sidebarlessons {
     ul {
@@ -474,15 +419,14 @@ div#body:not(.LessonPlan, .narrativepage) p {
       max-height: 200px;
       overflow:   scroll;
       padding:    10px !important;
-      font-size:  10pt !important;
+      font-size:  11pt !important;
     }
-    li:nth-child(odd) { background: @translucent-bg-color; }
+    li:nth-child(odd) { background: @translucent-bg-color2; }
   }
   #sidebarstandards {
     select { margin-top: 10px; }
     a { display: none; }
-    dl { line-height: 1; }
-    dt { margin-bottom: 5px; }
+    dl { line-height: 1.2; }
   }
 }
 
@@ -492,6 +436,7 @@ div#body:not(.LessonPlan, .narrativepage) p {
 div#body.narrativepage {
   font-size: 12pt;
   font-family: "Rubik", sans-serif;
+  margin-top: 3em;
   p {line-height:1.6;}
   h2 { margin-top: 20px; }
   .logo     { float: right; }
@@ -531,6 +476,7 @@ div#body.LessonPlan {
   font-size: 12pt;
   font-family: "Rubik", sans-serif;
   line-height: 1.7;
+  margin-top: 3em;
 
   .other-proglang::before { font-style: italic; }
 
@@ -566,22 +512,6 @@ div#body.LessonPlan {
     #material-links p.open, #opt-material-links p.open {
       .showPageLinks a::after { content: ' ▲ '; }
       &+.ulist { transition: 1s ease-in; max-height: 1000px; }
-    }
-
-    /* Assessment styling */
-    .AssessmentDirections { font-style: italic; }
-    .quizBox {
-      input { display: none; width: 250px; }
-      .makeQuizLinkImage {
-        background: url(images/quizLinkIcon.png) center center / 24px 24px;
-        height: 24px;
-        width: 24px;
-        display: inline-block;
-        margin-left: 10px;
-      }
-      &:hover {
-        .makeQuizLinkImage { filter: drop-shadow(2px 2px 2px gray); }
-      }
     }
   }
 
@@ -769,7 +699,7 @@ html div#body.workbookpage {
   max-width: unset;
 
   /* Force acknowledgment section to the bottom of every page */
-  .acknowledgment { position: absolute; top: 100%; }
+  .acknowledgment { position: absolute; top: calc(100% + 0.5in); opacity: 0.5; }
 
   #header > h1:first-child { text-align: center; margin-bottom: 0;}
   h1 { font-weight: bold; }
@@ -777,8 +707,9 @@ html div#body.workbookpage {
   h2 .editbox, h2 .editbox *, h2 .pyret { color: black; background: none; margin: 0 5px; }
 
   /* set page dimensions */
-  &:not(.landscape) { width: 7.5in !important; height: calc(9.8in + 1.5in) !important; }
-  &.landscape { width: 9.8in !important; height:  calc(7.5in + 1.5in) !important; page: landscape; } /* define 'landscape' page type */
+  &:not(.landscape) { width: 7.5in !important; height: 9.8in !important; }
+  &.landscape { width: 9.8in !important; height: 7.5in !important; page: landscape; } /* define 'landscape' page type */
+  &.canBeLongerThanAPage:not(.landscape), &.canBeLongerThanAPage { height: unset !important; }
 
   /* Make content of page as tall as possible */
   #content, #preamble_disabled, #preamble_disabled .sectionbody,
@@ -946,8 +877,7 @@ html div#body.workbookpage {
     background-image: url('images/2.2em-ruled lines.png');
     margin-left: 5px;
     line-height: 2.2em;
-    margin-top: 0.6em;
-    .solution { position: absolute; }
+    .solution { position: absolute; bottom: -3px; line-height: inherit; }
     /* artificially shrink codeblocks to avoid stepping on the line */
     .editbox, code.pyret {
       line-height: 0.5em !important;
@@ -1090,7 +1020,7 @@ div#body{
     p  { margin-top: 0; }
     td { padding: .1em .625em !important; height: 23pt; }
     tr:nth-child(odd) { border-top: solid 2px black; }
-    tbody tr:nth-child(odd) * { color: @code-comment-color !important; }
+    tbody tr:nth-child(odd) * { color: @pyret-comment-color !important; }
     tbody tr:nth-child(odd) td:first-child .tableblock { margin-left: 1em; }
     tbody tr:nth-child(odd) td:first-child::before { position: absolute;  }
     tbody tr:nth-child(even) * { font-family: monospace; white-space: pre; }
@@ -1365,13 +1295,13 @@ td.halign-center .circleevalsexp { text-align: center; }
 .wescheme-boolean,    .cm-scheme-boolean  { color: darkred;}
 .wescheme-character,  .cm-scheme-character{ color: orange;}
 .wescheme-symbol,     .cm-scheme-symbol   { color: steelblue;}
-.wescheme-comment,    .cm-scheme-comment  { color: @code-comment-color; }
+.wescheme-comment,    .cm-scheme-comment  { color: @wescheme-comment-color !important; }
 .cm-scheme-punctuation                    { color: black;}
 .cm-scheme-rparen                         { color: black;}
 
 /* PYRET COLORS */
 .cm-s-default.CodeMirror                  { color: black; }
-.cm-comment, .hljs-comment                { color: @code-comment-color; }
+.cm-comment, .hljs-comment                { color: @pyret-comment-color !important; }
 .cm-boolean                               { color: darkred; }
 .cm-builtin, .hljs-built_in               { color: #555; }
 .cm-variable, .hljs-name                  { color: #4d5966; }
@@ -1395,13 +1325,14 @@ div.leftColumn .obeyspaces, div.rightColumn .obeyspaces {
 .codetwo {
   font-family: @code-font;
   font-size: 0.85em;
-  background-color: #f7f7f8;
+  background-color: var(--code-bg);
   color: #666;
   word-break: break-word;
 }
 
-code.pyret-comment { background-color: #f7f7f8 !important; color: #a50; }
-code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
+code.pyret-comment { background-color: var(--code-bg) !important; color: @pyret-comment-color; }
+code.racket-comment { background-color: var(--code-bg) !important; color: @wescheme-comment-color; }
+code .ruby { word-spacing: 2px !important; }
 
 /************************************************************************************
 * SCREEN MEDIA
@@ -1416,71 +1347,78 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
     line-height:      2.5em;
   }
 
-  #savetodrive-div { display: none; height: 30px !important; }
-
-  div#body.workbookpage { margin-left: 3em; }
+  /* When viewing workbook pages on the web...
+   * zoom in
+   * abuse stacked box-shadows to create the page boundary and margin
+   */
+  div#body.workbookpage {
+    zoom:       1.25;
+    box-shadow: 0 0 0 0.5in var(--pure-white),        /* print margin    */
+                0 0 0 calc(0.5in + 1px) lightgray,    /* 1px page border */
+                0 0 10px calc(0.5in + 2px) lightgray; /* tiny shadow     */
+  }
   /********************************************************************
    *  Collapsing Headers
    */
-   div#body.LessonPlan, div#body.TeacherResources {
-      /* add a bottom padding to prevent browser-scroll */
-      padding-bottom:  5in;
-      /* adjust colors */
-      h2 {
-        background-color: @translucent-bg-color;
+  div#body.LessonPlan, div#body.TeacherResources {
+    /* add a bottom padding to prevent browser-scroll */
+    padding-bottom:  5in;
+    /* adjust colors */
+    h2 {
+      background-color: @translucent-bg-color;
+      color: white;
+      font-weight: 600;
+      font-size: 1.75em;
+      cursor: pointer;
+      padding: 5px !important;
+      width: 100%;
+      border: none;
+      text-align: left;
+      outline: none;
+      /* add the plus/minus signs ("expand me" / "collapse me") for discoverability */
+      &::after {
+        content: '▼';
+        width: 16px;
+        font-size: 16px;
+        line-height: 30px;
         color: white;
-        font-weight: 600;
-        font-size: 1.75em;
-        cursor: pointer;
-        padding: 5px !important;
-        width: 100%;
-        border: none;
-        text-align: left;
-        outline: none;
-        /* add the plus/minus signs ("expand me" / "collapse me") for discoverability */
-        &::after {
-          content: '▼';
-          width: 16px;
-          font-size: 16px;
-          line-height: 30px;
-          color: white;
-          font-weight: bold;
-          float: left;
-          margin-right: 5px;
-        }
-        &.active::after { content: '▲'; }
-        &.active, &:hover { background-color: @translucent-bg-color2; }
+        font-weight: bold;
+        float: left;
+        margin-right: 5px;
       }
-      /* set collapsed size and transition rules */
-      .sect1:not(.acknowledgmentsect) .sectionbody {
-        padding: 10px 18px;
-        max-height: 100px;
-        overflow: hidden;
-        transition: max-height 0.2s ease-out;
-        position: relative;
-        /* Add a white fade to hint for discoverability */
-        &::after {
-          content  : "";
-          position : absolute;
-          z-index  : 1;
-          bottom   : 0;
-          left     : 0;
-          pointer-events   : none;
-          background-image : linear-gradient(to bottom,
-                            rgba(255,255,255, 0),
-                            rgba(255,255,255, 1) 90%);
-          width    : 100%;
-          height   : 10em;
-        }
+      &.active::after { content: '▲'; }
+      &.active, &:hover { background-color: @translucent-bg-color2; }
+    }
+    /* set collapsed size and transition rules */
+    .sect1:not(.acknowledgmentsect) .sectionbody {
+      padding: 10px 18px;
+      max-height: 100px;
+      overflow: hidden;
+      transition: max-height 0.2s ease-out;
+      position: relative;
+      /* Add a white fade to hint for discoverability */
+      &::after {
+        content  : "";
+        position : absolute;
+        z-index  : 1;
+        bottom   : 0;
+        left     : 0;
+        pointer-events   : none;
+        background-image : linear-gradient(to bottom,
+                          rgba(255,255,255, 0),
+                          rgba(255,255,255, 1) 90%);
+        width    : 100%;
+        height   : 10em;
       }
-      .sect1:not(.acknowledgmentsect) h2+.sectionbody:after { height: 4em; }
-      /* don't add the fade for summaries or active sections */
-      .lessonSummary .sectionbody { max-height: unset; }
-      .lessonSummary .sectionbody, h2.active+.sectionbody {
-        &::after { display: none; }
-      }
-      .sect1:not(.acknowledgmentsect) h2:not(.active)+.sectionbody h3 { display: none; }
-   }
+    }
+    .sect1:not(.acknowledgmentsect) h2+.sectionbody:after { height: 4em; }
+    /* don't add the fade for summaries or active sections */
+    .lessonSummary .sectionbody { max-height: unset; }
+    .lessonSummary .sectionbody, h2.active+.sectionbody {
+      &::after { display: none; }
+    }
+    .sect1:not(.acknowledgmentsect) h2:not(.active)+.sectionbody h3 { display: none; }
+  }
 }
 
 
@@ -1507,7 +1445,7 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
   ::-webkit-scrollbar { display:  none; }
   a[href]::after { content: none !important; }
   #savetodrive-div, .copyright, #footer, #outOfDate, .web-page-only, .section-link,
-  .acknowledgmentsect, .sidebar, .CodeMirror div.CodeMirror-cursor, #MathJax_Message {
+  .acknowledgmentsect, #sidebar, .CodeMirror div.CodeMirror-cursor, #MathJax_Message {
     display: none !important; float: none;
   }
   div#body{ position: static; } /* page-break fails on absolute positioning */
@@ -1547,9 +1485,6 @@ code.racket-comment { background-color: #f7f7f8 !important; color: #a50; }
   }
 
   html div#body.workbookpage {
-    /* set page dimensions to ignore acknowledgement padding */
-    &:not(.landscape) { height: 9.8in !important; }
-    &.landscape       { height:  7.5in !important; page: landscape; }
 
     /* Use B&W colors for headers */
     #header> h1:first-child, .sect1 > h1:first-child {

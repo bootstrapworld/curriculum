@@ -25,8 +25,7 @@
 |===
 
 == What is AI?
-@objective{ai-effect}
-@objective{ai-vs-ml}
+@objective{ai-different-kinds}
 
 === Overview
 Students explore different examples of how people use AI every day, including a mix of recommendation systems and classifiers. Students discover the challenges of defining AI, and think about whether AI is just an algorithm, or something more.
@@ -46,15 +45,14 @@ Who here has ever used AI? Raise your hand if you've used an AI tool, or know so
 }
 
 @slidebreak{LaunchR}
+@right{@image{images/flow-chart.gif, 400}}
 
 @lesson-point{Is it _thinking_, or is it just _following an algorithm_?}
---
-@right{@image{images/flow-chart.gif, 400}}
-The first spell-checker was written in 1961. It had a 10,000 word dictionary, and it would check every word you typed to see if it was in the dictionary. It wasn't really _thinking_. It was just following an following an @vocab{algorithm} -- a series of steps that tell a computer how to perform a task -- in this case mechanically comparing strings of letters against a long list. And all it could do was tell you if a word _was_ or _wasn't_ spelled correctly.
---
+
+The first spell-checker was written in 1961. It had a 10,000 word dictionary, and it would check every word you typed to see if it was in the dictionary. It wasn't really _thinking_. It was just following an @vocab{algorithm} -- a series of steps that tell a computer how to perform a task -- in this case mechanically comparing strings of letters against a long list. And all it could do was tell you if a word _was_ or _wasn't_ spelled correctly.
+
 
 @slidebreak{Launch}
-
 In 1971, however, a new spell-checker arrived from the Stanford Artificial Intelligence Laboratory called SPELL. SPELL wouldn't just tell you if a word was misspelled - it would _suggest alternative words_ that you might have intended! People were *floored*, and swore that AI had arrived. After all, "how did the computer know what we intended to write?"
 
 Was SPELL _thinking_, or was it, too, just _following an algorithm_?
@@ -80,14 +78,13 @@ Here's SPELL's algorithm for checking a word:
 }
 SPELL had no idea what those alternative words meant. It didn't even know what a word _was!_ And it definitely didn't know what people were thinking when they typed. *It was just an algorithm.*
 
-@slidebreak{Launch}
-
---
+@slidebreak{LaunchR}
 @right{@image{images/mccarthy.png, 200}}
+
 After a while, most people stopped calling spell checkers AI. But in the early 2000s, cell phones introduced a feature called "predictive text": when you start typing a sentence, the phone makes suggestions about what the next word should be. People were *floored*, and swore that AI had arrived...but eventually they stopped calling predictive text AI, too.
 
 Computer scientist @link{https://en.wikipedia.org/wiki/John_McCarthy_(computer_scientist), John McCarthy} developed the term "AI effect" to describe this phenomenon: humans keep _moving the goalposts_ for what counts as "Artificial Intelligence" and what counts as "Human Intelligence"! In other words, "As soon as it works, no one calls it AI anymore."
---
+
 
 === Investigate
 @slidebreak{Investigate}
@@ -137,6 +134,7 @@ Which of these technologies falls into which category?
 
 
 == Different Kinds of AI
+@objective{ai-machines-v-people}
 
 === Overview
 Students learn that AI is actually a collection of technologies involving Machine Learning, and begin thinking about how they might work.
@@ -148,7 +146,7 @@ Modern AI is largely driven by a set of techniques called @vocab{Machine Learnin
 
 There are many kinds of Machine Learning algorithms out there, and nearly every example we've come up with falls into one of three categories:
 
-[cols="^1a,^1a,^1a"]
+[cols="^1a,^1a,^1a", frame="none"]
 |===
 | @image{images/prediction-bots.webp, 250}
 | @image{images/recommendation-bot.png, 200}
@@ -177,8 +175,6 @@ Let's play with some real tools that use AI, and see if we can make sense of how
 
 === Investigate
 @slidebreak{InvestigateR}
-
---
 @right{@image{images/classifier-bot.png, 250}}
 
 There are several kinds of *predictive models* you probably interact with every day!
@@ -190,19 +186,23 @@ There are several kinds of *predictive models* you probably interact with every 
 - Is this customer likely to buy a video game or not?
 - Which Harry Potter house would I be in?
 
+@slidebreak{InvestigateR}
+@ifslide{@right{@image{images/classifier-bot.png, 250}}}
 @lesson-instruction{
-- @online-exercise{https://www.nyckel.com/pretrained-classifiers/flowers-identifier/, This link } will take you to an example of a Machine Learning tool that consumes an image of a flower, and tries to predict what *category* of flower it really is.
+@online-exercise{https://www.nyckel.com/pretrained-classifiers/flowers-identifier/, This link } will take you to an example of a Machine Learning tool that consumes an image of a flower, and tries to predict what *category* of flower it really is.
+
 - Find an image of a flower, and drag it into the box
 - What part(s) of the image do you think it's looking at, to make its prediction?
 }
---
 
-@slidebreak{InvestigateR}
+
+@slidebreak{Investigate}
 @lesson-instruction{
 - Let's think a little about how classifiers might work!
 - With a partner, complete the first section on @printable-exercise{predictive-models-classifiers.adoc}
 - Be ready to share back!
 }
+
 
 @slidebreak{InvestigateR}
 @QandA{
@@ -217,6 +217,7 @@ There are several kinds of *predictive models* you probably interact with every 
 @A{Maybe it some definition of "rose-ness", and it's just computing how far off the definition of *this rose* is from the one it knows}
 }
 
+@slidebreak{Investigate}
 @lesson-instruction{
 - You just looked at a _categorical_ classification problem: every flower image belongs to one category of flower.
 - Sometimes a classifier is just choosing between *two* categories: 
@@ -242,27 +243,43 @@ There are several kinds of *predictive models* you probably interact with every 
 }
 
 @slidebreak{InvestigateR}
---
 @right{@image{images/prediction-bots.webp, 250}}
 
 But Classifiers aren't the only kind of prediction system out there!
 
-@vocab{Regression} is all about *predicting values*:
+Classifiers predict _categorizes_. @vocab{Regression} predicts *amounts*:
 
 - How many 3-pointers do we predict for player who is 6'5"?
 - How long do we predict a person will live, based on an income of $95,000?
 - How likely is it a student will do well in college, based on an SAT score of 1028?
---
 
 @slidebreak{InvestigateR}
-
 @ifslide{@right{@image{images/prediction-bots.webp, 250}}}
+
 @lesson-instruction{
 - Let's think a little about how regression models might work!
-- With a partner, complete the first section of @printable-exercise{predictive-models-regression.adoc} using @online-exercise{https://www.marriage.com/quizzes/how-many-kids-will-i-have/, this ML tool} that predicts the *number* of children you will have based on input from a few questions.
+- Have you ever taken one of those silly online quizzes, which claims to predict how long you'll live or how much money you'll make based on a few questions?
+- With a partner, complete the first section of @printable-exercise{predictive-models-regression.adoc}.
 - Be ready to share back!
 }
 
+@slidebreak{Investigate}
+@QandA{
+@Q{What variables did you come up with?}
+
+@Q{Were any of your slopes negative? What would be an example of a negative slope?}
+@A{Example: Number of packs of cigarettes smoked per week}
+
+@Q{If all the variables are zero, how long does your quiz predict someone will live?}
+
+@Q{Why is that called y-intercept?}
+}
+
+Humans try to come up with formulas to help us make predictions about everything from when it will rain to how likely it is that you'll pay back a loan. These predictions are based on *data*, rather than guesses like "cats will make you richer". Let's look at some real data and try to make a prediction...
+
+@lesson-instruction{
+- Complete the rest of @printable-exercise{predictive-models-regression.adoc}.
+}
 
 @slidebreak{InvestigateR}
 
@@ -300,11 +317,9 @@ Pretty much everyone saw a line with a positive slope, but they didn't necessari
 }
 
 @slidebreak{InvestigateR}
-
---
 @right{@image{images/recommendation-bot.png, 200}}
 
-@vocab{Similarity Models} are all about *measuring similarity*:
+Similarity and Recommendation Models are all about *measuring differences*:
 
 - Which songs are most like this one?
 - Which people on a dating site are the best matches for this person?
@@ -312,10 +327,7 @@ Pretty much everyone saw a line with a positive slope, but they didn't necessari
 
 @link{https://open.spotify.com/, Let's try out an example in Spotify!}
 
-@teacher{Search for a song that your students will recognize. When you hover over the search result, you'll see a three dots (`...`) appear on the right. Click these dots and select "Go to Song Radio"}
---
-
-@scrub{SCHANZER this is NOT what I see when I click the link as someone who isn't logged in!}
+@teacher{Search for a song that your students will recognize, making sure to filter by "songs". When you hover over any of the songs in the search results, you'll see a three dots (`...`) appear on the right. Click these dots and select "Go to Song Radio"}
 
 @slidebreak{InvestigateR}
 @ifslide{@right{@image{images/recommendation-bot.png, 200}}}
@@ -340,129 +352,103 @@ How similar were Spotify's recommendations to the original song?
 }
 
 @slidebreak{InvestigateR}
---
 @right{@image{images/chat-bot.png, 250}}
 
-@scrub{SCHANZER please explain why Generative Models are abbreviated as LMs. Need a bridge here.}
+*Generative Models* look for *patterns and frequency in language*. In fact, they are often called "language models"
 
-@vocab{Generative Models} (LMs) look for *patterns and frequency in language*.
+- LMs trained on _English_ can be "chat bots", and generate English responses to questions
+- LMs trained on _Spanish_ can be "chat bots", and generate Spanish responses to questions
+- LMs trained on _Music_ can be "music bots", and generate music
+- LMs trained on _Drawings_ can be "art bots", and generate images
+- LMs trained on _Tic Tac Toe_ can be "tic tac Toe tots", and generate moves in the game
 
-- LMs trained on _English_ can be "chatbots", and generate English responses to questions!
-- LMs trained on _Spanish_ can be "chatbots", and generate Spanish responses to questions!
-- LMs trained on _Music_ can be "musicbots", and generate music!
-- LMs trained on _Drawings_ can be "Tic Tac Toe bots", and generate the next move!
-- LMs trained on _Tic Tac Toe_ can be "Tic Tac Toe bots", and generate the next move!
+@slidebreak{InvestigateR}
+@ifslide{@right{@image{images/chat-bot.png, 250}}}
 
-@link{https://duck.ai/, Here's an example of an ML tool} that uses language you type to predict the *language* that should come back as a reply.
+@link{https://duck.ai/, Here's an example of an ML tool} in the form of a chatbot: it generates text in response to what you write, based on patterns it has picked up by processing trillions of examples.
 
 @teacher{Give students 1-2m to try chatting}
---
 
 We'll get to Language Models in a later lesson, but for now the important thing is to realize that this is yet another kind of @vocab{Machine Learning}.
 
 === Synthesize
 TBD - give students examples of use-cases, and have them identify the kind of ML at work
 
-== Meet Pyret!
+
+
+== What _is_ a Model, Anyway?
 
 === Overview
-Students open up the Pyret environment (pyret.bootstrapworld.org, or "PBO") and see the Animals Dataset reflected there.
+Students begin to think about the meaning of the term "model", which is a broad term that different disciplines use in subtly different ways. Note that the goal of this section is to give them the beginning of an intuition for thinking about models, _not_ a rigorous definition!
 
 === Launch
-@slidebreak{LaunchR}
+@slidebreak{Launch}
+In this lesson, you've already seen the word "model" being used when it comes to AI. We've talked about Prediction Models such as Classification Models and Regression Models. We've talked about Generative (Language) Models, and you probably know some famous ones like GPT, Gemini, or Claude.
 
-Let's take a look at our programming environment, and see what the Animals Dataset looks like there.
+But what IS a model, anyway?
 
-@lesson-instruction{
-- @right{@image{images/pyret.png, 100}}Open the @starter-file{animals} in a new tab. Click “Connect to Google Drive” to sign into your Google account. This will allow you to save Pyret files into your Google Drive.
-- Next, click the "File" menu and select "Save a Copy". This will save a copy of the file into your own account, so that you can make changes and retrieve them later.
+@slidebreak{Launch}
+@lesson-point{A model is a mathematical summary of a dataset}
+
+Defining the term "Model" is actually pretty hard, because different disciplines would define the same word in slightly different ways! But what they all have in common is that models are used to _represent a dataset_, and to do so in a more compact way. When we summarize an essay, we're trying to *identify the main ideas* and *leave the rest behind* - models do the same thing with data, identifying the most important patterns or structures and leaving the rest behind.
+
+@slidebreak{Launch}
+All Models summarize features of a dataset, and all models leave some details out!
+
+You may already be familiar with some simple mathematical models:
+
+- Mean, median, and mode are different ways of summarizing the "center" of a list of numbers, but they leave out the original list
+- A line of best fit summarizes the relationship between points in a scatter plot, but they leave out the original points
+
+Both of these tell us something about a feature of the original dataset, and leave out the less important details.
+
+
+@strategy{Not all Definitions are Black and White!}{
+Someone with a background in Machine Learning would argue that the average of a list of numbers isn't a models at all! In Machine Learning, models are typically used to _make predictions_. A mathematician would disagree.
+
+The fact is that these lines are somewhat blurry, and for an introductory class we've tried to use a least-common-denominator approach by focusing on two main ideas that are common across every discipline: (a) models summarize the features of a dataset, and (b) that summary leaves out parts of the dataset.
 }
 
 === Investigate
 @slidebreak{Investigate}
+@lesson-point{"All models are wrong. Some are useful."}
 
-@lesson-instruction{
-- Click "Run" to tell Pyret to read the code on the left-hand side.
-- On the right-hand side, type `animals-table` and hit the "Enter" or "Return" key.
-- A table of animals appears on the right-hand side of the screen.
-- Look on the left-hand side of the screen. Where is Pyret getting `animals-table` from?
+By definition, a model leaves out some details about the original dataset.
+
+- Rush hour is generally between 4:30-6:30pm (but not on holiday weekends!)
+- White is the most common color of car in the world (but millions of cars are not white!)
+
+The goal of a model is not to be right every time, but to be _right enough to be useful_. Both of the generalizations above are wrong sometimes. But if you're planning a road trip, only one is useful.
+
+
+@teacher{
+For more info on the quote above, check out @link{https://en.wikipedia.org/wiki/All_models_are_wrong, the Wikipedia entry}.
 }
 
 @slidebreak{Investigate}
-
-The first line on the left-hand side of the screen tells Pyret to use a provided file, which contains tools we’ll want to use for this course.
-
-`use context shared-gdrive("Bootstrap-...")`
-
-After that, we see a line of code that _defines_ `shelter-sheet` to be a spreadsheet.
-
-`shelter-sheet = load-spreadsheet("https://docs.google.com....")`
-
-This table is loaded from Google Drive, so now Pyret can see the same spreadsheet you do. If you look carefully, you'll notice that the address listed here is the same address as the spreadsheet we just looked at!
-
-@pd-slide{
-*What Happens when Pyret loads a spreadsheet?*
-
-- When Pyret imports a sheet, it reads all the cells and builds something it calls a Table.
-- When making a table, Pyret checks all of the cells automatically, and holds us accountable for using clean and complete data.
-- Each time we sort, filter or change a Table, Pyret makes a new Table. This is beneficial for a variety of reasons!
-}
-
-@strategy{What Happens when Pyret loads a spreadsheet?}{
-- When Pyret imports a sheet, it reads all the cells and builds something it calls a _Table_. The original spreadsheet is still out there, exactly as it used to be!
-- When making a table, Pyret _checks all of the cells automatically_, and holds us accountable for using clean and complete data so that all visualizations can be trusted. Unlike Pyret, spreadsheets allow us to make visualizations out of any collection of cells -- even if those cells are blank, contain mismatched data, or contain data from multiple, unrelated tables -- which can jeopardize our analysis!
-- Each time we sort, filter or change a Table, Pyret makes a _new Table_. This means that we can explore one transformation or another, or even multiple transformations together...and can always go back as many steps as we want.  This is a big improvement over working with spreadsheets, where our options are to choose between making "backup" copies of sheets at every step (which means any change to one of those sheets needs to be replicated _by hand_ in all of the other sheets), or modifying the original sheet (which makes it really hard to undo mistakes).
-- Checking data by hand and the inability to undo mistakes are problematic for students, teachers, and Data Scientists alike!  While the strictness of programming may outweigh the benefits for younger students, for students who are comfortable writing code, programming is a vastly more powerful and learner-friendly tool for Data Science!
-}
-
-@slidebreak{Investigate}
-
-After that, we see the following code:
-
-```
-# load the 'pets' sheet as a table called animals-table
-animals-table = load-table: name, species, sex, age, fixed, legs, pounds, weeks
-  source: pets-sheet.sheet-by-name("pets", true)
-end
-```
-
-The first line (starting with `#`) is called a @vocab{Comment}. Comments are notes for humans, which the computer ignores. The next line defines a new table called animals-table, (loaded from the shelter-sheet!) and defines column names: `name`, `species`, `sex`, `age`, `fixed`, `legs`, `pounds` and `weeks`. We could use any names we want for these columns, but it’s always a good idea to pick names that make sense!
-
-@lesson-point{
-Even if your spreadsheet already has column headers, Pyret requires that you name them in the program itself.
-}
-
-@slidebreak{Investigate}
-
-Below is an example of a table with a *header row* and two *data rows*:
-
-[.pyret-table,cols="5a,5a,5a,5a,5a,5a,5a,5a",options="header"]
-|===
-
-| name 		| species | sex 	 | age 	| fixed | legs 	| pounds| weeks
-| "Sasha" 	| "cat"	  | "female" | 1 	| false | 4 	| 6.5 	| 3
-| "Mittens" | "cat"   | "female" | 2 	| true 	| 4 	| 7.4 	| 1
-|===
-
-Pyret lets us use many different kinds of data. In the animals table, for example, there are Numbers (the number of legs each animal has), Strings (the species of the animal), and Booleans (whether it is true or false that an animal is fixed).
 
 @QandA{
-@Q{What happens if you remove a column from the list in my program? Or add an extra one?}
-@A{When I remove a column, I get this message: "Loaded worksheet has 8 columns, but 7 column names were given."}
-@A{When I add a column, I get this message: "Loaded worksheet has 8 columns, but 9 column names were given."}
+@Q{Can you come up with your own example of a model?}
+@A{Some ideas:
+- A height, weight, or BMI chart at the doctors office (a summary of the growth of a population)
+- Weather prediction (a summary of environmental trends and relationships)
 }
+
+@Q{When is your model wrong?}
+@A{A bodybuilder has a dangerously high BMI, but they're not actually unhealthy}
+@A{Weather reports might misjudge how hot it will get, or whether it'll rain}
+
+@Q{Is your model useful?}
+@A{Responses will vary}
+}
+
 
 === Synthesize
 @slidebreak{Synthesize}
-Once you know how to program, you can do a _lot_ with tables in Pyret: make charts and graphs, filter it to show just the dogs, or build columns to look at different information.
+Models summarize the features of a dataset, and leave out the details
 
 @QandA{
-@Q{What does Pyret do with a google sheet?}
-@A{Pyret can load any google sheet and build a table using all of the columns of data in the sheet, naming them whatever we want.}
-@A{When Pyret loads a google sheet, it checks to make sure that the number of columns named in the file matches the number of columns in the sheet itself.}
-@A{Pyret can do computations with the data in the sheet without changing the original sheet at all.}
-@A{Pyret can build visualizations from the data and make new tables that are either a filtered subset of the rows in the original table or expanded tables including new columns we build.}
+@Q{What features do you think our flower classifier was looking at, when comparing a picture to different species of flower? What was it ignoring?}
+@Q{What features do you think Spotify looks at, when comparing a songs? What does it ignore?}
+@Q{What features did YOU look at when predicting adoption time for animals in our shelter? What did you ignore?}
 }
-
-@slidebreak{Synthesize}
-In this class, we'll use datasets like this one to explore Prediction Models, Similarity Models, and Language Models. But first we need to get comfortable with the basics of Pyret! Stay tuned...

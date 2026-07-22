@@ -1,4 +1,4 @@
-= Supervised Machine Learning: Reflecting on ALVINN
+= Reflecting on Self-Driving Cars
 
 == Thinking about Training
 
@@ -26,7 +26,7 @@ What might explain why the car drove unsafely on some days?
 @n Imagine that a self-driving car has done extensive training on a one-lane road, in all weather conditions, and at all times of day. Would you expect it to be able to safely drive on a busy two-lane road? Explain.
 
 @blanklines{3}{
-@ifsoln{Although ALVINN's training at this point enables accurate steering in a variety of conditions, ALVINN is not trained on busy multi-lane roads. The steering angles differ when the road is wider, and the appearance of unexpected, unfamiliar objects (like other cars) could result in very dangerous driving.
+@ifsoln{Although our car's training at this point enables accurate steering in a variety of conditions, it was not trained on busy multi-lane roads. The steering angles differ when the road is wider, and the appearance of unexpected, unfamiliar objects (like other cars) could result in very dangerous driving.
 }
 }
 
@@ -40,9 +40,9 @@ What might explain why the car drove unsafely on some days?
 
 == Confidence Rating
 
-@n In addition to producing a steering angle for each image of the road, ALVINN produces a _numeric_ measure of "confidence" in its response.
+@n In addition to producing a steering angle for each image of the road, many models produces a _numeric_ measure of "confidence" in its response.
 
-- What do you think causes ALVINN's "confidence" to increase or decrease? 
+- What do you think causes a model's "confidence" to increase or decrease?
 
 @blanklines{3}{
 @ifsoln{*Confidence will be higher* when the image of the road matches an image from the training dataset.  *Confidence will be lower* when the image of the road is entirely unlike any image in the training dataset.
@@ -52,6 +52,6 @@ What might explain why the car drove unsafely on some days?
 - Is 100% "confidence" possible? 
 
 @blanklines{3}{
-@ifsoln{100% confidence is not possible, because, once the model is constructed, ALVINN will only have access to a lossy version of the original data. Since it is not comparing new images to the original images, if it encounters a patch of road it's seen before under identical conditions, it won't recognize it.
+@ifsoln{100% confidence is not possible, because, once the model is constructed, the car will only have access to a lossy version of the original data. Since it is not comparing new images to the original images, if it encounters a patch of road it's seen before under identical conditions, it won't recognize it.
 }
 }

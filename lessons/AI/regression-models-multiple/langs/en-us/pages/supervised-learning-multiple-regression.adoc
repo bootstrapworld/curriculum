@@ -20,47 +20,52 @@ div#body .center { padding: 0 !important; }
 </style>
 ++++
 
-To complete this page, you'll be using the following contracts:
+@link-instructions{To complete this page, open your copy of @starter-file{self-driving} and click "Run". You'll be using the following functions:}
 
 @indented{
-@show{(contract "reg-model-code" '((table-name Table) (explanatory List<String>) (response String)) "Code")} +
-@show{(contract "reg-model-S" '((table-name Table) (explanatory List<String>) (response String) (model "Row->Number")) "Number")}
+@show{(contract "regression-model-code" '((table-name Table) (explanatory List<String>) (response String)) "Code")} +
+@show{(contract "regression-model-S" '((table-name Table) (explanatory List<String>) (response String) (model "Row->Number")) "Number")}
 }
 
 @vspace{1ex}
 
 == Building a Two-Variable Model
 
-@n Evaluate `reg-model-code(training-data, [list: "curve", "skew"], "steering-angle")` to produce the predictor function, then fill in the model below. (Round your numbers to 2-3 digits)
+@n Evaluate `regression-model-code(training, [list: "curve", "skew"], "steering-angle")` to produce the predictor function, then fill in the model below. (Round your numbers to 2-3 digits)
 
 [.big-codeblock]
 @big{
-`fun cs-predictor(r):` +
+`fun curve-skew-predictor(r):` +
 @hspace{2em} `(` @fitbruby{8em}{}{@math{m_{curve}}} `* r["curve"]) + (` @fitbruby{8em}{}{@math{m_{skew}}} `* r["skew"]) +` @fitbruby{8em}{}{@math{b}} +
 `end`
 }
 
+@n *Copy-and-paste* your model into the Definitions Area.
 
-@n Which variable has the larger coefficient? @fitb{5em}{@ifsoln{`curve`}} What does that tell you? @fitb{}{} +
-@fitb{}{@ifsoln{`curve` has more "pull" on the prediction — a one-unit change in `curve` shifts the predicted steering angle more than a one-unit change in `skew`.}}
-
-@n *Copy-and-paste* your model into the Definitions Area, and *change the name* to `cs-predictor`.
-
-@n Use `reg-model-S` to compare the fit of your 1-variable and 2-variable models:
+@n Use `regression-model-S` to compare the fit of your 1-variable and 2-variable models:
 
 [cols="6a, ^1a", options="header", stripes="none"]
 |===
 | Model
 | @math{S}-value
-| `reg-model-S(training-data, [list: "curve"], "steering-angle", curve-predictor)`
+
+|
+@comment{We use ---- so asciidoctor will preserve the whitespace for indenting the second line}
+----
+regression-model-S(
+  training, [list: "curve"], "steering-angle", curve-predictor)
+----
 | @ifsoln{}
 
-
-| `reg-model-S(training-data, [list: "curve", "skew"], "steering-angle", cs-predictor)`
+|
+----
+regression-model-S(
+  training, [list: "curve", "skew"], "steering-angle", curve-skew-predictor)
+----
 | @ifsoln{}
 |===
 
-@n Adding `skew` to the model made the S-value @fitbruby{14em}{@ifsoln{smaller}}{larger/smaller}. Does that mean the fit is @fitbruby{13em}{@ifsoln{better}}{better/worse}?
+@n Adding `skew` to the model made the S-value @fitbruby{14em}{@ifsoln{smaller}}{larger/smaller} so we know that the fit is @fitbruby{13em}{@ifsoln{better}}{better/worse}.
 
 == Thinking Critically About Variables
 

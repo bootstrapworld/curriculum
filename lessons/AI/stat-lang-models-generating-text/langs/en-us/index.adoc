@@ -1,9 +1,9 @@
 [.beta]
-= Statistical Language Modeling: Generating Text
+= Generative Models
 
 @description{Students consider how statistics and probability drive AI text generation, learning that language models can produce text that sounds credible but may not actually be credible.}
 
-@lesson-prereqs{}
+@lesson-prereqs{data-driven-algorithms}
 
 @keywords{}
 
@@ -16,9 +16,7 @@
 
 | Student-facing Lesson Goals
 |
-
 - Let's explore how probability influences the output of generative AI models.
-
 
 | Materials
 |[.materials-links]
@@ -27,17 +25,12 @@
 | Preparation
 | @preparation{
 - Make a copy of the @online-exercise{https://docs.google.com/forms/u/1/d/1C1WSad_IrVT0pd_IXG7yCCM30CVoIibv9kBDKnEJ5RI/copy, What comes next? Survey Google Form} so that you can examine your class's data. _If you are using our Google Slides, be sure to add the link to your copy of the form to the appropriate slide._}
-
 |===
 
-
-
 == Introduction to Statistical Language Modeling
-
-@objective{predictive-text}
+@objective{ai-slm}
 
 === Overview
-
 Students explore how text prediction relies on statistical language modeling.
 
 === Launch
@@ -52,9 +45,12 @@ Make sure you've made a copy of the @online-exercise{https://docs.google.com/for
 @slidebreak{Launch}
 
 @lesson-instruction{
-- Consider this start of a phrase: "Close the..."
-- Use the form to record the next word that pops into your mind.
-- Type in two other possible next words.
+Consider this start of a phrase: "Close the..."
+
+- What word might come next?
+- As a class, are there more than one “next word”?
+- Which one is the most likely?
+
 }
 
 @teacher{
@@ -76,7 +72,7 @@ Let's look a little more closely at the words we generated.
 @A{For example: If there are 25 students in your class, and 8 students chose “door”, it was chosen 8/25ths of the time.}
 }
 
-@slidebreak{Investigate2}
+@slidebreak{Investigate}
 
 Statistical language models are built on the assumption that the fraction of the time that a word follows a series of words in a training corpus can help predict the likelihood of it being the right word to follow that same series of words in a future scenario. In this lesson, we will refer to that fraction as its @vocab{probability}.
 
@@ -93,12 +89,12 @@ Similar to other AI systems we've discussed, predictive text features are traine
 
 During training:
 
-1. The computer extracts each use of the phrase "Close the" from the training dataset, along with the subsequent word.
+1. The computer extracts each use of the phrase "Close the" from the corpus, along with the subsequent word.
 2. It then determines the probability of each possible next word.
 
 @ifnotslide{@right{@image{images/texting-app.png, 200}} When making a suggestion: 
 
-@hspace{1em}It offers the words that had the highest probability of following "Close the" in the training dataset.
+@hspace{1em}It offers the words that had the highest probability of following "Close the" in the corpus.
 
 Consider this screenshot from a text messaging app. +
 In the @vocab{training corpus} it was built on, "door", "doors", and "house"  most commonly appeared after "Close the". +
@@ -108,7 +104,7 @@ But are all users recommended the _same_ completions?
 
 @ifslide{When making a suggestion: 
 
-@hspace{1em}It offers the words that had the highest probability of following "Close the" in the training dataset.
+@hspace{1em}It offers the words that had the highest probability of following "Close the" in the corpus.
 
 @slidebreak{InvestigateR}
 
@@ -132,9 +128,9 @@ But are all users recommended the _same_ completions?
 For a variety of reasons, not all phones will propose the same completions:
 
 - If there are multiple words with equal probability, the system will select the word at random. As a result, even the same phone won't necessarily propose the same word every time.
-- Not all phones use the same system, or the same amount of randomness.
-- A messaging app also includes a @vocab{model} of _the words that the owner uses_, to personalize suggestions to the way the user writes. The app can also account for previously-accepted word suggestions.
-- Some predictive text features even account for the specific message being written! For instance, typing first letter of an unusual word that you used in the same message triggers the app to propose that unusual word.
+- Not all phones use the same corpus, the same prediction rules, or the same amount of randomness.
+- A messaging app also includes a @vocab{model} of _the words that the owner uses_, to personalize suggestions to the way the user writes.
+- Some predictive text features even account for the specific message being written! Typing first letter of an unusual word that you used in the same message triggers the app to propose that unusual word.
 
 @scrub{
 @slidebreak{Investigate}
@@ -172,8 +168,8 @@ Using computers to process languages, often by consuming a corpus and constructi
 
 == Constructing a Statistical Language Model
 
-@objective{slm}
-
+@objective{ai-slm}
+@objective{ai-slm-create}
 === Overview
 
 Students construct a statistical language model by decomposing the text and computing the probabilities of different words following each other.
@@ -213,7 +209,7 @@ You chopped up the first line of our corpus into differently sized chunks (one w
 
 |===
 
-@slidebreak{LaunchR}
+@slidebreak{Launch}
 
 The formal word computer scientists use in this context is not "chunk" but @vocab{n-gram}. In an @math{n}-gram, @math{n} represents the number of words in the chunk. For special cases where @math{n} is 1, 2, or 3, the @math{n}-grams are called @vocab{unigrams}, @vocab{bigrams}, and @vocab{trigrams}.
 
@@ -228,13 +224,13 @@ The formal word computer scientists use in this context is not "chunk" but @voca
 }
 
 @slidebreak{LaunchR}
-@right{@image{images/bag-of-colors.png}}
 @lesson-point{The Table of Unigrams is effectively a Bag of Words}
 
-When restricted to a single word (unigrams only), the n-gram language model stores the exact same information as the Bag of Words! Even though they store the same data, however, it's important to keep in mind that they come from two very different places:
+@right{@image{images/bag-of-colors.png, 250}}
+When restricted to single words (unigrams), an n-gram model stores the exact same data as a Bag of Words, though they originate from very different concepts:
 
-- Bag-of-Words is a _representation_ of a corpus of documents, which turns them into coordinates of n-dimensions for the sake of classification or regression.
-- Unigrams come from _Language Modeling_. They (and their siblings bigrams, trigrams, etc) are used to _calculate probabilities_.
+- The @vocab{bag of words model} represents documents as @math{n}-dimensional coordinates, allowing them to be used for classification or regression.
+- Unigrams come from Language Modeling and—along with bigrams and trigrams—are used to _calculate probabilities_.
 
 Same data, very different purposes.
 
@@ -265,11 +261,9 @@ The phrase "there was an old lady who swallowed a..." is repeated in our corpus!
 
 @slidebreak{Investigate}
 
-In the example you just worked through, you computed the probability that "was" appears after the unigram "there"...
+In the example you just worked through, you computed the _conditional probability_ that "was" appears after the unigram "there" by dividing the number of times *`"there"` is followed by `"was"`* (five times) by the number of times we see *`"there"` followed by anything* (five times)}
 
-@indented{by dividing 5 _(how many times we see "there" followed by "was")_ by 5 _(how many times we see "there" followed by anything)_.}
-
-We can represent this computation with a special notation:
+This fraction represents the  that "was" will come after "there":
 
 @indented{
 @math{p(was | there) = \frac
@@ -303,7 +297,7 @@ If you'd like to explore probability and sampling in greater depth, check out ou
 
 @lesson-instruction{
 - Return to @starter-file{ai-ngrams}
-- *In the Definitions Area*, build your language mode by evaluating `m = build-lang-model(corpus)`, then click "Run".
+- *In the Definitions Area*, build your language model by evaluating `m = build-lang-model(corpus)`, then click "Run".
 - Evaluate `m` to see what it looks like!
 - To find the probability of one word following another, evaluate `next-word-probability(m, "swallowed a", "fly")`
 }
@@ -323,10 +317,11 @@ We can say that, _in this corpus_, as the n-gram gets longer, the number of comp
 @A{Yes, in general, this is a true statement: longer phrases have fewer possible completions than single words.}
 }
 
+
 == Sampling from the Model
+@objective{ai-slm-hallucination}
 
 === Overview
-
 Students use their statistical language model in a generative way, to produce output.
 
 === Launch
@@ -345,15 +340,19 @@ How might we go about doing that?
 
 We've created helper functions for this, too:
 
-@show{(contract "completions" '((model Table) (start String)) "Table")} +
-@show{(contract "choose-completion" '((model Table) (start String)) "String")}
+@show{(contract "completions" '((model Table) (start String)) "Table")}
 
-- We can use these contract to find all the possible completions for a starting string: `completions(c, "swallowed the")`
+@show{(contract "choose-completion" '((model Table) (start String) (n Number)) "String")}
 
-- Or to choose one completion at random: `choose-completion(c, "swallowed the")`
+- We can use these contract to find all the possible completions for a starting string: `completions(m, "swallowed the")`
 
+- Or to choose the next `n` words at random:
+@indented{
+`choose-completion(m, "swallowed the", 1)`
+`choose-completion(m, "swallowed the", 2)`
+}
 
-@slidebreak{Investigate}
+@slidebreak{Investigate-DN}
 
 
 @teacher{Note that on @printable-exercise{sampling.adoc}, questions build on one another. In other words, a student who misses Question 2 will also get Question 3 incorrect. To ensure that class runs smoothly, we encourage you to require that students check their work with a partner before moving from one question to the next. Encouraging students to annotate @printable-exercise{old-lady-lyrics.adoc} will also result in more accurate counting and therefore more correct responses!}
@@ -369,6 +368,9 @@ We've created helper functions for this, too:
 
 @Q{Did everyone in your class end up with same phrase? How and why did that happen?}
 @A{Yes. When considering which word to generate next, there was always one word that was clearly the most probable, and there were no ties.}
+
+@Q{What do you think would happen if you start with a word like "llama", which doesn't appear _at all_ in the original corpus?}
+@A{The probability of following "llama" is the same for every word: zero. Maybe `choose-completion` would choose at random?}
 }
 
 
@@ -400,7 +402,22 @@ If you're curious to see what would happen if we just kept going, evaluate `gene
 
 === Synthesize
 @slidebreak{Synthesize}
+@lesson-point{A model is a mathematical summary of a dataset}
 
+@QandA{
+@Q{What does our n-grams table summarize about this dataset?}
+@Q{What does it leave out?}
+}
+
+@slidebreak{Synthesize}
+@lesson-point{All models are wrong. Some are useful.}
+
+@QandA{
+@Q{Will _any_ language model *perfect*? Why or why not?}
+@Q{When is a language model *useful*?}
+}
+
+@slidebreak{Synthesize}
 @QandA{
 Critics of ChatGPT and other language models raise a variety of concerns. Consider each of them, below.
 

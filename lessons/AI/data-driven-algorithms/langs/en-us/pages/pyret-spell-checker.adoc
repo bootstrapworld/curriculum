@@ -13,31 +13,31 @@ td { padding: 3px !important; }
 @link-instructions{Open the @starter-file{spell-checker} and click "Run".} Follow each of the instructions below to discover how our very own Pyret spell checker works.
 
 == Suggestions for 1 Edit-Distance
-The four functions below consume a word, and suggest a list of words that can be reached by making a *single change*.
+`deletions`, `insertions`, `swaps`, and `subs` consume a word, and suggest a list of words that can be reached by making a *single change*.
 
-@vspace{1ex}
+@n Fill in the 2nd column of table below by evaluating each expression, and recording the *number of suggestions* Pyret returns.
 
-Complete the table below by evaluating each expression, and recording the *number of suggestions* Pyret returns. *How many of YOUR suggestions from  @printable-exercise{first-spell-checker.adoc}* are in Pyret's list?
-
-[%autowidth, options="header", cols="<, ^, ^"]
+[cols="<1a,^1a,4a", options="header"]
 |===
-| Expression 	| # Suggestions | How many of your suggestions are here? (circle one)
-| @n `deletions("wello")`
+| Expression 	| # Suggestions | Did Pyret find all your suggestions?
+| `deletions("wello")`
 | @ifsoln{4}
-| 0@hspace{4em}1@hspace{4em}2@hspace{4em}3@hspace{4em}4@hspace{4em}5@hspace{4em}
+| @hspace{1em} *Yes* @hspace{3em} *No*, it missed:
 
-| @n `insertions("wello")`
+| `insertions("wello")`
 | @ifsoln{151}
-| 0@hspace{4em}1@hspace{4em}2@hspace{4em}3@hspace{4em}4@hspace{4em}5@hspace{4em}
+| @hspace{1em} *Yes* @hspace{3em} *No*, it missed:
 
-| @n `swaps("wello")`
+| `swaps("wello")`
 | @ifsoln{4}
-| 0@hspace{4em}1@hspace{4em}2@hspace{4em}3@hspace{4em}4@hspace{4em}5@hspace{4em}
+| @hspace{1em} *Yes* @hspace{3em} *No*, it missed:
 
-| @n `subs("wello")`
+| `subs("wello")`
 | @ifsoln{125}
-| 0@hspace{4em}1@hspace{4em}2@hspace{4em}3@hspace{4em}4@hspace{4em}5@hspace{4em}
+| @hspace{1em} *Yes* @hspace{3em} *No*, it missed:
 |===
+
+@n *Flip back to @printable-exercise{first-spell-checker.adoc}.* How many of YOUR suggestions are in Pyret's list? Fill in the 3rd column of the table above.
 
 == Suggestions for Larger Edit-Distances
 
@@ -52,13 +52,13 @@ Pyret has a function `only-real`, that takes in a table of suggested words and a
 
 @n Evaluate `insertions("flt")`. How many suggestions does it return? @fitb{}{@ifsoln{101}}
 
-@n Evaluate the three expressions below and record the words they return
+@n Evaluate the two expressions below and record the *number of words* they return
 
 [cols="1a,1a"]
 |===
-|`only-real(insertions("flt"), WORDS-S)`| @ifsoln{flat}
-|`only-real(insertions("flt"), WORDS-M)`| @ifsoln{felt, flat}
-|`only-real(insertions("flt"), WORDS-L)`| @ifsoln{felt, flat, flit}
+|`only-real(insertions("pat"), WORDS-S)`| @ifsoln{3}
+|`only-real(insertions("pat"), WORDS-M)`| @ifsoln{8}
+|`only-real(insertions("pat"), WORDS-L)`| @ifsoln{9}
 |===
 
 @n What does `only-real` do? Why do we get different results? @fitb{}{@ifsoln{It removes any word that isn't in the dictionary}} +
@@ -70,14 +70,14 @@ The `alt-words` function combines all 5 of these functions. It takes in a "word"
 
 @n If you had to guess, what word did the author mean to type when they wrote `crosswrd`? @fitb{}{}
 
-@n Evaluate `alt-words("crosswrd", WORDS-S, 2)`. Record the first 3 results. Describe the edit(s) to get here from "crosswrd".
+@n Evaluate `alt-words("crosswrd", WORDS-L, 2)`. Record the first 3 results. Describe the edit(s) to get here from "crosswrd".
 
 [.FillVerticalSpace, cols="^2a, ^1a, ^5a", options="header", stripes="none"]
 |===
-| Alternative Word		| # Edits 									| Edits from "crosswrd"
-| @ifsoln{crossed}		| @ifsoln{2} @ifnotsoln{@vspace{1ex}}		| @ifsoln{delete the "w". replace "r" with "e"} 
-| @ifsoln{crossword}	| @ifsoln{1} @ifnotsoln{@vspace{1ex}}		| @ifsoln{delete the "w". replace "r" with "e"}
-| @ifsoln{crosswords}	| @ifsoln{2} @ifnotsoln{@vspace{1ex}}		| @ifsoln{delete the "w". replace "r" with "e"}
+| Alternative Word	| # Edits 									| Edits from "crosswrd"
+| @ifsoln{crosser}	| @ifsoln{2} @ifnotsoln{@vspace{1ex}}		| @ifsoln{delete the "d". replace "w" with "e"}
+| @ifsoln{crossed}	| @ifsoln{2} @ifnotsoln{@vspace{1ex}}		| @ifsoln{replace the "w" with an "e", and delete "r"}
+| @ifsoln{crossword}| @ifsoln{1} @ifnotsoln{@vspace{1ex}}		| @ifsoln{insert an "o"}
 |===
 
 @n If the spellchecker were to take the number of edits into consideration, which of these suggestions do you think it would propose first? Why? 

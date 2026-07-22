@@ -1,0 +1,68 @@
+= Modeling Language with AI
+++++
+<style>
+img { max-height: 80px; margin: 10px auto; }
+
+/* Override the default no-flex-on-notes rule for this page */
+div#body.LessonNotes #content { display: flex !important; }
+</style>
+++++
+
+Another kind of AI, called *Generative AI*, is all about making new text, images, or music. The tools that generate language are called @vocab{language models}, and they power everything from predictive text to chatbots, and from deepfakes to AI-written book reports. But a computer can't actuallty _read_: it has no idea what words *mean*. So how can it possibly work with language?
+
+The trick, as always, is to turn language into *data*. Once words become data, a computer can do two big jobs with them:
+
+
+[cols="^.^1a,^.^1a", frame="none", grid="none", options="header", stripes="none"]
+|===
+| Understanding Text | Generating Text
+
+|
+@image{../images/bag-of-colors.png}
+
+A @vocab{bag of words} represents a document as an *unordered* collection of words and how often each appears. Order is thrown away -- just the counts remain. Now text is data, so we can measure *similarity* between documents (this is how plagiarism detectors work!).
+
+|
+@image{../images/texting-app.png}
+
+A @vocab{statistical language model} learns, from a corpus, *how often one word follows another.* It can then predict -- and generate -- a likely next word, one word at a time.
+|===
+
+
+Raw text is noisy, so before we model it we @vocab{normalize} it -- lowercasing everything, stripping punctuation, and removing common @vocab{stopwords} (like "the" and "of"). This cuts out noise so the words that actually carry meaning produce more meaningful results.
+
+== Probability and N-grams
+
+@vspace{1ex}
+
+A statistical language model is built on @vocab{probability}: the _fraction_ of times one word follows another in the training corpus. To measure that, we chop the corpus into chunks called @vocab{n-grams} (where @math{n} is the number of words per chunk):
+
+[cols="^.^1,^.^4a,^.^5", stripes="none", options="header", frame="none"]
+|===
+| Name | Chunks of "There was an old lady" | What it captures
+| @vocab{Unigram} (n=1) | (There) (was) (an) (old) (lady) | just word frequencies -- _a bag of words!_
+| @vocab{Bigram} (n=2) | (There was) (was an) (an old) (old lady) | which word tends to follow one other word
+| @vocab{Trigram} (n=3) | (There was an) (was an old) (an old lady) | the next word, given the _two_ before it
+|===
+
+@vspace{1ex}
+
+Counting up these n-grams to compute next-word probabilities *is* training a model -- and like all training, it's *lossy*: the model keeps the probabilities but forgets the original text.
+
+== Generating Text = Sampling
+
+@vspace{1ex}
+
+To generate, the model just *samples* a next word according to those probabilities, adds it to the sentence, and repeats. A dial called @vocab{temperature} controls how random the choice is: low temperature always grabs the most likely word (repetitive), while higher temperature takes more chances (surprising, sometimes nonsense). A tool like *Soekia* lets us peek behind the curtain at exactly this process.
+
+@vspace{1ex}
+
+@lesson-point{A language model knows *probability*, not *meaning* or *truth*.}
+
+This is why language models "make stuff up," or *hallucinate*: every sentence is produced by the same word-by-word probability game, whether or not it happens to be true. For the same reason, a model faithfully echoes the *biases* baked into its corpus.
+
+== A "Language" is more than Just Words!
+
+@vspace{1ex}
+
+@vocab{Natural language processing} (NLP) means using a computer to consume a corpus, build a model, and produce new text. But nothing about that process requires _English_ -- or any human language at all! The very same techniques work on *artificial languages*: the moves of a Tic-Tac-Toe game, a melody, or a chess match are all just sequences of "words" a model can learn to continue.

@@ -14,7 +14,7 @@
 .highlight-diagonal tr:nth-child(4) td:nth-child(5),
 .highlight-diagonal tr:nth-child(5) td:nth-child(6) {
   background: var(--bs-secondary-lighter-supernova) !important;
-  color: white !important;
+  color: black !important;
   font-weight: bold;
 }
 </style>
@@ -40,16 +40,21 @@
 | Materials
 |[.materials-links]
 @material-links
+
+| Supplemental Materials
+|[.materials-links]
+@opt-material-links
 |===
 
 == Building Decision Trees in Pyret
-
+@objective{pyret-build-trees}
+@objective{ai-over-fitting}
 === Overview
 Now that they know the algorithm, students explore Pyret's ability to build decision trees automatically! They explore the impact that different depths or columns have on the quality of a classifier.
 
 === Launch
 @slidebreak{Launch}
-By now, you know:
+Let's review what we know about classifiers:
 
 - There is a simple algorithm we can use to compute an _optimal tree_ for any dataset .
 - @vocab{Decision trees} are really just functions called @vocab{classifiers}: they take an input and produce a prediction as their output.
@@ -58,6 +63,7 @@ By now, you know:
 Of course, computing a decision tree by hand takes a long time, especially if you're dealing with tens of thousands of rows and hundreds of columns! 
 Fortunately, computers are really, _really_ good at following algorithms.
 
+@slidebreak{Launch}
 One example of an early application for this kind of automation is used by the United States Postal Service to read handwritten addresses on envelopes.  Their address interpretation system was trained on the MNIST database (Modified National Institute of Standards and Technology database), which includes thousands of labelled images of handwritten digits.
 
 === Investigate
@@ -65,7 +71,7 @@ One example of an early application for this kind of automation is used by the U
 
 Given a dataset to train on, Pyret can build _optimal_ decision trees for us, and even give us the classifier code for those trees, using the algorithm you already know!
 
-@show{(contract "build-tree" '("Table" "List" "String" "Number") "DecisionTree")}
+@show{(contract "build-tree" '((t Table) (split-cols "List<String>") (answer-col String) (max-depth Number)) "DecisionTree")}
 
 The `build-tree` function takes *four arguments* in its Domain:
 
@@ -74,7 +80,7 @@ The `build-tree` function takes *four arguments* in its Domain:
 - The name of the _target_ column containing all the "answers" for the various categories
 - The _maximum depth_ the tree is allowed to be
 
-@slidebreak{Investigate}
+@slidebreak{Investigate-DN}
 
 @lesson-instruction{
 - Complete the first section of @printable-exercise{computing-decision-trees.adoc} using the @starter-file{decision-tree}.
@@ -83,7 +89,7 @@ The `build-tree` function takes *four arguments* in its Domain:
 @slidebreak{Investigate}
 
 @QandA{
-@Q{When you evaluated `dt-code(tree-cat1)`, did you recognize the code that came back?}
+@Q{When you evaluated `dt-code(tree-c1)`, did you recognize the code that came back?}
 @A{It's the same function as `tail-classifier`, which was already in our Definitions Area}
 
 @Q{What did Pyret do with the quantitative column (`"pounds"`)?}
@@ -93,23 +99,23 @@ The `build-tree` function takes *four arguments* in its Domain:
 @A{`"swims"`}
 }
 
-@slidebreak{Investigate}
+@slidebreak{Investigate-DN}
 
 @lesson-instruction{
 Complete the second section of @printable-exercise{computing-decision-trees.adoc}
 }
 
-@slidebreak{Investigate}
+@slidebreak{Investigate-DN}
 
 @QandA{
-@Q{How are the definitions for `tree-cat1` and `tree-cat2` different?}
-@A{`tree-cat1` allows for a maximum of 1 level.}
-@A{`tree-cat2` allows for a maximum of 2 levels.}
+@Q{How are the *definitions* for `tree-c1` and `tree-c2` different?}
+@A{`tree-c1` allows for a maximum of 1 level.}
+@A{`tree-c2` allows for a maximum of 2 levels.}
 
-@Q{How are the trees for `tree-cat1` and `tree-cat2` different?}
+@Q{How are the *trees* for `tree-c1` and `tree-c2` different?}
 @A{They are the same! Once we split on whether or not animals have tails, there's no further sorting we can do with just the `"tail"` column.}
 
-@Q{How did `tree-quant1`, `tree-quant2` and `tree-quant3` compare?}
+@Q{How did `tree-q1`, `tree-q2` and `tree-q3` compare?}
 @A{They all started with the same splits.}
 }
 
@@ -118,9 +124,9 @@ Complete the second section of @printable-exercise{computing-decision-trees.adoc
 - Turn to @printable-exercise{comparing-decision-trees.adoc} and complete the first section.
 }
 
-@slidebreak{Investigate}
+@slidebreak{Investigate-DN}
 
-Notice that `tree-quant6` works just as well as `tree-any4`, even though it only has one column to train on!
+Notice that `tree-q6` works just as well as `tree-any4`, even though it only has one column to train on!
 
 As is common for quantitative columns, there's more variability in `pounds` than there is for any of our categorical columns. In fact, the only way to _not_ have a perfect classifier based on `pounds` would be for animals from two different species to weigh the exact same amount!
 
@@ -130,13 +136,14 @@ As is common for quantitative columns, there's more variability in `pounds` than
 
 @slidebreak{Investigate}
 
-When given another dataset to classify, `tree-any4` is outscoring `tree-quant6`!
+When given another dataset to classify, `tree-any4` is out-scoring `tree-q6`!
 
 @QandA{
-@Q{Why did `tree-quant6` do so poorly?}
+@Q{*Why did `tree-q6` do so poorly?*}
 @A{Let students share their theories}
 }
 
+@slidebreak{Investigate}
 [cols="^1a, ^1a", frame="none", options="header"]
 |===
 | Training Dataset
@@ -146,9 +153,7 @@ When given another dataset to classify, `tree-any4` is outscoring `tree-quant6`!
 | @image{images/dot-plot-pounds-testing.png}
 |===
 
-This is a classic example of what ML engineers call @vocab{over-fitting}. The more dependent a classifier is on a specific attribute, the more sensitive it is to variations in that attribute between populations. In this case, `tree-quant6` was _totally dependent_ on `pounds`, whose distribution is very different in the `testing` dataset.
-
-This would be like studying for a test by memorizing the answers to a previous test. You've learned how to ace _that specific test_, but not enough to actually do well on a different one.
+This is an example of what ML engineers call @vocab{over-fitting}. The more a classifier depends on the quirks of an attribute in the training data, the more sensitive it is to variations in that attribute when it comes time to use new inputs. In this case, `tree-q6` was _totally dependent on very specific thresholds in the `pounds` column_, so when the testing dataset had different thresholds the classifier performed poorly.
 
 @slidebreak{Investigate}
 @ifslide{
@@ -161,7 +166,9 @@ This would be like studying for a test by memorizing the answers to a previous t
 | @image{images/dot-plot-pounds-testing.png}
 |===
 }
+This would be like studying for a test by memorizing the answers to a previous test. You've learned how to ace _that specific test_, but not enough to actually do well on a different one.
 
+@slidebreak{Investigate}
 In Machine Learning, over-fitting happens when our decision tree tries so hard to find a pattern in a specific set of data that it begins to "memorize" the details and random noise instead of learning the actual rule. That's exactly what happened with the `pounds` column here.
 
 The other columns didn't vary as much at all! Dogs and cats are all `mammals` no matter what. Most dogs like to `swim`. And most dogs, cats, and lizards all have a `tail`. These attributes are more stable across samples, whereas `pounds` can vary widely.
@@ -182,17 +189,64 @@ The other columns didn't vary as much at all! Dogs and cats are all `mammals` no
 @A{Yes. A decision tree may not be deep enough to correctly classify every category - and in some cases, there may not *be* a way to correctly classify every category!}
 }
 
-== Is the Classifier Good?
-@objective{}
+== Evaluating a Classifier
+@objective{ai-confusion-matrix}
 
 === Overview
 Students learn about confusion matrices, and use Pyret to generate them from classifier functions derived from decision trees.
 
 === Launch
 @slidebreak{Launch}
-How do we know if a @vocab{decision tree} makes a good @vocab{classifier} or not? Using the `classify` function only tells us how many we got right, and how many we got wrong.
+Tests for the flu, measles, etc are all forms of @vocab{classifiers}! When looking at any of these tests, public health officials need to think about the following:
 
-It's not enough to know that a classifier messed up 6 times! Data Scientists and Machine Language Engineers want to know what percentage of the time the classifier did what it was supposed to and _which mistakes_ it made!
+[.highlight-diagonal, cols="<.^1a,^.^2a,^.^2a", stripes="none", options="header"]
+|===
+| Actual Status
+| Predicted Positive
+| Predicted Negative
+
+| Infected
+| *True Positive:* +
+   The test says someone is infected, and they _actually are_
+| *False Negative:* +
+   The test says someone is infected, but they aren't
+
+| Not Infected
+| *False Positive:* +
+   The test says someone is healthy, but they're sick
+| *True Negative:* +
+   The test says someone is healthy, and they _actually are_
+|===
+
+There are two ways for the test to be right, and two ways for it to be wrong.
+
+@slidebreak{Launch}
+Suppose we have an outbreak of a really deadly, highly-contagious disease, and two possible tests to choose from.
+
+- Test A has tons of *false positives:* It will almost always do the right thing if you're sick, but a lot of healthy people get told they are infected
+- Test B has tons of *false negatives:* It will almost always do the right thing if you're healthy, but a lot of sick people get told they are fine
+
+@slidebreak{Launch}
+
+@ifslide{
+@center{
+Test A has tons of *false positives*
+Test B has tons of *false negatives*
+}
+}
+
+@lesson-instruction{
+- YOU are in the minister of public health, for a country struggling with an outbreak of this disease.
+- Which test do you choose, for your country?
+- Would you pick a different test for a less contagious disease?
+}
+
+@teacher{
+Give students ample time to discuss. What matters isn't that the class comes to a conclusion, but that students begin to see how it's not simply a matter of "how often is the test accurate?", but instead "how often is the test accurate in _which ways_?"
+}
+
+@slidebreak{Launch}
+This real-world example makes it clear that it's not enough to simply say "the classifier was right half the time."
 
 @QandA{
 @Q{Out of the 5 cats in this dataset, how many did our `tail-classifier` classify _correctly_?}
@@ -210,11 +264,11 @@ It's not enough to know that a classifier messed up 6 times! Data Scientists and
 
 @slidebreak{Launch}
 
-The reports Data Scientists use to understand how "good" a classifier is are called @vocab{confusion matrices}. A @vocab{confusion matrix} typically shows _ratios:_ 
+The reports Data Scientists (and public health officials!) use to understand how "good" a classifier is are called @vocab{confusion matrices}. A @vocab{confusion matrix} typically shows _ratios:_
 
-- 4-out-of-5 cats becomes 80% or 0.8
-- 0-out-of-4 dogs becomes 0% or 0
-- 2-out-of-2 lizards becomes 100% or 1 
+- 0-out-of-4 dogs becomes 0% (0 in decimal form)
+- 2-out-of-2 lizards becomes 100% or (1)
+- 4-out-of-5 cats becomes 80% (0.8)
 
 ...and so on.
 
@@ -228,10 +282,10 @@ The reports Data Scientists use to understand how "good" a classifier is are cal
 @center{@image{images/swims-confusion.png,600}}
 
 @QandA{
-@Q{Which species is the `swims-classifier` most accurate at predicting?}
+@Q{Which species did `swims-classifier` predict _most_ accurately?}
 @A{dogs}
 
-@Q{Which species is the `swims-classifier` least accurate at predicting?}
+@Q{Which species did `swims-classifier` predict _least_ accurately?}
 @A{snails, lizards and tarantulas}
 
 @Q{What else can we learn from the confusion matrix?}
@@ -245,12 +299,12 @@ The reports Data Scientists use to understand how "good" a classifier is are cal
 
 Pyret has a function that will make a @vocab{confusion matrix} for you! Here's the contract:
 
-@show{(contract "confusion-matrix" '("Table" "String" "(Row -> String)") "Table")}
+@show{(contract "confusion-matrix" '((t Table) (answer-col String) (classifier-fn "(Row -> String)")) "Table")}
 
 @slidebreak{Investigate}
 
 @lesson-instruction{
-- Make sure you added the `swims-classifier` to your Definitions Area and clicked "Run".
+- Make sure you added the `swims-classifier` below to your Definitions Area and clicked "Run".
 
 ```
 fun swims-classifier(r):
@@ -261,7 +315,11 @@ fun swims-classifier(r):
   end
 end
 ```
+}
 
+@slidebreak{Investigate}
+
+@lesson-instruction{
 - Test out the confusion matrix for our `swims-classifier` using the following code:
 
 @indented{`confusion-matrix(training, "species", swims-classifier)`}
@@ -272,19 +330,19 @@ end
 @slidebreak{Investigate}
 
 @QandA{
-@Q{How did the `swims-classifier` performance with the `testing` table compare to its performance with the `training` table.}
+@Q{How did the `swims-classifier` performance with the `testing` table compare to its performance with the `training` table?}
 @A{It did impressively well, but misclassified all of the rabbits as dogs.}
 @A{We wouldn't expect it to correctly classify the species of an animal that it wasn't trained on.}
 }
 
 @lesson-instruction{
-Make a confusion matrix for our original `tail-classifier` and be prepared to share what you learn from it.
+- Make a confusion matrix for our original `tail-classifier` and be prepared to share what you learn from it.
 }
 
 @slidebreak{Investigate}
 
 @indented{
-[.data-table.highlight-diagonal, cols="6a,^7a,^7a,^7a,^7a,^7a", options="header", ]
+[.data-table.highlight-diagonal, cols="6a,^7a,^7a,^7a,^7a,^7a", options="header"]
 |===
 |actual-species|predicted-cat|predicted-dog|predicted-lizard|predicted-snail|predicted-tarantula
 |"cat"         |      1      |      0      |       0        |       0       |       0
@@ -318,11 +376,26 @@ The "correct scores" are shown in the diagonal, running from top-left to bottom-
 
 @QandA{
 @Q{Why doesn't a decision tree that is 100% accurate for the training data always make good predictions for testing data?}
-@A{If a classifier is overfitted to the training data, it might not make good predictions about related but different data.}
-@A{Models based on quantitative columns are particularly susceptible to overfitting.}
+@A{If a classifier is over-fit to the training data, it might not make good predictions about related but different data.}
+@A{Models based on quantitative columns are particularly susceptible to over-fitting.}
 
 @Q{In your own words, describe what a confusion matrix is.}  
 }
+
+@slidebreak{Synthesize}
+@lesson-point{All models are wrong. Some are useful.}
+
+@QandA{
+@Q{When is a Decision Tree wrong?}
+@Q{When is a Decision Tree useful?}
+}
+
+
+@strategy{Coming Soon!}{
+
+Want your students to practice their skills and apply their knowledge of classifiers to some real-world data? Have them open the @opt-starter-file{ai-music}, and build a decision tree that can tell the difference between R&B songs, Rock'n'Roll songs and Country songs! While the starter file is ready today, we'll be updating the workbook page and adding an optional section to this lesson that scaffolds the whole thing.
+}
+
 
 @scrub{
 == Optional: Classifying Songs
@@ -337,13 +410,13 @@ Students are given a training dataset and a testing dataset, both drawn from the
 @Q{How can you tell the difference between R&B songs, Rock'n'Roll songs and Country songs?}
 }
 
-@teacher{Let kids offer up a lot of suggestions!}
+@teacher{Let students offer up a lot of suggestions!}
 
 @slidebreak{Launch}
 
 Can we teach a _computer_ how to tell the difference?
 
-@teacher{Maybe. If the differences are quantifiable or describable by . Let kids offer up a lot of suggestions!}
+@teacher{Maybe. If the differences are quantifiable and can be described by numbers! Let students offer up a lot of suggestions.}
 
 === Investigate
 @slidebreak{Launch}

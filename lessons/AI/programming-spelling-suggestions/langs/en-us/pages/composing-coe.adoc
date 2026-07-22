@@ -1,0 +1,70 @@
+= Composing with Circles of Evaluation 
+
+++++
+<style>
+/* For the bottom table, make the first row 2x tall
+ * Center the circles, and add space below the
+ * autonum-based prompt
+*/
+.bottom { grid-template-rows: 2fr 1fr !important; }
+.bottom .circleevalsexp { text-align: center; }
+.bottom .autonum { margin-bottom: 30px; }
+</style>
+++++
+
+[.no-flex-section]
+== Notice and Wonder
+
+@do{
+(define sort-exp '(sort results "edit-distance" true))
+(define trim-exp '(first-n-rows (sort results "edit-distance" true) 5))
+
+(define trim-exp2 '(first-n-rows results 200))
+(define sort-exp2 '(sort (first-n-rows results 200) "edit-distance" false))
+}
+
+_Suppose we want to see the top 5 results of `results`, sorted by increasing edit-distance. Let's use Circles of Evaluation to look at the structure:_
+
+[%autowidth, cols="^a, ^.^a, ^a", grid="none", stripes="none", frame="none"]
+|===
+
+| We can start by generating the sorted table.
+|
+| And then use `first-n-rows` to grab the top 5
+
+| @show{(coe sort-exp)}  | &rarr; 	| @show{(coe trim-exp)}
+
+| @show{(code sort-exp)} | 			| @show{(code trim-exp)}
+
+|===
+
+
+@n What do you Notice? @fitb{}{} +
+@fitb{}{}
+
+@n What do you Wonder?@fitb{}{} +
+@fitb{}{}
+
+== Mixing it Up
+
+_Suppose you wanted the computer to take the first 200 rows of `results`, and sort them in decreasing order of `edit-distance`..._
+
+[.bottom.FillVerticalSpace, cols=".<1a, .<1a", stripes="none", frame="none"]
+|===
+
+| @center{*Take the first 200 rows*} +
+  @n Draw the circle of evaluation: +
+  @showsoln{(coe trim-exp2)}
+
+| @center{*Sort them*} +
+  @n Draw the circle of evaluation: +
+  @showsoln{(coe sort-exp2)}
+
+
+
+| @n Convert the Circle of Evaluation to code: +
+  @showsoln{(code trim-exp2)}
+| @n Convert the Circle of Evaluation to code: +
+  @showsoln{(code sort-exp2)}
+|===
+

@@ -1,9 +1,9 @@
 [.beta]
 = Simple Regression Models
 
-@description{Students are introduced to ALVINN — the world's first self-driving car — as a compelling example of supervised machine learning. They explore a driving simulator, collect training data, make scatter plots to find the best explanatory variable, and use Pyret's linear regression tools to build and evaluate predictor functions.}
+@description{Students explore a driving simulator, collect training data, make scatter plots to find the best explanatory variable, and use Pyret's linear regression tools to build and evaluate predictor functions. The lesson serves as a concrete application of Supervised Learning, in which driving data from the simulator serves as the "answer key".}
 
-@lesson-prereqs{data-driven-algorithms, fitting-models}
+@lesson-prereqs{programming-spelling-suggestions, fitting-models}
 
 @keywords{}
 
@@ -24,23 +24,20 @@
 
 | Relevant Resources
 |
-- @link{https://www.youtube.com/watch?v=ntIczNQKfjQ, "This two-minute video"} from the Carnegie Mellon University Robotics Institute} shows the first self-driving car in action.
+- @link{https://www.youtube.com/watch?v=ntIczNQKfjQ, "This two-minute video" from the Carnegie Mellon University Robotics Institute} shows the first self-driving car in action.
 |===
 
 == Self-Driving Cars
+@objective{ai-driving-training}
 
 === Overview
-Students are introduced to ALVINN, the world's first self-driving car, as a compelling example of supervised machine learning. They explore a driving simulator, collect their own training data, and discover that predicting steering angle is a regression problem.
+Students reflect on self-driving cars, as a compelling example of supervised machine learning. They explore a driving simulator, collect their own training data, and discover that predicting steering angle is a regression problem.
 
 === Launch
 @slidebreak{LaunchR}
---
 @right{@image{images/self-driving-car.jpg, 300}}
 
-Self-driving cars feel like the future has really arrived! Many people think they are one of the strongest examples of "AI" really _thinking_, instead of just "following an algorithm". After all, how can a computer possibly make decisions about how to drive???
-
-What do _you_ think?
---
+Self-driving cars feel like the future has really arrived! Many people think they are one of the strongest examples of "AI" really thinking, instead of just "following an algorithm". After all, _how can a computer possibly make decisions about how to drive?_
 
 @teacher{Give students time to discuss. Remind them about the AI Effect, and how people also felt when the first spell-checkers were developed!}
 
@@ -54,99 +51,81 @@ Self-driving cars work via a lot of inputs (sensors, cameras, etc.) and a lot of
 - Obstacles and traffic lights that could be in the way
 - And lots more!
 
-We're going to explore how @vocab{supervised learning} -- regression, specifically -- allows cars to "know where they're going".
-
-@slidebreak{LaunchR}
---
-@right{@image{images/navlab.png, 300}}
-Meet ALVINN!
-
-ALVINN (short for Autonomous Land Vehicle in a Neural Network) was developed in 1989 by a team of computer scientists at Carnegie Mellon University. ALVINN is the forebear of today's self-driving cars: a retrofitted Army ambulance equipped with sensors, computers, and small motors to turn the wheel, press the pedals, etc. ALVINN had about one-tenth of the processing power of an Apple Watch -- but was able to safely drive on a very limited course at 70 miles per hour by the early 1990s! How did it happen?
---
+We're going to explore how one form of @vocab{supervised learning} -- regression, specifically -- allows cars to "know where they're going".
 
 @slidebreak{Launch}
 
-As with all machine learning, ALVINN required @vocab{training}.
+Teaching an AI what it means to steer requires @vocab{training}. Here's what that training entails:
 
-The goal of that training? Learning how to steer.
+*A person drives the vehicle*
 
-Here's what ALVINN's training entailed:
-
-(1) A person drove the vehicle while a front-facing video camera recorded the road.
-
-- In the context of @vocab{supervised learning}, the human driver is often referred to as the _supervisor_.
+- In @vocab{supervised learning}, the human driver is often called the _supervisor_
 - The supervisor demonstrates the correct behavior (e.g. which direction the steering wheel should be turned)
 
-(2) 10 times each second, ALVINN recorded...
+*Many times each second, a computer records...*
 
-- a digitized image of the road ahead, along with a distance to the nearest obstacle
+- information from many sensors around the car
 - the steering direction chosen by the driver at that moment
 
 @slidebreak{Launch}
 
-(3) ALVINN's training data (@vocab{training corpus}) can be represented as an input-output table, with road images and obstacle distances as inputs and the correct steering angles as outputs.
+*The training data (@vocab{training corpus}) gets represented as an input-output table*, with columns for sensor data as inputs and the correct steering angles as outputs. For example:
 
 @indented{
 [cols="^.^1,^.^1,^.^1", stripes="none", options="header"]
 |===
-| `road-image`                      | `obstacle-distance` (ft) | `steering-angle`
-| @image{images/road1.png, 100}     |          21              |   0.02º
-| @image{images/road2.png, 100}     |          49              |  55.20º
-| @image{images/road3.png, 100}     |          37              | -25.43º
+| `curve` | `speed`	| `steering-angle`
+|     1° 	|	  45	 	| 		0.02º
+|     4° 	|  	21 		|	  	55.20º
+|    -2° 	| 	56 		| 	 -25.43º
 |===
-
-@teacher{
-Note: These images were selected for illustrative purposes. The 30x32 pixel images produced by ALVINN were of much lower quality!
-}
 }
 
 @slidebreak{Launch}
 
-(4) Using this dataset, ALVINN uses regression to generate a @vocab{function} for predicting the correct steering angle from the road image and obstacle distance.
+@lesson-point{The dataset is used to generate a @vocab{function}}
 
-@lesson-point{
-`road-image` and `obstacle-distance` are the @vocab{explanatory variables}. `steering-angle` is the @vocab{response variable}.
-}
+*The function predicts steering angle from the sensor data.* In the table above, `curve` and `speed` would be @vocab{explanatory variables}; `steering-angle` is the @vocab{response variable}.
 
-(5) After training is complete, a human pushes ALVINN's "run" switch and the vehicle begins driving. As ALVINN drives, it continuously evaluates its learned function to produce steering angles — just as the human driver did during training.
+*After training is complete, a human pushes the "run" switch and the vehicle begins driving!* As the car drives, it continuously evaluates its learned function to produce steering angles — just as the human driver did during training.
 
 @teacher{
-If you want your students to see ALVINN in action, now is a good time to view @link{https://www.youtube.com/watch?v=ntIczNQKfjQ, "this brief two-minute video"}.
+If you want your students to see an example of an early self-driving car (1989!) in action, now is a good time to view @link{https://www.youtube.com/watch?v=ntIczNQKfjQ, "this brief two-minute video"}.
 }
 
 @slidebreak{Launch}
 
 @QandA{
-@Q{What information does ALVINN process before producing a steering angle?}
-@A{ALVINN processes the image of the road in front of it, along with an obstacle distance, and evaluates its learned function to produce a steering angle.}
+@Q{What other sensor input might help us determine the desired steering angle?}
+@A{What lane we're in, whether the car is lined up with the road, obstacles in our path...}
 
-@Q{What did ALVINN learn _from_?}
-@A{A human driver — the supervisor — who demonstrated correct steering. Those input-output pairs form the training corpus.}
+@Q{Supervised Learning involves a computer learning _from_ something. What is the computer learning from, in our example?}
+@A{A human driver — the supervisor — who demonstrated correct steering.} 
+@A{Those input-output pairs form the training corpus.}
 
-@Q{What is ALVINN actually _computing_ when it decides how to steer?}
-@A{It's evaluating a function: given the inputs (road image, obstacle distance), produce a steering angle. The function was learned from the training data.}
+@Q{Why is the resulting model a _function?_}
+@A{Given the same set of inputs (sensor data), the model should always predict the same output (steering angle)}
 
-@Q{Why is this called _supervised_ learning?}
-@A{Because a human provided the correct answers (steering angles) during training, supervising what the machine learned.}
+@Q{Why is this _called_ supervised learning?}
+@A{Because a human provided the correct answers (steering angles) during training, "supervising" what the machine learned.}
 }
 
 @slidebreak{Launch}
 
-In discovering the details of ALVINN's training, you may have noticed three key phases:
+@lesson-point{Let's train our own model to steer a virtual self-driving car!}
 
-1. Human-tagged data is recorded, demonstrating the knowledge to be learned
-2. A machine learning algorithm finds a *function* that maps from inputs to the correct outputs
-3. That function is applied to new, unseen data
+The phases of any kind of @vocab{supervised learning} include:
 
-@lesson-point{
-We're going to do exactly the same thing — training our own model to steer a virtual self-driving car!
-}
+1. Human-tagged data is recorded, demonstrating the knowledge to be learned.
+2. A machine learning algorithm finds a *function* that maps from inputs to the correct outputs (the "answer key").
+3. The learned function can be applied to new, unseen data.
+
 
 === Investigate
 @slidebreak{Investigate-DN}
 
 @lesson-instruction{
-- Open @starter-file{self-driving} and click "Run".
+- Open the @starter-file{self-driving} and save a copy of your own. Then click "Run".
 - Turn to @printable-exercise{driving-game-exploration.adoc} and follow the instructions there.
 }
 
@@ -175,11 +154,11 @@ Give students several minutes to play the simulator before debriefing. Students 
 @slidebreak{Investigate}
 
 @lesson-point{
-We've prepared a @vocab{training corpus} for you containing expert driving data, collected across many different road conditions and driving speeds. It's already loaded in the starter file as `training-data`.
+We've prepared a @vocab{training corpus} for you containing expert driving data, collected across many different road conditions and driving speeds. It's already loaded in the starter file as `training`.
 }
 
 @QandA{
-@Q{Looking at the `training-data` table, what is the thing we're trying to _predict_?}
+@Q{Looking at the `training` table, what is the thing we're trying to _predict_?}
 @A{The `steering-angle` — how far to turn the wheel.}
 
 @Q{What _type_ of value is a steering angle?}
@@ -187,6 +166,20 @@ We've prepared a @vocab{training corpus} for you containing expert driving data,
 
 @Q{What other data types do you see in this table?}
 @A{None! All of the data columns are quantitative.}
+}
+
+@strategy{Where did `training` come from?}{
+This dataset began as real data from a very slow, careful run through multiple tracks. The original size was a little north of 10,000 rows, and was assembled from separate "ideal" runs over multiple tracks. The raw, combined data was then _post-processed_ via a @link{https://en.wikipedia.org/wiki/Moving_average, moving average}, which smooths out extreme values into something far more natural. Another post-processing step involved removing the most severe outliers, using knowledge of the track (a `skew` above 80°, for example, obviously represents human error!).
+
+We've even provided an API so that your students can do some of this post-processing themselves!
+
+@show{(contract 'trim '((t Table) (col string) (lo Number) (hi Number)) "Table" "Given a column, remove all rows where the value in that column is outside the range [lo-hi]")}
+
+
+@show{(contract 'sample-rows '((t Table) (every-n Number)) "Table" "Given a column, skip every n rows (useful for this dataset, where 5 rows are all so close in time that the extra data is just more noise)")}
+
+
+Is this "cheating"? Not at all! In fact, this is a great discussion point to bring up if your students ask. Machine Learning is so dependent on quality data that enormous effort is spent finding ways to improve that quality using every method available, before a model is trained.
 }
 
 === Synthesize
@@ -199,6 +192,7 @@ We've prepared a @vocab{training corpus} for you containing expert driving data,
 
 
 == Predicting Steering Angle
+@objective{models-compare-fit}
 
 === Overview
 Students identify candidate explanatory variables from the training corpus, make scatter plots to explore the relationship between each variable and `steering-angle`, and settle on `curve` as the strongest single predictor.
@@ -212,16 +206,28 @@ In the @lesson-link{fitting-models} lesson, we learned that a relationship betwe
 - The @vocab{explanatory variable} (x-axis) is the input we're predicting _from_.
 - The @vocab{response variable} (y-axis) is what we're trying to predict.
 
-In this case, our response variable is `steering-angle`. The training data has several columns that could serve as an explanatory variable:
+In this case, our response variable is `steering-angle`: the number of degrees to turn the wheel. The training data has several columns that could serve as an explanatory variable.
 
-[cols="^1a,^3a", options="header", stripes="none"]
+@slidebreak{Investigate}
+[cols="^1,^1,^1,^1", stripes="none", frame="none"]
 |===
-| Column       | What it measures
-| `speed`      | How fast the car is moving
-| `curve`      | How sharply the road is curving (positive = right, negative = left)
-| `skew`       | How far out of alignment the car's orientation is from the direction the road is headed
-| `offset`     | How far the car is from the center of the lane
+| *Curve* +
+  @image{images/curve.png} +
+  The curvature of the road in front of the car
+
+| *Speed* +
+  @image{images/speed.png} +
+  How fast the car is moving
+
+| *Offset* +
+  @image{images/offset.png} +
+  How far the car is from the center line
+
+| *Skew* +
+  @image{images/skew.png} +
+  Angle of the car relative to the road
 |===
+
 
 @QandA{
 @Q{Which of these do you expect to be the best predictor of steering angle, and why?}
@@ -236,7 +242,7 @@ Let's use some Data Science to find some evidence about what really _is_ the bes
 @A{Scatter plots}
 
 @Q{What should we look for in our visualizations, to choose the best explanatory variable?}
-@A{The strongest-looking relationship (points most-tightly clustered around a line) is the one that is most strongly connected to `steering-angle`}
+@A{The strongest-looking relationship (points most-tightly clustered around a line)}
 }
 
 === Investigate
@@ -255,8 +261,13 @@ Circulate and encourage students to read the scatter plots critically. Push them
 @slidebreak{InvestigateR}
 
 @QandA{
+@right{@image{images/steering-v-curve-on-offset-scale.png, 350}}
 @Q{Which variable appeared to show the *strongest* relationship with `steering-angle`?}
-@A{`curve` — it has a clear, nearly linear relationship. As the road curves more sharply in one direction, the steering angle increases proportionally.}
+@A{`curve` has a clear, nearly linear relationship. As the road curves more sharply in one direction, the steering angle increases proportionally.}
+@A{If students notice that the scatter plot for `offset` has a nearly mirror image scatter plot to the `curve` data and think that it makes an equally good predictor (as the car is more offset in one direction, the steering angle decreases proportionally):
+  * draw their attention to the fact that the x-axes ranges on `curve` and `offset` are quite different. 
+  * reset the `curve` scatter plot window to @math{-30 < x < 30} (matching the window for the `offset` plot) so they can see that data is much more tightly clustered.
+  }
 
 @Q{Which variable appeared to show the *weakest* relationship?}
 @A{`speed` — there's a lot of scatter with no clear linear pattern.}
@@ -283,32 +294,37 @@ Circulate and encourage students to read the scatter plots critically. Push them
 
 
 == Linear Regression
+@objective{ai-training-lossy}
 
 === Overview
-Having already manually fit linear model to the  data, students use Pyret's `lr-plot` to find the optimal fit for the data. They interpret the model's coefficients, use `mr-code` to generate row-consuming predictor functions, and test their predictors using the `drive` function. Finally, they reflect on what it means to have trained a model.
+Having already manually fit linear model to the  data, students use Pyret's `lr-plot` to find the optimal fit for the data. They interpret the model's coefficients and test their predictors using the `drive` function. Finally, they reflect on what it means to have trained a model.
 
 === Launch
 @slidebreak{Launch}
 
-On @printable-exercise{steering-angle-scatter-plots.adoc} you estimated the @vocab{slope} @math{m} and @vocab{y-intercept} @math{b} of the lines you fitted to the scatter plots. But how do we know whether or not they were the _best_ linear model: the @vocab{line of best fit} for the data?
+On @printable-exercise{steering-angle-scatter-plots.adoc} you estimated the @vocab{slope} (@math{m}) and @vocab{y-intercept} (@math{b}) of the lines you fit to the scatter plots. But how do we know whether or not they were the _best_ linear model: the @vocab{line of best fit} for the data?
 
 @slidebreak{Launch}
 
-Data scientists use a method called @vocab{linear regression} to find the straight-line pattern that describes a set of inputs and an already-known target output with the mathematically _optimal_ values of @math{m} and @math{b} - that minimizes error as much as possible.
+Data scientists use a method called @vocab{linear regression} to find the straight-line pattern that describes a set of inputs and an already-known target output with the mathematically _optimal_ values of @math{m} and @math{b}. 
 
 - This form of learning — where we already know the correct output for each input — is called @vocab{supervised learning}.
 - In Machine Learning, the act of finding a function from the data is called @vocab{training}.
+
+@lesson-point{
+Linear regression models minimize error as much as possible.
+}
 
 @slidebreak{Launch}
 
 Pyret's `lr-plot` function computes and visualizes the @vocab{line of best fit}. Its contract is the same as `scatter-plot`:
 
-@show{(contract "lr-plot" '((table-name Table) (labels String) (xs String) (ys String)) "Image")}
+@show{(contract "lr-plot" '((t Table) (labels Str) (xs Str) (ys Str)) "Image")}
 
 @slidebreak{Launch-DN}
 @lesson-instruction{
 - Turn to the first section of @printable-exercise{lr-steering-angle.adoc}.
-- Use `lr-plot` on `training-data` to find the best-fit line for each of the variables as compared to `steering-angle`.
+- Use `lr-plot` on `training` to find the best-fit line for each of the variables as compared to `steering-angle`.
 - How do Pyret's optimal models for the data compare to the ones you fit by hand?
 }
 
@@ -316,82 +332,116 @@ Pyret's `lr-plot` function computes and visualizes the @vocab{line of best fit}.
 Students will notice that `lr-plot` defines models down to decimal values, certainly a level of specificity more than their hand-drawn model. This motivates the idea that the computer can optimize this much better and faster than humans — which is, after all, the point of machine learning.
 }
 
-@slidebreak{InvestigateR}
+@slidebreak{LaunchR}
 @QandA{
 @right{@image{images/steering-v-curve-lr.png, 300}}
-@Q{What does the slope of our model tell us?}
+@Q{What does the slope of our `curve` model (~19.5) tell us?}
+@A{That the steering angle increases by about 19.5 degrees for each 1 degree increase in the curve.}
 
-@Q{Does the y-intercept make sense in the real world? Why or why not?}
+@Q{What does the y-intercept of our `curve` model (~0.41) tell us about the relationship between `curve` and `steering-angle`?}
+@A{If the curve is zero, the steering angle should be 0.41°.}
+
+@Q{Does that _make sense in the real world?_}
+@A{Almost. A road with zero curve should need zero degrees of steering, but instead we're seeing just under half a degree worth of curve!}
 
 @Q{What does the @math{S}-value tell us?}
+@A{We expect the error in predictions made by this model to be off by about 37 degrees.}
+@A{This might explain some of that mysterious 0.41° turn when the road is straight!}
 }
 
+@slidebreak{LaunchR}
+@QandA{
+@ifslide{@right{@image{images/steering-v-curve-lr.png, 300}}}
+@Q{Based on the @math{S}-value, would you expect the `curve` model to successfully be able to "drive" a full lap around a course in the game?}
+@A{Probably not! 37 degrees is a pretty large error.}
+
+@Q{Do our predictor functions expect steering angle to increase as our other variables increase?}
+@A{No! Steering angle is expected to decrease as `skew` and `offset` increase.}
+
+@Q{How is a regression model "lossy"? What details of the original training data does it lose?}
+@A{Everything above or below the regression line is real data, which we throw away when we use the line.}
+}
+
+@slidebreak{Launch}
+@lesson-point{We can't calculate a _meaningful_ @math{S} unless we have more than two rows in our table!}
+
+A line through two points fits both exactly, so our @math{S}-value is zero. But that says less about the model than it does about the lack of data: there’s no error to measure, so it's a "perfect fit" without any real meaning.
 
 === Investigate
 
 @slidebreak{Investigate}
 
-@teacher{
-These template functions are Number-consuming: `curve-predictor(curve)`, `offset-predictor(offset)`, etc. Students are filling in the learned slope and intercept. This sets up the contrast with the Row-consuming version `drive` needs.
-}
-
-Are we ready to use these predictors to drive the car? Pyret has a `drive` function:
+Let's see how well our predictors drive the car! Pyret has a `drive` function:
 
 @show{(contract "drive" '((predictor ("Row" "Number"))) "Table"
 "runs the driving simulator, using predictor to compute the steering angle at each frame")}
 
-Read that Domain _carefully!_ What do you *Notice*?
-
 @lesson-instruction{
-- Complete @printable-exercise{lr-steering-angle.adoc}.
+- Complete #7 and #8 on @printable-exercise{lr-steering-angle.adoc}.
 - Spend some time thinking about what the error message you get might be telling you!
 }
 
 @slidebreak{Investigate}
-Notice that `drive` takes a *Row-consuming* function — but `curve-predictor` consumes *Numbers*, not Rows!
+Notice that `drive` takes a *Row-consuming* function — but `c-predictor` consumes *Numbers*, not Rows!
 
 @QandA{
 @Q{Why does `drive` need a Row-consuming function instead of a Number-consuming one?}
 @A{Because at each moment, `drive` has access to the entire row of data — not just one column. A Row-consuming function can decide which columns to look at.}
 
-@Q{How can we get a Row-consuming version of `curve-predictor`?}
+@Q{How can we get a Row-consuming version of `c-predictor`?}
 @A{We need a new Pyret function that generates Row-consuming code from our training data.}
+}
+
+@strategy{Want Deeper Programming?}{
+
+If you're teaching this in the context of a CS, CTE, or any other class where programming is an important learning outcome, have students figure out how to make their `c-predictor` function take a Row instead of a Number. This is a great exercise about abstraction and the idea of a data structure, and it uses programming tools they've seen in prior lessons.
+
+If your learning goals are more about AI Literacy or Mathematics, this would make a good challenge exercise for an advanced student. Otherwise, it's okay for you to move on to `regression-model-code`, which will write the Row-accessing code for them.
 }
 
 @slidebreak{Investigate}
 
-Pyret has exactly the right tool:
+We could write it by hand, but Pyret has exactly the right tool:
 
-@show{(contract "reg-model-code" '((table-name Table) (explanatory List<String>) (response String)) "Code"
+@show{(contract "regression-model-code" '((t Table) (inputs List<Str>) (prediction Str)) "Code"
 "produces code that defines a trained, row-consuming model (copy/paste into the Definitions Area!)")}
 
-For example: `reg-model-code(training-data, [list: "curve"], "steering-angle")`
+For example: `regression-model-code(training, [list: "curve"], "steering-angle")`
 
+@slidebreak{InvestigateR}
 @lesson-instruction{
-- Use `reg-model-code` to generate a row-consuming predictor for each of the four variables.
-- Define them as `curve-predictor` (replacing your existing one), `offset-predictor`, `skew-predictor`, and `speed-predictor`.
-- Try each one with `drive(...)`. Which model is the best driver?
+@right{@image{images/navlab.png, 300}}
+
+- Complete @printable-exercise{lr-steering-angle.adoc}.
+- Copy and paste the `curve-predictor` definition you just generated into your Definitions area and click "Run" to load it. Then evaluate `drive(curve-predictor)` in the Interactions Area.
+}
+
+
+@slidebreak{InvestigateR}
+@lesson-instruction{
+@ifslide{@right{@image{images/navlab.png, 300}}}
+- Use `regression-model-code` to generate a row-consuming predictor for each of the other variables.
+- Copy and paste the resulting definitions for `offset-predictor`, `skew-predictor`, and `speed-predictor` into your Definitions Area. Click "Run" to load them. 
+- Try each one with `drive(...)`.
 }
 
 @teacher{
 Students will find that `curve-predictor` drives much better than the others. Allow time for them to try all four and compare results before debriefing.
 }
 
-@slidebreak{InvestigateR}
+@slidebreak{Investigate}
 
 @QandA{
 @Q{Which predictor drove the best? Did that match your predictions from the scatter plots?}
 @A{`curve-predictor` — yes, it had the strongest linear relationship with `steering-angle`.}
 
-@Q{What does the slope of the `curve` predictor tell us about what the model _learned_?}
-@A{For every additional unit of curve sharpness, the model predicts a proportional increase in steering angle. Sharper curve = more steering.}
-
-@Q{What does the y-intercept tell us?}
-@A{When the road is perfectly straight (`curve = 0`), the model predicts a steering angle near 0 — meaning don't turn. That makes intuitive sense!}
+@Q{Did the predictor "drive" better than you did? Why?}
+@A{No!}
+@A{When we were driving, we could take all of the variables into account and the predictor was only using one.}
 }
 
 === Common Misconceptions
-- *More steering isn't always better.* Students may expect that a predictor trained on "good" data will drive perfectly. Remind them that a model can only generalize from what it's seen — it has no understanding of the road.
+*Training data may not be representative of the real world!* Students may expect that a predictor built from "good" steering data will drive perfectly. Remind them that a model can only generalize from what it's seen — it has no understanding of the road. Data from a perfect drive on a straight road will produce a model that might do _very poorly_ on a curved one!
 
 === Synthesize
 @slidebreak{Synthesize}
@@ -409,9 +459,6 @@ Congratulations — you have just *trained a machine learning model!*
 
 @Q{What if our training data was all collected on dry roads, and the car now drives on ice?}
 @A{The model was never trained on those conditions. It will predict as if conditions are normal — which could be very wrong.}
-
-@Q{When an AI system confidently produces a wrong answer because the input is outside its training data, that's sometimes called a _hallucination_. How does what you just built connect to that idea?}
-@A{Our predictor will confidently output a steering angle for any input — even situations it's never seen. It doesn't know what it doesn't know.}
 }
 
 @slidebreak{Synthesize}
@@ -419,11 +466,8 @@ Congratulations — you have just *trained a machine learning model!*
 @QandA{
 @Q{Could we train a model using more than one explanatory variable?}
 
-@Q{What would a line-of-best-fit look like on a scatter plot with _two_ explanatory variables?}
-
-@A{Would we have one slope and intercept? Two?}
+@Q{What would a line-of-best-fit look like on a scatter plot with _two_ explanatory variables? Would we have one slope and intercept? Two?}
 }
-
 
 @strategy{Computers aren't people!}{
 

@@ -9,7 +9,7 @@
 local function sread_line(i)
   while true do
     local c = i:read(1)
-    if c == '\r' or c == '\n' then
+    if c == nil or c == '\r' or c == '\n' then  -- nil == EOF
       break
     end
   end
@@ -18,7 +18,9 @@ end
 local function sread_block_comment(i)
   while true do
     local c = i:read(1)
-    if c == '|' then
+    if c == nil then  -- EOF inside an unterminated block comment
+      break
+    elseif c == '|' then
       c = i:read(1)
       if c == '#' then
         break
@@ -66,8 +68,8 @@ local function sread_atom(i)
       in_escape_p = true
       i:read(1)
       table.insert(result, c)
-    elseif c == ' ' or c == '\t' or c == '\n' or c == '\r' or c == '(' or c == '[' or c == ')' or c == ']' or c == ';' then
-      break
+    elseif c == nil or c == ' ' or c == '\t' or c == '\n' or c == '\r' or c == '(' or c == '[' or c == ')' or c == ']' or c == ';' then
+      break  -- nil == EOF terminates the atom
     else
       i:read(1)
       table.insert(result, c)
@@ -97,7 +99,9 @@ local function sread_string(i)
   local in_escape_p = false
   while true do
     local c = i:read(1)
-    if in_escape_p then
+    if c == nil then  -- EOF inside an unterminated string
+      break
+    elseif in_escape_p then
       in_escape_p = false
       table.insert(result, c)
     elseif c == '\\' then
@@ -116,7 +120,9 @@ function sread(i)
   sread_ignorespaces(i)
   local c = buf_peek_char(i)
   local result = false
-  if c == '(' or c == '[' then
+  if c == nil then  -- EOF: no s-expression to read (empty/exhausted input)
+    result = false
+  elseif c == '(' or c == '[' then
     i:read(1)
     result = sread_list(i)
   elseif c == ')' or c == ']' then

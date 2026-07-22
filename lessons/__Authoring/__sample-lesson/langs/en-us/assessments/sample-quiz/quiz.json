@@ -50,13 +50,23 @@
         "image": "https://www.bootstrapworld.org/images/icon.png"
     },
     {
+        "type": "Tracing",
+        "prompt": {
+            "program": "fn main() {\n  let x = 1;\n  println!(\"{x}\");\n  x += 1;\n  println!(\"{x}\");\n}\n"
+        },
+        "answer": {
+            "doesCompile": false,
+            "lineNumber": 4
+        }
+    },
+    {
       "type": "CardSort",
       "prompt": {
         "prompt": "Distinguish between bar charts and histograms: Sort the cards into two groups - one for bar charts and one for histograms. \nBe sure to sort all 9 cards.\n",
           "cards": [
             {
               "id": "hist-title",
-              "content": "**HISTOGRAM**"
+              "title": "HISTOGRAM"
             },
             {
               "id": "hist1",
@@ -64,19 +74,19 @@
             },
             {
               "id": "hist2",
-              "content": "uses quantitative data"
+              "title": "uses quantitative data"
             },
             {
               "id": "hist3",
-              "content": "it's bars cannot be reordered"
+              "title": "it's bars cannot be reordered"
             },
             {
               "id": "hist4",
-              "content": "requires us to determine a bin width"
+              "title": "requires us to determine a bin width"
             },
             {
               "id": "bar-title",
-              "content": "**BAR CHART**"
+              "title": "BAR CHART"
             },
             {
               "id": "bar1",

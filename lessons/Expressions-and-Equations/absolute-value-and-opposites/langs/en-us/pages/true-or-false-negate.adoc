@@ -3,18 +3,20 @@
 ++++
 <style>
 .circleevalsexp { width: auto; }
+/* add parens for autonums */
+table .autonum::after { content: ')' !important; }
 </style>
 ++++
 
-Decide whether or not the two expressions are equivalent. Explain your reasoning.
+Translate each Circle of Evaluation into words and evaluate. Decide whether or not each pair is equivalent.
 
-[.FillVerticalSpace, cols="^.^1a, ^.^5a, ^.^1a, ^.^5a, ^.^10a", grid="none", options="header", ]
+[.FillVerticalSpace, cols="^.^1a, ^.^10a, ^.^1a, ^.^9a, ^.^3a", grid="none", options="header", ]
 |===
 |
 | Expression 1
 |
 | Expression 2
-| True or False? Justify.
+| True or False?
 
 | @n
 | @show{(coe '(negate 6))}
@@ -22,69 +24,83 @@ Decide whether or not the two expressions are equivalent. Explain your reasoning
 | @show{(coe '(negate -6))}
 | False.
 
+|
+| The opposite of 6 is -6.
+|
+| The opposite of -6 is 6.
+|
 @math{-6 ≠ 6}
 
 | @n
 | @show{(coe '(negate -3))}
 | @math{=}
 | @math{-3}
-| @ifsoln{False.
+| @ifsoln{False.}
 
-@math{3 ≠ -3}}
+|
+| @ifsoln{The opposite of -3 is 3.}
+|
+| 
+|@ifsoln{@math{3 ≠ -3}}
 
 | @n
 | @show{(coe '(negate (+ 5 2)))}
 | @math{=}
 | @show{(coe '(negate 7))}
-| @ifsoln{True.
+| @ifsoln{True.}
 
-@math{-7 = -7}}
+|
+| @ifsoln{The opposite of 7 is -7.}
+|
+| @ifsoln{The opposite of 7 is -7.}
+| @ifsoln{@math{-7 = -7}}
 
-| @n
-| @show{(coe '(negate (* 5 20)))}
-| @math{=}
-| @show{(coe '(negate (* 20 5)))}
-| @ifsoln{True. The Commutative Property is being applied.
-
-@math{-100 = -100}}
 
 | @n
 | @show{(coe '(+ (negate -20) 0))}
 | @math{=}
 | @show{(coe '(* 1 (negate -20)))}
-| @ifsoln{True. The Identity Property is being applied.
+| @ifsoln{True.}
 
-@math{20 = 20}}
+|
+| @ifsoln{The opposite of -20 is 20, plus 0 is still 20.}
+|
+| @ifsoln{The opposite of -20 is 20, times 1 is still 20.}
+| @ifsoln{@math{20 = 20}}
 
 | @n
 | @show{(coe '(negate (negate 8)))}
 | @math{=}
 | @math{ -8}
-| @ifsoln{False.
+| @ifsoln{False.}
 
-@math{8 ≠ -8}}
+|
+| @ifsoln{The opposite of (the opposite of 8, which is -8) is 8.}
+|
+| 
+| @ifsoln{@math{8 ≠ -8}}
 
 | @n
 | @show{(coe '(negate(negate -16)))}
 | @math{=}
 | @math{-16}
-| @ifsoln{True.
+| @ifsoln{True.}
 
-@math{-16 = -16}}
-
-| @n
-| @show{(coe '(negate 12))}
-| @math{=}
-| the opposite of 12
-| @ifsoln{True.
-
-@math{-12 = -12}}
+|
+| @ifsoln{The opposite of (the opposite of -16, which is 16) is -16.}
+|
+| 
+| @ifsoln{@math{-16 = -16}}
 
 | @n
 | @show{(coe '(negate b))}
 | @math{=}
 | @show{(coe '(* -b 1))}
-| @ifsoln{True. The Identity Property is being applied.
+| @ifsoln{True.}
 
-@math{-b = -b}}
+|
+| @ifsoln{The opposite of b is -b.}
+|
+| @ifsoln{-b times 1 is -b.}
+| @ifsoln{@math{-b = -b}}
 |===

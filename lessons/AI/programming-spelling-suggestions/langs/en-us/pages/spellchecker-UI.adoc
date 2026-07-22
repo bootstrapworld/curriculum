@@ -1,0 +1,120 @@
+= User Interface for our Spelling Checker
+++++
+<style>
+div#body td {padding: 4px 10px !important; }
+.circleevalsexp .value { margin: 0.4em 0.2em; }
+</style>
+++++
+
+@do{
+(define expr '(overlay (text "Platoon" 20 "black") (rectangle 150 50 "solid" "gray")))
+}
+
+@link-instructions{
+For this page you'll need the @starter-file{spell-checker} open on your computer, with `results = alt-words("plation", WORDS-L, 4)` defined in the *Definitions Area.* Make sure that after clicking "Run", you can evaluate `results` in the Interactions Area and see your table!
+}
+
+@n What are the first two words in the `results` table? @fitb{}{@ifsoln{This will be different for each student!}}
+
+@n What code will extract the `"word"` column from the _first row_ in the table?
+@fitb{}{@ifsoln{row-n(results, 1)["word"]}}
+
+@vspace{1ex}
+
+*Here are some contracts (and examples!) for a few new functions:*
+[cols="4,1,10,1,2", options="header", grid="rows"]
+|===
+| Name    			|	 | Domain      							|     	| Range
+
+| `string-length`
+| `{two-colons}`
+| `String`
+| `->`
+| `Number`
+
+| `text`
+| `{two-colons}`
+| @ifsoln{`String, Number, String`}
+| `->`
+| @ifsoln{`Image`}
+|===
+
+@n `string-length("hello")` evaluates to @fitb{3em}{@ifsoln{5}} What does `string-length` do? @fitb{}{It counts the number of characters in a string}
+
+@n *Predict before you type:* For each expression below, what do you _think_ Pyret will produce?
+
+- `string-length(row-n(results, 1)["word"])`? @fitb{3em}{@ifsoln{varies}} _Type it in and try it out!_
+- `string-length(row-n(results, 2)["word"])`? @fitb{3em}{@ifsoln{varies}} _Type it in and try it out!_
+
+@n Evaluate `text("AI!", 50, "blue")`. What did you get back? @fitb{}{@ifsoln{The word "AI! in big blue letters"}}.
+
+@n What code will draw the word in the _second row_ of the `results` table in big, blue letters? +
+@fitb{}{`text(row-n(results, 2)["word"], 50, "blue")`}
+
+@vspace{1ex}
+
+*Most of the functions below are all _missing their contracts!_ Can you experiment in Pyret and fill in the missing parts?*
+
+[cols="4,1,10,1,2", options="header", grid="rows"]
+|===
+| Name    			|	 | Domain      							|     	| Range
+
+| `triangle`
+| `{two-colons}`
+| `Number, String, String`
+| `->`
+| `Image`
+
+| `star`
+| `{two-colons}`
+| @ifsoln{`Number, String, String`}
+| `->`
+| @ifsoln{`Image`}
+
+| `circle`
+| `{two-colons}`
+| @ifsoln{`Number, String, String`}
+| `->`
+| @ifsoln{`Image`}
+
+| `rectangle`
+| `{two-colons}`
+| @ifsoln{`Number, Number, String, String`}
+| `->`
+| @ifsoln{`Image`}
+
+| `ellipse`
+| `{two-colons}`
+| @ifsoln{`Number, Number, String, String`}
+| `->`
+| @ifsoln{`Image`}
+
+| `regular-polygon`
+| `{two-colons}`
+| @ifsoln{`Number, Number, String, String`}
+| `->`
+| @ifsoln{`Image`}
+
+| `overlay`
+| `{two-colons}`
+| @ifsoln{`Image, Image`}
+| `->`
+| @ifsoln{`Image`}
+
+| `rotate`
+| `{two-colons}`
+| @ifsoln{`Number, Image`}
+| `->`
+| @ifsoln{`Image`}
+|===
+
+@n The Circle of Evaluation below overlays the word "Platoon" above a solid, gray rectangle. Convert it to code and enter it into Pyret.
+
+[.FillVerticalSpace, cols=".^1a, ^2a", frame="none"]
+|===
+| @image{../images/phone-mockup.webp}
+| @show{(coe expr)} +
+@showsoln{(code expr)}
+|===
+
+@star *Be Creative:* Use the image contracts above to add color, multiple shapes (maybe even multiple suggestions?) to your User Interface!

@@ -1,0 +1,103 @@
+= Supervised or Unsupervised? (Continued)
+++++
+<style>
+/* Make table headers and the "supervised v. unsupervised" options bold and center */
+div#body td .paragraph:has(+.paragraph), div#body th {
+	text-align: center !important;
+	font-weight: bold !important;
+}
+
+div#body td td { padding: 2px !important; }
+</style>
+++++
+Machine learning models are all around us, using a mix of different learning methods. Can you tell the difference between @vocab{supervised learning} and @vocab{unsupervised learning}? Supervised methods learn from labeled examples — sorting things into categories (_classification_), predicting a number (_regression_), or recommending by similarity to examples you've tagged (building a _centroid_). Unsupervised methods hunt for patterns with no labels at all.
+
+[.FillVerticalSpace, cols="2a, <5a", options="header"]
+|===
+| Example
+| What Kind of Learning and Why? (Circle one)
+
+| @n An online retail store uses an algorithm to automatically organize its thousands of unstructured product descriptions into a hierarchical tree of topics and themes, without any input from human catalogers.
+|
+[cols="^2a,^1a", frame="none", stripes="none"]
+!===
+! *Supervised* ! @ifsoln-choice{*Unsupervised*}
+! Classification
+@hspace{2em} Regression
+@hspace{2em} Similarity
+!
+!===
+
+@blanklines{3}{
+@ifsoln{This is an example of topic modeling, an unsupervised learning technique that uncovers pattern in text data without pre-existing categories.}
+}
+
+
+
+| @n An astronomy survey feeds millions of unlabeled galaxy images into an algorithm that sorts them into groups by shape and brightness, even though no one has told it what categories to expect.
+|
+[cols="^2a,^1a", frame="none", stripes="none"]
+!===
+! *Supervised* ! @ifsoln-choice{*Unsupervised*}
+! Classification
+@hspace{2em} Regression
+@hspace{2em} Similarity
+!
+!===
+
+@blanklines{3}{
+@ifsoln{There are no labels telling the algorithm what kind of galaxy each image is. It explores the data and finds "clumps" of similar points on its own—clustering, an unsupervised technique.}
+}
+
+
+
+| @n A bank trains a model on records of past loan applicants, each marked with whether they eventually 'repaid' or 'defaulted', to predict how a new applicant is likely to turn out.
+|
+[cols="^2a,^1a", frame="none", stripes="none"]
+!===
+! @ifsoln-choice{*Supervised*} ! *Unsupervised*
+! @ifsoln-choice{Classification}
+@hspace{2em} Regression
+@hspace{2em} Similarity
+!
+!===
+
+@blanklines{3}{
+@ifsoln{The training data is labeled with each applicant's known outcome ('repaid' or 'defaulted'), so it's supervised. Since the prediction is one of a fixed set of categories, it's classification.}
+}
+
+
+
+| @n An agricultural startup predicts how many bushels of corn a field will produce, using rainfall, soil nutrients, and fertilizer amounts from past seasons—each paired with the actual harvest totals that were recorded.
+|
+[cols="^2a,^1a", frame="none", stripes="none"]
+!===
+! @ifsoln-choice{*Supervised*} ! *Unsupervised*
+! Classification
+@hspace{2em} @ifsoln-choice{Regression}
+@hspace{2em} Similarity
+!
+!===
+
+@blanklines{3}{
+@ifsoln{The model is trained on past seasons where the actual yield is already known—that's the "answer key"—so it's supervised. Because it predicts a continuous number (bushels) rather than a category, it's regression.}
+}
+
+
+
+| @n A marine biologist tags a handful of reef photos as examples of 'healthy coral.' The system averages the color and texture features of those tagged photos into a single prototype, then flags new survey photos that look most similar to it.
+|
+[cols="^2a,^1a", frame="none", stripes="none"]
+!===
+! @ifsoln-choice{*Supervised*} ! *Unsupervised*
+! Classification
+@hspace{2em} Regression
+@hspace{2em} @ifsoln-choice{Similarity}
+!
+!===
+
+@blanklines{3}{
+@ifsoln{The biologist's tags are the labels, making this supervised. The system builds a _centroid_ from the tagged 'healthy' photos and ranks new photos by closeness to that prototype — recommending by similarity rather than sorting into fixed classes.}
+}
+
+|===
