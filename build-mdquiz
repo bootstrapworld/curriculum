@@ -27,8 +27,12 @@ indexHTML='<!DOCTYPE html>
 for d in $(find distribution -type d -name assessments); do
   for dd in $d/*; do
     if test -d $dd; then
-      echo "$indexHTML" > $dd/index.html
-      cp -pu node_modules/mdquiz/dist/lib.js $dd/
+      if test -f $dd/quiz.json; then
+        echo "$indexHTML" > $dd/index.html
+        cp -pu node_modules/mdquiz/dist/lib.js $dd/
+      else
+        echo "WARNING: $dd has no quiz.json -- skipping"
+      fi
     fi
   done
 done
