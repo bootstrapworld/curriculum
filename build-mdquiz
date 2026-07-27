@@ -29,8 +29,9 @@ for d in $(find distribution -type d -name assessments); do
     if test -d $dd; then
       if test -f $dd/quiz.json; then
         echo "$indexHTML" > $dd/index.html
-        $SED 's/\["localhost", "127\.0\.0\.1"\]\.includes(window\.location\.hostname)/["localhost", "127.0.0.1", ""].includes(window.location.hostname)/' \
-          node_modules/mdquiz/dist/lib.js > $dd/lib.js
+        node -e "const fs=require('fs'),f='$dd/lib.js'; \
+          fs.writeFileSync(f,fs.readFileSync('node_modules/mdquiz/dist/lib.js','utf8') \
+          .replace('[\"localhost\", \"127.0.0.1\"]','[\"localhost\", \"127.0.0.1\", \"\"]'));"
       else
         echo "WARNING: $dd has no quiz.json -- skipping"
       fi
