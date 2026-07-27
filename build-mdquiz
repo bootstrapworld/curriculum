@@ -70,7 +70,9 @@ import { viteStaticCopy } from "vite-plugin-static-copy"
 import { glob } from "glob"
 import { readFileSync} from "fs"
 
-const quizzes = glob.sync("distribution/*/lessons/*/assessments/*");
+const quizzes = glob.sync("distribution/*/lessons/*/assessments/*").filter(d => {
+  try { readFileSync(d + "/quiz.json"); return true; } catch { return false; }
+});
 const imageTypes = ["svg", "gif", "jpg", "png", "svg"];
 
 // create the JSON objects for each of our quizzes
