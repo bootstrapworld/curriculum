@@ -295,6 +295,7 @@ In our clock animation we have 12 "slices", with 12 evenly-spaced labels around 
   * Check to see whether this changes the shape of the curves.
 }
 
+@slidebreak{Investigate}
 @QandA{
 @Q{Does changing the number of slices effect the way the curves are drawn? Why or why not?}
 @A{Let students discuss.}
@@ -342,7 +343,7 @@ Students are introduced to @vocab{radians}, and practice converting between diff
 
 Conveniently, we can chop up circles based on whatever kind of math we want to do, and the devices we have available to do our computations with.
 
-- The Babylonians chose to use 360 slices to map out the "circle" representing the night sky, because 360 is roughly the number of days in a year and most easy-to-see constellations repeat their cycles annually.
+The Babylonians chose to use 360 slices to map out the "circle" representing the night sky, because 360 is roughly the number of days in a year and most easy-to-see constellations repeat their cycles annually.
   * 360 is a convenient number for mental math because it is easily divided by common numbers like 2, 3, 4, 6, 8, 9, 10, and 12.
   * They also noticed that there were roughly 12 full moons each year. 
 
@@ -473,9 +474,7 @@ We can use the special @vocab{sine} and @vocab{cosine} functions that describe t
 
 Most calculators abbreviate these functions as `sin` and `cos` and bury the distinction between whether or not they consume @vocab{radians} or @vocab{degrees} somewhere in the settings.
 
-In Pyret, we make visible the reality that a function can only do one thing, so use different function names depending on what our functions consume. 
-
-In Pyret, the contracts for the @vocab{radian}-consuming versions of these functions are: +
+In Pyret, we have _different functions for different units_. The contracts for the @vocab{radian}-consuming versions of these functions are: +
 @hspace{4em}
 @show{(contracts
 '("sin" (Radians Number) "Number")
