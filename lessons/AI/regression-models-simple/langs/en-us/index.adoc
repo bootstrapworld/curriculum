@@ -128,12 +128,14 @@ We're going to apply those phases, and train our own model to steer a virtual se
 @slidebreak{Investigate-DN}
 
 @lesson-instruction{
-- Open @starter-file{self-driving} and save a copy of your own. Then click "Run".
-- Turn to @printable-exercise{driving-game-exploration.adoc} and follow the instructions there.
+- Turn to @printable-exercise{driving-game-exploration.adoc} and follow the instructions to:
+  * Open the @starter-file{self-driving}, save a copy of your own and click "Run".
+  * Do a test run of driving the car using the arrows on your keyboard.
+  * Save data from two different training runs.
 }
 
 @teacher{
-Give students several minutes to play the simulator before debriefing. Students who finish early can try collecting data at different speeds, or deliberately drive poorly to see what bad training data looks like.
+Give students several minutes to play with the simulator before debriefing. Students who finish early can try collecting data at different speeds, or deliberately drive poorly to see what bad training data looks like.
 }
 
 @slidebreak{Investigate}
@@ -157,11 +159,11 @@ Give students several minutes to play the simulator before debriefing. Students 
 @slidebreak{Investigate}
 
 @lesson-point{
-We've prepared a @vocab{training corpus} for you containing expert driving data, collected across many different road conditions and driving speeds. It's already loaded in the starter file as `training-data`.
+We've prepared a @vocab{training corpus} for you containing expert driving data, collected across many different road conditions and driving speeds. It's already loaded in the starter file as `training`.
 }
 
 @QandA{
-@Q{Looking at the `training-data` table, what is the thing we're trying to _predict_?}
+@Q{Evaluate `training` to see the data table. What is the thing we're trying to _predict_?}
 @A{The `steering-angle` — how far to turn the wheel.}
 
 @Q{What _type_ of value is a steering angle?}
@@ -171,7 +173,7 @@ We've prepared a @vocab{training corpus} for you containing expert driving data,
 @A{None! All of the data columns are quantitative.}
 }
 
-@strategy{Where did `training-data` come from?}{
+@strategy{Where did the `training` data come from?}{
 This dataset began as real data from a very slow, careful run through multiple tracks. The original size was a little north of 10,000 rows, and was assembled from separate "ideal" runs over multiple tracks. The raw, combined data was then _post-processed_ via a @link{https://en.wikipedia.org/wiki/Moving_average, moving average}, which smooths out extreme values into something far more natural. Another post-processing step involved removing the most severe outliers, using knowledge of the track (a `skew` above 80°, for example, obviously represents human error!).
 
 Is this "cheating"? Not at all! In fact, this is a great discussion point to bring up if your students ask. Machine Learning is so dependent on quality data that enormous effort is spent finding ways to improve that quality using every method available, before a model is trained.
@@ -244,9 +246,8 @@ Let's use some Data Science to find some evidence about what really _is_ the bes
 @slidebreak{Investigate-DN}
 
 @lesson-instruction{
-- Return to the @starter-file{self-driving}.
-- Use `scatter-plot` to compare each of the four possible explanatory columns to `steering-angle`.
-- Then complete @printable-exercise{steering-angle-scatter-plots.adoc}.
+- Turn to @printable-exercise{steering-angle-scatter-plots.adoc}.
+- Using the @starter-file{self-driving}, follow the directions to build scatter plots comparing each of the four possible explanatory columns to `steering-angle`. 
 }
 
 @teacher{
@@ -268,7 +269,7 @@ Circulate and encourage students to read the scatter plots critically. Push them
 @A{Answers will vary.}
 }
 
-@opt{If you'd like to give your students more practice with `fit-model` and interpreting @vocab{S-values}, you could have them define all 4 of their models in the starter file and evaluate their fit.}
+@teacher{@opt{If you'd like to give your students more practice with `fit-model` and interpreting @vocab{S-values}, you could have them define all 4 of their models in the starter file and evaluate their fit.}}
 
 === Synthesize
 @slidebreak{Synthesize}
@@ -289,7 +290,7 @@ Circulate and encourage students to read the scatter plots critically. Push them
 @objective{ai-training-lossy}
 
 === Overview
-Having already manually fit linear model to the  data, students use Pyret's `lr-plot` to find the optimal fit for the data. They interpret the model's coefficients, use `mr-code` to generate row-consuming predictor functions, and test their predictors using the `drive` function. Finally, they reflect on what it means to have trained a model.
+Having already manually fit linear model to the  data, students use Pyret's `lr-plot` to find the optimal fit for the data. They interpret the model's coefficients, use `regression-model-code` to generate row-consuming predictor functions, and test their predictors using the `drive` function. Finally, they reflect on what it means to have trained a model.
 
 === Launch
 @slidebreak{Launch}
@@ -312,7 +313,7 @@ Pyret's `lr-plot` function computes and visualizes the @vocab{line of best fit}.
 @slidebreak{Launch-DN}
 @lesson-instruction{
 - Turn to the first section of @printable-exercise{lr-steering-angle.adoc}.
-- Use `lr-plot` on `training-data` to find the best-fit line for each of the variables as compared to `steering-angle`.
+- Use `lr-plot` on the `training` data to find the computationally best-fit line for each of the variables as compared to `steering-angle`.
 - How do Pyret's optimal models for the data compare to the ones you fit by hand?
 }
 
@@ -327,7 +328,7 @@ Students will notice that `lr-plot` defines models down to decimal values, certa
 @A{That the steering angle increases by about 19.5 degrees for each 1 degree increase in the curve.}
 
 @Q{What does the y-intercept of our `curve` model tell us about the relationship between `curve` and `steering-angle`?}
-@A{If the curve is zero, the steering angle should be zero.}
+@A{If the curve is zero, the steering angle should be about 0.4, almost zero.}
 
 @Q{Does that _make sense in the real world?_}
 @A{Yes! A road with zero curve should need zero degrees of steering!}
@@ -357,47 +358,49 @@ Remember, we use two points to define the line, and if there's no _other_ data l
 Let's see how well our predictors drive the car! Pyret has a `drive` function:
 
 @show{(contract "drive" '((predictor ("Row" "Number"))) "Table"
-"runs the driving simulator, using predictor to compute the steering angle at each frame")}
+"runs the driving simulator, using a predictor function to compute the steering angle at each frame")}
 
-@lesson-instruction{
-- Complete #7 and #8 on @printable-exercise{lr-steering-angle.adoc}.
-- Spend some time thinking about what the error message you get might be telling you!
+@QandA{
+@Q{Take a look at the contract. What do you Notice? What do you Wonder?}
 }
 
 @slidebreak{Investigate}
-Notice that `drive` takes a *Row-consuming* function — but `c-predictor` consumes *Numbers*, not Rows!
+@ifslide{@show{(contract "drive" '((predictor ("Row" "Number"))) "Table"
+"runs the driving simulator, using a predictor function to compute the steering angle at each frame")}
+}
+
+Notice that `drive` takes a *Row-consuming* function. 
 
 @QandA{
-@Q{Why does `drive` need a Row-consuming function instead of a Number-consuming one?}
+@Q{Why do you think `drive` need a Row-consuming function instead of a Number-consuming one?}
 @A{Because at each moment, `drive` has access to the entire row of data — not just one column. A Row-consuming function can decide which columns to look at.}
-
-@Q{How can we get a Row-consuming version of `c-predictor`?}
-@A{We need a new Pyret function that generates Row-consuming code from our training data.}
 }
 
 @strategy{Want Deeper Programming?}{
-
 If you're teaching this in the context of a CS, CTE, or any other class where programming is an important learning outcome, have students figure out how to make their `c-predictor` function take a Row instead of a Number. This is a great exercise about abstraction and the idea of a data structure, and it uses programming tools they've seen in prior lessons.
 
-If your learning goals are more about AI Literacy or Mathematics, this would make a good challenge exercise for an advanced student. Otherwise, it's okay for you to move on to `regression-model-code`, which will write the Row-accessing code for them.
+If your learning goals are more about AI Literacy or Mathematics, this could make a good challenge exercise for an advanced student, but no need to focus on it because the `regression-model-code` we're about to introduce will write the Row-accessing code for your students. 
 }
-
+ 
 @slidebreak{Investigate}
 
-We could write it by hand, but Pyret has exactly the right tool:
+We could write a Row-consuming function from our training data by hand, but Pyret also has a tool to help us generate one:
 
 @show{(contract "regression-model-code" '((t Table) (inputs List<Str>) (prediction Str)) "Code"
 "produces code that defines a trained, row-consuming model (copy/paste into the Definitions Area!)")}
 
-For example: `regression-model-code(training-data, [list: "curve"], "steering-angle")`
+For example: `regression-model-code(training, [list: "curve"], "steering-angle")`
 
 @slidebreak{Investigate}
+
 @lesson-instruction{
-@right{@image{images/navlab.png, 300}}
+@right{@image{images/navlab.png, 300}} 
+
 - Complete @printable-exercise{lr-steering-angle.adoc}.
-- Copy and past the `curve-predictor` definition you just generated into your Definitions area and click "Run" to load it. Then evaluate `drive(curve-predictor)` in the Interactions Area.
+- Copy and past the `curve-predictor` definition you just generated into your Definitions Area (on the left) and click "Run" to load it. 
+- Then evaluate `drive(curve-predictor)` in the Interactions Area (right).
 - Use `regression-model-code` to generate a row-consuming predictor for each of the other variables.
-- Copy and paste the resulting definitions for `offset-predictor`, `skew-predictor`, and `speed-predictor` into your Definitions Area. Click "Run" to load them. 
+- Copy and paste the resulting definitions for `offset-predictor`, `skew-predictor`, and `speed-predictor` into your Definitions Area (left). Click "Run" to load them. 
 - Try each one with `drive(...)`.
 }
 
@@ -417,7 +420,7 @@ Students will find that `curve-predictor` drives much better than the others. Al
 }
 
 === Common Misconceptions
-*More steering isn't always better.* Students may expect that a predictor build from "good" steering data will drive perfectly. Remind them that a model can only generalize from what it's seen — it has no understanding of the road. Data from a perfect drive on a straight road will produce a model that might do _very poorly_ on a curved one!
+*More steering isn't always better.* Students may expect that a predictor built from "good" steering data will drive perfectly. Remind them that a model can only generalize from what it's seen — it has no understanding of the road. Data from a perfect drive on a straight road will produce a model that might do _very poorly_ on a curved one!
 
 === Synthesize
 @slidebreak{Synthesize}
@@ -446,7 +449,6 @@ Congratulations — you have just *trained a machine learning model!*
 }
 
 @strategy{Computers aren't people!}{
-
 In conversations about AI, computers often get anthropomorphized — given human-like traits when they are not in fact human. This can block students from understanding the mechanics of machine learning.
 
 Avoid saying that the model "knows" how to drive, or that it "understands" the road.
