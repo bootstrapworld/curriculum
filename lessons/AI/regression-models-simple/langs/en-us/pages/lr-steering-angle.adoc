@@ -49,10 +49,10 @@ div#body .functions .fitbruby, div#body .functions .fitb {
 [cols="<.^2,<.^5", stripes="none"]
 |===
 | From `regression-model-code` 
-| `fun curve-predictor (` @fitb{1em}{@ifsoln{r}}`) : (`@fitb{4em}{@ifsoln{`19.5`}} `*` @fitb{7em}{@ifsoln{`r["curve"]`}} `) +` @fitb{3em}{@ifsoln{-0.41}} `end`
+| @show{(code '(define (curve-predictor (?ANS r)) (+ (* 19.5 (?ANS (row-accessor r "curve"))) -0.41)))}
 
 | From `lr-plot`
-| `fun c-predictor (`@hspace{1em}`curve` @hspace{1em} `)` @hspace{1em} `:` @hspace{1em} `(19.5 * curve)`@hspace{1em}  `+` @hspace{1em} `-0.41 end`
+| @show{(code '(define (c-predictor curve) (+ (* 19.5 curve) -0.41)))}
 |===
 
 @n How is the `curve-predictor` function *similar* to `c-predictor`? @fitb{}{} +
