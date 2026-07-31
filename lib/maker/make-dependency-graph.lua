@@ -226,3 +226,42 @@ o:write('// if we\'re in node, provide the module exports\n')
 o:write('if(typeof module !== "undefined"){\n')
 o:write('  module.exports = graph;\n')
 o:write('}\n')
+
+-- Check that each pathway's lesson order doesn't place a lesson before its prerequisites
+local courses_dir = os.getenv('TOPDIR') .. '/distribution/' .. os.getenv('NATLANG') .. '/courses/'
+for _, pathway in ipairs(shell_output('ls ' .. courses_dir)) do
+  local wl_file = courses_dir .. pathway .. '/.cached/.workbook-lessons.rkt.kp'
+  local f = io.open(wl_file)
+  if f then
+    local ordered = {}
+    local position = {}
+    local pos = 0
+    for line in f:lines() do
+      local item = line:match('"([^"]+)"')
+      if item then
+        pos = pos + 1
+        ordered[pos] = item
+        position[item] = pos
+      end
+    end
+    f:close()
+    for i, lesson in ipairs(ordered) do
+      local prereq_file = lessons_dir .. lesson .. '/.cached/.lesson-prereq.txt.kp'
+      local pf = io.open(prereq_file)
+      if pf then
+        for prereq in pf:lines() do
+          if prereq ~= '' then
+            local prereq_pos = position[prereq]
+            if prereq_pos and prereq_pos > i then
+              print('WARNING: In pathway ' .. pathway .. ', ' .. lesson ..
+                    ' lists ' .. prereq ..
+                    ' as a prerequisite, but ' .. prereq ..
+                    ' appears later in lesson-order.txt')
+            end
+          end
+        end
+        pf:close()
+      end
+    end
+  end
+end
