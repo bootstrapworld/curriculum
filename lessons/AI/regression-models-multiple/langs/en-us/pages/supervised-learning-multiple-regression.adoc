@@ -20,7 +20,7 @@ div#body .center { padding: 0 !important; }
 </style>
 ++++
 
-@link-instructions{To complete this page, open your copy of @starter-file{self-driving} and click "Run". You'll be using the following functions:}
+@link-instructions{To complete this page, open your copy of the @starter-file{self-driving} and click "Run". You'll be using the following functions:}
 
 @indented{
 @show{(contract "regression-model-code" '((table-name Table) (explanatory List<String>) (response String)) "Code")} +
@@ -31,7 +31,7 @@ div#body .center { padding: 0 !important; }
 
 == Building a Two-Variable Model
 
-@n Evaluate `regression-model-code(training-data, [list: "curve", "skew"], "steering-angle")` to produce the predictor function, then fill in the model below. (Round your numbers to 2-3 digits)
+@n Evaluate `regression-model-code(training, [list: "curve", "skew"], "steering-angle")` to produce the predictor function, then fill in the model below. (Round your numbers to 2-3 digits)
 
 [.big-codeblock]
 @big{
@@ -40,9 +40,11 @@ div#body .center { padding: 0 !important; }
 `end`
 }
 
-@n *Copy-and-paste* your model into the Definitions Area.
+@n *Copy-and-paste* your model into the Definitions Area and click "Run". 
 
-@n Use `regression-model-S` to compare the fit of your 1-variable and 2-variable models:
+pass:[*] Make sure your Definitions Area already includes: `fun curve-predictor(r): (19.50 * r["curve"]) + -0.41 end`
+
+@n Use `regression-model-S` to compare the fit of your 1-variable\* and 2-variable models:
 
 [cols="6a, ^1a", options="header", stripes="none"]
 |===
@@ -53,19 +55,21 @@ div#body .center { padding: 0 !important; }
 @comment{We use ---- so asciidoctor will preserve the whitespace for indenting the second line}
 ----
 regression-model-S(
-  training-data, [list: "curve"], "steering-angle", curve-predictor)
+  training, [list: "curve"], "steering-angle", curve-predictor)
 ----
 | @ifsoln{}
 
 |
 ----
 regression-model-S(
-  training-data, [list: "curve", "skew"], "steering-angle", curve-skew-predictor)
+  training, [list: "curve", "skew"], "steering-angle", curve-skew-predictor)
 ----
 | @ifsoln{}
 |===
 
 @n Adding `skew` to the model made the S-value @fitbruby{14em}{@ifsoln{smaller}}{larger/smaller} so we know that the fit is @fitbruby{13em}{@ifsoln{better}}{better/worse}.
+
+
 
 == Thinking Critically About Variables
 
