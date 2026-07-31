@@ -2562,7 +2562,8 @@
                 [else #f]))
 
         (when (and (or (pair? *opt-starter-files-used*)
-                       (pair? *opt-online-exercise-links*))
+                       (pair? *opt-online-exercise-links*)
+                       (pair? *opt-printable-exercise-links*))
                    (not *supplemental-materials-needed?*))
           (warnmsg "~a: @opt-material-links missing" (errmessage-context)))
 
@@ -2872,7 +2873,8 @@
             ans)))))
 
 (define (sexp->arith e #:pyret [pyret #f] #:wrap [wrap #f]
-                     #:encloser [encloser #f] #:parens [parens #f] #:firstarg [firstarg #f] #:tex [tex #f])
+                     #:encloser [encloser #f] #:parens [parens #f] #:firstarg [firstarg #f]
+                     #:tex [tex #f] #:codemirror? [codemirror? #f])
   ; (printf "doing sexp->arith ~s l:~s w:~s e:~s p:~s\n" e pyret wrap encloser parens)
   (cond [(member e '(true false)) (let ([x (format "~a" e)])
                                     (if (or pyret tex) x (enclose-span ".value.wescheme-boolean" x)))]
@@ -2882,7 +2884,11 @@
               (memq e '(BSLeaveAHoleHere BSLeaveAHoleHere2 BSLeaveAHoleHere3)))
          (enclose-span ".fitb" (format "~a" e))] ;CHECK
         [(symbol? e) (let ([x (sym-to-adocstr e #:pyret pyret #:tex tex)])
-                       (if (or pyret tex) x (enclose-span ".value.wescheme-symbol" x)))]
+                       (cond [codemirror? 
+                               (set! *uses-codemirror?* #t)
+                               (enclose-textarea ".pyret" x)]
+                             [(or pyret tex) x]
+                             [else (enclose-span ".value.wescheme-symbol" x)]))]
         [(string? e) (let ([x (format "~s" e)])
                        (if (or pyret tex) x (enclose-span ".value.wescheme-string" x)))]
         [(answer? e) (let* ([e (second e)]
@@ -2915,13 +2921,24 @@
                                                  ))
                             (infix-sexp->math a (rest e) #:wrap wrap #:encloser encloser
                                               #:parens parens #:firstarg firstarg)]
+                           [(and (eq? a 'row-accessor) (= (length e) 3) pyret)
+                            (let* ([vec (list-ref e 1)]
+                                   [idx (list-ref e 2)]
+                                   [vec-c (sexp->arith vec #:pyret #t #:tex tex)]
+                                   [idx-c (sexp->arith idx #:pyret #t #:tex tex)])
+                              (format "~a[~a]" vec-c idx-c))]
                            [(and (eq? a 'define) (= (length e) 3) pyret)
                             (let* ([lhs (list-ref e 1)]
                                    [rhs (list-ref e 2)]
                                    [lhs-c (sexp->arith lhs #:pyret #t #:tex tex)]
                                    [rhs-c (sexp->arith rhs #:pyret #t #:tex tex)])
                               (cond [(cons? lhs)
-                                     (format "fun ~a: ~a end" lhs-c rhs-c)]
+                                     (format "~a ~a: ~a ~a"
+                                       (sexp->arith 'fun #:pyret #t #:codemirror? codemirror?)
+                                       lhs-c rhs-c
+                                       (sexp->arith 'end #:pyret #t #:codemirror? codemirror?)
+                                       )
+                                     ]
                                     [else
                                       (format "~a = ~a" lhs-c rhs-c)]))]
                            [(and (eq? a 'EXAMPLE) pyret)
@@ -3038,12 +3055,14 @@
 
     ))
 
-(define (sexp->pyret e #:parens [parens #f] #:multiline? [multiline? #f])
-  ; (printf "\ndoing sexp->pyret ~s\n" e)
+(define (sexp->pyret e #:parens [parens #f] #:multiline? [multiline? #f]
+                     #:codemirror? [codemirror? #f])
+  ; (printf "\ndoing sexp->pyret (~s) ~s\n" codemirror? e)
   (let ([h (holes-to-underscores e)])
     ; (printf "h2u retn'd ~s\n" h)
     ; (enclose-textarea ".pyret" (sexp->arith h #:pyret #t #:parens parens))
-    (enclose-textarea-2 ".pyret" (sexp->arith h #:pyret #t #:parens parens) #:multiline? multiline?)
+    (enclose-textarea-2 ".pyret"
+                        (sexp->arith h #:pyret #t #:parens parens #:codemirror? codemirror?) #:multiline? multiline?)
     ))
 
 (define (math e #:parens [parens #f])
@@ -3070,7 +3089,7 @@
 (define (sexp->code e #:parens [parens #f] #:multiline? [multiline? #f])
   ; (printf "doing sexp->code ~s\n" e)
   (if (string=? *proglang* "pyret")
-      (sexp->pyret e #:parens parens #:multiline? multiline?)
+      (sexp->pyret e #:parens parens #:multiline? multiline? #:codemirror? #t)
       (sexp->wescheme e #:multiline? multiline?)))
 
 (define (sym-to-adocstr e #:pyret [pyret #f] #:tex [tex #f])
