@@ -2920,7 +2920,7 @@
                                                  ))
                             (infix-sexp->math a (rest e) #:wrap wrap #:encloser encloser
                                               #:parens parens #:firstarg firstarg)]
-                           [(and (memq a '(row-accessor vector-ref)) (= (length e) 3) pyret)
+                           [(and (eq? a 'row-accessor) (= (length e) 3) pyret)
                             (let* ([vec (list-ref e 1)]
                                    [idx (list-ref e 2)]
                                    [vec-c (sexp->arith vec #:pyret #t #:tex tex)]
