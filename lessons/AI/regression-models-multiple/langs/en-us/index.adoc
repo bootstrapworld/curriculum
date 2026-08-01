@@ -188,22 +188,15 @@ Pyret can't plot data in more than two dimensions at a time, but it can _compute
 @hspace{2em}`regression-model-code(training, [list: "curve"], "steering-angle")`
   * Adding a second variable to the list is all it takes to go from a regression _line_ to a *regression __plane!__* For example: +
 @hspace{2em}`regression-model-code(training, [list: "curve", "skew"], "steering-angle")`
-- Pyret also has a tool for _measuring the fit_ of any row-consuming regression model:
-@hspace{2em}@show{(contract "regression-model-S" '((table-name Table) (explanatory List<String>) (response String) (model "Row->Number")) "Number" 
-"produces the S-value of a multiple-regression model, fit to the specific columns"
-)}
+- Pyret also has a tool for _measuring the fit_ of any row-consuming regression model: +
+@hspace{2em}@show{(contract "regression-model-S" '((table-name Table) (explanatory List<String>) (response String) (model "Row->Number")) "Number"
+"produces the S-value of a multiple-regression model, fit to the specified columns")}
+  * Remember: To define a model, we need at least as many rows as the number of columns we want to work with. To calculate @math{S}, we need more rows in our table than the number of columns we want to work with, otherwise we have nothing to test the fit of our model against.
+
 
 @teacher{
 Consider the trade-off between clarity and amount-of-typing: for some students, renaming their predictors using a shorthand is a big win! For example, `curve-skew-offset-predictor` could be renamed `cso-pred`.
 }
-
-@slidebreak{Launch}
-@lesson-point{`regression-model-S` needs to know about your explanatory columns!}
-
-When we were calculating @math{S} in a 2-dimensional model (1 explanatory, 1 response), we needed _more than two rows_. Two points are enough to define a line, but if there's no third row then there's nothing else to fit the line _to!_ But now we're dealing with models in 3-dimensions (2 explanatory, 1 response), and we need _more than three rows_.
-
-(That's why the list of explanatory columns matters!)
-
 
 === Investigate
 @slidebreak{InvestigateR-DN}
@@ -211,7 +204,7 @@ When we were calculating @math{S} in a 2-dimensional model (1 explanatory, 1 res
 @lesson-instruction{
 @right{@image{images/self-driving-car.jpg, 300}}
 
-- Open your copy of @starter-file{self-driving} and click "Run".
+- Open your copy of the @starter-file{self-driving} and click "Run".
 - Complete the first section of @printable-exercise{supervised-learning-multiple-regression.adoc} using `regression-model-code` and `regression-model-S`.
 }
 
