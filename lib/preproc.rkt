@@ -1185,6 +1185,7 @@
       (set! title-txt (regexp-replace* #rx"\\[.*?\\]##(.*?)##" title-txt "\\1"))
       (set! title-txt (regexp-replace* #rx"," title-txt "\\&#x2c;"))
       (set! title-txt (regexp-replace* #rx"{nbsp}" title-txt " "))
+      (set! title-txt (regexp-replace* #rx"_(.*?)_" title-txt "\\1"))
       (set! title-txt (regexp-replace* #rx"@proglang" title-txt (nicer-case *proglang*)))
       (call-with-output-file title-file
         (lambda (o)
