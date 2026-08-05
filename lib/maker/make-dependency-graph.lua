@@ -246,6 +246,7 @@ for _, pathway in ipairs(shell_output('ls ' .. courses_dir)) do
     end
     f:close()
     for i, lesson in ipairs(ordered) do
+      if lesson:find('^project%-') then goto continue end
       local prereq_file = lessons_dir .. lesson .. '/.cached/.lesson-prereq.txt.kp'
       local pf = io.open(prereq_file)
       if pf then
@@ -262,6 +263,7 @@ for _, pathway in ipairs(shell_output('ls ' .. courses_dir)) do
         end
         pf:close()
       end
+      ::continue::
     end
   end
 end
