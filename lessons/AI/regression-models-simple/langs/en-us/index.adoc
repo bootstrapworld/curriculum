@@ -39,17 +39,22 @@ Students reflect on self-driving cars, as a compelling example of supervised mac
 
 Self-driving cars feel like the future has really arrived! Many people think they are one of the strongest examples of "AI" really thinking, instead of just "following an algorithm". After all, _how can a computer possibly make decisions about how to drive?_
 
-@teacher{Give students time to discuss. Remind them about the AI Effect, and how people also felt when the first spell-checkers were developed!}
+@teacher{Remind students about the AI Effect, and how people also felt when the first spell-checkers were developed!}
 
 @slidebreak{Launch}
 
-Self-driving cars work via a lot of inputs (sensors, cameras, etc.) and a lot of outputs (how much to accelerate, brake, and steer). Steering, for example, is incredibly difficult! Considerations include:
+Self-driving cars work via a lot of inputs (sensors, cameras, etc.) and a lot of outputs (how much to accelerate, brake, and steer). Steering, for example, is incredibly difficult! 
 
-- Whether the road ahead bends to the left or right, and how sharply
-- How far the car is from the center of the lane
-- Whether the car is in-line with the lane, or heading towards one side
-- Obstacles and traffic lights that could be in the way
-- And lots more!
+@QandA{
+@Q{What information do humans consider when we make decisions about which way to steer a car?}
+@A{Whether the road ahead bends to the left or right, and how sharply}
+@A{How far the car is from the center of the lane}
+@A{Whether the car is in-line with the lane, or heading towards one side}
+@A{Whether or not we are planning to continue driving on the road for a long time or are preparing to turn onto a different road}
+@A{Obstacles and traffic lights that could be in the way}
+@A{What cars ahead of us are doing}
+@A{And lots more!}
+}
 
 We're going to explore how one form of @vocab{supervised learning} -- regression, specifically -- allows cars to "know where they're going".
 
@@ -57,19 +62,19 @@ We're going to explore how one form of @vocab{supervised learning} -- regression
 
 Teaching an AI what it means to steer requires @vocab{training}. Here's what that training entails:
 
-*A person drives the vehicle*
+(1) A person drives the vehicle
 
-- In @vocab{supervised learning}, the human driver is often called the _supervisor_
-- The supervisor demonstrates the correct behavior (e.g. which direction the steering wheel should be turned)
+- In @vocab{supervised learning}, the human driver is often called the _supervisor_.
+- The supervisor demonstrates the correct behavior (e.g. which direction the steering wheel should be turned).
 
-*Many times each second, car records...*
+(2) Many times each second, the vehicle records @vocab{training data} including:
 
 - information from many sensors around the car
 - the steering direction chosen by the driver at that moment
 
 @slidebreak{Launch}
 
-*The training data (@vocab{training corpus}) is be represented as an input-output table*, with columns for sensor data as inputs and the correct steering angles as outputs. For example:
+(3) The training data (@vocab{training corpus}) can be represented as an input-output table, with columns for sensor data as inputs and the correct steering angles as outputs. For example:
 
 @indented{
 [cols="^.^1,^.^1,^.^1", stripes="none", options="header"]
@@ -83,13 +88,17 @@ Teaching an AI what it means to steer requires @vocab{training}. Here's what tha
 
 @slidebreak{Launch}
 
-*This dataset is used to generate a @vocab{function} for predicting the correct steering angle from the sensor data.*
+(4) This dataset is used to generate a @vocab{function} for predicting the correct steering angle from the sensor data.
 
 @lesson-point{
 In this example, `curve` and `speed` are @vocab{explanatory variables}. `steering-angle` is the @vocab{response variable}.
 }
 
-*After training is complete, a human pushes the "run" switch and the vehicle begins driving!* As the car drives, it continuously evaluates its learned function to produce steering angles — just as the human driver did during training.
+- This function that we generate with statistics is what scientists call a @vocab{model}: a summary of data that captures relationships between variables. In machine learning, we use algorithms to learn models.
+- Typically, models are @vocab{lossy}, meaning that some of the original information in the dataset was lost through the process of summarizing and compressing the data to build the model. 
+- In @vocab{supervised learning}, the abstraction of the function -- the act of shrinking the @vocab{training} -- takes place after (or sometimes in tandem with) demonstration.
+
+(5) After training is complete, a human pushes the "run" switch and the vehicle begins driving! As the car drives, it continuously evaluates its learned function to produce steering angles — just as the human driver did during training.
 
 @teacher{
 If you want your students to see an example of an early self-driving car (1989!) in action, now is a good time to view @link{https://www.youtube.com/watch?v=ntIczNQKfjQ, "this brief two-minute video"}.
@@ -101,7 +110,7 @@ If you want your students to see an example of an early self-driving car (1989!)
 @Q{What other sensor input might help us determine the desired steering angle?}
 @A{What lane we're in, whether the car is lined up with the road, obstacles in our path...}
 
-@Q{@vocab{Supervised Learning} involves a computer learning _from_ something. What is the computer learning from, in our example?}
+@Q{Supervised Learning involves a computer learning _from_ something. What is the computer learning from, in our example?}
 @A{A human driver — the supervisor — who demonstrated correct steering. Those input-output pairs form the training corpus.}
 
 @Q{Why is the resulting model a _function?_}
@@ -111,21 +120,26 @@ If you want your students to see an example of an early self-driving car (1989!)
 @A{Because a human provided the correct answers (steering angles) during training, "supervising" what the machine learned.}
 }
 
+@strategy{Computers aren't people!}{
+In conversations about AI, computers often get anthropomorphized — given human-like traits when they are not in fact human. This can block students from understanding the mechanics of machine learning.
+
+Avoid saying that the model "knows" how to drive, or that it "understands" the road.
+
+A model's output is always the result of *mathematical computation* — evaluating a learned function on an input. All supervised machine learning relies on data, functions, and computation.
+}
+
 @slidebreak{Launch}
 
-These phases are a part of any kind of @vocab{supervised learning}:
+The key phases of any kind of @vocab{supervised learning} are:
 
-1. Human-tagged data is recorded, demonstrating the knowledge to be learned
-2. A machine learning algorithm finds a *function* that maps from inputs to the correct outputs (the "answer key")
-3. That function is applied to new, unseen data
-
-
-@lesson-point{
-We're going to apply those phases, and train our own model to steer a virtual self-driving car!
-}
+1. Human-tagged data is recorded, demonstrating the knowledge to be learned.
+2. A machine learning algorithm finds a *function* that maps from inputs to the correct outputs (the "answer key").
+3. That function is applied to new, unseen data.
 
 === Investigate
 @slidebreak{Investigate-DN}
+
+Let's apply what we know about supervised learning to train our own model to steer a virtual self-driving car!
 
 @lesson-instruction{
 - Turn to @printable-exercise{driving-game-exploration.adoc} and follow the instructions to:
@@ -178,6 +192,20 @@ This dataset began as real data from a very slow, careful run through multiple t
 
 Is this "cheating"? Not at all! In fact, this is a great discussion point to bring up if your students ask. Machine Learning is so dependent on quality data that enormous effort is spent finding ways to improve that quality using every method available, before a model is trained.
 }
+
+Self-driving cars are just one example of supervised learning. There are countless others!
+
+- *Spam detection.* When email users indicate that an email they have received is spam (_demonstration_), they are contributing to a massive, labeled dataset that can be used to train a model to classify emails as _spam_ and everything else, implicitly, as _not spam_. (Although Gmail sometimes asks users if something is “not spam” -- see the image, below.) The "supervision" comes from the fact that the training data includes examples of both spam and legitimate emails.
+
+@center{@image{images/report-not-spam.png, 500}}
+
+@slidebreak{Investigate}
+
+-  *Image classification.* When you do an image search for "apple", how does the computer know which images are of apples? In 2006, AI researcher Fei-Fei Li began working on the idea for a large visual database (ImageNet) to develop and improve visual object recognition software. ImageNet collects millions of images that have been hand-annotated (_demonstration_) with object categories. This collection is used for training, to produce a function that can label new images. This labeling is used by image search engines.
+
+@slidebreak{Investigate}
+
+- *Handwriting Recognition.* The United States Postal Services uses handwritten address interpretation systems to read handwritten addresses on envelopes. The MNIST database (Modified National Institute of Standards and Technology database) is one example of an early database used for the training of such systems; it includes thousands of labelled images of handwritten digits.  
 
 === Synthesize
 @slidebreak{Synthesize}
@@ -446,12 +474,4 @@ Congratulations — you have just *trained a machine learning model!*
 @Q{Could we train a model using more than one explanatory variable?}
 
 @Q{What would a line-of-best-fit look like on a scatter plot with _two_ explanatory variables? Would we have one slope and intercept? Two?}
-}
-
-@strategy{Computers aren't people!}{
-In conversations about AI, computers often get anthropomorphized — given human-like traits when they are not in fact human. This can block students from understanding the mechanics of machine learning.
-
-Avoid saying that the model "knows" how to drive, or that it "understands" the road.
-
-A model's output is always the result of *mathematical computation* — evaluating a learned function on an input. All supervised machine learning relies on data, functions, and computation.
 }
