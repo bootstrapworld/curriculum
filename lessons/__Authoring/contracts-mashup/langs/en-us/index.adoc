@@ -85,8 +85,6 @@ Be sure to read any error messages you get back carefully! They might have clues
 
 @slideonlybreak{Launch}
 
-@scrub{ES - I WOULD EXPECT QANDA TO BECOME MDQuiz FIELDS}
-
 @QandA{
 @Q{What does the expression @show{(code '(string-length "rainbow"))} evaluate to?}
 @A{7}
@@ -118,7 +116,8 @@ _If your students are not yet familiar with function notation, no need to introd
 @editorconfig{{
     definitionsAtLastRun: `
       use context starter2024
-    `,
+    `
+    ,
     editorContents: `
       regular-polygon(40, 6, "solid", "green")
       regular-polygon(80, 5, "outline", "dark-green")
@@ -128,7 +127,6 @@ _If your students are not yet familiar with function notation, no need to introd
 @lesson-instruction{
 With your partner, complete @printable-exercise{applying-functions.adoc}.
 }
-@scrub{DORAI - WE WANT TO OPEN THIS PAGE - NOTE: The page has both questions, which should probably be QandA/MD Quiz, and directions. We'll need to figure out how to indicate that as authors.}
 
 @slidebreak{Investigate}
 The expressions using the `regular-polygon` function produced a value that wasn't a Number, a String, or a Boolean. In the @proglang programming language, these values are called _Images_.
@@ -157,7 +155,7 @@ The expressions using the `regular-polygon` function produced a value that wasn'
 @ifnotselfguided{
 Contracts are _binding_ agreements! For example, we might sign a contract with a plumber to install a sink for $200. As long as they install the sink, we are obligated to pay them $200. If a parent promises to order pizza if their child does their chores, they'd better order that pizza if the child does those chores!
 
-If one party breaks the contract, bad things can happen.} @scrub{DORAI- I WANT TO END THE @IFNOTSELFGUIDED IN THE MIDDLE OF THIS LINE AND MAKE IT VISIBLE TO AUTHORS IN THE FILE WITHOUT DISRUPTING THE LINE ON THE HTML VERSION} In some programming languages, breaking a function's contract can cause the whole computer to crash, or it can result in a security hole that lets the program be hacked! In @proglang, the contracts are checked every time we use a function, so the result of a contract error is a helpful error message.
+If one party breaks the contract, bad things can happen.} In some programming languages, breaking a function's contract can cause the whole computer to crash, or it can result in a security hole that lets the program be hacked! In @proglang, the contracts are checked every time we use a function, so the result of a contract error is a helpful error message.
 
 @lesson-point{
 A Contract is an agreement between us and a function: if it gets what it expects, it'll give us what we expect.
@@ -166,8 +164,10 @@ A Contract is an agreement between us and a function: if it gets what it expects
 === Synthesize
 @slidebreak{Synthesize}
 
-- How would you explain Domain and Range to someone who missed today's class?
-- What questions do you have about Contracts?
+@QandA{
+@Q{How would you explain Domain and Range to someone who missed today's class?}
+@Q{What questions do you have about Contracts?}
+}
 
 @pd-slide{
 *Connect to the Classroom: Contracts are a major pedagogical technique.*
@@ -324,6 +324,7 @@ To convert a Circle of Evaluation into code, we start at the outside and work ou
 @selfguidedbreak
 @lesson-instruction{
 It's your turn to design a logo! 
+
 - Complete @printable-exercise{design-your-logo.adoc}.
 - Then complete @printable-exercise{code-your-logo.adoc}
 }
