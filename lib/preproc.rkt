@@ -2563,7 +2563,8 @@
                 [else #f]))
 
         (when (and (or (pair? *opt-starter-files-used*)
-                       (pair? *opt-online-exercise-links*))
+                       (pair? *opt-online-exercise-links*)
+                       (pair? *opt-printable-exercise-links*))
                    (not *supplemental-materials-needed?*))
           (warnmsg "~a: @opt-material-links missing" (errmessage-context)))
 
