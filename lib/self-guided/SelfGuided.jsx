@@ -48,11 +48,18 @@ const EditorPane = ({config}) => {
         const config0 = {
           definitionsAtLastRun: "",
           interactionsSinceLastRun: "",
-          editorContent: "",
+          editorContents: "",
           replContents: "",
         };
 
-        embed.sendReset({...config0, ...config});
+        let finalConfig = {...config0, ...config};
+        if (finalConfig.definitionsAtLastRun && finalConfig.editorContents) {
+          finalConfig = {
+            ...finalConfig,
+            editorContents: finalConfig.definitionsAtLastRun + '\n' + finalConfig.editorContents,
+          };
+        }
+        embed.sendReset(finalConfig);
       }
     }
 
