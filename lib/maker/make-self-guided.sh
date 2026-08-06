@@ -28,6 +28,7 @@ for sgf in "$self_guided_dir"/*; do
 done
 
 mv ../selfGuidedBits.jsx .
+mv ../selfGuidedExtra.css extra.css
 test -d ../images && ln -sf ../images
 test -d ../videos && ln -sf ../videos
 

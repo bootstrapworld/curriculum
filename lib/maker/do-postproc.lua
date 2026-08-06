@@ -415,10 +415,13 @@ local function extract_self_guided(fhtml_cached, lesson_title)
   local fdir = fhtml_cached:gsub('/%.cached/%.index%.html$', '')
   local fhtml = fdir .. '/index.shtml'
   local fjson = fdir .. '/selfGuidedBits.jsx'
+  local fcss  = fdir .. '/selfGuidedExtra.css'
   local i = io.open(fhtml, 'r')
   local o = io.open(fjson, 'w')
+  local c = io.open(fcss,  'w')
   local writing_p = false
   local skip_one_more_line_p = false
+  local in_style_p = false
   local counter = 0
   local page_header = ''
   local piece_buf = {}  -- buffer lines for the current piece
@@ -477,7 +480,13 @@ local function extract_self_guided(fhtml_cached, lesson_title)
     if x:match('href="%.%./%.%./lessons/') then
       x = x:gsub('href="%.%./%.%./lessons/', 'href="../../../../lessons/')
     end
-    if writing_p then
+    if x == '<style>' then
+      in_style_p = true
+    elseif x == '</style>' then
+      in_style_p = false
+    elseif in_style_p then
+      c:write(x, '\n')
+    elseif writing_p then
       if skip_one_more_line_p then
         skip_one_more_line_p = false
         table.insert(piece_buf, page_header)
@@ -512,6 +521,7 @@ local function extract_self_guided(fhtml_cached, lesson_title)
   o:write(']\n')
   i:close()
   o:close()
+  c:close()
 end
 
 -- Build one combined worklist across all five types, then split it into
