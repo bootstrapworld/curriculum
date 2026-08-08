@@ -2137,27 +2137,30 @@
                                                            "\\&#x2c;")]
                                                        [title (or link-text
                                                                   starter-file-title)]
-                                                       [url (let* ([url (hash-ref p 'url "")]
+                                                       [raw-url (hash-ref p 'url "")]
+                                                       [use-pyret-prefix?
+                                                         (and p (eq? *proglang-sym* 'pyret)
+                                                              (string-prefix? raw-url *github-prefix*)
+                                                              (hash-ref p 'prefix #t))]
+                                                       [url (cond [(string=? raw-url "")
+                                                                   (warnmsg "~a: @~a ~a missing URL"
+                                                                           (errmessage-context) directive lbl)
+                                                                   "starter-file-missing-URL.html"]
                                                                   [use-pyret-prefix?
-                                                                    (and p (eq? *proglang-sym* 'pyret)
-                                                                         (string-prefix? url *github-prefix*)
-                                                                         (hash-ref p 'prefix #t))])
-                                                              (cond [(string=? url "")
-                                                                     (warnmsg "~a: @~a ~a missing URL"
-                                                                             (errmessage-context) directive lbl)
-                                                                     "starter-file-missing-URL.html"]
-                                                                    [use-pyret-prefix?
-                                                                      (string-append
-                                                                        *pyret-starter-file-prefix*
-                                                                        url)]
-                                                                    [else url]))]
+                                                                    (string-append
+                                                                      *pyret-starter-file-prefix*
+                                                                      raw-url)]
+                                                                  [else raw-url])]
                                                        [link-output
-                                                         (format
-                                                           "link:pass:[~a][~a~a]"
-                                                           url
-                                                           title
-                                                           ", window=\"&#x5f;blank\""
-                                                           )])
+                                                         (if use-pyret-prefix?
+                                                           ; Raw HTML so we can add data-starter-file-url for
+                                                           ; the self-guided app to intercept and load inline
+                                                           (format
+                                                             "pass:[<a href=\"~a\" target=\"_blank\" data-starter-file-url=\"~a\">~a</a>]"
+                                                             url raw-url title)
+                                                           (format
+                                                             "link:pass:[~a][~a~a]"
+                                                             url title ", window=\"&#x5f;blank\""))])
                                                   (display link-output o))]))]))]
                           [(string=? directive "assessments")
                            (fprintf o "\ninclude::~a/{cachedir}.index-assessments.asc[]\n" *containing-directory*)]
