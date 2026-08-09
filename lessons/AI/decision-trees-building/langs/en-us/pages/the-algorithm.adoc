@@ -1,4 +1,4 @@
-= Building a Decision Tree: The Algorithm
+= Finding the Best Split: The Algorithm
 ++++
 <style>
 div#body #preamble_disabled { flex-grow: 0 !important; }
@@ -9,65 +9,53 @@ div#body table { margin: 0 !important; }
 </style>
 ++++
 
-[%autowidth, cols="^,^,^,^", frame="none", stripes="none", options="header"]
-|===
-| Split on
-| "no" leaf (most common in this group)
-| "yes" leaf (most common in this group)
-| # Correct
 
-| `r["tail"] == true`
-| "snail" or "lizard" or "tarantula" (2 out of 6)
-| "cat" (5 out of 11)
-| 7
-|===
+@n Evaluate `image-dot-plot(training, "tail", animal-img)`, and use the chart to answer the following questions...
 
-*Use this table as a model for completing the Categorical and Quantitative Splits sections below.* Notice:
+@n *When `r["tail"] == true`...*
+@hspace{2em} Which species is/are most common, and would make the best prediction? @fitb{}{@ifsoln{cats}}
 
-- the 1st column is the code that will ask our question: "Does the animal have a tail?"
-- the 2nd and 3rd columns show predicted species for animals with and without tails (and the numbers these predictions were based on)
-- the last column tell us how many of these predictions would be correct for the animals in our testing table
+@hspace{2em}_If our classifier predicts @fitbruby{15em}{@ifsoln{cat}}{most common species *with* tails}, it will be correct @fitbruby{7em}{@ifsoln{5}}{# of that species} out of @fitbruby{8em}{@ifsoln{11}}{# of animals with tails} times._
 
-@vspace{1ex}
+@n *When `r["tail"] == false`...* Which species would make the best prediction? @fitb{}{@ifsoln{snails and tarantulas}}
+
+@hspace{2em}_If our classifier predicts @fitbruby{15em}{@ifsoln{tarantula or snail}}{most common species *without* tails}, it will be correct @fitbruby{7em}{@ifsoln{2}}{# of that species} out of @fitbruby{8em}{@ifsoln{4}}{# of animals with tails} times._
 
 == Categorical Splits
-@n Complete the table below, using `image-dot-plot` to see the distribution of `mammal`, `tail`, `swims` and `sex`.
+@n The first row in the table below uses the answers for 1 and 2 (above). _To fill in the rest of the table_, use `image-dot-plot` to see the distribution of `mammal`, `tail`, `swims` and `sex`.
 
 [%autowidth, cols="^,^,^,^", frame="none", stripes="none", options="header"]
 |===
 | Split on
-| "no" leaf (most common)
 | "yes" leaf (most common)
+| "no" leaf (most common)
 | # Correct
 
-| `r["mammal"] == true`
-| "snail" or "tarantula" (2 of 4)
-| "cat" (5 of 9)
+| `r["tail"] == true`
+| "cat" (5 correct out of 11)
+| "snail" or "tarantula" (2 correct out of 4)
 | 7
 
-| `r["tail"] == true`
+| `r["mammal"] == true`
+| @ifsoln{"cat" (5 of 9)}
 | @ifsoln{"snail" or "tarantula" (2 of 4)}
-| @ifsoln{"cat" (5 of 11)}
 | @ifsoln{7}
 
 | `r["swims"] == true`
-| @ifsoln{"cat" (4 of 9)}
 | @ifsoln{"dog" (4 of 6)}
+| @ifsoln{"cat" (4 of 9)}
 | @ifsoln{8}
 
 | `r["sex"] == "hermaphrodite"`
-| @ifsoln{"cat" (5 of 13)}
 | @ifsoln{"snail" (2 of 2)}
+| @ifsoln{"cat" (5 of 13)}
 | @ifsoln{6}
 
 | `r["sex"] == "female"`
-| @ifsoln{"dog" or "snail" or "cat" (2 of 8)}
 | @ifsoln{"cat" (3 of 7)}
+| @ifsoln{"dog" or "snail" or "cat" (2 of 8)}
 | @ifsoln{6}
 |===
-
-@n Why wouldn't it make sense to have a second row for `r["mammal"] == false`? @fitb{}{} +
-@fitb{}{@ifsoln{For Boolean columns where there are only two options the split is identical whether we phrase the question as IS or ISN'T.}}
 
 == Quantitative Splits
 @n Complete the table below, using `image-dot-plot` to see the distribution of `pounds`.
@@ -75,29 +63,30 @@ div#body table { margin: 0 !important; }
 [%autowidth, cols="^,^,^,^", frame="none", stripes="none", options="header"]
 |===
 | Split on
-| "no" leaf
 | "yes" leaf
+| "no" leaf
 | # Correct
 
 | `r["pounds"] > 2`
-| "snail" or "tarantula" (2 of 4)
 | "cat" (5 of 11)
+| "snail" or "tarantula" (2 of 4)
 | 7
 
 | `r["pounds"] > 6`
-| @ifsoln{"snail" or "tarantula" (2 of 4)}
 | @ifsoln{"cat" or "dog" (4 of 9)}
+| @ifsoln{"snail" or "tarantula" (2 of 4)}
 | @ifsoln{6}
 
 | `r["pounds"] > 9.5`
-| @ifsoln{"cat" (4 of 10)}
 | @ifsoln{"dog" (4 of 5)}
+| @ifsoln{"cat" (4 of 10)}
 | @ifsoln{8}
 |===
 
 == Completing the Tree
 
-@n Choose your split and explain your choice: @fitb{}{@ifsoln{`r["swims"] == true` or `r["pounds"] > 9.5` both lead to the most correct classifications}}.
+@n *Which split(s) will make the best root node?* Choose your split and explain your choice: @fitb{}{@ifsoln{`r["swims"] == true` or `r["pounds"] > 9.5` both lead to the most correct classifications}} +
+@fitb{}{}
 
 @n Fill in the root at the top of the tree below, and label the edges with the number of animals in each sub-group. Place a check next to each row of the table that your split predicts correctly.
 
