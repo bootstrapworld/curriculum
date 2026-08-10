@@ -44,6 +44,8 @@ end
 local allowed_slide_layouts = {
   "AI Title Slide",
   "AI Title and Body",
+  "E+E Title Slide",
+  "E+E Title and Body",
   "Core Title Slide",
   "Core Title and Body",
   "Math Title Slide",
@@ -446,12 +448,16 @@ function make_slides_file(lesson_dir)
 
   if lesson_superdir == 'Data-Science' then
     course_string = 'DS'
-  elseif lesson_superdir == 'Algebra' or lesson_superdir == 'Algebra2' or lesson_superdir == 'Expressions-and-Equations' then
+  elseif lesson_superdir == 'Algebra' then
     course_string = 'Math'
+  elseif lesson_superdir == 'Algebra2' then
+    course_string = 'Algebra 2'
   elseif lesson_superdir == 'Reactive' then
     course_string = 'R'
   elseif lesson_superdir == 'AI' then
     course_string = 'AI'
+  elseif lesson_superdir == 'Expressions-and-Equations' then
+    course_string = 'E+E'
   else
     course_string = 'Core'
   end
