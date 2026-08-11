@@ -17,7 +17,26 @@
     <style>
         #preamble_disabled { padding-bottom: 25px; }
         .logo img { width: 300px; }
-        .drag-handle img { width: 15px; user-select: none; }
+        /* Prevent iOS's long-press "Save Image / Copy / Share" popup and
+           native image drag-out on the drag-handle. -webkit-touch-callout
+           is Apple's own switch for that popup; pointer-events: none makes
+           the <img> itself untouchable so the touch target is the parent
+           .drag-handle span instead (an <img> is what triggers iOS's
+           image-specific callout in the first place), while still letting
+           SortableJS's handle-based drag detection see the touch/mouse
+           events via the span. */
+        .drag-handle {
+          -webkit-touch-callout: none;
+          -webkit-user-select: none;
+          user-select: none;
+        }
+        .drag-handle img {
+          width: 15px;
+          user-select: none;
+          -webkit-touch-callout: none;
+          -webkit-user-drag: none;
+          pointer-events: none;
+        }
         .item { display: inline-block; }
         .two-thirds { width: 60%; }
         .one-third {width: 30%; margin-left: 75px !important; }
@@ -160,7 +179,7 @@
                 onClick="deleteLesson('${l}')">
                 &times;
               </button>
-              <img src="lib/images/drag-handle.png" aria-hidden="true"/>
+              <img src="lib/images/drag-handle.png" aria-hidden="true" draggable="false"/>
             </span>
             <span class="itemContent">
               <dt>
