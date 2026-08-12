@@ -6,7 +6,17 @@ The build process automatically generates the files containing the JSON required
 
 The self-guided materials *must be run from a webserver*, as they use advanced JS that cannot be loaded from a file. Fortunately, it's easy to run a webserver on your own computer.
 
-The normal `make` command creates the raw files needed for self-guided lessons, in the directory `/lessonName/.cached/self-guided/`. Running `npm run dev` from this directory will launch a web browser that allows you to see the lesson in self-guided form.
+The easiest way to do this is with the `try-self-guided` script, from the top level of the repo:
+
+  ./try-self-guided lessonName
+
+This builds the lesson (via `make`) and launches a dev server for its self-guided materials, printing a `localhost` URL you can open in a browser. If you've already run `make` recently and don't want to wait for another full build, pass `--nomake`:
+
+  ./try-self-guided --nomake lessonName
+
+For lessons with a WeScheme or CODAP variant, pass `--proglang wescheme` or `--proglang codap`.
+
+Under the hood, `make` creates the raw files needed for self-guided lessons in `distribution/$NATLANG/lessons/lessonName/self-guided/`, and it's `npm run dev` from that directory that launches the dev server -- `try-self-guided` just automates finding that directory and running the command for you.
 
 == Building Self-Guided Lessons for Deployment
 

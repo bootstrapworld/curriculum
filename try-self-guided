@@ -1,0 +1,82 @@
+#! /usr/bin/env bash
+
+# Usage: try-self-guided [--nomake] [--proglang wescheme|codap] <lesson>
+#
+# Builds (unless --nomake) and launches the dev server for a single
+# lesson's self-guided materials, so an author can preview it in a
+# browser without needing to know the distribution folder layout.
+
+SED=sed
+
+if which gsed|grep -q .; then
+  SED=gsed
+fi
+
+export PROGLANG
+nomake=
+lsn=
+
+if test $# -eq 0; then
+  echo $0 needs a lesson argument
+  exit 1
+fi
+
+while test $# -ne 0; do
+  if test "$1" = --proglang; then
+    shift; PROGLANG="$1"; shift
+  elif test "$1" = --nomake; then
+    nomake=1; shift
+  else
+    lsn="$1"; shift
+  fi
+done
+
+# get at the lesson basename
+lsn=${lsn%/}
+lsn=${lsn##*/}
+
+if test "$PROGLANG" = wescheme; then
+  lsn=$(echo $lsn|$SED -e 's/-wescheme$//')
+  lsn=$lsn-wescheme
+elif test "$PROGLANG" = codap; then
+  lsn=$(echo $lsn|$SED -e 's/-codap$//')
+  lsn=$lsn-codap
+fi
+
+if echo $lsn|grep -q "\-wescheme$"; then
+  PROGLANG=wescheme
+elif echo $lsn|grep -q "\-codap$"; then
+  PROGLANG=codap
+fi
+
+if test -z "$PROGLANG"; then
+  PROGLANG=pyret
+fi
+
+export TOPDIR=$(pwd)
+export NATLANG=${NATLANG:-en-us}
+
+if test -z "$nomake"; then
+  make
+fi
+
+if test ! -d distribution; then
+  echo WARNING: Did not find any built pathways
+  exit 1
+fi
+
+lesson_dir=distribution/$NATLANG/lessons/$lsn
+
+if test ! -d "$lesson_dir"; then
+  echo Lesson $NATLANG/lessons/$lsn not found in distribution
+  exit 1
+fi
+
+if test ! -d "$lesson_dir/self-guided"; then
+  echo Lesson $NATLANG/lessons/$lsn has no self-guided content -- is this lesson self-guided-enabled?
+  exit 1
+fi
+
+cd "$lesson_dir/self-guided" || exit 1
+echo Launching self-guided preview for $lsn...
+npm run dev

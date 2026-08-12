@@ -6,6 +6,8 @@
 
 @keywords{inverse}
 
+@add-to-lang{translate}
+
 [@lesson-intro-table]
 |===
 | Lesson Goals
@@ -136,20 +138,21 @@ You have probably learned about the primary color wheel in art class, where the 
 |===
 }
 
-@lesson-point{@proglang generates colors by adding red, green and blue pixels in specified ratios.} 
+@slidebreak{Investigate}
+@lesson-point{@proglang makes colors by adding red, green and blue in different amounts.}
 
-Those ratios are represented in RGB codes as integer values ranging from 0 to 255. The @vocab{inverse} of any color can be found by finding the ratio that complements the original color's RGB ratio such that all 255 parts of red, green and blue are accounted for. For example: 
+These quantities are represented in RGB codes as integer values ranging from 0 to 255. The @vocab{inverse} of any color can be found by finding the ratio that complements the original color's RGB ratio such that complements the original color's RGB ratio. For example:
 
 @indented{
-[.data-table, cols="3a,1a,11a", options="header"]
+[cols="3a,2a,11a", options="header"]
 |===
 |Color                         |Code            |
-|Red                           |RGB(255,0,0)    |uses all of the possible red and no blue or green
-|Inverse of red: +
-cyan/aqua                      |RGB(0,255,255)  |doesn't use any red, and uses all of the possible blue and green. It is the color across from red on the RGB model
-|Royal blue                    |RGB(65,105,225) |uses 25.5% of the possible red, 41.2% of the possible green, and 88.2% of the possible blue
-|Inverse of royal blue: +  
-tannish                        |RGB(190,150,30) |uses the other 74.5% of possible red, the other 58.8% of the possible green and the other 11.8% of the possible blue
+|*red*                           |RGB(255,0,0)    |uses all of the possible red and no blue or green
+|inverse of red: +
+*cyan/aqua*                      |RGB(0,255,255)  |doesn't use any red, and uses all of the possible blue and green. It is the color across from red on the RGB model
+|*royal blue*                   |RGB(65,105,225) |uses 25.5% of the possible red, 41.2% of the possible green, and 88.2% of the possible blue
+|inverse of royal blue: +  
+*tannish*                       |RGB(190,150,30) |uses the other 74.5% of possible red, the other 58.8% of the possible green and the other 11.8% of the possible blue
 |===
 }
 
@@ -159,7 +162,7 @@ But we don't need the RGB code to think about inverses! Referring to the RGB Col
 
 @ifnotslide{
 @indented{
-[.data-table, cols="1a,1a", options="header"]
+[ols="1a,1a", options="header"]
 |===
 | Starting Value                | Inverted Image
 | black square                  | _white square (same size)_
@@ -196,6 +199,8 @@ In classic game development (like the original Nintendo or Super Nintendo era), 
 - A game where characters punch holes in the wall couldn't afford to load one image for the wall, and another for the wall full of holes.
 - A game where a plumber changes their appearance when they get a power-up couldn't afford to have one image for the normal plumber, and another for the powered-up plumber.
 
+@slidebreak{SynthesizeR}
+@ifslide{@right{@image{images/pixel-hero-with-sword.png, 300}}}
 To get around this limitation, they used a technique called _masking_. Think of a "mask" as the additive inverse of a shape. If your character sprite is the "value," the mask is the mathematical opposite that tells the computer exactly where not to draw pixels.
 
 Masking blends an image (like a wall or a plumber) with a "mask image" that causes pieces of the original image to change in certain ways, or disappear entirely. Many modern games continue to use masking as an optimization!
@@ -218,8 +223,7 @@ Students discover the Additive Inverse Property, which tells us that adding a nu
 === Launch
 
 @slidebreak{Launch}
-
-Just as inverted images will cancel each other out to make gray shapes, when computing expresssions, additive inverses will combine to make a sum of zero.
+Just as inverted images will cancel each other out to make gray shapes, when computing expressions, additive inverses will combine to make a sum of zero.
 
 @lesson-instruction{
 I'm going to draw a two-column table on the board. I'm labeling the left-hand side "Starting Value," and I'm labeling the right-hand side "Additive Inverse".
@@ -311,7 +315,7 @@ div.paragraph>p:has(+.circleevalsexp) { display: inline; }
 ++++
 
 @indented{
-[cols="^1a,^1a"]
+[cols="^1a,^1a", frame="none"]
 |===
 |@show{(coe '(- (+ 16 973) 972))} = @show{(coe '(- 989 972))} = @show{(coe '(17))}
 |@show{(coe '(+ 16 (- 973 972)))} = @show{(coe '(+ 16 1))} = @show{(coe '(17))}
@@ -330,8 +334,8 @@ div.paragraph>p:has(+.circleevalsexp) { display: inline; }
 
 The tricky thing is that order _sometimes_ matters. 
 
-- We can evaluate as if order _always_ matters. We will _always get the correct answer_ this way, but we might end up working harder.
-- We can try to learn a more nuanced pattern...
+- If we act like order _always_ matters, we will _always get the correct answer_. But sometimes we'll have to do more work than we need.
+- But what if, _sometimes_, we didn't _need_ to do that work?
 
 @lesson-instruction{
 - Complete @printable-exercise{is-there-another-way.adoc}.
@@ -393,6 +397,8 @@ During this exploration, you should have discovered that:
 Now, students are ready to continue their exploration of subtraction as the inverse of addition. Note: To complete this worksheet, students do not need to be fluent at integer addition and subtraction. We just want students thinking about when expressions are @vocab{equivalent} based on what they have learned about the additive inverse.
 }
 
+@slidebreak{Launch}
+
 @lesson-instruction{
 Complete @printable-exercise{wodb.adoc}.
 }
@@ -420,7 +426,5 @@ Have students share strategies for determining equivalence. What are the differe
 @A{Another word for the @vocab{additive inverse} is @vocab{opposite}.}
 @A{When we add a number and its @vocab{additive inverse} we get zero.}
 @A{Additive inverses allow us to rewrite any subtraction problem as addition.}
-}
-
 }
 

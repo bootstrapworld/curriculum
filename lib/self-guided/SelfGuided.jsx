@@ -48,11 +48,29 @@ const EditorPane = ({config}) => {
         const config0 = {
           definitionsAtLastRun: "",
           interactionsSinceLastRun: "",
-          editorContent: "",
+          editorContents: "",
           replContents: "",
         };
 
-        embed.sendReset({...config0, ...config});
+        let finalConfig = {...config0, ...config};
+
+        // If a starter file URL is given, fetch its content into editorContents
+        if (config.starterFileUrl && !finalConfig.editorContents) {
+          try {
+            const r = await fetch(config.starterFileUrl);
+            if (r.ok) finalConfig = {...finalConfig, editorContents: await r.text()};
+          } catch(e) {
+            console.error('Failed to fetch starter file:', e);
+          }
+        }
+
+        if (finalConfig.definitionsAtLastRun && finalConfig.editorContents) {
+          finalConfig = {
+            ...finalConfig,
+            editorContents: finalConfig.definitionsAtLastRun + '\n' + finalConfig.editorContents,
+          };
+        }
+        embed.sendReset(finalConfig);
       }
     }
 
@@ -115,6 +133,40 @@ export function SelfGuided() {
   const [index, setIndex] = useState(0);
   let twinPane = selfGuidedBits[index];
 
+  // Intercept clicks on starter-file links so they load directly into the
+  // embedded editor instead of opening a new tab.
+  const leftPaneRef = useRef(null);
+  useEffect(() => {
+    const el = leftPaneRef.current;
+    if (!el) return;
+
+    function handleStarterFileClick(e) {
+      const link = e.target.closest('a[data-starter-file-url]');
+      if (!link) return;
+
+      e.preventDefault();
+      const rawUrl = link.getAttribute('data-starter-file-url');
+      const embed = window.containerRef?.current?.editor;
+      if (!embed) return;
+
+      fetch(rawUrl)
+        .then(r => {
+          if (!r.ok) throw new Error('HTTP ' + r.status);
+          return r.text();
+        })
+        .then(content => {
+          embed.sendReset({ editorContents: content });
+        })
+        .catch(err => {
+          console.error('Failed to load starter file:', err);
+          window.open(link.href, '_blank'); // fall back to new tab
+        });
+    }
+
+    el.addEventListener('click', handleStarterFileClick);
+    return () => el.removeEventListener('click', handleStarterFileClick);
+  }, [index]); // re-bind whenever the page changes
+
   const [nextAllowed, allowNext] = useState(true);
 
   function handleClickNext() {
@@ -130,8 +182,16 @@ export function SelfGuided() {
   let leftPane = createLeftPane(twinPane.lessonText);
   let rightPane;
 
-  if(twinPane.editorCode) {
-    rightPane = <EditorPane config={twinPane.editorCode}/>
+  // If editorCode is empty but the lesson text references a starter file,
+  // auto-populate the editor with the starter file's content on page load.
+  let editorConfig = twinPane.editorCode;
+  if (editorConfig && Object.keys(editorConfig).length === 0) {
+    const m = twinPane.lessonText.match(/data-starter-file-url="([^"]+)"/);
+    if (m) editorConfig = { starterFileUrl: m[1] };
+  }
+
+  if(editorConfig) {
+    rightPane = <EditorPane config={editorConfig}/>
   } else if(twinPane.videoConfig) {
     rightPane = <VideoPane config={twinPane.videoConfig} />
   } else if(twinPane.imageConfig) {
@@ -162,7 +222,7 @@ export function SelfGuided() {
         </button>
       </div>
       <div id="pages">
-        <div id="leftPane">
+        <div id="leftPane" ref={leftPaneRef}>
           {leftPane}
         </div>
         <div id="rightPane">

@@ -44,6 +44,10 @@ end
 local allowed_slide_layouts = {
   "AI Title Slide",
   "AI Title and Body",
+  "Algebra 2 Title Slide",
+  "Algebra 2 Title and Body",
+  "E+E Title Slide",
+  "E+E Title and Body",
   "Core Title Slide",
   "Core Title and Body",
   "Math Title Slide",
@@ -100,6 +104,7 @@ local function get_slides(lsn_plan_adoc_file, addl_exercises_list_file)
   local beginning_of_line_p = true
   local tableIdx = -1 -- to skip the preamble table
   local coeIdx = 0
+  local contractIdx = 0
   local imgIdx = 0
   local curr_slide
   local curr_slide_header = ''
@@ -172,13 +177,14 @@ local function get_slides(lsn_plan_adoc_file, addl_exercises_list_file)
         local directive = read_word(i)
         if directive == 'show' then
           local arg = read_group(i, directive, 'scheme', 'multiline')
-          if arg:match('%(coe') then
-            coeIdx = coeIdx + 1
-            if not inside_table_p then
+          if not inside_table_p then
+            if arg:match('%(coe') then
+              coeIdx = coeIdx + 1
               update_curr_slide_text('@autogen-image{coe' .. coeIdx .. '}{images/AUTOGEN-COE' .. coeIdx .. '.png}')
-            end
-          else
-            if not inside_table_p then
+            elseif arg:match('%(contract') then
+              contractIdx = contractIdx + 1
+              update_curr_slide_text('@autogen-image{contract' .. contractIdx .. '}{images/AUTOGEN-CONTRACT' .. contractIdx .. '.png}')
+            else
               update_curr_slide_text(c .. directive .. '{' .. arg .. '}')
             end
           end
@@ -211,6 +217,8 @@ local function get_slides(lsn_plan_adoc_file, addl_exercises_list_file)
           tableIdx = tableIdx + n
           _, n = txt:gsub('@show{%(coe', 'z')
           coeIdx = coeIdx + n
+          _, n = txt:gsub('@show{%(contract', 'z')
+          contractIdx = contractIdx + n
           txt2, n = txt2:gsub('@image{', 'z')
           imgIdx = imgIdx + n
           txt2, n = txt2:gsub('@centered%-image{', 'z')
@@ -442,12 +450,16 @@ function make_slides_file(lesson_dir)
 
   if lesson_superdir == 'Data-Science' then
     course_string = 'DS'
-  elseif lesson_superdir == 'Algebra' or lesson_superdir == 'Algebra2' or lesson_superdir == 'Expressions-and-Equations' then
+  elseif lesson_superdir == 'Algebra' then
     course_string = 'Math'
+  elseif lesson_superdir == 'Algebra2' then
+    course_string = 'Algebra 2'
   elseif lesson_superdir == 'Reactive' then
     course_string = 'R'
   elseif lesson_superdir == 'AI' then
     course_string = 'AI'
+  elseif lesson_superdir == 'Expressions-and-Equations' then
+    course_string = 'E+E'
   else
     course_string = 'Core'
   end

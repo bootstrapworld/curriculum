@@ -1,5 +1,5 @@
 [.beta]
-= Supervised and Unsupervised Similarity
+= Building Centroids
 
 @description{
 This lesson uses a *supervised* learning approach to image similarity, and compares it to the unsupervised approach used in the prior lesson. Students think about how arbitrary documents (in this case, Images) can be represented as _labeled_ points in space, and how those human-labeled points can be used to improve the quality of searches and recommendations.
@@ -23,9 +23,12 @@ This lesson uses a *supervised* learning approach to image similarity, and compa
 |[.materials-links]
 @material-links
 
+| Supplemental Materials
+|[.materials-links]
+@opt-material-links
 |===
 
-== Unsupervised vs. Supervised Learning
+== But We Still Haven't _Learned_ Anything!
 @objective{ai-supervised-v-unsupervised}
 
 === Overview
@@ -76,15 +79,10 @@ Machine Learning engineers at Netflix, Spotify, and Google have confronted these
 So...what if *we humans* started telling these model about Jack Black, what songs they like, which songs are jazz and which images have snow?
 
 @slidebreak{Investigate}
-There are several different times of Machine Learning, and we're about to cross from one into another:
+There are several different times of Machine Learning, and so far *our similarity system doesn't use either one!*
 
-* Unsupervised Learning - the computer is given a corpus of data and asked to find patterns. There's no "answer key"!
-* Supervised Learning - the corpus has been labeled, providing a sort of answer key. The computer has to find patterns that map inputs to outputs, staying as close to the correct answers as possible.
-
-@slidebreak{Investigate}
-@lesson-point{AI isn't just one thing: it involves different kinds of learning!}
-
-Image search is just one example of how supervised and unsupervised learning show up in AI. Every example of Machine Learning usually starts with one of these two. There are actually other kinds of machine learning too, but we'll get to that later.
+* Unsupervised Learning - the computer is given a corpus of data and asked to find patterns. There's no "answer key"! We could ask the computer to find the _@math{N}_ clusters of images that are near each other.
+* Supervised Learning - the corpus has been labeled, providing a sort of answer key. The computer has to find patterns that map inputs to outputs, staying as close to the correct answers as possible. Now we could ask the computer to find image similar to those we like, or those we've tagged with one term or another.
 
 === Synthesize
 @slidebreak{Synthesize}
@@ -96,10 +94,10 @@ When you trained Decision Trees to identify the species of an animal based on co
 @A{Supervised}
 
 @Q{Why?}
-@A{Because the data included the labeled answers (the species of each animal).}
+@A{Because the similarity computation didn't _use_ the labels — even though the data had them, we ignored them.}
 
 
-You built a model of images in the previous lesson, including columns like `ENTROPY`, `WIDTH`, `red`, etc.
+You built a model of images, including columns like `ENTROPY`, `WIDTH`, `red`, etc.
 @Q{Was this an example of supervised learning or unsupervised learning?}
 @A{Unsupervised}
 
@@ -110,7 +108,7 @@ You built a model of images in the previous lesson, including columns like `ENTR
 @A{`LIKES`, `DISLIKES`, and `TAGS`}
 }
 
-== Computing Centroids
+== Let the Learning Begin!
 @objective{ai-centroids}
 @objective{ai-supervision-ethics}
 
@@ -149,12 +147,13 @@ If every image in our corpus is a point in space, then common ground is literall
 
 In our 2-dimensional Blue-Green Space, for example, the midpoint halfway between `"grass-sun"` and `"sun2"` defines one kind of "sun-ness"!
 
+@slidebreak{LaunchR}
+@ifslide{@right{@image{images/blue-v-green-images-centroid.png, 300}}}
 (Do you remember learning about mean, median, and mode? In Machine Learning, there are algorithms for finding clusters of points in space that are literally named `k-means`, `k-medians`, and `k-modes` clustering! _Measures of Center are a critical part of modern Machine Learning._)
 
 
-@slidebreak{LaunchR}
+@slidebreak{Launch}
 @QandA{
-@ifslide{@image{images/blue-v-green-images-centroid.png, 300}}
 @Q{We have *three* images where the sun is visible. How can we find the middle of those three?}
 @A{It's the middle of a triangle!}
 
@@ -168,7 +167,8 @@ In our 2-dimensional Blue-Green Space, for example, the midpoint halfway between
 
 If you have more than 1 dimension, the same math applies: compute the centroid for each column separately. Can we get a better result for sunny images by teaching Pyret what "sun-ness" looks like for two of our images?
 
-For any set of points (in any number of dimensions!), the "middle" point is the @vocab{Centroid}.
+@slidebreak{LaunchC}
+For any set of points (in any number of dimensions!), the "middle" is the @vocab{Centroid}.
 
 [cols="^.^1a, ^.^1a, ^.^1a", grid="none", frame="none", options="header"]
 |===
@@ -185,20 +185,21 @@ For any set of points (in any number of dimensions!), the "middle" point is the 
 @slidebreak{InvestigateR}
 @QandA{
 @ifslide{@right{@image{images/centroid-3d.png, 300}}}
-@Q{Our unsupervised `angle-similarity` measure did a fine job recommending similar images when given a grassy or snowy image. Why did it struggle to finding images with the sun?}
-@A{The sunset image is _really_ different from the others. Any time we search by the `ID` of the other images (0, 6, or 7), we get other recommendations before image 8.}
+@Q{Even without any real _learning_, our `angle-similarity` measure did a fine job recommending similar images when given a grassy or snowy image. Why did it struggle to finding images with the sun?}
+@A{The sunset image is _really_ different from the others. Any time we search by the `ID` of the other images (`"sun1"`, `"grass-sun"`, or `"sun2"`), we get other recommendations ahead of `"sunset"`.}
 }
 
 @slidebreak{Investigate}
-Let's talk about the other major limitation of our unsupervised similarity system, compared to real ones:
+Remember the biggest problem of our non-learning system:
 
 - We're only recommending matches based on a _single document_: we can't find images, songs, or anything else based on a _collection_ of liked or disliked documents.
 
 How can our @vocab{centroid} implementation solve this problem, too?
 
 @slidebreak{Investigate}
-Building @vocab{centroids} is powerful, because now we can access the power of human-labeled information to reason about _groups_. Instead of looking at one image with grass, we can now look at multiple grassy images and talk about _what they have in common: "grass-ness"_.
+Building @vocab{centroids} is where we *start generalizing across rows*, because now we can access the power of human-labeled information to reason about _groups_. Instead of looking at one image with grass, we can now look at multiple grassy images and talk about _what they have in common: "grass-ness"_.
 
+@slidebreak{Investigate}
 And we can use that to solve *both* of the limitations of our unsupervised system!
 
 - We can find a centroid for all the images labeled with "sun", and use that to find __un__-labeled images that are close to "sun-ness". Without centroids, we're stuck comparing images to *one picture with a sun*.
@@ -214,7 +215,7 @@ In each case, the steps are the same:
 (3) find un-labeled documents that are similar to the centroid using the relevant columns.
 
 @lesson-instruction{
-- We've provided two functions that do exactly this, using every available column in the model.
+- We've provided two functions that do exactly this, using every available column in the table.
 - Complete the second section of @printable-exercise{supervised-learning.adoc}
 }
 
@@ -230,11 +231,11 @@ Now a recommendation system is just:
 - Calculate the similarities between every document and both centroids
 - Recommendation strength is a simple equation:
 
-@indented{@math{\text{similarity-to-liked} - \text{similarity-to-disliked}}!}
+@indented{@math{\text{strength} = \text{similarity-to-liked} - \text{similarity-to-disliked}}!}
 
 We've created a helper function that does exactly that, given a table and a list of columns:
 
-@show{(contract "recommend" '(Table List<String>) "Table")}
+@show{(contract "recommend" '((t Table)) "Table")}
 
 The result is a table of all your documents, in descending order of recommendation-strength (strongest first).
 
@@ -247,7 +248,7 @@ Image Search-by-word is just:
 
 We've created a helper function that does exactly that, given a table and a list of columns:
 
-@show{(contract "search-by-tag" '(Table List<String>) "Table")}
+@show{(contract "search-by-tag" '((t Table) (tags List<String>)) "Table")}
 
 The result is a table of all your documents, in descending order of similarity to the centroid of the documents that match your tag.
 
@@ -256,11 +257,16 @@ The result is a table of all your documents, in descending order of similarity t
 }
 
 @slidebreak{Investigate}
-Can you tell the difference between supervised and unsupervised learning in the real world?
+Can you tell the difference between supervised and unsupervised learning in the real world? Can you tell the difference between supervised models that use classifiers, regression, or similarity?
 
 @lesson-instruction{
 - Complete @printable-exercise{supervised-or-unsupervised.adoc}
 }
+
+@teacher{
+For more practice, have students complete @opt-printable-exercise{supervised-or-unsupervised-2.adoc}. After students have finished, review by designating one side of the room as "supervised" and the other as "unsupervised", and having students move to one side or the other based on their confidence.
+}
+
 
 @opt{
 We've explored building a model for comparing images based on a set of attributes.  Let's think about attributes we might build models from for other categories of things that aren't images!
@@ -296,7 +302,7 @@ We've explored building a model for comparing images based on a set of attribute
 @slidebreak{Investigate}
 
 @lesson-instruction{
-- With you partner complete @printable-exercise{comparing-desserts.adoc}.
+- With your partner complete @printable-exercise{comparing-desserts.adoc}.
 }
 
 @slidebreak{Investigate}
@@ -372,12 +378,12 @@ A self-driving car is given a table of inputs (data from various sensors), each 
 
 
 @slidebreak{Synthesize}
-Supervised learning is a large part of what makes Machine Learning models feel like they "understand" humans. When we type in a sentence on Google Images, it feels like somehow the search engine _understood_ what we wanted! But in reality, it's another Data Driven Algorithm cranking through oceans of tagged and un-tagged data.
+Supervised learning is a large part of what makes Machine Learning models feel like they "understand" humans. When we type in a sentence on Google Images, it feels like somehow the search engine _understood_ what we wanted! But in reality, it's another data-driven algorithm cranking through oceans of tagged and un-tagged data.
 
 But this comes at a cost: *someone has to tag millions of images!*
 
 @slidebreak{SynthesizeR}
-@right{@image{images/CAPTCHA.png}}
+@right{@image{images/CAPTCHA.png, 200}}
 In some cases that's US, clicking on images of buses in order to prove we're human. Those images are real images from a database where the similarity wasn't strong enough to be confident about whether they are or aren't a bus. By asking us to tag them, we are helping to train algorithm.
 
 @slidebreak{Synthesize}

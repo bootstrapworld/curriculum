@@ -34,7 +34,7 @@
 @objective{ai-machines-v-people}
 
 === Overview
-Students consider one specific example of a data driven algorithm: evaluating how spell checkers' programmed behaviors compare and contrast with the behaviors of humans.
+Students consider one specific example of a data-driven algorithm: evaluating how spell checkers' programmed behaviors compare and contrast with the behaviors of humans.
 
 === Launch
 @slidebreak{Launch}
@@ -76,7 +76,7 @@ When humans spell check, they rely on _context clues, experience, and background
 === Investigate
 @slidebreak{Investigate}
 
-The spell checker built into your web browser is a classic example of @vocab{machine learning}. To get a better sense of how machines work differently from us, we are going to follow the algorithm from one of the earliest forms of AI/ML.
+The spell checker built into your web browser is a classic example of a @vocab{data-driven algorithm} at work. To get a better sense of how machines work differently from us, we are going to follow the algorithm from the original SPELL program.
 
 @lesson-instruction{
 - To complete @printable-exercise{first-spell-checker.adoc}, _you_ will be the computer, following an early spell checker's algorithm.
@@ -127,7 +127,8 @@ Students explore both the algorithm and the datasets that power a Pyret-based sp
 
 @lesson-instruction{
 - Let's take a look at a spell checking program written in Pyret.
-- Open the @starter-file{spell-checker} and click "Run".
+- Open the @starter-file{spell-checker}, save a copy, and click "Run".
+- In Pyret, a _comment_ is any line of code that starts with a `#`. Pyret ignores comments completely, so programmers use them to write notes! *Read the comments in the Definitions Area*. What do these notes tell you?
 - Complete the first section of @printable-exercise{pyret-spell-checker.adoc}.
 }
 
@@ -145,7 +146,7 @@ Students explore both the algorithm and the datasets that power a Pyret-based sp
 
 @slidebreak{Investigate}
 
-All of the "words" our spell checker generated in the first section involved a single change. A more technical term with the same meaning is @vocab{edit distance} - the edit distance for all of those words was 1. @vocab{Edit distance} is one way that we can measure the similarity of two strings! 
+All of the "words" our spell checker generated in the first section involved a single change. A more technical term with the same meaning is @vocab{edit distance} - the edit distance for all of those words was 1, meaning they were a single swap, insertion, substitution or deletion away from the original. @vocab{Edit distance} is one way that we can measure the similarity of two strings!
 
 @slidebreak{Investigate-DN}
 
@@ -207,7 +208,7 @@ Students are introduced to variable definition in Pyret, motivated by a desire t
 @QandA{
 Let's experiment with a bigger list of suggestions...
 
-- In the Interactions Window on the right type `alt-words("plation", WORDS-L, 4)` and hit "Enter" to see the table.
+- In the Interactions Window on the right, evaluate `alt-words("plation", WORDS-L, 4)`.
 
 @Q{How long did Pyret take to generate all the substitutions, deletions, insertions, and swaps, and then filter by only real words?}
 @A{A while!}
@@ -223,7 +224,7 @@ Let's experiment with a bigger list of suggestions...
 When we ask Pyret to do something over and over, it has no way of knowing that it should save its work! As a result, _it does the work over and over, too!_ Fortunately, the world of math has a solution: define a @vocab{variable}.
 
 @QandA{
-In the *Interactions Area*, evaluate `results = alt-words("plation", WORDS-L, 4)`.
+Evaluate `results = alt-words("plation", WORDS-L, 4)`.
 
 @Q{Did anything come back? Why or why not?}
 @A{No! Defining a variable doesn't produce anything, *just like in math!*}
@@ -243,8 +244,7 @@ In the *Interactions Area*, evaluate `results = alt-words("plation", WORDS-L, 4)
 When we want Pyret to remember a definition, we add it to the *Definitions Area*. Every time we click "Run" Pyret re-runs all the code, including the definition!
 
 @lesson-instruction{
-- Add `results = alt-words("plation", WORDS-L, 4)` to the Definitions Area, and click "Run". Evaluate `results` in the Interactions Area.
-- Add a _second_ definition to the Interactions Area
+- Add `results = alt-words("plation", WORDS-L, 4)` as the *last line of the Definitions Area*, and click "Run". Evaluate `results` in the Interactions Area.
 - What happens if you add another definition that _also_ has the name `results`?
 }
 

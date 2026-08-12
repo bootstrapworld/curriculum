@@ -12,7 +12,7 @@ div#body .functions .fitbruby, div#body .functions .fitb {
 
 == Using Linear Regression
 
-@n Evaluate `lr-plot(training, "id", "curve", "steering-angle")` to find the slope and y-intercept for our model: + 
+@n Evaluate `lr-plot(training, "id", "curve", "steering-angle")` to find the slope and y-intercept for our model: +
 @hspace{1em}@math{c\text{-}predictor(curve) = (}@fitbruby{2em}{@ifsoln{~19.5}}{@math{m}}@math{\times curve) + }@fitbruby{2em}{@ifsoln{-0.41}}{@math{b}}
 
 @n To the nearest degree, what steering angle does `c-predictor` estimate when a road is perfectly straight and `curve = 0`? @fitbruby{1em}{@ifsoln{≈ 0}}{intercept}° +
@@ -36,6 +36,7 @@ div#body .functions .fitbruby, div#body .functions .fitb {
 @n How do Pyret's best-fit lines compare to your estimates on @printable-exercise{steering-angle-scatter-plots.adoc} @fitb{}{} +
 @fitb{}{@ifsoln{}}
 
+
 == Driving with the Model
 
 @show{(contract "drive" '((predictor ("Row" "Number"))) "Table"
@@ -48,7 +49,7 @@ div#body .functions .fitbruby, div#body .functions .fitb {
 
 [cols="<.^2,<.^5", stripes="none"]
 |===
-| From `regression-model-code` 
+| From `regression-model-code`
 | @show{(code '(define (curve-predictor (?ANS r)) (+ (* 19.5 (?ANS (row-accessor r "curve"))) -0.41)))}
 
 | From `lr-plot`

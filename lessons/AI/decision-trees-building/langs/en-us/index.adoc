@@ -34,7 +34,11 @@
 | Relevant Resources
 |
 - This lesson uses dot plots to support students' thinking about how data is clustered, and assumes that your students are at least somewhat familiar with them. If this is not the case, we recommend having students complete @lesson-link{dot-plots} prior to building decision trees.
-- This lesson also exposes conditionals, also known as _if-then-else_ expressions in the CS world, or _piecewise functions_ in the math world. If you're interested in taking a deeper dive at some point, we have an entire lesson devoted to @lesson-link{piecewise-functions-conditionals}.}
+- This lesson also exposes conditionals, also known as _if-then-else_ expressions in the CS world, or _piecewise functions_ in the math world. If you're interested in taking a deeper dive at some point, we have an entire lesson devoted to @lesson-link{piecewise-functions-conditionals}.
+
+| Supplemental Resources
+|[.materials-links]
+@opt-material-links
 |===
 
 == Predicting Categories @duration{25 minutes}
@@ -131,7 +135,6 @@ We're going to play a version of "I Spy", called "I Spy - *Classify*!"...
 }
 
 @slidebreak{Investigate-RP}
-
 @lesson-instruction{
 *I Spy*...a student in this class. Who am I thinking of? *Classify!*
 }
@@ -226,25 +229,29 @@ We're sticking to splits that only create two branch nodes, but some decisions t
 - Before we begin, take a moment to look at the dataset.
 }
 
+@define{data-table}{
 [.data-table, cols="1,^1,^1,^1,^1,^1,^1", stripes="none", options="header"]
 |===
-| name        | species   | sex         | pounds| tail  | mammal| swims
-| "Firepaw"   | "cat"     | "female"    |  9.5  | TRUE  | TRUE  | FALSE
-| "Frisky"    | "dog"     | "female"    |  9.6  | TRUE  | TRUE  | TRUE
-| "Socks"     | "dog"     | "female"    | 11.1  | TRUE  | TRUE  | TRUE
-| "stripes"   | "dog"     | "male"      | 10.0  | TRUE  | TRUE  | TRUE
-| "Snickers"  | "dog"     | "male"      | 10.3  | TRUE  | TRUE  | TRUE
-| "Leafpool"  | "cat"     | "female"    | 10.6  | TRUE  | TRUE  | FALSE
-| "Shadestar" | "cat"     | "female"    |  9.0  | TRUE  | TRUE  | TRUE
-| "Bramble"   | "cat"     | "female"    |  4.1  | TRUE  | TRUE  | FALSE
-| "Brick"     | "cat"     | "male"      |  8.5  | TRUE  | TRUE  | FALSE
-| "Bruni"     | "lizard"  | "female"    |  8.2  | TRUE  | FALSE | TRUE
-| "Jesús"     | "lizard"  | "male"      |  3.5  | TRUE  | FALSE | FALSE
-| "Gary"      | "snail"   |"hermaphrodite"| 0.1 | FALSE | FALSE | FALSE
-| "Turbo"     | "snail"   |"hermaphrodite"| 0.1 | FALSE | FALSE | FALSE
-| "Charlotte" |"tarantula"| "male"      | 0.4   | FALSE | FALSE | FALSE
-| "Webs"      |"tarantula"| "female"    | 0.4   | FALSE | FALSE | FALSE
+| name         | species    | sex            | pounds| tail | mammal| swims
+| "Firepaw"    | "cat"      | "male"         |  9.5  | TRUE | TRUE   | FALSE
+| "Leafpool"   | "cat"      | "female"       | 10.6  | TRUE | TRUE   | FALSE
+| "Shadestar"  | "cat"      | "female"       |  9.0  | TRUE | TRUE   | TRUE
+| "Bramble"    | "cat"      | "female"       |  4.1  | TRUE | TRUE   | FALSE
+| "Brick"      | "cat"      | "male"         |  8.5  | TRUE | TRUE   | FALSE
+| "Frisky"     | "dog"      | "female"       |  9.6  | TRUE | TRUE   | TRUE
+| "Socks"      | "dog"      | "female"       | 10.0  | TRUE | TRUE   | TRUE
+| "stripes"    | "dog"      | "male"         | 11.1  | TRUE | TRUE   | TRUE
+| "Snickers"   | "dog"      | "male"         | 10.3  | TRUE | TRUE   | TRUE
+| "Bruni"      | "lizard"   | "female"       |  8.2  | TRUE | FALSE  | TRUE
+| "Jesús"      | "lizard"   | "male"         |  3.5  | TRUE | FALSE  | FALSE
+| "Gary"       | "snail"    |"hermaphrodite" |  0.02 | FALSE| FALSE  | FALSE
+| "Turbo"      | "snail"    |"hermaphrodite" |  0.03 | FALSE| FALSE  | FALSE
+| "Charlotte"  | "tarantula"| "male"         |  0.35 | FALSE| FALSE  | FALSE
+| "Webs"       | "tarantula"| "female"       |  0.4  | FALSE| FALSE  | FALSE
 |===
+}
+
+@data-table
 
 @QandA{
 @Q{What do you *Notice* about the animals in this dataset?}
@@ -266,31 +273,10 @@ Humans can generate their own questions.
 
 @lesson-point{Machine-learning algorithms generate decision trees from @vocab{training datasets}, using the column headers as questions.}
 
-Creating a decision tree from a dataset is a form of @vocab{supervised learning}, because the training data already contains the desired outcomes (as one column), and the algorithm just learns a function that maps from input to outcomes. 
+Creating a decision tree from a dataset is a form of @vocab{supervised learning}, because the training data already contains the desired outcomes (as one column), and the algorithm just learns a function that maps from input to outcomes.
 
 @slidebreak{Investigate-RP}
-
-@ifslide{
-[.data-table, cols="1,^1,^1,^1,^1,^1,^1", stripes="none", options="header"]
-|===
-| name        | species   | sex         | pounds| tail  | mammal| swims
-| "Firepaw"   | "cat"     | "female"    |  9.5  | TRUE  | TRUE  | FALSE
-| "Frisky"    | "dog"     | "female"    |  9.6  | TRUE  | TRUE  | TRUE
-| "Socks"     | "dog"     | "female"    | 11.1  | TRUE  | TRUE  | TRUE
-| "stripes"   | "dog"     | "male"      | 10.0  | TRUE  | TRUE  | TRUE
-| "Snickers"  | "dog"     | "male"      | 10.3  | TRUE  | TRUE  | TRUE
-| "Leafpool"  | "cat"     | "female"    | 10.6  | TRUE  | TRUE  | FALSE
-| "Shadestar" | "cat"     | "female"    |  9.0  | TRUE  | TRUE  | TRUE
-| "Bramble"   | "cat"     | "female"    |  4.1  | TRUE  | TRUE  | FALSE
-| "Brick"     | "cat"     | "male"      |  8.5  | TRUE  | TRUE  | FALSE
-| "Bruni"     | "lizard"  | "female"    |  8.2  | TRUE  | FALSE | TRUE
-| "Jesús"     | "lizard"  | "male"      |  3.5  | TRUE  | FALSE | FALSE
-| "Gary"      | "snail"   |"hermaphrodite"| 0.1 | FALSE | FALSE | FALSE
-| "Turbo"     | "snail"   |"hermaphrodite"| 0.1 | FALSE | FALSE | FALSE
-| "Charlotte" |"tarantula"| "male"      | 0.4   | FALSE | FALSE | FALSE
-| "Webs"      |"tarantula"| "female"    | 0.4   | FALSE | FALSE | FALSE
-|=== 
-}
+@ifslide{@data-table}
 
 @lesson-instruction{
 - I'm going to pick one animal in the dataset.
@@ -302,16 +288,27 @@ Creating a decision tree from a dataset is a form of @vocab{supervised learning}
 Encourage students to come up with both categorical and quantitative questions, and keep asking them to explain why they chose the split they did. As before, keep drawing the decision tree as they go.
 }
 
+@slidebreak{Investigate-RP}
+@ifslide{@data-table}
+
+@lesson-instruction{
+- In small groups, play a few rounds of this game! Are some questions better than others?
+- At the wall, or on a sheet of scrap paper: what do you think is the *best root node* for this dataset? (i.e. - which question is the most useful to start with?)
+- Can you explain why you chose that question?
+
+(You can also use the @opt-starter-file{root-node-cardsort} CardSort to accompany this exploration)
+}
+
 === Synthesize
 @slidebreak{Synthesize}
 
 @QandA{
-@Q{How was generating questions from a dataset similar to the other "I Spy - Classify" game we played?}
+@Q{How was generating questions from a dataset _similar_ to the other "I Spy - Classify" game we played?}
 @A{Sample responses might include:
    * Some questions did a better job of splitting the data than others.
   }
 
-@Q{How was generating questions from a dataset different from the other "I Spy - Classify" game we played?}
+@Q{How was generating questions from a dataset _different_ from the other "I Spy - Classify" game we played?}
 @A{Sample responses might include:
    * There were questions we couldn't ask, because there wasn't a column for them!
   }
@@ -393,7 +390,7 @@ It reduces complexity and discards variance in the data, by looking for "general
 - Then complete the first 2 sections of @printable-exercise{what-does-the-code-do.adoc} with your partner.
 }
 
-@slidebreak{Launch}
+@slidebreak{LaunchC}
 
 [cols="^.^1a,^3a", frame="none", grid="none"]
 |===
@@ -412,7 +409,7 @@ end
 ```
 |===
 
-@ifslide{What did you notice?}
+@ifslide{What does the Decision Tree have to do with the function?}
 
 @teacher{Give students ample time to discuss and share back!}
 
@@ -435,9 +432,11 @@ You've probably noticed that:
 }
 @A{It checks to see whether the value in the `"tail"` column is `true`. Then, if the value is anything other than `true`, it classifies the animal as a `"snail"`.}
 
-@Q{What does `tail-classifier(firepaw)` evaluate to? Can you explain why?}
-@A{Tells us how the `tail-classifier` will classify our `firepaw` row}
-@A{It returns "cat", because the first part of the if-branch will always produce "cat" for any animal with a tail}
+@Q{What does `tail-classifier(firepaw)` evaluate to?}
+@A{It evaluates to "cat"}
+
+@Q{Can you explain why?}
+@A{The first part of the if-branch will always produce "cat" for any animal with a tail}
 }
 
 @teacher{
@@ -450,7 +449,7 @@ You might find it duplicative to check whether or not `r["tail"] == true` since 
 We have learned over time that many students do better with keeping things consistent.
 }
 
-@slidebreak{Investigate}
+@slidebreak{Investigate-DN}
 
 @lesson-instruction{
 - Complete @printable-exercise{what-does-the-code-do.adoc}
@@ -458,22 +457,22 @@ We have learned over time that many students do better with keeping things consi
 
 @slidebreak{InvestigateR}
 @right{@image{images/dot-plot-tail.png, 450}}
-You've just encountered two new Pyret functions that will help us to make sense of the data as we build our @vocab{decision trees} and @vocab{classifier functions}. 
+You've just encountered two new Pyret functions that will help us to make sense of the data as we build our @vocab{decision trees} and @vocab{classifier functions}.
 
 - The `image-dot-plot` function uses emojis for each animal instead of dots to help us see how the species are distributed across the split in our classifier-function. +
-- The `classify` function will add 2 new columns to our table: 
+- The `classify` function will add 2 new columns to our table:
   * our classifier function's predictions for each row
   * whether or not the prediction was correct +
 
 @show{(contract "image-dot-plot" '("Table" "String" "(Row -> Image)") "Image")} +
-@hspace{1em}`image-dot-plot(training, "tail", animal-img)` 
+@hspace{1em}`image-dot-plot(training, "tail", animal-img)`
 
 @show{(contract "classify" '("Table" "String" "(Row -> String)") "Table")} +
 @hspace{1em}`classify(training, "species", tail-classifier)`
 
 @slidebreak{Investigate}
 
-Let's use our new tools to answer some questions about our `tail-classifier` tree. 
+Let's use our new tools to answer some questions about our `tail-classifier` tree.
 
 @QandA{
 @Q{For how many *tail-having* animals in the training dataset will our 1-level tree do the *right thing*?}
@@ -492,7 +491,7 @@ Let's use our new tools to answer some questions about our `tail-classifier` tre
 @A{Not really. Only half of its predictions were correct.}
 }
 
-@slidebreak{Investigate}
+@slidebreak{Investigate-DN}
 
 @lesson-instruction{
 - Turn to @printable-exercise{the-algorithm.adoc}, and use `image-dot-plot` to help you complete the *Categorical Splits* and *Quantitative Splits* columns.
@@ -568,6 +567,9 @@ This is the _exact same_ problem we solved for the root node: our goal is to ask
 @slidebreak{Synthesize}
 
 @QandA{
+@Q{Would a Decision Tree ever have decision nodes splitting on both `r["mammal"] == true` _and_ `r["mammal"] == false`? Why or why not?}
+@A{For Boolean columns where there are only two options the split is identical whether we phrase the question as IS or ISN'T.}
+
 @Q{Explain how the decision tree and training dataset correspond to each other.}
 @A{The column headers from the table are the questions that will get asked in the decision nodes of the decision tree.}
 @A{The data in each column are the answers to those questions which become the arrow labels of the decision tree ("yes" and "no", for this dataset).}

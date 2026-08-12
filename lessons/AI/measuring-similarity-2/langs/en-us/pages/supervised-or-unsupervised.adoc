@@ -6,26 +6,27 @@ div#body td .paragraph:has(+.paragraph), div#body th {
 	text-align: center !important;
 	font-weight: bold !important;
 }
+
+div#body td td { padding: 2px !important; }
 </style>
 ++++
-Machine learning models are all around us, using a mix of different learning methods. Can you tell the difference between @vocab{supervised learning} and @vocab{unsupervised learning}?
+Machine learning models are all around us, using a mix of different learning methods. Can you tell the difference between @vocab{supervised learning} and @vocab{unsupervised learning}? Supervised methods learn from labeled examples — sorting things into categories (_classification_), predicting a number (_regression_), or recommending by similarity to examples you've tagged (building a _centroid_). Unsupervised methods hunt for patterns with no labels at all.
 
-[.FillVerticalSpace, cols="1a, <2a", options="header"]
+[.FillVerticalSpace, cols="2a, <5a", options="header"]
 |===
 | Example
 | What Kind of Learning and Why? (Circle one)
-@scrub{
-| @n A streaming platform recommends new movies to a user based only on what they've seen before (not what they've liked or disliked), and does not use any labeled information about the genre, cast, etc.
-| Supervised @hspace{3em} @ifsoln-choice{Unsupervised}
 
-
-
-@blanklines{3}{
-@ifsoln{The platform has a list of points (viewing history) and is blindly recommending other, nearby points. It has no idea what any of the points represent, and nothing has been labeled}
-}
-}
 | @n An e-commerce website uses historical data of past transactions, which are explicitly marked as 'authorized' or 'fraudulent', to train a model that flags suspicious new transactions.
-| @ifsoln-choice{Supervised} @hspace{3em} Unsupervised
+|
+[cols="^2a,^1a", frame="none", stripes="none"]
+!===
+! @ifsoln-choice{*Supervised*} ! *Unsupervised*
+! @ifsoln-choice{Classification}
+@hspace{2em} Regression
+@hspace{2em} Similarity
+!
+!===
 
 @blanklines{3}{
 @ifsoln{This is a classification task, similar to what we saw in the Decision Trees lessons! The model is trained on a labeled dataset where the correct output ('authorized' or 'fraudulent') is known, making it a supervised.}
@@ -33,17 +34,35 @@ Machine learning models are all around us, using a mix of different learning met
 
 
 
-| @n A marketing team splits their customer base into groups so they can design targeted ad campaigns, based only on data they've collected: like purchasing frequency, average spend, and age.
-| Supervised @hspace{3em} @ifsoln-choice{Unsupervised}
+| @n A hospital uses a machine learning model to classify medical images (X-rays) as either 'healthy' or 'pneumonia-affected' after training it on a dataset of images reviewed and tagged by expert radiologists.
+|
+[cols="^2a,^1a", frame="none", stripes="none"]
+!===
+! @ifsoln-choice{*Supervised*} ! *Unsupervised*
+! @ifsoln-choice{Classification}
+@hspace{2em} Regression
+@hspace{2em} Similarity
+!
+!===
+
 
 @blanklines{3}{
-@ifsoln{This is an example of _clustering_, where the computer tries to find "clumps" of unlabeled points in space.}
+@ifsoln{The model is trained on a labeled dataset where the outcome is already known. This is the "answer key" that makes it an example of supervised learning}
 }
 
 
 
-| @n  A real estate app estimates the market price of a house based on features like square footage, number of bedrooms, and zip code, using a model trained on thousands of past home sales with known prices.
-| @ifsoln-choice{Supervised} @hspace{3em} Unsupervised
+| @n A real estate app estimates the market price of a house based on features like square footage, number of bedrooms, and zip code, using a model trained on thousands of past home sales with known prices.
+|
+[cols="^2a,^1a", frame="none", stripes="none"]
+!===
+! @ifsoln-choice{*Supervised*} ! *Unsupervised*
+! Classification
+@hspace{2em} @ifsoln-choice{Regression}
+@hspace{2em} Similarity
+!
+!===
+
 
 @blanklines{3}{
 @ifsoln{The model is trained on a labeled dataset where the sale price is already known. This is the "answer key" that makes it an example of supervised learning}
@@ -51,47 +70,52 @@ Machine learning models are all around us, using a mix of different learning met
 
 
 
-| @n An algorithm analyzes a massive dataset of unlabelled DNA sequences from various plant species to find hidden structural similarities and categorize them into evolutionary clusters.
-| Supervised @hspace{3em} @ifsoln-choice{Unsupervised}
+| @n A music app lets you "heart" the songs you love. It averages the audio features (tempo, energy, danceability) of all your hearted songs into a single "taste profile," then recommends new songs whose features land closest to that profile.
+|
+[cols="^2a,^1a", frame="none", stripes="none"]
+!===
+! @ifsoln-choice{*Supervised*} ! *Unsupervised*
+! Classification
+@hspace{2em} Regression
+@hspace{2em} @ifsoln-choice{Similarity}
+!
+!===
 
 @blanklines{3}{
-@ifsoln{The algorithm is exploring the data to find underlying patterns and structures on its own, without any target labels or guidance.}
+@ifsoln{The songs you "hearted" act as labels, so this is supervised. The app builds a _centroid_ — the average of those labeled songs — and recommends tracks nearest to it. Unlike classification, it isn't sorting songs into fixed categories; it's ranking them by closeness to your prototype.}
 }
 
 
 
-| @n A hospital uses a machine learning model to classify medical images (X-rays) as either 'healthy' or 'pneumonia-affected' after training it on a dataset of images reviewed and tagged by expert radiologists.
-| @ifsoln-choice{Supervised} @hspace{3em} Unsupervised
+| @n A marketing team splits their customer base into groups so they can design targeted ad campaigns, based only on data they've collected: like purchasing frequency, average spend, and age.
+|
+[cols="^2a,^1a", frame="none", stripes="none"]
+!===
+! *Supervised* ! @ifsoln-choice{*Unsupervised*}
+! Classification
+@hspace{2em} Regression
+@hspace{2em} Similarity
+!
+!===
 
 @blanklines{3}{
-@ifsoln{The model is trained on a labeled dataset where the outcome is already known. This is the "answer key" that makes it an example of supervised learning}
+@ifsoln{This is an example of _clustering_, where the computer tries to find "clumps" of unlabeled points in space.}
 }
 
 
 
-| @n A security system monitors network traffic to detect anomalies. It analyzes normal daily patterns and flags any data packet behavior that deviates significantly from the norm, without using a list of known cyberattack signatures.
-| Supervised @hspace{3em} @ifsoln-choice{Unsupervised}
+| @n A streaming platform recommends new movies to a user based only on what they've seen before (not what they've liked or disliked), and does not use any labeled information about the genre, cast, etc.
+|
+[cols="^2a,^1a", frame="none", stripes="none"]
+!===
+! *Supervised* ! @ifsoln-choice{*Unsupervised*}
+! Classification
+@hspace{2em} Regression
+@hspace{2em} Similarity
+!
+!===
 
 @blanklines{3}{
-@ifsoln{The algorithm is exploring the data to find underlying patterns and structures on its own, and then search for deviations. There is no labeling or human guidance to define what "normal patterns" are}
-}
-
-
-
-| @n An online retail store uses an algorithm to automatically organize its thousands of unstructured product descriptions into a hierarchical tree of topics and themes, without any input from human catalogers.
-| Supervised @hspace{3em} @ifsoln-choice{Unsupervised}
-
-@blanklines{3}{
-@ifsoln{This is an example of topic modeling, an unsupervised learning technique that uncovers pattern in text data without pre-existing categories.}
-}
-
-
-@scrub{
-| @n A logistics company uses historical weather data, traffic reports, and driver logs—all paired with the actual delivery times recorded on those days—to predict future delivery arrival times.
-| @ifsoln-choice{Supervised} @hspace{3em} Unsupervised
-
-@blanklines{3}{
-@ifsoln{The model is trained on a labeled dataset where the outcome is already known. This is the "answer key" that makes it an example of supervised learning}
-}
+@ifsoln{The platform has a list of points (viewing history) and is blindly recommending other, nearby points. It has no idea what any of the points represent, and nothing has been labeled. (Contrast this with the music app above, where _hearting_ songs gives the labels needed to build a centroid!)}
 }
 |===

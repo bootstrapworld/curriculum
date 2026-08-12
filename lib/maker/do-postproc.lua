@@ -48,6 +48,13 @@ local function get_proglang(fhtml_cached)
   end
 end
 
+-- Narrative/resource pages live under distribution/<lang>/courses/<pathway>/...;
+-- pull the <pathway> segment out of the path. Returns nil for lesson plans and
+-- other pages that aren't tied to a single pathway.
+local function get_pathway(fhtml_cached)
+  return fhtml_cached:match('/courses/([^/]+)/')
+end
+
 local function postproc(fhtml_cached, tipe)
   -- pre-compute tipe flags once
   local is_shtml       = tipe == 'lessonplan' or tipe == 'pathwaynarrative' or tipe == 'pathwayresource'
@@ -92,6 +99,7 @@ local function postproc(fhtml_cached, tipe)
   local add_codemirror_p = false
   local add_body_id_p = false
   local add_landscape_p = false
+  local add_can_be_longer_p = false
   local add_end_body_id_p = false
   local delete_line_p = false
   local openblock_attribs = false
@@ -116,6 +124,12 @@ local function postproc(fhtml_cached, tipe)
       if x:find('landscape') then
         x = x:gsub('landscape', '')
         add_landscape_p = true
+      end
+      -- An authored [.canBeLongerThanAPage] role lands on <body>; copy it onto
+      -- the #body div, where the `div#body.canBeLongerThanAPage` CSS lives. Leave
+      -- it on <body> too, since html2pdf.js keys off `body.canBeLongerThanAPage`.
+      if x:find('canBeLongerThanAPage') then
+        add_can_be_longer_p = true
       end
       --
       add_body_id_p = true
@@ -256,10 +270,7 @@ local function postproc(fhtml_cached, tipe)
       ]])
       -- added for DesignHammer
       o:write('<link rel="stylesheet" type="text/css" href="' .. local_dist_root_dir .. 'lib/wp-adaptors/style-bsw.css">\n')
-      o:write('<link rel="preconnect" href="https://fonts.googleapis.com">\n')
-      o:write('<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n')
-      o:write('<link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">\n')
-      o:write('<script src="' .. local_dist_root_dir .. 'lib/wp-adaptors/script.js"></script>\n')
+      o:write('<script defer src="' ..local_dist_root_dir .. 'lib/wp-adaptors/script.js"></script>\n')
       --
       o:write(z, '\n')
       --
@@ -337,6 +348,10 @@ local function postproc(fhtml_cached, tipe)
           add_landscape_p = false
           klass = klass .. ' landscape'
         end
+        if add_can_be_longer_p then
+          add_can_be_longer_p = false
+          klass = klass .. ' canBeLongerThanAPage'
+        end
         --
         o:write('<div id="body" class="' .. klass .. '">\n')
     --
@@ -346,10 +361,10 @@ local function postproc(fhtml_cached, tipe)
       add_codemirror_p = false
       o:write('<link rel="stylesheet" href="' .. local_dist_root_dir .. 'lib/codemirror.css" />\n')
       o:write(gtm_content)
-      --o:write('<script src="' .. local_dist_root_dir .. 'lib/codemirror.js"></script>\n')
-      o:write('<script src="' .. local_dist_root_dir .. 'lib/runmode-standalone.js"></script>\n')
-      o:write('<script src="' .. local_dist_root_dir .. 'lib/scheme2.js"></script>\n')
-      o:write('<script src="' .. local_dist_root_dir .. 'lib/pyret-mode.js"></script>\n')
+      --o:write('<script defer src="' ..local_dist_root_dir .. 'lib/codemirror.js"></script>\n')
+      o:write('<script defer src="' ..local_dist_root_dir .. 'lib/runmode-standalone.js"></script>\n')
+      o:write('<script defer src="' ..local_dist_root_dir .. 'lib/scheme2.js"></script>\n')
+      o:write('<script defer src="' ..local_dist_root_dir .. 'lib/pyret-mode.js"></script>\n')
 
     end
     --
@@ -360,20 +375,28 @@ local function postproc(fhtml_cached, tipe)
         o:write('<script async defer src="https://unpkg.com/pdf-lib@1.4.0"></script>\n')
         o:write('<script async defer src="https://unpkg.com/@pdf-lib/fontkit/dist/fontkit.umd.min.js"></script>\n')
         o:write('<script async defer src="https://unpkg.com/downloadjs@1.4.7"></script>\n')
-        o:write('<script src="' .. local_dist_root_dir .. 'lib/dependency-graph.js"></script>\n')
-        o:write('<script src="' .. local_dist_root_dir .. 'lib/makeWorkbook.js"></script>\n')
-        o:write('<script src="' .. local_dist_root_dir .. 'lib/dictionaries.js"></script>\n')
-        o:write('<script src="' .. local_dist_root_dir .. 'lib/pathway-tocs.js"></script>\n')
-        o:write('<script src="' .. local_dist_root_dir .. 'lib/starterFiles.js"></script>\n')
+        o:write('<script defer src="' ..local_dist_root_dir .. 'lib/dependency-graph.js"></script>\n')
+        o:write('<script defer src="' ..local_dist_root_dir .. 'lib/makeWorkbook.js"></script>\n')
+        o:write('<script defer src="' ..local_dist_root_dir .. 'lib/dictionaries.js"></script>\n')
+        o:write('<script defer src="' ..local_dist_root_dir .. 'lib/pathway-tocs.js"></script>\n')
+        o:write('<script defer src="' ..local_dist_root_dir .. 'lib/starterFiles.js"></script>\n')
+        o:write('<script defer src="' ..local_dist_root_dir .. 'lib/graph-pages.js"></script>\n')
       end
-      o:write('<script src="' .. local_dist_root_dir .. 'lib/bootstraplesson.js"></script>\n')
-      o:write('<script>var pathway;</script>\n')
+      o:write('<script defer src="' ..local_dist_root_dir .. 'lib/page-render.js"></script>\n')
+      -- Expose the page's pathway to scripts. Course pages (narrative/resource)
+      -- carry it in their path; elsewhere it's left undefined (read from the URL).
+      local pathway = get_pathway(fhtml_cached)
+      if pathway then
+        o:write('<script>var pathway = "' .. pathway .. '";</script>\n')
+      else
+        o:write('<script>var pathway;</script>\n')
+      end
     end
     --
     if add_mathjax_p then
       -- print('adding mathjax')
       add_mathjax_p = false
-      o:write('<script src="' .. 'https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml-full-speech.min.js' .. '"><script>\n')
+      o:write('<script id="MathJax-script" async defer src="' .. 'https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-chtml.js' .. '"></script>\n')
       o:write('<script>window.status = "not_ready_to_print";</script>\n')
     end
     --
@@ -392,12 +415,64 @@ local function extract_self_guided(fhtml_cached, lesson_title)
   local fdir = fhtml_cached:gsub('/%.cached/%.index%.html$', '')
   local fhtml = fdir .. '/index.shtml'
   local fjson = fdir .. '/selfGuidedBits.jsx'
+  local fcss  = fdir .. '/selfGuidedExtra.css'
   local i = io.open(fhtml, 'r')
   local o = io.open(fjson, 'w')
+  local c = io.open(fcss,  'w')
   local writing_p = false
   local skip_one_more_line_p = false
+  local in_style_p = false
   local counter = 0
   local page_header = ''
+  local piece_buf = {}  -- buffer lines for the current piece
+
+  -- Fix a buffered piece's lines for split-list artifacts:
+  -- If the first content line is a bare <li> (no wrapping <ul>), inject <ul>
+  -- before it and drop the orphaned </ul> and subsequent debris lines after
+  -- the last </li>. If the last content line has unclosed <li>/<ul> elements,
+  -- append the missing close tags.
+  local function fix_piece(lines)
+    -- Count net open <ul> and <li> tags to detect unclosed list at end
+    local ul_count, li_count = 0, 0
+    for _, l in ipairs(lines) do
+      if     l:match('^<ul')   then ul_count = ul_count + 1
+      elseif l:match('^</ul>') then ul_count = ul_count - 1
+      end
+      if     l:match('^<li>')  then li_count = li_count + 1
+      elseif l:match('^</li>') then li_count = li_count - 1
+      end
+    end
+
+    -- Case 1: piece ends with unclosed <li> (break was inside a list item)
+    -- Close the open <p>, <li>, and <ul> before the outer </div>
+    if li_count > 0 then
+      table.insert(lines, '</p>')
+      for _ = 1, li_count do table.insert(lines, '</li>') end
+      for _ = 1, ul_count  do table.insert(lines, '</ul>') end
+    end
+
+    -- Case 2: piece starts with a bare <li> (continuation of a split list)
+    -- Find the first non-empty, non-header line; if it's <li>, inject <ul>
+    -- before it and drop everything after the last </li>.
+    local first = nil
+    for idx, l in ipairs(lines) do
+      if l:match('%S') and not l:match('^<h%d') then first = idx; break end
+    end
+    if first and lines[first]:match('^<li>') then
+      table.insert(lines, first, '<ul>')
+      local last_li = nil
+      for idx = #lines, 1, -1 do
+        if lines[idx]:match('^</li>') then last_li = idx; break end
+      end
+      if last_li then
+        while #lines > last_li do table.remove(lines) end
+        table.insert(lines, '</ul>')
+      end
+    end
+
+    return lines
+  end
+
   o:write('export const selfGuidedTitle = "' .. lesson_title .. '"\n\n')
   o:write('export const selfGuidedBits = [\n')
   for x0 in i:lines() do
@@ -405,15 +480,24 @@ local function extract_self_guided(fhtml_cached, lesson_title)
     if x:match('href="%.%./%.%./lessons/') then
       x = x:gsub('href="%.%./%.%./lessons/', 'href="../../../../lessons/')
     end
-    if writing_p then
+    if x == '<style>' then
+      in_style_p = true
+    elseif x == '</style>' then
+      in_style_p = false
+    elseif in_style_p then
+      c:write(x, '\n')
+    elseif writing_p then
       if skip_one_more_line_p then
         skip_one_more_line_p = false
-        o:write(page_header, '\n')
+        table.insert(piece_buf, page_header)
       elseif x:match('stop_self_guided_piece') then
+        piece_buf = fix_piece(piece_buf)
+        for _, l in ipairs(piece_buf) do o:write(l, '\n') end
         o:write('</div>`\n},\n')
+        piece_buf = {}
         writing_p = false
       else
-        o:write(x, '\n')
+        table.insert(piece_buf, x)
       end
     elseif x:match('^<h2') then
       page_header = x
@@ -421,6 +505,7 @@ local function extract_self_guided(fhtml_cached, lesson_title)
     elseif x:match('start_self_guided_piece') then
       writing_p = true
       skip_one_more_line_p = true
+      piece_buf = {}
       counter = counter + 1
       -- print('counter=', counter)
       local editorconfig_file = fdir .. '/.cached/.index-sg-' .. counter .. '.json'
@@ -436,6 +521,7 @@ local function extract_self_guided(fhtml_cached, lesson_title)
   o:write(']\n')
   i:close()
   o:close()
+  c:close()
 end
 
 -- Build one combined worklist across all five types, then split it into

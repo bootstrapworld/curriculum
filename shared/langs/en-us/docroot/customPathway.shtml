@@ -17,7 +17,26 @@
     <style>
         #preamble_disabled { padding-bottom: 25px; }
         .logo img { width: 300px; }
-        .drag-handle img { width: 15px; user-select: none; }
+        /* Prevent iOS's long-press "Save Image / Copy / Share" popup and
+           native image drag-out on the drag-handle. -webkit-touch-callout
+           is Apple's own switch for that popup; pointer-events: none makes
+           the <img> itself untouchable so the touch target is the parent
+           .drag-handle span instead (an <img> is what triggers iOS's
+           image-specific callout in the first place), while still letting
+           SortableJS's handle-based drag detection see the touch/mouse
+           events via the span. */
+        .drag-handle {
+          -webkit-touch-callout: none;
+          -webkit-user-select: none;
+          user-select: none;
+        }
+        .drag-handle img {
+          width: 15px;
+          user-select: none;
+          -webkit-touch-callout: none;
+          -webkit-user-drag: none;
+          pointer-events: none;
+        }
         .item { display: inline-block; }
         .two-thirds { width: 60%; }
         .one-third {width: 30%; margin-left: 75px !important; }
@@ -74,6 +93,9 @@
         button { background: none; border: none; font-weight: 900; padding: 0; user-select: none; }
 
         #content { position: relative; }
+        #selected { float: left !important; }
+        #accessible { position: sticky; top: 0;  }
+
         #accessible * { font-size: 14px; }
         #accessible h2 { font-size:16px; font-weight:bold; }
         #accessible button {display: none; }
@@ -82,6 +104,18 @@
         #status { display: none; }
         #status, label, progress { width: 100%; }
         .pathway_external_links li { margin-top: 25px !important; }
+
+    #copyBtn {
+      text-align: center;
+        border-radius: 100px;
+        background-color: var(--bs-primary-light-blue-translucent);
+        margin-top: 0;
+        margin-bottom: 0.75em;
+      margin-left: 1em;
+        padding: 0.35em 1em;
+    }
+    #copyBtn:hover { background-color: var(--bs-primary-light-blue); }
+
     </style>
 
     <!-- Latest compiled and minified CSS -->
@@ -97,6 +131,7 @@
     <script src="lib/pathway-tocs.js"></script>
     <script src="lib/bootstraplesson.js"></script>
     <script src="lib/makeWorkbook.js"></script>
+  <script src="lib/graph-pages.js"></script>
 
     <script>
     let url = new URL(location);
@@ -144,7 +179,7 @@
                 onClick="deleteLesson('${l}')">
                 &times;
               </button>
-              <img src="lib/images/drag-handle.png" aria-hidden="true"/>
+              <img src="lib/images/drag-handle.png" aria-hidden="true" draggable="false"/>
             </span>
             <span class="itemContent">
               <dt>
@@ -207,60 +242,68 @@
       populateselectedList(selectedList,   lessons,    true);
       populateselectedList(accessibleList, accessible, false)
 
-      // make accessible and selected lists sortable
-      // special behavior for adding a lesson to selected
-      const accessibleSort = new Sortable(accessibleList, sortingOptions);
-      const selectedSort = new Sortable(selectedList, {
-        ...sortingOptions,
-        onUpdate: updateList,
-        onAdd: updateList
-       });
-
-      function updateList(evt) {
-        lessons = selectedSort.toArray();
-        updateHistory()
-      }
-
-      function safeToDrop(evt, originalEvt) {
-       // Extract the title of the lesson being dragged, and which lesson it's being inserted relative to
-       const draggingLesson = evt.dragged.getAttribute('data-lesson-title');
-       const relatedLesson = evt.related.getAttribute('data-lesson-title');
-       const oldLessonOrder = selectedSort.toArray().filter(onlyUnique);
-       const otherLessons = oldLessonOrder.filter(l => l !== draggingLesson);
-       const insertingAfter = evt.willInsertAfter;
-       //console.log('old order is', oldLessonOrder)
-       //console.log('inserting', draggingLesson, evt.willInsertAfter? 'after' : 'before', relatedLesson);
-
-       // Split the lesson list into prior and later, based on whether insertion happens after or before
-       const relatedIndex = otherLessons.indexOf(relatedLesson);
-       const before = otherLessons.splice(0, evt.willInsertAfter? relatedIndex + 1 : relatedIndex );
-       const after = otherLessons.filter(l => !before.includes(l))
-       //console.log('before', before, 'after', after)
-
-       // Invalid Case 1: dragging lesson is a prereq of a prior one
-       const tooLate = before.find(l => graph[l].prerequisites.includes(draggingLesson))
-       if(tooLate) {
-         console.error(`Invalid move: ${draggingLesson} must come before ${tooLate}`);
-         return false;
-       }
-       // Invalid Case 2: dragging lesson depends on a later one
-       const draggingPrereqs   = graph[draggingLesson].prerequisites;
-       const tooSoon = draggingPrereqs.find(l => after.includes(l))
-       if(tooSoon) {
-         console.error(`${draggingLesson} must come after ${tooSoon}`)
-         return false;
-       }
-      }
-
-      accessibleSort.option('onMove', safeToDrop);
-      selectedSort.option('onMove', safeToDrop);
-
-      // revise search params for content links
+      // revise search params for content links. This must run before the
+      // Sortable setup below: Sortable is loaded from a third-party CDN, and
+      // some browsers (e.g. Opera, with ad/tracker blocking on by default)
+      // may block it, throwing a ReferenceError that would otherwise abort
+      // the rest of init() and leave these links without their query string.
       document.querySelectorAll('#content a').forEach(link => {
-        newLink = new URL(link.href);
+        const newLink = new URL(link.href);
         newLink.search = url.search;
         link.href = newLink.href;
       });
+
+      // make accessible and selected lists sortable
+      // special behavior for adding a lesson to selected
+      try {
+        const accessibleSort = new Sortable(accessibleList, sortingOptions);
+        const selectedSort = new Sortable(selectedList, {
+          ...sortingOptions,
+          onUpdate: updateList,
+          onAdd: updateList
+         });
+
+        function updateList(evt) {
+          lessons = selectedSort.toArray();
+          updateHistory()
+        }
+
+        function safeToDrop(evt, originalEvt) {
+         // Extract the title of the lesson being dragged, and which lesson it's being inserted relative to
+         const draggingLesson = evt.dragged.getAttribute('data-lesson-title');
+         const relatedLesson = evt.related.getAttribute('data-lesson-title');
+         const oldLessonOrder = selectedSort.toArray().filter(onlyUnique);
+         const otherLessons = oldLessonOrder.filter(l => l !== draggingLesson);
+         const insertingAfter = evt.willInsertAfter;
+         //console.log('old order is', oldLessonOrder)
+         //console.log('inserting', draggingLesson, evt.willInsertAfter? 'after' : 'before', relatedLesson);
+
+         // Split the lesson list into prior and later, based on whether insertion happens after or before
+         const relatedIndex = otherLessons.indexOf(relatedLesson);
+         const before = otherLessons.splice(0, evt.willInsertAfter? relatedIndex + 1 : relatedIndex );
+         const after = otherLessons.filter(l => !before.includes(l))
+         //console.log('before', before, 'after', after)
+
+         // Invalid Case 1: dragging lesson is a prereq of a prior one
+         const tooLate = before.find(l => graph[l].prerequisites.includes(draggingLesson))
+         if(tooLate) {
+           console.error(`Invalid move: ${draggingLesson} must come before ${tooLate}`);
+           return false;
+         }
+         // Invalid Case 2: dragging lesson depends on a later one
+         const draggingPrereqs   = graph[draggingLesson].prerequisites;
+         const tooSoon = draggingPrereqs.find(l => after.includes(l))
+         if(tooSoon) {
+           console.error(`${draggingLesson} must come after ${tooSoon}`)
+           return false;
+         }
+        }
+
+        accessibleSort.option('onMove', safeToDrop);
+        selectedSort.option('onMove', safeToDrop);
+      } catch (err) {
+        console.warn('Drag-and-drop reordering unavailable (Sortable failed to load or initialize):', err);
+      }
     }
 
     function makeEditable(node) {
@@ -336,7 +379,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div class="x-anchor-text"><span class="x-anchor-text-primary">Why Bootstrap?</span></div>
           </div>
         </a>
-        <div class="x-div e51-e13 m1f-3b m1f-3d m1f-3e m1f-3f m1f-3g m1f-3i m1f-3j m1f-3k m1f-3l m1f-3n m1f-3o m1f-3p m1f-3q">
+        <div id="accountButton" class="x-div e51-e13 m1f-3b m1f-3d m1f-3e m1f-3f m1f-3g m1f-3i m1f-3j m1f-3k m1f-3l m1f-3n m1f-3o m1f-3p m1f-3q">
           <div class="x-div e51-e14 m1f-3f m1f-3g m1f-3h m1f-3n m1f-3r m1f-3s m1f-3t m1f-3u m1f-3v m1f-3w m1f-b"></div>
           <a class="x-anchor x-anchor-button e51-e15 m1f-16 m1f-17 m1f-19 m1f-1g m1f-1h m1f-1i m1f-1k m1f-1m m1f-1q m1f-1y m1f-1z m1f-21 m1f-22 m1f-23 m1f-24 m1f-25 m1f-26 m1f-27 m1f-28 border-increase-on-hover" tabindex="0" href="/my-account/">
             <div class="x-anchor-content">
@@ -431,9 +474,66 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <!-- end prologue.txt -->
 
-    <div id="body">
+  <div id="body" class="customPathway article canBeLongerThanAPage">
         <div id="header">
-            <h1 id="pathwayTitle" style="border-bottom: none;" onClick="makeEditable(this)" onBlur="save(this)"></h1>
+            <h1 id="pathwayTitle" style="border-bottom: none; display: inline; vertical-align: middle;" onClick="makeEditable(this)" onBlur="save(this)">Click to name this Pathway</h1>
+
+<button id="copyBtn" onclick="copyURL()" title="Copy URL" aria-label="Copy URL">
+  <svg id="copyIcon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+    <path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/>
+  </svg>
+</button>
+
+<script>
+// Material Design icon paths
+const ICONS = {
+  copy:  'M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z',
+  check: 'M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z',
+  error: 'M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z'
+};
+
+function setIcon(name) {
+  document.getElementById('copyIcon').querySelector('path').setAttribute('d', ICONS[name]);
+}
+
+async function copyURL() {
+  const text = window.location.href;
+  try {
+    if (navigator.clipboard && window.isSecureContext) {
+      // Modern async Clipboard API
+      await navigator.clipboard.writeText(text);
+    } else {
+      // Fallback for older browsers / non-secure contexts
+      fallbackCopy(text);
+    }
+    setIcon('check');
+  } catch (err) {
+    console.error('Copy failed:', err);
+    setIcon('error');
+  }
+  setTimeout(() => setIcon('copy'), 1500);
+}
+
+function fallbackCopy(text) {
+  const textarea = document.createElement('textarea');
+  textarea.value = text;
+  // Keep it off-screen and unobtrusive
+  textarea.style.position = 'fixed';
+  textarea.style.top = '-9999px';
+  textarea.style.opacity = '0';
+  document.body.appendChild(textarea);
+  textarea.focus();
+  textarea.select();
+  try {
+    const ok = document.execCommand('copy');
+    if (!ok) throw new Error('execCommand returned false');
+  } finally {
+    document.body.removeChild(textarea);
+  }
+}
+</script>
+
+
         </div>
         <div id="content">
             <div id="preamble_disabled" class="lessonSummary">
@@ -445,9 +545,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 </div>
             </div>
 
-        <div class="clearfix item two-thirds">
+        <div id="selected" class="clearfix item two-thirds">
             <div class="sectionbody">
-                <h2>Lesson Plans <span id="totalDays" class="day"/></h2>
+                <h2 style="margin: 20px 0; ">Lesson Plans <span id="totalDays" class="day"/></h2>
                 <dl id="lesson-list" ></dl>
             </div>
         </div>
@@ -460,7 +560,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
 
 
-        <div class="clearfix item top-border bottom-border">
+        <div class="clearfix item two-thirds top-border bottom-border">
             <h2>Student Workbooks</h2>
             <p>Every page can be accessed individually from the lesson plans, in both Web and PDF format. You can print only what you need for each day, or get every page combined as a complete <a href="javascript:void(0)" onclick="makeCustomBook(pathway, lessons, { reqPages: true, optPages: false, solns: false, addTOC: true })">Student Workbook</a>.
             <p/>
@@ -471,7 +571,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </p>
         </div>
 
-        <div class="clearfix item bottom-border">
+        <div class="clearfix two-thirds item bottom-border">
             <h2>Other Resources</h2>
             <p>Of course, there's more to a curriculum than software
             and lesson plans! We also provide a number of resources to educators,
@@ -522,7 +622,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <div id="sidebar" class="x-col e4468439224895391-e5 m17zxgn2tjtr-d m17zxgn2tjtr-f m17zxgn2tjtr-g" style="padding-bottom: 48px;">
 
   <div class="x-div e4468439224895391-e6 m17zxgn2tjtr-r m17zxgn2tjtr-s m17zxgn2tjtr-t m17zxgn2tjtr-u m17zxgn2tjtr-v m17zxgn2tjtr-w m17zxgn2tjtr-x m17zxgn2tjtr-y m17zxgn2tjtr-z">
-    <div class="x-text x-content e4468439224895391-e7 m17zxgn2tjtr-j m17zxgn2tjtr-l m17zxgn2tjtr-m m17zxgn2tjtr-n">SEMESTER_YEAR</div>
+    <div class="x-text x-content e4468439224895391-e7 m17zxgn2tjtr-j m17zxgn2tjtr-l m17zxgn2tjtr-m m17zxgn2tjtr-n">fall2026</div>
   </div>
 
   <div class="x-div e4468439224895391-e8 m17zxgn2tjtr-v m17zxgn2tjtr-w m17zxgn2tjtr-x m17zxgn2tjtr-y m17zxgn2tjtr-10">

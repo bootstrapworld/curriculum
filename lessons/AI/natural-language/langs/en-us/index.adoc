@@ -5,7 +5,7 @@
 
 @lesson-prereqs{measuring-similarity-2}
 
-@keywords{}
+@keywords{stop words, normalization}
 
 [@lesson-intro-table]
 |===
@@ -15,11 +15,17 @@
 
 | Student-facing Lesson Goals
 |
--
+- Let's apply Bag of Words models to define similarity between text documents
+- Let's explore the parts of text that tell us what it's _about_, and what parts can be discarded
+- Let's think about the ethics of using plagiarism detectors with different groups of students
 
 | Materials
 |[.materials-links]
 @material-links
+
+| Supplemental Materials
+|[.materials-links]
+@opt-material-links
 |===
 
 == Plotting Essays in Space
@@ -37,14 +43,14 @@ Today we are going to explore how Machine Learning Models work with @vocab{natur
 Let's think back to our discussion of @lesson-link{measuring-similarity, similarity}. 
 
 @lesson-point{
-We can *plot documents in space* and use *geometry* to calculate something approximating "similarity".
+We can *plot documents in space* and use *geometry* to calculate a notion of "close-ness".
 }
 
 @right{@image{images/3-d-comparison-w-lines.png, 300}}
 
 - A table with @math{n} numeric attributes (e.g., number of green-dominant pixels) can be graphed as points in @math{n}-dimensional space
 - The location of these points in space can be used to compute different measures of similarity (equality, distance similarity, angle similarity, etc.)
-- Machine Learning Engineers typically use angle measure, because it more closely reflects human intuition for things clustered on an axis being more similar to each other than things clustered on different axes.
+- Machine Learning Engineers typically use angle measure, because it’s closer reflects human intuition
 
 @slidebreak{Launch}
 
@@ -60,9 +66,12 @@ We can *plot documents in space* and use *geometry* to calculate something appro
 - Find lines 25-39 of the Definitions Area, which define our initial `corpus` table.
 }
 
-Recall our angle similarity function.
+@slidebreak{LaunchR}
+@right{@image{images/matchmaker.jpg, 200}}
 
-@hspace{1em}@show{(contract 'angle-similarity '((table-name Table) ("row ID" String) ("quantitative columns" List<String>)) "Table")}
+Recall our angle similarity function: +
+@hspace{1em}@show{(contract 'angle-similarity '((table-name Table) ("row ID" String) ("quantitative columns" List<String>)) "Table")} +
+We want to ask it to find matches for a particular essay, and tell it which attributes we care about.
 
 @QandA{
 @Q{Why can't we use `angle-similarity` with our `corpus`, as-is?}
@@ -150,6 +159,7 @@ Pyret also has another similarity function that _uses all the numeric columns_ t
 
 For example: `all-cols-similarity(decorated, "?")` will find the angle-similarity of every document to our mystery row `"?"`, using every column containing numbers in our `decorated` table.
 
+@slidebreak{Investigate-DN}
 @lesson-instruction{
 - Take a moment to experiment with our new columns using the following functions:
   * `all-cols-similarity`
@@ -260,6 +270,7 @@ Inconsistent *capitalization* and *punctuation* prevent the computer from recogn
 . Our counts for these words are off, so we're not seeing how common they really are.
 . We're creating extra, meaningless dimensions in which text gets compared!
 
+@slidebreak{Launch}
 The near-universal presence of words like "is", "a", "the", etc. (known as @vocab{stop words}) in every essay is also a problem:
 
 . It creates many dimensions in which the essays are close together.
@@ -346,16 +357,31 @@ Machine Learning Engineers and Data Scientists care a lot about @vocab{normalizi
 @A{standardize units: do we want to go with 5'8" or 68" or 1.72m or 172cm?}
 }
 
-== Detecting Plagiarism
+== Super- and Unsupervised Language Similarity
 @objective{ai-plagiarism-detector-ethics}
 
 === Overview
-Armed with their similarity detection, students explore the how that algorithm can be used to detect plagiarism. Now that they know how it works, they consider limitations of the algorithm and when it might not be ethical for teachers to use it.
+Armed with their similarity detection, students explore the how that algorithm can be used to detect plagiarism and perform sentiment analysis. Now that they know how it works, they consider limitations of the algorithm and when it might not be ethical for teachers to use these models for plagiarism detection, or when to use it to check the tone of their emails.
 
 === Launch
 @slidebreak{Launch}
 A @vocab{training corpus} is a collection of data used to train AI/ML @vocab{models}, enabling them to learn patterns and make predictions.
 
+*Let's consider an unsupervised application...*
+
+@QandA{
+@Q{When might we want to know if two essays are similar?}
+@Q{When might a _teacher_ want to know if two essays are similar?}
+}
+
+
+*Let's consider a supervised application…*
+@QandA{
+@Q{Why might it be useful to have centroids for emails with lots of "angry words"? With "friendly words"?}
+@Q{Why might it be useful to have centroids for hundreds of different topics?}
+}
+
+@slidebreak{Launch}
 For a plagiarism checker, the corpus is the set of documents previously fed into the checker.
 
 @QandA{
@@ -386,29 +412,42 @@ To catch plagiarism across _any_ essay, a teacher needs a model trained on a _ma
 
 @A{Students should provide a wide range of estimates.}
 @A{The largest possible estimate would be 10,000 dimensions (20 essays multiplied by 500 words) --but it is not a good estimate, because we commonly repeat and reuse words like "the", "and", "a", and so on.}
-
 @A{Before making an estimate, students might have clarifying questions, like:
   * Did all of the students write about the same topic?
   * How sophisticated is the student writing?
   * Did all students actually write 500 words?
 }
-
 @A{A reasonable prediction would probably be that there would be at least a few hundred dimensions in the model.}
 }
 
 @lesson-instruction{
-Complete @printable-exercise{matching-human-judgment.adoc}.}
+Complete @printable-exercise{matching-human-judgment.adoc}.
+}
+
+
+@slidebreak{Investigate}
+@QandA{
+@Q{What words would show up in a centroid for "angry words"?}
+@Q{What words would show up in a centroid for "friendly words"?}
+@Q{What words would show up in a centroid for "professional words"?}
+@Q{How does Grammarly check to see if the email to your boss is going to get you in trouble?}
+}
+
+@slidebreak{Investigate}
+By adding @vocab{supervised learning} to our tool belt, we can start performing what ML engineers call "sentiment analysis" on the _tone_ or _topic_ of our emails and text messages!
+
+- This allows us the algorithm to check if our email is "friendly" or "angry"
+- This allows our phone to summarize all the texts we got from our friend into a concise summary notification
 
 === Synthesize
 @slidebreak{Synthesize}
 
 @QandA{
-@Q{What strategies did you use to complete the matching activity? Were any of the scenarios especially challenging to match?}
-
 - In Class A, 3rd graders are asked to write 1-paragraph essays about zebras
 - In Class B, high school freshmen are asked to write a 3-page paper about their favorite TV show
 
-@Q{Is it *equally ethical* for the teachers in both classes to use plagiarism detectors with their students' work? Why or why not?}
-@A{Definitely not!}
-@A{3rd graders have smaller vocabularies, if all the essays are about zebras the number of unique words will be small (they'll all use "Zebra", "Stripes", and "Africa", for example). And being just one paragraph long, there's not a ton of room for the frequency of words to differ! It's very likely there will be false positives in Class A, and a plagiarism detector is just not appropriate.}
+@Q{*Given what you know about how plagiarism detectors work*, why would we expect the plagiarism detector to accuse more students in Class A than Class B?}
+@A{All the essays are about zebras, so the number of unique words will be small (they'll all use "Zebra", "Stripes", and "Africa", for example).}
+@A{Being just one paragraph long, there's not a ton of room for the frequency of words to differ! It's very likely there will be false positives in Class A, and a plagiarism detector is just not appropriate.}
+@A{3rd graders have smaller vocabularies than high schoolers, so their essays will have more words in common no matter what.}
 }

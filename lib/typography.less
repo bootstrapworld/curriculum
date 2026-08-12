@@ -1,0 +1,138 @@
+// =========================================================================
+// Typography
+// =========================================================================
+// All font-related concerns in one place:
+//   1. @font-face declarations  (asset wiring: which .woff2 lives where)
+//   2. Font-family tokens       (semantic names: --text-font, --heading)
+//   3. LESS aliases             (@text-font, @code-font for back-compat)
+//
+// Pairs with lib/brand-palette.less, which handles colors and breakpoints.
+// Imported by shared/langs/<NATLANG>/curriculum.less; the resulting
+// declarations end up in curriculum.css and are in scope for every page.
+// =========================================================================
+
+// -------------------------------------------------------------------------
+// 1. Asset wiring (@font-face)
+//    Local first, BSW-hosted fallback. font-display:swap so users see
+//    fallback text immediately and the proper font swaps in when loaded.
+// -------------------------------------------------------------------------
+
+/* lato-regular - latin_latin-ext */
+@font-face {
+  font-display: swap;
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 400;
+  src: url('fonts/lato/lato-v24-latin_latin-ext-regular.woff2') format('woff2'),
+       url('https://www.bootstrapworld.org/fonts/lato/lato-v24-latin_latin-ext-regular.woff2') format('woff2');
+}
+/* lato-italic - latin_latin-ext */
+@font-face {
+  font-display: swap;
+  font-family: 'Lato';
+  font-style: italic;
+  font-weight: 400;
+  src: url('fonts/lato/lato-v24-latin_latin-ext-italic.woff2') format('woff2'),
+       url('https://www.bootstrapworld.org/fonts/lato/lato-v24-latin_latin-ext-italic.woff2') format('woff2');
+}
+/* lato-700 - latin_latin-ext */
+@font-face {
+  font-display: swap;
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 700;
+  src: url('fonts/lato/lato-v24-latin_latin-ext-700.woff2') format('woff2'),
+       url('https://www.bootstrapworld.org/fonts/lato/lato-v24-latin_latin-ext-700.woff2') format('woff2');
+}
+/* lato-900 - latin_latin-ext */
+@font-face {
+  font-display: swap;
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 900;
+  src: url('fonts/lato/lato-v24-latin_latin-ext-900.woff2') format('woff2'),
+       url('https://www.bootstrapworld.org/fonts/lato/lato-v24-latin_latin-ext-900.woff2') format('woff2');
+}
+/* lato-900italic - latin_latin-ext */
+@font-face {
+  font-display: swap;
+  font-family: 'Lato';
+  font-style: italic;
+  font-weight: 900;
+  src: url('fonts/lato/lato-v24-latin_latin-ext-900italic.woff2') format('woff2'),
+       url('https://www.bootstrapworld.org/fonts/lato/lato-v24-latin_latin-ext-900italic.woff2') format('woff2');
+}
+
+/* hack — monospace for code blocks. The bolditalic/italic forms only
+   exist on BSW's CDN; no local fallback. */
+@font-face {
+  font-display: swap;
+  font-family: 'Hack';
+  src: url('fonts/hack/hack-regular.woff2') format('woff2'),
+       url('https://www.bootstrapworld.org/fonts/hack/hack-regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-display: swap;
+  font-family: 'Hack';
+  src: url('fonts/hack/hack-bold.woff2') format('woff2'),
+       url('https://www.bootstrapworld.org/fonts/hack/hack-bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-display: swap;
+  font-family: 'Hack';
+  src: url('fonts/hack/hack-italic.woff2') format('woff2'),
+       url('https://www.bootstrapworld.org/fonts/hack/hack-italic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+}
+@font-face {
+  font-display: swap;
+  font-family: 'Hack';
+  src: url('fonts/hack/hack-bolditalic.woff2') format('woff2'),
+       url('https://www.bootstrapworld.org/fonts/hack/hack-bolditalic.woff2') format('woff2');
+  font-weight: 700;
+  font-style: italic;
+}
+
+/* rubik — variable-weight font (300-900) used for headings and chrome. */
+@font-face {
+  font-display: swap;
+  font-family: 'Rubik';
+  font-style: normal;
+  font-weight: 300 900;
+  src: url('fonts/rubik/rubik-variable-wght.woff2') format('woff2-variations'),
+       url('https://www.bootstrapworld.org/fonts/rubik/rubik-variable-wght.woff2') format('woff2-variations');
+}
+@font-face {
+  font-display: swap;
+  font-family: 'Rubik';
+  font-style: italic;
+  font-weight: 300 900;
+  src: url('fonts/rubik/rubik-italic-variable-wght.woff2') format('woff2-variations'),
+       url('https://www.bootstrapworld.org/fonts/rubik/rubik-italic-variable-wght.woff2') format('woff2-variations');
+}
+
+
+// -------------------------------------------------------------------------
+// 2. Font-family tokens
+//    Symbolic names that semantic stylesheets reference via var().
+// -------------------------------------------------------------------------
+:root {
+  --text-font:  'Lato', Arial, Helvetica, sans-serif;
+  --code-font:  Hack, "Courier New", monospace;
+  --rubik-font: "Rubik", sans-serif;
+
+  // Semantic aliases
+  --heading:    var(--rubik-font);
+}
+
+
+// -------------------------------------------------------------------------
+// 3. LESS aliases (back-compat for existing core.less call sites)
+// -------------------------------------------------------------------------
+@text-font: var(--text-font);
+@code-font: var(--code-font);

@@ -61,14 +61,14 @@ This page relies on the @starter-file{alg2-co2}. Make sure you have it open on y
 
 @math{periodic-sin(x) =}
 (@fitbruby{70pt}{@ifsoln{@a}}{amplitude (@math{a})} @math{\times} @math{sin}(
-@fitbruby{70pt}{@math{2\pi \div} @ifnotsoln{@hspace{2em}} @ifsoln{@p}}{frequency (@math{b})} @math{(x -}
+@fitbruby{70pt}{@ifnotsoln{@hspace{5em}} @ifsoln{@p}}{frequency (@math{b})} @math{(x -}
 @fitbruby{70pt}{@ifsoln{@h}}{horizontal shift (@math{h})} ))) @math{+} 
 @fitbruby{70pt}{@ifsoln{@k}}{vertical shift (@math{k})}
 
 | @vspace{1ex} +
 *Pyret Notation*
 |
-@show{(code `(define (periodic-sin x) (+ (* (?ANS ,a) (sin (* (/ 1.0 (?ANS ,b)) (- x (?ANS ,h))))) (?ANS ,k))))}
+@show{(code `(define (periodic-sin x) (+ (* (?ANS ,a) (sin (* (?ANS ,b) (- x (?ANS ,h))))) (?ANS ,k))))}
 |===
 
 @n Then update the `periodic-sin` function definition in your starter file to match what you've just written.
@@ -84,14 +84,14 @@ This page relies on the @starter-file{alg2-co2}. Make sure you have it open on y
 
 @math{periodic-cos(x) =}
 (@fitbruby{70pt}{@ifsoln{@a}}{amplitude (@math{a})} @math{\times} @math{cos}(
-@fitbruby{70pt}{@math{2\pi \div} @ifnotsoln{@hspace{2em}} @ifsoln{@p}}{frequency (@math{b})} @math{(x -}
+@fitbruby{70pt}{@ifnotsoln{@hspace{5em}} @ifsoln{@p}}{frequency (@math{b})} @math{(x -}
 @fitbruby{70pt}{@ifsoln{@h-cos}}{horizontal shift (@math{h})}))) @math{+}
 @fitbruby{70pt}{@ifsoln{@k}}{vertical shift (@math{k})}
 
 | @vspace{1ex} +
 *Pyret Notation*
 |
-@show{(code `(define (periodic-cos x) (+ (* (?ANS ,a) (cos (* (/ 1.0 (?ANS ,b)) (- x (?ANS ,h-cos))))) (?ANS ,k))))}
+@show{(code `(define (periodic-cos x) (+ (* (?ANS ,a) (cos (* (?ANS ,b) (- x (?ANS ,h-cos))))) (?ANS ,k))))}
 |===
 
 == Fit Your Periodic Model to the Data

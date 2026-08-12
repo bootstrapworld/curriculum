@@ -51,7 +51,7 @@ This activity introduces the problem with duplicate code, leveraging *Mathematic
 === Launch
 @slidebreak{Launch}
 
-Invite students to take a look at the expressions below:
+@teacher{Invite students to take a look at the expressions below:}
 
 @ifproglang{wescheme}{
 
@@ -81,6 +81,8 @@ rotate(45, scale(3, star(50, "solid", "green")))
 @A{We'd have to change the color everywhere it appeared.}
 }
 
+
+@slidebreak{Launch}
 There are lots of potential problems with duplicate code:
 
 - *Readability:* The more code there is, the harder it can be to read.
@@ -93,25 +95,22 @@ Duplicate code is almost always bad!
 
 Since we're using that star over and over again, wouldn't it be nice if we could define a "nickname" for that code, and then use the nickname over and over in place of the expression? And then, if we wanted to change something about all of the stars, we would only have to make the change once, in the definition.
 
+@slidebreak{Launch}
 You already know how to do this in math:
 
 @indented{@math{x = 4} _defines_ the nickname @math{x} to be the value 4.}
 
 
 @ifproglang{wescheme}{
---
 WeScheme uses the word "define" to make this even clearer!
 
 @indented{We can type `(define x 4)` to define `x` to be the value 4.}
---
 }
 
 @ifproglang{pyret}{
---
-Pyret is no different!
+Pyret is no different:
 
 @indented{We type `x = 4` to define `x` to be the value 4.}
---
 }
 
 Once we've defined `x` to be the value 4 and clicked "Run", anytime we use `x`, the computer will remember that it is _defined_ as 4.  We can _use_ that definition to get an answer. For example, @math{x + 2} will evaluate to 6.

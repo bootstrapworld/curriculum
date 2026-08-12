@@ -67,9 +67,9 @@ Take a look at this picture of a cylinder floating in a box.
 @slidebreak{LaunchR}
 @right{@image{images/steering-v-curve-lr.png, 300}}
 
-In @lesson-link{regression-models-simple}, we made four scatter plots — one for each candidate explanatory variable. Each showed a 2D relationship between one variable and `steering-angle`.
+In @lesson-link{regression-models-simple}, we made a scatter plot for each explanatory variable, showing a 2D relationship between it and the `steering-angle`.
 
-But `curve`, `skew`, `offset`, and `speed` are all being measured _at the same time_, for the same data point. Each scatter plot we made was showing just one "shadow" of the data — a 2D projection of information that actually exists in more dimensions.
+But `curve`, `skew`, `offset`, and `speed` are all being measured _at the same time_, for the same data point. Each scatter plot we made was showing just one "shadow" of the data — a 2D projection.
 @QandA{
 @Q{If `curve` and `skew` are both inputs, and `steering-angle` is the output, how many dimensions would we need to represent all three at once?}
 @A{Three! One axis for `curve`, one for `skew`, one for `steering-angle`.}
@@ -105,7 +105,7 @@ We've set the Desmos activity to start with minimum perspective, but teachers sh
 @strategy{Using Perspective in Desmos3D}{@perspective-note}
 
 @pd-slide{
-@slidebreak{Investigate}
+@slidebreak{AI Title and Body}
 @perspective-note
 }
 
@@ -130,12 +130,11 @@ Instead of a @vocab{line of best fit}, we're looking for a @vocab{plane of best 
 
 If we want to consider all three variables in our model, then we need to consider each snapshot in the training corpus as a 3d point, with values for `curve`, `skew`, _and_ `steering-angle`.
 
-- To make _predictions_ in three dimensions, we need to do _regression_ in three dimensions. 
+- To make _predictions_ in three dimensions, we need to do _regression_ in three dimensions.
 - If `curve` and `skew` are both values in a given snapshot, they each explain a _portion_ of the steering angle at that moment.
 - Each slope (@math{m_{curve}} and @math{m_{skew}}) quantifies the amount that a single-unit change in each variable contributes to the steering angle.
 
 @strategy{Different fields use different vocabulary for the same ideas:}{
-
 [cols="^1a,^1a", options="header", stripes="none"]
 |===
 | In Math... | In Machine Learning...
@@ -182,7 +181,10 @@ Let's use Pyret to find the best model for our data!
 @A{It told us how much error to expect in predictions made with the model by reporting the @math{S-value} and @math{r^2}.}
 }
 
-Pyret can't plot data in more than two dimensions at a time, but it can _compute_ in as many dimensions as we want!
+@slidebreak{Launch}
+Pyret can't _plot_ data in more than two dimensions at a time, but it can _compute_ in as many dimensions as we want!
+
+- To get the code for a predictor function we can use `regression-model-code`.
 
 - We've already used `regression-model-code` to generate a @vocab{predictor function}. +
 @hspace{2em}@show{(contract "regression-model-code" '((table-name Table) (explanatory List<String>) (response String)) "Code")} +
@@ -194,7 +196,6 @@ Pyret can't plot data in more than two dimensions at a time, but it can _compute
 @hspace{2em}@show{(contract "regression-model-S" '((table-name Table) (explanatory List<String>) (response String) (model "Row->Number")) "Number"
 "produces the S-value of a multiple-regression model, fit to the specified columns")}
   * Remember: To define a model, we need at least as many rows as the number of columns we want to work with. To calculate @math{S}, we need more rows in our table than the number of columns we want to work with, otherwise we have nothing to test the fit of our model against.
-
 
 @teacher{
 Consider the trade-off between clarity and amount-of-typing: for some students, renaming their predictors using a shorthand is a big win! For example, `curve-skew-offset-predictor` could be renamed `cso-pred`.
@@ -221,9 +222,9 @@ Consider the trade-off between clarity and amount-of-typing: for some students, 
 @A{`curve` — its coefficient is larger, meaning a one-unit change in `curve` moves the prediction more than a one-unit change in `skew`.}
 }
 
-@slidebreak{Investigate}
+@slidebreak{Investigate-DN}
 
-*To make cars affordable, companies need to make tough decisions* about which sensors to keep and which to drop. Adding all the various sensors to make a car self-driving adds thousands of dollars to the cost of manufacturing, and the extra computing power needed to process the data makes the chips used in those cars more expensive, too. 
+*To make cars affordable, companies need to make tough decisions* about which sensors to keep and which to drop. Adding all the various sensors to make a car self-driving adds thousands of dollars to the cost of manufacturing, and the extra computing power needed to process the data makes the chips used in those cars more expensive, too.
 
 @lesson-instruction{
 - Complete the rest of @printable-exercise{supervised-learning-multiple-regression.adoc}.

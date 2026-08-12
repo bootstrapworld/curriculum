@@ -71,7 +71,7 @@ One example of an early application for this kind of automation is used by the U
 
 Given a dataset to train on, Pyret can build _optimal_ decision trees for us, and even give us the classifier code for those trees, using the algorithm you already know!
 
-@show{(contract "build-tree" '("Table" "List" "String" "Number") "DecisionTree")}
+@show{(contract "build-tree" '((t Table) (split-cols "List<String>") (answer-col String) (max-depth Number)) "DecisionTree")}
 
 The `build-tree` function takes *four arguments* in its Domain:
 
@@ -80,7 +80,7 @@ The `build-tree` function takes *four arguments* in its Domain:
 - The name of the _target_ column containing all the "answers" for the various categories
 - The _maximum depth_ the tree is allowed to be
 
-@slidebreak{Investigate}
+@slidebreak{Investigate-DN}
 
 @lesson-instruction{
 - Complete the first section of @printable-exercise{computing-decision-trees.adoc} using the @starter-file{decision-tree}.
@@ -99,13 +99,13 @@ The `build-tree` function takes *four arguments* in its Domain:
 @A{`"swims"`}
 }
 
-@slidebreak{Investigate}
+@slidebreak{Investigate-DN}
 
 @lesson-instruction{
 - Complete the second section of @printable-exercise{computing-decision-trees.adoc}
 }
 
-@slidebreak{Investigate}
+@slidebreak{Investigate-DN}
 
 @QandA{
 @Q{How are the *definitions* for `tree-c1` and `tree-c2` different?}
@@ -123,7 +123,7 @@ The `build-tree` function takes *four arguments* in its Domain:
 - Turn to @printable-exercise{comparing-decision-trees.adoc} and complete the first section.
 }
 
-@slidebreak{Investigate}
+@slidebreak{Investigate-DN}
 
 Notice that `tree-q6` works just as well as `tree-any4`, even though it only has one column to train on!
 
@@ -144,7 +144,7 @@ When given another dataset to classify, `tree-any4` is out-scoring `tree-q6`!
 
 @slidebreak{Investigate}
 
-This is an example of what Machine Learning engineers call @vocab{over-fitting}. Over-fitting happens when our decision tree tries so hard to find a pattern in a specific set of data that it begins to "memorize" the details and random noise instead of learning the actual rule. 
+This is an example of what Machine Learning engineers call @vocab{over-fitting}. Over-fitting happens when our decision tree tries so hard to find a pattern in a specific set of data that it begins to "memorize" the details and random noise instead of learning the actual rule.
 
 In this case, `tree-q6` was _totally dependent_ on `pounds`, whose distribution in the `training` dataset is quite different from the `testing` dataset.
 
@@ -168,12 +168,12 @@ In this case, `tree-q6` was _totally dependent_ on `pounds`, whose distribution 
 |===
 }
 
-Animals' weights in `pounds` can vary widely, whereas the attributes in the other columns are more stable across samples! 
+Animals' weights in `pounds` can vary widely, whereas the attributes in the other columns are more stable across samples!
 
-- Dogs and cats are all `mammals` no matter what. 
-- Most dogs like to `swim`. And most dogs, cats, and lizards have a `tail`. 
+- Dogs and cats are all `mammals` no matter what.
+- Most dogs like to `swim`. And most dogs, cats, and lizards have a `tail`.
 
-The more a classifier depends on an attribute, the more sensitive it is to variations in that attribute between populations. 
+The more a classifier depends on an attribute, the more sensitive it is to variations in that attribute between populations.
 
 @slidebreak{Investigate}
 [cols="^1a, ^1a", frame="none", options="header"]
@@ -211,7 +211,7 @@ Students learn about confusion matrices, and use Pyret to generate them from cla
 @slidebreak{Launch}
 Tests for the flu, measles, etc are all forms of @vocab{classifiers}! When looking at any of these tests, public health officials need to think about the following:
 
-[.highlight-diagonal, cols="<1a,^2a,^2a", stripes="none", options="header"]
+[.highlight-diagonal, cols="<.^1a,^.^2a,^.^2a", stripes="none", options="header"]
 |===
 | Actual Status
 | Predicted Positive
@@ -220,7 +220,7 @@ Tests for the flu, measles, etc are all forms of @vocab{classifiers}! When looki
 | Infected
 | *True Positive:* +
    The test says someone is infected, and they _actually are_
-| *False Positive:* +
+| *False Negative:* +
    The test says someone is infected, but they aren't
 
 | Not Infected
@@ -237,6 +237,15 @@ Suppose we have an outbreak of a really deadly, highly-contagious disease, and t
 
 - Test A has tons of *false positives:* It will almost always do the right thing if you're sick, but a lot of healthy people get told they are infected
 - Test B has tons of *false negatives:* It will almost always do the right thing if you're healthy, but a lot of sick people get told they are fine
+
+@slidebreak{Launch}
+
+@ifslide{
+@center{
+Test A has tons of *false positives*
+Test B has tons of *false negatives*
+}
+}
 
 @lesson-instruction{
 - YOU are in the minister of public health, for a country struggling with an outbreak of this disease.
@@ -302,7 +311,7 @@ The reports Data Scientists (and public health officials!) use to understand how
 
 Pyret has a function that will make a @vocab{confusion matrix} for you! Here's the contract:
 
-@show{(contract "confusion-matrix" '("Table" "String" "(Row -> String)") "Table")}
+@show{(contract "confusion-matrix" '((t Table) (answer-col String) (classifier-fn "(Row -> String)")) "Table")}
 
 @slidebreak{Investigate}
 
@@ -373,8 +382,8 @@ The "correct scores" are shown in the diagonal, running from top-left to bottom-
 @lesson-point{All models are wrong. Some are useful.}
 
 @QandA{
-@A{When is a Decision Tree wrong?}
-@A{When is a Decision Tree useful?}
+@Q{When is a Decision Tree wrong?}
+@Q{When is a Decision Tree useful?}
 }
 
 
