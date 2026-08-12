@@ -143,6 +143,11 @@ When given another dataset to classify, `tree-any4` is out-scoring `tree-q6`!
 }
 
 @slidebreak{Investigate}
+
+This is an example of what Machine Learning engineers call @vocab{over-fitting}. Over-fitting happens when our decision tree tries so hard to find a pattern in a specific set of data that it begins to "memorize" the details and random noise instead of learning the actual rule. 
+
+In this case, `tree-q6` was _totally dependent_ on `pounds`, whose distribution in the `training` dataset is quite different from the `testing` dataset.
+
 [cols="^1a, ^1a", frame="none", options="header"]
 |===
 | Training Dataset
@@ -152,11 +157,8 @@ When given another dataset to classify, `tree-any4` is out-scoring `tree-q6`!
 | @image{images/dot-plot-pounds-testing.png}
 |===
 
-This is an example of what ML engineers call @vocab{over-fitting}. The more a classifier depends on an attribute, the more sensitive it is to variations in that attribute between populations. In this case, `tree-q6` was _totally dependent_ on `pounds`, whose distribution is very different in the `testing` dataset.
-
 @slidebreak{Investigate}
-@ifslide{
-[cols="^1a, ^1a", frame="none", options="header"]
+@ifslide{[cols="^1a, ^1a", frame="none", options="header"]
 |===
 | Training Dataset
 | Testing Dataset
@@ -165,12 +167,23 @@ This is an example of what ML engineers call @vocab{over-fitting}. The more a cl
 | @image{images/dot-plot-pounds-testing.png}
 |===
 }
-This would be like studying for a test by memorizing the answers to a previous test. You've learned how to ace _that specific test_, but not enough to actually do well on a different one.
+
+Animals' weights in `pounds` can vary widely, whereas the attributes in the other columns are more stable across samples! 
+
+- Dogs and cats are all `mammals` no matter what. 
+- Most dogs like to `swim`. And most dogs, cats, and lizards have a `tail`. 
+
+The more a classifier depends on an attribute, the more sensitive it is to variations in that attribute between populations. 
 
 @slidebreak{Investigate}
-In Machine Learning, over-fitting happens when our decision tree tries so hard to find a pattern in a specific set of data that it begins to "memorize" the details and random noise instead of learning the actual rule. That's exactly what happened with the `pounds` column here.
+[cols="^1a, ^1a", frame="none", options="header"]
+|===
+| Training Dataset
+| Testing Dataset
 
-The other columns didn't vary as much at all! Dogs and cats are all `mammals` no matter what. Most dogs like to `swim`. And most dogs, cats, and lizards all have a `tail`. These attributes are more stable across samples, whereas `pounds` can vary widely.
+| @image{images/dot-plot-pounds-training.png}
+| @image{images/dot-plot-pounds-testing.png}
+|===
 
 === Synthesize
 @slidebreak{Synthesize}
