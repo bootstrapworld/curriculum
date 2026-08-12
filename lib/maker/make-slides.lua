@@ -44,6 +44,8 @@ end
 local allowed_slide_layouts = {
   "AI Title Slide",
   "AI Title and Body",
+  "Algebra 2 Title Slide",
+  "Algebra 2 Title and Body",
   "E+E Title Slide",
   "E+E Title and Body",
   "Core Title Slide",
