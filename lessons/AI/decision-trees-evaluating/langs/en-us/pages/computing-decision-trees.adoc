@@ -2,60 +2,54 @@
 ++++
 <style>
 div#body .pyret-comment .fitbruby { min-width: 9em; }
-
+#preamble_disabled { flex-grow: 0 !important; }
 </style>
 ++++
+
 @center{@show{(contract "build-tree" '(("Training Data" "Table" ) ("Columns to Split On" "List<String>") ("\"Answer key\" Column" "String") ("Maximum Depth" "Number")) "DecisionTree")}}
 
 @link-instructions{Return to your copy of the @starter-file{decision-tree}.}
+
+@vspace{1ex}
+
+[.no-flex-section]
 == Building One-Level Decision Trees from Categorical and Quantitative Splits
 
-*In the Definitions Area, define `tree-c1` and to be a 1-level tree using only the _categorical_ `"tail"` column, and click "Run":*
+_This section will make use of the following decision trees, which are defined at the bottom of the Definitions Area:_
 
-@hspace{1em}`tree-c1 = build-tree(training, [list: "tail"], "species", 1)`
+- __A 1-level tree using only the *categorical* `"tail"` column__ +
+`tree-c1 = build-tree(training, [list: "tail"], "species", 1)`
 
-@n Evaluate `tree-c1`. If an animals has no tail, it will predict: @fitb{5em}{@ifsoln{snail}}
+- __A 1-level tree using only the *quantitative* `"pounds"` column__ +
+`tree-q1 = build-tree(training, [list: "pounds"], "species", 1)`
+
+- __A 1-level tree using *any* column__: +
+`tree-any1 = build-tree(training, [list: "sex", "tail", "mammal", "swims", "pounds"], "species", 1)`
+
+@n Evaluate `tree-c1`. If an animal has no tail, this tree will predict: @fitb{}{@ifsoln{snail}}
 
 @n Evaluate `dt-code(tree-c1)`. Where have we seen this code before? @fitb{}{@ifsoln{it's the code for `tail-classifier`!}}
 
-@vspace{1ex}
-
-*In the Definitions Area, define `tree-q1` to be a 1-level tree using only the _quantitative_ `"pounds"` column, and click "Run":*
-
-@hspace{1em}`tree-q1 = build-tree(training, [list: "pounds"], "species", 1)`
-
 @n Evaluate `tree-q1`. What split did it come up with? @fitb{}{@ifsoln{pounds < 9.55}}
 
-@vspace{1ex}
+@n Which column would *you* choose for the @vocab{root node}? @fitb{}{@ifsoln{`swims`}}. 
 
-*In the Definitions Area, define `tree-any` to be a 1-level tree using the _any_ column, and click "Run":*
+@n Evaluate `tree-any1`. Which column did *Pyret* choose? @fitb{}{@ifsoln{`swims`}}
 
-@hspace{1em}`tree-any1 = build-tree(training, [list: "sex", "tail", "mammal", "swims", "pounds"], "species", 1)`
-
-@n Which column would *you* choose for the @vocab{root node}? @fitb{5em}{@ifsoln{`swims`}}. Evaluate `tree-any1`. Which one did *Pyret* choose? @fitb{}{@ifsoln{`swims`}}
 
 == Building Multi-level Decision Trees from Categorical and Quantitative Splits
 
-*Add the following definitions to your Definitions Area and click "Run":*
+@vspace{1ex}
 
-@hspace{1em}`tree-c2 = build-tree(training, [list: "tail"], "species", 2)` +
-@hspace{1em}`tree-q2 = build-tree(training, [list: "pounds"], "species", 2)` +
-@hspace{1em}`tree-any2 = build-tree(training, [list: "sex", "tail", "mammal", "swims", "pounds"], "species", 2)` 
+@hspace{1em}`tree-c2 = build-tree(training, [list: "tail"], "species", 2)` 
 
-@n In the code above, we allowed `tree-c2` to have a maximum depth of @fitb{2em}{@ifsoln{2}}. The resulting tree actually had @fitb{2em}{@ifsoln{1}} level. Why? +
+@n What maximum depth does this code allow `tree-c2` to have? @fitb{}{@ifsoln{2}}
+
+@n Evaluate `tree-c2`. How many levels does the resulting tree actually have? @fitb{2em}{@ifsoln{1}} Why? @fitb{}{} +
 @fitb{}{@ifsoln{once we split between animals with and without tails, there's no further sorting we can do with just the `"tail"` column.}}
 
-*Add the following definitions to your Definitions Area and click "Run":*
-
-@hspace{1em}`tree-q3 = build-tree(training, [list: "pounds"], "species", 3)` +
-@hspace{1em}`tree-q4 = build-tree(training, [list: "pounds"], "species", 4)` +
-@hspace{1em}`tree-q5 = build-tree(training, [list: "pounds"], "species", 5)` +
-@hspace{1em}`tree-any3 = build-tree(training, [list: "sex", "tail", "mammal", "swims", "pounds"], "species", 3)` +
-@hspace{1em}`tree-any4 = build-tree(training, [list: "sex", "tail", "mammal", "swims", "pounds"], "species", 4)` +
-@hspace{1em}`tree-any5 = build-tree(training, [list: "sex", "tail", "mammal", "swims", "pounds"], "species", 5)`
-
-@n We've produced three of the trees below. How are they similar? How are they different? @fitb{}{} +
-@blanklines{2}{@ifsoln{The trees all start with the same root nodes, and q2 and q3 have the same 2nd-level decision node. The only difference is really the depth}}
+@n Consider the trees below. How are they similar? How are they different? @fitb{}{} +
+@blanklines{2}{@ifsoln{The trees all start with the same root nodes, and q2 and q3 have the same 2nd-level decision node. The only difference is really the depth.}}
 
 [%autowidth, cols="^a,^a,^a", stripes="none", options="header"]
 |===
@@ -87,5 +81,7 @@ pounds < 9.55?
 ```
 |===
 
+_These additional definitions were used to generate the decision trees above:_
 
-Be sure to save your copy of the @starter-file{decision-tree}. Then turn to @printable-exercise{comparing-decision-trees.adoc}.
+@hspace{1em}`tree-q2 = build-tree(training, [list: "pounds"], "species", 2)` +
+@hspace{1em}`tree-q3 = build-tree(training, [list: "pounds"], "species", 3)` 
