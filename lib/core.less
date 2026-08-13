@@ -17,6 +17,12 @@
 @lesson-block-vertical-space: 1em;
 @ruby-height: 13px; /* Note(Emmanuel): use this for positioning and font size! */
 
+/* Spin animation for .quizLinksLoading (see div#body.LessonPlan below).
+   @keyframes must live at the top level, not nested inside a selector. */
+@keyframes quizLinksSpin {
+  to { transform: rotate(360deg); }
+}
+
 div#body {
   font-family:    @text-font;
   color:          @font-color;
@@ -528,6 +534,41 @@ div#body.LessonPlan {
       &:hover {
         .makeQuizLinkImage { filter: drop-shadow(2px 2px 2px gray); }
       }
+    }
+  }
+
+  /* Quiz link states, scoped to the whole LessonPlan (not just .preamble)
+     since a.quiz/.quizBox can also appear inline in the lesson body, e.g.
+     inside a .teacherNote reminder -- not only in the materials-list table. */
+
+  /* Disabled state applied to the raw a.quiz link the instant the page
+     loads, before populateQuizLinks() does anything async -- otherwise
+     there's a window where the raw, unguarded quiz link is live and
+     clickable while we're still checking login status. pointer-events
+     backs up the JS-side href removal in case that hasn't run yet either. */
+  a.quiz.quiz-pending {
+    color: gray !important;
+    cursor: default;
+    pointer-events: none !important;
+  }
+
+  /* Shown above a quizBox's <ul> while restoreQuizLinks() is fetching
+     existing links; removed once that resolves. */
+  .quizBox .quizLinksLoading {
+    font-style: italic;
+    color: gray;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    &::before {
+      content: "";
+      width: 12px;
+      height: 12px;
+      border: 2px solid #ccc;
+      border-top-color: #666;
+      border-radius: 50%;
+      animation: quizLinksSpin 0.8s linear infinite;
     }
   }
 
