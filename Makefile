@@ -20,6 +20,19 @@ export NATLANG := en-us
 
 # export ASCIIDOCTOR_NODE := yes
 
+# This branch (use-acdc) defaults to acdc (the Rust reimplementation)
+# instead of Ruby Asciidoctor. Still pre-1.0 and not yet vetted against
+# this repo's do-postproc.lua HTML-scraping and include/image path
+# resolution, so treat it as experimental. Takes precedence over
+# ASCIIDOCTOR_NODE if both are set.
+#
+# make ASCIIDOCTOR_ACDC=
+#
+# (i.e. set it to empty at the make call) to fall back to Ruby Asciidoctor
+# for comparison.
+
+export ASCIIDOCTOR_ACDC := yes
+
 # make DEBUGADOC=yes
 #
 # if you want to run Asciidoctor individually on each intermediate .asc file so
