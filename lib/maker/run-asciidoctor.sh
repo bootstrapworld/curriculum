@@ -15,20 +15,18 @@ if test -n "$ASCIIDOCTOR_ACDC"; then
   # internally, so unlike the Ruby branch below there's no need to manually
   # shard $ADOC_INPUT across $NUMCORES workers.
   #
-  # NOTE: acdc's CLI has no -B/--base-dir equivalent yet (the underlying
-  # acdc-parser crate supports it, but acdc-cli doesn't expose it). The Ruby
-  # branch below passes -B . so that .asc files deep under
-  # distribution/$NATLANG/... still resolve images/includes relative to
-  # $TOPDIR rather than their own directory. If acdc-converted output is
-  # missing images or failing includes, this is the first thing to check.
+  # --base-dir . mirrors the Ruby branch's -B . below: without it, relative
+  # include/image targets in .asc files under distribution/$NATLANG/...
+  # resolve against each entry file's own directory instead of $TOPDIR,
+  # breaking this repo's root-relative include:: paths.
   if test -z "$DEBUGADOC"; then
-    acdc convert -a linkcss -a stylesheet=$cssfile -a cachedir=.cached/ $(cat $ADOC_INPUT) > $MAKE_ERR_LOG 2>&1
+    acdc convert -a linkcss -a stylesheet=$cssfile -a cachedir=.cached/ --base-dir . $(cat $ADOC_INPUT) > $MAKE_ERR_LOG 2>&1
   else
     echo $'\e[1;31m'🐌 Will be slow! Running acdc once per file because DEBUGADOC=$DEBUGADOC $'\e[0m'
     for f in $(cat $ADOC_INPUT); do
       rm -f $MAKE_ERR_LOG; touch $MAKE_ERR_LOG
       echo -n .
-      acdc convert -a linkcss -a stylesheet=$cssfile -a cachedir=.cached/ $f > $MAKE_ERR_LOG 2>&1
+      acdc convert -a linkcss -a stylesheet=$cssfile -a cachedir=.cached/ --base-dir . $f > $MAKE_ERR_LOG 2>&1
       if test -s "$MAKE_ERR_LOG"; then
         echo
         echo Error occurred while acdc-converting $f
