@@ -1,0 +1,50 @@
+= Using ACDC as the AsciiDoc implementation
+
+== Prereqs
+
+This branch, `use-acdc`, uses the ACDC, the Rust implementation of
+AsciiDoc, rather than the Ruby Asciidoctor.
+
+First install Rust.  On macOS
+
+  brew install rust
+
+You then need to install ACDC. I have a modified fork of ACDC at
+https://github.com/ds26gte/acdc, branch `option-B`.  Clone, then
+`cd` to the `acdc` directory and do
+
+  git switch option-B
+  cargo install --path acdc-cli --force
+
+(The `--force` is not needed if you're installing it for the first
+time.)
+
+WARNING: The standard ACDC is at https://github.com/nlopes/acdc.
+However, it currently misses some Asciidoctor features that I had
+to add via Claude in my fork.
+
+== Running
+
+Update your clone of https://github.com/bootstrapworld/curriculum.
+In it
+
+  git switch use-acdc
+
+Then run `make` as usual. (You might want to do a `make clean`
+first so you have a clean slate.)
+
+
+== Speed advantage
+
+ACDC is noticeably faster than Asciidoctor. A clean `make` takes
+the following times with the two systems:
+
+With Ruby Asciidoctor:
+
+  make  125.53s user 118.95s system 235% cpu 1:43.66 total
+
+With Rust ACDC (with changes to make it match Asciidoctor operationally):
+
+  make  98.36s user 76.99s system 278% cpu 1:02.92 total
+
+
