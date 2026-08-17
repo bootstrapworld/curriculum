@@ -10,7 +10,7 @@ else
   export SOURCE_DATE_EPOCH=$(date -d $(date +%Y-%m-%d) +%s)
 fi
 
-if test -n "$ASCIIDOCTOR_ACDC"; then
+if test -n "$ASCIIDOC_ACDC"; then
   # acdc (the Rust reimplementation) parallelizes multi-file conversion
   # internally, so unlike the Ruby branch below there's no need to manually
   # shard $ADOC_INPUT across $NUMCORES workers.

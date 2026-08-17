@@ -26,12 +26,12 @@ export NATLANG := en-us
 # resolution, so treat it as experimental. Takes precedence over
 # ASCIIDOCTOR_NODE if both are set.
 #
-# make ASCIIDOCTOR_ACDC=
+# make ASCIIDOC_ACDC=
 #
 # (i.e. set it to empty at the make call) to fall back to Ruby Asciidoctor
 # for comparison.
 
-export ASCIIDOCTOR_ACDC := yes
+export ASCIIDOC_ACDC := yes
 
 # make DEBUGADOC=yes
 #
