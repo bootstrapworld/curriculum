@@ -56,7 +56,7 @@ else
   echo "];" >> $NODE_ADOC_INPUT
   echo "module.exports = adocFiles;" >> $NODE_ADOC_INPUT
   #
-  node lib/callAdoc.js $NODE_ADOC_INPUT
+  node lib/callAdoc.mjs $NODE_ADOC_INPUT
 fi
 
 if test -f $MAKE_ERR_LOG; then
