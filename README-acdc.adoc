@@ -2,10 +2,10 @@
 
 == Prereqs
 
-This branch, `use-acdc`, uses the ACDC, the Rust implementation of
+This branch, `use-acdc`, uses ACDC, the Rust implementation of
 AsciiDoc, rather than the Ruby Asciidoctor.
 
-First install Rust.  On macOS
+First, install Rust.  On macOS
 
   brew install rust
 
@@ -20,7 +20,7 @@ https://github.com/ds26gte/acdc, branch `option-B`.  Clone, then
 time.)
 
 WARNING: The standard ACDC is at https://github.com/nlopes/acdc.
-However, it currently misses some Asciidoctor features that I had
+However, it currently lacks some Asciidoctor features that I had
 to add via Claude in my fork.
 
 == Running
@@ -33,10 +33,15 @@ In it
 Then run `make` as usual. (You might want to do a `make clean`
 first so you have a clean slate.)
 
-TIP: By default, this branch's `make` uses ACDC. To revert to
+[TIP]
+====
+By default, this branch's `make` uses ACDC. To revert to
 using Asciidoctor, comment out the line in `Makefile` that says
 
   export ASCIIDOC_ACDC := yes
+
+(I.e., prefix a `#` to this line.)
+====
 
 == Speed advantage
 
@@ -50,5 +55,3 @@ With Ruby Asciidoctor:
 With Rust ACDC (with changes to make it match Asciidoctor operationally):
 
   make  98.36s user 76.99s system 278% cpu 1:02.92 total
-
-
