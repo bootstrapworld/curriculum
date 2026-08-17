@@ -3,6 +3,7 @@
     "questions": [
       {
         "type": "MultipleChoice",
+        "label": "5-number summary from a list",
         "prompt": {
           "prompt": "Click the correct 5-number summary for this dataset: 2, 3, 5, 8, 12, 20",
           "distractors": [
@@ -23,6 +24,7 @@
        },
        {
         "type": "MultipleChoice",
+        "label": "maximum from 5-number summary",
         "prompt": {
           "prompt": "The greatest amount of sodium in a fast food item in this dataset is ____ mg. \n\n ![](./sodium.png) ",
           "distractors": [
@@ -34,23 +36,10 @@
         "answer": {
             "answer": "1140"
         }
-      },  
+      },        
       {
         "type": "MultipleChoice",
-        "prompt": {
-          "prompt": "The greatest amount of sodium in a fast food item in this dataset is ____ mg. \n\n ![](./sodium.png) ",
-          "distractors": [
-            "2651.9",
-            "654",
-            "494"
-          ]
-        },
-        "answer": {
-            "answer": "1140"
-        }
-      },       
-      {
-        "type": "MultipleChoice",
+        "label": "IQR from 5-number summary",
         "prompt": {
           "prompt": "The interquartile range for grams of sodium is ____ mg. \n\n ![](./sodium.png) ",
           "distractors": [
@@ -65,6 +54,7 @@
       },    
       {
         "type": "MultipleChoice",
+        "label": "25% of data from 5-number summary",
         "prompt": {
           "prompt": "25% of the values in this dataset are between 2.9 mg and ____ mg of sodium. \n\n ![](./sodium.png) ",
           "distractors": [
@@ -79,6 +69,7 @@
       }, 
       {
         "type": "MultipleChoice",
+        "label": "50% of data from 5-number summary",
         "prompt": {
           "prompt": "50% of the values in this dataset are between 1140 mg and ____ mg of sodium. \n\n ![](./sodium.png) ",
           "distractors": [
@@ -93,20 +84,43 @@
       }, 
       {
         "type": "MultipleChoice",
+        "label": "box-plot from 5-number summary",
         "prompt": {
           "prompt": "Choose the box plot (below) that accurately represents this 5-number summary: \n\n ![](./5-num-sum.png)",
           "distractors": [
-            "![](./box-plot-a.png)",
-            "![](./box-plot-c.png)",
-            "![](./box-plot-a.png)"
+            { "id": "box-plot-a", 
+              "content": "![](./box-plot-a.png)",
+              "label": "equal distribution",
+              "description": "Box plot distributed equally from 0 to 9" 
+            },
+            { "id": "box-plot-b", 
+              "content": "![](./box-plot-b.png)",
+              "label": "symmetric distribution",
+              "description": "Box plot symmetric 1 to 10. whiskers slightly smaller than box sections." 
+            },
+            { "id": "box-plot-c", 
+              "content": "![](./box-plot-c.png)",
+              "label": "skew left",
+              "description": "Box plot skew left 0 to 9 with median at 5." 
+            },
+            { "id": "box-plot-d", 
+              "content": "![](./box-plot-d.png)",
+              "label": "skew left - no right whisker",
+              "description": "Box plot skew left 0 to 9. Median 6.5. No R whisker. " 
+            }
           ]
         },
         "answer": {
-            "answer": "![](./box-plot-b.png)"
+            "answer": { 
+              "id": "boxplotA", "content": "![](./boxplotA.png)",
+               "label": "skew left",
+                "description": "Box plot skewed left — long lower whisker, box shifted toward the high end." 
+              }
         }
       },
       {
         "type": "MultipleChoice",
+        "label": "interpret box-plot",
         "prompt": {
           "prompt": "The box plot (below) shows the distribution of weeks to adoption for 32 animals in the shelter. Of the five statements below, select *all* that are *true*: \n\n ![](./weeks.png)",
           "distractors": [
