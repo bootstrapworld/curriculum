@@ -5,7 +5,6 @@ phase1: node_modules initialization .git/hooks/pre-commit courses-and-lessons pa
 ###############################################################################
 
 initialization:
-	@. ${HOME}/.nvm/nvm.sh && nvm use 22.5
 	@mkdir -p $(PROGDIR)
 	@$(CP) -upr shared/langs/en-us/* $(PROGDIR)
 	@$(CP) -p node_modules/codemirror/lib/codemirror.css distribution/$(NATLANG)/lib
@@ -60,7 +59,6 @@ initialization:
 # but I don't think it buys us much
 
 node_modules:
-	@. ${HOME}/.nvm/nvm.sh && nvm use 22.5
 	npm explore npm/node_modules/@npmcli/run-script -g -- npm_config_global=false npm install node-gyp@latest
 	npm install
 
