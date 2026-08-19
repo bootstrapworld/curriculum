@@ -52,57 +52,35 @@
         }
       },
     {
-      "type": "CardSort",
+      "type": "Matching",
       "label": "bar charts v histograms",
       "prompt": {
-        "prompt": "Distinguish between bar charts and histograms: Sort the cards into two groups - one for bar charts and one for histograms. \nBe sure to sort all 9 cards.\n",
-        "cards": [
-          {
-            "id": "hist-title",
-            "content": "HISTOGRAM"
-          },
-          {
-            "id": "hist1",
-            "content": "![](./hist-image.png)"
-          },
-          {
-            "id": "hist2",
-            "content": "uses quantitative data"
-          },
-          {
-            "id": "hist3",
-            "content": "its bars cannot be reordered"
-          },
-          {
-            "id": "hist4",
-            "content": "requires us to determine a bin width"
-          },
-          {
-            "id": "bar-title",
-            "content": "BAR CHART"
-          },
-          {
-            "id": "bar1",
-            "content": "uses categorical data"
-          },
-          {
-            "id": "bar2",
-            "content": "its bars can be reordered any way we wish"
-          },
-          {
-            "id": "bar3",
-            "content": "![](./bar-image.png)"
-          }
+        "prompt": "Distinguish between bar charts and histograms: Match each item below to the correct category.\n",
+        "leftColumn": ["HISTOGRAM", "BAR CHART"],
+        "rightColumn": [
+          "![](./hist-image.png)",
+          "uses quantitative data",
+          "its bars cannot be reordered",
+          "requires us to determine a bin width",
+          "uses categorical data",
+          "its bars can be reordered any way we wish",
+          "![](./bar-image.png)"
         ]
       },
-        "answer": {
-          "answer": [
-              ["hist-title", "hist1", "hist2", "hist3", "hist4"],
-              ["bar-title", "bar1", "bar2", "bar3"]
-            ],
-          "ordered": false
-        }
-      },
+      "answer": {
+        "HISTOGRAM": [
+          "![](./hist-image.png)",
+          "uses quantitative data",
+          "its bars cannot be reordered",
+          "requires us to determine a bin width"
+        ],
+        "BAR CHART": [
+          "uses categorical data",
+          "its bars can be reordered any way we wish",
+          "![](./bar-image.png)"
+        ]
+      }
+    },
     {
       "type": "MultipleChoice",
       "label": "Most useful bin size",
