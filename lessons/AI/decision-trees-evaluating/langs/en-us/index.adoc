@@ -102,7 +102,7 @@ The `build-tree` function takes *four arguments* in its Domain:
 @slidebreak{Investigate-DN}
 
 @lesson-instruction{
-Complete the second section of @printable-exercise{computing-decision-trees.adoc}
+- Complete the second section of @printable-exercise{computing-decision-trees.adoc}
 }
 
 @slidebreak{Investigate-DN}
@@ -120,7 +120,6 @@ Complete the second section of @printable-exercise{computing-decision-trees.adoc
 }
 
 @lesson-instruction{
-- Make sure you've saved all of the new definitions to your copy of the @starter-file{decision-tree}
 - Turn to @printable-exercise{comparing-decision-trees.adoc} and complete the first section.
 }
 
@@ -139,9 +138,42 @@ As is common for quantitative columns, there's more variability in `pounds` than
 When given another dataset to classify, `tree-any4` is out-scoring `tree-q6`!
 
 @QandA{
-@Q{*Why did `tree-q6` do so poorly?*}
-@A{Let students share their theories}
+@Q{Why did `tree-q6` do so poorly?}
+@A{Let students share their theories.}
 }
+
+@slidebreak{Investigate}
+
+This is an example of what Machine Learning engineers call @vocab{over-fitting}. Over-fitting happens when our decision tree tries so hard to find a pattern in a specific set of data that it begins to "memorize" the details and random noise instead of learning the actual rule.
+
+In this case, `tree-q6` was _totally dependent_ on `pounds`, whose distribution in the `training` dataset is quite different from the `testing` dataset.
+
+[cols="^1a, ^1a", frame="none", options="header"]
+|===
+| Training Dataset
+| Testing Dataset
+
+| @image{images/dot-plot-pounds-training.png}
+| @image{images/dot-plot-pounds-testing.png}
+|===
+
+@slidebreak{Investigate}
+@ifslide{[cols="^1a, ^1a", frame="none", options="header"]
+|===
+| Training Dataset
+| Testing Dataset
+
+| @image{images/dot-plot-pounds-training.png}
+| @image{images/dot-plot-pounds-testing.png}
+|===
+}
+
+Animals' weights in `pounds` can vary widely, whereas the attributes in the other columns are more stable across samples!
+
+- Dogs and cats are all `mammals` no matter what.
+- Most dogs like to `swim`. And most dogs, cats, and lizards have a `tail`.
+
+The more a classifier depends on an attribute, the more sensitive it is to variations in that attribute between populations.
 
 @slidebreak{Investigate}
 [cols="^1a, ^1a", frame="none", options="header"]
@@ -152,26 +184,6 @@ When given another dataset to classify, `tree-any4` is out-scoring `tree-q6`!
 | @image{images/dot-plot-pounds-training.png}
 | @image{images/dot-plot-pounds-testing.png}
 |===
-
-This is an example of what ML engineers call @vocab{over-fitting}. The more a classifier depends on the quirks of an attribute in the training data, the more sensitive it is to variations in that attribute when it comes time to use new inputs. In this case, `tree-q6` was _totally dependent on very specific thresholds in the `pounds` column_, so when the testing dataset had different thresholds the classifier performed poorly.
-
-@slidebreak{Investigate}
-@ifslide{
-[cols="^1a, ^1a", frame="none", options="header"]
-|===
-| Training Dataset
-| Testing Dataset
-
-| @image{images/dot-plot-pounds-training.png}
-| @image{images/dot-plot-pounds-testing.png}
-|===
-}
-This would be like studying for a test by memorizing the answers to a previous test. You've learned how to ace _that specific test_, but not enough to actually do well on a different one.
-
-@slidebreak{Investigate}
-In Machine Learning, over-fitting happens when our decision tree tries so hard to find a pattern in a specific set of data that it begins to "memorize" the details and random noise instead of learning the actual rule. That's exactly what happened with the `pounds` column here.
-
-The other columns didn't vary as much at all! Dogs and cats are all `mammals` no matter what. Most dogs like to `swim`. And most dogs, cats, and lizards all have a `tail`. These attributes are more stable across samples, whereas `pounds` can vary widely.
 
 === Synthesize
 @slidebreak{Synthesize}
@@ -304,22 +316,6 @@ Pyret has a function that will make a @vocab{confusion matrix} for you! Here's t
 @slidebreak{Investigate}
 
 @lesson-instruction{
-- Make sure you added the `swims-classifier` below to your Definitions Area and clicked "Run".
-
-```
-fun swims-classifier(r):
-  if r["swims"] == true:
-    "dog"
-  else: 
-    "cat"
-  end
-end
-```
-}
-
-@slidebreak{Investigate}
-
-@lesson-instruction{
 - Test out the confusion matrix for our `swims-classifier` using the following code:
 
 @indented{`confusion-matrix(training, "species", swims-classifier)`}
@@ -393,7 +389,7 @@ The "correct scores" are shown in the diagonal, running from top-left to bottom-
 
 @strategy{Coming Soon!}{
 
-Want your students to practice their skills and apply their knowledge of classifiers to some real-world data? Have them open the @opt-starter-file{ai-music}, and build a decision tree that can tell the difference between R&B songs, Rock'n'Roll songs and Country songs! While the starter file is ready today, we'll be updating the workbook page and adding an optional section to this lesson that scaffolds the whole thing.
+Want your students to practice their skills and apply their knowledge of classifiers to some real-world data? Have them open the @opt-starter-file{ai-music}, and build a decision tree that can tell the difference between R&B songs, Rock'n'Roll songs and Country songs! While the starter file is ready today, we'll be adding an optional section to this lesson and a workbook page that scaffolds the whole thing.
 }
 
 

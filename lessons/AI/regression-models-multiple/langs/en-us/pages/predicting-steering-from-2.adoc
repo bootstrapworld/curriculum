@@ -43,25 +43,23 @@ div#body td { padding: 0 1em 0 0 !important; }
 [cols="3a, ^2a", frame="none"]
 |===
 | @n What do you Notice? What do you Wonder? 
-@blanklines{4}{}
+@blanklines{4}{@ifsoln{There's a cube with x, y and z axes. There's a translucent purple x-y plane. There are some purple dots.}}
 | @image{../images/3d-planes.webp}
 |===
 
 @vspace{1ex}
 
-*Click on the cube to drag and rotate it so that the z-axis points up, y-axis points to the right, and x-axis points towards you.*
+*Click on the cube to drag and rotate it so the y-axis is horizontal (pointing right) and x-axis points towards you (and is no longer visible).*
 
-@n Now the 3D graph shows a (purple) 2D scatter plot. Which plane is the scatter plot on? @hspace{2em}x-y @hspace{2em}x-z @hspace{2em}@ifsoln-choice{y-z}
+@n Now the 3D graph shows a (purple) 2D scatter plot. Which plane is the scatter plot on? @hspace{3em}x-y @hspace{3em}x-z @hspace{3em}@ifsoln-choice{y-z}
 
-@n Which variables are being compared in this plane? @fitb{}{@ifsoln{angle and skew}}
+@n Which variables are being compared in this plane?  @hspace{3em} @ifsoln-choice{angle} @hspace{4em} curve @hspace{4em} @ifsoln-choice{skew}
 
-@n Adjust @math{m_{skew}} and @math{b} to find the best fit.  @hspace{1em} @math{m_{skew}}: @fitb{4em}{@ifsoln{-2 to -5}}    @math{b}: @fitb{5em}{@ifsoln{30 to 45}}. _As skew increases, the steering-angle_ @fitb{}{@ifsoln{decreases}}
+@n Adjust @math{m_{skew}} and @math{b} to find the best fit.  @hspace{1em} @math{m_{skew}}: @fitb{4em}{@ifsoln{-2 to -5}}    @math{b}: @fitb{5em}{@ifsoln{30 to 45}}. _As skew increases, the steering-angle_ @fitbruby{}{@ifsoln{decreases}}{increases / decreases}
 
 @vspace{1ex}
 
-*Rotate the cube to the right, so that the z-axis points up, y-axis points to the right, and x-axis points towards you.*
-
-@n What did the line look like while you were rotating the cube? @fitb{}{@ifsoln{a plane!}}
+*Rotate the cube to the right until the x-axis points to the right and y-axis points away from you (and is no longer visible).*
 
 @n Why do the purple dots look like they're in one line? @fitb{}{@ifsoln{from this angle, we can't see the x-distance between them}}
 
@@ -73,8 +71,8 @@ div#body td { padding: 0 1em 0 0 !important; }
 
 @n If you haven't already, label the planes on the 3D plot at the top of the page with the correct variable names.
 
-@n Use the sliders to fit a line to the points in this plane. _(Note:_ @math{m_{curve}} _is beneath the curve folder!)_ +
-@hspace{1em}@math{m_{curve}}: @fitb{4em}{@ifsoln{15 to 20}}    @math{b}: @fitb{5em}{@ifsoln{-30 to -10}}. _As curve increases, the steering-angle_ @fitb{8em}{@ifsoln{increases}} 
+@n Use the sliders to fit a line to the points in this plane. _(Note:_ @math{m_{curve}} _is beneath the curve folder!  @math{b} _is still above the curve folder.)_ +
+@hspace{1em}@math{m_{curve}}: @fitb{4em}{@ifsoln{15 to 20}}    @math{b}: @fitb{5em}{@ifsoln{-30 to -10}}. _As curve increases, the steering-angle_ @fitbruby{}{@ifsoln{increases}}{increases / decreases} 
 
 
 == Making Connections
@@ -88,9 +86,9 @@ div#body td { padding: 0 1em 0 0 !important; }
 
 == Fitting a 3D Model
 
-@n "Turn off" the 2d projections (blue and purple) and focus on the orange dots. Set the slope sliders to the values you found for your the 2D plots and adjust the y-intercept slider to the *plane of best fit* for this data. Readjust the slope sliders if need be. Then use your slider estimates to complete the Pyret definition below:
+@n "Turn off" the 2d projections (blue and purple) and focus on the orange dots. Set the @math{m_{skew}} and@math{m_{curve}} sliders to the values you found for your the 2D plots and adjust the @math{b} slider to the *plane of best fit* for this data. Readjust the slope sliders if need be. Then use your slider estimates to complete the Pyret definition below:
 
-`fun steering-angle(r): (`
+`fun curve-skew-predictor(r): (`
 @fitbruby{4.5em}{@ifsoln{20}}{@math{m_{curve}}}
 `* r["curve"]) + (`
 @fitbruby{4.5em}{@ifsoln{-2.5}}{@math{m_{skew}}}

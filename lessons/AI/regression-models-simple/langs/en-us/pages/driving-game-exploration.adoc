@@ -7,15 +7,22 @@
   text-align: center;
   p {margin-left: .25em !important; padding: 10px !important;}
 }
+
+.lessSpace .autonum { padding-top: 0.2em !important; }
+
 </style>
 ++++
 
 
-Open @starter-file{self-driving} in Pyret and save a copy of your own. Then click "Run".
+Open the @starter-file{self-driving} in Pyret and save a copy of your own. Then click "Run".
 
 == Playing the Game
 
-@n *Test run:* evaluate `train-bev(20)` to run the simulator at a speedy 20 frames per second. *Use the left- and right-arrow keys to steer the car*. In the top-left corner of the simulator, you'll find the current `steering-angle`, along with some some other data.
+@vspace{1ex}
+
+[.lessSpace]
+*Test run:* +
+@n To get a feel for the simulator, evaluate   `train-bev(20)` and use  ◀  and  ▶  on your keyboard to steer the car around the track and across the finish line. _We won't be saving this data, so don't worry about driving perfectly right now!_ In the top-left corner of the simulator, you'll find the current `steering-angle`, along with some some other data.
 
 @n What happens to the track when you cross the finish line? @fitb{}{@ifsoln{We get a new track with a different shape.}}
 
@@ -25,12 +32,15 @@ Open @starter-file{self-driving} in Pyret and save a copy of your own. Then clic
 @vspace{1ex}
 
 [.myCustomClass]
-Every time we drive the car, we create a new table based on how we steer. But to _save that data_ and use it later, *we need to define it*.
+Every time we evaluate `train-bev`, we'll get a new table, based on how we steer the car. To save data from a training session, we need to define it as something before we start, e.g. `first-attempt = train-bev(20)`.
 
-@n *Training run:* slow down the training lap to get better data, and *save it as a variable*. Evaluate `run1 = train-bev(10)` and steer the car to the finish the line. When you close the simulator, evaluate `run1`. How many rows are in your table? @fitb{}{@ifsoln{answers will vary - likely 500 to 1000}}
+@vspace{1ex}
 
-@n Now let's try another lap using a "Point of View" simulation. Evaluate `run2 = train-pov(5)`. Which view do you prefer, and why? @fitb{}{@ifsoln{Answer will vary.}} +
-@fitb{}{@ifsoln{Birds Eye View, because we could anticipate what was coming and plan ahead. Also, the road didn't get hidden as we went up.}}
+[.lessSpace]
+*Training run:* +
+@n Let's slow down the training lap to get better data and *save it as a variable*. Evaluate `b-data = train-bev(10)` and steer the car across the finish the line. When you close the simulator, evaluate `b-data`. How many rows are in your table? @fitb{}{@ifsoln{answers will vary - likely 500 to 1000}}
+
+@n Let's try another lap using a "Point of View" simulation. Evaluate `p-data = train-pov(5)`. Which view do you prefer, and why? @fitb{}{@ifsoln{Answers will vary. e.g. Birds Eye View, because we could anticipate what was coming and plan ahead. Also, the road didn't get hidden as we went up.}}
 
 == Examining the Training Data
 
