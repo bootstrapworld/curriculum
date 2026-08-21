@@ -1,0 +1,333 @@
+{
+  "title": "Data Science (Ending Benchmark)",
+  "multipart": {
+    "p1": "**5)** Alia is gathering information about candies at a local store. The following table shows several rows from the resulting dataset.\n\n![](./candy-table.png)",
+    "p2": "**7)** A class is having a contest about who can pick up the most pieces of trash during a weekly clean-up day. They have made a table (shown below) to show how many pieces each student has picked up in the first two weeks. Students who pick up an average of at least 20 pieces a week will win a prize.\n\nYou want to find the number of students who are winning prizes after the first two weeks. Below are several possible steps you could use when coding in Pyret. Your task is to decide which steps are needed, and what order to do them in.\n\n![](./trash-steps-table.png)",
+    "p3": "**8)** At the end of each day, the owners of a sports equipment store tabulate the information shown in the following table. (These rows are a sample -- the real table is much bigger.) It has similar rows for several months and several items, with the most recent data being from last month. For each of the three questions below the sample table, indicate which can be answered using just the information in the full table (\"just\" means with only the same columns as the sample).\n\n![](./sports-table.png)",
+    "p4": "**9)** The school gym teacher times his students as they go through an obstacle course. Times are in minutes. There are 20 students. Based ONLY ON THIS plot, indicate whether each of the following statements is true or false. Choose \"Can't tell\" if you cannot judge based on the plot alone.\n\n![](./obstacle-histogram.png)",
+    "p5": "**10)** Continuing with the obstacle course data, here are plots of the times from four different sections of the gym class (named A, B, C, and D). The Section A plot is the same from the previous question.\n\n![](./obstacle-grid.png)",
+    "p6": "**12)** A school uses a spreadsheet to manage information about its teachers. Two sample rows are shown below. In the grid below, indicate whether each column holds categorical data, quantitative data, or neither.\n\n![](./teacher-table.png)"
+  },
+  "questions": [
+    {
+      "type": "MultipleChoice",
+      "multipart": "p1",
+      "prompt": {
+        "prompt": "Name",
+        "distractors": ["not ready to use", "I don't know"]
+      },
+      "answer": { "answer": "can use as is" }
+    },
+    {
+      "type": "MultipleChoice",
+      "multipart": "p1",
+      "prompt": {
+        "prompt": "Has Chocolate?",
+        "distractors": ["can use as is", "I don't know"]
+      },
+      "answer": { "answer": "not ready to use" }
+    },
+    {
+      "type": "MultipleChoice",
+      "multipart": "p1",
+      "prompt": {
+        "prompt": "Cost ($)",
+        "distractors": ["can use as is", "I don't know"]
+      },
+      "answer": { "answer": "not ready to use" }
+    },
+    {
+      "type": "ShortAnswer",
+      "multipart": "p1",
+      "prompt": {
+        "prompt": "If you answered \"not ready\" for any of the columns in the previous question, please briefly explain why. At the end of your answer, pick ONE column and provide a ready-to-use version of that column with the same information as in the original table (one line per row)."
+      },
+      "answer": {
+        "answer": "The \"Has Chocolate?\" column mixes different ways of writing yes/no (\"yeah\", \"nope\", \"false\", \"yes\"), and the \"Cost ($)\" column mixes different formats (a dollar-sign string, a written-out description, a plain number, and \"cents\" written out as text). Ready-to-use version of Has Chocolate?, same row order: true, false, false, true"
+      }
+    },
+
+    {
+      "type": "ShortAnswer",
+      "multipart": "p2",
+      "prompt": {
+        "prompt": "Use the radio grid below to indicate the order in which you would do the steps you kept to determine the number of prize winners. You can also mark a step as not needed for this task.\n\nList, in order, only the steps you would use, separated by commas. For any step you would NOT use, write \"not needed\"."
+      },
+      "answer": {
+        "answer": "ADD-COL, FILTER-AVG-PIECES, COUNT (FILTER-WEEK1, SORT, and MEAN are not needed)"
+      }
+    },
+
+    {
+      "type": "MultipleChoice",
+      "multipart": "p3",
+      "prompt": {
+        "prompt": "Check all that apply.",
+        "distractors": [
+          "Which item is most often rented by older customers?",
+          "None of them"
+        ]
+      },
+      "answer": {
+        "answer": [
+          "Which month sees the most bicycle rentals?",
+          "Which items should they replace because they've been repaired too many times?"
+        ]
+      }
+    },
+
+    {
+      "type": "MultipleChoice",
+      "multipart": "p4",
+      "prompt": {
+        "prompt": "More than half of all students at the school finished in under 6 minutes",
+        "distractors": ["True", "False"]
+      },
+      "answer": { "answer": "Can't tell" }
+    },
+    {
+      "type": "MultipleChoice",
+      "multipart": "p4",
+      "prompt": {
+        "prompt": "No two students in Section A finished in exactly the same amount of time",
+        "distractors": ["True", "False"]
+      },
+      "answer": { "answer": "Can't tell" }
+    },
+    {
+      "type": "MultipleChoice",
+      "multipart": "p4",
+      "prompt": {
+        "prompt": "At most 6 students in Section A finished in exactly the same time",
+        "distractors": ["False", "Can't tell"]
+      },
+      "answer": { "answer": "True" }
+    },
+
+    {
+      "type": "MultipleChoice",
+      "multipart": "p5",
+      "prompt": {
+        "prompt": "Which sections had MEDIAN times between 5 and 5.5 minutes? Check all that apply:",
+        "distractors": [
+          "Section A",
+          "Section C",
+          "I don't know the definition of MEDIAN",
+          "I don't know how to determine MEDIAN from a plot",
+          "I don't know for another reason"
+        ]
+      },
+      "answer": { "answer": ["Section B", "Section D"] }
+    },
+    {
+      "type": "MultipleChoice",
+      "multipart": "p5",
+      "prompt": {
+        "prompt": "Refer to the same four plots. Which sections had a MODE between 5 and 5.5 minutes? Check all that apply:",
+        "distractors": [
+          "Section B",
+          "Section C",
+          "I don't know the definition of MODE",
+          "I don't know how to determine MODE from a plot",
+          "I don't know for another reason"
+        ]
+      },
+      "answer": { "answer": ["Section A", "Section D"] }
+    },
+
+    {
+      "type": "MultipleChoice",
+      "multipart": "p6",
+      "prompt": {
+        "prompt": "Teacher",
+        "distractors": ["Categorical", "Quantitative", "I don't know"]
+      },
+      "answer": { "answer": "Neither" }
+    },
+    {
+      "type": "MultipleChoice",
+      "multipart": "p6",
+      "prompt": {
+        "prompt": "Classroom",
+        "distractors": ["Neither", "Quantitative", "I don't know"]
+      },
+      "answer": { "answer": "Categorical" }
+    },
+    {
+      "type": "MultipleChoice",
+      "multipart": "p6",
+      "prompt": {
+        "prompt": "Is-New",
+        "distractors": ["Quantitative", "Neither", "I don't know"]
+      },
+      "answer": { "answer": "Categorical" }
+    },
+    {
+      "type": "MultipleChoice",
+      "multipart": "p6",
+      "prompt": {
+        "prompt": "Subject",
+        "distractors": ["Quantitative", "Neither", "I don't know"]
+      },
+      "answer": { "answer": "Categorical" }
+    },
+    {
+      "type": "MultipleChoice",
+      "multipart": "p6",
+      "prompt": {
+        "prompt": "Students",
+        "distractors": ["Categorical", "Neither", "I don't know"]
+      },
+      "answer": { "answer": "Quantitative" }
+    },
+    {
+      "type": "ShortAnswer",
+      "multipart": "p6",
+      "prompt": {
+        "prompt": "Referring to the same sample table, what type of data would Teacher be in a program (number, image, etc)? Enter a single word."
+      },
+      "answer": { "answer": "string" }
+    },
+    {
+      "type": "ShortAnswer",
+      "multipart": "p6",
+      "prompt": {
+        "prompt": "Referring to the same sample table, what type of data would Classroom be in a program (number, image, etc)? Enter a single word."
+      },
+      "answer": { "answer": "number" }
+    },
+    {
+      "type": "ShortAnswer",
+      "multipart": "p6",
+      "prompt": {
+        "prompt": "Referring to the same sample table, what type of data would Is-New be in a program (number, image, etc)? Enter a single word."
+      },
+      "answer": { "answer": "boolean" }
+    },
+
+    {
+      "type": "MultipleChoice",
+      "prompt": {
+        "prompt": "Select the box plot below that correctly displays this dataset: 0, 4, 5, 6, 6, 7, 9\n\n![](./boxplot-grid.png)",
+        "distractors": ["A", "B", "D"]
+      },
+      "answer": { "answer": "C" }
+    },
+
+    {
+      "type": "MultipleChoice",
+      "prompt": {
+        "prompt": "Select each statement that must be true of the box plot, below.\n\n![](./boxplot-single.png)",
+        "distractors": [
+          "25% of the data falls between 3 and 4.25",
+          "25% of the data falls between 6.75 and 8"
+        ]
+      },
+      "answer": {
+        "answer": [
+          "25% of the data falls between 3 and 3.5",
+          "25% of the data falls between 4.5 and 5",
+          "50% of the data falls between 3.5 and 5",
+          "50% of the data falls between 4.5 and 8"
+        ]
+      }
+    },
+
+    {
+      "type": "MultipleChoice",
+      "prompt": {
+        "prompt": "Select each statement that must be true of the box plot, below.\n\n![](./boxplot-single.png)",
+        "distractors": [
+          "The mean of the data is 5.",
+          "The median of the data is 5.5"
+        ]
+      },
+      "answer": {
+        "answer": ["The median of the data is 4.5", "The range of the data is 5"]
+      }
+    },
+
+    {
+      "type": "MultipleChoice",
+      "prompt": {
+        "prompt": "The following are histograms of quiz scores for four different classes. Which distribution shows the most variability?\n\n![](./histogram-grid.png)",
+        "distractors": ["II", "III", "IV"]
+      },
+      "answer": { "answer": "I" }
+    },
+
+    {
+      "type": "MultipleChoice",
+      "prompt": {
+        "prompt": "The following plots are made using data from IMDB, a website where people review movies. Plot A shows the ratings of the top 250 movies and the bottom 250 movies. Plot B shows data from only the top 250 movies. Indicate which of the following statements are true based on these plots.\n\n![](./imdb-plots.png)",
+        "distractors": [
+          "When a movie in the top 250 gets more reviews, that causes its ratings go up",
+          "Movies in the top 250 tend to get the same reviews, regardless of how they are rated",
+          "When a movie in the top 250 is rated highly, that causes it to get more reviews",
+          "Movies in the top 250 have more reviews than movies in the Bottom 250."
+        ]
+      },
+      "answer": {
+        "answer": ["Movies in the top 250 with more reviews tend to have higher ratings"]
+      }
+    },
+
+    {
+      "type": "MultipleChoice",
+      "prompt": {
+        "prompt": "A student who waits tables recorded the cost of the meal and the tip left by twelve diners at the restaurant where she works. Based on her data (see points plotted below, with regression line), which tip amount listed below is closest to what you would expect the student to earn on a meal that costs $20?\n\n![](./tip-scatter.png)",
+        "distractors": ["$4.00", "$3.40", "$3.00"]
+      },
+      "answer": { "answer": "$3.15" }
+    },
+
+    {
+      "type": "MultipleChoice",
+      "prompt": {
+        "prompt": "Estimate the correlation coefficient (r) for the two variables X and Y from the scatter plot below\n\n![](./correlation-scatter.png)",
+        "distractors": [
+          "I don't know these terms or don't understand the question.",
+          "-1.8",
+          "-0.25",
+          "0.25",
+          "1.6"
+        ]
+      },
+      "answer": { "answer": "0" }
+    },
+
+    {
+      "type": "MultipleChoice",
+      "prompt": {
+        "prompt": "Which of the following statements about functions are true? Check all that apply.",
+        "distractors": [
+          "I have no idea what a function is (I'm guessing at all of these)",
+          "A function can only take numbers as input.",
+          "A function can only produce a number as a result.",
+          "A function can produce more than one output for the same input.",
+          "An algebraic expression is a function.",
+          "Every function can be displayed on a coordinate grid.",
+          "A pie chart is a representations of a function."
+        ]
+      },
+      "answer": {
+        "answer": [
+          "A function can take more than one input.",
+          "An input-output table is a representations of a function.",
+          "A human can generalize a collection of input-output examples to create a function.",
+          "A computer can generalize a collection of input-output examples to create a function."
+        ]
+      }
+    },
+
+    {
+      "type": "ShortAnswer",
+      "prompt": {
+        "prompt": "Were any of these questions confusing to you? Which ones and why?"
+      },
+      "answer": {
+        "answer": "(Open-ended reflection on this assessment itself -- there is no single correct answer; reserved for teacher review.)"
+      }
+    }
+  ]
+}
