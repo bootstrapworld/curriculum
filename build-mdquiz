@@ -16,7 +16,40 @@ indexHTML='<!DOCTYPE html>
     <script type="module">
         import buildQuiz from "./lib.js";
         import quizConfig from "./quiz.json?raw" with {type: "json"};
-        buildQuiz('root', quizConfig)
+        buildQuiz('"'"'root'"'"', quizConfig)
+    </script>
+    <style>
+      /* Categorize questions: images default to a fixed small size, filling
+         the vertical space text cards spend on paragraph margin so the
+         enclosing card stays the same size as a text card; click to toggle
+         full size. */
+      .categorize .categorize-card p:has(> img),
+      .categorize .match-tag p:has(> img) {
+        margin: 0;
+      }
+      .categorize .categorize-card img,
+      .categorize .match-tag img {
+        width: auto;
+        height: 3em;
+        object-fit: contain;
+        cursor: zoom-in;
+        transition: height 0.15s ease;
+      }
+      .categorize .categorize-card img.mq-enlarged,
+      .categorize .match-tag img.mq-enlarged {
+        width: auto;
+        height: auto;
+        max-width: 100%;
+        max-height: 300px;
+        cursor: zoom-out;
+      }
+    </style>
+    <script>
+      document.addEventListener('"'"'click'"'"', function (e) {
+        var card = e.target.closest && e.target.closest('"'"'.categorize .categorize-card, .categorize .match-tag'"'"');
+        var img = card && card.querySelector('"'"'img'"'"');
+        if (img) img.classList.toggle('"'"'mq-enlarged'"'"');
+      });
     </script>
   </body>
 </html>'
