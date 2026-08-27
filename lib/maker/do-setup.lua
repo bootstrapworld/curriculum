@@ -52,6 +52,27 @@ local function first_n_lines_contain(file, n, pat)
   return false
 end
 
+-- The pages/.cached/.workbook-pages-ls.txt.kp cache is written during phase-1
+-- massage (collect-workbook-pages.lua). On incremental builds a lesson dir can
+-- be preproc-relevant without a current cache -- e.g. an interrupted massage,
+-- an orphaned distribution dir from a renamed source lesson, or a
+-- .proglang-ignore stub that slipped out of the ignore list. Racket preproc
+-- hard-errors on the missing file (preproc.rkt), which aborts the whole build;
+-- a full `make clean` masks it by re-massaging every lesson. Skip such lessons
+-- here, loudly, instead of feeding preproc a lesson it cannot process.
+local warned_lessons = {}
+local function lesson_cache_ready_p(lessondirectory)
+  local kp = lessondirectory .. '/pages/.cached/.workbook-pages-ls.txt.kp'
+  if file_exists_p(kp) then return true end
+  -- both loops hit every page of a lesson, so warn once per lesson, not per adoc
+  if not warned_lessons[lessondirectory] then
+    warned_lessons[lessondirectory] = true
+    io.stderr:write('WARNING: skipping ' .. lessondirectory ..
+      ' -- missing ' .. kp .. ' (re-massage this lesson, or `make clean`)\n')
+  end
+  return false
+end
+
 for _,adocfile in ipairs(pathwayindependent_adocs) do
   local containingdirectory = adocfile:gsub('^(.*)/.*', '%1')
   local distrootdir = get_distrootdir(adocfile)
@@ -71,6 +92,9 @@ for _,adocfile in ipairs(workbookpage_adocs) do
   local containingdirectory = adocfile:gsub('^(.*)/.*', '%1')
   local lessondirectory = containingdirectory:gsub('(.*/lessons/.-)/.*', '%1')
   if memberp(lessondirectory, ignorable_directories) then
+    goto continue
+  end
+  if not lesson_cache_ready_p(lessondirectory) then
     goto continue
   end
   local distrootdir = get_distrootdir(adocfile)
@@ -112,6 +136,9 @@ local distrootdir = "../../"
 for _,adocfile in ipairs(lessonplan_adocs) do
   local containingdirectory = adocfile:gsub('^(.*)/.*', '%1')
   if memberp(containingdirectory, ignorable_directories) then
+    goto continue
+  end
+  if not lesson_cache_ready_p(containingdirectory) then
     goto continue
   end
   local adocbasename = adocfile:gsub('^.*/', '')
