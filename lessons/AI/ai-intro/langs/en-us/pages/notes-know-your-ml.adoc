@@ -1,0 +1,57 @@
+= Know Your Machine Learning Methods!
+++++
+<style>
+div#body td { text-align: center !important; }
+div#body img { height: 140px; width: auto; }
+div#body td { border-top: none !important; border-bottom: none !important; }
+div#body td[colspan] {
+	padding-top: 45px !important;
+	font-size:	 20px;
+	font-style:  italic;
+}
+div#body tr:first-child { font-size: 20px; }
+</style>
+++++
+
+[cols="^.^1a,^.^1a,^.^1a,^.^1a", frame="none", stripes="none", options="noheader"]
+|===
+| *Classification*
+| *Regression*
+| *Recommendation*
+| *Text Generation*
+
+| @image{../images/classifier-bot.png, 150}
+| @image{../images/regression-bot.webp, 150}
+| @image{../images/recommendation-bot.png, 150}
+| @image{../images/chat-bot.png, 150}
+
+| "Which one?"
+| "How many?"
+| "What's similar?"
+| "What comes next?"
+
+4+| Training means...
+
+| Start with a multi-column dataset with at least one categorical column...
+| Start with a multi-column dataset with at least one quantitative column...
+| Start with a collection of items (e.g., photos, documents, audio samples)...
+| Start with from a corpus of items (e.g., writings, audio samples, recipes)...
+
+| ...build a decision tree in which a categorical variable is predicted from the others
+| ...using regression (statistics) to compute slopes and y-intercepts that best fit a set of points
+| ...map items to points and finding clusters of points that are near one another
+| ...build a large "table" of what word most likely comes next
+
+4+| After training...
+
+| Given a new observation/row, follow its values down the tree branches until reach the predicted category
+| Given a new observation/row, plug its values into y = b₀ + b₁x₁ + b₂x₂, + ... to get prediction for y
+| Compute centroid of likes/dislikes, then return existing clusters whose centroids are closest ("most similar") to likes/dislikes one
+| Given a prompt, lookup in "tables" to get next word, then repeat with the extended phrase, over and over
+
+4+| Math you need...
+| *Ratio & probability* to compute the accuracy of a prediction if we split on each variable, and *dot plots* to visualize distributions
+| *Scatter plots* to visualize relationships, *line of best fit* to model them, *slope and y-intercept* to describe them
+| *Average/mean* to compute centroids from a set of points, *pythagorean distance* or *angle measures* to determine how close/similar items are to those centroids
+| *Conditional probability* to determine the most likely next-word to follow a starting phrase.
+|===

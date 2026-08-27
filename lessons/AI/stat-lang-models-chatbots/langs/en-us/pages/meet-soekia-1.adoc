@@ -2,38 +2,78 @@
 
 @link-instructions{Respond to the prompts below by interacting with @starter-file{soekia}.}
 
-== Generate text
+== Generating text
 
-The blue panel occupying most of your screen is where text generation takes place. This is the level typically visible to the user when using a chatbot. 
+The blue panel occupying most of your screen is where text generation takes place. This is the level typically visible to the user when using a chatbot.
 
 @n To tell Soekia to start writing, click on the @image{../images/send-icon.png,15} on the right. Read the text until Soekia finishes writing. Take a minute to scroll and click on the other icons in this panel: {nbsp} @image{../images/reset-icon.png,15} {nbsp} @image{../images/copy-icon.png,15} {nbsp} @image{../images/android-icon.png,15} {nbsp} @image{../images/face-icon.png,15} {nbsp} @image{../images/single-step-icon.png,15}. What do you Notice? What do you Wonder?
 
-@blanklines{6}{
-@ifsoln{*Possible Noticings*: A new word appears about once a second. Different words appear in different colors. The fairy tale sounds a little strange. We can pause, speed up or just add one word at a time using the play controls beneath the text window. We can ask Soekia to write another paragraph by clicking "Resume Automatically". We can manually select the next word from a list if we want. In order to clear a story, we can click on the refresh button. We can copy the text that's been generated to our clipboard. We can turn color-coding of the words on and off by clicking on the eye.  *Possible Wonderings*: Why does the story sound so odd? Will Soekia tell a different story each time I ask it for a story? Does ChatGPT use the same algorithm as Soekia? Why are the words highlighted with different colors?
-}
-}
-
-@n Hover your mouse over one or two of the highlighted words in the fairy tale. What appears? (If the words in your fairy tale aren't already highlighted with different colors, click the @image{../images/eye-icon.png, 15}.)
-
 @blanklines{4}{
-@ifsoln{Each color corresponds with a different document; documents are labelled with letters of the alphabet.
+@ifsoln{*Possible Noticings*: Different words appear in different colors. The fairy tale sounds a little strange. We can pause, speed up or just add one word at a time using the controls beneath the text window. We can ask Soekia to keep going by clicking "Resume Automatically". We can turn color-coding of the words on and off by clicking on the eye.  *Possible Wonderings*: Why does the story sound so odd? Will Soekia tell a different story each time I ask it for a story? Does ChatGPT use the same algorithm as Soekia? Why are the words highlighted with different colors?
 }
 }
 
+@n Hover your mouse over one or two of the highlighted words in the fairy tale. What appears? (If the words in your fairy tale aren't already highlighted with different colors, click the @image{../images/eye-icon.png, 15}.) @fitb{}{@ifsoln{Each color corresponds to a document; each document is labelled with letters of the alphabet.}} +
+@fitb{}{@ifsoln{}}
 
-== Documents
+@n Think back to the text-generation program you explored in Pyret. Circle the part of that program that the @image{../images/send-icon.png,15} button most reminds you of:
 
-The green _Documents_ panel is where the training corpus lives. You can access it by clicking the "LOOK INSIDE @image{../images/arrow-forward-icon.png, 15}" button in the upper right-hand corner of @starter-file{soekia, "Soekia"} and scrolling all the way to the right.
+[%autowidth, cols="^,^,^,^,^", grid="none", frame="none"]
+|===
+| `corpus`
+| `build-lang-model`
+| `completions`
+| `choose-completion`
+| @ifsoln-choice{`generate-from`}
+|===
+
+
+== The Documents Panel
+*Click the "LOOK INSIDE @image{../images/arrow-forward-icon.png, 15}" button in the upper right-hand corner, and scroll all the way to the right.*
 
 @n How many documents are there in this particular corpus? @fitb{}{@ifsoln{12}}
 
-@n Give the title of one of the documents: @fitb{}{@ifsoln{THE EMPEROR'S NEW CLOTHES}}
+@n Write the title of one of the documents: @fitb{}{@ifsoln{Responses will vary. For example, "THE EMPEROR'S NEW CLOTHES"}}
 
-@n Click on the @image{../images/collection-icon.png,15} (the middle icon in the upper right). Hover over each of the 7 icons that drop down. Which one are you most interested in exploring? @fitb{}{}
+@n Think back to the text-generation program you explored in Pyret. Circle the part of that program that the @image{../images/send-icon.png,15} button most reminds you of:
 
-@n Take a minute to scroll and click on any remaining icons in this panel. What else do you Notice about the _Documents_ panel? What do you Wonder? 
+[%autowidth, cols="^,^,^,^,^", grid="none", frame="none"]
+|===
+| @ifsoln-choice{`corpus`}
+| `build-lang-model`
+| `completions`
+| `choose-completion`
+| `generate-from`
+|===
 
-@blanklines{6}{
-@ifsoln{*Possible Noticings:* The colors of the documents correspond with the ones I saw in the _Text Generation_ panel. Each document has a maximum of 20,000 characters. I can delete documents by clicking the trash can icon. *Possible Wonderings:* Can I change the training corpus? Why have I never heard of some of the fairy tales?
-}
-}
+== N-Grams and Suggested Words
+@n The next panel to the left is called "N-grams", which has numbered buttons at the top. What number is selected? @fitb{}{@ifsoln{3}}
+
+@n What do all the n-grams listed below these buttons have in common? @fitb{}{@ifsoln{all contain a mix of three words or punctuation marks}} +
+@fitb{}{}
+
+@n Select different numbers, and see how the n-grams change. Circle the part of our Pyret program that this panel most reminds you of:
+
+[%autowidth, cols="^,^,^,^,^", grid="none", frame="none"]
+|===
+| `corpus`
+| @ifsoln-choice{`build-lang-model`}
+| `completions`
+| `choose-completion`
+| `generate-from`
+|===
+
+@n Moving farther to the left, find the panel called "Suggested Words". What is the first suggestion you see? @fitb{}{@ifsoln{responses will vary}}
+
+@n Each suggestion has a number to the left. What do you think the number means? @fitb{}{@ifsoln{the length of the gram}}
+
+@n The darkest-green word at the end of each suggestion is the next word to be added to the output. Circle the part of our Pyret program that this panel most reminds you of:
+
+[%autowidth, cols="^,^,^,^,^", grid="none", frame="none"]
+|===
+| `corpus`
+| `build-lang-model`
+| @ifsoln-choice{`completions`}
+| `choose-completion`
+| `generate-from`
+|===

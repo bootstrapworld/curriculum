@@ -1,0 +1,75 @@
+= What Kind of ML?
+++++
+<style>
+/* Make the "classification v. regression" options bold and center */
+div#body td .paragraph:has(+.paragraph), div#body th {
+	text-align: center !important;
+	font-weight: bold !important;
+}
+</style>
+++++
+Both @vocab{classification} and @vocab{regression} are kinds of _supervised_ learning: the model trains on labeled examples where the right answer is already known. The difference is what they predict. Classification predicts a *category* (one of a fixed set of labels), while regression predicts a *number* on a continuous scale. For each example below, the data is labeled — so the only question is whether the model is producing a category or a number.
+
+[.FillVerticalSpace, cols=".^1a, <.^2a", options="header"]
+|===
+| Example
+| What Kind of Learning and Why? (Circle one)
+
+| @n A weather service predicts whether tomorrow will be 'sunny', 'cloudy', or 'rainy', using thousands of past days each labeled with the sky conditions that actually occurred.
+| @ifsoln-choice{Classification}
+@hspace{3em} Regression
+
+@blanklines{3}{
+@ifsoln{The training data is labeled, so this is supervised. The model chooses from a fixed set of categories ('sunny', 'cloudy', 'rainy'), which makes it classification.}
+}
+
+
+
+| @n A weather service predicts how many inches of rain will fall tomorrow, using thousands of past days each labeled with the rainfall total that was actually recorded.
+| Classification
+@hspace{3em} @ifsoln-choice{Regression}
+
+@blanklines{3}{
+@ifsoln{Same labeled data, same supervised setup — but here the model predicts a continuous number (inches of rain) rather than a category, which makes it regression.}
+}
+
+
+
+| @n A school predicts whether a student will 'pass' or 'fail' the final exam, training on past students who are each marked with whether they ultimately passed or failed.
+| @ifsoln-choice{Classification}
+@hspace{3em} Regression
+
+@blanklines{3}{
+@ifsoln{The outcome label ('pass' or 'fail') is known for every past student, so it's supervised. The prediction is one of two categories, making it classification.}
+}
+
+
+
+| @n A school predicts a student's final exam score from 0 to 100, training on past students whose actual recorded scores are known.
+| Classification
+@hspace{3em} @ifsoln-choice{Regression}
+
+@blanklines{3}{
+@ifsoln{The scores are the labeled "answer key," so it's supervised. Because the prediction is a number on a continuous scale (0–100) rather than a category, it's regression.}
+}
+
+
+
+| @n A nature app looks at a photo of a leaf and predicts which of five tree species it came from, trained on a collection of leaf photos that botanists have already tagged by species.
+| @ifsoln-choice{Classification}
+@hspace{3em} Regression
+
+@blanklines{3}{
+@ifsoln{The photos are labeled with the correct species, so it's supervised. The model assigns each leaf to one of a fixed set of species, which makes it classification.}
+}
+
+
+
+| @n A rideshare app predicts the dollar fare of a trip from its distance, the time of day, and current traffic, trained on millions of past trips with their final fares recorded.
+| Classification
+@hspace{3em} @ifsoln-choice{Regression}
+
+@blanklines{3}{
+@ifsoln{The past fares are the labeled outcomes, so it's supervised. The model predicts a continuous number (the fare in dollars) rather than a category, making it regression.}
+}
+|===
