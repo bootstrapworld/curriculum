@@ -2167,8 +2167,10 @@
                            ;; fills in with a login prompt when the viewer isn't logged
                            ;; in. Must exist in the markup even when the reader is
                            ;; logged in / JS hasn't run yet, since the JS looks it up
-                           ;; by class rather than creating it.
-                           (fprintf o "\n++++\n<p class=\"AssessmentDirections\"></p>\n++++\n")
+                           ;; by class rather than creating it. The id is also the jump
+                           ;; target for inline @assessment{} back-links elsewhere in
+                           ;; the lesson body -- see the "assessment" directive below.
+                           (fprintf o "\n++++\n<p id=\"assessments-anchor\" class=\"AssessmentDirections\"></p>\n++++\n")
                            (fprintf o "\ninclude::~a/{cachedir}.index-assessments.asc[]\n" *containing-directory*)]
                           [(string=? directive "assessment")
                            (let* ([args (read-commaed-group i directive read-group)]
@@ -2195,11 +2197,15 @@
                              (unless (assoc lbl *assessments-met*)
                                  (set! *assessments-met*
                                    (cons (cons lbl text) *assessments-met*)))
-                             ;; Inline @assessment{} links up to the Assessments
-                             ;; row in the materials table (anchored via [#assessments]
-                             ;; emitted by @assessments).  Italicized to distinguish
-                             ;; it as a reference rather than the quiz link itself.
-                             (fprintf o "link:#assessments[_~a_]" text))]
+                             ;; Inline @assessment{} uses don't duplicate the real,
+                             ;; JS-guarded a.quiz link (that lives once in the intro
+                             ;; table's materials list -- see @assessments /
+                             ;; store-assessments). Instead they link back up to the
+                             ;; #assessments-anchor id that directive emits, so a
+                             ;; reader who meets @assessment{} mid-lesson can jump to
+                             ;; the actual link. The up-arrow flags that this jumps up
+                             ;; the page rather than away from it.
+                             (fprintf o "pass:[<a href=\"#assessments-anchor\" class=\"assessment-backlink\">&#x2B06;&#xFE0F; ~a</a>]" text))]
                           [(string=? directive "citation")
                            (let* ([args (read-commaed-group i directive read-group)]
                                   [args-len (length args)]
