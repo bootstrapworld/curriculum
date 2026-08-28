@@ -2163,6 +2163,12 @@
                                                              url title ", window=\"&#x5f;blank\""))])
                                                   (display link-output o))]))]))]
                           [(string=? directive "assessments")
+                           ;; Empty placeholder that populateQuizLinks() (graph-pages.js)
+                           ;; fills in with a login prompt when the viewer isn't logged
+                           ;; in. Must exist in the markup even when the reader is
+                           ;; logged in / JS hasn't run yet, since the JS looks it up
+                           ;; by class rather than creating it.
+                           (fprintf o "\n++++\n<p class=\"AssessmentDirections\"></p>\n++++\n")
                            (fprintf o "\ninclude::~a/{cachedir}.index-assessments.asc[]\n" *containing-directory*)]
                           [(string=? directive "assessment")
                            (let* ([args (read-commaed-group i directive read-group)]
@@ -2682,8 +2688,12 @@
     (lambda (o)
       (unless (null? *assessments-met*)
         (for ([asst (reverse *assessments-met*)])
-          (fprintf o "- link:pass:[assessments/~a/index.html][~a, role=quiz]\n"
-                   (car asst) (cdr asst)))))
+          ;; The title is a single positional attribute in the link macro's
+          ;; bracket list, which asciidoctor otherwise splits on commas --
+          ;; quoting it keeps a title like "Show What You Know, Part 2" intact.
+          (let ([quoted-title (string-replace (cdr asst) "\"" "\\\"")])
+            (fprintf o "- link:pass:[assessments/~a/index.html][\"~a\", role=quiz]\n"
+                     (car asst) quoted-title)))))
     #:exists 'replace))
 
 (define (store-objectives)
