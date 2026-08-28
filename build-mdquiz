@@ -1,7 +1,11 @@
 #! /usr/bin/env bash
 
-# Make sure we're on a recent make
-make
+# Make sure distribution/ is up to date, unless the caller (e.g. `make
+# deploy`) just did a full build itself and passes --skip-make to avoid
+# redoing it.
+if [[ " $* " != *" --skip-make "* ]]; then
+  make
+fi
 
 # index.html for the assessment page,
 # which loads the quiz and displays it

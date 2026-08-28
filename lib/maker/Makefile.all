@@ -136,7 +136,12 @@ force:
 deploy:
 	rm -fr $(TOPDIR)/distribution
 	$(MAKE) book
-	NATLANG=en-us node lib/maker/screenshot-elts.js
+	@echo ➤ Building quizzes and taking screenshots in parallel
+	@$(TOPDIR)/build-mdquiz --skip-make & mdquiz_pid=$$!; \
+	NATLANG=en-us node lib/maker/screenshot-elts.js & shots_pid=$$!; \
+	wait $$mdquiz_pid; mdquiz_status=$$?; \
+	wait $$shots_pid; shots_status=$$?; \
+	if [ $$mdquiz_status -ne 0 ] || [ $$shots_status -ne 0 ]; then exit 1; fi
 	$(MAKE_DIR)deploy-to-hostinger.sh
 
 screenshots:
