@@ -2,22 +2,27 @@
 
 ++++
 <style>
-div#body sub { position: relative; bottom: 0.3em; }
-div#body .studentAnswerMedium { min-width: 35pt; }
-
-#preamble_disabled { flex-grow: 0 !important; }
-
 div#body .functions .fitbruby, div#body .functions .fitb {
 	padding-top: 0 !important;
 }
 </style>
 ++++
 
-@link-instructions{This page is designed for use with the @starter-file{self-driving}}
+@link-instructions{This page is designed for use with the @starter-file{self-driving}}.
 
 == Using Linear Regression
 
-@n `lr-plot(training, "id", "curve", "steering-angle")` was used to fill in the first row below. Complete the table.
+@n Evaluate `lr-plot(training, "id", "curve", "steering-angle")` to find the slope and y-intercept for our model: +
+@hspace{1em}@math{c\text{-}predictor(curve) = (}@fitbruby{2em}{@ifsoln{~19.5}}{@math{m}}@math{\times curve) + }@fitbruby{2em}{@ifsoln{-0.41}}{@math{b}}
+
+@n To the nearest degree, what steering angle does `c-predictor` estimate when a road is perfectly straight and `curve = 0`? @fitbruby{1em}{@ifsoln{≈ 0}}{intercept}° +
+@hspace{1em}Does this make real-world sense? Explain. @fitb{}{@ifsoln{Yes! If the road is straight and the car is centered, there's no reason to steer.}}
+
+@n If the `curve` of the road increases by 1º, the `c-predictor` expects the steering angle to @fitbruby{8em}{@ifsoln{increase}}{increase/decrease} by @fitbruby{5em}{@ifsoln{19.5º}}{slope}.
+
+@n To generalize what the model _learned_: "the more sharply the road curves, the @fitbruby{10em}{@ifsoln{more}}{less? more?} sharply you need to steer".
+
+@n Use `lr-plot` to complete the table below for the other variables and the corresponding templates in the starter file.
 
 [cols="<, ^, ^, ^",options="header"]
 |===
@@ -31,42 +36,34 @@ div#body .functions .fitbruby, div#body .functions .fitb {
 @n How do Pyret's best-fit lines compare to your estimates on @printable-exercise{steering-angle-scatter-plots.adoc} @fitb{}{} +
 @fitb{}{@ifsoln{}}
 
-@n Use the values you calculated with `lr-plot` for `curve` to define `c-predictor` in math and Pyret notation below. Then complete the template in the starter file and click "Run".
-
-[%autowidth, role="functions", cols="<, >", frame="none", stripes="none"]
-|===
-| @math{c\text{-}predictor(curve) = (}@fitbruby{4em}{@ifsoln{19.5}}{@math{m}}@math{\times curve) + }@fitbruby{4em}{@ifsoln{-0.41}}{@math{b}}
-| @show{(code '(define (c-predictor curve) (+ (* (?ANS 19.5) curve) (?ANS -0.41))))}
-|===
-
-@n On a straight road (`curve = 0`), `c-predictor` produces a steering angle of (round to the nearest degree) @fitbruby{2em}{@ifsoln{≈ 0}}{intercept} @fitbruby{5.5em}{degrees}{units}. Does this make real-world sense? @fitb{}{} +
-@fitb{}{@ifsoln{Yes! If the road is straight and the car is centered, there's no reason to steer.}}
-
-@n If the `curve` of the road increases by 1º, the `c-predictor` expects the steering angle to @fitbruby{8em}{@ifsoln{increase}}{increase/decrease} by @fitbruby{5em}{@ifsoln{19.5º}}{slope}.
-
-@n To generalize what the model _learned_: "the more sharply the road curves, the @fitbruby{10em}{@ifsoln{more}}{less? more?} sharply you need to steer".
 
 == Driving with the Model
 
 @show{(contract "drive" '((predictor ("Row" "Number"))) "Table"
 "runs the driving simulator, using predictor to compute the steering angle at each frame")}
 
-@n Read the Domain of `drive` carefully. What do you Notice? @fitb{}{} +
-@fitb{}{}
+@n Read the Domain of `drive` carefully. Why can't it use our `c-predictor` as the predictor? @fitb{}{} +
+@fitb{}{@ifsoln{`drive` needs access to full *Rows* of data, but we defined `c-predictor` to only take in a Number.}}
 
-@n Evaluate `drive(c-predictor)` and read the error carefully. What do you think it is telling us? @fitb{}{} +
-@blanklines{1}{@ifsoln{`drive` needs access to full *Rows* of data, but we defined `c-predictor` to only take in a Number.}}
+@n Evaluate `regression-model-code(training, [list: "curve"], "steering-angle")` to complete the table below.
 
-@vspace{1ex}
+[cols="<.^2,<.^5", stripes="none"]
+|===
+| From `regression-model-code`
+| @show{(code '(define (curve-predictor (?ANS r)) (+ (* 19.5 (?ANS (row-accessor r "curve"))) -0.41)))}
 
-*Evaluate `regression-model-code(training, [list: "curve"], "steering-angle")`* and read the resulting code carefully.
+| From `lr-plot`
+| @show{(code '(define (c-predictor curve) (+ (* 19.5 curve) -0.41)))}
+|===
 
-@n How is the resulting code *similar* to your `c-predictor` function? @fitb{}{} +
+@n How is the `curve-predictor` function *similar* to `c-predictor`? @fitb{}{} +
 @blanklines{1}{
 @ifsoln{It seems to use the same slope and intercept that I do. It consumes one thing in the domain, and produces a number.}
 }
 
-@n How is it *different*? @fitb{}{@ifsoln{`c-predictor` took in the curve value. }} +
+@n How are they *different*? @fitb{}{@ifsoln{`c-predictor` took in the curve value. }} +
 @blanklines{1}{
 @ifsoln{This `predictor` appears to take in a Row, and then grab the curve data from inside that row.}
 }
+
+@n Copy and paste your `curve-predictor` function from the Interactions Area into the Definitions Area of the starter file and click "Run". Then evaluate `drive(curve-predictor)` to watch the model drive the car. Evaluate `drive(c-predictor)` and read the error message carefully to make sure you understand what it's trying to tell you.

@@ -88,6 +88,10 @@ Let's explore what a 3-D scatter plot looks like, using a _small subset_ of our 
 - Be ready to share your thinking!
 }
 
+Note: The Desmos file includes sliders for @math{m_{skew}} and @math{m_{curve}}. This may be the first time you've seen subscript text attached to a variable. It's a way of adding a note that describes the variable. In this case, we recognize @math{m} as the slope. The @math{m_{skew}} and @math{m_{curve}} notation allows us to distinguish between the slope that is based on `skew` and the slope that is based on `curve`.
+
+@teacher{Draw connections to the cylinder-and-shadows image: each 2D scatter plot from the last lesson is a literal "shadow" of the 3D data, cast by collapsing one dimension flat.}
+
 @define{perspective-note}{
 Our brains naturally process the 3D world using _perspective_, making parallel train tracks appear to converge in the distance. In Desmos, you can control this effect by clicking the wrench icon and adjusting the perspective slider. Teachers should pay close attention to this setting!
 
@@ -105,26 +109,32 @@ We've set the Desmos activity to start with minimum perspective, but teachers sh
 @perspective-note
 }
 
+@slidebreak{Investigate}
 
-@slidebreak{LaunchR}
+@QandA{
+@Q{How would you describe the data visualization you just worked with in the Desmos file?}
+@A{It was a 3-D scatter plot.}
+@A{The blue and purple dots were 2-D shadow projections of the 3-D orange dots.}
+@A{There were translucent planes that looked like lines when rotated so that we were viewing their edges from the side.}
+
+@Q{Why does our multiple-regression function have *two* slopes?}
+@A{Because we're defining a *plane*. A flat sheet can tip along two different axes independently, so it needs two slopes — one for each.}
+}
+
+@slidebreak{InvestigateR}
+@lesson-point{
+Instead of a @vocab{line of best fit}, we're looking for a @vocab{plane of best fit}.
+}
+
 @right{@image{images/plane-of-best-fit.png, 300}}
 
 If we want to consider all three variables in our model, then we need to consider each snapshot in the training corpus as a 3d point, with values for `curve`, `skew`, _and_ `steering-angle`.
 
+- To make _predictions_ in three dimensions, we need to do _regression_ in three dimensions.
 - If `curve` and `skew` are both values in a given snapshot, they each explain a _portion_ of the steering angle at that moment.
+- Each slope (@math{m_{curve}} and @math{m_{skew}}) quantifies the amount that a single-unit change in each variable contributes to the steering angle.
 
-- To make _predictions_ in three dimensions, we need to do _regression_ in three dimensions. 
-
-@lesson-point{
-Instead of a line of best fit, we're looking for a *plane of best fit*.
-}
-
-@teacher{Draw connections to the cylinder-and-shadows image: each 2D scatter plot from the last lesson is a literal "shadow" of the 3D data, cast by collapsing one dimension flat.}
-
-@slidebreak{Synthesize}
-
-Different fields use different vocabulary for the same ideas:
-
+@strategy{Different fields use different vocabulary for the same ideas:}{
 [cols="^1a,^1a", options="header", stripes="none"]
 |===
 | In Math... | In Machine Learning...
@@ -134,25 +144,7 @@ Different fields use different vocabulary for the same ideas:
 
 In math, the "amount of pull" a variable has on the output is its _slope_. In machine learning, the same idea is called a _weight_. When tech companies talk about "releasing model weights" — or refuse to — they mean the learned coefficients of their regression models.
 
-@teacher{
 Some tech companies make a show of open-sourcing their models while declining to share the weights. That's a little like saying "we predict steering angle from curve and skew" but refusing to tell anyone the actual slope for either one.
-}
-
-
-@scrub{
-@slidebreak{LaunchR}
-
-@ifslide{@right{@image{images/plane-of-best-fit.png, 300}}}
-
-
-- We need a function that takes in both slopes (@math{m_{curve}} and @math{m_{skew}}) - considering the "amount of pull" each variable has on the steering angle
-- @math{b} is the intercept: the predicted steering angle when both inputs are zero
-We want Pyret to learn a function with the best possible values for @math{m_{curve}}, @math{m_{skew}}, and @math{b}:
-
-[.big-codeblock]
-@big{
-`fun curve-skew-predictor(r): (` @math{m_{curve}}` * r["curve"]) + ( `@math{m_{skew}} `* r["skew"]) + b end`
-}
 }
 
 === Synthesize
@@ -160,18 +152,16 @@ We want Pyret to learn a function with the best possible values for @math{m_{cur
 @ifslide{@right{@image{images/plane-of-best-fit.png, 300}}}
 
 @QandA{
-@Q{Why does our multiple-regression function have *two* slopes?}
-@A{Because we're defining a *plane*. A flat sheet can tip along two different axes independently, so it needs two slopes — one for each.}
+@Q{When should a model be built with more than one slope?}
+@A{When we want it to make a prediction based on more than one variable.}
 
-@Q{Each scatter plot from the last lesson was a "shadow" of the 3D data. When we looked at `curve` vs. `steering-angle`, in which direction was the light shining?}
-@A{Along the `skew` axis — all the variation in `skew` got collapsed into a flat 2D view.}
-
-@Q{Does that mean the `curve` vs. `steering-angle` scatter plot was "wrong"?}
+@Q{Each scatter plot from the last lesson was a "shadow" of the 3D data. When we looked at `curve` vs. `steering-angle`, the light was shining along the `skew` axis so that all the variation in `skew` got collapsed into a flat 2D view. Does that mean the `curve` vs. `steering-angle` scatter plot was "wrong"?}
 @A{No — it was accurate, just incomplete. It told part of the story.}
 
 @Q{Do we know that the model we fit in Desmos is really the best for the data?}
 @A{No! We just used our eyes to find a plane that looked like it might represent the pattern in the points.}
 }
+
 
 == Multiple Regression in Pyret
 @objective{models-multivariable}
@@ -196,32 +186,22 @@ Pyret can't _plot_ data in more than two dimensions at a time, but it can _compu
 
 - To get the code for a predictor function we can use `regression-model-code`.
 
+- We've already used `regression-model-code` to generate a @vocab{predictor function}. +
 @hspace{2em}@show{(contract "regression-model-code" '((table-name Table) (explanatory List<String>) (response String)) "Code")} +
-  * In the last lesson we gave it a list with just one explanatory variable.
-
-`regression-model-code(training, [list: "curve"], "steering-angle")`
-
-  * Adding a second variable to the list is all it takes to go from a regression _line_ to a *regression __plane!__*
-
-`regression-model-code(training, [list: "curve", "skew"], "steering-angle")`
+  * In the last lesson we gave it a list with just one explanatory variable. For example: +
+@hspace{2em}`regression-model-code(training, [list: "curve"], "steering-angle")`
+  * Adding a second variable to the list is all it takes to go from a regression _line_ to a *regression __plane!__* For example: +
+@hspace{2em}`regression-model-code(training, [list: "curve", "skew"], "steering-angle")`
 
 @slidebreak{Launch}
-- Pyret also has a tool for measuring the fit of any row-consuming regression model:
-@hspace{2em}@show{(contract "regression-model-S" '((table-name Table) (explanatory List<String>) (response String) (model "Row->Number")) "Number" 
-"produces the S-value of a multiple-regression model, fit to the specific columns"
-)}
+- Pyret also has a tool for _measuring the fit_ of any row-consuming regression model: +
+@hspace{2em}@show{(contract "regression-model-S" '((table-name Table) (explanatory List<String>) (response String) (model "Row->Number")) "Number"
+"produces the S-value of a multiple-regression model, fit to the specified columns")}
+  * Remember: To define a model, we need at least as many rows as the number of columns we want to work with. To calculate @math{S}, we need more rows in our table than the number of columns we want to work with, otherwise we have nothing to test the fit of our model against.
 
 @teacher{
-Consider the trade-off between clarity and amount-of-typing: for some students, rename their predictors using a shorthand is a big win! For example, `curve-skew-offset-predictor` could be renamed `cso-pred`.
+Consider the trade-off between clarity and amount-of-typing: for some students, renaming their predictors using a shorthand is a big win! For example, `curve-skew-offset-predictor` could be renamed `cso-pred`.
 }
-
-@slidebreak{Launch}
-Why does `regression-model-S` need to know about your explanatory columns?
-
-When we calculated @math{S} in a 2-dimensional model (1 explanatory, 1 response), we _needed_ more than two rows. Two points are enough to define a line, but if there's no third row then there's nothing else to fit the line _to!_ But now we're dealing with models in 3-dimensions (2 explanatory, 1 response), and we need _more than three rows_.
-
-(That's why the list of explanatory columns matters!)
-
 
 === Investigate
 @slidebreak{InvestigateR-DN}
@@ -229,8 +209,8 @@ When we calculated @math{S} in a 2-dimensional model (1 explanatory, 1 response)
 @lesson-instruction{
 @right{@image{images/self-driving-car.jpg, 300}}
 
-- Open your copy of @starter-file{self-driving} and click "Run".
-- Use `regression-model-code` and `regression-model-S` to complete the first section of @printable-exercise{supervised-learning-multiple-regression.adoc}.
+- Open your copy of the @starter-file{self-driving} and click "Run".
+- Complete the first section of @printable-exercise{supervised-learning-multiple-regression.adoc} using `regression-model-code` and `regression-model-S`.
 }
 
 @slidebreak{InvestigateR}
@@ -246,7 +226,7 @@ When we calculated @math{S} in a 2-dimensional model (1 explanatory, 1 response)
 
 @slidebreak{Investigate-DN}
 
-*Sensors cost money!* Adding all the various sensors to make a car self-driving adds thousands of dollars to the cost of manufacturing, and the extra computing power needed to process the data makes the chips used in those cars more expensive too. To make cars affordable, companies need to make tough decisions about which sensors to keep and which to drop.
+*To make cars affordable, companies need to make tough decisions* about which sensors to keep and which to drop. Adding all the various sensors to make a car self-driving adds thousands of dollars to the cost of manufacturing, and the extra computing power needed to process the data makes the chips used in those cars more expensive, too.
 
 @lesson-instruction{
 - Complete the rest of @printable-exercise{supervised-learning-multiple-regression.adoc}.
@@ -272,14 +252,14 @@ When we calculated @math{S} in a 2-dimensional model (1 explanatory, 1 response)
 }
 @slidebreak{Investigate}
 
-@lesson-point{
-Multiple regression is the same idea as linear regression, extended to any number of input variables. Each input gets its own slope (weight), and the model learns all of them at once to minimize error.
-}
-
 Multiple regression is the engine behind many real AI systems:
 
 - Car insurance rates based on age, location, and driving history
 - Weather forecasts based on temperature, humidity, pressure, and wind speed
+
+@lesson-point{
+Multiple regression is the same idea as linear regression, extended to any number of input variables. Each input gets its own slope (weight), and the model learns all of them at once to minimize error.
+}
 
 The same three phases always apply when training and using a model: 
 
@@ -287,6 +267,16 @@ The same three phases always apply when training and using a model:
 . Train a function.
 . Apply the function to new inputs.
 
+@slidebreak{Investigate}
+
+You've now learned about two kinds of Machine Learning: @vocab{classification} and @vocab{regression}. Can you tell them apart?
+
+@lesson-instruction{
+- Complete @printable-exercise{what-kind-of-ml.adoc}, identifying which type of Machine Learning (ML) is being used in each example.
+- Can you explain your thinking? In the lines provided, write down your thinking.
+}
+
+@teacher{Debrief student answers with the class!}
 
 === Synthesize
 @slidebreak{Synthesize}
