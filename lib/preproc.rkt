@@ -2179,7 +2179,15 @@
                              (unless (assoc lbl *assessments-met*)
                                  (set! *assessments-met*
                                    (cons (cons lbl text) *assessments-met*)))
-                             (fprintf o "link:pass:[assessments/~a/index.html][~a, role=quiz]" lbl text))]
+                             ;; Inline @assessment{} uses just export the quiz
+                             ;; title, not a link -- the actual quiz link lives
+                             ;; in the materials list (via @assessments{},
+                             ;; store-assessments/.index-assessments.asc). This
+                             ;; keeps a.quiz to one occurrence per assessment.
+                             ;; Italicized (AsciiDoc _..._) to set it apart as
+                             ;; a reference, not an action, now that it's
+                             ;; plain text rather than a link.
+                             (fprintf o "_~a_" text))]
                           [(string=? directive "citation")
                            (let* ([args (read-commaed-group i directive read-group)]
                                   [args-len (length args)]

@@ -43,30 +43,13 @@
         }
     },
     {
-        "type": "Informational",
-        "prompt": {
-            "prompt": "Hello! Good news! This is just a poster, no questions to answer."
-        },
-        "image": "https://www.bootstrapworld.org/images/icon.png"
-    },
-    {
-        "type": "Tracing",
-        "prompt": {
-            "program": "fn main() {\n  let x = 1;\n  println!(\"{x}\");\n  x += 1;\n  println!(\"{x}\");\n}\n"
-        },
-        "answer": {
-            "doesCompile": false,
-            "lineNumber": 4
-        }
-    },
-    {
       "type": "CardSort",
       "prompt": {
         "prompt": "Distinguish between bar charts and histograms: Sort the cards into two groups - one for bar charts and one for histograms. \nBe sure to sort all 9 cards.\n",
           "cards": [
             {
               "id": "hist-title",
-              "title": "HISTOGRAM"
+              "content": "HISTOGRAM"
             },
             {
               "id": "hist1",
@@ -74,19 +57,19 @@
             },
             {
               "id": "hist2",
-              "title": "uses quantitative data"
+              "content": "uses quantitative data"
             },
             {
               "id": "hist3",
-              "title": "it's bars cannot be reordered"
+              "content": "its bars cannot be reordered"
             },
             {
               "id": "hist4",
-              "title": "requires us to determine a bin width"
+              "content": "requires us to determine a bin width"
             },
             {
               "id": "bar-title",
-              "title": "BAR CHART"
+              "content": "BAR CHART"
             },
             {
               "id": "bar1",
@@ -94,7 +77,7 @@
             },
             {
               "id": "bar2",
-              "content": "it's bars can be reordered any way we wish"
+              "content": "its bars can be reordered any way we wish"
             },
             {
               "id": "bar3",
@@ -109,6 +92,21 @@
             ],
           "ordered": false
         }
+      },
+    {
+      "type": "Categorize",
+      "id": "one-to-one-logic",
+      "prompt": {
+        "prompt": "One-to-One: *Computer Science Basics*\n\nMatch each term to its primary definition.",
+        "leftColumn": ["Variable", "Function", "Boolean"],
+        "rightColumn": ["A reusable block of code", "A container for storing data", "A data type with two possible values"]
+      },
+      "answer": {
+        "Variable": ["A container for storing data"],
+        "Function": ["A reusable block of code"],
+        "Boolean": ["A data type with two possible values"]
+      },
+      "context": "In a one-to-one relationship, every item in the left column has exactly one unique partner in the right column."
     }
   ]
 }

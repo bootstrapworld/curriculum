@@ -16,7 +16,40 @@ indexHTML='<!DOCTYPE html>
     <script type="module">
         import buildQuiz from "./lib.js";
         import quizConfig from "./quiz.json?raw" with {type: "json"};
-        buildQuiz('root', quizConfig)
+        buildQuiz('"'"'root'"'"', quizConfig)
+    </script>
+    <style>
+      /* Categorize questions: images default to a fixed small size, filling
+         the vertical space text cards spend on paragraph margin so the
+         enclosing card stays the same size as a text card; click to toggle
+         full size. */
+      .categorize .categorize-card p:has(> img),
+      .categorize .match-tag p:has(> img) {
+        margin: 0;
+      }
+      .categorize .categorize-card img,
+      .categorize .match-tag img {
+        width: auto;
+        height: 3em;
+        object-fit: contain;
+        cursor: zoom-in;
+        transition: height 0.15s ease;
+      }
+      .categorize .categorize-card img.mq-enlarged,
+      .categorize .match-tag img.mq-enlarged {
+        width: auto;
+        height: auto;
+        max-width: 100%;
+        max-height: 300px;
+        cursor: zoom-out;
+      }
+    </style>
+    <script>
+      document.addEventListener('"'"'click'"'"', function (e) {
+        var card = e.target.closest && e.target.closest('"'"'.categorize .categorize-card, .categorize .match-tag'"'"');
+        var img = card && card.querySelector('"'"'img'"'"');
+        if (img) img.classList.toggle('"'"'mq-enlarged'"'"');
+      });
     </script>
   </body>
 </html>'
@@ -27,8 +60,14 @@ indexHTML='<!DOCTYPE html>
 for d in $(find distribution -type d -name assessments); do
   for dd in $d/*; do
     if test -d $dd; then
-      echo "$indexHTML" > $dd/index.html
-      cp -pu node_modules/mdquiz/dist/lib.js $dd/
+      if test -f $dd/quiz.json; then
+        echo "$indexHTML" > $dd/index.html
+        node -e "const fs=require('fs'),f='$dd/lib.js'; \
+          fs.writeFileSync(f,fs.readFileSync('node_modules/mdquiz/dist/lib.js','utf8') \
+          .replace('[\"localhost\", \"127.0.0.1\"]','[\"localhost\", \"127.0.0.1\", \"\"]'));"
+      else
+        echo "WARNING: $dd has no quiz.json -- skipping"
+      fi
     fi
   done
 done
@@ -43,7 +82,7 @@ JQ=$(which jq)
 
 if test -n "$JQ"; then
   json_error=
-  for jf in distribution/*/lessons/*/assessments/*/*.json; do
+  for jf in distribution/*/{lessons,courses}/*/assessments/*/*.json; do
     cat $jf | $JQ -e >/dev/null 2>&1 && continue
     json_error=1
     echo $jf is invalid JSON!
@@ -66,7 +105,9 @@ import { viteStaticCopy } from "vite-plugin-static-copy"
 import { glob } from "glob"
 import { readFileSync} from "fs"
 
-const quizzes = glob.sync("distribution/*/lessons/*/assessments/*");
+const quizzes = glob.sync("distribution/*/{lessons,courses}/*/assessments/*").filter(d => {
+  try { readFileSync(d + "/quiz.json"); return true; } catch { return false; }
+});
 const imageTypes = ["svg", "gif", "jpg", "png", "svg"];
 
 // create the JSON objects for each of our quizzes

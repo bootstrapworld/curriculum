@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <title>Quiz Reports</title>
+
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-TS6D6H9T');</script>
+    <!-- End Google Tag Manager -->
+
+  <link rel="stylesheet" href="lib/curriculum.css" />
+  <script defer src="lib/page-render.js"></script>
+  <script defer src="lib/graph-pages.js"></script>
+  <script defer src="lib/images.js"></script>
+  <script defer src="lib/dependency-graph.js"></script>
+  <script defer src="lib/pathway-tocs.js"></script>
+  <script>var pathway;</script>
+  <style>
+    #quizReportsCard {
+      max-width: 480px;
+      margin: 0 auto;
+    }
+    #quizReportsCard p.intro { color: var(--text-black); }
+    #quizReportsCard label {
+      display: block;
+      margin: 18px 0 6px 0;
+      font-weight: 700;
+      color: var(--bs-secondary-astronaut-blue);
+    }
+    #quizReportsCard input[type="date"] {
+      font-family: 'Lato', sans-serif;
+      font-size: 1em;
+      padding: 8px 10px;
+      border: 1px solid var(--bs-primary-light-blue);
+      border-radius: 6px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    #requestReportBtn {
+      display: block;
+      margin: 24px auto 0 auto;
+      background: var(--bs-secondary-green);
+      color: var(--pure-white);
+      border: none;
+      border-radius: 25px;
+      padding: 12px 28px;
+      font-family: 'Lato', sans-serif;
+      font-size: 1em;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    #requestReportBtn:hover { background: var(--bs-secondary-lighter-green); }
+    #requestReportBtn:disabled { background: var(--hover-bg-grey); color: #888; cursor: not-allowed; }
+    .quizReportsError {
+      color: darkred;
+      font-weight: 600;
+      background: var(--soft-pink);
+      border-radius: 8px;
+      padding: 14px 18px;
+    }
+    #requestOutput {
+      display: none;
+      background: var(--light-grey);
+      border: 1px solid var(--hover-bg-grey);
+      border-radius: 8px;
+      padding: 16px;
+      margin-top: 24px;
+      white-space: pre-wrap;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9em;
+      color: var(--text-black);
+    }
+  </style>
+  <link rel="stylesheet" type="text/css" href="lib/wp-adaptors/style-overrides.css">
+  <link rel="stylesheet" type="text/css" href="lib/wp-adaptors/style-bsw.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+  <script src="lib/wp-adaptors/script.js"></script>
+</head>
+
+<body onload="initQuizReportsPage()">
+
+%PROLOGUE%
+
+    <div id="body">
+        <div class="clearfix">
+            <div class="item bottom-border">
+                <h1>Quiz Reports</h1>
+
+                <div id="quizReportsCard">
+                  <p class="intro">Request a summary of your students' quiz results for any date range. We'll email you a report once it's ready.</p>
+
+                  <div id="loginCheck">Checking your login status&hellip;</div>
+
+                  <div id="notLoggedIn" class="quizReportsError" style="display:none;">
+                    To request quiz reports, you must be <a href="https://bootstrapworld.org/my-account/">logged in</a> to your teacher account.
+                  </div>
+
+                  <form id="reportForm" style="display:none;" onsubmit="return requestReport(event)">
+                    <label for="startDate">Start date</label>
+                    <input type="date" id="startDate" name="startDate" required />
+
+                    <label for="endDate">End date</label>
+                    <input type="date" id="endDate" name="endDate" required />
+
+                    <button type="submit" id="requestReportBtn">Send me results for this time period</button>
+                  </form>
+
+                  <pre id="requestOutput"></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+      // Mirrors fetchUserHash() in lib/graph-pages.js: POSTs to the WordPress
+      // AJAX endpoint, which reads the visitor's WP session cookie and
+      // returns a salted per-teacher hash if they're logged in, or an
+      // unsuccessful response if not.
+      async function postJSON(url, formData) {
+        const response = await fetch(url, { method: "POST", body: formData });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        return response.json();
+      }
+
+      async function fetchUserHash() {
+        const formData = new FormData();
+        formData.append('action', 'get_user_hash');
+        return await postJSON('https://bootstrapworld.org/wp-admin/admin-ajax.php', formData)
+          .then(data => data.success ? data.data : null)
+          .catch(() => null);
+      }
+
+      async function initQuizReportsPage() {
+        const teacherId = await fetchUserHash();
+        document.getElementById('loginCheck').style.display = 'none';
+
+        if (!teacherId) {
+          document.getElementById('notLoggedIn').style.display = 'block';
+          return;
+        }
+
+        const form = document.getElementById('reportForm');
+        form.dataset.teacherId = teacherId;
+        form.style.display = 'block';
+      }
+
+      // Placeholder for now: builds and displays a mock request object.
+      // Once a real reporting endpoint exists, this is where we'd POST
+      // { teacher_hash, start_date, end_date } to it instead.
+      function requestReport(event) {
+        event.preventDefault();
+
+        const form = document.getElementById('reportForm');
+        const start = document.getElementById('startDate').value;
+        const end = document.getElementById('endDate').value;
+        const output = document.getElementById('requestOutput');
+
+        if (start > end) {
+          output.style.display = 'block';
+          output.textContent = 'Start date must be on or before the end date.';
+          return false;
+        }
+
+        const mockRequest = {
+          teacher_hash: form.dataset.teacherId,
+          start_date: start,
+          end_date: end,
+          requested_at: new Date().toISOString()
+        };
+
+        output.style.display = 'block';
+        output.textContent = 'Mock request created:\n\n' + JSON.stringify(mockRequest, null, 2);
+        return false;
+      }
+    </script>
+
+%EPILOGUE%
+
+
+</html>

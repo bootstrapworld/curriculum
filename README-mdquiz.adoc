@@ -24,9 +24,7 @@ You can look at `lessons/Data-Science/histograms-visualize/langs/en-us/assessmen
 
 1. It begins with a title that will end up being student-facing.
 
-2. Question Types:
-  - We currently have two fully functional question types: "MultipleChoice" and "ShortAnswer". 
-  - To insert a slide that does not ask a question, use the type "Informational".
+2. Question Types: We currently have three fully-functional question types: "MultipleChoice", "ShortAnswer", "CardSort", and "Categorize".
 
 3. Every question must include
 
@@ -109,11 +107,43 @@ Below is an example of what the complete json might look like.
           }
       },
       {
-          "type": "Informational",
+          "type": "CardSort",
           "prompt": {
-              "prompt": "Hello! Good news! This is just a poster, no questions to answer.\n\n ![](https://www.bootstrapworld.org/images/icon.png)"
+              "prompt": "Sort these cards into colors and animals",
+              "cards": [
+                  {"id":"red",    "content": "red"},
+                  {"id":"yellow", "content": "yellow"},
+                  {"id":"blue",   "content": "blue![alt text](./react.svg 'react logo')"},
+                  {"id":"green",  "content": "green![alt text](./bar-image.png)"},
+
+                  {"id":"cat",    "content": "cat![alt text](./react.svg 'react logo')"},
+                  {"id":"dog",    "content": "dog"},
+                  {"id":"pig",    "content": "pig![alt text](./hist-image.png)"},
+                  {"id":"wombat", "content": "wombat![alt text](./react.svg 'react logo')"}
+              ]            },
+          "answer": {
+              "answer": [
+                  ["red", "yellow", "blue", "green"],
+                  ["cat", "dog", "pig", "wombat"]
+              ],
+              "ordered": false
           }
-      }
+      },
+      {
+        "type": "Categorize",
+        "id": "one-to-one-logic",
+        "prompt": {
+          "prompt": "One-to-One: *Computer Science Basics*\n\nMatch each term to its primary definition.",
+          "leftColumn": ["Variable", "Function", "Boolean"],
+          "rightColumn": ["A reusable block of code", "A container for storing data", "A data type with two possible values"]
+        },
+        "answer": {
+          "Variable": ["A container for storing data"],
+          "Function": ["A reusable block of code"],
+          "Boolean": ["A data type with two possible values"]
+        },
+        "context": "In a one-to-one relationship, every item in the left column has exactly one unique partner in the right column."
+      },
     ]
   }
 
