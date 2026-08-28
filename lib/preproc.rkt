@@ -2168,12 +2168,22 @@
                            (let* ([args (read-commaed-group i directive read-group)]
                                   [lbl (first args)]
                                   [text (string-join (rest args) ", ")]
-                                  [dir (build-path *containing-directory* "assessments" lbl)])
-                             (when (string=? text "")
-                               (warnmsg "~a: assessment ~a missing second argument"
-                                       (errmessage-context) lbl))
-                             (unless (directory-exists?
-                                       (build-path *containing-directory* "assessments" lbl))
+                                  [dir (build-path *containing-directory* "assessments" lbl)]
+                                  ;; If no text given, auto-derive from quiz.json "title"
+                                  [text (if (string=? text "")
+                                          (let* ([json-file (build-path dir "quiz.json")]
+                                                 [title (and (file-exists? json-file)
+                                                             (hash-ref
+                                                               (call-with-input-file json-file read-json)
+                                                               'title #f))])
+                                            (if title
+                                              (string-append "Show What You Know: " title)
+                                              (begin
+                                                (warnmsg "~a: @assessment ~a has no text and no title in quiz.json"
+                                                        (errmessage-context) lbl)
+                                                lbl)))
+                                          text)])
+                             (unless (directory-exists? dir)
                                (warnmsg "~a uses ~a with nonexistent directory ~a"
                                        (errmessage-context) directive lbl))
                              (unless (assoc lbl *assessments-met*)
@@ -2678,8 +2688,9 @@
     (lambda (o)
       (unless (null? *assessments-met*)
         (for ([asst (reverse *assessments-met*)])
-          (fprintf o "- link:pass:[assessments/~a/index.html][~a, role=quiz]\n"
-                   (car asst) (cdr asst)))))
+          (let ([escaped-text (regexp-replace* #rx"," (cdr asst) "\\&#x2c;")])
+            (fprintf o "- link:pass:[assessments/~a/index.html][~a, role=quiz]\n"
+                     (car asst) escaped-text)))))
     #:exists 'replace))
 
 (define (store-objectives)
