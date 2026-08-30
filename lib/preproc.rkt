@@ -2152,15 +2152,9 @@
                                                                       raw-url)]
                                                                   [else raw-url])]
                                                        [link-output
-                                                         (if use-pyret-prefix?
-                                                           ; Raw HTML so we can add data-starter-file-url for
-                                                           ; the self-guided app to intercept and load inline
-                                                           (format
-                                                             "pass:[<a href=\"~a\" class=\"starterFileLink\" target=\"_blank\" data-starter-file-url=\"~a\">~a</a>]"
-                                                             url raw-url title)
-                                                           (format
-                                                             "link:pass:[~a][~a~a, role=starterFileLink]"
-                                                             url title ", window=\"&#x5f;blank\""))])
+                                                         (format
+                                                           "link:pass:[~a][~a~a, role=starterFileLink]"
+                                                           url title ", window=\"&#x5f;blank\"")])
                                                   (display link-output o))]))]))]
                           [(string=? directive "assessments")
                            (fprintf o "\ninclude::~a/{cachedir}.index-assessments.asc[]\n" *containing-directory*)]
