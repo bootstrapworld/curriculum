@@ -29,6 +29,8 @@ done
 
 mv ../selfGuidedBits.jsx .
 mv ../selfGuidedExtra.css extra.css
+sed 's/^var starterFiles = //; s/;[[:space:]]*$//' \
+  "$TOPDIR/distribution/$NATLANG/lib/starterFiles.js" > starterFiles.json
 test -d ../images && ln -sf ../images
 test -d ../videos && ln -sf ../videos
 
