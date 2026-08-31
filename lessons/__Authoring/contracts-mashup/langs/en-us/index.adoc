@@ -25,12 +25,10 @@
 
 | Student-facing Lesson Goals
 |
-
 - Let's learn to identify the Domain and Range of a function.
 
 | Materials
 |[.materials-links]
-
 @material-links
 
 - @dist-link{Contracts.shtml, Contracts Pages} (a complete list of all the contracts)
@@ -60,11 +58,17 @@ Students learn how to apply functions in @proglang, and are introduced to the no
 @slidebreak{Launch}
 In human languages, verbs _do things to nouns_. For example, I can "_throw_ a ball", or "_eat_ a sandwich". "Throw" and "Eat" are verbs, and "ball" and "sandwich" are nouns.
 
-In programming languages, values are like nouns. You've learned about different data types in our programming language, like Number values (`42`, `-8.3`, etc), String values (`"hello!"`), and Boolean values (`true` and `false`). @ifproglang{pyret}{We already know _some_ verbs, like `+`, and `-` ... each of which _does something_ to Number values.}
+@ifproglang{pyret}{We already know _some_ verbs in @proglang, like `+`, and `-` ... each of which _does something_ to Number values.}
+
+In programming languages, values are like nouns. You've learned about different data types in our programming language:
+
+- Number values (`42`, `-8.3`, etc)
+- String values (`"hello!"`)
+- Boolean values (`true` and `false`). 
 
 @scrub{IN A SELF-GUIDED VERSION OF THIS LESSON, I'D WANT TO HAVE STUDENTS INTERACT WITH THE TWO PARAGRAPHS ABOVE.}
 
-@slidebreak{Launch}
+@slideonlybreak{Launch}
 
 In programming, most verbs are called @vocab{functions}. A function is like a machine at a factory:
 
@@ -77,19 +81,33 @@ In programming, most verbs are called @vocab{functions}. A function is like a ma
 @slidebreak{Launch-DN}
 @editorconfig{{definitionsAtLastRun: `use context starter2024` }}
 
-Let's play with a function to get the hang of it. 
-
-@ifselfguided{@htmlverb{<input type="button" value="Click here" onclick='addToEditor(\` string-length("rainbow") \`)' />} to add @show{(code '(string-length "rainbow"))} to the editor.}
+Let's play with a function to get the hang of it. @ifselfguided{Be sure to read any error messages you get back carefully! They might have clues to help you understand what's going on.}
 
 @lesson-instruction{
 @ifnotselfguided{
 - Log into @starter-file{editor} and click "Run".
 - Then type @show{(code '(string-length "rainbow"))} into the Interactions Area and hit Enter.
-}
-- What do you think the `string-length` function does? Come up with a theory and test it out by using the function with other inputs.
+- What do you think the `string-length` function does? Come up with a theory and test it out by using the function with other inputs.}
 }
 
-Be sure to read any error messages you get back carefully! They might have clues to help you understand what's going on.
+@ifselfguided{
+@htmlverb{<input type="button" value="Click here" onclick='addToEditor(\` string-length("rainbow") \`)' />} to add @show{(code '(string-length "rainbow"))} to the editor.
+
+What do you think the `string-length` function does? How many arguments does it expect? What does it produce? 
+
+@vspace{1ex}
+What do you think @show{(code '(string-length "good work!"))} will produce? 
+
+@htmlverb{<input type="button" value="Click here" onclick='addToEditor(\` string-length("good work!") \`)' />} to add it to the editor and test it out.
+
+What do you think @show{(code '(string-length 215))} will produce?
+
+@htmlverb{<input type="button" value="Click here" onclick='addToEditor(\` string-length(215) \`)' />} to add it to the editor and test it out.
+
+What happened? Why?
+}
+
+@ifnotselfguided{Be sure to read any error messages you get back carefully! They might have clues to help you understand what's going on.}
 
 @slideonlybreak{Launch}
 
@@ -121,16 +139,15 @@ _If your students are not yet familiar with function notation, no need to introd
 
 === Investigate
 @slidebreak{Investigate}
+
+@scrub{NOTE: INDENTATION IN THE EDITOR CONFIG RESULTS IN INDENTATION IN THE DEFINITIONS AREA.}
 @editorconfig{{
-    definitionsAtLastRun: `
-      use context starter2024
-    `
-    ,
-    editorContents: `
-      regular-polygon(40, 6, "solid", "green")
-      regular-polygon(80, 5, "outline", "dark-green")
-    `
-  }}
+definitionsAtLastRun: `use context starter2024`,
+editorContents: `
+regular-polygon(40, 6, "solid", "green")
+regular-polygon(80, 5, "outline", "dark-green")
+`
+}}
 
 @lesson-instruction{
 With your partner, complete @printable-exercise{applying-functions.adoc}.
@@ -158,12 +175,12 @@ The expressions using the `regular-polygon` function produced a value that wasn'
 @A{_Answers will vary!_}
 }
 
-@slidebreak{Investigate}
+@slideonlybreak{Investigate}
 
 @ifnotselfguided{
 Contracts are _binding_ agreements! For example, we might sign a contract with a plumber to install a sink for $200. As long as they install the sink, we are obligated to pay them $200. If a parent promises to order pizza if their child does their chores, they'd better order that pizza if the child does those chores!
 
-If one party breaks the contract, bad things can happen.}@scrub{DORAI- I WANT TO END THE @IFNOTSELFGUIDED IN THE MIDDLE OF THIS LINE AND MAKE IT VISIBLE TO AUTHORS IN THE FILE WITHOUT DISRUPTING THE LINE ON THE HTML VERSION}In some programming languages, breaking a function's contract can cause the whole computer to crash, or it can result in a security hole that lets the program be hacked! In @proglang, the contracts are checked every time we use a function, so the result of a contract error is a helpful error message.
+If one party breaks the contract, bad things can happen.} @scrub{DORAI- I WANT TO END THE @IFNOTSELFGUIDED IN THE MIDDLE OF THIS LINE AND MAKE IT VISIBLE TO AUTHORS IN THE FILE WITHOUT DISRUPTING THE LINE ON THE HTML VERSION.} In some programming languages, breaking a function's contract can cause the whole computer to crash, or it can result in a security hole that lets the program be hacked! In @proglang, the contracts are checked every time we use a function, so the result of a contract error is a helpful error message.
 
 
 @lesson-point{
@@ -315,7 +332,10 @@ To convert a Circle of Evaluation into code, we start at the outside and work ou
 
 @ifselfguided{
 @selfguidedbreak
-@scrub{DORAI - how do I tell @editorconfig{} to use the definitions area of @starter-file{logos}?}
+@editorconfig{{
+  starterFile: "logos"
+}}
+
 @lesson-instruction{
 - We're going to look at three logos made by Bootstrap students in San Diego. Open the @starter-file{logos} and click "Run". Type `sample-logo-1` in the Interactions Area (right side) and hit enter, then repeat for the other sample logos.
 }
@@ -346,7 +366,9 @@ Building on their understanding of @lesson-link{contracts-strings-images, Contra
 
 === Launch
 @slidebreak{Launch-DN}
-@scrub{DORAI - we want the `@editor-config{}` to open the animals starter file here.}
+@editorconfig{{
+  starterFile: "animals"
+}}
 
 @ifselfguided{
 @htmlverb{<input type="button" value="Click here" onclick='addToEditor("animals-table")' />} to load the `animals-table`!
@@ -370,7 +392,9 @@ Building on their understanding of @lesson-link{contracts-strings-images, Contra
 
 === Investigate
 @slidebreak{Investigate}
-@scrub{DORAI - we want the `@editor-config{}` to open the animals starter file here.}
+@editorconfig{{
+  starterFile: "animals"
+}}
 
 @lesson-instruction{
 Turn to @printable-exercise{functions-for-tables.adoc} and complete the first section: *Ordering a Table with `sort`*.
@@ -406,7 +430,9 @@ Contracts are the _instruction manual_ for functions.
 }
 
 @slidebreak{Investigate}
-@scrub{DORAI - we want the `@editor-config{}` to open the animals starter file here.}
+@editorconfig{{
+  starterFile: "animals"
+}}
 
 Let's explore the Contract for another function that works with Tables: `count`
 
@@ -441,7 +467,9 @@ Complete the first two sections of @printable-exercise{functions-for-tables-cont
 }
 
 @slidebreak{Investigate}
-@scrub{DORAI - we want the `@editor-config{}` to open the animals starter file here.}
+@editorconfig{{
+  starterFile: "animals"
+}}
 
 The second input to `row-n` is a Number, called the _index_ of the Row. The index tells Pyret how many data Rows to count from the first one in the table.
 
@@ -456,7 +484,9 @@ If we want the _second_ Row in the table, Pyret needs to count one Row down from
 }
 
 @slidebreak{Investigate}
-@scrub{DORAI - we want the `@editor-config{}` to open the animals starter file here.}
+@editorconfig{{
+  starterFile: "animals"
+}}
 
 @lesson-instruction{
 - Complete the last section of @printable-exercise{functions-for-tables-cont.adoc}.
@@ -524,7 +554,9 @@ The goal here is for students to become familiar with using @dist-link{Contracts
 
 === Launch
 @slidebreak{Launch}
-@scrub{DORAI - we want the `@editor-config{}` to open the animals starter file here.}
+@editorconfig{{
+  starterFile: "animals"
+}}
 
 The `count` function summarized the data for a single variable in a new table. 
 
@@ -534,7 +566,9 @@ The same information could be communicated as a picture! This is called data vis
 
 === Investigate
 @slidebreak{Investigate}
-@scrub{DORAI - we want the `@editor-config{}` to open the animals starter file here.}
+@editorconfig{{
+  starterFile: "animals"
+}}
 
 @ifnotselfguided{
 @QandA{
@@ -620,8 +654,6 @@ Just as we can use Circles of Evaluation to help us combine `sort`, `count`, and
   * For example, we may want to see how the age range of the animals adopted quickly compares to the age range of all the animals or of the animals that were adopted slowly.
 } 
 
-@scrub{DORAI - in case it's not obvious, opt stuff should be left out of selfguided.}
-
 @opt{For more practice making tables and visualizations by composing functions, have students complete @opt-printable-exercise{coe-visualizations-2.adoc}}
 
 === Synthesize
@@ -648,4 +680,3 @@ Just as we can use Circles of Evaluation to help us combine `sort`, `count`, and
 @slidebreak{Supplemental}
 
 @opt-starter-file{images-code}
-
