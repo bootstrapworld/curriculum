@@ -2041,7 +2041,8 @@
                             (unless *lesson-plan*
                               (error 'ERROR "~a (~a) valid only in lesson plan"
                                      directive (errmessage-file-context)))
-                            (when (member directive '("slidebreak" "selfguidedbreak"))
+                            (when (and (member directive '("slidebreak" "selfguidedbreak"))
+                                       (not *additional-exercises-explicit?*))
                               (start-self-guided-break o))
                             ; (display (html-comment (format "slidenum ~a" *self-guided-counter*)) o)
                             (when (member directive '("slidebreak" "slideonlybreak"))
