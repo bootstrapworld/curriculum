@@ -109,6 +109,44 @@ main {
   text-align: center;
 }
 
+/* Ruby annotations under contract types, e.g. `String` with `message`
+   printed beneath it in a `# text :: (String, Number, String) -> Image`
+   signature. Ported from lib/core.less (.fitb/.fitbruby/.ruby rules) --
+   the self-guided app only pulls in each lesson's own inline <style>
+   blocks (see extract_self_guided in lib/maker/do-postproc.lua), not the
+   main site stylesheet, so these base rules have to be repeated here. */
+.fitbruby::before, .fitb::before { content: '\200b'; }
+.fitbruby { margin-bottom: 0.75em; }
+
+.fitb, .fitbruby {
+  padding-top: 1.2em;
+  position: relative;
+  display: inline-block;
+  min-width: 4em;
+  text-align: center;
+  line-height: 1em;
+  border-bottom: solid thin black;
+  vertical-align: baseline;
+}
+
+.fitbruby .ruby {
+  position: absolute;
+  display: inline-block;
+  bottom: -11.85px;
+  left: 0;
+  font-size: 9.5px;
+  line-height: 14px;
+  font-weight: normal;
+  width: 100%;
+  text-align: center;
+  font-style: normal;
+  font-family: var(--text-font, Lato, "Century Gothic", Arial, Helvetica, sans-serif);
+  white-space: nowrap;
+  user-select: none;
+}
+.ruby * { font-family: var(--text-font, Lato, "Century Gothic", Arial, Helvetica, sans-serif) !important; background: none !important; }
+.ruby sup { top: -0.3em; font-size: 7px; }
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
