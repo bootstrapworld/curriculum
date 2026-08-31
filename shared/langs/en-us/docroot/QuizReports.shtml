@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
 <head>
+    <script src="lib/early-login-check.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <title>Quiz Reports</title>
 
@@ -118,24 +119,10 @@
     </div>
 
     <script>
-      // Mirrors fetchUserHash() in lib/graph-pages.js: POSTs to the WordPress
-      // AJAX endpoint, which reads the visitor's WP session cookie and
-      // returns a salted per-teacher hash if they're logged in, or an
-      // unsuccessful response if not.
-      async function postJSON(url, formData) {
-        const response = await fetch(url, { method: "POST", body: formData });
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        return response.json();
-      }
-
-      async function fetchUserHash() {
-        const formData = new FormData();
-        formData.append('action', 'get_user_hash');
-        return await postJSON('https://bootstrapworld.org/wp-admin/admin-ajax.php', formData)
-          .then(data => data.success ? data.data : null)
-          .catch(() => null);
-      }
-
+      // fetchUserHash() is a global, defined in lib/page-render.js (loaded
+      // above). It in turn prefers the promise kicked off as early as
+      // possible by lib/early-login-check.js, rather than firing its own
+      // request from scratch.
       async function initQuizReportsPage() {
         const teacherId = await fetchUserHash();
         document.getElementById('loginCheck').style.display = 'none';
