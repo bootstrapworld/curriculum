@@ -103,7 +103,7 @@ local function postproc(fhtml_cached, tipe)
   local add_end_body_id_p = false
   local delete_line_p = false
   local openblock_attribs = false
-  local item_attrib = false
+  local pending_li_p = false
   --
   for x0 in i:lines() do
     local x = x0
@@ -182,6 +182,22 @@ local function postproc(fhtml_cached, tipe)
     if x:find('<code>', 1, true)   then x = x:gsub('<code>', code_open)             end
     if x:find('<p> </p>', 1, true) then x = x:gsub('<p> </p>', '<p></p>')           end
     --
+    -- A bare <li> is deferred (not written) until we see what's inside it,
+    -- so we know whether it's an @A{} answer -- which gets class="ablockitem"
+    -- so self-guided's CSS can hide it -- or anything else. @Q{} is legal
+    -- without a matching @A{} (e.g. open discussion questions), so a <li>
+    -- can't be assumed to be an answer just because it's the next one after
+    -- some earlier @Q{}'s end marker; that assumption is what let the flag
+    -- leak forward and hide unrelated, unlucky <li> content downstream.
+    if pending_li_p then
+      pending_li_p = false
+      if x:find('<p>%%BEGINABLOCKITEM%%') then
+        o:write('<li class="ablockitem">\n')
+      else
+        o:write('<li>\n')
+      end
+    end
+    --
     if x:find('<p>%%BEGINQBLOCKITEM%%') then
       x = x:gsub('<p>%%BEGINQBLOCKITEM%%', '<p class="qblock">')
     end
@@ -190,18 +206,13 @@ local function postproc(fhtml_cached, tipe)
       x = x:gsub('<p>%%BEGINABLOCKITEM%%', '<p class="ablock">')
     end
     --
-    if item_attrib and (x:find('<li>')) then
-      x = x:gsub('<li>', '<li class="' .. item_attrib .. '">')
-      item_attrib = false
+    if x:find('%%END[QA]BLOCKITEM%%') then
+      x = x:gsub('%%END[QA]BLOCKITEM%%', '')
     end
     --
-    if x:find('%%END[QA]BLOCKITEM%%') then
-      if x:find('%%ENDQBLOCKITEM%%') then
-        item_attrib = 'ablockitem'
-      else
-        item_attrib = false
-      end
-      x = x:gsub('%%END[QA]BLOCKITEM%%', '')
+    if x:find('<li>') then
+      pending_li_p = true
+      goto continue
     end
     --
     if x:find('actually%-openblock') then
@@ -409,6 +420,8 @@ local function postproc(fhtml_cached, tipe)
     --
     ::continue::
   end
+  -- Safety net: flush a <li> deferred on the very last line of the file.
+  if pending_li_p then o:write('<li>\n') end
   --
   i:close()
   o:close()
