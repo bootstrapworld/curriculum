@@ -2698,7 +2698,17 @@
           (let ([escaped-text (regexp-replace* #rx"," (cdr asst) "\\&#x2c;")])
             (fprintf o "- link:pass:[assessments/~a/index.html][~a, role=quiz]\n"
                      (car asst) escaped-text)))))
-    #:exists 'replace))
+    #:exists 'replace)
+  ;; Warn about assessments present in assessments/ but not referenced in the lesson plan
+  (let ([adir (build-path *containing-directory* "assessments")])
+    (when (directory-exists? adir)
+      (for ([entry (directory-list adir)])
+        (let ([lbl (path->string entry)])
+          (when (and (not (regexp-match #rx"^\\." lbl))
+                     (directory-exists? (build-path adir entry)))
+            (unless (assoc lbl *assessments-met*)
+              (warnmsg "~a: assessment ~a is in assessments/ but not referenced with @assessment{~a}"
+                       (errmessage-context) lbl lbl))))))))
 
 (define (store-objectives)
   (call-with-output-file
