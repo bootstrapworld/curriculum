@@ -223,7 +223,7 @@ What if we wanted to see your name written on a diagonal?
 
 @hspace{2em} @show{(contract 'text '((message String) (size Number) (color String)) "Image")}
 
--  @proglang also has a function called `rotate` that will rotate any Image a specified number of degrees.
+- @proglang also has a function called `rotate` that will rotate any Image a specified number of degrees.
 
 @hspace{2em} @show{(contract 'rotate '(Number Image) "Image")}
 
@@ -250,12 +250,14 @@ The rules are simple:
 
 @slideonlybreak{Investigate}
 
+@ifnotselfguided{
 @lesson-instruction{
 - Suppose we want to see the `text` "Diego" written in diagonal yellow letters of size 150.
-@ifnotselfguided{
 - Turn to @printable-exercise{composing-coe.adoc} and complete the Notice and Wonder section.
 }
 }
+
+_Circles of Evaluation let us see the structure._
 
 @do{
 (define expd '(text "Diego" 150 "yellow"))
@@ -271,7 +273,10 @@ The rules are simple:
 
 @slidebreak{Investigate}
 // there was an empty imageconfig here
-_Circles of Evaluation let us see the structure._
+
+@ifselfguided{
+Suppose we want to see the `text` "Diego" written in diagonal yellow letters of size 150.
+}
 
 [cols="^4a, ^.^1a, ^5a", grid="none", stripes="none", frame="none"]
 |===
@@ -284,12 +289,17 @@ _Circles of Evaluation let us see the structure._
 | &rarr;
 | [.circle2]
 @show{(coe exprd)}
+|===
 
+@ifnotselfguided{
+[cols="^4a, ^.^1a, ^5a", grid="none", stripes="none", frame="none"]
+|===
 | @show{(code expd)}
 |
 | @show{(code exprd)}
-
 |===
+}
+
 
 @lesson-instruction{
 What do you Notice? What do you Wonder?
@@ -299,18 +309,20 @@ What do you Notice? What do you Wonder?
 
 @scrub{I'm noticing that we might need another directive that allows us to specify something isn't lesson plan facing but should appear on both slides and book pages}
 
+To convert a Circle of Evaluation into code, we start at the outside and work our way in. After each function, we write a pair of parentheses, and then convert each argument inside the Circle.
+
 @ifslide{
 [cols="^4, ^.^1,^5", grid="none", stripes="none", frame="none"]
 |===
 
-| @show{(coe expd)}  | &rarr; 	| @show{(coe exprd)}
+| @show{(coe expd)}  | &rarr;   | @show{(coe exprd)}
 
-| @show{(code expd)} | 			| @show{(code exprd)}
+| @show{(code expd)} |      | @show{(code exprd)}
 
 |===
 }
 
-To convert a Circle of Evaluation into code, we start at the outside and work our way in. After each function, we write a pair of parentheses, and then convert each argument inside the Circle.
+@ifselfguided{What do you Notice? What do you Wonder?}
 
 @slidebreak{Investigate}
 
