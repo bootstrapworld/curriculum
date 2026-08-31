@@ -153,6 +153,13 @@ local function postproc(fhtml_cached, tipe)
     --
     if x:find('^<link.*curriculum%.css') then
       x = x:gsub('^<link.*curriculum%.css', '<link rel="stylesheet" href="' .. local_dist_root_dir .. 'lib/curriculum.css')
+      -- Fire the WordPress login-status check as early as possible: a
+      -- plain blocking (non-deferred) script, written here rather than
+      -- alongside page-render.js et al below, so it runs before those
+      -- deferred scripts finish downloading -- some of them are large,
+      -- externally-hosted (unpkg.com), and would otherwise queue the
+      -- login check behind themselves for no functional reason.
+      o:write('<script src="' .. local_dist_root_dir .. 'lib/early-login-check.js"></script>\n')
       add_bootstrap_lesson_p = true
       if file_exists_p(f_codemirror_file) or tipe == 'pathwaynarrative' then
         add_codemirror_p = true
