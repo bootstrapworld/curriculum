@@ -160,14 +160,14 @@ export function SelfGuided() {
       editorConfig = { ...rest, starterFileUrl: url };
     }
   }
-  if(editorConfig) {
+  if(editorConfig && Object.keys(editorConfig).length > 0) {
     rightPane = <EditorPane config={editorConfig}/>
   } else if(twinPane.videoConfig) {
     rightPane = <VideoPane config={twinPane.videoConfig} />
   } else if(twinPane.imageConfig) {
     rightPane = <ImagePane config={twinPane.imageConfig} />
   } else {
-    throw "Invalid configuration provided: "+JSON.stringify(twinPane, null, 2);
+    rightPane = null;
   }
 
   return (
