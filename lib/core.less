@@ -24,6 +24,13 @@
 }
 
 div#body {
+  /* single lever for fitb/fitbruby/blanklines row height (see the
+     FORMATTING OF CIRCLES section for why). A real CSS custom property
+     (not a LESS @variable) so a wrapper can override it once and have
+     every fitb/fitbruby/blanklines beneath it follow, the same way the
+     old drawBlankLines() rig picked up ambient context automatically --
+     but via ordinary inheritance instead of a runtime measurement hack. */
+  --blank-pitch: 2.2em;
   font-family:    @text-font;
   color:          @font-color;
   width:          100%; /* needed to undo effect of html{display:flex} */
@@ -330,7 +337,7 @@ div#body {
 
   .fitb.stretch, .fitbruby.stretch {
     margin-left:        5px;
-    vertical-align:     baseline;
+    vertical-align:     bottom; /* match the base rule -- baseline reintroduces ambient half-leading */
     width:              auto;
     border-color:       transparent; /* hide the normal underline */
     /* add an underline that goes past the end of the page */
@@ -374,15 +381,41 @@ body.beta div#body::after {
 
 /* use 'thin' instead of 1px border to try and avoid disappearing
 lines on some browsers */
+/* DESIGN EXPERIMENT (unify-blanks branch): line-height is the single
+   lever controlling how tall a writing line is. align-items:flex-end
+   pins content against the border-bottom (replacing padding-top, which
+   used to do that job jointly with an inner line-height:1em). Height is
+   derived from line-height so there's exactly one number to change.
+   vertical-align:bottom (not the old baseline) avoids an inline box's
+   ambient half-leading, which used to add an unpredictable extra ~1-2px
+   per row depending on the surrounding paragraph's font metrics -- the
+   reason drawBlankLines() previously had to measure a hidden rig instead
+   of computing the pitch directly from CSS. */
 .fitb, .fitbruby, .fitb.stretch::after, .fitbruby.stretch::after {
-  padding-top:        @top-padding-for-writing;
   position:           relative;
-  display:            inline-block;
+  display:            inline-flex;
+  align-items:        flex-end;
+  justify-content:    center;
   min-width:          4em;
   text-align:         center;
-  line-height:        1em;
+  line-height:        var(--blank-pitch);
+  height:             1lh; /* derived from line-height -- never override this directly */
   border-bottom:      solid thin black;
-  vertical-align:     baseline;
+  vertical-align:     bottom;
+}
+
+/* line-height is inherited, so without this reset the content's own
+   anonymous flex item would ALSO be as tall as --blank-pitch -- as tall as the
+   container itself -- leaving align-items:flex-end nothing to do, and
+   the glyphs would float centered inside that inherited line-height
+   instead of resting on the underline. Keep the content's own box tight
+   so bottom-alignment has something to actually pin to the border.
+   (Scoped to .fitb/.fitbruby only, not their .stretch::after counterparts
+   -- a ::after pseudo-element can't have a real .solution child, and a
+   selector list containing that invalid combination gets silently
+   dropped in its entirety by the browser.) */
+.fitb > .solution, .fitbruby > .solution, .fitb::before, .fitbruby::before {
+  line-height: 1;
 }
 
 div#body:not(.LessonPlan, .narrativepage) p {
@@ -933,7 +966,7 @@ html div#body.workbookpage {
     position: relative;
     background-image: url('images/2.2em-ruled lines.png');
     margin-left: 5px;
-    line-height: 2.2em;
+    line-height: var(--blank-pitch);
     .solution { position: absolute; bottom: -3px; line-height: inherit; }
     /* artificially shrink codeblocks to avoid stepping on the line */
     .editbox, code.pyret {
@@ -1101,6 +1134,9 @@ div#body{
   }
 
   .recipe {
+    /* --blank-pitch inherits down to any fitb/fitbruby/blanklines inside,
+       same lever as everywhere else (was a one-off padding-top). */
+    --blank-pitch: 2em;
 
     /* Under a heading come the instructions */
     .recipe_instructions * { font-style: italic; font-size: .85em; }
@@ -1110,7 +1146,7 @@ div#body{
 
     /* All student answers have a bottom-border, and a "ruby" printed in black */
     p .fitb, p .fitbruby {
-      word-spacing: 2pt; padding-top: @top-padding-for-dr;
+      word-spacing: 2pt;
       &:after { word-spacing: 0; }
     }
 
