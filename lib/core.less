@@ -1368,8 +1368,11 @@ td.halign-center .circleevalsexp { text-align: center; }
   .hspace ~ .hspace { display: inline-block; width: 0.5ex; }
   .lParen, .rParen { display: none; } /* Don't show parens in Circle mode */
 
-  /* fill-in-the-blanks inside circles need no border */
-  .fitb { border: none; padding: 0;}
+  /* fill-in-the-blanks inside circles need no border, and should be
+     compact (matching sibling .value elements) rather than a full
+     writing-line -- --blank-pitch: 1em replaces what used to be
+     achieved by zeroing padding-top against the old box model. */
+  .fitb { border: none; padding: 0; --blank-pitch: 1em; }
 }
 
 .codesexp, .circleevalsexp, .editbox, .cm-s-scheme {
