@@ -1337,13 +1337,28 @@ td.halign-center .circleevalsexp { text-align: center; }
 }
 
 .codesexp, .circleevalsexp, .editbox, .cm-s-scheme {
-  width:              100%;
   margin:             0px 3px;
   display:            inline-block;
   padding:            0px;
   color:              #666;
   font-style:         normal;
   clear:              both;
+}
+
+/* .circleevalsexp intentionally excluded: most circles are either the sole
+   content of a table cell (already isolated) or alone in their own
+   paragraph (already block via <p>), so width:100% is redundant there and
+   actively fought in the minority of pages that want circles inline. */
+.codesexp, .editbox, .cm-s-scheme {
+  width:              100%;
+}
+
+/* A circle inline in running prose (e.g. inside an @Q{} question, or
+   mid-sentence) needs to be pushed to its own line -- without width:100%
+   forcing that, it glues onto the end of the preceding text. .qblock is
+   @Q{}'s wrapper, so this covers that case everywhere it occurs. */
+.qblock .circleevalsexp {
+  display: block;
 }
 
 /* WESCHEME COLORS */
