@@ -191,7 +191,7 @@ export function SelfGuided() {
           »
         </button>
       </div>
-      <div id="pages">
+      <div id="pages" className={rightPane ? '' : 'no-right-pane'}>
         <div id="leftPane">
           {leftPane}
         </div>
