@@ -1959,6 +1959,9 @@
                                           "\n--\n\n")]
                                       [else (enclose-span
                                              ".teacherNote" converted-text)]) o))]
+                           [(string=? directive "ifnotlessonplan")
+                            (let ([text (read-group i directive #:multiline? #t)])
+                              (display-openblock ".ifnotlessonplan" text directive o))]
                            [(string=? directive "indented")
                             (let ([text (read-group i directive #:multiline? #t)])
                               (display-openblock ".indentedpara" text directive o))]

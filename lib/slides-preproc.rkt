@@ -775,7 +775,7 @@
                             (let ([text (string-trim (read-group i directive #:multiline? #t))])
                               (display ":pushpin: " o)
                               (expand-directives:string->port text o))]
-                           [(member directive '("lesson-instruction" "lesson-roleplay" "indented"))
+                           [(member directive '("lesson-instruction" "lesson-roleplay" "indented" "ifnotlessonplan"))
                             (let ([text (string-trim (read-group i directive #:multiline? #t))])
                               (expand-directives:string->port text o))]
                            [(member directive '("left" "right" "center"))
