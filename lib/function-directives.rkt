@@ -56,10 +56,9 @@
         ; (if (string=? style ".recipe_purpose") "" ".fitbruby")
         style)
       (string-append
-        (enclose-span
-          (if show? ".solution" ".blank")
-          (if show? s
-              (string-multiply "&#x5f;" (string-length s-og))))
+        (if show?
+            (fitb-solution-wrap s)
+            (enclose-span ".blank" (string-multiply "&#x5f;" (string-length s-og))))
         (enclose-span ".ruby" "")
         ))))
 
