@@ -309,11 +309,9 @@ What do you Notice? What do you Wonder?
 
 @slidebreak{Investigate}
 
-@scrub{I'm noticing that we might need another directive that allows us to specify something isn't lesson plan facing but should appear on both slides and book pages}
-
 To convert a Circle of Evaluation into code, we start at the outside and work our way in. After each function, we write a pair of parentheses, and then convert each argument inside the Circle.
 
-@ifslide{
+@ifnotlessonplan{
 [cols="^4, ^.^1,^5", grid="none", stripes="none", frame="none"]
 |===
 
@@ -344,14 +342,28 @@ To convert a Circle of Evaluation into code, we start at the outside and work ou
 - What did you wonder?
 - Why might it be useful to separate the _thinking_ and _coding_ steps? Why not just do them at the same time, all the time?
 
-@ifselfguided{
 @selfguidedbreak
+
+@ifselfguided{
 @editorconfig{{
   starterFile: "logos"
 }}
 
+We're going to look at three logos made by Bootstrap students in San Diego.
+
+@scrub{
+@htmlverb{<input type="button" value="Click here" onclick='addToEditor(\` sample-logo-1 \`)' />} to add `sample-logo-1` to the editor.
+
+@htmlverb{<input type="button" value="Click here" onclick='addToEditor(\` sample-logo-2 \`)' />} to add `sample-logo-2` to the editor.
+
+@htmlverb{<input type="button" value="Click here" onclick='addToEditor(\` sample-logo-3 \`)' />} to add `sample-logo-3` to the editor.
+}
+}
+
+@ifnotselfguided{
 @lesson-instruction{
 - We're going to look at three logos made by Bootstrap students in San Diego. Open the @starter-file{logos} and click "Run". Type `sample-logo-1` in the Interactions Area (right side) and hit enter, then repeat for the other sample logos.
+}
 }
 - Which logo's *picture* looks the most complex to you? 
 - Which logo's *code* looks the most complex to you? 
