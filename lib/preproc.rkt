@@ -3330,8 +3330,12 @@
                  ; the type name floats above the underline instead of
                  ; resting on it (same issue as @fitbruby's literal-text
                  ; argument, encoded-ans, and the ?ANS answer case, all
-                 ; fixed elsewhere in this file).
-                 (string-append (create-begin-tag "span" ".fitbruby"
+                 ; fixed elsewhere in this file). The .contract-type marker
+                 ; lets core.less un-italicize this .solution specifically --
+                 ; .solution is normally italicized for graded answers, but a
+                 ; contract's type name is a display-only label, not an
+                 ; answer, and wasn't italic before this fix.
+                 (string-append (create-begin-tag "span" ".fitbruby.contract-type"
                                                   ; #:attribs (format "style=\"width: ~aem\"" w)
                                                   )
                    (enclose-span ".solution" type)

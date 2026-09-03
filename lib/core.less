@@ -998,6 +998,12 @@ html div#body.workbookpage {
 
   /* Some elements show either solution mode or a blank */
   .solution, .solution code, .solution .MJX-TEX { font-style: italic !important; }
+  /* .solution's italic is meant for graded answers -- a contract's type
+     name (Table, String, ...) is a display-only label wrapped in .solution
+     only so its line-height:1 reset has a real element to target (see
+     contract-type in preproc.rkt), not an answer, and wasn't italic
+     before that fix. */
+  .contract-type > .solution { font-style: normal !important; }
   div.choice { display: inline; }
   .blank    { color: rgba(0,0,0,0); }
   .chosen::after { content: '✅'; }
