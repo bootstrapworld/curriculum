@@ -1945,17 +1945,21 @@
                                     ; given/label value rather than a graded fill-in --
                                     ; produces bare text with no wrapping span, unlike
                                     ; @ifsoln{}'s own expansion (which already wraps
-                                    ; itself in .solution when shown). Wrap unconditionally
-                                    ; here too: .fitbruby > .solution needs a real child
-                                    ; element for its line-height:1 reset to target
-                                    ; (align-items:flex-end has nothing tight to pin
-                                    ; against otherwise, and the text floats above the
-                                    ; underline instead of resting on it). Harmless to
-                                    ; double-wrap the @ifsoln case -- it just nests an
-                                    ; empty or already-.solution-wrapped span one level
-                                    ; deeper, with no visible effect.
-                                    (enclose-span ".solution"
-                                      (expand-directives:string->string text #:enclosing-directive directive))
+                                    ; itself in .solution when shown). .fitbruby >
+                                    ; .solution needs a real child element for its
+                                    ; line-height:1 reset to target (align-items:flex-end
+                                    ; has nothing tight to pin against otherwise, and the
+                                    ; text floats above the underline instead of resting
+                                    ; on it) -- so wrap it in .solution here too, but only
+                                    ; when @ifsoln{} hasn't already: expand text first and
+                                    ; check whether it already begins with the token
+                                    ; create-begin-tag would have produced for .solution,
+                                    ; to avoid nesting .solution inside .solution.
+                                    (let* ([expanded-text (expand-directives:string->string text #:enclosing-directive directive)]
+                                           [solution-tag-prefix (create-begin-tag "span" ".solution")])
+                                      (if (string-prefix? expanded-text solution-tag-prefix)
+                                          expanded-text
+                                          (enclose-span ".solution" expanded-text)))
                                     (create-begin-tag "span" ".ruby")
                                     (expand-directives:string->string ruby #:enclosing-directive directive)
                                     (create-end-tag "span"))
