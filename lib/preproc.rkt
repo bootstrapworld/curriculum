@@ -1926,26 +1926,17 @@
                               ; A literal (non-@ifsoln) second argument -- e.g.
                               ; @fitb{5em}{3} or @fitb{20ex}{pounds} -- used to
                               ; flow through the generic span-stack mechanism
-                              ; unwrapped, the same bug fixed for @fitbruby's
-                              ; equivalent argument, encoded-ans, and others in
-                              ; this file: .fitb > .solution's line-height:1
-                              ; reset needs a real child element to target, or
-                              ; the text floats above the underline instead of
-                              ; resting on it. Read the text explicitly (like
-                              ; @fitbruby does) and wrap it in .solution, unless
-                              ; @ifsoln{} already did (avoid double-nesting).
+                              ; unwrapped. Read the text explicitly (like
+                              ; @fitbruby does) and wrap it via
+                              ; fitb-solution-wrap (see html-tag-gen.rkt).
                               (let* ([text (read-group i directive)]
-                                     [expanded-text (expand-directives:string->string text #:enclosing-directive directive)]
-                                     [solution-tag-prefix (create-begin-tag "span" ".solution")]
-                                     [wrapped-text (if (string-prefix? expanded-text solution-tag-prefix)
-                                                        expanded-text
-                                                        (enclose-span ".solution" expanded-text))])
+                                     [expanded-text (expand-directives:string->string text #:enclosing-directive directive)])
                                 (display
                                   (string-append
                                     (if (string=? width "")
                                         (create-begin-tag "span" ".fitb.stretch")
                                         (create-begin-tag "span" ".fitb" #:attribs (format "style=\"width: ~a\"" width)))
-                                    wrapped-text
+                                    (fitb-solution-wrap expanded-text)
                                     (create-end-tag "span"))
                                   o)))]
                            [(string=? directive "fitbruby")
@@ -1965,21 +1956,11 @@
                                     ; given/label value rather than a graded fill-in --
                                     ; produces bare text with no wrapping span, unlike
                                     ; @ifsoln{}'s own expansion (which already wraps
-                                    ; itself in .solution when shown). .fitbruby >
-                                    ; .solution needs a real child element for its
-                                    ; line-height:1 reset to target (align-items:flex-end
-                                    ; has nothing tight to pin against otherwise, and the
-                                    ; text floats above the underline instead of resting
-                                    ; on it) -- so wrap it in .solution here too, but only
-                                    ; when @ifsoln{} hasn't already: expand text first and
-                                    ; check whether it already begins with the token
-                                    ; create-begin-tag would have produced for .solution,
-                                    ; to avoid nesting .solution inside .solution.
-                                    (let* ([expanded-text (expand-directives:string->string text #:enclosing-directive directive)]
-                                           [solution-tag-prefix (create-begin-tag "span" ".solution")])
-                                      (if (string-prefix? expanded-text solution-tag-prefix)
-                                          expanded-text
-                                          (enclose-span ".solution" expanded-text)))
+                                    ; itself in .solution when shown). Wrap via
+                                    ; fitb-solution-wrap (see html-tag-gen.rkt), which
+                                    ; skips re-wrapping when @ifsoln{} already did.
+                                    (fitb-solution-wrap
+                                      (expand-directives:string->string text #:enclosing-directive directive))
                                     (create-begin-tag "span" ".ruby")
                                     (expand-directives:string->string ruby #:enclosing-directive directive)
                                     (create-end-tag "span"))
@@ -2970,15 +2951,8 @@
                             [fill-len (answer-fill-length e)])
                        ;(printf "answer frag found: ~s\n" e)
                        (if *solutions-mode?*
-                           ; .fitb > .solution needs a real child element for its
-                           ; line-height:1 reset to target -- without it,
-                           ; align-items:flex-end has nothing tight to pin against
-                           ; and the answer floats above the underline instead of
-                           ; resting on it (same issue as @fitbruby's literal-text
-                           ; and encoded-ans's outer-.solution cases, fixed
-                           ; elsewhere in this file).
                            (enclose-span (format ".fitb~a" fill-len)
-                             (enclose-span ".solution"
+                             (fitb-solution-wrap
                                (sexp->arith e #:pyret pyret #:wrap wrap #:parens parens #:tex tex)))
                            (enclose-span (format ".fitb~a" fill-len)
                              "{nbsp}"
@@ -3212,14 +3186,10 @@
                              ; Only the wescheme (.fitb*) branch needs the
                              ; .solution wrapper -- .studentBlockAnswerFilled*
                              ; is a circleevalsexp-only class that doesn't use
-                             ; the fitb flex/line-height box model this reset
-                             ; targets. Without it here, .fitb > .solution's
-                             ; line-height:1 reset has no element to target and
-                             ; the answer floats above the underline instead of
-                             ; resting on it (same issue fixed for sexp->arith's
-                             ; answer? case and elsewhere in this file).
+                             ; the fitb flex/line-height box model
+                             ; fitb-solution-wrap's reset targets.
                              (if wescheme
-                                 (enclose-span ".solution" (sexp->block e #:pyret pyret #:wescheme wescheme))
+                                 (fitb-solution-wrap (sexp->block e #:pyret pyret #:wescheme wescheme))
                                  (sexp->block e #:pyret pyret #:wescheme wescheme)))
                            (enclose-span
                              (if wescheme
@@ -3324,21 +3294,15 @@
                       ; [type-w (string-length type)]
                       ; [w (+ 0 (max name-w type-w))]
                       )
-                 ; .fitbruby > .solution needs a real child element for its
-                 ; line-height:1 reset to target -- without it,
-                 ; align-items:flex-end has nothing tight to pin against and
-                 ; the type name floats above the underline instead of
-                 ; resting on it (same issue as @fitbruby's literal-text
-                 ; argument, encoded-ans, and the ?ANS answer case, all
-                 ; fixed elsewhere in this file). The .contract-type marker
-                 ; lets core.less un-italicize this .solution specifically --
-                 ; .solution is normally italicized for graded answers, but a
-                 ; contract's type name is a display-only label, not an
-                 ; answer, and wasn't italic before this fix.
+                 ; The .contract-type marker lets core.less un-italicize
+                 ; this .solution specifically -- .solution is normally
+                 ; italicized for graded answers, but a contract's type
+                 ; name is a display-only label, not an answer, and wasn't
+                 ; italic before the fitb-solution-wrap fix below.
                  (string-append (create-begin-tag "span" ".fitbruby.contract-type"
                                                   ; #:attribs (format "style=\"width: ~aem\"" w)
                                                   )
-                   (enclose-span ".solution" type)
+                   (fitb-solution-wrap type)
                    (create-begin-tag "span" ".ruby")
                    name
                    (create-end-tag "span")
