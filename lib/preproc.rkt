@@ -1940,7 +1940,22 @@
                                       (create-begin-tag "span" ".fitbruby" #:attribs
                                                         (format "style=\"width: ~a\"" width)))
                                   (string-append
-                                    (expand-directives:string->string text #:enclosing-directive directive)
+                                    ; A literal (non-@ifsoln) text argument -- e.g.
+                                    ; @fitbruby{width}{explanatory variable}{caption}, a
+                                    ; given/label value rather than a graded fill-in --
+                                    ; produces bare text with no wrapping span, unlike
+                                    ; @ifsoln{}'s own expansion (which already wraps
+                                    ; itself in .solution when shown). Wrap unconditionally
+                                    ; here too: .fitbruby > .solution needs a real child
+                                    ; element for its line-height:1 reset to target
+                                    ; (align-items:flex-end has nothing tight to pin
+                                    ; against otherwise, and the text floats above the
+                                    ; underline instead of resting on it). Harmless to
+                                    ; double-wrap the @ifsoln case -- it just nests an
+                                    ; empty or already-.solution-wrapped span one level
+                                    ; deeper, with no visible effect.
+                                    (enclose-span ".solution"
+                                      (expand-directives:string->string text #:enclosing-directive directive))
                                     (create-begin-tag "span" ".ruby")
                                     (expand-directives:string->string ruby #:enclosing-directive directive)
                                     (create-end-tag "span"))
