@@ -10,6 +10,8 @@
 .tighter { --blank-pitch: 1.1em; }
 .smallfont { font-size: 0.75rem; }
 .bigfont { font-size: 1.3rem; }
+/* fitb-only lever: should NOT affect a nearby default blanklines */
+.fitbonly { --fitb-pitch: 1.3em; }
 </style>
 ++++
 
@@ -242,3 +244,14 @@ Stacked, mixed content types (plain / exponent / subscript), pitch check:
 @n Stacked math check: @fitb{}{@ifsoln{@math{7x^2}}}
 
 @n Stacked math check: @fitb{}{@ifsoln{@math{log_b}}}
+
+== Section P: --fitb-pitch (fitb-only lever), should NOT affect a nearby default blanklines
+
+[.fitbonly]
+--
+@n Fitb-only tight, filled: @fitb{}{@ifsoln{tight but blanklines below is not}}
+--
+
+Immediately followed by a DEFAULT (unaffected) blanklines, for comparison:
+
+@blanklines{2}{@ifsoln{This should stay at the default pitch, not the tight fitb-only pitch above.}}

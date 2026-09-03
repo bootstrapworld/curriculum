@@ -398,7 +398,12 @@ lines on some browsers */
   justify-content:    center;
   min-width:          4em;
   text-align:         center;
-  line-height:        var(--blank-pitch);
+  /* --fitb-pitch overrides just fitb/fitbruby without touching a
+     .blanklines sharing the same page; falls back to the shared
+     --blank-pitch when nothing more specific is set, so the common
+     "tighten everything in this section" case still only needs one
+     override. */
+  line-height:        var(--fitb-pitch, var(--blank-pitch));
   height:             1lh; /* derived from line-height -- never override this directly */
   border-bottom:      solid thin black;
   vertical-align:     bottom;
@@ -966,7 +971,11 @@ html div#body.workbookpage {
     position: relative;
     background-image: url('images/2.2em-ruled lines.png');
     margin-left: 5px;
-    line-height: var(--blank-pitch);
+    /* --blanklines-pitch is the blanklines-only counterpart to
+       --fitb-pitch -- lets a page tighten blanklines specifically
+       without touching nearby fitb/fitbruby, symmetric with the
+       fitb-only case. Falls back to the shared --blank-pitch. */
+    line-height: var(--blanklines-pitch, var(--blank-pitch));
     .solution { position: absolute; bottom: -3px; line-height: inherit; }
     /* artificially shrink codeblocks to avoid stepping on the line */
     .editbox, code.pyret {
@@ -1370,9 +1379,12 @@ td.halign-center .circleevalsexp { text-align: center; }
 
   /* fill-in-the-blanks inside circles need no border, and should be
      compact (matching sibling .value elements) rather than a full
-     writing-line -- --blank-pitch: 1em replaces what used to be
-     achieved by zeroing padding-top against the old box model. */
-  .fitb { border: none; padding: 0; --blank-pitch: 1em; }
+     writing-line -- --fitb-pitch: 1em replaces what used to be
+     achieved by zeroing padding-top against the old box model.
+     --fitb-pitch (not --blank-pitch): a Circle of Evaluation never
+     contains a .blanklines, but using the fitb-only lever documents
+     that fact instead of relying on it accidentally. */
+  .fitb { border: none; padding: 0; --fitb-pitch: 1em; }
 }
 
 .codesexp, .circleevalsexp, .editbox, .cm-s-scheme {
