@@ -1205,13 +1205,6 @@ div#body{
     .recipe_purpose, .recipe_contract .recipe_name {
       &::before { content: '#'; }
     }
-    /* .solution used to be a class directly on the outer .fitbruby.recipe_name
-       box (matching this rule's old ".solution.recipe_name" compound
-       selector); it's now a real child span around just the answer text
-       (see encoded-ans in function-directives.rkt), so min-width -- a
-       box-sizing property that only means something on the flex
-       container itself -- has to stay targeted at the outer element,
-       via :has() checking for the (now-inner) .solution. */
     .recipe_name:has(> .solution) { text-align: right !important; min-width: 6em; } /* no whitespace in pyret */
     /* Indenting for function body and example bodies */
     .recipe_example_line:not(.keyword_only) > .content,
@@ -1399,11 +1392,7 @@ td.halign-center .circleevalsexp { text-align: center; }
 
   /* fill-in-the-blanks inside circles need no border, and should be
      compact (matching sibling .value elements) rather than a full
-     writing-line -- --fitb-pitch: 1em replaces what used to be
-     achieved by zeroing padding-top against the old box model.
-     --fitb-pitch (not --blank-pitch): a Circle of Evaluation never
-     contains a .blanklines, but using the fitb-only lever documents
-     that fact instead of relying on it accidentally. */
+     writing-line. use the more specific lever (--fitb-pitch) */
   .fitb { border: none; padding: 0; --fitb-pitch: 1em; }
 }
 
