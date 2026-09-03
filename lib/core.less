@@ -337,6 +337,8 @@ div#body {
 
   .fitb.stretch, .fitbruby.stretch {
     margin-left:        5px;
+    /* .fitbruby.stretch overrides this back to baseline further down
+       (see the comment by that rule) -- kept here only for .fitb.stretch. */
     vertical-align:     bottom; /* match the base rule -- baseline reintroduces ambient half-leading */
     width:              auto;
     border-color:       transparent; /* hide the normal underline */
@@ -410,6 +412,23 @@ lines on some browsers */
   border-bottom:      solid thin black;
   vertical-align:     bottom;
 }
+
+/* fitbruby specifically reverts to baseline: its .ruby caption hangs
+   below the box via position:absolute (deliberately, so it doesn't
+   inflate fitbruby's own height/pitch past fitb's), but vertical-align:
+   bottom anchors the box to the LINE's bottom independent of where
+   adjacent same-line text's own baseline+descenders land -- in running
+   prose that gap reliably eats into the caption, ~10-14px of real
+   collision measured across a curriculum-wide survey. baseline keeps
+   fitbruby's bottom pinned close to the shared text baseline instead
+   (matching the old, pre-redesign behavior), which resolves the
+   collision. This does reintroduce a little of the ambient-half-leading
+   drift the base rule's comment warns about, but only for fitbruby, and
+   only in the (rare) case of several fitbrubies flowing back-to-back
+   with nothing else on their lines -- measured worst case across every
+   real page in the curriculum is +7px on a single page; all but 8 of
+   658 fitbruby-bearing pages are unaffected. */
+.fitbruby, .fitbruby.stretch { vertical-align: baseline; }
 
 /* line-height is inherited, so without this reset the content's own
    anonymous flex item would ALSO be as tall as --blank-pitch -- as tall as the
