@@ -10,7 +10,11 @@
 .tighter { --blank-pitch: 1.1em; }
 .smallfont { font-size: 0.75rem; }
 .bigfont { font-size: 1.3rem; }
-/* fitb-only lever: should NOT affect a nearby default blanklines */
+/* Rare, deliberate case: --fitb-pitch decouples fitb/fitbruby from a
+   nearby blanklines. Most page overrides should use --blank-pitch (as
+   above) so blanklines keeps matching fitb, per the "blanklines
+   pretends to be repeated fitbs" design intent -- --fitb-pitch is
+   only for a page that explicitly wants them to diverge. */
 .fitbonly { --fitb-pitch: 1.3em; }
 </style>
 ++++
@@ -245,13 +249,16 @@ Stacked, mixed content types (plain / exponent / subscript), pitch check:
 
 @n Stacked math check: @fitb{}{@ifsoln{@math{log_b}}}
 
-== Section P: --fitb-pitch (fitb-only lever), should NOT affect a nearby default blanklines
+== Section P: --fitb-pitch, the rare deliberate-divergence lever
 
 [.fitbonly]
 --
-@n Fitb-only tight, filled: @fitb{}{@ifsoln{tight but blanklines below is not}}
+@n Fitb-only tight, filled: @fitb{}{@ifsoln{tight -- blanklines below stays default, by explicit choice}}
 --
 
-Immediately followed by a DEFAULT (unaffected) blanklines, for comparison:
+Immediately followed by a DEFAULT blanklines, for comparison. Because
+`.fitbonly` sets `--fitb-pitch` (not `--blank-pitch`), this blanklines
+correctly does NOT follow -- this is the escape hatch for a page that
+wants fitb and blanklines to diverge on purpose:
 
-@blanklines{2}{@ifsoln{This should stay at the default pitch, not the tight fitb-only pitch above.}}
+@blanklines{2}{@ifsoln{This stays at the default pitch -- --fitb-pitch only affects fitb/fitbruby.}}
