@@ -430,6 +430,23 @@ lines on some browsers */
    658 fitbruby-bearing pages are unaffected. */
 .fitbruby, .fitbruby.stretch { vertical-align: baseline; }
 
+/* Same root problem, different symptom: a bare .fitb (the ?ANS-style
+   inline code blank) sitting inside a code display (.codetwo, i.e. a
+   `code.pyret`/`.obeyspaces` block) is pitched at the shared, much
+   larger --blank-pitch, while the surrounding monospace code text's
+   own natural line-height is far smaller -- vertical-align:bottom
+   anchors the fitb's underline to the (fitb-inflated) line's bottom,
+   leaving it visibly detached below the code text it's meant to sit
+   inline with (measured ~9px gap, consistent whether filled or empty).
+   baseline pins it back to the shared text baseline instead, closing
+   the gap to <1px. Unlike the fitbruby fix above, this carries no
+   height-drift risk to weigh: a code line's fitbs share one line rather
+   than each claiming their own, so there's nothing to compound --
+   measured 0px page-height change across all 71 curriculum pages using
+   this pattern. Scoped to .codetwo specifically so plain running-text
+   .fitb (and the blanklines-matching math it depends on) is untouched. */
+.codetwo .fitb { vertical-align: baseline; }
+
 /* line-height is inherited, so without this reset the content's own
    anonymous flex item would ALSO be as tall as --blank-pitch -- as tall as the
    container itself -- leaving align-items:flex-end nothing to do, and
