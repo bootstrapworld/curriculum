@@ -1923,11 +1923,31 @@
                               (unless (char=? (ignorespaces-peek-char i) #\{)
                                 (warnmsg "~a: @fitb{~a} requires second arg"
                                        (errmessage-context) width))
-                              (if (string=? width "")
-                                (display-begin-span
-                                  ".fitb.stretch" o)
-                                (display-begin-span
-                                  ".fitb" o #:attribs (format "style=\"width: ~a\"" width))))]
+                              ; A literal (non-@ifsoln) second argument -- e.g.
+                              ; @fitb{5em}{3} or @fitb{20ex}{pounds} -- used to
+                              ; flow through the generic span-stack mechanism
+                              ; unwrapped, the same bug fixed for @fitbruby's
+                              ; equivalent argument, encoded-ans, and others in
+                              ; this file: .fitb > .solution's line-height:1
+                              ; reset needs a real child element to target, or
+                              ; the text floats above the underline instead of
+                              ; resting on it. Read the text explicitly (like
+                              ; @fitbruby does) and wrap it in .solution, unless
+                              ; @ifsoln{} already did (avoid double-nesting).
+                              (let* ([text (read-group i directive)]
+                                     [expanded-text (expand-directives:string->string text #:enclosing-directive directive)]
+                                     [solution-tag-prefix (create-begin-tag "span" ".solution")]
+                                     [wrapped-text (if (string-prefix? expanded-text solution-tag-prefix)
+                                                        expanded-text
+                                                        (enclose-span ".solution" expanded-text))])
+                                (display
+                                  (string-append
+                                    (if (string=? width "")
+                                        (create-begin-tag "span" ".fitb.stretch")
+                                        (create-begin-tag "span" ".fitb" #:attribs (format "style=\"width: ~a\"" width)))
+                                    wrapped-text
+                                    (create-end-tag "span"))
+                                  o)))]
                            [(string=? directive "fitbruby")
                             ;FIXME: text should be processed, see fitb above
                             (let* ([width (read-group i directive)]
