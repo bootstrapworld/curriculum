@@ -398,11 +398,13 @@ lines on some browsers */
   justify-content:    center;
   min-width:          4em;
   text-align:         center;
-  /* --fitb-pitch overrides just fitb/fitbruby without touching a
-     .blanklines sharing the same page; falls back to the shared
-     --blank-pitch when nothing more specific is set, so the common
-     "tighten everything in this section" case still only needs one
-     override. */
+  /* --blank-pitch is the shared, page/section-wide lever -- set it on a
+     common ancestor to tighten fitb, fitbruby, AND any .blanklines in
+     that scope together, so @blanklines{}{} keeps behaving like an
+     author's shorthand for repeated @fitb{}{} lines (the intended
+     design). --fitb-pitch is a narrower escape hatch for the rare case
+     where a page deliberately wants fitb/fitbruby to diverge from a
+     nearby .blanklines. */
   line-height:        var(--fitb-pitch, var(--blank-pitch));
   height:             1lh; /* derived from line-height -- never override this directly */
   border-bottom:      solid thin black;

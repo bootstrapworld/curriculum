@@ -75,11 +75,20 @@ div#body.LessonNotes li {
 ++++
 
 
-* To shrink vertical spacing on fitb and fitbruby
+* To shrink vertical spacing on fitb, fitbruby, and any blanklines sharing
+  the page (they follow the same pitch, so a blanklines block keeps
+  matching what repeated fitbs would look like)
 ++++
 <style>
-.fitbruby { --fitb-pitch: calc(0.5rem + 1em);}
-.fitb { --fitb-pitch: calc(0.5rem + 1em);}
+#content { --blank-pitch: calc(0.5rem + 1em); }
+</style>
+++++
+
+* To shrink vertical spacing on fitb/fitbruby ONLY, deliberately leaving any
+  blanklines on the page at the default pitch
+++++
+<style>
+.fitb, .fitbruby { --fitb-pitch: calc(0.5rem + 1em); }
 </style>
 ++++
 
