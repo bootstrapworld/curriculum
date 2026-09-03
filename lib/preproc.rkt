@@ -3189,7 +3189,18 @@
                              (if wescheme
                                  (format ".fitb~a" fill-len)
                                  (format ".studentBlockAnswerFilled~a" fill-len))
-                             (sexp->block e #:pyret pyret #:wescheme wescheme))
+                             ; Only the wescheme (.fitb*) branch needs the
+                             ; .solution wrapper -- .studentBlockAnswerFilled*
+                             ; is a circleevalsexp-only class that doesn't use
+                             ; the fitb flex/line-height box model this reset
+                             ; targets. Without it here, .fitb > .solution's
+                             ; line-height:1 reset has no element to target and
+                             ; the answer floats above the underline instead of
+                             ; resting on it (same issue fixed for sexp->arith's
+                             ; answer? case and elsewhere in this file).
+                             (if wescheme
+                                 (enclose-span ".solution" (sexp->block e #:pyret pyret #:wescheme wescheme))
+                                 (sexp->block e #:pyret pyret #:wescheme wescheme)))
                            (enclose-span
                              (if wescheme
                                  (format ".value.wescheme-symbol.fitb~a" fill-len)
@@ -3293,10 +3304,17 @@
                       ; [type-w (string-length type)]
                       ; [w (+ 0 (max name-w type-w))]
                       )
+                 ; .fitbruby > .solution needs a real child element for its
+                 ; line-height:1 reset to target -- without it,
+                 ; align-items:flex-end has nothing tight to pin against and
+                 ; the type name floats above the underline instead of
+                 ; resting on it (same issue as @fitbruby's literal-text
+                 ; argument, encoded-ans, and the ?ANS answer case, all
+                 ; fixed elsewhere in this file).
                  (string-append (create-begin-tag "span" ".fitbruby"
                                                   ; #:attribs (format "style=\"width: ~aem\"" w)
                                                   )
-                   type
+                   (enclose-span ".solution" type)
                    (create-begin-tag "span" ".ruby")
                    name
                    (create-end-tag "span")
