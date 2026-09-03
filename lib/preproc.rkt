@@ -657,8 +657,7 @@
                             (member link-type '("printable-exercise" "opt-printable-exercise" "handout")))
                         ", window=\"&#x5f;blank\"" ""))])
       (when *lesson-plan*
-        (cond [(or (equal? link-type "opt-printable-exercise")
-                   (and (equal? link-type "printable-exercise") *optional-flag?*))
+        (cond [(equal? link-type "opt-printable-exercise")
                (let ([styled-link-output (string-append "[.Optional.PrintableExercise]##"
                                            materials-link-output "##")])
                  (unless (member styled-link-output *opt-printable-exercise-links*)
@@ -1110,9 +1109,7 @@
                      (set! *online-exercise-links*
                        (cons (cons g styled-link-output) *online-exercise-links*)))))
 
-               (when (or (equal? link-type "opt-online-exercise")
-                         (and (equal? link-type "online-exercise")
-                              *optional-flag?*))
+               (when (equal? link-type "opt-online-exercise")
                  (let ([styled-link-output (string-append "[.Optional.OnlineExercise]##"
                                              link-output "##")])
                    (unless (assoc g *opt-online-exercise-links*)
