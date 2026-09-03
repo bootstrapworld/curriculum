@@ -25,12 +25,11 @@
 
 div#body {
   /* single lever for fitb/fitbruby/blanklines row height (see the
-     FORMATTING OF CIRCLES section for why). A real CSS custom property
-     (not a LESS @variable) so a wrapper can override it once and have
-     every fitb/fitbruby/blanklines beneath it follow, the same way the
-     old drawBlankLines() rig picked up ambient context automatically --
-     but via ordinary inheritance instead of a runtime measurement hack. */
+     FORMATTING OF CIRCLES section for why). A wrapper can override
+     it once and have every fitb/fitbruby/blanklines beneath it follow,
+  */
   --blank-pitch: 2.2em;
+
   font-family:    @text-font;
   color:          @font-color;
   width:          100%; /* needed to undo effect of html{display:flex} */
@@ -337,14 +336,7 @@ div#body {
 
   .fitb.stretch, .fitbruby.stretch {
     margin-left:        5px;
-    /* .fitbruby.stretch overrides this back to baseline immediately
-       below -- kept here only for .fitb.stretch. (It has to be a
-       separate, later rule at matching specificity, not just a
-       different value here: this whole block is nested inside
-       div#body, which the .fitbruby-only override further down the
-       file -- written at the top level, outside div#body -- can't
-       out-specificity, so it was silently losing to this line.) */
-    vertical-align:     bottom; /* match the base rule -- baseline reintroduces ambient half-leading */
+    vertical-align:     bottom;
     width:              auto;
     border-color:       transparent; /* hide the normal underline */
     /* add an underline that goes past the end of the page */
@@ -356,6 +348,9 @@ div#body {
       bottom :            -1px;
     }
   }
+  /* override the default vertical-align for fitb, since the ruby should
+     not be bottom-aligned
+   */
   .fitbruby.stretch { vertical-align: baseline; }
 
   .vocab { font-weight: bold; font-style: italic; color: @font-color; }
@@ -373,32 +368,37 @@ div#body {
 }
 
 body.beta div#body::after {
-    position: absolute;
-    top: 25%;
-    left: 20%;
-    transform: rotate(-45deg);
-    content: "BETA";
-    opacity: 0.2;
-    line-height: 3em;
-    color: gray;
-    font-size: 100pt;
-    font-weight: bold;
-    z-index: -1;
-  }
+  position: absolute;
+  top: 25%;
+  left: 20%;
+  transform: rotate(-45deg);
+  content: "BETA";
+  opacity: 0.2;
+  line-height: 3em;
+  color: gray;
+  font-size: 100pt;
+  font-weight: bold;
+  z-index: -1;
+}
 
 
-/* use 'thin' instead of 1px border to try and avoid disappearing
-lines on some browsers */
-/* DESIGN EXPERIMENT (unify-blanks branch): line-height is the single
-   lever controlling how tall a writing line is. align-items:flex-end
-   pins content against the border-bottom (replacing padding-top, which
-   used to do that job jointly with an inner line-height:1em). Height is
-   derived from line-height so there's exactly one number to change.
-   vertical-align:bottom (not the old baseline) avoids an inline box's
-   ambient half-leading, which used to add an unpredictable extra ~1-2px
-   per row depending on the surrounding paragraph's font metrics -- the
-   reason drawBlankLines() previously had to measure a hidden rig instead
-   of computing the pitch directly from CSS. */
+/***********************************************************************
+  WRITING LINES: fitb, fitbruby, and blanklines
+
+  line-height is the single lever controlling how tall a writing line is.
+  To make this all work, we use align-items:flex-end to pin content against
+  the bottom border. Height is derived from line-height so there's exactly
+  one number to change. vertical-align:bottom is used in place of baseline,
+  which is a less predictable measure and would occasionally add fractional
+  height to the line (BUT see override exceptions below!)
+
+  --blank-pitch is the shared, page/section-wide lever -- set it on a
+  common ancestor to tighten fitb, fitbruby, AND any .blanklines in
+  that scope together
+  --fitb-pitch is a narrower escape hatch for the rare case
+  where a page deliberately wants fitb/fitbruby to diverge from a
+  nearby .blanklines.
+  */
 .fitb, .fitbruby, .fitb.stretch::after, .fitbruby.stretch::after {
   position:           relative;
   display:            inline-flex;
@@ -406,66 +406,28 @@ lines on some browsers */
   justify-content:    center;
   min-width:          4em;
   text-align:         center;
-  /* --blank-pitch is the shared, page/section-wide lever -- set it on a
-     common ancestor to tighten fitb, fitbruby, AND any .blanklines in
-     that scope together, so @blanklines{}{} keeps behaving like an
-     author's shorthand for repeated @fitb{}{} lines (the intended
-     design). --fitb-pitch is a narrower escape hatch for the rare case
-     where a page deliberately wants fitb/fitbruby to diverge from a
-     nearby .blanklines. */
   line-height:        var(--fitb-pitch, var(--blank-pitch));
-  height:             1lh; /* derived from line-height -- never override this directly */
+  height:             1lh; /* derived from line-height -- NEVER override this directly */
+  /* use 'thin' instead of 1px to avoid disappearing lines on some browsers */
   border-bottom:      solid thin black;
   vertical-align:     bottom;
 }
 
-/* fitbruby specifically reverts to baseline: its .ruby caption hangs
-   below the box via position:absolute (deliberately, so it doesn't
-   inflate fitbruby's own height/pitch past fitb's), but vertical-align:
-   bottom anchors the box to the LINE's bottom independent of where
-   adjacent same-line text's own baseline+descenders land -- in running
-   prose that gap reliably eats into the caption, ~10-14px of real
-   collision measured across a curriculum-wide survey. baseline keeps
-   fitbruby's bottom pinned close to the shared text baseline instead
-   (matching the old, pre-redesign behavior), which resolves the
-   collision. This does reintroduce a little of the ambient-half-leading
-   drift the base rule's comment warns about, but only for fitbruby, and
-   only in the (rare) case of several fitbrubies flowing back-to-back
-   with nothing else on their lines -- measured worst case across every
-   real page in the curriculum is +7px on a single page; all but 8 of
-   658 fitbruby-bearing pages are unaffected. (.fitbruby.stretch needs
-   its own, separate override nested inside div#body, next to the
-   .fitb.stretch/.fitbruby.stretch rule above -- see the comment there.
-   A bare rule here can't out-specificity that div#body-nested one.) */
-.fitbruby { vertical-align: baseline; }
+/*
+  EXCEPTION 1: fitbruby's caption hangs below the box via position:absolute
+  (deliberately, so it doesn't inflate fitbruby's own height/pitch
+  past fitb's), but vertical-align: bottom anchors the box to the
+  LINE's bottom. Use baseline instead
 
-/* Same root problem, different symptom: a bare .fitb (the ?ANS-style
-   inline code blank) sitting inside a code display (.codetwo, i.e. a
-   `code.pyret`/`.obeyspaces` block) is pitched at the shared, much
-   larger --blank-pitch, while the surrounding monospace code text's
-   own natural line-height is far smaller -- vertical-align:bottom
-   anchors the fitb's underline to the (fitb-inflated) line's bottom,
-   leaving it visibly detached below the code text it's meant to sit
-   inline with (measured ~9px gap, consistent whether filled or empty).
-   baseline pins it back to the shared text baseline instead, closing
-   the gap to <1px. Unlike the fitbruby fix above, this carries no
-   height-drift risk to weigh: a code line's fitbs share one line rather
-   than each claiming their own, so there's nothing to compound --
-   measured 0px page-height change across all 71 curriculum pages using
-   this pattern. Scoped to .codetwo specifically so plain running-text
-   .fitb (and the blanklines-matching math it depends on) is untouched. */
-.codetwo .fitb { vertical-align: baseline; }
+  EXCEPTION 2: when a fitb is inside a codeblock, the line-height doesn't
+  match the surrounding text so vertical-align: bottom will break;
+   */
+.fitbruby, .codetwo .fitb { vertical-align: baseline; }
 
-/* line-height is inherited, so without this reset the content's own
-   anonymous flex item would ALSO be as tall as --blank-pitch -- as tall as the
-   container itself -- leaving align-items:flex-end nothing to do, and
-   the glyphs would float centered inside that inherited line-height
-   instead of resting on the underline. Keep the content's own box tight
-   so bottom-alignment has something to actually pin to the border.
-   (Scoped to .fitb/.fitbruby only, not their .stretch::after counterparts
-   -- a ::after pseudo-element can't have a real .solution child, and a
-   selector list containing that invalid combination gets silently
-   dropped in its entirety by the browser.) */
+/* line-height is inherited if not set explicitly, so the content's own
+   anonymous flex item will be as tall as the container (--blank-pitch)
+   and the glyphs would float centered inside a taller box. Set it here.
+*/
 .fitb > .solution, .fitbruby > .solution, .fitb::before, .fitbruby::before {
   line-height: 1;
 }
@@ -998,11 +960,9 @@ html div#body.workbookpage {
 
   /* Some elements show either solution mode or a blank */
   .solution, .solution code, .solution .MJX-TEX { font-style: italic !important; }
-  /* .solution's italic is meant for graded answers -- a contract's type
-     name (Table, String, ...) is a display-only label wrapped in .solution
-     only so its line-height:1 reset has a real element to target (see
-     contract-type in preproc.rkt), not an answer, and wasn't italic
-     before that fix. */
+  /* A contract's type name (Table, String, ...) is a display-only label
+    wrapped in .solution only so its line-height:1 reset has a real element
+    to target (see contract-type in preproc.rkt). Don't treat it as italic */
   .contract-type > .solution { font-style: normal !important; }
   div.choice { display: inline; }
   .blank    { color: rgba(0,0,0,0); }

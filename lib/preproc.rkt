@@ -1923,12 +1923,6 @@
                               (unless (char=? (ignorespaces-peek-char i) #\{)
                                 (warnmsg "~a: @fitb{~a} requires second arg"
                                        (errmessage-context) width))
-                              ; A literal (non-@ifsoln) second argument -- e.g.
-                              ; @fitb{5em}{3} or @fitb{20ex}{pounds} -- used to
-                              ; flow through the generic span-stack mechanism
-                              ; unwrapped. Read the text explicitly (like
-                              ; @fitbruby does) and wrap it via
-                              ; fitb-solution-wrap (see html-tag-gen.rkt).
                               (let* ([text (read-group i directive)]
                                      [expanded-text (expand-directives:string->string text #:enclosing-directive directive)])
                                 (display
@@ -1940,7 +1934,6 @@
                                     (create-end-tag "span"))
                                   o)))]
                            [(string=? directive "fitbruby")
-                            ;FIXME: text should be processed, see fitb above
                             (let* ([width (read-group i directive)]
                                    [text (read-group i directive)]
                                    [ruby (read-group i directive)])
@@ -1951,14 +1944,6 @@
                                       (create-begin-tag "span" ".fitbruby" #:attribs
                                                         (format "style=\"width: ~a\"" width)))
                                   (string-append
-                                    ; A literal (non-@ifsoln) text argument -- e.g.
-                                    ; @fitbruby{width}{explanatory variable}{caption}, a
-                                    ; given/label value rather than a graded fill-in --
-                                    ; produces bare text with no wrapping span, unlike
-                                    ; @ifsoln{}'s own expansion (which already wraps
-                                    ; itself in .solution when shown). Wrap via
-                                    ; fitb-solution-wrap (see html-tag-gen.rkt), which
-                                    ; skips re-wrapping when @ifsoln{} already did.
                                     (fitb-solution-wrap
                                       (expand-directives:string->string text #:enclosing-directive directive))
                                     (create-begin-tag "span" ".ruby")
