@@ -1239,7 +1239,14 @@ div#body{
     .recipe_purpose, .recipe_contract .recipe_name {
       &::before { content: '#'; }
     }
-    .solution.recipe_name { text-align: right !important; min-width: 6em; } /* no whitespace in pyret */
+    /* .solution used to be a class directly on the outer .fitbruby.recipe_name
+       box (matching this rule's old ".solution.recipe_name" compound
+       selector); it's now a real child span around just the answer text
+       (see encoded-ans in function-directives.rkt), so min-width -- a
+       box-sizing property that only means something on the flex
+       container itself -- has to stay targeted at the outer element,
+       via :has() checking for the (now-inner) .solution. */
+    .recipe_name:has(> .solution) { text-align: right !important; min-width: 6em; } /* no whitespace in pyret */
     /* Indenting for function body and example bodies */
     .recipe_example_line:not(.keyword_only) > .content,
     .recipe_definition_body { margin-left: 2ex; }
