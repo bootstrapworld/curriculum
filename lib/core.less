@@ -337,8 +337,13 @@ div#body {
 
   .fitb.stretch, .fitbruby.stretch {
     margin-left:        5px;
-    /* .fitbruby.stretch overrides this back to baseline further down
-       (see the comment by that rule) -- kept here only for .fitb.stretch. */
+    /* .fitbruby.stretch overrides this back to baseline immediately
+       below -- kept here only for .fitb.stretch. (It has to be a
+       separate, later rule at matching specificity, not just a
+       different value here: this whole block is nested inside
+       div#body, which the .fitbruby-only override further down the
+       file -- written at the top level, outside div#body -- can't
+       out-specificity, so it was silently losing to this line.) */
     vertical-align:     bottom; /* match the base rule -- baseline reintroduces ambient half-leading */
     width:              auto;
     border-color:       transparent; /* hide the normal underline */
@@ -351,6 +356,7 @@ div#body {
       bottom :            -1px;
     }
   }
+  .fitbruby.stretch { vertical-align: baseline; }
 
   .vocab { font-weight: bold; font-style: italic; color: @font-color; }
 
@@ -427,8 +433,11 @@ lines on some browsers */
    only in the (rare) case of several fitbrubies flowing back-to-back
    with nothing else on their lines -- measured worst case across every
    real page in the curriculum is +7px on a single page; all but 8 of
-   658 fitbruby-bearing pages are unaffected. */
-.fitbruby, .fitbruby.stretch { vertical-align: baseline; }
+   658 fitbruby-bearing pages are unaffected. (.fitbruby.stretch needs
+   its own, separate override nested inside div#body, next to the
+   .fitb.stretch/.fitbruby.stretch rule above -- see the comment there.
+   A bare rule here can't out-specificity that div#body-nested one.) */
+.fitbruby { vertical-align: baseline; }
 
 /* Same root problem, different symptom: a bare .fitb (the ?ANS-style
    inline code blank) sitting inside a code display (.codetwo, i.e. a
