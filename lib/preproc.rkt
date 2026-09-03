@@ -2950,8 +2950,16 @@
                             [fill-len (answer-fill-length e)])
                        ;(printf "answer frag found: ~s\n" e)
                        (if *solutions-mode?*
+                           ; .fitb > .solution needs a real child element for its
+                           ; line-height:1 reset to target -- without it,
+                           ; align-items:flex-end has nothing tight to pin against
+                           ; and the answer floats above the underline instead of
+                           ; resting on it (same issue as @fitbruby's literal-text
+                           ; and encoded-ans's outer-.solution cases, fixed
+                           ; elsewhere in this file).
                            (enclose-span (format ".fitb~a" fill-len)
-                             (sexp->arith e #:pyret pyret #:wrap wrap #:parens parens #:tex tex))
+                             (enclose-span ".solution"
+                               (sexp->arith e #:pyret pyret #:wrap wrap #:parens parens #:tex tex)))
                            (enclose-span (format ".fitb~a" fill-len)
                              "{nbsp}"
                              ;(symbol->string *hole-symbol*)
