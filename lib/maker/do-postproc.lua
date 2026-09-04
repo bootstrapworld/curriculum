@@ -510,6 +510,18 @@ local function extract_self_guided(fhtml_cached, lesson_title)
     return lines
   end
 
+  -- lessonText/paneText are written out as JS template literals (backtick-
+  -- delimited). A literal backtick or `${` in the HTML -- e.g. from an
+  -- author's `\`` escape in the adoc source, meant only to suppress
+  -- Asciidoctor's own monospace formatting -- would otherwise terminate
+  -- (or corrupt) that JS string and break the build.
+  local function escape_for_js_template(s)
+    s = s:gsub('\\', '\\\\')
+    s = s:gsub('`', '\\`')
+    s = s:gsub('%$%{', '\\${')
+    return s
+  end
+
   o:write('export const selfGuidedTitle = "' .. lesson_title .. '"\n\n')
   o:write('export const selfGuidedBits = [\n')
   for x0 in i:lines() do
@@ -545,12 +557,12 @@ local function extract_self_guided(fhtml_cached, lesson_title)
         in_panetext_p = false
         writing_p = false
       elseif in_panetext_p then
-        table.insert(panetext_buf, x)
+        table.insert(panetext_buf, escape_for_js_template(x))
       else
-        table.insert(piece_buf, x)
+        table.insert(piece_buf, escape_for_js_template(x))
       end
     elseif x:match('^<h2') then
-      page_header = x
+      page_header = escape_for_js_template(x)
     elseif x:match('end_self_guided') then break -- needed?
     elseif x:match('start_self_guided_piece') then
       writing_p = true
