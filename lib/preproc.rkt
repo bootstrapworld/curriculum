@@ -2054,6 +2054,18 @@
                                        (read-group i directive)]
                                       [else (warnmsg "~a: Invalid ~a" directive
                                               (errmessage-context))])))]
+                           [(string=? directive "selfguidedpanebreak")
+                            ; Unlike selfguidedbreak, this does NOT start a new
+                            ; self-guided page -- it just marks that whatever
+                            ; comes next (until the current page ends, or
+                            ; another such break) belongs in the right pane
+                            ; instead of the left one. do-postproc.lua's
+                            ; extract_self_guided routes lines accordingly;
+                            ; slides are untouched (no .slidebreak span here).
+                            (unless *lesson-plan*
+                              (error 'ERROR "~a (~a) valid only in lesson plan"
+                                     directive (errmessage-file-context)))
+                            (display (html-comment "start_self_guided_panetext") o)]
                            [(member directive '("editorconfig" "imageconfig" "videoconfig"))
                             (unless *lesson-plan*
                               (error 'ERROR

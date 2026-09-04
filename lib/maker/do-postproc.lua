@@ -442,9 +442,12 @@ local function extract_self_guided(fhtml_cached, lesson_title)
   local writing_p = false
   local skip_one_more_line_p = false
   local in_style_p = false
+  local in_panetext_p = false
   local counter = 0
   local page_header = ''
-  local piece_buf = {}  -- buffer lines for the current piece
+  local piece_buf = {}     -- buffer lines for the current piece's left pane
+  local panetext_buf = {}  -- buffer lines diverted to the right pane by
+                           -- @selfguidedpanebreak, for the current piece
 
   -- Fix a buffered piece's lines for split-list artifacts:
   -- If the first content line is a bare <li> (no wrapping <ul>), inject <ul>
@@ -474,10 +477,24 @@ local function extract_self_guided(fhtml_cached, lesson_title)
     -- Case 2: piece starts with a bare <li> (continuation of a split list)
     -- Find the first non-empty, non-header line; if it's <li>, inject <ul>
     -- before it and drop everything after the last </li>.
-    local first = nil
-    for idx, l in ipairs(lines) do
-      if l:match('%S') and not l:match('^<h%d') then first = idx; break end
+    local function first_content_idx()
+      for idx, l in ipairs(lines) do
+        if l:match('%S') and not l:match('^<h%d') then return idx end
+      end
+      return nil
     end
+    local first = first_content_idx()
+
+    -- Case 2a: piece starts with an orphan </li> instead -- the split
+    -- (e.g. @selfguidedpanebreak) landed between a list item's own close
+    -- tag and its next sibling, whose matching <li> is on the far side of
+    -- the split. That close tag has nothing to close here; drop it before
+    -- re-checking for the bare-<li> case below.
+    if first and lines[first]:match('^</li>') then
+      table.remove(lines, first)
+      first = first_content_idx()
+    end
+
     if first and lines[first]:match('^<li>') then
       table.insert(lines, first, '<ul>')
       local last_li = nil
@@ -510,12 +527,25 @@ local function extract_self_guided(fhtml_cached, lesson_title)
       if skip_one_more_line_p then
         skip_one_more_line_p = false
         table.insert(piece_buf, page_header)
+      elseif x:match('start_self_guided_panetext') then
+        in_panetext_p = true
       elseif x:match('stop_self_guided_piece') then
         piece_buf = fix_piece(piece_buf)
         for _, l in ipairs(piece_buf) do o:write(l, '\n') end
-        o:write('</div>`\n},\n')
+        o:write('</div>`')
+        if #panetext_buf > 0 then
+          panetext_buf = fix_piece(panetext_buf)
+          o:write(',\npaneText: `\n')
+          for _, l in ipairs(panetext_buf) do o:write(l, '\n') end
+          o:write('`')
+        end
+        o:write('\n},\n')
         piece_buf = {}
+        panetext_buf = {}
+        in_panetext_p = false
         writing_p = false
+      elseif in_panetext_p then
+        table.insert(panetext_buf, x)
       else
         table.insert(piece_buf, x)
       end

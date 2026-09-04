@@ -103,6 +103,10 @@ const ImagePane = ({config}) => {
   return ( <img src={config} /> );
 }
 
+const TextPane = ({config}) => {
+  return <div className="pane-text" dangerouslySetInnerHTML={{__html: config}} />
+}
+
 const VideoPane = ({config}) => {
   console.log('creating VideoPane', config);
   return (
@@ -166,6 +170,8 @@ export function SelfGuided() {
     rightPane = <VideoPane config={twinPane.videoConfig} />
   } else if(twinPane.imageConfig) {
     rightPane = <ImagePane config={twinPane.imageConfig} />
+  } else if(twinPane.paneText) {
+    rightPane = <TextPane config={twinPane.paneText} />
   } else {
     rightPane = null;
   }
