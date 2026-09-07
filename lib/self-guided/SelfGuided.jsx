@@ -185,21 +185,21 @@ export function SelfGuided() {
     </div>
     <div id="progressbar" style={{width: (index + 1) * (100 / numSelfGuidedPages) + "%"}}></div>
     <main>
-      <div id="buttons">
-        <button id="prev"
-                onClick={handleClickPrev}
-                disabled={(index>0)? '' : 'yes' }>
-          «
-        </button>
-        <button id="next"
-                onClick={handleClickNext}
-                disabled={(index < selfGuidedBits.length - 1) && nextAllowed? '' : 'yes'}>
-          »
-        </button>
-      </div>
       <div id="pages" className={rightPane ? '' : 'no-right-pane'}>
         <div id="leftPane">
           {leftPane}
+        </div>
+        <div id="buttons">
+          <button id="prev"
+                  onClick={handleClickPrev}
+                  disabled={(index>0)? '' : 'yes' }>
+            «
+          </button>
+          <button id="next"
+                  onClick={handleClickNext}
+                  disabled={(index < selfGuidedBits.length - 1) && nextAllowed? '' : 'yes'}>
+            »
+          </button>
         </div>
         <div id="rightPane">
           {rightPane}

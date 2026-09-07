@@ -22,9 +22,13 @@ main {
   padding:    20px;
 }
 
-#pages { display: flex; column-gap: 40px; flex-grow: 1; }
+/* align-items: center keeps #buttons at its own natural height, centered
+   against whichever pane is taller, instead of stretching to match it. */
+#pages { display: flex; column-gap: 40px; flex-grow: 1; align-items: center; }
 
-#pages>div {
+/* #leftPane and #rightPane get the boxed "page" look; #buttons (also a
+   flex child of #pages, sitting between them) explicitly does not. */
+#pages>#leftPane, #pages>#rightPane {
   box-shadow:   inset 0px 0px 5px black;
   border-radius:20px;
   border:       solid 1px black;
@@ -89,12 +93,15 @@ main {
   background: lightblue;
 }
 
+/* A real flex child of #pages, sitting between #leftPane and #rightPane
+   (see SelfGuided.jsx), instead of the previous position:absolute overlay
+   guessed to sit in the gap by pixel math -- which put it on top of
+   whichever pane's content happened to be at viewport-center, especially
+   once a pane's own content (e.g. the Pyret editor) scrolls independently
+   of the page. As a flex child it can never overlap either pane. */
 #buttons {
-  position: absolute;
-  top: 50%;
-  left: calc(max(320px, min(49%, 500px)));
   text-align: center;
-  z-index: 9;
+  flex-shrink: 0;
 }
 
 #progressbar{
