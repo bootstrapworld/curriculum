@@ -1568,6 +1568,20 @@
 (define *supplemental-materials-needed?* #f)
 (define *additional-exercises-explicit?* #f)
 
+; Peeks (without consuming) whether the current position -- right after a
+; heading's leading '=' -- is followed, once the rest of this heading line
+; ends, by an immediate @slideonlybreak. @slideonlybreak never starts a new
+; self-guided piece on its own (only @slidebreak/@selfguidedbreak do), so an
+; author using it right after a heading -- in place of @slidebreak -- is
+; already a clear enough signal that this heading shouldn't end the current
+; self-guided page either. No separate role or directive is needed for that;
+; the heading just needs to skip its own stop-self-guided-break in this case.
+(define (heading-followed-by-slideonlybreak? i)
+  (let ([peeked (peek-string 500 0 i)])
+    (and (string? peeked)
+         (regexp-match #px"^[^\n]*\n(?:[ \t]*\n)*@slideonlybreak\\b" peeked)
+         #t)))
+
 (define *uses-codemirror?* #f)
 (define *uses-mathjax?* #f)
 
@@ -2336,7 +2350,7 @@
                    (when (span-stack-present?)
                      (warnmsg "~a: Header can't be inside span"
                              (errmessage-context)))
-                   (when *lesson-plan*
+                   (when (and *lesson-plan* (not (heading-followed-by-slideonlybreak? i)))
                      (stop-self-guided-break o))
                    (cond [*title-reached?*
                            (cond [*first-subsection-reached?* #f]
