@@ -1,0 +1,60 @@
+= The `author` Dev Server
+
+`try-quiz`, `try-self-guided`, double-clicking a plain page in the Finder -- each of those is its own answer to "how do I preview my changes", scoped to one kind of content at a time and (except for double-clicking) requiring you to know which script to reach for and re-run it by hand after every edit.
+
+`author` is a single alternative to all of that: one webserver for the whole `distribution/` tree, watching the rest of the repo and rebuilding automatically.
+
+  ./author
+
+This builds (via `make`) if needed, starts a server, and opens a browser to it. From there:
+
+* plain lesson-plan and workbook pages just work, same as they always have
+* quizzes work -- open a lesson's `assessments/*/` page directly
+* self-guided lessons work, and get real hot-module-reload on the React source (see below)
+* editing anything under `lessons/`, `pathways/`, `shared/`, or `lib/` (outside `lib/maker/`) triggers a rebuild, and the browser reloads once it succeeds
+
+Flags:
+
+  ./author --port 9000    # default 8000, or $PORT
+  ./author --nomake       # skip the initial build; serve what's already in distribution/
+  ./author --no-open      # don't open a browser window
+  ./author --no-watch     # don't watch for changes or rebuild
+
+`NATLANG` selects the language tree, same as everywhere else (default `en-us`).
+
+== Why a rebuild takes ~10 seconds
+
+`make`'s own incremental-build overhead (mostly graph-scanning) is close to that even with nothing to do, so that's the floor on how fast a rebuild can complete regardless of how small the edit was. The server debounces rapid saves and queues at most one rebuild while another is running, so you can't pile up overlapping `make` invocations by saving quickly.
+
+== Self-guided lessons: how the dev server gets mounted
+
+Building each self-guided lesson's production bundle (`make self-guided`) is broken independently of any of this -- see <<README-self-guided.adoc#,README-self-guided.adoc>> -- so instead of serving that (currently unreachable) build output, `author` runs each visited lesson's own vite dev server in middleware mode, mounted at that lesson's own `self-guided/` URL, the first time it's requested. That gets you real HMR on the React source, same as `try-self-guided`, but without a separate process or port per lesson.
+
+One wrinkle: vite is handed a synthetic internal base (`/__self_guided__/<lesson>/`) rather than the lesson's real, public URL. Using the real URL as vite's `base` broke `.jsx` module transforms -- reproduced in isolation down to "the base string exactly matches the dev server's own root path", but not fully root-caused beyond that. `author` rewrites requests between the two shapes at the boundary, so nothing about the public URL changes.
+
+== The teacher hash: quiz-link generation and starter-file tagging
+
+Quiz-link generation and starter-file tagging need a hash identifying the logged-in teacher, fetched from `bootstrapworld.org`'s WordPress backend. That's a cross-origin request from wherever the curriculum is served, so it needs two things: `credentials: 'include'` on the client fetch (to send the WordPress login cookie), and the backend allow-listing the calling origin via CORS. Without both, it fails the same way it always has locally -- silently, falling back to `populateQuizLinks()`'s "you must be logged in" message -- whether that's a double-clicked `file://` page, `try-quiz`'s local server, or `author` with no further setup.
+
+*Why not just allow-list `127.0.0.1`?* Because it isn't a trustworthy identity to hand out cookie-bearing CORS access to -- it's "whatever's listening on that port on that machine", which any other local process (or a malicious page probing common local ports) could just as easily be. `pyret.bootstrapworld.org` already does this same cross-origin fetch in production, and its allow-list (`wp-content/plugins/bootstrap-plugin/inc/user-hash-ajax.php` in the `website` repo) is an exact-match list of *real* origins the org's own DNS controls -- not a wildcard, not localhost.
+
+`author` follows the same pattern: it looks for a dedicated hostname, `dev-author.bootstrapworld.org`, that resolves to nothing in public DNS -- it only resolves at all on a machine where you've added it to `/etc/hosts` yourself, pointed at loopback. That's what makes it safe to allow-list: nobody else's page can make your browser resolve it to `127.0.0.1` without you having deliberately opted in on that specific machine.
+
+*Why HTTPS too, not just the right origin?* Browsers now treat `http://` and `https://` as different "sites" for `SameSite` cookie purposes ("schemeful same-site") -- so even with the right hostname and a correct CORS allow-list, a plain `http://dev-author.bootstrapworld.org` origin never gets `bootstrapworld.org`'s (`SameSite=Lax`) login cookie attached to the fetch at all, regardless of anything else lining up. `author` serves HTTPS to match, using a certificate `mkcert` generates and signs with a *locally-trusted* CA (installed once into your own machine's trust store, not a real certificate authority), so browsers accept it without warnings.
+
+One-time setup, per machine where you want this:
+
+1. Add a line to `/etc/hosts` (needs `sudo`):
++
+  127.0.0.1  dev-author.bootstrapworld.org
+
+2. Install `mkcert` and trust its local CA (needs `sudo`; this is the one step that touches your machine's trust store, so `author` never runs it for you):
++
+  brew install mkcert
+  mkcert -install
+
+3. Make sure `bootstrapworld.org`'s CORS allow-lists include `https://dev-author.bootstrapworld.org:8000` (or whatever port you actually run `author` on -- CORS matching is exact, port included):
+   * `wp-content/plugins/bootstrap-plugin/inc/user-hash-ajax.php` in the `website` repo (`get_user_hash_allowed_origins()`) -- gates the teacher-hash fetch itself, which needs the login cookie.
+   * The shared `allowed_origins` config the `/data/*.php` endpoints read (`QueryAssessmentLinks.php`, `GenerateAssessmentLink.php`, `SubmitAssessment.php`) -- lives outside git, on the server. These don't strictly need the login cookie (they're keyed on the teacher hash itself, once you have it), just a matching CORS origin so the response is readable -- but without step 2 you'll never obtain a teacher hash to use with them in the first place.
+
+That's it on the curriculum side -- at startup, `author` checks for the `/etc/hosts` entry (same lookup a browser would do) and, if it's there, generates (once, cached in the gitignored `.author-certs/`) or reuses a cert via `mkcert` and serves HTTPS on that hostname automatically. If the hostname isn't set up, or `mkcert` isn't available/trusted yet, it falls back to plain `http://127.0.0.1` with a warning explaining what's missing -- same graceful degradation as today, nothing further required.
