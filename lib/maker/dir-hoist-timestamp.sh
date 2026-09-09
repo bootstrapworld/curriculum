@@ -1,5 +1,5 @@
 #! /usr/bin/env bash
-# last modified 2026-08-17
+# last modified 2026-09-08
 #
 # For every language directory (a child of a directory named "langs"), set its
 # mtime to that of the most-recently-modified file beneath it, so make can use
@@ -8,6 +8,14 @@
 # Single pass: one find for the files, batched stat, one awk to pick the newest
 # file per language directory, one touch per directory. The previous version
 # spawned a 6-process pipeline per language directory (~1000 processes).
+#
+# When AUTHOR_CHANGED_PATHS is set, it replaces the `find`: author-server.mjs
+# sets it (one absolute path per line) to exactly the files its chokidar
+# watcher saw change for the build in progress, so there's no reason to stat
+# every file under lessons/ and pathways/ just to rediscover what's already
+# known. Any other invocation (plain `make`, CI, `make deploy`, or author's
+# own first build before any watch event exists) leaves it unset and gets the
+# original full scan.
 
 dirs=()
 for dir in "$@"; do
@@ -15,8 +23,22 @@ for dir in "$@"; do
 done
 test ${#dirs[@]} -gt 0 || exit 0
 
-find "${dirs[@]}" -type f -path '*/langs/*/*' -print0 |
-  xargs -0 stat --format '%Y %n' |
+if [ -n "$AUTHOR_CHANGED_PATHS" ]; then
+  abs_dirs=()
+  for dir in "${dirs[@]}"; do
+    abs_dirs+=("$(cd "$dir" && pwd)")
+  done
+  printf '%s\n' "$AUTHOR_CHANGED_PATHS" | while IFS= read -r f; do
+    test -f "$f" || continue
+    case "$f" in */langs/*/*) ;; *) continue ;; esac
+    for d in "${abs_dirs[@]}"; do
+      case "$f" in "$d"/*) printf '%s\0' "$f"; break ;; esac
+    done
+  done | xargs -0 stat --format '%Y %n' 2>/dev/null
+else
+  find "${dirs[@]}" -type f -path '*/langs/*/*' -print0 |
+    xargs -0 stat --format '%Y %n'
+fi |
   awk '
     {
       mtime = $1
