@@ -103,6 +103,8 @@ You can skip this section and scroll down to your operating system if you're rea
 
 * Finally, run `npm install` to download and install the various node modules described above
 
+* If you want to live-test features that require being logged into BootstrapWorld.org (such as quiz link generation), run `mkcert --install` and follow the instructions in your terminal
+
 === In Unix or WSL...
 
 * Most packages can be installed via `sudo apt-get install`, with the following terminal command:
@@ -122,6 +124,9 @@ You can skip this section and scroll down to your operating system if you're rea
 
 * Finally, run `npm install` to download and install the various node modules described above
 
+* If you want to live-test features that require being logged into BootstrapWorld.org (such as quiz link generation), run `mkcert --install` and follow the instructions in your terminal
+
+
 === Additional Tools for Sublime
 
 If you use the https://www.sublimetext.com/[Sublime Text Editor], we've also created some tools that make authoring more pleasant and readable.
@@ -134,6 +139,10 @@ If you use the https://www.sublimetext.com/[Sublime Text Editor], we've also cre
 * Copy both files from the `curriculum/lib/sublime-settings` folder into your `Sublime Text/Packages/User` folder.
 * Quit and relaunch Sublime Text.
 * Navigate to the View dropdown menu and select Syntax. Switch the mode from Asciidoctor to Asciidoctor+ when viewing an .adoc file. Sublime will remember your preference for all future adoc files.
+
+== Authoring using the hot-reload server
+
+The most common modality for authors is to launch the authoring server (`./author`), then simply edit the curriculum files using Sublime, VSCode, or your favorite text editor. Edits will automatically trigger a rebuild of the affected files, and your browser will automatically reload to any files that have changed.
 
 == Building and deploying using the Makefile
 
@@ -151,9 +160,6 @@ to populate the `distribution/` directory with the built documentation.
 
 - `clean` -- removes `distribution/` so the next make builds from
   scratch. If this is the only option, there is no build done!
-
-- `csv` -- makes a CSV version of the entire converted (`en-us` version
-  only, for now) docs in `distribution/en-us/curriculum.csv`
 
 - `deploy` -- deploys. (See section on "Deployment")
 
