@@ -1984,11 +1984,14 @@
                                     [else (set! possible-beginning-of-line?
                                             (skip-1-newline-if-possible i o))]))]
 
-                           [(string=? directive "ifsoln")
+                           [(member directive '("ifsoln" "ifsoln-match"))
                             (let ([text (read-group i directive #:multiline? #t)])
                               (cond [*solutions-mode?*
                                       (let* ([contains-nl? (regexp-match "^ *\n" text)]
                                              [converted-text (expand-directives:string->string text #:enclosing-directive directive)])
+                                        (when (regexp-match "ifsoln-match" directive)
+                                          (set! converted-text
+                                            (string-append " → " converted-text)))
                                         (display
                                           (cond [contains-nl?
                                                   (string-append
