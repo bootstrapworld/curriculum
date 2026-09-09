@@ -29,6 +29,7 @@ initialization:
 	@mkdir -p distribution/$(NATLANG)/textbooks/.cached
 	@$(CP) -p lib/*.html $(PROGDIR)
 	@$(CP) -p lib/*.rkt $(PROGDIR)
+	@raco make $(PROGDIR)/adocables-preproc.rkt
 	@$(CP) -p lib/*.json $(PROGDIR)
 	@$(CP) -p lib/*.pdf distribution/$(NATLANG)/lib
 	@$(CP) -p lib/*.css distribution/$(NATLANG)/lib
