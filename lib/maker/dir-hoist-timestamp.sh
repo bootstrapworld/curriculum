@@ -24,17 +24,45 @@ done
 test ${#dirs[@]} -gt 0 || exit 0
 
 if [ -n "$AUTHOR_CHANGED_PATHS" ]; then
-  abs_dirs=()
+  # The changed-paths list is only trustworthy for trees the watcher
+  # reports in full. It is NOT complete for pathways/: Makefile.all's
+  # `phases` target unconditionally touches
+  # pathways/__sample/langs/en-us/lesson-order.txt on every build, and
+  # author-server.mjs's watcher deliberately filters that exact path (left
+  # in, the build's own touch would retrigger a rebuild forever). Relying
+  # on the list there leaves __sample's langs dir un-bumped, so the course
+  # silently fails to refresh -- stale or missing generated content, with
+  # no error most of the time.
+  #
+  # pathways/ is small (~378 files, ~0.04s) so just scan it in full;
+  # lessons/ (~4,284 files) is the tree the fast path exists for.
+  fast_dirs=()
+  full_dirs=()
   for dir in "${dirs[@]}"; do
-    abs_dirs+=("$(cd "$dir" && pwd)")
+    case "$dir" in
+      pathways|*/pathways) full_dirs+=("$dir") ;;
+      *) fast_dirs+=("$dir") ;;
+    esac
   done
-  printf '%s\n' "$AUTHOR_CHANGED_PATHS" | while IFS= read -r f; do
-    test -f "$f" || continue
-    case "$f" in */langs/*/*) ;; *) continue ;; esac
-    for d in "${abs_dirs[@]}"; do
-      case "$f" in "$d"/*) printf '%s\0' "$f"; break ;; esac
-    done
-  done | xargs -0 stat --format '%Y %n' 2>/dev/null
+  {
+    if [ ${#full_dirs[@]} -gt 0 ]; then
+      find "${full_dirs[@]}" -type f -path '*/langs/*/*' -print0 |
+        xargs -0 stat --format '%Y %n'
+    fi
+    if [ ${#fast_dirs[@]} -gt 0 ]; then
+      abs_dirs=()
+      for dir in "${fast_dirs[@]}"; do
+        abs_dirs+=("$(cd "$dir" && pwd)")
+      done
+      printf '%s\n' "$AUTHOR_CHANGED_PATHS" | while IFS= read -r f; do
+        test -f "$f" || continue
+        case "$f" in */langs/*/*) ;; *) continue ;; esac
+        for d in "${abs_dirs[@]}"; do
+          case "$f" in "$d"/*) printf '%s\0' "$f"; break ;; esac
+        done
+      done | xargs -0 stat --format '%Y %n' 2>/dev/null
+    fi
+  }
 else
   find "${dirs[@]}" -type f -path '*/langs/*/*' -print0 |
     xargs -0 stat --format '%Y %n'
