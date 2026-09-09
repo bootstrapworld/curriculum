@@ -116,6 +116,14 @@ linkcheck:
 
 ###############################################################################
 
+# Not part of the default `make` (it costs ~0.6-0.7s every single build for
+# something a normal edit loop never needs) -- run explicitly when you
+# actually want the standards-coverage report.
+coverage:
+	@$(MAKE) COVERAGE=yes
+
+###############################################################################
+
 clean:
 	@echo ➤ Clean distribution directory
 	@rm -fr $(TOPDIR)/distribution $(TOPDIR)/coverage-report.*

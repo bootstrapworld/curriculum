@@ -1,6 +1,10 @@
 include $(MAKE_DIR)utils.mk
 
+ifeq "$(COVERAGE)" ""
+phase2: specials verifylinks images tocs books
+else
 phase2: specials verifylinks images tocs coverage books
+endif
 
 ##########################################################################
 
