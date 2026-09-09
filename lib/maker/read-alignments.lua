@@ -22,6 +22,7 @@ standards_list = {
   read_alignment_file('NGSS', 'Next-Gen Science', 'standards/standards-ngss-dictionary.json', 'https://www.nextgenscience.org/'),
   read_alignment_file('IA', 'Iowa', 'standards/standards-ia-dictionary.json', 'https://iowacore.gov/standards/iowa-core-standards'),
   read_alignment_file('MA', 'Massachusetts', 'standards/standards-ma-dictionary.json', 'https://www.doe.mass.edu/frameworks/'),
+  read_alignment_file('MN', 'Minnesota', 'standards/standards-mn-dictionary.json', 'https://education.mn.gov/MDE/dse/stds/Math/'),
   read_alignment_file('OK', 'Oklahoma', 'standards/standards-ok-dictionary.json', 'https://sde.ok.gov/okhahome-academic-standards'),
   read_alignment_file('OR', 'Oregon', 'standards/standards-or-dictionary.json', 'https://www.oregon.gov/ode/educator-resources/standards/pages/default.aspx'),
   read_alignment_file('TX', 'Texas', 'standards/standards-tx-dictionary.json', 'https://www.oregon.gov/ode/educator-resources/standards/pages/default.aspx'),
