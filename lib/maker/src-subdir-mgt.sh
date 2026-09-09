@@ -18,6 +18,13 @@ function adjustproglangsubdirs() {
 
   local subdir
   for subdir in "$d"/*; do
+    # self-guided/node_modules is a symlink into a shared npm tree (~550
+    # packages). Nothing in here is a proglang subdirectory, but recursing
+    # in costs ~18s per lesson: the primary lesson dir escapes it only
+    # because massage-distribution-lesson.sh's `rm -fr $d` happens to
+    # delete the symlink first -- its alternate-proglang siblings are never
+    # wiped, so they keep last build's symlink and pay the full walk.
+    case "$subdir" in */node_modules) continue ;; esac
     test -d "$subdir" && adjustproglangsubdirs "$subdir" "$pl"
   done
 
@@ -43,6 +50,7 @@ function scrubproglangsubdirs() {
 
   local subdir
   for subdir in "$d"/*; do
+    case "$subdir" in */node_modules) continue ;; esac
     test -d "$subdir" && scrubproglangsubdirs "$subdir"
   done
 }
