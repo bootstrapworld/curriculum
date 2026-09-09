@@ -4,10 +4,20 @@
 
 dofile(os.getenv'MAKE_DIR' .. 'utils.lua')
 
+-- NUMCORES even shards via a K/N round-robin arg (same convention as
+-- do-postproc.lua): each lesson's output lives entirely under its own
+-- .cached/, so shards need no merge step.
+local shard_k, shard_n
+if arg[1] then
+  local k, n = arg[1]:match('^(%d+)/(%d+)$')
+  shard_k, shard_n = tonumber(k), tonumber(n)
+end
+
 do
   local lessons_dir = 'distribution/' .. os.getenv('NATLANG') .. '/lessons/'
   local lessons = read_file_lines(os.getenv 'LESSONS_LIST_FILE')
-  for _,lesson in ipairs(lessons) do
+  for i,lesson in ipairs(lessons) do
+    if shard_k and (((i - 1) % shard_n) + 1 ~= shard_k) then goto continue end
     local lesson_cache = lessons_dir .. lesson .. '/.cached/'
     if not file_exists_p(lesson_cache) then
       goto continue

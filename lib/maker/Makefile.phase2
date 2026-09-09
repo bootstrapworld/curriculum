@@ -326,7 +326,10 @@ coverage-report.html: $(alignment-dictionaries) preproc
 
 specials: preproc
 	@echo ➤ Collect lesson info
-	@$(MAKE_DIR)collect-specials.lua
+	@for k in $$(seq 1 $(NUMCORES)); do \
+	   $(MAKE_DIR)collect-specials.lua $$k/$(NUMCORES) & \
+	 done; \
+	 wait
 
 postproc: preproc
 	@echo ➤ Postproc
