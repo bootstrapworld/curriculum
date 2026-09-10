@@ -2,9 +2,6 @@
 
 ++++
 <style>
-/* Format matching answers to render with an arrow */
-.solution::before{ content: ' → '; }
-
 /* For matching activities, we hide the ) from the number */
 .autonum:after{ content: '' !important; }
 </style>
@@ -27,23 +24,22 @@ Draw a line from each Circle of Evaluation on the left to the corresponding Code
 | Code
 
 | @show{(coe expr1)}
-|*@n*@ifsoln{B}  ||*A*
+|*@n*@ifsoln-match{B}  ||*A*
 | @show{(code expr3 #:parens true)}
 
 | @show{(coe expr2)}
-|*@n*@ifsoln{D}  ||*B*
+|*@n*@ifsoln-match{D}  ||*B*
 | @show{(code expr1 #:parens true)}
 
 | @show{(coe expr3)}
-|*@n*@ifsoln{A}  ||*C*
+|*@n*@ifsoln-match{A}  ||*C*
 | @show{(code expr5 #:parens true)}
 
 | @show{(coe expr4)}
-|*@n*@ifsoln{E}  ||*D*
+|*@n*@ifsoln-match{E}  ||*D*
 | @show{(code expr2 #:parens true)}
 
 | @show{(coe expr5)}
-|*@n*@ifsoln{C}  ||*E*
+|*@n*@ifsoln-match{C}  ||*E*
 | @show{(code expr4 #:parens true)}
-
 |===
