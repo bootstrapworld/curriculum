@@ -14,14 +14,10 @@ p.tableblock { margin: 0; }
   font-style: italic !important; text-align: center; padding: 0 5px !important;
 }
 .data td {padding: .1em .1em !important; }
-
-/* Format matching answers to render with an arrow */
-.solution::before{ content: ' → '; }
 </style>
 ++++
 
 @do{
-
 (define exp1 '(filter (sort t "pounds" true) is-female))
 (define exp2 '(build-column (filter t is-female) "kilos" kilograms))
 (define exp3 '(filter (build-column t "kilos" kilograms) is-heavy))
@@ -49,33 +45,29 @@ Then consider the table and the 2 function definitions.
 
 Match each table description on the left, to the Circle of Evaluation that will produce it. 
 
- 
 [.FillVerticalSpace.matchingTable, cols=">.^7a,^.^2a,1,^.^1a,.^11a",stripes="none",grid="none",frame="none"]
 |===
-
 | Produces a table containing Toggle, Nori and Sasha, with an extra column showing their weight in kilograms
-|*@n*@ifsoln{B} ||*A*
+|*@n*@ifsoln-match{B} ||*A*
 | @show{(coe exp1)}
 
 | Produces a table containing Sasha, Nori and Toggle (in that order) 
-|*@n*@ifsoln{A} ||*B*
+|*@n*@ifsoln-match{A} ||*B*
 | @show{(coe exp2)}
 
 | Produces a table with an extra column for kilos, but only animals with more than 25 kilos
-|*@n*@ifsoln{C} ||*C*
+|*@n*@ifsoln-match{C} ||*C*
 | @show{(coe exp3)}
 
 | Won’t run: will produce an error (if so, why?)
-|*@n*@ifsoln{D} ||*D*
+|*@n*@ifsoln-match{D} ||*D*
 | @show{(coe exp4)}
 
 | Produces a table containing Sasha, Toggle, and Nori (in that order) and adds an extra column showing their weight in kilograms
-|*@n*@ifsoln{F} ||*E*
+|*@n*@ifsoln-match{F} ||*E*
 | @show{(coe exp5)}
 
 | Produces an empty table -- with no animals at all!
-|*@n*@ifsoln{E} ||*F*
+|*@n*@ifsoln-match{E} ||*F*
 | @show{(coe exp6)}
-
 |===
-

@@ -1,13 +1,11 @@
 = Matching Expressions to Diagrams
 ++++
 <style>
-/* Format matching answers to render with an arrow */
-.solution::before{ content: ' → '; }
-
 /* For matching activities, we hide the ) from the number */
 .autonum:after{ content: '' !important; }
 </style>
 ++++
+
 Draw a line from each Circle of Evaluation on the left to the corresponding arithmetic expression on the right.
 
 @do{
@@ -22,7 +20,6 @@ Draw a line from each Circle of Evaluation on the left to the corresponding arit
   (define coe3 (coe expr3))
   (define coe4 (coe expr4))
   (define coe5 (coe expr5))
-
 }
 
 [.FillVerticalSpace, cols="^.^10a,^.^3a,5a,^.^1a,^.^10a", options="header", stripes="none", grid="none", frame="none"]
@@ -32,23 +29,22 @@ Draw a line from each Circle of Evaluation on the left to the corresponding arit
 | Arithmetic Expression
 
 | @show{(coe expr1)}
-|*@n* @ifsoln{C}  ||*A*
+|*@n* @ifsoln-match{C}  ||*A*
 | @show{(math expr2 #:parens true)}
 
 | @show{(coe expr2)}
-|*@n* @ifsoln{A}  ||*B*
+|*@n* @ifsoln-match{A}  ||*B*
 | @show{(math expr4 #:parens true)}
 
 | @show{(coe expr3)}
-|*@n* @ifsoln{E}  ||*C*
+|*@n* @ifsoln-match{E}  ||*C*
 | @show{(math expr1 #:parens true)}
 
 | @show{(coe expr4)}
-|*@n* @ifsoln{B} ||*D*
+|*@n* @ifsoln-match{B}  ||*D*
 | @show{(math expr5 #:parens true)}
 
 | @show{(coe expr5)}
-|*@n* @ifsoln{D}  ||*E*
+|*@n* @ifsoln-match{D}  ||*E*
 | @show{(math expr3 #:parens true)}
-
 |===
