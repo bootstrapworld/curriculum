@@ -15,7 +15,7 @@ A teacher asks students to write an essay on one of three topics: modern art, so
 
 @vspace{1ex}
 
-@hspace{1em} *Circle one:* @hspace{1em} more dimensions @hspace{5em}  the same number of dimensions @hspace{5em} fewer dimensions
+@hspace{1em} *Circle one:* @hspace{5em} @ifsoln-choice{more dimensions} @hspace{5em}  the same number of dimensions @hspace{5em} fewer dimensions
 
 @n Explain your choice. 
 
@@ -30,9 +30,6 @@ A teacher asks students to write an essay on one of three topics: modern art, so
 p {margin: 0px 0px;}
 .center, .centered-image { padding: 0.5ex 0ex; }
 img { width: 230px; }
-
-/* Format matching answers to render with an arrow */
-.solution::before{ content: ' → '; }
 </style>
 ++++
 
@@ -47,22 +44,19 @@ Match the description of each output with the correct interpretation.
 | Interpretation of What the Output Means
 
 | The 32 points are evenly scatter all over the 1023-dimensional space, with no apparent clustering.
-|*1* @ifsoln{D}||*A*
+|*1* @ifsoln-match{D}||*A*
 | Essays about one topic are likely to use similar words, but essays about different topics likely use different words. The three clusters probably represent the three different topics (modern art, zebras, and soccer).
 
-
 | The points are clustered into three groups, but two of the points are almost on top of one another.
-|*2* @ifsoln{B}||*B*
+|*2* @ifsoln-match{B}||*B*
 | Two of the essays use almost the same words, in almost the same frequencies. This look suspicious, and the teacher should take a closer look at those essays for potential plagiarism.
 
-
 | The points are clustered into three groups.
-|*3* @ifsoln{A}||*C*
+|*3* @ifsoln-match{A}||*C*
 | Only one student opted to write about a particular topic, while the rest of the class wrote essays on the other two. There is no evidence of plagiarism.
 
-
 | Almost all the points are clustered into two groups, but one point is positioned very far away from both clusters.
-|*4* @ifsoln{C}||*D*
+|*4* @ifsoln-match{C}||*D*
 | Every student appears to have written essays about entirely different topics! The teacher has no reason to suspect plagiarism, but they should _probably_ worry about their students not following the assignment!
 |===
 
