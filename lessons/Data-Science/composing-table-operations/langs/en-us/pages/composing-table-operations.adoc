@@ -5,9 +5,6 @@ p.tableblock { margin: 0; }
 .t td { padding: 0.1 5px !important; }
 .m td { padding: 2px 8px !important; }
 .circleevalsexp .value { font-size: 1rem; }
-
-/* Format matching answers to render with an arrow */
-.solution::before{ content: ' → '; }
 </style>
 ++++
 
@@ -42,39 +39,37 @@ fun nametag(r):  text(r["name"], 20, "red") end
 
 Match each table description on the left, to the Circle of Evaluation that will produce it.
 
-[.m, cols=">.^8a,^.^2a,4,^.^1a,.^14a",stripes="none",grid="none",frame="none"]
+[.m, cols=">.^8a,^.^3a,3,^.^1a,.^14a",stripes="none",grid="none",frame="none"]
 |===
-
 | A table containing only Susie Q and Rebel
-|*@n*@ifsoln{D} ||*A*
+|*@n*@ifsoln-match{D} ||*A*
 | @show{(coe exp1)}
 
 | Produces a table of only young, fixed animals
-|*@n*@ifsoln{E} ||*B*
+|*@n*@ifsoln-match{E} ||*B*
 | @show{(coe exp2)}
 
 | Produces a table, sorted youngest-to-oldest
-|*@n*@ifsoln{A} ||*C*
+|*@n*@ifsoln-match{A} ||*C*
 | @show{(coe exp3)}
 
 | Produces a table with an extra column, named "sticker"
-|*@n*@ifsoln{C} ||*D*
+|*@n*@ifsoln-match{C} ||*D*
 | @show{(coe exp4)}
 
 | Produces a table containing Susie Q and Rebel, in that order
-|*@n*@ifsoln{F} ||*E*
+|*@n*@ifsoln-match{F} ||*E*
 | @show{(coe exp5)}
 
 | Produces a table containing Susie Q, Fritz, and Nori
-|*@n*@ifsoln{B} ||*F*
+|*@n*@ifsoln-match{B} ||*F*
 | @show{(coe exp6)}
 
 | Won’t run: will produce an error (why?)
-|*@n*@ifsoln{H} ||*G*
+|*@n*@ifsoln-match{H} ||*G*
 | @show{(coe exp7)}
 
 | Produces a table with an extra "label" column, sorted youngest-to-oldest
-|*@n*@ifsoln{G} ||*H*
+|*@n*@ifsoln-match{G} ||*H*
 | @show{(coe exp8)}
-
 |===

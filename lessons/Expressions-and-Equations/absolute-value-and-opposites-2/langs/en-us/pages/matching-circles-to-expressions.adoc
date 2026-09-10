@@ -7,43 +7,42 @@ td .solution::before { content: ' → '; }
 </style>
 ++++
 
-Assume @math{m} is a non-zero integer. Draw a line from the expression on the left to the Circle of Evaluation on the right. +
+Match each expression on the left to the corresponding Circle of Evaluation on the right. +
 _Note: Some expressions have more than one correct Circle of Evaluation!_
 
-[cols="^.^10a,^.^3a,10a,^.^1a,^.^10a", options="header", stripes="none", grid="none", frame="none"]
+[cols="^.^8a,^.^5a,10a,^.^1a,^.^10a", options="header", stripes="none", grid="none", frame="none"]
 |===
-| Words
+| Expression
 |||
 | Circle of Evaluation
 
-| @math{\|-m\|}
-|*@n* @ifsoln{A, G}||*A*
+|
+| ||*A*
 | @show{(coe '(abs (negate m)))}
 
-| @math{-\|m\|}
-|*@n* @ifsoln{B}||*B*
+| @math{\|-m\|}
+|*@n* @ifsoln{A, G}||*B*
 | @show{(coe '(negate (abs m)))}
 
-| @math{- (-m)}
-|*@n* @ifsoln{C, F}||*C*
+| @math{-\|m\|}
+|*@n* @ifsoln{B}	||*C*
 | @show{(coe '(negate (negate m)))}
 
-| @math{-m}
-|*@n* @ifsoln{E}||*D*
+| @math{- (-m)}
+|*@n* @ifsoln{C, F}	||*D*
 | @show{(coe '(negate (abs -m)))}
 
-| @math{- \| -m \|}
-|*@n* @ifsoln{D}	||*E*
+| @math{-m}
+|*@n* @ifsoln{E}	||*E*
 | @show{(coe '(negate m))}
 
-|
-| ||*F*
+| @math{- \| -m \|}
+|*@n* @ifsoln{D}	||*F*
 | @show{(coe '(negate -m))}
 
 |
 | ||*G*
 | @show{(coe '(abs -m))}
-
 |===
 
 

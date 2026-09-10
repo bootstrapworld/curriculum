@@ -3,25 +3,22 @@
 ++++
 <style>
 table {grid-auto-rows: 1fr;}
-
-/* Format matching answers to render with an arrow */
-.solution::before{ content: ' → '; }
 </style>
 ++++
 
-Draw a line from each expression on the left to a Circle of Evaluation on the right. 
+Match each expression on the left to a Circle of Evaluation on the right. 
 
-[.FillVerticalSpace, cols="^.^3a,.^10a, 9a,^.^1a,^.^7a", options="header", stripes="none", grid="none", frame="none"]
+[.FillVerticalSpace, cols=".^10a, ^.^3a,9a,^.^1a,^.^7a", options="header", stripes="none", grid="none", frame="none"]
 |===
-| 					| Words						||		| Circle of Evaluation
-|*@n* @ifsoln{C}	| 25 tripled 				|||
-|*@n* @ifsoln{E}	| 3 less than 25			||*A*	| @show{(coe '(/ 25 3))}
-|*@n* @ifsoln{F}	| 25 less than 3 			||*B*	| @show{(coe '(/ 3 25))}
-|*@n* @ifsoln{G} 	| one-third of 25 			||*C*	| @show{(coe '(* 25 3))}
-|*@n* @ifsoln{D} 	| the sum of 3 and 25 		||*D*	| @show{(coe '(+ 3 25))}
-|*@n* @ifsoln{A} 	| divide 25 into 3 groups	||*E*	| @show{(coe '(- 25 3))}
-|*@n* @ifsoln{B}	| the quotient of 3 and 25 	||*F* 	| @show{(coe '(- 3 25))}
-|*@n* @ifsoln{A}	| the quotient of 25 and 3 	||*G* 	| @show{(coe '(* 1/3 25))}
-|*@n* @ifsoln{E} 	| 25 decreased by 3 		|||
-|*@n* @ifsoln{C} 	| the product of 25 and 3 	|||
+| Verbal Expression			| 						||		| Circle of Evaluation
+| 25 tripled 				|*@n* @ifsoln-match{C}	|||
+| 3 less than 25			|*@n* @ifsoln-match{E}	||*A*	| @show{(coe '(/ 25 3))}
+| 25 less than 3 			|*@n* @ifsoln-match{F}	||*B*	| @show{(coe '(/ 3 25))}
+| one-third of 25 			|*@n* @ifsoln-match{G} 	||*C*	| @show{(coe '(* 25 3))}
+| the sum of 3 and 25 		|*@n* @ifsoln-match{D} 	||*D*	| @show{(coe '(+ 3 25))}
+| divide 25 into 3 groups	|*@n* @ifsoln-match{A} 	||*E*	| @show{(coe '(- 25 3))}
+| the quotient of 3 and 25 	|*@n* @ifsoln-match{B}	||*F* 	| @show{(coe '(- 3 25))}
+| the quotient of 25 and 3 	|*@n* @ifsoln-match{A}	||*G* 	| @show{(coe '(* 1/3 25))}
+| 25 decreased by 3 		|*@n* @ifsoln-match{E} 	|||
+| the product of 25 and 3 	|*@n* @ifsoln-match{C} 	|||
 |===
