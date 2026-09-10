@@ -4,7 +4,6 @@ Cross out the Circle of Evaluation that does NOT belong with the others, and the
 
 ++++
 <style>
-.chosen::after { content: '❌' !important; }
 .circleevalsexp { width: auto; }
 
 /* for table cells with immediate .content children, which have immediate
@@ -30,7 +29,8 @@ td > .content > .paragraph > p { display: contents; }
 @ifsoln-choice{@show{(coe '(+ (* 5 2) 4))}}
 @show{(coe '(+ (* 5 2) (* 5 4)))}
 @show{(coe '(* 5 6))}
-| @ifsoln{The second circle evaluates to 40, while the rest evaluate to 30}
+| @ifsoln{The second expression adds 4 to @math{5 \times 2}. +
+The rest multiply 5 by @math{2 + 4}.}
 
 | @n
 |
@@ -38,7 +38,7 @@ td > .content > .paragraph > p { display: contents; }
 @show{(coe '(* 3 (+ 99 1)))}
 @show{(coe '(+ 297 3))}
 @show{(coe '(+ (* 3 99) (* 3 1)))}
-| @ifsoln{The first circle evaluates to 408, while the rest evaluate to 300}
+| @ifsoln{The first circle evaluates to 408, while the rest evaluate to 300.}
 
 | @n
 |
@@ -46,7 +46,7 @@ td > .content > .paragraph > p { display: contents; }
 @show{(coe '(+ (* 7 m) (* 7 3)))}
 @ifsoln-choice{@show{(coe '(* (* 7 m) 3))}}
 @show{(coe '(+ (* 7 3) (* 7 m)))}
-| @ifsoln{The third circle is neither a sum of products or a product of sums}
+| @ifsoln{The third circle is neither a sum of products nor a product of sums.}
 
 | @n
 |
@@ -54,7 +54,7 @@ td > .content > .paragraph > p { display: contents; }
 @show{(coe '(* 605 g))}
 @show{(coe '(+ (* 5 g) (* 600 g)))}
 @ifsoln-choice{@show{(coe '(+ (* 5 g) 600))}}
-| @ifsoln{In the fourth circle, `g` is multiplied by 5 but not 600}
+| @ifsoln{In the fourth circle, `g` is multiplied by 5 but not 600.}
 
 | @n
 |
@@ -62,7 +62,7 @@ td > .content > .paragraph > p { display: contents; }
 @show{(coe '(* (+ b c) a))}
 @show{(coe '(* (+ c b) a))}
 @ifsoln-choice{@show{(coe '(* (* a b) (* a c)))}}
-| @ifsoln{The fourth circle shows a _product_ of products instead of a _sum_ of products}
+| @ifsoln{The fourth circle shows a _product_ of products instead of a _sum_ of products.}
 
 | @n
 |
@@ -70,7 +70,7 @@ td > .content > .paragraph > p { display: contents; }
 @show{(coe '(- (* 3 h) (* 3 45)))}
 @show{(coe '(- (* 3 45) (* 3 h)))}
 @ifsoln-choice{@show{(coe '(* 3 (- 45 h)))}}
-| @ifsoln{The fourth circle swaps 45 and `h`, but those are not commutative}
+| @ifsoln{The fourth circle swaps 45 and `h`, but subtraction is not commutative.}
 
 |===
 

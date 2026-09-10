@@ -22,7 +22,7 @@ table .autonum::after { content: ')' !important;}
 </style>
 ++++
 
-[.FillVerticalSpace, cols="^.^1a,^.^8a, ^3a",stripes="none", options="header"]
+[.FillVerticalSpace, cols="^.^1a,^.^8a, ^.^3a",stripes="none", options="header"]
 |===
 | 	 | Circles of Evaluation | Justify your Choice
 
@@ -35,7 +35,7 @@ table .autonum::after { content: ')' !important;}
 !@show{(coe '(- 20 20))}
 !@ifsoln-choice{@show{(coe '(- -20 20))}}
 !===
-|
+| @ifsoln{The fourth expression has 2 `-`, whereas the others have one `-`.}
 
 | @n
 | 
@@ -46,7 +46,8 @@ table .autonum::after { content: ')' !important;}
 !@show{(coe '(- 5 2))}
 !@ifsoln-choice{@show{(coe '(- 2 5))}}
 !===
-|
+| @ifsoln{The fourth expression applies the +
+`-` to the 5 instead of the 2.}
 
 | @n
 | 
@@ -57,7 +58,8 @@ table .autonum::after { content: ')' !important;}
 !@ifsoln-choice{@show{(coe '(- 3 6))}}
 !@show{(coe '(+ -3 6))}
 !===
-|
+| @ifsoln{The fourth expression applies the +
+`-` to the 6 instead of the 3.}
 
 | @n
 | 
@@ -68,7 +70,7 @@ table .autonum::after { content: ')' !important;}
 !@show{(coe '(+ -30 100))}
 !@show{(coe '(- 100 30))}
 !===
-|
+| @ifsoln{The second expression has 2 `-`, whereas the others have one `-`.}
 
 | @n
 | 
@@ -79,7 +81,8 @@ table .autonum::after { content: ')' !important;}
 !@show{(coe '(+ -50 0))}
 !@show{(coe '(- 0 50))}
 !===
-|
+| @ifsoln{The first expression aapplies the +
+`-` to the 0 instead of the 50.}
 
 | @n
 | 
@@ -90,6 +93,7 @@ table .autonum::after { content: ')' !important;}
 !@show{(coe '(+ -8 5))}
 !@ifsoln-choice{@show{(coe '(- 8 5))}}
 !===
-|
+| @ifsoln{The fourth expression applies the +
+`-` to the 5 instead of the 8.}
 |===
 

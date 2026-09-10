@@ -4,7 +4,6 @@ For each row, cross out any Circles of Evaluation that do NOT meet the condition
 
 ++++
 <style>
-.chosen::after { content: '❌' !important; }
 .circleevalsexp { width: auto; }
 
 /* for table cells with immediate .content children, which have immediate
@@ -41,7 +40,8 @@ td > .content > .paragraph > p { display: contents; }
 @ifsoln-choice{@show{(coe '(abs (negate -3)))}}
 
 | @n
-| Let @math{h=9}. Which Circles evaluate to @math{9}?
+| Let @math{h=9}. +
+Which Circles evaluate to @math{9}?
 |
 @show{(coe '(negate -h))}
 @ifsoln-choice{@show{(coe '(negate (abs h)))}}
@@ -49,14 +49,16 @@ td > .content > .paragraph > p { display: contents; }
 @ifsoln-choice{@show{(coe '(negate (negate -h)))}}
 
 | @n
-| Let @math{h=6}. Which Circles evaluate to @math{6}?
+| Let @math{h=6}. +
+Which Circles evaluate to @math{6}?
 |
 @show{(coe '(+ (abs h) (- h h)))}
 @ifsoln-choice{@show{(coe '(+ (negate h) (- h h)))}}
 @show{(coe '(* (/ h h) (abs h)))}
 
 | @n
-| Let @math{k=99}. Which Circles evaluate to @math{0}?
+| Let @math{k=99}. +
+Which Circles evaluate to @math{0}?
 
 |
 @show{(coe '(+ k (negate k)))}
@@ -64,7 +66,8 @@ td > .content > .paragraph > p { display: contents; }
 @show{(coe '(+ (abs (+ 45 44)) (negate k)))}
 
 | @n
-| Let @math{a=11} and @math{b=20}. Which Circles evaluate to @math{31}?
+| Let @math{a=11} and @math{b=20}. +
+Which Circles evaluate to @math{31}?
 |
 @show{(coe '(abs (+ a b)))}
 @show{(coe '(abs (+ b a)))}

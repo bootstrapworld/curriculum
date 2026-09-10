@@ -9,23 +9,35 @@ td > .content > .paragraph > * { vertical-align: middle; }
 
 Decide whether or not the two expressions are equivalent. Explain your reasoning. When applicable, provide the property that confirms the equivalence. The first one is done for you.
 
-[.FillVerticalSpace, cols="^.^1a, ^.^5a, ^.^1a, ^.^5a, ^.^10a", grid="none", options="header", ]
+[.FillVerticalSpace, cols="^.^1a, ^.^6a, ^.^1a, ^.^5a, ^.^9a", grid="none", options="header", ]
 |===
 |	 | Expression 1 					 		| | Expression 2						| True or False? Justify.
-| @n | @show{(coe '(negate (* 5 k)))}    		|=| @show{(coe '(negate (* k 5)))}		| True. The Commutative Property of Multiplication is being applied.
+| @n | @show{(coe '(negate (* 5 k)))}    		|=| @show{(coe '(negate (* k 5)))}		| True. +
+The Commutative Property is being applied. +
 @math{-5k = -5k}
 
-| @n | @show{(coe '(negate (negate q)))} 		|=| @math{ -q}							| @ifsoln{False. @math{q ≠ -q}}
+| @n | @show{(coe '(negate (negate q)))} 		|=| @math{ -q}							| @ifsoln{False. +
+The opposite of the opposite is the original expression. +
+@math{q ≠ -q}}
 
-| @n | @show{(coe '(+ (negate h) 6))}	 		|=| @show{(coe '(+ 6 -h))}				| @ifsoln{True. The Commutative Property is being applied. @math{-h + 6 = 6 + -h}}
+| @n | @show{(coe '(+ (negate h) 6))}	 		|=| @show{(coe '(+ 6 -h))}				| @ifsoln{True. +
+The Commutative Property is being applied. + 
+@math{-h + 6 = 6 + -h}}
 
-| @n | @show{(coe '(* (negate -m) (+ 20 3)))}	|=| @show{(coe '(+ (* m 20) (* m 3)))} 	| @ifsoln{True. The Distributive Property is being applied. @math{m = m}}
+| @n | @show{(coe '(* (negate -m) (+ 20 3)))}	|=| @show{(coe '(+ (* m 20) (* m 3)))} 	| @ifsoln{True. +
+The Distributive Property is being applied. +
+(The opposite of @math{-m} is @math{m}.)}
 
-| @n | @show{(coe '(negate(negate -y)))}		|=| @math{-y}							| @ifsoln{True. @math{-y = -y}}
+| @n | @show{(coe '(negate(negate -y)))}		|=| @math{-y}							| @ifsoln{True. +
+The opposite of the opposite is the original expression.}
 
-| @n | @show{(coe '(+ (negate -g) 0))}			|=| @show{(coe '(- 0 (negate -g)))}		| @ifsoln{False. @math{g + 0 ≠ 0 - g}}
+| @n | @show{(coe '(+ (negate -g) 0))}			|=| @show{(coe '(- 0 (negate -g)))}		| @ifsoln{False. +
+Subtracting *from* zero is not an identity. It changes the sign of the expression (from positive to negative or vice versa). +
+@math{g + 0 ≠ 0 - g}}
 
-| @n | @show{(coe '(negate f))}					|=|	@show{(coe '(* (negate f) 1))}		| @ifsoln{True. @math{-f = -f}}
+| @n | @show{(coe '(negate f))}					|=|	@show{(coe '(* (negate f) 1))}		| @ifsoln{True. The Identity Property is being applied. +
+Multiplying by @math{1} doesn't change the value of the expression.}
 
-| @n | @show{(coe '(negate (+ c h)))}			|=|	@show{(coe '(* (negate (+ c h)) 1))}| @ifsoln{True. The Identity Property is being applied. @math{-(c + h) = -(c + h)}}
+| @n | @show{(coe '(negate (+ c h)))}			|=|	@show{(coe '(* (negate (+ c h)) 1))}| @ifsoln{True. The Identity Property is being applied. +
+Multiplying by @math{1} doesn't change the value of the expression.}
 |===
