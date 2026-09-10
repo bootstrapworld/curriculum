@@ -24,7 +24,7 @@ You can look at `lessons/Data-Science/histograms-visualize/langs/en-us/assessmen
 
 1. It begins with a title that will end up being student-facing.
 
-2. Question Types: We currently have three fully-functional question types: "MultipleChoice", "ShortAnswer", "CardSort", and "Categorize".
+2. Question Types: We currently have four fully-functional question types: "MultipleChoice", "ShortAnswer", "CardSort", and "Categorize".
 
 3. Every question must include
 
@@ -73,9 +73,11 @@ Note: you must specify both a width and a height and doing so without paying att
               ]
             }
 
-7. \n\n is used to insert a new line in the middle of a string.
+7. Categorize questions ask students to match each term in a `leftColumn` to one or more terms in a `rightColumn`. The `answer` maps each `leftColumn` term to an array of the matching `rightColumn` term(s) — usually just one, but you can list more than one if a left-hand term has multiple correct matches. Both columns are shuffled for the student, so their order in the JSON doesn't matter. An optional `id` gives the question a stable identifier, and an optional `context` adds explanatory text (shown after the student submits) — see the `Categorize` example below, whose `context` explains the "one-to-one" framing of that particular question.
 
-8. This is how to **bold** something.
+8. \n\n is used to insert a new line in the middle of a string.
+
+9. This is how to **bold** something.
 
 Below is an example of what the complete json might look like. 
 
@@ -146,65 +148,6 @@ Below is an example of what the complete json might look like.
       },
     ]
   }
-
-There is one more question type called Multi-part, but it can only be used for assessments that have a single question! For this question type, whatever you write in multipart will appear on every slide.
-
-[options="nowrap"]
-  "multipart": {
-      "q": "Twenty-nine individuals are represented by the points in the chart below.\nThe x-axis indicates the number of years worked for a particular company, and the y-axis represents salary.\n\nThe questions on the next 3 slides will focus on this chart.\n\n ![](./salary-lr-plot.png)"
-    },
-    "questions": [
-      {
-        "type": "MultipleChoice",
-        "multipart": "q",
-        "prompt": {
-          "prompt": "Individuals at this company should expect that their salaries will increase about ____ every 2 years.",
-        "distractors": [
-          "$20,000",
-          "$30,000",
-          "$40,000"
-        ],
-        "answerIndex": 0
-      },
-      "answer": {
-        "answer": "$10,000"
-      }
-    },
-    {
-      "type": "MultipleChoice",
-      "multipart": "q",
-      "prompt": {
-        "prompt": "Use the predictor function to calculate how much money you expect would an employee with 15 years of experience to earn.",
-        "distractors": [
-          "$142,000",
-          "$194,000",
-          "$372,000"
-        ],
-        "answerIndex": 1
-      },
-      "answer": {
-        "answer": "$167,000"
-      }
-    },
-    {
-      "type": "MultipleChoice",
-      "multipart": "q",
-      "prompt": {
-        "prompt": "Use the predictor function to determine about how much money would you expect an employee with no experience to earn.",
-        "distractors": [
-          "$0",
-          "$15,000",
-          "$20,000"
-        ],
-        "answerIndex": 3
-      },
-      "answer": {
-        "answer": "$25,000"
-      }
-    }
-  ]
-
-
 
 === To build your quiz
 
