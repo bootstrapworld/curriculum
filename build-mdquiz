@@ -58,27 +58,33 @@ indexHTML='<!DOCTYPE html>
   </body>
 </html>'
 
-# Given a list of assessment directories, replace
-# the index.html file with a fresh one and
-# add the mdquiz JS file
-for d in $(find distribution -type d -name assessments); do
-  for dd in $d/*; do
-    if test -d $dd; then
-      if test -f $dd/quiz.json; then
-        echo "$indexHTML" > $dd/index.html
-        node -e "const fs=require('fs'),f='$dd/lib.js'; \
-          fs.writeFileSync(f,fs.readFileSync('node_modules/mdquiz/dist/lib.js','utf8') \
-          .replace('[\"localhost\", \"127.0.0.1\"]','[\"localhost\", \"127.0.0.1\", \"\"]'));"
-      else
-        echo "WARNING: $dd has no quiz.json -- skipping"
-      fi
-    fi
-  done
-done
+if [[ " $* " == *" --clean "* ]]; then
+  # Unconditional refresh of every quiz's pre-build stub (Vite's input) --
+  # a manual reset, not the normal incremental path below, so it always
+  # touches everything regardless of what changed. The staleness cache
+  # below only tracks authored content (quiz.json/assets), not index.html,
+  # so it wouldn't otherwise notice this reset happened -- drop it so the
+  # next normal run doesn't skip rebuilding these now-torn-down stubs.
+  rm -f distribution/.mdquiz-hashes.json
+  MDQUIZ_INDEX_HTML="$indexHTML" node --input-type=module -e '
+import { glob } from "glob"
+import fs from "fs"
 
- if [[ " $* " == *" --clean "* ]]; then
-   exit 0
- fi
+const indexHTML = process.env.MDQUIZ_INDEX_HTML;
+const mdquizLib = fs.readFileSync("node_modules/mdquiz/dist/lib.js", "utf8")
+  .replace(`["localhost", "127.0.0.1"]`, `["localhost", "127.0.0.1", ""]`);
+
+for (const d of glob.sync("distribution/*/{lessons,courses}/*/assessments/*")) {
+  if (fs.existsSync(d + "/quiz.json")) {
+    fs.writeFileSync(d + "/index.html", indexHTML);
+    fs.writeFileSync(d + "/lib.js", mdquizLib);
+  } else {
+    console.log(`WARNING: ${d} has no quiz.json -- skipping`);
+  }
+}
+'
+  exit 0
+fi
 
 echo ➤ Checking jsons
 
@@ -97,50 +103,117 @@ if test -n "$JQ"; then
   fi
 fi
 
-echo ➤ Building quizzes
+echo ➤ Checking which quizzes changed
 
 outputf=.tmp.build-mdquiz.txt
+newhashesf=.tmp.build-mdquiz-hashes.json
+cachef=distribution/.mdquiz-hashes.json
 
-node --input-type=module -e '
-import react from "@vitejs/plugin-react"
-import { build } from "vite"
-import { viteSingleFile } from "vite-plugin-singlefile"
+MDQUIZ_INDEX_HTML="$indexHTML" MDQUIZ_CACHE_FILE="$cachef" MDQUIZ_NEW_HASHES_FILE="$newhashesf" node --input-type=module -e '
 import { glob } from "glob"
-import { readFileSync} from "fs"
+import fs from "fs"
+import crypto from "crypto"
 
-const quizzes = glob.sync("distribution/*/{lessons,courses}/*/assessments/*").filter(d => {
-  try { readFileSync(d + "/quiz.json"); return true; } catch { return false; }
-});
-const imageTypes = ["svg", "gif", "jpg", "png", "svg"];
+const indexHTML = process.env.MDQUIZ_INDEX_HTML;
+const cacheFile = process.env.MDQUIZ_CACHE_FILE;
+const newHashesFile = process.env.MDQUIZ_NEW_HASHES_FILE;
 
-// create the JSON objects for each of our quizzes
-const buildConfigs = quizzes.map( quiz => ({
-  plugins: [
-    react(),
-    viteSingleFile(),
-  ],
-  build: {
-    logLevel: "silent",
-    root: "distribution",
-    minify: false,
-    outDir: "./",
-    emptyOutDir: false,
-    onConsoleLog(log) {
-      return "@"+log
-    },
-    rollupOptions: {
-      input: quiz+"/index.html",
-    }
+const assessmentDirs = glob.sync("distribution/*/{lessons,courses}/*/assessments/*");
+const quizzes = [];
+for (const d of assessmentDirs) {
+  if (fs.existsSync(d + "/quiz.json")) {
+    quizzes.push(d);
+  } else {
+    console.log(`WARNING: ${d} has no quiz.json -- skipping`);
   }
-}));
+}
 
-//console.log(JSON.stringify(buildConfigs, null, 2))
+// Content hash of everything under a quiz'"'"'s assessments dir except
+// index.html and lib.js: both are build-system-generated (the stub above,
+// lib.js copied from node_modules/mdquiz) rather than authored content, so
+// neither reflects whether the quiz itself actually changed.
+function hashQuiz(dir) {
+  const hash = crypto.createHash("sha256");
+  (function walk(d) {
+    const entries = fs.readdirSync(d, { withFileTypes: true })
+      .sort((a, b) => a.name < b.name ? -1 : a.name > b.name ? 1 : 0);
+    for (const entry of entries) {
+      if (entry.name === "index.html" || entry.name === "lib.js") continue;
+      const p = d + "/" + entry.name;
+      if (entry.isDirectory()) { walk(p); continue; }
+      hash.update(p);
+      hash.update(fs.readFileSync(p));
+    }
+  })(dir);
+  return hash.digest("hex");
+}
 
-// wait until all of the builds are complete
-await Promise.all(buildConfigs.map( async c => await build(c)));
+let oldHashes = {};
+try { oldHashes = JSON.parse(fs.readFileSync(cacheFile, "utf-8")); } catch {}
+
+const newHashes = {};
+const staleQuizzes = [];
+for (const q of quizzes) {
+  const h = hashQuiz(q);
+  newHashes[q] = h;
+  if (oldHashes[q] !== h) staleQuizzes.push(q);
+}
+
+// Written before attempting anything below, so a build failure never loses
+// this run'"'"'s hashes -- the outer shell script only promotes this file to
+// the real cache once it confirms the build actually succeeded.
+fs.writeFileSync(newHashesFile, JSON.stringify(newHashes));
+
+if (staleQuizzes.length === 0) {
+  console.log(`No quiz content changed (${quizzes.length} checked) -- skipping quiz build`);
+} else {
+  console.log(`Building ${staleQuizzes.length} of ${quizzes.length} quiz(zes) (content changed)`);
+
+  // Only the quizzes actually being rebuilt get a fresh stub -- an unstale
+  // quiz keeps its already-built (bundled, self-contained) index.html
+  // exactly as it was; overwriting it with the raw pre-build stub here
+  // would break it until it next happened to be rebuilt.
+  const mdquizLib = fs.readFileSync("node_modules/mdquiz/dist/lib.js", "utf8")
+    .replace(`["localhost", "127.0.0.1"]`, `["localhost", "127.0.0.1", ""]`);
+  for (const q of staleQuizzes) {
+    fs.writeFileSync(q + "/index.html", indexHTML);
+    fs.writeFileSync(q + "/lib.js", mdquizLib);
+  }
+
+  // Deferred to a dynamic import so an all-skip run never pays for loading
+  // Vite'"'"'s module graph at all.
+  const [{ default: react }, { build }, { viteSingleFile }] = await Promise.all([
+    import("@vitejs/plugin-react"),
+    import("vite"),
+    import("vite-plugin-singlefile"),
+  ]);
+
+  const buildConfigs = staleQuizzes.map( quiz => ({
+    plugins: [
+      react(),
+      viteSingleFile(),
+    ],
+    build: {
+      logLevel: "silent",
+      root: "distribution",
+      minify: false,
+      outDir: "./",
+      emptyOutDir: false,
+      onConsoleLog(log) {
+        return "@"+log
+      },
+      rollupOptions: {
+        input: quiz+"/index.html",
+      }
+    }
+  }));
+
+  // wait until all of the builds are complete
+  await Promise.all(buildConfigs.map( async c => await build(c)));
+}
 
 for (const filePath of quizzes) {
-    const fileContent = readFileSync(filePath + "/quiz.json", "utf-8");
+    const fileContent = fs.readFileSync(filePath + "/quiz.json", "utf-8");
     try {
       JSON.parse(fileContent);
       } catch (e) {
@@ -155,10 +228,13 @@ NC='\033[0m' # No Color
 phrase="✗ Build failed"
 
 if ! grep "$phrase" $outputf; then
-  echo All quizzes were built successfully!
+  cat $outputf
+  test -f "$newhashesf" && mv "$newhashesf" "$cachef"
 else
   n=$(grep -n "$phrase" $outputf|head -1|cut -d: -f1)
   n=$((n + 1))
   echo ${RED}✗ Build failed${NC}
   tail -n +$n $outputf
+  rm -f "$newhashesf"
+  exit 1
 fi
