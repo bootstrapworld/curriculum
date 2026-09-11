@@ -28,7 +28,7 @@ div#body {
      FORMATTING OF CIRCLES section for why). A wrapper can override
      it once and have every fitb/fitbruby/blanklines beneath it follow,
   */
-  --blank-pitch: 2.2em;
+  --blank-height: 2.2em;
 
   font-family:    @text-font;
   color:          @font-color;
@@ -393,10 +393,10 @@ body.beta div#body::after {
   which is a less predictable measure and would occasionally add fractional
   height to the line (BUT see override exceptions below!)
 
-  --blank-pitch is the shared, page/section-wide lever -- set it on a
+  --blank-height is the shared, page/section-wide lever -- set it on a
   common ancestor to tighten fitb, fitbruby, AND any .blanklines in
   that scope together
-  --fitb-pitch is a narrower escape hatch for the rare case
+  --fitb-height is a narrower escape hatch for the rare case
   where a page deliberately wants fitb/fitbruby to diverge from a
   nearby .blanklines.
   */
@@ -407,7 +407,7 @@ body.beta div#body::after {
   justify-content:    center;
   min-width:          4em;
   text-align:         center;
-  line-height:        var(--fitb-pitch, var(--blank-pitch));
+  line-height:        var(--fitb-height, var(--blank-height));
   height:             1lh; /* derived from line-height -- NEVER override this directly */
   /* use 'thin' instead of 1px to avoid disappearing lines on some browsers */
   border-bottom:      solid thin black;
@@ -416,7 +416,7 @@ body.beta div#body::after {
 
 /*
   EXCEPTION 1: fitbruby's caption hangs below the box via position:absolute
-  (deliberately, so it doesn't inflate fitbruby's own height/pitch
+  (deliberately, so it doesn't inflate fitbruby's own height
   past fitb's), but vertical-align: bottom anchors the box to the
   LINE's bottom. Use baseline instead
 
@@ -426,7 +426,7 @@ body.beta div#body::after {
 .fitbruby, .codetwo .fitb { vertical-align: baseline; }
 
 /* line-height is inherited if not set explicitly, so the content's own
-   anonymous flex item will be as tall as the container (--blank-pitch)
+   anonymous flex item will be as tall as the container (--blank-height)
    and the glyphs would float centered inside a taller box. Set it here.
 */
 .fitb > .solution, .fitbruby > .solution, .fitb::before, .fitbruby::before {
@@ -986,11 +986,11 @@ html div#body.workbookpage {
     position: relative;
     background-image: url('images/2.2em-ruled lines.png');
     margin-left: 5px;
-    /* --blanklines-pitch is the blanklines-only counterpart to
-       --fitb-pitch -- lets a page tighten blanklines specifically
+    /* --blanklines-height is the blanklines-only counterpart to
+       --fitb-height -- lets a page tighten blanklines specifically
        without touching nearby fitb/fitbruby, symmetric with the
-       fitb-only case. Falls back to the shared --blank-pitch. */
-    line-height: var(--blanklines-pitch, var(--blank-pitch));
+       fitb-only case. Falls back to the shared --blank-height. */
+    line-height: var(--blanklines-height, var(--blank-height));
     .solution { position: absolute; top: 3.3px; line-height: inherit; }
     /* artificially shrink codeblocks to avoid stepping on the line */
     .editbox, code.pyret {
@@ -1158,9 +1158,9 @@ div#body{
   }
 
   .recipe {
-    /* --blank-pitch inherits down to any fitb/fitbruby/blanklines inside,
+    /* --blank-height inherits down to any fitb/fitbruby/blanklines inside,
        same lever as everywhere else (was a one-off padding-top). */
-    --blank-pitch: 2em;
+    --blank-height: 2em;
 
     /* Under a heading come the instructions */
     .recipe_instructions * { font-style: italic; font-size: .85em; }
@@ -1394,8 +1394,8 @@ td.halign-center .circleevalsexp { text-align: center; }
 
   /* fill-in-the-blanks inside circles need no border, and should be
      compact (matching sibling .value elements) rather than a full
-     writing-line. use the more specific lever (--fitb-pitch) */
-  .fitb { border: none; padding: 0; --fitb-pitch: 1em; }
+     writing-line. use the more specific lever (--fitb-height) */
+  .fitb { border: none; padding: 0; --fitb-height: 1em; }
 }
 
 .codesexp, .circleevalsexp, .editbox, .cm-s-scheme {
