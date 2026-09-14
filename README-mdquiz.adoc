@@ -73,11 +73,22 @@ Note: you must specify both a width and a height and doing so without paying att
               ]
             }
 
-7. Categorize questions ask students to match each term in a `leftColumn` to one or more terms in a `rightColumn`. The `answer` maps each `leftColumn` term to an array of the matching `rightColumn` term(s) — usually just one, but you can list more than one if a left-hand term has multiple correct matches. Both columns are shuffled for the student, so their order in the JSON doesn't matter. An optional `id` gives the question a stable identifier, and an optional `context` adds explanatory text (shown after the student submits) — see the `Categorize` example below, whose `context` explains the "one-to-one" framing of that particular question.
+7. ShortAnswer questions can optionally include a `validation` object to constrain what a student is allowed to submit: `required` (defaults to `true` if omitted), `numeric` (whether the answer must be a number), and inclusive `min`/`max` bounds (only meaningful when `numeric` is `true`). If no `validation` object is given at all, the question is assumed to be required with no other constraints — this matches every ShortAnswer question written before this feature existed, so nothing needs to change in older quizzes.
 
-8. \n\n is used to insert a new line in the middle of a string.
+    {
+        "type": "ShortAnswer",
+        "prompt": {
+            "prompt": "How many degrees are in a right angle?",
+            "validation": { "numeric": true, "min": 0, "max": 360, "required": false }
+        },
+        "answer": { "answer": "90" }
+    }
 
-9. This is how to **bold** something.
+8. Categorize questions ask students to match each term in a `leftColumn` to one or more terms in a `rightColumn`. The `answer` maps each `leftColumn` term to an array of the matching `rightColumn` term(s) — usually just one, but you can list more than one if a left-hand term has multiple correct matches. Both columns are shuffled for the student, so their order in the JSON doesn't matter. An optional `id` gives the question a stable identifier, and an optional `context` adds explanatory text (shown after the student submits) — see the `Categorize` example below, whose `context` explains the "one-to-one" framing of that particular question.
+
+9. \n\n is used to insert a new line in the middle of a string.
+
+10. This is how to **bold** something.
 
 Below is an example of what the complete json might look like. 
 
