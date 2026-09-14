@@ -915,6 +915,15 @@ html div#body.workbookpage {
 
   /* Some elements show either solution mode or a blank */
   .solution, .solution code, .solution .MJX-TEX { font-style: italic !important; }
+  .solution:has(> .image-figure:only-child) .image-figure {
+    border: 1px dashed; border-radius: 15px; padding: 10px;
+  }
+  .solution:has(> .circleevalsexp:only-child) .circleevalsexp {
+    .expression { border: 1px dashed; }
+    .operator { border-bottom: 1px dashed; }
+    font-style: italic !important;
+  }
+
   div.choice { display: inline; }
   .blank    { color: rgba(0,0,0,0); }
   .chosen::after { content: '✅'; }
