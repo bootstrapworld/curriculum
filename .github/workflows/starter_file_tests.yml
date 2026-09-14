@@ -1,0 +1,68 @@
+name: Starter File Tests
+
+on:
+  workflow_dispatch:
+    inputs:
+      host:
+        description: "Pyret deployment to test against"
+        required: false
+        default: "https://pyret.bootstrapworld.org"
+      jobs:
+        description: "How many starter files to run at once"
+        required: false
+        default: "4"
+      grep:
+        description: "Only run starter files whose label/title/URL matches this regex"
+        required: false
+        default: ""
+      lang:
+        description: "Curriculum language directory under shared/langs"
+        required: false
+        default: "en-us"
+
+jobs:
+  starter-files:
+    name: Run starter files in a headless browser
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    defaults:
+      run:
+        working-directory: starter-file-tests
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: starter-file-tests/package-lock.json
+
+      - run: npm ci
+
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      # Inputs go through the environment, never interpolated into the shell.
+      - name: Run starter files
+        id: run
+        env:
+          PYRET_HOST: ${{ inputs.host }}
+          SFT_JOBS: ${{ inputs.jobs }}
+          SFT_LANG: ${{ inputs.lang }}
+          SFT_GREP: ${{ inputs.grep }}
+        run: |
+          args=( "--jobs=$SFT_JOBS" "--lang=$SFT_LANG" --json=results.json --summary=summary.md )
+          if [ -n "$SFT_GREP" ]; then args+=( "--grep=$SFT_GREP" ); fi
+          node run.js "${args[@]}"
+
+      - name: Publish summary
+        if: always()
+        run: cat summary.md >> "$GITHUB_STEP_SUMMARY" || true
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: starter-file-results
+          path: |
+            starter-file-tests/results.json
+            starter-file-tests/summary.md
