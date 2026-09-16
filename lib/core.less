@@ -336,7 +336,7 @@ div#body {
 
   .fitb.stretch, .fitbruby.stretch {
     margin-left:        5px;
-    vertical-align:     bottom;
+    vertical-align:     baseline;
     width:              auto;
     border-color:       transparent; /* hide the normal underline */
     min-width:          unset;
@@ -349,10 +349,6 @@ div#body {
       bottom :            -1px;
     }
   }
-  /* override the default vertical-align for fitb, since the ruby should
-     not be bottom-aligned
-   */
-  .fitbruby.stretch { vertical-align: baseline; }
 
   .vocab { font-weight: bold; font-style: italic; color: @font-color; }
 
@@ -389,9 +385,19 @@ body.beta div#body::after {
   line-height is the single lever controlling how tall a writing line is.
   To make this all work, we use align-items:flex-end to pin content against
   the bottom border. Height is derived from line-height so there's exactly
-  one number to change. vertical-align:bottom is used in place of baseline,
-  which is a less predictable measure and would occasionally add fractional
-  height to the line (BUT see override exceptions below!)
+  one number to change.
+
+  vertical-align:baseline (not bottom) on the OUTER box, for both fitb and
+  fitbruby: fitbruby's ruby caption hangs below the box via
+  position:absolute (deliberately, so it doesn't inflate fitbruby's own
+  height past fitb's), and vertical-align:bottom anchors a box to the
+  LINE's bottom rather than its own text baseline -- when a plain fitb
+  (bottom) sat on the same line as a fitbruby (baseline, needed for the
+  reason above), the two anchors disagreed by ~11px, visibly misaligning
+  their blanks. baseline for both keeps every writing-line element
+  level whether or not fitb/fitbruby are mixed on the same line -- verified
+  with no page-height or layout change across the corpus for fitb used on
+  its own.
 
   --blank-height is the shared, page/section-wide lever -- set it on a
   common ancestor to tighten fitb, fitbruby, AND any .blanklines in
@@ -411,19 +417,8 @@ body.beta div#body::after {
   height:             1lh; /* derived from line-height -- NEVER override this directly */
   /* use 'thin' instead of 1px to avoid disappearing lines on some browsers */
   border-bottom:      solid thin black;
-  vertical-align:     bottom;
+  vertical-align:     baseline;
 }
-
-/*
-  EXCEPTION 1: fitbruby's caption hangs below the box via position:absolute
-  (deliberately, so it doesn't inflate fitbruby's own height
-  past fitb's), but vertical-align: bottom anchors the box to the
-  LINE's bottom. Use baseline instead
-
-  EXCEPTION 2: when a fitb is inside a codeblock, the line-height doesn't
-  match the surrounding text so vertical-align: bottom will break;
-   */
-.fitbruby, .codetwo .fitb { vertical-align: baseline; }
 
 /* line-height is inherited if not set explicitly, so the content's own
    anonymous flex item will be as tall as the container (--blank-height)
