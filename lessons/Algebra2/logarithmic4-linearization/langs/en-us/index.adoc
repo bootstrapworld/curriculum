@@ -29,19 +29,6 @@
 |[.materials-links]
 @opt-material-links
 
-
-| Preparation
-| 
-@preparation{
-- Much of the exploration in this lesson hinges on the same custom-built interactive Desmos activity we introduced in @lesson-link{logarithmic1-exploring-wealth-health}.
- * Set the pacing so that students are synced to you and only able to interact with the slide for the lesson section you are working on.
- * Decide how you will share the link or code with students and, if you are using our Google Slides, add the appropriate link to the slide deck.
- * If you don't already have a code, or you want to share a new one, you will first want to:
- *** Open @starter-file{alg2-log-desmos}.
- *** Make a link or code to share with your students.
-- _If you're a first-time Desmos user, fear not!_ @dist-link{pages/desmos-instructions-alg2.adoc, _Here's what you need to do._}
-}
-
 |===
 
 
@@ -65,63 +52,63 @@ Instead of plotting `pc-gdp` on a _logarithmic_ x-axis, we could *transform the 
 
 @slidebreak{Launch-DN}
 
-@teacher{Sync or pace students to *Wealth-v-Health: Scaling the axes from pc-gdp to log(pc-gdp)* of @starter-file{alg2-log-desmos}.}
-
-@lesson-instruction{
-- Let's return to the *Fitting Wealth-v-Health and Exploring Logarithmic Models Desmos file*.
-- You should now be on Slide 8: *Wealth-v-Health: Scaling the axes from pc-gdp to log(pc-gdp)*.
-- Use it to complete @printable-exercise{transforming-data.adoc}.
-}
-
-@slidebreak{Launch}
-
-@QandA{
-@Q{What values did you come up with for @math{m} and @math{b} in your best-guess linear model?}
-@A{Record different students' responses for @math{m} and @math{b} on the board.}
-@A{These numbers should be somewhat close to their earlier responses for @math{a} and @math{k}!}
-@Q{Were those values very similar to or very different from our best-guess logarithmic model?}
-@Q{How was transforming the data similar to changing the scale on the x-axis?}
-@A{Transforming the data and changing the scale both made the logarithmic relationship look linear.}
-@Q{How was it different?}
-@A{Changing the scale just made things *look* linear, but the data wasn't any different.}
-}
-
-@slidebreak{Launch}
-
-@lesson-point{
-The @vocab{slope} in the transformed, linear model is the same as the @vocab{log coefficient} in the untransformed logarithmic model.
-}
-
-@lesson-point{
-The @vocab{vertical shift} in the transformed, linear model is the same as the @vocab{vertical shift} in the untransformed logarithmic model
-}
-
-=== Investigate
-@slidebreak{Investigate}
-
-
-Now that we know how the model settings in our linear model of transformed data relate to the model settings in our logarithmic model, let's return to Pyret to run linear regression on the transformed data, find the best possible linear model (the @vocab{line of best fit}), and use its model settings to define our *optimal _logarithmic_ model!*
-
-@slidebreak{Investigate-DN}
-
 @lesson-instruction{
 - Open @starter-file{alg2-countries}, and turn to @printable-exercise{logarithmic-models.adoc}.
 - Complete the first part ("Transforming: From Logarithmic Plots to Linear Ones"), then pause for class discussion.
 }
 
-@slidebreak{Investigate}
+
+@slidebreak{Launch}
+@QandA{
+@Q{What kind of data does the function `g` consume?}
+@A{A Row}
+
+@Q{Given a Row, what does `g` do to its input?}
+@A{It extracts the `pc-gdp`, and produces the log of the value}
+
+@Q{What does `countries-transformed = build-column(countries-table, "log(pc-gdp)", g)` do?}
+@A{It defines a new table called `countries-transformed`, which is the same as the original table but with a new column called `log(pc-gdp)` added on the right. This column is built using the function `g`, and contains the log of each country's `pc-gdp`}
+
+@Q{Compare the slope and y-intercept of the optimal linear model you made from `lr-plot` to the slope and y-intercept you estimated for `logarithmic2` on @printable-exercise{logarithmic3-changing-scale/pages/fitting-logarithmic-models.adoc}}?
+@A{They are both very similar!}
+}
+
+@slidebreak{Launch}
+@lesson-point{
+The @vocab{slope} in the transformed, linear model is the same as the @vocab{log coefficient} in the __un__-transformed logarithmic model.
+}
+
+@lesson-point{
+The @vocab{vertical shift} in the transformed, linear model is the same as the @vocab{vertical shift} in the __un__-transformed logarithmic model
+}
+
+@slidebreak{Launch}
 
 We transformed the data in three steps:
 
-1. Defined the transformation function @math{g(r)} to produce the log of the `pc-gdp` column.
+1. Defined the transformation function @math{g} to produce the log of the `pc-gdp` column.
 2. Built a new column `log(pc-gdp)` by applying @math{g(r)} to transform each of our original x-values.
 3. Used the new column as the @vocab{explanatory variable} on the x-axis for our scatter plot.
 
 @teacher{Address any student questions about `build-column`, the Pyret function they've just discovered. Make sure that students have recorded the slope and vertical shift for their regression line. Then, emphasize the following key ideas.}
 
+@slidebreak{LaunchR}
+
+@right{@image{images/lr-plot-transformed.png, 350}}Transforming the `pc-gdp` column with a log function produces a scatter plot showing a linear pattern in the data!
+
+Pyret's `lr-plot` tool computes the optimal (best possible) linear model for our transformed data:
+
+@indented{@math{y = 11.9012x + ~24.2636}}
+
+Our @math{S} has dropped to 4.49, showing a much better correlation than before.
+
+@clear
+
+
+=== Investigate
 @slidebreak{Investigate}
 
-- At each point in our linear model, @math{y} is the _predicted median lifespan_, and @math{x} is the _log of per-capita gdp in dollars_.
+- At each point in our optimized @vocab{linear model}, @math{y} is the _predicted median lifespan_, and @math{x} is the _log of per-capita gdp in dollars_.
 - We want @math{x} to represent the *original, untransformed* value, simply using _per-capita gdp in thousands_ as-is...
 
 @slidebreak{Investigate}
@@ -131,21 +118,10 @@ We transformed the data in three steps:
 - Complete the second part ("Inverting: From Linear Models to Logarithmic Ones") of @printable-exercise{logarithmic-models.adoc}.
 }
 
-@slidebreak{InvestigateR}
-
-@right{@image{images/lr-plot-transformed.png, 350}}Just like in Desmos, transforming the `pc-gdp` column with a log function produces a scatter plot showing a linear pattern in the data! 
-
-Pyret's `lr-plot` tool computes the best possible linear model for our transformed data: 
-
-@indented{@math{y = 11.9012x + ~24.2636}} 
-
-Our @math{S} has dropped to 4.49, showing a much better correlation than before.
-
-@clear
 
 @slidebreak{InvestigateR}
 
-@right{@image{images/logarithmic-model.png, 350}}From @printable-exercise{transforming-data.adoc}, we know that the model settings used in the transformed, linear model are the same ones used in the logarithmic, untransformed model:
+@right{@image{images/logarithmic-model.png, 350}}The model settings used in the transformed, linear model are the same ones used in the logarithmic, __un__-transformed model, but one of them changes its meaning:
 
 @center{@math{linear(x) = 11.9012x + 24.2636}}
 @center{@math{logarithmic3(x) = 11.9012 \log_{10}(x) + 24.2636}}
@@ -153,7 +129,6 @@ Our @math{S} has dropped to 4.49, showing a much better correlation than before.
 The resulting logarithmic model can be fit to our original scatter plot, showing a much better fit than our 2-point-derived estimates.
 
 - How do you interpret this model?
-
 
 
 === Synthesize

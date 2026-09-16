@@ -6,13 +6,11 @@ table {grid-auto-rows: 1fr;}
 </style>
 ++++
 
-
 Create a Circle of Evaluation for the given expression. Once you have drawn a Circle of Evaluation, evaluate the expression by substituting in the value provided in the third column. The first one is done for you.
 
 [.FillVerticalSpace, cols="^.^1a,^.^2a,^.^5a,^.4a", stripes="none", options="header"]
 |===
 | 	 | Expression	| Circle of Evaluation | Evaluate
-
 
 | @n
 | @math{3x^2}
@@ -28,45 +26,35 @@ Create a Circle of Evaluation for the given expression. Once you have drawn a Ci
 | @n
 | @math{{m^2\over4}}
 | @showsoln{(coe '(/ (expt m 2) 4))}
-| Evaluate for @math{m=10}.
-
-@ifsoln{@math{\frac{m^2}{4} = 25}}
-
+| Evaluate @math{m^2\over4} for @math{m = 10}. +
+@vspace{1ex} +
+@ifsoln{@math{\frac{10^2}{4} = 25}}
 
 | @n
 | @math{6 + w^3}
 | @showsoln{(coe '(+ 6 (expt w 3)))}
-| Evaluate for @math{w=3}.
-
-@ifsoln{@math{6 + w^3 = 33}}
-
+| Evaluate @math{6 + w^3}for @math{w = 3}.  +
+@vspace{1ex} +
+@ifsoln{@math{6 + 3^3 = 33}}
 
 | @n
 | @math{\frac{1}{25} \times 5^b}
 | @showsoln{(coe '(* 1/25 (expt 5 b)))}
-| Evaluate for @math{b=3}.
-
-@ifsoln{@math{\frac{1}{25} \times 5^b = 5}}
-
+| Evaluate @math{\frac{1}{25} \times 5^b}for @math{b = 3}. +
+@vspace{1ex} +
+@ifsoln{@math{\frac{1}{25} \times 5^3 = 5}}
 
 | @n
 | @math{(7 + c)^2}
 | @showsoln{(coe '(expt (+ 7 c) 2))}
-| Evaluate for @math{c=13}.
-
-@ifsoln{@math{(7 + c)^2 = 400}}
-
+| Evaluate @math{(7 + c)^2} for @math{c = 13}. +
+@vspace{1ex} +
+@ifsoln{@math{(7 + 13)^2 = 400}}
 
 | @n
 | @math{5w^m}
 | @showsoln{(coe '(* 5 (expt w m)))}
-| Evaluate for @math{w=6} and @math{m=2}.
-
-@ifsoln{@math{5w^m = 180}}
-
-
-
-
+| Evaluate @math{5w^m} for @math{w=6} and @math{m=2}. +
+@vspace{1ex} +
+@ifsoln{@math{5(6)^2 = 180}}
 |===
-
-

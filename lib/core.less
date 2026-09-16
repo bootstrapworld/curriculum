@@ -56,7 +56,7 @@ div#body {
   .prefix { font-style: italic; color: gray; }
   a       { color:  var(--link-color) !important; }
   p       { margin: 10px 0px; font-size: inherit; }
-  sup     { font-size: smaller; top: -0.55em; left: 1px; }
+  sup     { font-size: smaller; top: -0.15em; left: 2px; position: relative; }
   sub     { font-size: smaller; bottom: -0.35em; }
   code    {
     border: none;
@@ -114,6 +114,7 @@ div#body {
     margin: 0 !important;
     font-family: MJXZERO, 'MJXTEX';
     font-size: inherit !important;
+    .solution { display: none; }
   }
   .mathunicode {
     font-family: MJXZERO, 'MJXTEX';
@@ -129,7 +130,8 @@ div#body {
   table.FillVerticalSpace td .paragraph { align-items: baseline; }
   em .mathunicode { font-family: 'MJXTEX-I';}
   strong .mathunicode { font-family: 'MJXTEX-B'; }
-  em strong .mathunicode, strong em .mathunicode, strong .MathJax .TEX-I, em .MathJax .TEX-B {
+  em strong .mathunicode, strong em .mathunicode, strong .MathJax .TEX-I,
+  em .MathJax .TEX-B, i strong .mathunicode, strong i .mathunicode, strong .mathunicode i {
     font-family: 'MJXTEX-BI';
   }
 
@@ -679,7 +681,7 @@ div#body.LessonPlan {
   }
 
   code { line-height: 1.5 !important; }
-  .codesexp, .circleevalsexp { font-size: 0.8em; }
+  .circleevalsexp { font-size: 0.8em; }
 
   .lesson-instruction, .lesson-roleplay, .q-and-a {
     min-height: 50px;
@@ -790,6 +792,7 @@ div#body.workbookpage #content .sect1.lesson-section-1 .sectionbody { display: c
 
 div#body.solution-page {
   .fitbruby, .fitb { font-style: italic; }
+  .MathJax .solution { font-style: italic; display: inline; }
 }
 
 html div#body.workbookpage {
@@ -961,6 +964,16 @@ html div#body.workbookpage {
     wrapped in .solution only so its line-height:1 reset has a real element
     to target (see contract-type in preproc.rkt). Don't treat it as italic */
   .contract-type > .solution { font-style: normal !important; }
+
+  .solution:has(> .image-figure:only-child) .image-figure {
+    border: 1px dashed; border-radius: 15px; padding: 5px;
+  }
+  .solution:has(> .circleevalsexp:only-child) .circleevalsexp {
+    .expression { border: 1px dashed; }
+    .operator { border-bottom: 1px dashed; }
+    font-style: italic !important;
+  }
+
   div.choice { display: inline; }
   .blank    { color: rgba(0,0,0,0); }
   .chosen::after { content: '✅'; }
@@ -1349,8 +1362,16 @@ div#body {
 
 /************************************************************************************
 * FORMATTING OF CIRCLES, AND TEXT CODE
+*
+* .codesexp and .cm-s-scheme used to appear in these rules but are dead: the
+* preprocessor never emits .codesexp, and attachCodeMirror() (page-render.js)
+* only calls CodeMirror.runMode() to tokenize code into inline .editbox spans
+* -- it never instantiates a full editor (new CodeMirror()/fromTextArea()),
+* which is the only thing that would stamp a cm-s-<theme> class onto
+* anything. Confirmed empirically: 0 elements with either class in the built
+* distribution or in a live-rendered page's DOM.
 */
-.codesexp, .circleevalsexp, .editbox, .cm-s-scheme, .CodeMirror {
+.circleevalsexp, .editbox, .CodeMirror {
   font-family: @code-font;
 }
 
@@ -1369,7 +1390,7 @@ td.halign-center .circleevalsexp { text-align: center; }
   }
   .value {
     display:            inline-block;
-    margin:             0.5em 0.4em;
+    margin:             0.5em 0.375em;
     vertical-align:     top;
   }
   .operator {
@@ -1393,8 +1414,7 @@ td.halign-center .circleevalsexp { text-align: center; }
   .fitb { border: none; padding: 0; --fitb-height: 1em; }
 }
 
-.codesexp, .circleevalsexp, .editbox, .cm-s-scheme {
-  width:              100%;
+.circleevalsexp, .editbox {
   margin:             0px 3px;
   display:            inline-block;
   padding:            0px;
@@ -1402,6 +1422,12 @@ td.halign-center .circleevalsexp { text-align: center; }
   font-style:         normal;
   clear:              both;
 }
+
+/* A circle inline inside an @Q{} question needs to be pushed to its own line
+   -- without width:100% forcing that, it glues onto the end of the preceding
+   text. .qblock is @Q{}'s wrapper, so this covers that case everywhere it
+   occurs. */
+.qblock .circleevalsexp { display: block; }
 
 /* WESCHEME COLORS */
 .wescheme-string,     .cm-scheme-string   { color: forestgreen;}
