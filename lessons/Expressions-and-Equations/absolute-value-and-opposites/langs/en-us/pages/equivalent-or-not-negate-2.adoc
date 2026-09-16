@@ -1,4 +1,4 @@
-= True or False? Negate (2)
+= Equivalent or Not? Negate (2)
 
 ++++
 <style>
@@ -10,33 +10,33 @@ Decide whether or not the two expressions are equivalent. Explain your reasoning
 
 [.FillVerticalSpace, cols="^.^1a, ^.^6a, ^.^1a, ^.^5a, ^.^9a", grid="none", options="header", ]
 |===
-|	 | Expression 1 					 		| | Expression 2						| True or False? Justify.
-| @n | @show{(coe '(negate (* 5 k)))}    		|=| @show{(coe '(negate (* k 5)))}		| True. +
+|	 | Expression 1 					 		| | Expression 2						| Equivalent or Not? Justify.
+| @n | @show{(coe '(negate (* 5 k)))}    		|=| @show{(coe '(negate (* k 5)))}		| Yes. +
 The Commutative Property is being applied. +
 @math{-5k = -5k}
 
-| @n | @show{(coe '(negate (negate q)))} 		|=| @math{ -q}							| @ifsoln{False. +
+| @n | @show{(coe '(negate (negate q)))} 		|=| @math{ -q}							| @ifsoln{No. +
 The opposite of the opposite is the original expression. +
 @math{q ≠ -q}}
 
-| @n | @show{(coe '(+ (negate h) 6))}	 		|=| @show{(coe '(+ 6 -h))}				| @ifsoln{True. +
+| @n | @show{(coe '(+ (negate h) 6))}	 		|=| @show{(coe '(+ 6 -h))}				| @ifsoln{Yes. +
 The Commutative Property is being applied. + 
 @math{-h + 6 = 6 + -h}}
 
-| @n | @show{(coe '(* (negate -m) (+ 20 3)))}	|=| @show{(coe '(+ (* m 20) (* m 3)))} 	| @ifsoln{True. +
+| @n | @show{(coe '(* (negate -m) (+ 20 3)))}	|=| @show{(coe '(+ (* m 20) (* m 3)))} 	| @ifsoln{Yes. +
 The Distributive Property is being applied. +
 (The opposite of @math{-m} is @math{m}.)}
 
-| @n | @show{(coe '(negate(negate -y)))}		|=| @math{-y}							| @ifsoln{True. +
+| @n | @show{(coe '(negate(negate -y)))}		|=| @math{-y}							| @ifsoln{Yes. +
 The opposite of the opposite is the original expression.}
 
-| @n | @show{(coe '(+ (negate -g) 0))}			|=| @show{(coe '(- 0 (negate -g)))}		| @ifsoln{False. +
+| @n | @show{(coe '(+ (negate -g) 0))}			|=| @show{(coe '(- 0 (negate -g)))}		| @ifsoln{No. +
 Subtracting *from* zero is not an identity. It changes the sign of the expression (from positive to negative or vice versa). +
 @math{g + 0 ≠ 0 - g}}
 
-| @n | @show{(coe '(negate f))}					|=|	@show{(coe '(* (negate f) 1))}		| @ifsoln{True. The Identity Property is being applied. +
+| @n | @show{(coe '(negate f))}					|=|	@show{(coe '(* (negate f) 1))}		| @ifsoln{Yes. The Identity Property is being applied. +
 Multiplying by @math{1} doesn't change the value of the expression.}
 
-| @n | @show{(coe '(negate (+ c h)))}			|=|	@show{(coe '(* (negate (+ c h)) 1))}| @ifsoln{True. The Identity Property is being applied. +
+| @n | @show{(coe '(negate (+ c h)))}			|=|	@show{(coe '(* (negate (+ c h)) 1))}| @ifsoln{Yes. The Identity Property is being applied. +
 Multiplying by @math{1} doesn't change the value of the expression.}
 |===

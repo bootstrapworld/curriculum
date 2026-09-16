@@ -1,4 +1,4 @@
-= True or False? Absolute Value & Negate
+= Equivalent or Not? Absolute Value & Negate
 
 ++++
 <style>
@@ -14,13 +14,13 @@ Translate each Circle of Evaluation into words and evaluate. Decide whether or n
 | Expression 1
 |
 | Expression 2
-| True or False?
+| Equivalent or Not?
 
 | @n
 | @show{(coe '(negate 4))}
 |@math{=}
 |@show{(coe '(negate -4))}
-| False. 
+| No. 
 
 |
 | The opposite of 4 is -4.
@@ -30,10 +30,11 @@ Translate each Circle of Evaluation into words and evaluate. Decide whether or n
 @math{-4 ≠ 4}
 
 | @n
+
 | @show{(coe '(negate 3))}
 |@math{=}
 |@show{(coe '(abs 3))}
-| @ifsoln{False.}
+| @ifsoln{No.}
 
 |
 | @ifsoln{The opposite of 3 is -3.}
@@ -57,7 +58,7 @@ Translate each Circle of Evaluation into words and evaluate. Decide whether or n
 | @show{(coe '(abs -3))}
 |@math{=}
 |@show{(coe '(abs 3))}
-| @ifsoln{True.}
+| @ifsoln{Yes.}
 
 |
 | @ifsoln{The absolute value of -3 is 3.}
@@ -80,21 +81,21 @@ For each pair of Circles of Evaluation below, decide whether they're _always_, _
 | @show{(coe '(negate m))}
 |@math{=}
 |@show{(coe '(abs m))}
-| @ifsoln{Sometimes true. +
-Negating @math{m} can result in a positive value, a negative value, or zero. The absolute value of @math{m} is always positive. If @math{m} is zero or a negative value, then the equation is true.}
+| @ifsoln{Sometimes Yes. +
+Negating @math{m} can result in a positive value, a negative value, or zero. The absolute value of @math{m} is always positive. If @math{m} is zero or a negative value, then the equation is Yes.}
 
 | @n
 | @show{(coe '(abs m))}
 |@math{=}
 |@show{(coe '(abs -m))}
-| @ifsoln{Always true. +
-These both always result in a positive outcome, unless @math{m} is zero -- in which case the equation is still true.}
+| @ifsoln{Always Yes. +
+These both always result in a positive outcome, unless @math{m} is zero -- in which case the equation is still Yes.}
 
 | @n
 | @show{(coe '(abs -m))}
 |@math{=}
 |@show{(coe '(negate -m))}
-| @ifsoln{Sometimes true. +
-The absolute value of @math{-m} always results in a positive outcome. Negating @math{-m}, however, can result in a positive outcome, a negative outcome, or zero. If @math{m} is zero or a positive value, then the equation is true.}
+| @ifsoln{Sometimes Yes. +
+The absolute value of @math{-m} always results in a positive outcome. Negating @math{-m}, however, can result in a positive outcome, a negative outcome, or zero. If @math{m} is zero or a positive value, then the equation is Yes.}
 
 |===
