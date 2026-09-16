@@ -638,7 +638,7 @@ div#body.LessonPlan {
   }
 
   code { line-height: 1.5 !important; }
-  .codesexp, .circleevalsexp { font-size: 0.8em; }
+  .circleevalsexp { font-size: 0.8em; }
 
   .lesson-instruction, .lesson-roleplay, .q-and-a {
     min-height: 50px;
@@ -1307,8 +1307,16 @@ div#body {
 
 /************************************************************************************
 * FORMATTING OF CIRCLES, AND TEXT CODE
+*
+* .codesexp and .cm-s-scheme used to appear in these rules but are dead: the
+* preprocessor never emits .codesexp, and attachCodeMirror() (page-render.js)
+* only calls CodeMirror.runMode() to tokenize code into inline .editbox spans
+* -- it never instantiates a full editor (new CodeMirror()/fromTextArea()),
+* which is the only thing that would stamp a cm-s-<theme> class onto
+* anything. Confirmed empirically: 0 elements with either class in the built
+* distribution or in a live-rendered page's DOM.
 */
-.codesexp, .circleevalsexp, .editbox, .cm-s-scheme, .CodeMirror {
+.circleevalsexp, .editbox, .CodeMirror {
   font-family: @code-font;
 }
 
@@ -1327,7 +1335,7 @@ td.halign-center .circleevalsexp { text-align: center; }
   }
   .value {
     display:            inline-block;
-    margin:             0.5em 0.4em;
+    margin:             0.5em 0.375em;
     vertical-align:     top;
   }
   .operator {
@@ -1349,8 +1357,7 @@ td.halign-center .circleevalsexp { text-align: center; }
   .fitb { border: none; padding: 0;}
 }
 
-.codesexp, .circleevalsexp, .editbox, .cm-s-scheme {
-  width:              100%;
+.circleevalsexp, .editbox {
   margin:             0px 3px;
   display:            inline-block;
   padding:            0px;
@@ -1358,6 +1365,12 @@ td.halign-center .circleevalsexp { text-align: center; }
   font-style:         normal;
   clear:              both;
 }
+
+/* A circle inline inside an @Q{} question needs to be pushed to its own line
+   -- without width:100% forcing that, it glues onto the end of the preceding
+   text. .qblock is @Q{}'s wrapper, so this covers that case everywhere it
+   occurs. */
+.qblock .circleevalsexp { display: block; }
 
 /* WESCHEME COLORS */
 .wescheme-string,     .cm-scheme-string   { color: forestgreen;}
