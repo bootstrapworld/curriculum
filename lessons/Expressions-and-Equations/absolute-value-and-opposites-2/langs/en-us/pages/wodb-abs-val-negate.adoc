@@ -1,10 +1,11 @@
-= Which One Doesn't Belong? (Absolute Value & Negate)
+= Which One Isn't Equivalent? Absolute Value & Negate 2
 
-For each row, cross out any Circles of Evaluation that do NOT meet the condition stated on the left. *NOTE:* Some rows might not need anything crossed out!
+Identify the circle of evaluation in each row below that doesn’t evaluate to the same things as the others.
 
 ++++
 <style>
 .circleevalsexp { width: auto; }
+.chosen::after { content: '❌' !important; }
 
 /* for table cells with immediate .content children, which have immediate
  * .paragraph children: use flex to space them evenly and center vertically
@@ -21,58 +22,45 @@ td > .content > .paragraph > p { display: contents; }
 
 [.FillVerticalSpace, cols="<.^1a,^.^3a,^.^10a",stripes="none", options="header"]
 |===
-| 	 | Value | Circles of Evaluation
+| 	 | |Circles of Evaluation
 
-| @n
-| Which Circles evaluate to @math{20}?
+| @n |
 |
 @show{(coe '(negate (negate 20)))}
 @ifsoln-choice{@show{(coe '(negate (negate -20)))}}
 @show{(coe '(abs (negate 20)))}
-@ifsoln-choice{@show{(coe '(negate (abs 20)))}}
+@show{(coe '(abs (negate -20)))}
 
-| @n
-| Which Circles evaluate to @math{-3}?
+| @n |
 |
-@show{(coe '(negate (abs 3)))}
-@show{(coe '(negate (abs -3)))}
-@ifsoln-choice{@show{(coe '(abs (negate 3)))}}
-@ifsoln-choice{@show{(coe '(abs (negate -3)))}}
+@show{(coe '(negate (negate 3)))}
+@show{(coe '(abs (negate 3)))}
+@ifsoln-choice{@show{(coe '(negate (abs -3)))}}
+@show{(coe '(abs (abs -3)))}
 
-| @n
-| Let @math{h=9}. +
-Which Circles evaluate to @math{9}?
+| @n | Let @math{h = 9}
 |
 @show{(coe '(negate -h))}
-@ifsoln-choice{@show{(coe '(negate (abs h)))}}
+@show{(coe '(abs (negate h)))}
 @show{(coe '(abs -h))}
 @ifsoln-choice{@show{(coe '(negate (negate -h)))}}
 
-| @n
-| Let @math{h=6}. +
-Which Circles evaluate to @math{6}?
+| @n| Let @math{h = 6}
 |
 @show{(coe '(+ (abs h) (- h h)))}
 @ifsoln-choice{@show{(coe '(+ (negate h) (- h h)))}}
 @show{(coe '(* (/ h h) (abs h)))}
 
-| @n
-| Let @math{k=99}. +
-Which Circles evaluate to @math{0}?
-
+| @n | Let @math{k = 99}
 |
+@ifsoln-choice{@show{(coe '(+ (abs k) k))}}
 @show{(coe '(+ k (negate k)))}
-@show{(coe '(+ (negate k) k))}
 @show{(coe '(+ (abs (+ 45 44)) (negate k)))}
 
-| @n
-| Let @math{a=11} and @math{b=20}. +
-Which Circles evaluate to @math{31}?
+| @n | Let @math{a = 11} and @math{b = 20}.
 |
 @show{(coe '(abs (+ a b)))}
 @show{(coe '(abs (+ b a)))}
 @show{(coe '(abs (negate (+ b a))))}
 @ifsoln-choice{@show{(coe '(negate (abs (+ a b))))}}
-
 |===
-
