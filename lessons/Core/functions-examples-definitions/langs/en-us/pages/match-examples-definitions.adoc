@@ -13,29 +13,18 @@
 
 (1) Find the variables in `gt` and label them with the word "size".
 
-@ifproglang{pyret}{
-@hspace{1em}*examples:*
-[.indentedpara]
---
-`gt(20) is triangle(20, "solid", "green")`
+@show{
+(code '(EXAMPLE
+       (gt 20) (triangle 20 "solid" "green")
+       (gt 50) (triangle 50 "solid" "green")
+      ))
+   }
 
-`gt(50) is triangle(50, "solid", "green")`
---
-@hspace{1em}*end*
-
-@hspace{1em}*fun* `gt(size): triangle(size, "solid", "green")` *end*}
-
-
-@ifproglang{wescheme}{
-[.indentedpara]
---
-`(EXAMPLE (gt 20) (triangle 20 "solid" "green"))`
-
-`(EXAMPLE (gt 50) (triangle 50 "solid" "green"))`
-
-`(define (gt size) (gt size "solid" "green"))`
---
-}
+@show{
+(code '(define 
+       (gt size) (triangle size "solid" "green")
+      ))
+      }
 
 (2) Highlight and label the variables in the example lists below. 
 
