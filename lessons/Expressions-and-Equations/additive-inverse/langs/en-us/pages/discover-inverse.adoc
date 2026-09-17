@@ -2,13 +2,16 @@
 
 ++++
 <style>
+#body td { padding: 0 !important; }
+#body tr { height: 3em !important; }
 #body td .autonum::after { content: none !important; }
+#body .autonum { padding-top: 1em !important; }
 
 /* Shorten the fitbs and arrow */
 #content { --blank-height: calc(0.8em + 1em); }
 #body.workbookpage span.arrow { height: unset !important; }
 
-/* Force fractional row heights on the 5 rows, making them 4x the height of the header */
+/* Force fractional row heights on the 5 rows, making them 1.33x the height of the header */
 #body .FillVerticalSpace {
   grid-template-rows: 3fr 4fr 4fr 4fr 4fr !important;
 }
@@ -20,7 +23,7 @@
 
 @n Kelli claims that *adding a negative is the same as subtracting a positive* and draws the Circles of Evaluation below as proof. Translate the Circles of Evaluation into expressions and compute their values. 
 
-[cols="5,1,5", stripes="none"]
+[cols=".^5,1,.^5", stripes="none"]
 |===
 ^.^|@show{(coe  '(+ 10 -3))}             
 | @arrow  
@@ -35,7 +38,7 @@
 
 @n Can you think of any problems where adding a negative can't be rewritten as subtracting a positive? We've provided the start of two examples for you to complete. Then write at least three more examples and see if they evaluate to the same thing. 
 
-[.FillVerticalSpace, cols="^1a,^1a", options="header",stripes="none"]
+[.FillVerticalSpace, cols="^.>1a,^.>1a", options="header",stripes="none"]
 |===
 | Adding a Negative
 | Subtracting a Positive
