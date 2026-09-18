@@ -1185,3 +1185,50 @@ enclose CSS classes and/or an ID around arbitrary (i.e., in-line)
 text. ``@span``s may be nested. `@span`’s first argument of
 classes and ID is specified in the same way as for blocks,
 without the brackets.
+
+==== Tuning the height of fill-in-the-blanks: the `--blank` properties
+
+`@fitb`, `@fitbruby` and `@blanklines` all draw writing lines whose spacing is controlled by CSS custom properties, rather than by per-element padding or margins. Each writing line is `line-height` tall, so changing one number changes the height of the line _and_ the space it reserves.
+
+[cols="2,4,3", options="header"]
+|===
+| Property | What it controls | Default
+
+| `--blank-height`
+| The shared lever: height of every `@fitb`, `@fitbruby` and `@blanklines` line within the scope where it is set.
+| `2.2em` (on `div#body`)
+
+| `--fitb-height`
+| Overrides `--blank-height` for `@fitb` and `@fitbruby` only, leaving nearby `@blanklines` alone.
+| falls back to `--blank-height`
+
+| `--blanklines-height`
+| Overrides `--blank-height` for `@blanklines` only, leaving nearby `@fitb`/`@fitbruby` alone.
+| falls back to `--blank-height`
+|===
+
+Because custom properties inherit, set one on the widest element that should be affected, in the page's `<style>` block. `--blank-height` is usually all you need:
+
+[source]
+----
+++++
+<style>
+#content { --blank-height: calc(0.5em + 1em); }  /* every blank on the page */
+td { --blank-height: calc(0.2em + 1em); }        /* only blanks inside table cells */
+.fitbruby { --fitb-height: calc(0.3em + 1em); }  /* only fitbruby blanks */
+</style>
+++++
+----
+
+===== Guidelines
+
+* *Write the value as `calc(Xem + 1em)`.* The `1em` is the line of text itself; `X` is the extra room a student gets to write in. A smaller `X` gives a tighter page. This is the convention used across the corpus.
+* *Use `em`, never `rem`.* `em` resolves against the workbook page's font size, which is the same on screen and in print. `rem` resolves against `<html>`, which is 16px on screen but 9pt in print, so a `rem` value makes the page drift between the two.
+* *Set the property on an ancestor, not on the blank.* `.fitb`, `.fitbruby` and `.blanklines` read it; scoping a rule to a container (`#content`, `td`, a class you add with `@span` or a block attribute) is how a whole region is tightened together.
+* *Never set `height` or `line-height` on `.fitb`/`.fitbruby` directly.* Height is derived from `line-height` (`height: 1lh`), so overriding either one breaks the other. Change the property instead.
+* `@blanklines` draws its rules as real bottom borders at `--blank-height` intervals (see `drawBlankLines()` in `lib/page-render.js`), matching the stroke that `@fitb` uses. It reserves exactly `n * --blank-height`, so `@blanklines{3}` takes the same room as three `@fitb` lines.
+* Reach for `--fitb-height` or `--blanklines-height` only when a page deliberately needs the two kinds of line to differ. Inside Circles of Evaluation, `.fitb` is already set to a compact `--fitb-height: 1em` for this reason.
+
+===== See also
+
+`@fitb{width}{answer}` takes an optional width (e.g. `@fitb{8em}{}`); with no width, the blank stretches to the end of the line. Prefer `em` for widths too, for the same screen/print reason as above.
