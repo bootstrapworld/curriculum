@@ -785,7 +785,13 @@
       (unless images-hash
         (set! images-hash (read-image-json-files-in image-dir)))
 
-      (unless (or *narrative* *target-pathway* *teacher-resources*)
+      ; lib/images/ holds shared UI assets (icons, etc.) that other files depend
+      ; on by their literal name -- e.g. core.less's url(images/quizLinkIcon.png).
+      ; Anonymizing is for lesson/teacher content whose filename might give away
+      ; an answer; renaming a shared asset here would silently break every other
+      ; reference to it instead.
+      (unless (or *narrative* *target-pathway* *teacher-resources*
+                  (regexp-match? #rx"/lib/images/" (path->string img-qn)))
         (let* ([img-anonymized (anonymize-filename img)]
                [img-anonymized-qn (build-path *containing-directory* img-anonymized)])
           (set! img img-anonymized)
