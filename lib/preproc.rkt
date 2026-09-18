@@ -932,10 +932,9 @@
           (warnmsg "~a: @dist-link: Missing file ~a" (errmessage-context) f)))
       (when (and (or (not link-text) (string=? link-text "")) page-title)
         (set! link-text page-title))
-      (let ([link-output (format "link:~apass:[~a][~a~a]"
+      (let ([link-output (format "link:~apass:[~a][~a, window=\"&#x5f;blank\"]"
                                  "{fromlangroot}"
-                                 f link-text
-                                 (if *lesson-plan* ", window=\"&#x5f;blank\"" ""))])
+                                 f link-text)])
         link-output))))
 
 (define (make-lesson-link f link-text)
