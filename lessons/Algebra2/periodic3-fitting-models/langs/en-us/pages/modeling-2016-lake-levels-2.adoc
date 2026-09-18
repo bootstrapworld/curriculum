@@ -1,4 +1,4 @@
-= Modeling Recent Carbon Dioxide Levels (continued)
+= Modeling 2016 Great Lakes Mean Monthly Water Levels (continued)
 ++++
 <style>
 /* Tweak table display */
@@ -19,36 +19,33 @@ table+.paragraph .autonum {padding-top: 0; }
 ++++
 
 
-@define{COtwo}{@math{\text{CO}_2}}
 @do{
-(define-values (hi lo lo-dateA lo-dateB) (values 424 415.74 2022.708 2023.708))
-(define p (round (abs (- lo-dateA lo-dateB))))
-(define a 4.13)
+(define-values (hi lo) (values 580.18 578.97))
+(define a 0.65)
 (define b 6.28)
-(define k 419.87)
-(define h 2023.1)
-(define h-cos 2023.35)
+(define k 579.62)
+(define h 2016.25)
+(define h-cos 2017)
+(define p 1)
 }
 
 @define{hi}{@show{hi}}
 @define{lo}{@show{lo}}
-@define{lo-dateA}{@show{lo-dateA}}
-@define{lo-dateB}{@show{lo-dateB}}
-@define{p}{@show{p}}
 @define{a}{@show{a}}
 @define{b}{@show{(/ 6.28 p)}}
 @define{k}{@show{k}}
 @define{h}{@show{h}}
+@define{p}{@show{1}}
 @define{h-cos}{@show{h-cos}}
 
 
 @link-instructions{
-This page relies on the @starter-file{alg2-co2}. Make sure you have it open on your computer!
+This page relies on the @starter-file{alg2-great-lakes}. Make sure you have it open on your computer!
 }
 
 == Define Your Periodic Model
 
-@n Define a periodic model using the values you computed for @math{a}, @math{k}, @math{h} and @math{b} on @printable-exercise{modeling-recent-co2.adoc}.
+@n Define a periodic model using the values you computed for @math{a}, @math{k}, @math{h} and @math{b} on @printable-exercise{modeling-2016-lake-levels.adoc}.
 
 @teacher{Students horizontal shift estimates may vary slightly from this function definition.}
 
@@ -91,12 +88,12 @@ This page relies on the @starter-file{alg2-co2}. Make sure you have it open on y
 | @vspace{1ex} +
 *Pyret Notation*
 |
-@show{(code `(define (periodic-cos x) (+ (* (?ANS ,a) (cos (* (?ANS ,b) (- x (?ANS ,h-cos))))) (?ANS ,k))))}
+@show{(code '(define (periodic-cos x) (+ (* (?ANS ,a) (cos (* (?ANS ,b) (- x (?ANS ,h-cos))))) (?ANS ,k))))}
 |===
 
 == Fit Your Periodic Model to the Data
 
-@n Use `fit-model` to fit your `periodic` model to the data in the `recent-table`. What S-value do you get? @fitb{}{@ifsoln{Answers will vary slightly.  ~1.2 }}
+@n Use `fit-model` to fit your `periodic` model to the data in the `small-table`. What S-value do you get? @fitb{}{@ifsoln{Answers will vary slightly.  ~0.16 feet or 1.9 inches }}
 
 [cols="9a,1,10a", grid="none",frame="none"]
 |===
@@ -104,26 +101,26 @@ This page relies on the @starter-file{alg2-co2}. Make sure you have it open on y
 
 @vspace{1ex}
 
-@image{../images/recent-co2-scatter.png}
+@image{../images/great-lakes-16-17-scatter-plot.png}
 |
 | @n This model was built using data about 
-@fitbruby{8em}{@ifsoln{12}}{how many?}
+@fitbruby{8em}{@ifsoln{13}}{how many?}
 @fitbruby{8em}{@ifsoln{monthly readings}}{what?} whose 
 @fitbruby{15em}{@ifsoln{time stamps}}{x-variable} ranged from
-@fitbruby{}{@ifsoln{September 2022 (2022.79)}}{x-min} +
-to @fitbruby{}{@ifsoln{August of 2023 (2023.71)}}{x-max}
+@fitbruby{}{@ifsoln{January of 2016}}{x-min} +
+to @fitbruby{}{@ifsoln{January of 2017}}{x-max}
 
 @n Possible limitations of this model include @fitb{}{} +
-@blanklines{2}{@ifsoln{Small Sample size! And it's all from Mauna Loa Observatory in Hawaii.}}
+@blanklines{2}{@ifsoln{Small Sample size!}}
 @fitbruby{}{}{uneven distribution, high variability, small sample size, etc.}
 |===
 
-@n Between the end of 2022 and 2023, the amount of @math{CO_2} in the air fluctuated between @fitbruby{6em}{@ifsoln{415.74}}{lowest} and @fitbruby{6em}{@ifsoln{424}}{highest} parts-per-million. 
+@n Between January of 2016 and January of 2017, the mean monthly water level of the Great Lakes fluctuated between @fitbruby{6em}{@ifsoln{@lo}}{lowest} and @fitbruby{6em}{@ifsoln{@hi}}{highest} feet. 
 
-@n This pattern appears to be @vocab{periodic}, with an amplitude of @fitbruby{6em}{@ifsoln{4.13}}{amplitude} rising and falling around a @vocab{midline} of @fitbruby{6em}{@ifsoln{419.87}}{midline}. We expect this pattern to repeat every @fitbruby{4em}{@ifsoln{1}}{period} @fitbruby{5em}{@ifsoln{year}}{x-units}. 
+@n This pattern appears to be @vocab{periodic}, with an amplitude of @fitbruby{6em}{@ifsoln{@a}}{amplitude} rising and falling around a @vocab{midline} of @fitbruby{6em}{@ifsoln{@k}}{midline}. We expect this pattern to repeat every @fitbruby{4em}{@ifsoln{1}}{period} @fitbruby{5em}{@ifsoln{year}}{x-units}. 
 
-@n The error in the model is described by an @vocab{S-value} of about @fitbruby{1em}{@ifsoln{1.2}}{S}@fitbruby{8em}{@ifsoln{ppm}}{y-units}. @hspace{1em} I
+@n The error in the model is described by an @vocab{S-value} of about @fitbruby{1em}{@ifsoln{0.16}}{S}@fitbruby{8em}{@ifsoln{feet}}{y-units}. @hspace{1em} I
 @fitbruby{18em}{@ifsoln{agree}}{strongly agree, agree, disagree, strongly disagree}
 that this model is a good fit considering that
-@fitbruby{8em}{@ifsoln{Carbon dioxide}}{y-variable} in this dataset ranges from about
-@fitbruby{10em}{@ifsoln{416 ppm}}{lowest y-value} to @fitbruby{8em}{@ifsoln{424 ppm}}{highest y-value}.
+@fitbruby{8em}{@ifsoln{water levels}}{y-variable} in this dataset ranges from about
+@fitbruby{10em}{@ifsoln{@lo}}{lowest y-value} to @fitbruby{8em}{@ifsoln{@hi}}{highest y-value}.
