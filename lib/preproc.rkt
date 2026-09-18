@@ -2626,6 +2626,12 @@
                    (not *supplemental-materials-needed?*))
           (warnmsg "~a: @opt-material-links missing" (errmessage-context)))
 
+        (when (and *supplemental-materials-needed?*
+                   (not (pair? *opt-starter-files-used*))
+                   (not (pair? *opt-online-exercise-links*))
+                   (not (pair? *opt-printable-exercise-links*)))
+          (warnmsg "~a: @opt-material-links present but no optional materials found" (errmessage-context)))
+
         (for-each (lambda (sf)
                     (unless (member sf *starter-files-used-outside-preparation*)
                       (warnmsg "~a: starter file ~s mentioned in @preparation but not used"
