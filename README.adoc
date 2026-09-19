@@ -1188,7 +1188,21 @@ without the brackets.
 
 ==== Tuning the height of fill-in-the-blanks: the `--blank` properties
 
-`@fitb`, `@fitbruby` and `@blanklines` all draw writing lines whose spacing is controlled by CSS custom properties, rather than by per-element padding or margins. Each writing line is `line-height` tall, so changing one number changes the height of the line _and_ the space it reserves.
+`@fitb`, `@fitbruby` and `@blanklines` are all different forms of "fill in the blank" elements:
+
+- @`fitb{3em}{salmon}` - displays a blank line 3em wide, with the word "hello!" inside
+- @`fitbruby{6em}{salmon}{fish species}` - displays a blank line 3em wide, with the word "hello!" inside, and the ruby "fish species" underneath
+- @blanklines{4}{Four interesting things about salmon} - displays four blank lines, with the text "Four interesting things about salmon" word-wrapped within them.
+
+`@blanklines` can be any number of lines *tall*, whereas `@fitb` and `@fitbruby` are always the fixed height but have variable *width* (3em, 6em, etc.). Leaving the width property blank makes the element stretch all the way to the end of the containing block.
+
+Each element serves a slightly different purpose for filling-in-the-blanks, and requires very different DOM and rendering behind the scenes. But for author trying to size those elements, we'd _like_ to treat them as all just one thing: if I want them all extra tall or extra short, I want to be able to specify it in one place. One option is to set these using a complex selector: like `padding-top`, `line-height`, or `margin-top`:
+
+`.fitb, .fitbruby, .blanklines { padding-top: 1.2em; }`
+
+There are two problems with this approach. One is that the selectors are more complicated than necessary, and adding a `@fitbruby` to a page that had none requires that the author remember to update the selector. The other is consistency: authors use padding, margin, or line-height throughout the codebase, leading to spaghetti code that is difficult to maintain. Copying-and-pasting makes these problems much worse. And if we ever want to change our standard line-height for these elements, _every single page_ with a custom rule for any of these elements and any of these properties will have to be updated!
+
+To address this complexity, all three elements are controlled by a single CSS *custom property*, with (rarely-used) options to apply it differently to different elements on the same page.
 
 [cols="2,4,3", options="header"]
 |===
@@ -1207,7 +1221,12 @@ without the brackets.
 | falls back to `--blank-height`
 |===
 
-Because custom properties inherit, set one on the widest element that should be affected, in the page's `<style>` block. `--blank-height` is usually all you need:
+Custom properties cannot be defined on an element itself - they can only be inherited. To tweak the value for every fill-in-the-blank element on a page, you would declare the property on the _whole page_:
+
+*The Property Way:* `div#body .fitb { padding-top: 2.2em; }`
+*The Custom Property Way:* `div#body { --blank-height: 2.2em; }`
+
+Here's an example of a page that uses all three to one height for `@fitb`s on the page, another for all `@fitbruby`s on the page, and another for blanks inside a table cell, and .
 
 [source]
 ----
