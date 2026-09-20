@@ -1228,16 +1228,16 @@ Custom properties cannot be defined on an element itself - they can only be inhe
 
 Here's an example of a page that uses all three to define:
 - one height for `@fitb`s on the page
+- another for blanks inside a table cell
 - another for all `@fitbruby`s on the page
-- another for blanks inside a table cell, and
 
 [source]
 ----
 ++++
 <style>
 #content           { --blank-height: calc(0.5em + 1em); } /* every blank on the page */
-#content .fitbruby { --fitb-height: calc(0.3em + 1em); }  /* only fitbruby blanks */
 #content td        { --blank-height: calc(0.2em + 1em); } /* only blanks inside table cells */
+#content .fitbruby { --fitb-height: calc(0.3em + 1em); }  /* only fitbruby blanks */
 </style>
 ++++
 ----
