@@ -1191,10 +1191,10 @@ without the brackets.
 `@fitb`, `@fitbruby` and `@blanklines` are all different forms of "fill in the blank" elements:
 
 - @`fitb{3em}{salmon}` - displays a blank line 3em wide, with the word "salmon" inside
-- @`fitbruby{6em}{salmon}{fish species}` - displays a blank line 3em wide, with the word "salmon" inside, and the ruby "fish species" underneath
+- @`fitbruby{6em}{salmon}{fish species}` - displays a blank line 6em wide, with the word "salmon" inside, and the ruby "fish species" underneath
 - @blanklines{4}{Four interesting things about salmon} - displays four blank lines, with the text "Four interesting things about salmon" word-wrapped within them.
 
-`@blanklines` can be any number of lines *tall*, whereas `@fitb` and `@fitbruby` are always the fixed height but have variable *width* (3em, 6em, etc.). Leaving the width property blank makes the element stretch all the way to the end of the containing block.
+`@blanklines` can be any number of lines *tall*, whereas `@fitb` and `@fitbruby` are always the fixed height but have variable *width* (3em, 6em, etc.). Leaving the width blank makes the element stretch to the right edge of the containing block.
 
 Each element serves a slightly different purpose for filling-in-the-blanks, and requires very different DOM and rendering behind the scenes. But for author trying to size those elements, we'd _like_ to treat them as all just one thing: if I want them all extra tall or extra short, I want to be able to specify it in one place. One option is to set these using a complex selector: like `padding-top`, `line-height`, or `margin-top`:
 
@@ -1221,13 +1221,14 @@ To address this complexity, all three elements are controlled by a single CSS *c
 | falls back to `--blank-height`
 |===
 
-Custom properties cannot be defined on an element itself - they can only be inherited. To tweak the value for every fill-in-the-blank element on a page, you would declare the property on the _whole page_:
+A custom property can be set on the blank itself or on any ancestor, and it is inherited by everything beneath it. To tweak the value for every fill-in-the-blank element on a page, declare the property on the _whole page_:
 
 *The Old Way:* `div#body .fitb { padding-top: 2.2em; }` +
 *The New Way:* `div#body { --blank-height: 2.2em; }`
 
-Here's an example of a page that uses all three to define:
-- one height for `@fitb`s on the page
+Here's an example of a page that sets the height at three different scopes:
+
+- one height for every blank on the page (`@fitb`, `@fitbruby` and `@blanklines`)
 - another for blanks inside a table cell
 - another for all `@fitbruby`s on the page
 
@@ -1246,11 +1247,11 @@ Here's an example of a page that uses all three to define:
 
 * *Write the value as `calc(Xem + 1em)`.* The `1em` is the line of text itself; `X` is the extra room a student gets to write in. A smaller `X` gives a tighter page. This is the convention used across the corpus.
 * *Use `em`, never `rem`.* `em` resolves against the workbook page's font size, which is the same on screen and in print. `rem` resolves against `<html>`, which is 16px on screen but 9pt in print, so a `rem` value makes the page drift between the two.
-* *Set the property on an ancestor, not on the blank.* `.fitb`, `.fitbruby` and `.blanklines` read it; scoping a rule to a container (`#content`, `td`, a class you add with `@span` or a block attribute) is how a whole region is tightened together.
+* *Set the property on the widest element that should be affected.* `.fitb`, `.fitbruby` and `.blanklines` read it from themselves or the nearest ancestor that defines it, so `#content`, a `td`, or a class you add with `@span` or a block attribute all work, and setting it on `.fitb`/`.fitbruby` directly is fine when only those should change. `--fitb-height` and `--blanklines-height` override `--blank-height` wherever they are defined, even on a more distant ancestor, so a nearer `--blank-height` will not beat a farther `--fitb-height`. On a page that uses one of the narrow properties, set that one everywhere rather than mixing.
 * *Never set `height` or `line-height` on `.fitb`/`.fitbruby` directly.* Height is derived from `line-height` (`height: 1lh`), so overriding either one breaks the other. Change the property instead.
 * `@blanklines` draws its rules as real bottom borders at `--blank-height` intervals (see `drawBlankLines()` in `lib/page-render.js`), matching the stroke that `@fitb` uses. It reserves exactly `n * --blank-height`, so `@blanklines{3}` takes the same room as three `@fitb` lines.
 * Reach for `--fitb-height` or `--blanklines-height` only when a page deliberately needs the two kinds of line to differ. Inside Circles of Evaluation, `.fitb` is already set to a compact `--fitb-height: 1em` for this reason.
 
 ===== See also
 
-`@fitb{width}{answer}` takes an optional width (e.g. `@fitb{8em}{}`); with no width, the blank stretches to the end of the line. Prefer `em` for widths too, for the same screen/print reason as above.
+`@fitb{width}{answer}` takes an optional width (e.g. `@fitb{8em}{}`); with no width, the blank stretches to the right edge of the containing block. Prefer `em` for widths too, for the same screen/print reason as above.
