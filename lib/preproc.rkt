@@ -612,7 +612,7 @@
                     (set! existent-file? #t)
                     (when (and existent-file? (equal? link-type "printable-exercise")
                                (not lesson-dir)
-                               (not (member snippet *workbook-pages*)))
+                               (not (member (path->string (path-replace-extension snippet "")) *workbook-pages*)))
                       (set! non-workbook-page? #t)
                       (set! existent-file? #f))
                     (set! g-in-pages (path-replace-extension g-in-pages ".html"))
@@ -1517,7 +1517,8 @@
       (unless (file-exists? workbook-pages-ls-file)
         (error 'ERROR "File ~a not found" workbook-pages-ls-file))
       (set! *workbook-pages*
-        (read-data-file workbook-pages-ls-file #:mode 'files))))
+        (map (lambda (p) (path->string (path-replace-extension p "")))
+             (read-data-file workbook-pages-ls-file #:mode 'files)))))
 
   (set! *in-file* (build-path *containing-directory* in-file))
 
@@ -2631,6 +2632,18 @@
                    (not (pair? *opt-online-exercise-links*))
                    (not (pair? *opt-printable-exercise-links*)))
           (warnmsg "~a: @opt-material-links present but no optional materials found" (errmessage-context)))
+
+        (let ([referenced-pages
+               (map (lambda (e)
+                      (path->string
+                        (path-replace-extension
+                          (file-name-from-path (first e)) "")))
+                    *exercises-done*)])
+          (for-each (lambda (wp)
+                      (unless (member wp referenced-pages)
+                        (warnmsg "~a: workbook page ~a not referenced in lesson plan"
+                                (errmessage-context) wp)))
+                    *workbook-pages*))
 
         (for-each (lambda (sf)
                     (unless (member sf *starter-files-used-outside-preparation*)
