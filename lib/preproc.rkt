@@ -2640,7 +2640,8 @@
                           (file-name-from-path (first e)) "")))
                     *exercises-done*)])
           (for-each (lambda (wp)
-                      (unless (member wp referenced-pages)
+                      (unless (or (regexp-match? #rx"^notes-" wp)
+                                  (member wp referenced-pages))
                         (warnmsg "~a: workbook page ~a not referenced in lesson plan"
                                 (errmessage-context) wp)))
                     *workbook-pages*))
