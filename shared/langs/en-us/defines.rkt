@@ -134,9 +134,9 @@
       "-- We also offer several teachers-only materials, including an\n"
       "answer key to the student workbook, keys to all the exercises,\n"
       "and pre- and post-tests for teachers who are participating in our\n"
-      "research study. For access to these materials, please fill out the\n"
-      "https://docs.google.com/forms/d/e/1FAIpQLSefQhHo-AA6ruZyICrx51OnJp0sU63b_Y3h05f4KZKHiUbPXw/viewform[password request form].\n"
-      "We'll get back to you soon with the necessary login information.\n") o))
+      "research study. For access to these materials, \n"
+      "https://bootstrapworld.org/my-account/[create an account on our website].\n"
+      "Note: approval may take a day or two.\n") o))
 
 (define (print-link-to-forum o)
   (display
