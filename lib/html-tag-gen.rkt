@@ -23,6 +23,7 @@
   fitb
   hspace
   html-comment
+  fitb-solution-wrap
   )
 
 (define (create-begin-tag tag-name classes #:attribs [attribs #f])
@@ -50,6 +51,20 @@
 
 (define (enclose-span classes s #:attribs [attribs #f])
   (enclose-tag "span" classes s #:attribs attribs))
+
+; .fitb/.fitbruby > .solution's line-height:1 reset needs a real .solution
+; child element to target -- without one, align-items:flex-end has nothing
+; tight to pin against and the content floats above the underline instead
+; of resting on it. Wrap `content` (already-expanded/rendered HTML) in
+; .solution, unless it's already wrapped (as when it came from @ifsoln{}'s
+; own expansion, which wraps itself when shown) -- avoids nesting .solution
+; inside .solution. Shared by every fitb/fitbruby content-generation path
+; in preproc.rkt and function-directives.rkt.
+(define (fitb-solution-wrap content)
+  (let ([solution-tag-prefix (create-begin-tag "span" ".solution")])
+    (if (string-prefix? content solution-tag-prefix)
+        content
+        (enclose-span ".solution" content))))
 
 (define (enclose-div classes s #:attribs [attribs #f])
   (enclose-tag "div" classes s #:attribs attribs))

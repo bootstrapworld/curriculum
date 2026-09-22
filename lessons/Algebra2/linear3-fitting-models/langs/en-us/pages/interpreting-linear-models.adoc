@@ -6,16 +6,13 @@
 td { padding: 0.5 !important; }
 .example { font-style: italic; }
 .example .fitbruby {
-	padding-top: 0.2rem !important;
 	border-color: lightgray !important;
 	}
 
-/* shrink padding on fitb */
-.fitb, .fitbruby, .fitb.stretch::after, .fitbruby.stretch::after {
-    padding-top: 0.6em !important;
-    line-height: 1em !important;
-    }
+/* shrink line height on fitb, fitbruby, AND any blanklines sharing the page */
+#content { --blank-height: 1.7em; }
 
+.sectionbody .paragraph:first-child .autonum { padding-top: 0.5em !important; }
 </style>
 ++++
 
@@ -61,7 +58,7 @@ With @fitbruby{20em}{median household income}{response variable (y)} ranging fro
 
 @fitb{}{@ifsoln{The amount by which median income increases for each percentage of citizens who finished college}}
 
-@n How would we use this model to predict the median income for a state where 30% of the population has attended college? @fitb{}{}
+@n Use this model to predict the median income for a state where 30% of the population has attended college @fitb{}{}
 
 @fitb{}{@ifsoln{@math{5614 \times 30 + 83616 = ~252306}}}
 

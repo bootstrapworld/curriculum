@@ -24,6 +24,12 @@
 }
 
 div#body {
+  /* single lever for fitb/fitbruby/blanklines row height (see the
+     FORMATTING OF CIRCLES section for why). A wrapper can override
+     it once and have every fitb/fitbruby/blanklines beneath it follow,
+  */
+  --blank-height: 2.2em;
+
   font-family:    @text-font;
   color:          @font-color;
   width:          100%; /* needed to undo effect of html{display:flex} */
@@ -361,31 +367,67 @@ div#body {
 }
 
 body.beta div#body::after {
-    position: absolute;
-    top: 25%;
-    left: 20%;
-    transform: rotate(-45deg);
-    content: "BETA";
-    opacity: 0.2;
-    line-height: 3em;
-    color: gray;
-    font-size: 100pt;
-    font-weight: bold;
-    z-index: -1;
-  }
+  position: absolute;
+  top: 25%;
+  left: 20%;
+  transform: rotate(-45deg);
+  content: "BETA";
+  opacity: 0.2;
+  line-height: 3em;
+  color: gray;
+  font-size: 100pt;
+  font-weight: bold;
+  z-index: -1;
+}
 
 
-/* use 'thin' instead of 1px border to try and avoid disappearing
-lines on some browsers */
+/***********************************************************************
+  WRITING LINES: fitb, fitbruby, and blanklines
+
+  line-height is the single lever controlling how tall a writing line is.
+  To make this all work, we use align-items:flex-end to pin content against
+  the bottom border. Height is derived from line-height so there's exactly
+  one number to change.
+
+  vertical-align:baseline (not bottom) on the OUTER box, for both fitb and
+  fitbruby: fitbruby's ruby caption hangs below the box via
+  position:absolute (deliberately, so it doesn't inflate fitbruby's own
+  height past fitb's), and vertical-align:bottom anchors a box to the
+  LINE's bottom rather than its own text baseline -- when a plain fitb
+  (bottom) sat on the same line as a fitbruby (baseline, needed for the
+  reason above), the two anchors disagreed by ~11px, visibly misaligning
+  their blanks. baseline for both keeps every writing-line element
+  level whether or not fitb/fitbruby are mixed on the same line -- verified
+  with no page-height or layout change across the corpus for fitb used on
+  its own.
+
+  --blank-height is the shared, page/section-wide lever -- set it on a
+  common ancestor to tighten fitb, fitbruby, AND any .blanklines in
+  that scope together
+  --fitb-height is a narrower escape hatch for the rare case
+  where a page deliberately wants fitb/fitbruby to diverge from a
+  nearby .blanklines.
+  */
 .fitb, .fitbruby, .fitb.stretch::after, .fitbruby.stretch::after {
-  padding-top:        @top-padding-for-writing;
   position:           relative;
-  display:            inline-block;
+  display:            inline-flex;
+  align-items:        flex-end;
+  justify-content:    center;
   min-width:          4em;
   text-align:         center;
-  line-height:        1em;
+  line-height:        var(--fitb-height, var(--blank-height));
+  height:             1lh; /* derived from line-height -- NEVER override this directly */
+  /* use 'thin' instead of 1px to avoid disappearing lines on some browsers */
   border-bottom:      solid thin black;
   vertical-align:     baseline;
+}
+
+/* line-height is inherited if not set explicitly, so the content's own
+   anonymous flex item will be as tall as the container (--blank-height)
+   and the glyphs would float centered inside a taller box. Set it here.
+*/
+.fitb > .solution, .fitbruby > .solution, .fitb::before, .fitbruby::before {
+  line-height: 1;
 }
 
 div#body:not(.LessonPlan, .narrativepage) p {
@@ -918,6 +960,11 @@ html div#body.workbookpage {
 
   /* Some elements show either solution mode or a blank */
   .solution, .solution code, .solution .MJX-TEX { font-style: italic !important; }
+  /* A contract's type name (Table, String, ...) is a display-only label
+    wrapped in .solution only so its line-height:1 reset has a real element
+    to target (see contract-type in preproc.rkt). Don't treat it as italic */
+  .contract-type > .solution { font-style: normal !important; }
+
   .solution:has(> .image-figure:only-child) .image-figure {
     border: 1px dashed; border-radius: 15px; padding: 5px;
   }
@@ -947,8 +994,12 @@ html div#body.workbookpage {
     position: relative;
     background-image: url('images/2.2em-ruled lines.png');
     margin-left: 5px;
-    line-height: 2.2em;
-    .solution { position: absolute; bottom: -3px; line-height: inherit; }
+    /* --blanklines-height is the blanklines-only counterpart to
+       --fitb-height -- lets a page tighten blanklines specifically
+       without touching nearby fitb/fitbruby, symmetric with the
+       fitb-only case. Falls back to the shared --blank-height. */
+    line-height: var(--blanklines-height, var(--blank-height));
+    .solution { position: absolute; top: 3.3px; line-height: inherit; }
     /* artificially shrink codeblocks to avoid stepping on the line */
     .editbox, code.pyret {
       line-height: 0.5em !important;
@@ -1115,6 +1166,9 @@ div#body{
   }
 
   .recipe {
+    /* --blank-height inherits down to any fitb/fitbruby/blanklines inside,
+       same lever as everywhere else (was a one-off padding-top). */
+    --blank-height: 2em;
 
     /* Under a heading come the instructions */
     .recipe_instructions * { font-style: italic; font-size: .85em; }
@@ -1124,7 +1178,7 @@ div#body{
 
     /* All student answers have a bottom-border, and a "ruby" printed in black */
     p .fitb, p .fitbruby {
-      word-spacing: 2pt; padding-top: @top-padding-for-dr;
+      word-spacing: 2pt;
       &:after { word-spacing: 0; }
     }
 
@@ -1161,7 +1215,7 @@ div#body{
     .recipe_purpose, .recipe_contract .recipe_name {
       &::before { content: '#'; }
     }
-    .solution.recipe_name { text-align: right !important; min-width: 6em; } /* no whitespace in pyret */
+    .recipe_name:has(> .solution) { text-align: right !important; min-width: 6em; } /* no whitespace in pyret */
     /* Indenting for function body and example bodies */
     .recipe_example_line:not(.keyword_only) > .content,
     .recipe_definition_body { margin-left: 2ex; }
@@ -1354,8 +1408,10 @@ td.halign-center .circleevalsexp { text-align: center; }
   .hspace ~ .hspace { display: inline-block; width: 0.5ex; }
   .lParen, .rParen { display: none; } /* Don't show parens in Circle mode */
 
-  /* fill-in-the-blanks inside circles need no border */
-  .fitb { border: none; padding: 0;}
+  /* fill-in-the-blanks inside circles need no border, and should be
+     compact (matching sibling .value elements) rather than a full
+     writing-line. use the more specific lever (--fitb-height) */
+  .fitb { border: none; padding: 0; --fitb-height: 1em; }
 }
 
 .circleevalsexp, .editbox {

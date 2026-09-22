@@ -1185,3 +1185,71 @@ enclose CSS classes and/or an ID around arbitrary (i.e., in-line)
 text. ``@span``s may be nested. `@span`’s first argument of
 classes and ID is specified in the same way as for blocks,
 without the brackets.
+
+==== Tuning the height of fill-in-the-blanks: the `--blank` properties
+
+`@fitb`, `@fitbruby` and `@blanklines` are all different forms of "fill in the blank" elements:
+
+- @`fitb{3em}{salmon}` - displays a blank line 3em wide, with the word "salmon" inside
+- @`fitbruby{6em}{salmon}{fish species}` - displays a blank line 6em wide, with the word "salmon" inside, and the ruby "fish species" underneath
+- @blanklines{4}{Four interesting things about salmon} - displays four blank lines, with the text "Four interesting things about salmon" word-wrapped within them.
+
+`@blanklines` can be any number of lines *tall*, whereas `@fitb` and `@fitbruby` are always the fixed height but have variable *width* (3em, 6em, etc.). Leaving the width blank makes the element stretch to the right edge of the containing block.
+
+Each element serves a slightly different purpose for filling-in-the-blanks, and requires very different DOM and rendering behind the scenes. But for author trying to size those elements, we'd _like_ to treat them as all just one thing: if I want them all extra tall or extra short, I want to be able to specify it in one place. One option is to set these using a complex selector: like `padding-top`, `line-height`, or `margin-top`:
+
+`.fitb, .fitbruby, .blanklines { padding-top: 1.2em; }`
+
+There are two problems with this approach. One is that the selectors are more complicated than necessary, and adding a `@fitbruby` to a page that had none requires that the author remember to update the selector. The other is consistency: authors use padding, margin, or line-height throughout the codebase, leading to spaghetti code that is difficult to maintain. Copying-and-pasting makes these problems much worse. And if we ever want to change our standard line-height for these elements, _every single page_ with a custom rule for any of these elements and any of these properties will have to be updated!
+
+To address this complexity, all three elements are controlled by a single CSS *custom property*, with (rarely-used) options to apply it differently to different elements on the same page.
+
+[cols="2,3,4", options="header"]
+|===
+| Property | What it controls | Default
+
+| `--blank-height`
+| The shared lever: height of every `@fitb`, `@fitbruby` and `@blanklines` line within the scope where it is set.
+| `2.2em` (on `div#body`)
+
+| `--fitb-height`
+| Overrides `--blank-height` for `@fitb` and `@fitbruby` only, leaving nearby `@blanklines` alone.
+| falls back to `--blank-height`
+
+| `--blanklines-height`
+| Overrides `--blank-height` for `@blanklines` only, leaving nearby `@fitb`/`@fitbruby` alone.
+| falls back to `--blank-height`
+|===
+
+A custom property can be set on the blank itself or on any ancestor, and it is inherited by everything beneath it. To tweak the value for every fill-in-the-blank element on a page, declare the property on the _whole page_:
+
+*The Old Way:* `div#body .fitb { padding-top: 2.2em; }` +
+*The New Way:* `div#body { --blank-height: 2.2em; }`
+
+Here's an example of a page that sets the height at three different scopes:
+
+- one height for every blank on the page (`@fitb`, `@fitbruby` and `@blanklines`)
+- another for blanks inside a table cell
+- another for all `@fitbruby`s on the page
+
+[source]
+----
+++++
+<style>
+#content           { --blank-height: calc(0.5em + 1em); } /* every blank on the page */
+#content td        { --blank-height: calc(0.2em + 1em); } /* only blanks inside table cells */
+#content .fitbruby { --fitb-height: calc(0.3em + 1em); }  /* only fitbruby blanks */
+</style>
+++++
+----
+
+===== Guidelines
+
+* *Write the value as `calc(Xem + 1em)`.* The `1em` is the line of text itself; `X` is the extra room a student gets to write in. A smaller `X` gives a tighter page. This is the convention used across the corpus.
+* *Use `em`, never `rem`.* `em` resolves against the workbook page's font size, which is the same on screen and in print. `rem` resolves against `<html>`, which is 16px on screen but 9pt in print, so a `rem` value makes the page drift between the two.
+* `@blanklines` draws its rules as real bottom borders at `--blank-height` intervals (see `drawBlankLines()` in `lib/page-render.js`), matching the stroke that `@fitb` uses. It reserves exactly `n * --blank-height`, so `@blanklines{3}` takes the same room as three `@fitb` lines.
+* Reach for `--fitb-height` or `--blanklines-height` only when a page deliberately needs the two kinds of line to differ. Inside Circles of Evaluation, `.fitb` is already set to a compact `--fitb-height: 1em` for this reason.
+
+===== See also
+
+`@fitb{width}{answer}` takes an optional width (e.g. `@fitb{8em}{}`); with no width, the blank stretches to the right edge of the containing block. Prefer `em` for widths too, for the same screen/print reason as above.

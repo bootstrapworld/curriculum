@@ -1940,13 +1940,17 @@
                               (unless (char=? (ignorespaces-peek-char i) #\{)
                                 (warnmsg "~a: @fitb{~a} requires second arg"
                                        (errmessage-context) width))
-                              (if (string=? width "")
-                                (display-begin-span
-                                  ".fitb.stretch" o)
-                                (display-begin-span
-                                  ".fitb" o #:attribs (format "style=\"width: ~a\"" width))))]
+                              (let* ([text (read-group i directive)]
+                                     [expanded-text (expand-directives:string->string text #:enclosing-directive directive)])
+                                (display
+                                  (string-append
+                                    (if (string=? width "")
+                                        (create-begin-tag "span" ".fitb.stretch")
+                                        (create-begin-tag "span" ".fitb" #:attribs (format "style=\"width: ~a\"" width)))
+                                    (fitb-solution-wrap expanded-text)
+                                    (create-end-tag "span"))
+                                  o)))]
                            [(string=? directive "fitbruby")
-                            ;FIXME: text should be processed, see fitb above
                             (let* ([width (read-group i directive)]
                                    [text (read-group i directive)]
                                    [ruby (read-group i directive)])
@@ -1957,7 +1961,8 @@
                                       (create-begin-tag "span" ".fitbruby" #:attribs
                                                         (format "style=\"width: ~a\"" width)))
                                   (string-append
-                                    (expand-directives:string->string text #:enclosing-directive directive)
+                                    (fitb-solution-wrap
+                                      (expand-directives:string->string text #:enclosing-directive directive))
                                     (create-begin-tag "span" ".ruby")
                                     (expand-directives:string->string ruby #:enclosing-directive directive)
                                     (create-end-tag "span"))
@@ -2986,7 +2991,8 @@
                        ;(printf "answer frag found: ~s\n" e)
                        (if *solutions-mode?*
                            (enclose-span (format ".fitb~a" fill-len)
-                             (sexp->arith e #:pyret pyret #:wrap wrap #:parens parens #:tex tex))
+                             (fitb-solution-wrap
+                               (sexp->arith e #:pyret pyret #:wrap wrap #:parens parens #:tex tex)))
                            (enclose-span (format ".fitb~a" fill-len)
                              "{nbsp}"
                              ;(symbol->string *hole-symbol*)
@@ -3216,7 +3222,14 @@
                              (if wescheme
                                  (format ".fitb~a" fill-len)
                                  (format ".studentBlockAnswerFilled~a" fill-len))
-                             (sexp->block e #:pyret pyret #:wescheme wescheme))
+                             ; Only the wescheme (.fitb*) branch needs the
+                             ; .solution wrapper -- .studentBlockAnswerFilled*
+                             ; is a circleevalsexp-only class that doesn't use
+                             ; the fitb flex/line-height box model
+                             ; fitb-solution-wrap's reset targets.
+                             (if wescheme
+                                 (fitb-solution-wrap (sexp->block e #:pyret pyret #:wescheme wescheme))
+                                 (sexp->block e #:pyret pyret #:wescheme wescheme)))
                            (enclose-span
                              (if wescheme
                                  (format ".value.wescheme-symbol.fitb~a" fill-len)
@@ -3320,10 +3333,15 @@
                       ; [type-w (string-length type)]
                       ; [w (+ 0 (max name-w type-w))]
                       )
-                 (string-append (create-begin-tag "span" ".fitbruby"
+                 ; The .contract-type marker lets core.less un-italicize
+                 ; this .solution specifically -- .solution is normally
+                 ; italicized for graded answers, but a contract's type
+                 ; name is a display-only label, not an answer, and wasn't
+                 ; italic before the fitb-solution-wrap fix below.
+                 (string-append (create-begin-tag "span" ".fitbruby.contract-type"
                                                   ; #:attribs (format "style=\"width: ~aem\"" w)
                                                   )
-                   type
+                   (fitb-solution-wrap type)
                    (create-begin-tag "span" ".ruby")
                    name
                    (create-end-tag "span")
