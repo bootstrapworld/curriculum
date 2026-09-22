@@ -210,7 +210,7 @@ local function postproc(fhtml_cached, tipe)
       x = x:gsub('%%END[QA]BLOCKITEM%%', '')
     end
     --
-    if x:find('<li>') then
+    if x:match('^%s*<li>%s*$') then
       pending_li_p = true
       goto continue
     end
@@ -461,8 +461,8 @@ local function extract_self_guided(fhtml_cached, lesson_title)
       if     l:match('^<ul')   then ul_count = ul_count + 1
       elseif l:match('^</ul>') then ul_count = ul_count - 1
       end
-      if     l:match('^<li>')  then li_count = li_count + 1
-      elseif l:match('^</li>') then li_count = li_count - 1
+      if     l:match('^%s*<li>%s*$') then li_count = li_count + 1
+      elseif l:match('^</li>')       then li_count = li_count - 1
       end
     end
 
@@ -495,7 +495,7 @@ local function extract_self_guided(fhtml_cached, lesson_title)
       first = first_content_idx()
     end
 
-    if first and lines[first]:match('^<li>') then
+    if first and lines[first]:match('^%s*<li>%s*$') then
       table.insert(lines, first, '<ul>')
       local last_li = nil
       for idx = #lines, 1, -1 do

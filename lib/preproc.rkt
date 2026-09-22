@@ -612,7 +612,7 @@
                     (set! existent-file? #t)
                     (when (and existent-file? (equal? link-type "printable-exercise")
                                (not lesson-dir)
-                               (not (member snippet *workbook-pages*)))
+                               (not (member (path->string (path-replace-extension snippet "")) *workbook-pages*)))
                       (set! non-workbook-page? #t)
                       (set! existent-file? #f))
                     (set! g-in-pages (path-replace-extension g-in-pages ".html"))
@@ -785,7 +785,13 @@
       (unless images-hash
         (set! images-hash (read-image-json-files-in image-dir)))
 
-      (unless (or *narrative* *target-pathway* *teacher-resources*)
+      ; lib/images/ holds shared UI assets (icons, etc.) that other files depend
+      ; on by their literal name -- e.g. core.less's url(images/quizLinkIcon.png).
+      ; Anonymizing is for lesson/teacher content whose filename might give away
+      ; an answer; renaming a shared asset here would silently break every other
+      ; reference to it instead.
+      (unless (or *narrative* *target-pathway* *teacher-resources*
+                  (regexp-match? #rx"/lib/images/" (path->string img-qn)))
         (let* ([img-anonymized (anonymize-filename img)]
                [img-anonymized-qn (build-path *containing-directory* img-anonymized)])
           (set! img img-anonymized)
@@ -926,10 +932,9 @@
           (warnmsg "~a: @dist-link: Missing file ~a" (errmessage-context) f)))
       (when (and (or (not link-text) (string=? link-text "")) page-title)
         (set! link-text page-title))
-      (let ([link-output (format "link:~apass:[~a][~a~a]"
+      (let ([link-output (format "link:~apass:[~a][~a, window=\"&#x5f;blank\"]"
                                  "{fromlangroot}"
-                                 f link-text
-                                 (if *lesson-plan* ", window=\"&#x5f;blank\"" ""))])
+                                 f link-text)])
         link-output))))
 
 (define (make-lesson-link f link-text)
@@ -1512,7 +1517,8 @@
       (unless (file-exists? workbook-pages-ls-file)
         (error 'ERROR "File ~a not found" workbook-pages-ls-file))
       (set! *workbook-pages*
-        (read-data-file workbook-pages-ls-file #:mode 'files))))
+        (map (lambda (p) (path->string (path-replace-extension p "")))
+             (read-data-file workbook-pages-ls-file #:mode 'files)))))
 
   (set! *in-file* (build-path *containing-directory* in-file))
 
@@ -2625,6 +2631,24 @@
                        (pair? *opt-printable-exercise-links*))
                    (not *supplemental-materials-needed?*))
           (warnmsg "~a: @opt-material-links missing" (errmessage-context)))
+
+        (when (and *supplemental-materials-needed?*
+                   (not (pair? *opt-starter-files-used*))
+                   (not (pair? *opt-online-exercise-links*))
+                   (not (pair? *opt-printable-exercise-links*)))
+          (warnmsg "~a: @opt-material-links present but no optional materials found" (errmessage-context)))
+
+        (let ([referenced-pages
+               (map (lambda (e)
+                      (path->string
+                        (path-replace-extension
+                          (file-name-from-path (first e)) "")))
+                    *exercises-done*)])
+          (for-each (lambda (wp)
+                      (unless (member wp referenced-pages)
+                        (warnmsg "~a: workbook page ~a not referenced in lesson plan"
+                                (errmessage-context) wp)))
+                    *workbook-pages*))
 
         (for-each (lambda (sf)
                     (unless (member sf *starter-files-used-outside-preparation*)
