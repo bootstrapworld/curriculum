@@ -2,19 +2,13 @@
 ++++
 <style>
 /* Tweak table display */
-td { padding: 0 5px !important; }
-td .codetwo { color: black; background: none; }
-table table td { color: inherit !important; padding: 3px 0 !important; }
-div#body .center { padding: 0; }
-.directions p { line-height: 1.75 !important; }
-table+.paragraph .autonum {padding-top: 0; }
+#content td { padding: 0 5px !important; }
+#content td .codetwo { color: black; background: none; }
+#content table+.paragraph .autonum {padding-top: 0; }
 
-/* Shorten fill in the blanks, and give fitbrubies more vertical space */
-.fitb, .fitbruby { min-width: 2em; }
-.indentedpara .fitbruby { padding-top: 0.8rem; }
-.studentAnswerMedium { min-width: 58pt !important; }
-.fitbruby{ margin-bottom: 1rem; }
-.ruby { bottom: -13px !important; }
+/* Shorten fill in the blanks */
+#content .fitb, .fitbruby { min-width: 2em; }
+#content .studentAnswerMedium { min-width: 58pt !important; }
 </style>
 ++++
 
@@ -49,7 +43,7 @@ This page relies on the @starter-file{alg2-great-lakes}. Make sure you have it o
 
 @teacher{Students horizontal shift estimates may vary slightly from this function definition.}
 
-@vspace{1ex}
+@vspace{1em}
 
 [cols="1a, .^12a", frame="none", stripes="none"]
 |===
@@ -62,7 +56,7 @@ This page relies on the @starter-file{alg2-great-lakes}. Make sure you have it o
 @fitbruby{70pt}{@ifsoln{@h}}{horizontal shift (@math{h})} ))) @math{+} 
 @fitbruby{70pt}{@ifsoln{@k}}{vertical shift (@math{k})}
 
-| @vspace{1ex} +
+| @vspace{1em} +
 *Pyret Notation*
 |
 @show{(code `(define (periodic-sin x) (+ (* (?ANS ,a) (sin (* (?ANS ,b) (- x (?ANS ,h))))) (?ANS ,k))))}
@@ -72,7 +66,7 @@ This page relies on the @starter-file{alg2-great-lakes}. Make sure you have it o
 
 @star Try translating the definition you wrote for `periodic` so that it uses  @math{\text{cosine}}  instead of @math{\text{sine}}:
 
-@vspace{1ex}
+@vspace{1em}
 
 [cols="1a, .^12a", frame="none", stripes="none"]
 |===
@@ -85,10 +79,10 @@ This page relies on the @starter-file{alg2-great-lakes}. Make sure you have it o
 @fitbruby{70pt}{@ifsoln{@h-cos}}{horizontal shift (@math{h})}))) @math{+}
 @fitbruby{70pt}{@ifsoln{@k}}{vertical shift (@math{k})}
 
-| @vspace{1ex} +
+| @vspace{1em} +
 *Pyret Notation*
 |
-@show{(code '(define (periodic-cos x) (+ (* (?ANS ,a) (cos (* (?ANS ,b) (- x (?ANS ,h-cos))))) (?ANS ,k))))}
+@show{(code `(define (periodic-cos x) (+ (* (?ANS ,a) (cos (* (?ANS ,b) (- x (?ANS ,h-cos))))) (?ANS ,k))))}
 |===
 
 == Fit Your Periodic Model to the Data
@@ -99,7 +93,7 @@ This page relies on the @starter-file{alg2-great-lakes}. Make sure you have it o
 |===
 | @n On the scatter plot below, make a sketch of what you see in pyret showing how the `periodic` model fits the data. +
 
-@vspace{1ex}
+@vspace{1em}
 
 @image{../images/great-lakes-16-17-scatter-plot.png}
 |
@@ -115,7 +109,7 @@ to @fitbruby{}{@ifsoln{January of 2017}}{x-max}
 @fitbruby{}{}{uneven distribution, high variability, small sample size, etc.}
 |===
 
-@n Between January of 2016 and January of 2017, the mean monthly water level of the Great Lakes fluctuated between @fitbruby{6em}{@ifsoln{@lo}}{lowest} and @fitbruby{6em}{@ifsoln{@hi}}{highest} feet. 
+@n Between January 2016 and January 2017, the mean monthly water level fluctuated between @fitbruby{7.5em}{@ifsoln{@lo}}{lowest} and @fitbruby{7.5em}{@ifsoln{@hi}}{highest} feet.
 
 @n This pattern appears to be @vocab{periodic}, with an amplitude of @fitbruby{6em}{@ifsoln{@a}}{amplitude} rising and falling around a @vocab{midline} of @fitbruby{6em}{@ifsoln{@k}}{midline}. We expect this pattern to repeat every @fitbruby{4em}{@ifsoln{1}}{period} @fitbruby{5em}{@ifsoln{year}}{x-units}. 
 
