@@ -33,7 +33,7 @@ Raw text is noisy, so before we model it we @vocab{normalize} it -- lowercasing 
 
 == Probability and N-grams
 
-@vspace{1ex}
+@vspace{1em}
 
 A statistical language model is built on @vocab{probability}: the _fraction_ of times one word follows another in the training corpus. To measure that, we chop the corpus into chunks called @vocab{n-grams} (where @math{n} is the number of words per chunk):
 
@@ -45,17 +45,17 @@ A statistical language model is built on @vocab{probability}: the _fraction_ of 
 | @vocab{Trigram} (n=3) | (There was an) (was an old) (an old lady) | the next word, given the _two_ before it
 |===
 
-@vspace{1ex}
+@vspace{1em}
 
 Counting up these n-grams to compute next-word probabilities *is* training a model -- and like all training, it's *lossy*: the model keeps the probabilities but forgets the original text.
 
 == Generating Text = Sampling
 
-@vspace{1ex}
+@vspace{1em}
 
 To generate, the model just *samples* a next word according to those probabilities, adds it to the sentence, and repeats. A dial called @vocab{temperature} controls how random the choice is: low temperature always grabs the most likely word (repetitive), while higher temperature takes more chances (surprising, sometimes nonsense). A tool like *Soekia* lets us peek behind the curtain at exactly this process.
 
-@vspace{1ex}
+@vspace{1em}
 
 @lesson-point{A language model knows *probability*, not *meaning* or *truth*.}
 
@@ -63,6 +63,6 @@ This is why language models "make stuff up," or *hallucinate*: every sentence is
 
 == A "Language" is more than Just Words!
 
-@vspace{1ex}
+@vspace{1em}
 
 @vocab{Natural language processing} (NLP) means using a computer to consume a corpus, build a model, and produce new text. But nothing about that process requires _English_ -- or any human language at all! The very same techniques work on *artificial languages*: the moves of a Tic-Tac-Toe game, a melody, or a chess match are all just sequences of "words" a model can learn to continue.

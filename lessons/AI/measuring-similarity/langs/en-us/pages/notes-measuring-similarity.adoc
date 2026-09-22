@@ -11,19 +11,19 @@ div#body.LessonNotes #content { display: flex !important; }
 
 Another huge job AI does is *similarity*: given an input, find the things most _like_ it. Every recommendation system -- Spotify suggesting songs, Google finding matching images, a dating app proposing matches -- is really a similarity engine.
 
-@vspace{1ex}
+@vspace{1em}
 
 The catch is that a computer doesn't _see_ an image or _hear_ a song. Where we see a mountain, the computer only sees a grid of @vocab{pixels} -- numbers. So the first step is always the same:
 
-@vspace{1ex}
+@vspace{1em}
 
 @center{*Almost ANY kind of document can be described by a list of numeric attributes -- and once it is, we can plot it as a __point in space__.*}
 
-@vspace{1ex}
+@vspace{1em}
 
 If every document is a point in space, then "similar" means "close together." But there's more than one way to measure "close"!
 
-@vspace{1ex}
+@vspace{1em}
 
 [cols="^.^1a,^.^1a,^.^1a", frame="none", grid="none", options="header", stripes="none"]
 |===
@@ -45,7 +45,7 @@ If every document is a point in space, then "similar" means "close together." Bu
 *Smaller Angle = More Similar.*
 |===
 
-@vspace{1ex}
+@vspace{1em}
 
 Converting documents into a table of points isn't _learning_: every document still has its own row, and a search just compares the query against _all_ of them. That's a real and widely-used AI technique, but it's closer to a *lookup* that it is to *learning* -- the computer is _memorizing_ examples, not learning a general pattern from them.
 
@@ -54,7 +54,7 @@ Converting documents into a table of points isn't _learning_: every document sti
 {empty} +
 This is the moment we finally *build a model* -- and where real _learning_ happens. A centroid throws away the individual points and keeps only their summary, *aggregating many documents into one and losing the original detail.* That is exactly what @vocab{training} means: a centroid _generalizes_ a whole group into a single point, instead of memorizing every example.
 
-@vspace{1ex}
+@vspace{1em}
 
 *Searching by nearest neighbor _memorizes_ the data; building a centroid _generalizes_ it into a model.*
 
