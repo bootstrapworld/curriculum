@@ -9,6 +9,7 @@
 (require "defines.rkt")
 (require "common-defines.rkt")
 (require "function-directives.rkt")
+(require "inline-quiz.rkt")
 
 (provide
   preproc-adoc-file
@@ -2106,6 +2107,55 @@
                                   [("editorconfig") (format "editorCode: ~a\n" text)]
                                   [("imageconfig") (format "imageConfig: ~s\n" (path->string (anonymize-filename text)))]
                                   [("videoconfig") (format "videoConfig: ~s\n" text)])))]
+                           ; Inline quiz directives (see #2888). These are
+                           ; purely side-effecting -- they collect into
+                           ; inline-quiz.rkt's running question list (or, for
+                           ; checkpoint/cumulativeAssessment, flush it to a
+                           ; quiz.json) and emit nothing into the lesson's
+                           ; own HTML output. read-group does not expand
+                           ; nested directives, so multiline? is set wherever
+                           ; a group's content (a checkbox or term/item list,
+                           ; or raw JSON) depends on its own newlines to
+                           ; parse correctly; inline-quiz.rkt does its own,
+                           ; narrow expansion of @image{} and *bold* within
+                           ; each group's raw text.
+                           ;
+                           ; Named cumulativeAssessment, not assessment: the
+                           ; latter is already a directive (below) that links
+                           ; to an existing assessments/<label>/ folder --
+                           ; unrelated to collecting inline questions here.
+                           [(member directive '("shortAnswer" "multipleChoice" "cardSort"
+                                                 "categorize" "quizJSON" "checkpoint" "cumulativeAssessment"))
+                            (unless *lesson-plan*
+                              (error 'ERROR "~a (~a) valid only in lesson plan"
+                                     directive (errmessage-file-context)))
+                            (case directive
+                              [("shortAnswer")
+                               (let* ([required-flag (read-group i directive)]
+                                      [range (read-group i directive)]
+                                      [prompt (read-group i directive)]
+                                      [answer (read-group i directive)])
+                                 (handle-shortAnswer! required-flag range prompt answer))]
+                              [("multipleChoice")
+                               (let* ([order-mode (read-group i directive)]
+                                      [prompt (read-group i directive)]
+                                      [options (read-group i directive #:multiline? #t)])
+                                 (handle-multipleChoice! order-mode prompt options))]
+                              [("cardSort")
+                               (let* ([ordered-flag (read-group i directive)]
+                                      [prompt (read-group i directive)]
+                                      [cards (read-group i directive #:multiline? #t)])
+                                 (handle-cardSort! ordered-flag prompt cards))]
+                              [("categorize")
+                               (let* ([prompt (read-group i directive)]
+                                      [groups (read-group i directive #:multiline? #t)])
+                                 (handle-categorize! prompt groups))]
+                              [("quizJSON")
+                               (handle-quizJSON! (read-group i directive #:multiline? #t))]
+                              [("checkpoint")
+                               (handle-checkpoint! *containing-directory* (read-group i directive))]
+                              [("cumulativeAssessment")
+                               (handle-cumulative-assessment! *containing-directory* (read-group i directive))])]
                            [(string=? directive "Bootstrap")
                             (fprintf o "https://www.bootstrapworld.org/[Bootstrap]")]
                            [(hash-ref *simple-directives* (string->symbol directive) #f)
@@ -2465,6 +2515,7 @@
       (set! *title-reached?* #f)
       (set! *supplemental-materials-needed?* #f)
       (set! *additional-exercises-explicit?* #f)
+      (reset-inline-quiz-state!)
       (set! *uses-codemirror?* #f)
       (set! *uses-mathjax?* #f)
       (set! *needs-objectives?* #f)

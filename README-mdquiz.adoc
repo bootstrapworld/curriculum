@@ -160,6 +160,121 @@ Below is an example of what the complete json might look like.
     ]
   }
 
+=== Writing an assessment inline (alternative to hand-writing `quiz.json`)
+
+Instead of hand-writing a `quiz.json`, you can write questions directly in
+the lesson's own `index.adoc`, right next to the content they're testing.
+The build system collects them and emits the same `quiz.json` mdquiz
+already consumes -- the two approaches produce identical output, so pick
+whichever is easier for a given assessment (or mix them: a hand-written
+`quiz.json` and inline questions elsewhere in the same lesson are both
+fine).
+
+Design background and discussion: https://github.com/bootstrapworld/curriculum/issues/2888[issue #2888].
+
+==== The four question directives
+
+Each directive takes a fixed number of `{...}` groups, read in order --
+there's no optional/variadic group, so "no value" is always an empty group
+`{}`, never an omitted one.
+
+`@shortAnswer{required-flag}{numeric-range}{prompt}{answer}`::
++
+--
+- First group: `{}` = required (the default). `{optional}` sets `validation.required` to `false`.
+- Second group: `{}` = no numeric constraint. A `min..max` range sets `validation.numeric: true`; either side may be blank -- `{0..360}` sets both bounds, `{0..}` only `min`, `{..360}` only `max`, `{..}` numeric with no bounds at all.
+
+  @shortAnswer{optional}{0..360}{How many degrees are in a right angle?}{90}
+--
+
+`@multipleChoice{order-mode}{prompt}{options}`::
++
+--
+The third group is an AsciiDoc checkbox list; mark the correct option(s) `[x]` in place (multiple `[x]`s produce a multi-select answer array).
+`order-mode` is one of:
+
+- `{}` or `{sorted}` -- alphabetically sorted (the default).
++
+CAUTION: This default differs from hand-written `quiz.json`, where omitting `answerIndex`/`sortAnswers` means *randomized* order (see item 5 above). Inline questions default to `sorted` instead, per the design discussion on #2888.
+- `{shuffle}` or `{random}` -- randomized at render time.
+- `{fixed}` -- options stay exactly where written; the correct answer's own position is preserved.
+
+  @multipleChoice{sorted}{Which of these values is negative?}{
+  - [ ] 12
+  - [x] -4
+  - [ ] 0
+  - [ ] 7
+  }
+--
+
+`@cardSort{ordered-flag}{prompt}{groups}`::
++
+--
+The third group is an AsciiDoc description list (`term::` followed by `- item` bullets) grouping cards into their correct piles. The term itself is discarded -- mdquiz never shows pile labels during sorting -- so just number the piles rather than inventing names for them. Card ids are auto-generated; you never write them by hand.
+`{}` (default) or `{ordered}` sets `answer.ordered`.
+
+  @cardSort{}{Match each histogram with the appropriate descriptive statement.}{
+  1::
+  - @image{images/histoA.png}
+  - has a peak in the center
+  2::
+  - @image{images/histoC.png}
+  - has an outlier on the right
+  }
+--
+
+`@categorize{prompt}{groups}`::
++
+--
+Same term/item list shape as `@cardSort`, except here the term is a real, student-facing `leftColumn` label, not a discardable pile marker. Writing each category once with its matches listed underneath (rather than repeating the term once per match) leaves no room for a typo'd category name to silently create a second, mismatched entry.
+
+  @categorize{Distinguish between bar charts and histograms.}{
+  Histogram::
+  - HISTOGRAM
+  - @image{images/hist-image.png}
+  - uses quantitative data
+  Bar Chart::
+  - BAR CHART
+  - uses categorical data
+  }
+--
+
+All four directives accept `@image{path}` / `@image{path, size}` inline in
+prompt/option/card/category text (converted to the same Markdown image
+syntax used in hand-written `quiz.json`), and AsciiDoc `*bold*` (converted
+to Markdown `**bold**`). Nothing else gets expanded -- for anything more
+elaborate a prompt needs, fall back to a hand-written `quiz.json`, or the
+`@quizJSON{}` escape hatch below.
+
+==== Escape hatch: `@quizJSON{}`
+
+For anything the four directives above don't cover -- today, that's the
+`Tracing`, `Informational`, and `Pyret` question types, none of which have
+an inline directive yet -- write the question's raw JSON directly and it's
+spliced into the assessment's `questions` array as-is, same as a
+hand-written `quiz.json` entry:
+
+  @quizJSON{
+    { "type": "Tracing", "prompt": { ... }, "answer": { ... } }
+  }
+
+==== Collecting inline questions into a `quiz.json`: `@checkpoint` and `@cumulativeAssessment`
+
+Inline questions accumulate in a running list as the build walks through
+the lesson. Two directives flush that list to disk:
+
+`@checkpoint{title}`:: Collates every inline question seen since the last `@checkpoint` (or the start of the lesson) into its own `quiz.json`, titled `title`. A lesson can have as many checkpoints as it needs -- e.g. a short do-now/exit-ticket checkin partway through, and a fuller one later -- each independently titled and placed wherever it belongs, not tied to section boundaries.
+
+`@cumulativeAssessment{title}`:: At most one per lesson. Concatenates *every* `@checkpoint`'s questions seen so far into one new, cumulative `quiz.json`, titled `title`. Place it wherever the cumulative assessment belongs in the lesson -- it doesn't have to be the very last thing in the file (e.g. before a trailing "Data Exploration Project" section).
++
+NOTE: Not the same directive as the existing `@assessment{label}`, which links to an already-existing `assessments/<label>/` folder elsewhere in a lesson -- see "Setting up the assessments folder" above. Once `@cumulativeAssessment{title}` has written its `quiz.json`, `@assessment{}` can link to it the same way it links to any hand-written one.
+
+A lesson with only one quiz and no intermediate checkpoints
+doesn't need an explicit `@checkpoint{}` before its
+`@cumulativeAssessment{}` -- `@cumulativeAssessment{}` collects
+any not-yet-checkpointed questions itself, in addition to every
+``@checkpoint``'s questions so far.
+
 === To build your quiz
 
 1. Type `./build-mdquiz` in your terminal.

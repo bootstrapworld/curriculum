@@ -1,0 +1,97 @@
+= Sample Lesson 2: Inline Quiz Directives
+
+@description{A sister to __sample-lesson, demonstrating the inline quiz
+directives (@@shortAnswer, @@multipleChoice, @@cardSort, @@categorize,
+@@checkpoint, @@cumulativeAssessment) described in README-mdquiz.adoc and
+https://github.com/bootstrapworld/curriculum/issues/2888[issue #2888],
+instead of hand-writing a quiz.json. Not a real lesson -- see
+__sample-lesson for the general authoring reference.}
+
+@lesson-prereqs{}
+
+@keywords{}
+
+[@lesson-intro-table]
+|===
+| Lesson Goals
+| Students will be able to:
+@objectives
+
+| Student-Facing Goals
+|
+- N/A -- this is an authoring demo, not a real lesson.
+
+| Materials
+|[.materials-links]
+@material-links
+
+| Supplemental Materials
+|[.materials-links]
+@opt-material-links
+
+| Preparation
+| None.
+
+| Key Points for the Facilitator
+| This lesson exists only to exercise the inline quiz directives end to end -- two checkpoints and the cumulative assessment that combines them.
+
+| Assessments
+| - You're in luck! This lesson is piloting our new custom-built assessment tool. To learn more, read: +
+@dist-link{pages/how-to-use-assessments.adoc}
+@assessments
+|===
+
+== Inline Quiz Directives (demo)
+
+=== Overview
+
+This section produces three assessments: two checkpoints (one after
+Launch, one after Investigate), and a cumulative one combining both
+checkpoints' questions. See `README-mdquiz.adoc`'s "Writing an assessment
+inline" section for the full reference on each directive used below.
+
+=== Launch
+@slidebreak{Launch}
+
+@shortAnswer{optional}{0..360}{How many degrees are in a right angle?}{90}
+
+@multipleChoice{sorted}{Which of these values is negative?}{
+- [ ] 12
+- [x] -4
+- [ ] 0
+- [ ] 7
+}
+
+@checkpoint{Inline Quiz Demo Checkin}
+
+=== Investigate
+@slidebreak{Investigate}
+
+@cardSort{}{Match each histogram with the appropriate descriptive statement.}{
+1::
+- @image{images/boxplot.png}
+- has a peak in the center
+2::
+- @image{images/boxplot2.png}
+- has an outlier on the right
+}
+
+@categorize{Distinguish between bar charts and histograms.}{
+Histogram::
+- HISTOGRAM
+- uses quantitative data
+Bar Chart::
+- BAR CHART
+- uses categorical data
+}
+
+@checkpoint{Inline Quiz Demo Investigate}
+
+@cumulativeAssessment{Inline Quiz Demo}
+
+Once built, @assessment{inline-quiz-demo-checkin}, @assessment{inline-quiz-demo-investigate}, and @assessment{inline-quiz-demo} link to the Launch checkpoint, the Investigate checkpoint, and the cumulative assessment respectively.
+
+=== Synthesize
+@slidebreak{Synthesize}
+
+What did writing these questions inline feel like, compared to hand-writing `quiz.json`?
