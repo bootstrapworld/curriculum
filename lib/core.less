@@ -1078,6 +1078,22 @@ html div#body.workbookpage {
   .value { border: dotted 1px black; border-radius: 50%; padding: 0 3px; }
 }
 
+/* In operator position, .operator squashes line-height to 0.5em so the glyph
+   sits centered in the strip -- which would squash a border on .value itself
+   down to ~7px tall. Draw the dotted ellipse on a pseudo-element instead, so
+   its height is independent of the line-height that positions the glyph. */
+.circleevalsexp .operator .studentBlockAnswerFilled .value {
+  position: relative;
+  border-color: transparent;
+  &::after {
+    content: '';
+    position: absolute; left: -1px; right: -1px; top: 50%;
+    height: 1.1em; transform: translateY(-50%); box-sizing: border-box;
+    border: dotted 1px black; border-radius: 50%;
+    pointer-events: none;
+  }
+}
+
 /* TODO(Emmanuel): do we even need all of these? Clean up */
 div#body:not(.LessonPlan) {
   p:empty { min-height: 0; margin: 0; padding: 0; } /* Empty p tags should take up no space */
