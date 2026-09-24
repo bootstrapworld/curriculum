@@ -1,0 +1,93 @@
+= A Hybrid Model for Great Lakes Mean Monthly Water Levels
+
+== Decomposing Your Periodic Model
+
+@n Rewrite your periodic function definition from @printable-exercise{modeling-2016-lake-levels-2.adoc} here: 
+
+@ifsoln{@vspace{1em}}
+
+@hspace{1em}@ifnotsoln{`fun periodic-sin(x) :`  @fitb{42em}{} `end`} @ifsoln{@vspace{1ex}}
+@showsoln{(code '(define (periodic-sin x) (+ (* 0.65 sin (* 6.28 (- x 2016.25))) 579.62)))}
+
+@n Separate the `wave` from the `midline` of your `periodic-sin` model. 
+
+@ifsoln{@vspace{1em}}
+
+@hspace{1em}@ifnotsoln{`fun wave(x) :`  @fitb{47em}{} `end`}
+@showsoln{(code '(define (wave x) (*  0.65 (sin (* 6.28 (- x 2016.25))))))}
+
+@ifsoln{@vspace{1em}}
+
+@hspace{1em}@ifnotsoln{`fun midline(x) :`  @fitb{45em}{} `end`}
+@showsoln{(code '(define (midline x )(579.62)))}
+
+@n Use `fit-model` to determine the @vocab{S-value} of this model for the `lakes-table`: @fitb{8em}{@ifsoln{~1.21}}
+
+
+== Fitting the Optimal Linear Model
+
+[cols="13a, .^7a", frame="none"]
+
+@n Use `lr-plot` to find the best linear model for the `lakes-table`, and record the function for the trend line below:
+
+@ifsoln{@vspace{1em}}
+
+@hspace{1em}@ifnotsoln{`fun trend-line(x) :`  @fitb{43em}{} `end`}
+@showsoln{(code '(define (trend-line x) (+ (* 0.508 x) -445.68)))}
+
+@n Then use `fit-model` to compute the @vocab{S-value}: @fitb{8em}{@ifsoln{~0.498}}
+
+== Composing a Hybrid Model
+
+@n Combine your `wave` and your `trend-line` to define your `hybrid` model for the `lakes-table`.
+
+@hspace{1em}`fun hybrid(x) :`  @fitb{45em}{@ifsoln{`wave(x) + trend-line(x)`}} `end`
+
+@n Then use `fit-model` to compute the @vocab{S-value}: @fitb{8em}{@ifsoln{~0.431}}
+
+@n How much better does your `hybrid` model fit the `lakes-table` than your `periodic` model did?
+
+@vspace{1ex}
+
+@indented{
+Percent Change &#8192; = &#8192;
+@math{
+\frac{&#8192; \text{Difference} &#8192; \text{between} &#8192; \text{the} &#8192; \text{S-values}&#8192;}
+{\text{S-value} &#8192; \text{for} &#8192; \text{periodic} &#8192; \text{model}}
+\times 100 &#8192; = &#8192; }
+@ifnotsoln{@math{\frac{\qquad}{\qquad}}}
+@ifsoln{@math{\frac{0.78}{1.21} = 0.64  &#8192; &rarr; &#8192;  ~64 \%}}
+}
+
+== Interpreting the Hybrid Model
+
+@vspace{1em}
+
+@n This model was built using data about 
+@fitbruby{8em}{@ifsoln{84}}{how many?}
+@fitbruby{12em}{@ifsoln{monthly readings}}{what?} whose 
+@fitbruby{12em}{@ifsoln{time stamps}}{x-variable} ranged from
+@fitbruby{30em}{@ifsoln{January 2014  (2014.0417)}}{x-min} to 
+@fitbruby{}{@ifsoln{December 2020  (2020.9583)}}{x-max}
+
+@n Possible limitations of this model include @fitbruby{}{@ifsoln{Data only spans 7 years.}}{uneven distribution, high variability, small sample size, etc.}
+
+@n This model predicts that:
+
+- __The overall trend will be a(n)__
+@fitbruby{7em}{@ifsoln{increase}}{increase/decrease} _of_
+@fitbruby{5em}{@ifsoln{0.508}}{rate of change}
+@fitbruby{20em}{@ifsoln{feet}}{x-variable} _every_
+@fitbruby{4em}{@ifsoln{year}}{x-units}. 
+
+- __Within this trend, the data fluctuates following a periodic pattern that rises and falls around this @vocab{midline}.__ +
+__ The wave has an amplitude of__ 
+@fitbruby{6em}{@ifsoln{0.65}}{amplitude} __and repeats every__
+@fitbruby{4em}{@ifsoln{1}}{period} @fitbruby{5em}{@ifsoln{year}}{x-units}.
+
+@n The error in the model is described by an @vocab{S-value} of about
+@fitbruby{1em}{@ifsoln{0.43}}{S}@fitbruby{8em}{@ifsoln{feet}}{y-units}. +
+@hspace{1em} _I_
+@fitbruby{18em}{@ifsoln{agree}}{strongly agree, agree, disagree, strongly disagree} __that this model is a good fit considering that__ 
+@fitbruby{8em}{@ifsoln{@math{water levels}}}{y-variable} __in this dataset ranges from about__
+@fitbruby{8em}{@ifsoln{577.26 ft}}{lowest y-value} _to_ @fitbruby{8em}{@ifsoln{582.19 ft}}{highest y-value}.

@@ -19,7 +19,7 @@
 (define b 6.28)
 (define k 579.62)
 (define h 2016.25)
-(define h-cos 2017)
+(define h-cos 2014.68)
 (define p 1)
 }
 
@@ -34,7 +34,7 @@
 
 
 @link-instructions{
-This page relies on the @starter-file{alg2-great-lakes}. Make sure you have it open on your computer!
+This page relies on the @opt-starter-file{alg2-great-lakes}. Make sure you have it open on your computer!
 }
 
 == Define Your Periodic Model
@@ -64,7 +64,7 @@ This page relies on the @starter-file{alg2-great-lakes}. Make sure you have it o
 
 @n Then update the `periodic-sin` function definition in your starter file to match what you've just written.
 
-@star Try translating the definition you wrote for `periodic` so that it uses  @math{\text{cosine}}  instead of @math{\text{sine}}:
+@star Try translating the definition you wrote for `periodic-sin` so that it uses  @math{\text{cosine}}  instead of @math{\text{sine}}:
 
 @vspace{1em}
 
@@ -87,25 +87,25 @@ This page relies on the @starter-file{alg2-great-lakes}. Make sure you have it o
 
 == Fit Your Periodic Model to the Data
 
-@n Use `fit-model` to fit your `periodic` model to the data in the `small-table`. What S-value do you get? @fitb{}{@ifsoln{Answers will vary slightly.  ~0.16 feet or 1.9 inches }}
+@n Use `fit-model` to fit your `periodic-sin` model to the data in the `year-table`. What S-value do you get? @fitb{}{@ifsoln{Answers will vary slightly.  ~0.16 feet or 1.9 inches }}
 
 [cols="9a,1,10a", grid="none",frame="none"]
 |===
-| @n On the scatter plot below, make a sketch of what you see in pyret showing how the `periodic` model fits the data. +
+| @n On the scatter plot below, make a sketch of what you see in pyret showing how the `periodic-sin` model fits the data. +
 
-@vspace{1em}
+@ifnotsoln{@vspace{1em}}
 
-@image{../images/great-lakes-16-17-scatter-plot.png}
+@image{../images/great-lakes-year-scatter-plot.png}
 |
 | @n This model was built using data about 
-@fitbruby{8em}{@ifsoln{13}}{how many?}
+@fitbruby{8em}{@ifsoln{12}}{how many?}
 @fitbruby{8em}{@ifsoln{monthly readings}}{what?} whose 
 @fitbruby{15em}{@ifsoln{time stamps}}{x-variable} ranged from
 @fitbruby{}{@ifsoln{January of 2016}}{x-min} +
 to @fitbruby{}{@ifsoln{January of 2017}}{x-max}
 
 @n Possible limitations of this model include @fitb{}{} +
-@blanklines{2}{@ifsoln{Small Sample size!}}
+@blanklines{1}{@ifsoln{Small Sample size!}}
 @fitbruby{}{}{uneven distribution, high variability, small sample size, etc.}
 |===
 

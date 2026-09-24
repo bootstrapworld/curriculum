@@ -335,3 +335,91 @@ We can visualize the body of the function using the Circles of Evaluation.
 - Have your students refer back to @lesson-link{exponential1-exploring-covid}. As with the `recent-table` table in @starter-file{alg2-co2-hybrid}, the starter file there constrains the dataset to show only recent data. This is done for the same reason: to introduce students to a more perfectly-exponential model. Now that students know how to combine terms from different models, they can go back and build a model that fits the entire Covid dataset!
 }
 }
+
+== Optional: Modeling Great Lakes Water Levels
+
+=== Overview
+Students have the opportunity to apply what they've learned about combining linear and periodic models to build a model for a new dataset about Mean Monthly Water Levels in the Great Lakes.
+
+=== Launch
+@right{@image{images/great-lakes-nasa.jpg, 400}}
+
+The Great Lakes are a series of large interconnected freshwater lakes spanning the Canada–United States border. They connect to the Atlantic Ocean via the Saint Lawrence River as their primary drainage outflow and are also connected to the Mississippi River basin through the Illinois Waterway. 
+
+These lakes hold more than 20% of the world's surface fresh water by volume! They are big enough that you generally cannot see across to the opposite shore, much like looking out at the ocean.
+
+We are going to explore a dataset focused on the mean monthly water levels of these lakes as compared to the International Great Lakes Datum of 1985 (IGLD 1985), a tide gauge located near the outlet of the Great Lakes - St. Lawrence River system in Rimouski, Québec, the mean surface-water-level of which approximates mean sea level.
+
+
+=== Investigate
+
+Let's take a look at the mean monthly water levels for the Great Lakes in 2016.
+
+@lesson-instruction{
+- Open the @starter-file{alg2-great-lakes} and click "Run".
+- Use the `year-table` to make a scatter plot of the possible relationship between `water-level-ft` and `time` with `month-name` as the label. 
+}
+
+@QandA{
+@Q{What do you notice about the shape of the data? What do you wonder?} 
+@A{Ideally, students will suggest that a periodic model could be used to fit the curve.}
+}
+
+Let's fit a model for the `year-table`!
+
+@lesson-instruction{
+- Turn to @printable-exercise{modeling-2016-lake-levels.adoc} and follow the directions to find your model settings.
+- Then use your model settings and the starter file to complete @printable-exercise{modeling-2016-lake-levels-2.adoc}.
+}
+
+@QandA{
+@Q{How was this model similar to the periodic model you made for Carbon Dioxide levels?}
+@A{They both had a period of a year with higher levels in summer and lower levels in winter.}
+
+@Q{How was this model different from the periodic model for Carbon Dioxide levels?}
+@A{The water height variation was small enough that if we'd rounded to the nearest inch we wouldn't have been able to observe the rise and fall of the data.}
+}
+
+Now that we've found a @vocab{periodic model} for the 2016 data, let's take a look at the full dataset in the `lakes-table`.
+
+@lesson-instruction{
+- Use the `lakes-table` to make a scatter plot of the possible relationship between `water-level-ft` and `time` with `month-name` as the label. 
+}
+
+@QandA{
+@Q{Does it look like the data might have a periodic relationship?}
+@A{Yes. It curves up and down over time.}
+
+@Q{Do you expect your `periodic-sin` model to be a good fit for this dataset?}
+@A{No. Our model had a horizontal midline and the trendline here is clearly sloping upward over time.}
+}
+
+@lesson-instruction{
+- Complete @printable-exercise{hybrid-for-great-lakes.adoc}.
+}
+
+@QandA{
+@Q{How much better did your hybrid model fit the `lakes-table` than your `periodic` model did?}
+@A{64% - that's a big shift!}
+
+@Q{Which part of the `lakes-table` data did your `periodic` model fit best? why?}
+@A{2016, because we built it using that data.}
+
+@Q{Would you expect your `hybrid` model to do a good job of predicting water levels for 2026?}
+@A{It might, but since it's outside the window of data that we built our model with, it may not be reliable.}
+}
+
+=== Synthesize
+
+@QandA{
+@Q{We've seen two models whose period lasted one year. Do you expect this to be a common period? Why or why not?}
+@A{Yes. Many things are impacted by the number of hours of daylight and temperature, which fluctuate on a cycle related to the earth's annual orbit around the sun.}
+
+@Q{We've seen two models whose trend lines increase. Can you think of anything that might have a one year period with a  decreasing trend line?}
+@A{Answers will vary, but could include: 
+    * Glacial ice coverage
+    * Populations of species that are declining
+    * The amount of litter in a local creek where the community does an annual cleanup and is engaged in a longterm campaign to raise awareness and improve signage and other infrastructure for users.
+    * The number of people hit by cars as cities rollout efforts to make streetscapes safer for pedestrians.
+  }
+}
