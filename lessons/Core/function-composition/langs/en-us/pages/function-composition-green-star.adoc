@@ -3,7 +3,8 @@
 ++++
 <style>
 /* Give more space for the bottom row */
-table { grid-template-rows: 2fr 3fr !important; }
+#content table { grid-template-rows: 2fr 3fr !important; }
+#content .topTable { height: 2in; }
 
 /* Force the code solution to the bottom of the row */
 .content .paragraph:nth-child(3) p { position: absolute; bottom: 0; }
@@ -20,12 +21,10 @@ table { grid-template-rows: 2fr 3fr !important; }
 
 *Circle of Evaluation:*
 
-@ifsoln{
-@show{(coe green-star) }
-@vspace{10ex}
-}
-
-@ifnotsoln{@vspace{30ex}}
+[.topTable, frame="none"]
+|===
+| @ifsoln{ @show{(coe green-star) } }
+|===
 
 *Code:* @fitb{}{@showsoln{(code green-star) }}
 
@@ -37,14 +36,14 @@ Using the star described above as the *original*, draw the Circles of Evaluation
 [.FillVerticalSpace, cols="1a,1a",stripes="none"]
 |===
 
-| @n A solid, green star, that is 3x the size of the original (using `scale`)
+| @n A solid, green star, that's 3x the size of the original (use `scale`)
 
 @showsoln{(coe `(scale 3 ,green-star)) }
 
 @showsoln{(code `(scale 3 ,green-star)) }
 
 
-| @n A solid, green star, that is 1/2 the size of the original (using `scale`)
+| @n A solid, green star, that's 1/2 the size of the original (use `scale`)
 
 @showsoln{(coe `(scale 0.5 ,green-star)) }
 
@@ -61,7 +60,7 @@ Using the star described above as the *original*, draw the Circles of Evaluation
 @showsoln{(code `(rotate 45 ,green-star)) }
 
 
-| @n A solid, green star that is 3x the size of the original *and* has been rotated 45 degrees
+| @n A solid, green star that's 3x the size of the original *and* has been rotated 45 degrees
 
 @vspace{1em}
 

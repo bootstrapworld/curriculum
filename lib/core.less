@@ -825,6 +825,7 @@ html div#body.workbookpage {
    * (This allows *other* sections to grow, taking up the available space)
   */
   #content > .sect1.no-flex-section { flex-grow: 0; }
+  #content:has(.no-flex-section) #preamble_disabled { flex-grow: 0; }
 
   /* In some cases, AsiiDoc will put an empty preamble containing
      only a grandchild for custom styles. In this situation, no display
@@ -992,7 +993,6 @@ html div#body.workbookpage {
   .blanklines {
     display: block;
     position: relative;
-    background-image: url('images/2.2em-ruled lines.png');
     margin-left: 5px;
     /* --blanklines-height is the blanklines-only counterpart to
        --fitb-height -- lets a page tighten blanklines specifically
@@ -1078,19 +1078,29 @@ html div#body.workbookpage {
   .value { border: dotted 1px black; border-radius: 50%; padding: 0 3px; }
 }
 
-/* TODO(Emmanuel): do we even need all of these? Clean up */
+/* In operator position, .operator squashes line-height to 0.5em so the glyph
+   sits centered in the strip -- which would squash a border on .value itself
+   down to ~7px tall. Draw the dotted ellipse on a pseudo-element instead, so
+   its height is independent of the line-height that positions the glyph. */
+.circleevalsexp .operator .studentBlockAnswerFilled .value {
+  position: relative;
+  border-color: transparent;
+  &::after {
+    content: '';
+    position: absolute; left: -1px; right: -1px; top: 50%;
+    height: 1.1em; transform: translateY(-50%); box-sizing: border-box;
+    border: dotted 1px black; border-radius: 50%;
+    pointer-events: none;
+  }
+}
+
 div#body:not(.LessonPlan) {
-  p:empty { min-height: 0; margin: 0; padding: 0; } /* Empty p tags should take up no space */
+  p:empty { margin: 0; } /* Empty p tags should take up no space */
 
   #header { margin-bottom: 5px !important; }
-  #header> h1:first-child,
-  .sect1 > h1:first-child,
+  #header > h1:first-child,
   .sect1 > h2:first-child,
-  .sect1 > h3:first-child,
-  .sect2 > h3:first-child {
-    width:            100%;
-    padding:          5px 0px;
-  }
+  .sect2 > h3:first-child { padding: 5px 0px; }
   .description { display: none; }
 }
 
@@ -1198,10 +1208,13 @@ div#body{
     /* Some things should grow to fill the width of their containing line */
     .recipe_domain, .recipe_purpose, .fitbruby.questions, .fitbruby.answers { flex-grow: 1; }
 
-    /* Contract and Purpose get lang-specific comment symbols */
+    /* Contract and Purpose get lang-specific comment symbols. These go in ::after:
+       ::before must stay the in-flow zero-width strut that gives every
+       fitb/fitbruby the same baseline, or the name blank sits lower than
+       the domain/range blanks on the same line. */
     .recipe_purpose, &.recipe_contract .recipe_name {
       padding-left: 1em;
-      &::before { color: black; position: absolute; left: 0; }
+      &::after { color: black; position: absolute; left: 0; line-height: 1; }
     }
     &.fitbruby.recipe_condition *::before, *::after { color: @font-color; }
     /* If there's a section break between recipes, eat up all vertical space */
@@ -1213,7 +1226,7 @@ div#body{
   &.pyret {
 
     .recipe_purpose, .recipe_contract .recipe_name {
-      &::before { content: '#'; }
+      &::after { content: '#'; }
     }
     .recipe_name:has(> .solution) { text-align: right !important; min-width: 6em; } /* no whitespace in pyret */
     /* Indenting for function body and example bodies */
@@ -1233,20 +1246,24 @@ div#body{
         top: 0px;
         width: 1em;
       }
-      +.recipe:nth-last-child(3) .answers::before,
-      .questions::before {
+      +.recipe:nth-last-child(3) .answers:first-child::before,
+      .questions .blank::before {
         position: absolute;
         left: -2em;
         color: #75328A;
         font-weight: bold;
         font-family: @text-font;
       }
+      /* The if/else-if labels live in .blank::before, not .questions::before:
+         ::before must stay the in-flow zero-width strut that keeps every
+         fitb/fitbruby on the same baseline. */
+      .questions .blank::before { bottom: 0; line-height: 1; }
       /* the 1st condition ("if") */
-      .questions::before { content: "if"; }
+      .questions .blank::before { content: "if"; }
       /* the next n-1 conditions ("if else")*/
       +.recipe_condition {
         .questions { margin-left: 4em; }
-        .questions::before { content: "else if"; left: -3em; }
+        .questions .blank::before { content: "else if"; left: -3em; }
       }
       /* the last condition ("else") */
       +.recipe:nth-last-child(3) {
@@ -1266,7 +1283,7 @@ div#body{
 
   &.wescheme {
     .recipe_purpose, .recipe_contract .recipe_name {
-      &::before { content: ';'; }
+      &::after { content: ';'; }
     }
     .recipe_example_body { margin-left: 1em;}
     .recipe_condition {
@@ -1275,7 +1292,7 @@ div#body{
       width: 90%;
       .questions { margin-left: 1em; text-align: left; }
       .answers { margin-left: 1em; margin-right: 1em; text-align: left; }
-      .questions::before { content: "["; position: absolute; left: -1ex; color: @font-color; }
+      .questions .blank::before { content: "["; position: absolute; left: -1ex; bottom: 0; line-height: 1; color: @font-color; }
       .answers::after {
         content: "]";
         position: absolute;
@@ -1331,7 +1348,7 @@ div#body{
     .codap_transformer p { width:  100%; }
     .codap_example_tables+table table * { margin: 0; padding: 0; }
     .codap_example_tables+table table * { text-align: center; height: 2em; }
-    .recipe_domain, .recipe_range { width:  40%; }
+    .recipe_domain, .recipe_range { width:  35%; }
   }
 }
 
