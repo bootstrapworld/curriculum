@@ -714,6 +714,16 @@ div#body.LessonPlan {
     .ablock, .ablock+.ulist p { font-style: italic; }
   }
 
+  /* @A{} answer content (.ablock is the answer's own <p>; .ablockitem is
+   * the enclosing <li>, present when the answer is a list item -- see
+   * do-postproc.lua) is hidden from anyone not logged in to WordPress.
+   * .hide-answers is present by default (see do-postproc.lua) so nothing
+   * flashes visible before the login check resolves; page-render.js
+   * removes it once fetchUserHash() confirms a logged-in teacher. */
+  &.hide-answers {
+    .ablock, .ablockitem, .ablock+.ulist p { display: none; }
+  }
+
   /* COLLAPSED ELEMENTS:
    * divs that contain a .slidebreak or divs that are .hiddenblock are
    * considered *collapsed*, since they take up no space in the lesson plan
