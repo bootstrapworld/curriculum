@@ -3,7 +3,8 @@
 ++++
 <style>
 /* Give more space for the bottom row */
-table { grid-template-rows: 2fr 3fr !important; }
+#content table { grid-template-rows: 2fr 3fr !important; }
+#content .topTable { height: 2in; }
 
 /* Force the code solution to the bottom of the row */
 .content .paragraph:nth-child(3) p { position: absolute; bottom: 0; }
@@ -16,20 +17,18 @@ table { grid-template-rows: 2fr 3fr !important; }
 
 @n Draw a Circle of Evaluation and write the Code for a *solid, green star, size 50*. _Then go to @starter-file{editor} to test your code._
 
-@vspace{1ex}
+@vspace{1em}
 
 *Circle of Evaluation:*
 
-@ifsoln{
-@show{(coe green-star) }
-@vspace{10ex}
-}
-
-@ifnotsoln{@vspace{30ex}}
+[.topTable, frame="none"]
+|===
+| @ifsoln{ @show{(coe green-star) } }
+|===
 
 *Code:* @fitb{}{@showsoln{(code green-star) }}
 
-@vspace{2ex}
+@vspace{1em}
 
 Using the star described above as the *original*, draw the Circles of Evaluation and write the Code for each exercise below. Test your code in the editor.
 
@@ -37,14 +36,14 @@ Using the star described above as the *original*, draw the Circles of Evaluation
 [.FillVerticalSpace, cols="1a,1a",stripes="none"]
 |===
 
-| @n A solid, green star, that is 3x the size of the original (using `scale`)
+| @n A solid, green star, that's 3x the size of the original (use `scale`)
 
 @showsoln{(coe `(scale 3 ,green-star)) }
 
 @showsoln{(code `(scale 3 ,green-star)) }
 
 
-| @n A solid, green star, that is 1/2 the size of the original (using `scale`)
+| @n A solid, green star, that's 1/2 the size of the original (use `scale`)
 
 @showsoln{(coe `(scale 0.5 ,green-star)) }
 
@@ -61,17 +60,17 @@ Using the star described above as the *original*, draw the Circles of Evaluation
 @showsoln{(code `(rotate 45 ,green-star)) }
 
 
-| @n A solid, green star that is 3x the size of the original *and* has been rotated 45 degrees
+| @n A solid, green star that's 3x the size of the original *and* has been rotated 45 degrees
 
-@vspace{1ex}
+@vspace{1em}
 
 (It's okay if `scale` and `rotate` are swapped - they are associative!)
 
-@vspace{1ex}
+@vspace{1em}
 
 @showsoln{(coe `(scale 3 (rotate 45 ,green-star))) }
 
-@vspace{1ex}
+@vspace{1em}
 
 @showsoln{(code `(scale 3 (rotate 45 ,green-star))) }
 

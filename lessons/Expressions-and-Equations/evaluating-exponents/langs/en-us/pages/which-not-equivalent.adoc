@@ -1,11 +1,10 @@
 = Which One Isn't Equivalent? Exponent Expressions
 
-For each row, cross out any Circles of Evaluation that do NOT evaluate to the provided quantity. *NOTE:* Some rows might not need anything crossed out!
+Identify the circle of evaluation in each row below that doesn’t evaluate to the same things as the others.
 
 ++++
 <style>
 .chosen::after { content: '❌' !important; }
-.circleevalsexp { width: auto; }
 
 /* for table cells with immediate .content children, which have immediate
  * .paragraph children: use flex to space them evenly and center vertically
@@ -20,20 +19,18 @@ td > .content > .paragraph > p { display: contents; }
 </style>
 ++++
 
-[.FillVerticalSpace, cols="<.^1a,^.^4a,^.^22a",stripes="none", options="header"]
+[.FillVerticalSpace, cols="<.^1a,^.^22a",stripes="none", options="header"]
 |===
-| 	 | Which Circle(s) evaluate to... | Circles of Evaluation
+| 	 | Circles of Evaluation
 
 | @n
-| @math{16}?
 |
 @show{(coe '(expt 2 4))}
 @show{(coe '(* 2 (expt 2 3)))}
 @show{(coe '(* 2 (* 2 (expt 2 2))))}
-@show{(coe '(* 2 (* 2 (* 2 2))))}
+@ifsoln-choice{@show{(coe '(* 2 (* 2 (* 2 3))))}}
 
 | @n
-| @math{18}?
 |
 @ifsoln-choice{@show{(coe '(* (expt 2 3) 2))}}
 @show{(coe '(* 2 (expt 3 2)))}
@@ -41,15 +38,13 @@ td > .content > .paragraph > p { display: contents; }
 @show{(coe '(+ (expt  3 2) (expt 3 2)))}
 
 | @n
-| @math{11}?
 |
-@show{(coe '(+ 2 (expt 3 2)))}
-@ifsoln-choice{@show{(coe '(+ (expt 3 3) 2))}}
-@ifsoln-choice{@show{(coe '(expt  3 (+ 2 3)))}}
-@ifsoln-choice{@show{(coe '(+ 2 (expt  2 3)))}}
+@show{(coe '(* 6 (expt 2 2)))}
+@show{(coe '(* 3 (* 2 (* 2 2))))}
+@ifsoln-choice{@show{(coe '(* (expt 3 2) (expt 2 2)))}}
+@show{(coe '(* (expt 2 3) 3))}
 
 | @n
-| @math{25}?
 |
 @show{(coe '(expt 5 2))}
 @show{(coe '(* (+ 3 2) 5))}
@@ -57,20 +52,16 @@ td > .content > .paragraph > p { display: contents; }
 @show{(coe '(expt (+ 3 2) 2))}
 
 | @n
-| @math{9}?
 |
 @show{(coe '(/ (expt 6 2) 4))}
 @ifsoln-choice{@show{(coe '(- (expt 6 2) 3))}}
-@ifsoln-choice{@show{(coe '(expt 3 3))}}
+@show{(coe '((/ expt 3 3) 3))}
 @show{(coe '(expt 3 2))}
 
 | @n
-| @math{27}?
 |
 @ifsoln-choice{@show{(coe '(* 3 (* 3 2)))}}
-@ifsoln-choice{@show{(coe '(* 3 3))}}
+@show{(coe '(* (* 3 3) 3))}
 @show{(coe '(* 3 (expt 3 2)))}
-@ifsoln-choice{@show{(coe '(* 3 (expt 3 3)))}}
-
+@show{(coe '(/ 3 (expt 3 4)))}
 |===
-

@@ -16,13 +16,12 @@
 div#body .center, div#body .centered-image {
     padding: 0ex 0ex !important;
 }
-
 </style> 
 ++++
 
 Bootstrap is a research-based project, which means we're constantly evaluating our materials and impact on student learning. The benefit to teachers - besides piece of mind - is that we put a fair amount of effort into the assessments and tools we use.
 
-@vspace{1ex}
+@vspace{1em}
 
 *We are currently piloting "Show What You Know" assessments that teachers can use with their students* for a select group of lessons. This document outlines the design goals of those assessments, how your students' data is protected, and how to use the assessments.
 
@@ -44,18 +43,40 @@ Lessons that include assessments will list them in the *Assessments* row of the 
 - Copy and save the link to share with your students before navigating away from the page. 
 - Share the link with the relevant group of students (via email, Google Classroom, etc.). _Note: The link will expire after 14 days._ 
 
+[.WhatDoesItLookLike]
+== What does "Show What You Know" look like?
+
+Our assessments make use of a small set of question types over-and-above the standard short-answer, "write your response in the text box" and multiple-choice types:
+
+- *Card Sort:* Students are asked to drag cards on top of one another, forming any number of groups of related concepts.
+- *Categorize:* Students are given a set of cards and a fixed set of buckets, and must drag each card into the appropriate bucket. Categorize questions more structured than card sorts, allowing for one-to-one ("match A with B") or one-to-many relationships ("find all that apply").
+
+@center{@image{images/quiz-question-crossfade.gif}}
+
+
 == Getting Assessment Results
 
+[cols="1a,.^1a" grid="none", frame="none"]
+|===
+|
 - *You will receive an automated email* summarizing the past 24 hours' submissions for each group and each assessment accessed that day, including a quick snapshot of the class, an answer key, information about which students need support, and a complete csv file.
   * If you gave the same assessment to 3 classes, you'll receive 3 different emails.
   * If you gave two assessments to one class, you'll receive 2 different emails. 
+  * If you gave an assessment to one class last week, but then had an absent student re-take the assessment, you'll receive a NEW summary email that includes all of the prior scores with the new student data incorporated.
 - *Privacy matters:* These results will only be identified by the the first two letters of your students' first and last names, and the last digit of the day of the month they were born, _e.g. 8 for a student born on December 18th_. 
 
-@scrub{
-== Retrieving Old Assessments
+- Each class report includes an aggregate, question-by-question report on how the class did. Questions where fewer than 70% of students made mistakes are marked as "worth discussing", to help you zero in on what needs the most review.
+- After the class-wide summary, each class report includes a fine-grained question-by-student report, to see how each student scored on each question. This allows you to drill down right away to see which students struggled where.
+- Sometimes we want to know more than whether a student got something right or wrong: _we want to know what they wrote!_ The end of report includes a question-by-question summary of the class, showing every student answer to every question.
+|
+@image{images/quiz-report-crossfade.gif, 350}
+|===
 
-Ever lost an important email? We have too! If you need to retrieve old assessment data go to *Link TBD*, and enter the start and end dates for window of data you want to retrieve and you'll receive an automated email around 5am EST.  For example:
+And for teachers who like to crunch their own data - or need to import it into a gradebook - each report also includes the raw data as a CSV file, which can easily be imported into your favorite spreadsheet program.
 
-- If you want to get access to just yesterday's assessment, you'd use yesterday's date for both the start and end date. 
-- If you gave an assessment to four sections of students every day between 2/4/26 and 2/6/26, you should expect to get (4 classes × 3 days) 12 of these emails.
-}
+== Getting Assessments Results on Demand
+
+Whether you're looking for assessment results before the automated report arrives or need to retrieve old assessment data, you can always visit the @link{../QuizReports.shtml, Quiz Reports page} (you must be logged in to your teacher account). Enter the start and end dates for the window of data you want to retrieve and you'll receive an email with the results within about 15 minutes. For example:
+
+- If you want to retrieve just today's assessment results, use today's date for both the start and end date.
+- If you gave an assessment to four sections of students every day between 2/4/26 and 2/6/26, you should expect to receive (4 classes × 3 days) 12 emails.

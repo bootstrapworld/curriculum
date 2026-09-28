@@ -24,6 +24,12 @@
 }
 
 div#body {
+  /* single lever for fitb/fitbruby/blanklines row height (see the
+     FORMATTING OF CIRCLES section for why). A wrapper can override
+     it once and have every fitb/fitbruby/blanklines beneath it follow,
+  */
+  --blank-height: 2.2em;
+
   font-family:    @text-font;
   color:          @font-color;
   width:          100%; /* needed to undo effect of html{display:flex} */
@@ -50,7 +56,7 @@ div#body {
   .prefix { font-style: italic; color: gray; }
   a       { color:  var(--link-color) !important; }
   p       { margin: 10px 0px; font-size: inherit; }
-  sup     { font-size: smaller; top: -0.55em; left: 1px; }
+  sup     { font-size: smaller; top: -0.15em; left: 2px; position: relative; }
   sub     { font-size: smaller; bottom: -0.35em; }
   code    {
     border: none;
@@ -108,6 +114,7 @@ div#body {
     margin: 0 !important;
     font-family: MJXZERO, 'MJXTEX';
     font-size: inherit !important;
+    .solution { display: none; }
   }
   .mathunicode {
     font-family: MJXZERO, 'MJXTEX';
@@ -123,7 +130,8 @@ div#body {
   table.FillVerticalSpace td .paragraph { align-items: baseline; }
   em .mathunicode { font-family: 'MJXTEX-I';}
   strong .mathunicode { font-family: 'MJXTEX-B'; }
-  em strong .mathunicode, strong em .mathunicode, strong .MathJax .TEX-I, em .MathJax .TEX-B {
+  em strong .mathunicode, strong em .mathunicode, strong .MathJax .TEX-I,
+  em .MathJax .TEX-B, i strong .mathunicode, strong i .mathunicode, strong .mathunicode i {
     font-family: 'MJXTEX-BI';
   }
 
@@ -359,31 +367,67 @@ div#body {
 }
 
 body.beta div#body::after {
-    position: absolute;
-    top: 25%;
-    left: 20%;
-    transform: rotate(-45deg);
-    content: "BETA";
-    opacity: 0.2;
-    line-height: 3em;
-    color: gray;
-    font-size: 100pt;
-    font-weight: bold;
-    z-index: -1;
-  }
+  position: absolute;
+  top: 25%;
+  left: 20%;
+  transform: rotate(-45deg);
+  content: "BETA";
+  opacity: 0.2;
+  line-height: 3em;
+  color: gray;
+  font-size: 100pt;
+  font-weight: bold;
+  z-index: -1;
+}
 
 
-/* use 'thin' instead of 1px border to try and avoid disappearing
-lines on some browsers */
+/***********************************************************************
+  WRITING LINES: fitb, fitbruby, and blanklines
+
+  line-height is the single lever controlling how tall a writing line is.
+  To make this all work, we use align-items:flex-end to pin content against
+  the bottom border. Height is derived from line-height so there's exactly
+  one number to change.
+
+  vertical-align:baseline (not bottom) on the OUTER box, for both fitb and
+  fitbruby: fitbruby's ruby caption hangs below the box via
+  position:absolute (deliberately, so it doesn't inflate fitbruby's own
+  height past fitb's), and vertical-align:bottom anchors a box to the
+  LINE's bottom rather than its own text baseline -- when a plain fitb
+  (bottom) sat on the same line as a fitbruby (baseline, needed for the
+  reason above), the two anchors disagreed by ~11px, visibly misaligning
+  their blanks. baseline for both keeps every writing-line element
+  level whether or not fitb/fitbruby are mixed on the same line -- verified
+  with no page-height or layout change across the corpus for fitb used on
+  its own.
+
+  --blank-height is the shared, page/section-wide lever -- set it on a
+  common ancestor to tighten fitb, fitbruby, AND any .blanklines in
+  that scope together
+  --fitb-height is a narrower escape hatch for the rare case
+  where a page deliberately wants fitb/fitbruby to diverge from a
+  nearby .blanklines.
+  */
 .fitb, .fitbruby, .fitb.stretch::after, .fitbruby.stretch::after {
-  padding-top:        @top-padding-for-writing;
   position:           relative;
-  display:            inline-block;
+  display:            inline-flex;
+  align-items:        flex-end;
+  justify-content:    center;
   min-width:          4em;
   text-align:         center;
-  line-height:        1em;
+  line-height:        var(--fitb-height, var(--blank-height));
+  height:             1lh; /* derived from line-height -- NEVER override this directly */
+  /* use 'thin' instead of 1px to avoid disappearing lines on some browsers */
   border-bottom:      solid thin black;
   vertical-align:     baseline;
+}
+
+/* line-height is inherited if not set explicitly, so the content's own
+   anonymous flex item will be as tall as the container (--blank-height)
+   and the glyphs would float centered inside a taller box. Set it here.
+*/
+.fitb > .solution, .fitbruby > .solution, .fitb::before, .fitbruby::before {
+  line-height: 1;
 }
 
 div#body:not(.LessonPlan, .narrativepage) p {
@@ -637,7 +681,7 @@ div#body.LessonPlan {
   }
 
   code { line-height: 1.5 !important; }
-  .codesexp, .circleevalsexp { font-size: 0.8em; }
+  .circleevalsexp { font-size: 0.8em; }
 
   .lesson-instruction, .lesson-roleplay, .q-and-a {
     min-height: 50px;
@@ -748,6 +792,7 @@ div#body.workbookpage #content .sect1.lesson-section-1 .sectionbody { display: c
 
 div#body.solution-page {
   .fitbruby, .fitb { font-style: italic; }
+  .MathJax .solution { font-style: italic; display: inline; }
 }
 
 html div#body.workbookpage {
@@ -780,6 +825,7 @@ html div#body.workbookpage {
    * (This allows *other* sections to grow, taking up the available space)
   */
   #content > .sect1.no-flex-section { flex-grow: 0; }
+  #content:has(.no-flex-section) #preamble_disabled { flex-grow: 0; }
 
   /* In some cases, AsiiDoc will put an empty preamble containing
      only a grandchild for custom styles. In this situation, no display
@@ -915,6 +961,20 @@ html div#body.workbookpage {
 
   /* Some elements show either solution mode or a blank */
   .solution, .solution code, .solution .MJX-TEX { font-style: italic !important; }
+  /* A contract's type name (Table, String, ...) is a display-only label
+    wrapped in .solution only so its line-height:1 reset has a real element
+    to target (see contract-type in preproc.rkt). Don't treat it as italic */
+  .contract-type > .solution { font-style: normal !important; }
+
+  .solution:has(> .image-figure:only-child) .image-figure {
+    border: 1px dashed; border-radius: 15px; padding: 5px;
+  }
+  .solution:has(> .circleevalsexp:only-child) .circleevalsexp {
+    .expression { border: 1px dashed; }
+    .operator { border-bottom: 1px dashed; }
+    font-style: italic !important;
+  }
+
   div.choice { display: inline; }
   .blank    { color: rgba(0,0,0,0); }
   .chosen::after { content: '✅'; }
@@ -933,10 +993,13 @@ html div#body.workbookpage {
   .blanklines {
     display: block;
     position: relative;
-    background-image: url('images/2.2em-ruled lines.png');
     margin-left: 5px;
-    line-height: 2.2em;
-    .solution { position: absolute; bottom: -3px; line-height: inherit; }
+    /* --blanklines-height is the blanklines-only counterpart to
+       --fitb-height -- lets a page tighten blanklines specifically
+       without touching nearby fitb/fitbruby, symmetric with the
+       fitb-only case. Falls back to the shared --blank-height. */
+    line-height: var(--blanklines-height, var(--blank-height));
+    .solution { position: absolute; top: 3.3px; line-height: inherit; }
     /* artificially shrink codeblocks to avoid stepping on the line */
     .editbox, code.pyret {
       line-height: 0.5em !important;
@@ -1015,19 +1078,29 @@ html div#body.workbookpage {
   .value { border: dotted 1px black; border-radius: 50%; padding: 0 3px; }
 }
 
-/* TODO(Emmanuel): do we even need all of these? Clean up */
+/* In operator position, .operator squashes line-height to 0.5em so the glyph
+   sits centered in the strip -- which would squash a border on .value itself
+   down to ~7px tall. Draw the dotted ellipse on a pseudo-element instead, so
+   its height is independent of the line-height that positions the glyph. */
+.circleevalsexp .operator .studentBlockAnswerFilled .value {
+  position: relative;
+  border-color: transparent;
+  &::after {
+    content: '';
+    position: absolute; left: -1px; right: -1px; top: 50%;
+    height: 1.1em; transform: translateY(-50%); box-sizing: border-box;
+    border: dotted 1px black; border-radius: 50%;
+    pointer-events: none;
+  }
+}
+
 div#body:not(.LessonPlan) {
-  p:empty { min-height: 0; margin: 0; padding: 0; } /* Empty p tags should take up no space */
+  p:empty { margin: 0; } /* Empty p tags should take up no space */
 
   #header { margin-bottom: 5px !important; }
-  #header> h1:first-child,
-  .sect1 > h1:first-child,
+  #header > h1:first-child,
   .sect1 > h2:first-child,
-  .sect1 > h3:first-child,
-  .sect2 > h3:first-child {
-    width:            100%;
-    padding:          5px 0px;
-  }
+  .sect2 > h3:first-child { padding: 5px 0px; }
   .description { display: none; }
 }
 
@@ -1103,6 +1176,9 @@ div#body{
   }
 
   .recipe {
+    /* --blank-height inherits down to any fitb/fitbruby/blanklines inside,
+       same lever as everywhere else (was a one-off padding-top). */
+    --blank-height: 2em;
 
     /* Under a heading come the instructions */
     .recipe_instructions * { font-style: italic; font-size: .85em; }
@@ -1112,7 +1188,7 @@ div#body{
 
     /* All student answers have a bottom-border, and a "ruby" printed in black */
     p .fitb, p .fitbruby {
-      word-spacing: 2pt; padding-top: @top-padding-for-dr;
+      word-spacing: 2pt;
       &:after { word-spacing: 0; }
     }
 
@@ -1132,10 +1208,13 @@ div#body{
     /* Some things should grow to fill the width of their containing line */
     .recipe_domain, .recipe_purpose, .fitbruby.questions, .fitbruby.answers { flex-grow: 1; }
 
-    /* Contract and Purpose get lang-specific comment symbols */
+    /* Contract and Purpose get lang-specific comment symbols. These go in ::after:
+       ::before must stay the in-flow zero-width strut that gives every
+       fitb/fitbruby the same baseline, or the name blank sits lower than
+       the domain/range blanks on the same line. */
     .recipe_purpose, &.recipe_contract .recipe_name {
       padding-left: 1em;
-      &::before { color: black; position: absolute; left: 0; }
+      &::after { color: black; position: absolute; left: 0; line-height: 1; }
     }
     &.fitbruby.recipe_condition *::before, *::after { color: @font-color; }
     /* If there's a section break between recipes, eat up all vertical space */
@@ -1147,9 +1226,9 @@ div#body{
   &.pyret {
 
     .recipe_purpose, .recipe_contract .recipe_name {
-      &::before { content: '#'; }
+      &::after { content: '#'; }
     }
-    .solution.recipe_name { text-align: right !important; min-width: 6em; } /* no whitespace in pyret */
+    .recipe_name:has(> .solution) { text-align: right !important; min-width: 6em; } /* no whitespace in pyret */
     /* Indenting for function body and example bodies */
     .recipe_example_line:not(.keyword_only) > .content,
     .recipe_definition_body { margin-left: 2ex; }
@@ -1167,20 +1246,24 @@ div#body{
         top: 0px;
         width: 1em;
       }
-      +.recipe:nth-last-child(3) .answers::before,
-      .questions::before {
+      +.recipe:nth-last-child(3) .answers:first-child::before,
+      .questions .blank::before {
         position: absolute;
         left: -2em;
         color: #75328A;
         font-weight: bold;
         font-family: @text-font;
       }
+      /* The if/else-if labels live in .blank::before, not .questions::before:
+         ::before must stay the in-flow zero-width strut that keeps every
+         fitb/fitbruby on the same baseline. */
+      .questions .blank::before { bottom: 0; line-height: 1; }
       /* the 1st condition ("if") */
-      .questions::before { content: "if"; }
+      .questions .blank::before { content: "if"; }
       /* the next n-1 conditions ("if else")*/
       +.recipe_condition {
         .questions { margin-left: 4em; }
-        .questions::before { content: "else if"; left: -3em; }
+        .questions .blank::before { content: "else if"; left: -3em; }
       }
       /* the last condition ("else") */
       +.recipe:nth-last-child(3) {
@@ -1200,7 +1283,7 @@ div#body{
 
   &.wescheme {
     .recipe_purpose, .recipe_contract .recipe_name {
-      &::before { content: ';'; }
+      &::after { content: ';'; }
     }
     .recipe_example_body { margin-left: 1em;}
     .recipe_condition {
@@ -1209,7 +1292,7 @@ div#body{
       width: 90%;
       .questions { margin-left: 1em; text-align: left; }
       .answers { margin-left: 1em; margin-right: 1em; text-align: left; }
-      .questions::before { content: "["; position: absolute; left: -1ex; color: @font-color; }
+      .questions .blank::before { content: "["; position: absolute; left: -1ex; bottom: 0; line-height: 1; color: @font-color; }
       .answers::after {
         content: "]";
         position: absolute;
@@ -1265,7 +1348,7 @@ div#body{
     .codap_transformer p { width:  100%; }
     .codap_example_tables+table table * { margin: 0; padding: 0; }
     .codap_example_tables+table table * { text-align: center; height: 2em; }
-    .recipe_domain, .recipe_range { width:  40%; }
+    .recipe_domain, .recipe_range { width:  35%; }
   }
 }
 
@@ -1296,8 +1379,16 @@ div#body {
 
 /************************************************************************************
 * FORMATTING OF CIRCLES, AND TEXT CODE
+*
+* .codesexp and .cm-s-scheme used to appear in these rules but are dead: the
+* preprocessor never emits .codesexp, and attachCodeMirror() (page-render.js)
+* only calls CodeMirror.runMode() to tokenize code into inline .editbox spans
+* -- it never instantiates a full editor (new CodeMirror()/fromTextArea()),
+* which is the only thing that would stamp a cm-s-<theme> class onto
+* anything. Confirmed empirically: 0 elements with either class in the built
+* distribution or in a live-rendered page's DOM.
 */
-.codesexp, .circleevalsexp, .editbox, .cm-s-scheme, .CodeMirror {
+.circleevalsexp, .editbox, .CodeMirror {
   font-family: @code-font;
 }
 
@@ -1316,7 +1407,7 @@ td.halign-center .circleevalsexp { text-align: center; }
   }
   .value {
     display:            inline-block;
-    margin:             0.5em 0.4em;
+    margin:             0.5em 0.375em;
     vertical-align:     top;
   }
   .operator {
@@ -1334,12 +1425,13 @@ td.halign-center .circleevalsexp { text-align: center; }
   .hspace ~ .hspace { display: inline-block; width: 0.5ex; }
   .lParen, .rParen { display: none; } /* Don't show parens in Circle mode */
 
-  /* fill-in-the-blanks inside circles need no border */
-  .fitb { border: none; padding: 0;}
+  /* fill-in-the-blanks inside circles need no border, and should be
+     compact (matching sibling .value elements) rather than a full
+     writing-line. use the more specific lever (--fitb-height) */
+  .fitb { border: none; padding: 0; --fitb-height: 1em; }
 }
 
-.codesexp, .circleevalsexp, .editbox, .cm-s-scheme {
-  width:              100%;
+.circleevalsexp, .editbox {
   margin:             0px 3px;
   display:            inline-block;
   padding:            0px;
@@ -1347,6 +1439,12 @@ td.halign-center .circleevalsexp { text-align: center; }
   font-style:         normal;
   clear:              both;
 }
+
+/* A circle inline inside an @Q{} question needs to be pushed to its own line
+   -- without width:100% forcing that, it glues onto the end of the preceding
+   text. .qblock is @Q{}'s wrapper, so this covers that case everywhere it
+   occurs. */
+.qblock .circleevalsexp { display: block; }
 
 /* WESCHEME COLORS */
 .wescheme-string,     .cm-scheme-string   { color: forestgreen;}

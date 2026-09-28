@@ -4,7 +4,6 @@
 ++++
 <style>
 .chosen::after { content: '❌' !important; }
-.circleevalsexp { width: auto; }
 
 /* for table cells with immediate .content children, which have immediate
  * .paragraph children: use flex to space them evenly and center vertically
@@ -22,7 +21,7 @@ td > .content > .paragraph > p { display: contents; }
 [.FillVerticalSpace, cols="<.^1a,^.^20a,^.^14a",stripes="none", options="header"]
 |===
 |    
-| Cross out the expression that is NOT equivalent to the others.
+| Cross out the expression that is NOT equivalent to the others. Assume all variables represent nonzero values.
 | Justify your choice.
 
 | @n
@@ -45,17 +44,17 @@ But we can't regroup between two different operations.}
 
 | @n
 |
+@ifsoln-choice{@show{(coe '(* (+ b c) (- g f)))}}
 @show{(coe '(* (+ b c) (- f g)))}
 @show{(coe '(* (- f g) (+ b c)))}
 @show{(coe '(* (+ c b) (- f g)))}
-@ifsoln-choice{@show{(coe '(* (+ b c) (- g f)))}}
 | @ifsoln{The 4th circle incorrectly changes the order of terms being subtracted.}
 
 | @n
 |
 @show{(coe '(* 3 (+ (+ h w) 4)))}
-@show{(coe '(* (+ (+ h w) 4) 3))}
 @ifsoln-choice{@show{(coe '(* (+ h w) (+ 4 3)))}}
+@show{(coe '(* (+ (+ h w) 4) 3))}
 @show{(coe '(* 3 (+ 4 (+ h w))))}
 | @ifsoln{All but the 3rd circle involve a sum being tripled.}
 
@@ -66,7 +65,4 @@ But we can't regroup between two different operations.}
 @ifsoln-choice{@show{(coe '(/ (+ t h) (+ m a)))}}
 @show{(coe '(/ (+ a m) (+ h t)))}
 | @ifsoln{The 3rd circle incorrectly treats division as commutative}
-
 |===
-
-

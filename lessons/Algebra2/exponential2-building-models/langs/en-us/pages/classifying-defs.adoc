@@ -4,6 +4,11 @@
 <style>
 /* Shrink images */
 #content img { width: 75%; height: 75%; }
+
+/* Each cell is a column: the function sits at the top of the cell, and
+   everything after it is pushed to the bottom. */
+div#body td { flex-direction: column !important; flex-wrap: nowrap !important; }
+div#body td > .content > :first-child { margin-bottom: auto !important; }
 </style>
 ++++
 
@@ -13,8 +18,6 @@ Decide whether each situation is best described by a linear, {nbsp}quadratic, or
 [.FillVerticalSpace, cols="<.^15a,<.^15a", frame="none", stripes="none"]
 |===
 | @center{@math{f(x) = 6x^2 - 5}}
-
-@vspace{6ex}
 
 [cols="1a,4a,4a,8a",stripes="none",frame="none",grid="none"]
 !===
@@ -33,8 +36,6 @@ If it's exponential:@hspace{1ex}@fitbruby{10em}{}{base/growth/decay factor} @hsp
 
 | @center{@math{\text{miles}(\text{hours}) = \frac{22 \times \text{hours} + 14}{12 - 9}}}
 
-@vspace{6ex}
-
 [cols="1a,4a,4a,8a",stripes="none",frame="none",grid="none"]
 !===
 ! *@n*
@@ -49,8 +50,6 @@ How did you know? @fitb{}{} +
 If it's exponential:@hspace{1ex}@fitbruby{10em}{}{base/growth/decay factor} @hspace{3em} @fitbruby{5em}{}{initial value}
 
 | @center{@math{\text{cost}(w) = 5(1.2^w) + 16}}
-
-@vspace{6ex}
 
 [cols="1a,4a,4a,8a",stripes="none",frame="none",grid="none"]
 !===
@@ -69,8 +68,6 @@ If it's exponential:@hspace{1ex}@fitbruby{10em}{@ifsoln{1.2}}{base/growth/decay 
 
 | @center{@math{t(g) = 42 - 2g^2}}
 
-@vspace{6ex}
-
 [cols="1a,4a,4a,8a",stripes="none",frame="none",grid="none"]
 !===
 ! *@n*
@@ -86,8 +83,6 @@ If it's exponential:@hspace{1ex}@fitbruby{10em}{}{base/growth/decay factor} @hsp
 
 | @center{@math{\text{price}(d) = d^2 + 6d}}
 
-@vspace{6ex}
-
 [cols="1a,4a,4a,8a",stripes="none",frame="none",grid="none"]
 !===
 ! *@n*
@@ -102,8 +97,6 @@ How did you know? @fitb{}{} +
 If it's exponential:@hspace{1ex}@fitbruby{10em}{}{base/growth/decay factor} @hspace{3em} @fitbruby{5em}{}{initial value}
 
 | @center{@math{j(x) = \left( \frac{1}{2} \right)^x + 22}}
-
-@vspace{6ex}
 
 [cols="1a,4a,4a,8a",stripes="none",frame="none",grid="none"]
 !===
@@ -121,8 +114,6 @@ If it's exponential:@hspace{1ex}@fitbruby{10em}{@ifsoln{0.5}}{base/growth/decay 
 
 | @center{@math{f(a) = 20000 - 4.1^a}}
 
-@vspace{6ex}
-
 [cols="1a,4a,4a,8a",stripes="none",frame="none",grid="none"]
 !===
 ! *@n*
@@ -138,8 +129,6 @@ If it's exponential:@hspace{1ex}@fitbruby{10em}{@ifsoln{-4.1}}{base/growth/decay
 
 
 | @center{@math{g(x) = 8(3^{–4x})}}
-
-@vspace{6ex}
 
 [cols="1a,4a,4a,8a",stripes="none",frame="none",grid="none"]
 !===

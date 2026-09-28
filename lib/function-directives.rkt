@@ -54,11 +54,11 @@
       (string-append
         (if (string=? style "") "" ".fitbruby")
         ; (if (string=? style ".recipe_purpose") "" ".fitbruby")
-        (if show? ".solution" ".blank")
         style)
       (string-append
-        (if show? s
-            (string-multiply "&#x5f;" (string-length s-og)))
+        (if show?
+            (fitb-solution-wrap s)
+            (enclose-span ".blank" (string-multiply "&#x5f;" (string-length s-og))))
         (enclose-span ".ruby" "")
         ))))
 
