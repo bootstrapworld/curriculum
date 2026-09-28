@@ -353,7 +353,11 @@ local function postproc(fhtml_cached, tipe)
             klass = klass .. ' LessonNotes'
           end
         elseif tipe == 'lessonplan' then
-          klass = klass .. ' LessonPlan'
+          -- hide-answers: @A{} content starts hidden and page-render.js
+          -- removes it once fetchUserHash() confirms a logged-in teacher
+          -- (see core.less); default-hidden avoids a flash of visible
+          -- answers before that async check resolves.
+          klass = klass .. ' LessonPlan hide-answers'
         elseif not memberp(tipe, {'datasheetpage'}) then
           if tipe == 'pathwayresource' then
             klass = klass .. ' TeacherResources'
