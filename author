@@ -1,0 +1,18 @@
+#! /usr/bin/env bash
+
+# Usage: author [--port N] [--nomake] [--no-open] [--no-watch]
+#
+# Launches a single dev server for the whole distribution/ tree: plain
+# pages, quizzes, and self-guided lessons are all served from one running
+# process (with real hot-reload) instead of each needing their own
+# narrowly-scoped script (try-quiz, try-self-guided's `npm run dev`, ...)
+# and without needing distribution/ to be double-clickable from the
+# Finder. Watches lessons/, pathways/, shared/, and lib/ and re-runs the
+# build automatically whenever something changes.
+#
+# NATLANG selects which language tree to serve (default en-us), same as
+# every other script here.
+
+export NATLANG=${NATLANG:-en-us}
+
+exec node "$(dirname "$0")/lib/maker/author-server.mjs" "$@"
