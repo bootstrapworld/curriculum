@@ -360,8 +360,14 @@
 
 (define *required-subsections* '("Overview" "Launch" "Investigate" "Synthesize"))
 
+(define (exempt-from-section-check?)
+  (let ([repodir-file (build-path *containing-directory* ".repodir.txt.kp")])
+    (and (file-exists? repodir-file)
+         (let ([repodir (string-trim (file->string repodir-file))])
+           (regexp-match? #rx"/Projects/|/Hour-of-Code/" repodir)))))
+
 (define (check-and-reset-section-subsections)
-  (when (and *lesson-plan* *current-section-title*)
+  (when (and *lesson-plan* *current-section-title* (not (exempt-from-section-check?)))
     (for-each (lambda (sub)
                 (unless (member sub *section-subsections-seen*)
                   (warnmsg "~a: section \"~a\" missing === ~a"
