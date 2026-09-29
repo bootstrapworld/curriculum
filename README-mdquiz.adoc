@@ -258,20 +258,20 @@ hand-written `quiz.json` entry:
     { "type": "Tracing", "prompt": { ... }, "answer": { ... } }
   }
 
-==== Collecting inline questions into a `quiz.json`: `@checkpoint` and `@cumulativeAssessment`
+==== Collecting inline questions into a `quiz.json`: `@checkpoint` and `@assessment`
 
 Inline questions accumulate in a running list as the build walks through
 the lesson. Two directives flush that list to disk:
 
 `@checkpoint{title}`:: Collates every inline question seen since the last `@checkpoint` (or the start of the lesson) into its own `quiz.json`, titled `title`. A lesson can have as many checkpoints as it needs -- e.g. a short do-now/exit-ticket checkin partway through, and a fuller one later -- each independently titled and placed wherever it belongs, not tied to section boundaries.
 
-`@cumulativeAssessment{title}`:: At most one per lesson. Concatenates *every* `@checkpoint`'s questions seen so far into one new, cumulative `quiz.json`, titled `title`. Place it wherever the cumulative assessment belongs in the lesson -- it doesn't have to be the very last thing in the file (e.g. before a trailing "Data Exploration Project" section).
+`@assessment{title}`:: At most one per lesson. Concatenates *every* `@checkpoint`'s questions seen so far into one new, cumulative `quiz.json`, titled `title`. Place it wherever the cumulative assessment belongs in the lesson -- it doesn't have to be the very last thing in the file (e.g. before a trailing "Data Exploration Project" section).
 +
-NOTE: Not the same directive as the existing `@assessment{label}`, which links to an already-existing `assessments/<label>/` folder elsewhere in a lesson -- see "Setting up the assessments folder" above. Once `@cumulativeAssessment{title}` has written its `quiz.json`, `@assessment{}` can link to it the same way it links to any hand-written one.
+NOTE: Not the same directive as the existing `@old-assessment{label}`, which links to an already-existing `assessments/<label>/` folder elsewhere in a lesson -- see "Setting up the assessments folder" above. Once `@assessment{title}` has written its `quiz.json`, `@old-assessment{}` can link to it the same way it links to any hand-written one.
 
 A lesson with only one quiz and no intermediate checkpoints
 doesn't need an explicit `@checkpoint{}` before its
-`@cumulativeAssessment{}` -- `@cumulativeAssessment{}` collects
+`@assessment{}` -- `@assessment{}` collects
 any not-yet-checkpointed questions itself, in addition to every
 ``@checkpoint``'s questions so far.
 

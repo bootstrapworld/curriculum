@@ -1665,7 +1665,12 @@
                             (let ([prose (read-group i directive)])
                               (display-html-verb prose o))]
                            [(string=? directive "scrub")
-                            (read-group i directive)]
+                            (let ([content (read-group i directive)])
+                              (cond
+                                [(regexp-match #rx"^label: *(.*)" content)
+                                 => (lambda (m)
+                                      (set-pending-quiz-label!
+                                        (string-trim (second m) "\"")))]))]
                            [(member directive '("ifslide" "pd-slide" "ifpdslide"))
                             (let ([text (read-group i directive #:multiline? #t)])
                               (when (or (regexp-match "\\|===" text)
@@ -2110,7 +2115,7 @@
                            ; Inline quiz directives (see #2888). These are
                            ; purely side-effecting -- they collect into
                            ; inline-quiz.rkt's running question list (or, for
-                           ; checkpoint/cumulativeAssessment, flush it to a
+                           ; checkpoint/@assessment, flush it to a
                            ; quiz.json) and emit nothing into the lesson's
                            ; own HTML output. read-group does not expand
                            ; nested directives, so multiline? is set wherever
@@ -2120,42 +2125,43 @@
                            ; narrow expansion of @image{} and *bold* within
                            ; each group's raw text.
                            ;
-                           ; Named cumulativeAssessment, not assessment: the
-                           ; latter is already a directive (below) that links
-                           ; to an existing assessments/<label>/ folder --
-                           ; unrelated to collecting inline questions here.
-                           [(member directive '("shortAnswer" "multipleChoice" "cardSort"
-                                                 "categorize" "quizJSON" "checkpoint" "cumulativeAssessment"))
+                           [(member directive '("shortAnswer" "short-answer"
+                                                 "multipleChoice" "multiple-choice"
+                                                 "cardSort" "card-sort"
+                                                 "categorize"
+                                                 "quizJSON" "quiz-json"
+                                                 "checkpoint" "assessment"))
                             (unless *lesson-plan*
                               (error 'ERROR "~a (~a) valid only in lesson plan"
                                      directive (errmessage-file-context)))
                             (case directive
-                              [("shortAnswer")
+                              [("shortAnswer" "short-answer")
                                (let* ([required-flag (read-group i directive)]
                                       [range (read-group i directive)]
                                       [prompt (read-group i directive)]
                                       [answer (read-group i directive)])
                                  (handle-shortAnswer! required-flag range prompt answer))]
-                              [("multipleChoice")
+                              [("multipleChoice" "multiple-choice")
                                (let* ([order-mode (read-group i directive)]
                                       [prompt (read-group i directive)]
                                       [options (read-group i directive #:multiline? #t)])
                                  (handle-multipleChoice! order-mode prompt options))]
-                              [("cardSort")
-                               (let* ([ordered-flag (read-group i directive)]
-                                      [prompt (read-group i directive)]
+                              [("cardSort" "card-sort")
+                               (let* ([prompt (read-group i directive)]
                                       [cards (read-group i directive #:multiline? #t)])
-                                 (handle-cardSort! ordered-flag prompt cards))]
+                                 (handle-cardSort! prompt cards))]
                               [("categorize")
                                (let* ([prompt (read-group i directive)]
                                       [groups (read-group i directive #:multiline? #t)])
                                  (handle-categorize! prompt groups))]
-                              [("quizJSON")
+                              [("quizJSON" "quiz-json")
                                (handle-quizJSON! (read-group i directive #:multiline? #t))]
                               [("checkpoint")
-                               (handle-checkpoint! *containing-directory* (read-group i directive))]
-                              [("cumulativeAssessment")
-                               (handle-cumulative-assessment! *containing-directory* (read-group i directive))])]
+                               (let ([title (handle-checkpoint! *containing-directory* (read-group i directive))])
+                                 (fprintf o "pass:[<a href=\"#assessments-anchor\" class=\"assessment-backlink\">&#x2B06;&#xFE0F; ~a</a>]" title))]
+                              [("assessment")
+                               (let ([title (handle-cumulative-assessment! *containing-directory* (read-group i directive))])
+                                 (fprintf o "pass:[<a href=\"#assessments-anchor\" class=\"assessment-backlink\">&#x2B06;&#xFE0F; ~a</a>]" title))])]
                            [(string=? directive "Bootstrap")
                             (fprintf o "https://www.bootstrapworld.org/[Bootstrap]")]
                            [(hash-ref *simple-directives* (string->symbol directive) #f)
@@ -2253,11 +2259,11 @@
                            ;; in. Must exist in the markup even when the reader is
                            ;; logged in / JS hasn't run yet, since the JS looks it up
                            ;; by class rather than creating it. The id is also the jump
-                           ;; target for inline @assessment{} back-links elsewhere in
-                           ;; the lesson body -- see the "assessment" directive below.
+                           ;; target for inline @old-assessment{} back-links elsewhere in
+                           ;; the lesson body -- see the "old-assessment" directive below.
                            (fprintf o "\n++++\n<p id=\"assessments-anchor\" class=\"AssessmentDirections\"></p>\n++++\n")
                            (fprintf o "\ninclude::~a/{cachedir}.index-assessments.asc[]\n" *containing-directory*)]
-                          [(string=? directive "assessment")
+                          [(string=? directive "old-assessment")
                            (let* ([args (read-commaed-group i directive read-group)]
                                   [lbl (first args)]
                                   [text (string-join (rest args) ", ")]
@@ -2272,7 +2278,7 @@
                                             (if title
                                               (string-append "Show What You Know: " title)
                                               (begin
-                                                (warnmsg "~a: @assessment ~a has no text and no title in quiz.json"
+                                                (warnmsg "~a: @old-assessment ~a has no text and no title in quiz.json"
                                                         (errmessage-context) lbl)
                                                 lbl)))
                                           text)])
@@ -2282,12 +2288,12 @@
                              (unless (assoc lbl *assessments-met*)
                                  (set! *assessments-met*
                                    (cons (cons lbl text) *assessments-met*)))
-                             ;; Inline @assessment{} uses don't duplicate the real,
+                             ;; Inline @old-assessment{} uses don't duplicate the real,
                              ;; JS-guarded a.quiz link (that lives once in the intro
                              ;; table's materials list -- see @assessments /
                              ;; store-assessments). Instead they link back up to the
                              ;; #assessments-anchor id that directive emits, so a
-                             ;; reader who meets @assessment{} mid-lesson can jump to
+                             ;; reader who meets @old-assessment{} mid-lesson can jump to
                              ;; the actual link. The up-arrow flags that this jumps up
                              ;; the page rather than away from it.
                              (fprintf o "pass:[<a href=\"#assessments-anchor\" class=\"assessment-backlink\">&#x2B06;&#xFE0F; ~a</a>]" text))]
@@ -2817,7 +2823,7 @@
           (when (and (not (regexp-match #rx"^\\." lbl))
                      (directory-exists? (build-path adir entry)))
             (unless (assoc lbl *assessments-met*)
-              (warnmsg "~a: assessment ~a is in assessments/ but not referenced with @assessment{~a}"
+              (warnmsg "~a: assessment ~a is in assessments/ but not referenced with @old-assessment{~a}"
                        (errmessage-context) lbl lbl))))))))
 
 (define (store-objectives)

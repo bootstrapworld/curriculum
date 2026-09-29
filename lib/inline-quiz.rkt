@@ -3,14 +3,14 @@
 (require json)
 
 ;; Inline quiz directives: @shortAnswer, @multipleChoice, @cardSort,
-;; @categorize, @quizJSON, @checkpoint, @cumulativeAssessment.
+;; @categorize, @quizJSON, @checkpoint, @assessment.
 ;;
 ;; Design: https://github.com/bootstrapworld/curriculum/issues/2888
 ;;
 ;; preproc.rkt reads each directive's fixed-count {...} groups (via its own
 ;; read-group) and hands the raw group text to the handlers below, which
 ;; parse it, build a jsexpr question object, and append it to a running
-;; list. @checkpoint{title} flushes that list to a quiz.json; @cumulativeAssessment
+;; list. @checkpoint{title} flushes that list to a quiz.json; @assessment
 ;; {title} concatenates every checkpoint seen so far into a second,
 ;; cumulative quiz.json. Nothing here touches ports or directive-expansion
 ;; internals, so it's independently testable without preproc.rkt's other
@@ -33,11 +33,12 @@
 ;;   to link an answer-key entry back to its card, never shown to students,
 ;;   so a counter is simpler and can't collide the way slugified content
 ;;   (especially image-only cards) could.
-;; - Resolved on #2888: a lone @cumulativeAssessment{} with no preceding
+;; - Resolved on #2888: a lone @assessment{} with no preceding
 ;;   @checkpoint at all (a lesson with a single quiz, no intermediate
 ;;   checkins) needs no workaround -- see handle-cumulative-assessment!.
 
 (provide reset-inline-quiz-state!
+         set-pending-quiz-label!
          handle-shortAnswer!
          handle-multipleChoice!
          handle-cardSort!
@@ -49,18 +50,27 @@
 ;; ---------------------------------------------------------------------
 ;; State: the running list of questions since the last @checkpoint (or the
 ;; start of the lesson), and every checkpoint's questions seen so far (for
-;; @cumulativeAssessment to concatenate). Both reset per lesson.
+;; @assessment to concatenate). Both reset per lesson.
 ;; ---------------------------------------------------------------------
 
 (define *pending-questions* (box '()))          ; reverse order; newest first
 (define *checkpoints-so-far* (box '()))         ; list of (title . questions), oldest first
+(define *pending-label* (box #f))               ; label from preceding @scrub{label: ...}
 
 (define (reset-inline-quiz-state!)
   (set-box! *pending-questions* '())
-  (set-box! *checkpoints-so-far* '()))
+  (set-box! *checkpoints-so-far* '())
+  (set-box! *pending-label* #f))
+
+(define (set-pending-quiz-label! s)
+  (set-box! *pending-label* (string-trim s)))
 
 (define (add-question! q)
-  (set-box! *pending-questions* (cons q (unbox *pending-questions*))))
+  (define label (unbox *pending-label*))
+  (set-box! *pending-label* #f)
+  (set-box! *pending-questions*
+            (cons (if label (hash-set q 'label label) q)
+                  (unbox *pending-questions*))))
 
 ;; ---------------------------------------------------------------------
 ;; Small helpers
@@ -91,10 +101,14 @@
 (define (expand-bold s)
   (regexp-replace* #px"\\*([^*\n]+)\\*" s "**\\1**"))
 
+;; AsciiDoc " +\n" (forced line break) -> bare "\n" for JSON consumers.
+(define (expand-line-breaks s)
+  (regexp-replace* #px" \\+\n" s "\n"))
+
 ;; The one text-conversion pass every piece of quiz content (prompts,
 ;; options, card/category items, answers) goes through.
 (define (quiz-text s)
-  (expand-bold (expand-image-calls (string-trim s))))
+  (expand-bold (expand-image-calls (expand-line-breaks (string-trim s)))))
 
 ;; ---------------------------------------------------------------------
 ;; AsciiDoc-list mini-parsers over already-extracted group text (raw
@@ -190,9 +204,8 @@
   (add-question!
     (hash 'type "MultipleChoice" 'prompt prompt 'answer (hash 'answer answer-value))))
 
-;; @cardSort{ordered-flag}{prompt}{description-list}
-(define (handle-cardSort! ordered-flag-str prompt-str list-str)
-  (define ordered? (string=? (string-trim ordered-flag-str) "ordered"))
+;; @cardSort{prompt}{description-list}  (always ordered: false)
+(define (handle-cardSort! prompt-str list-str)
   (define groups (parse-description-list list-str))  ; term discarded below, just a pile marker
   (define counter (box 0))
   (define (next-id!) (set-box! counter (add1 (unbox counter))) (format "card~a" (unbox counter)))
@@ -204,7 +217,7 @@
           'prompt (hash 'prompt (quiz-text prompt-str)
                         'cards (for/list ([c all-cards]) (hash 'id (car c) 'content (cdr c))))
           'answer (hash 'answer (for/list ([g id-groups]) (map car g))
-                        'ordered ordered?))))
+                        'ordered #f))))
 
 ;; @categorize{prompt}{description-list}
 (define (handle-categorize! prompt-str list-str)
@@ -223,12 +236,12 @@
   (add-question! (string->jsexpr json-str)))
 
 ;; ---------------------------------------------------------------------
-;; @checkpoint{title} / @cumulativeAssessment{title}
+;; @checkpoint{title} / @assessment{title}
 ;; ---------------------------------------------------------------------
 
-;; Writes {title, questions} to <dir>/assessments/<slugify title>/quiz.json.
-(define (write-quiz-json! dir title questions)
-  (define slug (slugify title))
+;; Writes {title, questions} to <dir>/assessments/<slug>/quiz.json.
+;; slug is derived from the raw author title (without the "Show what you know:" prefix).
+(define (write-quiz-json! dir slug title questions)
   (define assessment-dir (build-path dir "assessments" slug))
   (make-directory* assessment-dir)
   (call-with-output-file (build-path assessment-dir "quiz.json")
@@ -236,31 +249,42 @@
     (lambda (o) (write-json (hash 'title title 'questions questions) o)))
   slug)
 
+;; "Show what you know: X Checkpoint" / "Show what you know: X (Cumulative)"
+(define (checkpoint-display-title raw)
+  (string-append "Show what you know: " raw " Checkpoint"))
+(define (assessment-display-title raw)
+  (string-append "Show what you know: " raw " (Cumulative)"))
+
 ;; dir is the lesson's own output directory (preproc.rkt's
 ;; *containing-directory*), passed in explicitly rather than required back
 ;; from preproc.rkt, to keep this module a leaf dependency.
+;; Returns the display title string (for preproc.rkt to emit into the HTML).
 (define (handle-checkpoint! dir title-str)
-  (define title (string-trim title-str))
+  (define raw (string-trim title-str))
+  (define title (checkpoint-display-title raw))
   (define questions (reverse (unbox *pending-questions*)))
   (when (null? questions)
-    (error 'inline-quiz "@checkpoint{~a} has no preceding questions to collect" title))
-  (define slug (write-quiz-json! dir title questions))
+    (error 'inline-quiz "@checkpoint{~a} has no preceding questions to collect" raw))
+  (write-quiz-json! dir (slugify raw) title questions)
   (set-box! *checkpoints-so-far* (cons (cons title questions) (unbox *checkpoints-so-far*)))
   (set-box! *pending-questions* '())
-  slug)
+  title)
 
 ;; Resolved on #2888 (comment thread, schanzer/flannery-denny): a lone
-;; @cumulativeAssessment{} with no preceding @checkpoint at all -- the
+;; @assessment{} with no preceding @checkpoint at all -- the
 ;; common one-lesson-one-quiz case -- should not require a redundant
 ;; @checkpoint{} immediately before it just to flush the pending list.
-;; @cumulativeAssessment{} sweeps up any still-pending (un-checkpointed)
+;; @assessment{} sweeps up any still-pending (un-checkpointed)
 ;; questions itself, in addition to every @checkpoint's questions so far.
+;; Returns the display title string (for preproc.rkt to emit into the HTML).
 (define (handle-cumulative-assessment! dir title-str)
-  (define title (string-trim title-str))
+  (define raw (string-trim title-str))
+  (define title (assessment-display-title raw))
   (define checkpoints (reverse (unbox *checkpoints-so-far*)))
   (define pending (reverse (unbox *pending-questions*)))
   (define all-questions (append (append* (map cdr checkpoints)) pending))
   (when (null? all-questions)
-    (error 'inline-quiz "@cumulativeAssessment{~a} has no preceding questions (from @checkpoint or otherwise) to collect" title))
+    (error 'inline-quiz "@assessment{~a} has no preceding questions (from @checkpoint or otherwise) to collect" raw))
   (set-box! *pending-questions* '())
-  (write-quiz-json! dir title all-questions))
+  (write-quiz-json! dir (slugify raw) title all-questions)
+  title)
