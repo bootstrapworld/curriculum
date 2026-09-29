@@ -161,6 +161,14 @@ to populate the `distribution/` directory with the built documentation.
 - `clean` -- removes `distribution/` so the next make builds from
   scratch. If this is the only option, there is no build done!
 
+- `coverage` -- builds and additionally generates the standards-coverage
+  report. By default this isn't done, since it costs time on every build
+  for something a normal edit loop never needs
+
+- `debug` -- equivalent to `force DEBUGADOC=yes`: a full clean rebuild
+  with Asciidoctor run individually on each file, to help locate AsciiDoc
+  syntax errors
+
 - `deploy` -- deploys. (See section on "Deployment")
 
 - `force` -- removes `distribution/` and builds from scratch
@@ -171,12 +179,27 @@ to populate the `distribution/` directory with the built documentation.
   the documents to ensure they are valid. By default, this check isn't
   done to save time
 
+- `mdquiz` -- builds the quiz/assessment pages (equivalent to running
+  `./build-mdquiz`; see link:README-mdquiz.adoc[])
+
+- `quick-deploy` -- re-runs just the deploy-to-hostinger step, without
+  rebuilding `distribution/`, PDFs, quizzes, or screenshots first. Useful
+  when only the already-built `distribution/` needs to be re-pushed
+
+- `screenshots` -- (re)generates the screenshot images embedded in some
+  pages, without doing anything else
+
+- `self-guided` -- builds the production bundles for self-guided lessons
+  (equivalent to running `./build-all-self-guideds`; see
+  link:README-self-guided.adoc[]). This is processor-intensive and is
+  only needed before deployment
+
 `make` can take the following variable settings on the command line to guide the
 build:
 
 - `NATLANG=lang` -- builds for the natural language `lang`. The default is
-  `en-us` (**En**glish *US*) . Currently, the only other language that has
-  significant support is `es-mx` (**es**pañol **m**e**x**icano)
+  `en-us` (**En**glish *US*) . The other languages with significant support
+  are `es-mx` (**es**pañol **m**e**x**icano) and `fr` (**fr**ançais)
 
 - `SEMESTER=season` -- typically either `fall` or
   `spring`. The default is `fall`
@@ -630,7 +653,6 @@ various standards. For now, these are:
 
   standards-cc-ela-dictionary.json
   standards-cc-math-dictionary.json
-  standards-cc-states-dictionary.json
   standards-csta-dictionary.json
   standards-ia-dictionary.json
   standards-k12cs-dictionary.json
@@ -806,17 +828,13 @@ constituent lessons are collected into a file
 `pathway-standards.shtml` that is linked to in the narrative
 page.
 
-// doesn't look like we're using shadowing glossaries anymore?
-
-There can be auxiliary glossary files in `lib/` that can be used
-to _shadow_ the main glossary for particular lessons. For now,
-the only such shadowing glossary file is `glossary-terms-ss.json`,
-used for Social-Studies lessons.
-
-In order for a lesson `lessonA` to use a shadowing glossary, its
-directory, i.e., `lessons/lessonA/langs/en-us`, should contain a
-file `shadow-glossary.txt` that contains the name of the
-shadowing glossary file.
+The preprocessor still supports _shadowing_ the main glossary for
+particular lessons -- a lesson's directory, i.e.,
+`lessons/lessonA/langs/en-us`, can contain a file
+`shadow-glossary.txt` naming an auxiliary glossary file in `lib/` to
+use instead of `glossary-terms.json` for that lesson -- but no such
+shadowing glossary file currently exists in the repo, so this
+mechanism is unused at the moment.
 
 ===== Syntax of the glossary-terms.json file
 

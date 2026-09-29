@@ -39,6 +39,16 @@ In some situations, we don't want an exact 1-to-1 correspondence between slides 
 
 The older directive `@slidebreak`, of course, ensures the following piece of text is included in both book and slides. (We may need to change these names later to be more uniform.)
 
+== Splitting a self-guided page into two panes
+
+Unlike the three directives above, `@selfguidedpanebreak` does *not* start a
+new self-guided page. Within the current page, it marks everything from that
+point until the next page break (or another `@selfguidedpanebreak`) as
+belonging in the self-guided app's *right* pane instead of its default,
+*left* one -- typically used to move an `@editorconfig`/`@imageconfig`/`@videoconfig`
+and its surrounding text over next to the interactive content it describes.
+It has no effect on slides.
+
 == {editor,image,video}config
 
 A book page also has one of the fields: `editorCode`, `imageConfig`, or `videoConfig`. To insert these in the lesson-plan file, use the directives

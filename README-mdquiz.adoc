@@ -3,7 +3,7 @@
 == Installing the Infrastructure
 
 1. `git pull`
-2. `nvm use 22.5`
+2. `nvm use` (reads the pinned version from `.nvmrc`, currently `24.7.0`)
 3. `npm install`
 4. `npm update mdquiz`
 5. You're ready to rock `./build-mdquiz` once you write an assessment!
@@ -24,7 +24,7 @@ You can look at `lessons/Data-Science/histograms-visualize/langs/en-us/assessmen
 
 1. It begins with a title that will end up being student-facing.
 
-2. Question Types: We currently have four fully-functional question types: "MultipleChoice", "ShortAnswer", "CardSort", and "Categorize".
+2. Question Types: "MultipleChoice", "ShortAnswer", "CardSort", "Categorize", and "Pyret" are documented below. (mdquiz also ships "Tracing" and "Informational" question types, undocumented here.)
 
 3. Every question must include
 
@@ -86,9 +86,23 @@ Note: you must specify both a width and a height and doing so without paying att
 
 8. Categorize questions ask students to match each term in a `leftColumn` to one or more terms in a `rightColumn`. The `answer` maps each `leftColumn` term to an array of the matching `rightColumn` term(s) — usually just one, but you can list more than one if a left-hand term has multiple correct matches. Both columns are shuffled for the student, so their order in the JSON doesn't matter. An optional `id` gives the question a stable identifier, and an optional `context` adds explanatory text (shown after the student submits) — see the `Categorize` example below, whose `context` explains the "one-to-one" framing of that particular question.
 
-9. \n\n is used to insert a new line in the middle of a string.
+9. Pyret questions embed a live Pyret editor, pre-loaded with `program` as the starting code. The student edits and runs it; a `checkblock` (Pyret `check:`/`where:` code, run against whatever the student's editor holds when they submit) decides whether they passed. `answer.answer` is a plain string -- the sample solution shown to the student afterwards, not something graded against directly.
 
-10. This is how to **bold** something.
+    {
+        "type": "Pyret",
+        "prompt": {
+            "prompt": "Write a function `double` that takes a number and returns twice its value.",
+            "program": "fun double(n):\n  n * 2\nend",
+            "checkblock": "check:\n  double(3) is 6\n  double(0) is 0\nend"
+        },
+        "answer": {
+            "answer": "fun double(n):\n  n * 2\nend"
+        }
+    }
+
+10. \n\n is used to insert a new line in the middle of a string.
+
+11. This is how to **bold** something.
 
 Below is an example of what the complete json might look like. 
 

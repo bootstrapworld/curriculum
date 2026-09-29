@@ -22,6 +22,9 @@ Flags:
 
 `NATLANG` selects the language tree, same as everywhere else (default `en-us`).
 
+When the authoring server is running, it will automatically run `make` any time a file has changed, then reload the browser. If you switch to the terminal, you can hit keys to select a different kind of `make`: `f` runs `make force`, and `b` runs `make book`.
+
+
 == Why a rebuild takes ~10 seconds
 
 `make`'s own incremental-build overhead (mostly graph-scanning) is close to that even with nothing to do, so that's the floor on how fast a rebuild can complete regardless of how small the edit was. The server debounces rapid saves and queues at most one rebuild while another is running, so you can't pile up overlapping `make` invocations by saving quickly.
