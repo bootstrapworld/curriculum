@@ -141,3 +141,20 @@ Once you’ve finished, write another branch to check whether the player and the
 - Change your first condition so that the danger gets reset only when the player and danger collide AND the cat is jumping. (What must be true about the player’s y-coordinate for it to be jumping?)
 - Add another condition to check whether the player has collided with the danger while the player is on the ground. This could be a single expression within `next-state-tick`, or you can write a @vocab{helper function} called `game-over` to do this work, and use it in other functions as well (maybe the GameState is drawn differently once the game is over.)
 }
+
+=== Synthesize
+@slidebreak{Synthesize}
+
+@QandA{
+@Q{Why do we care how far apart our game characters are?}
+@A{It's the only way to determine whether or not they've collided, which is information we need to keep score.}
+
+@Q{The Pythagorean Theorem describes right triangles. Why is it also able to help us find distance?}
+@A{The diagonal distance between any two points is also they hypotenuse of a right triangle.}
+
+@Q{How many functions did you use to define `distance`?}
+@A{3 -- `line-length`, `sqr`, `sqrt`}
+
+@Q{Which of those functions are taking in the output of another function?}
+@A{`sqr` and `sqrt`}
+}
