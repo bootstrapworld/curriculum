@@ -189,19 +189,16 @@ if (staleQuizzes.length === 0) {
   ]);
 
   const buildConfigs = staleQuizzes.map( quiz => ({
+    logLevel: "error",
     plugins: [
       react(),
       viteSingleFile(),
     ],
     build: {
-      logLevel: "silent",
       root: "distribution",
       minify: false,
       outDir: "./",
       emptyOutDir: false,
-      onConsoleLog(log) {
-        return "@"+log
-      },
       rollupOptions: {
         input: quiz+"/index.html",
       }
