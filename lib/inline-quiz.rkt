@@ -204,8 +204,9 @@
   (add-question!
     (hash 'type "MultipleChoice" 'prompt prompt 'answer (hash 'answer answer-value))))
 
-;; @cardSort{prompt}{description-list}  (always ordered: false)
-(define (handle-cardSort! prompt-str list-str)
+;; @cardSort{ordered-flag}{prompt}{description-list}
+(define (handle-cardSort! ordered-flag-str prompt-str list-str)
+  (define ordered? (string=? (string-downcase (string-trim ordered-flag-str)) "ordered"))
   (define groups (parse-description-list list-str))  ; term discarded below, just a pile marker
   (define counter (box 0))
   (define (next-id!) (set-box! counter (add1 (unbox counter))) (format "card~a" (unbox counter)))
@@ -217,7 +218,7 @@
           'prompt (hash 'prompt (quiz-text prompt-str)
                         'cards (for/list ([c all-cards]) (hash 'id (car c) 'content (cdr c))))
           'answer (hash 'answer (for/list ([g id-groups]) (map car g))
-                        'ordered #f))))
+                        'ordered ordered?))))
 
 ;; @categorize{prompt}{description-list}
 (define (handle-categorize! prompt-str list-str)

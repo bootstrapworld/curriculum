@@ -178,16 +178,16 @@ Each directive takes a fixed number of `{...}` groups, read in order --
 there's no optional/variadic group, so "no value" is always an empty group
 `{}`, never an omitted one.
 
-`@shortAnswer{required-flag}{numeric-range}{prompt}{answer}`::
+`@short-answer{required-flag}{numeric-range}{prompt}{answer}`::
 +
 --
 - First group: `{}` = required (the default). `{optional}` sets `validation.required` to `false`.
 - Second group: `{}` = no numeric constraint. A `min..max` range sets `validation.numeric: true`; either side may be blank -- `{0..360}` sets both bounds, `{0..}` only `min`, `{..360}` only `max`, `{..}` numeric with no bounds at all.
 
-  @shortAnswer{optional}{0..360}{How many degrees are in a right angle?}{90}
+  @short-answer{optional}{0..360}{How many degrees are in a right angle?}{90}
 --
 
-`@multipleChoice{order-mode}{prompt}{options}`::
+`@multiple-choice{order-mode}{prompt}{options}`::
 +
 --
 The third group is an AsciiDoc checkbox list; mark the correct option(s) `[x]` in place (multiple `[x]`s produce a multi-select answer array).
@@ -199,7 +199,7 @@ CAUTION: This default differs from hand-written `quiz.json`, where omitting `ans
 - `{shuffle}` or `{random}` -- randomized at render time.
 - `{fixed}` -- options stay exactly where written; the correct answer's own position is preserved.
 
-  @multipleChoice{sorted}{Which of these values is negative?}{
+  @multiple-choice{sorted}{Which of these values is negative?}{
   - [ ] 12
   - [x] -4
   - [ ] 0
@@ -207,13 +207,13 @@ CAUTION: This default differs from hand-written `quiz.json`, where omitting `ans
   }
 --
 
-`@cardSort{ordered-flag}{prompt}{groups}`::
+`@card-sort{ordered-flag}{prompt}{groups}`::
 +
 --
 The third group is an AsciiDoc description list (`term::` followed by `- item` bullets) grouping cards into their correct piles. The term itself is discarded -- mdquiz never shows pile labels during sorting -- so just number the piles rather than inventing names for them. Card ids are auto-generated; you never write them by hand.
 `{}` (default) or `{ordered}` sets `answer.ordered`.
 
-  @cardSort{}{Match each histogram with the appropriate descriptive statement.}{
+  @card-sort{}{Match each histogram with the appropriate descriptive statement.}{
   1::
   - @image{images/histoA.png}
   - has a peak in the center
@@ -226,7 +226,7 @@ The third group is an AsciiDoc description list (`term::` followed by `- item` b
 `@categorize{prompt}{groups}`::
 +
 --
-Same term/item list shape as `@cardSort`, except here the term is a real, student-facing `leftColumn` label, not a discardable pile marker. Writing each category once with its matches listed underneath (rather than repeating the term once per match) leaves no room for a typo'd category name to silently create a second, mismatched entry.
+Same term/item list shape as `@card-sort`, except here the term is a real, student-facing `leftColumn` label, not a discardable pile marker. Writing each category once with its matches listed underneath (rather than repeating the term once per match) leaves no room for a typo'd category name to silently create a second, mismatched entry.
 
   @categorize{Distinguish between bar charts and histograms.}{
   Histogram::
@@ -244,9 +244,9 @@ prompt/option/card/category text (converted to the same Markdown image
 syntax used in hand-written `quiz.json`), and AsciiDoc `*bold*` (converted
 to Markdown `**bold**`). Nothing else gets expanded -- for anything more
 elaborate a prompt needs, fall back to a hand-written `quiz.json`, or the
-`@quizJSON{}` escape hatch below.
+`@quiz-json{}` escape hatch below.
 
-==== Escape hatch: `@quizJSON{}`
+==== Escape hatch: `@quiz-json{}`
 
 For anything the four directives above don't cover -- today, that's the
 `Tracing`, `Informational`, and `Pyret` question types, none of which have
@@ -254,7 +254,7 @@ an inline directive yet -- write the question's raw JSON directly and it's
 spliced into the assessment's `questions` array as-is, same as a
 hand-written `quiz.json` entry:
 
-  @quizJSON{
+  @quiz-json{
     { "type": "Tracing", "prompt": { ... }, "answer": { ... } }
   }
 

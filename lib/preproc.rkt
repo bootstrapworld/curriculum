@@ -2125,36 +2125,37 @@
                            ; narrow expansion of @image{} and *bold* within
                            ; each group's raw text.
                            ;
-                           [(member directive '("shortAnswer" "short-answer"
-                                                 "multipleChoice" "multiple-choice"
-                                                 "cardSort" "card-sort"
+                           [(member directive '("short-answer"
+                                                 "multiple-choice"
+                                                 "card-sort"
                                                  "categorize"
-                                                 "quizJSON" "quiz-json"
+                                                 "quiz-json"
                                                  "checkpoint" "assessment"))
                             (unless *lesson-plan*
                               (error 'ERROR "~a (~a) valid only in lesson plan"
                                      directive (errmessage-file-context)))
                             (case directive
-                              [("shortAnswer" "short-answer")
+                              [("short-answer")
                                (let* ([required-flag (read-group i directive)]
                                       [range (read-group i directive)]
                                       [prompt (read-group i directive)]
                                       [answer (read-group i directive)])
                                  (handle-shortAnswer! required-flag range prompt answer))]
-                              [("multipleChoice" "multiple-choice")
+                              [("multiple-choice")
                                (let* ([order-mode (read-group i directive)]
                                       [prompt (read-group i directive)]
                                       [options (read-group i directive #:multiline? #t)])
                                  (handle-multipleChoice! order-mode prompt options))]
-                              [("cardSort" "card-sort")
-                               (let* ([prompt (read-group i directive)]
+                              [("card-sort")
+                               (let* ([ordered-flag (read-group i directive)]
+                                      [prompt (read-group i directive)]
                                       [cards (read-group i directive #:multiline? #t)])
-                                 (handle-cardSort! prompt cards))]
+                                 (handle-cardSort! ordered-flag prompt cards))]
                               [("categorize")
                                (let* ([prompt (read-group i directive)]
                                       [groups (read-group i directive #:multiline? #t)])
                                  (handle-categorize! prompt groups))]
-                              [("quizJSON" "quiz-json")
+                              [("quiz-json")
                                (handle-quizJSON! (read-group i directive #:multiline? #t))]
                               [("checkpoint")
                                (let ([title (handle-checkpoint! *containing-directory* (read-group i directive))])
