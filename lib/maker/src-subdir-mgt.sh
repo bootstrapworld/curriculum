@@ -122,7 +122,7 @@ function flatten_image_subfolders() {
       imgbase=$(basename "$img")
       case "$imgbase" in *.json) continue;; esac  # handled separately below
       if grep -qxF "$imgbase" "$seen_list_file" 2>/dev/null; then
-        echo "WARNING: images/$imgbase appears in more than one subfolder; skipping duplicate" >&2
+        echo "WARNING: $(basename "$PWD"): images/$imgbase appears in more than one subfolder; skipping duplicate" >&2
       else
         echo "$imgbase" >> "$seen_list_file"
         cp "$img" "images/$imgbase"
@@ -156,11 +156,15 @@ for subdir in subdirs:
     with open(json_path) as f:
         sub = json.load(f)
     for k, v in sub.items():
-        if k in merged:
-            print(f'WARNING: duplicate image name {k!r} in images/lesson-images.json and'
-                  f' images/{subdir}/lesson-images.json; keeping first occurrence', file=sys.stderr)
-        else:
+        if k not in merged:
             merged[k] = v
+        elif merged[k] != v:
+            # An identical entry is just this same subfolder re-merged --
+            # e.g. a non-first proglang variant (lesson-codap) is a copy of
+            # the already-flattened first one, so its top-level JSON already
+            # holds these entries. Only a genuine conflict is worth a warning.
+            print(f'WARNING: {os.path.basename(os.getcwd())}: duplicate image name {k!r} in images/lesson-images.json and'
+                  f' images/{subdir}/lesson-images.json; keeping first occurrence', file=sys.stderr)
 
 if merged:
     with open(top_json, 'w') as f:
