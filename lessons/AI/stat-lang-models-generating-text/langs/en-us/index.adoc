@@ -50,7 +50,6 @@ Consider this start of a phrase: "Close the..."
 - What word might come next?
 - As a class, are there more than one “next word”?
 - Which one is the most likely?
-
 }
 
 @teacher{
@@ -167,11 +166,10 @@ Using computers to process languages, often by consuming a corpus and constructi
 }
 
 == Constructing a Statistical Language Model
-
 @objective{ai-slm}
 @objective{ai-slm-create}
-=== Overview
 
+=== Overview
 Students construct a statistical language model by decomposing the text and computing the probabilities of different words following each other.
 
 === Launch
@@ -182,8 +180,8 @@ The best way to make sense of statistical language modeling is to try it yoursel
 For our corpus, we will use the folk song @printable-exercise{old-lady-lyrics.adoc}, which tells the nonsensical story of an old lady who swallows a fly, and the unfortunate series of events that follow.
 
 @lesson-instruction{
-- Read the lyrics on @printable-exercise{old-lady-lyrics.adoc}
-- Fill in the rest of the table at the bottom
+- Read the lyrics on @printable-exercise{old-lady-lyrics.adoc}.
+- Fill in the rest of the table at the bottom.
 }
 
 @slidebreak{Launch}
@@ -226,7 +224,7 @@ The formal word computer scientists use in this context is not "chunk" but @voca
 @slidebreak{LaunchR}
 @lesson-point{The Table of Unigrams is effectively a Bag of Words}
 
-@right{@image{images/bag-of-colors.png, 250}}
+@right{@image{images/bag-of-colors.png, 200}}
 When restricted to single words (unigrams), an n-gram model stores the exact same data as a Bag of Words, though they originate from very different concepts:
 
 - The @vocab{bag of words model} represents documents as @math{n}-dimensional coordinates, allowing them to be used for classification or regression.
@@ -258,7 +256,6 @@ The phrase "there was an old lady who swallowed a..." is repeated in our corpus!
 @A{5/5 or 100%}
 }
 
-
 @slidebreak{Investigate}
 
 In the example you just worked through, you computed the _conditional probability_ that "was" appears after the unigram "there" by dividing the number of times *`"there"` is followed by `"was"`* (five times) by the number of times we see *`"there"` followed by anything* (five times)
@@ -277,11 +274,9 @@ This fraction represents the  that "was" will come after "there":
 - Complete @printable-exercise{constructing-model.adoc}.
 }
 
-
 @slidebreak{Investigate}
 
 @QandA{
-
 @Q{What @vocab{training corpus} did we use to construct the language model?}
 @A{The song lyrics, including the title of the song, were our corpus.}
 
@@ -296,8 +291,8 @@ If you'd like to explore probability and sampling in greater depth, check out ou
 @slidebreak{Investigate}
 
 @lesson-instruction{
-- Return to @starter-file{ai-ngrams}
-- *In the Definitions Area*, build your language model by evaluating `m = build-lang-model(corpus)`, then click "Run".
+- Return to the @starter-file{ai-ngrams}
+- *In the Definitions Area*, define `m = build-lang-model(corpus)` to build your language model, then click "Run".
 - Evaluate `m` to see what it looks like!
 - To find the probability of one word following another, evaluate `next-word-probability(m, "swallowed a", "fly")`
 }
@@ -354,7 +349,6 @@ We've created helper functions for this, too:
 
 @slidebreak{Investigate-DN}
 
-
 @teacher{Note that on @printable-exercise{sampling.adoc}, questions build on one another. In other words, a student who misses Question 2 will also get Question 3 incorrect. To ensure that class runs smoothly, we encourage you to require that students check their work with a partner before moving from one question to the next. Encouraging students to annotate @printable-exercise{old-lady-lyrics.adoc} will also result in more accurate counting and therefore more correct responses!}
 
 @lesson-instruction{
@@ -372,7 +366,6 @@ We've created helper functions for this, too:
 @Q{What do you think would happen if you start with a word like "llama", which doesn't appear _at all_ in the original corpus?}
 @A{The probability of following "llama" is the same for every word: zero. Maybe `choose-completion` would choose at random?}
 }
-
 
 @slidebreak{Investigate}
 
@@ -418,6 +411,7 @@ If you're curious to see what would happen if we just kept going, evaluate `gene
 }
 
 @slidebreak{Synthesize}
+
 @QandA{
 Critics of ChatGPT and other language models raise a variety of concerns. Consider each of them, below.
 
