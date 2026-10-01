@@ -29,7 +29,6 @@
 | Preparation
 |
 @preparation{
-
 - Decide whether or not the first section of this lesson (an introduction to measures of center) is appropriate for your class. 
   * Want to get a sense of what your students already know before you decide? Looking for a do now to get the juices flowing before skipping ahead? Use our online assessment: @assessment{mean-median-modes-checkin}
   * If you are teaching this section, each group of three students will need a ruler, a marker, tape, and 5 pennies for the kinesthetic activity.
@@ -45,12 +44,12 @@
 }
 
 | Assessments
-| - You're in luck! This lesson is piloting our new custom-built assessment tool. @dist-link{pages/how-to-use-assessments.adoc, Learn more how to use them now}. Looking for a report you lost about an assessment your class already took? You can always @dist-link{QuizReports.shtml, request that we resend a report}.
-
+| 
+- You're in luck! This lesson is piloting our new custom-built assessment tool. @dist-link{pages/how-to-use-assessments.adoc, Learn more how to use them now}. Looking for a report you lost about an assessment your class already took? You can always @dist-link{QuizReports.shtml, request that we resend a report}.
 @assessments
 |===
 
-[.optpara]
+[.opt-para]
 == Optional: Mean, Median, and Mode(s)
 @objective{measures-of-center-proglang}
 
@@ -103,17 +102,13 @@ There are several different measures of central tendency. Data Scientists know w
 @A{The goal of this question is to gauge students' general level of comfort with mean, median, and mode. Take notes on the board, which you can add to as students make additional discoveries about measures of center during the instruction.}
 }
 
-
 === Investigate
 @slidebreak{Investigate}
 
 ==== Mean
-
 We can think of the @vocab{mean} as the balancing point of a dataset, or the value where the "weight" of all data points on one side is equal to the "weight" of all data points on the other side. Let's explore this idea.
 
-@teacher{
-Divide the class into groups of three. Supply each group with a marker, a ruler, tape, and 5 pennies.
-}
+@teacher{Divide the class into groups of three. Supply each group with a marker, a ruler, tape, and 5 pennies.}
 
 @slidebreak{Investigate}
 
@@ -139,7 +134,6 @@ Divide the class into groups of three. Supply each group with a marker, a ruler,
 @A{We recommend drawing some sketches on the board of students' balanced rulers, adding and labeling arrows to represent the distance from each penny to the balance point.}
 @A{The key idea is that *the total distance from the mean to the lower data points must equal the total distance from the mean to upper data points.*}
 }
-
 
 @pd-slide{
 Strategy: Building a Conceptual Understanding of Mean
@@ -167,7 +161,6 @@ To compute the mean of any dataset, we add up all of the values, and then divide
 @slidebreak{InvestigateR}
 
 ==== Median
-
 *There is another measure of center we can use* called the @vocab{median}. Instead of averaging the data points, it identifies the “middle” value, dividing the data into two groups. Half of the values are less than the median, and the other half are greater than median. In the image below, 40 Wall Street represents the median height of the dataset; three buildings are shorter, and three buildings are taller.
 
 @right{@image{images/buildings-by-height.png, 250}}
@@ -213,7 +206,6 @@ There is no middle number. So the median of this list will be the mean of the tw
 @slidebreak{Investigate}
 
 ==== Mode(s)
-
 The third measure of center is called the @vocab{mode(s)} of a dataset. The @vocab{mode(s)} of a dataset are the values that appear _most often_.
 
 Median and mean always produce one number and many datasets are what we call “unimodal”, having just one mode. But sometimes there are exceptions!
@@ -234,7 +226,6 @@ Consider the following three datasets:
 - The mode of the second dataset is 2, since 2 appears more than any other number.
 - The modes (plural!) of the last dataset are 1 and 4, because 1 and 4 both appear more often than any other element, and because they appear equally often.
 
-
 @slidebreak{Investigate}
 
 Can you find the mode(s) of this dataset?
@@ -245,7 +236,6 @@ red, green, red, yellow, blue, red, purple, purple
 
 @teacher{The mode here is red, which appears three times on the list. Highlight for students that *yes*, we can find the mode of a categorical dataset!}
 
-
 @slidebreak{Investigate}
 
 @lesson-instruction{
@@ -253,13 +243,10 @@ red, green, red, yellow, blue, red, purple, purple
 - Compare your answers with a partner's. Correct any mistakes.
 }
 
-
-
 === Synthesize
 @slidebreak{Synthesize}
 
 @QandA{
-
 @Q{If you heard that the mean age of students in a kindergarten class was 21, would you be surprised? Why or why not?}
 @A{Sample response: yes, that would be surprising. Usually students in kindergarten are 4 or 5 years old!}
 
@@ -268,15 +255,12 @@ red, green, red, yellow, blue, red, purple, purple
 
 @Q{How come we can find the mode of a categorical dataset, but not the median or the mean?}
 @A{Finding the mode does not require us to perform any arithmetic computations. Computing the median or the mean does require us to perform some arithmetic, therefore we can only use quantitative data.}
-
 }
 
 == Choosing the Right Measure of Center
-
 @objective{best-measure-of-center}
 
 === Overview
-
 Students use @proglang to compute measure of center, and then consider which measure of center is most appropriate in a given situation.
 
 === Launch
@@ -333,37 +317,27 @@ Facilitate a discussion about this new-to-them Pyret Data Visualization!
 === Investigate
 @slidebreak{Investigate-DN}
 
-
 @ifproglang{codap}{
 To compute the mean in CODAP, create a graph of randomly distributed points, then drag a quantitative column to the x-axis. From the Measure menu, select Mean. If this information is not on your Data Displays Organizer, add it now!
 }
 
 @ifproglang{pyret}{
-
-Pyret has functions that will compute mean, median, and mode.
-
-@hspace{2em} @show{ (contract "mean" '("Table" "String") "Number" )}
-
-@hspace{2em} @show{ (contract "median" '("Table" "String") "Number" )}
-
+Pyret has functions that will compute mean, median, and mode. +
+@hspace{2em} @show{ (contract "mean" '("Table" "String") "Number" )} +
+@hspace{2em} @show{ (contract "median" '("Table" "String") "Number" )} +
 @hspace{2em} @show{ (contract "modes" '("Table" "String") "List" )}
 
-@teacher{
-Note: `List` is a new data type!
-}
+@teacher{Note: `List` is a new data type!}
 
 @QandA{
 @Q{Why do you think `modes` returns a List?}
 @A{If `modes` only returned a Number, there would be no way to indicate if there are multiple modes.}
 }
-
 }
-
 
 @ifproglang{codap}{
 To compute the mean and median in CODAP, create a graph of randomly distributed points, then drag a quantitative column to the x-axis. From the `Measure` menu, select Mean or Median. *If this information is not on your Data Visualizations Organizer, add it now!*
 }
-
 
 @lesson-instruction{
 - Open the @starter-file{animals} in @proglang.
@@ -373,17 +347,13 @@ To compute the mean and median in CODAP, create a graph of randomly distributed 
 
 @teacher{Question 3 requires students to _apply_ their knowledge of mean *and* median, which can be quite difficult. Commonly, students' understanding of center does not extend beyond algorithms. Invite students to think back to what they know about histograms and histogram shape. Challenge them to think deeply about how a histogram's shape relates to its measures of center. We will continue to consider this topic in the next lesson section.}
 
-
 @slidebreak{Investigate}
-
 
 Let's summarize some of the key ideas we encountered while thinking about the best measure of center to summarize the pounds column of the animals dataset.
 
 @QandA{
-
 @Q{When is mean probably the best measure of center to use?}
 @A{The @vocab{mean} is a useful summary number when all of the points in a dataset are fairly balanced on either side of the middle.}
-
 
 @Q{Although mean is generally the best measure of center, statisticians sometimes fall back to the median. When is median the best measure of center to use?}
 @A{For skewed datasets, the @vocab{median} is a better summary value because it is less sensitive to skew. Mean is misleading for datasets with imbalance and extreme outliers.}
@@ -395,7 +365,6 @@ Let's summarize some of the key ideas we encountered while thinking about the be
 @slidebreak{Investigate}
 
 Consider how many policies or laws are informed by statistics! Knowing about measures of center helps us see through and critique misleading statements.
-
 
 @slidebreak{Investigate}
 
@@ -490,6 +459,3 @@ Complete @printable-exercise{data-cycle-practice-2.adoc, "two Data Cycles"} that
 @slidebreak{Supplemental}
 
 - @opt-starter-file{matching-modes}
-
-
-
