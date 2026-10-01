@@ -396,13 +396,16 @@
     (when (and *lesson-plan* (= section-level 2))
       (set! *section-subsections-seen*
         (cons (string-trim title) *section-subsections-seen*)))
-    (fprintf o "[.lesson-section-~a~a]~n" section-level
-      (if *additional-exercises-explicit?* ".notselfguided" ""))
-    (for ([i section-level])
-      (display #\= o))
-    (display "= " o)
-    (expand-directives:string->port title o)
-    (newline o)))
+    (let ([optional? (and (= section-level 1) *optional-flag?*)])
+      (when (= section-level 1) (set! *optional-flag?* #f))
+      (fprintf o "[.lesson-section-~a~a~a]~n" section-level
+        (if *additional-exercises-explicit?* ".notselfguided" "")
+        (if optional? ".optpara" ""))
+      (for ([i section-level])
+        (display #\= o))
+      (display "= " o)
+      (expand-directives:string->port title o)
+      (newline o))))
 
 (define (display-error-output s o)
   (display (enclose-tag "span" ""
@@ -2177,6 +2180,8 @@
                               (set! *optional-flag?* #t)
                               (display-openblock ".optpara" text  directive o)
                               (set! *optional-flag?* old-optional-flag?))]
+                           [(string=? directive "opt-section-start")
+                            (set! *optional-flag?* #t)]
                           [(or (string=? directive "starter-file")
                                (string=? directive "opt-starter-file"))
                             (let* ([lbl+text (read-commaed-group i directive read-group)]
