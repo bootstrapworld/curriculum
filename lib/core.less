@@ -652,7 +652,7 @@ div#body.LessonPlan {
   /* Special links back to older, pre-remix materials */
   .old-materials p { width:100%; background:@translucent-bg-color; color:black; text-align:center; }
 
-  .optpara {
+  .optpara, .opt-para .sectionbody {
 
     &::before {
       font-family: "Open Sans","DejaVu Sans",sans-serif;
@@ -663,12 +663,11 @@ div#body.LessonPlan {
 
     > .content > * { margin-top: 1em; }
 
-    border: 2px;
-    border-style: groove;
-    border-radius: 20px;
-    background-color: transparent !important;
-    padding: 18px;
-    margin: 10px;
+    border-left:  color-mix(in srgb, currentcolor 50%, white 50%) double 7px;
+    padding-left: 10px !important;
+    margin-left:  10px;
+    margin-top:   10px;
+    margin-bottom:10px;
 
 
     /* Override Asciidoc default here */
@@ -676,7 +675,6 @@ div#body.LessonPlan {
       background-color: inherit;
       border:           none;
       box-shadow:       none;
-      border-radius:    20px;
     }
 
   }
