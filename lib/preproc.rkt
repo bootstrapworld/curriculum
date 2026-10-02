@@ -2180,7 +2180,7 @@
                               (set! *optional-flag?* #t)
                               (display-openblock ".optpara" text  directive o)
                               (set! *optional-flag?* old-optional-flag?))]
-                           [(string=? directive "opt-section-start")
+                           [(string=? directive "opt-section")
                             (set! *optional-flag?* #t)]
                           [(or (string=? directive "starter-file")
                                (string=? directive "opt-starter-file"))
