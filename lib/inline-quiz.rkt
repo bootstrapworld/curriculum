@@ -56,11 +56,13 @@
 (define *pending-questions* (box '()))          ; reverse order; newest first
 (define *checkpoints-so-far* (box '()))         ; list of (title . questions), oldest first
 (define *pending-label* (box #f))               ; label from preceding @scrub{label: ...}
+(define *written-slugs* (box '()))               ; (slug . 'checkpoint/'assessment) written so far, this lesson
 
 (define (reset-inline-quiz-state!)
   (set-box! *pending-questions* '())
   (set-box! *checkpoints-so-far* '())
-  (set-box! *pending-label* #f))
+  (set-box! *pending-label* #f)
+  (set-box! *written-slugs* '()))
 
 (define (set-pending-quiz-label! s)
   (set-box! *pending-label* (string-trim s)))
@@ -259,19 +261,40 @@
 ;; dir is the lesson's own output directory (preproc.rkt's
 ;; *containing-directory*), passed in explicitly rather than required back
 ;; from preproc.rkt, to keep this module a leaf dependency.
-;; Returns (slug . display-title): the assessments/ folder it wrote, and the
-;; title -- for preproc.rkt to register in the lesson's Assessments list and
-;; emit a backlink.
+;; Two @checkpoint/@assessment titles in one lesson that slugify alike would
+;; write the same assessments/<slug>/ folder, the later silently replacing
+;; the earlier. Instead, keep the earlier one and report the clash: returns
+;; #t (writing nothing) if slug was already written in this lesson.
+;; Exception: the same @assessment mentioned again (e.g., offered mid-lesson
+;; and again at the end) is one cumulative quiz, not a clash -- rewrite it,
+;; since the later mention has collected every question so far.
+(define (write-quiz-json-unless-duplicate! dir kind slug title questions)
+  (define earlier-kind (cond [(assoc slug (unbox *written-slugs*)) => cdr] [else #f]))
+  (cond
+    [(and earlier-kind (not (and (eq? kind 'assessment) (eq? earlier-kind 'assessment)))) #t]
+    [else
+     (write-quiz-json! dir slug title questions)
+     (unless earlier-kind
+       (set-box! *written-slugs* (cons (cons slug kind) (unbox *written-slugs*))))
+     #f]))
+
+;; Returns (list slug display-title duplicate?): the assessments/ folder it
+;; wrote (or, if duplicate?, would have written, had an earlier one in this
+;; lesson not already claimed it), and the title -- for preproc.rkt to
+;; register in the lesson's Assessments list, emit a backlink, and warn on a
+;; duplicate. A duplicate's questions still count toward the cumulative
+;; @assessment; only its own quiz.json is skipped.
 (define (handle-checkpoint! dir title-str)
   (define raw (string-trim title-str))
   (define title (checkpoint-display-title raw))
+  (define slug (slugify raw))
   (define questions (reverse (unbox *pending-questions*)))
   (when (null? questions)
     (error 'inline-quiz "@checkpoint{~a} has no preceding questions to collect" raw))
-  (write-quiz-json! dir (slugify raw) title questions)
+  (define duplicate? (write-quiz-json-unless-duplicate! dir 'checkpoint slug title questions))
   (set-box! *checkpoints-so-far* (cons (cons title questions) (unbox *checkpoints-so-far*)))
   (set-box! *pending-questions* '())
-  (cons (slugify raw) title))
+  (list slug title duplicate?))
 
 ;; Resolved on #2888 (comment thread, schanzer/flannery-denny): a lone
 ;; @assessment{} with no preceding @checkpoint at all -- the
@@ -279,15 +302,16 @@
 ;; @checkpoint{} immediately before it just to flush the pending list.
 ;; @assessment{} sweeps up any still-pending (un-checkpointed)
 ;; questions itself, in addition to every @checkpoint's questions so far.
-;; Returns (slug . display-title), as handle-checkpoint! does.
+;; Returns (list slug display-title duplicate?), as handle-checkpoint! does.
 (define (handle-cumulative-assessment! dir title-str)
   (define raw (string-trim title-str))
   (define title (assessment-display-title raw))
+  (define slug (slugify raw))
   (define checkpoints (reverse (unbox *checkpoints-so-far*)))
   (define pending (reverse (unbox *pending-questions*)))
   (define all-questions (append (append* (map cdr checkpoints)) pending))
   (when (null? all-questions)
     (error 'inline-quiz "@assessment{~a} has no preceding questions (from @checkpoint or otherwise) to collect" raw))
   (set-box! *pending-questions* '())
-  (write-quiz-json! dir (slugify raw) title all-questions)
-  (cons (slugify raw) title))
+  (define duplicate? (write-quiz-json-unless-duplicate! dir 'assessment slug title all-questions))
+  (list slug title duplicate?))

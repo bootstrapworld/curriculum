@@ -2208,14 +2208,22 @@
                                    [result (and groups
                                                 (call-quiz-handler directive
                                                   (lambda () (apply handler groups))))])
-                              ; checkpoint/assessment return (slug . title) for the
-                              ; assessments/ folder they wrote. Register it the way
-                              ; @old-assessment does, so it shows up in the lesson's
+                              ; checkpoint/assessment return (list slug title duplicate?)
+                              ; for the assessments/ folder they wrote. Register it the
+                              ; way @old-assessment does, so it shows up in the lesson's
                               ; Assessments list (which the backlink below jumps to) and
                               ; isn't flagged by store-assessments as unreferenced.
-                              ; Skip both if the call itself was skipped.
+                              ; Skip both if the call itself was skipped. A duplicate
+                              ; (an earlier one in this lesson already wrote that folder)
+                              ; was kept rather than overwritten -- say so.
                               (when (and result (member directive '("checkpoint" "assessment")))
-                                (let ([slug (car result)] [title (cdr result)])
+                                (let ([slug (first result)] [title (second result)])
+                                  (when (third result)
+                                    (warnmsg "~a: @~a \"~a\" would write assessments/~a/, which an earlier @checkpoint or @assessment in this lesson already wrote -- keeping the earlier one; give this one a distinct title.~a"
+                                             (errmessage-context) directive title slug
+                                             (if (string=? directive "checkpoint")
+                                                 " (Its questions still count toward the lesson's @assessment.)"
+                                                 "")))
                                   (unless (assoc slug *assessments-met*)
                                     (set! *assessments-met*
                                       (cons (cons slug title) *assessments-met*)))
