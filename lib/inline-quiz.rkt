@@ -182,10 +182,10 @@
   (define mode (string-downcase (string-trim order-mode-str)))
   (define items (parse-checkbox-list list-str))  ; (checked? . text), in written order
   (when (null? items)
-    (error 'inline-quiz "@multipleChoice has no options"))
+    (error 'inline-quiz "@multiple-choice has no options"))
   (define answers (filter car items))
   (when (null? answers)
-    (error 'inline-quiz "@multipleChoice has no option marked [x]"))
+    (error 'inline-quiz "@multiple-choice has no option marked [x]"))
   (define answer-texts (map cdr answers))
   (define answer-value (if (= (length answer-texts) 1) (first answer-texts) answer-texts))
   (define base-prompt (hash 'prompt (quiz-text prompt-str)))
@@ -200,7 +200,7 @@
                   'sortAnswers #t)]
       [(member mode '("shuffle" "random"))
        (hash-set base-prompt 'distractors (map cdr (filter (lambda (it) (not (car it))) items)))]
-      [else (error 'inline-quiz "@multipleChoice's order-mode must be empty, sorted, shuffle, random, or fixed; got ~s" order-mode-str)]))
+      [else (error 'inline-quiz "@multiple-choice's order-mode must be empty, sorted, shuffle, random, or fixed; got ~s" order-mode-str)]))
   (add-question!
     (hash 'type "MultipleChoice" 'prompt prompt 'answer (hash 'answer answer-value))))
 
@@ -259,7 +259,9 @@
 ;; dir is the lesson's own output directory (preproc.rkt's
 ;; *containing-directory*), passed in explicitly rather than required back
 ;; from preproc.rkt, to keep this module a leaf dependency.
-;; Returns the display title string (for preproc.rkt to emit into the HTML).
+;; Returns (slug . display-title): the assessments/ folder it wrote, and the
+;; title -- for preproc.rkt to register in the lesson's Assessments list and
+;; emit a backlink.
 (define (handle-checkpoint! dir title-str)
   (define raw (string-trim title-str))
   (define title (checkpoint-display-title raw))
@@ -269,7 +271,7 @@
   (write-quiz-json! dir (slugify raw) title questions)
   (set-box! *checkpoints-so-far* (cons (cons title questions) (unbox *checkpoints-so-far*)))
   (set-box! *pending-questions* '())
-  title)
+  (cons (slugify raw) title))
 
 ;; Resolved on #2888 (comment thread, schanzer/flannery-denny): a lone
 ;; @assessment{} with no preceding @checkpoint at all -- the
@@ -277,7 +279,7 @@
 ;; @checkpoint{} immediately before it just to flush the pending list.
 ;; @assessment{} sweeps up any still-pending (un-checkpointed)
 ;; questions itself, in addition to every @checkpoint's questions so far.
-;; Returns the display title string (for preproc.rkt to emit into the HTML).
+;; Returns (slug . display-title), as handle-checkpoint! does.
 (define (handle-cumulative-assessment! dir title-str)
   (define raw (string-trim title-str))
   (define title (assessment-display-title raw))
@@ -288,4 +290,4 @@
     (error 'inline-quiz "@assessment{~a} has no preceding questions (from @checkpoint or otherwise) to collect" raw))
   (set-box! *pending-questions* '())
   (write-quiz-json! dir (slugify raw) title all-questions)
-  title)
+  (cons (slugify raw) title))

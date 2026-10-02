@@ -258,6 +258,55 @@
 (define read-group (*make-read-group #:code (lambda z (apply code z))
                                      #:errmessage-file-context errmessage-file-context))
 
+;; Inline quiz directives (see inline-quiz.rkt) take a fixed number of
+;; {...} groups. read-group needs each group's "{" to come immediately; when
+;; one is missing it prints only a terse "Ill-formed metadata directive ...
+;; #\newline" and returns "", and the resulting empty group then trips a hard
+;; error that aborts the rest of the lesson (leaving e.g. .index-objectives.asc
+;; unwritten, so asciidoctor reports missing include files too). So peek for
+;; each "{" first, and if one is missing, say what the directive expects and
+;; which question it was, and return #f so the caller skips just that question.
+;;
+;; group-specs: list of (name . multiline?), in order.
+(define (quiz-snippet s)
+  (let ([s (string-trim (regexp-replace* #px"\\s+" s " "))])
+    (if (> (string-length s) 60) (string-append (substring s 0 60) "...") s)))
+
+(define (read-quiz-groups i directive group-specs)
+  (let loop ([specs group-specs] [acc '()])
+    (cond
+      [(null? specs) (reverse acc)]
+      [(eqv? (peek-char i) #\{)
+       (loop (cdr specs) (cons (read-group i directive #:multiline? (cdar specs)) acc))]
+      [else
+       (let ([n-expected (length group-specs)]
+             [n-found (length acc)]
+             [first-name (car (car group-specs))])
+         (warnmsg "~a: @~a expects ~a {...} groups, ~a, but found only ~a~a~a -- skipping it."
+                  (errmessage-context) directive n-expected
+                  (apply string-append (map (lambda (s) (format "{~a}" (car s))) group-specs))
+                  n-found
+                  (if (null? acc) "" (format ", the first being \"~a\"" (quiz-snippet (last acc))))
+                  (if (and (>= n-expected 2) (= n-found (sub1 n-expected))
+                           (not (string=? first-name "prompt")))
+                      (format ". If that first group is the prompt, add a leading {} for {~a}" first-name)
+                      "")))
+       #f])))
+
+;; Runs an inline-quiz.rkt handler, turning its errors (no option marked
+;; [x], malformed range, ...) into a warning that skips just this question,
+;; instead of an exception that aborts the rest of the lesson.
+(define (call-quiz-handler directive thunk)
+  (with-handlers ([exn:fail?
+                    (lambda (e)
+                      (let ([msg (regexp-replace #rx"^inline-quiz: " (exn-message e) "")])
+                        ; Some handler messages already lead with the directive
+                        ; name (@multiple-choice has no options); don't repeat it.
+                        (warnmsg "~a: ~a -- skipping it." (errmessage-context)
+                                 (if (regexp-match? #rx"^@" msg) msg (format "@~a: ~a" directive msg))))
+                      #f)])
+    (thunk)))
+
 (define (skip-1-newline-if-possible i o)
   (let loop ()
     (let ([c (peek-char i)])
@@ -2134,35 +2183,43 @@
                             (unless *lesson-plan*
                               (error 'ERROR "~a (~a) valid only in lesson plan"
                                      directive (errmessage-file-context)))
-                            (case directive
-                              [("short-answer")
-                               (let* ([required-flag (read-group i directive)]
-                                      [range (read-group i directive)]
-                                      [prompt (read-group i directive)]
-                                      [answer (read-group i directive)])
-                                 (handle-shortAnswer! required-flag range prompt answer))]
-                              [("multiple-choice")
-                               (let* ([order-mode (read-group i directive)]
-                                      [prompt (read-group i directive)]
-                                      [options (read-group i directive #:multiline? #t)])
-                                 (handle-multipleChoice! order-mode prompt options))]
-                              [("card-sort")
-                               (let* ([ordered-flag (read-group i directive)]
-                                      [prompt (read-group i directive)]
-                                      [cards (read-group i directive #:multiline? #t)])
-                                 (handle-cardSort! ordered-flag prompt cards))]
-                              [("categorize")
-                               (let* ([prompt (read-group i directive)]
-                                      [groups (read-group i directive #:multiline? #t)])
-                                 (handle-categorize! prompt groups))]
-                              [("quiz-json")
-                               (handle-quizJSON! (read-group i directive #:multiline? #t))]
-                              [("checkpoint")
-                               (let ([title (handle-checkpoint! *containing-directory* (read-group i directive))])
-                                 (fprintf o "pass:[<a href=\"#assessments-anchor\" class=\"assessment-backlink\">&#x2B06;&#xFE0F; ~a</a>]" title))]
-                              [("assessment")
-                               (let ([title (handle-cumulative-assessment! *containing-directory* (read-group i directive))])
-                                 (fprintf o "pass:[<a href=\"#assessments-anchor\" class=\"assessment-backlink\">&#x2B06;&#xFE0F; ~a</a>]" title))])]
+                            (let* ([specs
+                                     (case directive
+                                       [("short-answer") '(("required" . #f) ("numeric-range" . #f)
+                                                           ("prompt" . #f) ("answer" . #f))]
+                                       [("multiple-choice") '(("order-mode" . #f) ("prompt" . #f)
+                                                              ("options" . #t))]
+                                       [("card-sort") '(("ordered" . #f) ("prompt" . #f) ("cards" . #t))]
+                                       [("categorize") '(("prompt" . #f) ("groups" . #t))]
+                                       [("quiz-json") '(("json" . #t))]
+                                       [("checkpoint" "assessment") '(("title" . #f))])]
+                                   [groups (read-quiz-groups i directive specs)]
+                                   [handler
+                                     (case directive
+                                       [("short-answer") handle-shortAnswer!]
+                                       [("multiple-choice") handle-multipleChoice!]
+                                       [("card-sort") handle-cardSort!]
+                                       [("categorize") handle-categorize!]
+                                       [("quiz-json") handle-quizJSON!]
+                                       [("checkpoint")
+                                        (lambda (t) (handle-checkpoint! *containing-directory* t))]
+                                       [("assessment")
+                                        (lambda (t) (handle-cumulative-assessment! *containing-directory* t))])]
+                                   [result (and groups
+                                                (call-quiz-handler directive
+                                                  (lambda () (apply handler groups))))])
+                              ; checkpoint/assessment return (slug . title) for the
+                              ; assessments/ folder they wrote. Register it the way
+                              ; @old-assessment does, so it shows up in the lesson's
+                              ; Assessments list (which the backlink below jumps to) and
+                              ; isn't flagged by store-assessments as unreferenced.
+                              ; Skip both if the call itself was skipped.
+                              (when (and result (member directive '("checkpoint" "assessment")))
+                                (let ([slug (car result)] [title (cdr result)])
+                                  (unless (assoc slug *assessments-met*)
+                                    (set! *assessments-met*
+                                      (cons (cons slug title) *assessments-met*)))
+                                  (fprintf o "pass:[<a href=\"#assessments-anchor\" class=\"assessment-backlink\">&#x2B06;&#xFE0F; ~a</a>]" title))))]
                            [(string=? directive "Bootstrap")
                             (fprintf o "https://www.bootstrapworld.org/[Bootstrap]")]
                            [(hash-ref *simple-directives* (string->symbol directive) #f)
