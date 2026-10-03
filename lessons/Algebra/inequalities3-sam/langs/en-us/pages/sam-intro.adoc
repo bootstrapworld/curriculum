@@ -1,10 +1,5 @@
 = Sam the Butterfly
 
-++++
-<style>
-#content .right{margin-right: 20ex; }
-</style>
-++++
 
 @link-instructions{Open the @starter-file{inequalities-sam} starter file and click “Run”. (Hi, Sam!) }
 Move Sam around the screen using the arrow keys.
@@ -13,11 +8,11 @@ Move Sam around the screen using the arrow keys.
 
 @n What do you Notice about the program?
 
-@blanklines{2}{}
+@blanklines{3}{}
 
 @n What do you Wonder?
 
-@blanklines{2}{}
+@blanklines{3}{}
 
 @n What do you see when Sam is at (0,0)?  Why is that?
 
@@ -29,31 +24,35 @@ Move Sam around the screen using the arrow keys.
 
 @n Sam is in a 640 × 480 yard. Sam’s mom wants Sam to stay in sight... _How far to the left and right can Sam go and still remain visible?_
 
-@blanklines{2}{
+@blanklines{3}{
 @ifsoln{Sam can go to the left until their x-coordinate is less than -40, and to the right until x > 680}
 }
 
 @vspace{1em}
 
-
+@n Write an inequality to complete each of the following statements:
 [cols="1a,1a",stripes="none",grid="none",frame="none"]
 |===
-2+| @n Write an inequality to complete each of the following statements:
 | @hspace{2em}_Sam hasn't gone off the left edge of the screen as long as…_
-@vspace{3ex}
 @fitb{}{@ifsoln{x > -50 +
 some students will also correctly say: x &#8805; -40}}
 | @hspace{2em}_Sam hasn't gone off the right edge of the screen as long as…_
-@vspace{3ex}
 @fitb{}{@ifsoln{x < 690 +
 some students will also correctly say: x &#8804; 680}}
-2+| @n Draw the Circle of Evaluation for each inequality you wrote above.
-| @ifnotsoln{@vspace{30ex}}
-@showsoln{(coe '(> x -50))}
+|===
+
+@n Draw the Circle of Evaluation for each inequality you wrote above.
+[.FillVerticalSpace, cols="1a,1a",stripes="none", grid="none",frame="none"]
+|===
+| @showsoln{(coe '(> x -50))}
 | @showsoln{(coe '(< x 690))}
+|===
+
 @ifproglang{wescheme}{
-2+| @n Translate each of the Circles of Evaluation into code.
+@n Translate each of the Circles of Evaluation into code.
+[cols="^1a,^1a",stripes="none",grid="none",frame="none"]
+|===
 |code: @fitb{}{@showsoln{(code '(> x -50))}}
 |code: @fitb{}{@showsoln{(code '(< x 690))}}
-}
 |===
+}

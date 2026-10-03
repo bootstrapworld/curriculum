@@ -10,6 +10,7 @@
 
 /* Give more space for the bottom row */
 table { grid-template-rows: 2fr 3fr !important; }
+#content .topTable { height: 2in; }
 
 /* Force the code solution to the bottom of the row */
 .content .paragraph:nth-child(3) p { position: absolute; bottom: 0; }
@@ -41,12 +42,12 @@ You’ll be investigating these functions with your partner:
 
 *Circle of Evaluation for an "image of your name":*
 
-@ifsoln{
-@show{(coe name-sexp) }
-@vspace{7ex}
-}
 
-@ifnotsoln{@vspace{27ex}}
+[.topTable, frame="none"]
+|===
+| @ifsoln{ @show{(coe name-sexp)} }
+|===
+
 
 *Code for an "image of your name":* @fitb{}{@showsoln{(code name-sexp)}}
 

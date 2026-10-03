@@ -90,7 +90,7 @@ You can skip this section and scroll down to your operating system if you're rea
 
 * Most packages can be installed via `brew`, with the following terminal command:
 +
-  brew install gnu-sed curl make coreutils gnu-tar lua asciidoctor pkg-config cairo pango libpng jpeg giflib librsvg pixman nvm jq racket findutils
+  brew install gnu-sed curl make coreutils gnu-tar lua asciidoctor pkg-config cairo pango libpng jpeg giflib librsvg pixman nvm jq racket findutils mkcert
 
 * Mac users will also need to add these unix tools to their `$PATH`. In the terminal, run `open ~/.zshrc` to edit your configuration file. Add the following to the bottom of the file, then save and quit-and-reopen your terminal:
 +
@@ -102,6 +102,8 @@ You can skip this section and scroll down to your operating system if you're rea
   fi
 
 * Finally, run `npm install` to download and install the various node modules described above
+
+* If you want to live-test features that require being logged into BootstrapWorld.org (such as quiz link generation), run `mkcert --install` and follow the instructions in your terminal
 
 === In Unix or WSL...
 
@@ -122,6 +124,9 @@ You can skip this section and scroll down to your operating system if you're rea
 
 * Finally, run `npm install` to download and install the various node modules described above
 
+* If you want to live-test features that require being logged into BootstrapWorld.org (such as quiz link generation), run `mkcert --install` and follow the instructions in your terminal
+
+
 === Additional Tools for Sublime
 
 If you use the https://www.sublimetext.com/[Sublime Text Editor], we've also created some tools that make authoring more pleasant and readable.
@@ -134,6 +139,10 @@ If you use the https://www.sublimetext.com/[Sublime Text Editor], we've also cre
 * Copy both files from the `curriculum/lib/sublime-settings` folder into your `Sublime Text/Packages/User` folder.
 * Quit and relaunch Sublime Text.
 * Navigate to the View dropdown menu and select Syntax. Switch the mode from Asciidoctor to Asciidoctor+ when viewing an .adoc file. Sublime will remember your preference for all future adoc files.
+
+== Authoring using the hot-reload server
+
+The most common modality for authors is to launch the authoring server (`./author`), then simply edit the curriculum files using Sublime, VSCode, or your favorite text editor. Edits will automatically trigger a rebuild of the affected files, and your browser will automatically reload to any files that have changed.
 
 == Building and deploying using the Makefile
 
@@ -152,8 +161,13 @@ to populate the `distribution/` directory with the built documentation.
 - `clean` -- removes `distribution/` so the next make builds from
   scratch. If this is the only option, there is no build done!
 
-- `csv` -- makes a CSV version of the entire converted (`en-us` version
-  only, for now) docs in `distribution/en-us/curriculum.csv`
+- `coverage` -- builds and additionally generates the standards-coverage
+  report. By default this isn't done, since it costs time on every build
+  for something a normal edit loop never needs
+
+- `debug` -- equivalent to `force DEBUGADOC=yes`: a full clean rebuild
+  with Asciidoctor run individually on each file, to help locate AsciiDoc
+  syntax errors
 
 - `deploy` -- deploys. (See section on "Deployment")
 
@@ -165,12 +179,27 @@ to populate the `distribution/` directory with the built documentation.
   the documents to ensure they are valid. By default, this check isn't
   done to save time
 
+- `mdquiz` -- builds the quiz/assessment pages (equivalent to running
+  `./build-mdquiz`; see link:README-mdquiz.adoc[])
+
+- `quick-deploy` -- re-runs just the deploy-to-hostinger step, without
+  rebuilding `distribution/`, PDFs, quizzes, or screenshots first. Useful
+  when only the already-built `distribution/` needs to be re-pushed
+
+- `screenshots` -- (re)generates the screenshot images embedded in some
+  pages, without doing anything else
+
+- `self-guided` -- builds the production bundles for self-guided lessons
+  (equivalent to running `./build-all-self-guideds`; see
+  link:README-self-guided.adoc[]). This is processor-intensive and is
+  only needed before deployment
+
 `make` can take the following variable settings on the command line to guide the
 build:
 
 - `NATLANG=lang` -- builds for the natural language `lang`. The default is
-  `en-us` (**En**glish *US*) . Currently, the only other language that has
-  significant support is `es-mx` (**es**pañol **m**e**x**icano)
+  `en-us` (**En**glish *US*) . The other languages with significant support
+  are `es-mx` (**es**pañol **m**e**x**icano) and `fr` (**fr**ançais)
 
 - `SEMESTER=season` -- typically either `fall` or
   `spring`. The default is `fall`
@@ -624,7 +653,6 @@ various standards. For now, these are:
 
   standards-cc-ela-dictionary.json
   standards-cc-math-dictionary.json
-  standards-cc-states-dictionary.json
   standards-csta-dictionary.json
   standards-ia-dictionary.json
   standards-k12cs-dictionary.json
@@ -800,17 +828,13 @@ constituent lessons are collected into a file
 `pathway-standards.shtml` that is linked to in the narrative
 page.
 
-// doesn't look like we're using shadowing glossaries anymore?
-
-There can be auxiliary glossary files in `lib/` that can be used
-to _shadow_ the main glossary for particular lessons. For now,
-the only such shadowing glossary file is `glossary-terms-ss.json`,
-used for Social-Studies lessons.
-
-In order for a lesson `lessonA` to use a shadowing glossary, its
-directory, i.e., `lessons/lessonA/langs/en-us`, should contain a
-file `shadow-glossary.txt` that contains the name of the
-shadowing glossary file.
+The preprocessor still supports _shadowing_ the main glossary for
+particular lessons -- a lesson's directory, i.e.,
+`lessons/lessonA/langs/en-us`, can contain a file
+`shadow-glossary.txt` naming an auxiliary glossary file in `lib/` to
+use instead of `glossary-terms.json` for that lesson -- but no such
+shadowing glossary file currently exists in the repo, so this
+mechanism is unused at the moment.
 
 ===== Syntax of the glossary-terms.json file
 

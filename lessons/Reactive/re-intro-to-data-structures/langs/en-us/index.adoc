@@ -24,6 +24,9 @@
 
 == Review
 
+=== Overview
+Students go over the critical elements of the Design Recipe, defining functions, and more.
+
 === Launch
 @slidebreak{Launch}
 In the previous unit, you reviewed almost everything from Bootstrap:Algebra including data types, Contracts, and the Design Recipe. In this unit you will go above and beyond all that, and learn an entirely new construct that will be the basis for everything you’ll do in Bootstrap:Reactive.
@@ -124,18 +127,33 @@ For more practice, turn to @printable-exercise{double-width.adoc} in your workbo
 }
 
 @teacher{
-Check students understanding: Why do we use variables in place of specific values? Why is it important to have descriptive variable names, as opposed to n or x? Remind students about nested functions: A function whose range is a number can be used inside of a function requiring a number in its domain, as in `circle(2 * 25, "outline", "red")`.
+Check students understanding:   Remind students about nested functions: A function whose range is a number can be used inside of a function requiring a number in its domain, as in `circle(2 * 25, "outline", "red")`.
+}
+
+
+=== Synthesize
+@QandA{
+@Q{Why do we use variables in place of specific values?}
+@A{Variables can *change*, while values cannot. This allows us to save work (rather than re-writing the same expression over and over), and create new programs that were not possible before (changing position @arrow animation, changing key @arrow key commands, etc).}
+
+@Q{Why is it important to have descriptive variable names, as opposed to n or x?}
+@A{Readability!}
 }
 
 == Introducing Structures
 
+=== Overview
+Students explore a practical application of data structures - diagonal movement that cannot be reproduced any other way.
+
+=== Launch
+@slidebreak{Launch}
 @lesson-instruction{
 Open the @starter-file{package-delivery} file on your computer and press "Run". What happens?
 }
 
 The drone tries to deliver a package directly to a house, but the box falls straight down, outside of the delivery zone. We want the package to fall _diagonally_, and land right in front of the house. Let’s take a look at the code to see why it falls into the road instead. There are a few new concepts in this file, but first, let’s focus on what you already know.
 
-@slidebreak{Investigate}
+@slidebreak{Launch}
 
 @QandA{
 Look at the function defined here called `next-position`.
@@ -144,7 +162,7 @@ Look at the function defined here called `next-position`.
 @Q{What does `next-position` do with its inputs?}
 }
 
-@slidebreak{Investigate}
+@slidebreak{Launch}
 
 This function takes in two numbers, representing the x- and y-coordinate of the box, but it only produces a new y-coordinate (after subtracting 5). If only the y-coordinate is changing, the box will always fall straight down. To reach the house, it will have to fall diagonally.
 
@@ -153,14 +171,14 @@ This function takes in two numbers, representing the x- and y-coordinate of the 
 @Q{How should its y-coordinate change?}
 }
 
-@slidebreak{Investigate}
+@slidebreak{Launch}
 
 Functions can return only one thing at a time, but we want to return a new x- *and* a y-coordinate in order to make the box fall diagonally. Thankfully, we have a way to combine multiple things within one container, called a @vocab{Data Structure}.
 
 For this project, we’ve created a structure for you to use called `DeliveryState`, which contains two Numbers. These represent an x and a y-coordinate.
 
 
-@slidebreak{Investigate}
+@slidebreak{Launch}
 
 @lesson-instruction{
 Look at line 5, where we’ve defined `DeliveryState`. We’ll go through the new syntax for defining a data structure, because very soon you’ll be defining brand new structures of your own!
@@ -177,7 +195,7 @@ end
  
 - On the first line, we’ve written a comment that describes the structure. We’re calling it `DeliveryState`, and it contains Numbers for the x- and y-coordinate.
 
-@slidebreak{Investigate}
+@slidebreak{Launch}
 
 @ifslide{
 ----
@@ -192,7 +210,7 @@ end
 
 You’re already familiar with built-in data types like `Number`, `String`, `Image` and `Boolean`. The `data` keyword allows us to create _brand new data types!_! We're making a data type called `DeliveryState`.
 
-@slidebreak{Investigate}
+@slidebreak{Launch}
 
 @ifslide{
 ----
@@ -207,7 +225,7 @@ end
 
 We choose this name, because it represents the current state -- or position -- of the package being delivered. Pyret lets us write any name after `data`, but it’s good habit to choose a meaningful name and capitalize it.
 
-@slidebreak{Investigate}
+@slidebreak{Launch}
 
 @ifslide{
 ----
@@ -222,7 +240,7 @@ end
 
 The next line begins with the "bar symbol" (`|`), followed by the name of the @vocab{constructor} function for this structure: `delivery`. To create a `DeliveryState`, we can use the `delivery` @vocab{constructor} function with its inputs (x and y).
 
-@slidebreak{Investigate}
+@slidebreak{Launch}
 
 @ifslide{
 ----
@@ -237,6 +255,7 @@ end
 
 This @vocab{data block} tells us that we’re defining a new data type called `DeliveryState`, whose constructor function `delivery` takes in two Numbers: x and y. Once we’ve listed each input and its data type, we finish defining the structure with the `end` keyword, just like finishing an `example` block.
 
+=== Investigate
 @slidebreak{Investigate}
 
 @lesson-instruction{

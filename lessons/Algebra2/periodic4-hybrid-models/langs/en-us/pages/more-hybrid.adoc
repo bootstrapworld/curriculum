@@ -51,7 +51,7 @@ error from predictions made with `hybrid-all` than with `hybrid-modern`."
 
 You've had a lot of practice comparing the @vocab{S-values} of two different models on the same dataset (including what you just did on this page!), to quantify the error between them. *But can we compare the @vocab{S-values} for one model fit to _two different datasets?_*
 
-@n In the first row of the table below, we've fit the `periodic-cos` model to all three datasets.
+@n In the first row of the table below, we've fit the `cosine` model to all three datasets.
 
 @vspace{1em}
 
@@ -63,7 +63,7 @@ You've had a lot of practice comparing the @vocab{S-values} of two different mod
 | `modern-table`
 | `co2-table`
 
-| @vocab{S-value} of `periodic-cos`
+| @vocab{S-value} of `cosine`
 | ~1.2ppm
 | ~17.76ppm
 | ~55.89ppm
@@ -82,9 +82,9 @@ You've had a lot of practice comparing the @vocab{S-values} of two different mod
 
 @vspace{1em}
 
-The `periodic-cos` model was built from `recent-table`, _so there's no surprise_ it was a good fit for `recent-table`! But for datasets that reach farther and farther back in time, that model fits worse and worse.
+The `cosine` model was built from `recent-table`, _so there's no surprise_ it was a good fit for `recent-table`! But for datasets that reach farther and farther back in time, that model fits worse and worse.
 
-@n It's tempting to compare the @math{\text{S-values}} in this table, to quantify how much more error we'd expect from the `periodic-sin` model for the `co2-table`. *Why shouldn't we?*
+@n It's tempting to compare the @math{\text{S-values}} in this table, to quantify how much more error we'd expect from the `sine` model for the `co2-table`. *Why shouldn't we?*
 
 @blanklines{2}{
 @ifsoln{@math{\text{S-values}} only mean something when we consider them within the context of the range of the data. We can compare @math{\text{S-values}} for different models when they're applied to the same dataset, but, in this case, we're looking at datasets with very different ranges!}

@@ -9,7 +9,8 @@
 .contracts { background-color: #f7f7f8 !important; }
 
 /* Give more space for the bottom row */
-table { grid-template-rows: 2fr 3fr !important; }
+#content table { grid-template-rows: 2fr 3fr !important; }
+#content .topTable { height: 2in; }
 
 /* Force the code solution to the bottom of the row */
 .content .paragraph:nth-child(3) p { position: absolute; bottom: 0; }
@@ -39,8 +40,10 @@ You’ll be investigating these functions with your partner:
 
 *Circle of Evaluation:*
 
-@showsoln{(coe violet-tri) }
-@vspace{10ex}
+[.topTable, frame="none"]
+|===
+| @ifsoln{ @show{(coe violet-tri) } }
+|===
 
 *Code:* @fitb{}{@showsoln{(code violet-tri) }}
 

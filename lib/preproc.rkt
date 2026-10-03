@@ -77,6 +77,9 @@
 
 (define *first-level-section-titles* '())
 
+(define *current-section-title* #f)       ; title of the current == section
+(define *section-subsections-seen* '())   ; === subsections seen so far in it
+
 (define *natlang-glossary-list* '())
 
 (define *simple-directives*
@@ -405,6 +408,24 @@
     (if (eof-object? c) #f
         (char=? c #\=))))
 
+(define *required-subsections* '("Overview" "Launch" "Investigate" "Synthesize"))
+
+(define (exempt-from-section-check?)
+  (let ([repodir-file (build-path *containing-directory* ".repodir.txt.kp")])
+    (and (file-exists? repodir-file)
+         (let ([repodir (string-trim (file->string repodir-file))])
+           (regexp-match? #rx"/Projects/|/Hour-of-Code/" repodir)))))
+
+(define (check-and-reset-section-subsections)
+  (when (and *lesson-plan* *current-section-title* (not (exempt-from-section-check?)))
+    (for-each (lambda (sub)
+                (unless (member sub *section-subsections-seen*)
+                  (warnmsg "~a: section \"~a\" missing === ~a"
+                          (errmessage-context) *current-section-title* sub)))
+              *required-subsections*))
+  (set! *current-section-title* #f)
+  (set! *section-subsections-seen* '()))
+
 (define (display-section-markup i o)
   (let ([section-level
           (let loop ([section-level 0])
@@ -417,14 +438,24 @@
       (set! *additional-exercises-explicit?* #t))
     (when (and *lesson-plan* (= section-level 1))
       (let ([section-title (string-trim (regexp-replace "@duration{(.*)}" title "(\\1)"))])
-        (set! *first-level-section-titles* (cons section-title *first-level-section-titles*))))
-    (fprintf o "[.lesson-section-~a~a]~n" section-level
-      (if *additional-exercises-explicit?* ".notselfguided" ""))
-    (for ([i section-level])
-      (display #\= o))
-    (display "= " o)
-    (expand-directives:string->port title o)
-    (newline o)))
+        (set! *first-level-section-titles* (cons section-title *first-level-section-titles*))
+        ; check previous == section's subsections, then start tracking new one
+        (check-and-reset-section-subsections)
+        (unless (regexp-match #rx"Additional Exercises" title)
+          (set! *current-section-title* section-title))))
+    (when (and *lesson-plan* (= section-level 2))
+      (set! *section-subsections-seen*
+        (cons (string-trim title) *section-subsections-seen*)))
+    (let ([optional? (and (= section-level 1) *optional-flag?*)])
+      (when (= section-level 1) (set! *optional-flag?* #f))
+      (fprintf o "[.lesson-section-~a~a~a]~n" section-level
+        (if *additional-exercises-explicit?* ".notselfguided" "")
+        (if optional? ".optpara" ""))
+      (for ([i section-level])
+        (display #\= o))
+      (display "= " o)
+      (expand-directives:string->port title o)
+      (newline o))))
 
 (define (display-error-output s o)
   (display (enclose-tag "span" ""
@@ -1538,6 +1569,8 @@
   (set! *natlang* (string->symbol (getenv "NATLANG")))
   (set! *optional-flag?* #f)
   (set! *first-level-section-titles* '())
+  (set! *current-section-title* #f)
+  (set! *section-subsections-seen* '())
   (set! *possibly-invalid-page?* #f)
   (set! *definitions* '())
   (set! *local-scheme-definitions* '())
@@ -2269,6 +2302,8 @@
                               (set! *optional-flag?* #t)
                               (display-openblock ".optpara" text  directive o)
                               (set! *optional-flag?* old-optional-flag?))]
+                           [(string=? directive "opt-section")
+                            (set! *optional-flag?* #t)]
                           [(or (string=? directive "starter-file")
                                (string=? directive "opt-starter-file"))
                             (let* ([lbl+text (read-commaed-group i directive read-group)]
@@ -2779,6 +2814,9 @@
                       (warnmsg "~a: starter file ~s mentioned in @preparation but not used"
                               (errmessage-context) sf)))
                   *starter-files-used-in-preparation*)
+
+        ; check the last == section's subsections
+        (check-and-reset-section-subsections)
 
         )
 

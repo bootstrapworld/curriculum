@@ -65,15 +65,16 @@
     }
     #requestOutput {
       display: none;
-      background: var(--light-grey);
-      border: 1px solid var(--hover-bg-grey);
       border-radius: 8px;
-      padding: 16px;
+      padding: 14px 18px;
       margin-top: 24px;
-      white-space: pre-wrap;
-      font-family: 'Courier New', monospace;
-      font-size: 0.9em;
-      color: var(--text-black);
+      font-size: 0.95em;
+    }
+    #requestOutput.success {
+      background: #e4f4e4;
+      border: 1px solid #bfe0bf;
+      color: #006300;
+      font-weight: 600;
     }
   </style>
   <link rel="stylesheet" type="text/css" href="lib/wp-adaptors/style-overrides.css">
@@ -112,7 +113,7 @@
                     <button type="submit" id="requestReportBtn">Send me results for this time period</button>
                   </form>
 
-                  <pre id="requestOutput"></pre>
+                  <div id="requestOutput"></div>
                 </div>
             </div>
         </div>
@@ -137,32 +138,58 @@
         form.style.display = 'block';
       }
 
-      // Placeholder for now: builds and displays a mock request object.
-      // Once a real reporting endpoint exists, this is where we'd POST
-      // { teacher_hash, start_date, end_date } to it instead.
-      function requestReport(event) {
+      async function requestReport(event) {
         event.preventDefault();
 
-        const form = document.getElementById('reportForm');
-        const start = document.getElementById('startDate').value;
-        const end = document.getElementById('endDate').value;
+        const form   = document.getElementById('reportForm');
+        const start  = document.getElementById('startDate').value;
+        const end    = document.getElementById('endDate').value;
         const output = document.getElementById('requestOutput');
+        const btn    = document.getElementById('requestReportBtn');
+
+        output.style.display = 'none';
+        output.className = '';
 
         if (start > end) {
+          output.className = 'quizReportsError';
           output.style.display = 'block';
           output.textContent = 'Start date must be on or before the end date.';
           return false;
         }
 
-        const mockRequest = {
-          teacher_hash: form.dataset.teacherId,
-          start_date: start,
-          end_date: end,
-          requested_at: new Date().toISOString()
-        };
+        btn.disabled = true;
+        btn.textContent = 'Sending request…';
 
-        output.style.display = 'block';
-        output.textContent = 'Mock request created:\n\n' + JSON.stringify(mockRequest, null, 2);
+        try {
+          const response = await fetch('https://bootstrapworld.org/data/RequestReport.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              teacher_hash: form.dataset.teacherId,
+              start_date: start,
+              end_date: end
+            })
+          });
+          const data = await response.json();
+          output.style.display = 'block';
+          if (data.success) {
+            btn.style.display = 'none';
+            output.className = 'success';
+            output.textContent = data.message;
+          } else {
+            output.className = 'quizReportsError';
+            output.textContent = data.error || 'Something went wrong. Please try again.';
+            btn.disabled = false;
+            btn.textContent = 'Send me results for this time period';
+          }
+        } catch (err) {
+          output.style.display = 'block';
+          output.className = 'quizReportsError';
+          output.textContent = 'Network error. Please check your connection and try again.';
+          btn.disabled = false;
+          btn.textContent = 'Send me results for this time period';
+        }
+
         return false;
       }
     </script>
