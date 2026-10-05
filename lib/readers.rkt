@@ -7,6 +7,7 @@
   read-backticked-text
   string-to-form
   *make-read-group
+  read-commaed-elts
   read-commaed-group
   ignorespaces
   spaces-till-newline-inclusive
@@ -122,9 +123,8 @@
                          ""])))])
     read-group))
 
-(define (read-commaed-group i directive read-group)
-  (let* ([g (read-group i directive)]
-         [n (string-length g)]
+(define (read-commaed-elts g directive)
+  (let* ([n (string-length g)]
          [r (let loop ([i 0] [r '()])
               (if (>= i n)
                   (reverse r)
@@ -138,7 +138,7 @@
                                  ]
                                 [in-escape?
                                   (loop2 (+ j 1) in-string? #f)]
-                                [(char=? c #\\)
+                                [(char=? c #\\ )
                                  (loop2 (+ j 1) in-string? #t)]
                                 [in-string?
                                   (if (char=? c #\")
@@ -157,6 +157,9 @@
                (set! x (substring x 1 last-i))))
            x)
          r)))
+
+(define (read-commaed-group i directive read-group)
+  (read-commaed-elts (read-group i directive) directive))
 
 (define local-read-group
   (let ([read-group (*make-read-group)])

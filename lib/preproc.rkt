@@ -1768,7 +1768,11 @@
                                       (warnmsg "Item ~s not found in glossary"
                                               arg)]))]
                            [(string=? directive "lesson-prereqs")
-                            (add-lesson-prereqs (read-commaed-group i directive read-group))]
+                            (let* ([raw (read-group i directive)]
+                                   [expanded (string-trim (expand-directives:string->string raw))]
+                                   [elts (read-commaed-elts expanded directive)]
+                                   )
+                              (add-lesson-prereqs elts))]
                            [(string=? directive "keywords")
                             (add-lesson-keywords (read-commaed-group i directive read-group))]
                            [(string=? directive "proglang")
