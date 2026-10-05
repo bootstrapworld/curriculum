@@ -13,6 +13,7 @@
   print-workbook-info
   print-other-resources
   natlang:also-available-in
+  natlang:optional-section-prefix
   ; print-teach-remotely
   ; print-standards-js
   ; print-textbooks-js
@@ -156,3 +157,9 @@
 
 (define (natlang:also-available-in s)
   (string-append "_(Using another tool? Please select it now: " s ".)_"))
+
+; Prepended to the title of every section marked with @opt-section: in the
+; generated heading (preproc.rkt) and, via the matching `optional_section_prefix`
+; in defines.lua, to every slide title in that section (make-slides.lua).
+; Keep the two in sync.
+(define natlang:optional-section-prefix "Optional: ")

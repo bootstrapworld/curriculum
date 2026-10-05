@@ -16,6 +16,7 @@
   print-workbook-info
   print-other-resources
   natlang:also-available-in
+  natlang:optional-section-prefix
   ; print-standards-js
   ; print-textbooks-js
   ; print-menubar
@@ -146,3 +147,10 @@
 
 (define (natlang:also-available-in s)
   (string-append "(Also available in " s ")"))
+
+; Prepended to the title of every section marked with @opt-section: in the
+; generated heading (preproc.rkt) and, via the matching `optional_section_prefix`
+; in defines.lua, to every slide title in that section (make-slides.lua).
+; Keep the two in sync.
+; (English placeholder, like the rest of this file: please translate into French)
+(define natlang:optional-section-prefix "Facultatif: ")

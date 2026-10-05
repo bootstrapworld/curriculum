@@ -6,6 +6,10 @@ dofile(make_dir .. 'utils.lua')
 dofile(make_dir .. 'readers.lua')
 dofile(make_dir .. 'adoc-to-md.lua')
 
+-- per-language strings (defines.lua), e.g. optional_section_prefix
+dofile(os.getenv'PROGDIR' .. '/defines.lua')
+local optional_prefix = optional_section_prefix or 'Optional: '
+
 local file_being_read = 'noneyet'
 
 local course_string, proglang
@@ -87,6 +91,7 @@ local function newslide()
     header = '',
     section = false,
     containsoptblock = false,
+    optional = false,       -- slide belongs to an @opt-section section
     preparation = false,
   }
 end
@@ -112,6 +117,10 @@ local function get_slides(lsn_plan_adoc_file, addl_exercises_list_file)
   local curr_slide_section = false
   local curr_slide_style = ''
   local curr_slide_preparation = false
+  -- @opt-section marks the NEXT level-1 (==) section optional, same as preproc.rkt:
+  -- the flag is consumed by that heading and every slide in the section inherits it
+  local opt_section_pending = false
+  local curr_slide_optional = false
   local writing_curr_slide_text_p = true
   local additional_exercises_explicit_p = false
 
@@ -131,6 +140,7 @@ local function get_slides(lsn_plan_adoc_file, addl_exercises_list_file)
     curr_slide.level = curr_slide_level
     curr_slide.section = curr_slide_section
     curr_slide.style = curr_slide_style
+    curr_slide.optional = curr_slide_optional
     if n == 0 and curr_slide_preparation then
       curr_slide.preparation = curr_slide_preparation
       curr_slide_preparation = false
@@ -200,6 +210,8 @@ local function get_slides(lsn_plan_adoc_file, addl_exercises_list_file)
           end
         elseif directive == 'clear' then
           --noop
+        elseif directive == 'opt-section' then
+          opt_section_pending = true
         elseif directive == 'scrub' or
           directive == 'pathway-only' or
           directive == 'vspace' or
@@ -356,6 +368,10 @@ local function get_slides(lsn_plan_adoc_file, addl_exercises_list_file)
                 curr_slide = false
                 writing_curr_slide_text_p = false
               end
+              if new_level == 1 then
+                curr_slide_optional = opt_section_pending
+                opt_section_pending = false
+              end
               curr_slide_level = new_level
               -- curr_slide.level = curr_slide_level
 
@@ -406,6 +422,7 @@ local function get_slides(lsn_plan_adoc_file, addl_exercises_list_file)
 
   if (not additional_exercises_explicit_p) and file_exists_p(addl_exercises_list_file) then
     start_new_slide()
+    curr_slide_optional = false
     -- print('adding additional exercises')
     local addl_exercises_files = dofile(addl_exercises_list_file)
     curr_slide_header = 'Additional Exercises'
@@ -500,8 +517,8 @@ function make_slides_file(lesson_dir)
         additional_exercises_explicit_p = true
         -- print('additional exercises explicitly given')
       end
-      if slide.containsoptblock then
-        curr_header = 'Optional: ' .. curr_header
+      if slide.optional or slide.containsoptblock then
+        curr_header = optional_prefix .. curr_header
       end
       if (slide.level == 2 and slide.section) then
         local curr_layout = slide.style
