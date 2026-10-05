@@ -408,7 +408,7 @@
       ; carries through to the HTML); the per-language string lives in
       ; defines.rkt. Only what is *printed* changes -- the section titles
       ; tracked above for lesson-plan validation stay as authored.
-      (when optional? (display natlang:optional-section-prefix o))
+      (when optional? (display natlang:optional-prefix o))
       (expand-directives:string->port title o)
       (newline o))))
 

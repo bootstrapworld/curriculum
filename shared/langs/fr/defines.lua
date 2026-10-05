@@ -5,7 +5,7 @@ Si vous avez des suggestions sur la façon d'améliorer l'une de nos définition
 veuillez partager vos commentaires avec contact@BootstrapWorld.org
 ]]
 
--- Prepended to every slide title in an @opt-section section (make-slides.lua).
--- Keep in sync with natlang:optional-section-prefix in defines.rkt.
--- (English placeholder: please translate into French)
-optional_section_prefix = 'Optional: '
+-- Prepended to the title of optional slides: those in an @opt-section section,
+-- or made up entirely of @opt-block content (make-slides.lua).
+-- Keep in sync with natlang:optional-prefix in defines.rkt.
+optional_prefix = 'Facultatif: '

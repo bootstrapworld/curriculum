@@ -5,7 +5,7 @@
   print-other-resources-intro
   print-workbook-info
   print-other-resources
-  natlang:optional-section-prefix
+  natlang:optional-prefix
   )
 
 ;please add definitions for
@@ -84,8 +84,8 @@ para otros maestros de Bootstrap? Estos foros son el lugar para hacerlo.\n")
   (print-link-to-teacher-resources course o)
   (print-link-to-forum o))
 
-; Prepended to the title of every section marked with @opt-section: in the
-; generated heading (preproc.rkt) and, via the matching `optional_section_prefix`
-; in defines.lua, to every slide title in that section (make-slides.lua).
-; Keep the two in sync.
-(define natlang:optional-section-prefix "Opcional: ")
+; Prepended to optional content: the heading of every @opt-section section
+; (preproc.rkt), and -- via the matching `optional_prefix` in defines.lua --
+; the title of every slide in such a section or made up entirely of
+; @opt-block content (make-slides.lua). Keep the two in sync.
+(define natlang:optional-prefix "Opcional: ")
