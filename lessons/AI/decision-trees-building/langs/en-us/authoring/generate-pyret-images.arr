@@ -34,6 +34,15 @@ end
 images = training.all-rows().map(animal-img)
 
 #################### "Baseball Card" Images for Desmos Cardsort #################
+# Whole numbers print as-is (10), everything else with one decimal place (9.5).
+# (num-to-fixnum is not safe here: for a non-integer it returns a raw JS float,
+# which to-string can't handle, so it printed "<Unknown value ...>".)
+fun weight-to-string(n):
+  if num-is-integer(n): to-string(n)
+  else: num-to-string-digits(n, 1)
+  end
+end
+
 fun to-card-img(r):
   card = overlay-align(
     "middle",
@@ -43,7 +52,7 @@ fun to-card-img(r):
         circle(SIZE / 4, "solid", "transparent"),
         text("sex: "     + r["sex"],               SIZE, "darkblue"),
         circle(SIZE / 4, "solid", "transparent"),
-        text("pounds: "  + to-string(num-to-fixnum(r["pounds"])), SIZE, "blue"),
+        text("pounds: "  + weight-to-string(r["pounds"]), SIZE, "blue"),
         circle(SIZE / 4, "solid", "transparent"),
         text("tail: "    + to-string(r["tail"]),   SIZE, "darkblue"),
         circle(SIZE / 4, "solid", "transparent"),

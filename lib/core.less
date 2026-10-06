@@ -515,8 +515,39 @@ div#body.narrativepage {
   .lesson-unit h3 {
     margin-top: 30px;
     font-size: 18px;
-    padding-left: 5px !important;
+    padding: 10px 0 10px 10px !important;
     background: @translucent-bg-color2;
+    border-radius: 10px;
+  }
+
+  /* House style for the pathway pages (courses/XYZ/index) only -- not the
+     TeacherResources pages, which style their own collapsible sections.
+     Every pathway page has a .lessonSummary block; the title becomes a navy
+     banner. On pages with the standard layout (a .lesson-list followed by
+     supporting sections), those later sections become soft blue panels,
+     echoing the site's alternating colored bands. Pages whose sections are
+     parallel content rather than a list plus resources (e.g. physics) get
+     the banner only. */
+  &:not(.TeacherResources):has(> #content > .lessonSummary) {
+    #header {
+      background:    var(--bs-secondary-astronaut-blue);
+      border-radius: 8px;
+      padding:       0.35em 1em;
+      h1 { color: white; margin: 0; }
+    }
+    &:has(.lesson-list) #content > .sect1 ~ .sect1:not(.acknowledgmentsect) {
+      background:    color-mix(in srgb, var(--bs-primary-light-blue) 30%, transparent);
+      border-radius: 8px;
+      padding:       0.25em 1.25em 1em;
+      margin-top:    1.5em;
+      > h2 { margin-top: 0.4em; }
+    }
+  }
+  /* For the student workbook section... */
+  .sect1:has(#_student_workbooks) {
+    background: var(--bs-primary-dark-blue) !important;
+    color: white;
+    a { color: white !important; }
   }
 }
 
@@ -652,7 +683,11 @@ div#body.LessonPlan {
   /* Special links back to older, pre-remix materials */
   .old-materials p { width:100%; background:@translucent-bg-color; color:black; text-align:center; }
 
-  .optpara, .opt-para .sectionbody {
+  /*
+   * optpara can be used for a chunk of a lesson section, or an ENTIRE section
+   * If it's the latter, then only apply the
+  */
+  .optpara, .optsection .sectionbody {
 
     &::before {
       font-family: "Open Sans","DejaVu Sans",sans-serif;
@@ -1505,6 +1540,7 @@ code .ruby { word-spacing: 2px !important; }
 
 @media screen {
   html { height: 100%; }
+  div#body { margin-right: 20px; }
 
   .web-page-only {
     font-weight:      bold;

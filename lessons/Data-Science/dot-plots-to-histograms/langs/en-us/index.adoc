@@ -2,12 +2,9 @@
 
 @description{Students compare and contrast dot plots and histograms. Students learn to create histograms by hand and in @proglang.}
 
-@ifproglang{pyret}{
-@lesson-prereqs{contracts-tables, contracts-visualizations, dot-plots}
-}
-
-@ifproglang{codap}{
-@lesson-prereqs{codap-dot-plots-bar-charts}
+@lesson-prereqs{
+@ifproglang{pyret}{contracts-tables, contracts-visualizations, dot-plots}
+@ifproglang{codap}{codap-dot-plots-bar-charts}
 }
 
 @keywords{histogram, bin, interval}
@@ -18,12 +15,10 @@
 |===
 | Lesson Goals
 | Students will be able to...
-
 @objectives
 
 | Student-facing Lesson Goals
 |
-
 - Let's create histograms for datasets and learn how describe their shape.
 
 | Materials
@@ -31,7 +26,6 @@
 @material-links
 
 @ifproglang{pyret}{
-
 | Supplemental Materials
 |[.materials-links]
 @opt-material-links
@@ -51,21 +45,16 @@
 }
 
 | Assessments
-| - You're in luck! This lesson is piloting our new custom-built assessment tool. @dist-link{pages/how-to-use-assessments.adoc, Learn more how to use them now}. Looking for a report you lost about an assessment your class already took? You can always @dist-link{QuizReports.shtml, request that we resend a report}.
-
+| 
+- You're in luck! This lesson is piloting our new custom-built assessment tool. @dist-link{pages/how-to-use-assessments.adoc, Learn more how to use them now}. Looking for a report you lost about an assessment your class already took? You can always @dist-link{QuizReports.shtml, request that we resend a report}.
 @assessments
 |===
 
-
-
 == From Dot Plots to Histograms
-
 @objective{dot-plot-v-histogram}
 
 === Overview
-
 Students learn about histograms, considering how they are both similar to and different from dot plots.
-
 
 === Launch
 @slidebreak{Launch}
@@ -102,7 +91,6 @@ Facilitate a discussion about this new-to-them Pyret Data Visualization!
 @slidebreak{Launch}
 }
 
-
 A @vocab{histogram}, like a @vocab{dot plot}, is data visualization that displays quantitative data. Let's explore the ways that histograms are similar to and different from dot plots.
 
 @lesson-instruction{
@@ -125,15 +113,12 @@ A @vocab{histogram}, like a @vocab{dot plot}, is data visualization that display
 |
 | @image{images/weeks.png, 350}
 |===
-
 }
-
 
 === Investigate
 @slidebreak{Investigate}
 
 Now, let's think more deeply about the sort of information that dot plots and histograms provide us.
-
 
 @lesson-instruction{
 - Use *only the dot plot* to answer the questions on the second section of @printable-exercise{compare-dot-plots-histograms.adoc}.
@@ -151,7 +136,6 @@ Next, we'll use a histogram to answer the same questions.
 
 @QandA{
 @Q{Given that this is your first time interpreting a histogram: What questions do you have about reading a histogram?}
-
 @A{Possible questions include:
 * *How is this different from a bar chart?* Histograms show the distribution of quantitative data, not categorical. Histograms' bars cannot be reordered, as they allow us to see the shape of a dataset. We can reorder bars in a bar chart.
 * *Are the values on the tick marks included in the bar?* On a histogram, each bar _includes_ the left-end value but not the right-end value.}
@@ -163,7 +147,6 @@ Next, we'll use a histogram to answer the same questions.
 @lesson-instruction{
 - Respond to the questions in the Reflection section of @printable-exercise{compare-dot-plots-histograms.adoc}.
 }
-
 
 @teacher{Invite students to share their responses, emphasizing the important idea that histograms display aggregate information rather than individual cases.}
 
@@ -180,8 +163,6 @@ How do we prevent this misconception? The authors have two recommendations:
 - When aggregate plots *are* introduced, pair them with representations that allow students to see individual cases.
 }
 
-
-
 @strategy{Histograms Don't Display Individual Data Points!}{
 
 Dot plots and histograms have a lot in common... so why is interpreting histograms a challenge for many students?
@@ -192,7 +173,6 @@ How do we prevent this misconception? The authors have two recommendations:
 
 - Spend ample time learning about data visualizations _where individual cases are visible_ to establish a solid foundation.
 - When aggregate plots *are* introduced, pair them with representations that allow students to see individual cases.
-
 }
 
 @slidebreak{Investigate}
@@ -204,14 +184,10 @@ Let's think more deeply about dot plots and histograms, two data visualizations 
 - What was your strategy for matching dot plots and histograms?
 }
 
-
-
 === Synthesize
 @slidebreak{Synthesize}
 
-
 @QandA{
-
 @Q{How are the two displays alike?}
 @A{They both display the frequency and distribution of quantitative data. They both show the total number of values.}
 
@@ -220,17 +196,14 @@ Let's think more deeply about dot plots and histograms, two data visualizations 
 
 @Q{When might a histogram be more useful than a dot plot? When might a dot plot be more useful than a histogram?}
 @A{If we have a large dataset and we want to get a collective overview of the data, a histogram would be more useful. If we need to look at individual data points in a smaller dataset, we should use a dot plot.}
-
 }
 
 
 == Creating and Reading Histograms
-
 @objective{make-histograms}
 @objective{histogram-center-spread}
 
 === Overview
-
 Students create histograms by hand and in @proglang, and then use the histograms to respond to questions about the data.
 
 === Launch
@@ -247,14 +220,12 @@ During this lesson, we will get comfortable making histograms by hand and in @pr
 - When you're done, open @starter-file{tooth-data} and complete the second section of the page using @proglang.
 }
 
-
 === Investigate
 @slidebreak{Investigate}
 
 Let's practice reading histograms.
 
 @teacher{If your students are new to histograms, you may want review the first section of @printable-exercise{reading-histograms.adoc} before having students move on to the second section. Some misconceptions that commonly emerge are highlighted @ifnotslide{below}@ifslide{on the next slide}.}
-
 
 @lesson-instruction{
 - Complete @printable-exercise{reading-histograms.adoc}

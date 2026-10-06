@@ -450,10 +450,15 @@
       (when (= section-level 1) (set! *optional-flag?* #f))
       (fprintf o "[.lesson-section-~a~a~a]~n" section-level
         (if *additional-exercises-explicit?* ".notselfguided" "")
-        (if optional? ".optpara" ""))
+        (if optional? ".optsection" ""))
       (for ([i section-level])
         (display #\= o))
       (display "= " o)
+      ; An @opt-section heading is labelled in the generated adoc itself (so it
+      ; carries through to the HTML); the per-language string lives in
+      ; defines.rkt. Only what is *printed* changes -- the section titles
+      ; tracked above for lesson-plan validation stay as authored.
+      (when optional? (display natlang:optional-prefix o))
       (expand-directives:string->port title o)
       (newline o))))
 
@@ -1818,7 +1823,11 @@
                                       (warnmsg "Item ~s not found in glossary"
                                               arg)]))]
                            [(string=? directive "lesson-prereqs")
-                            (add-lesson-prereqs (read-commaed-group i directive read-group))]
+                            (let* ([raw (read-group i directive)]
+                                   [expanded (string-trim (expand-directives:string->string raw))]
+                                   [elts (read-commaed-elts expanded directive)]
+                                   )
+                              (add-lesson-prereqs elts))]
                            [(string=? directive "keywords")
                             (add-lesson-keywords (read-commaed-group i directive read-group))]
                            [(string=? directive "proglang")
