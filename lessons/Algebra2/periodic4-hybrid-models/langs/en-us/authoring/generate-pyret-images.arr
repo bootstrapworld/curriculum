@@ -3,7 +3,6 @@ import image-typed as I
 import color as C
 import csv as csv
 include charts
-import statistics as Stats
 
 # just return the image, instead of displaying it as a modal
 display-chart := lam(c): c.get-image() end
