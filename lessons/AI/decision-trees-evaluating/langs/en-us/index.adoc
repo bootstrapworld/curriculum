@@ -15,7 +15,6 @@
 .highlight-diagonal tr:nth-child(5) td:nth-child(6) {
   background: var(--bs-secondary-lighter-supernova) !important;
   color: black !important;
-  font-weight: bold;
 }
 </style>
 ++++
@@ -220,15 +219,19 @@ Tests for the flu, measles, etc are all forms of @vocab{classifiers}! When looki
 
 | Infected
 | *True Positive:* +
-   The test says someone is infected, and they _actually are_
+   Person is infected. +
+   Test predicts that they are infected.
 | *False Negative:* +
-   The test says someone is infected, but they aren't
+   Person is infected. +
+   Test predicts that they are NOT infected.
 
 | Not Infected
 | *False Positive:* +
-   The test says someone is healthy, but they're sick
+   Person is not infected. +
+   Test predicts that they ARE infected.
 | *True Negative:* +
-   The test says someone is healthy, and they _actually are_
+   Person is not infected. +
+   Test predicts that they are not infected.
 |===
 
 There are two ways for the test to be right, and two ways for it to be wrong.
@@ -236,8 +239,8 @@ There are two ways for the test to be right, and two ways for it to be wrong.
 @slidebreak{Launch}
 Suppose we have an outbreak of a really deadly, highly-contagious disease, and two possible tests to choose from.
 
-- Test A has tons of *false positives:* It will almost always do the right thing if you're sick, but a lot of healthy people get told they are infected
-- Test B has tons of *false negatives:* It will almost always do the right thing if you're healthy, but a lot of sick people get told they are fine
+- Test A has tons of *false positives:* It will almost always do the right thing if you're infected, but a lot of people who _aren't infected_ get told they are
+- Test B has tons of *false negatives:* It will almost always do the right thing if you're not infected, but a lot of _infected_ people get told they're not
 
 @slidebreak{Launch}
 
