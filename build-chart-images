@@ -7,7 +7,7 @@ function process_authoring() {
     pyret_file=$authoring_dir/generate-pyret-images.arr
     if test -f $pyret_file; then
       echo Generating images from $pyret_file
-      (cd $authoring_dir; npx pyret --builtin-js-dir $extras_path -p generate-pyret-images.arr >/dev/null)
+      (cd $authoring_dir; npx pyret --backend ts --builtin-js-dir $extras_path -p generate-pyret-images.arr >/dev/null)
     fi
   done < <(find $diry -type d -name authoring)
 }
