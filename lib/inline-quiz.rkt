@@ -1,6 +1,7 @@
 #lang racket
 (require racket/hash)
 (require json)
+(require "utils.rkt")
 
 ;; Inline quiz directives: @shortAnswer, @multipleChoice, @cardSort,
 ;; @categorize, @quizJSON, @checkpoint, @assessment.
@@ -23,10 +24,11 @@
 ;;   **bold**). Anything else -- nested custom directives, footnotes, etc.
 ;;   -- passes through literally. @quizJSON{} is the escape hatch for
 ;;   anything this doesn't cover.
-;; - Image paths are used as-written, relative to the lesson's images/
-;;   directory -- no filename anonymization or alt-text lookup (unlike
-;;   make-image in preproc.rkt). Alt text is always empty, matching the
-;;   existing quiz.json corpus's own convention (see e.g.
+;; - Image paths are written relative to the lesson (images/histoA.png);
+;;   write-quiz-json! points them, from the quiz's own folder, at the
+;;   lesson's (anonymized) image (see relink-images!). No alt-text lookup (unlike make-image in
+;;   preproc.rkt): alt text is always empty, matching the existing
+;;   quiz.json corpus's own convention (see e.g.
 ;;   histograms-cumulative/quiz.json's "![](./histoA.png)").
 ;; - CardSort card ids are a simple per-question counter ("card1", "card2",
 ;;   ...) rather than slugified content -- ids are only ever used internally
@@ -107,10 +109,17 @@
 (define (expand-line-breaks s)
   (regexp-replace* #px" \\+\n" s "\n"))
 
+;; quiz.json's "\n" (e.g. the corpus's "\n\n &nbsp; \n\n" spacer), as
+;; authors carry it over from hand-written quizzes: a literal backslash-n
+;; in the .adoc becomes a real newline. "\\n" stays a literal "\n".
+(define (expand-escaped-newlines s)
+  (regexp-replace* #px"\\\\(\\\\?)n" s
+    (lambda (whole esc) (if (string=? esc "") "\n" "\\n"))))
+
 ;; The one text-conversion pass every piece of quiz content (prompts,
 ;; options, card/category items, answers) goes through.
 (define (quiz-text s)
-  (expand-bold (expand-image-calls (expand-line-breaks (string-trim s)))))
+  (expand-bold (expand-image-calls (expand-line-breaks (expand-escaped-newlines (string-trim s))))))
 
 ;; ---------------------------------------------------------------------
 ;; AsciiDoc-list mini-parsers over already-extracted group text (raw
@@ -247,10 +256,38 @@
 (define (write-quiz-json! dir slug title questions)
   (define assessment-dir (build-path dir "assessments" slug))
   (make-directory* assessment-dir)
+  (define relinked-questions (relink-images! dir questions))
   (call-with-output-file (build-path assessment-dir "quiz.json")
     #:exists 'replace
-    (lambda (o) (write-json (hash 'title title 'questions questions) o)))
+    (lambda (o) (write-json (hash 'title title 'questions relinked-questions) o)))
   slug)
+
+;; Quiz text references images by lesson-relative path (e.g.
+;; images/histoA.png, from @image{}), but the quiz page lives two levels
+;; down, in assessments/<slug>/. So point the Markdown at ../../<path>,
+;; using the anonymized name -- renaming the lesson's image to it now if
+;; that hasn't happened yet, just as make-image in preproc.rkt does for an
+;; ordinary @image (so a filename can't give away an answer). ./ and ../
+;; paths and URLs are left as written.
+(define (relink-images! dir questions)
+  (define (relink s)
+    (regexp-replace* #px"!\\[([^\\]]*)\\]\\(([^) ]+)" s
+      (lambda (whole alt path)
+        (define anon (anonymize-filename path))
+        (define src-qn (build-path dir path))
+        (define anon-qn (build-path dir anon))
+        (cond [(regexp-match? #px"^(\\.\\.?/|/|[a-z]+:)" path) whole]
+              [(or (file-exists? anon-qn)
+                   (and (file-exists? src-qn)
+                        (begin (rename-file-or-directory src-qn anon-qn #t) #t)))
+               (format "![~a](../../~a" alt (path->string anon))]
+              [else (printf "WARNING: ~a: quiz image ~a not found\n\n" dir path)
+                    whole]))))
+  (let walk ([x questions])
+    (cond [(string? x) (relink x)]
+          [(list? x) (map walk x)]
+          [(hash? x) (for/hasheq ([(k v) (in-hash x)]) (values k (walk v)))]
+          [else x])))
 
 ;; "Show what you know: X Checkpoint" / "Show what you know: X (Cumulative)"
 (define (checkpoint-display-title raw)
