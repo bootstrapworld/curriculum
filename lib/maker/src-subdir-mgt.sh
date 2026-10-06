@@ -107,9 +107,14 @@ function flatten_image_subfolders() {
   done
   test "$has_subdirs" = no && return
 
-  # Copy image files from subdirs to flat images/, warning on cross-subdir duplicates
+  # Copy image files from subdirs to flat images/, warning on duplicates, both
+  # across subdirs and between a subdir and images/ itself. A non-first
+  # proglang variant (lesson-codap) is a copy of the already-flattened first
+  # one, so its images/ already holds the earlier pass's copies, recorded in
+  # flattened_list_file -- those aren't duplicates.
   local seen_list_file
   seen_list_file=$(mktemp)
+  local flattened_list_file=images/.cached/.flattened-images.txt
   for subdir in images/*/; do
     test -d "$subdir" || continue
     local dirname
@@ -123,13 +128,16 @@ function flatten_image_subfolders() {
       case "$imgbase" in *.json) continue;; esac  # handled separately below
       if grep -qxF "$imgbase" "$seen_list_file" 2>/dev/null; then
         echo "WARNING: $(basename "$PWD"): images/$imgbase appears in more than one subfolder; skipping duplicate" >&2
+      elif test -f "images/$imgbase" && ! grep -qxF "$imgbase" "$flattened_list_file" 2>/dev/null; then
+        echo "WARNING: $(basename "$PWD"): images/$imgbase also appears as images/$dirname/$imgbase; keeping images/$imgbase" >&2
       else
         echo "$imgbase" >> "$seen_list_file"
         cp "$img" "images/$imgbase"
       fi
     done
   done
-  rm -f "$seen_list_file"
+  mkdir -p images/.cached
+  mv "$seen_list_file" "$flattened_list_file"
 
   # Merge lesson-images.json files from all subdirs into images/lesson-images.json
   local proglangs_list="${ALL_PROGLANGS:-wescheme pyret codap spreadsheets none}"
