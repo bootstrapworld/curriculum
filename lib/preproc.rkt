@@ -310,6 +310,12 @@
                       #f)])
     (thunk)))
 
+;; label: a @quiz-label no question picked up, or #f.
+(define (warn-unused-quiz-label label)
+  (when label
+    (warnmsg "~a: @quiz-label{~a} isn't followed by a quiz question (@short-answer, @multiple-choice, @card-sort, @categorize or @quiz-json) -- ignoring it."
+             (errmessage-context) label)))
+
 (define (skip-1-newline-if-possible i o)
   (let loop ()
     (let ([c (peek-char i)])
@@ -1752,12 +1758,7 @@
                             (let ([prose (read-group i directive)])
                               (display-html-verb prose o))]
                            [(string=? directive "scrub")
-                            (let ([content (read-group i directive)])
-                              (cond
-                                [(regexp-match #rx"^label: *(.*)" content)
-                                 => (lambda (m)
-                                      (set-pending-quiz-label!
-                                        (string-trim (second m) "\"")))]))]
+                            (read-group i directive)]
                            [(member directive '("ifslide" "pd-slide" "ifpdslide"))
                             (let ([text (read-group i directive #:multiline? #t)])
                               (when (or (regexp-match "\\|===" text)
@@ -2216,6 +2217,18 @@
                            ; narrow expansion of @image{} and *bold* within
                            ; each group's raw text.
                            ;
+                           ; @quiz-label{...} labels the quiz question that
+                           ; follows it (its "label" field, used by results
+                           ; reports). A label no question picks up is warned
+                           ; about: here, if another @quiz-label displaces it;
+                           ; below, at @checkpoint/@assessment and the end of
+                           ; the lesson plan.
+                           [(string=? directive "quiz-label")
+                            (unless *lesson-plan*
+                              (error 'ERROR "~a (~a) valid only in lesson plan"
+                                     directive (errmessage-file-context)))
+                            (warn-unused-quiz-label
+                              (set-pending-quiz-label! (read-group i directive)))]
                            [(member directive '("short-answer"
                                                  "multiple-choice"
                                                  "card-sort"
@@ -2247,9 +2260,16 @@
                                         (lambda (t) (handle-checkpoint! *containing-directory* t))]
                                        [("assessment")
                                         (lambda (t) (handle-cumulative-assessment! *containing-directory* t))])]
+                                   [checkpoint? (member directive '("checkpoint" "assessment"))]
+                                   [_unused-label (when checkpoint?
+                                        (warn-unused-quiz-label (take-pending-quiz-label!)))]
                                    [result (and groups
                                                 (call-quiz-handler directive
                                                   (lambda () (apply handler groups))))])
+                              ; A question that was skipped (and already warned
+                              ; about) leaves its label behind -- drop it rather
+                              ; than let it land on the next question.
+                              (unless checkpoint? (take-pending-quiz-label!))
                               ; checkpoint/assessment return (list slug title duplicate?)
                               ; for the assessments/ folder they wrote. Register it the
                               ; way @old-assessment does, so it shows up in the lesson's
@@ -2656,6 +2676,9 @@
               (fprintf o "ifndef::fromlangroot[:fromlangroot: ~a]\n\n" *dist-root-dir*)
 
               (expand-directives i o)
+
+              (when *lesson-plan*
+                (warn-unused-quiz-label (take-pending-quiz-label!)))
 
               (when (and *lesson-plan* (not *additional-exercises-explicit?*)
                          (or (pair? *opt-printable-exercise-links*) (pair? *opt-online-exercise-links*)))
