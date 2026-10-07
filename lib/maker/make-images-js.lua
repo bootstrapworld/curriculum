@@ -44,7 +44,18 @@ local o = io.open(image_js_file, 'w+')
 
 o:write('var images = {\n')
 
-local function report_missing_images(logf, image_json_file)
+-- The images .json file that describes file: a subfolder's lesson-images.json
+-- if any, else any top-level images/*.json (after flatten_image_subfolders,
+-- the top-level lesson-images.json holds every subfolder's entries too, so
+-- check the subfolders first)
+local function json_describing(lesson, file)
+  local images_dir = lessons_dir .. lesson .. '/images/'
+  local hits = shell_output('cd ' .. images_dir .. ' && grep -lF \'"' .. file
+    .. '"\' */lesson-images.json *.json 2>/dev/null')
+  return 'images/' .. (hits[1] or '*.json')
+end
+
+local function report_missing_images(logf, lesson)
   if not file_exists_p(logf) then return end
   local files = read_file_lines(logf)
   local already_read = {}
@@ -56,14 +67,15 @@ local function report_missing_images(logf, image_json_file)
     end
   end
   for _,file in ipairs(res) do
-    print('WARNING: Image file ' .. file .. ' referenced in ' .. image_json_file .. ' not found')
+    print('WARNING: ' .. lesson .. ': ' .. json_describing(lesson, file) .. ' describes '
+      .. file .. ', but there is no such image file')
   end
 end
 
 for _,lesson in ipairs(lessons) do
   local lesson_image_list_file = lessons_dir .. lesson .. '/images/.cached/.image-list.txt.kp'
   local missing_image_logf = lessons_dir .. lesson .. '/.cached/.missing-image-files.txt'
-  report_missing_images(missing_image_logf, lesson_image_list_file)
+  report_missing_images(missing_image_logf, lesson)
   if not file_exists_p(lesson_image_list_file) then goto continue end
   o:write('"' .. lesson .. '": {\n')
   local fi = io.open(lesson_image_list_file)

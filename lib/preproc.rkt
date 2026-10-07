@@ -9,6 +9,7 @@
 (require "defines.rkt")
 (require "common-defines.rkt")
 (require "function-directives.rkt")
+(require "inline-quiz.rkt")
 
 (provide
   preproc-adoc-file
@@ -259,6 +260,61 @@
 
 (define read-group (*make-read-group #:code (lambda z (apply code z))
                                      #:errmessage-file-context errmessage-file-context))
+
+;; Inline quiz directives (see inline-quiz.rkt) take a fixed number of
+;; {...} groups. read-group needs each group's "{" to come immediately; when
+;; one is missing it prints only a terse "Ill-formed metadata directive ...
+;; #\newline" and returns "", and the resulting empty group then trips a hard
+;; error that aborts the rest of the lesson (leaving e.g. .index-objectives.asc
+;; unwritten, so asciidoctor reports missing include files too). So peek for
+;; each "{" first, and if one is missing, say what the directive expects and
+;; which question it was, and return #f so the caller skips just that question.
+;;
+;; group-specs: list of (name . multiline?), in order.
+(define (quiz-snippet s)
+  (let ([s (string-trim (regexp-replace* #px"\\s+" s " "))])
+    (if (> (string-length s) 60) (string-append (substring s 0 60) "...") s)))
+
+(define (read-quiz-groups i directive group-specs)
+  (let loop ([specs group-specs] [acc '()])
+    (cond
+      [(null? specs) (reverse acc)]
+      [(eqv? (peek-char i) #\{)
+       (loop (cdr specs) (cons (read-group i directive #:multiline? (cdar specs)) acc))]
+      [else
+       (let ([n-expected (length group-specs)]
+             [n-found (length acc)]
+             [first-name (car (car group-specs))])
+         (warnmsg "~a: @~a expects ~a {...} groups, ~a, but found only ~a~a~a -- skipping it."
+                  (errmessage-context) directive n-expected
+                  (apply string-append (map (lambda (s) (format "{~a}" (car s))) group-specs))
+                  n-found
+                  (if (null? acc) "" (format ", the first being \"~a\"" (quiz-snippet (last acc))))
+                  (if (and (>= n-expected 2) (= n-found (sub1 n-expected))
+                           (not (string=? first-name "prompt")))
+                      (format ". If that first group is the prompt, add a leading {} for {~a}" first-name)
+                      "")))
+       #f])))
+
+;; Runs an inline-quiz.rkt handler, turning its errors (no option marked
+;; [x], malformed range, ...) into a warning that skips just this question,
+;; instead of an exception that aborts the rest of the lesson.
+(define (call-quiz-handler directive thunk)
+  (with-handlers ([exn:fail?
+                    (lambda (e)
+                      (let ([msg (regexp-replace #rx"^inline-quiz: " (exn-message e) "")])
+                        ; Some handler messages already lead with the directive
+                        ; name (@multiple-choice has no options); don't repeat it.
+                        (warnmsg "~a: ~a -- skipping it." (errmessage-context)
+                                 (if (regexp-match? #rx"^@" msg) msg (format "@~a: ~a" directive msg))))
+                      #f)])
+    (thunk)))
+
+;; label: a @quiz-label no question picked up, or #f.
+(define (warn-unused-quiz-label label)
+  (when label
+    (warnmsg "~a: @quiz-label{~a} isn't followed by a quiz question (@short-answer, @multiple-choice, @card-sort, @categorize or @quiz-json) -- ignoring it."
+             (errmessage-context) label)))
 
 (define (skip-1-newline-if-possible i o)
   (let loop ()
@@ -2148,6 +2204,92 @@
                                   [("editorconfig") (format "editorCode: ~a\n" text)]
                                   [("imageconfig") (format "imageConfig: ~s\n" (path->string (anonymize-filename text)))]
                                   [("videoconfig") (format "videoConfig: ~s\n" text)])))]
+                           ; Inline quiz directives (see #2888). These are
+                           ; purely side-effecting -- they collect into
+                           ; inline-quiz.rkt's running question list (or, for
+                           ; checkpoint/@assessment, flush it to a
+                           ; quiz.json) and emit nothing into the lesson's
+                           ; own HTML output. read-group does not expand
+                           ; nested directives, so multiline? is set wherever
+                           ; a group's content (a checkbox or term/item list,
+                           ; or raw JSON) depends on its own newlines to
+                           ; parse correctly; inline-quiz.rkt does its own,
+                           ; narrow expansion of @image{} and *bold* within
+                           ; each group's raw text.
+                           ;
+                           ; @quiz-label{...} labels the quiz question that
+                           ; follows it (its "label" field, used by results
+                           ; reports). A label no question picks up is warned
+                           ; about: here, if another @quiz-label displaces it;
+                           ; below, at @checkpoint/@assessment and the end of
+                           ; the lesson plan.
+                           [(string=? directive "quiz-label")
+                            (unless *lesson-plan*
+                              (error 'ERROR "~a (~a) valid only in lesson plan"
+                                     directive (errmessage-file-context)))
+                            (warn-unused-quiz-label
+                              (set-pending-quiz-label! (read-group i directive)))]
+                           [(member directive '("short-answer"
+                                                 "multiple-choice"
+                                                 "card-sort"
+                                                 "categorize"
+                                                 "quiz-json"
+                                                 "checkpoint" "assessment"))
+                            (unless *lesson-plan*
+                              (error 'ERROR "~a (~a) valid only in lesson plan"
+                                     directive (errmessage-file-context)))
+                            (let* ([specs
+                                     (case directive
+                                       [("short-answer") '(("required" . #f) ("numeric-range" . #f)
+                                                           ("prompt" . #f) ("answer" . #f))]
+                                       [("multiple-choice") '(("order-mode" . #f) ("prompt" . #f)
+                                                              ("options" . #t))]
+                                       [("card-sort") '(("ordered" . #f) ("prompt" . #f) ("cards" . #t))]
+                                       [("categorize") '(("prompt" . #f) ("groups" . #t))]
+                                       [("quiz-json") '(("json" . #t))]
+                                       [("checkpoint" "assessment") '(("title" . #f))])]
+                                   [groups (read-quiz-groups i directive specs)]
+                                   [handler
+                                     (case directive
+                                       [("short-answer") handle-shortAnswer!]
+                                       [("multiple-choice") handle-multipleChoice!]
+                                       [("card-sort") handle-cardSort!]
+                                       [("categorize") handle-categorize!]
+                                       [("quiz-json") handle-quizJSON!]
+                                       [("checkpoint")
+                                        (lambda (t) (handle-checkpoint! *containing-directory* t))]
+                                       [("assessment")
+                                        (lambda (t) (handle-cumulative-assessment! *containing-directory* t))])]
+                                   [checkpoint? (member directive '("checkpoint" "assessment"))]
+                                   [_unused-label (when checkpoint?
+                                        (warn-unused-quiz-label (take-pending-quiz-label!)))]
+                                   [result (and groups
+                                                (call-quiz-handler directive
+                                                  (lambda () (apply handler groups))))])
+                              ; A question that was skipped (and already warned
+                              ; about) leaves its label behind -- drop it rather
+                              ; than let it land on the next question.
+                              (unless checkpoint? (take-pending-quiz-label!))
+                              ; checkpoint/assessment return (list slug title duplicate?)
+                              ; for the assessments/ folder they wrote. Register it the
+                              ; way @old-assessment does, so it shows up in the lesson's
+                              ; Assessments list (which the backlink below jumps to) and
+                              ; isn't flagged by store-assessments as unreferenced.
+                              ; Skip both if the call itself was skipped. A duplicate
+                              ; (an earlier one in this lesson already wrote that folder)
+                              ; was kept rather than overwritten -- say so.
+                              (when (and result (member directive '("checkpoint" "assessment")))
+                                (let ([slug (first result)] [title (second result)])
+                                  (when (third result)
+                                    (warnmsg "~a: @~a \"~a\" would write assessments/~a/, which an earlier @checkpoint or @assessment in this lesson already wrote -- keeping the earlier one; give this one a distinct title.~a"
+                                             (errmessage-context) directive title slug
+                                             (if (string=? directive "checkpoint")
+                                                 " (Its questions still count toward the lesson's @assessment.)"
+                                                 "")))
+                                  (unless (assoc slug *assessments-met*)
+                                    (set! *assessments-met*
+                                      (cons (cons slug title) *assessments-met*)))
+                                  (fprintf o "pass:[<a href=\"#assessments-anchor\" class=\"assessment-backlink\">&#x2B06;&#xFE0F; ~a</a>]" title))))]
                            [(string=? directive "Bootstrap")
                             (fprintf o "https://www.bootstrapworld.org/[Bootstrap]")]
                            [(hash-ref *simple-directives* (string->symbol directive) #f)
@@ -2247,11 +2389,11 @@
                            ;; in. Must exist in the markup even when the reader is
                            ;; logged in / JS hasn't run yet, since the JS looks it up
                            ;; by class rather than creating it. The id is also the jump
-                           ;; target for inline @assessment{} back-links elsewhere in
-                           ;; the lesson body -- see the "assessment" directive below.
-                           (fprintf o "\n++++\n<p class=\"AssessmentDirections\"></p>\n++++\n")
+                           ;; target for inline @old-assessment{} back-links elsewhere in
+                           ;; the lesson body -- see the "old-assessment" directive below.
+                           (fprintf o "\n++++\n<p id=\"assessments-anchor\" class=\"AssessmentDirections\"></p>\n++++\n")
                            (fprintf o "\ninclude::~a/{cachedir}.index-assessments.asc[]\n" *containing-directory*)]
-                          [(string=? directive "assessment")
+                          [(string=? directive "old-assessment")
                            (let* ([args (read-commaed-group i directive read-group)]
                                   [lbl (first args)]
                                   [text (string-join (rest args) ", ")]
@@ -2266,7 +2408,7 @@
                                             (if title
                                               (string-append "Show What You Know: " title)
                                               (begin
-                                                (warnmsg "~a: @assessment ~a has no text and no title in quiz.json"
+                                                (warnmsg "~a: @old-assessment ~a has no text and no title in quiz.json"
                                                         (errmessage-context) lbl)
                                                 lbl)))
                                           text)])
@@ -2276,12 +2418,12 @@
                              (unless (assoc lbl *assessments-met*)
                                  (set! *assessments-met*
                                    (cons (cons lbl text) *assessments-met*)))
-                             ;; Inline @assessment{} uses don't duplicate the real,
+                             ;; Inline @old-assessment{} uses don't duplicate the real,
                              ;; JS-guarded a.quiz link (that lives once in the intro
                              ;; table's materials list -- see @assessments /
                              ;; store-assessments). Instead they link back up to the
                              ;; #assessments-anchor id that directive emits, so a
-                             ;; reader who meets @assessment{} mid-lesson can jump to
+                             ;; reader who meets @old-assessment{} mid-lesson can jump to
                              ;; the actual link. The up-arrow flags that this jumps up
                              ;; the page rather than away from it.
                              (fprintf o "pass:[<a href=\"#assessments\" class=\"assessment-backlink\">&#x2B06;&#xFE0F; ~a</a>]" text))]
@@ -2509,6 +2651,7 @@
       (set! *title-reached?* #f)
       (set! *supplemental-materials-needed?* #f)
       (set! *additional-exercises-explicit?* #f)
+      (reset-inline-quiz-state!)
       (set! *uses-codemirror?* #f)
       (set! *uses-mathjax?* #f)
       (set! *needs-objectives?* #f)
@@ -2533,6 +2676,9 @@
               (fprintf o "ifndef::fromlangroot[:fromlangroot: ~a]\n\n" *dist-root-dir*)
 
               (expand-directives i o)
+
+              (when *lesson-plan*
+                (warn-unused-quiz-label (take-pending-quiz-label!)))
 
               (when (and *lesson-plan* (not *additional-exercises-explicit?*)
                          (or (pair? *opt-printable-exercise-links*) (pair? *opt-online-exercise-links*)))
@@ -2813,7 +2959,7 @@
           (when (and (not (regexp-match #rx"^\\." lbl))
                      (directory-exists? (build-path adir entry)))
             (unless (assoc lbl *assessments-met*)
-              (warnmsg "~a: assessment ~a is in assessments/ but not referenced with @assessment{~a}"
+              (warnmsg "~a: assessment ~a is in assessments/ but not referenced with @old-assessment{~a}"
                        (errmessage-context) lbl lbl))))))))
 
 (define (store-objectives)
