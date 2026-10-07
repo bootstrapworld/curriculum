@@ -2249,7 +2249,7 @@
                            ;; by class rather than creating it. The id is also the jump
                            ;; target for inline @assessment{} back-links elsewhere in
                            ;; the lesson body -- see the "assessment" directive below.
-                           (fprintf o "\n++++\n<p id=\"assessments-anchor\" class=\"AssessmentDirections\"></p>\n++++\n")
+                           (fprintf o "\n++++\n<p class=\"AssessmentDirections\"></p>\n++++\n")
                            (fprintf o "\ninclude::~a/{cachedir}.index-assessments.asc[]\n" *containing-directory*)]
                           [(string=? directive "assessment")
                            (let* ([args (read-commaed-group i directive read-group)]
@@ -2284,7 +2284,7 @@
                              ;; reader who meets @assessment{} mid-lesson can jump to
                              ;; the actual link. The up-arrow flags that this jumps up
                              ;; the page rather than away from it.
-                             (fprintf o "pass:[<a href=\"#assessments-anchor\" class=\"assessment-backlink\">&#x2B06;&#xFE0F; ~a</a>]" text))]
+                             (fprintf o "pass:[<a href=\"#assessments\" class=\"assessment-backlink\">&#x2B06;&#xFE0F; ~a</a>]" text))]
                           [(string=? directive "citation")
                            (let* ([args (read-commaed-group i directive read-group)]
                                   [args-len (length args)]
