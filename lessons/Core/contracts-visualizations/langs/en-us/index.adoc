@@ -38,72 +38,9 @@
 @opt-material-links
 |===
 
-== Bug Hunting @duration{10 minutes}
-
-=== Overview
-This activity focuses on what we can learn about @proglang functions from the messages we get back in the Interactions Area. The error messages in this environment are _specially-designed_ to be as student-friendly as possible. By explicitly drawing their attention to errors, you will be setting them up to be more independent in the future.
-
-=== Launch
-@slidebreak{Launch-DN}
-
-Before we explore some new functions in Pyret, let's see how error messages in @proglang can help us to figure out the contract for a function we've never seen before.
-
-@lesson-instruction{
-- Let's complete the first section of @printable-exercise{catching-bugs-ds.adoc} together. We'll be working in @starter-file{animals}.
-- Start by typing `sort` into the Interactions Area, and hit the "Enter" or "Return" key to run this code.
-}
-
-@QandA{
-@Q{What do you get back?}
-@A{`<function:sort>`}
-@A{This means that the computer knows about a function called `sort`.}
-}
-
-@slidebreak{Launch}
-
-@lesson-instruction{
-- We know that all functions will need an open parentheses and at least one input!
-- We don't know the Domain, so we don't know how many inputs or what types they are. But we can always guess, and if we get it wrong we'll use the error message as a clue.
-- Type @show{(code '(sort animals-table))} in the Interactions Area and read the error message.
-}
-
-@QandA{
-@Q{What _hint_ does the error message give us about how to use this function?}
-@A{@image{images/sort-error.png, 650}}
-@A{The the sort function expects 3 arguments and its Domain is Table, String, Boolean. If we don't give it those three things we'll get an error instead of the sorted table we want.}
-}
-
-=== Investigate
-@slidebreak{Investigate}
-
-@ifnotslide{
-Mistakes happen, especially if we're just figuring things out! Diagnosing and fixing errors are skills that we will continue developing throughout this course.
-}
-
-@lesson-instruction{
-- Answer question 3 of @printable-exercise{catching-bugs-ds.adoc} with your partner and try to explain the difference between syntax and contract errors in your own words.
-- Then turn to the second section of @printable-exercise{catching-bugs-ds.adoc}. Read each error message carefully, decide whether it's a contract error or a syntax error and work together to decipher what it's trying to tell us.
-}
-
-=== Synthesize
-@slidebreak{Synthesize}
-
-@QandA{
-@Q{What kinds of @vocab{syntax errors} did you find?}
-@A{missing commas}
-@A{missing closing parentheses}
-@A{missing quotes}
-@A{a space between the function name and the open parentheses}
-
-@Q{What kinds of @vocab{contract errors} did you find?}
-@A{wrong number of arguments given}
-@A{wrong type of argument given}
-}
-
 == Functions for Making Data Visualizations @duration{20 minutes}
 
 === Overview
-
 Students will be introduced to functions for making one-variable visualizations in Pyret, including: @show{(code 'pie-chart)}, @show{(code 'bar-chart)}, @show{(code 'box-plot)} and @show{(code 'histogram)}.
 
 The goal here is for students to become familiar with using @dist-link{Contracts.shtml, Contracts} to write expressions that will produce visualizations. But knowing how to __make__ a histogram doesn't mean a student really __understands__ histograms, and that's OK!
