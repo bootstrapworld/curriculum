@@ -41,6 +41,7 @@
 
 (provide reset-inline-quiz-state!
          set-pending-quiz-label!
+         take-pending-quiz-label!
          handle-shortAnswer!
          handle-multipleChoice!
          handle-cardSort!
@@ -57,7 +58,7 @@
 
 (define *pending-questions* (box '()))          ; reverse order; newest first
 (define *checkpoints-so-far* (box '()))         ; list of (title . questions), oldest first
-(define *pending-label* (box #f))               ; label from preceding @scrub{label: ...}
+(define *pending-label* (box #f))               ; label from preceding @quiz-label{...}
 (define *written-slugs* (box '()))               ; (slug . 'checkpoint/'assessment) written so far, this lesson
 
 (define (reset-inline-quiz-state!)
@@ -66,12 +67,22 @@
   (set-box! *pending-label* #f)
   (set-box! *written-slugs* '()))
 
+;; @quiz-label{...} labels the next question. Returns the label it
+;; displaced, if an earlier @quiz-label was never used, so preproc.rkt can
+;; warn about it.
 (define (set-pending-quiz-label! s)
-  (set-box! *pending-label* (string-trim s)))
+  (begin0 (unbox *pending-label*)
+    (set-box! *pending-label* (string-trim s))))
+
+;; Clears and returns the pending label, if any: for preproc.rkt to drop a
+;; skipped question's label (rather than let it attach to the next
+;; question), and to catch one that no question followed.
+(define (take-pending-quiz-label!)
+  (begin0 (unbox *pending-label*)
+    (set-box! *pending-label* #f)))
 
 (define (add-question! q)
-  (define label (unbox *pending-label*))
-  (set-box! *pending-label* #f)
+  (define label (take-pending-quiz-label!))
   (set-box! *pending-questions*
             (cons (if label (hash-set q 'label label) q)
                   (unbox *pending-questions*))))

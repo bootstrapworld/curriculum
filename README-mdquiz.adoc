@@ -272,6 +272,23 @@ hand-written `quiz.json` entry:
     { "type": "Tracing", "prompt": { ... }, "answer": { ... } }
   }
 
+==== Labeling a question: `@quiz-label`
+
+To give a question a short label naming the skill or topic it assesses
+(its `label` field, which results reports show in place of a bare question
+number), put `@quiz-label{...}` just before it:
+
+  @quiz-label{Useful bin size}
+  @multiple-choice{sorted}{Which of the following displays would be most useful?}{
+  ...
+  }
+
+The label is plain text, taken as written. It applies to the next question
+directive -- any of the four above, or `@quiz-json{}` -- and labels are
+optional. A `@quiz-label` that no question picks up (another `@quiz-label`,
+`@checkpoint`, `@assessment`, or the end of the lesson comes first) gets a
+warning.
+
 ==== Collecting inline questions into a `quiz.json`: `@checkpoint` and `@assessment`
 
 Inline questions accumulate in a running list as the build walks through
