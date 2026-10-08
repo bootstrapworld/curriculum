@@ -17,10 +17,20 @@ Flags:
 
   ./author --port 8001    # default 8000, or $PORT. Port 9000 is special: it adds a "Review" band to the top of every page
   ./author --nomake       # skip the initial build; serve what's already in distribution/
-  ./author --no-open      # don't open a browser window
+  ./author --no-open      # don't open a browser window (also stops pages opening on edit, below)
+  ./author --no-open-changed  # keep the startup window, but don't open a tab for each page you edit
   ./author --no-watch     # don't watch for changes or rebuild
 
 `NATLANG` selects the language tree, same as everywhere else (default `en-us`).
+
+== Pages open as you edit them
+
+After a rebuild, the server opens a tab for the page built from each `.adoc` you changed, unless that page is already open, in which case it just reloads. (Every page the server serves tells it which page it is showing, so it knows what's open. A tab you close is forgotten, so editing that file again reopens it.)
+
+* A lesson plan (`index.adoc`), a workbook or solution page (`pages/`, `solution-pages/`), and a pathway's `index.adoc`, `resources/`, `front-matter/` and `back-matter/` pages each map to one page.
+* Files with no page of their own (`fragments/`, `authoring/`, the `pyret/` and `wescheme/` variants) aren't opened; the server prints a one-line note instead.
+* At most 5 tabs open per rebuild, so something that touches many files at once (a `git checkout`, say) doesn't bury you in tabs. The server says how many it skipped.
+* The server can open a tab but can't bring an existing one to the front. If your browser discards a background tab to save memory, the server can no longer see that it's open, so it may open a second copy.
 
 When the authoring server is running, it will automatically run `make` any time a file has changed, then reload the browser. If you switch to the terminal, you can hit keys to select a different kind of `make`: `f` runs `make force`, and `b` runs `make book`. Ctrl+Z pauses the server. Resume it with `fg` (back in the foreground, with the hotkeys), or with `bg` to keep it running in the background while you use the terminal for other things, like `git commit`. (The hotkeys only work in the foreground.) Ctrl+C quits.
 
