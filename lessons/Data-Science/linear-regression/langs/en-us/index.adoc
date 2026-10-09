@@ -49,13 +49,12 @@
 }
 
 | Assessments
-| - You're in luck! This lesson is piloting our new custom-built assessment tool. @dist-link{pages/how-to-use-assessments.adoc, Learn more how to use them now}. Looking for a report you lost about an assessment your class already took? You can always @dist-link{QuizReports.shtml, request that we resend a report}.
-
+| 
+- You're in luck! This lesson is piloting our new custom-built assessment tool. @dist-link{pages/how-to-use-assessments.adoc, Learn more how to use them now}. Looking for a report you lost about an assessment your class already took? You can always @dist-link{QuizReports.shtml, request that we resend a report}.
 @assessments
 |===
 
 == Intro to Linear Regression
-
 @objective{direction-strength}
 @objective{r-value}
 
@@ -83,15 +82,13 @@ Make sure you've already...
 @lesson-instruction{
 - Open the *Google Form Survey* link I shared and submit your response.
 }
-}
+} 
 
 @slidebreak{Launch}
 }
 
-
 @pd-slide{
 Vocabulary Note
-
 
 We prefer the words “explanatory” and “response” in our curriculum, because in other contexts the words “dependent” and “independent” refer to whether or not the variables are related at all, as opposed to what role each plays in the relationship.
 
@@ -106,10 +103,7 @@ The straight line that best fits the points on a scatter plot has several names.
 The line itself is computed through a process called _linear regression_, which also goes by the name _least squares regression_.
 }
 
-
-
 @strategy{Vocabulary Note}{
-
 We prefer the words “explanatory” and “response” in our curriculum, because in other contexts the words “dependent” and “independent” refer to whether or not the variables are related at all, as opposed to what role each plays in the relationship.
 
 The straight line that best fits the points on a scatter plot has several names, depending on the context, subject, or grade level. All of the following terms refer to the same concept:
@@ -126,7 +120,6 @@ The line itself is computed through a process called _linear regression_, which 
 @lesson-instruction{
 - Open the @starter-file{animals} in Pyret, and click "Run".
 - Make two scatter plots from the `animals-table`, using `age` as the explanatory variable in one visualization, and `pounds` as the @vocab{explanatory variable} in the other.
-
 - In both visualizations, use `weeks` as your @vocab{response variable} and `name` for the `labels`.
 - We will refer to the explanatory column as “xs” and the response column as “ys.”
 }
@@ -195,8 +188,25 @@ This line can be graphed on top of the scatter plot as a function, called the @v
 
 What did you observe as you experimented?
 
+@quiz-label{correlation from scatter plot}
+@multiple-choice{}{Choose the statement you most agree with about the scatterplot on the left.\n\n @image{images/scatter-positive.png}}{
+- [ ] There appears to be a strong negative correlation
+- [ ] There appears to be a perfect correlation
+- [ ] There appears to be a weak negative correlation.
+- [x] There appears to be a positive correlation.
+}
+
+@quiz-label{describing correlation with r-value}
+@multiple-choice{sorted}{A strong negative correlation would have an r-value that is closest to:}{
+- [x] -1
+- [ ] -0.5
+- [ ] 0
+- [ ] 0.5
+- [ ] 1
+}
+
 @teacher{
-Want to check student mastery of the content you've just taught? Click @assessment{checkpoint-1} to create a link for your class to our custom-built assessment and get a snapshot of your students' current level of mastery.
+Want to check student mastery of the content you've just taught? Click @checkpoint{Direction and Strength} to create a link for your class to our custom-built assessment and get a snapshot of your students' current level of mastery.
 
 If you'd prefer to wait until your students have completed the __entire__ lesson to check mastery, we also offer a cumulative assessment.
 }
@@ -368,8 +378,32 @@ Statistical models are just proxies for the real world, drawn from a limited sam
 A common misconception is that "more data is always better", and the age-v-height worksheet challenges that assumption. Two sub-groups (girls and boys) can each have a strong correlation between age and height, but when they are combined the correlation is weaker. This phenomenon is called @link{https://en.wikipedia.org/wiki/Simpson's_paradox, Simpson's Paradox}. Statistics (especially AP!) teachers will want to dive deeper on this topic.
 }}
 
+@quiz-label{interpreting slope from lr-plot}
+@multiple-choice{sorted}{Twenty-nine individuals are represented by the points in the chart below.\n\n The x-axis indicates the number of years worked for a particular company, and the y-axis represents salary.\n\n (All 3 questions in this checkpoint will focus on this same chart.)\n\n &nbsp; \n\nIndividuals at this company should expect that their salaries will increase about ____ every 2 years.\n\n  @image{images/salary-lr-plot.png}}{
+- [ ] $10,000
+- [x] $20,000
+- [ ] $30,000
+- [ ] $40,000"
+}
+
+@quiz-label{prediction from function}
+@multiple-choice{sorted}{Twenty-nine individuals are represented by the points in the chart below.\n\n The x-axis indicates the number of years worked for a particular company, and the y-axis represents salary.\n\n &nbsp; Use the predictor function to <b>calculate how much money you expect would an employee with 15 years of experience to earn</b> \n\n  @image{images/salary-lr-plot.png}}{
+- [ ] $142,000
+- [x] $167,000
+- [ ] $194,000
+- [ ] $372,000"
+}
+
+@quiz-label{interpreting y-intercept of lr-plot}
+@multiple-choice{sorted}{Twenty-nine individuals are represented by the points in the chart below.\n\n The x-axis indicates the number of years worked for a particular company, and the y-axis represents salary.\n\n &nbsp; \n\n Use the predictor function to <b>determine about how much money you would expect an employee with no experience to earn </b>.\n\n  @image{images/salary-lr-plot.png}}{
+- [ ] $0
+- [ ] $15,000
+- [ ] $20,000
+- [x] $25,000"
+}
+    
 @teacher{
-Want to check student mastery of the content you've just taught? Click @assessment{checkpoint-2} to create a link for your class to our custom-built assessment and get a snapshot of your students' current level of mastery.
+Want to check student mastery of the content you've just taught? Click @checkpoint{Predictions from the Model} to create a link for your class to our custom-built assessment and get a snapshot of your students' current level of mastery.
 
 If you'd prefer to wait until your students have completed the __entire__ lesson to check mastery, we also offer a cumulative assessment.
 }
@@ -442,10 +476,14 @@ The word “linear” in “linear regression” is important here. In the image
 
 There are many other kinds of statistical models out there, but all of them work the same way: use a particular kind of mathematical function (linear or otherwise), to figure out how to get the “best fit” for a cloud of data.
 
-@teacher{
-Want to check student mastery of the content you've just taught? Click @assessment{checkpoint-3} to create a link for your class to our custom-built assessment and get a snapshot of your students' current level of mastery.
+@short-answer{}{}{
+The chart shows some restaurant data. Describe the relationship between dollars spent and dollars tipped in as much detail as possible. \n\n @image{images/restaurant-lr-plot.png}}{
+}
 
-Alternatively, administer the compilation of all three Checkpoints in this lesson with @assessment{cumulative}
+@teacher{
+Want to check student mastery of the content you've just taught? Click @checkpoint{Interpreting Regression Lines} to create a link for your class to our custom-built assessment and get a snapshot of your students' current level of mastery.
+
+Alternatively, administer the compilation of all three Checkpoints in this lesson with @assessment{Linear Regression}
 }
 
 
