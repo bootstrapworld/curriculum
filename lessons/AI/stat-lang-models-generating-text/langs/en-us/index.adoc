@@ -177,42 +177,23 @@ Students construct a statistical language model by decomposing the text and comp
 
 The best way to make sense of statistical language modeling is to try it yourself! We'll start by constructing a model.
 
-For our corpus, we will use the folk song @printable-exercise{old-lady-lyrics.adoc}, which tells the nonsensical story of an old lady who swallows a fly, and the unfortunate series of events that follow.
+For our @vocab{corpus}, we will start with an excerpt from the folk song _There was an Old Lady Who Swallowed a Fly_, which tells the nonsensical story of an old lady who swallows a fly, and the unfortunate series of events that follow.
+
+@indented{_she swallowed the cat to catch the bird +
+she swallowed the bird to catch the spider_	
+}
 
 @lesson-instruction{
-- Read the lyrics on @printable-exercise{old-lady-lyrics.adoc}.
-- Fill in the rest of the table at the bottom.
+- You'll find this `short-corpus` at the top of @printable-exercise{build-lang-model-short.adoc}.
+- You'll also see a table of strings of different lengths that we can chop our corpus into.
 }
 
 @slidebreak{Launch}
 
-You chopped up the first line of our corpus into differently sized chunks (one word at a time, two words at a time, etc.):
-
-[cols="^.^1,^.^1,<.^8", stripes="none", options="header"]
-|===
-
-| chunk size | Quantity			| Decomposition
-
-| 1 word
-| 9
-| (There) (Was) (an) (Old) (Lady) (Who) (Swallowed) (a) (Fly)
-
-| 2 words
-| 8
-| (There Was) (Was an) (an Old) (Old Lady) (Lady Who) (Who Swallowed) (Swallowed a) (a Fly)
-
-| 3 words
-| 7
-| (There Was an) (Was an Old) (an Old Lady) (Old Lady Who) (Lady Who Swallowed) (Who Swallowed a) (Swallowed a Fly)
-
-|===
-
-@slidebreak{Launch}
-
-The formal word computer scientists use in this context is not "chunk" but @vocab{n-gram}. In an @math{n}-gram, @math{n} represents the number of words in the chunk. For special cases where @math{n} is 1, 2, or 3, the @math{n}-grams are called @vocab{unigrams}, @vocab{bigrams}, and @vocab{trigrams}.
+The formal word computer scientists use to describe the strings that can be generated from a corpus (one word at a time, two words at a time, etc.) is @vocab{n-gram}. In an @math{n}-gram, @math{n} represents the number of words in the chunk. For special cases where @math{n} is 1, 2, or 3, the @math{n}-grams are called @vocab{unigrams}, @vocab{bigrams}, and @vocab{trigrams}.
 
 @QandA{
-@Q{What other collections of words have you encountered that begin with "uni", "bi", and "tri"?}
+@Q{What other collections of words (besides @vocab{unigrams}, @vocab{bigrams}, and @vocab{trigrams}) have you encountered that begin with "uni", "bi", and "tri"?}
 @A{Answers will vary!}
 @A{unicycle, bicycle, tricycle}
 @A{(monomial), binomial, trinomial...}
@@ -221,77 +202,83 @@ The formal word computer scientists use in this context is not "chunk" but @voca
 @A{unicorn}
 }
 
-@slidebreak{LaunchR}
-@lesson-point{The Table of Unigrams is effectively a Bag of Words}
+@slidebreak{Launch}
 
-@right{@image{images/bag-of-colors.png, 200}}
-When restricted to single words (unigrams), an n-gram model stores the exact same data as a Bag of Words, though they originate from very different concepts:
+@lesson-instruction{
+- Complete the table on @printable-exercise{build-lang-model-short.adoc} by determining how often each of the n-grams occurs in the text.
+}
 
-- The @vocab{bag of words model} represents documents as @math{n}-dimensional coordinates, allowing them to be used for classification or regression.
-- Unigrams come from Language Modeling and—along with bigrams and trigrams—are used to _calculate probabilities_.
+@slidebreak{Launch}
 
-Same data, very different purposes.
+Computers are really fast at generating word counts. 
+Pyret has a function that will make more or less the same table you just completed in the blink of an eye.
+
+@hspace{2em} @show{(contract 'build-lang-model '((corpus String) (max-ngram-size Number)) "Table")}
+
+@lesson-instruction{
+- Open the @starter-file{ai-old-lady} and click "Run".
+- In the Definitions Area (on the left) you will see `m-short` defined to produce a table using the `short-corpus` with a maximum @vocab{n-gram} length of 3.
+- Evaluate `m-short` in the Interactions Area.
+}
+
+@QandA{
+@Q{How is the table similar to the one you made?}
+@A{It has the same 3 columns and the same number of rows}
+
+@Q{How is the table different from the one you made?}
+@A{n-grams that are the same size are listed in alphabetical order.
+	* While it's easier for humans to read ordered tables like this, it's extra error-prone work for humans to attempt to make an alphabetized count table from a text.}
+}
+
+@slidebreak{Launch}
+
+@lesson-instruction{
+- Confirm that your counts match the counts in the pyret table.
+- Then complete the questions at the bottom of @printable-exercise{build-lang-model-short.adoc}.
+}
+
+@slidebreak{Launch}
+
+@QandA{
+@Q{How was knowing the count of a particular @vocab{n-gram} in the @vocab{corpus} useful in determining the probability of the next word?}
+@A{The count of any bigram, divided by the count of its first word gives us the probability of the first word being followed by the second word.}
+}
 
 === Investigate
 @slidebreak{Investigate}
 
-@lesson-instruction{
-- Open the @starter-file{ai-ngrams}, Save a Copy, and click "Run"
-- Evaluate `corpus` in the Interactions Area
-- Evaluate `generate-ngrams(corpus, 1)`.
-}
-
-@slidebreak{Investigate}
-
-Let's dig a little deeper...
-
-The phrase "there was an old lady who swallowed a..." is repeated in our corpus! Let's zoom in on one unigram from that phrase: “there”.
-
-@QandA{
-@Q{Referring to the @printable-exercise{old-lady-lyrics.adoc, corpus} (the "lyrics" and the title): how many times does the word "there" appear in the song?}
-@A{5}
-@Q{In this corpus, how many times was the word "there" followed by the word "was"?}
-@A{5}
-@Q{What is the probability that the word "there" is followed by the word "was"?}
-@A{5/5 or 100%}
-}
-
-@slidebreak{Investigate}
-
-In the example you just worked through, you computed the _conditional probability_ that "was" appears after the unigram "there" by dividing the number of times *`"there"` is followed by `"was"`* (five times) by the number of times we see *`"there"` followed by anything* (five times)
-
-This fraction represents the  that "was" will come after "there":
+In math we can describe the @vocab{conditional probability} that `"bird"` will follow `"the"` in our `short-corpus` using the following notation:
 
 @indented{
-@math{p(was | there) = \frac
-	{\textit{count(there was)}}
-	{\textit{count(there...)}} = {\frac{5}{5}}}
+@math{p(bird | the) = \frac
+	{\textit{count(the bird)}}
+	{\textit{count(the...)}} = {\frac{2}{4}} = 0.5 = 50%}
 }
 
 @slidebreak{Investigate}
 
+Let's take a look at the full lyrics of _There was an Old Lady who Swallowed a Fly_ and explore how we could use probability to make predictions about lines in the song.
+
+@scrub{I WOULD LOVE TO GIVE THEM THE OPTION OF MAKING A COUNT TABLE IN PYRET, BUT NEED TO SEE IT ALPHABETIZED FIRST - it's unwieldy in its current state.}
+
 @lesson-instruction{
-- Complete @printable-exercise{constructing-model.adoc}.
+- Turn to @printable-exercise{old-lady-comparing-probability.adoc}.
+- Complete the questions at the bottom using both the title and the lyrics as your @vocab{corpus}.
+- If you find it helpful, you can use Pyret's `build-lang-model` function to find the counts.
 }
 
 @slidebreak{Investigate}
 
 @QandA{
-@Q{Make a prediction: How can we make use of the ratios we completed on @printable-exercise{constructing-model.adoc}?}
-@A{We can refer to our ratios to determine which word is the most likely to follow a given word.}
+@Q{Which word would you suggest to follow "swallowed a" for a random line in the song? Why?}
+@A{Fly. Because it has the highest probability of being the word that finishes the line in the song. }
+
+@Q{How would you know that the word you suggested was the right word for finishing the line of the song?}
+@A{We wouldn't! It would be the right word 60% of the time and the wrong word 40% of the time.}
 }
 
 @teacher{
 If you'd like to explore probability and sampling in greater depth, check out our lesson on @lesson-link{probability-inference, the subject}!
-}
-
-@slidebreak{Investigate}
-
-@lesson-instruction{
-- Return to the @starter-file{ai-ngrams}
-- *In the Definitions Area*, define `m = build-lang-model(corpus)` to build your language model, then click "Run".
-- Evaluate `m` to see what it looks like!
-- To find the probability of one word following another, evaluate `next-word-probability(m, "swallowed a", "fly")`
 }
 
 === Synthesize

@@ -1,0 +1,56 @@
+= Building a Language Model
+
+++++
+<style>
+div#body table tr th, div#body table tr td {
+    padding: 0.3em}
+</style>
+++++
+
+she swallowed the cat to catch the bird she swallowed the bird to catch the spider
+
+== Language Model
+
+[cols="1a, 2a, 1a", options="header"]
+|===
+| size  | n-gram 					| count
+| 1 	| 	"she"					| 2
+| 1 	| 	"swallowed"				| 2
+| 1 	| 	"the"					| 4
+| 1 	| 	"cat"					| 1
+| 1 	| 	"to"					| @ifsoln{2}
+| 1 	| 	"catch"					| @ifsoln{2}
+| 1 	| 	"bird"					| @ifsoln{2}
+| 1 	| 	"spider"				| @ifsoln{1}
+| 2 	| 	"she swallowed"			| @ifsoln{2}
+| 2 	| 	"swallowed the"			| @ifsoln{2}
+| 2 	| 	"the cat"				| @ifsoln{1}
+| 2 	| 	"cat to"				| @ifsoln{2}
+| 2 	| 	"to catch"				| @ifsoln{2}
+| 2 	| 	"catch the"				| @ifsoln{2}
+| 2 	| 	"the bird"				| @ifsoln{2}
+| 2 	| 	"bird she"				| @ifsoln{1}
+| 2 	| 	"the spider"			| @ifsoln{1}
+| 3 	| 	"she swallowed the"		| @ifsoln{2}
+| 3 	| 	"swallowed the cat"		| @ifsoln{1}
+| 3 	| 	"the cat to"			| @ifsoln{1}
+| 3 	| 	"cat to catch"			| @ifsoln{1}
+| 3 	| 	"to catch the"			| @ifsoln{2}
+| 3 	| 	"catch the bird"		| @ifsoln{1}
+| 3 	| 	"the bird she"			| @ifsoln{1}
+| 3 	| 	"bird she swallowed"	| @ifsoln{1}
+| 3 	| 	"swallowed the bird"	| @ifsoln{1}
+| 3 	| 	"the bird to"			| @ifsoln{1}
+| 3 	| 	"bird to catch"			| @ifsoln{1}
+| 3 	| 	"catch the spider"		| @ifsoln{1}
+|===
+
+== Next Word Probability
+
+@n How many times does the word "the" appear in this corpus? @fitb{}{@ifsoln{4}}
+
+@n How many times was the word "the" followed by the word "bird"? @fitb{}{@ifsoln{2}}
+
+@n If you picked any of the "the"s in the corpus, what is the probability that the next word would be "bird"? @fitb{}{@ifsoln{50%}}
+
+@n Why might it be useful to know that probability? @fitb{}{@ifsoln{we can compare it to the probability of other words following "the"}}

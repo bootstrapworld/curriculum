@@ -20,15 +20,8 @@
 </style>
 ++++
 
-[.no-flex-section]
-== Corpus
 [.lyrics]
 --
-
-@center{*There was an old lady who swallowed a fly*}
-
-
-
 There was an old lady who swallowed a fly,
 
 I don't know why she swallowed a fly – perhaps she'll die!
@@ -74,32 +67,42 @@ She swallowed the spider to catch the fly;}
 I don't know why she swallowed a fly – perhaps she'll die!
 --
 
-== Chunking the Text
-@n How many 1-, 2-, and 3-word chunks can you find in the first line of the song? Complete the table.
+== What did she swallow?
 
-[.FillVerticalSpace, cols="^1a, 10a, ^1a". frame="none", options="header", stripes="none"]
-|===
-| Words
-| Chunks
-| Count
+Find the ratio representing the likelihood that she swallowed each of the animals. __Remember: **the title of the song is a part of the corpus!**__
 
-| 1 word
-| "there", "was", "an", "old", "lady", "who", "swallowed", "a", "fly" ...
-| @ifsoln{9}
+@vspace{1em}
 
-| 2 words
-| "there was", "was an", "an old", "old lady" ...
-  @ifsoln{"lady who", "who swallowed", "swallowed a", "a fly"}
-| @ifsoln{8}
+@n @hspace{1em}
+@math{p(fly | swallowed a) =}
+@math{\frac
+	{\textit{count(swallowed a fly)}}
+	{\textit{count(swallowed a...)}}
+= {\frac{}{10}}}
 
-| 3 words
-| "there was an", "was an old", "an old lady" ...
-  @ifsoln{"Lady Who Swallowed", "Who Swallowed a", "Swallowed a Fly"}
-| @ifsoln{7}
-|===
+@n @hspace{1em}
+@math{p(spider | swallowed a) =}
+@math{\frac
+	{\textit{count(swallowed a spider)}}
+	{\textit{count(swallowed a...)}}
+= {\frac{}{10}}}
 
-@n In this corpus (*the lyrics _and_ the title!*) How many times does the word "there" appear? @fitb{}{@ifsoln{5}}
+@n @hspace{1em}
+@math{p(bird | swallowed a) =}
+@math{\frac
+	{\textit{count(swallowed a bird)}}
+	{\textit{count(swallowed a...)}}
+= {\frac{}{10}}}
 
-@n In this corpus, how many times was the word "there" followed by the word "was"? @fitb{}{@ifsoln{5}}
+@n @hspace{1em}
+@math{p(cat | swallowed a) =}
+@math{\frac
+	{\textit{count(swallowed a cat)}}
+	{\textit{count(swallowed a...)}}
+= {\frac{}{10}}}
 
-@n If you picked any of the "there"s in the corpus, what is the probability that the next word would be "was"? @fitb{}{@ifsoln{100%}}
+@n Across the entire poem, the lady _most likely_ swallowed a @fitb{10em}{@ifsoln{fly (6/10)}}. 
+
+@n The second most likely option is that she swallowed a @fitb{10em}{@ifsoln{cat (2/10)}}. 
+
+@n There is an equal probability that she swallowed a @fitb{10em}{@ifsoln{spider (1/10)}} or a @fitb{10em}{@ifsoln{bird (1/10)}}.
