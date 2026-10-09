@@ -250,14 +250,20 @@ Pyret has a function that will make more or less the same table you just complet
 In math we can describe the @vocab{conditional probability} that `"bird"` will follow `"the"` in our `short-corpus` using the following notation:
 
 @indented{
-@math{p(bird | the) = \frac
+@math{p(bird | the) =}
+@math{\frac
 	{\textit{count(the bird)}}
-	{\textit{count(the...)}} = {\frac{2}{4}} = 0.5 = 50%}
+	{\textit{count(the...)}} = \frac{2}{4} = 0.5 = 50}%
+}
+
+@teacher{
+If you'd like to explore @lesson-link{probability-inference, probability and sampling} in greater depth, check out our lesson on the subject
 }
 
 @slidebreak{Investigate}
 
 Let's take a look at the full lyrics of _There was an Old Lady who Swallowed a Fly_ and explore how we could use probability to make predictions about lines in the song.
+
 
 @scrub{I WOULD LOVE TO GIVE THEM THE OPTION OF MAKING A COUNT TABLE IN PYRET, BUT NEED TO SEE IT ALPHABETIZED FIRST - it's unwieldy in its current state.}
 
@@ -275,10 +281,27 @@ Let's take a look at the full lyrics of _There was an Old Lady who Swallowed a F
 
 @Q{How would you know that the word you suggested was the right word for finishing the line of the song?}
 @A{We wouldn't! It would be the right word 60% of the time and the wrong word 40% of the time.}
+@A{When our computers offer us suggested words, they don't always come up with the right one, either!}
 }
 
-@teacher{
-If you'd like to explore probability and sampling in greater depth, check out our lesson on @lesson-link{probability-inference, the subject}!
+@slidebreak{Investigate}
+
+In order for Generative Text models to suggest next words, they need to build models with computed probabilities for all of the possible n-grams! Pyret has a function that will do just that.
+
+@hspace{2em} @show{(contract 'build-stat-lang-model '((corpus String)) "Model")}
+
+@lesson-instruction{
+- Return to the @starter-file{ai-old-lady}.
+- In the Definitions Area define `model = build-stat-lang-model(corpus)` and click "Run" to load it.
+- Then evaluate `model` in the Interactions Area.
+}
+
+@QandA{
+@Q{What do you Notice? What do you Wonder?}
+@A{Answers will vary. Possible noticings might include: 
+  * some of the strings are empty. These probabilities should the probability of those words occurring without taking the preceding word into consideration. Generative text functions use those probabilities to select starting words.
+  * the table uses the same notation for describing conditional probability that they are used to
+  }
 }
 
 === Synthesize
