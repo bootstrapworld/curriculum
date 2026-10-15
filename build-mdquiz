@@ -8,7 +8,12 @@ if [[ " $* " != *" --skip-make "* ]]; then
 fi
 
 # index.html for the assessment page,
-# which loads the quiz and displays it
+# which loads the quiz and displays it.
+#
+# It also appends the student barometer questions (lib/barometer-questions.json,
+# spliced in for __BAROMETER_QUESTIONS__ below) to every quiz, unless its
+# quiz.json says "barometer": false (see #2938). A quiz.json that doesn't
+# parse is passed through as-is, so mdquiz still reports the JSON error.
 indexHTML='<!DOCTYPE html>
 <html lang="en">
   <head>
@@ -20,7 +25,14 @@ indexHTML='<!DOCTYPE html>
     <script type="module">
         import buildQuiz from "./lib.js";
         import quizConfig from "./quiz.json?raw" with {type: "json"};
-        buildQuiz('"'"'root'"'"', quizConfig)
+        const barometerQuestions = __BAROMETER_QUESTIONS__;
+        function withBarometer(raw) {
+          let quiz;
+          try { quiz = JSON.parse(raw); } catch (e) { return raw; }
+          if (quiz.barometer === false) return quiz;
+          return { ...quiz, questions: quiz.questions.concat(barometerQuestions) };
+        }
+        buildQuiz('"'"'root'"'"', withBarometer(quizConfig))
     </script>
     <style>
       /* Categorize questions: images default to a fixed small size, filling
@@ -47,6 +59,21 @@ indexHTML='<!DOCTYPE html>
         max-height: 300px;
         cursor: zoom-out;
       }
+      /* Barometer questions (lib/barometer-questions.json, whose prompts
+         carry an empty <span class="barometer">): faces 3x the usual size,
+         kept in one row so the scale reads left to right, even on phones. */
+      .question:has(.prompt .barometer) fieldset {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 10px;
+      }
+      .question:has(.prompt .barometer) .choice label {
+        min-width: 0;
+        justify-content: center;
+      }
+      .question:has(.prompt .barometer) .choice p {
+        font-size: 3em;
+        margin: 0;
+      }
     </style>
     <script>
       document.addEventListener('"'"'click'"'"', function (e) {
@@ -70,7 +97,8 @@ if [[ " $* " == *" --clean "* ]]; then
 import { glob } from "glob"
 import fs from "fs"
 
-const indexHTML = process.env.MDQUIZ_INDEX_HTML;
+const indexHTML = process.env.MDQUIZ_INDEX_HTML.replace("__BAROMETER_QUESTIONS__",
+  () => fs.readFileSync("lib/barometer-questions.json", "utf8").trim());
 const mdquizLib = fs.readFileSync("node_modules/mdquiz/dist/lib.js", "utf8")
   .replace(`["localhost", "127.0.0.1"]`, `["localhost", "127.0.0.1", ""]`);
 
@@ -114,7 +142,8 @@ import { glob } from "glob"
 import fs from "fs"
 import crypto from "crypto"
 
-const indexHTML = process.env.MDQUIZ_INDEX_HTML;
+const indexHTML = process.env.MDQUIZ_INDEX_HTML.replace("__BAROMETER_QUESTIONS__",
+  () => fs.readFileSync("lib/barometer-questions.json", "utf8").trim());
 const cacheFile = process.env.MDQUIZ_CACHE_FILE;
 const newHashesFile = process.env.MDQUIZ_NEW_HASHES_FILE;
 
@@ -131,9 +160,12 @@ for (const d of assessmentDirs) {
 // Content hash of everything under a quiz'"'"'s assessments dir except
 // index.html and lib.js: both are build-system-generated (the stub above,
 // lib.js copied from node_modules/mdquiz) rather than authored content, so
-// neither reflects whether the quiz itself actually changed.
+// neither reflects whether the quiz itself actually changed. The stub
+// template (indexHTML, barometer questions included) is hashed instead, so
+// a change to it rebuilds every quiz.
 function hashQuiz(dir) {
   const hash = crypto.createHash("sha256");
+  hash.update(indexHTML);
   (function walk(d) {
     const entries = fs.readdirSync(d, { withFileTypes: true })
       .sort((a, b) => a.name < b.name ? -1 : a.name > b.name ? 1 : 0);
