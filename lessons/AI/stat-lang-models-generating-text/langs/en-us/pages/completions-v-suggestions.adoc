@@ -1,0 +1,44 @@
+= Completions vs. Suggestions
+
+== More `completions`
+
+@n _Evaluate @show{(code '(completions m "swallowed to catch"))}_. What does Pyret return? @fitb{}{@ifsoln{and empty table}} +
+@hspace{1em} Why? @fitb{}{@ifsoln{The phrase "swallowed to catch" never appears in the corpus.}}
+
+@n What other completion expression could we evaluate in Pyret to find a possible next word to follow "swallowed to catch"? 
+
+@hspace{1em} `completions(` @fitb{3em}{@ifsoln{m}} `,` " @fitb{25em}{@ifsoln{to catch}} " `)`
+
+@hspace{1em} _Evaluate it_. What completions does Pyret return? @fitb{}{@ifsoln{"the"}}
+
+@n What other completion expression might be worth trying? @hspace{1em} `completions(` @fitb{3em}{@ifsoln{m}} `,` " @fitb{17em}{@ifsoln{catch}} " `)`
+
+@hspace{1em} _Evaluate it_. What completions does Pyret return? @fitb{}{@ifsoln{"the"}}
+
+@n _Evaluate @show{(code '(completions m ""))}_ What is this expression asking Pyret to do? @fitb{}{} +
+@fitb{}{@ifsoln{Find all possible completions from the corpus if we start without any specific text.}}
+
+@n How many rows are in the table? @fitb{5em}{@ifsoln{35}} @hspace{1em} What do they represent? @fitb{}{@ifsoln{all 35 unique words in the corpus}}
+
+== `suggestions`
+
+@n _Evaluate @show{(code '(suggestions m "swallowed to catch"))}._ What does the `suggestions` function do? @fitb{}{} +
+@fitb{}{@ifsoln{Returns the completions for the exact phrase and each of the smaller n-grams it ends with, followed by all of the other words that are in the corpus.}}
+
+@n What does the number in the size column tell us? @fitb{}{@ifsoln{The size of the n-gram that the suggestion or completion follows.}}
+
+@n Why might programmers have computers generate text with `suggestions` rather than `completions`? @fitb{}{@ifsoln{It's not very helpful to not get any text at all.}}
+
+@n Why might `suggestions` be more likely to generate nonsense than `completions`? @fitb{}{@ifsoln{It includes combinations of words that never appear in the corpus!}} +
+@fitb{}{}
+
+
+== `choose-suggestion`
+
+@n What rules would you expect Pyret to be programmed to follow in order to choose a suggestion? @fitb{}{} +
+@fitb{}{}
+
+@n Test it out. Be sure to evaluate @show{(code '(choose-suggestion m "bird"))} and @show{(code '(choose-suggestion m "cat"))}
+
+@n When generating text, do we want to choose the most likely word every single time? @fitb{}{} +
+@fitb{}{}

@@ -1,22 +1,20 @@
 = Sampling from the Language Model
 
-@link-instructions{Use Pyret to answer the questions below.}
+@link-instructions{This page is designed for use with @starter-file{ai-old-lady}.}
 
 @indented{
-@show{(contract "build-lang-model" '((corpus String)) "Table")} +
-@show{(contract "generate-ngrams" '((model Table) (size Number)) "Table")} +
-@show{(contract "completions" '((model Table) (start String)) "Table")}
+@show{(contract "completions" '((model Table) (starting-n-gram String)) "Table")}
 }
 
 == Text Generation Exercise #1
 
-@n Let's start our text generation with the phrase "She ".
+@n Let's start our text generation with the word "she".
 
 @indented{*Text Generation 1*:
-@fitbruby{10em}{She}{first word} @hspace{1em}
+@fitbruby{10em}{she}{first word} @hspace{1em}
 @fitbruby{10em}{@ifsoln{swallowed}}{second word} @hspace{1em}
-@fitbruby{10em}{@ifsoln{a}}{third word} @hspace{1em}
-@fitbruby{10em}{@ifsoln{fly}}{fourth word}
+@fitbruby{10em}{@ifsoln{the}}{third word} @hspace{1em}
+@fitbruby{10em}{@ifsoln{spider}}{fourth word}
 }
 
 @n Determine which word is most likely to follow "She " and record it on the line for second word above.
@@ -34,13 +32,11 @@
 
 == Text Generation Exercise #2
 
-@n Let's start by choosing the *most* common word: @fitb{8em}{@ifsoln{the}}
+@n Let's start our text generation with the word "spider".  Use statistical language modeling to determine the next word. @fitb{}{@ifsoln{"that" or "to"}}
 
-@n Determine which word is most likely to follow that word: @fitb{8em}{@ifsoln{spider}}
+@n How is this text generation example different from the last? @fitb{}{@ifsoln{There are two equally likely options instead of one most likely.}}
 
-@n There are two words that have an equal probability of appearing in the third spot! What are they? @fitb{7em}{@ifsoln{that}} and @fitb{}{@ifsoln{to}}
-
-@n Use statistical language modeling to determine the fourth word for each of the sentences below, using each of the two words you computed for the third spot.
+@n Use statistical language modeling to complete the two text generation options below.
 
 @vspace{1em}
 
@@ -48,32 +44,33 @@
 Some students will have the 2a response in the 2b blanks, and vice versa — which is fine!
 
 }
-
 @indented{*Text Generation 2a*:
-@fitbruby{10em}{the}{first word} @hspace{1em}
-@fitbruby{10em}{@ifsoln{spider}}{second word} @hspace{1em}
-@fitbruby{10em}{@ifsoln{that}}{third word} @hspace{1em}
-@fitbruby{10em}{@ifsoln{wriggled}}{fourth word}
+@fitbruby{10em}{spider}{first word} @hspace{1em}
+@fitbruby{10em}{@ifsoln{that}}{second word} @hspace{1em}
+@fitbruby{10em}{@ifsoln{wriggled}}{third word} @hspace{1em}
+@fitbruby{10em}{@ifsoln{and}}{fourth word}
 }
 
 @vspace{1em}
 
 @indented{*Text Generation 2b*:
-@fitbruby{10em}{the}{first word} @hspace{1em}
-@fitbruby{10em}{@ifsoln{spider}}{second word} @hspace{1em}
-@fitbruby{10em}{@ifsoln{to}}{third word} @hspace{1em}
-@fitbruby{10em}{@ifsoln{catch}}{fourth word}
+@fitbruby{10em}{spider}{first word} @hspace{1em}
+@fitbruby{10em}{@ifsoln{to}}{second word} @hspace{1em}
+@fitbruby{10em}{@ifsoln{catch}}{third word} @hspace{1em}
+@fitbruby{10em}{@ifsoln{the}}{fourth word}
 }
 
-@n Why was there only one result for *Text Generation Exercise 1*, while *Text Generation Exercise 2* had two possible results?
+@n You've just generated two possible results. If you were a computer, which one would you suggest. Why?
 
-@blanklines{3}{
-@ifsoln{In *Text Generation Exercise 2*, there was a "tie" for the most likely next word after "spider", whereas there was always a most likely word for *Text Generation Exercise 1*}
+@blanklines{2}{
+@ifsoln{Computers can't choose unless they are given a rule to follow. Since text 2a and text 2b are equally likely, a computer would need another criteria to fall back on, perhaps whichever come first alphabetically.}
 }
 
-@star What is another starting word that would result in only one possible four-word phrase? @fitb{}{@ifsoln{was, an, old, lady, who}}
+== Text Generation Exercise #3
 
-@star @star What is another starting word that would result in at least two possible outcomes? @fitb{}{@ifsoln{and, cat}}
+@star What is another starting word that would result in only one possible four-word phrase? @fitb{}{@ifsoln{was, an, old, lady, who, how, absurd, wriggled, etc.}}
+
+@star @star What is another starting word that would result in at least two possible outcomes? @fitb{}{@ifsoln{and, cat, spider, bird}}
 
 
 
