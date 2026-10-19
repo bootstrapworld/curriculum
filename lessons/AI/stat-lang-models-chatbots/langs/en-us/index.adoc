@@ -35,18 +35,16 @@ Decide if you want to distribute the optional handout @opt-printable-exercise{fa
 
 == Meet Soekia
 @objective{ai-soekia}
-@objective{ai-slm-temperature}
+
 === Overview
 Students engage with Soekia to discover some of the nuances of a student-friendly statistical language model.
-
 
 === Launch
 @slidebreak{Launch}
 
 You've already learned about how @vocab{statistical language models} rely on probability to generate text and constructed your own language model from the folk song "There Was an Old Lady Who Swallowed a Fly" in our @lesson-link{stat-lang-models-generating-text} lesson.
 
-In this lesson, you will explore Soekia, a learning tool designed specifically for text generation tool designed for student learning. Soekia offers us one example of @vocab{Natural Language Processing}.
-
+In this lesson, you will explore Soekia, a text generation tool designed for students to learn about @vocab{Natural Language Processing}.
 
 @slidebreak{Launch}
 
@@ -54,9 +52,8 @@ In this lesson, you will explore Soekia, a learning tool designed specifically f
 - Open a browser window and make sure it is filling the full width of your screen.
 - Go to @starter-file{soekia}.
 - The blue-colored panel occupying most of your screen is where text generation takes place. This is the level typically visible to the user when using a chatbot. 
-- We're going to tell Soekia to generate a fairy tale by clicking on the ⌲.
+- We're going to tell Soekia to generate a folk song by clicking on the ⌲.
 - Follow along and read the text until Soekia finishes writing.
-- Then complete the first section of @printable-exercise{meet-soekia-1.adoc}. 
 }
 
 @slidebreak{Launch}
@@ -64,69 +61,57 @@ In this lesson, you will explore Soekia, a learning tool designed specifically f
 @QandA{
 @Q{What do you Notice?}
 @A{A new word appears about once a second.}
-@A{Different words appear in different colors.}
-@A{The fairy tale sounds a little strange.}
-@A{We can pause, speed up or just add one word at a time using the play controls beneath the text window.}
-@A{We can ask Soekia to write another paragraph by clicking "@image{images/android-icon.png,15} Resume Automatically".}
-@A{We can manually select the next word from a list if we want.}
-@A{In order to write a new story, we can click on the reset icon ↺ to delete what's been generated.}
-@A{We can copy the text that's been generated to our clipboard using the @image{images/copy-icon.png,15}.}
-@A{We can turn color-coding of the words on and off by clicking on 👁️.}
-@A{We can switch from continuous text generation to {nbsp} "@image{images/single-step-icon.png, 15} single word"  {nbsp} or {nbsp} "⏩︎ fast" text generation mode {nbsp} ⏩︎.
+@A{The words seem to come from our Old Lady corpus.}
+@A{The words are highlighted in different colors.}
+@A{The folk song sounds a little strange.}
+@A{Specific button functionality is __not a learning goal here__, but noticings may include:
+  * @image{images/reset-icon.png,15} allows us to reset and write new lyrics.
+  * We can pause, speed up or just add one word at a time using the play controls beneath the text window.
+  * We can ask Soekia to write another paragraph by clicking "@image{images/android-icon.png,15} Resume Automatically".
+  * We can manually select the next word from a list if we want.
+  * @image{images/copy-icon.png,15} allows us to copy the text that's been generated to our clipboard.
+  * 👁️ turns color-coding of the words by source document on and off.
+  * We can switch from continuous text generation to {nbsp} "@image{images/single-step-icon.png, 15} single word"  {nbsp} or {nbsp} "⏩︎ fast" text generation mode {nbsp} ⏩︎.
 }
 
-
 @Q{What do you Wonder?}
-@A{Why does the story sound so odd?}
-@A{Will Soekia tell a different story each time I ask it for a story?}
+@A{Will Soekia write a different song each time I ask it for one?}
 @A{Does ChatGPT use the same algorithm as Soekia?}
-@A{Why are the words highlighted with different colors?}
-
-@Q{Hover your mouse over one or two of the highlighted words in the fairy tale. What appears?
-  * If the words in your fairy tale aren't already highlighted with different colors (greens, purples, etc), click the 👁️ beneath the generated text.}
-@A{Each color corresponds with a different document; documents are labeled A, B, C, etc.}
 }
 
 === Investigate
 @slidebreak{Investigate}
 
-It's time to peek behind the curtain to see where the fairytale you read is coming from! 
+It's time to peek behind the curtain to see where the words you read are coming from! 
 
 @lesson-instruction{
 - Click the "LOOK INSIDE ➔" button in the upper right-hand corner of @starter-file{soekia, "Soekia"}.
 }
 
-Now, in addition to the blue text generation panel, we see three additional panels: suggested words, n-grams, and documents.
+Now, in addition to the blue text generation panel, we see three additional panels: suggested words, n-grams, and corpus.
 
-@image{images/four-panels.png}
+@image{images/four-panels.png} @scrub{REPLACE THIS!}
 
 @slidebreak{Investigate}
 
 There is a LOT to discover in each panel! 
 
 @lesson-instruction{
-- Let's start with the Documents panel. 
-- Turn to @printable-exercise{meet-soekia-1.adoc} and complete the page with your partner.
+- With your partner, take some time to explore @starter-file{soekia} and make connections to @starter-file{ai-old-lady}.
+- Complete @printable-exercise{match-pyret-soekia.adoc} as you poke around.
 }
 
 @slidebreak{Investigate}
 
 @QandA{
-@Q{What did you Notice about the _Documents_ panel?}
-@A{There are 12 documents.}
-@A{Each document is a different color.}
-@A{The colors correspond with the colors that appeared (highlighting words) in the _Text generation_ panel.}
-@A{If I click on the icons in the upper right, I can change the training corpus.}
-@A{If I change the prompt in the _Text generation_ panel, the green lines at the bottom of the document change. These lines indicate how closely the wording of the prompt corresponds with the text in the document.}
+@Q{What are some connections you see between Soekia and Pyret?}
 
-@Q{What did you Wonder about the _Documents_ panel?}
-@A{Can I change these documents for different ones?}
-@A{Why haven't I heard of some of these fairy tales?}
-@A{What is the relationship between this _Documents_ panel and the _N-grams_ panel next to it?}
+@Q{What else do you notuce and wonder?}
 }
 
-@teacher{Invite students to share their discoveries. Some of your students may discover that they can change the training corpus so that the documents include not fairy tales but tic tac toe games, musical compositions, and chess matches! In the subsequent section of the lesson, students will explore these other document collections in greater depth.}
+@teacher{Invite students to share their discoveries. Some of your students may discover that they can change the training corpus so that the documents include not fairy tales but tic tac toe games, musical compositions, and chess matches! In subsequent sections of the lesson, students will explore these other document collections in greater depth.}
 
+@scrub{
 @slidebreak{Investigate}
 
 @lesson-instruction{
@@ -137,8 +122,7 @@ There is a LOT to discover in each panel!
 @slidebreak{Investigate}
 
 @lesson-instruction{
-- Turn to @printable-exercise{meet-soekia-2.adoc} and complete the page with your partner.
-- If you finish before we're ready to discuss as a class, see if you can predict the first 5 words Soekia would produce from the weather collection ☁️. _Note: When you switch collections, the temperature will automatically reset to 60, so you'll need to reset it to low._
+- If you finish before we're ready to discuss as a class, see if you can predict the first 5 words Soekia would produce from the weather collection ☁️. 
 }
 
 @slidebreak{Investigate}
@@ -218,6 +202,23 @@ Do you think your students might enjoy learning more about specific examples of 
 @Q{What did you Notice?}
 @A{The _Suggested words_ panel updates automatically as Soekia generates text.}
 @A{Soekia often suggests a 5-gram and the shorter n-grams that are contained within that 5-gram (e.g., "the wind in the trees", "wind in the trees", "in the trees" and "trees").}
+}
+
+
+@QandA{
+@Q{What did you Notice about the _Documents_ panel?}
+@A{There are 12 documents.}
+@A{Each document is a different color.}
+@A{The colors correspond with the colors that appeared (highlighting words) in the _Text generation_ panel.}
+@A{If I click on the icons in the upper right, I can change the training corpus.}
+@A{If I change the prompt in the _Text generation_ panel, the green lines at the bottom of the document change. These lines indicate how closely the wording of the prompt corresponds with the text in the document.}
+
+@Q{What did you Wonder about the _Documents_ panel?}
+@A{Can I change these documents for different ones?}
+@A{Why haven't I heard of some of these fairy tales?}
+@A{What is the relationship between this _Documents_ panel and the _N-grams_ panel next to it?}
+}
+
 }
 
 === Synthesize
