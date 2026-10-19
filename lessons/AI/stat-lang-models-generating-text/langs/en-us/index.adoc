@@ -184,8 +184,8 @@ she swallowed the bird to catch the spider_
 }
 
 @lesson-instruction{
-- You'll find this `short-corpus` at the top of @printable-exercise{n-gram-table-short-corpus.adoc}.
-- You'll also see a table of @vocab{n-grams} (strings of different lengths) that we can chop our corpus into.
+- You'll find this `short-corpus` on the left column at the top of @printable-exercise{n-gram-table-short-corpus.adoc}.
+- You'll also see a table of @vocab{n-grams} (strings of different lengths) that we can chop this corpus into.
 }
 
 @slidebreak{Launch}
@@ -208,13 +208,15 @@ To model text, computer scientists find all of the strings that can be generated
 @slidebreak{Launch}
 
 @lesson-instruction{
-- Complete the table on @printable-exercise{n-gram-table-short-corpus.adoc} by determining how often each of the n-grams occurs in the text.
+- According to the n-gram table, the unigrams (size-1 n-grams) `"she"` and `"swallowed"` appear *two times* in the short corpus, and the unigram `"the"` appears *four times*.
+- For all the unigrams in the table, on @printable-exercise{n-gram-table-short-corpus.adoc} fill in the `count` column by determining how often each one occurs in the text.
+- Compare your unigram `count`s with another student, then complete the rows for the bigrams (size-2 n-grams).
+- When you've compared your counts for the bigrams, finish the table by counting the trigrams (size-3 n-grams).
 }
 
 @slidebreak{Launch}
 
-Computers are really fast at generating word counts. 
-Pyret has a function that will make more or less the same table you just completed in the blink of an eye.
+Computers are really fast at generating word counts. Pyret has a function that will make more or less the same table you just completed in the blink of an eye.
 
 @hspace{2em} @show{(contract "n-grams" '((corpus String)) "Table")}
 
@@ -270,7 +272,7 @@ Let's take a look at the full lyrics of _There was an Old Lady who Swallowed a F
 
 @lesson-instruction{
 - Turn to @printable-exercise{old-lady-lyrics-comparing-probability.adoc}.
-- Complete the questions at the bottom using both the title and the lyrics as your @vocab{corpus}.
+- Complete the questions at the bottom using this combination of both the title and the lyrics as your @vocab{corpus}.
   * Pyret can help you find the counts if you use the `n-grams` function with the full `corpus`.
   * You can even search the n-grams table by clicking on it to reveal all of the rows and then using the keyboard shortcut "command F"! 
 }
