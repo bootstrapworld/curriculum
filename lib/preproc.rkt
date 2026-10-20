@@ -2379,9 +2379,13 @@
                                                                       raw-url)]
                                                                   [else raw-url])]
                                                        [link-output
-                                                         (format
-                                                           "link:pass:[~a][~a~a, role=starterFileLink]"
-                                                           url title ", window=\"&#x5f;blank\"")])
+                                                         (if (string-prefix? "http" url)
+                                                           (format
+                                                             "link:pass:[~a][~a~a, role=starterFileLink]"
+                                                             url title ", window=\"&#x5f;blank\"")
+                                                           (format
+                                                             "link:{fromlangroot}pass:[~a][~a~a, role=starterFileLink]"
+                                                             url title ", window=\"&#x5f;blank\""))])
                                                   (display link-output o))]))]))]
                           [(string=? directive "assessments")
                            ;; Empty placeholder that populateQuizLinks() (graph-pages.js)
