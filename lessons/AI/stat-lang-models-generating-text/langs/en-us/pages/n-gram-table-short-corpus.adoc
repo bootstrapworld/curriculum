@@ -6,27 +6,82 @@ div#body table tr th, div#body table tr td {
     padding: 0.25em;
 }
 
-#content table table {
-    margin: 0px !important;
+/* Give the outer table a top margin only, and the inner table no margins at all */
+#content table { margin-bottom: 0 !important; margin-top: 1em !important; }
+#content table table { margin: 0 !important; }
+#content table table tr:last-child td {
     border-bottom: solid 1px black !important;
 }
 
+#content tr th.tableblock:first-child, #content table table:last-child tr:first-child td:first-child {
+    border-bottom: none !important;
+    background: white !important;
+}
+
 #content { --blank-height: calc(0.5em + 1em); }
+
+#content .linkInstructions .autonum { padding-top: 0 !important; }
+
+/* Base style for both background quotes */
+#content .dramatic-quote::before,
+#content .dramatic-quote::after {
+  position: absolute;
+  font-size: 6em; /* Large, dramatic sizing */
+  font-family: 'Georgia', serif;
+  color: rgba(0, 0, 0, 0.08); /* Faint color to act as a background shadow */
+  line-height: 1;
+  z-index: -1; /* Pushes the quotes safely behind the text */
+  user-select: none; /* Prevents users from accidentally highlighting them */
+}
+
+#content .dramatic-quote {
+  position: relative; /* Establish positioning context for pseudo-elements */
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 40px 60px;
+  font-family: 'Georgia', serif;
+  font-size: 1.5rem;
+  line-height: 1.6;
+  color: #333;
+  background-color: #fff; /* Ensures text stays visible over the quotes */
+  z-index: 1; /* Creates a stacking context */
+}
+
+/* Position the opening quote top-left */
+#content .dramatic-quote::before {
+  content: "“";
+  top: -20px;
+  left: 10px;
+}
+
+/* Position the closing quote bottom-right */
+#content .dramatic-quote::after {
+  content: "”";
+  bottom: -80px;
+  right: 10px;
+}
+
 </style>
 ++++
 
 == `short-corpus` and n-gram Table
+@link-instructions{
+Read the short corpus on the left. How many times the word "she" appear? The word "the"? For each n-gram in the table on the right, fill in the number of times each unigram, bigram, and trigram appears in the short corpus.
+}
 
-[cols=".^1a, ^2a", frame="none", grid="none"]
+[cols=".^1a, ^1a", frame="none", grid="none"]
 |===
 |
+[.dramatic-quote]
 __she swallowed the cat to catch the bird +
+{empty} +
 she swallowed the bird to catch the spider__
 
 |
-[cols="^1a, ^2a, ^1a", options="header"]
+[cols="^.^1a, ^1a, ^2a, ^1a", options="header", frame="none"]
 !===
-! size  ! n-gram 					! count
+! ! size  ! n-gram 					! count
+.8+! @n
 ! 1 	! 	"she"					! 2
 ! 1 	! 	"swallowed"				! 2
 ! 1 	! 	"the"					! 4
@@ -36,8 +91,9 @@ she swallowed the bird to catch the spider__
 ! 1 	! 	"bird"					! @ifsoln{2}
 ! 1 	! 	"spider"				! @ifsoln{1}
 !===
-[cols="^1a, ^2a, ^1a"]
+[cols="^.^1a, ^1a, ^2a, ^1a", frame="none"]
 !===
+.9+! @n
 ! 2 	! 	"she swallowed"			! @ifsoln{2}
 ! 2 	! 	"swallowed the"			! @ifsoln{2}
 ! 2 	! 	"the cat"				! @ifsoln{1}
@@ -48,8 +104,9 @@ she swallowed the bird to catch the spider__
 ! 2 	! 	"bird she"				! @ifsoln{1}
 ! 2 	! 	"the spider"			! @ifsoln{1}
 !===
-[cols="^1a, ^2a, ^1a"]
+[cols="^.^1a, ^1a, ^2a, ^1a", frame="none"]
 !===
+.12+! @n
 ! 3 	! 	"she swallowed the"		! 2
 ! 3 	! 	"swallowed the cat"		! @ifsoln{1}
 ! 3 	! 	"the cat to"			! @ifsoln{1}

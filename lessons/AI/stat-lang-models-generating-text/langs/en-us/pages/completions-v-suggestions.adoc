@@ -2,10 +2,10 @@
 
 == More `completions`
 
-@n _Evaluate @show{(code '(completions m "swallowed to catch"))}_. What does Pyret return? @fitb{}{@ifsoln{and empty table}} +
-@hspace{1em} Why? @fitb{}{@ifsoln{The phrase "swallowed to catch" never appears in the corpus.}}
+@n _Evaluate @show{(code '(completions m "swallowed to catch"))}_. With "swallowed to catch" as a prompt, why aren't there any completions? +
+@fitb{}{@ifsoln{The phrase "swallowed to catch" never appears in the corpus.}}
 
-@n What other completion expression could we evaluate in Pyret to find a possible next word to follow "swallowed to catch"? 
+@n If we can't find a completion for the _entire_ prompt, we could try removing words from the beginning, and only words at the end instead! Fill in the blank below with the _next best prompt_
 
 @hspace{1em} `completions(` @fitb{3em}{@ifsoln{m}} `,` " @fitb{25em}{@ifsoln{to catch}} " `)`
 
@@ -15,12 +15,12 @@
 
 @hspace{1em} _Evaluate it_. What completions does Pyret return? @fitb{}{@ifsoln{"the"}}
 
-@n _Evaluate @show{(code '(completions m ""))}_ What is this expression asking Pyret to do? @fitb{}{} +
+@n *What if even the last word has no completion?* _Evaluate @show{(code '(completions m ""))}_ What is this expression asking Pyret to do? @fitb{}{} +
 @fitb{}{@ifsoln{Find all possible completions from the corpus if we start without any specific text.}}
 
 @n How many rows are in the table? @fitb{5em}{@ifsoln{35}} @hspace{1em} What do they represent? @fitb{}{@ifsoln{all 35 unique words in the corpus}}
 
-== `suggestions`
+== Introducing `suggestions`
 
 @n _Evaluate @show{(code '(suggestions m "swallowed to catch"))}._ What does the `suggestions` function do? @fitb{}{} +
 @fitb{}{@ifsoln{Returns the completions for the exact phrase and each of the smaller n-grams it ends with, followed by all of the other words that are in the corpus.}}
@@ -33,12 +33,17 @@
 @fitb{}{}
 
 
-== `choose-suggestion`
+== Introducing `choose-suggestion`
+@n Evaluate @show{(code '(suggestions m "bird"))}. Which suggestion should we choose? @fitb{5em}{@ifsoln{to}}. Why? @fitb{}{} +
+@fitb{}{@ifsoln{It's the one with the highest probability}}
 
-@n What rules would you expect Pyret to be programmed to follow in order to choose a suggestion? @fitb{}{} +
+@n If our system _always_ chooses the same suggestion for the same prompt, will it sound "human"? Why or why not? @fitb{}{@ifsoln{Humans don't do the same thing every time}} +
 @fitb{}{}
 
-@n Test it out. Be sure to evaluate @show{(code '(choose-suggestion m "bird"))} and @show{(code '(choose-suggestion m "cat"))}
+@center{*Language models use a `heat` value between 0-1 to determine the amount of randomness to use when selecting the next word*}
 
-@n When generating text, do we want to choose the most likely word every single time? @fitb{}{} +
-@fitb{}{}
+@n Test it out. Evaluate @show{(code '(choose-suggestion m "bird" 0))} five times, then do it again with other heat values.
+
+@n Using a heat value of `0` will make the language model sound @fitbruby{15em}{@ifsoln{robotic}}{[robotic / human / insane]}, but a heat value of `1` will make the language model sound @fitbruby{15em}{@ifsoln{insane}}{[robotic / human / insane]}.
+
+@star Evaluate `generate-text(m, 0)` five times, then try `generate-text(m, 1)`.
