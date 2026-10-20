@@ -104,16 +104,22 @@
         "example-pyret": "completions(m, \"swallowed the\")"
       },
       {
-        "name": "choose-completion",
-        "domain": [{"name": "model", "type":"LanguageModel"}, {"name": "start", "type":"String"}, {"name": "n", "type": "Number"}],
+        "name": "suggestions",
+        "domain": [{"name": "model", "type": "LanguageModel"}, {"name": "start", "type": "String"}],
         "range": "Table",
-        "example-pyret": "choose-completion(m, \"swallowed the\", 3)"
+        "example-pyret": "suggestions(m, \"swallowed the\")"
       },
       {
-        "name": "generate-from",
-        "domain": [{"name": "model", "type":"LanguageModel"}, {"name": "start", "type":"String"}],
+        "name": "choose-suggestion",
+        "domain": [{"name": "model", "type":"LanguageModel"}, {"name": "start", "type":"String"}, {"name": "heat", "type": "Number"}],
         "range": "Table",
-        "example-pyret": "generate-from(m, \"swallowed the\")"
+        "example-pyret": "choose-suggestion(m, \"swallowed the\", 0)"
+      },
+      {
+        "name": "generate-text",
+        "domain": [{"name": "model", "type":"LanguageModel"}, {"name": "heat", "type":"Number"}],
+        "range": "Table",
+        "example-pyret": "generate-text(m, \"swallowed the\", 0)"
       }
      ],
      "values": ["This whole table is a table!"]
