@@ -103,6 +103,10 @@ phases:
 	@echo ➤ Find the files that need updating
 	@rm -f distribution/$(NATLANG)/lib/dependency-graph.js
 	@$(MAKE) --no-print-directory -f $(MAKE_DIR)Makefile.phase2
+	@if test ! -d $(TOPDIR)/distribution/$(NATLANG)/Soekia; then \
+	    echo ➤ Clone SoekiaGPT; \
+	    git clone --depth 1 --branch tictactoe https://github.com/bootstrapworld/SoekiaGPT $(TOPDIR)/distribution/$(NATLANG)/Soekia; \
+	fi
 
 ###############################################################################
 
