@@ -40,10 +40,10 @@
 @n If our system _always_ chooses the same suggestion for the same prompt, will it sound "human"? Why or why not? @fitb{}{@ifsoln{Humans don't do the same thing every time}} +
 @fitb{}{}
 
-@center{*Language models use a `heat` value between 0-1 to determine the amount of randomness to use when selecting the next word*}
+@center{*Language models use a `heat` value between 0-100 to determine the amount of randomness to use when selecting the next word*}
 
 @n Test it out. Evaluate @show{(code '(choose-suggestion m "bird" 0))} five times, then do it again with other heat values.
 
-@n Using a heat value of `0` will make the language model sound @fitbruby{15em}{@ifsoln{robotic}}{[robotic / human / nonsensical]}, but a heat value of `1` will make the language model sound @fitbruby{15em}{@ifsoln{insane}}{[robotic / human / nonsensical]}.
+@n Using a heat value of `0` will make the language model sound @fitbruby{15em}{@ifsoln{robotic}}{[robotic / human / nonsensical]}, but a heat value of `100` will make the language model sound @fitbruby{15em}{@ifsoln{nonsensical}}{[robotic / human / nonsensical]}.
 
 @star Evaluate `generate-text(m, 0)` five times, then try `generate-text(m, 1)`.

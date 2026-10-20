@@ -126,7 +126,7 @@ But are all users recommended the _same_ completions?
 
 For a variety of reasons, not all phones will propose the same completions:
 
-- If there are multiple words with equal probability, the system will select the word at random. As a result, even the same phone won't necessarily propose the same word every time.
+- If there are multiple words with equal probability, some systems will select the word at random. As a result, even the same phone won't necessarily propose the same word every time.
 - Not all phones use the same corpus, the same prediction rules, or the same amount of randomness.
 - A messaging app also includes a @vocab{model} of _the words that the owner uses_, to personalize suggestions to the way the user writes.
 - Some predictive text features even account for the specific message being written! Typing first letter of an unusual word that you used in the same message triggers the app to propose that unusual word.
@@ -146,7 +146,7 @@ Phenomena 3 and 4 above suggest that sometimes making a usable tool requires tha
 
 @slidebreak{Investigate}
 
-You have just considered the workings and in-context use of a @vocab{language model}. Hopefully you have discovered that, although it sometimes may _seem_ like your texting app can read your mind... it can't. It doesn't know the rules of grammar, the meanings of words, or your intentions when you are composing a text. It just knows @vocab{probability}, which it uses in ways that are often very impressive (but sometimes not!).
+You have just considered the workings and in-context use of a @vocab{language model}. Hopefully you have discovered that, although it sometimes may _seem_ like your texting app can read your mind... it can't. It doesn't know the rules of grammar, the meanings of words, or your intentions when you are composing a text. Our model just knows @vocab{probability}, which it uses in ways that are often very impressive (but sometimes not!).
 
 @teacher{
 Throughout the lesson, we'll explore the very important "sometimes not" parenthetical, above.}
@@ -162,7 +162,7 @@ Using computers to process languages, often by consuming a corpus and constructi
 @A{Statistical language modeling will work for any language! The AI does not need to "know" anything about the rules of grammar; it just follows rules that enable it to identify patterns.}
 
 @Q{Can you think of other things besides human spoken languages that a similar approach might work for?}
-@A{With statistical language modeling, AI can compose music, play chess games, and more. The "text" does not need to be made up of words: any symbolic notation at all will do as long as it uses spaces to separate the symbolic "words".}
+@A{With statistical language modeling, AI can generate sequences of sounds that resemble music, sequences of moves that resemble chess games, and more. The "text" does not need to be made up of words: any symbolic notation at all will do as long as it uses spaces to separate the symbolic "words".}
 }
 
 == Constructing a Statistical Language Model
@@ -312,8 +312,11 @@ In order for Generative Text models to suggest next words, they need to build mo
   }
 }
 
-@strategy{Statistical Language Models you use all the time - THIS BOX IS A PLACEHOLDER FOR @SCHANZER }{
-Our old lady corpus was quite short compared to the thousands of pages of text on the internet. Most SLMs take a long time to generate. When you're searching for a term and seeing suggestions, the model is not being built on the fly. The model may have taken days to be built. Once built, we can use the model as many times as we want.
+@slidebreak{Investigate}
+The `stat-lang-model` function is where the _training_ happens: counting n-grams, computing probabilities, etc (and training a real LLM involves a *lot* more complexity beyond this!). Our old lady corpus was quite short compared to the billions of pages of text on the internet. Most Large Language Models take an astronomical amount of computation to train!
+
+@strategy{Large Language Models}{
+Our language model is microscopic - a tiny corpus and a simple representation used for educational purposes. The language models most of us are familiar with, however, are Large Language Models. These use a corpus that is tens of billions of times larger, and employ a vastly more sophisticated representation: a neural network, which has been heavily optimized to minimize prediction error.
 }
 
 === Synthesize
@@ -328,7 +331,7 @@ In our song corpus,
 We can say that, _in this corpus_, as the n-gram gets longer, the number of completion options decreases.
 
 @Q{Do you think it will generally be true of other corpuses that as the n-gram gets longer, the number of completion options decreases?}
-@A{Yes, in general, this is a true statement: longer phrases have fewer possible completions than single words.}
+@A{Yes: A phrase never has more completions than its ending does, and often fewer.}
 }
 
 
@@ -362,7 +365,7 @@ Let's explore how Pyret can help us to generate text.
 }
 
 @strategy{Vocabulary Note}{
-Next word -> token
+Next word -> token (a word, or piece of a word)
 Given -> context
 }
 
@@ -405,13 +408,20 @@ Let's use the completions function to generate text!
 @Q{Should we always get the same output if we use the same input?}
 @A{No - in the event of a tie, it will choose randomly!}
 
-@Q{What do you think would happen if you start with a word like "llama", which doesn't appear _at all_ in the original corpus?}
-@A{The probability of following "llama" is the same for every word: zero.}
+@Q{What would the probability be for any word to follow "llama", which doesn't appear _at all_ in the original corpus?}
+@A{The probability of following "llama" is the same for every word: undefined (@math{0 \div 0}).}
 }
 
 @slidebreak{Investigate}
-If you're curious to see what text Pyret would generate from the  model, evaluate `generate-text(m, 0)`, or `generate-text(m, 1)`!
+If you're curious to see what text Pyret would generate from the  model, evaluate `generate-text(m, 0)`, or `generate-text(m, 100)`!
 
+@slidebreak{Investigate}
+@lesson-point{Training is expensive. Inference is cheap.}
+When you talk to a chatbot, you're essentially asking something similar to `generate-text` to create responses to your prompts. And `generate-text` relies on `choose-suggestion` in our model, which is simply looking up `completions` based on the already-computed model.
+
+Applying the `stat-lang-model` function to our corpus is where the @vocab{training} happens, resulting in a statistical language model. For real LLMs, this process can take days and - if you've seen the news - use enormous amounts of power!
+
+Asking a language model to come up with text (chatting, having it write a story, etc) is where @vocab{inference} happens. A single inference _doesn't use much computing power_, although it's important to remember just how many people might be using an LLM to make inferences every day.
 
 === Synthesize
 @slidebreak{Synthesize}
@@ -445,5 +455,6 @@ Critics of ChatGPT and other language models raise a variety of concerns. Consid
 @A{When ChatGPT produces false or misleading information, it is not glitching nor is there a bug. ChatGPT is just doing what it does, following the model as it ought to.}
 
 @Q{ChatGPT has biases that can be seen in its text output. Where do these biases come from?}
-@A{If there are biases in the corpus, there will likely be biases in the output!}
+@A{If there are biases in the training corpus there will likely be biases in the output!}
+@A{Real LLMs also use an extensive reinforcement learning phase, in which humans rate outputs of the model as positive or negative. The model is then adjusted to maximize positive responses. All humans possess some form of bias, which can leak into the model through this reinforcement.}
 }
