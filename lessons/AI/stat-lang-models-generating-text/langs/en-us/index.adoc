@@ -41,7 +41,7 @@ While texting, emailing, or even conducting a web search, you've probably notice
 Consider this start of a phrase: "Close the..."
 
 - Write down _at least three_ possible words that would come next
-- Put a star next the word that you think is the _most likely_
+- Put a star next to the word that you think is the _most likely_
 - Come up with another word that technically _could_ follow "close the...", but is very unusual
 }
 
@@ -55,8 +55,8 @@ Call on students one-at-a-time to volunteer their answers. After each one, ask t
 Let's look a little more closely at the chart we generated.
 
 @QandA{
-@Q{Which words were suggested the most common?}
-@Q{Which words were suggested least common?}
+@Q{Which words were suggested most often?}
+@Q{Which words were suggested least often?}
 @Q{Are you surprised by the most and least common words? Why or why not?}
 @Q{What fraction of our class proposed each of our top three words?}
 @A{For example: If there are 25 students in your class, and 8 students chose “door”, it was chosen 8/25ths of the time.}
@@ -77,39 +77,26 @@ Statistical language models are built on the assumption that the fraction of the
 
 Similar to other AI systems we've discussed, predictive text features are trained on a large amount of data, in this case, text.
 
-During training:
+During training, the computer builds a model:
 
-1. The computer extracts each use of the phrase "Close the" from the corpus, along with the subsequent word.
-2. It then determines the probability of each possible next word.
+1. It extracts each use of the phrase "Close the" from the corpus, along with the subsequent word.
+2. It computes the probability of each possible next word following a given phrase.
 
-@ifnotslide{@right{@image{images/texting-app.png, 200}} When making a suggestion: 
+When making a suggestion:
 
-@hspace{1em}It offers the words that had the highest probability of following "Close the" in the corpus.
-
-Consider this screenshot from a text messaging app. +
-In the @vocab{training corpus} it was built on, "door", "doors", and "house"  most commonly appeared after "Close the". +
-As a result, those words are suggested. +
-But are all users recommended the _same_ completions?
-}
-
-@ifslide{When making a suggestion: 
-
-@hspace{1em}It offers the words that had the highest probability of following "Close the" in the corpus.
+1. The computer queries the model for words that have a high probability of following "Close the" in the corpus.
+2. It supplies that list to an algorithm that returns suggestions.
 
 @slidebreak{InvestigateR}
 
-@image{images/texting-app.png, 200}
-Consider this screenshot from a text messaging app. +
-In the @vocab{training corpus} it was built on, "door", "doors", and "house"  most commonly appeared after "Close the". +
-As a result, those words are suggested. +
-But are all users recommended the _same_ completions?
-}
-
-@slidebreak{Investigate}
-
 @QandA{
-@Q{What do you think? Will your phone suggest the same words as your classmates' phones would? Why or why not?}
-@A{Before we get into the in-depth student-facing explanation, below, invite discussion!}
+@right{@image{images/texting-app.png, 200}} Consider this screenshot from a text messaging app.
+@Q{Do you think the text messaging app would be good at generating text that sounds like someone in our class wrote it? Why or why not}
+@A{Answers will vary based on the list your class generated.}
+@A{This may be an opportunity for discussing the limitations / bias built into models from the training dataset.}
+
+@Q{Would you expect your phone to suggest the same words as your classmates' phones would? Why or why not?}
+@A{Invite discussion before advancing to the guided explanation.}
 @A{This question is a great opportunity to revisit previous concepts, in particular the process of training and sampling that students discussed when thinking about @lesson-link{decision-trees-evaluating} and @lesson-link{regression-models-simple}.}
 }
 
@@ -117,23 +104,12 @@ But are all users recommended the _same_ completions?
 
 For a variety of reasons, not all phones will propose the same completions:
 
-- If there are multiple words with equal probability, some systems will select the word at random. As a result, even the same phone won't necessarily propose the same word every time.
-- Not all phones use the same corpus, the same prediction rules, or the same amount of randomness.
-- A messaging app also includes a @vocab{model} of _the words that the owner uses_, to personalize suggestions to the way the user writes.
-- Some predictive text features even account for the specific message being written! Typing first letter of an unusual word that you used in the same message triggers the app to propose that unusual word.
-
-@scrub{
-@slidebreak{Investigate}
-
-@QandA{
-@Q{We just considered four reasons why different phones sometimes propose different completions. Do each of these four reasons represent _statistical_ phenomena? Why or why not?}
-@A{Phenomena 1 and 2 are statistical, given that statistical language modeling always includes some element of randomness.}
-@A{Phenomena 3 demonstrates the use of a _personalized_ language model, a more refined version of a statistical language model.}
-@A{Phenomena 4 is almost anti-statistical! The AI consumes and uses data outside of the model for the corpus.}
-}
-
-Phenomena 3 and 4 above suggest that sometimes making a usable tool requires that we step out of bounds! Although pure statistical language models are powerful, the upgrades that programmers develop can make the AI _better_ at completing the task that it was designed to complete.
-}
+- The same phone won't necessarily propose the same word every time.
+  * If there are multiple words with equal probability, some systems will select the word at random. 
+  * Different messaging apps may be built using a different corpus. _(For example, Bootstrap authors notice big differences between predictions from imessage and WhatsApp.)_
+- Not all phones and apps use the same corpus, the same prediction rules, or the same amount of randomness.
+- A messaging app may also include a @vocab{model} of _the words that the owner uses_, to personalize suggestions to the way the user writes.
+- Some predictive text features even account for the specific message being written! Typing the first letter of an unusual word that you already used in the same message could trigger the app to propose that unusual word.
 
 @slidebreak{Investigate}
 
@@ -148,13 +124,23 @@ Using computers to process languages, often by consuming a corpus and constructi
 @slidebreak{Synthesize}
 
 @QandA{
+@Q{Think of three words that might follow "close the" for directions given in a kitchen.}
+@A{Answers will vary, but might include:
+  * refrigerator
+  * oven
+  * microwave
+  * drawer
+  * cabinet
+  * container
+  * freezer
+  }
 
-@Q{Might statistical language modeling be possible for other spoken human languages? Which languages?}
-@A{Statistical language modeling will work for any language! The AI does not need to "know" anything about the rules of grammar; it just follows rules that enable it to identify patterns.}
+@Q{How many of these were suggested by the messaging app?}
 
-@Q{Can you think of other things besides human spoken languages that a similar approach might work for?}
-@A{With statistical language modeling, AI can generate sequences of sounds that resemble music, sequences of moves that resemble chess games, and more. The "text" does not need to be made up of words: any symbolic notation at all will do as long as it uses spaces to separate the symbolic "words".}
+@Q{What does that suggest?}
+@A{The suggestions are limited by the training corpus.}
 }
+
 
 == Constructing a Statistical Language Model
 @objective{ai-slm}
@@ -168,14 +154,14 @@ Students construct a statistical language model by decomposing the text and comp
 
 The best way to make sense of statistical language modeling is to try it yourself! We'll start by constructing a model.
 
-For our @vocab{corpus}, we will start with an excerpt from the folk song _There was an Old Lady Who Swallowed a Fly_, which tells the nonsensical story of an old lady who swallows a fly, and the unfortunate series of events that follow.
+For our @vocab{training corpus}, we will start with an excerpt from the folk song _There was an Old Lady Who Swallowed a Fly_, which tells the nonsensical story of an old lady who swallows a fly, and the unfortunate series of events that follow.
 
 @indented{_she swallowed the cat to catch the bird +
 she swallowed the bird to catch the spider_
 }
 
 @lesson-instruction{
-- Turn to @printable-exercise{n-gram-table-short-corpus.adoc}.
+- Turn to @printable-exercise{counting-ngrams.adoc}.
 - The first section on the page has this `short-corpus` on the left column.
 - You'll also see a table of @vocab{n-grams} (strings of different lengths) that we can chop this corpus into.
 }
@@ -201,7 +187,7 @@ To model text, computer scientists find all of the strings that can be generated
 
 @lesson-instruction{
 - According to the n-gram table, the unigrams (size-1 n-grams) `"she"` and `"swallowed"` appear *two times* in the short corpus, and the unigram `"the"` appears *four times*.
-- For all the unigrams in the table, on @printable-exercise{n-gram-table-short-corpus.adoc} fill in the `count` column by determining how often each one occurs in the text.
+- For all the unigrams in the table, on @printable-exercise{counting-ngrams.adoc} fill in the `count` column by determining how often each one occurs in the text.
 - Compare your unigram counts with another student, then complete the rows for the bigrams (size-2 n-grams).
 - When you've compared your counts for the bigrams, finish the table by counting the trigrams (size-3 n-grams).
 }
@@ -232,7 +218,7 @@ Computers are really fast at generating word counts. Pyret has a function that w
 
 @lesson-instruction{
 - Confirm that your counts match the counts in the pyret table.
-- Then complete the questions at the bottom of @printable-exercise{n-gram-table-short-corpus.adoc}.
+- Then complete the questions at the bottom of @printable-exercise{counting-ngrams.adoc}.
 }
 
 @slidebreak{Launch}
@@ -414,34 +400,56 @@ Applying the `stat-lang-model` function to our corpus is where the @vocab{traini
 
 Asking a language model to come up with text (chatting, having it write a story, etc) is where @vocab{inference} happens. A single inference _doesn't use much computing power_, although it's important to remember just how many people might be using an LLM to make inferences every day.
 
+@slidebreak{Investigate}
+
+Asking machines to generate text using algorithms comes with risks.
+
+@lesson-instruction{
+- Turn to @printable-exercise{famous-ai-disasters-text-generation-1.adoc}.
+- With your partner, choose a case study to focus on and think through how the harm could have been avoided by responding to the questions at the bottom of the page.
+}
+
 === Synthesize
 @slidebreak{Synthesize}
 @lesson-point{A model is a mathematical summary of a dataset}
 
 @QandA{
-@Q{What does our n-grams table summarize about this dataset?}
-@A{}
+@Q{Why does a statistical language model have it's name - what does it have to do with statistics?}
+@A{It computes the probability of each word in the corpus appearing in the corpus and also the probability of each word following other words and phrases in the corpus.}
 
-@Q{What does it leave out?}
-@A{}
+@Q{Explain why counting n-grams is needed to create the model?}
+@A{If you don't count you can't find the probability.}
 }
 
 @slidebreak{Synthesize}
 @lesson-point{All models are wrong. Some are useful.}
 
 @QandA{
-@Q{Will _any_ language model be *perfect*? Why or why not?}
-@A{}
+@Q{Why won't _any_ language model be *perfect*?}
+@A{Because all it knows is a collection of words and phases found in the training corpus and various computed probabilities about those n-grams.}
+@A{There is much more to language than probability!}
 
 @Q{When is a language model *useful*?}
-@A{}
+@A{When it's built using a corpus that is representative of the desired output.}
 }
 
 @slidebreak{Synthesize}
-
+@lesson-point{Nous ne parlons pas toujours anglais!}
 @QandA{
-Critics of ChatGPT and other language models raise a variety of concerns. Consider each of them, below.
+@Q{Might statistical language modeling be possible for other spoken human languages? Which languages?}
+@A{Statistical language modeling will work for any language!}
+@A{The AI does not need to "know" anything about the rules of grammar; it just follows rules that enable it to identify patterns.}
+@A{A statistical language model built with a corpus of English text will not be very good at making suggestions in other languages!}
 
+@Q{Can you think of other things besides human spoken languages that a similar approach might work for?}
+@A{Answers will vary.}
+@A{Statistical language modeling can process any "text" composed of symbolic notation as long as it uses spaces to separate the symbolic "words".}
+@A{We will explore several examples in our lesson on @lesson-link{stat-lang-models-chatbots}, including sequences of game moves and musical notation.}
+}
+
+@slidebreak{Synthesize}
+@lesson-point{Some people have raised concerns about ChatGPT and other language models.}
+@QandA{
 @Q{ChatGPT sometimes "makes stuff up." Why does this happen? What is actually going on?}
 @A{When ChatGPT produces false or misleading information, it is not glitching nor is there a bug. ChatGPT is just doing what it does, following the model as it ought to.}
 
