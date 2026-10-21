@@ -163,9 +163,13 @@ for (const d of assessmentDirs) {
 // neither reflects whether the quiz itself actually changed. The stub
 // template (indexHTML, barometer questions included) is hashed instead, so
 // a change to it rebuilds every quiz.
+const mdquizLibSrc = fs.readFileSync("node_modules/mdquiz/dist/lib.js");
 function hashQuiz(dir) {
   const hash = crypto.createHash("sha256");
   hash.update(indexHTML);
+  // lib.js itself is skipped below, but a new mdquiz version must rebuild
+  // every quiz, so hash the source it is copied from.
+  hash.update(mdquizLibSrc);
   (function walk(d) {
     const entries = fs.readdirSync(d, { withFileTypes: true })
       .sort((a, b) => a.name < b.name ? -1 : a.name > b.name ? 1 : 0);
