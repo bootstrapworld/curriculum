@@ -29,21 +29,24 @@
 
 @n Why might programmers have computers generate text with `suggestions` rather than `completions`? @fitb{}{@ifsoln{It's not very helpful to not get any text at all.}}
 
-@n Why might `suggestions` be more likely to generate nonsense than `completions`? @fitb{}{@ifsoln{It includes combinations of words that never appear in the corpus!}} +
-@fitb{}{}
+@n Why might `suggestions` be more likely to generate nonsense than `completions`? @fitb{}{} +
+@fitb{}{@ifsoln{It includes combinations of words that never appear in the corpus!}} 
 
 
 == Introducing `choose-suggestion`
-@n Evaluate @show{(code '(suggestions m "bird"))}. Which suggestion should we choose? @fitb{5em}{@ifsoln{to}}. Why? @fitb{}{} +
-@fitb{}{@ifsoln{It's the one with the highest probability}}
+@n Evaluate @show{(code '(suggestions m "bird"))}. Which suggestion should we choose? @fitb{8em}{@ifsoln{"she" or "to"}}. Why? @fitb{}{@ifsoln{They have the highest probability.}}
 
-@n If our system _always_ chooses the same suggestion for the same prompt, will it sound "human"? Why or why not? @fitb{}{@ifsoln{Humans don't do the same thing every time}} +
-@fitb{}{}
+@n Evaluate @show{(code '(choose-suggestion m "bird" 0))}. Did it agree with your choice? @fitb{}{@ifsoln{Sort of. It returned "she".}}
 
-@center{*Language models use a `heat` value between 0-100 to determine the amount of randomness to use when selecting the next word*}
+@n Evaluate the expression 5 more times. Why shouldn't our system _always_ choose the same suggestion for the same prompt? @fitb{}{} +
+@fitb{}{@ifsoln{Humans don't do the same thing every time. There may be equally likely answers. And less likely answers should probably also be suggested sometimes.}} 
 
-@n Test it out. Evaluate @show{(code '(choose-suggestion m "bird" 0))} five times, then do it again with other heat values.
+@center{*Language models use a `heat` value between 0-100 to determine the amount of randomness to use when selecting the next word*.}
 
-@n Using a heat value of `0` will make the language model sound @fitbruby{15em}{@ifsoln{robotic}}{[robotic / human / nonsensical]}, but a heat value of `100` will make the language model sound @fitbruby{15em}{@ifsoln{nonsensical}}{[robotic / human / nonsensical]}.
+@n Evaluate @show{(code '(choose-suggestion m "bird" 100))} ten times. Would all of these suggestions make sense after the word "bird"? 
+@fitb{}{@ifsoln{probably not}}
 
-@star Evaluate `generate-text(m, 0)` five times, then try `generate-text(m, 1)`.
+@n Experiment with letting Pyret keep choosing a next word by evaluating `generate-text(m, 0)` and `generate-text(m, 100)`. +
+When the heat value is `0` the output sounds @fitbruby{12em}{@ifsoln{robotic}}{[robotic / human / nonsensical]}, but with heat of `100` the output sounds @fitbruby{11em}{@ifsoln{nonsensical}}{[robotic / human / nonsensical]}.
+
+@star Experiment with `generate-text`. What temperature value between 0 and 100 do you think generates the best text? @fitb{}{}
