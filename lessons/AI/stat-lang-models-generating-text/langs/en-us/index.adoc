@@ -416,10 +416,10 @@ Let's use the completions function to generate text!
 If you're curious to see what text Pyret would generate from the  model, evaluate `generate-text(m, 0)`, or `generate-text(m, 100)`!
 
 @slidebreak{Investigate}
-@lesson-point{Training is expensive. Inference is cheap.}
+@lesson-point{Training is expensive. Inference is cheap, but adds up.}
 When you talk to a chatbot, you're essentially asking something similar to `generate-text` to create responses to your prompts. And `generate-text` relies on `choose-suggestion` in our model, which is simply looking up `completions` based on the already-computed model.
 
-Applying the `stat-lang-model` function to our corpus is where the @vocab{training} happens, resulting in a statistical language model. For real LLMs, this process can take days and - if you've seen the news - use enormous amounts of power!
+Applying the `stat-lang-model` function to our corpus is where the @vocab{training} happens, resulting in a statistical language model. For real LLMs, this process can take _months_ and - if you've seen the news - use enormous amounts of power!
 
 Asking a language model to come up with text (chatting, having it write a story, etc) is where @vocab{inference} happens. A single inference _doesn't use much computing power_, although it's important to remember just how many people might be using an LLM to make inferences every day.
 
