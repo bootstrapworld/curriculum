@@ -118,6 +118,11 @@ But what does _"relevant information"_ really mean?
   * What extra information was included, that wasn't needed to solve the problem?
 }
 
+@strategy{Pedagogy Note: Contracts and Purpose Statements}{
+
+Before writing any code, the Design Recipe asks students to restate the problem in two forms: a Contract, which names the function and says what goes in and what comes out, and a Purpose Statement, which says in a sentence what the function does. Restating the problem is among the oldest advice in problem solving: the first step in @citation{polya-1945, "Pólya's"} method is to understand the problem, and the metacognitive scaffold of @citation{loksa-et-al-2016, "Loksa et al. (2016)"} for programmers likewise begins by reinterpreting the prompt. @citation{wrenn-krishnamurthi-2020, "Wrenn and Krishnamurthi (2020)"} observe that Pólya, the Design Recipe and Loksa et al. all start this way. Novices who were prompted to interpret the problem before coding showed a better grasp of the prompt and were more likely to complete the task (@citation{prather-et-al-2019}). The same holds in mathematics, where much of the difficulty of word problems lies in understanding the text rather than in the arithmetic (@citation{cummins-et-al-1988}; see @citation{verschaffel-et-al-2020, "Verschaffel et al. (2020)"} for a survey). Explaining in plain language what a piece of code does is also a recognized window into what novices understand (@citation{murphy-et-al-2012}). The Contract has a second job in mathematics: a function assigns each input exactly one output (@citation{ccss-8-f-a-1}), and naming the domain and range makes that mapping explicit. This matters because students' own mental images of function are often narrower than the mapping definition (@citation{vinner-dreyfus-1989}), even among prospective teachers (@citation{even-1993}), and because seeing a function as a process that turns inputs into outputs is a key step in understanding it (@citation{breidenbach-et-al-1992}). In Bootstrap, students who cannot articulate the domain and range usually do not yet understand the problem well enough to continue (@citation{schanzer-et-al-2015}).
+}
+
 === Synthesize
 @slidebreak{Synthesize}
 
@@ -145,17 +150,6 @@ The three steps of the Design Recipe are designed to mirror best practices that 
 - Writing the definition is where students formalize and abstract this understanding to work with any input.
 }
 
-@strategy{The Design Recipe in Your Classroom}{
-The three steps of the Design Recipe are designed to mirror best practices that you may _already be using in your classroom_. It's merely a collection of those practices, assembled in a structured way with great care taken to connecting each practice with the others.
-
-*Writing the Contract and Purpose Statement is where students _understand_ the word problem.* If you have your students restate the problem in their own words, draw pictures, or underline the inputs and outputs in the word problem, _you're already using this practice!_
-
-*Writing examples and circling-and-labeling what changes is where students _apply_ their understanding* to concrete inputs. If you have your students work through some concrete examples before jumping straight to variables and formulas, and ask them "what's the rule?" or "what's the pattern?", _you're already using this practice!_.
-
-*Writing the definition is where students _formalize and abstract_ this understanding* to work with _any input_. This is where they identify the structure of the rule or pattern, independently of any specific inputs.
-
-The order of the recipe is a recommendation based on 20+ years of research about what works for most students, but that doesn't mean this order works best for _every_ student! Some may find it easier to work through a concrete example or two before thinking about Domain and Range, and there's nothing wrong with that. We encourage you to use the Recipe in your classroom as often as possible, teaching students to be flexible with the tools and representations it includes.
-}
 
 == Rocket Height
 
@@ -210,6 +204,11 @@ Type @show{(code '(rocket-height 0))} into the Interactions Area.
 
 @lesson-point{
 We should always test a function definition against at least 2 examples!
+}
+
+@strategy{Pedagogy Note: Examples before Definitions}{
+
+Examples are concrete input/output pairs, written before the function definition. In computer science education examples serve as test cases, and introducing testing early has long been proposed as a way to move students from trial-and-error toward reflection (@citation{edwards-2004}; @citation{janzen-saiedian-2008}). Writing them before the code has a further benefit: tests developed alongside an implementation can share its misunderstanding, whereas examples written first check whether the student understands the problem at all (@citation{wrenn-krishnamurthi-2019}). When their environment supports examples-first development, many students adopt it voluntarily (@citation{wrenn-krishnamurthi-2020}), and asking students to solve a test case before programming has been associated with better problem-solving outcomes (@citation{denny-et-al-2019}). In mathematics education, examples play a complementary role. Algebra students learn efficiently from studying worked examples (@citation{sweller-cooper-1985}; @citation{atkinson-et-al-2000}), studying incorrect examples alongside correct ones improves algebra learning (@citation{booth-et-al-2013}), and the IES practice guide recommends using solved problems to engage students in analyzing algebraic reasoning (@citation{star-et-al-2015}). Examples are also how students come to see the general in the particular (@citation{mason-pimm-1984}): two or three concrete cases reveal what stays the same and what varies, which is exactly what the function definition must express. Bootstrap treats the ability to articulate examples as a skill valuable in both programming and mathematics, and assesses it explicitly (@citation{schanzer-et-al-2018}).
 }
 
 === Investigate
