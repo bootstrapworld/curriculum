@@ -24,11 +24,12 @@
 
 |===
 
-== Introduction to Statistical Language Modeling
+== Building a Statistical Language Modeling
 @objective{ai-slm}
+@objective{ai-slm-create}
 
 === Overview
-Students explore how text prediction relies on statistical language modeling.
+Students construct a statistical language model by decomposing the text and computing the probabilities of different words following each other.
 
 === Launch
 @slidebreak{Launch}
@@ -49,7 +50,6 @@ Consider this start of a phrase: "Close the..."
 Call on students one-at-a-time to volunteer their answers. After each one, ask the class to raise their hands if it was one of the words they came up with, and make a tally chart of each word and the number of people who wrote it down. You don't need to tally every possible word - a top-10 list is great.
 }
 
-=== Investigate
 @slidebreak{Investigate}
 
 Let's look a little more closely at the chart we generated.
@@ -57,100 +57,22 @@ Let's look a little more closely at the chart we generated.
 @QandA{
 @Q{Which words were suggested most often?}
 @Q{Which words were suggested least often?}
-@Q{Are you surprised by the most and least common words? Why or why not?}
 @Q{What fraction of our class proposed each of our top three words?}
 @A{For example: If there are 25 students in your class, and 8 students chose “door”, it was chosen 8/25ths of the time.}
 }
 
 @slidebreak{Investigate}
 
-Statistical language models are built on the assumption that the fraction of the time that a word follows a series of words in a training corpus can help predict the likelihood of it being the right word to follow that same series of words in a future scenario. In this lesson, we will refer to that fraction as its @vocab{probability}.
-
 @QandA{
-@Q{Do you think a text messaging app with a predictive text feature would produce the same results as our class? Why or why not?}
+@Q{Do you think a text messaging app with a predictive text feature would produce the same results as our class did? Why or why not?}
 @A{Answers will vary. Invite conversation.}
 @A{An app will probably not suggest all the same words.}
-@A{Our class is a pretty small sample, all from the same generation and geography and we are all currently at school so our minds are primed to respond differently than if we were somewhere else.}
-}
-
-@slidebreak{Investigate}
-
-Similar to other AI systems we've discussed, predictive text features are trained on a large amount of data, in this case, text.
-
-During training, the computer builds a model:
-
-1. It extracts each use of the phrase "Close the" from the corpus, along with the subsequent word.
-2. It computes the probability of each possible next word following a given phrase.
-
-When making a suggestion:
-
-1. The computer queries the model for words that have a high probability of following "Close the" in the corpus.
-2. It supplies that list to an algorithm that returns suggestions.
-
-@slidebreak{InvestigateR}
-
-@QandA{
-@right{@image{images/texting-app.png, 200}} Consider this screenshot from a text messaging app.
-@Q{Do you think the text messaging app would be good at generating text that sounds like someone in our class wrote it? Why or why not}
-@A{Answers will vary based on the list your class generated.}
-@A{This may be an opportunity for discussing the limitations / bias built into models from the training dataset.}
-
-@Q{Would you expect your phone to suggest the same words as your classmates' phones would? Why or why not?}
-@A{Invite discussion before advancing to the guided explanation.}
-@A{This question is a great opportunity to revisit previous concepts, in particular the process of training and sampling that students discussed when thinking about @lesson-link{decision-trees-evaluating} and @lesson-link{regression-models-simple}.}
-}
-
-@slidebreak{Investigate}
-
-For a variety of reasons, not all phones will propose the same completions:
-
-- The same phone won't necessarily propose the same word every time.
-  * If there are multiple words with equal probability, some systems will select the word at random. 
-  * Different messaging apps may be built using a different corpus. _(For example, Bootstrap authors notice big differences between predictions from imessage and WhatsApp.)_
-- Not all phones and apps use the same corpus, the same prediction rules, or the same amount of randomness.
-- A messaging app may also include a @vocab{model} of _the words that the owner uses_, to personalize suggestions to the way the user writes.
-- Some predictive text features even account for the specific message being written! Typing the first letter of an unusual word that you already used in the same message could trigger the app to propose that unusual word.
-
-@slidebreak{Investigate}
-
-You have just considered the workings and in-context use of a @vocab{language model}. Hopefully you have discovered that, although it sometimes may _seem_ like your texting app can read your mind... it can't. It doesn't know the rules of grammar, the meanings of words, or your intentions when you are composing a text. Our model just knows @vocab{probability}, which it uses in ways that are often very impressive (but sometimes not!).
-
-@teacher{
-Throughout the lesson, we'll explore the very important "sometimes not" parenthetical, above.}
-
-Using computers to process languages, often by consuming a corpus and constructing a model, is referred to as @vocab{Natural Language Processing}. In this lesson, we will explore in greater detail what exactly @vocab{Natural Language Processing} entails.
-
-=== Synthesize
-@slidebreak{Synthesize}
-
-@QandA{
-@Q{Think of three words that might follow "close the" for directions given in a kitchen.}
-@A{Answers will vary, but might include:
-  * refrigerator
-  * oven
-  * microwave
-  * drawer
-  * cabinet
-  * container
-  * freezer
+@A{Our class is a pretty small sample, all from the same generation and geography and we are all currently at school so our minds are primed to respond differently than if we were somewhere else.
   }
-
-@Q{How many of these were suggested by the messaging app?}
-
-@Q{What does that suggest?}
-@A{The suggestions are limited by the training corpus.}
 }
 
-
-== Constructing a Statistical Language Model
-@objective{ai-slm}
-@objective{ai-slm-create}
-
-=== Overview
-Students construct a statistical language model by decomposing the text and computing the probabilities of different words following each other.
-
-=== Launch
-@slidebreak{Launch}
+=== Investigate
+@slidebreak{Investigate}
 
 The best way to make sense of statistical language modeling is to try it yourself! We'll start by constructing a model.
 
@@ -162,11 +84,11 @@ she swallowed the bird to catch the spider_
 
 @lesson-instruction{
 - Turn to @printable-exercise{counting-ngrams.adoc}.
-- The first section on the page has this `short-corpus` on the left column.
-- You'll also see a table of @vocab{n-grams} (strings of different lengths) that we can chop this corpus into.
+- You'll see the excerpt in quotes.
+- Beside it you'll see a table of @vocab{n-grams} (strings of different lengths) that we can chop this corpus into.
 }
 
-@slidebreak{Launch}
+@slidebreak{Investigate}
 
 To model text, computer scientists find all of the strings that can be generated from a corpus (one word at a time, two words at a time, etc.). They call these strings @vocab{n-grams} because they use @math{n} to represent the number of words in the chunk. For special cases where @math{n} is 1, 2, or 3, the @math{n}-grams are called @vocab{unigrams}, @vocab{bigrams}, and @vocab{trigrams}.
 
@@ -183,16 +105,16 @@ To model text, computer scientists find all of the strings that can be generated
   }
 }
 
-@slidebreak{Launch}
+@slidebreak{Investigate}
 
 @lesson-instruction{
-- According to the n-gram table, the unigrams (size-1 n-grams) `"she"` and `"swallowed"` appear *two times* in the short corpus, and the unigram `"the"` appears *four times*.
+- According to the n-gram table, the unigrams `"she"` and `"swallowed"` each appear two times in `document-1` and `"the"` appears four times.
 - For all the unigrams in the table, on @printable-exercise{counting-ngrams.adoc} fill in the `count` column by determining how often each one occurs in the text.
-- Compare your unigram counts with another student, then complete the rows for the bigrams (size-2 n-grams).
-- When you've compared your counts for the bigrams, finish the table by counting the trigrams (size-3 n-grams).
+- Compare your unigram counts with another student, then complete the rows for the bigrams (2-word strings).
+- When you've compared your counts for the bigrams, finish the table by counting the trigrams (3-word strings).
 }
 
-@slidebreak{Launch}
+@slidebreak{Investigate}
 
 Computers are really fast at generating word counts. Pyret has a function that will make more or less the same table you just completed in the blink of an eye.
 
@@ -200,7 +122,7 @@ Computers are really fast at generating word counts. Pyret has a function that w
 
 @lesson-instruction{
 - Open the @starter-file{ai-old-lady} and click "Run".
-- Evaluate @show{(code '(n-grams short-corpus))}.
+- Evaluate @show{(code '(n-grams document-1))}.
 }
 
 @QandA{
@@ -214,24 +136,21 @@ Computers are really fast at generating word counts. Pyret has a function that w
 @A{It shows all the n-grams up to size 7 and we stopped at size 3.}
 }
 
-@slidebreak{Launch}
+@slidebreak{Investigate}
 
 @lesson-instruction{
 - Confirm that your counts match the counts in the pyret table.
 - Then complete the questions at the bottom of @printable-exercise{counting-ngrams.adoc}.
 }
 
-@slidebreak{Launch}
+@slidebreak{Investigate}
 
 @QandA{
 @Q{How was knowing the count of a particular @vocab{n-gram} in the @vocab{corpus} useful in determining the probability of the next word?}
 @A{The count of any bigram, divided by the count of its first word gives us the probability of the first word being followed by the second word.}
 }
 
-=== Investigate
-@slidebreak{Investigate}
-
-In math we can describe the @vocab{conditional probability} that `"bird"` will follow `"the"` in our `short-corpus` using the following notation:
+In math we can describe the @vocab{conditional probability} that `"bird"` will follow `"the"` in `document-1` using the following notation:
 
 @indented{
 @math{p(bird | the) =}
@@ -251,7 +170,7 @@ Let's take a look at the full lyrics of _There was an Old Lady who Swallowed a F
 @lesson-instruction{
 - Turn to @printable-exercise{old-lady-lyrics-comparing-probability.adoc}.
 - Complete the questions at the bottom using this combination of both the title and the lyrics as your @vocab{corpus}.
-  * Pyret can help you find the counts if you use the `n-grams` function with the full `corpus`.
+  * Pyret can help you find the counts if you use the `n-grams` function with `document-2`.
   * You can even search the n-grams table by clicking on it to reveal all of the rows and then using the keyboard shortcut "command F"!
 }
 
@@ -274,7 +193,7 @@ In order for Generative Text models to suggest next words, they need to build mo
 
 @lesson-instruction{
 - Return to the @starter-file{ai-old-lady}.
-- Evaluate @show{(code '(stat-lang-model corpus))}
+- Evaluate @show{(code '(stat-lang-model document-2))}
 }
 
 @QandA{
@@ -300,15 +219,37 @@ Our language model is microscopic - a tiny corpus and a simple representation us
 @slidebreak{Synthesize}
 
 @QandA{
-In our song corpus, 
+@Q{Do you think it will generally be true that as the n-gram gets longer, the number of completion options decreases? +
+For example, in our song corpus: 
 
 - there were _four_ possible completions for the unigram "the"
 - there were only _three_ possible completions for the 3-gram "to catch the"
-
-We can say that, _in this corpus_, as the n-gram gets longer, the number of completion options decreases.
-
-@Q{Do you think it will generally be true of other corpuses that as the n-gram gets longer, the number of completion options decreases?}
+}
 @A{Yes: A phrase never has more completions than its ending does, and often fewer.}
+}
+
+@slidebreak{Synthesize}
+
+@QandA{
+@Q{Imagine someone standing in a kitchen giving directions that begin with "Close the... " @hspace{1em} Record the first three words that come to mind.}
+@A{Answers will vary, but might include: refrigerator, oven, microwave, drawer, cabinet, container, freezer}
+
+@Q{How many of the words from your "kitchen" list were on your class' initial list?  And what does that suggest?}
+@A{Answers will vary, but this list will likely look different from the first one.}
+@A{The suggestions are limited by the training corpus.}
+}
+
+@slidebreak{Synthesize-R}
+
+@QandA{
+@Q{@right{@image{images/texting-app.png, 200}} What do you think? Will your phone suggest the same words as your classmates' phones would? Why or why not?}
+@A{Invite Discussion}
+@A{For a variety of reasons, not all phones will propose the same completions:
+  * If there are multiple words with equal probability, the system will select the word at random. As a result, even the same phone won’t necessarily propose the same word every time.
+  * Not all phones use the same corpus, the same prediction rules, or the same amount of randomness.
+  * A messaging app also includes a model of the words that the owner uses, to personalize suggestions to the way the user writes.
+  * Some predictive text features even account for the specific message being written! Typing first letter of an unusual word that you used in the same message triggers the app to propose that unusual word.
+  }
 }
 
 
