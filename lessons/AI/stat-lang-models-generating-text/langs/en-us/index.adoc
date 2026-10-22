@@ -342,8 +342,14 @@ Let's explore how Pyret can help us to generate text.
 }
 
 @strategy{Vocabulary Note}{
-Next word -> token (a word, or piece of a word)
-Given -> context
+
+*Next word -> token.* In our table, each row is a possible _next word_. Real language models do the same job, but they often don't work in whole words. They chop text into *tokens*: pieces that might be a whole word ("cat"), part of a word ("un" + "believ" + "able"), or even just punctuation or a space. A token is the unit the model predicts, just as a "next word" is the unit our model predicts. Our model treats every word as a single token, which keeps things simple, but the idea is identical: pick the most likely next token from a list of possibilities, each with a probability.
+
+*Given -> context.* When we ask "_given_ this bigram, what comes next?", the bigram is the text the model looks at before predicting. In machine learning, that text is called the *context*. Our model's context is only the last _n_ words (the n-gram), while larger models use far more: whole paragraphs, or even entire conversations. The more context a model can see, the better its predictions tend to be.
+
+Put together: _given_ a *context*, predict the next *token*. That is what our `completions` table does, and it is what every language model does.
+
+If students ask how much context our model uses, the answer is the length of the n-gram we hand to `completions`: one word for a unigram, two for a bigram, and so on. Real models have a limit too, called the "context window", which is the maximum amount of text they can take into account at once.
 }
 
 @slidebreak{Investigate}
