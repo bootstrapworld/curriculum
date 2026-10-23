@@ -60,12 +60,13 @@ In this lesson, you will explore Soekia, a text generation tool designed for stu
 @Q{What do you Notice?}
 @A{A new word appears about once a second.}
 @A{The words seem to come from our Old Lady corpus.}
-@A{The words are highlighted in different colors.}
+@A{The words are highlighted in different colors.
+   * color-coding corresponds to the color of the document the n-gram came from
+   }
 @A{The folk song sounds a little strange.}
 @A{Specific button functionality is __not a learning goal here__, but noticings may include:
   * @image{images/reset-icon.png,15} allows us to reset and write new lyrics.
   * We can pause, speed up or just add one word at a time using the play controls beneath the text window.
-  * We can ask Soekia to write another paragraph by clicking "@image{images/android-icon.png,15} Resume Automatically".
   * We can manually select the next word from a list if we want.
   * @image{images/copy-icon.png,15} allows us to copy the text that's been generated to our clipboard.
   * 👁️ turns color-coding of the words by source document on and off.
@@ -97,7 +98,7 @@ Now, in addition to the blue text generation panel, we see three additional pane
 There is a LOT to discover in each panel! 
 
 @lesson-instruction{
-- With your partner, take some time to explore the @starter-file{soekia} and make connections to @starter-file{ai-old-lady}.
+- With your partner, take some time to explore @starter-file{soekia} and make connections to the @starter-file{ai-old-lady}.
 - Complete @printable-exercise{match-pyret-soekia.adoc} as you poke around.
 }
 
@@ -120,131 +121,47 @@ There is a LOT to discover in each panel!
 @Q{Why doesn't that make sense?}
 @A{The portion of the song that is excerpted for Document 1 is over-represented.}
 }
-}
 
 @slidebreak{Investigate}
 
-@lesson-instruction{
-- We're going to delete Document 1 from the corpus to remove the duplicate text.
-- Notice what happens to the n-grams and suggested words panels as you delete it.
-- Once Soekia has recalibrated, those panels should match Pyret's.
-}
-
-@lesson-instruction{
 When Statistical Language Models get built using the text on the internet as the corpus, overrepresentation can introduce bias. 
 
+@lesson-instruction{
 - Turn to @printable-exercise{famous-ai-disasters-text-gen-2.adoc} and consider the case studies with your partner.
 }
 
-
-@scrub{
-@slidebreak{Investigate}
-
-@lesson-instruction{
-- Before we start exploring the other panels, we'll want to find a smaller and shorter collection of documents. Go to the collections @image{images/collection-icon.png, 15} drop down menu and select {nbsp} 🐾 _Intelligent Monkeys?_
-- Once you have the collection open, take a look at the _N-grams_ panel. By default you should see `3` selected at the top, meaning that all of the possible @vocab{trigrams} in the collection will be displayed, sorted from most to least frequently occurring. 
-}
+@teacher{Debrief the case studies however you best see fit.}
 
 @slidebreak{Investigate}
 
-@lesson-instruction{
-- If you finish before we're ready to discuss as a class, see if you can predict the first 5 words Soekia would produce from the weather collection ☁️. 
-}
-
-@slidebreak{Investigate}
-
-@lesson-instruction{
-You were just introduced to how Soekia scans the various lists in the _N-grams_ panel to generate the next word in the text field when the temperature is set to low. You were also introduced to the idea that not all of the lists are "valid n-grams" from the get go. Let's confirm that the process made sense.
-}
-
-@teacher{
-Question 7 requires students to notice that all of the documents are one sentence long. As an extension, invite students to edit one of the documents so that it has a second sentence. Students should observe that editing just one document will result in Soekia producing a bigram that starts with a period!
-}
-
-@slidebreak{Investigate}
+Let's take another look at the table we built in the @starter-file{ai-old-lady} using @show{(code '(n-grams document-2))}. 
 
 @QandA{
-@Q{When predicting the next word, when will Soekia choose a word from the list of unigrams?}
-@A{For the first word. And for any other word, when it doesn't find a match for a bigger n-gram that uses the previous words.}
-
-@Q{If the first four words in the text generation field were "Once upon a time", what would Soekia look for in the _N-grams_ tabs to choose the next word?}
-@A{First it would look for the most frequently occurring 5-gram that starts with "Once upon a time"}
-@A{If there wasn't one, it would look for the most frequently occurring 4-gram that starts with "upon a time"}
-@A{If there wasn't one, it would look for the most frequently occurring trigram that starts with "a time"}
-@A{If there wasn't one, it would look for the most frequently occurring bigram thar starts with "time"}
-@A{If there wasn't one, it would look for the next most frequently occurring unigram.}
-
-@Q{What else did you Notice about the _N-grams_ panel?}
-@A{All of the n-grams come directly from the documents.}
-@A{I can sort the n-grams either alphabetically or by frequency.}
-@A{Soekia interprets punctuation marks as words.}
-@A{I can tell Soekia to produce unigrams, digrams, trigrams, etc.}
-@A{Soekia computes the frequency of each n-gram, just like we did from the "There Was an Old Lady Who Swallowed a Fly" corpus in the @lesson-link{stat-lang-models-generating-text} lesson.}
-
-@Q{What did you Wonder about the _N-grams_ panel?}
-@A{Why does Soekia interpret punctuation as a word?}
-@A{How does Soekia decide which n-gram it will use in the fairy tale?}
+@Q{What is the count for `"swallowed"`?}
+@A{16}
 }
 
-@slidebreak{Investigate}
+In Soekia, we can see the precise count of any @vocab{n-gram} by clicking on the corresponding green bar. 
 
-We just looked at how Soekia chooses the next word with the temperature set to low, but what does that mean? 
-
-When the temperature is zero we are following an algorithm that very rigidly returns the most frequently occurring @vocab{n-grams} in the corpus. Higher temperatures introduce some degree of randomization. In fact, when the temperature is 60 it means there’s a 60% chance that we will look outside the first set (the most frequently occurring n-grams).
-
-@slidebreak{Investigate}
-
-But why would we want to introduce randomness into our text generation? There are many reasons!
-
-- When we asked Soekia to generate text with zero randomization from the {nbsp} 🐾 _Intelligent Monkeys?_ collection, sticking to the most frequent n-grams trapped us in a repetitive three word loop!
-- We might not want the same prompt to generate the exact same content every time.
-- We might want to generate text that pushes us to think creatively beyond the bounds of the box our ideas are stuck in.
-
-
-@strategy{AI "Hallucinations"}{
-
-As generative AI produces text, it often generates incorrect or misleading information. This is commonly known as an AI "hallucination".
-
-Some experts dislike this term and are encouraging an end to its use. These experts argue that _all_ output is "hallucinatory". Some of it happens to match reality... and some does not.
-
-The very same process that generates "hallucinatory" text _also_ generates the "non-hallucinatory" text. This truth helps us to understand _why_ it is so difficult to *fix* the "hallucination" problem.
-
-This term also attributes intent and consciousness to the AI, giving it human qualities when it is merely executing a program exactly as it is intended to do.
+@QandA{
+@Q{What is the count for `"swallowed"` in our Soekia Collection?}
+@A{18}
 }
-
-@teacher{
-Do you think your students might enjoy learning more about specific examples of AI hallucinations? If so, print and distribute the optional handout @opt-printable-exercise{famous-AI-disasters.adoc}. 
-}
-
-@slidebreak{Investigate}
 
 @lesson-instruction{
-- Return to Soekia and open the ☁️ weather collection.
-- In the _Suggested words_ panel, click "Customize temperature/ number of suggestions" and set the temperature to *low*. Then click ⌲ in the _Generate Text_ panel and watch as the text is generated both there and in the _Suggested words_ panel.
-- Repeat the process for other temperature settings, noticing how the language changes.
+- *Read both of these directions before you do anything*
+  * We're going to delete Document 1 from the corpus to remove the duplicate text.
+  * As you complete the next direction, notice what happens to the n-grams and suggested words panels.
 }
 
-@QandA{
-@Q{What did you Notice?}
-@A{The _Suggested words_ panel updates automatically as Soekia generates text.}
-@A{Soekia often suggests a 5-gram and the shorter n-grams that are contained within that 5-gram (e.g., "the wind in the trees", "wind in the trees", "in the trees" and "trees").}
-}
+Once Soekia has recalibrated, the n-grams counts should match Pyret's!
 
+Soekia also gives you the ability to add a new document. Let's test it out.
 
-@QandA{
-@Q{What did you Notice about the _Documents_ panel?}
-@A{There are 12 documents.}
-@A{Each document is a different color.}
-@A{The colors correspond with the colors that appeared (highlighting words) in the _Text generation_ panel.}
-@A{If I click on the icons in the upper right, I can change the training corpus.}
-@A{If I change the prompt in the _Text generation_ panel, the green lines at the bottom of the document change. These lines indicate how closely the wording of the prompt corresponds with the text in the document.}
-
-@Q{What did you Wonder about the _Documents_ panel?}
-@A{Can I change these documents for different ones?}
-@A{Why haven't I heard of some of these fairy tales?}
-@A{What is the relationship between this _Documents_ panel and the _N-grams_ panel next to it?}
-}
-
+@lesson-instruction{
+- Click on @image{images/new-document-icon.png, 25} to add a new document. 
+- In your new document write a new verse about another animal.
+- Then have Soekia write you a folk song.
 }
 
 === Synthesize
@@ -340,18 +257,18 @@ Here is the game played out on a Tic Tac Toe board:
 === Investigate
 @slidebreak{Investigate}
 
-Did you notice that the collection of fairy tales you explored during the first half of this lesson is just one of several available training corpuses? Let's explore some of the others.
+Unlike our @starter-file{ai-old-lady}, Soekia has many other document collections. One of them generates sequences of Tic Tac Toe moves.
 
 @lesson-instruction{
-- Open a browser window and make sure it is filling the full width of your screen.
-- Follow the directions on @printable-exercise{what-makes-a-language.adoc} to load the Tic Tac Toe training corpus in Soekia.
-- Complete the first section of @printable-exercise{what-makes-a-language.adoc}
+- Click on the collections @image{images/collection-icon.png, 15} drop down menu and select @image{images/grid-icon.png, 15}.
+- Then complete the first section of @printable-exercise{what-makes-a-language.adoc}
 }
 
 @slidebreak{Investigate}
 Soekia is a great tool for allowing us to look behind the curtain and to watch @vocab{Natural Language Processing} at work. 
 
-Interestingly -- as the Tic Tac Toe corpus reveals -- Natural Language Processing does not actually require a @vocab{natural language}! (A natural language is a language used by humans, like Spanish, English or Swahili.) 
+Interestingly -- as the Tic Tac Toe corpus reveals -- Natural Language Processing does not actually require a @vocab{natural language}! +
+@indented{_(A natural language is a language used by humans, like Spanish, English or Swahili.)_} 
 
 @slidebreak{Investigate}
 Just like a natural language, the Tic Tac Toe text can be parsed into n-grams and then the likelihood of each n-gram's appearance can be determined, so Soekia was able to apply the same algorithms used on our fairytale corpus to produce output.
@@ -359,9 +276,6 @@ Just like a natural language, the Tic Tac Toe text can be parsed into n-grams an
 @QandA{
 @Q{Can you think of any other artificial languages that Soekia might be able to process?}
 @A{Possible examples: chess moves, musical notation}
-
-@Q{What is required of an artificial language, in order for it to successfully undergo natural language processing?}
-@A{It must be broken up with spaces so that it can be interpreted as "words", even if it is not made up of actual words.}
 }
 
 @slidebreak{Investigate}
@@ -369,17 +283,26 @@ Just like a natural language, the Tic Tac Toe text can be parsed into n-grams an
 @lesson-instruction{
 - Follow the directions in the second section of @printable-exercise{what-makes-a-language.adoc} to access the "Music in ABC Notation" training corpus.
 - Complete the second section of @printable-exercise{what-makes-a-language.adoc}, "Thinking About Natural Language Processing." 
+- If you finish before we're ready to discuss as a class, explore Soekia's other collections.
 }
 
 @QandA{
-@Q{Does Natural Language Processing require natural language? Explain.}  
-@A{No, Natural Language Processing works on artificial languages, such as chess and music notation. As long as the language can be broken into "words", then the text can be processed just like a natural language. The very same algorithms can be applied to a wide variety of languages -- both natural and artificial.}
+@Q{You've just worked with three Soekia collections that don't actually use natural language. From your computer's point of view, these collection use "words" just like any other language. How do you think the computer identifies the words?}  
+@A{Chunks of text that are separated by spaces can be interpreted as "words", even if they are not actual words.}
 }
 
 === Synthesize
 @slidebreak{Synthesize}
 
 @QandA{
+@Q{What do you understand about text generation now that you didn't know before this unit?}
+
+@Q{How is the Soekia SLM for Tic Tac Toe moves similar to and different from the Soekia SLM for There was and Old Lady who Swallowed a Fly?}
+@A{Both composes are composed of characters from the keyboard.}
+@A{Both corpuses are split into "words" by spaces.}
+@A{Any English speaker can recognize the words in the folk song corpus. We had to make up a notation that Soekia could work with in order to generate Tic Tac Toe moves.}
+@A{It makes sense for song writers to keep writing for quite a while. It doesn't make sense for a tic tac toe game to continue after someone has already won or the board is full.}
+
 @Q{A student argues that ChatGPT -- which was built on the concept of language modeling -- is a reliably correct and credible source of information. How would you respond?}
 @A{The output that ChatGPT produces depends on the corpus on which it is trained.}
 @A{ChatGPT does not actually have any way of assessing for correctness and credibility; it simply produces one output after the next based on a model.}
@@ -389,5 +312,4 @@ Just like a natural language, the Tic Tac Toe text can be parsed into n-grams an
 
 == Additional Exercises
 
-- @printable-exercise{famous-ai-disasters-text-gen-2.adoc}
 - @opt-printable-exercise{famous-ai-disasters-not-about-text.adoc} 
