@@ -189,7 +189,7 @@ Let's take a look at the full lyrics of _There was an Old Lady who Swallowed a F
 
 @slidebreak{Investigate}
 
-@lesson-point{In order for Generative Text models to suggest next words, they need to compute probabilities for all of the possible n-grams!} 
+@lesson-point{In order for Language Models to suggest the next word, they need to compute probabilities for all of the possible n-grams!}
 
 Pyret has a function that will do just that.
 
@@ -345,12 +345,13 @@ As you might imagine, not all text generation is so straight forward. Let's expl
 @QandA{
 
 @Q{How are Pyret's `completions`, `suggestions`, `choose-suggestion` and `generate-text` functions related?}
-@A{`suggestions` builds an SLM with computed probabilities for are all of the `completions` plus all of the unigrams in the corpus.}
+@A{`completions` consumes an SLM and a given input string, and shows only the rows of the model for which the `"given"` string matches the input.}
+@A{`suggestions` consumes an SLM and a given input string, and then finds the `completions` for the original string, plus completions for the string without the first word, the string without the first two words, and so on.}
 @A{`choose-suggestion` selects a single word from the `suggestions` table using the computed probabilities and a specified degree of randomness.}
 @A{`generate-text` applies `choose-suggestion` over and over again.}
 
 @Q{What is "heat" in the context of text generation?}
-@A{The amount of randomness the gets applied to word selection with 0 being none and 100 being a lot.}
+@A{The amount of randomness gets applied to word selection, with 0 being none and 100 being a lot.}
 
 @Q{Why do you think it's important that we can choose what "heat" we want text to be generated with?}
 @A{There are lots of different kinds of text! For example:
@@ -364,14 +365,21 @@ As you might imagine, not all text generation is so straight forward. Let's expl
    * Text would sound robotic if we always got the same output.
     *** The song doesn't always finish the sentence the same way.
     *** Humans wouldn't always finish the sentence exactly the same way - we came up with a variety of different words to finish "Close the..."
-  * Functions can only have one output.
  }
 
 @Q{What would the probability be for any word to follow "llama", which doesn't appear _at all_ in the original corpus?}
 @A{The probability of following "llama" is the same for every word: undefined (@math{0 \div 0}).}
 
-@Q{What should `generate-text` do if you ask it to suggest a word to follow "llama"?}
-@A{Choose a word from the corpus.}
+@Q{What should `generate-text` do if you ask it to suggest a word to follow "llama" - which isn't in our corpus at all?}
+@A{Choose a word from the corpus that follows the empty string, since nothing matches `"llama"`.}
+}
+
+@strategy{But What About the Vertical Line Test?}{
+When given the same input, a mathematical @vocab{function} must always produce the same output. Sharp-eyed students will notice that when given the same input multiple times, `generate-text` is allowed to produce _different outputs_ when `heat > 0`. That's because `heat` introduces an element of *randomness* to the behavior of the function.
+
+*In a mathematical sense, `generate-text` is no longer a valid function!*
+
+In computer programming, the term "function" means something fundamentally different than it does in math. It still refers to an input-output machine, but these machines are allowed to break all kinds of mathematical laws - including the vertical line test. For your students, that means that `generate-text` crosses the line from "pure" functions in Algebra into something else entirely.
 }
 
 @slidebreak{Investigate}
