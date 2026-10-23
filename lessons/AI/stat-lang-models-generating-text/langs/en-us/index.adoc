@@ -24,7 +24,7 @@
 
 |===
 
-== Building a Statistical Language Modeling
+== Building a Statistical Language Model
 @objective{ai-slm}
 @objective{ai-slm-create}
 
@@ -74,7 +74,7 @@ Let's look a little more closely at the chart we generated.
 === Investigate
 @slidebreak{Investigate}
 
-The best way to make sense of statistical language modeling is to try it yourself! We'll start by constructing a model.
+The best way to make sense of @vocab{statistical language modeling} is to try it yourself! We'll start by constructing a model.
 
 For our @vocab{training corpus}, we will start with an excerpt from the folk song _There was an Old Lady Who Swallowed a Fly_, which tells the nonsensical story of an old lady who swallows a fly, and the unfortunate series of events that follow.
 
@@ -90,7 +90,9 @@ she swallowed the bird to catch the spider_
 
 @slidebreak{Investigate}
 
-To model text, computer scientists find all of the strings that can be generated from a corpus (one word at a time, two words at a time, etc.). They call these strings @vocab{n-grams} because they use @math{n} to represent the number of words in the chunk. For special cases where @math{n} is 1, 2, or 3, the @math{n}-grams are called @vocab{unigrams}, @vocab{bigrams}, and @vocab{trigrams}.
+@lesson-point{To model text, computer scientists find all of the strings that can be generated from a corpus (one word at a time, two words at a time, etc.).}
+
+They call these strings @vocab{n-grams} because they use @math{n} to represent the number of words in the chunk. For special cases where @math{n} is 1, 2, or 3, the @math{n}-grams are called @vocab{unigrams}, @vocab{bigrams}, and @vocab{trigrams}.
 
 @QandA{
 @Q{n-grams aren't the only things we describe with specialized words that begin with "uni", "bi", and "tri" (unigrams, bigrams, and trigrams). What other collections of words with these prefixes can you think of?}
@@ -108,7 +110,7 @@ To model text, computer scientists find all of the strings that can be generated
 @slidebreak{Investigate}
 
 @lesson-instruction{
-- According to the n-gram table, the unigrams `"she"` and `"swallowed"` each appear two times in `document-1` and `"the"` appears four times.
+- According to the n-gram table, the unigrams `"she"` appears two times in `document-1` and `"the"` appears four times.
 - For all the unigrams in the table, on @printable-exercise{counting-ngrams.adoc} fill in the `count` column by determining how often each one occurs in the text.
 - Compare your unigram counts with another student, then complete the rows for the bigrams (2-word strings).
 - When you've compared your counts for the bigrams, finish the table by counting the trigrams (3-word strings).
@@ -139,8 +141,8 @@ Computers are really fast at generating word counts. Pyret has a function that w
 @slidebreak{Investigate}
 
 @lesson-instruction{
-- Confirm that your counts match the counts in the pyret table.
-- Then complete the questions at the bottom of @printable-exercise{counting-ngrams.adoc}.
+- Confirm that your counts on @printable-exercise{counting-ngrams.adoc} match the counts in the pyret table.
+- Then complete the questions at the bottom of the page.
 }
 
 @slidebreak{Investigate}
@@ -160,7 +162,7 @@ In math we can describe the @vocab{conditional probability} that `"bird"` will f
 }
 
 @teacher{
-If you'd like to explore @lesson-link{probability-inference, probability and sampling} in greater depth, check out our lesson on the subject
+If you'd like to explore @lesson-link{probability-inference, probability and sampling} in greater depth, check out our lesson on the subject.
 }
 
 @slidebreak{Investigate}
@@ -187,7 +189,9 @@ Let's take a look at the full lyrics of _There was an Old Lady who Swallowed a F
 
 @slidebreak{Investigate}
 
-In order for Generative Text models to suggest next words, they need to build models with computed probabilities for all of the possible n-grams! Pyret has a function that will do just that.
+@lesson-point{In order for Generative Text models to suggest next words, they need to compute probabilities for all of the possible n-grams!} 
+
+Pyret has a function that will do just that.
 
 @hspace{2em} @show{(contract 'stat-lang-model '((corpus String)) "Model")}
 
@@ -201,7 +205,7 @@ In order for Generative Text models to suggest next words, they need to build mo
 @A{Answers will vary, but might include:
   * There are 5 columns.
   * One of the columns has the conditional-probability notation.
-  * The starting size is 0.
+  * The starting n-gram size is 0.
   * Some words follow quotes without anything in them. (*Teachers:* These empty strings are used to represent the probability of each word occurring without taking the preceding word into consideration.)
   * Some probability values are rounded, some are precise decimals, and some are 1.
   * The biggest n-grams in the table are 6 words.
@@ -209,7 +213,13 @@ In order for Generative Text models to suggest next words, they need to build mo
 }
 
 @slidebreak{Investigate}
-The `stat-lang-model` function is where the _training_ happens: counting n-grams, computing probabilities, etc (and training a real LLM involves a *lot* more complexity beyond this!). Our old lady corpus was quite short compared to the billions of pages of text on the internet. Most Large Language Models take an astronomical amount of computation to train!
+The `stat-lang-model` function is where the _training_ happens: counting n-grams, computing probabilities, etc. 
+
+@lesson-point{
+We only have to build a @vocab{statistical language model (SLM)} once; then we can query it as many times as we want to!
+} 
+
+Training a real SLM involves a *lot* more complexity than the one we've just built. And our old lady corpus was quite short compared to the billions of pages of text on the internet. Most Large Language Models take an astronomical amount of computation and time to train!
 
 @strategy{Large Language Models}{
 Our language model is microscopic - a tiny corpus and a simple representation used for educational purposes. The language models most of us are familiar with, however, are Large Language Models. These use a corpus that is tens of billions of times larger, and employ a vastly more sophisticated representation: a neural network, which has been heavily optimized to minimize prediction error.
@@ -236,14 +246,15 @@ For example, in our song corpus:
 
 @Q{How many of the words from your "kitchen" list were on your class' initial list?  And what does that suggest?}
 @A{Answers will vary, but this list will likely look different from the first one.}
-@A{The suggestions are limited by the training corpus.}
+@A{Which words humans suggest vary based on context and experience.}
+@A{Which words a computer can suggest are limited by the training corpus.}
 }
 
-@slidebreak{Synthesize-R}
+@slidebreak{SynthesizeR}
 
 @QandA{
 @Q{@right{@image{images/texting-app.png, 200}} What do you think? Will your phone suggest the same words as your classmates' phones would? Why or why not?}
-@A{Invite Discussion}
+@A{Invite Discussion.}
 @A{For a variety of reasons, not all phones will propose the same completions:
   * If there are multiple words with equal probability, the system will select the word at random. As a result, even the same phone won’t necessarily propose the same word every time.
   * Not all phones use the same corpus, the same prediction rules, or the same amount of randomness.
@@ -272,8 +283,7 @@ How might we go about doing that?
 - Then, we ask: "Given this @vocab{bigram}, what is the most likely successor?"
 - We can continue asking: "Given this @vocab{n-gram}, what is the most likely successor?" for as long as we want.
 
-=== Investigate
-@slidebreak{Investigate}
+@slidebreak{Launch}
 
 Let's explore how Pyret can help us to generate text.
 
@@ -293,7 +303,7 @@ Put together: _given_ a *context*, predict the next *token*. That is what our `c
 If students ask how much context our model uses, the answer is the length of the n-gram we hand to `completions`: one word for a unigram, two for a bigram, and so on. Real models have a limit too, called the "context window", which is the maximum amount of text they can take into account at once.
 }
 
-@slidebreak{Investigate}
+@slidebreak{Launch}
 @show{(contract "completions" '((model Table) (starting-n-gram String)) "Table")}
 
 @QandA{
@@ -302,6 +312,8 @@ If students ask how much context our model uses, the answer is the length of the
 @A{It tells the probability of each word being the completion of the n-gram in the corpus.}
 @A{The probabilities will add up to 1. Or, if there is only one possible completion, the probability will be 1.}
 }
+=== Investigate
+
 
 @slidebreak{Investigate-DN}
 
@@ -314,7 +326,7 @@ Let's use the completions function to generate text!
 @slidebreak{Investigate}
 @QandA{
 @Q{What four-word phrase did you generate?}
-@A{"She swallowed a fly"}
+@A{"She swallowed the spider"}
 
 @Q{Did everyone in your class end up with the same phrase?}
 @A{Yes. When considering which word to generate next, there was always one word that was clearly the most probable.}
@@ -322,34 +334,57 @@ Let's use the completions function to generate text!
 
 @slidebreak{Investigate}
 
+As you might imagine, not all text generation is so straight forward. Let's explore a few more layers of complexity and some additional Pyret functions to support them.
+
 @lesson-instruction{
-- Complete @printable-exercise{completions-v-suggestions.adoc}
+- Turn to @printable-exercise{completions-v-suggestions.adoc} and complete it with your partner.
 }
 
 @slidebreak{Investigate}
 
 @QandA{
+
+@Q{How are Pyret's `completions`, `suggestions`, `choose-suggestion` and `generate-text` functions related?}
+@A{`suggestions` builds an SLM with computed probabilities for are all of the `completions` plus all of the unigrams in the corpus.}
+@A{`choose-suggestion` selects a single word from the `suggestions` table using the computed probabilities and a specified degree of randomness.}
+@A{`generate-text` applies `choose-suggestion` over and over again.}
+
+@Q{What is "heat" in the context of text generation?}
+@A{The amount of randomness the gets applied to word selection with 0 being none and 100 being a lot.}
+
+@Q{Why do you think it's important that we can choose what "heat" we want text to be generated with?}
+@A{There are lots of different kinds of text! For example:
+  * instructions for how to assemble a product should sound kind of robotic.
+  * poetry shouldn't sound robotic at all.
+  }
+
 @Q{Should we always get the same output if we use the same input?}
-@A{No - in the event of a tie, it will choose randomly!}
+@A{Answers will vary, but might include:
+   * Sometimes there's more than one word with the same likelihood - at the very least we want to not always choose the same one of them.
+   * Text would sound robotic if we always got the same output.
+    *** The song doesn't always finish the sentence the same way.
+    *** Humans wouldn't always finish the sentence exactly the same way - we came up with a variety of different words to finish "Close the..."
+  * Functions can only have one output.
+ }
 
 @Q{What would the probability be for any word to follow "llama", which doesn't appear _at all_ in the original corpus?}
 @A{The probability of following "llama" is the same for every word: undefined (@math{0 \div 0}).}
+
+@Q{What should `generate-text` do if you ask it to suggest a word to follow "llama"?}
+@A{Choose a word from the corpus.}
 }
 
 @slidebreak{Investigate}
-If you're curious to see what text Pyret would generate from the  model, evaluate `generate-text(m, 0)`, or `generate-text(m, 100)`!
 
-@slidebreak{Investigate}
-@lesson-point{Training is expensive. Inference is cheap, but adds up.}
-When you talk to a chatbot, you're essentially asking something similar to `generate-text` to create responses to your prompts. And `generate-text` relies on `choose-suggestion` in our model, which is simply looking up `completions` based on the already-computed model.
+Applying the `stat-lang-model` function to our corpus is where the @vocab{training} happens, resulting in a statistical language model. For real LLMs, this process can take _months_ and - if you've seen the news - _uses enormous amounts of power!_
 
-Applying the `stat-lang-model` function to our corpus is where the @vocab{training} happens, resulting in a statistical language model. For real LLMs, this process can take _months_ and - if you've seen the news - use enormous amounts of power!
+Asking a language model to do something similar to our `generate-text` function (chat, write an essay, etc...) is where @vocab{inference} happens.  A single inference _doesn't use much computing power_.
 
-Asking a language model to come up with text (chatting, having it write a story, etc) is where @vocab{inference} happens. A single inference _doesn't use much computing power_, although it's important to remember just how many people might be using an LLM to make inferences every day.
+@lesson-point{Training is expensive. Inference is cheap. But tens of millions of cheap inferences also add up to a sizable expense.}
 
 @slidebreak{Investigate}
 
-Asking machines to generate text using algorithms comes with risks.
+Asking machines to generate text using algorithms comes with risks, especially as we add heat.
 
 @lesson-instruction{
 - Turn to @printable-exercise{famous-ai-disasters-text-gen-1.adoc}.
@@ -358,7 +393,7 @@ Asking machines to generate text using algorithms comes with risks.
 
 === Synthesize
 @slidebreak{Synthesize}
-@lesson-point{A model is a mathematical summary of a dataset}
+@lesson-point{A model is a mathematical summary of a dataset.}
 
 @QandA{
 @Q{Why does a statistical language model have it's name - what does it have to do with statistics?}
@@ -395,10 +430,10 @@ Asking machines to generate text using algorithms comes with risks.
 }
 
 @slidebreak{Synthesize}
-@lesson-point{Some people have raised concerns about ChatGPT and other language models.}
+@lesson-point{Machines do what they are programmed to do - no more, no less.}
 @QandA{
-@Q{ChatGPT sometimes "makes stuff up." Why does this happen? What is actually going on?}
-@A{When ChatGPT produces false or misleading information, it is not glitching nor is there a bug. ChatGPT is just doing what it does, following the model as it ought to.}
+@Q{Some people have raised concerns about ChatGPT and other language models because ChatGPT sometimes "makes stuff up." Why does this happen? What is actually going on?}
+@A{When ChatGPT produces false or misleading information, it is not glitching, nor is there a bug. ChatGPT is just doing what it does, following the model as it ought to.}
 
 @Q{ChatGPT has biases that can be seen in its text output. Where do these biases come from?}
 @A{If there are biases in the training corpus there will likely be biases in the output!}
