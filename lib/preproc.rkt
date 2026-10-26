@@ -799,6 +799,8 @@
         (set! text (substring text 1)))
       (when (char=? (string-ref text (- n 1)) #\")
         (set! text (substring text 0 (- n 1))))))
+  ; backticks trigger AsciiDoc inline markup inside image attributes; strip them
+  (set! text (regexp-replace* #rx"`" text ""))
   ; (set! text (regexp-replace* #rx"," text "%CURRICULUMCOMMA%"))
   text)
 
