@@ -13,7 +13,7 @@ fi
 # It also appends the student barometer questions (lib/barometer-questions.json,
 # spliced in for __BAROMETER_QUESTIONS__ below) to every quiz, unless its
 # quiz.json says "barometer": false (see #2938). A quiz.json that doesn't
-# parse is passed through as-is, so mdquiz still reports the JSON error.
+# parse is passed through as-is, so swyk-client still reports the JSON error.
 indexHTML='<!DOCTYPE html>
 <html lang="en">
   <head>
@@ -103,7 +103,7 @@ import fs from "fs"
 
 const indexHTML = process.env.MDQUIZ_INDEX_HTML.replace("__BAROMETER_QUESTIONS__",
   () => fs.readFileSync("lib/barometer-questions.json", "utf8").trim());
-const mdquizLib = fs.readFileSync("node_modules/mdquiz/dist/lib.js", "utf8")
+const mdquizLib = fs.readFileSync("node_modules/swyk-client/dist/lib.js", "utf8")
   .replace(`["localhost", "127.0.0.1"]`, `["localhost", "127.0.0.1", ""]`);
 
 for (const d of glob.sync("distribution/*/{lessons,courses}/*/assessments/*")) {
@@ -163,15 +163,15 @@ for (const d of assessmentDirs) {
 
 // Content hash of everything under a quiz'"'"'s assessments dir except
 // index.html and lib.js: both are build-system-generated (the stub above,
-// lib.js copied from node_modules/mdquiz) rather than authored content, so
+// lib.js copied from node_modules/swyk-client) rather than authored content, so
 // neither reflects whether the quiz itself actually changed. The stub
 // template (indexHTML, barometer questions included) is hashed instead, so
 // a change to it rebuilds every quiz.
-const mdquizLibSrc = fs.readFileSync("node_modules/mdquiz/dist/lib.js");
+const mdquizLibSrc = fs.readFileSync("node_modules/swyk-client/dist/lib.js");
 function hashQuiz(dir) {
   const hash = crypto.createHash("sha256");
   hash.update(indexHTML);
-  // lib.js itself is skipped below, but a new mdquiz version must rebuild
+  // lib.js itself is skipped below, but a new swyk-client version must rebuild
   // every quiz, so hash the source it is copied from.
   hash.update(mdquizLibSrc);
   (function walk(d) {
@@ -213,7 +213,7 @@ if (staleQuizzes.length === 0) {
   // quiz keeps its already-built (bundled, self-contained) index.html
   // exactly as it was; overwriting it with the raw pre-build stub here
   // would break it until it next happened to be rebuilt.
-  const mdquizLib = fs.readFileSync("node_modules/mdquiz/dist/lib.js", "utf8")
+  const mdquizLib = fs.readFileSync("node_modules/swyk-client/dist/lib.js", "utf8")
     .replace(`["localhost", "127.0.0.1"]`, `["localhost", "127.0.0.1", ""]`);
   for (const q of staleQuizzes) {
     fs.writeFileSync(q + "/index.html", indexHTML);

@@ -19,7 +19,7 @@
 ;;
 ;; KNOWN v1 SIMPLIFICATIONS (documented rather than silently glossed over):
 ;; - Quiz text supports @image{path} / @image{path, size} (converted to
-;;   Markdown, since quiz content is rendered by mdquiz's own Markdown
+;;   Markdown, since quiz content is rendered by swyk-client's own Markdown
 ;;   renderer, not Asciidoctor) and AsciiDoc *bold* (converted to Markdown
 ;;   **bold**). Anything else -- nested custom directives, footnotes, etc.
 ;;   -- passes through literally. @quizJSON{} is the escape hatch for
@@ -99,7 +99,7 @@
     (if (string=? s "") "untitled" s)))
 
 ;; @image{path} or @image{path, size} -> Markdown image syntax.
-;; size, when given, becomes the mdquiz-corpus convention "=WIDTHxWIDTH"
+;; size, when given, becomes the swyk-client-corpus convention "=WIDTHxWIDTH"
 ;; (a single number sets both dimensions, matching @image{}'s own usage
 ;; elsewhere in this codebase, e.g. @image{images/histoA.png, 110}).
 (define (expand-image-calls s)

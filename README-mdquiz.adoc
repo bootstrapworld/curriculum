@@ -5,7 +5,7 @@
 1. `git pull`
 2. `nvm use` (reads the pinned version from `.nvmrc`, currently `24.7.0`)
 3. `npm install`
-4. `npm update mdquiz`
+4. `npm update swyk-client`
 5. You're ready to rock `./build-mdquiz` once you write an assessment!
 
 == Writing an Assessment
@@ -24,7 +24,7 @@ You can look at `lessons/Data-Science/histograms-visualize/langs/en-us/assessmen
 
 1. It begins with a title that will end up being student-facing.
 
-2. Question Types: "MultipleChoice", "ShortAnswer", "CardSort", "Categorize", and "Pyret" are documented below. (mdquiz also ships "Tracing" and "Informational" question types, undocumented here.)
+2. Question Types: "MultipleChoice", "ShortAnswer", "CardSort", "Categorize", and "Pyret" are documented below. (swyk-client also ships "Tracing" and "Informational" question types, undocumented here.)
 
 3. Every question must include
 
@@ -178,7 +178,7 @@ Below is an example of what the complete json might look like.
 
 Instead of hand-writing a `quiz.json`, you can write questions directly in
 the lesson's own `index.adoc`, right next to the content they're testing.
-The build system collects them and emits the same `quiz.json` mdquiz
+The build system collects them and emits the same `quiz.json` swyk-client
 already consumes -- the two approaches produce identical output, so pick
 whichever is easier for a given assessment (or mix them: a hand-written
 `quiz.json` and inline questions elsewhere in the same lesson are both
@@ -224,7 +224,7 @@ CAUTION: This default differs from hand-written `quiz.json`, where omitting `ans
 `@card-sort{ordered-flag}{prompt}{groups}`::
 +
 --
-The third group is an AsciiDoc description list (`term::` followed by `- item` bullets) grouping cards into their correct piles. The term itself is discarded -- mdquiz never shows pile labels during sorting -- so just number the piles rather than inventing names for them. Card ids are auto-generated; you never write them by hand.
+The third group is an AsciiDoc description list (`term::` followed by `- item` bullets) grouping cards into their correct piles. The term itself is discarded -- swyk-client never shows pile labels during sorting -- so just number the piles rather than inventing names for them. Card ids are auto-generated; you never write them by hand.
 `{}` (default) or `{ordered}` sets `answer.ordered`.
 
   @card-sort{}{Match each histogram with the appropriate descriptive statement.}{
