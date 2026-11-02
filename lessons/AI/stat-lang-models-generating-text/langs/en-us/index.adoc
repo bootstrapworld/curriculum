@@ -41,9 +41,9 @@ While texting, emailing, or even conducting a web search, you've probably notice
 @lesson-instruction{
 Consider this start of a phrase: "Close the..."
 
-- Write down _at least three_ possible words that would come next
-- Put a star next to the word that you think is the _most likely_
-- Come up with another word that technically _could_ follow "close the...", but is very unusual
+- Write down _at least three_ possible words that would come next.
+- Put a star next to the word that you think is the _most likely_.
+- Come up with another word that technically _could_ follow "close the...", but is very unusual.
 }
 
 @teacher{
@@ -206,7 +206,8 @@ Pyret has a function that will do just that.
   * There are 5 columns.
   * One of the columns has the conditional-probability notation.
   * The starting n-gram size is 0.
-  * Some words follow quotes without anything in them. (*Teachers:* These empty strings are used to represent the probability of each word occurring without taking the preceding word into consideration.)
+  * Some words follow quotes without anything in them. 
+     *** "empty strings" are used here to represent the probability of each word occurring without taking the preceding word into consideration.
   * Some probability values are rounded, some are precise decimals, and some are 1.
   * The biggest n-grams in the table are 6 words.
   }
@@ -241,7 +242,8 @@ For example, in our song corpus:
 @slidebreak{Synthesize}
 
 @QandA{
-@Q{Imagine someone standing in a kitchen giving directions that begin with "Close the... " @hspace{1em} Record the first three words that come to mind.}
+@Q{Imagine someone standing in a kitchen giving directions that begin with "Close the... " +
+Record the first three words that come to mind.}
 @A{Answers will vary, but might include: refrigerator, oven, microwave, drawer, cabinet, container, freezer}
 
 @Q{How many of the words from your "kitchen" list were on your class' initial list?  And what does that suggest?}
@@ -340,6 +342,14 @@ As you might imagine, not all text generation is so straight forward. Let's expl
 - Turn to @printable-exercise{completions-v-suggestions.adoc} and complete it with your partner.
 }
 
+@strategy{But What About the Vertical Line Test?}{
+When given the same input, a mathematical @vocab{function} must always produce the same output. Sharp-eyed students will notice that when given the same input multiple times, `generate-text` is allowed to produce _different outputs_ when `heat > 0`. That's because `heat` introduces an element of *randomness* to the behavior of the function.
+
+*In a mathematical sense, `generate-text` is no longer a valid function!*
+
+In computer programming, the term "function" means something fundamentally different than it does in math. It still refers to an input-output machine, but these machines are allowed to break all kinds of mathematical laws - including the vertical line test. For your students, that means that `generate-text` crosses the line from "pure" functions in Algebra into something else entirely.
+}
+
 @slidebreak{Investigate}
 
 @QandA{
@@ -349,15 +359,6 @@ As you might imagine, not all text generation is so straight forward. Let's expl
 @A{`suggestions` consumes an SLM and a given input string, and then finds the `completions` for the original string, plus completions for the string without the first word, the string without the first two words, and so on.}
 @A{`choose-suggestion` selects a single word from the `suggestions` table using the computed probabilities and a specified degree of randomness.}
 @A{`generate-text` applies `choose-suggestion` over and over again.}
-
-@Q{What is "heat" in the context of text generation?}
-@A{The amount of randomness gets applied to word selection, with 0 being none and 100 being a lot.}
-
-@Q{Why do you think it's important that we can choose what "heat" we want text to be generated with?}
-@A{There are lots of different kinds of text! For example:
-  * instructions for how to assemble a product should sound kind of robotic.
-  * poetry shouldn't sound robotic at all.
-  }
 
 @Q{Should we always get the same output if we use the same input?}
 @A{Answers will vary, but might include:
@@ -374,14 +375,6 @@ As you might imagine, not all text generation is so straight forward. Let's expl
 @A{Choose a word from the corpus that follows the empty string, since nothing matches `"llama"`.}
 }
 
-@strategy{But What About the Vertical Line Test?}{
-When given the same input, a mathematical @vocab{function} must always produce the same output. Sharp-eyed students will notice that when given the same input multiple times, `generate-text` is allowed to produce _different outputs_ when `heat > 0`. That's because `heat` introduces an element of *randomness* to the behavior of the function.
-
-*In a mathematical sense, `generate-text` is no longer a valid function!*
-
-In computer programming, the term "function" means something fundamentally different than it does in math. It still refers to an input-output machine, but these machines are allowed to break all kinds of mathematical laws - including the vertical line test. For your students, that means that `generate-text` crosses the line from "pure" functions in Algebra into something else entirely.
-}
-
 @slidebreak{Investigate}
 
 Applying the `stat-lang-model` function to our corpus is where the @vocab{training} happens, resulting in a statistical language model. For real LLMs, this process can take _months_ and - if you've seen the news - _uses enormous amounts of power!_
@@ -390,12 +383,34 @@ Asking a language model to do something similar to our `generate-text` function 
 
 @lesson-point{Training is expensive. Inference is cheap. But tens of millions of cheap inferences also add up to a sizable expense.}
 
+@QandA{
+@Q{What is inference?}
+@A{Using patterns learned from training data to make a prediction.}
+}
+
 @slidebreak{Investigate}
 
 Asking machines to generate text using algorithms comes with risks, especially as we add heat.
 
-@strategy{AI "Hallucinations"}{
+@QandA{
+@Q{What is "heat" in the context of text generation?}
+@A{The amount of randomness gets applied to word selection, with 0 being none and 100 being a lot.}
 
+@Q{Why do you think it's important that we can choose what "heat" we want text to be generated with?}
+@A{There are lots of different kinds of text! For example:
+  * instructions for how to assemble a product should sound kind of robotic.
+  * poetry shouldn't sound robotic at all.
+  }
+}
+
+@slidebreak{Investigate}
+
+@lesson-instruction{
+- Turn to @printable-exercise{famous-ai-disasters-text-gen-1.adoc}.
+- With your partner, choose a case study to focus on and think through how the harm could have been avoided by responding to the questions at the bottom of the page.
+}
+
+@strategy{AI "Hallucinations"}{
 As generative AI produces text, it often generates incorrect or misleading information. This is commonly known as an AI "hallucination".
 
 Some experts dislike this term and are encouraging an end to its use. These experts argue that _all_ output is "hallucinatory". Some of it happens to match reality... and some does not.
@@ -403,11 +418,6 @@ Some experts dislike this term and are encouraging an end to its use. These expe
 The very same process that generates "hallucinatory" text _also_ generates the "non-hallucinatory" text. This truth helps us to understand _why_ it is so difficult to *fix* the "hallucination" problem.
 
 This term also attributes intent and consciousness to the AI, giving it human qualities when it is merely executing a program exactly as it is intended to do.
-}
-
-@lesson-instruction{
-- Turn to @printable-exercise{famous-ai-disasters-text-gen-1.adoc}.
-- With your partner, choose a case study to focus on and think through how the harm could have been avoided by responding to the questions at the bottom of the page.
 }
 
 === Synthesize
@@ -457,4 +467,19 @@ This term also attributes intent and consciousness to the AI, giving it human qu
 @Q{ChatGPT has biases that can be seen in its text output. Where do these biases come from?}
 @A{If there are biases in the training corpus there will likely be biases in the output!}
 @A{Real LLMs also use an extensive reinforcement learning phase, in which humans rate outputs of the model as positive or negative. The model is then adjusted to maximize positive responses. All humans possess some form of bias, which can leak into the model through this reinforcement.}
+}
+
+@slidebreak{Synthesize}
+@lesson-point{There are three phases of Supervised Learning.}
+
+@QandA{
+@Q{What does the demonstration of the learning process include for Language Models?}
+@A{Essentially, a human supervisor is needed to select the documents that form the @vocab{training corpus}.}
+@A{The demonstration that “given an n-gram, the possible completions are ____” is implicit (computed by the computer from the corpus), not overt. It would be mindbogglingly overwhelming for a human to have to demonstrate each of these completions!}
+
+@Q{What does function abstraction look like for Language Models?}
+@A{A statistical language model assigns probabilities to different word sequences, indicating how likely it is that they will occur based on the preceding words (or n-grams).}
+
+@Q{How do Language Models use the function?}
+@A{Function use involves generating text, one word at a time, based on probability.}
 }
