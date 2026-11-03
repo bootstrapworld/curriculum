@@ -469,17 +469,8 @@ This term also attributes intent and consciousness to the AI, giving it human qu
 @A{Real LLMs also use an extensive reinforcement learning phase, in which humans rate outputs of the model as positive or negative. The model is then adjusted to maximize positive responses. All humans possess some form of bias, which can leak into the model through this reinforcement.}
 }
 
-@slidebreak{Synthesize}
-@lesson-point{There are three phases of Supervised Learning.}
+@strategy{Wait, is this Supervised or Unsupervised?}{
+Language Models are given a large volume of unstructured input (the @vocab{corpus}), and then calculate probabilities at a massive scale in order to predict "the next word" for a given input. While pre-training relies on unannotated text, it isn't purely @vocab{unsupervised learning} in the traditional sense. Instead, LLMs use @vocab{self-supervised learning}: the raw text provides both the input and the "answer key" by using the actual subsequent token in the text as the target. This allows the model to continuously test its predictions and update its parameters without needing manual human labeling.
 
-@QandA{
-@Q{What does the demonstration of the learning process include for Language Models?}
-@A{Essentially, a human supervisor is needed to select the documents that form the @vocab{training corpus}.}
-@A{The demonstration that “given an n-gram, the possible completions are ____” is implicit (computed by the computer from the corpus), not overt. It would be mindbogglingly overwhelming for a human to have to demonstrate each of these completions!}
-
-@Q{What does function abstraction look like for Language Models?}
-@A{A statistical language model assigns probabilities to different word sequences, indicating how likely it is that they will occur based on the preceding words (or n-grams).}
-
-@Q{How do Language Models use the function?}
-@A{Function use involves generating text, one word at a time, based on probability.}
+However, modern LLMs do not stop there. After this self-supervised pre-training phase, models undergo additional training phases before reaching the public (e.g. Supervised Fine-Tuning (SFT) using human-labeled dataset pairs, followed by reinforcement learning techniques to align their outputs with human preferences).
 }
