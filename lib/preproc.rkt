@@ -2154,15 +2154,23 @@
                                       [else
                                         (enclose-span (format ".~a" class-name)
                                           converted-text)]) o))]
-                           [(or (string=? directive "ifpathway")
-                                (string=? directive "ifnotpathway"))
-                            (let ([pathways (read-commaed-group i directive read-group)]
-                                  [pfx (if (string=? directive "ifpathway") ".pathway-"
-                                           ".notpathway-")])
-                              (display-begin-span
-                                (apply string-append
-                                  (map (lambda (p) (string-append pfx (string-trim p)))
-                                       pathways)) o))]
+                           [(member directive '("ifpathway" "ifnotpathway"))
+                            (let* ([pathways (read-commaed-group i directive read-group)]
+                                   [text (read-group i directive #:multiline? #t)]
+                                   [pfx (if (string=? directive "ifpathway") ".pathway-"
+                                            ".notpathway-")]
+                                   [classes (apply string-append
+                                              (map (lambda (p) (string-append pfx (string-trim p)))
+                                                   pathways))]
+                                   [contains-nl? (regexp-match "^ *\n" text)]
+                                   [converted-text (expand-directives:string->string
+                                                     text #:enclosing-directive directive)])
+                              (display
+                                (if contains-nl?
+                                  (format "\n\n[.actually-openblock~a]\n====\n~a\n====\n"
+                                    classes converted-text)
+                                  (enclose-span classes converted-text))
+                                o))]
                            [(string=? directive "funname")
                             (fprintf o "`~a`" (get-function-name))]
                            [(member directive '("slidebreak" "slideonlybreak" "selfguidedbreak"))
