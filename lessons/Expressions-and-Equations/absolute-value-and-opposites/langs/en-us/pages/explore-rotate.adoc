@@ -8,7 +8,7 @@ td.tableblock { padding: 0 !important; }
 .lettered { counter-reset: letter-counter; }
 .lettered td { counter-increment: letter-counter; position: relative; }
 .lettered tr:first-child td::after {
-	content: counter(letter-counter, upper-alpha) ") ";
+	content: counter(letter-counter, upper-alpha) ". ";
 	position: absolute;
 	top:  2px;
 	left: 2px;
@@ -65,7 +65,7 @@ Use the @starter-file{expressions-equations} for this page.
 
 @n For each Circle of Evaluation above, draw a _simpler, equivalent_ Circle of Evaluation below that will produce the same image. Star the ones you applied the identity property to.
 
-[.FillVerticalSpace, cols="^.^2a,^.^3a,^.^2a,^.^2a,^.^2a", stripes="none"]
+[.FillVerticalSpace.lettered, cols="^.^2a,^.^3a,^.^2a,^.^2a,^.^2a", stripes="none"]
 |===
 | @ifsoln{@show{(coe '(rotate 180 hello))}}
 | @ifsoln{@star @show{(coe '(rotate 90 hello))}}
