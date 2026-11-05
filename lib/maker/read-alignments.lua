@@ -26,6 +26,7 @@ standards_list = {
   read_alignment_file('OK', 'Oklahoma', 'standards/standards-ok-dictionary.json', 'https://sde.ok.gov/okhahome-academic-standards'),
   read_alignment_file('OR', 'Oregon', 'standards/standards-or-dictionary.json', 'https://www.oregon.gov/ode/educator-resources/standards/pages/default.aspx'),
   read_alignment_file('TX', 'Texas', 'standards/standards-tx-dictionary.json', 'https://www.oregon.gov/ode/educator-resources/standards/pages/default.aspx'),
+  read_alignment_file('DS-Prog', 'Data Science Progressions', 'standards/ds-progressions-dictionary.json', 'https://cdn.prod.website-files.com/686d98aab2e91cf9c6e2822c/689e59218e2af022203cd94b_Summer%202025%20Release%20_%20Learning%20Progressions%20Excel%20_%20All%20Strands.xlsx'),
 }
 
 textbooks_list = {
