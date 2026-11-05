@@ -25,7 +25,7 @@ standards_list = {
   read_alignment_file('MN', 'Minnesota', 'standards/standards-mn-dictionary.json', 'https://education.mn.gov/MDE/dse/stds/Math/'),
   read_alignment_file('OK', 'Oklahoma', 'standards/standards-ok-dictionary.json', 'https://sde.ok.gov/okhahome-academic-standards'),
   read_alignment_file('OR', 'Oregon', 'standards/standards-or-dictionary.json', 'https://www.oregon.gov/ode/educator-resources/standards/pages/default.aspx'),
-  read_alignment_file('TX', 'Texas', 'standards/standards-tx-dictionary.json', 'https://www.oregon.gov/ode/educator-resources/standards/pages/default.aspx'),
+  read_alignment_file('TX', 'Texas', 'standards/standards-tx-dictionary.json', 'https://tea.texas.gov/curriculum-and-instruction/curriculum-standards/teks-review/mathematics-texas-essential-knowledge-and-skills'),
   read_alignment_file('DS-Prog', 'Data Science Progressions', 'standards/ds-progressions-dictionary.json', 'https://www.datascience4everyone.org/learningprogressions'),
 }
 
