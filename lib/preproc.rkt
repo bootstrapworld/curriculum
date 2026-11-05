@@ -232,6 +232,7 @@
 (define *additional-exercises* '())
 (define *handout-exercise-links* '())
 (define *project-lessons* '())
+(define *suppress-project-lessons?* #f)
 
 (define *images-hash-list* '())
 
@@ -1115,7 +1116,7 @@
       (when (and (or (not link-text) (string=? link-text "")) page-title)
         (set! link-text page-title))
       (when (path? f) (set! f (path->string f)))
-      (when project-lesson?
+      (when (and project-lesson? (not *suppress-project-lessons?*))
         (unless (member f *project-lessons*)
           (set! *project-lessons*
             (cons (regexp-replace "distribution/[^/]+/lessons/" dir "")
@@ -2166,8 +2167,12 @@
                                               (map (lambda (p) (string-append pfx (string-trim p)))
                                                    pathways))]
                                    [contains-nl? (regexp-match "^ *\n" text)]
-                                   [converted-text (expand-directives:string->string
-                                                     text #:enclosing-directive directive)])
+                                   [converted-text (let ([saved *suppress-project-lessons?*])
+                                                     (set! *suppress-project-lessons?* #t)
+                                                     (let ([result (expand-directives:string->string
+                                                                     text #:enclosing-directive directive)])
+                                                       (set! *suppress-project-lessons?* saved)
+                                                       result))])
                               (display
                                 (if contains-nl?
                                   (format "\n\n[.actually-openblock~a]\n====\n~a\n====\n"
