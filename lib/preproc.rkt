@@ -2397,7 +2397,7 @@
                                                                       raw-url)]
                                                                   [else raw-url])]
                                                        [link-output
-                                                         (if (string-prefix? "http" url)
+                                                         (if (string-prefix? url "http")
                                                            (format
                                                              "link:pass:[~a][~a~a, role=starterFileLink]"
                                                              url title ", window=\"&#x5f;blank\"")
