@@ -46,7 +46,7 @@ Use the @starter-file{expressions-equations} for this page.
 
 @vspace{1em}
 
-@n A programmer composed negation, absolute value, and rotation to make a bunch of images. Complete the table by drawing the image that each Circle of Evaluation will produce.
+@n A programmer composed negation, absolute value, and rotation to make a bunch of images. Place a star (@star) next to the ones where two functions are undoing each other's work. 
 
 [.FillVerticalSpace.lettered, cols="^.^2a,^.^3a,^.^2a,^.^2a,^.^2a", stripes="none"]
 |===
@@ -57,19 +57,21 @@ Use the @starter-file{expressions-equations} for this page.
 | @show{(coe '(rotate (abs 135) hello))}
 
 | @ifsoln{@image{../images/hello-180.png, 40}}
-| @ifsoln{@image{../images/hello-90.png, 20}}
+| @ifsoln{@star @image{../images/hello-90.png, 20}}
 | @ifsoln{@image{../images/hello-45.png, 40}}
-| @ifsoln{@image{../images/hello.png, 40}}
+| @ifsoln{@star @image{../images/hello.png, 40}}
 | @ifsoln{@image{../images/hello-225.png, 40}} @vspace{8em}
 |===
 
-@n For each Circle of Evaluation above, draw a _simpler, equivalent_ Circle of Evaluation below that will produce the same image. Star the ones you applied the identity property to.
+@n Complete the table above by drawing the image that each Circle of Evaluation will produce. +
+
+@n Draw _simpler, equivalent_ versions of all 5 of the Circles of Evaluation above. Then test that they still produce identical images to the ones above.
 
 [.FillVerticalSpace.lettered, cols="^.^2a,^.^3a,^.^2a,^.^2a,^.^2a", stripes="none"]
 |===
 | @ifsoln{@show{(coe '(rotate 180 hello))}}
-| @ifsoln{@star @show{(coe '(rotate 90 hello))}}
+| @ifsoln{@show{(coe '(rotate 90 hello))}}
 | @ifsoln{@show{(coe '(rotate 45 hello))}}
-| @ifsoln{@star @show{(coe 'hello)}}
+| @ifsoln{@show{(coe 'hello)}}
 | @ifsoln{@show{(coe '(rotate 225 hello))}}
 |===
