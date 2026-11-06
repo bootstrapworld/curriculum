@@ -5,6 +5,14 @@
 <style>
 td > .content > .paragraph > * { vertical-align: middle; }
 td.tableblock { padding: 0 !important; }
+.lettered { counter-reset: letter-counter; }
+.lettered td { counter-increment: letter-counter; position: relative; }
+.lettered tr:first-child td::after {
+	content: counter(letter-counter, upper-alpha) ". ";
+	position: absolute;
+	top:  2px;
+	left: 2px;
+}
 </style>
 ++++
 
@@ -12,7 +20,7 @@ Use the @starter-file{expressions-equations} for this page.
 
 @n Draw the image that each Circle of Evaluation will produce. The first one has been done for you.
 
-[.FillVerticalSpace, cols="^.^1a,^.^1a,^.^1a,^.^1a,^.^1a,^.^1a,^.^1a,^.^1a", stripes="none"]
+[.FillVerticalSpace.lettered, cols="^.^1a,^.^1a,^.^1a,^.^1a,^.^1a,^.^1a,^.^1a,^.^1a", stripes="none"]
 |===
 | @show{(coe '(rotate 45 hello))}
 | @show{(coe '(rotate -45 hello))}
@@ -38,9 +46,9 @@ Use the @starter-file{expressions-equations} for this page.
 
 @vspace{1em}
 
-@n The table below includes negation, absolute value, and composed rotations. Draw the image that each Circle of Evaluation will produce.
+@n A programmer composed negation, absolute value, and rotation to make a bunch of images. Place a star (@star) next to the ones where two functions are undoing each other's work. 
 
-[.FillVerticalSpace, cols="^.^2a,^.^3a,^.^2a,^.^2a,^.^2a", stripes="none"]
+[.FillVerticalSpace.lettered, cols="^.^2a,^.^3a,^.^2a,^.^2a,^.^2a", stripes="none"]
 |===
 | @show{(coe '(rotate (negate 180) hello))}
 | @show{(coe '(rotate (negate (negate 90)) hello))}
@@ -49,15 +57,17 @@ Use the @starter-file{expressions-equations} for this page.
 | @show{(coe '(rotate (abs 135) hello))}
 
 | @ifsoln{@image{../images/hello-180.png, 40}}
-| @ifsoln{@image{../images/hello-90.png, 20}}
+| @ifsoln{@star @image{../images/hello-90.png, 20}}
 | @ifsoln{@image{../images/hello-45.png, 40}}
-| @ifsoln{@image{../images/hello.png, 40}}
+| @ifsoln{@star @image{../images/hello.png, 40}}
 | @ifsoln{@image{../images/hello-225.png, 40}} @vspace{8em}
 |===
 
-*@star For each Circle of Evaluation above, draw a _simpler, equivalent_ Circle of Evaluation below that will produce the same image.*
+@n Complete the table above by drawing the image that each Circle of Evaluation will produce. +
 
-[.FillVerticalSpace, cols="^.^2a,^.^3a,^.^2a,^.^2a,^.^2a", stripes="none"]
+@n Draw _simpler, equivalent_ versions of all 5 of the Circles of Evaluation above. Then test that they still produce identical images to the ones above.
+
+[.FillVerticalSpace.lettered, cols="^.^2a,^.^3a,^.^2a,^.^2a,^.^2a", stripes="none"]
 |===
 | @ifsoln{@show{(coe '(rotate 180 hello))}}
 | @ifsoln{@show{(coe '(rotate 90 hello))}}

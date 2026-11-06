@@ -1,9 +1,18 @@
 RewriteEngine On
 
-# 1. Capture the path relative to THIS .htaccess file
+# 1. Anonymous visitors (no WordPress login cookie): redirect straight to the
+#    login page without booting WordPress. Bots and crawlers hit this path
+#    constantly, and the bridge below costs ~0.4 CPU-seconds per request.
+#    This only filters out the obvious anonymous cases. A forged cookie still
+#    reaches the bridge, which does the real login check.
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteCond %{HTTP_COOKIE} !wordpress_logged_in_ [NC]
+RewriteRule ^ /my-account/?redirect_to=%{REQUEST_URI} [R=302,L]
+
+# 2. Everyone else: capture the path relative to THIS .htaccess file
 # If the file is 'folder/sub/file.pdf', $1 will become 'sub/file.pdf'
 RewriteCond %{REQUEST_FILENAME} -f
 RewriteRule ^(.*)$ /access-bridge.php?file=%{REQUEST_URI} [L,QSA]
 
-# 2. This path is sent to /access-bridge.php, a script that actively
+# 3. This path is sent to /access-bridge.php, a script that actively
 # checks to see if the user is logged into WP.
