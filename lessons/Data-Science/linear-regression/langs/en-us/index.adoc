@@ -380,7 +380,12 @@ A common misconception is that "more data is always better", and the age-v-heigh
 }}
 
 @quiz-label{interpreting slope from lr-plot}
-@multiple-choice{sorted}{Twenty-nine individuals are represented by the points in the chart below.\n\n The x-axis indicates the number of years worked for a particular company, and the y-axis represents salary.\n\n (All 3 questions in this checkpoint will focus on this same chart.)\n\n &nbsp; \n\nIndividuals at this company should expect that their salaries will increase about +____+ every 2 years.\n\n  @image{images/salary-lr-plot.png}}{
+@multiple-choice{sorted}{Twenty-nine individuals are represented by the points in the chart below. +
+The x-axis indicates the number of years worked for a particular company, and the y-axis represents salary. +
+(All 3 questions in this checkpoint will focus on this same chart.) +
+@vspace{1ex} +
+Individuals at this company should expect that their salaries will increase about +____+ every 2 years. +
+@image{images/salary-lr-plot.png}}{
 - [ ] $10,000
 - [x] $20,000
 - [ ] $30,000
@@ -388,7 +393,11 @@ A common misconception is that "more data is always better", and the age-v-heigh
 }
 
 @quiz-label{prediction from function}
-@multiple-choice{sorted}{Twenty-nine individuals are represented by the points in the chart below.\n\n The x-axis indicates the number of years worked for a particular company, and the y-axis represents salary.\n\n &nbsp; Use the predictor function to *calculate how much money you expect would an employee with 15 years of experience to earn* \n\n  @image{images/salary-lr-plot.png}}{
+@multiple-choice{sorted}{Twenty-nine individuals are represented by the points in the chart below. +
+The x-axis indicates the number of years worked for a particular company, and the y-axis represents salary. +
+@vspace{1ex} +
+Use the predictor function to *calculate how much money you expect would an employee with 15 years of experience to earn* +
+@image{images/salary-lr-plot.png}}{
 - [ ] $142,000
 - [x] $167,000
 - [ ] $194,000
@@ -396,7 +405,11 @@ A common misconception is that "more data is always better", and the age-v-heigh
 }
 
 @quiz-label{interpreting y-intercept of lr-plot}
-@multiple-choice{sorted}{Twenty-nine individuals are represented by the points in the chart below.\n\n The x-axis indicates the number of years worked for a particular company, and the y-axis represents salary.\n\n &nbsp; \n\n Use the predictor function to *determine about how much money you would expect an employee with no experience to earn*.\n\n  @image{images/salary-lr-plot.png}}{
+@multiple-choice{sorted}{Twenty-nine individuals are represented by the points in the chart below. + 
+The x-axis indicates the number of years worked for a particular company, and the y-axis represents salary. +
+@vspace{1ex} +
+Use the predictor function to *determine about how much money you would expect an employee with no experience to earn*. +
+@image{images/salary-lr-plot.png}}{
 - [ ] $0
 - [ ] $15,000
 - [ ] $20,000
@@ -404,14 +417,12 @@ A common misconception is that "more data is always better", and the age-v-heigh
 }
     
 @teacher{
-Want to check student mastery of the content you've just taught? Click @checkpoint{Predictions from the Model} to create a link for your class to our custom-built assessment and get a snapshot of your students' current level of mastery.
-
+Want to check student mastery of the content you've just taught? Click @checkpoint{Predictions from the Model} to create a link for your class to our custom-built assessment and get a snapshot of your students' current level of mastery. +
 If you'd prefer to wait until your students have completed the __entire__ lesson to check mastery, we also offer a cumulative assessment.
 }
 
 
 == Interpreting Linear Regression Lines
-
 @objective{write-about-lr}
 
 === Overview
@@ -426,8 +437,11 @@ How well can you interpret the results of a linear regression analysis? How woul
 @A{It means the y-value is higher than the sample would have predicted for that x-value.}
 @Q{What does it mean when a data point is _below_ the line of best fit?}
 @A{It means the y-value is lower than the sample would have predicted for that x-value.}
+}
 
-Turn to @printable-exercise{interpreting-regression-lines-n-rvalues.adoc}, and fill in the blanks for each scenario on the left using information from the @vocab{predictor function} and @vocab{r-value} on the right.
+@lesson-instruction{
+- Turn to @printable-exercise{interpreting-regression-lines-n-rvalues.adoc}.
+- Fill in the blanks for each scenario on the left using information from the @vocab{predictor function} and @vocab{r-value} on the right.
 }
 
 @slidebreak{Launch}
@@ -467,23 +481,20 @@ Let's take a look at how the Data Cycle can be used with Linear Regression, and 
 === Synthesize
 @slidebreak{SynthesizeR}
 
-@teacher{
-Have students read their data stories aloud, to get comfortable with the phrasing.
-}
+@teacher{Have students read their data stories aloud, to get comfortable with the phrasing.}
 
 @right{@image{images/lin-reg-2.png, 300}}
-
 The word “linear” in “linear regression” is important here. In the image on the right, there’s clearly a pattern, but it doesn’t look like a straight line!
 
 There are many other kinds of statistical models out there, but all of them work the same way: use a particular kind of mathematical function (linear or otherwise), to figure out how to get the “best fit” for a cloud of data.
 
 @short-answer{}{}{
-The chart shows some restaurant data. Describe the relationship between dollars spent and dollars tipped in as much detail as possible. \n\n @image{images/restaurant-lr-plot.png}}{
+The chart shows some restaurant data. Describe the relationship between dollars spent and dollars tipped in as much detail as possible. +
+@image{images/restaurant-lr-plot.png}}{
 }
 
 @teacher{
-Want to check student mastery of the content you've just taught? Click @checkpoint{Interpreting Regression Lines} to create a link for your class to our custom-built assessment and get a snapshot of your students' current level of mastery.
-
+Want to check student mastery of the content you've just taught? Click @checkpoint{Interpreting Regression Lines} to create a link for your class to our custom-built assessment and get a snapshot of your students' current level of mastery. +
 Alternatively, administer the compilation of all three Checkpoints in this lesson with @assessment{Linear Regression}
 }
 
@@ -553,5 +564,8 @@ Some teachers opt instead to focus their class on the @opt-starter-file{food}. T
 
 @teacher{Have students share their findings.}
 
-- Did you discover anything surprising or interesting about your dataset?
-- Did the results from @ifproglang{pyret}{`lr-plot`}@ifproglang{codap}{your Least Squares Line} confirm your suspicions about the correlation? Were any of them surprising?
+@QandA{
+@Q{Did you discover anything surprising or interesting about your dataset?}
+
+@Q{Did the results from @ifproglang{pyret}{`lr-plot`}@ifproglang{codap}{your Least Squares Line} confirm your suspicions about the correlation? Were any of them surprising?}
+}
