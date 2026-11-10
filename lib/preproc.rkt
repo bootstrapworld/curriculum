@@ -2263,12 +2263,15 @@
                                      directive (errmessage-file-context)))
                             (let* ([specs
                                      (case directive
+                                       ; Prompts keep their line breaks, so AsciiDoc
+                                       ; line-oriented markup in them (a " +" hard
+                                       ; line break, say) still works.
                                        [("short-answer") '(("required" . #f) ("numeric-range" . #f)
-                                                           ("prompt" . #f) ("answer" . #f))]
-                                       [("multiple-choice") '(("order-mode" . #f) ("prompt" . #f)
+                                                           ("prompt" . #t) ("answer" . #f))]
+                                       [("multiple-choice") '(("order-mode" . #f) ("prompt" . #t)
                                                               ("options" . #t))]
-                                       [("card-sort") '(("ordered" . #f) ("prompt" . #f) ("cards" . #t))]
-                                       [("categorize") '(("prompt" . #f) ("groups" . #t))]
+                                       [("card-sort") '(("ordered" . #f) ("prompt" . #t) ("cards" . #t))]
+                                       [("categorize") '(("prompt" . #t) ("groups" . #t))]
                                        [("quiz-json") '(("json" . #t))]
                                        [("checkpoint" "assessment") '(("title" . #f))])]
                                    [groups (read-quiz-groups i directive specs)]
