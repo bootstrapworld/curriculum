@@ -903,9 +903,12 @@
 
 (define (preproc-slides-file in-file out-file)
   ; (printf "\ndoing preproc-slides-file ~s ~s\n" in-file out-file)
-  (system (string-append
-    "node " *topdir*
-    "/lib/maker/screenshot-elts.js " *topdir* "/distribution"))
+  ; build-slide --noscreenshots (build-all-slides --screenshots / --noscreenshots)
+  ; sets SKIP_SCREENSHOTS: the screenshots were already generated in one batch
+  (unless (getenv "SKIP_SCREENSHOTS")
+    (system (string-append
+      "node " *topdir*
+      "/lib/maker/screenshot-elts.js " *topdir* "/distribution")))
   (set! *in-file* in-file)
   (call-with-input-file in-file
     (lambda (i)
