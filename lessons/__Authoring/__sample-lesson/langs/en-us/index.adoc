@@ -165,7 +165,60 @@ Use the `lesson-instruction` class for prose aimed directly at telling students 
 }
 }
 
-Want to check student mastery of the content you've just taught? Administer @old-assessment{sample-quiz}.
+@multiple-choice{shuffle}{What is the best vegetable?\n\n(No, a tomato is not a vegetable)}{
+- [x] Broccoli
+- [ ] Brussels Sprouts
+- [ ] Cucumbers
+- [ ] Peppers
+- [ ] Potatoes
+- [ ] Parsnips
+}
+
+@multiple-choice{shuffle}{What are the best fruits?\n\n(Yes, a tomato is a fruit)}{
+- [x] Strawberries
+- [x] Blueberries
+- [ ] Bananas
+- [ ] Apples
+- [ ] Kumquats
+- [ ] Lemons
+- [ ] Grapefruits
+}
+
+@short-answer{}{}{What is the keyword used after `let` to indicate that a variable can be mutated?\n\n @image{images/react.svg}}{mut}
+
+@card-sort{}{Distinguish between bar charts and histograms: Sort the cards into two groups - one for bar charts and one for histograms.\n\n Be sure to sort all 9 cards.}{
+1::
+- HISTOGRAM
+- @image{images/hist-image.png}
+- uses quantitative data
+- its bars cannot be reordered
+- requires us to determine a bin width
+2::
+- BAR CHART
+- uses categorical data
+- its bars can be reordered any way we wish
+- @image{images/bar-image.png}
+}
+
+@quiz-json{
+{
+  "type": "Categorize",
+  "id": "one-to-one-logic",
+  "prompt": {
+    "prompt": "One-to-One: *Computer Science Basics*\n\nMatch each term to its primary definition.",
+    "leftColumn": ["Variable", "Function", "Boolean"],
+    "rightColumn": ["A reusable block of code", "A container for storing data", "A data type with two possible values"]
+  },
+  "answer": {
+    "Variable": ["A container for storing data"],
+    "Function": ["A reusable block of code"],
+    "Boolean": ["A data type with two possible values"]
+  },
+  "context": "In a one-to-one relationship, every item in the left column has exactly one unique partner in the right column."
+}
+}
+
+Want to check student mastery of the content you've just taught? Administer @checkpoint{Emmanuel's Sample Quiz}.
 
 === Common Misconceptions
 

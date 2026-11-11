@@ -8,6 +8,42 @@
 
 @add-to-lang{mean, median, modes}
 
+// The Mean, Median, Modes Checkin's questions. Its checkpoint is in the
+// Preparation list below, which it's offered from before the lesson starts.
+
+@quiz-label{mean 17,23,25,23,22}
+@short-answer{}{}{Find the mean of the dataset: 17, 23, 25, 23, 22}{22}
+
+@quiz-label{mean 11,3,4,7}
+@short-answer{}{}{Find the mean of the dataset: 11, 3, 4, 7}{6.25}
+
+@quiz-label{median 11,3,4,5,7}
+@short-answer{}{}{Find the median of the dataset: 11, 3, 4, 5, 7}{5}
+
+@quiz-label{median 11,3,4,7}
+@short-answer{}{}{Find the median of the dataset: 11, 3, 4, 7}{5.5}
+
+@quiz-label{mode(s) 17,23,25,23,22}
+@short-answer{}{}{Find the mode(s) of the dataset: 17, 23, 25, 23, 22 +
+@vspace{1ex} +
+If there is no mode, write: none\n\n If there is more than one mode, separate the numbers with commas, for example by writing: 5,7}{23}
+
+@quiz-label{mode(s) 11,3,4,5,7}
+@short-answer{}{}{Find the mode(s) of the dataset: 11, 3, 4, 5, 7 +
+@vspace{1ex} +
+If there is no mode, write: none +
+If there is more than one mode, separate the numbers with commas, for example by writing: 5,7}{none}
+
+@quiz-label{mode(s) 5, 7, 11, 11, 7, 7}
+@short-answer{}{}{Find the mode(s) of the dataset: 5, 7, 11, 11, 7, 7 +
+@vspace{1ex} +
+If there is no mode, write: none\n\n If there is more than one mode, separate the numbers with commas, for example by writing: 5,7}{7}
+
+@quiz-label{mode(s) 2, 3, 5, 4, 3, 7, 4}
+@short-answer{}{}{Find the mode(s) of the dataset: 2, 3, 5, 4, 3, 7, 4 +
+@vspace{1ex} +
+If there is no mode, write: none\n\n If there is more than one mode, separate the numbers with commas, for example by writing: 5,7}{3, 4}
+
 [@lesson-intro-table]
 |===
 | Lesson Goals
@@ -30,7 +66,7 @@
 |
 @preparation{
 - Decide whether or not the first section of this lesson (an introduction to measures of center) is appropriate for your class. 
-  * Want to get a sense of what your students already know before you decide? Looking for a do now to get the juices flowing before skipping ahead? Use our online assessment: @old-assessment{mean-median-modes-checkin}
+  * Want to get a sense of what your students already know before you decide? Looking for a do now to get the juices flowing before skipping ahead? Use our online assessment: @checkpoint{Mean, Median, Modes Checkin}
   * If you are teaching this section, each group of three students will need a ruler, a marker, tape, and 5 pennies for the kinesthetic activity.
   * If you are confident that your students have a solid understanding of mean, median, and mode(s), you can jump to the second section of the lesson, where students will use @proglang to compute measures of center, and then consider which measure of center is the most appropriate. 
 
@@ -285,8 +321,7 @@ Let's learn how to use @proglang to quickly, easily compute the three different 
 @ifproglang{pyret}{
 @opt-block{
 @teacher{
-If you decided to launch today's class using our *Live Pyret Survey*, now is the time!
-
+If you decided to launch today's class using our *Live Pyret Survey*, now is the time! +
 When you click "Run", the @opt-starter-file{moc-survey-starter} displays the `mean`, `median` and `mode(s)`. 
 
 @indented{
@@ -299,8 +334,7 @@ The data visualizations will be generated using data from your students! +
 And they will continue to update in real time as more of your students complete the Google Form.
 }
 
-Project your screen and/or publish the starter file and share a link with your students.
-
+Project your screen and/or publish the starter file and share a link with your students. +
 Facilitate a discussion about this new-to-them Pyret Data Visualization!
 }
 
@@ -383,8 +417,61 @@ Consider how many policies or laws are informed by statistics! Knowing about mea
 @A{The median}
 }
 
+@quiz-label{mean 5,6,8,8,10,15,18}
+@short-answer{}{}{Find the mean of the dataset: 5, 6, 8, 8, 10, 15, 18}{10}
+
+@quiz-label{median 11,18,19,23,13}
+@short-answer{}{}{Find the median of the dataset: 11, 18, 19, 23, 13}{18}
+
+@quiz-label{median 2,4,6,8}
+@short-answer{}{}{Find the median of the dataset: 2, 4, 6, 8}{5}
+
+@quiz-label{mode(s) 7,9,9,9,11,11,13}
+@short-answer{}{}{Find the mode(s) of the dataset: 7, 9, 9, 9, 11, 11,13}{9}
+
+@quiz-label{mode(s) 1,2,2,3,5,5}
+@short-answer{}{}{Find the mode(s) of the dataset: 1, 2, 2, 3, 5, 5}{2,5}
+
+@quiz-label{mode(s) 1,1,2,2,3,3}
+@short-answer{}{}{Find the mode(s) of the dataset: 1, 1, 2, 2, 3, 3}{none}
+
+@quiz-label{best summary stat (42,44,46,46,47,80)}
+@multiple-choice{shuffle}{Here is a list of the number of words per minute that 6 students can type: 42, 44, 46, 46, 47, 80 +
+@vspace{1ex} +
+Which measure of center best describes the number of words per minute each student can type?}{
+- [x] median
+- [ ] mean
+- [ ] mode
+}
+
+@quiz-label{best summary stat (categorical)}
+@multiple-choice{shuffle}{The survey results are in! Favorite pizza toppings among the 8 surveyed students are as follows: pepperoni, pepperoni, cheese, pepperoni, sausage, olives, broccoli, pepperoni. +
+@vspace{1ex} +
+Which measure of center best describes students' favorite topping?}{
+- [x] mode
+- [ ] mean
+- [ ] median
+}
+
+@quiz-label{best summary stat (skewed)}
+@multiple-choice{shuffle}{Jenny collected some data and plotted it in the histogram below. She wants to summarize the data using a measure of center. +
+@vspace{1ex} +
+Which measure of center will best summarize her data? +
+@image{images/Eh.png}}{
+- [x] median
+- [ ] mean
+- [ ] mode
+}
+
+@quiz-label{best summary stat (symmetrical)}
+@multiple-choice{shuffle}{When the points in a dataset are fairly balanced on either side of the middle, statisticians usually use @fitb{3em}{} summarize the data.}{
+- [x] mean
+- [ ] median
+- [ ] mode
+}
+
 @teacher{
-Want to check student mastery of the content you've just taught? Administer @old-assessment{measures-of-center}.
+Want to check student mastery of the content you've just taught? Administer @checkpoint{Measures of Center}.
 }
 
 
@@ -446,13 +533,15 @@ Complete @printable-exercise{data-cycle-practice-2.adoc, "two Data Cycles"} that
 
 @teacher{Have students share their findings.}
 
-- Did you discover anything surprising or interesting about your dataset?
+@QandA{
+@Q{Did you discover anything surprising or interesting about your dataset?}
 
-- Which measures of center do you think were the most useful for the quantitative columns you chose?
+@Q{Which measures of center do you think were the most useful for the quantitative columns you chose?}
 
-- What questions did the measures of center inspire you to ask about your dataset?
+@Q{What questions did the measures of center inspire you to ask about your dataset?}
 
-- When you compared your findings with other students, did you make any interesting discoveries? (For instance: Did everyone find mode(s)? Did anyone have a measure of center that was dramatically influenced by an outlier?)
+@Q{When you compared your findings with other students, did you make any interesting discoveries? (For instance: Did everyone find mode(s)? Did anyone have a measure of center that was dramatically influenced by an outlier?)}
+}
 
 == Additional Exercises
 @slidebreak{Supplemental}
