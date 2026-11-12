@@ -223,7 +223,10 @@
 (define *additional-exercises* '())
 (define *handout-exercise-links* '())
 (define *project-lessons* '())
-(define *suppress-project-lessons?* #f)
+; The @ifpathway/@ifnotpathway conditions around the text being expanded,
+; innermost first, each a list (directive pathway ...). A project @lesson-link
+; inside any of them is saved along with them (see project-lesson-in-pathway?).
+(define *pathway-conditions* '())
 
 (define *images-hash-list* '())
 
@@ -1128,11 +1131,15 @@
       (when (and (or (not link-text) (string=? link-text "")) page-title)
         (set! link-text page-title))
       (when (path? f) (set! f (path->string f)))
-      (when (and project-lesson? (not *suppress-project-lessons?*))
-        (unless (member f *project-lessons*)
-          (set! *project-lessons*
-            (cons (regexp-replace "distribution/[^/]+/lessons/" dir "")
-                  *project-lessons*))))
+      (when project-lesson?
+        ; Saved as just the project's name, or, inside @ifpathway/@ifnotpathway,
+        ; as (name condition ...), so that only the courses the conditions allow
+        ; list it (see #2953).
+        (let* ([name (regexp-replace "distribution/[^/]+/lessons/" dir "")]
+               [entry (if (null? *pathway-conditions*) name
+                          (cons name (reverse *pathway-conditions*)))])
+          (unless (member entry *project-lessons*)
+            (set! *project-lessons* (cons entry *project-lessons*)))))
       (let ([link-output
 
               (format "link:{fromlangroot}pass:[~a~a][~a~a]"
@@ -1403,14 +1410,30 @@
                             (call-with-input-file link-desc-file port->string)
                             project-lesson)])
         (set! link-text (regexp-replace "Project: " link-text ""))
-        (fprintf o "\n* link:~apass:[~a][~a]: ~a"
+        (fprintf o "\n* link:~apass:[lessons/~a/index.shtml][~a]: ~a"
                  "{fromlangroot}"
                  project-lesson link-text link-desc)))
     (display "\n\n" o)))
 
+(define (project-lesson-name pl)
+  (if (pair? pl) (first pl) pl))
+
+; Whether course `pathway` lists project lesson pl, an entry of *project-lessons*:
+; always, if pl's @lesson-link wasn't inside any @ifpathway/@ifnotpathway;
+; otherwise only if `pathway` meets every condition around it -- the same test
+; lib/page-render.js uses to show or hide the text itself.
+(define (project-lesson-in-pathway? pl pathway)
+  (or (string? pl)
+      (for/and ([c (rest pl)])
+        (let ([named? (and (member pathway (rest c)) #t)])
+          (if (string=? (first c) "ifpathway") named? (not named?))))))
+
 (define (link-to-project-lessons-in-lesson-plan o)
   ; (printf "doing link-to-project-lessons-in-lesson-plan\n")
-  (let ([project-lessons (reverse *project-lessons*)])
+  ; A lesson plan isn't built for any one course, so it lists only the projects
+  ; whose links aren't inside @ifpathway/@ifnotpathway. (No lesson uses
+  ; @project-list today.)
+  (let ([project-lessons (filter string? (reverse *project-lessons*))])
     (link-to-project-lessons-short-form "Lesson" project-lessons o)))
 
 (define (link-to-project-lessons-in-pathway o)
@@ -1428,7 +1451,11 @@
           (let ([lesson-project-lessons (call-with-input-file lesson-pl-file read)])
             (set! project-lessons
               (append project-lessons lesson-project-lessons))))))
-    (set! project-lessons (remove-duplicates project-lessons))
+    (set! project-lessons
+      (remove-duplicates
+        (map project-lesson-name
+             (filter (lambda (pl) (project-lesson-in-pathway? pl *target-pathway*))
+                     project-lessons))))
     ((if *teacher-resources*
          link-to-project-lessons-long-form
          link-to-project-lessons-short-form)
@@ -2179,11 +2206,13 @@
                                               (map (lambda (p) (string-append pfx (string-trim p)))
                                                    pathways))]
                                    [contains-nl? (regexp-match "^ *\n" text)]
-                                   [converted-text (let ([saved *suppress-project-lessons?*])
-                                                     (set! *suppress-project-lessons?* #t)
+                                   [converted-text (let ([saved *pathway-conditions*])
+                                                     (set! *pathway-conditions*
+                                                       (cons (cons directive (map string-trim pathways))
+                                                             saved))
                                                      (let ([result (expand-directives:string->string
                                                                      text #:enclosing-directive directive)])
-                                                       (set! *suppress-project-lessons?* saved)
+                                                       (set! *pathway-conditions* saved)
                                                        result))])
                               (display
                                 (if contains-nl?
