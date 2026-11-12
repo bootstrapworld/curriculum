@@ -881,14 +881,23 @@
       ; Anonymizing is for lesson/teacher content whose filename might give away
       ; an answer; renaming a shared asset here would silently break every other
       ; reference to it instead.
-      (unless (or *narrative* *target-pathway* *teacher-resources*
+      ;
+      ; A course page's images keep their names, since its own references to
+      ; them aren't anonymized. But a quiz on a course page needs its images
+      ; anonymized as much as a lesson's quiz does, so those are copied (not
+      ; renamed) to the anonymized name, which leaves the original for the page.
+      (unless (or (and (or *narrative* *target-pathway* *teacher-resources*)
+                       (not (*quiz-text?*)))
                   (regexp-match? #rx"/lib/images/" (path->string img-qn)))
         (let* ([img-anonymized (anonymize-filename img)]
-               [img-anonymized-qn (build-path *containing-directory* img-anonymized)])
+               [img-anonymized-qn (build-path *containing-directory* img-anonymized)]
+               [rename? (not (or *narrative* *target-pathway* *teacher-resources*))])
           (set! img img-anonymized)
           (unless (file-exists? img-anonymized-qn)
             (cond [(file-exists? img-qn)
-                   (rename-file-or-directory img-qn img-anonymized-qn #t)]
+                   (if rename?
+                       (rename-file-or-directory img-qn img-anonymized-qn #t)
+                       (copy-file img-qn img-anonymized-qn #t))]
                   [(authoring-resource?) #f]
                   [else (warnmsg "~a: Image file ~a not found"
                                 (errmessage-context) img-qn)]))))
@@ -2274,10 +2283,14 @@
                            ; reports). A label no question picks up is warned
                            ; about: here, if another @quiz-label displaces it;
                            ; below, at @checkpoint/@assessment and the end of
-                           ; the lesson plan.
+                           ; the page.
+                           ;
+                           ; All of these work in a lesson plan or a course's
+                           ; narrative page (its index.adoc), whose quizzes go
+                           ; in the course's own assessments/ folder.
                            [(string=? directive "quiz-label")
-                            (unless *lesson-plan*
-                              (error 'ERROR "~a (~a) valid only in lesson plan"
+                            (unless (or *lesson-plan* *narrative*)
+                              (error 'ERROR "~a (~a) valid only in a lesson plan or a course's narrative page"
                                      directive (errmessage-file-context)))
                             (warn-unused-quiz-label
                               (set-pending-quiz-label! (read-group i directive)))]
@@ -2286,10 +2299,16 @@
                                                  "card-sort"
                                                  "categorize"
                                                  "quiz-json"
-                                                 "checkpoint" "assessment"))
-                            (unless *lesson-plan*
-                              (error 'ERROR "~a (~a) valid only in lesson plan"
+                                                 "checkpoint" "assessment"
+                                                 "course-checkpoint" "course-assessment"))
+                            (unless (or *lesson-plan* *narrative*)
+                              (error 'ERROR "~a (~a) valid only in a lesson plan or a course's narrative page"
                                      directive (errmessage-file-context)))
+                            (when (and (member directive '("course-checkpoint" "course-assessment"))
+                                       (not *narrative*))
+                              (error 'ERROR "~a (~a) valid only in a course's narrative page; a lesson plan uses @~a"
+                                     directive (errmessage-file-context)
+                                     (substring directive (string-length "course-"))))
                             (let* ([specs
                                      (case directive
                                        ; Prompts keep their line breaks, so AsciiDoc
@@ -2302,7 +2321,9 @@
                                        [("card-sort") '(("ordered" . #f) ("prompt" . #t) ("cards" . #t))]
                                        [("categorize") '(("prompt" . #t) ("groups" . #t))]
                                        [("quiz-json") '(("json" . #t))]
-                                       [("checkpoint" "assessment") '(("title" . #f))])]
+                                       [("checkpoint" "assessment") '(("title" . #f))]
+                                       [("course-checkpoint" "course-assessment")
+                                        '(("title" . #f) ("folder" . #f))])]
                                    [groups (read-quiz-groups i directive specs)]
                                    [handler
                                      (case directive
@@ -2314,8 +2335,13 @@
                                        [("checkpoint")
                                         (lambda (t) (handle-checkpoint! *containing-directory* t))]
                                        [("assessment")
-                                        (lambda (t) (handle-cumulative-assessment! *containing-directory* t))])]
-                                   [checkpoint? (member directive '("checkpoint" "assessment"))]
+                                        (lambda (t) (handle-cumulative-assessment! *containing-directory* t))]
+                                       [("course-checkpoint")
+                                        (lambda (t f) (handle-course-checkpoint! *containing-directory* t f))]
+                                       [("course-assessment")
+                                        (lambda (t f) (handle-course-assessment! *containing-directory* t f))])]
+                                   [checkpoint? (member directive '("checkpoint" "assessment"
+                                                                    "course-checkpoint" "course-assessment"))]
                                    [_unused-label (when checkpoint?
                                         (warn-unused-quiz-label (take-pending-quiz-label!)))]
                                    [result (and groups
@@ -2333,18 +2359,24 @@
                               ; Skip both if the call itself was skipped. A duplicate
                               ; (an earlier one in this lesson already wrote that folder)
                               ; was kept rather than overwritten -- say so.
-                              (when (and result (member directive '("checkpoint" "assessment")))
+                              (when (and result checkpoint?)
                                 (let ([slug (first result)] [title (second result)])
                                   (when (third result)
-                                    (warnmsg "~a: @~a \"~a\" would write assessments/~a/, which an earlier @checkpoint or @assessment in this lesson already wrote -- keeping the earlier one; give this one a distinct title.~a"
+                                    (warnmsg "~a: @~a \"~a\" would write assessments/~a/, which an earlier checkpoint or assessment on this page already wrote -- keeping the earlier one; give this one a distinct ~a.~a"
                                              (errmessage-context) directive title slug
-                                             (if (string=? directive "checkpoint")
-                                                 " (Its questions still count toward the lesson's @assessment.)"
+                                             (if (regexp-match? #rx"^course-" directive) "folder" "title")
+                                             (if (member directive '("checkpoint" "course-checkpoint"))
+                                                 " (Its questions still count toward a later cumulative assessment.)"
                                                  "")))
                                   (unless (assoc slug *assessments-met*)
                                     (set! *assessments-met*
                                       (cons (cons slug title) *assessments-met*)))
-                                  (fprintf o "pass:[<a href=\"#assessments-anchor\" class=\"assessment-backlink\">&#x2B06;&#xFE0F; ~a</a>]" title))))]
+                                  ; A course page has no Assessments list for the
+                                  ; backlink to jump to (and graph-pages.js only
+                                  ; turns quiz links into teacher link boxes on
+                                  ; lesson pages), so there it shows nothing.
+                                  (when *lesson-plan*
+                                    (fprintf o "pass:[<a href=\"#assessments-anchor\" class=\"assessment-backlink\">&#x2B06;&#xFE0F; ~a</a>]" title)))))]
                            [(string=? directive "Bootstrap")
                             (fprintf o "https://www.bootstrapworld.org/[Bootstrap]")]
                            [(hash-ref *simple-directives* (string->symbol directive) #f)
@@ -2733,7 +2765,7 @@
 
               (expand-directives i o)
 
-              (when *lesson-plan*
+              (when (or *lesson-plan* *narrative*)
                 (warn-unused-quiz-label (take-pending-quiz-label!))
                 (write-inline-quizzes! *dist-root-dir*))
 
