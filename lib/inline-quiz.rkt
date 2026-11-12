@@ -4,7 +4,8 @@
 (require "utils.rkt")
 
 ;; Inline quiz directives: @shortAnswer, @multipleChoice, @cardSort,
-;; @categorize, @quizJSON, @checkpoint, @assessment.
+;; @categorize, @quizJSON, @checkpoint, @assessment, and a course page's
+;; @course-checkpoint, @course-assessment.
 ;;
 ;; Design: https://github.com/bootstrapworld/curriculum/issues/2888
 ;;
@@ -54,7 +55,9 @@
          handle-categorize!
          handle-quizJSON!
          handle-checkpoint!
-         handle-cumulative-assessment!)
+         handle-cumulative-assessment!
+         handle-course-checkpoint!
+         handle-course-assessment!)
 
 ;; ---------------------------------------------------------------------
 ;; State: the running list of questions since the last @checkpoint (or the
@@ -277,7 +280,8 @@
 ;; ---------------------------------------------------------------------
 
 ;; Writes {title, questions} to <dir>/assessments/<slug>/quiz.json.
-;; slug is derived from the raw author title (without the "Show what you know:" prefix).
+;; slug is derived from the raw author title (without the "Show what you know:" prefix),
+;; unless a folder=NAME option gives it.
 (define (write-quiz-json! dir slug title questions)
   (define assessment-dir (build-path dir "assessments" slug))
   (make-directory* assessment-dir)
@@ -431,6 +435,15 @@
 (define (assessment-display-title raw)
   (string-append "Show what you know: " raw " (Cumulative)"))
 
+;; @course-checkpoint's and @course-assessment's second argument: the
+;; assessments/ folder to write to (e.g. student-pre, to keep an existing
+;; quiz's URL), rather than one slugified from the title.
+(define (check-folder-name directive folder-str)
+  (define name (string-trim folder-str))
+  (unless (regexp-match? #px"^[a-z0-9]+(-[a-z0-9]+)*$" name)
+    (error 'inline-quiz "@~a: folder ~s must be lowercase letters, digits and single hyphens, e.g. student-pre" directive name))
+  name)
+
 ;; dir is the lesson's own output directory (preproc.rkt's
 ;; *containing-directory*), passed in explicitly rather than required back
 ;; from preproc.rkt, to keep this module a leaf dependency.
@@ -463,11 +476,18 @@
 ;; @assessment; only its own quiz.json is skipped.
 (define (handle-checkpoint! dir title-str)
   (define raw (string-trim title-str))
-  (define title (checkpoint-display-title raw))
-  (define slug (slugify raw))
+  (checkpoint! dir "checkpoint" raw (checkpoint-display-title raw) (slugify raw)))
+
+;; @course-checkpoint{title}{folder}: a course page's quiz -- the title as
+;; written, in assessments/<folder>/.
+(define (handle-course-checkpoint! dir title-str folder-str)
+  (define raw (string-trim title-str))
+  (checkpoint! dir "course-checkpoint" raw raw (check-folder-name "course-checkpoint" folder-str)))
+
+(define (checkpoint! dir directive raw title slug)
   (define questions (reverse (unbox *pending-questions*)))
   (when (null? questions)
-    (error 'inline-quiz "@checkpoint{~a} has no preceding questions to collect" raw))
+    (error 'inline-quiz "@~a{~a} has no preceding questions to collect" directive raw))
   (define duplicate? (write-quiz-json-unless-duplicate! dir 'checkpoint slug title questions))
   (set-box! *checkpoints-so-far* (cons (cons title questions) (unbox *checkpoints-so-far*)))
   (set-box! *pending-questions* '())
@@ -482,13 +502,19 @@
 ;; Returns (list slug display-title duplicate?), as handle-checkpoint! does.
 (define (handle-cumulative-assessment! dir title-str)
   (define raw (string-trim title-str))
-  (define title (assessment-display-title raw))
-  (define slug (slugify raw))
+  (assessment! dir "assessment" raw (assessment-display-title raw) (slugify raw)))
+
+;; @course-assessment{title}{folder}: likewise, for a cumulative quiz.
+(define (handle-course-assessment! dir title-str folder-str)
+  (define raw (string-trim title-str))
+  (assessment! dir "course-assessment" raw raw (check-folder-name "course-assessment" folder-str)))
+
+(define (assessment! dir directive raw title slug)
   (define checkpoints (reverse (unbox *checkpoints-so-far*)))
   (define pending (reverse (unbox *pending-questions*)))
   (define all-questions (append (append* (map cdr checkpoints)) pending))
   (when (null? all-questions)
-    (error 'inline-quiz "@assessment{~a} has no preceding questions (from @checkpoint or otherwise) to collect" raw))
+    (error 'inline-quiz "@~a{~a} has no preceding questions (from a checkpoint or otherwise) to collect" directive raw))
   (set-box! *pending-questions* '())
   (define duplicate? (write-quiz-json-unless-duplicate! dir 'assessment slug title all-questions))
   (list slug title duplicate?))

@@ -226,6 +226,38 @@ and shows the quiz's title -- or `@old-assessment{slug, text}` to show
 The quiz must be written by a `@checkpoint` or `@assessment` earlier in the
 lesson; otherwise the build warns.
 
+=== Quizzes on a course page
+
+A course's own page (`pathways/<course>/langs/en-us/index.adoc`) can hold
+quizzes too. Its questions are written exactly as in a lesson, but are
+usually collected with these two directives instead, which only a course
+page can use:
+
+`@course-checkpoint{title}{folder}`:: Like `@checkpoint`, but the quiz's title is exactly _title_ (no "Show what you know: ... Checkpoint" around it), and it goes in `assessments/_folder_/`, whatever its title -- so a course's quiz URLs stay put when a title changes.
+`@course-assessment{title}{folder}`:: Likewise, for a cumulative quiz like `@assessment`'s.
+
+_folder_ must be lowercase letters, digits and single hyphens. E.g.:
+
+  @course-checkpoint{Data Science (Starting Benchmark)}{student-pre}
+
+writes `distribution/en-us/courses/data-science/assessments/student-pre/quiz.json`,
+titled "Data Science (Starting Benchmark)". A bad _folder_ is warned
+about, and that quiz is skipped; its questions then go into the next one.
+(`@checkpoint` and `@assessment` work on a course page too, as in a lesson.)
+
+Differences from a lesson:
+
+- The course page shows nothing where the directives are -- no link to
+  the quiz, and no Assessments list. Link to the quiz some other way.
+- Images a quiz uses go in the course's `images/` folder, with an entry
+  in its `lesson-images.json`. The quiz gets an anonymized copy of each,
+  leaving the original for the course page itself.
+- A course may still have hand-written quizzes, in its source's
+  `assessments/` folder (e.g. `student-pre/quiz.json`). An inline quiz
+  written to the same folder overwrites that quiz. That's how to replace
+  one with an inline version: write it inline with `@course-checkpoint`
+  and that folder, and delete the hand-written one.
+
 === To build your quiz
 
 1. Type `./build-mdquiz` in your terminal. It runs `make`, which writes the lesson's `quiz.json` files and warns about any question it had to skip, then builds each quiz's page.
