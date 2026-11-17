@@ -1,7 +1,26 @@
 #! /usr/bin/env bash
+#
+# Usage: build-all-slides [--nomake] [--skipnode] [--pd] [--rebuild|-f]
+#                         [-j N] [--screenshots | --noscreenshots] [course[,course...]]
+#
+#   -j N             build N lessons at a time (default 1, i.e. one after another).
+#                    Output goes to a log per lesson, with a summary at the end.
+#                    Requires --rebuild or -f, since build-slide's "are you sure?"
+#                    prompt can't be answered with several lessons running at once.
+#                    Lessons that fail are retried once, one at a time, after the batch
+#                    (a burst of Google API calls can trip quota errors).
+#   --screenshots    first generate every lesson's AUTOGEN screenshots in one batch
+#                    (the same `make screenshots` step `make deploy` runs), then skip the
+#                    per-lesson screenshot step. Much cheaper than launching Chrome per lesson.
+#                    This is the default when building ALL lessons (no course, no --pd);
+#                    for a course or --pd run the default is the per-lesson step.
+#   --noscreenshots  skip the per-lesson screenshot step, trusting that the screenshots
+#                    already exist (e.g. after `make deploy` or `make screenshots`)
 course=
 nomake=
 pd=
+jobs=1
+screenshots=
 otheropts="--nomake"
 while test $# -ne 0; do
   opt="$1"
@@ -12,43 +31,73 @@ while test $# -ne 0; do
   elif test "$opt" = --pd; then
     pd=1; otheropts="$otheropts --pd"; shift
   elif test "$opt" = --rebuild -o "$opt" = -f; then
-    otheropts="$otheropts $opt"; shift
+    otheropts="$otheropts $opt"; rebuildopt=1; shift
+  elif test "$opt" = -j; then
+    jobs="$2"; shift; shift
+  elif [[ "$opt" =~ ^-j[0-9]+$ ]]; then
+    jobs="${opt#-j}"; shift
+  elif test "$opt" = --screenshots; then
+    screenshots=do; shift
+  elif test "$opt" = --noscreenshots; then
+    screenshots=skip; shift
   else
     course="$opt"; shift
     course=${course%/}
     course=${course##*/}
   fi
 done
+if ! [[ "$jobs" =~ ^[1-9][0-9]*$ ]]; then
+  echo "build-all-slides: -j needs a positive number, got '$jobs'" >&2
+  exit 1
+fi
+if test "$jobs" -gt 1 -a -z "$rebuildopt"; then
+  echo "build-all-slides: -j $jobs needs --rebuild or -f (build-slide's confirmation prompt can't run in parallel)" >&2
+  exit 1
+fi
 if test -z "nomake"; then
   make
 fi
+
+# Over every lesson, one batch of screenshots beats launching Chrome per lesson.
+# (A course or --pd run covers too few lessons for that to pay off: pass --screenshots to force it.)
+if test -z "$screenshots" -a -z "$course" -a -z "$pd"; then
+  screenshots=do
+fi
+
+if test "$screenshots" = do; then
+  echo "Generating screenshots for all lessons (make screenshots)"
+  make screenshots || { echo "make screenshots failed; aborting" >&2; exit 1; }
+fi
+if test -n "$screenshots"; then
+  otheropts="$otheropts --noscreenshots"
+fi
+
 function build_slide() {
   local lesson=$1
   echo calling build-slide $otheropts $lesson
   ./build-slide $otheropts $lesson
 }
+
+# collect the lessons to build into $lessons
+lessons=()
 if test -n "$pd"; then
   seen_lessons=""
-  pd_lessons=()
   while IFS= read -r adoc; do
     grep -qF '@pd-slide{' "$adoc" || continue
     lesson=${adoc#*/lessons/}
     lesson=${lesson%%/*}
     if ! echo "$seen_lessons" | grep -qx "$lesson"; then
       seen_lessons="$seen_lessons"$'\n'"$lesson"
-      pd_lessons+=("$lesson")
+      lessons+=("$lesson")
     fi
   done < <(find distribution/en-us/lessons -name index.adoc)
-  echo "Found ${#pd_lessons[@]} lesson(s) with PD slides:"
-  for lesson in "${pd_lessons[@]}"; do
+  echo "Found ${#lessons[@]} lesson(s) with PD slides:"
+  for lesson in "${lessons[@]}"; do
     echo "  $lesson"
-  done
-  for lesson in "${pd_lessons[@]}"; do
-    build_slide "$lesson"
   done
 elif test -z "$course"; then
   for lesson in distribution/en-us/lessons/*; do
-    build_slide $lesson
+    lessons+=("$lesson")
   done
 else
   seen_lessons=""
@@ -63,9 +112,65 @@ else
       if ! echo $lesson | grep -q "[()]"; then
         if ! echo "$seen_lessons" | grep -qx "$lesson"; then
           seen_lessons="$seen_lessons"$'\n'"$lesson"
-          build_slide $lesson
+          lessons+=("$lesson")
         fi
       fi
     done
   done
 fi
+
+if test "$jobs" -le 1; then
+  for lesson in "${lessons[@]}"; do
+    build_slide "$lesson"
+  done
+  exit 0
+fi
+
+###############################################################################
+# parallel: N build-slide processes at a time, one log file per lesson
+###############################################################################
+logdir=$(mktemp -d "${TMPDIR:-/tmp}/build-all-slides.XXXXXX")
+export OTHEROPTS="$otheropts" LOGDIR="$logdir"
+
+# build-slide exits 0 even when a lesson fails, so judge success from its output
+function lesson_failed() {
+  grep -qE 'Slides failed|failed preprocessing|Unable to generate|rateLimit|Rate Limit|Quota exceeded|code: 429|status: 429' "$LOGDIR/$1.log"
+}
+function build_one() {
+  local name
+  name=$(basename "$1")
+  ./build-slide $OTHEROPTS "$1" > "$LOGDIR/$name.log" 2>&1
+  if lesson_failed "$name"; then echo "  FAILED  $name"; else echo "  done    $name"; fi
+}
+export -f build_one lesson_failed
+
+echo "Building ${#lessons[@]} lesson(s), $jobs at a time; logs in $logdir"
+start=$SECONDS
+printf '%s\n' "${lessons[@]}" | xargs -P "$jobs" -I{} bash -c 'build_one {}'
+
+failed=()
+for lesson in "${lessons[@]}"; do
+  name=$(basename "$lesson")
+  if lesson_failed "$name"; then failed+=("$lesson"); fi
+done
+
+if test ${#failed[@]} -gt 0; then
+  echo
+  echo "${#failed[@]} lesson(s) failed; retrying once, one at a time:"
+  still_failed=()
+  for lesson in "${failed[@]}"; do
+    name=$(basename "$lesson")
+    build_one "$lesson"
+    if lesson_failed "$name"; then still_failed+=("$name"); fi
+  done
+  failed=("${still_failed[@]}")
+fi
+
+echo
+echo "Finished ${#lessons[@]} lesson(s) in $((SECONDS - start))s"
+if test ${#failed[@]} -gt 0; then
+  echo "Still failing after retry (see logs in $logdir):"
+  for name in "${failed[@]}"; do echo "  $name"; done
+  exit 1
+fi
+echo "All lessons built. Logs: $logdir"
