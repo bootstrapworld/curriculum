@@ -1,0 +1,55 @@
+= Standards dictionaries
+
+Each `standards-*-dictionary.json` file maps a standard's ID to its text and to the lessons aligned with it:
+
+[source,json]
+----
+"6.12A": {
+  "description": "Represent numeric data graphically, including dot plots, ...",
+  "lessons": ["dot-plots", "histograms-visualize"]
+}
+----
+
+The files are registered in `lib/maker/read-alignments.lua`. JSON has no comments, so notes about the IDs live here instead. Please keep extra keys out of the JSON files, because the build reads every entry as a standard.
+
+== Scope
+
+Our materials start at 5th grade. The Oklahoma and CSTA dictionaries do not carry standards for Pre-K through grade 4.
+
+== Texas (`standards-tx-dictionary.json`)
+
+IDs have the form `<course>.<knowledge statement><item>`. For example, `6.12A` is item A of statement 12 in the grade 6 standards.
+
+[cols="1,3"]
+|===
+| Prefix | Course
+
+| `5`, `6`, `7`, `8` | Grade 5 through grade 8 mathematics
+| `6AM`, `7AM`, `8AM` | Advanced middle school mathematics (the advanced versions of grades 6 to 8)
+| `ALG1`, `ALG2` | Algebra I and Algebra II
+| `GEO` | Geometry
+| `Stats` | Statistics
+| `MMA` | Mathematical Models with Applications
+| `AQR` | Advanced Quantitative Reasoning
+|===
+
+The same standard text often appears under more than one ID, for example a grade-level standard and its advanced middle school or Algebra I counterpart. When you align lessons to one of them, check its twins. A search for identical `description` text finds them.
+
+== Other dictionaries
+
+[cols="1,3"]
+|===
+| File | ID format
+
+| `standards-csta-dictionary.json` | `<band>-<strand>-<substrand>-<number>`, where the band is `E5` (grade 5), `MS` (middle school) or `HS` (high school), such as `MS-DAT-DI-25`
+| `standards-k12cs-dictionary.json` | `<grade band>.<concept>.<subconcept>`, such as `9-12.Data and Analysis.Inference and Models`
+| `standards-ia-dictionary.json` | `21.<grade band>.<strand>.<number>`, where `ES` is Employability Skills and `TL` is Technology Literacy
+| `standards-ngss-dictionary.json` | `<MS or HS>-SEP<practice>-<number>` (science and engineering practices)
+| `standards-ok-dictionary.json` | `OK.<grade>.<strand>...` (2022 standards)
+| `standards-ok-2016-dictionary.json` | `OK.<strand>...` (2016 standards)
+| `standards-ma-dictionary.json` | `<grade band>.<strand>.<letter>.<number>`, such as `9-12.CT.e.1`
+| `standards-mn-dictionary.json` | `<grade>.<strand>.<standard>.<benchmark>`, such as `9.3.7.1`
+| `standards-or-dictionary.json` | Common Core style IDs plus Oregon data science standards such as `HS.DR.A.1`
+| `standards-cc-math-dictionary.json`, `standards-cc-ela-dictionary.json` | Common Core IDs, such as `5.OA.A.1` and `WHST.6-8.1.A`
+| `ds-progressions-dictionary.json` | `<grade band>.<strand>.<substrand>.<number><letter>`, such as `9-10.C.4.5a`, plus the strand and substrand rollup rows
+|===
