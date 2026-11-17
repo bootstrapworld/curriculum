@@ -2,11 +2,9 @@
 
 @description{Students compute the “line of best fit” using the function for linear regression, and summarize linear relationships in a dataset.}
 
-@ifproglang{pyret}{
-  @lesson-prereqs{correlations}
-}
-@ifproglang{codap}{
-  @lesson-prereqs{scatter-plots}
+@lesson-prereqs{
+@ifproglang{pyret}{correlations}
+@ifproglang{codap}{scatter-plots}
 }
 
 @keywords{line of best fit}
@@ -124,14 +122,12 @@ The line itself is computed through a process called _linear regression_, which 
 - We will refer to the explanatory column as “xs” and the response column as “ys.”
 }
 
-
 @teacher{
 [cols="1a,1a", grid="none", frame="none"]
 |===
 | @image{images/pounds-v-weeks.png, 400}
 | @image{images/age-v-weeks.png, 400}
 |===
-
 
 Quickly survey the class about whether they think we can use an animal’s size or age to predict how long it will take to be adopted.
 
@@ -151,8 +147,7 @@ Just as the mean, median, and mode can summarize data from a _single quantitativ
 Open the @online-exercise{https://www.geogebra.org/m/ZcVIxKtF, Interactive Regression Line}, and use it to complete @printable-exercise{lr-plot-intro.adoc}.
 }
 
-@teacher{
-Have students talk about their answers to the first section.}
+@teacher{Have students talk about their answers to the first section.}
 
 @QandA{
 @Q{Why do x-values that are far to the left or right of the point cloud have a larger impact on R?}
@@ -189,7 +184,8 @@ This line can be graphed on top of the scatter plot as a function, called the @v
 What did you observe as you experimented?
 
 @quiz-label{correlation from scatter plot}
-@multiple-choice{}{Choose the statement you most agree with about the scatterplot on the left.\n\n @image{images/scatter-positive.png}}{
+@multiple-choice{}{Choose the statement you most agree with about the scatterplot on the left. +
+@image{images/scatter-positive.png}}{
 - [ ] There appears to be a strong negative correlation
 - [ ] There appears to be a perfect correlation
 - [ ] There appears to be a weak negative correlation.
@@ -211,9 +207,9 @@ Want to check student mastery of the content you've just taught? Click @checkpoi
 If you'd prefer to wait until your students have completed the __entire__ lesson to check mastery, we also offer a cumulative assessment.
 }
 
+
 == Performing Linear Regression
 @objective{predict-values}
-
 
 === Overview
 Students are introduced to the @ifproglang{pyret}{`lr-plot` function in Pyret}@ifproglang{codap}{Least Squares Line in CODAP}, which performs a linear regression and plots the result.
@@ -286,7 +282,6 @@ To perform linear regression in CODAP, simply create a scatter plot and select L
 
 - The predictor function is written in slope-intercept form.
 (@math{y = mx + b}, where @math{m} describes the @vocab{slope} or @vocab{rate of change} and @math{b} identifies the @vocab{y-intercept}.)
-
 - In this `lr-plot`, we can see that the slope of the line is `0.789`, which means that on average, each extra year of age results in an extra @math{0.789} weeks of waiting to be adopted (about 5 or 6 extra days).
 
 @ifslide{
@@ -318,11 +313,8 @@ To perform linear regression in CODAP, simply create a scatter plot and select L
 
 (4) @ifproglang{pyret}{We also see the @math{r}-value is `+0.448`.}@ifproglang{codap}{We also see that the @math{R^2} value is `0.201`. When we know @math{R^2}, we can find @math{r} by taking the square root of @math{R^2}. The @math{r}-value is `+0.448`.}
 
-
 - The sign is positive, because the scatter plot point cloud and line of best fit both slope upward.
-
 - The fact that the @math{r}-value is close to @math{0.5} tells us that the strength is moderate.
-
 - This makes sense: the scatter plot points are somewhere between being really tightly clustered and really loosely scattered.
 
 @ifslide{
@@ -330,9 +322,7 @@ To perform linear regression in CODAP, simply create a scatter plot and select L
 @ifproglang{codap}{@right{@image{images/codap-lr-explained.png, 400}}}
 }
 
-
 @strategy{Going Deeper}{
-
 @ifproglang{pyret}{Students may notice another value in the `lr-plot`, called @math{R^2}.}@ifproglang{codap}{CODAP shows @math{R^2} rather than @math{r}.} @math{R^2} describes the _percentage of the variation in the y-variable that is explained by least-squares regression on the x variable_. In other words, an @math{R^2} value of 0.20 could mean that “20% of the variation in adoption time is explained by regressing adoption time on the age of the animal”. Discussion of @math{R^2} may be appropriate for older students, or in an AP Statistics class.
 }
 
