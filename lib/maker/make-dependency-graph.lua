@@ -64,6 +64,7 @@ for _,lesson in ipairs(lessons) do
   local starterFiles_txt = ''
   local optStarterFiles_txt = ''
   local prerequisites_txt = ''
+  local assessments_txt = ''
   --
   local proglang_file = lessoncache .. '.record-proglang'
   if file_exists_p(proglang_file) then
@@ -190,6 +191,19 @@ for _,lesson in ipairs(lessons) do
     i:close()
   end
   --
+  local assessments_file = lessoncache .. '.index-assessments.asc'
+  if file_exists_p(assessments_file) then
+    i = io.open(assessments_file)
+    for line in i:lines() do
+      local slug, title = line:match('link:pass:%[assessments/([^/]+)/index%.html%]%[(.+), role=quiz%]')
+      if slug then
+        title = title:gsub('&#x2c;', ','):gsub('"', '\\"')
+        assessments_txt = assessments_txt .. '{slug:"' .. slug .. '", title:"' .. title .. '"}, '
+      end
+    end
+    i:close()
+  end
+  --
   o:write('  \"' .. lesson .. '\" : {\n')
   o:write('    title: \"' .. title_txt .. '\",\n')
   o:write('    description: \"' .. description_txt .. '\",\n')
@@ -207,6 +221,7 @@ for _,lesson in ipairs(lessons) do
     o:write('    glossary: ' .. read_list_of_glosses_from_file(glossary_json_file) .. ',\n')
   end
   o:write('    prerequisites: [' .. prerequisites_txt .. '],\n')
+  o:write('    assessments: [' .. assessments_txt .. '],\n')
   o:write('    starterFiles: [' .. starterFiles_txt .. '],\n')
   o:write('    optStarterFiles: [' .. optStarterFiles_txt .. '],\n')
   if file_exists_p(slidesId_file) then
